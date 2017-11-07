@@ -16,14 +16,8 @@ attributes = {
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether to validate property values and function parameters.
-If enabled, the instrument driver validates the parameter values that
-you pass to driver functions. Range checking parameters is very useful
-for debugging. After you validate your program, you can set this
-property to FALSE to disable range checking and maximize performance.
-The default value is TRUE. Use `niScope Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-override this value.
+Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
+The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
 ''',
 },
     },
@@ -37,15 +31,9 @@ override this value.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the instrument driver queries the instrument status
-after each operation. Querying the instrument status is very useful for
-debugging. After you validate your program, you can set this property to
-FALSE to disable status checking and maximize performance. The
-instrument driver can choose to ignore status checking for particular
-properties regardless of the setting of this property. The default value
-is TRUE. Use `niScope Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-override this value.
+Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
+The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
+The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
 ''',
 },
     },
@@ -59,15 +47,9 @@ override this value.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether to cache the value of properties. When caching is
-enabled, the instrument driver keeps track of the current instrument
-settings and avoids sending redundant commands to the instrument. Thus,
-you can significantly increase execution speed. The instrument driver
-can choose always to cache or never to cache particular properties,
-regardless of the setting of this property. The default value is TRUE.
-Use `niScope Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-override this value.
+Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
+The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
+The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
 ''',
 },
     },
@@ -81,10 +63,8 @@ override this value.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether to simulate instrument driver I/O operations. The
-default value is FALSE. Use `niScope Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-override this value.
+Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
+The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
 ''',
 },
     },
@@ -98,11 +78,24 @@ override this value.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the IVI engine keeps a list of the value coercions it
-makes for ViInt32 and DBL properties. The default value is FALSE. Use
-`niScope Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-override this value.
+Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 attributes.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
+The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
+''',
+},
+    },
+    1050007: {
+        'access': 'read only',
+        'channel_based': False,
+        'enum': None,
+        'lv_property': '',
+        'name': 'DRIVER_SETUP',
+        'resettable': False,
+        'type': 'ViString',
+'documentation': {
+'description': '''
+This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
+Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  niScope_InitWithOptions, or through the IVI Configuration Utility.
+If the user does not specify a Driver Setup string, this attribute returns an empty string.
 ''',
 },
     },
@@ -116,10 +109,7 @@ override this value.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether to perform interchangeability checking and log
-interchangeability warnings when you call VIs. Interchangeability
-warnings indicate that using your application with a different
-instrument might cause different behavior.
+NI-SCOPE does not generate interchange warnings and therefore ignores this attribute.
 ''',
 },
     },
@@ -133,9 +123,8 @@ instrument might cause different behavior.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Indicates the number of channels that the specific instrument driver
-supports. For channel based properties, the IVI engine maintains a
-separate cache value for each channel.
+Indicates the number of channels that the specific instrument driver  supports.
+For channel-based properties, the IVI engine maintains a separate cache value for each channel.
 ''',
 },
     },
@@ -149,8 +138,7 @@ separate cache value for each channel.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains the prefix for the instrument driver. The name of
-each user-callable function in this driver starts with this prefix.
+A string that contains the prefix for the instrument driver. The name of each user-callable  function in this driver starts with this prefix.
 ''',
 },
     },
@@ -164,11 +152,8 @@ each user-callable function in this driver starts with this prefix.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Indicates the resource descriptor the driver uses to identify the
-physical device. If you initialize the driver with a logical name, this
-property contains the resource descriptor that corresponds to the entry
-in the IVI Configuration utility. If you initialize the instrument
-driver with the resource descriptor, this property contains that value.
+Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 ''',
 },
     },
@@ -182,17 +167,7 @@ driver with the resource descriptor, this property contains that value.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains the logical name you specified when opening the
-current IVI session.
-
-You can pass a logical name to `niScope
-Initialize <scopeviref.chm::/niScope_Initialize.html>`__ or `niScope
-Initialize with
-Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__. The
-IVI Configuration utility must contain an entry for the logical name.
-The logical name entry refers to a virtual instrument section in the IVI
-Configuration file. The virtual instrument section specifies a physical
-device and initial user options.
+A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 ''',
 },
     },
@@ -206,8 +181,7 @@ device and initial user options.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains a comma-separated list of the instrument model
-numbers supported by this driver.
+A string that contains a comma-separated list of the instrument model numbers supported by this driver.
 ''',
 },
     },
@@ -221,8 +195,7 @@ numbers supported by this driver.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains a comma-separated list of class-extension groups
-that this driver implements.
+A string that contains a comma-separated list of class extension groups that this driver implements.
 ''',
 },
     },
@@ -236,8 +209,7 @@ that this driver implements.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains the firmware revision information for the current
-instrument.
+A string that contains the firmware revision information  for the instrument you are currently using.
 ''',
 },
     },
@@ -251,8 +223,7 @@ instrument.
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains the name of the instrument manufacturer, for
-example, "National Instruments".
+A string that contains the name of the instrument manufacturer.
 ''',
 },
     },
@@ -265,7 +236,9 @@ example, "National Instruments".
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
-'description': 'A string that contains the model number of the current instrument.',
+'description': '''
+A string that contains the model number of the current instrument.
+''',
 },
     },
     1050513: {
@@ -278,8 +251,7 @@ example, "National Instruments".
         'type': 'ViString',
 'documentation': {
 'description': '''
-A string that contains the name of the vendor that supplies this driver,
-for example, "National Instruments".
+A string that contains the name of the vendor that supplies this driver.
 ''',
 },
     },
@@ -292,7 +264,9 @@ for example, "National Instruments".
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
-'description': 'A string that contains the description of the instrument.',
+'description': '''
+A string that contains a brief description of the specific  driver
+''',
 },
     },
     1050515: {
@@ -305,8 +279,7 @@ for example, "National Instruments".
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-The major version number of the class specification with which this
-driver is compliant.
+The major version number of the class specification with which this driver is compliant.
 ''',
 },
     },
@@ -320,8 +293,7 @@ driver is compliant.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-The minor version number of the class specification with which this
-driver is compliant.
+The minor version number of the class specification with which this driver is compliant.
 ''',
 },
     },
@@ -335,8 +307,7 @@ driver is compliant.
         'type': 'ViString',
 'documentation': {
 'description': '''
-The string that contains additional version information about this
-instrument driver.
+A string that contains additional version information about this  instrument driver.
 ''',
 },
     },
@@ -350,14 +321,7 @@ instrument driver.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specify the number of records to acquire.
-
-**Related topics:**
-
-`Making Multiple-Record
-Acquisitions <digitizers.chm::/Making_Multiple-Record_Acquisitions.html>`__
-`Fetching Multiple-Record
-Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
+Specifies the number of records to acquire. Can be used for multi-record acquisition  and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
 ''',
 },
     },
@@ -371,32 +335,7 @@ Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the input source for the PLL reference clock for all boards
-except the NI 5102. For the NI 5102 this property is the source of the
-board clock.
-
-**Defined Values**
-
-VAL\_NO\_SOURCE
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_CLOCK
-
-VAL\_CLK\_IN
-
-VAL\_EXTERNAL
-
-VAL\_RTSI\_CLOCK
-
-**Related topics:**
-
-`Reference Clock/Phase-Lock
-Loop <digitizers.chm::/Reference_Clock.html>`__
+Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock  for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source  of the board clock.
 ''',
 },
     },
@@ -410,38 +349,7 @@ Loop <digitizers.chm::/Reference_Clock.html>`__
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the output source for the 10 MHz clock to which another
-digitizer's sample clock can be phased-locked.
-
-The NI 5102 uses a 20 MHz system clock.
-
-**Defined Values**
-
-None
-
-VAL\_RTSI\_CLOCK
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_CLK\_OUT
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
+Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
 ''',
 },
     },
@@ -455,13 +363,7 @@ VAL\_RTSI\_6
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Indicates whether the digitizer enforces real-time measurements or
-allows equivalent-time measurements.
-
-**Related topics:**
-
-`Sampling Methods <digitizers.chm::/Sampling_Methods.html>`__ `Real-Time
-Sampling <digitizers.chm::/Real-Time_Sampling.html>`__
+Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
 ''',
 },
     },
@@ -475,16 +377,9 @@ Sampling <digitizers.chm::/Real-Time_Sampling.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Indicates the bit width of the binary data in the acquired waveform,
-which can help you determine which Binary Fetch to use.
-
-To configure the device to store samples with a lower resolution than
-the native, set this property to the desired binary width. This
-configuration can be useful for streaming at faster speeds, but at the
-cost of resolution. The least significant bits are lost with this
-configuration. Compare to the `Resolution <pniScope_Resolution.html>`__
-property.
-
+Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to NISCOPE_ATTR_RESOLUTION.
+To configure the device to store samples with a lower resolution that the native, set this attribute to the desired binary width.
+This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
 Valid Values: 8, 16, 32
 ''',
 },
@@ -498,27 +393,7 @@ Valid Values: 8, 16, 32
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
-'description': '''
-Specifies the size of the hysteresis window on either side of the
-trigger level.
-
-The digitizer triggers when the trigger signal passes through the
-threshold you specify with the Trigger Level parameter, has the slope
-you specify with the Trigger Slope parameter, and passes through the
-hysteresis window that you specify with this parameter.
-
-Units: Volts
-
-Min Value: 0
-
-Max Value for positive trigger slope:
-
-*Hysteresis - trigger level >= -(vertical range/2) + vertical offset*
-
-Max value for negative trigger slope:
-
-*Hysteresis + trigger level <= (vertical range/2) + vertical offset*
-''',
+'description': 'Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify  with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.',
 },
     },
     1150007: {
@@ -531,33 +406,7 @@ Max value for negative trigger slope:
         'type': 'ViString',
 'documentation': {
 'description': '''
-For the NI 5102, specifies the line on which the sample clock is sent or
-received. For the NI 5112/5620/5621, specifies the line on which the
-one-time sync pulse is sent or received.
-
-This line should be the same for all devices to be synchronized.
-
-**Defined Values**
-
-VAL\_NO\_SOURCE
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
+For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
 ''',
 },
     },
@@ -571,16 +420,7 @@ VAL\_PFI\_2
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the device is a master or a slave.
-
-The master device is typically the originator of the trigger signal and
-clock sync pulse. For a stand-alone device, set this property to FALSE.
-
-**Valid Range**
-
-TRUE—Master
-
-FALSE—Slave
+Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
 ''',
 },
     },
@@ -594,21 +434,9 @@ FALSE—Slave
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the sampling rate (in Samples/second) for the acquisition.
-This attribute is invalid when the device is configured to use an
-external sample clock timebase. When a DDC is enabled, this attribute
-specifices the IQ rate. When both the `Time Per
-Record <pniScope_TimePerRecord.html>`__ Property and the Min Sample Rate
-Property are set, the attribute that was set first is ignored.
-
-Valid Values: The combination of sampling rate and minimum record length
-must allow the digitizer to sample at a valid sampling rate for the
-acquisition type specified in the `niScope Configure
-Acquisition <scopeviref.chm::/niScope_Configure_Acquisition.html>`__ VI
-and not require more memory than the onboard memory module allows.
-
-`Sample Rate <digitizers.chm::/Sample_Rate.html>`__ `Coercions of
-Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
+Specify the sampling rate for the acquisition in Samples per second.
+Valid Values:
+The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in niScope_ConfigureAcquisition and not require more memory than the  onboard memory module allows.
 ''',
 },
     },
@@ -622,15 +450,7 @@ Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies whether to trigger when the signal enters or leaves the window
-specified by the `Trigger Window Low
-Level <pniScope_TriggerWindowLowLevel.html>`__ property or the `Trigger
-Window High Level <pniScope_TriggerWindowHighLevel.html>`__ property.
-
-**Related topics:**
-
-`Window Triggers <digitizers.chm::/Window_Triggers.html>`__ `Trigger
-Parameters <digitizers.chm::/Trigger_Parameters.html>`__
+Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL, or NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
 ''',
 },
     },
@@ -644,31 +464,14 @@ Parameters <digitizers.chm::/Trigger_Parameters.html>`__
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Pass the lower voltage threshold you want the digitizer to use for
-window triggering.
-
-The digitizer triggers when the trigger signal enters or leaves the
-window you specify with this property and the `Trigger Window High
-Level <pniScope_TriggerWindowHighLevel.html>`__ property.
-
-The values of the `Vertical Range <pniScope_VerticalRange.html>`__
-property and the `Vertical Offset <pniScope_VerticalOffset.html>`__
-property determine the valid range for this property on the channel you
-specify with the `Trigger Source <pniScope_TriggerSource.html>`__
-property.
-
-The value you pass for this parameter must meet the following
-conditions:
-
-*Low Trigger Level <= Vertical Range/2 + Vertical Offset*
-
-*Low Trigger Level >= (-Vertical Range/2) + Vertical Offset*
-
-*Low Trigger Level < High Trigger Level*
-
-**Related topics:**
-
-`Window Triggers <digitizers.chm::/Window_Triggers.html>`__
+Pass the lower voltage threshold you want the digitizer to use for  window triggering.
+The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
+Units: Volts
+Valid Values:
+The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+Low Trigger Level <= Vertical Range/2 + Vertical Offset
+Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
+Low Trigger Level < High Trigger Level
 ''',
 },
     },
@@ -682,31 +485,13 @@ conditions:
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Pass the upper voltage threshold you want the digitizer to use for
-window triggering.
-
-The digitizer triggers when the trigger signal enters or leaves the
-window you specify with the Trigger Window Low Level property and this
-property.
-
-The values of the `Vertical Range <pniScope_VerticalRange.html>`__
-property and the `Vertical Offset <pniScope_VerticalOffset.html>`__
-property determine the valid range for the Trigger Window Low Level
-property on the channel you specify with the `Trigger
-Source <pniScope_TriggerSource.html>`__ property.
-
-The value you pass for this parameter must meet the following
-conditions:
-
-*High Trigger Level <= Vertical Range/2 + Vertical Offset*
-
-*High Trigger Level >= (-Vertical Range/2) + Vertical Offset*
-
-*High Trigger Level > Low Trigger Level*
-
-**Related topics:**
-
-`Window Triggers <digitizers.chm::/Window_Triggers.html>`__
+Pass the upper voltage threshold you want the digitizer to use for  window triggering.
+The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL
+Valid Values:
+The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+High Trigger Level <= Vertical Range/2 + Vertical Offset
+High Trigger Level >= (-Vertical Range/2) + Vertical Offset
+High Trigger Level > Low Trigger Level
 ''',
 },
     },
@@ -720,12 +505,10 @@ conditions:
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the units for the waveform measurement reference levels.
-
-If you choose percentage, the measurement routine uses the `Percentage
-Method <pniScope_PercentageMethod.html>`__ property to map the
-percentage values to voltages. If you choose voltage units, you can set
-the voltage thresholds directly and avoid extra calculations.
+Specifies the units of the reference levels.
+NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
+NISCOPE_VAL_MEAS_PERCENTAGE--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.
+Default: NISCOPE_VAL_MEAS_PERCENTAGE
 ''',
 },
     },
@@ -739,10 +522,8 @@ the voltage thresholds directly and avoid extra calculations.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the second channel for two-channel measurements, such as `Add
-Channels <Digitizers.chm::/Add_Channels.html>`__. If processing steps
-are registered with this channel, the processing happens before the
-waveform is used in a two-channel measurement. The default value is 0.
+Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+Default: '0'
 ''',
 },
     },
@@ -756,9 +537,8 @@ waveform is used in a two-channel measurement. The default value is 0.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Digital hysteresis that is used in several of the scalar waveform
-measurements. This property specifies the percentage of the full-scale
-vertical range for the hysteresis window size. The default value is 2%.
+Digital hysteresis that is used in several of the scalar waveform measurements. This attribute specifies the percentage of the full-scale vertical range for the hysteresis window size.
+Default: 2%
 ''',
 },
     },
@@ -772,10 +552,8 @@ vertical range for the hysteresis window size. The default value is 2%.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the size (that is, the number of bins) in the last acquisition
-histogram. This histogram is used to determine several scalar
-measurements, most importantly voltage low and voltage high. The default
-value is 256.
+Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
+Default: 256
 ''',
 },
     },
@@ -789,13 +567,8 @@ value is 256.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the number of bins in the running voltage histogram. The
-default value is 256.
-
-This value is used during the first running voltage histogram
-measurement, and it is not updated until you call `niScope Clear
-Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function niScope_ClearWaveformMeasurementStats.
+Default: 256
 ''',
 },
     },
@@ -809,13 +582,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the minimum voltage value in the running voltage histogram.
-The default value is -10.0.
-
-This value is used during the first running voltage histogram
-measurement, and it is not updated until you call `niScope Clear
-Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
+Default: -10.0 V
 ''',
 },
     },
@@ -829,13 +597,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the maximum voltage value in the running voltage histogram.
-The default value is 10.0.
-
-This value is used during the first running voltage histogram
-measurement, and it is not updated until you call `niScope Clear
-Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
+Default: 10.0 V
 ''',
 },
     },
@@ -849,10 +612,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Determines the multiple acquisition time histogram size. The size is set
-during the first call to a time histogram measurement after you clear
-the measurement history with `niScope Clear Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with niScope_ClearWaveformMeasurementStats.
+Default: 256
 ''',
 },
     },
@@ -866,13 +627,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the low voltage limit for the multi-acquisition time
-histogram. Only points in the waveform between the low and high voltage
-limits are included in the histogram. The default value is -10.0.
-
-This value is used during the first running time histogram measurement,
-and it is not updated until you call `niScope Clear Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
+Default: -10.0 V
 ''',
 },
     },
@@ -886,13 +642,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the high voltage limit for the Multi-Acquisition time
-histogram. Only points in the waveform between the low and high voltage
-limits are included in the histogram. The default value is 10.0 V.
-
-This value is used during the first time histogram measurement, and it
-is not updated until you call `niScope Clear Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
+Default: 10.0 V
 ''',
 },
     },
@@ -906,14 +657,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the minimum time limit (in seconds) of the multi-acquisition
-time histogram, where the time is in seconds relative to the trigger
-position. Only points in the waveform between the low and high time
-limits are included in the histogram. The default value is -5.0e-4 .
-
-This value is used during the first time histogram measurement, and it
-is not updated until you call `niScope Clear Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
+Default: -5.0e-4 seconds
 ''',
 },
     },
@@ -927,14 +672,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the maximum time limit (in seconds) of the Multi-Acquisition
-time histogram, where the time is in seconds relative to the trigger
-position. Only points in the waveform between the low and high time
-limits are included in the histogram. The default value is 5.0e-4 .
-
-This value is used during the first time histogram measurement, and it
-is not updated until you call `niScope Clear Waveform Measurement
-Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
+Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
+Default: 5.0e-4 seconds
 ''',
 },
     },
@@ -948,11 +687,8 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the order of the polynomial used during the polynomial
-interpolation array measurement. For example, an order of 1 is linear
-interpolation whereas an order of 2 specifies parabolic interpolation.
-Any positive integer is valid. The default value is 1 (linear
-interpolation).
+Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
+Default: 1
 ''',
 },
     },
@@ -966,14 +702,8 @@ interpolation).
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The new number of points for polynomial interpolation is the sampling
-factor times the input number of points. The default value is 0.0.
-
-For example, if you acquire 1,000 points with the digitizer and set this
-property to 2.5, calling the `niScope Fetch Measurement
-(poly) <scopeviref.chm::/niScope_Fetch_Measurement_(poly).html>`__ VI
-(Measurement Scalar DBL instance), with the Polynomial Interpolation
-measurement resamples the waveform to 2,500 points.
+The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling niScope_FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+Default: 2.0
 ''',
 },
     },
@@ -987,9 +717,8 @@ measurement resamples the waveform to 2,500 points.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the cutoff frequency in hertz for filters of type lowpass and
-highpass. The cutoff frequency definition varies depending on the
-filter. The default value is 1.0e6 Hz.
+Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
+Default: 1.0e6 Hz
 ''',
 },
     },
@@ -1003,9 +732,8 @@ filter. The default value is 1.0e6 Hz.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The center frequency in hertz for filters of type bandpass and bandstop.
-The width of the filter is specified by Filter Width, where the cutoff
-frequencies are the center width. The default value is 1.0e6 Hz.
+The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by NISCOPE_ATTR_MEAS_FILTER_WIDTH, where the cutoff frequencies are the center ± width.
+Default: 1.0e6 Hz
 ''',
 },
     },
@@ -1019,11 +747,8 @@ frequencies are the center width. The default value is 1.0e6 Hz.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the amount of passband ripple (in dB) for Chebyshev filters.
-More ripple gives a sharper cutoff for a given filter order. The default
-value is 0.1.
-
-Valid Values: >0.0
+Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
+Default: 0.1 dB
 ''',
 },
     },
@@ -1037,13 +762,8 @@ Valid Values: >0.0
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The percentage (0 - 100%) of the infinite impulse response (IIR)
-filtered waveform to eliminate from the beginning of the waveform. This
-action allows eliminating the transient portion of the waveform that is
-undefined due to the assumptions necessary at the boundary condition.
-The default value is 20.0%.
-
-Valid Range: 0.0 - 100.0%
+The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
+Default: 20.0%
 ''',
 },
     },
@@ -1056,7 +776,14 @@ Valid Range: 0.0 - 100.0%
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies the type of digital filter. The default value is lowpass.',
+'description': '''
+Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
+·  NISCOPE_VAL_MEAS_LOWPASS
+·  NISCOPE_VAL_MEAS_HIGHPASS
+·  NISCOPE_VAL_MEAS_BANDPASS
+·  NISCOPE_VAL_MEAS_BANDSTOP
+Default: NISCOPE_VAL_MEAS_LOWPASS
+''',
 },
     },
     1150036: {
@@ -1069,10 +796,8 @@ Valid Range: 0.0 - 100.0%
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the order of the infinite impulse response filter. The default
-value is 2.
-
-Valid Values: >0
+Specifies the order of an IIR filter. All positive integers are valid.
+Default: 2
 ''',
 },
     },
@@ -1086,12 +811,8 @@ Valid Values: >0
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the number of taps for the finite impulse response filter.
-This value must be odd if the filter type is highpass or bandstop.
-Otherwise, the magnitude response goes to zero as the frequency goes to
-half the sampling rate. The default value is 25.
-
-Valid Values: >0
+Defines the number of taps (coefficients) for an FIR filter.
+Default: 25
 ''',
 },
     },
@@ -1105,11 +826,8 @@ Valid Values: >0
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the low reference level used in many scalar measurements. The
-default value is 10.0%.
-
-Units: Percentage of the signal based on the selected `Percentage Units
-Method <pniScope_PercentageMethod.html>`__ property.
+Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_LOW_REF if you use this attribute to set various channels to different values.
+Default: 10%
 ''',
 },
     },
@@ -1123,11 +841,8 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the mid reference level used in many scalar measurements. The
-default value is 50%.
-
-Units: Percentage of the signal based on the selected `Percentage Units
-Method <pniScope_PercentageMethod.html>`__ property.
+Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_MID_REF if you use this attribute to set various channels to different values.
+Default: 50%
 ''',
 },
     },
@@ -1141,11 +856,8 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the high reference level used in many scalar measurements. The
-default value is 90%.
-
-Units: Percentage of the signal based on the selected `Percentage Units
-Method <pniScope_PercentageMethod.html>`__ property.
+Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
+Default: 90%
 ''',
 },
     },
@@ -1159,9 +871,8 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the width (in Hz) of a bandpass or bandstop filter. The cutoff
-frequencies are the (center frequency property ± 0.5 × filter width).
-The default value is 1.0e3.
+Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ ± one-half width.
+Default: 1.0e3 Hz
 ''',
 },
     },
@@ -1175,9 +886,15 @@ The default value is 1.0e3.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the FIR window type. The symmetric windows are applied to the
-FIR filter coefficients to limit passband ripple in FIR filters. The
-default value is None (0).
+Specifies the FIR window type. The possible choices are:
+NISCOPE_VAL_NONE
+NISCOPE_VAL_HANNING_WINDOW
+NISCOPE_VAL_HAMMING_WINDOW
+NISCOPE_VAL_TRIANGLE_WINDOW
+NISCOPE_VAL_FLAT_TOP_WINDOW
+NISCOPE_VAL_BLACKMAN_WINDOW
+The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
+Default: NISCOPE_VAL_NONE
 ''',
 },
     },
@@ -1191,8 +908,8 @@ default value is None (0).
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Every element of an array is multiplied by this scalar value during the
-array gain measurement. The default value is 1.0.
+Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
+Default: 1.0
 ''',
 },
     },
@@ -1206,8 +923,8 @@ array gain measurement. The default value is 1.0.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Every element of an array is added to this scalar value during the array
-offset measurement. The default value is 0.0.
+Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
+Default: 0.0
 ''',
 },
     },
@@ -1221,8 +938,11 @@ offset measurement. The default value is 0.0.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the method used to map percentage reference units to voltages.
-The default value is BaseTop.
+Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
+NISCOPE_VAL_MEAS_LOW_HIGH
+NISCOPE_VAL_MEAS_MIN_MAX
+NISCOPE_VAL_MEAS_BASE_TOP
+Default: NISCOPE_VAL_MEAS_BASE_TOP
 ''',
 },
     },
@@ -1236,12 +956,7 @@ The default value is BaseTop.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the delay in seconds for the trigger from the master to the
-slave.
-
-This value adjusts the **initial X** value of the slave digitizer to
-correct for the propagation delay between the master trigger output and
-slave trigger input.
+Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
 ''',
 },
     },
@@ -1255,17 +970,7 @@ slave trigger input.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for the
-trigger to the PXI Star Trigger line.
-
-By itself, this property has no effect on the acquired data. However,
-depending on how the trigger lines are routed between the master and
-slave boards, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PXI Star Trigger Line <digitizers.chm::/PXI_Star_Trigger_Line.html>`__
+This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1279,17 +984,7 @@ slave boards, you can use this value as a starting point to set the
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for the
-trigger to the RTSI bus.
-
-By itself, this property has no effect on the acquired data. However,
-depending on how the trigger lines are routed between the master and
-slave digitizers, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PXI Trigger Lines <digitizers.chm::/PXI_Trigger_Lines.html>`__
+This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1303,17 +998,7 @@ slave digitizers, you can use this value as a starting point to set the
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for the
-trigger to the PFI lines. By itself, this property has no effect on the
-acquired data.
-
-Depending on how the trigger lines are routed between the master and
-slave digitizers, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PFI Lines <digitizers.chm::/PFI_Lines.html>`__
+This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1327,17 +1012,7 @@ slave digitizers, you can use this value as a starting point to set the
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for PXI
-Star Trigger line to the trigger input. By itself, this property has no
-effect on the acquired data.
-
-Depending on how the trigger lines are routed between the master and
-slave digitizers, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PXI Star Trigger Line <digitizers.chm::/PXI_Star_Trigger_Line.html>`__
+This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1351,17 +1026,7 @@ slave digitizers, you can use this value as a starting point to set the
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for the
-RTSI bus to the trigger input. By itself, this property has no effect on
-the acquired data.
-
-Depending on how the trigger lines are routed between the master and
-slave digitizers, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PXI Trigger Lines <digitizers.chm::/PXI_Trigger_Lines.html>`__
+This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1375,17 +1040,7 @@ slave digitizers, you can use this value as a starting point to set the
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-A factory-programmed value that specifies the delay in seconds for the
-PFI lines to the trigger input. By itself, this property has no effect
-on the acquired data.
-
-Depending on how the trigger lines are routed between the master and
-slave digitizers, you can use this value as a starting point to set the
-`Slave Trigger Delay <pniScope_SlaveTriggerDelay.html>`__ property.
-
-**Related topics:**
-
-`PFI Lines <digitizers.chm::/PFI_Lines.html>`__
+This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
 ''',
 },
     },
@@ -1399,37 +1054,20 @@ slave digitizers, you can use this value as a starting point to set the
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source the digitizer monitors for an acquisition arm
-trigger. When an acquisition arm trigger is received, the digitizer
-begins acquiring pretrigger samples.
-
-**Defined Values**
-
-VAL\_IMMEDIATE
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
-
-VAL\_SW\_TRIG\_FUNC
+Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
+Valid Values:
+NISCOPE_VAL_IMMEDIATE     ('VAL_IMMEDIATE')    - Triggers immediately
+NISCOPE_VAL_RTSI_0        ('VAL_RTSI_0')       - RTSI 0
+NISCOPE_VAL_RTSI_1        ('VAL_RTSI_1')       - RTSI 1
+NISCOPE_VAL_RTSI_2        ('VAL_RTSI_2')       - RTSI 2
+NISCOPE_VAL_RTSI_3        ('VAL_RTSI_3')       - RTSI 3
+NISCOPE_VAL_RTSI_4        ('VAL_RTSI_4')       - RTSI 4
+NISCOPE_VAL_RTSI_5        ('VAL_RTSI_5')       - RTSI 5
+NISCOPE_VAL_RTSI_6        ('VAL_RTSI_6')       - RTSI 6
+NISCOPE_VAL_PFI_0         ('VAL_PFI_0')        - PFI 0
+NISCOPE_VAL_PFI_1         ('VAL_PFI_1')        - PFI 1
+NISCOPE_VAL_PFI_2         ('VAL_PFI_2')        - PFI 2
+NISCOPE_VAL_PXI_STAR      ('VAL_PXI_STAR')     - PXI Star Trigger
 ''',
 },
     },
@@ -1443,33 +1081,7 @@ VAL\_SW\_TRIG\_FUNC
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source for the record arm. This property is only
-applicable to Traditional NI-DAQ (Legacy) devices. For SMC-based or USB
-devices, use the Synchronization:Advance Trigger:Source Property.
-
-**Defined Values**
-
-VAL\_IMMEDIATE
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
+Specifies the record arm source.
 ''',
 },
     },
@@ -1483,22 +1095,7 @@ VAL\_PFI\_2
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Allows you to acquire more records than fit in onboard memory.
-
-TRUE—Enables NI-SCOPE to fetch more records than fit in memory
-
-FALSE—Disables NI-SCOPE from fetching more records than fit in memory
-
-**Related topics:**
-
-`Time Interleaved
-Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
-''',
-'note': '''
-The property can be used only in digitizers that support continuous
-acquisition. Refer to `Features Supported by
-Device <Digitizers.chm::/Features_Supported_Main.html>`__ to find out if
-your digitizer supports continuous acquisition.
+Indicates whether more records can be configured with niScope_ConfigureHorizontalTiming  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
 ''',
 },
     },
@@ -1512,8 +1109,7 @@ your digitizer supports continuous acquisition.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the total combined amount of onboard memory for all channels in
-bytes.
+Returns the total combined amount of onboard memory for all channels in bytes.
 ''',
 },
     },
@@ -1527,20 +1123,7 @@ bytes.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the number of averages in each RIS bin.
-
-Averaging is useful in RIS because the trigger times are not evenly
-spaced, so adjacent points in the reconstructed waveform cannot be
-accurately spaced. By averaging, the errors in both time and voltage are
-smoothed, minimizing the noise in the reconstructed waveform.
-
-Valid Values: Greater than or equal to 0
-
-**Related topics:**
-
-`Sampling Methods <digitizers.chm::/Sampling_Methods.html>`__
-`Equivalent-Time Sampling and Random Interleaved
-Sampling <digitizers.chm::/ris.html>`__
+The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
 ''',
 },
     },
@@ -1554,9 +1137,7 @@ Sampling <digitizers.chm::/ris.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the algorithm for random-interleaved sampling, which is used
-if the sample rate exceeds the `Max Realtime Sample
-Rate <pniScope_MaximumRealtimeSampleRate.html>`__.
+Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of NISCOPE_ATTR_MAX_REAL_TIME_SAMPLING_RATE.
 ''',
 },
     },
@@ -1570,11 +1151,7 @@ Rate <pniScope_MaximumRealtimeSampleRate.html>`__.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Set to TRUE to retrieve one array with alternating values on the NI
-5620/5621. This property can be used to retrieve a single array with I
-and Q interleaved instead of two separate arrays. If set to TRUE, the
-resulting array is twice the size of the actual record length. The
-default value is FALSE.
+Set to VI_TRUE to retrieve one array with alternating values on the NI 5620/5621.  For example, this attribute can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to VI_TRUE, the resulting array will be twice the size of the actual record length.
 ''',
 },
     },
@@ -1588,12 +1165,7 @@ default value is FALSE.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Returns the maximum real-time sample rate in hertz.
-
-**Related topics:**
-
-`Sampling Methods <digitizers.chm::/Sampling_Methods.html>`__ `Real-Time
-Sampling <digitizers.chm::/Real-Time_Sampling.html>`__
+Returns the maximum real time sample rate in Hz.
 ''',
 },
     },
@@ -1607,13 +1179,7 @@ Sampling <digitizers.chm::/Real-Time_Sampling.html>`__
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Returns the maximum RIS sampling rate in hertz.
-
-**Related topics:**
-
-`Sampling Methods <digitizers.chm::/Sampling_Methods.html>`__
-`Equivalent-Time Sampling and Random Interleaved
-Sampling <digitizers.chm::/ris.html>`__
+Returns the maximum sample rate in RIS mode in Hz.
 ''',
 },
     },
@@ -1627,13 +1193,10 @@ Sampling <digitizers.chm::/ris.html>`__
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Sets the impedance for the trigger channel (NI 5112 only).
-
-**Defined Values**
-
-1 M Ohm
-
-50 Ohm
+Specifies the input impedance for the external analog trigger channel in Ohms.
+Valid Values:
+50      - 50 ohms
+1000000 - 1 mega ohm
 ''',
 },
     },
@@ -1659,8 +1222,8 @@ Sets the impedance for the trigger channel (NI 5112 only).
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies which point in the acquired waveform is the first to be
-fetched. This property specifies what the 'Fetch Offset' is relative to.
+Position to start fetching within one record.
+Default Value: NISCOPE_VAL_PRETRIGGER
 ''',
 },
     },
@@ -1674,11 +1237,8 @@ fetched. This property specifies what the 'Fetch Offset' is relative to.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the offset in samples; the samples returned also depend on the
-`Fetch Relative To <pniScope_FetchRelativeTo.html>`__ property. The
-default value is 0.
-
-Valid Values: All integers
+Offset in samples to start fetching data within each record. The offset is applied relative to  NISCOPE_ATTR_FETCH_RELATIVE_TO.The offset can be positive or negative.
+Default Value: 0
 ''',
 },
     },
@@ -1692,10 +1252,8 @@ Valid Values: All integers
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the record to fetch. The record is from a channel you specify. The
-default value is 0.
-
-Valid Values: Values greater than or equal to 0
+Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
+Default Value: 0.
 ''',
 },
     },
@@ -1709,17 +1267,8 @@ Valid Values: Values greater than or equal to 0
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Fetches multiple records. If you want to fetch all records from the
-record you specify in the `Fetch Record
-Number <pniScope_FetchRecordNumber.html>`__ property to the last record
-configured, use -1. The default value is -1.
-
-**Related topics:**
-
-`Making Multiple-Record
-Acquisitions <digitizers.chm::/Making_Multiple-Record_Acquisitions.html>`__
-`Fetching Multiple-Record
-Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
+Number of records to fetch. Use -1 to fetch all configured records.
+Default Value: -1
 ''',
 },
     },
@@ -1733,10 +1282,8 @@ Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Determines the number of samples to fetch from a digitizer when
-performing a measurement. -1 means fetch all samples from the `Fetch
-Offset <pniScope_FetchOffset.html>`__ property to the end of the current
-record. The default value is -1.
+Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
+Default Value: -1
 ''',
 },
     },
@@ -1750,11 +1297,7 @@ record. The default value is -1.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Actual number of samples acquired since the last fetch, relative to the
-configured value for `Fetch Relative
-To <pniScope_FetchRelativeTo.html>`__, including `Fetch
-Offset <pniScope_FetchOffset.html>`__, and for the current configured
-`Fetch Record Number <pniScope_FetchRecordNumber.html>`__.
+Actual number of samples acquired in the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER from the NISCOPE_ATTR_FETCH_RELATIVE_TO and NISCOPE_ATTR_FETCH_OFFSET attributes.
 ''',
 },
     },
@@ -1767,7 +1310,9 @@ Offset <pniScope_FetchOffset.html>`__, and for the current configured
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Returns the number of records your digitizer has acquired.',
+'description': '''
+Specifies the number of records that have been completely acquired.
+''',
 },
     },
     1150084: {
@@ -1780,11 +1325,7 @@ Offset <pniScope_FetchOffset.html>`__, and for the current configured
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the number of points acquired that have not been fetched yet.
-
-**Related topics:**
-
-`Fetching Data <digitizers.chm::/Fetching_Data.html>`__
+Returns the number of samples (NISCOPE_ATTR_POINTS_DONE) that have been acquired but not fetched  for the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER.
 ''',
 },
     },
@@ -1798,9 +1339,7 @@ Specifies the number of points acquired that have not been fetched yet.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-When set to TRUE and the digitizer is set to master, the number of
-pretrigger samples and total number of samples are adjusted to enable
-synchronizing a master and slave NI 5102.
+When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
 ''',
 },
     },
@@ -1814,13 +1353,7 @@ synchronizing a master and slave NI 5102.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Returns the temperature of the device in degrees Celsius from the
-onboard sensor.
-
-**Related topics:**
-
-`Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__ `PXI/PXIe
-Chassis Cooling <digitizers.chm::/chassis_with_PXIe.html>`__
+Returns the temperature of the device in degrees Celsius from the onboard sensor.
 ''',
 },
     },
@@ -1834,32 +1367,7 @@ Chassis Cooling <digitizers.chm::/chassis_with_PXIe.html>`__
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source of the sample clock timebase, which is the timebase
-used to control waveform sampling.
-
-The actual sample rate may be the timebase itself or a scaled version of
-the timebase, depending on the `Min Sample
-Rate <pniScope_MinSampleRate.html>`__ property (for internal sources) or
-the `Sample Clock Timebase
-Divisor <pniScope_SampleClockTimebaseDivisor.html>`__ and `Sample Clock
-Timebase Multiplier <pniScope_SampleClockTimebaseMultiplier.html>`__
-properties (for external sources).
-
-**Defined Values**
-
-VAL\_CLK\_IN
-
-VAL\_PXI\_STAR
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_NO\_SOURCE
-
-**Related topics:**
-
-`Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  NISCOPE_ATTR_MIN_SAMPLE_RATE (for internal sources) or the NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV (for external sources).
 ''',
 },
     },
@@ -1873,10 +1381,7 @@ VAL\_NO\_SOURCE
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the frequency in hertz of the external clock used as the
-timebase source if the `Sample Clock Timebase
-Source <pniScope_SampleClockTimebaseSource.html>`__ is an external
-source.
+If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
 ''',
 },
     },
@@ -1890,14 +1395,7 @@ source.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-If `Sample Clock Timebase
-Source <pniScope_SampleClockTimebaseSource.html>`__ is an external
-source, specifies the ratio between the sample clock timebase rate and
-the actual sample rate, which can be slower.
-
-**Related topics:**
-
-`Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
 ''',
 },
     },
@@ -1911,20 +1409,7 @@ the actual sample rate, which can be slower.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-If `Reference Clock Source <pniScope_ReferenceClockSource.html>`__ is an
-external source, specifies the frequency (in hertz) of the input clock
-(reference clock) to which the internal sample clock timebase is
-synchronized.
-
-**Related topics:**
-
-`Reference Clock/Phase-Lock
-Loop <digitizers.chm::/Reference_Clock.html>`__
-''',
-'note': '''
-Refer to `Features Supported by
-Device <Digitizers.chm::/Features_Supported_Main.html>`__ for valid
-values.
+If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
 ''',
 },
     },
@@ -1937,40 +1422,7 @@ values.
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
-'description': '''
-Exports the sample clock to a specified terminal. This property is not
-supported by all digitizers.
-
-The full sample clock rate can be exported to the CLK\_OUT connector. If
-decimating, the divided down sample clock rate can be exported to any of
-the valid destinations.
-
-**Defined Values**
-
-VAL\_CLK\_OUT
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PXI\_STAR
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-''',
+'description': 'Exports the sample clock to a specified terminal.',
 },
     },
     1150093: {
@@ -1983,8 +1435,10 @@ VAL\_PFI\_2
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Restores the video-triggered data retrieved by the digitizer to the
-video signal's zero reference point. The default value is FALSE.
+Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point.
+Valid Values:
+VI_TRUE - Enable DC restore
+VI_FALSE - Disable DC restore
 ''',
 },
     },
@@ -1998,37 +1452,7 @@ video signal's zero reference point. The default value is FALSE.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source the digitizer monitors for an advance trigger. When
-the advance trigger is received, the digitizer begins acquiring
-pretrigger samples for the next record.
-
-**Defined Values**
-
-VAL\_IMMEDIATE
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
-
-VAL\_SW\_TRIG\_FUNC
+Specifies the source the digitizer monitors for an advance trigger.   When the advance trigger is received, the digitizer begins acquiring pretrigger  samples.
 ''',
 },
     },
@@ -2042,38 +1466,7 @@ VAL\_SW\_TRIG\_FUNC
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source the digitizer monitors for an arm reference
-trigger. When the arm reference trigger is received, the digitizer
-begins searching for the reference (stop) trigger from the
-user-configured trigger source.
-
-**Defined Values**
-
-VAL\_IMMEDIATE
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
-
-VAL\_SW\_TRIG\_FUNC
+Specifies the source the digitizer monitors for an arm reference trigger.   When the arm reference trigger is received, the digitizer begins looking for a  reference (stop) trigger from the user-configured trigger source.
 ''',
 },
     },
@@ -2087,12 +1480,7 @@ VAL\_SW\_TRIG\_FUNC
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies that the digitizer should record the trigger position
-precisely using time-digital conversion (TDC).
-
-**Related topics:**
-
-`TDC <digitizers.chm::/TDC.html>`__
+This attribute controls whether the TDC is used to compute an accurate trigger.
 ''',
 },
     },
@@ -2106,9 +1494,8 @@ precisely using time-digital conversion (TDC).
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination to export the Start trigger. When the start
-trigger is received, the digitizer begins acquiring data. Refer to the
-device specifications document for a list of valid destinations.
+Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2122,34 +1509,8 @@ device specifications document for a list of valid destinations.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination to export the Reference (Stop) Trigger Refer
-to the device specifications document for a list of valid destinations.
-
-**Defined Values**
-
-VAL\_EXTERNAL
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination export for the reference (stop) trigger.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2163,33 +1524,22 @@ VAL\_PXI\_STAR
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the End of Record event. When this event
-is asserted, the digitizer has completed sampling a record. Refer to the
-device specifications document for a list of valid destinations.
-
-**Defined Values**
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
+Consult your device documentation for a specific list of valid destinations.
+''',
+},
+    },
+    1150100: {
+        'access': 'read-write',
+        'channel_based': False,
+        'enum': None,
+        'lv_property': '',
+        'name': 'POLL_INTERVAL',
+        'resettable': False,
+        'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
 ''',
 },
     },
@@ -2203,34 +1553,8 @@ VAL\_PXI\_STAR
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the End of Acquisition event. When this
-event is asserted, the digitizer has completed sampling all records.
-Refer to the device specifications document for a list of valid
-destinations.
-
-**Defined Values**
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination for the End of Acquisition Event.    When this event is asserted, the digitizer has completed sampling for all records.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2244,11 +1568,7 @@ VAL\_PXI\_STAR
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Indicates the actual resolution in bits of valid data (as opposed to
-padding bits) in the acquired waveform. Compare to the `Binary Sample
-Width <pniScope_BinarySampleWidth.html>`__ property.
-
-Valid Values: 8 to 32
+Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to NISCOPE_ATTR_BINARY_SAMPLE_WIDTH.
 ''',
 },
     },
@@ -2262,10 +1582,8 @@ Valid Values: 8 to 32
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Pass the length of time (in seconds) you want the digitizer to wait
-after it starts acquiring data until the digitizer enables the trigger
-system to detect a reference (stop) trigger.
-
+Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
+Units: Seconds
 Valid Values: 0.0 - 171.8
 ''',
 },
@@ -2279,7 +1597,9 @@ Valid Values: 0.0 - 171.8
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
-'description': 'Returns the serial number of the device.',
+'description': '''
+Returns the serial number of the device.
+''',
 },
     },
     1150105: {
@@ -2291,15 +1611,8 @@ Valid Values: 0.0 - 171.8
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': '''
-Gets or sets the binary phase DAC value that controls the delay added to
-the Phase Locked Loop (PLL) of the sample clock. The default value is "
-".
-''',
-'note': '''
-If this value is set, sample clock adjustments and TClk cannot do any
-subsample adjustment of the timebase sample clock.
-''',
+'description': 'Gets or sets the binary phase DAC value that controls the delay added to the Phase Locked Loop (PLL) of the sample clock.',
+'note': 'if this value is set, sample clock adjust and TClk will not be able to do any sub-sample adjustment of the timebase sample clock.',
 },
     },
     1150106: {
@@ -2312,8 +1625,10 @@ subsample adjustment of the timebase sample clock.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Indicates whether the digitizer should use RIS sample rates when
-searching for a frequency in autosetup.
+Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup.
+Valid Values:
+VI_TRUE  (1) - Use RIS sample rates in autosetup
+VI_FALSE (0) - Do not use RIS sample rates in autosetup
 ''',
 },
     },
@@ -2327,12 +1642,7 @@ searching for a frequency in autosetup.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies how the digitizer configures the channel terminal.
-
-**Related topics:**
-
-`NI 5922 Channel Terminal
-Configuration <digitizers.chm::/5922_Chan_Terminal_Configuration.html>`__
+Specifies the terminal configuration for the channel.
 ''',
 },
     },
@@ -2346,8 +1656,8 @@ Configuration <digitizers.chm::/5922_Chan_Terminal_Configuration.html>`__
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the advance trigger. When the advance
-trigger is received, the digitizer begins acquiring pretrigger samples.
+Specifies the destination to export the advance trigger.   When the advance trigger is received, the digitizer begins acquiring  samples for the Nth record.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2361,33 +1671,8 @@ trigger is received, the digitizer begins acquiring pretrigger samples.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination to export the Start trigger. When the start
-trigger is received, the digitizer begins acquiring data. Refer to the
-device specifications document for a list of valid destinations.
-
-**Defined Values**
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination for the Ready for Start Event.   When this event is asserted, the digitizer is ready to receive a start trigger.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2401,11 +1686,8 @@ VAL\_PXI\_STAR
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the Ready for Reference Event. When this
-event is asserted, the digitizer is ready to receive a reference
-trigger. Refer to the device-specific documentation in the *NI
-High-Speed Digitizers Help* for a list of valid destinations for your
-device.
+Specifies the destination for the Ready for Reference Event.   When this event is asserted, the digitizer is ready to receive a reference trigger.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2419,32 +1701,8 @@ device.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the advance trigger. When the advance
-trigger is received, the digitizer begins acquiring pretrigger samples.
-
-**Defined Values**
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
+Consult your device documentation for a specific list of valid destinations.
 ''',
 },
     },
@@ -2458,19 +1716,10 @@ VAL\_PXI\_STAR
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Extends the maximum sample rate on the specified Active Channel for some
-devices that support Time Interleaved Sampling (TIS). TIS enables the
-device to use multiple ADCs to sample the same waveform at a higher
-effective real-time rate. NI 5152/5153/5154 devices fully support
-Read/Write ability for this property. For other devices that use TIS
-mode, such as the NI 5185/5186, this property is Read Only.
-
-**Related topics:**
-
-`Time Interleaved
-Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__ `Configuring
-the Horizontal
-Settings <digitizers.chm::/Configuring_Horizontal.html>`__
+Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
+Valid Values:
+VI_TRUE  (1) - Use multiple interleaved ADCs on this channel
+VI_FALSE (0) - Use only this channel's ADC to acquire data for this channel
 ''',
 },
     },
@@ -2484,34 +1733,9 @@ Settings <digitizers.chm::/Configuring_Horizontal.html>`__
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the destination for the 5 Volt power signal. Refer to the
-device specifications document for a list of valid destinations.
-
-**Defined Values**
-
-VAL\_RTSI\_0
-
-VAL\_RTSI\_1
-
-VAL\_RTSI\_2
-
-VAL\_RTSI\_3
-
-VAL\_RTSI\_4
-
-VAL\_RTSI\_5
-
-VAL\_RTSI\_6
-
-VAL\_PFI\_0
-
-VAL\_PFI\_1
-
-VAL\_PFI\_2
-
-VAL\_PXI\_STAR
+Specifies the destination for the 5 Volt signal.
+Consult your device documentation for a specific list of valid destinations.
 ''',
-'note': 'This property is supported only for NI 5152/5153/5154 devices.',
 },
     },
     1150271: {
@@ -2524,22 +1748,8 @@ VAL\_PXI\_STAR
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass
-antialias filter. Use this property to select from several types of
-filters to achieve desired filtering characteristics. For most
-applications, the default value of this property is recommended. The
-other available filters are useful for optimizing settling time
-measurements of step responses. The default value is 48 Tap Standard.
-
-**Related topics:**
-
-`Aliasing <digitizers.chm::/Aliasing.html>`__ `FIR
-Filters <digitizers.chm::/FIR_Filters.html>`__
-''',
-'note': '''
-Settling time values refer to the FIR filter only and do not take into
-account settling time caused by the analog front end. Refer to the *NI
-PXI-5922 Specifications* for combined digital and analog settling times.
+The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
+Use this attribute to select from several types of filters to achieve desired filtering characteristics.
 ''',
 },
     },
@@ -2553,13 +1763,7 @@ PXI-5922 Specifications* for combined digital and analog settling times.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the acquisition was triggered automatically. Auto
-triggering occurs if the Trigger Modifier property is set to Auto
-Trigger and no trigger has been received for a certain amount of time.
-
-**Related topics:**
-
-`Trigger Types <digitizers.chm::/Trigger_Types.html>`__
+Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered attribute to find out if the last acquisition was triggered.
 ''',
 },
     },
@@ -2568,15 +1772,13 @@ Trigger and no trigger has been received for a certain amount of time.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device:Accessory:Gain',
-        'name': 'SIGNAL_COND_GAIN',
+        'name': 'ACCESSORY_GAIN',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
 Returns the calibration gain for the current device configuration.
-
 **Related topics:**
-
 `NI 5122/5124/5142
 Calibration <digitizers.chm::/5122_Calibration.html>`__
 ''',
@@ -2591,15 +1793,13 @@ amplifier.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device:Accessory:Offset',
-        'name': 'SIGNAL_COND_OFFSET',
+        'name': 'ACCESSORY_OFFSET',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
 Returns the calibration offset for the current device configuration.
-
 **Related topics:**
-
 `NI 5122/5124/5142
 Calibration <digitizers.chm::/5122_Calibration.html>`__
 ''',
@@ -2619,15 +1819,8 @@ amplifier.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables/disables the digital downconverter (DDC) block of the digitizer.
-When the DDC block is disabled, all DDC-related properties are disabled
-and have no effect on the acquired signal. The default value is FALSE.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP. For NI 5620/5621
-digitizers, use `Enable DDC <pniScope_EnableDDC.html>`__.
+Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -2641,13 +1834,8 @@ digitizers, use `Enable DDC <pniScope_EnableDDC.html>`__.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables/disables frequency translating the data around the user-selected
-center frequency down to baseband. The default value is TRUE.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Enables/disables frequency translating the data around the user-selected center  frequency down to baseband.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -2661,17 +1849,8 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The frequency at which the `DDC <Digitizers.chm::/Glossary.html#DDC>`__
-block frequency translates the input data. The default value is 10 MHz.
-
-**Valid Values**
-
-0 - (0.5 × Sample Clock Timebase Rate for digitizer)
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+The frequency at which the DDC block frequency translates the input data.
+Default Value: 10 MHz
 ''',
 },
     },
@@ -2685,13 +1864,11 @@ this property with a device that does not support OSP.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-The way in which data is processed by the DDC block. The default value
-is Complex.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+The way in which data is processed by the DDC block.
+Valid Values:
+Real (0)
+Complex (1)
+Default Value: Complex
 ''',
 },
     },
@@ -2705,17 +1882,8 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The I oscillator phase in degrees at the first point acquired. The
-default value is 0.
-
-**Valid Values**
-
--360 to 360
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+The I center frequency phase in degrees at the first point of the acquisition.
+Default Value: 0
 ''',
 },
     },
@@ -2729,19 +1897,8 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-The Q oscillator phase in degrees at the first point acquired. Use this
-property only when the `Data Processing
-Mode <pniScope_DataProcessingMode.html>`__ property is set to Complex.
-The default value is 90.
-
-**Valid Values**
-
--360 to 360
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when NISCOPE_ATTR_DDC_DATA_PROCESSING_MODE is set to Complex.
+Default Value: 90
 ''',
 },
     },
@@ -2755,26 +1912,9 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Applies gain to the specified channel in hardware before any onboard
-signal processing occurs. The default value is 1.
-
-The output of the digital gain/offset block is as follows:
-
-(*ADC value* × *digital gain*) + *digital offset*
-
-Units: Unitless
-
-Valid Values: -1.5 to 1.5
-
-**Related topics:**
-
-`NI 5622 Onboard Signal Processing
-(OSP) <digitizers.chm::/5622_OSP_diagram.html>`__
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Applies gain to the specified channel in hardware before any onboard processing.
+Valid Values:
+-1.5 to 1.5
 ''',
 },
     },
@@ -2788,28 +1928,9 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Applies offset to the specified channel in hardware before any onboard
-signal processing occurs. The default value is 0.
-
-Units: Volts
-
-**Valid Values**
-
-±(Vertical Range × 0.4)
-
-The output of the digital gain/offset block is as follows:
-
-(*ADC value* × *digital gain*) + *digital offset*
-
-**Related topics:**
-
-`NI 5622 Onboard Signal Processing
-(OSP) <digitizers.chm::/5622_OSP_diagram.html>`__
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Applies offset to the specified channel in hardware before any onboard processing.
+Valid Values:
+-1.5 to 1.5 V
 ''',
 },
     },
@@ -2823,9 +1944,12 @@ this property with a device that does not support OSP.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Configures error reporting when the onboard signal processing block
-detects an overflow in any of its stages. Overflows lead to clipping of
-the waveform. The default value is Warning.
+Configures error reporting when the DDC block detects an overflow in any of its  stages. Overflows lead to clipping of the waveform.
+Valid Values:
+Warning (0)
+Error (1)
+Disabled (2)
+Default Value: Warning
 ''',
 },
     },
@@ -2839,16 +1963,8 @@ the waveform. The default value is Warning.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the channel that is the input to the Q data stream of the
-`DDC <Digitizers.chm::/Glossary.html#DDC>`__. The default value is the
-channel to which the property is registered.
-
-Valid Values: All valid channels for the device.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Indicates the channel that is the input of the Q path of the DDC.
+Default Value: The channel that the attribute is configured off of.
 ''',
 },
     },
@@ -2862,17 +1978,8 @@ this property with a device that does not support OSP.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether a fetch call retrieves a single waveform with I and Q
-interleaved, or two separate waveforms. If enabled, the number of
-elements returned by scalar fetch types (such as 16-bit integer) is
-twice the requested number of samples. If disabled during DDC
-acquisitions in Complex mode, two noninterleaved arrays of data are
-returned per channel, per record.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Enables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -2885,18 +1992,7 @@ this property with a device that does not support OSP.
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': '''
-Returns the number of coefficients that the equalization FIR filter can
-accept. This filter is designed to compensate the input signal for
-artifacts introduced to the signal outside of the digitizer. Because
-this filter is a generic FIR filter, any coefficients are valid.
-Coefficient values should be between +1 and -1.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
-''',
+'description': 'Returns the number of coefficients that the FIR filter can accept.  This filter is designed  to compensate the input signal for artifacts introduced to the signal outside of the digitizer.   However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be  between +1 and -1 in value.',
 },
     },
     1150313: {
@@ -2908,19 +2004,7 @@ this property with a device that does not support OSP.
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
-'description': '''
-Enables the onboard signal processing equalization FIR block, which is
-connected directly to the input signal. The equalization filter is
-designed to compensate the input signal for artifacts introduced to the
-signal outside of the digitizer. Because this filter is a generic FIR
-filter, any coefficients are valid. Coefficient values should be between
-+1 and -1. The default value is FALSE.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
-''',
+'description': 'Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside  of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients  should be between +1 and -1 in value.',
 },
     },
     1150314: {
@@ -2933,13 +2017,7 @@ this property with a device that does not support OSP.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies which reference trigger detection circuitry to use on the
-device.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+Indicates which analog compare circuitry to use on the device.
 ''',
 },
     },
@@ -2953,21 +2031,7 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the amount of time (in seconds) the trigger circuit must not
-detect a signal above the `trigger level <pniScope_TriggerLevel.html>`__
-(or below the trigger level if the trigger slope is negative) before the
-trigger is armed. This property is useful for triggering at the
-beginning of signal bursts instead of in the middle of signal bursts.
-The default value is 0.
-
-**Valid Values**
-
-Any value greater than or equal to 0.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
+The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This attribute is useful for triggering at the beginning and not in the  middle of signal bursts.
 ''',
 },
     },
@@ -2981,11 +2045,7 @@ this property with a device that does not support OSP.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the maximum number of samples to transfer at one time from the
-device to host memory. Increasing this number should result in better
-fetching performance because the driver does not need to restart the
-transfers as often. However, increasing this number may also increase
-the amount of page-locked memory required from the system.
+Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system.
 ''',
 },
     },
@@ -2999,13 +2059,7 @@ the amount of page-locked memory required from the system.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables the bandpass filter on the specified channel. For the NI
-PXIe-5622, set the value to TRUE to enable the IF filtered path 50MHz
-bandpass filter centered at 187MHz. The default value is FALSE.
-
-**Related topics:**
-
-`Bandwidth <digitizers.chm::/Analog_Bandwidth.html>`__
+Enables the bandpass filter on the specificed channel.  The default value is FALSE.
 ''',
 },
     },
@@ -3019,16 +2073,8 @@ bandpass filter centered at 187MHz. The default value is FALSE.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables or disables the analog dither on the device. Using dither can
-improve the spectral performance of the device by reducing the effects
-of quantization. However, adding dither increases the power level to the
-ADC, so you may need to either decrease the signal level or increase the
-vertical range. The default value is FALSE.
-
-**Related topics:**
-
-`NI 5620/5621 Signal
-Conditioning <digitizers.chm::/562x_Signal_Cond.html>`__
+Enables or Disables the analog dither on the device.  The default value is FALSE.
+Using dither can improve the spectral performance of the device by reducing the effects of quantization.  However, adding dither increases the power level to the ADC, so you may need to either decrease the signal level or increase your vertical range.
 ''',
 },
     },
@@ -3041,15 +2087,7 @@ Conditioning <digitizers.chm::/562x_Signal_Cond.html>`__
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
-'description': '''
-Enables the onboard signal processing block that resamples the input
-waveform to the user desired sample rate. The default value is FALSE.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-onboard signal processing (OSP). NI-SCOPE returns an error if you use
-this property with a device that does not support OSP.
-''',
+'description': 'Enables the onboard signal processing block that resamples the input waveform to the user desired sample rate.  The default value is FALSE.',
 },
     },
     1150321: {
@@ -3062,13 +2100,7 @@ this property with a device that does not support OSP.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the maximum bandwidth that the device is allowed to consume.
-The NI device limits itself to transfer fewer bytes per second on the
-PCIe bus than the value you specify for this property.
-
-**Related topics:**
-
-`Bandwidth <digitizers.chm::/Analog_Bandwidth.html>`__
+This property specifies the maximum bandwidth that the device is allowed to consume.
 ''',
 },
     },
@@ -3082,11 +2114,7 @@ PCIe bus than the value you specify for this property.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the preferred size of the data field in the PCI Express
-packet. In general, the larger the packet size, the more efficiently the
-device uses the bus. However, some systems, because of their
-implementation, perform better with smaller packet sizes. The value of
-this property must be a power of two (64, 128, ... , 512).
+This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
 ''',
 },
     },
@@ -3100,13 +2128,9 @@ this property must be a power of two (64, 128, ... , 512).
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the current number of samples available to stream from a
-peer-to-peer endpoint. This property is endpoint-based.
+Returns the current number of samples available to stream from a peer-to-peer endpoint.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150329: {
@@ -3119,17 +2143,9 @@ peer-to-peer streaming.
         'type': 'ViInt64',
 'documentation': {
 'description': '''
-Returns the address of a hardware register used to grant permission for
-the peer-to-peer endpoint to write data to another peer. The type of
-this address is determined by the `Data Transfer Permission Address
-Type <pniScope_P2PDataTransferPermissionAddressType.html>`__ property.
-Permission is granted in bytes and the register is additive. This
-property is endpoint-based.
+Returns the address of a hardware register used to grant permisison for the peer-to-peer endpoint to write  data to another peer.. The type of this address is determined by the  NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR_TYPE attribute. Permission is granted in bytes and the register  is additive.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150330: {
@@ -3142,15 +2158,13 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the type of address returned to the user from the `Data
-Transfer Permission
-Address <pniScope_P2PDataTransferPermissionAddress.html>`__ property.
-This property is endpoint-based.
+Specifies the type of address returned from the NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR attribute.
+Valid Values:
+Physical (0)
+Virtual (1)
+Default Value: Virtual
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150331: {
@@ -3163,19 +2177,10 @@ peer-to-peer streaming.
         'type': 'ViInt64',
 'documentation': {
 'description': '''
-Specifies the destination for data written by the peer-to-peer endpoint.
-The type of this address is specified by the `Destination Window Address
-Type <pniScope_P2PDestinationWindowAddressType.html>`__ property. This
-property is endpoint-based.
-
-**Valid Values**
-
-A valid, non-NULL, physical or virtual address.
+Specifies the destination for data written by the peer-to-peer endpoint. The type of this address is specified  by the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR_TYPE attribute.
+Valid Values: A valid, non-NULL physical or virtual address.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150332: {
@@ -3188,14 +2193,13 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the type of the `Destination Window
-Address <pniScope_P2PDestinationWindowAddress.html>`__ property. This
-property is endpoint-based.
+Specifies the type of the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR attribute.
+Valid Values:
+Physical (0)
+Virtual (1)
+Default Value: Virtual
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150333: {
@@ -3208,16 +2212,10 @@ peer-to-peer streaming.
         'type': 'ViInt64',
 'documentation': {
 'description': '''
-Specifies the size, in bytes, of the destination window determined by
-the `Destination Window
-Address <pniScope_P2PDestinationWindowAddress.html>`__ and `Destination
-Window Address Type <pniScope_P2PDestinationWindowAddressType.html>`__
-properties. This property is endpoint-based.
+Specifies the size, in bytes, of the destination window determined by the  NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS and the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS_TYPE  attributes.
+Valid Values: Any non-NULL value.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150334: {
@@ -3230,16 +2228,13 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the event to push the `Message Push
-Value <pniScope_P2PMessagePushValue.html>`__ property to the `Message
-Push Address <pniScope_P2PMessagePushAddress.html>`__ property.
-Specifying Done will push the message when the acquisition has
-completed. This property is endpoint-based.
+Specifies the event to push the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_VALUE attribute to the  NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute. Setting this attribute to NISCOPE_VAL_NOTIFY_DONE pushes  the message when the acquisition has completed.
+Valid Values:
+Never (0)
+Done (1)
+Default Value: Done
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150335: {
@@ -3252,15 +2247,9 @@ peer-to-peer streaming.
         'type': 'ViInt64',
 'documentation': {
 'description': '''
-Specifies the address to push the `Message Push
-Value <pniScope_P2PMessagePushValue.html>`__ to on the event specified
-by the `Push Message On <pniScope_P2PPushMessageOn.html>`__ property.
-This property is endpoint-based.
+Specifies the address to Push Message push Value to on the event specified by the  NISCOPE_ATTR_P2P_NOTIFY_PUSH_MESSAGE_ON attribute.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150336: {
@@ -3273,14 +2262,13 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the type of the `Message Push
-Address <pniScope_P2PMessagePushAddress.html>`__ property. This property
-is endpoint-based.
+Specifies the type of the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute.
+Valid Values:
+Physical (0)
+Virtual (1)
+Default Value: Virtual
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150337: {
@@ -3292,16 +2280,8 @@ peer-to-peer streaming.
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
-'description': '''
-Specifies the value to be pushed to the `Message Push
-Address <pniScope_P2PMessagePushAddress.html>`__ property on the event
-specified in the `Push Message On <pniScope_P2PPushMessageOn.html>`__
-property. This property is endpoint-based.
-''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'description': 'Specifies the value to be pushed to the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute on the event specified  by the NISCOPE_ATTR_MESSAGE_PUSH_ON attribute.',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150338: {
@@ -3314,13 +2294,10 @@ peer-to-peer streaming.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the digitizer writes data to the peer-to-peer
-endpoint. This property is endpoint-based.
+Specifies whether the digitizer writes data to the peer-to-peer endpoint.
+Default Value: VI_FALSE
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150339: {
@@ -3333,14 +2310,10 @@ peer-to-peer streaming.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies which channels will be written to a peer-to-peer endpoint. If
-multiple channels are specified, they will be interleaved by sample.
-This property is endpoint-based. The default value is 0.
+Specifies which channels are written to a peer-to-peer endpoint. If multiple channels are specified,  the channels are interleaved by sample.
+Default Value: 0
 ''',
-'note': '''
-This property must either be unused or set to all enabled channels on NI
-5160/5162 digitizers.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150340: {
@@ -3353,14 +2326,9 @@ This property must either be unused or set to all enabled channels on NI
         'type': 'ViInt64',
 'documentation': {
 'description': '''
-Returns the number of samples transferred through the peer-to-peer
-endpoint since the endpoint was last reset. This property is
-endpoint-based.
+Returns the number of samples transferred through the peer-to-peer endpoint since it was last reset.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150341: {
@@ -3373,14 +2341,9 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the most number of samples available to stream from a
-peer-to-peer endpoint since the last time this property was read. This
-property is endpoint-based.
+Returns the most number of samples available to stream from a peer-to-peer endpoint since the last  time this attribute was read.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150342: {
@@ -3393,13 +2356,9 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the size, in samples, of the peer-to-peer endpoint. This
-property is endpoint-based.
+Returns the size in samples of the peer-to-peer endpoint.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150343: {
@@ -3407,7 +2366,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Manual:Manual Configuration Enabled',
-        'name': 'P2P_MANUAL_CONFIGURATION_ENABLED',
+        'name': 'MANUAL_CONFIGURATION_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -3433,14 +2392,9 @@ peer-to-peer streaming.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Returns TRUE if the peer-to-peer endpoint has overflowed. Reset the
-endpoint to clear the overflow condition. This property is
-endpoint-based.
+Returns TRUE if the endpoint FIFO has overflowed. Reset the endpoint to clear the overflow condition.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150345: {
@@ -3453,13 +2407,9 @@ peer-to-peer streaming.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the number of FIFO-based peer-to-peer endpoints this device
-supports.
+Returns the number of FIFO-based peer-to-peer endpoints this device supports.
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150354: {
@@ -3472,10 +2422,10 @@ peer-to-peer streaming.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Specifies whether the digitizer writes data to onboard memory when a
-peer-to-peer endpoint is enabled.
+Specifies whether the digitizer writes data to onboard memory when a peer-to-peer endpoint is enabled.
+Default Value: VI_FALSE
 ''',
-'note': 'This property is not supported on NI 5160/5162 digitizers.',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150366: {
@@ -3494,7 +2444,6 @@ the acquisition of pre-trigger samples for the next record. During this
 time, the acquisition engine state delays the transition to the Wait for
 Advance Trigger state, and will not store samples in onboard memory,
 accept an Advance Trigger, or trigger on the input signal..
-
 **Supported Devices**: NI 5185/5186
 ''',
 },
@@ -3504,7 +2453,7 @@ accept an Advance Trigger, or trigger on the input signal..
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Multiplier',
-        'name': 'SAMP_CLK_TIMEBASE_MULT',
+        'name': 'SAMPLE_CLOCK_TIMEBASE_MULTIPLIER',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3516,15 +2465,12 @@ Timebase Rate <pniScope_SampleClockTimebaseRate.html>`__ and the actual
 sample rate, which can be higher. This property can be used in
 conjunction with the `Sample Clock Timebase Divisor
 Property <pniscope_SampleClockTimebaseDivisor.html>`__.
-
 Some devices use multiple ADCs to sample the same channel at an
 effective sample rate that is greater than the specified clock rate.
 When providing an external sample clock use this property to indicate
 when you want a higher sample rate. Valid values for this property vary
 by device and current configuration.
-
 **Related topics:**
-
 `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
 ''',
 },
@@ -3534,7 +2480,7 @@ by device and current configuration.
         'channel_based': 'False',
         'enum': 'StreamingPositionType',
         'lv_property': 'Peer-to-Peer:Stream Relative To',
-        'name': 'P2P_STREAM_RELATIVE_TO',
+        'name': 'STREAM_RELATIVE_TO',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3594,9 +2540,7 @@ offset is 0s.
 'description': '''
 Enables the interleaving offset correction on the specified channel. The
 default value is TRUE.
-
 **Related topics:**
-
 `Timed Interleaved
 Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
 ''',
@@ -3616,13 +2560,9 @@ Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
 Specifies the frequency for the highpass filter in Hz. The device uses
 one of the valid values listed below. If an invalid value is specified,
 no coercion occurs. The default value is 0.
-
 **(PXIe-5164) Valid Values:**
-
 0 90 450
-
 **Related topics:**
-
 `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
 ''',
 },
@@ -3632,7 +2572,7 @@ no coercion occurs. The default value is 0.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Transferred Per Record',
-        'name': 'P2P_SAMPLES_TRANSFERRED_PER_RECORD',
+        'name': 'SAMPLES_TRANSFERRED_PER_RECORD',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3656,14 +2596,10 @@ Returns the number of samples transferred per record when you set the
 'description': '''
 Controls the frequency of the timing NCO. The default value is
 0X8000000.
-
 Specifies the timing NCO center frequency in binary format as follows:
-
 N = ( *:sub:`out`* / *F\ :sub:`resampler`* ) & 2\ :sup:`32`
-
 where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
 is the resampled frequency.
-
 The value is transferred to the active register during the next initiate
 acquisition operation.
 ''',
@@ -3682,7 +2618,6 @@ acquisition operation.
 Offsets the phase of the timing NCO in binary format. The value is
 transferred to the active register during the next initiate acquisition.
 The default value is 0.
-
 Valid Range: 0 to 6.283185307179586476925286766558
 ''',
 },
@@ -3711,14 +2646,11 @@ Valid Range: 0 to 6.283185307179586476925286766558
 'description': '''
 Disables programming the DDC when set to FALSE. The default value is
 TRUE.
-
 This property is supported for NI 5620/5621 digitizers only. For NI
 5142/5622 digitizers, use the `DDC Enabled <pniScope_DDCEnabled.html>`__
 property.
-
 Custom programming of the DDC using NI-SCOPE property nodes is not
 supported by National Instruments.
-
 National Instruments supports using the DDC only when the Modulation
 Toolkit and/or Spectral Measurements Toolkit are used, because they make
 use of the DDC automatically (that is, without user intervention) when
@@ -3739,7 +2671,6 @@ configuration settings allow.
 Controls the decimation in the CIC filter. The CIC filter reduces the
 sample rate of a wideband signal to a rate that other filters in the DDC
 can process. The default value is 4.
-
 Valid Range: 4 to 32
 ''',
 },
@@ -3757,7 +2688,6 @@ Valid Range: 4 to 32
 Controls the shift gain at the input to the CIC filter. The CIC filter
 reduces the sample rate of a wideband signal to a rate that other
 filters in the DDC can process. The default value is 0.
-
 Valid Range: 0 to 15
 ''',
 },
@@ -3788,7 +2718,6 @@ discriminator is enabled. The default value is FALSE.
 'documentation': {
 'description': '''
 Sets the amount of decimation. The default value is 1.
-
 Valid Range: 1 to 8
 ''',
 },
@@ -3834,7 +2763,6 @@ value is even.
 'documentation': {
 'description': '''
 Sets the discriminator FIR number of taps. The default value is 1.
-
 Valid Range: 1 to 63
 ''',
 },
@@ -3850,7 +2778,6 @@ Valid Range: 1 to 63
 'documentation': {
 'description': '''
 Sets the number of delays in the discriminator. The default value is 1.
-
 Valid Range: 1 to 8
 ''',
 },
@@ -4343,12 +3270,9 @@ NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. The default value is
 'description': '''
 Controls the frequency of the timing NCO. Specifies the timing NCO
 center frequency in binary format:
-
 *N = (F:sub:`out` / F\ :sub:`resampler`) & 2\ :sup:`32`*
-
 where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
 is the resampled frequency.
-
 The value is transferred to the active register during the next initiate
 acquisition operation. The default value is 0X8000000.
 ''',
@@ -4368,7 +3292,6 @@ Offsets the phase of the `timing
 NCO <Digitizers.chm::/Glossary.html#timingNCO>`__ in binary format. The
 value is transferred to the active register during the next initiate
 acquisition. The default value is 0.
-
 Valid Range: 0 to 6.283185307179586476925286766558
 ''',
 },
@@ -4447,9 +3370,7 @@ the value loaded into the register plus one. The default value is 2.
 Divides down the reference clock by the value loaded into the register
 plus one. Load with a value that is one less than the desired period.
 The default value is 2.
-
 **Related topics:**
-
 `Reference Clock/Phase-Lock
 Loop <digitizers.chm::/Reference_Clock.html>`__
 ''',
@@ -4507,9 +3428,7 @@ decimation.
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If TRUE, the PLL has remained locked to the external reference clock
-since it was last checked. If FALSE, the PLL has become unlocked from
-the external reference clock since it was last checked.
+If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
 ''',
 },
     },
@@ -4573,9 +3492,8 @@ value is 0.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the absolute value of the input range for a channel. The units
-are volts. For example, to acquire a sine wave that spans between -5 and
-+5 V, set this property to 10.0 V.
+Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this attribute to 10.0 V.
+Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced  up to the next valid range.
 ''',
 },
     },
@@ -4589,11 +3507,9 @@ are volts. For example, to acquire a sine wave that spans between -5 and
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the location of the center of the range. The value is with
-respect to ground and is in volts. For example, to acquire a sine wave
-that spans between 0.0 and 10.0 V, set this property to 5.0 V. This
-property is not supported by all digitizers.
+Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this attribute to 5.0 V.
 ''',
+'note': 'This attribute is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.',
 },
     },
     1250003: {
@@ -4606,13 +3522,7 @@ property is not supported by all digitizers.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies how the digitizer couples the input signal for the channel.
-When you change input coupling, the input stage takes a finite amount of
-time to settle.
-
-**Related topics:**
-
-`Input Coupling <digitizers.chm::/Input_Coupling.html>`__
+Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 ''',
 },
     },
@@ -4626,12 +3536,9 @@ time to settle.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the probe attenuation for the input channel. For example, for
-a 10:1 probe, you would set this property to 10.0.
-
-**Related topics:**
-
-`Probes and Their Effects <digitizers.chm::/Probes.html>`__
+Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this attribute to 10.0.
+Valid Values:
+Any positive real number. Typical values are 1, 10, and 100.
 ''',
 },
     },
@@ -4644,7 +3551,12 @@ a 10:1 probe, you would set this property to 10.0.
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
-'description': 'Specifies whether the digitizer acquires a waveform for the channel.',
+'description': '''
+Specifies whether the digitizer acquires a waveform for the channel.
+Valid Values:
+VI_TRUE  (1) - Acquire data on this channel
+VI_FALSE (0) - Don't acquire data on this channel
+''',
 },
     },
     1250006: {
@@ -4657,20 +3569,14 @@ a 10:1 probe, you would set this property to 10.0.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the bandwidth of the channel in hertz. Express this value as
-the frequency at which the input circuitry attenuates the input signal
-by 3 dB.
-
-Special Values:
-
-(-1) Full bandwidth
-
-(0) Device default
-
-**Related topics:**
-
-`Bandwidth <digitizers.chm::/Analog_Bandwidth.html>`__ `Probes and Their
-Effects <digitizers.chm::/Probes.html>`__
+Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+Defined Values:
+NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
+NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
+NISCOPE_VAL_20MHZ_BANDWIDTH (20000000.0)
+NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
+NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
+NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
 ''',
 },
     },
@@ -4684,17 +3590,8 @@ Effects <digitizers.chm::/Probes.html>`__
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the length of time (in seconds) that corresponds to the record
-length. This attribute is invalid when the device is configured to use
-an external sample clock timebase. This attribute is also invalid when a
-DDC is enabled. When both the Time Per Record Property and the `Min
-Sample Rate <pniScope_MinSampleRate.html>`__ Property are set, the
-attribute that was set first is ignored.
-
-**Related topics:**
-
-`Record Length <digitizers.chm::/Record_Length.html>`__ `Sample
-Rate <digitizers.chm::/Sample_Rate.html>`__
+Specifies the length of time that corresponds to the record length.
+Units: Seconds
 ''',
 },
     },
@@ -4708,16 +3605,8 @@ Rate <digitizers.chm::/Sample_Rate.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the actual number of points the digitizer acquires for each
-channel. The value is equal to or greater than the value you specify in
-the `niScope Configure Horizontal
-Timing <scopeviref.chm::/niScope_Configure_Horizontal_Timing.html>`__
-VI.
-
-Valid Values: 1 to the maximum memory size
-
-`Record Length <digitizers.chm::/Record_Length.html>`__ `Coercions of
-Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
+Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  NISCOPE_ATTR_HORZ_MIN_NUM_PTS.
+Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch functions. This attribute is only valid after a call to the one of the  Configure Horizontal functions.
 ''',
 },
     },
@@ -4731,18 +3620,8 @@ Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the minimum number of points you require in the waveform
-record for each channel.
-
-NI-SCOPE uses the value you specify to configure the record length that
-the digitizer uses for waveform acquisition. The `Actual Record
-Length <pniScope_ActualRecordLength.html>`__ property returns the actual
-record length.
-
-**Related topics:**
-
-`Record Length <digitizers.chm::/Record_Length.html>`__ `Sample
-Rate <digitizers.chm::/Sample_Rate.html>`__
+Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. NISCOPE_ATTR_HORZ_RECORD_LENGTH returns the actual record length.
+Valid Values: 1 - available onboard memory
 ''',
 },
     },
@@ -4756,13 +3635,8 @@ Rate <digitizers.chm::/Sample_Rate.html>`__
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Returns the actual sample rate used for the acquisition.
-
-Units: hertz (Samples / Second)
-
-**Related topics:**
-
-`Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+Returns the effective sample rate using the current configuration. The units are samples per second.  This attribute is only valid after a call to the one of the Configure Horizontal functions.
+Units: Hertz (Samples / Second)
 ''',
 },
     },
@@ -4776,16 +3650,8 @@ Units: hertz (Samples / Second)
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the position of the Reference Event in the waveform record as
-a percentage of the record.
-
-When the digitizer detects a trigger, it waits the length of time the
-`Trigger Delay <pniScope_TriggerDelay.html>`__ property specifies. The
-event that occurs when the delay time elapses is the Reference Event.
-The Reference Event is relative to the start of the record and is a
-percentage of the record length. For example, the value 50.0 corresponds
-to the center of the waveform record and 0.0 corresponds to the first
-element in the waveform record.
+Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  NISCOPE_ATTR_TRIGGER_DELAY_TIME attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+Valid Values: 0.0 - 100.0
 ''',
 },
     },
@@ -4798,7 +3664,9 @@ element in the waveform record.
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies the type of trigger to use.',
+'description': '''
+Specifies the type of trigger to use.
+''',
 },
     },
     1250013: {
@@ -4811,10 +3679,8 @@ element in the waveform record.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Specifies the source the digitizer monitors for the trigger event. The
-value must be selected from one of the following valid values.
+Specifies the source the digitizer monitors for the trigger event.
 ''',
-'table_body': [['0..\\ *n*', '*n* is the number of channels on the device'], ['VAL\\_EXTERNAL', 'External TRIG input'], ['VAL\\_IMMEDIATE', 'Triggers immediately'], ['VAL\\_RTSI\\_0', 'RTSI 0'], ['VAL\\_RTSI\\_1', 'RTSI 1'], ['VAL\\_RTSI\\_2', 'RTSI 2'], ['VAL\\_RTSI\\_3', 'RTSI 3'], ['VAL\\_RTSI\\_4', 'RTSI 4'], ['VAL\\_RTSI\\_5', 'RTSI 5'], ['VAL\\_RTSI\\_6', 'RTSI 6'], ['VAL\\_PFI\\_0', 'PFI 0'], ['VAL\\_PFI\\_1', 'PFI 1'], ['VAL\\_PFI\\_2', 'PFI 2'], ['VAL\\_PXI\\_STAR', 'PXI Star trigger'], ['VAL\\_SW\\_TRIG\\_FUNC', 'Waits for niScope Send Software Trigger Edge']],
 },
     },
     1250014: {
@@ -4827,12 +3693,7 @@ value must be selected from one of the following valid values.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies how the digitizer couples the trigger source.
-
-This property affects instrument operation only when the `Trigger
-Type <pniScope_TriggerType.html>`__ property is set to Edge, Hysteresis,
-Window, or Video. If the trigger source is an input channel, the
-coupling of that channel is used for the trigger.
+Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
 ''',
 },
     },
@@ -4846,11 +3707,8 @@ coupling of that channel is used for the trigger.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the trigger delay time in seconds.
-
-The trigger delay time is the length of time the digitizer waits after
-it receives the trigger. The event that occurs when the trigger delay
-elapses is the Reference Event.
+Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
+Valid Values: 0.0 - 171.8
 ''',
 },
     },
@@ -4864,16 +3722,8 @@ elapses is the Reference Event.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the length of time the digitizer waits after detecting a
-trigger before enabling the trigger subsystem to detect another trigger.
-The units are seconds.
-
-This property affects instrument operation only when the digitizer
-requires multiple acquisitions to build a complete waveform. The
-digitizer requires multiple waveform acquisitions when it uses
-equivalent-time sampling or when the digitizer is configured for a
-multirecord acquisition through a call to `niScope Configure Horizontal
-Timing <scopeviref.chm::/niScope_Configure_Horizontal_Timing.html>`__.
+Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to niScope_ConfigureHorizontalTiming.
+Valid Values: 0.0 - 171.8
 ''',
 },
     },
@@ -4887,21 +3737,9 @@ Timing <scopeviref.chm::/niScope_Configure_Horizontal_Timing.html>`__.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the voltage threshold for the trigger. The units are volts.
-
-This property affects instrument behavior only when the `Trigger
-Type <pniScope_TriggerType.html>`__ is set to Edge, Hysteresis, or
-Window.
-
-The values of the **range** and **offset** parameters in `niScope
-Configure Vertical <scopeviref.chm::/niScope_Configure_Vertical.html>`__
-determine the valid range for the trigger level on the channel you use
-as the **trigger source**. The value you pass for this parameter must
-meet the following conditions:
-
-*Trigger Level <= Vertical Range/2 + Vertical Offset*
-
-*Trigger Level >= (-Vertical Range/2) + Vertical Offset*
+Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+Valid Values:
+The values of the range and offset parameters in niScope_ConfigureVertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
 ''',
 },
     },
@@ -4915,11 +3753,7 @@ meet the following conditions:
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies whether a rising or a falling edge triggers the digitizer.
-
-This property affects instrument operation only when the `Trigger
-Type <pniScope_TriggerType.html>`__ property is set to edge, hysteresis,
-window, or video.
+Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
 ''',
 },
     },
@@ -4932,11 +3766,8 @@ window, or video.
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies how the digitizer acquires data and fills the waveform record.',
-'note': '''
-Acquisition type DDC applies to the NI 5620/5621 only. To use DDC mode
-in the NI 5142 and NI 5622, leave acquisition type set to Normal and set
-`DDC Enabled <pniScope_DDCEnabled.html>`__ to TRUE.
+'description': '''
+Specifies how the digitizer acquires data and fills the waveform record.
 ''',
 },
     },
@@ -4950,8 +3781,10 @@ in the NI 5142 and NI 5622, leave acquisition type set to Normal and set
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Configures the device to automatically complete an acquisition if a
-trigger has not been received.
+Configures the device to automatically complete an acquisition if a trigger has not been received.
+Valid Values:
+None (1)         - Normal triggering
+Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
 ''',
 },
     },
@@ -4965,18 +3798,7 @@ trigger has not been received.
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the input impedance for the channel in ohms.
-
-**Defined Values**
-
-50 Ohm
-
-1 M Ohm
-
-**Related topics:**
-
-`Impedance and Impedance
-Matching <digitizers.chm::/Impedance_and_Impedance_Matching.html>`__
+Specifies the input impedance for the channel in Ohms.
 ''',
 },
     },
@@ -4990,13 +3812,7 @@ Matching <digitizers.chm::/Impedance_and_Impedance_Matching.html>`__
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the sample mode the digitizer is currently using.
-
-**Defined Values**
-
-Real Time (0)
-
-Equivalent Time (1)
+Indicates the sample mode the digitizer is currently using.
 ''',
 },
     },
@@ -5010,13 +3826,7 @@ Equivalent Time (1)
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the length of time (in seconds) from the trigger event to the
-first point in the waveform record.
-
-If the value is positive, the first point in the waveform record occurs
-after the trigger event (same as specifying a trigger delay). If the
-value is negative, the first point in the waveform record occurs before
-the trigger event (same as specifying Reference Position).
+Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
 ''',
 },
     },
@@ -5029,7 +3839,9 @@ the trigger event (same as specifying Reference Position).
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies the video signal format to use.',
+'description': '''
+Specifies the type of video signal, such as NTSC, PAL, or SECAM.
+''',
 },
     },
     1250204: {
@@ -5041,7 +3853,9 @@ the trigger event (same as specifying Reference Position).
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies whether the video signal is positive or negative.',
+'description': '''
+Specifies whether the video signal sync is positive or negative.
+''',
 },
     },
     1250205: {
@@ -5053,7 +3867,9 @@ the trigger event (same as specifying Reference Position).
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies the event to trigger on.',
+'description': '''
+Specifies the condition in the video signal that causes the digitizer to trigger.
+''',
 },
     },
     1250206: {
@@ -5066,11 +3882,7 @@ the trigger event (same as specifying Reference Position).
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the line number to trigger on.
-
-This property is only used if the video trigger
-`Event <pniScope_VideoTriggerEvent.html>`__ property is set as Line
-Number. Valid values depend on the video signal format selected.
+Specifies the line on which to trigger, if NISCOPE_ATTR_TV_TRIGGER_EVENT is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
 ''',
 },
     },

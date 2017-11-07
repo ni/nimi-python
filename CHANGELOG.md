@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
     * Simplified examples by removing try/except
+    * **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
   * #### Removed
 * ### NI-DMM
   * #### Added
@@ -56,6 +57,7 @@ All notable changes to this project will be documented in this file.
  * #### Added
  * #### Changed
  * #### Removed
+   * Removed Peer to Peer attributes
 
 ## 0.3.0 - 2017-10-13
 * ### ALL
