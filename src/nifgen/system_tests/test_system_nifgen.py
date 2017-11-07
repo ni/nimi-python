@@ -89,7 +89,7 @@ def test_get_ext_cal_recommended_interval(session):
 ''' TODO(Jaleel) Enable after Issue#558 fixed
 def test_get_hardware_state():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
-        assert session.get_hardware_state() == nifgen.HardwareState.IDLE  # TODO(Jaleel): name to change per #553
+        assert session.get_hardware_state() == nifgen.HardwareState.IDLE
 '''
 
 
