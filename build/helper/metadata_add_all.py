@@ -230,6 +230,10 @@ def add_all_metadata(functions, attributes, enums, config):
 
     with open(os.path.join('bin', 'metadata', config['module_name'] + '_functions.py'), "w") as text_file:
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
+    metadata_dir = os.path.join('bin', 'processed_metadata')
+    if not os.path.exists(metadata_dir):
+        os.makedirs(metadata_dir)
+
         text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
 
     with open(os.path.join('bin', 'metadata', config['module_name'] + '_attributes.py'), "w") as text_file:
