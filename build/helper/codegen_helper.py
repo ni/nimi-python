@@ -148,7 +148,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
        13. Output scalar or enum:                                       visatype.ViInt32()
     '''
 
-    # First we need to determine the module. If it is a custom type then the module is the file associated wit that type, otherwise 'visatype'
+    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
     module_name = 'visatype'
     c = find_custom_type(parameter, config)
     if c is not None:
