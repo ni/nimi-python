@@ -307,3 +307,12 @@ def test_create_and_delete_advanced_sequence_step(single_channel_session):
     single_channel_session.voltage_level = 1
     single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
 
+
+def test_send_software_edge_trigger_error(session):
+    try:
+        session.send_software_edge_trigger()
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074118587  # Error : Function not available in multichannel session
+        assert e.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
+
