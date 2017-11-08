@@ -254,7 +254,6 @@ def test_commit(single_channel_session):
     non_default_current_limit = 0.00021
     single_channel_session.current_limit = non_default_current_limit
     single_channel_session.commit()
-    assert single_channel_session.current_limit == non_default_current_limit
 
 
 # TODO(bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
