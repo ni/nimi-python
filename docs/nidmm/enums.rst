@@ -13,8 +13,7 @@ Enums used in NI-DMM
 
 
 
-        The DMM enables or disables ADC calibration based on the configured
-        function and resolution.
+        The DMM enables or disables ADC calibration for you.
 
         
 
@@ -34,8 +33,7 @@ Enums used in NI-DMM
 
 
 
-        The DMM measures an internal reference to calculate the correct gain for
-        the measurement.
+        The DMM measures an internal reference to calculate the correct gain for the  measurement.
 
         
 
@@ -101,7 +99,7 @@ Enums used in NI-DMM
 
 
 
-        Units are seconds.
+        Seconds
 
         
 
@@ -111,7 +109,7 @@ Enums used in NI-DMM
 
 
 
-        Units are powerline cycles (PLCs).
+        Powerline Cycles
 
         
 
@@ -124,8 +122,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM chooses the Auto Zero setting based on the configured function
-        and resolution.
+        The drivers chooses the AutoZero setting based on the configured function  and resolution.
 
         
 
@@ -145,11 +142,7 @@ Enums used in NI-DMM
 
 
 
-        The DMM internally disconnects the input signal following each
-        measurement and takes a zero reading. It then subtracts the zero reading
-        from the preceding reading. For NI 4065 devices, Auto Zero is always ON.
-        Auto Zero is an integral part of the signal measurement phase and adds
-        no extra time to the overall measurement.
+        The DMM internally disconnects the input signal following each measurement  and takes a zero reading. It then subtracts the zero reading from the  preceding reading.
 
         
 
@@ -159,10 +152,7 @@ Enums used in NI-DMM
 
 
 
-        The DMM internally disconnects the input signal for the first
-        measurement and takes a zero reading. It then subtracts the zero reading
-        from the first reading and the following readings. The NI 4060/4065 does
-        not support this setting.
+        The DMM internally disconnects the input signal for the first measurement  and takes a zero reading. It then subtracts the zero reading from the first  reading and the following readings.
 
         
 
@@ -175,7 +165,7 @@ Enums used in NI-DMM
 
 
 
-        No cable compensation.
+        No Cable Compensation
 
         
 
@@ -185,7 +175,7 @@ Enums used in NI-DMM
 
 
 
-        Open cable compensation.
+        Open Cable Compensation
 
         
 
@@ -195,7 +185,7 @@ Enums used in NI-DMM
 
 
 
-        Short cable compensation.
+        Short Cable Compensation
 
         
 
@@ -205,7 +195,7 @@ Enums used in NI-DMM
 
 
 
-        Open and short cable compensation.
+        Open and Short Cable Compensation
 
         
 
@@ -257,21 +247,21 @@ Enums used in NI-DMM
 
 .. py:data:: DCBias
 
-    .. py:attribute:: nidmm.DCBias.DC_BIAS_OFF
+    .. py:attribute:: nidmm.DCBias.OFF
 
 
 
-        NI-DMM programs the device not to use the DC bias.
+        NI-DMM programs the device not to use the DC bias
 
         
 
 
 
-    .. py:attribute:: nidmm.DCBias.DC_BIAS_ON
+    .. py:attribute:: nidmm.DCBias.ON
 
 
 
-        NI-DMM programs the device to use the DC bias.
+        NI-DMM programs the device to use the DC bias
 
         
 
@@ -284,8 +274,7 @@ Enums used in NI-DMM
 
 
 
-        The driver chooses the DC noise rejection setting based on the
-        configured function and resolution.
+        The driver chooses the DC noise rejection setting based on the configured  function and resolution.
 
         
 
@@ -305,9 +294,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM weighs the samples taken in the middle of the aperture time more
-        than samples taken at the beginning and the end of the measurement using
-        a triangular weighing function.
+        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.
 
         
 
@@ -317,9 +304,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM weighs the samples taken in the middle of the aperture time more
-        than samples taken at the beginning and the end of the measurement using
-        a bell-curve weighing function.
+        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.
 
         
 
@@ -385,7 +370,7 @@ Enums used in NI-DMM
 
 
 
-        All devices supported.
+        DC Voltage
 
         
 
@@ -395,7 +380,7 @@ Enums used in NI-DMM
 
 
 
-        All devices supported.
+        AC Voltage
 
         
 
@@ -405,7 +390,7 @@ Enums used in NI-DMM
 
 
 
-        All devices supported.
+        DC Current
 
         
 
@@ -415,37 +400,37 @@ Enums used in NI-DMM
 
 
 
-        All devices supported.
+        AC Current
 
         
 
 
 
-    .. py:attribute:: nidmm.Function._2_WIRE_RESISTANCE
+    .. py:attribute:: nidmm.Function._2_WIRE_RES
 
 
 
-        All devices supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.Function._4_WIRE_RESISTANCE
-
-
-
-        NI 4065, and NI 4070/4071/4072 supported.
+        2-Wire Resistance
 
         
 
 
 
-    .. py:attribute:: nidmm.Function.FREQUENCY
+    .. py:attribute:: nidmm.Function._4_WIRE_RES
 
 
 
-        NI 4070/4071/4072 supported.
+        4-Wire Resistance
+
+        
+
+
+
+    .. py:attribute:: nidmm.Function.FREQ
+
+
+
+        Frequency
 
         
 
@@ -455,7 +440,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4070/4071/4072 supported.
+        Period
 
         
 
@@ -475,7 +460,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4070/4071/4072 supported.
+        AC Voltage with DC Coupling
 
         
 
@@ -485,7 +470,7 @@ Enums used in NI-DMM
 
 
 
-        All devices supported.
+        Diode
 
         
 
@@ -495,7 +480,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4070/4071/4072 supported.
+        Waveform voltage
 
         
 
@@ -505,7 +490,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4070/4071/4072 supported.
+        Waveform current
 
         
 
@@ -515,7 +500,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4072 supported.
+        Capacitance
 
         
 
@@ -525,7 +510,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4072 supported.
+        Inductance
 
         
 
@@ -534,7 +519,7 @@ Enums used in NI-DMM
 
 .. py:data:: InputResistance
 
-    .. py:attribute:: nidmm.InputResistance._1_M_OHM
+    .. py:attribute:: nidmm.InputResistance._1_MEGAOHM
 
 
 
@@ -544,7 +529,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.InputResistance._10_M_OHM
+    .. py:attribute:: nidmm.InputResistance._10_MEGAOHM
 
 
 
@@ -554,7 +539,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.InputResistance.GREATER_THAN_10_G_OHM
+    .. py:attribute:: nidmm.InputResistance.GREATER_THAN_10_GIGAOHM
 
 
 
@@ -571,7 +556,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM chooses the algorithm based on function and range.
+        NI-DMM chooses the algorithm based on function and range
 
         
 
@@ -581,8 +566,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM uses the series impedance model to calculate capacitance and
-        inductance.
+        NI-DMM uses the series impedance model to calculate capacitance and inductance
 
         
 
@@ -592,8 +576,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM uses the parallel admittance model to calculate capacitance and
-        inductance.
+        NI-DMM uses the parallel admittance model to calculate capacitance and inductance
 
         
 
@@ -606,7 +589,7 @@ Enums used in NI-DMM
 
 
 
-        No destination specified.
+        No Trigger
 
         
 
@@ -616,13 +599,13 @@ Enums used in NI-DMM
 
 
 
-        Pin 6 on the AUX Connector
+        AUX I/O Connector
 
         
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_0
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG0
 
 
 
@@ -632,7 +615,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_1
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG1
 
 
 
@@ -642,7 +625,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TL_2
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG2
 
 
 
@@ -652,7 +635,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_3
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG3
 
 
 
@@ -662,7 +645,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TL_4
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG4
 
 
 
@@ -672,7 +655,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_5
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG5
 
 
 
@@ -682,7 +665,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_6
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG6
 
 
 
@@ -692,7 +675,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.TTL_7
+    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG7
 
 
 
@@ -702,11 +685,11 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.LBR_TRIG_0
+    .. py:attribute:: nidmm.MeasurementCompleteDest.LBR_TRIG0
 
 
 
-        Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis
+        Internal Trigger Line of a PXI/SCXI Combination Chassis
 
         
 
@@ -719,7 +702,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the rising edge of the trigger signal.
+        Rising Edgs
 
         
 
@@ -729,7 +712,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the falling edge of the trigger signal.
+        Falling Edge
 
         
 
@@ -742,7 +725,7 @@ Enums used in NI-DMM
 
 
 
-        Disables Offset Compensated Ohms.
+        The DMM disables offset compensated ohms.
 
         
 
@@ -752,7 +735,7 @@ Enums used in NI-DMM
 
 
 
-        Enables Offset Compensated Ohms.
+        The DMM enables offset compensated ohms.
 
         
 
@@ -761,25 +744,21 @@ Enums used in NI-DMM
 
 .. py:data:: OperationMode
 
-    .. py:attribute:: nidmm.OperationMode.IVIDMM_MODE
+    .. py:attribute:: nidmm.OperationMode.IVIDMM
 
 
 
-        Single or multipoint measurements: When the Trigger Count and Sample
-        Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and
-        NI 4080/4081/4082 take a single-point measurement; otherwise, NI-DMM
-        takes multipoint measurements.
+        IviDmm Mode
 
         
 
 
 
-    .. py:attribute:: nidmm.OperationMode.WAVEFORM_MODE
+    .. py:attribute:: nidmm.OperationMode.WAVEFORM
 
 
 
-        Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform
-        measurements.
+        Waveform acquisition mode
 
         
 
@@ -788,7 +767,7 @@ Enums used in NI-DMM
 
 .. py:data:: PowerlineFrequency
 
-    .. py:attribute:: nidmm.PowerlineFrequency._50_HZ
+    .. py:attribute:: nidmm.PowerlineFrequency._50
 
 
 
@@ -798,7 +777,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.PowerlineFrequency._60_HZ
+    .. py:attribute:: nidmm.PowerlineFrequency._60
 
 
 
@@ -822,7 +801,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3750
+    .. py:attribute:: nidmm.RTDType.PT3750
 
 
 
@@ -832,7 +811,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3851
+    .. py:attribute:: nidmm.RTDType.PT3851
 
 
 
@@ -842,7 +821,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3911
+    .. py:attribute:: nidmm.RTDType.PT3911
 
 
 
@@ -852,7 +831,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3916
+    .. py:attribute:: nidmm.RTDType.PT3916
 
 
 
@@ -862,7 +841,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3920
+    .. py:attribute:: nidmm.RTDType.PT3920
 
 
 
@@ -872,7 +851,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT_3928
+    .. py:attribute:: nidmm.RTDType.PT3928
 
 
 
@@ -889,7 +868,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the rising edge of the trigger signal.
+        Rising Edgs
 
         
 
@@ -899,7 +878,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the falling edge of the trigger signal.
+        Falling Edge
 
         
 
@@ -912,7 +891,7 @@ Enums used in NI-DMM
 
 
 
-        No trigger specified
+        No Trigger
 
         
 
@@ -922,7 +901,7 @@ Enums used in NI-DMM
 
 
 
-        Pin 9 on the AUX Connector
+        AUX I/O Connector Trigger Line 0
 
         
 
@@ -932,8 +911,7 @@ Enums used in NI-DMM
 
 
 
-        Configures the DMM to wait until `niDMM Send Software
-        Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
+        Software Trigger
 
         
 
@@ -943,13 +921,13 @@ Enums used in NI-DMM
 
 
 
-        Interval trigger
+        Interval Trigger
 
         
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_0
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG0
 
 
 
@@ -959,7 +937,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_1
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG1
 
 
 
@@ -969,7 +947,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_2
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG2
 
 
 
@@ -979,7 +957,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_3
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG3
 
 
 
@@ -989,7 +967,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_4
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG4
 
 
 
@@ -999,7 +977,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_5
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG5
 
 
 
@@ -1009,7 +987,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_6
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG6
 
 
 
@@ -1019,7 +997,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.TTL_7
+    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG7
 
 
 
@@ -1033,27 +1011,27 @@ Enums used in NI-DMM
 
 
 
-        PXI Star trigger line
+        PXI Star Trigger Line
 
         
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.AUX_TRIG_1
+    .. py:attribute:: nidmm.SampleTrigger.AUX_TRIG1
 
 
 
-        Pin 3 on the AUX connector
+        AUX I/0 Connector Trigger Line 1
 
         
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.LBR_TRIG_1
+    .. py:attribute:: nidmm.SampleTrigger.LBR_TRIG1
 
 
 
-        Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+        Internal Trigger Line of a PXI/SCXI Combination Chassis
 
         
 
@@ -1066,8 +1044,7 @@ Enums used in NI-DMM
 
 
 
-        Performs Steinhart-Hart thermistor scaling with the user-specified A, B,
-        and C coefficients.
+        Custom
 
         
 
@@ -1077,7 +1054,7 @@ Enums used in NI-DMM
 
 
 
-        Performs scaling for an Omega Series 44004 thermistor.
+        44004
 
         
 
@@ -1087,7 +1064,7 @@ Enums used in NI-DMM
 
 
 
-        Performs scaling for an Omega Series 44006 thermistor.
+        44006
 
         
 
@@ -1097,7 +1074,7 @@ Enums used in NI-DMM
 
 
 
-        Performs scaling for an Omega Series 44007 thermistor.
+        44007
 
         
 
@@ -1207,7 +1184,7 @@ Enums used in NI-DMM
 
 
 
-        Use for thermocouple measurements.
+        Thermocouple
 
         
 
@@ -1217,7 +1194,7 @@ Enums used in NI-DMM
 
 
 
-        Use for thermistor measurements.
+        Thermistor
 
         
 
@@ -1227,7 +1204,7 @@ Enums used in NI-DMM
 
 
 
-        Use for 2-wire RTD measurements.
+        2-wire RTD
 
         
 
@@ -1237,7 +1214,7 @@ Enums used in NI-DMM
 
 
 
-        Use for 4-wire RTD measurements.
+        4-wire RTD
 
         
 
@@ -1250,7 +1227,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the rising edge of the trigger signal.
+        Rising Edgs
 
         
 
@@ -1260,7 +1237,7 @@ Enums used in NI-DMM
 
 
 
-        The driver triggers on the falling edge of the trigger signal.
+        Falling Edge
 
         
 
@@ -1273,7 +1250,7 @@ Enums used in NI-DMM
 
 
 
-        No trigger specified.
+        No Trigger
 
         
 
@@ -1283,7 +1260,7 @@ Enums used in NI-DMM
 
 
 
-        Pin 9 on the AUX Connector
+        AUX I/O Connector Trigger Line 0
 
         
 
@@ -1293,14 +1270,13 @@ Enums used in NI-DMM
 
 
 
-        Waits until `niDMM Send Software
-        Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
+        Software Trigger
 
         
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_0
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG0
 
 
 
@@ -1310,7 +1286,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_1
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG1
 
 
 
@@ -1320,7 +1296,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_2
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG2
 
 
 
@@ -1330,7 +1306,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_3
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG3
 
 
 
@@ -1340,7 +1316,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_4
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG4
 
 
 
@@ -1350,7 +1326,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_5
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG5
 
 
 
@@ -1360,7 +1336,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_6
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG6
 
 
 
@@ -1370,7 +1346,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.TTL_7
+    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG7
 
 
 
@@ -1390,21 +1366,21 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.AUX_TRIG_1
+    .. py:attribute:: nidmm.TriggerSource.AUX_TRIG1
 
 
 
-        Pin 3 on the AUX connector
+        AUX I/O Connector Trigger Line 1
 
         
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.LBR_TRIG_1
+    .. py:attribute:: nidmm.TriggerSource.LBR_TRIG1
 
 
 
-        Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+        Internal Trigger Line of a PXI/SCXI Combination Chassis
 
         
 
@@ -1417,7 +1393,7 @@ Enums used in NI-DMM
 
 
 
-        Specifies AC coupling.
+        AC Coupled
 
         
 
@@ -1427,7 +1403,7 @@ Enums used in NI-DMM
 
 
 
-        Specifies DC coupling.
+        DC Coupled
 
         
 

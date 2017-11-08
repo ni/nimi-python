@@ -493,7 +493,7 @@ nifgen.Session methods
 
     :type coefficients_array: list of float
 
-.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE)
+.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
 
     Configures the specified Script Trigger for digital edge triggering.
 
@@ -587,7 +587,7 @@ nifgen.Session methods
 
     :type edge: :py:data:`nifgen.ScriptTriggerDigitalEdgeEdge`
 
-.. function:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE)
+.. function:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING)
 
     Configures the Start Trigger for digital edge triggering.
 

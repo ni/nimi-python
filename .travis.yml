@@ -15,10 +15,10 @@ install:
   - pip install --upgrade tox tox-travis coveralls
 
 script:
-  - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
+  - tox -e clean,build_test,codegen PRINT=1 PYTHON_CMD=python
   - tox
 
 after_success:
-  - coveralls
+  - coveralls --rcfile=tools/coverage_unit_tests.rc
 
 
