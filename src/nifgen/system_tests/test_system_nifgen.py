@@ -53,7 +53,7 @@ def test_self_cal(session):
 
 
 def test_standard_waveform(session):
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FUNC
+    session.output_mode = nifgen.OutputMode.FUNC
     session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
     expected_frequency = 2000000
     with session.initiate():
@@ -68,12 +68,12 @@ def test_standard_waveform(session):
 
 
 def test_frequency_list(session):
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FREQ_LIST
+    session.output_mode = nifgen.OutputMode.FREQ_LIST
     duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
     waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
     session.configure_freq_list(waveform_handle, 2.0, 0, 0)
-    session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
+    session.trigger_mode = nifgen.TriggerMode.CONTINUOUS
     session.output_enabled = True
     assert session.func_waveform == nifgen.Waveform.SQUARE
     assert session.func_amplitude == 2.0
