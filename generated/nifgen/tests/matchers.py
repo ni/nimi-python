@@ -86,6 +86,29 @@ class ViStringMatcher(object):
         return True
 
 
+# Custom Type
+
+
+class CustomTypeMatcher(object):
+    def __init__(self, expected_type, expected_value):
+        self.expected_type = expected_type
+        self.expected_value = expected_value
+
+    def __eq__(self, other):
+        if not isinstance(other, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            return False
+        # From https://stackoverflow.com/questions/20986330/print-all-fields-of-ctypes-structure-with-introspection
+        for field in self.expected_value._fields_:
+            field_name = field[0]
+            expected_val = getattr(self.expected_value, field_name)
+            other_val = getattr(other, field_name)
+            if expected_val != other_val:
+                print("Unexpected value field {0}. Expected: {1}. Received: {2}".format(field_name, expected_val, other_val))
+                return False
+        return True
+
+
 # Scalars
 
 

@@ -8,6 +8,12 @@ def session():
         yield simulated_session
 
 
+@pytest.fixture(scope='function')
+def single_channel_session():
+    with nidcpower.Session('4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        yield simulated_session
+
+
 def test_self_test():
     # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
@@ -242,6 +248,73 @@ def test_wait_for_event_with_timeout():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+
+
+def test_commit(single_channel_session):
+    non_default_current_limit = 0.00021
+    single_channel_session.current_limit = non_default_current_limit
+    single_channel_session.commit()
+
+
+# TODO(bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
+'''
+def test_export_signal(single_channel_session):
+    expected_trigger_terminal = "/4162/Engine0/MeasureTrigger"
+    single_channel_session.export_signal(nidcpower.Event.SOURCE_COMPLETE, expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
+'''
+
+
+def test_configure_digital_edge_measure_trigger(single_channel_session):
+    single_channel_session.measure_when = nidcpower.MeasureWhen.ON_MEASURE_TRIGGER
+    expected_trigger_terminal = "/4162/PXI_Trig0"
+    single_channel_session.configure_digital_edge_measure_trigger(expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.digital_edge_measure_trigger_input_terminal
+
+
+def test_configure_digital_edge_pulse_trigger():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4139; BoardType:PXIe') as session:
+        expected_trigger_terminal = "/4139/PXI_Trig0"
+        session.configure_digital_edge_pulse_trigger(expected_trigger_terminal)
+        assert expected_trigger_terminal == session.digital_edge_pulse_trigger_input_terminal
+
+
+def test_configure_digital_edge_sequence_advance_trigger(single_channel_session):
+    expected_trigger_terminal = "/4162/PXI_Trig0"
+    single_channel_session.configure_digital_edge_sequence_advance_trigger(expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.digital_edge_sequence_advance_trigger_input_terminal
+
+
+def test_configure_digital_edge_source_trigger(single_channel_session):
+    expected_trigger_terminal = "/4162/PXI_Trig0"
+    single_channel_session.configure_digital_edge_source_trigger(expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.digital_edge_source_trigger_input_terminal
+
+
+def test_configure_digital_edge_start_trigger(single_channel_session):
+    expected_trigger_terminal = "/4162/PXI_Trig0"
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    single_channel_session.set_sequence([0.1], [0.1])
+    single_channel_session.configure_digital_edge_start_trigger(expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.digital_edge_start_trigger_input_terminal
+
+
+def test_create_and_delete_advanced_sequence_step(single_channel_session):
+    ids = [1250001]  # work around #507
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.voltage_level = 1
+    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
+
+
+def test_send_software_edge_trigger_error(session):
+    try:
+        session.send_software_edge_trigger()
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074118587  # Error : Function not available in multichannel session
+        assert e.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
 
 
 def test_get_ext_cal_recommended_interval():

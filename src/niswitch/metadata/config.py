@@ -22,5 +22,6 @@ config = {
         'abort_function': 'AbortScan',
     },
     'init_function': 'InitWithTopology',
+    'custom_types': [],
 }
 

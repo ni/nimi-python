@@ -1,4 +1,5 @@
 from .metadata_filters import filter_parameters
+from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
 import pprint
@@ -66,14 +67,23 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters):
+def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
     return_type_snippet = ''
+
+    # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
+    val_suffix = '.value'
+    module_name = ''
+    c = find_custom_type(output_parameter, config)
+    if c is not None:
+        val_suffix = ''
+        module_name = c['file_name'] + '.'
+
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
-        return_type_snippet = output_parameter['python_type'] + '('
+        return_type_snippet = module_name + output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar':
@@ -84,21 +94,21 @@ def _get_output_param_return_snippet(output_parameter, parameters):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['ctypes_variable_name'] + '.value'
+                size = size_parameter['ctypes_variable_name'] + val_suffix
 
             snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
-        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
+        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
     return snippet
 
 
-def get_method_return_snippet(parameters):
+def get_method_return_snippet(parameters, config):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters))
+            snippets.append(_get_output_param_return_snippet(x, parameters, config))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -119,7 +129,7 @@ def _get_buffer_parameter_for_size_parameter(parameter, parameters):
     return None
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters):
+def get_ctype_variable_declaration_snippet(parameter, parameters, config):
     '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     We've identified many different cases on how these need to be initialized based on the parameter:
@@ -138,49 +148,55 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
        13. Output scalar or enum:                                       visatype.ViInt32()
     '''
 
+    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
+    module_name = 'visatype'
+    c = find_custom_type(parameter, config)
+    if c is not None:
+        module_name = c['file_name']
+
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
     # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = 'visatype.{0}(self._{1})  # case 1'.format(parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif parameter['is_repeated_capability'] is True:
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
         elif parameter['is_buffer'] is True:
-            definition = '(visatype.{0} * len({1}))(*{1})  # case 4'.format(parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = '({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
                 if corresponding_buffer_parameter['direction'] == 'in':
-                    definition = 'visatype.{0}(len({1}))  # case 5'.format(parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                    definition = '{0}.{1}(len({2}))  # case 5'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
-                        definition = 'visatype.{0}()  # case 6'.format(parameter['ctypes_type'])
+                        definition = '{0}.{1}()  # case 6'.format(module_name, parameter['ctypes_type'])
                     else:
                         assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
-                        definition = 'visatype.{0}({1})  # case 7'.format(parameter['ctypes_type'], parameter['python_name'])
+                        definition = '{0}.{1}({2})  # case 7'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             elif parameter['enum'] is None:
-                definition = 'visatype.{0}({1})  # case 8'.format(parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
-                definition = 'visatype.{0}({1}.value)  # case 9'.format(parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2}.value)  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         if parameter['is_buffer'] is True:
             assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
             if parameter['size']['mechanism'] == 'fixed':
-                definition = '(visatype.{0} * {1})()  # case 10'.format(parameter['ctypes_type'], parameter['size']['value'])
+                definition = '({0}.{1} * {2})()  # case 10'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             elif parameter['size']['mechanism'] == 'ivi-dance':
                 definition = 'None  # case 11'
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '(visatype.{0} * {1})()  # case 12'.format(parameter['ctypes_type'], size_parameter['python_name'])
+                definition = '({0}.{1} * {2})()  # case 12'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
                 assert False, 'Unknown mechanism: ' + str(parameter)
         else:
-            definition = 'visatype.{0}()  # case 13'.format(parameter['ctypes_type'])
+            definition = '{0}.{1}()  # case 13'.format(module_name, parameter['ctypes_type'])
 
     return parameter['ctypes_variable_name'] + ' = ' + definition
 

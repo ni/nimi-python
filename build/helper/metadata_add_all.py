@@ -1,11 +1,13 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
-from .helper import get_python_type_for_visa_type
+from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_functions
 from .metadata_merge_dicts import merge_dicts
 
+import codecs
 import copy
+import os
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
@@ -35,10 +37,10 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter):
+def _add_python_type(parameter, config):
     '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
+        parameter['python_type'] = get_python_type_for_api_type(parameter['type'], config)
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
@@ -174,7 +176,7 @@ def add_all_function_metadata(functions, config):
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _add_python_parameter_name(p)
-            _add_python_type(p)
+            _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_default_value_name(p)
@@ -211,6 +213,35 @@ def add_all_attribute_metadata(attributes, config):
         _add_python_name(a, attributes)
 
     return attributes
+
+
+def add_all_metadata(functions, attributes, enums, config):
+    '''merge and add all additional metadata_dir
+
+    Updates all parameters
+        functions, attributes, enums - addon data merged, additional metadata
+        config - functions, attributes, enums added
+    '''
+    functions = add_all_function_metadata(functions, config)
+    attributes = add_all_attribute_metadata(attributes, config)
+
+    config['functions'] = functions
+    config['attributes'] = attributes
+    config['enums'] = enums
+
+    pp_persist = pprint.PrettyPrinter(indent=4, width=200)
+    metadata_dir = os.path.join('bin', 'processed_metadata')
+    if not os.path.exists(metadata_dir):
+        os.makedirs(metadata_dir)
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w", "utf-8") as text_file:
+        text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w", "utf-8") as text_file:
+        text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
 
 # Unit Tests

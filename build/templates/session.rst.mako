@@ -23,7 +23,7 @@ for attr in helper.sorted_attrs(attributes):
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
     else:
-        t = helper.get_python_type_for_visa_type(attributes[attr]["type"])
+        t = helper.get_python_type_for_api_type(attributes[attr]["type"], config)
 
     table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
 
