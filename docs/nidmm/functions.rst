@@ -996,6 +996,28 @@ nidmm.Session methods
 
 
 
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended interval between external recalibration in
+    **Months**.
+
+    
+
+    .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+    :rtype: int
+    :return:
+
+
+            Returns the recommended number of **months** between external
+            calibrations.
+
+            
+
+
+
 .. function:: get_last_cal_temp(cal_type)
 
     Returns the **Temperature** during the last calibration procedure.

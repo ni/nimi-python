@@ -38,6 +38,9 @@ class Library(object):
         self.niDCPower_GetAttributeViString_cfunc = None
         self.niDCPower_GetChannelName_cfunc = None
         self.niDCPower_GetError_cfunc = None
+        self.niDCPower_GetExtCalLastDateAndTime_cfunc = None
+        self.niDCPower_GetExtCalLastTemp_cfunc = None
+        self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
@@ -231,6 +234,30 @@ class Library(object):
                 self.niDCPower_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetError_cfunc(vi, code, buffer_size, description)
+
+    def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalLastDateAndTime_cfunc is None:
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc = self._library.niDCPower_GetExtCalLastDateAndTime
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
+
+    def niDCPower_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalLastTemp_cfunc is None:
+                self.niDCPower_GetExtCalLastTemp_cfunc = self._library.niDCPower_GetExtCalLastTemp
+                self.niDCPower_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalLastTemp_cfunc(vi, temperature)
+
+    def niDCPower_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalRecommendedInterval_cfunc is None:
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc = self._library.niDCPower_GetExtCalRecommendedInterval
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
