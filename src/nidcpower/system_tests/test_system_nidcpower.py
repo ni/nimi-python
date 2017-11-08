@@ -243,3 +243,6 @@ def test_wait_for_event_with_timeout():
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
 
+
+def test_wait_for_event_with_timeout():
+    pass
