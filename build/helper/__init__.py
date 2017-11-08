@@ -18,9 +18,7 @@ from build.helper.helper import camelcase_to_snakecase  # noqa: F401
 from build.helper.helper import get_python_type_for_visa_type  # noqa: F401
 from build.helper.helper import sorted_attrs  # noqa: F401
 
-from build.helper.metadata_add_all import add_all_attribute_metadata  # noqa: F401
-from build.helper.metadata_add_all import add_all_enum_metadata  # noqa: F401
-from build.helper.metadata_add_all import add_all_function_metadata  # noqa: F401
+from build.helper.metadata_add_all import add_all_metadata  # noqa: F401
 
 from build.helper.metadata_filters import filter_codegen_attributes  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_enums  # noqa: F401

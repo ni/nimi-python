@@ -161,7 +161,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module does not produce a Scan Advanced Output trigger.
+        The switch device does not produce a Scan Advanced Output trigger.
 
         
 
@@ -171,96 +171,87 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module produces the Scan Advanced Output trigger on the
-        external trigger output.
+        External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.
 
         
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG0
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL0
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig0 line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG1
-
-
-
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig1 line before processing the next entry in the scan list.
+        The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
 
         
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG2
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL1
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig2 line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG3
-
-
-
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig3 line before processing the next entry in the scan list.
+        The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
 
         
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG4
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL2
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig4 line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG5
-
-
-
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig5 line before processing the next entry in the scan list.
+        The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
 
         
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG6
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL3
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig6 line before processing the next entry in the scan list.
+        The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
 
         
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG7
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL4
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the
-        PXI\_Trig7 line before processing the next entry in the scan list.
+        The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
+
+        
+
+
+
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL5
+
+
+
+        The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
+
+        
+
+
+
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL6
+
+
+
+        The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
+
+        
+
+
+
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL7
+
+
+
+        The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
 
         
 
@@ -281,8 +272,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the rear
-        connector.
+        The switch device produces the Scan Advanced Output  trigger on the rear connector.
 
         
 
@@ -292,8 +282,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module produces the Scan Advanced Output Trigger on the front
-        connector.
+        The switch device produces the Scan Advanced Output  trigger on the front connector.
 
         
 
@@ -566,7 +555,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanAdvancedPolarity
 
-    .. py:attribute:: niswitch.ScanAdvancedPolarity.RISING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.RISING
 
 
 
@@ -576,7 +565,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedPolarity.FALLING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.FALLING
 
 
 
@@ -603,8 +592,7 @@ Enums used in NI-SWITCH
 
 
 
-        When scanning, the switch module breaks existing connections before
-        making new connections.
+        When scanning, the switch device breaks existing connections before  making new connections.
 
         
 
@@ -614,8 +602,7 @@ Enums used in NI-SWITCH
 
 
 
-        When scanning, the switch module breaks existing connections after
-        making new connections.
+        When scanning, the switch device breaks existing connections after making  new connections.
 
         
 
@@ -628,8 +615,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module does not wait for a trigger before processing the next
-        entry in the scan list.
+        Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.
 
         
 
@@ -639,109 +625,97 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module waits until it receives a trigger from an external
-        source through the external trigger input before processing the next
-        entry in the scan list.
+        External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.SW_TRIG_FUNC
+    .. py:attribute:: niswitch.TriggerInput.SOFTWARE_TRIG
 
 
 
-        The switch module waits until you call the `niSwitch Send Software
-        Trigger <switchviref.chm::/niSwitch_Send_Software_Trigger.html>`__ VI
-        before processing the next entry in the scan list.
+        The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG0
+    .. py:attribute:: niswitch.TriggerInput.TTL0
 
 
 
-        The switch module waits until it receives a trigger on the PXI\_Trig0
-        line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG1
-
-
-
-        The switch module waits until it receives a trigger on the PXI\_Trig1
-        line before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG2
+    .. py:attribute:: niswitch.TriggerInput.TTL1
 
 
 
-        The switch module waits until it receives a trigger on the PXI\_Trig2
-        line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG3
-
-
-
-        The switch module waits until it receives a trigger on the PXI\_Trig3
-        line before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG4
+    .. py:attribute:: niswitch.TriggerInput.TTL2
 
 
 
-        The switch module waits until it receives a trigger on the PXI\_Trig4
-        line before processing the next entry in the scan list.
-
-        
-
-
-
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG5
-
-
-
-        The switch module waits until it receives a trigger on the PXI\_Trig5
-        line before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG6
+    .. py:attribute:: niswitch.TriggerInput.TTL3
 
 
 
-        The switch module waits until it receives a trigger on the PXI\_Trig6
-        line before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.
 
         
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG7
+    .. py:attribute:: niswitch.TriggerInput.TTL4
 
 
 
-        The switch module waits until it receives a trigger on the PXI\_Trig7
-        line before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.
+
+        
+
+
+
+    .. py:attribute:: niswitch.TriggerInput.TTL5
+
+
+
+        The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.
+
+        
+
+
+
+    .. py:attribute:: niswitch.TriggerInput.TTL6
+
+
+
+        The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.
+
+        
+
+
+
+    .. py:attribute:: niswitch.TriggerInput.TTL7
+
+
+
+        The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.
 
         
 
@@ -751,8 +725,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module waits until it receives a trigger on the PXI star
-        trigger bus before processing the next entry in the scan list.
+        The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.
 
         
 
@@ -762,8 +735,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module waits until it receives a trigger on the rear
-        connector.
+        The switch device waits until it receives a trigger on the  rear connector.
 
         
 
@@ -773,8 +745,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch module waits until it receives a trigger on the front
-        connector.
+        The switch device waits until it receives a trigger on the  front connector.
 
         
 
@@ -1047,7 +1018,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerInputPolarity
 
-    .. py:attribute:: niswitch.TriggerInputPolarity.RISING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.RISING
 
 
 
@@ -1057,7 +1028,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInputPolarity.FALLING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.FALLING
 
 
 

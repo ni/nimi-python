@@ -1,21 +1,52 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [0.4.0](#040---2017-11-07)
 * [0.3.0](#030---2017-10-13)
 * [0.2.0](#020---2017-09-20)
 * [0.1.0](#010---2017-09-01)
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [Unreleased]
 * ### ALL
   * #### Added
   * #### Changed
-    * Simplified examples by removing try/except
   * #### Removed
     * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-ModInst
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-Switch
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-DCPower
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-FGEN
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-SCOPE
+  * #### Added
+    * Initial release
+  * #### Changed
+  * #### Removed
+    * Removed Peer to Peer attributes
+
+## 0.4.0 - 2017-11-07
+* ### ALL
+  * #### Changed
+    * Simplified examples by removing try/except
+    * **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
+* ### NI-DMM
   * #### Changed
     * Removed incorrect leading underscore from some enum values:
       * Function.AC_VOLTS_DC_COUPLED
@@ -28,35 +59,22 @@ All notable changes to this project will be documented in this file.
       * TriggerSource.TTL_3
       * TriggerSource.TTL_7
       * TriggerSource.PXI_STAR
-  * #### Removed
-* ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
   * #### Removed
     * Support for is_debounced and is_scanning functions. Instead use the attribute of the same name.
 * ### NI-DCPower
- * #### Added
-  * New example nidcpower_advanced_sequence.py
- * #### Changed
-  * Fixed method signature for:
-    * wait_for_event
-    * create_sequence
-    * create_advanced_sequence
- * #### Removed
-   * Support for measure_multiple until issue #444 is addressed.
+  * #### Added
+    * New example nidcpower_advanced_sequence.py
+  * #### Changed
+    * Fixed method signature for:
+      * wait_for_event
+      * create_sequence
+      * create_advanced_sequence
+  * #### Removed
+    * Support for measure_multiple until issue #444 is addressed.
 * ### NI-FGEN
- * #### Added
-  * Initial release
- * #### Changed
- * #### Removed
-* ### NI-SCOPE
- * #### Added
- * #### Changed
- * #### Removed
+  * #### Added
+    * Initial release
 
 ## 0.3.0 - 2017-10-13
 * ### ALL

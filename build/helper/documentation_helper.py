@@ -229,7 +229,7 @@ def _replace_func_python_name(f_match):
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
             fname = config['functions'][fname]['python_name']
-        except KeyError as e:
+        except KeyError:
             print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
