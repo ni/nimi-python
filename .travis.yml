@@ -16,7 +16,7 @@ install:
 
 script:
   - tox -e clean,build_test,codegen PRINT=1 PYTHON_CMD=python
-  - tox -e test
+  - tox
 
 after_success:
   - coveralls --rcfile=tools/coverage_unit_tests.rc
