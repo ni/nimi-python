@@ -16,19 +16,20 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
+_library_info = ${helper.get_dictionary_snippet(config['library_info'], indent=16)}
 
 
 def _get_library_name():
     try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
-    except KeyError:  # pragma: no cover
+        return _library_info[platform.system()][platform.architecture()[0]]['name']
+    except KeyError:
         raise errors.UnsupportedConfigurationError
 
 
 def _get_library_type():
     try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
-    except KeyError:  # pragma: no cover
+        return _library_info[platform.system()][platform.architecture()[0]]['type']
+    except KeyError:
         raise errors.UnsupportedConfigurationError
 
 
@@ -46,10 +47,10 @@ def get():
                 library_type = _get_library_type()
                 if library_type == 'windll':
                     ctypes_library = ctypes.WinDLL(_get_library_name())
-                else:  # pragma: no cover
+                else:
                     assert library_type == 'cdll'
                     ctypes_library = ctypes.CDLL(_get_library_name())
-            except OSError:  # pragma: no cover
+            except OSError:
                 raise errors.DriverNotInstalledError()
             _instance = library.Library(ctypes_library)
         return _instance
