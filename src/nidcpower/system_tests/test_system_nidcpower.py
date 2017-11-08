@@ -244,5 +244,5 @@ def test_wait_for_event_with_timeout():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
 
 
-def test_wait_for_event_with_timeout():
+def test_get_ext_cal_recommended_interval():
     pass

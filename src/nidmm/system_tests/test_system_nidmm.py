@@ -319,5 +319,5 @@ def test_set_boolean_attribute(session):
     assert session.cache is True
 
 
-def test_wait_for_event_with_timeout():
+def test_get_ext_cal_recommended_interval():
     pass
