@@ -48,11 +48,13 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     call(['tox', '-e', 'clean'])
     call(['tox'])
-    call(['twine', 'upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*'])
+    call(['twine', 'upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
     call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/nidcpower/metadata/config.py'])
     call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/nidmm/metadata/config.py'])
     call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/niswitch/metadata/config.py'])
     call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/nimodinst/metadata/config.py'])
+    call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/nifgen/metadata/config.py'])
+    call(['python', 'tools/updateDevVersions.py', '--src-file', 'src/niscope/metadata/config.py'])
     call(['tox'])
 
 
