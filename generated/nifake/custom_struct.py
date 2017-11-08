@@ -4,7 +4,9 @@ from nifake import visatype
 
 
 # This class is an internal implementation detail
-class _CustomStructCType(ctypes.Structure):
+# ctypes definition
+# Name must match exactly what the name of the structure type is named in the C API.
+class custom_struct(ctypes.Structure):  # noqa N801
     _fields_ = [
         ('struct_int', visatype.ViInt32),
         ('struct_double', visatype.ViReal64),
@@ -18,10 +20,6 @@ class _CustomStructCType(ctypes.Structure):
         else:
             self.struct_int = struct_int
             self.struct_double = struct_double
-
-
-# We need to match the name in the function definition
-custom_struct = _CustomStructCType
 
 
 class CustomStruct(object):
