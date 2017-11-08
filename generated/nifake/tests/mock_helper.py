@@ -56,6 +56,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
+        self._defaults['GetCustomType'] = {}
+        self._defaults['GetCustomType']['return'] = 0
+        self._defaults['GetCustomType']['cs'] = None
         self._defaults['GetEnumValue'] = {}
         self._defaults['GetEnumValue']['return'] = 0
         self._defaults['GetEnumValue']['aQuantity'] = None
@@ -111,6 +114,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetCustomType'] = {}
+        self._defaults['SetCustomType']['return'] = 0
         self._defaults['SimpleFunction'] = {}
         self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
@@ -262,6 +267,16 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niFake_GetCustomType(self, vi, cs):  # noqa: N802
+        if self._defaults['GetCustomType']['return'] != 0:
+            return self._defaults['GetCustomType']['return']
+        if self._defaults['GetCustomType']['cs'] is None:
+            raise MockFunctionCallError("niFake_GetCustomType", param='cs')
+        for field in self._defaults['GetCustomType']['cs']._fields_:
+            field_name = field[0]
+            setattr(cs.contents, field_name, getattr(self._defaults['GetCustomType']['cs'], field_name))
+        return self._defaults['GetCustomType']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         if self._defaults['GetEnumValue']['return'] != 0:
@@ -440,6 +455,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niFake_SetCustomType(self, vi, cs):  # noqa: N802
+        if self._defaults['SetCustomType']['return'] != 0:
+            return self._defaults['SetCustomType']['return']
+        return self._defaults['SetCustomType']['return']
+
     def niFake_SimpleFunction(self, vi):  # noqa: N802
         if self._defaults['SimpleFunction']['return'] != 0:
             return self._defaults['SimpleFunction']['return']
@@ -508,6 +528,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAttributeViReal64.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
         mock_library.niFake_GetAttributeViString.return_value = 0
+        mock_library.niFake_GetCustomType.side_effect = MockFunctionCallError("niFake_GetCustomType")
+        mock_library.niFake_GetCustomType.return_value = 0
         mock_library.niFake_GetEnumValue.side_effect = MockFunctionCallError("niFake_GetEnumValue")
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
@@ -542,6 +564,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetAttributeViReal64.return_value = 0
         mock_library.niFake_SetAttributeViString.side_effect = MockFunctionCallError("niFake_SetAttributeViString")
         mock_library.niFake_SetAttributeViString.return_value = 0
+        mock_library.niFake_SetCustomType.side_effect = MockFunctionCallError("niFake_SetCustomType")
+        mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
         mock_library.niFake_SimpleFunction.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")

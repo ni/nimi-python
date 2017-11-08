@@ -12,4 +12,11 @@ def find_size_parameter(parameter, parameters):
     return find_parameter(parameter['size']['value'], parameters)
 
 
+def find_custom_type(p, config):
+    for c in config['custom_types']:
+        if p['ctypes_type'] == c['ctypes_type']:
+            return c
+    return None
+
+
 

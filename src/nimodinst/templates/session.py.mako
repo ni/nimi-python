@@ -168,7 +168,7 @@ class Session(object):
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
-        ${helper.get_ctype_variable_declaration_snippet(p, parameters)}
+        ${helper.get_ctype_variable_declaration_snippet(p, parameters, config)}
 % endfor
 % if ivi_dance_parameter is not None:
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
@@ -180,6 +180,6 @@ class Session(object):
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters)}
+        ${helper.get_method_return_snippet(parameters, config)}
 % endfor
 

@@ -8,6 +8,8 @@ from nifake import errors
 from nifake import library_singleton
 from nifake import visatype
 
+from nifake import custom_struct  # noqa: F401
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -635,6 +637,20 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    def get_custom_type(self):
+        '''get_custom_type
+
+        This function returns a custom type.
+
+        Returns:
+            cs (CustomStruct): Set using custom type
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cs_ctype = custom_struct.custom_struct()  # case 13
+        error_code = self._library.niFake_GetCustomType(vi_ctype, ctypes.pointer(cs_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return custom_struct.CustomStruct(cs_ctype)
+
     def get_enum_value(self):
         '''get_enum_value
 
@@ -901,6 +917,20 @@ class Session(_SessionBase):
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
+
+    def set_custom_type(self, cs):
+        '''set_custom_type
+
+        This function takes a custom type.
+
+        Args:
+            cs (CustomStruct): Set using custom type
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cs_ctype = custom_struct.custom_struct(cs)  # case 8
+        error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def simple_function(self):
         '''simple_function

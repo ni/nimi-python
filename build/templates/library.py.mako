@@ -17,6 +17,10 @@ import ctypes
 import threading
 
 from ${module_name}.visatype import *  # noqa: F403,H303
+% for c in config['custom_types']:
+
+from ${module_name} import ${c['file_name']}  # noqa: F401
+% endfor
 
 
 class Library(object):
