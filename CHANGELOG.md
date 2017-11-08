@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DMM
   * #### Added
+    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-ModInst
@@ -27,6 +28,7 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DCPower
   * #### Added
+    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-FGEN
