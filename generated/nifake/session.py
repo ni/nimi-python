@@ -651,6 +651,24 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return custom_struct.CustomStruct(cs_ctype)
 
+    def get_custom_type_array(self, number_of_elements):
+        '''get_custom_type_array
+
+        This function returns a custom type.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            cs (list of CustomStruct): Set using custom type
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 7
+        cs_ctype = (custom_struct.custom_struct * number_of_elements)()  # case 12
+        error_code = self._library.niFake_GetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
+
     def get_enum_value(self):
         '''get_enum_value
 
@@ -929,6 +947,22 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         cs_ctype = custom_struct.custom_struct(cs)  # case 8
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_custom_type_array(self, cs):
+        '''set_custom_type_array
+
+        This function takes an array of custom types.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+            cs (list of CustomStruct): Set using custom type
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_elements_ctype = visatype.ViInt32(len(cs))  # case 5
+        cs_ctype = (custom_struct.custom_struct * len(cs))(*[custom_struct.custom_struct(c) for c in cs])  # case 14
+        error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

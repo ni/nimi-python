@@ -89,23 +89,53 @@ class ViStringMatcher(object):
 # Custom Type
 
 
+def _compare_ctype_structs(expected, actual):
+    # From https://stackoverflow.com/questions/20986330/print-all-fields-of-ctypes-structure-with-introspection
+    for field in expected._fields_:
+        field_name = field[0]
+        expected_val = getattr(expected, field_name)
+        actual_val = getattr(actual, field_name)
+        if expected_val != actual_val:
+            print("Unexpected value field {0}. Expected: {1}. Received: {2}".format(field_name, expected_val, actual_val))
+            return False
+    return True
+
+
 class CustomTypeMatcher(object):
     def __init__(self, expected_type, expected_value):
         self.expected_type = expected_type
         self.expected_value = expected_value
 
-    def __eq__(self, other):
-        if not isinstance(other, self.expected_type):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+    def __eq__(self, actual):
+        if not isinstance(actual, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(actual)))
             return False
-        # From https://stackoverflow.com/questions/20986330/print-all-fields-of-ctypes-structure-with-introspection
-        for field in self.expected_value._fields_:
-            field_name = field[0]
-            expected_val = getattr(self.expected_value, field_name)
-            other_val = getattr(other, field_name)
-            if expected_val != other_val:
-                print("Unexpected value field {0}. Expected: {1}. Received: {2}".format(field_name, expected_val, other_val))
-                return False
+        return _compare_ctype_structs(self.expected_value, actual)
+
+
+class CustomTypeBufferMatcher(object):
+    def __init__(self, expected_element_type, expected_value):
+        self.expected_value = expected_value
+        self.expected_size = len(expected_value)
+        self.expected_type = expected_element_type * self.expected_size
+        self.expected_element_type = expected_element_type
+
+    def __eq__(self, actual):
+        if not isinstance(actual, self.expected_type):
+            print("Unexpected array type. Expected: {0}. Received: {1}".format(self.expected_type, type(actual)))
+            return False
+        if self.expected_size != len(actual):
+            print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(actual)))
+            return False
+        if self.expected_value is not None:
+            # Can't compare the objects directly because they're different types (one is list, another is ctypes array).
+            # Go element by element, which allows for reporting the first index where different values were found.
+            for i in range(0, len(self.expected_value)):
+                if not isinstance(actual[i], self.expected_element_type):
+                    print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_element_type, type(actual[i])))
+                    return False
+                if not _compare_ctype_structs(self.expected_value[i], actual[i]):
+                    return False
         return True
 
 
