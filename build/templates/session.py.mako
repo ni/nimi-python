@@ -88,7 +88,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-% for attribute in helper.sorted_attrs(attributes):
+% for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
 <%
 rep_cap_attr_desc = '''
 This property can use repeated capabilities (usually channels). If set or get directly on the

@@ -51,11 +51,6 @@ class CurrentLimitAutorange(Enum):
     '''
 
 
-class CurrentLimitBehavior(Enum):
-    CURRENT_REGULATE = 13613
-    CURRENT_TRIP = 13614
-
-
 class DCNoiseRejection(Enum):
     SECOND_ORDER = 1043
     '''

@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
   * #### Changed

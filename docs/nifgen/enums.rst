@@ -638,19 +638,6 @@ Enums used in NI-FGEN
 
 
 
-.. py:data:: OperationMode
-
-    .. py:attribute:: nifgen.OperationMode.NIFGEN_VAL_OPERATE_CONTINUOUS
-
-
-
-        Continuous operation
-
-        
-
-
-
-
 .. py:data:: OutputMode
 
     .. py:attribute:: nifgen.OutputMode.FUNC
@@ -699,29 +686,6 @@ Enums used in NI-FGEN
 
         **Script mode—**\ Allows you to use scripting to link and loop multiple
         waveforms in complex combinations.
-
-        
-
-
-
-
-.. py:data:: P2PAddressType
-
-    .. py:attribute:: nifgen.P2PAddressType.PHYSICAL
-
-
-
-        Physical
-
-        
-
-
-
-    .. py:attribute:: nifgen.P2PAddressType.VIRTUAL
-
-
-
-        Physical
 
         
 
@@ -1696,150 +1660,6 @@ Enums used in NI-FGEN
 
 
         Specifies that another terminal is used.
-
-        
-
-
-
-
-.. py:data:: UpdateClockSource
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_INTERNAL
-
-
-
-        Internal update clock
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_EXTERNAL
-
-
-
-        External update clock given on the IO connector
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_PXI_STAR
-
-
-
-        (PXI only) PXI star trigger line. This choice is valid only in PXI
-        chassis slots 3 through 15.
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_0
-
-
-
-        RTSI line 0
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_1
-
-
-
-        RTSI line 1
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_2
-
-
-
-        RTSI line 2
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_3
-
-
-
-        RTSI line 3
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_4
-
-
-
-        RTSI line 4
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_5
-
-
-
-        RTSI line 5
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_6
-
-
-
-        RTSI line 6
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_RTSI_7
-
-
-
-        (PCI only) RTSI line 7
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_OTHER_TERMINAL
-
-
-
-        Uses another device terminal.
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_CLK_IN
-
-
-
-        Coaxial CLK IN connector on the board front panel
-
-        
-
-
-
-    .. py:attribute:: nifgen.UpdateClockSource.NIFGEN_VAL_DDC_CLK_IN
-
-
-
-        DDC CLK IN line of the Digital Data & Control connector
 
         
 

@@ -3,35 +3,6 @@
 from enum import Enum
 
 
-class AGCAverageControl(Enum):
-    MEAN = 0
-    '''
-    Mean average.
-    '''
-    MEDIAN = 1
-    '''
-    Median average.
-    '''
-
-
-class AOUTParallelOutputSource(Enum):
-    I_DATA = 0
-    '''
-    Specifies I data as the source for the AOUT parallel output from the
-    DDC.
-    '''
-    MAGNITUDE_DATA = 1
-    '''
-    Specifies magnitude data as the source for the AOUT parallel output from
-    the DDC.
-    '''
-    FREQUENCY_DATA = 2
-    '''
-    Specifies frequency data as the source for the AOUT parallel output from
-    the DDC.
-    '''
-
-
 class AcquisitionType(Enum):
     NORMAL = 0
     '''
@@ -44,43 +15,6 @@ class AcquisitionType(Enum):
     DDC = 1002
     '''
     Sets the digitizer to DDC mode on the NI 5620/5621.
-    '''
-
-
-class AddressType(Enum):
-    PHYSICAL = 0
-    '''
-    Physical address.
-    '''
-    VIRTUAL = 1
-    '''
-    Virtual address.
-    '''
-
-
-class BOUTParallelOutputSource(Enum):
-    MAGNITUDE_DATA = 1
-    '''
-    Specifies magnitude data as the source.
-    '''
-    Q_DATA = 3
-    '''
-    Specifies Q data as the source.
-    '''
-    PHASE_DATA = 4
-    '''
-    Specifies phase data as the source.
-    '''
-
-
-class BoolEnableDisable(Enum):
-    DISABLED = 0
-    '''
-    Disabled
-    '''
-    ENABLED = 1
-    '''
-    Enabled
     '''
 
 
@@ -130,24 +64,6 @@ class BoolEnableDisableTIS(Enum):
     '''
 
 
-class CoordinateConverterInput(Enum):
-    RESAMPLER_HB = 0
-    '''
-    Selects the HB filter as the source for the input to the coordinate
-    converter.
-    '''
-    PROGRAMMABLE_FIR = 1
-    '''
-    Selects the programmable FIR filter as the source for the input to the
-    coordinate converter.
-    '''
-
-
-class DataJustificationMode(Enum):
-    LEFT = 1
-    RIGHT = 2
-
-
 class DataProcessingMode(Enum):
     REAL = 0
     '''
@@ -156,43 +72,6 @@ class DataProcessingMode(Enum):
     COMPLEX = 1
     '''
     The waveform data points are complex numbers (IQ data).
-    '''
-
-
-class DiscriminatorFIRInputSource(Enum):
-    PHASE = 0
-    '''
-    Sets the discriminator FIR input source to phase.
-    '''
-    MAGNITUDE = 1
-    '''
-    Sets the discriminator FIR input source to magnitude.
-    '''
-    RESAMPLER = 3
-    '''
-    Sets the discriminator FIR input source to resampler.
-    '''
-
-
-class DiscriminatorFIRSymmetry(Enum):
-    SYMMETRIC = 0
-    '''
-    Sets the discriminator FIR symmetry to symmetric.
-    '''
-    ASYMMETRIC = 1
-    '''
-    Sets the discriminator FIR symmetry to asymmetric.
-    '''
-
-
-class DiscriminatorFIRSymmetryType(Enum):
-    EVEN = 0
-    '''
-    Sets the discriminator FIR symmetry type to even.
-    '''
-    ODD = 1
-    '''
-    Sets the discriminator FIR symmetry type to odd.
     '''
 
 
@@ -284,17 +163,6 @@ class FlexFIRAntialiasFilterType(Enum):
     '''
 
 
-class NotificationType(Enum):
-    NEVER = 0
-    '''
-    Never send notification.
-    '''
-    DONE = 1
-    '''
-    Notify when digitizer acquisition is done.
-    '''
-
-
 class OverflowErrorReporting(Enum):
     ERROR = 0
     '''
@@ -326,50 +194,6 @@ class PercentageMethod(Enum):
     BASETOP = 2
     '''
     Reference level percentages are computed using the base/top method.
-    '''
-
-
-class ProgFIRFilterRealComplex(Enum):
-    REAL = 0
-    '''
-    Sets a dual real filter.
-    '''
-    COMPLEX = 1
-    '''
-    Sets a complex filter.
-    '''
-
-
-class ProgFIRFilterSymmetry(Enum):
-    SYMMETRIC = 0
-    '''
-    Sets a symmetric filter.
-    '''
-    ASYMMETRIC = 1
-    '''
-    Sets an asymmetric filter.
-    '''
-
-
-class ProgFIRFilterSymmetryType(Enum):
-    EVEN = 0
-    '''
-    Sets the discriminator FIR symmetry type to even.
-    '''
-    ODD = 1
-    '''
-    Sets the discriminator FIR symmetry type to odd.
-    '''
-
-
-class QInputtoCoordConverter(Enum):
-    I_AND_Q = 0
-    '''
-    Enables the Q input to coordinate converter.
-    '''
-    Q_ZEROED = 1
-    '''
-    Zeroes out the Q input the to coordinate converter.
     '''
 
 
@@ -416,29 +240,6 @@ class RefTriggerDetectorLocation(Enum):
     '''
 
 
-class ResamplerFilterMode(Enum):
-    RESAMPLER_ENABLED = 1
-    '''
-    Resampler enabled.
-    '''
-    HB_1_ENABLED = 2
-    '''
-    HB 1 enabled.
-    '''
-    RESAMPLER_AND_HB_1 = 3
-    '''
-    Resampler and HB 1.
-    '''
-    BOTH_HB_FILTERS = 6
-    '''
-    Both HB Filters.
-    '''
-    RESAMPLER_AND_BOTH_HB_FILTERS = 7
-    '''
-    Resampler and Both HB Filters.
-    '''
-
-
 class StreamingPositionType(Enum):
     START_TRIGGER = 0
     '''
@@ -455,17 +256,6 @@ class StreamingPositionType(Enum):
     '''
 
 
-class SyncoutCLKSelect(Enum):
-    CLKIN = 0
-    '''
-    Specifies CLKIN as the source for Syncout CLK.
-    '''
-    PROCCLK = 1
-    '''
-    Specifies PROCCLK as the source for Syncout CLK.
-    '''
-
-
 class TerminalConfiguration(Enum):
     SINGLE_ENDED = 0
     '''
@@ -478,25 +268,6 @@ class TerminalConfiguration(Enum):
     DIFFERENTIAL = 2
     '''
     Channel is differential
-    '''
-
-
-class TimingNCOFreqOffsetBits(Enum):
-    _8_BITS = 0
-    '''
-    Specifies 8 offset bits in the timing NCO.
-    '''
-    _16_BITS = 1
-    '''
-    Specifies 16 offset bits in the timing NCO.
-    '''
-    _24_BITS = 2
-    '''
-    Specifies 24 offset bits in the timing NCO.
-    '''
-    _32_BITS = 3
-    '''
-    Specifies 32 offset bits in the timing NCO.
     '''
 
 

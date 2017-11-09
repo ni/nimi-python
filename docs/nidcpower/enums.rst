@@ -109,29 +109,6 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: CurrentLimitBehavior
-
-    .. py:attribute:: nidcpower.CurrentLimitBehavior.CURRENT_REGULATE
-
-
-
-        
-
-        
-
-
-
-    .. py:attribute:: nidcpower.CurrentLimitBehavior.CURRENT_TRIP
-
-
-
-        
-
-        
-
-
-
-
 .. py:data:: DCNoiseRejection
 
     .. py:attribute:: nidcpower.DCNoiseRejection.SECOND_ORDER
