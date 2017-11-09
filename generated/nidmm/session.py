@@ -1631,7 +1631,7 @@ class Session(_SessionBase):
                 calibrations.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        months_ctype = visatype.ViInt32()  # case 13
+        months_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)

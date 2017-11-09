@@ -3186,11 +3186,11 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        year_ctype = visatype.ViInt32()  # case 13
-        month_ctype = visatype.ViInt32()  # case 13
-        day_ctype = visatype.ViInt32()  # case 13
-        hour_ctype = visatype.ViInt32()  # case 13
-        minute_ctype = visatype.ViInt32()  # case 13
+        year_ctype = visatype.ViInt32()  # case 14
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -3206,7 +3206,7 @@ class Session(_SessionBase):
                 during the last successful external calibration.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        temperature_ctype = visatype.ViReal64()  # case 13
+        temperature_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -3222,7 +3222,7 @@ class Session(_SessionBase):
                 external calibrations.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        months_ctype = visatype.ViInt32()  # case 13
+        months_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
