@@ -35,6 +35,7 @@ class Library(object):
         self.niFake_GetAttributeViReal64_cfunc = None
         self.niFake_GetAttributeViString_cfunc = None
         self.niFake_GetCustomType_cfunc = None
+        self.niFake_GetCustomTypeArray_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
@@ -53,6 +54,7 @@ class Library(object):
         self.niFake_SetAttributeViReal64_cfunc = None
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SetCustomType_cfunc = None
+        self.niFake_SetCustomTypeArray_cfunc = None
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
@@ -186,6 +188,14 @@ class Library(object):
                 self.niFake_GetCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct)]  # noqa: F405
                 self.niFake_GetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomType_cfunc(vi, cs)
+
+    def niFake_GetCustomTypeArray(self, vi, number_of_elements, cs):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetCustomTypeArray_cfunc is None:
+                self.niFake_GetCustomTypeArray_cfunc = self._library.niFake_GetCustomTypeArray
+                self.niFake_GetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct)]  # noqa: F405
+                self.niFake_GetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         with self._func_lock:
@@ -330,6 +340,14 @@ class Library(object):
                 self.niFake_SetCustomType_cfunc.argtypes = [ViSession, custom_struct]  # noqa: F405
                 self.niFake_SetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomType_cfunc(vi, cs)
+
+    def niFake_SetCustomTypeArray(self, vi, number_of_elements, cs):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_SetCustomTypeArray_cfunc is None:
+                self.niFake_SetCustomTypeArray_cfunc = self._library.niFake_SetCustomTypeArray
+                self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct)]  # noqa: F405
+                self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 
     def niFake_SimpleFunction(self, vi):  # noqa: N802
         with self._func_lock:

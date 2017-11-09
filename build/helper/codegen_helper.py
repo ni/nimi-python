@@ -94,7 +94,7 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['ctypes_variable_name'] + val_suffix
+                size = size_parameter['ctypes_variable_name'] + '.value'
 
             snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
@@ -137,22 +137,23 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
         4. Input buffer (not string):                                   (visatype.ViInt32 * len(list))(*list)
-        5. Input is size of input buffer:                               visatype.ViInt32(len(list))
-        6. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
-        7. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
-        8. Input scalar:                                                visatype.ViInt32(parameter_name)
-        9. Input enum:                                                  visatype.ViInt32(parameter_name.value)
-       10. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
-       11. Output buffer with mechanism ivi-dance:                      None
-       12. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
-       13. Output scalar or enum:                                       visatype.ViInt32()
+        5. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
+        6. Input is size of input buffer:                               visatype.ViInt32(len(list))
+        7. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
+        8. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
+        9. Input scalar:                                                visatype.ViInt32(parameter_name)
+       10. Input enum:                                                  visatype.ViInt32(parameter_name.value)
+       11. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
+       12. Output buffer with mechanism ivi-dance:                      None
+       13. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
+       14. Output scalar or enum:                                       visatype.ViInt32()
     '''
 
     # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
     module_name = 'visatype'
-    c = find_custom_type(parameter, config)
-    if c is not None:
-        module_name = c['file_name']
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name']
 
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
@@ -164,39 +165,41 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
-        elif parameter['is_buffer'] is True:
+        elif parameter['is_buffer'] is True and custom_type is None:
             definition = '({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+        elif parameter['is_buffer'] is True and custom_type is not None:
+            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
                 if corresponding_buffer_parameter['direction'] == 'in':
-                    definition = '{0}.{1}(len({2}))  # case 5'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                    definition = '{0}.{1}(len({2}))  # case 6'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
-                        definition = '{0}.{1}()  # case 6'.format(module_name, parameter['ctypes_type'])
+                        definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
                     else:
                         assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
-                        definition = '{0}.{1}({2})  # case 7'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                        definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             elif parameter['enum'] is None:
-                definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2})  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
-                definition = '{0}.{1}({2}.value)  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         if parameter['is_buffer'] is True:
             assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
             if parameter['size']['mechanism'] == 'fixed':
-                definition = '({0}.{1} * {2})()  # case 10'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+                definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             elif parameter['size']['mechanism'] == 'ivi-dance':
-                definition = 'None  # case 11'
+                definition = 'None  # case 12'
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '({0}.{1} * {2})()  # case 12'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+                definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
                 assert False, 'Unknown mechanism: ' + str(parameter)
         else:
-            definition = '{0}.{1}()  # case 13'.format(module_name, parameter['ctypes_type'])
+            definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
 
     return parameter['ctypes_variable_name'] + ' = ' + definition
 

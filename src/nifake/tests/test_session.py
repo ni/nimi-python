@@ -7,6 +7,7 @@ import warnings
 
 from mock import patch
 
+# from mock import ANY
 # Tests
 
 
@@ -842,4 +843,25 @@ class TestSession(object):
             cs = session.get_custom_type()
             assert cs.struct_int == cs_ctype.struct_int
             assert cs.struct_double == cs_ctype.struct_double
+
+    def test_set_custom_type_array(self):
+        self.patched_library.niFake_SetCustomTypeArray.side_effect = self.side_effects_helper.niFake_SetCustomTypeArray
+        cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
+        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        with nifake.Session('dev1') as session:
+            session.set_custom_type_array(cs)
+            self.patched_library.niFake_SetCustomTypeArray.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(cs)), matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype))
+
+    def test_get_custom_type_array(self):
+        self.patched_library.niFake_GetCustomTypeArray.side_effect = self.side_effects_helper.niFake_GetCustomTypeArray
+        cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
+        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        self.side_effects_helper['GetCustomTypeArray']['cs'] = cs_ctype
+        with nifake.Session('dev1') as session:
+            cs = session.get_custom_type_array(len(cs_ctype))
+            assert len(cs) == len(cs_ctype)
+            for i in range(len(cs_ctype)):
+                assert cs[i].struct_int == cs_ctype[i].struct_int
+                assert cs[i].struct_double == cs_ctype[i].struct_double
+
 
