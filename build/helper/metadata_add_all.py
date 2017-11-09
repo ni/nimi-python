@@ -275,6 +275,14 @@ def add_all_enum_metadata(enums, config):
                 for e in outof:
                     enums[e] = outof[e]
 
+    # Workaround for NI Internal CAR #675174
+    try:
+        replacement_enums = config['modules']['metadata.enums_addon'].__getattribute__('replacement_enums')
+        for e in replacement_enums:
+            enums[e] = replacement_enums[e]
+    except AttributeError:
+        pass
+
     _add_enum_codegen_method(enums, config)
     return enums
 
