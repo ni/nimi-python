@@ -195,16 +195,15 @@ class TestSession(object):
 
     def test_get_a_list_enums(self):
         self.patched_library.niFake_EnumArrayOutputFunction.side_effect = self.side_effects_helper.niFake_EnumArrayOutputFunction
-        test_array = [1, 1, 0]
-        test_array_size = len(test_array)
-        self.side_effects_helper['EnumArrayOutputFunction']['anArray'] = test_array
+        test_list = [1, 1, 0]
+        self.side_effects_helper['EnumArrayOutputFunction']['anArray'] = test_list
         with nifake.Session('dev1') as session:
-            test_result = session.enum_array_output_function(test_array_size)
-            assert test_array_size == len(test_result)
-            for i in range(test_array_size):
-                assert isinstance(test_result[i], nifake.Turtle)
-                assert test_result[i].value == test_array[i]
-            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViInt16BufferMatcher(test_array_size))
+            test_result = session.enum_array_output_function(len(test_list))
+            assert len(test_list) == len(test_result)
+            for expected_value, actual_value in zip(test_list, test_result):
+                assert isinstance(actual_value, nifake.Turtle)
+                assert actual_value.value == expected_value
+            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(test_list)), matchers.ViInt16BufferMatcher(len(test_list)))
 
     def test_get_a_boolean(self):
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
@@ -217,16 +216,15 @@ class TestSession(object):
 
     def test_get_a_list_booleans(self):
         self.patched_library.niFake_BoolArrayOutputFunction.side_effect = self.side_effects_helper.niFake_BoolArrayOutputFunction
-        test_array = [1, 1, 0]
-        test_array_size = len(test_array)
-        self.side_effects_helper['BoolArrayOutputFunction']['anArray'] = test_array
+        test_list = [1, 1, 0]
+        self.side_effects_helper['BoolArrayOutputFunction']['anArray'] = test_list
         with nifake.Session('dev1') as session:
-            test_result = session.bool_array_output_function(test_array_size)
-            assert test_array_size == len(test_result)
-            for i in range(test_array_size):
-                assert isinstance(test_result[0], bool)
-                assert test_result[i] == bool(test_array[i])
-            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViBooleanBufferMatcher(test_array_size))
+            test_result = session.bool_array_output_function(len(test_list))
+            assert len(test_list) == len(test_result)
+            for expected_value, actual_value in zip(test_list, test_result):
+                assert isinstance(actual_value, bool)
+                assert actual_value == bool(expected_value)
+            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(test_list)), matchers.ViBooleanBufferMatcher(len(test_list)))
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
