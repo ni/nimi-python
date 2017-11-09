@@ -130,11 +130,11 @@ class CustomTypeBufferMatcher(object):
         if self.expected_value is not None:
             # Can't compare the objects directly because they're different types (one is list, another is ctypes array).
             # Go element by element, which allows for reporting the first index where different values were found.
-            for i in range(0, len(self.expected_value)):
-                if not isinstance(actual[i], self.expected_element_type):
-                    print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_element_type, type(actual[i])))
+            for a, e in zip(actual, self.expected_value):
+                if not isinstance(a, self.expected_element_type):
+                    print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_element_type, type(a)))
                     return False
-                if not _compare_ctype_structs(self.expected_value[i], actual[i]):
+                if not _compare_ctype_structs(e, a):
                     return False
         return True
 
