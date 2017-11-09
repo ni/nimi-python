@@ -865,4 +865,3 @@ class TestSession(object):
                 assert cs[i].struct_double == cs_ctype[i].struct_double
 
 
-
