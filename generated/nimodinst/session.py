@@ -204,8 +204,8 @@ class Session(object):
                 character). Refer to the function help to find out how to determine the
                 exact buffer size required.
         '''
-        error_info_buffer_size_ctype = visatype.ViInt32()  # case 6
-        error_info_ctype = None  # case 11
+        error_info_buffer_size_ctype = visatype.ViInt32()  # case 7
+        error_info_ctype = None  # case 12
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -247,9 +247,9 @@ class Session(object):
                 the requested attribute.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 8
-        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViInt32()  # case 13
+        index_ctype = visatype.ViInt32(index)  # case 9
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -288,10 +288,10 @@ class Session(object):
                 size required.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 8
-        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 8
-        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case 6
-        attribute_value_ctype = None  # case 11
+        index_ctype = visatype.ViInt32(index)  # case 9
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 9
+        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case 7
+        attribute_value_ctype = None  # case 12
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -334,8 +334,8 @@ class Session(object):
                 driver parameter.
         '''
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case 3
-        handle_ctype = visatype.ViSession()  # case 13
-        device_count_ctype = visatype.ViInt32()  # case 13
+        handle_ctype = visatype.ViSession()  # case 14
+        device_count_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
