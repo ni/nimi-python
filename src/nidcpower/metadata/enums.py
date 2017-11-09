@@ -106,16 +106,14 @@ enums = {
     'DCNoiseRejection': {
         'values': [
             {
-                'name': 'SECOND_ORDER',
-                'prefix': 'DC_NOISE_REJECTION_',
+                'name': 'DC_NOISE_REJECTION_SECOND_ORDER',
                 'value': 1043,
 'documentation': {
 'description': 'Second-order rejection of DC noise.',
 },
             },
             {
-                'name': 'NORMAL',
-                'prefix': 'DC_NOISE_REJECTION_',
+                'name': 'DC_NOISE_REJECTION_NORMAL',
                 'value': 1044,
 'documentation': {
 'description': 'Normal rejection of DC noise.',
@@ -219,16 +217,14 @@ enums = {
     'Polarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 1018,
 'documentation': {
 'description': 'A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 1019,
 'documentation': {
 'description': 'A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.',
@@ -239,16 +235,14 @@ enums = {
     'PowerLineFrequency': {
         'values': [
             {
-                'name': '_50',
-                'suffix': '_HERTZ',
+                'name': '_50_HERTZ',
                 'value': 50.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 50 Hz.',
 },
             },
             {
-                'name': '_60',
-                'suffix': '_HERTZ',
+                'name': '_60_HERTZ',
                 'value': 60.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 60 Hz.',
@@ -395,16 +389,14 @@ enums = {
 },
             },
             {
-                'name': 'DIGITAL',
-                'suffix': '_EDGE',
+                'name': 'DIGITAL_EDGE',
                 'value': 1014,
 'documentation': {
 'description': 'The data operation starts when a digital edge is detected.',
 },
             },
             {
-                'name': 'SOFTWARE',
-                'suffix': '_EDGE',
+                'name': 'SOFTWARE_EDGE',
                 'value': 1015,
 'documentation': {
 'description': 'The data operation starts when a software trigger occurs.',

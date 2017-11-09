@@ -807,16 +807,14 @@ connector module 12.
     'ScanAdvancedPolarity': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'RISING_EDGE',
                 'value': 0,
 'documentation': {
 'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'FALLING_EDGE',
                 'value': 1,
 'documentation': {
 'description': 'The trigger occurs on the falling edge of the signal.',
@@ -1194,16 +1192,14 @@ connector module 12.
     'TriggerInputPolarity': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'RISING_EDGE',
                 'value': 0,
 'documentation': {
 'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'FALLING_EDGE',
                 'value': 1,
 'documentation': {
 'description': 'The trigger occurs on the falling edge of the signal.',

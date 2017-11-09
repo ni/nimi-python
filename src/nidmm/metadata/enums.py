@@ -9,24 +9,21 @@ enums = {
     'ADCCalibration': {
         'values': [
             {
-                'name': 'AUTO',
-                'prefix': 'ADC_CALIBRATION_',
+                'name': 'ADC_CALIBRATION_AUTO',
                 'value': -1,
 'documentation': {
 'description': 'The DMM enables or disables ADC calibration for you.',
 },
             },
             {
-                'name': 'OFF',
-                'prefix': 'ADC_CALIBRATION_',
+                'name': 'ADC_CALIBRATION_OFF',
                 'value': 0,
 'documentation': {
 'description': 'The DMM does not compensate for changes to the gain.',
 },
             },
             {
-                'name': 'ON',
-                'prefix': 'ADC_CALIBRATION_',
+                'name': 'ADC_CALIBRATION_ON',
                 'value': 1,
 'documentation': {
 'description': 'The DMM measures an internal reference to calculate the correct gain for the  measurement.',
@@ -94,32 +91,28 @@ enums = {
     'AutoZero': {
         'values': [
             {
-                'name': 'AUTO',
-                'prefix': 'AUTO_ZERO_',
+                'name': 'AUTO_ZERO_AUTO',
                 'value': -1,
 'documentation': {
 'description': 'The drivers chooses the AutoZero setting based on the configured function  and resolution.',
 },
             },
             {
-                'name': 'OFF',
-                'prefix': 'AUTO_ZERO_',
+                'name': 'AUTO_ZERO_OFF',
                 'value': 0,
 'documentation': {
 'description': 'Disables AutoZero.',
 },
             },
             {
-                'name': 'ON',
-                'prefix': 'AUTO_ZERO_',
+                'name': 'AUTO_ZERO_ON',
                 'value': 1,
 'documentation': {
 'description': 'The DMM internally disconnects the input signal following each measurement  and takes a zero reading. It then subtracts the zero reading from the  preceding reading.',
 },
             },
             {
-                'name': 'ONCE',
-                'prefix': 'AUTO_ZERO_',
+                'name': 'AUTO_ZERO_ONCE',
                 'value': 2,
 'documentation': {
 'description': 'The DMM internally disconnects the input signal for the first measurement  and takes a zero reading. It then subtracts the zero reading from the first  reading and the following readings.',
@@ -130,32 +123,28 @@ enums = {
     'CableCompensationType': {
         'values': [
             {
-                'name': 'NONE',
-                'prefix': 'CABLE_COMP_',
+                'name': 'CABLE_COMP_NONE',
                 'value': 0,
 'documentation': {
 'description': 'No Cable Compensation',
 },
             },
             {
-                'name': 'OPEN',
-                'prefix': 'CABLE_COMP_',
+                'name': 'CABLE_COMP_OPEN',
                 'value': 1,
 'documentation': {
 'description': 'Open Cable Compensation',
 },
             },
             {
-                'name': 'SHORT',
-                'prefix': 'CABLE_COMP_',
+                'name': 'CABLE_COMP_SHORT',
                 'value': 2,
 'documentation': {
 'description': 'Short Cable Compensation',
 },
             },
             {
-                'name': 'OPEN_AND_SHORT',
-                'prefix': 'CABLE_COMP_',
+                'name': 'CABLE_COMP_OPEN_AND_SHORT',
                 'value': 3,
 'documentation': {
 'description': 'Open and Short Cable Compensation',
@@ -198,16 +187,14 @@ enums = {
     'DCBias': {
         'values': [
             {
-                'name': 'OFF',
-                'prefix': 'DC_BIAS_',
+                'name': 'DC_BIAS_OFF',
                 'value': 0,
 'documentation': {
 'description': 'NI-DMM programs the device not to use the DC bias',
 },
             },
             {
-                'name': 'ON',
-                'prefix': 'DC_BIAS_',
+                'name': 'DC_BIAS_ON',
                 'value': 1,
 'documentation': {
 'description': 'NI-DMM programs the device to use the DC bias',
@@ -218,32 +205,28 @@ enums = {
     'DCNoiseRejection': {
         'values': [
             {
-                'name': 'AUTO',
-                'prefix': 'DCNR_',
+                'name': 'DCNR_AUTO',
                 'value': -1,
 'documentation': {
 'description': 'The driver chooses the DC noise rejection setting based on the configured  function and resolution.',
 },
             },
             {
-                'name': 'NORMAL',
-                'prefix': 'DCNR_',
+                'name': 'DCNR_NORMAL',
                 'value': 0,
 'documentation': {
 'description': 'NI-DMM weighs all samples equally.',
 },
             },
             {
-                'name': 'SECOND_ORDER',
-                'prefix': 'DCNR_',
+                'name': 'DCNR_SECOND_ORDER',
                 'value': 1,
 'documentation': {
 'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.',
 },
             },
             {
-                'name': 'HIGH_ORDER',
-                'prefix': 'DCNR_',
+                'name': 'DCNR_HIGH_ORDER',
                 'value': 2,
 'documentation': {
 'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.',
@@ -427,24 +410,21 @@ enums = {
     'LCCalculationModel': {
         'values': [
             {
-                'name': 'AUTO',
-                'prefix': 'CALC_MODEL_',
+                'name': 'CALC_MODEL_AUTO',
                 'value': -1,
 'documentation': {
 'description': 'NI-DMM chooses the algorithm based on function and range',
 },
             },
             {
-                'name': 'SERIES',
-                'prefix': 'CALC_MODEL_',
+                'name': 'CALC_MODEL_SERIES',
                 'value': 0,
 'documentation': {
 'description': 'NI-DMM uses the series impedance model to calculate capacitance and inductance',
 },
             },
             {
-                'name': 'PARALLEL',
-                'prefix': 'CALC_MODEL_',
+                'name': 'CALC_MODEL_PARALLEL',
                 'value': 1,
 'documentation': {
 'description': 'NI-DMM uses the parallel admittance model to calculate capacitance and inductance',
@@ -554,16 +534,14 @@ enums = {
     'OffsetCompensatedOhms': {
         'values': [
             {
-                'name': 'OFF',
-                'prefix': 'OFFSET_COMP_OHMS_',
+                'name': 'OFFSET_COMP_OHMS_OFF',
                 'value': 0,
 'documentation': {
 'description': 'The DMM disables offset compensated ohms.',
 },
             },
             {
-                'name': 'ON',
-                'prefix': 'OFFSET_COMP_OHMS_',
+                'name': 'OFFSET_COMP_OHMS_ON',
                 'value': 1,
 'documentation': {
 'description': 'The DMM enables offset compensated ohms.',
@@ -574,16 +552,14 @@ enums = {
     'OperationMode': {
         'values': [
             {
-                'name': 'IVIDMM',
-                'suffix': '_MODE',
+                'name': 'IVIDMM_MODE',
                 'value': 0,
 'documentation': {
 'description': 'IviDmm Mode',
 },
             },
             {
-                'name': 'WAVEFORM',
-                'suffix': '_MODE',
+                'name': 'WAVEFORM_MODE',
                 'value': 1,
 'documentation': {
 'description': 'Waveform acquisition mode',
@@ -594,16 +570,14 @@ enums = {
     'PowerlineFrequency': {
         'values': [
             {
-                'name': '_50',
-                'suffix': '_HERTZ',
+                'name': '_50_HERTZ',
                 'value': 50.0,
 'documentation': {
 'description': 'Specifies the powerline frequency as 50 Hz.',
 },
             },
             {
-                'name': '_60',
-                'suffix': '_HERTZ',
+                'name': '_60_HERTZ',
                 'value': 60.0,
 'documentation': {
 'description': 'Specifies the powerline frequency as 60 Hz.',
@@ -614,8 +588,7 @@ enums = {
     'RTDType': {
         'values': [
             {
-                'name': 'CUSTOM',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_CUSTOM',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -625,48 +598,42 @@ and C coefficients.
 },
             },
             {
-                'name': 'PT3750',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3750',
                 'value': 1,
 'documentation': {
 'description': 'Performs scaling for a Pt 3750 RTD.',
 },
             },
             {
-                'name': 'PT3851',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3851',
                 'value': 2,
 'documentation': {
 'description': 'Performs scaling for a Pt 3851 RTD.',
 },
             },
             {
-                'name': 'PT3911',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3911',
                 'value': 3,
 'documentation': {
 'description': 'Performs scaling for a Pt 3911 RTD.',
 },
             },
             {
-                'name': 'PT3916',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3916',
                 'value': 4,
 'documentation': {
 'description': 'Performs scaling for a Pt 3916 RTD.',
 },
             },
             {
-                'name': 'PT3920',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3920',
                 'value': 5,
 'documentation': {
 'description': 'Performs scaling for a Pt 3920 RTD.',
 },
             },
             {
-                'name': 'PT3928',
-                'prefix': 'TEMP_RTD_',
+                'name': 'TEMP_RTD_PT3928',
                 'value': 6,
 'documentation': {
 'description': 'Performs scaling for a Pt 3928 RTD.',
@@ -804,32 +771,28 @@ and C coefficients.
     'ThermistorType': {
         'values': [
             {
-                'name': 'CUSTOM',
-                'prefix': 'TEMP_THERMISTOR_',
+                'name': 'TEMP_THERMISTOR_CUSTOM',
                 'value': 0,
 'documentation': {
 'description': 'Custom',
 },
             },
             {
-                'name': '_44004',
-                'prefix': 'TEMP_THERMISTOR_',
+                'name': 'TEMP_THERMISTOR_44004',
                 'value': 1,
 'documentation': {
 'description': '44004',
 },
             },
             {
-                'name': '_44006',
-                'prefix': 'TEMP_THERMISTOR_',
+                'name': 'TEMP_THERMISTOR_44006',
                 'value': 2,
 'documentation': {
 'description': '44006',
 },
             },
             {
-                'name': '_44007',
-                'prefix': 'TEMP_THERMISTOR_',
+                'name': 'TEMP_THERMISTOR_44007',
                 'value': 3,
 'documentation': {
 'description': '44007',
@@ -854,64 +817,56 @@ temperature.
     'ThermocoupleType': {
         'values': [
             {
-                'name': 'B',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_B',
                 'value': 1,
 'documentation': {
 'description': 'Thermocouple type B',
 },
             },
             {
-                'name': 'E',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_E',
                 'value': 4,
 'documentation': {
 'description': 'Thermocouple type E',
 },
             },
             {
-                'name': 'J',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_J',
                 'value': 6,
 'documentation': {
 'description': 'Thermocouple type J',
 },
             },
             {
-                'name': 'K',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_K',
                 'value': 7,
 'documentation': {
 'description': 'Thermocouple type K',
 },
             },
             {
-                'name': 'N',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_N',
                 'value': 8,
 'documentation': {
 'description': 'Thermocouple type N',
 },
             },
             {
-                'name': 'R',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_R',
                 'value': 9,
 'documentation': {
 'description': 'Thermocouple type R',
 },
             },
             {
-                'name': 'S',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_S',
                 'value': 10,
 'documentation': {
 'description': 'Thermocouple type S',
 },
             },
             {
-                'name': 'T',
-                'prefix': 'TEMP_TC_',
+                'name': 'TEMP_TC_T',
                 'value': 11,
 'documentation': {
 'description': 'Thermocouple type T',
@@ -1074,16 +1029,14 @@ temperature.
     'WaveformCoupling': {
         'values': [
             {
-                'name': 'AC',
-                'prefix': 'WAVEFORM_COUPLING_',
+                'name': 'WAVEFORM_COUPLING_AC',
                 'value': 0,
 'documentation': {
 'description': 'AC Coupled',
 },
             },
             {
-                'name': 'DC',
-                'prefix': 'WAVEFORM_COUPLING_',
+                'name': 'WAVEFORM_COUPLING_DC',
                 'value': 1,
 'documentation': {
 'description': 'DC Coupled',

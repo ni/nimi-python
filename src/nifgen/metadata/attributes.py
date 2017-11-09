@@ -123,16 +123,7 @@ Interchangeability checking examines the attributes in a  capability group only 
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Describes the first error that occurred since the last call to the
-`niFgen Error
-Message <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Error_Message.html')>`__
-VI on the session.
-The value follows the VXIplug&play completion code conventions. A
-negative value (0x80000000 or higher in hex) describes an error
-condition. A positive value describes a warning condition and indicates
-that no error occurred. A zero indicates that no error or warning
-occurred. The error and warning values can be status codes defined by
-IVI, VISA, class drivers, or specific drivers.
+Specifies a code that describes the first error that occurred since the last  call to niFgen_GetErrorInfo on the session. The value follows the  VXI plug&play completion code conventions. A negative value describes  an error condition. A positive value describes a warning condition  and indicates that no error occurred. A zero indicates that no error  or warning occurred. The error and warning values can be status codes  defined by IVI, VISA, class drivers, or specific drivers.
 ''',
 },
     },
@@ -146,10 +137,7 @@ IVI, VISA, class drivers, or specific drivers.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Provides an optional code with additional information concerning the
-primary error condition. The error and warning values can be status
-codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-indicates no additional information.
+Specifies an optional code that provides additional information concerning the  primary error condition. The error and warning values can be status codes  defined by IVI, VISA, class drivers, or specific drivers.  A value of zero indicates  no additional information.
 ''',
 },
     },
@@ -163,8 +151,7 @@ indicates no additional information.
         'type': 'ViString',
 'documentation': {
 'description': '''
-Contains an optional string with additional information concerning the
-primary error condition.
+Specifies an optional string that contains additional information concerning the  primary error condition.
 ''',
 },
     },
@@ -173,13 +160,13 @@ primary error condition.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count',
-        'name': 'CHANNEL_COUNT',
+        'name': 'NUM_CHANNELS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the number of channels that the specific instrument  driver supports.
-For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
+Indicates the number of channels that the specific instrument  driver supports.
+For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
 ''',
 },
     },
@@ -225,6 +212,20 @@ If you initialize NI-FGEN with the resource  descriptor, this attribute contains
 'description': '''
 A string containing the logical name that you specified when opening the  current IVI session.
 You may pass a logical name to niFgen_init or  niFgen_InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+''',
+},
+    },
+    1050322: {
+        'access': 'read only',
+        'channel_based': False,
+        'enum': None,
+        'lv_property': '',
+        'name': 'IO_SESSION',
+        'resettable': False,
+        'type': 'ViSession',
+'documentation': {
+'description': '''
+Specifies the I/O session that NI-FGEN uses  to communicate with the instrument.
 ''',
 },
     },
@@ -474,13 +475,8 @@ Units: Percentage of time the waveform is high
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Controls the Update Clock source.',
-'note': '''
-You cannot change this property while the device is generating a
-waveform. If you want to change the device configuration, call the
-`niFgen Abort
-Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-VI or wait for the generation to complete.
+'description': '''
+Controls the update clock source.
 ''',
 },
     },
@@ -517,10 +513,7 @@ VI or wait for the generation to complete.
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
-'description': '''
-Returns the actual sample rate value of the signal generator after any
-coercion or rounding.
-''',
+'description': 'The actual sample rate value of the signal generator.',
 },
     },
     1150110: {
@@ -738,7 +731,7 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Returns the NI-DAQmx task pointer.',
+'description': 'The NI-DAQmx task that NI-FGEN uses for the NI 5421.  For internal use only.',
 },
     },
     1150222: {
@@ -2663,12 +2656,7 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
         'resettable': 'Yes',
         'type': 'ViBoolean',
 'documentation': {
-'description': '''
-Controls the specified auxiliary power pin. Setting this property to
-TRUE energizes the auxiliary power when the session is committed. When
-this property is FALSE, the power pin of the connector outputs no power.
-**Default Value**: FALSE
-''',
+'description': 'Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.',
 },
     },
     1150412: {
@@ -2706,20 +2694,11 @@ this property is FALSE, the power pin of the connector outputs no power.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Controls the Reference Clock source the signal generator uses.
-The signal generator derives the frequencies and sample rates that it
-uses to generate waveforms from the source you specify. For example,
-when you set this attribute to **Clock In**, the signal generator uses
-the signal it receives at the Clk In front panel connector as its
-Reference Clock.
+Controls the reference clock source that the signal generator uses.
+The signal generator derives the frequencies and sample rates that it  uses to generate waveforms from the source you specify. For example, when you set this parameter to NIFGEN_VAL_EXTERNAL, the signal generator uses the signal it receives at its external clock connector as its reference  clock.
+specify.
 ''',
-'note': '''
-You cannot change this property while the device is generating a
-waveform. If you want to change the device configuration, call the
-`niFgen Abort
-Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-VI or wait for the generation to complete.
-''',
+'note': 'All of the signal generator channels use the clock source that you',
 },
     },
     1250003: {
@@ -2756,10 +2735,7 @@ VI or wait for the generation to complete.
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies how the signal generator produces waveforms. NI signal
-generators currently support only one value:
-**NIFGEN\_VAL\_OPERATE\_CONTINUOUS**. To control trigger mode, set the
-`Trigger Mode <pniFgen_TriggerMode.html>`__ property.
+Specifies how the signal generator produces waveforms.  Currently only continuous mode is valid for NI signal generators.  To control trigger mode, use NIFGEN_ATTR_TRIGGER_MODE instead.
 ''',
 },
     },
@@ -3080,11 +3056,12 @@ This attribute is also the source for the trigger in the other trigger modes as 
         'channel_based': False,
         'enum': None,
         'lv_property': '',
-        'name': 'BURST_COUNT',
+        'name': 'CYCLE_COUNT',
         'resettable': False,
         'type': 'ViInt32',
 'documentation': {
-'description': 'The number of times to repeat each waveform in burst trigger mode.',
+'description': 'Specifies the number of cycles that you want the signal generator to produce after it receives a trigger./n For standard and arbitrary waveforms, a cycle is one period of the waveform./n An arbitrary sequence consists of multiple arbitrary waveforms in a sequence. Each waveform can be repeated a discrete number of times before the next waveform is produced. For arbitrary sequences, a cycle is one complete progression through the generation of all iterations of all waveforms in the sequence./n/n',
+'note': 'The NI 5411/5421 arbitrary waveform generators support only continuous generation./n',
 },
     },
 }

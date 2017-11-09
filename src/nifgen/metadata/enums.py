@@ -9,32 +9,28 @@ enums = {
     'AnalogPath': {
         'values': [
             {
-                'name': 'MAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'MAIN_ANALOG_PATH',
                 'value': 0,
 'documentation': {
 'description': 'Specifies use of the main path.  NI-FGEN chooses the amplifier based on the user-specified gain.',
 },
             },
             {
-                'name': 'DIRECT',
-                'suffix': '_ANALOG_PATH',
+                'name': 'DIRECT_ANALOG_PATH',
                 'value': 1,
 'documentation': {
 'description': 'Specifies use of the direct path.',
 },
             },
             {
-                'name': 'FIXED_LOW_GAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'FIXED_LOW_GAIN_ANALOG_PATH',
                 'value': 2,
 'documentation': {
 'description': 'Specifies use of the low-gain amplifier in the main path, no matter  what value the user specifies for gain. This setting limits the output  range.',
 },
             },
             {
-                'name': 'FIXED_HIGH_GAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'FIXED_HIGH_GAIN_ANALOG_PATH',
                 'value': 3,
 'documentation': {
 'description': 'Specifies use of the high-gain amplifier in the main path.',
@@ -45,48 +41,42 @@ enums = {
     'BusType': {
         'values': [
             {
-                'name': 'INVALID',
-                'prefix': 'BUS_',
+                'name': 'BUS_INVALID',
                 'value': 0,
 'documentation': {
 'description': 'Indicates an invalid bus type.',
 },
             },
             {
-                'name': 'AT',
-                'prefix': 'BUS_',
+                'name': 'BUS_AT',
                 'value': 1,
 'documentation': {
 'description': 'Indicates the signal generator is the AT bus type.',
 },
             },
             {
-                'name': 'PCI',
-                'prefix': 'BUS_',
+                'name': 'BUS_PCI',
                 'value': 2,
 'documentation': {
 'description': 'Indicates the signal generator is the PCI bus type.',
 },
             },
             {
-                'name': 'PXI',
-                'prefix': 'BUS_',
+                'name': 'BUS_PXI',
                 'value': 3,
 'documentation': {
 'description': 'Indicates the signal generator is the PXI bus type.',
 },
             },
             {
-                'name': 'VXI',
-                'prefix': 'BUS_',
+                'name': 'BUS_VXI',
                 'value': 4,
 'documentation': {
 'description': 'Indicates the signal generator is the VXI bus type.',
 },
             },
             {
-                'name': 'PCMCIA',
-                'prefix': 'BUS_',
+                'name': 'BUS_PCMCIA',
                 'value': 5,
 'documentation': {
 'description': 'Indicates the signal generator is the PCI-CMA bus type.',
@@ -182,16 +172,14 @@ enums = {
     'DataMarkerEventLevelPolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -202,16 +190,14 @@ enums = {
     'DataProcessingMode': {
         'values': [
             {
-                'name': 'REAL',
-                'prefix': 'OSP_',
+                'name': 'OSP_REAL',
                 'value': 0,
 'documentation': {
 'description': 'The waveform data points are real numbers (I data).',
 },
             },
             {
-                'name': 'COMPLEX',
-                'prefix': 'OSP_',
+                'name': 'OSP_COMPLEX',
                 'value': 1,
 'documentation': {
 'description': 'The waveform data points are complex numbers (I/Q data).',
@@ -222,16 +208,14 @@ enums = {
     'DoneEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -278,16 +262,14 @@ enums = {
     'DoneEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -316,40 +298,35 @@ enums = {
     'FilterType': {
         'values': [
             {
-                'name': 'FLAT',
-                'prefix': 'OSP_',
+                'name': 'OSP_FLAT',
                 'value': 0,
 'documentation': {
 'description': 'Applies a flat filter to the data with the passband value specified  in the NIFGEN_ATTR_OSP_FIR_FILTER_FLAT_PASSBAND attribute.',
 },
             },
             {
-                'name': 'RAISED_COSINE',
-                'prefix': 'OSP_',
+                'name': 'OSP_RAISED_COSINE',
                 'value': 1,
 'documentation': {
 'description': 'Applies a raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_RAISED_COSINE_ALPHA attribute.',
 },
             },
             {
-                'name': 'ROOT_RAISED_COSINE',
-                'prefix': 'OSP_',
+                'name': 'OSP_ROOT_RAISED_COSINE',
                 'value': 2,
 'documentation': {
 'description': 'Applies a root raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.',
 },
             },
             {
-                'name': 'GAUSSIAN',
-                'prefix': 'OSP_',
+                'name': 'OSP_GAUSSIAN',
                 'value': 3,
 'documentation': {
 'description': 'Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN_ATTR_OSP_FIR_FILTER_GAUSSIAN_BT attribute.',
 },
             },
             {
-                'name': 'CUSTOM',
-                'prefix': 'OSP_',
+                'name': 'OSP_CUSTOM',
                 'value': 4,
 'documentation': {
 'description': 'Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.',
@@ -360,16 +337,14 @@ enums = {
     'IdleBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST',
-                'suffix': '_VALUE',
+                'name': 'HOLD_LAST_VALUE',
                 'value': 400,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.',
 },
             },
             {
-                'name': 'JUMP_TO',
-                'suffix': '_VALUE',
+                'name': 'JUMP_TO_VALUE',
                 'value': 401,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.',
@@ -426,16 +401,14 @@ active state you specify.
     'MarkerEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -482,16 +455,14 @@ active state you specify.
     'OSPMode': {
         'values': [
             {
-                'name': 'IF',
-                'prefix': 'OSP_',
+                'name': 'OSP_IF',
                 'value': 0,
 'documentation': {
 'description': 'The OSP block generates intermediate frequency (IF) data.',
 },
             },
             {
-                'name': 'BASEBAND',
-                'prefix': 'OSP_',
+                'name': 'OSP_BASEBAND',
                 'value': 1,
 'documentation': {
 'description': 'The OSP block generates baseband data.',
@@ -502,16 +473,14 @@ active state you specify.
     'OSPOverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'ERROR_REPORTING_ERROR',
                 'value': 0,
 'documentation': {
 'description': 'NI-FGEN returns errors whenever an overflow has occurred in the OSP block.',
 },
             },
             {
-                'name': 'DISABLED',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'ERROR_REPORTING_DISABLED',
                 'value': 2,
 'documentation': {
 'description': 'NI-FGEN does not return errors when an overflow occurs in the OSP block.',
@@ -522,10 +491,10 @@ active state you specify.
     'OperationMode': {
         'values': [
             {
-                'name': 'NIFGEN_VAL_OPERATE_CONTINUOUS',
+                'name': 'OPERATE_CONTINUOUS',
                 'value': 0,
 'documentation': {
-'description': 'Continuous operation',
+'description': 'Continuous Operation',
 },
             },
         ],
@@ -533,32 +502,28 @@ active state you specify.
     'OutputMode': {
         'values': [
             {
-                'name': 'FUNC',
-                'prefix': 'OUTPUT_',
+                'name': 'OUTPUT_FUNC',
                 'value': 0,
 'documentation': {
 'description': 'Standard Function mode—  Generates standard function waveforms  such as sine, square, triangle, and so on.',
 },
             },
             {
-                'name': 'ARB',
-                'prefix': 'OUTPUT_',
+                'name': 'OUTPUT_ARB',
                 'value': 1,
 'documentation': {
 'description': 'Arbitrary waveform mode—Generates  waveforms from user-created/provided  waveform arrays of numeric data.',
 },
             },
             {
-                'name': 'SEQ',
-                'prefix': 'OUTPUT_',
+                'name': 'OUTPUT_SEQ',
                 'value': 2,
 'documentation': {
 'description': 'Arbitrary sequence mode —  Generates downloaded waveforms  in an order your specify.',
 },
             },
             {
-                'name': 'FREQ_LIST',
-                'prefix': 'OUTPUT_',
+                'name': 'OUTPUT_FREQ_LIST',
                 'value': 101,
 'documentation': {
 'description': 'Frequency List mode—Generates a  standard function using a list of  frequencies you define.',
@@ -579,16 +544,14 @@ waveforms in complex combinations.
     'P2PAddressType': {
         'values': [
             {
-                'name': 'PHYSICAL',
-                'prefix': 'ADDR_',
+                'name': 'ADDR_PHYSICAL',
                 'value': 0,
 'documentation': {
 'description': 'Physical',
 },
             },
             {
-                'name': 'VIRTUAL',
-                'prefix': 'ADDR_',
+                'name': 'ADDR_VIRTUAL',
                 'value': 1,
 'documentation': {
 'description': 'Physical',
@@ -599,16 +562,14 @@ waveforms in complex combinations.
     'ReadyForStartEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -806,16 +767,14 @@ is used as the source.
     'ScriptTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'RISING_EDGE',
                 'value': 101,
 'documentation': {
 'description': 'Rising Edge',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'FALLING_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Falling Edge',
@@ -826,16 +785,14 @@ is used as the source.
     'ScriptTriggerDigitalLevelActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'High Level',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'Low Level',
@@ -878,16 +835,14 @@ is used as the source.
     'StartTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'RISING_EDGE',
                 'value': 101,
 'documentation': {
 'description': 'Rising Edge',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'FALLING_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Falling Edge',
@@ -930,16 +885,14 @@ is used as the source.
     'StartedEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -986,16 +939,14 @@ is used as the source.
     'StartedEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -1363,83 +1314,122 @@ trigger mode.
     'UpdateClockSource': {
         'values': [
             {
-                'name': 'NIFGEN_VAL_INTERNAL',
+                'name': 'INTERNAL',
                 'value': 0,
 'documentation': {
-'description': 'Internal update clock',
+'description': 'Internal Update Clock',
 },
             },
             {
-                'name': 'NIFGEN_VAL_EXTERNAL',
+                'name': 'EXTERNAL',
                 'value': 1,
 'documentation': {
-'description': 'External update clock given on the IO connector',
+'description': 'External update clock given on the IO front panel connector',
 },
             },
             {
-                'name': 'NIFGEN_VAL_PXI_STAR',
+                'name': 'TTL1',
+                'value': 112,
+'documentation': {
+'description': 'TTL1',
+},
+            },
+            {
+                'name': 'TTL2',
+                'value': 113,
+'documentation': {
+'description': 'TTL2',
+},
+            },
+            {
+                'name': 'TTL3',
+                'value': 114,
+'documentation': {
+'description': 'TTL3',
+},
+            },
+            {
+                'name': 'TTL4',
+                'value': 115,
+'documentation': {
+'description': 'TTL4',
+},
+            },
+            {
+                'name': 'TTL5',
+                'value': 116,
+'documentation': {
+'description': 'TTL5',
+},
+            },
+            {
+                'name': 'TTL6',
+                'value': 117,
+'documentation': {
+'description': 'TTL6',
+},
+            },
+            {
+                'name': 'PXI_STAR',
                 'value': 131,
 'documentation': {
-'description': '''
-(PXI only) PXI star trigger line. This choice is valid only in PXI
-chassis slots 3 through 15.
-''',
+'description': 'PXI Star Trigger Line',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_0',
+                'name': 'RTSI_0',
                 'value': 141,
 'documentation': {
-'description': 'RTSI line 0',
+'description': 'RTSI 0',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_1',
+                'name': 'RTSI_1',
                 'value': 142,
 'documentation': {
-'description': 'RTSI line 1',
+'description': 'RTSI 1',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_2',
+                'name': 'RTSI_2',
                 'value': 143,
 'documentation': {
-'description': 'RTSI line 2',
+'description': 'RTSI 2',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_3',
+                'name': 'RTSI_3',
                 'value': 144,
 'documentation': {
-'description': 'RTSI line 3',
+'description': 'RTSI 3',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_4',
+                'name': 'RTSI_4',
                 'value': 145,
 'documentation': {
-'description': 'RTSI line 4',
+'description': 'RTSI 4',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_5',
+                'name': 'RTSI_5',
                 'value': 146,
 'documentation': {
-'description': 'RTSI line 5',
+'description': 'RTSI 5',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_6',
+                'name': 'RTSI_6',
                 'value': 147,
 'documentation': {
-'description': 'RTSI line 6',
+'description': 'RTSI 6',
 },
             },
             {
-                'name': 'NIFGEN_VAL_RTSI_7',
+                'name': 'RTSI_7',
                 'value': 1010,
 'documentation': {
-'description': '(PCI only) RTSI line 7',
+'description': 'RTSI 7',
 },
             },
             {
@@ -1450,17 +1440,17 @@ chassis slots 3 through 15.
 },
             },
             {
-                'name': 'NIFGEN_VAL_CLK_IN',
+                'name': 'CLK_IN',
                 'value': 1202,
 'documentation': {
-'description': 'Coaxial CLK IN connector on the board front panel',
+'description': 'CLK IN front panel connector',
 },
             },
             {
-                'name': 'NIFGEN_VAL_DDC_CLK_IN',
+                'name': 'DDC_CLK_IN',
                 'value': 1203,
 'documentation': {
-'description': 'DDC CLK IN line of the Digital Data & Control connector',
+'description': 'DDC CLK IN line of the Digital Data & Control front panel connector',
 },
             },
         ],
@@ -1528,16 +1518,14 @@ chassis slots 3 through 15.
     'WaitBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST',
-                'suffix': '_VALUE',
+                'name': 'HOLD_LAST_VALUE',
                 'value': 400,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.',
 },
             },
             {
-                'name': 'JUMP_TO',
-                'suffix': '_VALUE',
+                'name': 'JUMP_TO_VALUE',
                 'value': 401,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.',
@@ -1548,64 +1536,56 @@ chassis slots 3 through 15.
     'Waveform': {
         'values': [
             {
-                'name': 'SINE',
-                'prefix': 'WFM_',
+                'name': 'WFM_SINE',
                 'value': 1,
 'documentation': {
 'description': 'Sinusoid waveform',
 },
             },
             {
-                'name': 'SQUARE',
-                'prefix': 'WFM_',
+                'name': 'WFM_SQUARE',
                 'value': 2,
 'documentation': {
 'description': 'Square waveform',
 },
             },
             {
-                'name': 'TRIANGLE',
-                'prefix': 'WFM_',
+                'name': 'WFM_TRIANGLE',
                 'value': 3,
 'documentation': {
 'description': 'Triange waveform',
 },
             },
             {
-                'name': 'RAMP_UP',
-                'prefix': 'WFM_',
+                'name': 'WFM_RAMP_UP',
                 'value': 4,
 'documentation': {
 'description': 'Positive ramp waveform',
 },
             },
             {
-                'name': 'RAMP_DOWN',
-                'prefix': 'WFM_',
+                'name': 'WFM_RAMP_DOWN',
                 'value': 5,
 'documentation': {
 'description': 'Negative ramp waveform',
 },
             },
             {
-                'name': 'DC',
-                'prefix': 'WFM_',
+                'name': 'WFM_DC',
                 'value': 6,
 'documentation': {
 'description': 'Constant voltage',
 },
             },
             {
-                'name': 'NOISE',
-                'prefix': 'WFM_',
+                'name': 'WFM_NOISE',
                 'value': 101,
 'documentation': {
 'description': 'White noise',
 },
             },
             {
-                'name': 'USER',
-                'prefix': 'WFM_',
+                'name': 'WFM_USER',
                 'value': 102,
 'documentation': {
 'description': 'User-defined waveform as defined by the niFgen_DefineUserStandardWaveform function.',

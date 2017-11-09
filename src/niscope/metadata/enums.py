@@ -86,16 +86,14 @@ the DDC.
     'AddressType': {
         'values': [
             {
-                'name': 'PHYSICAL',
-                'prefix': 'ADDR_',
+                'name': 'ADDR_PHYSICAL',
                 'value': 0,
 'documentation': {
 'description': 'Physical address.',
 },
             },
             {
-                'name': 'VIRTUAL',
-                'prefix': 'ADDR_',
+                'name': 'ADDR_VIRTUAL',
                 'value': 1,
 'documentation': {
 'description': 'Virtual address.',
@@ -304,6 +302,11 @@ coordinate converter.
             },
             {
                 'name': 'RESAMPLER',
+                'value': 2,
+
+            },
+            {
+                'name': 'RESAMPLER',
                 'value': 3,
 'documentation': {
 'description': 'Sets the discriminator FIR input source to resampler.',
@@ -499,16 +502,14 @@ coordinate converter.
     'NotificationType': {
         'values': [
             {
-                'name': 'NEVER',
-                'prefix': 'NOTIFY_',
+                'name': 'NOTIFY_NEVER',
                 'value': 0,
 'documentation': {
 'description': 'Never send notification.',
 },
             },
             {
-                'name': 'DONE',
-                'prefix': 'NOTIFY_',
+                'name': 'NOTIFY_DONE',
                 'value': 1,
 'documentation': {
 'description': 'Notify when digitizer acquisition is done.',
@@ -519,8 +520,7 @@ coordinate converter.
     'OverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'ERROR_REPORTING_ERROR',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -530,8 +530,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'WARNING',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'ERROR_REPORTING_WARNING',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -541,8 +540,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'DISABLED',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'ERROR_REPORTING_DISABLED',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -656,16 +654,14 @@ the low/high method,
     'RISMethod': {
         'values': [
             {
-                'name': 'EXACT_NUM_AVERAGES',
-                'prefix': 'RIS_',
+                'name': 'RIS_EXACT_NUM_AVERAGES',
                 'value': 1,
 'documentation': {
 'description': 'Acquires exactly the specified number of records for each bin in the RIS acquisition.  An error is returned from the fetch function if the RIS acquisition does not successfully acquire the specified number of waveforms within the timeout period.  You may call the fetch function again to allow more time for the acquisition to finish.',
 },
             },
             {
-                'name': 'MIN_NUM_AVERAGES',
-                'prefix': 'RIS_',
+                'name': 'RIS_MIN_NUM_AVERAGES',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -675,16 +671,14 @@ distributed points.
 },
             },
             {
-                'name': 'INCOMPLETE',
-                'prefix': 'RIS_',
+                'name': 'RIS_INCOMPLETE',
                 'value': 3,
 'documentation': {
 'description': 'Returns the RIS waveform after the specified timeout even if it is incomplete.  If no waveforms have been acquired in certain bins, these bins will have a NaN (when fetching scaled data) or a zero (when fetching binary data). A warning (positive error code) is returned from the fetch function if the RIS acquisition did not finish.  The acquisition aborts when data is returned.',
 },
             },
             {
-                'name': 'LIMITED_BIN_WIDTH',
-                'prefix': 'RIS_',
+                'name': 'RIS_LIMITED_BIN_WIDTH',
                 'value': 5,
 'documentation': {
 'description': 'Limits the waveforms in the various bins to be within 200 ps of the center of the bin.',
@@ -954,56 +948,49 @@ after a certain amount of time.
     'TriggerType': {
         'values': [
             {
-                'name': 'EDGE',
-                'suffix': '_TRIGGER',
+                'name': 'EDGE_TRIGGER',
                 'value': 1,
 'documentation': {
 'description': 'Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with niScope_ConfigureTriggerEdge.',
 },
             },
             {
-                'name': 'TV',
-                'suffix': '_TRIGGER',
+                'name': 'TV_TRIGGER',
                 'value': 5,
 'documentation': {
 'description': 'Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.',
 },
             },
             {
-                'name': 'IMMEDIATE',
-                'suffix': '_TRIGGER',
+                'name': 'IMMEDIATE_TRIGGER',
                 'value': 6,
 'documentation': {
 'description': 'Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.',
 },
             },
             {
-                'name': 'HYSTERESIS',
-                'suffix': '_TRIGGER',
+                'name': 'HYSTERESIS_TRIGGER',
                 'value': 1001,
 'documentation': {
 'description': 'Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with niScope_ConfigureTriggerHysteresis.',
 },
             },
             {
-                'name': 'DIGITAL',
-                'suffix': '_TRIGGER',
+                'name': 'DIGITAL_TRIGGER',
                 'value': 1002,
 'documentation': {
 'description': 'Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with niScope_ConfigureTriggerDigital.',
 },
             },
             {
-                'name': 'WINDOW',
-                'suffix': '_TRIGGER',
+                'name': 'WINDOW_TRIGGER',
                 'value': 1003,
 'documentation': {
 'description': 'Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with niScope_ConfigureTriggerWindow.',
 },
             },
             {
-                'name': 'SOFTWARE',
-                'suffix': '_TRIGGER',
+                'name': 'SOFTWARE_TRIGGER',
                 'value': 1004,
 'documentation': {
 'description': 'Configures the digitizer for software triggering.  A software trigger occurs when niScope_SendSoftwareTrigger is called.',
@@ -1014,16 +1001,14 @@ after a certain amount of time.
     'TriggerWindowMode': {
         'values': [
             {
-                'name': 'ENTERING',
-                'suffix': '_WINDOW',
+                'name': 'ENTERING_WINDOW',
                 'value': 0,
 'documentation': {
 'description': 'Trigger upon entering the window',
 },
             },
             {
-                'name': 'LEAVING',
-                'suffix': '_WINDOW',
+                'name': 'LEAVING_WINDOW',
                 'value': 1,
 'documentation': {
 'description': 'Trigger upon leaving the window',
@@ -1059,16 +1044,14 @@ after a certain amount of time.
     'VideoPolarity': {
         'values': [
             {
-                'name': 'POSITIVE',
-                'prefix': 'TV_',
+                'name': 'TV_POSITIVE',
                 'value': 1,
 'documentation': {
 'description': 'Specifies that the video signal has positive polarity.',
 },
             },
             {
-                'name': 'NEGATIVE',
-                'prefix': 'TV_',
+                'name': 'TV_NEGATIVE',
                 'value': 2,
 'documentation': {
 'description': 'Specifies that the video signal has negative polarity.',
@@ -1202,40 +1185,35 @@ after a certain amount of time.
     'VideoTriggerEvent': {
         'values': [
             {
-                'name': 'FIELD1',
-                'prefix': 'TV_EVENT_',
+                'name': 'TV_EVENT_FIELD1',
                 'value': 1,
 'documentation': {
 'description': 'Trigger on field 1 of the signal',
 },
             },
             {
-                'name': 'FIELD2',
-                'prefix': 'TV_EVENT_',
+                'name': 'TV_EVENT_FIELD2',
                 'value': 2,
 'documentation': {
 'description': 'Trigger on field 2 of the signal',
 },
             },
             {
-                'name': 'ANY_FIELD',
-                'prefix': 'TV_EVENT_',
+                'name': 'TV_EVENT_ANY_FIELD',
                 'value': 3,
 'documentation': {
 'description': 'Trigger on the first field acquired',
 },
             },
             {
-                'name': 'ANY_LINE',
-                'prefix': 'TV_EVENT_',
+                'name': 'TV_EVENT_ANY_LINE',
                 'value': 4,
 'documentation': {
 'description': 'Trigger on the first line acquired',
 },
             },
             {
-                'name': 'LINE_NUMBER',
-                'prefix': 'TV_EVENT_',
+                'name': 'TV_EVENT_LINE_NUMBER',
                 'value': 5,
 'documentation': {
 'description': 'Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.',
