@@ -113,6 +113,29 @@ class CustomTypeMatcher(object):
         return _compare_ctype_structs(self.expected_value, actual)
 
 
+class CustomTypeBufferMatcher(object):
+    def __init__(self, expected_element_type, expected_value):
+        self.expected_value = expected_value
+        self.expected_size = len(expected_value)
+        self.expected_type = expected_element_type * self.expected_size
+        self.expected_element_type = expected_element_type
+
+    def __eq__(self, actual):
+        if not isinstance(actual, self.expected_type):
+            print("Unexpected array type. Expected: {0}. Received: {1}".format(self.expected_type, type(actual)))
+            return False
+        if self.expected_size != len(actual):
+            print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(actual)))
+            return False
+        if self.expected_value is not None:
+            # Can't compare the objects directly because they're different types (one is list, another is ctypes array).
+            # Go element by element, which allows for reporting the first index where different values were found.
+            for i in range(0, len(self.expected_value)):
+                if not isinstance(actual[i], self.expected_element_type):
+                    print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_element_type, type(actual[i])))
+                    return False
+                if not _compare_ctype_structs(self.expected_value[i], actual[i]):
+                    return False
         return True
 
 
