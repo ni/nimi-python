@@ -253,6 +253,45 @@ def _add_enum_codegen_method(enums, config):
                     enums[e]['codegen_method'] = a_codegen_method
 
 
+def _cleanup_names(enum_info):
+    # We are using an os.path function do find any common prefix. So that we don't
+    # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
+    names = [v['name'] for v in enum_info['values']]
+    prefix = os.path.commonprefix(names)
+    while len(prefix) > 0 and prefix[-1] != '_':
+        prefix = prefix[:-1]
+
+    # We only remove the prefix if there is one and it isn't '_'.
+    # '_' only means the name starts with a number
+    if len(prefix) > 0 and prefix != '_':
+        for v in enum_info['values']:
+            assert v['name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
+            v['prefix'] = prefix
+            v['name'] = v['name'].replace(prefix, '')
+            # We need to check again to see if we need a leading '_' due to the first character of the name being a number
+            if v['name'][0].isdigit():
+                v['name'] = '_' + v['name']
+
+    # Now we need to look for common suffixes
+    # Using the slow method of reversing a string for readability
+    rev_names = [''.join(reversed(v['name'])) for v in enum_info['values']]
+    suffix = os.path.commonprefix(rev_names)
+    while len(suffix) > 0 and suffix[-1] != '_':
+        suffix = suffix[:-1]
+
+    # We only remove the suffix if there is one.
+    # '_' only means the name starts with a number
+    if len(suffix) > 0:
+        # Unreverse the suffix
+        suffix = ''.join(reversed(suffix))
+        for v in enum_info['values']:
+            assert v['name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
+            v['suffix'] = suffix
+            v['name'] = v['name'].replace(suffix, '')
+
+    return enum_info
+
+
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     if 'modules' in config and 'metadata.enums_addon' in config['modules']:
@@ -261,6 +300,9 @@ def add_all_enum_metadata(enums, config):
                 merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
 
     _add_enum_codegen_method(enums, config)
+    for e in enums:
+        enums[e] = _cleanup_names(enums[e])
+
     return enums
 
 
