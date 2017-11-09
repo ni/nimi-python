@@ -1778,6 +1778,42 @@ functions = {
             'description': 'This function takes a custom type.',
         },
     },
+    'SetCustomTypeArray': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'cs',
+                'type': 'custom_struct[]',
+                'documentation': {
+                    'description': 'Set using custom type',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes an array of custom types.',
+        },
+    },
     'GetCustomType': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1796,6 +1832,42 @@ functions = {
                 'enum': None,
                 'name': 'cs',
                 'type': 'custom_struct',
+                'documentation': {
+                    'description': 'Set using custom type',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns a custom type.',
+        },
+    },
+    'GetCustomTypeArray': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'cs',
+                'type': 'custom_struct[]',
                 'documentation': {
                     'description': 'Set using custom type',
                 },
