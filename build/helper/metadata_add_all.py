@@ -168,6 +168,11 @@ def add_all_function_metadata(functions, config):
         for m in dir(config['modules']['metadata.functions_addon']):
             if m.startswith('functions_'):
                 merge_dicts(functions, config['modules']['metadata.functions_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'functions_additional_functions':
+                outof = config['modules']['metadata.functions_addon'].__getattribute__(m)
+                for f in outof:
+                    functions[f] = outof[f]
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -208,6 +213,11 @@ def add_all_attribute_metadata(attributes, config):
         for m in dir(config['modules']['metadata.attributes_addon']):
             if m.startswith('attributes_'):
                 merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'attributes_additional_attributes':
+                outof = config['modules']['metadata.attributes_addon'].__getattribute__(m)
+                for a in outof:
+                    attributes[a] = outof[a]
 
     for a in attributes:
         _add_attr_codegen_method(a, attributes)
@@ -259,6 +269,11 @@ def add_all_enum_metadata(enums, config):
         for m in dir(config['modules']['metadata.enums_addon']):
             if m.startswith('enums_'):
                 merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'enums_additional_enums':
+                outof = config['modules']['metadata.enums_addon'].__getattribute__(m)
+                for e in outof:
+                    enums[e] = outof[e]
 
     _add_enum_codegen_method(enums, config)
     return enums
