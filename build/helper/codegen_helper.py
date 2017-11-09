@@ -94,7 +94,7 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['ctypes_variable_name'] + val_suffix
+                size = size_parameter['ctypes_variable_name'] + '.value'
 
             snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
@@ -146,13 +146,14 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
        11. Output buffer with mechanism ivi-dance:                      None
        12. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
        13. Output scalar or enum:                                       visatype.ViInt32()
+       14. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
     '''
 
     # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
     module_name = 'visatype'
-    c = find_custom_type(parameter, config)
-    if c is not None:
-        module_name = c['file_name']
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name']
 
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
@@ -164,8 +165,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
-        elif parameter['is_buffer'] is True:
+        elif parameter['is_buffer'] is True and custom_type is None:
             definition = '({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+        elif parameter['is_buffer'] is True and custom_type is not None:
+            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 14'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
