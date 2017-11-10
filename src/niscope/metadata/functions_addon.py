@@ -36,7 +36,6 @@ functions_codegen_method = {
     'FetchBinary8':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
     'FetchComplex':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
     'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'Read':                            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
 }
 
 # Attach the given parameter to the given enum from enums.py
