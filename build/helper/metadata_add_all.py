@@ -247,13 +247,17 @@ def _add_enum_codegen_method(enums, config):
                     enums[e]['codegen_method'] = a_codegen_method
 
 
-def _cleanup_names(enum_info):
+def _cleanup_names(enum_info, config):
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
     names = [v['name'] for v in enum_info['values']]
     prefix = os.path.commonprefix(names)
     while len(prefix) > 0 and prefix[-1] != '_':
         prefix = prefix[:-1]
+
+    # If the prefix is in the whitelist, we don't want to remove it so set to empty string
+    if 'whitelist_prefix' in config and prefix in config['whitelist_prefix']:
+        prefix = ''
 
     # We only remove the prefix if there is one and it isn't '_'.
     # '_' only means the name starts with a number
@@ -273,11 +277,16 @@ def _cleanup_names(enum_info):
     while len(suffix) > 0 and suffix[-1] != '_':
         suffix = suffix[:-1]
 
+    # Unreverse the suffix
+    suffix = ''.join(reversed(suffix))
+
+    # If the suffix is in the whitelist, we don't want to remove it so set to empty string
+    if 'whitelist_suffix' in config and suffix in config['whitelist_suffix']:
+        suffix = ''
+
     # We only remove the suffix if there is one.
     # '_' only means the name starts with a number
     if len(suffix) > 0:
-        # Unreverse the suffix
-        suffix = ''.join(reversed(suffix))
         for v in enum_info['values']:
             assert v['name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
             v['suffix'] = suffix
@@ -300,7 +309,7 @@ def add_all_enum_metadata(enums, config):
 
     _add_enum_codegen_method(enums, config)
     for e in enums:
-        enums[e] = _cleanup_names(enums[e])
+        enums[e] = _cleanup_names(enums[e], config)
 
     return enums
 
