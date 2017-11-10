@@ -70,35 +70,35 @@ enums = {
     'FloatEnum': {
         'values': [
             {
-                'name': '_3_5',
+                'name': 'THREE_POINT_FIVE',
                 'value': 3.5,
                 'documentation': {
                     'description': 'Specifies 3.5 digits resolution.',
                 },
             },
             {
-                'name': '_4_5',
+                'name': 'FOUR_POINT_FIVE',
                 'value': 4.5,
                 'documentation': {
                     'description': 'Specifies 4.5 digits resolution.',
                 },
             },
             {
-                'name': '_5_5',
+                'name': 'FIVE_POINT_FIVE',
                 'value': 5.5,
                 'documentation': {
                     'description': 'Specifies 5.5 digits resolution.',
                 },
             },
             {
-                'name': '_6_5',
+                'name': 'SIX_POINT_FIVE',
                 'value': 6.5,
                 'documentation': {
                     'description': 'Specifies 6.5 digits resolution.',
                 },
             },
             {
-                'name': '_7_5',
+                'name': 'SEVEN_POINT_FIVE',
                 'value': 7.5,
                 'documentation': {
                     'description': 'Specifies 7.5 digits resolution.',
