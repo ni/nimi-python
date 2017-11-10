@@ -248,6 +248,10 @@ def _add_enum_codegen_method(enums, config):
 
 
 def _cleanup_names(enum_info, config):
+    # First remove <DIRVER>_VAL_ if it is there
+    for v in enum_info['values']:
+        v['name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
     names = [v['name'] for v in enum_info['values']]
