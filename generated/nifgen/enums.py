@@ -222,11 +222,11 @@ class MarkerEventDelayUnits(Enum):
 
 
 class MarkerEventOutputBehavior(Enum):
-    NIFGEN_VAL_PULSE = 101
+    PULSE = 101
     '''
     Triggers a pulse for a specified period of time.
     '''
-    NIFGEN_VAL_LEVEL = 102
+    LEVEL = 102
     '''
     Shifts high or low while the event is active, depending  on the active state you specify.
     '''

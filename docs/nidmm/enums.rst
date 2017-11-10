@@ -313,7 +313,7 @@ Enums used in NI-DMM
 
 .. py:data:: Function
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_DC_VOLTS
+    .. py:attribute:: nidmm.Function.DC_VOLTS
 
 
 
@@ -323,7 +323,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_AC_VOLTS
+    .. py:attribute:: nidmm.Function.AC_VOLTS
 
 
 
@@ -333,7 +333,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_DC_CURRENT
+    .. py:attribute:: nidmm.Function.DC_CURRENT
 
 
 
@@ -343,7 +343,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_AC_CURRENT
+    .. py:attribute:: nidmm.Function.AC_CURRENT
 
 
 
@@ -353,7 +353,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_2_WIRE_RES
+    .. py:attribute:: nidmm.Function._2_WIRE_RES
 
 
 
@@ -363,7 +363,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_4_WIRE_RES
+    .. py:attribute:: nidmm.Function._4_WIRE_RES
 
 
 
@@ -373,7 +373,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_FREQ
+    .. py:attribute:: nidmm.Function.FREQ
 
 
 
@@ -383,7 +383,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_PERIOD
+    .. py:attribute:: nidmm.Function.PERIOD
 
 
 
@@ -403,7 +403,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_AC_VOLTS_DC_COUPLED
+    .. py:attribute:: nidmm.Function.AC_VOLTS_DC_COUPLED
 
 
 
@@ -413,7 +413,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_DIODE
+    .. py:attribute:: nidmm.Function.DIODE
 
 
 
@@ -423,7 +423,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_WAVEFORM_VOLTAGE
+    .. py:attribute:: nidmm.Function.WAVEFORM_VOLTAGE
 
 
 
@@ -433,7 +433,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_WAVEFORM_CURRENT
+    .. py:attribute:: nidmm.Function.WAVEFORM_CURRENT
 
 
 
@@ -443,7 +443,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_CAPACITANCE
+    .. py:attribute:: nidmm.Function.CAPACITANCE
 
 
 
@@ -453,7 +453,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.NIDMM_VAL_INDUCTANCE
+    .. py:attribute:: nidmm.Function.INDUCTANCE
 
 
 

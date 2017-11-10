@@ -491,7 +491,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventOutputBehavior
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.NIFGEN_VAL_PULSE
+    .. py:attribute:: nifgen.MarkerEventOutputBehavior.PULSE
 
 
 
@@ -501,7 +501,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.NIFGEN_VAL_LEVEL
+    .. py:attribute:: nifgen.MarkerEventOutputBehavior.LEVEL
 
 
 

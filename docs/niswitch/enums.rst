@@ -157,7 +157,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanAdvancedOutput
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_NONE
+    .. py:attribute:: niswitch.ScanAdvancedOutput.NONE
 
 
 
@@ -167,7 +167,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_EXTERNAL
+    .. py:attribute:: niswitch.ScanAdvancedOutput.EXTERNAL
 
 
 
@@ -177,7 +177,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL0
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL0
 
 
 
@@ -187,7 +187,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL1
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL1
 
 
 
@@ -197,7 +197,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL2
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL2
 
 
 
@@ -207,7 +207,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL3
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL3
 
 
 
@@ -217,7 +217,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL4
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL4
 
 
 
@@ -227,7 +227,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL5
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL5
 
 
 
@@ -237,7 +237,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL6
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL6
 
 
 
@@ -247,7 +247,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_TTL7
+    .. py:attribute:: niswitch.ScanAdvancedOutput.TTL7
 
 
 
@@ -268,7 +268,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_REARCONNECTOR
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR
 
 
 
@@ -278,7 +278,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedOutput.NISWITCH_VAL_FRONTCONNECTOR
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR
 
 
 
@@ -611,7 +611,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerInput
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_IMMEDIATE
+    .. py:attribute:: niswitch.TriggerInput.IMMEDIATE
 
 
 
@@ -621,7 +621,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_EXTERNAL
+    .. py:attribute:: niswitch.TriggerInput.EXTERNAL
 
 
 
@@ -631,7 +631,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_SOFTWARE_TRIG
+    .. py:attribute:: niswitch.TriggerInput.SOFTWARE_TRIG
 
 
 
@@ -641,7 +641,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL0
+    .. py:attribute:: niswitch.TriggerInput.TTL0
 
 
 
@@ -651,7 +651,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL1
+    .. py:attribute:: niswitch.TriggerInput.TTL1
 
 
 
@@ -661,7 +661,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL2
+    .. py:attribute:: niswitch.TriggerInput.TTL2
 
 
 
@@ -671,7 +671,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL3
+    .. py:attribute:: niswitch.TriggerInput.TTL3
 
 
 
@@ -681,7 +681,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL4
+    .. py:attribute:: niswitch.TriggerInput.TTL4
 
 
 
@@ -691,7 +691,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL5
+    .. py:attribute:: niswitch.TriggerInput.TTL5
 
 
 
@@ -701,7 +701,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL6
+    .. py:attribute:: niswitch.TriggerInput.TTL6
 
 
 
@@ -711,7 +711,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_TTL7
+    .. py:attribute:: niswitch.TriggerInput.TTL7
 
 
 
@@ -721,7 +721,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_PXI_STAR
+    .. py:attribute:: niswitch.TriggerInput.PXI_STAR
 
 
 
@@ -731,7 +731,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_REARCONNECTOR
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR
 
 
 
@@ -741,7 +741,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInput.NISWITCH_VAL_FRONTCONNECTOR
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR
 
 
 
