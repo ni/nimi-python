@@ -292,7 +292,7 @@ class TestSession(object):
         int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
-        float_enum_val = nifake.FloatEnum._6_5
+        float_enum_val = nifake.FloatEnum.SIX_POINT_FIVE
         array_val = [0, 1, 2]
         array_size = len(array_val)
         string_val = 'Testing is fun?'
@@ -348,7 +348,7 @@ class TestSession(object):
         int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
-        float_enum_val = nifake.FloatEnum._6_5
+        float_enum_val = nifake.FloatEnum.SIX_POINT_FIVE
         string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
             session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, float_enum_val, string_val)
@@ -372,7 +372,7 @@ class TestSession(object):
         int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
-        float_enum_val = nifake.FloatEnum._6_5
+        float_enum_val = nifake.FloatEnum.SIX_POINT_FIVE
         string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
             try:
@@ -655,7 +655,7 @@ class TestSession(object):
 
     def test_get_attribute_enum_real64(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
-        enum_value = nifake.FloatEnum._6_5
+        enum_value = nifake.FloatEnum.SIX_POINT_FIVE
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = enum_value.value
         with nifake.Session('dev1') as session:
             assert session.float_enum == enum_value
@@ -664,7 +664,7 @@ class TestSession(object):
 
     def test_set_attribute_enum_real64(self):
         self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
-        enum_value = nifake.FloatEnum._5_5
+        enum_value = nifake.FloatEnum.FIVE_POINT_FIVE
         with nifake.Session('dev1') as session:
             session.float_enum = enum_value
             attribute_id = 1000005
@@ -781,7 +781,7 @@ class TestSession(object):
     def test_set_wrong_enum_attribute_int32_error(self):
         with nifake.Session('dev1') as session:
             try:
-                session.read_write_color = nifake.FloatEnum._6_5
+                session.read_write_color = nifake.FloatEnum.SIX_POINT_FIVE
             except TypeError as e:
                 assert str(e) == 'must be Color not FloatEnum'
 
