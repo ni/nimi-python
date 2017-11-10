@@ -18,6 +18,16 @@ def merge_helper(metadata, metadata_type, config):
                 for a in outof:
                     metadata[a] = outof[a]
 
+    # Delete any entries that are empty
+    # Have to do this in two steps. Otherwise the dictionary changes size and errors
+    to_delete = []
+    for m in metadata:
+        if len(metadata[m]) == 0:
+            to_delete.append(m)
+
+    for m in to_delete:
+        metadata.pop(m, None)
+
     return metadata
 
 
