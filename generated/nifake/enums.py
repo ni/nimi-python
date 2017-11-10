@@ -23,23 +23,23 @@ class Color(Enum):
 
 
 class FloatEnum(Enum):
-    _3_5 = 3.5
+    THREE_POINT_FIVE = 3.5
     '''
     Specifies 3.5 digits resolution.
     '''
-    _4_5 = 4.5
+    FOUR_POINT_FIVE = 4.5
     '''
     Specifies 4.5 digits resolution.
     '''
-    _5_5 = 5.5
+    FIVE_POINT_FIVE = 5.5
     '''
     Specifies 5.5 digits resolution.
     '''
-    _6_5 = 6.5
+    SIX_POINT_FIVE = 6.5
     '''
     Specifies 6.5 digits resolution.
     '''
-    _7_5 = 7.5
+    SEVEN_POINT_FIVE = 7.5
     '''
     Specifies 7.5 digits resolution.
     '''
