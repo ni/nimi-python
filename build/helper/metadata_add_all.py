@@ -4,7 +4,7 @@ from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
-from .metadata_merge_dicts import merge_dicts
+from .metadata_merge_dicts import merge_helper
 
 import codecs
 import copy
@@ -164,15 +164,7 @@ def _add_is_session_handle(parameter):
 
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.functions_addon']):
-            if m.startswith('functions_'):
-                merge_dicts(functions, config['modules']['metadata.functions_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'functions_additional_functions':
-                outof = config['modules']['metadata.functions_addon'].__getattribute__(m)
-                for f in outof:
-                    functions[f] = outof[f]
+    functions = merge_helper(functions, 'functions', config)
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -209,15 +201,7 @@ def _add_python_name(a, attributes):
 
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.attributes_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.attributes_addon']):
-            if m.startswith('attributes_'):
-                merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'attributes_additional_attributes':
-                outof = config['modules']['metadata.attributes_addon'].__getattribute__(m)
-                for a in outof:
-                    attributes[a] = outof[a]
+    attributes = merge_helper(attributes, 'attributes', config)
 
     for a in attributes:
         _add_attr_codegen_method(a, attributes)
@@ -304,15 +288,7 @@ def _cleanup_names(enum_info):
 
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.enums_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.enums_addon']):
-            if m.startswith('enums_'):
-                merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'enums_additional_enums':
-                outof = config['modules']['metadata.enums_addon'].__getattribute__(m)
-                for e in outof:
-                    enums[e] = outof[e]
+    enums = merge_helper(enums, 'enums', config)
 
     # Workaround for NI Internal CAR #675174
     try:
