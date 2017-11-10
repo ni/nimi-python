@@ -270,9 +270,6 @@ def _cleanup_names(enum_info, config):
             assert v['name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
             v['prefix'] = prefix
             v['name'] = v['name'].replace(prefix, '')
-            # We need to check again to see if we need a leading '_' due to the first character of the name being a number
-            if v['name'][0].isdigit():
-                v['name'] = '_' + v['name']
 
     # Now we need to look for common suffixes
     # Using the slow method of reversing a string for readability
@@ -295,6 +292,11 @@ def _cleanup_names(enum_info, config):
             assert v['name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
             v['suffix'] = suffix
             v['name'] = v['name'].replace(suffix, '')
+
+    # We need to check again to see if we need a leading '_' due to the first character of the name being a number
+    for v in enum_info['values']:
+        if v['name'][0].isdigit():
+            v['name'] = '_' + v['name']
 
     return enum_info
 
