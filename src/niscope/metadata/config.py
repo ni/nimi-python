@@ -22,6 +22,8 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
-    'custom_types': [],
+    'custom_types': [
+        {'file_name': 'wfm_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'niScope_wfmInfo', },
+    ],
 }
 
