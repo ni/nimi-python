@@ -98,11 +98,11 @@ class MeasureWhen(Enum):
 
 
 class MeasurementTypes(Enum):
-    MEASURE_CURRENT = 0
+    CURRENT = 0
     '''
     The device measures current.
     '''
-    MEASURE_VOLTAGE = 1
+    VOLTAGE = 1
     '''
     The device measures voltage.
     '''
@@ -139,11 +139,11 @@ class OutputFunction(Enum):
 
 
 class OutputStates(Enum):
-    OUTPUT_CONSTANT_VOLTAGE = 0
+    VOLTAGE = 0
     '''
     The device maintains a constant voltage by adjusting the current
     '''
-    OUTPUT_CONSTANT_CURRENT = 1
+    CURRENT = 1
     '''
     The device maintains a constant current by adjusting the voltage.
     '''
@@ -262,11 +262,11 @@ class TriggerType(Enum):
     '''
     No trigger is configured.
     '''
-    DIGITAL = 1014
+    DIGITAL_EDGE = 1014
     '''
     The data operation starts when a digital edge is detected.
     '''
-    SOFTWARE = 1015
+    SOFTWARE_EDGE = 1015
     '''
     The data operation starts when a software trigger occurs.
     '''

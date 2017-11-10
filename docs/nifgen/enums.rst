@@ -112,7 +112,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.NIFGEN_VAL_BUS_PXIE
+    .. py:attribute:: nifgen.BusType.PXIE
 
 
 
@@ -491,7 +491,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventOutputBehavior
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.PULSE
+    .. py:attribute:: nifgen.MarkerEventOutputBehavior.NIFGEN_VAL_PULSE
 
 
 
@@ -501,7 +501,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.LEVEL
+    .. py:attribute:: nifgen.MarkerEventOutputBehavior.NIFGEN_VAL_LEVEL
 
 
 
@@ -680,7 +680,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.NIFGEN_VAL_OUTPUT_SCRIPT
+    .. py:attribute:: nifgen.OutputMode.SCRIPT
 
 
 
@@ -1655,7 +1655,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.NIFGEN_VAL_OTHER_TERMINAL
+    .. py:attribute:: nifgen.TriggerSource.OTHER_TERMINAL
 
 
 

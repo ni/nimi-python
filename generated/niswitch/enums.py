@@ -4,7 +4,7 @@ from enum import Enum
 
 
 class HandshakingInitiation(Enum):
-    MEASUREMENT_DEVICE_INITIATED = 0
+    MEASUREMENT_DEVICE = 0
     '''
     The `niSwitch Initiate
     Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI does not
@@ -18,7 +18,7 @@ class HandshakingInitiation(Enum):
     signal. Thus, the first MC of the measurement device initiates
     handshaking.
     '''
-    SWITCH_INITIATED = 1
+    SWITCH = 1
     '''
     The `niSwitch Initiate
     Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI returns
@@ -58,11 +58,11 @@ class PathCapability(Enum):
 
 
 class RelayAction(Enum):
-    OPEN_RELAY = 20
+    OPEN = 20
     '''
     Open Relay
     '''
-    CLOSE_RELAY = 21
+    CLOSE = 21
     '''
     Close Relay
     '''
@@ -80,43 +80,43 @@ class RelayPosition(Enum):
 
 
 class ScanAdvancedOutput(Enum):
-    NONE = 0
+    NISWITCH_VAL_NONE = 0
     '''
     The switch device does not produce a Scan Advanced Output trigger.
     '''
-    EXTERNAL = 2
+    NISWITCH_VAL_EXTERNAL = 2
     '''
     External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.
     '''
-    TTL0 = 111
+    NISWITCH_VAL_TTL0 = 111
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
     '''
-    TTL1 = 112
+    NISWITCH_VAL_TTL1 = 112
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
     '''
-    TTL2 = 113
+    NISWITCH_VAL_TTL2 = 113
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
     '''
-    TTL3 = 114
+    NISWITCH_VAL_TTL3 = 114
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
     '''
-    TTL4 = 115
+    NISWITCH_VAL_TTL4 = 115
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
     '''
-    TTL5 = 116
+    NISWITCH_VAL_TTL5 = 116
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
     '''
-    TTL6 = 117
+    NISWITCH_VAL_TTL6 = 117
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
     '''
-    TTL7 = 118
+    NISWITCH_VAL_TTL7 = 118
     '''
     The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
     '''
@@ -125,11 +125,11 @@ class ScanAdvancedOutput(Enum):
     The switch module produces the Scan Advanced Output Trigger on the PXI
     Star trigger bus before processing the next entry in the scan list.
     '''
-    REARCONNECTOR = 1000
+    NISWITCH_VAL_REARCONNECTOR = 1000
     '''
     The switch device produces the Scan Advanced Output  trigger on the rear connector.
     '''
-    FRONTCONNECTOR = 1001
+    NISWITCH_VAL_FRONTCONNECTOR = 1001
     '''
     The switch device produces the Scan Advanced Output  trigger on the front connector.
     '''
@@ -282,59 +282,59 @@ class ScanMode(Enum):
 
 
 class TriggerInput(Enum):
-    IMMEDIATE = 1
+    NISWITCH_VAL_IMMEDIATE = 1
     '''
     Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.
     '''
-    EXTERNAL = 2
+    NISWITCH_VAL_EXTERNAL = 2
     '''
     External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.
     '''
-    SOFTWARE_TRIG = 3
+    NISWITCH_VAL_SOFTWARE_TRIG = 3
     '''
     The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
     '''
-    TTL0 = 111
+    NISWITCH_VAL_TTL0 = 111
     '''
     The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.
     '''
-    TTL1 = 112
+    NISWITCH_VAL_TTL1 = 112
     '''
     The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.
     '''
-    TTL2 = 113
+    NISWITCH_VAL_TTL2 = 113
     '''
     The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.
     '''
-    TTL3 = 114
+    NISWITCH_VAL_TTL3 = 114
     '''
     The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.
     '''
-    TTL4 = 115
+    NISWITCH_VAL_TTL4 = 115
     '''
     The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.
     '''
-    TTL5 = 116
+    NISWITCH_VAL_TTL5 = 116
     '''
     The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.
     '''
-    TTL6 = 117
+    NISWITCH_VAL_TTL6 = 117
     '''
     The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.
     '''
-    TTL7 = 118
+    NISWITCH_VAL_TTL7 = 118
     '''
     The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.
     '''
-    PXI_STAR = 125
+    NISWITCH_VAL_PXI_STAR = 125
     '''
     The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.
     '''
-    REARCONNECTOR = 1000
+    NISWITCH_VAL_REARCONNECTOR = 1000
     '''
     The switch device waits until it receives a trigger on the  rear connector.
     '''
-    FRONTCONNECTOR = 1001
+    NISWITCH_VAL_FRONTCONNECTOR = 1001
     '''
     The switch device waits until it receives a trigger on the  front connector.
     '''

@@ -47,7 +47,7 @@ class BusType(Enum):
     '''
     Indicates the signal generator is the PCI-CMA bus type.
     '''
-    NIFGEN_VAL_BUS_PXIE = 6
+    PXIE = 6
     '''
     Indicates the signal generator is the PXI Express bus type.
     '''
@@ -222,11 +222,11 @@ class MarkerEventDelayUnits(Enum):
 
 
 class MarkerEventOutputBehavior(Enum):
-    PULSE = 101
+    NIFGEN_VAL_PULSE = 101
     '''
     Triggers a pulse for a specified period of time.
     '''
-    LEVEL = 102
+    NIFGEN_VAL_LEVEL = 102
     '''
     Shifts high or low while the event is active, depending  on the active state you specify.
     '''
@@ -309,7 +309,7 @@ class OutputMode(Enum):
     '''
     Frequency List mode—Generates a  standard function using a list of  frequencies you define.
     '''
-    NIFGEN_VAL_OUTPUT_SCRIPT = 102
+    SCRIPT = 102
     '''
     **Script mode—**\ Allows you to use scripting to link and loop multiple
     waveforms in complex combinations.
@@ -744,7 +744,7 @@ class TriggerSource(Enum):
     '''
     PFI 3
     '''
-    NIFGEN_VAL_OTHER_TERMINAL = 1018
+    OTHER_TERMINAL = 1018
     '''
     Specifies that another terminal is used.
     '''

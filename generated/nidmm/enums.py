@@ -140,35 +140,35 @@ class DCNoiseRejection(Enum):
 
 
 class Function(Enum):
-    DC_VOLTS = 1
+    NIDMM_VAL_DC_VOLTS = 1
     '''
     DC Voltage
     '''
-    AC_VOLTS = 2
+    NIDMM_VAL_AC_VOLTS = 2
     '''
     AC Voltage
     '''
-    DC_CURRENT = 3
+    NIDMM_VAL_DC_CURRENT = 3
     '''
     DC Current
     '''
-    AC_CURRENT = 4
+    NIDMM_VAL_AC_CURRENT = 4
     '''
     AC Current
     '''
-    _2_WIRE_RES = 5
+    NIDMM_VAL_2_WIRE_RES = 5
     '''
     2-Wire Resistance
     '''
-    _4_WIRE_RES = 101
+    NIDMM_VAL_4_WIRE_RES = 101
     '''
     4-Wire Resistance
     '''
-    FREQ = 104
+    NIDMM_VAL_FREQ = 104
     '''
     Frequency
     '''
-    PERIOD = 105
+    NIDMM_VAL_PERIOD = 105
     '''
     Period
     '''
@@ -176,27 +176,27 @@ class Function(Enum):
     '''
     NI 4065, and NI 4070/4071/4072 supported.
     '''
-    AC_VOLTS_DC_COUPLED = 1001
+    NIDMM_VAL_AC_VOLTS_DC_COUPLED = 1001
     '''
     AC Voltage with DC Coupling
     '''
-    DIODE = 1002
+    NIDMM_VAL_DIODE = 1002
     '''
     Diode
     '''
-    WAVEFORM_VOLTAGE = 1003
+    NIDMM_VAL_WAVEFORM_VOLTAGE = 1003
     '''
     Waveform voltage
     '''
-    WAVEFORM_CURRENT = 1004
+    NIDMM_VAL_WAVEFORM_CURRENT = 1004
     '''
     Waveform current
     '''
-    CAPACITANCE = 1005
+    NIDMM_VAL_CAPACITANCE = 1005
     '''
     Capacitance
     '''
-    INDUCTANCE = 1006
+    NIDMM_VAL_INDUCTANCE = 1006
     '''
     Inductance
     '''

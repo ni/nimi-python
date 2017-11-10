@@ -99,12 +99,9 @@ class _SessionBase(object):
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
     If the user does not specify a Driver Setup string, this attribute returns  an empty string.
     '''
-    frequency_voltage_auto_range_value = attributes.AttributeViReal64(1150044)
+    freq_voltage_autorange = attributes.AttributeViReal64(1150044)
     '''
-    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
-    the frequency voltage range. If auto ranging is enabled, shows the
-    actual value of the active frequency voltage range. If not Auto Ranging,
-    the value is the same as that of the Frequency Voltage Range property.
+    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  NIDMM_ATTR_FREQ_VOLTAGE_RANGE.
     '''
     freq_voltage_range = attributes.AttributeViReal64(1250101)
     '''
