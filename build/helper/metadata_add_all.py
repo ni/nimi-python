@@ -529,3 +529,99 @@ def test_add_all_metadata_simple():
     }
 
     _do_the_test_add_all_metadata(functions, expected)
+
+
+def _do_the_test_add_attributes_metadata(attributes, expected):
+    actual = copy.deepcopy(attributes)
+    actual = add_all_attribute_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    _compare_dicts(actual, expected)
+
+
+def test_add_attributes_metadata_simple():
+    attributes = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    }
+    expected = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'codegen_method': 'public',
+            'documentation': {'description': 'An attribute of type bool with read/write access.'},
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'python_name': 'read_write_bool',
+            'resettable': 'No',
+            'type': 'ViBoolean'
+        },
+    }
+
+    _do_the_test_add_attributes_metadata(attributes, expected)
+
+
+def _do_the_test_add_enums_metadata(enums, expected):
+    actual = copy.deepcopy(enums)
+    actual = add_all_enum_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake', 'functions': {}, 'attributes': {}, 'modules': {'metadata.enums_addon': {}}})
+    _compare_dicts(actual, expected)
+
+
+def test_add_enums_metadata_simple():
+    enums = {
+        'Color': {
+            'values': [
+                {
+                    'name': 'RED',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Like blood.',
+                    }
+                },
+                {
+                    'name': 'BLUE',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like the sky.',
+                    }
+                },
+                {
+                    'name': 'YELLOW',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like a banana.',
+                    }
+                },
+                {
+                    'name': 'BLACK',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like this developer\'s conscience.',
+                    }
+                },
+            ],
+        },
+    }
+    expected = {
+        'Color': {
+            'codegen_method': 'no',
+            'values': [
+                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1},
+                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2},
+                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2},
+                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2}
+            ]
+        },
+    }
+
+    _do_the_test_add_enums_metadata(enums, expected)
+
