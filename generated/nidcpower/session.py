@@ -3169,6 +3169,64 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful calibration. The time
+        returned is 24-hour (military) local time; for example, if the device
+        was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
+        for **minutes**.
+
+        Returns:
+            year (int): Returns the **year** the device was last calibrated.
+            month (int): Returns the **month** in which the device was last calibrated.
+            day (int): Returns the **day** on which the device was last calibrated.
+            hour (int): Returns the **hour** (in 24-hour time) in which the device was last
+                calibrated.
+            minute (int): Returns the **minute** in which the device was last calibrated.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        year_ctype = visatype.ViInt32()  # case 14
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the onboard **temperature** of the device, in degrees Celsius,
+        during the last successful external calibration.
+
+        Returns:
+            temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
+                during the last successful external calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        temperature_ctype = visatype.ViReal64()  # case 14
+        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(temperature_ctype.value)
+
+    def get_ext_cal_recommended_interval(self):
+        '''get_ext_cal_recommended_interval
+
+        Returns the recommended maximum interval, in **months**, between
+        external calibrations.
+
+        Returns:
+            months (int): Specifies the recommended maximum interval, in **months**, between
+                external calibrations.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        months_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(months_ctype.value)
+
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 

@@ -317,3 +317,8 @@ def test_set_boolean_attribute(session):
     assert session.cache is False
     session.cache = True
     assert session.cache is True
+
+
+def test_get_ext_cal_recommended_interval(session):
+    months = session.get_ext_cal_recommended_interval()
+    assert months == 24

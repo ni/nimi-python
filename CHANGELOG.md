@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
     * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
+    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-ModInst
@@ -28,6 +29,9 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DCPower
   * #### Added
+    * get_ext_cal_last_date_and_time()
+    * get_ext_cal_last_temp()
+    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-FGEN

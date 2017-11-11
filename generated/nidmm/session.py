@@ -1618,6 +1618,24 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    def get_ext_cal_recommended_interval(self):
+        '''get_ext_cal_recommended_interval
+
+        Returns the recommended interval between external recalibration in
+        **Months**.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Returns:
+            months (int): Returns the recommended number of **months** between external
+                calibrations.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        months_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(months_ctype.value)
+
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
