@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DCPower
   * #### Added
+    * get_ext_cal_last_date_and_time()
+    * get_ext_cal_last_temp()
     * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
