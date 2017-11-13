@@ -256,13 +256,10 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-# TODO(bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
-'''
 def test_export_signal(single_channel_session):
     expected_trigger_terminal = "/4162/Engine0/MeasureTrigger"
-    single_channel_session.export_signal(nidcpower.Event.SOURCE_COMPLETE, expected_trigger_terminal)
+    single_channel_session.export_signal(nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT, expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
-'''
 
 
 def test_configure_digital_edge_measure_trigger(single_channel_session):
