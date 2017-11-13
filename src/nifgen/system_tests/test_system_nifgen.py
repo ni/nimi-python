@@ -148,3 +148,22 @@ def test_query_freq_list_capabilities(session):
 
 def test_read_current_temperature(session):
     assert session.read_current_temperature() > 25.0
+
+
+def test_allocate_waveform(session):
+    session.allocate_waveform(1024)
+
+
+def test_clear_waveform_memory(session):
+    session.clear_arb_memory()  
+    session.clear_user_standard_waveform()
+    session.clear_arb_sequence(-1)
+    session.clear_arb_waveform(-1)
+
+
+def test_query_arb_seq_capabilities(session):
+    maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count = session.query_arb_seq_capabilities()
+    assert maximum_number_of_sequences == 65535  # maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count are 65535, 1, 65535, 16777215 respectively for simulated 5433
+    assert minimum_sequence_length == 1
+    assert maximum_sequence_length == 65535
+    assert maximum_loop_count == 16777215
