@@ -834,6 +834,103 @@ nidcpower.Session methods
 
     :type buffer_size: int
 
+.. function:: get_ext_cal_last_date_and_time()
+
+    Returns the date and time of the last successful calibration. The time
+    returned is 24-hour (military) local time; for example, if the device
+    was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
+    for **minutes**.
+
+    
+
+
+
+    :rtype: tuple (year, month, day, hour, minute)
+
+        WHERE
+
+        year (int): 
+
+
+            Returns the **year** the device was last calibrated.
+
+            
+
+
+        month (int): 
+
+
+            Returns the **month** in which the device was last calibrated.
+
+            
+
+
+        day (int): 
+
+
+            Returns the **day** on which the device was last calibrated.
+
+            
+
+
+        hour (int): 
+
+
+            Returns the **hour** (in 24-hour time) in which the device was last
+            calibrated.
+
+            
+
+
+        minute (int): 
+
+
+            Returns the **minute** in which the device was last calibrated.
+
+            
+
+
+
+.. function:: get_ext_cal_last_temp()
+
+    Returns the onboard **temperature** of the device, in degrees Celsius,
+    during the last successful external calibration.
+
+    
+
+
+
+    :rtype: float
+    :return:
+
+
+            Returns the onboard **temperature** of the device, in degrees Celsius,
+            during the last successful external calibration.
+
+            
+
+
+
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended maximum interval, in **months**, between
+    external calibrations.
+
+    
+
+
+
+    :rtype: int
+    :return:
+
+
+            Specifies the recommended maximum interval, in **months**, between
+            external calibrations.
+
+            
+
+
+
 .. function:: get_self_cal_last_date_and_time()
 
     Returns the date and time of the oldest successful self-calibration from

@@ -316,3 +316,22 @@ def test_send_software_edge_trigger_error(session):
         assert e.code == -1074118587  # Error : Function not available in multichannel session
         assert e.description.find('The requested function is not available when multiple channels are present in the same session.') != -1
 
+
+def test_get_ext_cal_last_date_and_time(session):
+    print(type(session))
+    year, month, day, hour, minute = session.get_ext_cal_last_date_and_time()
+    assert year == 1940
+    assert month == 3
+    assert day == 1
+    assert hour == 0
+    assert minute == 0
+
+
+def test_get_ext_cal_last_temp(session):
+    temperature = session.get_ext_cal_last_temp()
+    assert temperature == 25.0
+
+
+def test_get_ext_cal_recommended_interval(session):
+    months = session.get_ext_cal_recommended_interval()
+    assert months == 12

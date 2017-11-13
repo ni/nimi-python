@@ -16,7 +16,9 @@ functions_codegen_method = {
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
-    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalSelfCalibrate':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
