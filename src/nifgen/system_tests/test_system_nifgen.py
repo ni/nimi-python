@@ -148,3 +148,33 @@ def test_query_freq_list_capabilities(session):
 
 def test_read_current_temperature(session):
     assert session.read_current_temperature() > 25.0
+
+
+
+def test_named_waveform_operations(session):
+    wfm_name = 'Waveform'
+    wfm_size = 4096
+    write_offset = 0
+    wfm_data_f64 = [0.0, 1.0]
+    wfm_data_i16 = [1, 0]
+    session.allocate_named_waveform(wfm_name, wfm_size)
+    session.set_named_waveform_next_write_position(wfm_name, nifgen.RelativeTo.WAVEFORM_POSITION_START, write_offset)
+    session.write_named_waveform_f64(wfm_name, wfm_data_f64)
+    session.write_named_waveform_i16(wfm_name, wfm_data_i16)
+    session.delete_named_waveform(wfm_name)
+
+
+def test_adjust_sample_clock_relative_delay(session):
+    delay = 1e-09
+    session.adjust_sample_clock_relative_delay(delay)
+
+
+def test_resets(session):
+    session.reset_with_defaults()
+    session.reset()
+    session.reset_device()
+
+
+def test_wait_until_done(session):
+    session.wait_until_done(20)
+
