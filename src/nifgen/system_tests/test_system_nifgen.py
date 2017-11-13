@@ -150,7 +150,6 @@ def test_read_current_temperature(session):
     assert session.read_current_temperature() > 25.0
 
 
-
 def test_named_waveform_operations(session):
     wfm_name = 'Waveform'
     wfm_size = 4096
@@ -164,9 +163,10 @@ def test_named_waveform_operations(session):
     session.delete_named_waveform(wfm_name)
 
 
-def test_adjust_sample_clock_relative_delay(session):
-    delay = 1e-09
-    session.adjust_sample_clock_relative_delay(delay)
+def test_adjust_sample_clock_relative_delay():
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 is not supporting adjust_sample_clock_relative_delay right now
+        delay = 1e-09
+        session.adjust_sample_clock_relative_delay(delay)
 
 
 def test_resets(session):
