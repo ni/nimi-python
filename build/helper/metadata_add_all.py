@@ -4,6 +4,7 @@ from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
+from .metadata_find import find_custom_type
 from .metadata_merge_dicts import merge_dicts
 
 import codecs
@@ -53,13 +54,18 @@ def _add_ctypes_variable_name(parameter):
     return parameter
 
 
-def _add_ctypes_type(parameter):
+def _add_ctypes_type(parameter, config):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type']
+    module_name = ''
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name'] + '.'
+
     if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
-        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
-        parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+        parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
 
     return parameter
 
@@ -190,7 +196,7 @@ def add_all_function_metadata(functions, config):
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
-            _add_ctypes_type(p)
+            _add_ctypes_type(p, config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
