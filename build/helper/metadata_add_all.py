@@ -162,6 +162,11 @@ def _add_is_session_handle(parameter):
         parameter['is_session_handle'] = parameter['type'] == 'ViSession' and parameter['direction'] == 'in'
 
 
+def _fix_type(parameter):
+    '''Replace any spaces in the parameter type with an underscore.'''
+    parameter['type'] = parameter['type'].replace(' ', '_')
+
+
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     if 'modules' in config and 'metadata.functions_addon' in config['modules']:
@@ -181,6 +186,7 @@ def add_all_function_metadata(functions, config):
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
+            _fix_type(p)
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
