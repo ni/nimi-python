@@ -249,11 +249,11 @@ def _add_enum_codegen_method(enums, config):
 
 def _add_enum_value_python_name(enum_info, config):
     for v in enum_info['values']:
-        v['name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+        v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
 
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
-    names = [v['name'] for v in enum_info['values']]
+    names = [v['python_name'] for v in enum_info['values']]
     prefix = os.path.commonprefix(names)
     while len(prefix) > 0 and prefix[-1] != '_':
         prefix = prefix[:-1]
@@ -266,13 +266,13 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(prefix) > 0 and prefix != '_':
         for v in enum_info['values']:
-            assert v['name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
+            assert v['python_name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
             v['prefix'] = prefix
-            v['name'] = v['name'].replace(prefix, '')
+            v['python_name'] = v['python_name'].replace(prefix, '')
 
     # Now we need to look for common suffixes
     # Using the slow method of reversing a string for readability
-    rev_names = [''.join(reversed(v['name'])) for v in enum_info['values']]
+    rev_names = [''.join(reversed(v['python_name'])) for v in enum_info['values']]
     suffix = os.path.commonprefix(rev_names)
     while len(suffix) > 0 and suffix[-1] != '_':
         suffix = suffix[:-1]
@@ -288,14 +288,14 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(suffix) > 0:
         for v in enum_info['values']:
-            assert v['name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
+            assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
             v['suffix'] = suffix
-            v['name'] = v['name'].replace(suffix, '')
+            v['python_name'] = v['python_name'].replace(suffix, '')
 
     # We need to check again to see if we need a leading '_' due to the first character of the name being a number
     for v in enum_info['values']:
-        if v['name'][0].isdigit():
-            v['name'] = '_' + v['name']
+        if v['python_name'][0].isdigit():
+            v['python_name'] = '_' + v['python_name']
 
     return enum_info
 
@@ -647,10 +647,10 @@ def test_add_enums_metadata_simple():
         'Color': {
             'codegen_method': 'no',
             'values': [
-                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1},
-                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2},
-                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2},
-                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2}
+                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
+                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
+                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
+                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
             ]
         },
     }
