@@ -89,6 +89,14 @@ def test_configure_arb_waveform(session):
     session.configure_arb_waveform(session.create_waveform_f64(waveform_data), 1.0, 0.0)
 
 
+def test_create_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
+    assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
+
+
 def test_disable(session):
     channel = session['0']
     assert channel.output_enabled is True
