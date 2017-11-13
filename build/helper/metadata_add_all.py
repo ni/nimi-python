@@ -247,7 +247,6 @@ def _add_enum_codegen_method(enums, config):
                     enums[e]['codegen_method'] = a_codegen_method
 
 
-    # First remove <DIRVER>_VAL_ if it is there
 def _add_enum_value_python_name(enum_info, config):
     for v in enum_info['values']:
         v['name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
