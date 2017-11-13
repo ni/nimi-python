@@ -155,7 +155,7 @@ def test_allocate_waveform(session):
 
 
 def test_clear_waveform_memory(session):
-    session.clear_arb_memory()  
+    session.clear_arb_memory()
     session.clear_user_standard_waveform()
     session.clear_arb_sequence(-1)
     session.clear_arb_waveform(-1)
