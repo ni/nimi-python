@@ -13,8 +13,9 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niSwitch_AbortScan_cfunc = None
         self.niSwitch_CanConnect_cfunc = None
@@ -39,8 +40,6 @@ class Library(object):
         self.niSwitch_GetRelayPosition_cfunc = None
         self.niSwitch_InitWithTopology_cfunc = None
         self.niSwitch_InitiateScan_cfunc = None
-        self.niSwitch_IsDebounced_cfunc = None
-        self.niSwitch_IsScanning_cfunc = None
         self.niSwitch_RelayControl_cfunc = None
         self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
@@ -58,12 +57,6 @@ class Library(object):
         self.niSwitch_error_message_cfunc = None
         self.niSwitch_reset_cfunc = None
         self.niSwitch_self_test_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niSwitch_AbortScan(self, vi):  # noqa: N802
         with self._func_lock:
@@ -248,22 +241,6 @@ class Library(object):
                 self.niSwitch_InitiateScan_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_InitiateScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitiateScan_cfunc(vi)
-
-    def niSwitch_IsDebounced(self, vi, is_debounced):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_IsDebounced_cfunc is None:
-                self.niSwitch_IsDebounced_cfunc = self._library.niSwitch_IsDebounced
-                self.niSwitch_IsDebounced_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
-                self.niSwitch_IsDebounced_cfunc.restype = ViStatus  # noqa: F405
-        return self.niSwitch_IsDebounced_cfunc(vi, is_debounced)
-
-    def niSwitch_IsScanning(self, vi, is_scanning):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_IsScanning_cfunc is None:
-                self.niSwitch_IsScanning_cfunc = self._library.niSwitch_IsScanning
-                self.niSwitch_IsScanning_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
-                self.niSwitch_IsScanning_cfunc.restype = ViStatus  # noqa: F405
-        return self.niSwitch_IsScanning_cfunc(vi, is_scanning)
 
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         with self._func_lock:

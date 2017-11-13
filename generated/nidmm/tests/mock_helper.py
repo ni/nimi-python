@@ -88,6 +88,9 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['Description'] = None
+        self._defaults['GetExtCalRecommendedInterval'] = {}
+        self._defaults['GetExtCalRecommendedInterval']['return'] = 0
+        self._defaults['GetExtCalRecommendedInterval']['Months'] = None
         self._defaults['GetLastCalTemp'] = {}
         self._defaults['GetLastCalTemp']['return'] = 0
         self._defaults['GetLastCalTemp']['Temperature'] = None
@@ -312,7 +315,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -361,10 +364,18 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='Description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
+
+    def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
+            return self._defaults['GetExtCalRecommendedInterval']['return']
+        if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
+            raise MockFunctionCallError("niDMM_GetExtCalRecommendedInterval", param='Months')
+        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+        return self._defaults['GetExtCalRecommendedInterval']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         if self._defaults['GetLastCalTemp']['return'] != 0:
@@ -606,6 +617,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetDevTemp.return_value = 0
         mock_library.niDMM_GetError.side_effect = MockFunctionCallError("niDMM_GetError")
         mock_library.niDMM_GetError.return_value = 0
+        mock_library.niDMM_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDMM_GetExtCalRecommendedInterval")
+        mock_library.niDMM_GetExtCalRecommendedInterval.return_value = 0
         mock_library.niDMM_GetLastCalTemp.side_effect = MockFunctionCallError("niDMM_GetLastCalTemp")
         mock_library.niDMM_GetLastCalTemp.return_value = 0
         mock_library.niDMM_GetMeasurementPeriod.side_effect = MockFunctionCallError("niDMM_GetMeasurementPeriod")

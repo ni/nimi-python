@@ -73,12 +73,6 @@ class SideEffectsHelper(object):
         self._defaults['InitWithTopology']['vi'] = None
         self._defaults['InitiateScan'] = {}
         self._defaults['InitiateScan']['return'] = 0
-        self._defaults['IsDebounced'] = {}
-        self._defaults['IsDebounced']['return'] = 0
-        self._defaults['IsDebounced']['isDebounced'] = None
-        self._defaults['IsScanning'] = {}
-        self._defaults['IsScanning']['return'] = 0
-        self._defaults['IsScanning']['isScanning'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -210,7 +204,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
-        if array_size == 0:
+        if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -220,7 +214,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetChannelName']['return']
         if self._defaults['GetChannelName']['channelNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
         channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
@@ -233,7 +227,7 @@ class SideEffectsHelper(object):
         code.contents.value = self._defaults['GetError']['Code']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
@@ -243,7 +237,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetPath']['return']
         if self._defaults['GetPath']['Path'] is None:
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetPath']['Path'])
         path.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
@@ -261,7 +255,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetRelayName']['return']
         if self._defaults['GetRelayName']['relayNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
-        if relay_name_buffer_size == 0:
+        if relay_name_buffer_size.value == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
         relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
@@ -286,22 +280,6 @@ class SideEffectsHelper(object):
         if self._defaults['InitiateScan']['return'] != 0:
             return self._defaults['InitiateScan']['return']
         return self._defaults['InitiateScan']['return']
-
-    def niSwitch_IsDebounced(self, vi, is_debounced):  # noqa: N802
-        if self._defaults['IsDebounced']['return'] != 0:
-            return self._defaults['IsDebounced']['return']
-        if self._defaults['IsDebounced']['isDebounced'] is None:
-            raise MockFunctionCallError("niSwitch_IsDebounced", param='isDebounced')
-        is_debounced.contents.value = self._defaults['IsDebounced']['isDebounced']
-        return self._defaults['IsDebounced']['return']
-
-    def niSwitch_IsScanning(self, vi, is_scanning):  # noqa: N802
-        if self._defaults['IsScanning']['return'] != 0:
-            return self._defaults['IsScanning']['return']
-        if self._defaults['IsScanning']['isScanning'] is None:
-            raise MockFunctionCallError("niSwitch_IsScanning", param='isScanning')
-        is_scanning.contents.value = self._defaults['IsScanning']['isScanning']
-        return self._defaults['IsScanning']['return']
 
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         if self._defaults['RelayControl']['return'] != 0:
@@ -455,10 +433,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_InitWithTopology.return_value = 0
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
         mock_library.niSwitch_InitiateScan.return_value = 0
-        mock_library.niSwitch_IsDebounced.side_effect = MockFunctionCallError("niSwitch_IsDebounced")
-        mock_library.niSwitch_IsDebounced.return_value = 0
-        mock_library.niSwitch_IsScanning.side_effect = MockFunctionCallError("niSwitch_IsScanning")
-        mock_library.niSwitch_IsScanning.return_value = 0
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = 0
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")

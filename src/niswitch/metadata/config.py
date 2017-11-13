@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'niswitch',
-    'module_version': '0.3.0.dev0',
+    'module_version': '0.5.0.dev0',
     'c_function_prefix': 'niSwitch_',
     'driver_name': 'NI-SWITCH',
     'session_class_description': 'An NI-SWITCH session to a National Instruments Switch Module',
@@ -22,5 +22,6 @@ config = {
         'abort_function': 'AbortScan',
     },
     'init_function': 'InitWithTopology',
+    'custom_types': [],
 }
 

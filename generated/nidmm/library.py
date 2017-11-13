@@ -13,8 +13,9 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDMM_Abort_cfunc = None
         self.niDMM_ConfigureACBandwidth_cfunc = None
@@ -43,6 +44,7 @@ class Library(object):
         self.niDMM_GetCalDateAndTime_cfunc = None
         self.niDMM_GetDevTemp_cfunc = None
         self.niDMM_GetError_cfunc = None
+        self.niDMM_GetExtCalRecommendedInterval_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
         self.niDMM_GetMeasurementPeriod_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
@@ -65,12 +67,6 @@ class Library(object):
         self.niDMM_error_message_cfunc = None
         self.niDMM_reset_cfunc = None
         self.niDMM_self_test_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niDMM_Abort(self, vi):  # noqa: N802
         with self._func_lock:
@@ -287,6 +283,14 @@ class Library(object):
                 self.niDMM_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description)
+
+    def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_GetExtCalRecommendedInterval_cfunc is None:
+                self.niDMM_GetExtCalRecommendedInterval_cfunc = self._library.niDMM_GetExtCalRecommendedInterval
+                self.niDMM_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_GetExtCalRecommendedInterval_cfunc(vi, months)
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         with self._func_lock:

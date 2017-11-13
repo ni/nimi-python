@@ -3,7 +3,9 @@ include $(BUILD_HELPER_DIR)/tools.mak
 
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
-                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY))
+                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY)) \
+                $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
+
 
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
@@ -32,6 +34,12 @@ $(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(_hide_cmds)$(call trigger_tests)
 
 $(MODULE_DIR)/%.py: %.py
+	$(call trace_to_console, "Copying",$@)
+	$(_hide_cmds)cp $< $@
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
+
+$(MODULE_DIR)/%.py: $(DRIVER_DIR)/custom_types/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
 # Need to signal the top level makefile to run tests again

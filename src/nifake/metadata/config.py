@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nifake',
-    'module_version': '0.3.0.dev0',
+    'module_version': '0.5.0.dev0',
     'c_function_prefix': 'niFake_',
     'driver_name': 'NI-FAKE',
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
@@ -22,5 +22,8 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'custom_types': [
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+    ],
 }
 

@@ -30,7 +30,7 @@ enums = {
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'Disables auto-zero.',
+'description': 'Disables auto zero.',
 },
             },
             {
@@ -44,11 +44,7 @@ enums = {
                 'name': 'ONCE',
                 'value': 1024,
 'documentation': {
-'description': '''
-Makes zero conversions following the first measurement after initiating
-the device. The device uses these zero conversions for the preceding
-measurement and future measurements until the device is reinitiated.
-''',
+'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.',
 },
             },
         ],
@@ -59,14 +55,14 @@ measurement and future measurements until the device is reinitiated.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the current level range.',
+'description': 'Autoranging is disabled.',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the current level range.',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -77,14 +73,14 @@ measurement and future measurements until the device is reinitiated.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the current limit range.',
+'description': 'Autoranging is disabled.',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the current limit range.',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -111,20 +107,18 @@ measurement and future measurements until the device is reinitiated.
         'values': [
             {
                 'name': 'SECOND_ORDER',
+                'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1043,
 'documentation': {
-'description': '''
-Second-order DC noise rejection. Refer to `Configuring the Measure
-Unit <NI_DC_Power_Supplies_Help.chm::/ConfiguringTheMeasureUnit.html>`__
-for supported devices.
-''',
+'description': 'Second-order rejection of DC noise.',
 },
             },
             {
                 'name': 'NORMAL',
+                'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1044,
 'documentation': {
-'description': 'Normal DC noise rejection.',
+'description': 'Normal rejection of DC noise.',
 },
             },
         ],
@@ -153,37 +147,21 @@ for supported devices.
                 'name': 'AUTOMATICALLY_AFTER_SOURCE_COMPLETE',
                 'value': 1025,
 'documentation': {
-'description': '''
-Acquires a measurement after each Source Complete event completes. Use
-the `niDCPower Fetch
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-retrieve the measurements.
-''',
+'description': 'Acquires a measurement after each Source Complete event completes.',
 },
             },
             {
                 'name': 'ON_DEMAND',
                 'value': 1026,
 'documentation': {
-'description': '''
-Acquires a measurement when the `niDCPower
-Measure <NIDCPowerVIRef.chm::/niDCPower_Measure.html>`__ VI or
-`niDCPower Measure
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Measure_Multiple.html>`__ VI is
-called.
-''',
+'description': 'Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.',
 },
             },
             {
                 'name': 'ON_MEASURE_TRIGGER',
                 'value': 1027,
 'documentation': {
-'description': '''
-Acquires a measurement when a Measure trigger is received. Use the
-`niDCPower Fetch
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-retrieve the measurements.
-''',
+'description': 'Acquires a measurement when a Measure trigger is received.',
 },
             },
         ],
@@ -194,14 +172,14 @@ retrieve the measurements.
                 'name': 'LOW',
                 'value': 1010,
 'documentation': {
-'description': 'Output capacitance is low.',
+'description': 'Output Capacitance is low.',
 },
             },
             {
                 'name': 'HIGH',
                 'value': 1011,
 'documentation': {
-'description': 'Output capacitance is high.',
+'description': 'Output Capacitance is high.',
 },
             },
         ],
@@ -241,23 +219,19 @@ retrieve the measurements.
     'Polarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 1018,
 'documentation': {
-'description': '''
-A high pulse occurs when the event is generated. The exported signal is
-low level both before and after the event is generated.
-''',
+'description': 'A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.',
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 1019,
 'documentation': {
-'description': '''
-A low pulse occurs when the event is generated. The exported signal is
-high level both before and after the event is generated.
-''',
+'description': 'A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.',
 },
             },
         ],
@@ -265,14 +239,16 @@ high level both before and after the event is generated.
     'PowerLineFrequency': {
         'values': [
             {
-                'name': '_50_HERTZ',
+                'name': '_50',
+                'suffix': '_HERTZ',
                 'value': 50.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 50 Hz.',
 },
             },
             {
-                'name': '_60_HERTZ',
+                'name': '_60',
+                'suffix': '_HERTZ',
                 'value': 60.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 60 Hz.',
@@ -300,10 +276,7 @@ high level both before and after the event is generated.
                 'name': 'AUTOMATIC',
                 'value': 1005,
 'documentation': {
-'description': '''
-Uses the auxiliary power source if it is available; otherwise, use the
-PXI chassis power source.
-''',
+'description': 'Uses the auxiliary power source if it is available; otherwise uses the PXI chassis power source.',
 },
             },
         ],
@@ -321,12 +294,7 @@ PXI chassis power source.
                 'name': 'AUXILIARY',
                 'value': 1004,
 'documentation': {
-'description': '''
-Uses the auxiliary power source connected to the device. Only the NI
-PXI-4110, NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this
-value. This is the only supported value for the NI PXIe-4112 and NI
-PXIe-4113.
-''',
+'description': 'Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.',
 },
             },
         ],
@@ -337,18 +305,14 @@ PXIe-4113.
                 'name': 'KEEP_IN_MEMORY',
                 'value': 1045,
 'documentation': {
-'description': 'Keep new self-calibration values in memory only.',
+'description': 'Keep new self calibration values in memory only.',
 },
             },
             {
                 'name': 'WRITE_TO_EEPROM',
                 'value': 1046,
 'documentation': {
-'description': '''
-Write new self-calibration values to hardware. Refer to your device
-documentation for more information about the implications of frequent
-writes to the EEPROM.
-''',
+'description': 'Write new self calibration values to hardware.',
 },
             },
         ],
@@ -384,10 +348,7 @@ writes to the EEPROM.
                 'name': 'SEQUENCE',
                 'value': 1021,
 'documentation': {
-'description': '''
-The source unit sequentially applies a list of voltage or current
-configurations.
-''',
+'description': 'The source unit applies a list of voltage or current configurations sequentially.',
 },
             },
         ],
@@ -398,46 +359,28 @@ configurations.
                 'name': 'NORMAL',
                 'value': 1038,
 'documentation': {
-'description': 'Normal transient response time.',
+'description': 'The output responds to changes in load at a normal speed.',
 },
             },
             {
                 'name': 'FAST',
                 'value': 1039,
 'documentation': {
-'description': 'Fast transient response time.',
+'description': 'The output responds to changes in load quickly.',
 },
             },
             {
                 'name': 'SLOW',
                 'value': 1041,
 'documentation': {
-'description': '''
-Slow transient response time. Refer to `Configuring Transient
-Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-for supported devices.
-''',
+'description': 'The output responds to changes in load slowly.',
 },
             },
             {
                 'name': 'CUSTOM',
                 'value': 1042,
 'documentation': {
-'description': '''
-Custom transient response time. If you select this value, you can then
-specify values for the `Voltage Gain
-Bandwidth <pniDCPower_VoltageGainBandwidth.html>`__, `Voltage
-Compensation
-Frequency <pniDCPower_VoltageCompensationFrequency.html>`__, `Voltage
-Pole-Zero Frequency <pniDCPower_VoltagePoleZeroRatio.html>`__, `Current
-Gain Bandwidth <pniDCPower_CurrentGainBandwidth.html>`__, `Current
-Compensation
-Frequency <pniDCPower_CurrentCompensationFrequency.html>`__, and
-`Current Pole-Zero Ratio <pniDCPower_CurrentPoleZeroRatio.html>`__
-properties. Refer to `Configuring Transient
-Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-for supported devices.
-''',
+'description': 'The output responds to changes in load based on specified values.',
 },
             },
         ],
@@ -452,14 +395,16 @@ for supported devices.
 },
             },
             {
-                'name': 'DIGITAL_EDGE',
+                'name': 'DIGITAL',
+                'suffix': '_EDGE',
                 'value': 1014,
 'documentation': {
 'description': 'The data operation starts when a digital edge is detected.',
 },
             },
             {
-                'name': 'SOFTWARE_EDGE',
+                'name': 'SOFTWARE',
+                'suffix': '_EDGE',
                 'value': 1015,
 'documentation': {
 'description': 'The data operation starts when a software trigger occurs.',
@@ -473,14 +418,14 @@ for supported devices.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the voltage level range.',
+'description': 'Autoranging is disabled.',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the voltage level range.',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -491,160 +436,16 @@ for supported devices.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the voltage limit range.',
+'description': 'Autoranging is disabled.',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the voltage limit range.',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
     },
-    'SendSoftwareEdgeTriggerType': {
-        'values': [
-            {
-                'name': 'START',
-                'value': 1034,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SOURCE',
-                'value': 1035,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE',
-                'value': 1036,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ADVANCE',
-                'value': 1037,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE',
-                'value': 1053,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'Event': {
-        'values': [
-            {
-                'name': 'SOURCE_COMPLETE',
-                'value': 1030,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE_COMPLETE',
-                'value': 1031,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ITERATION_COMPLETE',
-                'value': 1032,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ENGINE_DONE',
-                'value': 1033,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE_COMPLETE',
-                'value': 1051,
-                'documentation': {'',},
-            },
-            {
-                'name': 'READY_FOR_PULSE_TRIGGER',
-                'value': 1052,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'Signals': {
-        'values': [
-            {
-                'name': 'SOURCE_COMPLETE_EVENT',
-                'value': 1030,
-                'documentation': {
-                    'description': 'Exports the Source Complete event.',
-                },
-            },
-            {
-                'name': 'MEASURE_COMPLETE_EVENT',
-                'value': 1031,
-                'documentation': {
-                    'description': 'Exports the Measure Complete event.',
-                },
-            },
-            {
-                'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT',
-                'value': 1032,
-                'documentation': {
-                    'description': 'Exports the Sequence Iteration Complete event.',
-                },
-            },  
-            {
-                'name': 'SEQUENCE_ENGINE_DONE_EVENT',
-                'value': 1033,
-                'documentation': {
-                    'description': 'Exports the Sequence Engine Done event.',
-                },
-            },
-            {
-                'name': 'PULSE_COMPLETE_EVENT',
-                'value': 1051,
-                'documentation': {
-                    'description': 'Exports the Pulse Complete event.',
-                },
-            },
-            {
-                'name': 'READY_FOR_PULSE_TRIGGER_EVENT',
-                'value': 1052,
-                'documentation': {
-                    'description': 'Exports the Ready Pulse Trigger event.',
-                },
-            },
-            {
-                'name': 'START_TRIGGER',
-                'value': 1034,
-                'documentation': {
-                    'description': 'Exports the Start trigger.',
-                },
-            },
-            {
-                'name': 'SOURCE_TRIGGER',
-                'value': 1035,
-                'documentation': {
-                    'description': 'Exports the Source trigger.',
-                },
-            },
-            {
-                'name': 'MEASURE_TRIGGER',
-                'value': 1036,
-                'documentation': {
-                    'description': 'Exports the Measure trigger.',
-                },
-            },
-            {
-                'name': 'SEQUENCE_ADVANCE_TRIGGER',
-                'value': 1037,
-                'documentation': {
-                    'description': 'Exports the Sequence Advance trigger.',
-                },
-            },
-            {
-                'name': 'PULSE_TRIGGER',
-                'value': 1053,
-                'documentation': {
-                    'description': 'Exports the Pulse trigger.',
-                },
-            },          
-        ],
-    },  
 }

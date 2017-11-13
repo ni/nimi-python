@@ -440,7 +440,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 1.0295e-3 (44006).
 
         
@@ -451,7 +451,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 2.391e-4 (44006).
 
         
@@ -462,7 +462,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 1.568e-7 (44006).
 
         
@@ -991,6 +991,28 @@ nidmm.Session methods
 
 
             Returns the current **temperature** of the device.
+
+            
+
+
+
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended interval between external recalibration in
+    **Months**.
+
+    
+
+    .. note:: The NI 4050 and NI 4060 are not supported.
+
+
+
+    :rtype: int
+    :return:
+
+
+            Returns the recommended number of **months** between external
+            calibrations.
 
             
 

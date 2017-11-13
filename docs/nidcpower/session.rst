@@ -12,107 +12,107 @@ nidcpower.Session
    +-----------------------------------------------------------------+---------------------------------------+
    | Property                                                        | Datatype                              |
    +=================================================================+=======================================+
-   | :py:attr:`active_advanced_sequence`                             | ViString                              |
+   | :py:attr:`active_advanced_sequence`                             | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`active_advanced_sequence_step`                        | ViInt64                               |
+   | :py:attr:`active_advanced_sequence_step`                        | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`aperture_time`                                        | ViReal64                              |
+   | :py:attr:`aperture_time`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`aperture_time_units`                                  | :py:data:`ApertureTimeUnits`          |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`auto_zero`                                            | :py:data:`AutoZero`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`auxiliary_power_source_available`                     | ViBoolean                             |
+   | :py:attr:`auxiliary_power_source_available`                     | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`cache`                                                | ViBoolean                             |
+   | :py:attr:`cache`                                                | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`channel_count`                                        | ViInt32                               |
+   | :py:attr:`channel_count`                                        | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_compensation_frequency`                       | ViReal64                              |
+   | :py:attr:`current_compensation_frequency`                       | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_gain_bandwidth`                               | ViReal64                              |
+   | :py:attr:`current_gain_bandwidth`                               | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_level`                                        | ViReal64                              |
+   | :py:attr:`current_level`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`current_level_autorange`                              | :py:data:`CurrentLevelAutorange`      |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_level_range`                                  | ViReal64                              |
+   | :py:attr:`current_level_range`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_limit`                                        | ViReal64                              |
+   | :py:attr:`current_limit`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`current_limit_autorange`                              | :py:data:`CurrentLimitAutorange`      |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_limit_range`                                  | ViReal64                              |
+   | :py:attr:`current_limit_range`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`current_pole_zero_ratio`                              | ViReal64                              |
+   | :py:attr:`current_pole_zero_ratio`                              | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`dc_noise_rejection`                                   | :py:data:`DCNoiseRejection`           |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`digital_edge_measure_trigger_edge`                    | :py:data:`DigitalEdge`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`digital_edge_measure_trigger_input_terminal`          | ViString                              |
+   | :py:attr:`digital_edge_measure_trigger_input_terminal`          | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`digital_edge_pulse_trigger_edge`                      | :py:data:`DigitalEdge`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`digital_edge_pulse_trigger_input_terminal`            | ViString                              |
+   | :py:attr:`digital_edge_pulse_trigger_input_terminal`            | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`digital_edge_sequence_advance_trigger_edge`           | :py:data:`DigitalEdge`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`digital_edge_sequence_advance_trigger_input_terminal` | ViString                              |
+   | :py:attr:`digital_edge_sequence_advance_trigger_input_terminal` | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`digital_edge_source_trigger_edge`                     | :py:data:`DigitalEdge`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`digital_edge_source_trigger_input_terminal`           | ViString                              |
+   | :py:attr:`digital_edge_source_trigger_input_terminal`           | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`digital_edge_start_trigger_edge`                      | :py:data:`DigitalEdge`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`digital_edge_start_trigger_input_terminal`            | ViString                              |
+   | :py:attr:`digital_edge_start_trigger_input_terminal`            | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`driver_setup`                                         | ViString                              |
+   | :py:attr:`driver_setup`                                         | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`exported_measure_trigger_output_terminal`             | ViString                              |
+   | :py:attr:`exported_measure_trigger_output_terminal`             | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`exported_pulse_trigger_output_terminal`               | ViString                              |
+   | :py:attr:`exported_pulse_trigger_output_terminal`               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`exported_sequence_advance_trigger_output_terminal`    | ViString                              |
+   | :py:attr:`exported_sequence_advance_trigger_output_terminal`    | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`exported_source_trigger_output_terminal`              | ViString                              |
+   | :py:attr:`exported_source_trigger_output_terminal`              | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`exported_start_trigger_output_terminal`               | ViString                              |
+   | :py:attr:`exported_start_trigger_output_terminal`               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`fetch_backlog`                                        | ViInt32                               |
+   | :py:attr:`fetch_backlog`                                        | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`group_capabilities`                                   | ViString                              |
+   | :py:attr:`group_capabilities`                                   | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`instrument_firmware_revision`                         | ViString                              |
+   | :py:attr:`instrument_firmware_revision`                         | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`instrument_manufacturer`                              | ViString                              |
+   | :py:attr:`instrument_manufacturer`                              | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`instrument_model`                                     | ViString                              |
+   | :py:attr:`instrument_model`                                     | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`interchange_check`                                    | ViBoolean                             |
+   | :py:attr:`interchange_check`                                    | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`interlock_input_open`                                 | ViBoolean                             |
+   | :py:attr:`interlock_input_open`                                 | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`io_resource_descriptor`                               | ViString                              |
+   | :py:attr:`io_resource_descriptor`                               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`logical_name`                                         | ViString                              |
+   | :py:attr:`logical_name`                                         | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_buffer_size`                                  | ViInt32                               |
+   | :py:attr:`measure_buffer_size`                                  | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_complete_event_delay`                         | ViReal64                              |
+   | :py:attr:`measure_complete_event_delay`                         | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_complete_event_output_terminal`               | ViString                              |
+   | :py:attr:`measure_complete_event_output_terminal`               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`measure_complete_event_pulse_polarity`                | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_complete_event_pulse_width`                   | ViReal64                              |
+   | :py:attr:`measure_complete_event_pulse_width`                   | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_record_delta_time`                            | ViReal64                              |
+   | :py:attr:`measure_record_delta_time`                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_record_length`                                | ViInt32                               |
+   | :py:attr:`measure_record_length`                                | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`measure_record_length_is_finite`                      | ViBoolean                             |
+   | :py:attr:`measure_record_length_is_finite`                      | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`measure_trigger_type`                                 | :py:data:`TriggerType`                |
    +-----------------------------------------------------------------+---------------------------------------+
@@ -120,19 +120,19 @@ nidcpower.Session
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`output_capacitance`                                   | :py:data:`OutputCapacitance`          |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`output_connected`                                     | ViBoolean                             |
+   | :py:attr:`output_connected`                                     | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`output_enabled`                                       | ViBoolean                             |
+   | :py:attr:`output_enabled`                                       | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`output_function`                                      | :py:data:`OutputFunction`             |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`output_resistance`                                    | ViReal64                              |
+   | :py:attr:`output_resistance`                                    | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`overranging_enabled`                                  | ViBoolean                             |
+   | :py:attr:`overranging_enabled`                                  | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`ovp_enabled`                                          | ViBoolean                             |
+   | :py:attr:`ovp_enabled`                                          | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`ovp_limit`                                            | ViReal64                              |
+   | :py:attr:`ovp_limit`                                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`power_line_frequency`                                 | :py:data:`PowerLineFrequency`         |
    +-----------------------------------------------------------------+---------------------------------------+
@@ -140,59 +140,59 @@ nidcpower.Session
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`power_source_in_use`                                  | :py:data:`PowerSourceInUse`           |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_bias_current_level`                             | ViReal64                              |
+   | :py:attr:`pulse_bias_current_level`                             | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_bias_current_limit`                             | ViReal64                              |
+   | :py:attr:`pulse_bias_current_limit`                             | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_bias_delay`                                     | ViReal64                              |
+   | :py:attr:`pulse_bias_delay`                                     | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_bias_voltage_level`                             | ViReal64                              |
+   | :py:attr:`pulse_bias_voltage_level`                             | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_bias_voltage_limit`                             | ViReal64                              |
+   | :py:attr:`pulse_bias_voltage_limit`                             | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_complete_event_output_terminal`                 | ViString                              |
+   | :py:attr:`pulse_complete_event_output_terminal`                 | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`pulse_complete_event_pulse_polarity`                  | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_complete_event_pulse_width`                     | ViReal64                              |
+   | :py:attr:`pulse_complete_event_pulse_width`                     | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_current_level`                                  | ViReal64                              |
+   | :py:attr:`pulse_current_level`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_current_level_range`                            | ViReal64                              |
+   | :py:attr:`pulse_current_level_range`                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_current_limit`                                  | ViReal64                              |
+   | :py:attr:`pulse_current_limit`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_current_limit_range`                            | ViReal64                              |
+   | :py:attr:`pulse_current_limit_range`                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_off_time`                                       | ViReal64                              |
+   | :py:attr:`pulse_off_time`                                       | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_on_time`                                        | ViReal64                              |
+   | :py:attr:`pulse_on_time`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`pulse_trigger_type`                                   | :py:data:`TriggerType`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_voltage_level`                                  | ViReal64                              |
+   | :py:attr:`pulse_voltage_level`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_voltage_level_range`                            | ViReal64                              |
+   | :py:attr:`pulse_voltage_level_range`                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_voltage_limit`                                  | ViReal64                              |
+   | :py:attr:`pulse_voltage_limit`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`pulse_voltage_limit_range`                            | ViReal64                              |
+   | :py:attr:`pulse_voltage_limit_range`                            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`query_instrument_status`                              | ViBoolean                             |
+   | :py:attr:`query_instrument_status`                              | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`range_check`                                          | ViBoolean                             |
+   | :py:attr:`range_check`                                          | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`ready_for_pulse_trigger_event_output_terminal`        | ViString                              |
+   | :py:attr:`ready_for_pulse_trigger_event_output_terminal`        | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`ready_for_pulse_trigger_event_pulse_polarity`         | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`ready_for_pulse_trigger_event_pulse_width`            | ViReal64                              |
+   | :py:attr:`ready_for_pulse_trigger_event_pulse_width`            | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`record_coercions`                                     | ViBoolean                             |
+   | :py:attr:`record_coercions`                                     | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`reset_average_before_measurement`                     | ViBoolean                             |
+   | :py:attr:`reset_average_before_measurement`                     | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`samples_to_average`                                   | ViInt32                               |
+   | :py:attr:`samples_to_average`                                   | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`self_calibration_persistence`                         | :py:data:`SelfCalibrationPersistence` |
    +-----------------------------------------------------------------+---------------------------------------+
@@ -200,137 +200,143 @@ nidcpower.Session
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`sequence_advance_trigger_type`                        | :py:data:`TriggerType`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_engine_done_event_output_terminal`           | ViString                              |
+   | :py:attr:`sequence_engine_done_event_output_terminal`           | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`sequence_engine_done_event_pulse_polarity`            | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_engine_done_event_pulse_width`               | ViReal64                              |
+   | :py:attr:`sequence_engine_done_event_pulse_width`               | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_iteration_complete_event_output_terminal`    | ViString                              |
+   | :py:attr:`sequence_iteration_complete_event_output_terminal`    | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`sequence_iteration_complete_event_pulse_polarity`     | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_iteration_complete_event_pulse_width`        | ViReal64                              |
+   | :py:attr:`sequence_iteration_complete_event_pulse_width`        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_loop_count`                                  | ViInt32                               |
+   | :py:attr:`sequence_loop_count`                                  | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`sequence_loop_count_is_finite`                        | ViBoolean                             |
+   | :py:attr:`sequence_loop_count_is_finite`                        | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`simulate`                                             | ViBoolean                             |
+   | :py:attr:`simulate`                                             | bool                                  |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`source_complete_event_output_terminal`                | ViString                              |
+   | :py:attr:`source_complete_event_output_terminal`                | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`source_complete_event_pulse_polarity`                 | :py:data:`Polarity`                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`source_complete_event_pulse_width`                    | ViReal64                              |
+   | :py:attr:`source_complete_event_pulse_width`                    | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`source_delay`                                         | ViReal64                              |
+   | :py:attr:`source_delay`                                         | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`source_mode`                                          | :py:data:`SourceMode`                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`source_trigger_type`                                  | :py:data:`TriggerType`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_class_spec_major_version`             | ViInt32                               |
+   | :py:attr:`specific_driver_class_spec_major_version`             | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_class_spec_minor_version`             | ViInt32                               |
+   | :py:attr:`specific_driver_class_spec_minor_version`             | int                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_description`                          | ViString                              |
+   | :py:attr:`specific_driver_description`                          | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_prefix`                               | ViString                              |
+   | :py:attr:`specific_driver_prefix`                               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_revision`                             | ViString                              |
+   | :py:attr:`specific_driver_revision`                             | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`specific_driver_vendor`                               | ViString                              |
+   | :py:attr:`specific_driver_vendor`                               | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`start_trigger_type`                                   | :py:data:`TriggerType`                |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`supported_instrument_models`                          | ViString                              |
+   | :py:attr:`supported_instrument_models`                          | str                                   |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`transient_response`                                   | :py:data:`TransientResponse`          |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_compensation_frequency`                       | ViReal64                              |
+   | :py:attr:`voltage_compensation_frequency`                       | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_gain_bandwidth`                               | ViReal64                              |
+   | :py:attr:`voltage_gain_bandwidth`                               | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_level`                                        | ViReal64                              |
+   | :py:attr:`voltage_level`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`voltage_level_autorange`                              | :py:data:`VoltageLevelAutorange`      |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_level_range`                                  | ViReal64                              |
+   | :py:attr:`voltage_level_range`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_limit`                                        | ViReal64                              |
+   | :py:attr:`voltage_limit`                                        | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
    | :py:attr:`voltage_limit_autorange`                              | :py:data:`VoltageLimitAutorange`      |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_limit_range`                                  | ViReal64                              |
+   | :py:attr:`voltage_limit_range`                                  | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
-   | :py:attr:`voltage_pole_zero_ratio`                              | ViReal64                              |
+   | :py:attr:`voltage_pole_zero_ratio`                              | float                                 |
    +-----------------------------------------------------------------+---------------------------------------+
 
    **Public methods**
 
-   +------------------------------------------------------------+
-   | :py:func:`commit`                                          |
-   +============================================================+
-   | :py:func:`configure_aperture_time`                         |
-   +------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_measure_trigger`          |
-   +------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_pulse_trigger`            |
-   +------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_sequence_advance_trigger` |
-   +------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_source_trigger`           |
-   +------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_start_trigger`            |
-   +------------------------------------------------------------+
-   | :py:func:`create_advanced_sequence`                        |
-   +------------------------------------------------------------+
-   | :py:func:`create_advanced_sequence_step`                   |
-   +------------------------------------------------------------+
-   | :py:func:`delete_advanced_sequence`                        |
-   +------------------------------------------------------------+
-   | :py:func:`disable`                                         |
-   +------------------------------------------------------------+
-   | :py:func:`export_signal`                                   |
-   +------------------------------------------------------------+
-   | :py:func:`fetch_multiple`                                  |
-   +------------------------------------------------------------+
-   | :py:func:`get_channel_name`                                |
-   +------------------------------------------------------------+
-   | :py:func:`get_self_cal_last_date_and_time`                 |
-   +------------------------------------------------------------+
-   | :py:func:`get_self_cal_last_temp`                          |
-   +------------------------------------------------------------+
-   | :py:func:`measure`                                         |
-   +------------------------------------------------------------+
-   | :py:func:`measure_multiple`                                |
-   +------------------------------------------------------------+
-   | :py:func:`query_in_compliance`                             |
-   +------------------------------------------------------------+
-   | :py:func:`query_max_current_limit`                         |
-   +------------------------------------------------------------+
-   | :py:func:`query_max_voltage_level`                         |
-   +------------------------------------------------------------+
-   | :py:func:`query_min_current_limit`                         |
-   +------------------------------------------------------------+
-   | :py:func:`query_output_state`                              |
-   +------------------------------------------------------------+
-   | :py:func:`read_current_temperature`                        |
-   +------------------------------------------------------------+
-   | :py:func:`reset_device`                                    |
-   +------------------------------------------------------------+
-   | :py:func:`reset_with_defaults`                             |
-   +------------------------------------------------------------+
-   | :py:func:`send_software_edge_trigger`                      |
-   +------------------------------------------------------------+
-   | :py:func:`set_sequence`                                    |
-   +------------------------------------------------------------+
-   | :py:func:`wait_for_event`                                  |
-   +------------------------------------------------------------+
-   | :py:func:`reset`                                           |
-   +------------------------------------------------------------+
-   | :py:func:`self_test`                                       |
-   +------------------------------------------------------------+
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | Method                                                     | Parameters                                                |
+   +============================================================+===========================================================+
+   | :py:func:`commit`                                          |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_aperture_time`                         | aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS  |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_digital_edge_measure_trigger`          | input_terminal, edge=nidcpower.DigitalEdge.RISING         |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_digital_edge_pulse_trigger`            | input_terminal, edge=nidcpower.DigitalEdge.RISING         |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_digital_edge_sequence_advance_trigger` | input_terminal, edge=nidcpower.DigitalEdge.RISING         |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_digital_edge_source_trigger`           | input_terminal, edge=nidcpower.DigitalEdge.RISING         |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`configure_digital_edge_start_trigger`            | input_terminal, edge=nidcpower.DigitalEdge.RISING         |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`create_advanced_sequence`                        | sequence_name, attribute_ids, set_as_active_sequence=True |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`create_advanced_sequence_step`                   | set_as_active_step=True                                   |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`delete_advanced_sequence`                        | sequence_name                                             |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`disable`                                         |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`export_signal`                                   | signal, output_terminal, signal_identifier=''             |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`fetch_multiple`                                  | count, timeout=1.0                                        |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_channel_name`                                | index                                                     |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_ext_cal_last_date_and_time`                  |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_ext_cal_last_temp`                           |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_ext_cal_recommended_interval`                |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_self_cal_last_date_and_time`                 |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`get_self_cal_last_temp`                          |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`measure`                                         | measurement_type                                          |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`query_in_compliance`                             |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`query_max_current_limit`                         | voltage_level                                             |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`query_max_voltage_level`                         | current_limit                                             |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`query_min_current_limit`                         | voltage_level                                             |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`query_output_state`                              | output_state                                              |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`read_current_temperature`                        |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`reset_device`                                    |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`reset_with_defaults`                             |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`send_software_edge_trigger`                      | trigger=nidcpower.SendSoftwareEdgeTriggerType.START       |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`set_sequence`                                    | source_delays, values=None                                |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`wait_for_event`                                  | event_id, timeout=10.0                                    |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`reset`                                           |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
+   | :py:func:`self_test`                                       |                                                           |
+   +------------------------------------------------------------+-----------------------------------------------------------+
 
 

@@ -29,803 +29,436 @@ class _SessionBase(object):
 
     analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
     '''
-    Enables or disables sharing of an analog bus line so that multiple
-    NI SwitchBlock devices may connect to it simultaneously. To enable
-    multiple NI SwitchBlock devices to share an analog bus line, set this
-    property to TRUE for each device on the channel that corresponds with
-    the shared analog bus line. The default value for all devices is FALSE,
-    which disables sharing of the analog bus.
+    Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  attribute to VI_TRUE for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  VI_FALSE, which disables sharing of the analog bus.
+    Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    analog_bus_sharing_enable.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Using the
-    Analog Bus on an NI SwitchBlock
-    Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
+        session['0,1'].analog_bus_sharing_enable = var
+        var = session['0,1'].analog_bus_sharing_enable
     '''
     bandwidth = attributes.AttributeViReal64(1250005)
     '''
-    Returns the bandwidth for the channel in hertz.
+    This channel-based attribute returns the bandwidth for the channel.
+    The units are hertz.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    bandwidth.Session instance, and calling set/get value on the result.:
 
-    `Bandwidth and Insertion Loss <SWITCH.chm::/bandwidth.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
-    Considerations <SWITCH.chm::/rf.html>`__
+        session['0,1'].bandwidth = var
+        var = session['0,1'].bandwidth
     '''
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH. Use `niSwitch Route Scan Advanced
-    Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
-    VI instead.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
     '''
     cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH. Use the `niSwitch Route Trigger
-    Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
-    instead.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''
-    Specifies whether to cache the value of properties. The default value is
-    TRUE. Use the `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Set this property to TRUE to ensure the instrument driver tracks the
-    current instrument settings and avoid sending redundant commands to the
-    instrument. The instrument driver can always cache or never cache
-    regardless of the setting of this property.
-
-    **Related topics**
-
-    `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
+    The instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''
-    Contains the number of channels that the instrument driver supports.
-
-    **Related topics**
-
-    `niSwitch Get Channel
-    Name <switchviref.chm::/niSwitch_Get_Channel_Name.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+    Indicates the number of channels that the specific instrument  driver supports.
     '''
     characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''
-    Returns the characteristic impedance for the channel in ohms.
+    This channel-based attribute returns the characteristic impedance for the  channel.
+    The units are ohms.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    characteristic_impedance.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    characteristic_impedance.Session instance, and calling set/get value on the result.:
 
-    `Characteristic
-    Impedance <SWITCH.chm::/characteristic_impedance.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
-    Considerations <SWITCH.chm::/rf.html>`__
+        session['0,1'].characteristic_impedance = var
+        var = session['0,1'].characteristic_impedance
     '''
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
-    Specifies whether to continuously scan through a scan list. Set the
-    property to FALSE to stop scanning after one pass through the scan list.
-    Set this property to TRUE to loop continuously through the scan list.
-
-    If you set the property to TRUE, the `niSwitch Wait For Scan To
-    Complete <switchviref.chm::/niSwitch_Wait_For_Scan_To_Complete.html>`__
-    VI times out, and you must call the `niSwitch Abort
-    Scan <switchviref.chm::/niSwitch_Abort_Scan.html>`__ VI to stop the
-    scan.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    When a switch device is scanning, the swich can either stop scanning when  the end of the scan (VI_FALSE) or continue scanning from the top of the  scan list again (VI_TRUE).
+    Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
     '''
     digital_filter_enable = attributes.AttributeViBoolean(1150016)
     '''
-    Specifies whether to apply the pulse width filter to the Trigger Input.
-    Set the property to TRUE to prevent the switch module from being
-    triggered by pulses that are less than 150 ns on PXI trigger lines 0-7.
-
-    When this property is set to FALSE, noise on the PXI trigger lines might
-    trigger the switch module. If the device triggering the switch module
-    can send pulses greater than 150 ns, do not disable this property.
-
-    **Related topics**
-
-    `Disabling Digital Filtering <SWITCH.chm::/fast_pxi_triggering.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (VI_TRUE) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
+    When Digital Filter is disabled (VI_FALSE), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
     '''
     driver_setup = attributes.AttributeViString(1050007)
     '''
-    Contains the Driver Setup string that you specified when initializing
-    the instrument driver.
-
-    In some cases, you must specify instrument driver options at
-    initialization time—for example, when specifying a particular instrument
-    model from among a family of instruments that the instrument driver
-    supports. This is useful when using simulation.
-
-    You can specify instrument driver-specific options through the
-    DriverSetup keyword in the **option string** parameter of the `niSwitch
-    Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI,
-    or through the IVI Configuration Utility. If you did not specify a
-    Driver Setup string, this property returns an empty string.
-
-    **Related topics**
-
-    `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
+    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  niSwitch_InitWithOptions function, or through the IVI Configuration Utility.
+    If the user does not specify a Driver Setup string, this attribute returns an empty string.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
     '''
-    Contains a comma-separated (,) list of class-extension groups that the
-    instrument driver implements.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    A string that contains a comma-separated list of class-extention groups that  this driver implements.
     '''
     handshaking_initiation = attributes.AttributeEnum(attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
-    '''
-    Specifies how to start handshaking with a measurement device.
-
-    **Related topics**
-
-    `Handshaking <SWITCH.chm::/handshakingg.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
-    '''
     instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
-    Contains the firmware revision information for the instrument currently
-    in use.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
-    Revision Query <switchviref.chm::/niSwitch_Revision_Query.html>`__
+    A string that contains the firmware revision information  for the instrument you are currently using.
     '''
     instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
-    Contains the name of the manufacturer of the instrument currently in
-    use.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    A string that contains the name of the instrument manufacturer you are currently  using.
     '''
     instrument_model = attributes.AttributeViString(1050512)
     '''
-    Contains the model number or name of the instrument currently in use.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    A string that contains the model number or name of the instrument that you  are currently using.
     '''
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''
-    Specifies whether to perform interchangeability checking and retrieve
-    interchangeability warnings when you call the `niSwitch Connect
-    Channels <switchviref.chm::/niSwitch_Connect_Channels.html>`__,
-    `niSwitch Set Path <switchviref.chm::/niSwitch_Set_Path.html>`__ and
-    `niSwitch Initiate
-    Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VIs. The default
-    value is FALSE.
-
-    Interchangeability checking examines the properties in a capability
-    group only if you specify a value for at least one property within that
-    group. Interchangeability warnings can occur when a property that you
-    have not set or that has been invalidated affects the behavior of the
-    instrument.
-
-    Interchangeability warnings indicate that using your application with a
-    different instrument might cause different behavior. Call `niSwitch Get
-    Next Interchange
-    Warning <switchviref.chm::/niSwitch_Get_Next_Interchange_Warning.html>`__
-    VI to extract interchange warnings. Call the `niSwitch Clear Interchange
-    Warnings <switchviref.chm::/niSwitch_Clear_Interchange_Warnings.html>`__
-    VI to clear the list of interchangeability warnings without reading
-    them.
-
-    **Related topics**
-
-    `niSwitch Get Next Interchange
-    Warning <switchviref.chm::/niSwitch_Get_Next_Interchange_Warning.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
-    Reset Interchange
-    Check <switchviref.chm::/niSwitch_Reset_Interchange_Check.html>`__
-    '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
-    '''
-    Contains the resource descriptor the instrument driver uses to identify
-    the physical device.
-
-    If you initialize the instrument driver with a logical name, this
-    property contains the resource descriptor that corresponds to the entry
-    in the IVI Configuration Utility. If you initialize the instrument
-    driver with the resource descriptor, this property contains that value.
-
-    **Related topics**
-
-    `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niSwitch_Connect, niSwitch_SetPath and niSwitch_InitiateScan functions.
+    The default value is VI_FALSE.
+    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
+    Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
     '''
     is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
-    Specifies whether to designate the channel as a configuration channel—a
-    channel reserved for internal path creation. The instrument driver uses
-    configuration channels to create paths between the channels you specify
-    in the `niSwitch Connect
-    Channels <switchviref.chm::/niSwitch_Connect_Channels.html>`__ VI.
+    This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the niSwitch_Connect function.  Configuration channels are not available  for external connections.
+    Set this attribute to VI_TRUE to mark the channel as a configuration  channel.  Set this attribute to VI_FALSE to mark the channel as available  for external connections.
+    After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The niSwitch_Connect function  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
-    Set this property to TRUE to designate the channel as a configuration
-    channel. Set this property to FALSE to designate the channel as
-    available for external connections. Because you cannot use a
-    configuration channel for external connections, the `niSwitch Connect
-    Channels <switchviref.chm::/niSwitch_Connect_Channels.html>`__ VI
-    returns the Is Configuration Channel error when you attempt to establish
-    a connection between a configuration channel and any other channel.
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_configuration_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_configuration_channel.Session instance, and calling set/get value on the result.:
 
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
-    Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+        session['0,1'].is_configuration_channel = var
+        var = session['0,1'].is_configuration_channel
     '''
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''
-    Indicates whether the entire switch module has settled since the last
-    switching command. A value of TRUE indicates that all signals going
-    through the switch module are valid.
-
-    **Related topics**
-
-    `Electromechanical Relays <SWITCH.chm::/electromechanical_relay.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
-    Time <SWITCH.chm::/settling_time.html>`__
+    This attribute indicates whether the entire switch device has settled  since the last switching command.  A value of VI_TRUE indicates that all  signals going through the switch device are valid.
     '''
     is_scanning = attributes.AttributeViBoolean(1250024)
     '''
-    Indicates whether the switch module has completed the scan operation.
-    TRUE indicates that the scan has completed.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    If VI_TRUE, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If VI_FALSE, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
     '''
     is_source_channel = attributes.AttributeViBoolean(1250001)
     '''
-    Specifies whether to designate the channel as a source channel.
+    This channel-based attribute specifies whether you want to identify the  channel as a source channel.  Typically, you set this attribute to VI_TRUE  when you attach the channel to a power supply, a function generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The niSwitch_Connect function  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
-    Set this property to TRUE when you connect the channel to a power
-    supply, a function generator, or an active measurement point on the unit
-    under test, and you do not want to connect the channel to another
-    source. The instrument driver prevents source channels from connecting
-    to each other: when you attempt to connect two source channels, the
-    `niSwitch Connect
-    Channels <switchviref.chm::/niSwitch_Connect_Channels.html>`__ VI
-    returns the Attempt To Connect Sources error.
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_source_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_source_channel.Session instance, and calling set/get value on the result.:
 
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
-    Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+        session['0,1'].is_source_channel = var
+        var = session['0,1'].is_source_channel
     '''
     is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
-    Indicates with a semi-colon (;) that at that point in the scan list, the
-    scan engine should pause until a trigger is received from the trigger
-    input. If you generate that trigger through either a hardware pulse or
-    the `niSwitch Send Software
-    Trigger <switchviref.chm::/niSwitch_Send_Software_Trigger.html>`__ VI,
-    you must know when the scan engine has reached such a state.
-
-    **Related topics**
-
-    `niSwitch Configure Scan
-    Trigger <switchviref.chm::/niSwitch_Configure_Scan_List.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''
-    Contains the logical name you specified when opening the current IVI
-    session.
-
-    You can wire a logical name to the `niSwitch
-    Initialize <switchviref.chm::/niSwitch_Initialize.html>`__ or the
-    `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
-    VIs. The IVI Configuration Utility must contain an entry for the logical
-    name. The logical name entry refers to a virtual instrument section,
-    which specifies a physical device and initial user options, in the IVI
-    Configuration file.
-
-    **Related topics**
-
-    `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__ `Using NI Switches in
-    IVI <SWITCH.chm::/switches_in_ivi.html>`__
+    A string containing the logical name you specified when opening the  current IVI session.
+    You may pass a logical name to the niSwitch_init or  niSwitch_InitWithOptions functions.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
     '''
     master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH. Use `niSwitch Route Scan Advanced
-    Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
-    VI instead.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
     '''
     master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH. Use the `niSwitch Route Trigger
-    Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
-    instead.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
     '''
     max_ac_voltage = attributes.AttributeViReal64(1250007)
     '''
-    Returns the maximum AC voltage the channel can switch in volts RMS.
+    This channel-based attribute returns the maximum AC voltage the channel  can switch.
+    The units are volts RMS.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_ac_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_ac_voltage.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_ac_voltage = var
+        var = session['0,1'].max_ac_voltage
     '''
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
-    Returns the maximum AC current the channel can carry in amperes RMS.
+    This channel-based attribute returns the maximum AC current the channel  can carry.
+    The units are amperes RMS.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_current.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_carry_ac_current = var
+        var = session['0,1'].max_carry_ac_current
     '''
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
-    Returns the maximum AC power the channel can carry in volt-amperes.
+    This channel-based attribute returns the maximum AC power the channel can  carry.
+    The units are volt-amperes.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_power.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_carry_ac_power = var
+        var = session['0,1'].max_carry_ac_power
     '''
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
-    Returns the maximum DC current the channel can carry in amperes.
+    This channel-based attribute returns the maximum DC current the channel  can carry.
+    The units are amperes.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_current.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_carry_dc_current = var
+        var = session['0,1'].max_carry_dc_current
     '''
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
-    Returns the maximum DC power the channel can carry in watts.
+    This channel-based attribute returns the maximum DC power the channel can  carry.
+    The units are watts.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_power.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_carry_dc_power = var
+        var = session['0,1'].max_carry_dc_power
     '''
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
-    Returns the maximum DC voltage the channel can switch in volts.
+    This channel-based attribute returns the maximum DC voltage the channel  can switch.
+    The units are volts.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_dc_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_dc_voltage.Session instance, and calling set/get value on the result.:
 
-    `General Switching Considerations <SWITCH.chm::/considerations.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].max_dc_voltage = var
+        var = session['0,1'].max_dc_voltage
     '''
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
-    Returns the maximum AC current the channel can switch in amperes RMS.
+    This channel-based attribute returns the maximum AC current the channel  can switch.
+    The units are amperes RMS.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_current.Session instance, and calling set/get value on the result.:
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
-    Current <SWITCH.chm::/switching_current.html>`__
+        session['0,1'].max_switching_ac_current = var
+        var = session['0,1'].max_switching_ac_current
     '''
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
-    Returns the maximum AC power the channel can switch in volt-amperes.
+    This channel-based attribute returns the maximum AC power the channel can  switch.
+    The units are volt-amperes.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_power.Session instance, and calling set/get value on the result.:
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
-    Power <SWITCH.chm::/switching_power.html>`__
+        session['0,1'].max_switching_ac_power = var
+        var = session['0,1'].max_switching_ac_power
     '''
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
-    Returns the maximum DC current the channel can switch in amperes.
+    This channel-based attribute returns the maximum DC current the channel  can switch.
+    The units are amperes.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_current.Session instance, and calling set/get value on the result.:
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
-    Current <SWITCH.chm::/switching_current.html>`__
+        session['0,1'].max_switching_dc_current = var
+        var = session['0,1'].max_switching_dc_current
     '''
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
-    Returns the maximum DC power the channel can switch in watts.
+    This channel-based attribute returns the maximum DC power the channel can  switch.
+    The units are watts.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_power.Session instance, and calling set/get value on the result.:
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
-    Power <SWITCH.chm::/switching_power.html>`__
+        session['0,1'].max_switching_dc_power = var
+        var = session['0,1'].max_switching_dc_power
     '''
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''
-    Returns the number of relays that the instrument driver supports.
-
-    **Related topics**
-
-    `niSwitch Get Relay
-    Name <switchviref.chm::/niSwitch_Get_Relay_Name.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+    This attribute returns the number of relays.
     '''
     num_of_columns = attributes.AttributeViInt32(1250019)
     '''
-    Returns the number of channels on the column of a matrix or scanner. If
-    the switch module is a scanner, this property returns the number of
-    input channels.
-
-    The `Wire mode <pniSwitch_Wiremode.html>`__ property affects the number
-    of available columns. For example, if your switch module has eight input
-    lines and you use the 4-wire mode, then the number of columns available
-    is two.
-
-    **Related topics**
-
-    `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+    This attribute returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
+    The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
     '''
     num_of_rows = attributes.AttributeViInt32(1250018)
     '''
-    Returns the number of channels on the row of a matrix or scanner. If the
-    switch module is a scanner, this property returns the number of output
-    channels.
-
-    The `Wire mode <pniSwitch_Wiremode.html>`__ property affects the number
-    of available rows. For example, if your switch module has eight input
-    lines and you use the 2-wire mode, then the number of columns you have
-    available is four.
-
-    **Related topics**
-
-    `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+    This attribute returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
+    The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
     parsed_scan_list = attributes.AttributeViString(1150012)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.
     '''
     power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
     '''
-    Specifies whether to power down latching relays after calling the
-    `niSwitch Wait For
-    Debounce <switchviref.chm::/niSwitch_Wait_For_Debounce.html>`__ VI. Set
-    this property to TRUE to ensure that the relays settle and the latching
-    relays power down after you call the `niSwitch Wait for
-    Debounce <switchviref.chm::/niSwitch_Wait_For_Debounce.html>`__ VI.
-
-    **Related topics**
-
-    `Armature Relays <SWITCH.chm::/armature_relay.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status
-    after each operation. The default value is TRUE. Use the `niSwitch
-    Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Querying the instrument status is useful for debugging. After you
-    validate your program, set this property to FALSE to disable status
-    checking and maximize performance. The instrument driver can choose to
-    ignore status checking for particular properties regardless of the
-    setting of this property.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    This property specifies whether to power down latching relays after  calling Wait For Debounce.
+    When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
-    Specifies whether to validate property values and VI parameters. The
-    default value is TRUE. Use the `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Set this property to TRUE to validate the parameter values that you pass
-    to instrument driver VIs. Range checking parameters is useful for
-    debugging. After validating your program, set this property to FALSE to
-    disable range checking and maximize performance.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
+    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''
-    Specifies whether the IVI engine keeps a list of the value coercions it
-    makes for properties with ViInt32 and ViReal64 datatypes. The default
-    value is FALSE. Use the `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Call `niSwitch Get Next Coercion
-    Record <switchviref.chm::/niSwitch_Get_Next_Coercion_Record.html>`__ VI
-    to extract and delete the oldest coercion record from the list.
-
-    **Related topics**
-
-    `niSwitch Get Next Coercion
-    Record <switchviref.chm::/niSwitch_Get_Next_Coercion_Record.html>`__
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call niSwitch_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
+    The default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to override this value.
     '''
     scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
     '''
-    Specifies the method to use to notify another instrument that all
-    signals through the switch module have settled following the processing
-    of one entry in the scan list.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    '''
-    Specifies the driving level for the Scan Advanced Output signal sent
-    from the switch module through either the external (PXI/PXIe) or front
-    connector (SCXI) lines. When the Scan Advanced Output signal is sent to
-    one of the PXI_Trig lines, the driven level is always low and this
-    property is ignored. Between each Scan Advanced Output signal, the line
-    is not driven and is in a high-impedance state.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
-    '''
     scan_delay = attributes.AttributeViReal64(1250025)
     '''
-    Specifies the minimum amount of time the switch module waits before it
-    asserts the scan advanced output trigger after opening or closing the
-    switch. The switch module always waits for debounce before asserting the
-    trigger. Thus, the actual delay will always be the greater value of the
-    settling time and the value you specify as the switch delay, measured in
-    seconds. Settling time can vary depending on the switch module.
+    This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
+    the greater value of the settling time and the value you specify as the  scan delay.
 
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
     '''
     scan_list = attributes.AttributeViString(1250020)
     '''
-    Contains a scan list (a string that specifies channel connections and
-    trigger conditions). The `niSwitch Initiate
-    Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI makes or
-    breaks connections and waits for triggers according to the instructions
-    in the scan list. The scan list is comprised of channel names separated
-    by special characters that determine the operations the scanner performs
-    on the channels when it executes the scan list.
-
-    To create a path between two channels, use the following character
-    between the two channel names: -> (a dash followed by a '>' sign)
-    Example: 'CH1->CH2' tells the switch to make a path from channel CH1 to
-    channel CH2.
-
-    To break or clear a path, use the following character as a prefix before
-    the path: ~ (tilde) Example: '~CH1->CH2' tells the switch to break the
-    path from channel CH1 to channel CH2.
-
-    To tell the switch module to wait for a trigger event, use the following
-    character as a separator between paths: ; (semi-colon) Example:
-    'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1
-    to channel CH2, wait for a trigger, and then make the path from CH3 to
-    CH4.
-
-    To tell the switch module to create multiple paths as quickly as
-    possible, use the & (ampersand) or && (double ampersand) as a separator
-    between the paths. The & in 'CH0->CH1;CH2->CH3&CH4->CH5' instructs the
-    scanner to make the path between channels CH0 and CH1, wait for a
-    trigger, and then make the paths between channels CH2 and CH3 and
-    between channels CH4 and CH5 in no particular order without waiting for
-    settling or waiting for a trigger. If wait for settling is desired,
-    replace & with &&. The && in 'CH0->CH1;CH2->CH3&&CH4->CH5' instructs the
-    scanner to make the path between channels CH0 and CH1, wait for a
-    trigger, and then make the path between channels CH2 and CH3, wait for
-    settling, then make the path between channels CH4 and CH5.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Scan
-    Lists <SWITCH.chm::/scan_list.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    This attribute contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The niSwitch_InitiateScan  function makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+    The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
+    To create a path between two channels, use the following character between  the two channel names:
+    -> (a dash followed by a '>' sign)
+    Example:  'CH1->CH2' tells the switch to make a path from channel CH1 to channel  CH2.
+    To break or clear a path, use the following character as a prefix before  the path:
+    ~ (tilde)
+    Example:  '~CH1->CH2' tells the switch to break the path from channel CH1 to  channel CH2.
+    To tell the switch device to wait for a trigger event, use the following  character as a separator between paths:
+    ; (semi-colon)
+    Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
     '''
     scan_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanMode, 1250021)
     '''
-    Specifies how to handle existing connections that conflict with the
-    connections you make in a scan list. For example, if CH1 is already
-    connected to CH2 and the scan list instructs the switch module to
-    connect CH1 to CH3, this property specifies what happens to the
-    connection between CH1 and CH2.
-
-    Set the property value to **None** to make the switch module take no
-    action on existing paths. Set the value to **Break Before Make** to make
-    the switch module break conflicting paths before making new ones. Set
-    the value to **Break After Make** to make the switch module break
-    conflicting paths after making new ones. Most switch modules support
-    only one of the possible values: in such cases, this property serves as
-    an indicator of the module's behavior.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    This attribute specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this attribute specifies what happens to the  connection between CH1 and CH2.
+    If the value of this attribute is NISWITCH_VAL_NONE, the switch device  takes no action on existing paths.  If the value is  NISWITCH_VAL_BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is NISWITCH_VAL_BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
+    Most switch devices support only one of the possible values.  In such  cases, this attribute serves as an indicator of the device's behavior.
     '''
     serial_number = attributes.AttributeViString(1150015)
     '''
-    Returns the serial number for the switch module controlled by the
-    instrument driver. If the switch module does not return a serial number,
-    the instrument driver returns the Invalid Attribute error.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    serial_number_i32 = attributes.AttributeViInt32(1150001)
-    '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH.
+    This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
     settling_time = attributes.AttributeViReal64(1250004)
     '''
-    Returns the maximum length of time in seconds from after you make a
-    connection until the signal flowing through the channel settles.
-    Settling time can vary depending on the switch module.
+    This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
+    the greater value of the settling time and the value you specify as the  scan delay.
 
-    **Related topics**
+    Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
-    Time <SWITCH.chm::/settling_time.html>`__
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    settling_time.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    settling_time.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].settling_time = var
+        var = session['0,1'].settling_time
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''
-    Specifies whether to simulate instrument driver I/O operations. The
-    default value is FALSE. Use the `niSwitch Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Set this property to TRUE to perform range checking and call
-    Ivi_GetAttribute and Ivi_SetAttribute functions without performing
-    instrument I/O. For output parameters that represent instrument data,
-    the instrument driver VIs return calculated values.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Simulating
-    a Switch <SWITCH.chm::/simulate.html>`__
+    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
+    The default value is VI_FALSE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
-    Contains the major version number of the IviSwtch class specification.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    The major version number of the IviSwtch class specification.
     '''
     specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
-    Contains the minor version number of the class specification with which
-    the instrument driver is compliant.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    The minor version number of the class specification with which this driver is compliant.
     '''
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
-    Contains a brief description of the instrument driver.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    Contains the prefix for all of the instrument driver VIs.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    Contains additional version information about the instrument driver.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
-    Revision Query VI <switchviref.chm::/niSwitch_Revision_Query.html>`__
+    A string that contains a brief description of the specific  driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
-    Contains the name of the vendor that supplies the instrument driver.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    A string that contains the name of the vendor that supplies this driver.
     '''
     supported_instrument_models = attributes.AttributeViString(1050327)
     '''
-    Contains a comma-separated (,) list of supported instrument models.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    Contains a comma-separated list of supported instrument models.
     '''
     temperature = attributes.AttributeViReal64(1150019)
     '''
-    Returns the temperature as read by the Switch module in degrees Celsius.
-    Refer to the device documentation for more information.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+    This attribute returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
     trigger_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInput, 1250022)
     '''
-    Specifies the source of the trigger for which the switch module can wait
-    upon encountering a semi-colon (;) when processing a scan list. When the
-    trigger occurs, the switch module advances to the next entry in the scan
-    list.
-
-    **Related topics**
-
-    `niSwitch Configure Scan
-    List <switchviref.chm::/niSwitch_Configure_Scan_List.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    This attribute specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
     '''
     trigger_input_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
     '''
-    Determines the behavior of the trigger input.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
+    Determines the behavior of the trigger Input.
     '''
     trigger_mode = attributes.AttributeViInt32(1150005)
     '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH. Use the `niSwitch Route Trigger
-    Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ and/or
-    `niSwitch Route Scan Advanced
-    Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
-    VIs instead.
+    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput and/or niSwitch_RouteScanAdvancedOutput  functions instead.
     '''
     wire_mode = attributes.AttributeViInt32(1250017)
     '''
-    Returns the wire mode of the switch module. This property affects the
-    values of the `Number of Rows <pniSwitch_NumberofRows.html>`__ and
-    `Number of Columns <pniSwitch_NumberofColumns.html>`__ properties. The
-    actual number of input and output lines on the switch module does not
-    change, but the number of channels depends on how many lines constitute
-    each channel.
+    This attribute returns the wire mode of the switch device.
+    This attribute affects the values of the NISWITCH_ATTR_NUM_OF_ROWS and  NISWITCH_ATTR_NUM_OF_COLUMNS attributes.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
-    **Related topics**
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    wire_mode.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    wire_mode.Session instance, and calling set/get value on the result.:
 
-    `N-Wire Switching Modes <SWITCH.chm::/xwire.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
+        session['0,1'].wire_mode = var
+        var = session['0,1'].wire_mode
     '''
 
     def __init__(self, repeated_capability):
@@ -835,7 +468,7 @@ class _SessionBase(object):
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise TypeError("%r is a frozen class" % self)
+            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
@@ -907,8 +540,11 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViBoolean()  # case 14
+        error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -957,8 +593,11 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -1007,8 +646,11 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViReal64()  # case 14
+        error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -1072,15 +714,65 @@ class _SessionBase(object):
                 number of bytes in the value. If you pass 0, you can pass VI_NULL for
                 the Attribute Value buffer parameter. Default Value:512
         '''
-        array_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        array_size_ctype = visatype.ViInt32()  # case 7
+        attribute_value_ctype = None  # case 12
+        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size = error_code
-        attribute_value_ctype = (visatype.ViChar * array_size)()
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
+        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
+
+    def _get_error(self):
+        '''_get_error
+
+        This function retrieves and then clears the IVI error information for
+        the session or the current execution thread. One exception exists: If
+        the buffer_size parameter is 0, the function does not clear the error
+        information. By passing 0 for the buffer size, the caller can ascertain
+        the buffer size required to get the entire error description string and
+        then call the function again with a sufficiently large buffer. If the
+        user specifies a valid IVI session for the InstrumentHandle parameter,
+        Get Error retrieves and then clears the error information for the
+        session. If the user passes VI_NULL for the InstrumentHandle parameter,
+        this function retrieves and then clears the error information for the
+        current execution thread. If the InstrumentHandle parameter is an
+        invalid session, the function does nothing and returns an error.
+        Normally, the error information describes the first error that occurred
+        since the user last called _get_error or ClearError.
+
+        Args:
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
+                Description parameter. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate in this
+                parameter, the function copies buffer_size - 1 bytes into the buffer,
+                places an ASCII NUL byte at the end of the buffer, and returns the
+                buffer size you must pass to get the entire value. For example, if the
+                value is "123456" and the Buffer Size is 4, the function places "123"
+                into the buffer and returns 7. If you pass a negative number, the
+                function copies the value to the buffer regardless of the number of
+                bytes in the value. If you pass 0, you can pass VI_NULL for the
+                Description buffer parameter. Default Value: None
+
+        Returns:
+            code (int): Returns the error code for the session or execution thread. If you pass
+                0 for the Buffer Size, you can pass VI_NULL for this parameter.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        code_ctype = visatype.ViStatus()  # case 14
+        buffer_size_ctype = visatype.ViInt32()  # case 7
+        description_ctype = None  # case 12
+        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -1139,7 +831,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 9
+        error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1200,7 +896,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 9
+        error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1261,7 +961,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 9
+        error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1322,9 +1026,36 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Converts an error code returned by NI-SWITCH into a user-readable
+        string. Generally this information is supplied in error out of any
+        NI-SWITCH VI. Use _error_message for a static lookup of an
+        error code description.
+
+        Args:
+            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
+                (VI_SUCCESS)
+
+        Returns:
+            error_message (string): The error information formatted into a string. You must pass a ViChar
+                array with at least 256 bytes.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus(error_code)  # case 9
+        error_message_ctype = (visatype.ViChar * 256)()  # case 11
+        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -1361,9 +1092,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._vi = 0
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
@@ -1375,7 +1106,8 @@ class Session(_SessionBase):
         _initiate_scan. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        error_code = self._library.niSwitch_AbortScan(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_AbortScan(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1419,8 +1151,11 @@ class Session(_SessionBase):
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
         '''
-        path_capability_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), ctypes.pointer(path_capability_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
+        path_capability_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
@@ -1432,7 +1167,8 @@ class Session(_SessionBase):
         _initiate_scan. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        error_code = self._library.niSwitch_Commit(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1445,7 +1181,7 @@ class Session(_SessionBase):
         semi-colons. For example, the following scan list will scan the first
         three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
         to Scan Lists for more information on scan list syntax To see the status
-        of the scan, call either is_scanning or
+        of the scan, call either IsScanning or
         wait_for_scan_complete. Use the configure_scan_trigger
         function to configure the scan trigger. Use the _initiate_scan
         function to start the scan.
@@ -1460,7 +1196,10 @@ class Session(_SessionBase):
         '''
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        error_code = self._library.niSwitch_ConfigureScanList(self._vi, scanlist.encode(self._encoding), scan_mode.value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case 3
+        scan_mode_ctype = visatype.ViInt32(scan_mode.value)  # case 10
+        error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1501,7 +1240,11 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        error_code = self._library.niSwitch_ConfigureScanTrigger(self._vi, scan_delay, trigger_input.value, scan_advanced_output.value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case 9
+        trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case 10
+        scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case 10
+        error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1537,7 +1280,10 @@ class Session(_SessionBase):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self._library.niSwitch_Connect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_Connect(vi_ctype, channel1_ctype, channel2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1574,7 +1320,9 @@ class Session(_SessionBase):
                 of a valid connection list: c0 -> r1, [c2 -> r2 -> c3] In this example,
                 r2 is a configuration channel. Default value: None
         '''
-        error_code = self._library.niSwitch_ConnectMultiple(self._vi, connection_list.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_ConnectMultiple(vi_ctype, connection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1585,7 +1333,8 @@ class Session(_SessionBase):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        error_code = self._library.niSwitch_Disable(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1607,7 +1356,10 @@ class Session(_SessionBase):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self._library.niSwitch_Disconnect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_Disconnect(vi_ctype, channel1_ctype, channel2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1617,7 +1369,8 @@ class Session(_SessionBase):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        error_code = self._library.niSwitch_DisconnectAll(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_DisconnectAll(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1639,7 +1392,9 @@ class Session(_SessionBase):
                 r2 -> c3] In this example, r2 is a configuration channel. Default value:
                 None
         '''
-        error_code = self._library.niSwitch_DisconnectMultiple(self._vi, disconnection_list.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_DisconnectMultiple(vi_ctype, disconnection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1666,61 +1421,17 @@ class Session(_SessionBase):
                 bytes in the value. If you pass 0, you can pass VI_NULL for the
                 Coercion Record buffer parameter. Default Value: None
         '''
-        buffer_size = 0
-        channel_name_buffer_ctype = None
-        error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        index_ctype = visatype.ViInt32(index)  # case 9
+        buffer_size_ctype = visatype.ViInt32()  # case 7
+        channel_name_buffer_ctype = None  # case 12
+        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        channel_name_buffer_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
-
-    def _get_error(self):
-        '''_get_error
-
-        This function retrieves and then clears the IVI error information for
-        the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the function does not clear the error
-        information. By passing 0 for the buffer size, the caller can ascertain
-        the buffer size required to get the entire error description string and
-        then call the function again with a sufficiently large buffer. If the
-        user specifies a valid IVI session for the InstrumentHandle parameter,
-        Get Error retrieves and then clears the error information for the
-        session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this function retrieves and then clears the error information for the
-        current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the function does nothing and returns an error.
-        Normally, the error information describes the first error that occurred
-        since the user last called _get_error or clear_error.
-
-        Args:
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
-                Description parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies buffer_size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Description buffer parameter. Default Value: None
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread. If you pass
-                0 for the Buffer Size, you can pass VI_NULL for this parameter.
-        '''
-        code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -1758,13 +1469,16 @@ class Session(_SessionBase):
                 allocate the buffer of the appropriate size before calling this function
                 again.
         '''
-        buffer_size = 0
-        path_ctype = None
-        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), buffer_size, path_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
+        buffer_size_ctype = visatype.ViInt32()  # case 7
+        path_ctype = None  # case 12
+        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        path_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), buffer_size, path_ctype)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
 
@@ -1785,8 +1499,10 @@ class Session(_SessionBase):
         Returns:
             relay_count (int): The number of relay cycles.
         '''
-        relay_count_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode(self._encoding), ctypes.pointer(relay_count_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
+        relay_count_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
 
@@ -1813,13 +1529,15 @@ class Session(_SessionBase):
                 bytes in the value. If you pass 0, you can pass VI_NULL for the
                 Coercion Record buffer parameter. Default Value: None
         '''
-        relay_name_buffer_size = 0
-        relay_name_buffer_ctype = None
-        error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        index_ctype = visatype.ViInt32(index)  # case 9
+        relay_name_buffer_size_ctype = visatype.ViInt32()  # case 7
+        relay_name_buffer_ctype = None  # case 12
+        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        relay_name_buffer_size = error_code
-        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size)()
-        error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
+        relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
 
@@ -1838,8 +1556,10 @@ class Session(_SessionBase):
             relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
                 NIWITCH_VAL_CLOSED 11
         '''
-        relay_position_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode(self._encoding), ctypes.pointer(relay_position_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
+        relay_position_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
@@ -2072,11 +1792,15 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                init_with_topology, init_with_options, or init
+                init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
-        vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niSwitch_InitWithTopology(resource_name.encode(self._encoding), topology.encode(self._encoding), simulate, reset_device, ctypes.pointer(vi_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
+        topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case 3
+        simulate_ctype = visatype.ViBoolean(simulate)  # case 9
+        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 9
+        vi_ctype = visatype.ViSession()  # case 14
+        error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -2092,39 +1816,10 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         _abort_scan.
         '''
-        error_code = self._library.niSwitch_InitiateScan(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_InitiateScan(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def is_debounced(self):
-        '''is_debounced
-
-        Indicates if all created paths have settled by returning the value of
-        the IS_DEBOUNCED attribute.
-
-        Returns:
-            is_debounced (bool): VI_TRUE indicates that all created paths have settled. VI_FALSE
-                indicates that all created paths have not settled.
-        '''
-        is_debounced_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_debounced_ctype.value)
-
-    def is_scanning(self):
-        '''is_scanning
-
-        Indicates the status of the scan.
-
-        Returns:
-            is_scanning (bool): The driver returns the value of IS_SCANNING attribute.
-                VI_TRUE indicates that the switch device is scanning. VI_FALSE
-                indicates that the switch device is idle.
-        '''
-        is_scanning_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_scanning_ctype.value)
 
     def relay_control(self, relay_name, relay_action):
         '''relay_control
@@ -2146,7 +1841,10 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
-        error_code = self._library.niSwitch_RelayControl(self._vi, relay_name.encode(self._encoding), relay_action.value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
+        relay_action_ctype = visatype.ViInt32(relay_action.value)  # case 10
+        error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2158,7 +1856,8 @@ class Session(_SessionBase):
         created without a logical name, this function is equivalent to
         reset.
         '''
-        error_code = self._library.niSwitch_ResetWithDefaults(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2185,7 +1884,11 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        error_code = self._library.niSwitch_RouteScanAdvancedOutput(self._vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        scan_advanced_output_connector_ctype = visatype.ViInt32(scan_advanced_output_connector.value)  # case 10
+        scan_advanced_output_bus_line_ctype = visatype.ViInt32(scan_advanced_output_bus_line.value)  # case 10
+        invert_ctype = visatype.ViBoolean(invert)  # case 9
+        error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2213,7 +1916,11 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
-        error_code = self._library.niSwitch_RouteTriggerInput(self._vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_input_connector_ctype = visatype.ViInt32(trigger_input_connector.value)  # case 10
+        trigger_input_bus_line_ctype = visatype.ViInt32(trigger_input_bus_line.value)  # case 10
+        invert_ctype = visatype.ViBoolean(invert)  # case 9
+        error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2227,7 +1934,8 @@ class Session(_SessionBase):
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
         '''
-        error_code = self._library.niSwitch_SendSoftwareTrigger(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2242,7 +1950,9 @@ class Session(_SessionBase):
                 If VI_FALSE, the scan stops after one pass through the scan list.
                 Default value: VI_FALSE
         '''
-        error_code = self._library.niSwitch_SetContinuousScan(self._vi, continuous_scan)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        continuous_scan_ctype = visatype.ViBoolean(continuous_scan)  # case 9
+        error_code = self._library.niSwitch_SetContinuousScan(vi_ctype, continuous_scan_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2262,7 +1972,9 @@ class Session(_SessionBase):
                 configuration channel. Default value: None Obtain the path list for a
                 previously created path with get_path.
         '''
-        error_code = self._library.niSwitch_SetPath(self._vi, path_list.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case 3
+        error_code = self._library.niSwitch_SetPath(vi_ctype, path_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2280,7 +1992,9 @@ class Session(_SessionBase):
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
         '''
-        error_code = self._library.niSwitch_WaitForDebounce(self._vi, maximum_time_ms)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
+        error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2299,7 +2013,9 @@ class Session(_SessionBase):
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
         '''
-        error_code = self._library.niSwitch_WaitForScanComplete(self._vi, maximum_time_ms)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
+        error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2310,32 +2026,12 @@ class Session(_SessionBase):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or init_with_options.
+        call init or InitWithOptions.
         '''
-        error_code = self._library.niSwitch_close(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Converts an error code returned by NI-SWITCH into a user-readable
-        string. Generally this information is supplied in error out of any
-        NI-SWITCH VI. Use _error_message for a static lookup of an
-        error code description.
-
-        Args:
-            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
-                (VI_SUCCESS)
-
-        Returns:
-            error_message (string): The error information formatted into a string. You must pass a ViChar
-                array with at least 256 bytes.
-        '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_error_message(self._vi, error_code, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset
@@ -2344,7 +2040,8 @@ class Session(_SessionBase):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        error_code = self._library.niSwitch_reset(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niSwitch_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2358,9 +2055,10 @@ class Session(_SessionBase):
             self_test_message (string): Self-test response string from the switch device. You must pass a ViChar
                 array with at least 256 bytes.
         '''
-        self_test_result_ctype = visatype.ViInt16(0)
-        self_test_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        self_test_result_ctype = visatype.ViInt16()  # case 14
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case 11
+        error_code = self._library.niSwitch_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

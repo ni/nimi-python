@@ -1,9 +1,14 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
-from .helper import get_python_type_for_visa_type
+from .helper import get_python_type_for_api_type
+from .metadata_filters import filter_codegen_attributes
+from .metadata_filters import filter_codegen_functions
+from .metadata_merge_dicts import merge_dicts
 
+import codecs
 import copy
+import os
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
@@ -33,10 +38,10 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter):
+def _add_python_type(parameter, config):
     '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
+        parameter['python_type'] = get_python_type_for_api_type(parameter['type'], config)
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
@@ -81,6 +86,7 @@ def _add_buffer_info(parameter):
         parameter['is_buffer'] = True
 
     if (t.find('[ ]') > 0) or (t.find('[]') > 0):
+        assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
         parameter['type'] = t.replace('[ ]', '').replace('[]', '')
         parameter['original_type'] = t
         parameter['is_buffer'] = True
@@ -98,25 +104,10 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'in':
-        if parameter['is_session_handle'] is True:
-            library_method_call_snippet = 'self._' + parameter['name']
-        elif parameter['is_repeated_capability']:
-            # 'self._encoding' is a variable on the session object
-            library_method_call_snippet = 'self._repeated_capability.encode(self._encoding)'
-        else:
-            library_method_call_snippet = parameter['python_name']
-            library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            # 'self._encoding' is a variable on the session object
-            library_method_call_snippet += '.encode(self._encoding)' if parameter['type'] == 'ViChar' else ''
-
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:
+        parameter['library_method_call_snippet'] = 'ctypes.pointer({0})'.format(parameter['ctypes_variable_name'])
     else:
-        assert parameter['direction'] == 'out', pp.pformat(parameter)
-        if parameter['is_buffer'] is True:
-            library_method_call_snippet = parameter['ctypes_variable_name']
-        else:
-            library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
-    parameter['library_method_call_snippet'] = library_method_call_snippet
+        parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
 
 
 def _add_default_value_name(parameter):
@@ -172,8 +163,18 @@ def _add_is_session_handle(parameter):
 
 
 def add_all_function_metadata(functions, config):
-    '''Adds all codegen-specific metada to the function metadata list'''
-    for f in functions:
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.functions_addon']):
+            if m.startswith('functions_'):
+                merge_dicts(functions, config['modules']['metadata.functions_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'functions_additional_functions':
+                outof = config['modules']['metadata.functions_addon'].__getattribute__(m)
+                for f in outof:
+                    functions[f] = outof[f]
+
+    for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
@@ -181,7 +182,7 @@ def add_all_function_metadata(functions, config):
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _add_python_parameter_name(p)
-            _add_python_type(p)
+            _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_default_value_name(p)
@@ -190,6 +191,131 @@ def add_all_function_metadata(functions, config):
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
     return functions
+
+
+def _add_attr_codegen_method(a, attributes):
+    '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
+    if 'codegen_method' not in attributes[a]:
+        attributes[a]['codegen_method'] = 'public'
+
+
+def _add_python_name(a, attributes):
+    '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
+    n = attributes[a]['name'].lower()
+    if attributes[a]['name'][0].isdigit():
+        n = '_' + n
+    attributes[a]['python_name'] = n
+
+
+def add_all_attribute_metadata(attributes, config):
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.attributes_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.attributes_addon']):
+            if m.startswith('attributes_'):
+                merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'attributes_additional_attributes':
+                outof = config['modules']['metadata.attributes_addon'].__getattribute__(m)
+                for a in outof:
+                    attributes[a] = outof[a]
+
+    for a in attributes:
+        _add_attr_codegen_method(a, attributes)
+        _add_python_name(a, attributes)
+
+    return attributes
+
+
+def _add_enum_codegen_method(enums, config):
+    '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public
+
+    Set all to 'no', then go through all functions and attributes and set to least restrictive use
+    '''
+    for e in enums:
+        if 'codegen_method' not in enums[e]:
+            enums[e]['codegen_method'] = 'no'
+
+    # Iterate through all codegen functions and set any enum parameters to the same level
+    for f in filter_codegen_functions(config['functions']):
+        f_codegen_method = config['functions'][f]['codegen_method']
+        if f_codegen_method != 'no':
+            for p in config['functions'][f]['parameters']:
+                e = p['enum']
+                if e is not None and e not in enums:
+                    print('Missing enum {0} referenced by function {1}'.format(e, f))
+                elif e is not None:
+                    if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
+                        enums[e]['codegen_method'] = f_codegen_method
+                    elif f_codegen_method == 'public':
+                        enums[e]['codegen_method'] = f_codegen_method
+
+    # Iterate through all codegen attributes and set any enum parameters to the same level
+    for a in filter_codegen_attributes(config['attributes']):
+        a_codegen_method = config['attributes'][a]['codegen_method']
+        if a_codegen_method != 'no':
+            e = config['attributes'][a]['enum']
+            if e is not None and e not in enums:
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+            elif e is not None:
+                if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
+                    enums[e]['codegen_method'] = a_codegen_method
+                elif a_codegen_method == 'public':
+                    enums[e]['codegen_method'] = a_codegen_method
+
+
+def add_all_enum_metadata(enums, config):
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.enums_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.enums_addon']):
+            if m.startswith('enums_'):
+                merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == 'enums_additional_enums':
+                outof = config['modules']['metadata.enums_addon'].__getattribute__(m)
+                for e in outof:
+                    enums[e] = outof[e]
+
+    # Workaround for NI Internal CAR #675174
+    try:
+        replacement_enums = config['modules']['metadata.enums_addon'].__getattribute__('replacement_enums')
+        for e in replacement_enums:
+            enums[e] = replacement_enums[e]
+    except AttributeError:
+        pass
+
+    _add_enum_codegen_method(enums, config)
+    return enums
+
+
+def add_all_metadata(functions, attributes, enums, config):
+    '''merge and add all additional metadata_dir
+
+    Updates all parameters
+        functions, attributes, enums - addon data merged, additional metadata
+        config - functions, attributes, enums added
+    '''
+    functions = add_all_function_metadata(functions, config)
+    config['functions'] = functions
+
+    attributes = add_all_attribute_metadata(attributes, config)
+    config['attributes'] = attributes
+
+    enums = add_all_enum_metadata(enums, config)
+    config['enums'] = enums
+
+    pp_persist = pprint.PrettyPrinter(indent=4, width=200)
+    metadata_dir = os.path.join('bin', 'processed_metadata')
+    if not os.path.exists(metadata_dir):
+        os.makedirs(metadata_dir)
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w", "utf-8") as text_file:
+        text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w", "utf-8") as text_file:
+        text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
 
 # Unit Tests
@@ -313,7 +439,7 @@ def test_add_all_metadata_simple():
                         'value': 1
                     },
                     'type': 'ViSession',
-                    'library_method_call_snippet': 'self._vi',
+                    'library_method_call_snippet': 'vi_ctype',
                 },
                 {
                     'ctypes_type': 'ViChar',
@@ -335,7 +461,7 @@ def test_add_all_metadata_simple():
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViChar',
                     'original_type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability.encode(self._encoding)',
+                    'library_method_call_snippet': 'channel_name_ctype',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -366,7 +492,7 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'self._vi'
+                'library_method_call_snippet': 'vi_ctype'
             }, {
                 'direction': 'out',
                 'enum': None,
@@ -403,3 +529,99 @@ def test_add_all_metadata_simple():
     }
 
     _do_the_test_add_all_metadata(functions, expected)
+
+
+def _do_the_test_add_attributes_metadata(attributes, expected):
+    actual = copy.deepcopy(attributes)
+    actual = add_all_attribute_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    _compare_dicts(actual, expected)
+
+
+def test_add_attributes_metadata_simple():
+    attributes = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    }
+    expected = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'codegen_method': 'public',
+            'documentation': {'description': 'An attribute of type bool with read/write access.'},
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'python_name': 'read_write_bool',
+            'resettable': 'No',
+            'type': 'ViBoolean'
+        },
+    }
+
+    _do_the_test_add_attributes_metadata(attributes, expected)
+
+
+def _do_the_test_add_enums_metadata(enums, expected):
+    actual = copy.deepcopy(enums)
+    actual = add_all_enum_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake', 'functions': {}, 'attributes': {}, 'modules': {'metadata.enums_addon': {}}})
+    _compare_dicts(actual, expected)
+
+
+def test_add_enums_metadata_simple():
+    enums = {
+        'Color': {
+            'values': [
+                {
+                    'name': 'RED',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Like blood.',
+                    }
+                },
+                {
+                    'name': 'BLUE',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like the sky.',
+                    }
+                },
+                {
+                    'name': 'YELLOW',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like a banana.',
+                    }
+                },
+                {
+                    'name': 'BLACK',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like this developer\'s conscience.',
+                    }
+                },
+            ],
+        },
+    }
+    expected = {
+        'Color': {
+            'codegen_method': 'no',
+            'values': [
+                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1},
+                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2},
+                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2},
+                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2}
+            ]
+        },
+    }
+
+    _do_the_test_add_enums_metadata(enums, expected)
+

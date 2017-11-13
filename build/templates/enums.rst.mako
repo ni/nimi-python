@@ -12,7 +12,7 @@ Enums used in ${driver_name}
 
 .. py:currentmodule:: ${module_name}
 
-% for enum_name in sorted(enums):
+% for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
 .. py:data:: ${enum_name}

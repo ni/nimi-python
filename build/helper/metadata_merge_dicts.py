@@ -22,11 +22,14 @@ def merge_dicts(into, outof):
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
             else:
-                # Handle regex in addon
-                for item2 in into:
-                    if re.search(item, item2):
-                        assert type(into[item2]) is dict
-                        merge_dicts(into[item2], outof[item])
+                # attributes keys are integers so they do not need the regex check (and
+                # in fact will error)
+                if type(item) is str:
+                    # Handle regex in addon
+                    for item2 in into:
+                        if re.search(item, item2):
+                            assert type(into[item2]) is dict
+                            merge_dicts(into[item2], outof[item])
         else:
             into[item] = outof[item]
 

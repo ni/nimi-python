@@ -1,9 +1,7 @@
 
-from .metadata_filters import filter_input_parameters
-from .metadata_filters import filter_output_parameters
-
+from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
-from .codegen_helper import ParameterUsageOptions
+from .parameter_usage_options import ParameterUsageOptions
 
 import re
 import string
@@ -231,7 +229,7 @@ def _replace_func_python_name(f_match):
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
             fname = config['functions'][fname]['python_name']
-        except KeyError as e:
+        except KeyError:
             print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
@@ -344,7 +342,7 @@ def get_function_rst(fname, config, indent=0):
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_input_parameters(function['parameters'])
+    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -354,7 +352,7 @@ def get_function_rst(fname, config, indent=0):
         p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_output_parameters(function['parameters'])
+    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
@@ -405,19 +403,23 @@ def get_function_docstring(fname, config, indent=0):
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_input_parameters(function['parameters'])
+    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
-        docstring += get_documentation_for_node_docstring(p, config, indent + 8)
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+        ds = get_documentation_for_node_docstring(p, config, indent + 8)
+        if len(ds) > 0:
+            docstring += ' ' + ds
 
-    output_params = filter_output_parameters(function['parameters'])
+    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
-            docstring += get_documentation_for_node_docstring(p, config, indent + 8)
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+            ds = get_documentation_for_node_docstring(p, config, indent + 8)
+            if len(ds) > 0:
+                docstring += ' ' + ds
 
     return docstring
 

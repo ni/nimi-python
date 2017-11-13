@@ -13,8 +13,9 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDCPower_Abort_cfunc = None
         self.niDCPower_Commit_cfunc = None
@@ -37,12 +38,14 @@ class Library(object):
         self.niDCPower_GetAttributeViString_cfunc = None
         self.niDCPower_GetChannelName_cfunc = None
         self.niDCPower_GetError_cfunc = None
+        self.niDCPower_GetExtCalLastDateAndTime_cfunc = None
+        self.niDCPower_GetExtCalLastTemp_cfunc = None
+        self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
         self.niDCPower_Measure_cfunc = None
-        self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_QueryInCompliance_cfunc = None
         self.niDCPower_QueryMaxCurrentLimit_cfunc = None
         self.niDCPower_QueryMaxVoltageLevel_cfunc = None
@@ -63,12 +66,6 @@ class Library(object):
         self.niDCPower_error_message_cfunc = None
         self.niDCPower_reset_cfunc = None
         self.niDCPower_self_test_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niDCPower_Abort(self, vi):  # noqa: N802
         with self._func_lock:
@@ -238,6 +235,30 @@ class Library(object):
                 self.niDCPower_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetError_cfunc(vi, code, buffer_size, description)
 
+    def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalLastDateAndTime_cfunc is None:
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc = self._library.niDCPower_GetExtCalLastDateAndTime
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
+
+    def niDCPower_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalLastTemp_cfunc is None:
+                self.niDCPower_GetExtCalLastTemp_cfunc = self._library.niDCPower_GetExtCalLastTemp
+                self.niDCPower_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalLastTemp_cfunc(vi, temperature)
+
+    def niDCPower_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetExtCalRecommendedInterval_cfunc is None:
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc = self._library.niDCPower_GetExtCalRecommendedInterval
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
+
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_GetSelfCalLastDateAndTime_cfunc is None:
@@ -277,14 +298,6 @@ class Library(object):
                 self.niDCPower_Measure_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Measure_cfunc(vi, channel_name, measurement_type, measurement)
-
-    def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_MeasureMultiple_cfunc is None:
-                self.niDCPower_MeasureMultiple_cfunc = self._library.niDCPower_MeasureMultiple
-                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         with self._func_lock:

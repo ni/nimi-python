@@ -1,9 +1,8 @@
-# These dictionaries are applied to the generated functions dictionary at build time
-# Any changes to the API should be made here. functions.py is code generated
+# These dictionaries are merged with the extracted function metadata at build time.
+# Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
-# By default all functions in functions.py will be generated as a public function
-# This will override that with private - add '_' to the beginning of the name, or
-# don't generate at all
+# By default all functions in functions.py are "public".
+# This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
     'InitializeWithChannels':          { 'codegen_method': 'private',  },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
@@ -17,7 +16,9 @@ functions_codegen_method = {
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
-    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalSelfCalibrate':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -40,6 +41,7 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'MeasureMultiple':                 { 'codegen_method': 'no',       },  # Issue 444
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -52,25 +54,14 @@ functions_enums = {
     'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
-    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event',                       }, }, },
-    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'Signals',                     }, }, },
-    # @TODO add all enums
+    'WaitForEvent':                                 { 'parameters': { 1: { 'enum': 'Event',                       }, }, },
+    'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
+    'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
+    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'ExportSignal',                }, }, },
+	# @TODO add all enums
 }
 
-# This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
-# {'is_buffer': True} is required for all parameters that are arrays. Some were able to be detected as an array when
-#   generating functions.py. This sets 'is_buffer' for those parameters where the dectection didn't work
-# {'size': <size information>} is required for all output buffers.
-# <size information> is a dictionary with two keys: 'mechanism' and 'value'.
-#   'mechanism' can be:
-#       'fixed':        The size is known ahead of time, usually defined by the API.
-#                       'value' should be an int.
-#       'passed-in':    When the size comes from another parameter.
-#                       'value' should be the name of the parameter through which this is specified.
-#       'ivi-dance':    When the size is determined by calling into the function using a size of zero and
-#                       interpreting the return value as a size rather than an error.
-#                       'value' should be the name of the parameter through which the size (0, then the real
-#                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
+# This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
@@ -78,17 +69,11 @@ functions_buffer_info = {
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'SetSequence':                  { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'Size'}, }, }, },
-    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'attributeIdCount'}, }, }, },
-    'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
-    '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
-    'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
-    'InitializeWithChannels':       { 'parameters': { 0: { 'is_buffer': True, },
-                                                      1: { 'is_buffer': True, },
-                                                      3: { 'is_buffer': True, }, }, },
+    'SetSequence':                  { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
+    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'attributeIdCount'}, }, }, },
     'FetchMultiple':                { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
                                                       5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
-                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, }
+                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -100,7 +85,7 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '', }, }, },
@@ -115,7 +100,7 @@ function_default_value = {
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
-    'WaitForEvent':                                  { 'parameters': { 1: { 'default_value': 10.0, },}, },
+    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
                                                                        2: { 'default_value': 1.0, }, }, },
 

@@ -36,9 +36,12 @@ def test_vi_boolean_attribute(session):
     assert session.interchange_check is False
 
 
+'''
+# TODO(texasaggie97) enable when there is a writable string attribute
 def test_vi_string_attribute(session):
     session.error_elaboration = 'Test'
     assert 'Test' == session.error_elaboration
+'''
 
 
 def test_vi_int32_attribute(session):
@@ -314,3 +317,8 @@ def test_set_boolean_attribute(session):
     assert session.cache is False
     session.cache = True
     assert session.cache is True
+
+
+def test_get_ext_cal_recommended_interval(session):
+    months = session.get_ext_cal_recommended_interval()
+    assert months == 24

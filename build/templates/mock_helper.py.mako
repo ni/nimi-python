@@ -34,11 +34,11 @@ f = functions[func_name]
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-% for p in helper.filter_output_parameters(f['parameters']):
+% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS):
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
-ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
+ivi_dance_param = helper.filter_ivi_dance_parameter(f)
 %>\
 % if ivi_dance_param is not None:
         self._defaults['${func_name}']['${ivi_dance_param['name']}'] = None
@@ -55,8 +55,8 @@ ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
 <%
 f = functions[func_name]
 params = f['parameters']
-output_params = helper.filter_output_parameters(params)
-ivi_dance_param = helper.filter_ivi_dance_parameter(params)
+output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
+ivi_dance_param = helper.filter_ivi_dance_parameter(f)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
@@ -73,15 +73,26 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         for i in range(min(len(${p['python_name']}), len(a))):
             ${p['python_name']}[i] = a[i]
 %       else:
+%           if helper.find_custom_type(p, config) is not None:
+        for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
+            field_name = field[0]
+            setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
+%           else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
+%           endif
 %       endif
 %    endfor
 %    if ivi_dance_param is not None:
         if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
-        if ${ivi_dance_size_param['python_name']} == 0:
+        if ${ivi_dance_size_param['python_name']}.value == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
+%       if ivi_dance_param['type'] == 'ViChar':  # strings
         ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
+%       else:  # arrays
+        for i in range(len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])):
+            ${ivi_dance_param['python_name']}[i] = self._defaults['${func_name}']['${ivi_dance_param['name']}'][i]
+%       endif
 %    endif
         return self._defaults['${func_name}']['return']
 

@@ -1,8 +1,8 @@
 import ctypes
 
 
-'''Definitions of the VISA types used by the C API of the driver runtime. These are subclases of ctypes types so can
-be used directly to call into the library.
+'''Definitions of the VISA types used by the C API of the driver runtime.
+These are aliased directly to ctypes types so can be used directly to call into the library.
 '''
 
 

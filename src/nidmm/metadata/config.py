@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nidmm',
-    'module_version': '0.3.0.dev0',
+    'module_version': '0.5.0.dev0',
     'c_function_prefix': 'niDMM_',
     'driver_name': 'NI-DMM',
     'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
@@ -25,5 +25,6 @@ config = {
     'driver_urls': {
         'REPLACE_DRIVER_SPECIFIC_URL_1': 'http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/{0}/',
     },
+    'custom_types': [],
 }
 

@@ -1,9 +1,8 @@
-# These dictionaries are applied to the generated functions dictionary at build time
-# Any changes to the API should be made here. functions.py is code generated
+# These dictionaries are merged with the extracted function metadata at build time.
+# Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
-# By default all functions in functions.py will be generated as a public function
-# This will override that with private - add '_' to the beginning of the name, or
-# don't generate at all
+# By default all functions in functions.py are "public".
+# This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
@@ -26,6 +25,8 @@ functions_codegen_method = {
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
+    'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -42,20 +43,7 @@ functions_enums = {
                                                       3: { 'enum': 'ScanAdvancedOutput',       }, }, },
 }
 
-# This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
-# {'is_buffer': True} is required for all parameters that are arrays. Some were able to be detected as an array when
-#   generating functions.py. This sets 'is_buffer' for those parameters where the dectection didn't work
-# {'size': <size information>} is required for all output buffers.
-# <size information> is a dictionary with two keys: 'mechanism' and 'value'.
-#   'mechanism' can be:
-#       'fixed':        The size is known ahead of time, usually defined by the API.
-#                       'value' should be an int.
-#       'passed-in':    When the size comes from another parameter.
-#                       'value' should be the name of the parameter through which this is specified.
-#       'ivi-dance':    When the size is determined by calling into the function using a size of zero and
-#                       interpreting the return value as a size rather than an error.
-#                       'value' should be the name of the parameter through which the size (0, then the real
-#                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
+# This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
@@ -76,7 +64,7 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
     'InitWithTopology':         { 'parameters': { 1: { 'default_value': 'Configured Topology', },
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
@@ -87,7 +75,4 @@ function_default_value = {
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
     'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 5000, }, }, },
     'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 5000, }, }, },
-
-
-
 }

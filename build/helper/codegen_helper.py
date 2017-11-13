@@ -1,152 +1,50 @@
-from .metadata_filters import filter_ivi_dance_parameter
-from .metadata_filters import filter_len_parameter
+from .metadata_filters import filter_parameters
+from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
-from enum import Enum
+from .parameter_usage_options import ParameterUsageOptions
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
+_parameterUsageOptionsSnippet = {}
+
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name_with_default',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'python_name',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+    'skip_self': True,
+    'name_to_use': 'python_name_with_doc_default',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'python_name',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'library_method_call_snippet',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+    'skip_self': True,
+    'name_to_use': 'ctypes_type_library_call',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name',
+}
+# Only used for filtering
+#   ParameterUsageOptions.INPUT_PARAMETERS
+#   ParameterUsageOptions.OUTPUT_PARAMETERS
+#   ParameterUsageOptions.IVI_DANCE_PARAMETER
+#   ParameterUsageOptions.LEN_PARAMETER
+#   ParameterUsageOptions.INPUT_ENUM_PARAMETERS
+
 
 # Functions that return snippets that can be placed directly in the templates.
-class ParameterUsageOptions(Enum):
-    '''Different usage options for parameter lists.'''
-
-    SESSION_METHOD_DECLARATION = 1
-    '''For declaring a method in Session'''
-    SESSION_METHOD_CALL = 2
-    '''For calling into a Session method.'''
-    DOCUMENTATION_SESSION_METHOD = 3
-    '''For documentation (rst) of Session methods'''
-    CTYPES_CALL = 4
-    '''For Library implementation calling into the DLL via ctypes'''
-    LIBRARY_METHOD_CALL = 5
-    '''For calling into a method in Library.'''
-    CTYPES_ARGTYPES = 6
-    '''For setting up the ctypes argument types'''
-    LIBRARY_METHOD_DECLARATION = 7
-    '''For declaring a method in Library'''
-
-
-_parameterUsageOptions = {}
-
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name_with_default',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name_with_doc_default',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'library_method_call_snippet',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'ctypes_type_library_call',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-}
-
-
-def filter_parameters(function, parameter_usage_options):
-    '''filter_parameters
-
-    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
-    '''
-    if type(parameter_usage_options) is not ParameterUsageOptions:
-        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
-
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
-
-    parameters_to_use = []
-
-    # Filter based on options
-    # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
-    size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
-    if size_parameter is None:
-        size_parameter = find_size_parameter(filter_len_parameter(function['parameters']), function['parameters'])
-    for x in function['parameters']:
-        skip = False
-        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
-            skip = True
-        if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
-            skip = True
-        if x == size_parameter and options_to_use['skip_size_parameter']:
-            skip = True
-        if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
-            skip = True
-        if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
-            skip = True
-        if not skip:
-            parameters_to_use.append(x)
-
-    # Reorder based on options
-    if options_to_use['reordered_for_default_values']:
-        new_order = []
-        for x in parameters_to_use:
-            if 'default_value' not in x:
-                new_order.append(x)
-        for x in parameters_to_use:
-            if 'default_value' in x:
-                new_order.append(x)
-        parameters_to_use = new_order
-
-    return parameters_to_use
-
-
 def get_params_snippet(function, parameter_usage_options):
     '''get_params_snippet
 
@@ -155,7 +53,7 @@ def get_params_snippet(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
+    options_to_use = _parameterUsageOptionsSnippet[parameter_usage_options]
 
     parameters_to_use = filter_parameters(function, parameter_usage_options)
 
@@ -164,19 +62,28 @@ def get_params_snippet(function, parameter_usage_options):
         snippets.append('self')
 
     # Render based on options
-    for x in parameters_to_use:
-            snippets.append(x[options_to_use['name_to_use']])
+    for p in parameters_to_use:
+            snippets.append(p[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters):
+def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
     return_type_snippet = ''
+
+    # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
+    val_suffix = '.value'
+    module_name = ''
+    c = find_custom_type(output_parameter, config)
+    if c is not None:
+        val_suffix = ''
+        module_name = c['file_name'] + '.'
+
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
-        return_type_snippet = output_parameter['python_type'] + '('
+        return_type_snippet = module_name + output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar':
@@ -187,20 +94,21 @@ def _get_output_param_return_snippet(output_parameter, parameters):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['python_name']
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size + ')]'
+                size = size_parameter['ctypes_variable_name'] + '.value'
+
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
-        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
+        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
     return snippet
 
 
-def get_method_return_snippet(parameters):
+def get_method_return_snippet(parameters, config):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters))
+            snippets.append(_get_output_param_return_snippet(x, parameters, config))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -213,24 +121,87 @@ def get_enum_type_check_snippet(parameter, indent):
     return enum_check
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters):
-    '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    assert parameter['direction'] == 'out', pp.pformat(parameter)
-    snippet = parameter['ctypes_variable_name'] + ' = '
-    if parameter['is_buffer']:
-        if parameter['size']['mechanism'] == 'fixed':
-            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
-        elif parameter['size']['mechanism'] == 'ivi-dance':
-            # TODO(marcoskirsch): remove.
-            assert False, "THIS IS DEAD CODE!"
-            snippet += 'visatype.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+def _get_buffer_parameter_for_size_parameter(parameter, parameters):
+    '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
+    for p in parameters:
+        if p['is_buffer'] and p['size']['value'] == parameter['name']:
+            return p
+    return None
+
+
+def get_ctype_variable_declaration_snippet(parameter, parameters, config):
+    '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
+
+    We've identified many different cases on how these need to be initialized based on the parameter:
+        1. Input session handle:                                        visatype.ViSession(self._vi)
+        2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        4. Input buffer (not string):                                   (visatype.ViInt32 * len(list))(*list)
+        5. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
+        6. Input is size of input buffer:                               visatype.ViInt32(len(list))
+        7. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
+        8. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
+        9. Input scalar:                                                visatype.ViInt32(parameter_name)
+       10. Input enum:                                                  visatype.ViInt32(parameter_name.value)
+       11. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
+       12. Output buffer with mechanism ivi-dance:                      None
+       13. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
+       14. Output scalar or enum:                                       visatype.ViInt32()
+    '''
+
+    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
+    module_name = 'visatype'
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name']
+
+    # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
+    # Suggestions on how to improve readability are welcome.
+    # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
+    if parameter['direction'] == 'in':
+        if parameter['is_session_handle'] is True:
+            definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+        elif parameter['is_repeated_capability'] is True:
+            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
+        elif parameter['type'] == 'ViChar':
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
+        elif parameter['is_buffer'] is True and custom_type is None:
+            definition = '({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+        elif parameter['is_buffer'] is True and custom_type is not None:
+            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
-            size_parameter = find_size_parameter(parameter, parameters)
-            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
+            corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
+            if corresponding_buffer_parameter is not None:
+                if corresponding_buffer_parameter['direction'] == 'in':
+                    definition = '{0}.{1}(len({2}))  # case 6'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                else:
+                    assert corresponding_buffer_parameter['direction'] == 'out'
+                    if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
+                        definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                    else:
+                        assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
+                        definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            elif parameter['enum'] is None:
+                definition = '{0}.{1}({2})  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            else:
+                definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
-        snippet += 'visatype.' + parameter['ctypes_type'] + '(0)'
-    return snippet
+        assert parameter['direction'] == 'out'
+        if parameter['is_buffer'] is True:
+            assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
+            if parameter['size']['mechanism'] == 'fixed':
+                definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            elif parameter['size']['mechanism'] == 'ivi-dance':
+                definition = 'None  # case 12'
+            elif parameter['size']['mechanism'] == 'passed-in':
+                size_parameter = find_size_parameter(parameter, parameters)
+                definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+            else:
+                assert False, 'Unknown mechanism: ' + str(parameter)
+        else:
+            definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
+
+    return parameter['ctypes_variable_name'] + ' = ' + definition
 
 
 def get_dictionary_snippet(d, indent=4):

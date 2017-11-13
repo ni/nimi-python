@@ -14,18 +14,12 @@ attributes = {
         'name': 'RANGE_CHECK',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether to validate property values and VI parameters. If
-enabled, the instrument driver validates the parameter values passed to
-driver VIs. Range checking parameters is very useful for debugging.
-After the user program is validated, you can set this property to FALSE
-(0) to disable range checking and maximize performance. The default
-value is TRUE (1). Use `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_With_Options.html>`__ to
-override the default setting.
+'documentation': {
+'description': '''
+Specifies whether to validate attribute values and function parameters. If  enabled, the instrument driver validates the parameter values passed to  driver functions. Range checking parameters is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable range checking and maximize performance.
+The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
 ''',
-        },
+},
     },
     1050003: {
         'access': 'read-write',
@@ -35,19 +29,13 @@ override the default setting.
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether the instrument driver queries the instrument status
-after each operation. Querying the instrument status is very useful for
-debugging. After the user program is validated, this property can be set
-to FALSE (0) to disable status checking and maximize performance. The
-instrument driver can choose to ignore status checking for particular
-properties regardless of the setting of this property. The default value
-is TRUE (1). Use `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-override the default setting.
+'documentation': {
+'description': '''
+Specifies whether the instrument driver queries the instrument status after  each operation. Querying the instrument status is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable status checking and maximize performance.
+The instrument driver can choose to ignore status checking for particular  attributes regardless of the setting of this attribute.
+The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
 ''',
-        },
+},
     },
     1050004: {
         'access': 'read-write',
@@ -57,19 +45,9 @@ override the default setting.
         'name': 'CACHE',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether to cache the value of properties. When caching is
-enabled, the instrument driver keeps track of the current instrument
-settings and avoids sending redundant commands to the instrument. Thus,
-it significantly increases execution speed. The instrument driver can
-choose to always cache or to never cache particular properties
-regardless of the setting of this property. The default value is TRUE
-(1). Use `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-override the default setting.
-''',
-        },
+'documentation': {
+'description': 'Specifies whether to cache the value of attributes. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular attributes regardless of the setting of this  attribute. The default value is VI_TRUE (1). Use the niDMM_InitWithOptions  function to override this value.',
+},
     },
     1050005: {
         'access': 'read-write',
@@ -79,23 +57,13 @@ override the default setting.
         'name': 'SIMULATE',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether to simulate instrument driver I/O operations. If
-simulation is enabled, instrument driver functions perform range
-checking and call IVI Get and Set VIs, but they do not perform
-instrument I/O. For output parameters that represent instrument data,
-the instrument driver VIs return calculated values. The default value is
-FALSE (0). Use `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-override the default setting.
+'documentation': {
+'description': '''
+Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver functions perform range checking and  call IVI Get and Set functions, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver functions return calculated values.
+The default value is VI_FALSE (0). Use the niDMM_InitWithOptions function to  override this setting.
+Simulate can only be set within the InitWithOptions function.  The attribute value cannot be changed outside of the function.
 ''',
-            'note': '''
-Simulate can only be set within the `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ VI. The
-property value cannot be changed outside of the VI.
-''',
-        },
+},
     },
     1050006: {
         'access': 'read-write',
@@ -105,17 +73,12 @@ property value cannot be changed outside of the VI.
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether the IVI engine keeps a list of the value coercions it
-makes for ViInt32 and ViReal64 properties. The default value is FALSE
-(0). Use `niDMM Initialize With
-Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-override the default setting. Use `niDMM Get Next Coercion
-Record <dmmviref.chm::/niDMM_Get_Next_Coercion_Record.html>`__ to
-extract and delete the oldest coercion record from the list.
+'documentation': {
+'description': '''
+Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call niDMM_GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
+The default value is VI_FALSE (0). Use the niDMM_InitWithOptions function to  override this value.
 ''',
-        },
+},
     },
     1050007: {
         'access': 'read only',
@@ -125,20 +88,13 @@ extract and delete the oldest coercion record from the list.
         'name': 'DRIVER_SETUP',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-This property indicates the Driver Setup string that the user specified
-when initializing the driver. Some cases exist where the end-user must
-specify instrument driver options at initialization time. An example of
-this is specifying a particular instrument model from among a family of
-instruments that the driver supports. This is useful when using
-simulation. The end-user can specify driver-specific options through the
-Driver Setup keyword in the Option String parameter in `niDMM Initialize
-With Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__. If
-the user does not specify a Driver Setup string, this property returns
-an empty string.
+'documentation': {
+'description': '''
+This attribute indicates the Driver Setup string that the user specified when  initializing the driver.
+Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
+If the user does not specify a Driver Setup string, this attribute returns  an empty string.
 ''',
-        },
+},
     },
     1050021: {
         'access': 'read-write',
@@ -148,25 +104,14 @@ an empty string.
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
         'type': 'ViBoolean',
-        'documentation': {
-            'description': '''
-Specifies whether to perform interchangeability checking and log
-interchangeability warnings when you call niDMM VIs. Interchangeability
-warnings indicate that using your application with a different
-instrument might cause different behavior. Use `niDMM Get Next
-Interchange
-Warning <dmmviref.chm::/niDMM_Get_Next_Interchange_Warning.html>`__ to
-extract interchange warnings. Use `niDMM Clear Interchange
-Warnings <dmmviref.chm::/niDMM_Clear_Interchange_Warnings.html>`__ to
-clear the list of interchangeability warnings without reading them.
-Interchangeability checking examines the properties in a capability
-group only if you specify a value for at least one property within that
-group. Interchangeability warnings can occur when a property affects the
-behavior of the instrument and you have not set that property, or the
-property has been invalidated since you set it.
+'documentation': {
+'description': '''
+Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM functions.
+The default value is VI_FALSE.
+Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call niDMM_GetNextInterchangeWarning  to extract interchange warnings.  Call niDMM_ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
+Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
 ''',
-            'table_body': [['TRUE', '1'], ['FALSE', '0']],
-        },
+},
     },
     1050101: {
         'access': 'read-write',
@@ -176,8 +121,8 @@ property has been invalidated since you set it.
         'name': 'PRIMARY_ERROR',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 A code that describes the first error that occurred since the last call
 to niDMM Get Error for the session. The value follows the VXIplug&play
 conventions. A negative value describes an error condition. A positive
@@ -185,7 +130,7 @@ value describes a warning condition. A zero indicates that no error or
 warning occurred. The error and warning values can be status codes
 defined by IVI, VISA, class drivers, or specific drivers.
 ''',
-        },
+},
     },
     1050102: {
         'access': 'read-write',
@@ -195,14 +140,14 @@ defined by IVI, VISA, class drivers, or specific drivers.
         'name': 'SECONDARY_ERROR',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 An optional code that provides additional information concerning the
 primary error condition. The error and warning values can be status
 codes defined by IVI, VISA, class drivers, or specific drivers. Zero
 indicates no additional information.
 ''',
-        },
+},
     },
     1050103: {
         'access': 'read-write',
@@ -212,12 +157,12 @@ indicates no additional information.
         'name': 'ERROR_ELABORATION',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 An optional string that contains additional information concerning the
 primary error condition.
 ''',
-        },
+},
     },
     1050203: {
         'access': 'read only',
@@ -227,14 +172,9 @@ primary error condition.
         'name': 'CHANNEL_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Indicates the number of channels that the specific instrument driver
-supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
-property is set, the IVI engine maintains a separate cache value for
-each channel.
-''',
-        },
+'documentation': {
+'description': 'Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.',
+},
     },
     1050302: {
         'access': 'read only',
@@ -244,13 +184,12 @@ each channel.
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-The prefix for the specific instrument driver. The name of each
-user-callable VI in this driver starts with this prefix. The prefix can
-be up to a maximum of eight characters.
+'documentation': {
+'description': '''
+The prefix for the specific instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
+The prefix can be up to a maximum of eight characters.
 ''',
-        },
+},
     },
     1050304: {
         'access': 'read only',
@@ -260,9 +199,11 @@ be up to a maximum of eight characters.
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the resource descriptor of the instrument.',
-        },
+'documentation': {
+'description': '''
+A string containing the resource descriptor of the instrument.
+''',
+},
     },
     1050305: {
         'access': 'read only',
@@ -272,9 +213,11 @@ be up to a maximum of eight characters.
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the logical name of the instrument.',
-        },
+'documentation': {
+'description': '''
+A string containing the logical name of the instrument.
+''',
+},
     },
     1050327: {
         'access': 'read only',
@@ -284,12 +227,11 @@ be up to a maximum of eight characters.
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-A string containing the instrument models supported by the specific
-driver.
+'documentation': {
+'description': '''
+A string containing the instrument models supported by the specific driver.
 ''',
-        },
+},
     },
     1050401: {
         'access': 'read only',
@@ -299,12 +241,11 @@ driver.
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-A string containing the capabilities and extension groups supported by
-the specific driver.
+'documentation': {
+'description': '''
+A string containing the capabilities and extension groups supported by the  specific driver.
 ''',
-        },
+},
     },
     1050501: {
         'access': 'read only',
@@ -314,9 +255,9 @@ the specific driver.
         'name': 'ENGINE_MAJOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'The major version number of the IVI engine.',
-        },
+'documentation': {
+'description': 'The major version number of the IVI engine.',
+},
     },
     1050502: {
         'access': 'read only',
@@ -326,9 +267,9 @@ the specific driver.
         'name': 'ENGINE_MINOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'The minor version number of the IVI engine.',
-        },
+'documentation': {
+'description': 'The minor version number of the IVI engine.',
+},
     },
     1050503: {
         'access': 'read only',
@@ -338,9 +279,9 @@ the specific driver.
         'name': 'SPECIFIC_DRIVER_MAJOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Returns the major version number of this instrument driver.',
-        },
+'documentation': {
+'description': 'Returns the major version number of this instrument driver.',
+},
     },
     1050504: {
         'access': 'read only',
@@ -350,9 +291,9 @@ the specific driver.
         'name': 'SPECIFIC_DRIVER_MINOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Returns the minor version number of this instrument driver.',
-        },
+'documentation': {
+'description': 'Returns the minor version number of this instrument driver.',
+},
     },
     1050510: {
         'access': 'read only',
@@ -362,9 +303,11 @@ the specific driver.
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the instrument firmware revision number.',
-        },
+'documentation': {
+'description': '''
+A string containing the instrument firmware revision number.
+''',
+},
     },
     1050511: {
         'access': 'read only',
@@ -374,9 +317,11 @@ the specific driver.
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the manufacturer of the instrument.',
-        },
+'documentation': {
+'description': '''
+A string containing the manufacturer of the instrument.
+''',
+},
     },
     1050512: {
         'access': 'read only',
@@ -386,9 +331,11 @@ the specific driver.
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the instrument model.',
-        },
+'documentation': {
+'description': '''
+A string containing the instrument model.
+''',
+},
     },
     1050513: {
         'access': 'read only',
@@ -398,9 +345,11 @@ the specific driver.
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the vendor of the specific driver.',
-        },
+'documentation': {
+'description': '''
+A string containing the vendor of the specific driver.
+''',
+},
     },
     1050514: {
         'access': 'read only',
@@ -410,9 +359,11 @@ the specific driver.
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing a description of the specific driver.',
-        },
+'documentation': {
+'description': '''
+A string containing a description of the specific driver.
+''',
+},
     },
     1050515: {
         'access': 'read only',
@@ -422,12 +373,11 @@ the specific driver.
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-The major version number of the class specification for the specific
-driver.
+'documentation': {
+'description': '''
+The major version number of the class specification for the specific driver.
 ''',
-        },
+},
     },
     1050516: {
         'access': 'read only',
@@ -437,12 +387,11 @@ driver.
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-The minor version number of the class specification for the specific
-driver.
+'documentation': {
+'description': '''
+The minor version number of the class specification for the specific driver.
 ''',
-        },
+},
     },
     1050551: {
         'access': 'read only',
@@ -452,12 +401,11 @@ driver.
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-A string that contains additional version information about this
-instrument driver.
+'documentation': {
+'description': '''
+A string that contains additional version information about this specific  instrument driver.
 ''',
-        },
+},
     },
     1050553: {
         'access': 'read only',
@@ -467,12 +415,12 @@ instrument driver.
         'name': 'ENGINE_REVISION',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 A string that contains additional version information about the IVI
 engine.
 ''',
-        },
+},
     },
     1150001: {
         'access': 'read only',
@@ -482,9 +430,9 @@ engine.
         'name': 'IDQUERY_RESPONSE',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': 'A string containing the type of instrument used in the current session.',
-        },
+'documentation': {
+'description': 'A string containing the type of instrument used in the current session.',
+},
     },
     1150002: {
         'access': 'read-write',
@@ -494,9 +442,11 @@ engine.
         'name': 'MEAS_DEST_SLOPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the polarity of the generated measurement complete signal.',
-        },
+'documentation': {
+'description': '''
+Specifies the polarity of the generated measurement complete signal.
+''',
+},
     },
     1150003: {
         'access': 'read-write',
@@ -506,14 +456,12 @@ engine.
         'name': 'SHUNT_VALUE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': 'For the NI 4050 only, specifies the shunt resistance value.',
-            'note': '''
-The NI 4050 requires an external shunt resistor for current
-measurements. This property should be set to the value of the shunt
-resistor.
+'documentation': {
+'description': '''
+For the NI 4050 only, specifies the shunt resistance value.
+The NI 4050 requires an external shunt resistor for current measurements.  This attribute should be set to the value of shunt resistor.
 ''',
-        },
+},
     },
     1150010: {
         'access': 'read-write',
@@ -523,12 +471,11 @@ resistor.
         'name': 'SAMPLE_TRIGGER_SLOPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the edge of the signal from the specified sample trigger
-source on which the DMM is triggered.
+'documentation': {
+'description': '''
+Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
 ''',
-        },
+},
     },
     1150014: {
         'access': 'read-write',
@@ -538,21 +485,11 @@ source on which the DMM is triggered.
         'name': 'OPERATION_MODE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies how the DMM acquires data.
-
-When you call `niDMM Config
-Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__, NI-DMM
-sets this property to IVIDMM Mode. When you call `niDMM Configure
-Waveform
-Acquisition <dmmviref.chm::/niDMM_Configure_Waveform_Acquisition.html>`__,
-NI-DMM sets this property to Waveform Mode. If you are programming
-properties directly, you must set this property before setting other
-configuration properties.
+'documentation': {
+'description': '''
+Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niDMM_ConfigureMeasurementDigits, NI-DMM sets this attribute to NIDMM_VAL_IVIDMM_MODE.  When you call niDMM_ConfigureWaveformAcquisition, NI-DMM sets this attribute to NIDMM_VAL_WAVEFORM_MODE.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
 ''',
-            'note': 'The NI 4050 and NI 4060 are not supported.',
-        },
+},
     },
     1150018: {
         'access': 'read-write',
@@ -562,15 +499,9 @@ configuration properties.
         'name': 'WAVEFORM_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the rate of the waveform acquisition in samples per second
-(S/s). The valid rate is calculated by dividing 1,800,000 by an integer
-divisor, and the rate falls between 10 and 1,800,000 samples per second.
-The waveform rate is coerced upwards to the next valid rate. The default
-value is 1,800,000 samples per second. Not supported by NI 4065.
-''',
-        },
+'documentation': {
+'description': 'For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.',
+},
     },
     1150019: {
         'access': 'read-write',
@@ -580,12 +511,11 @@ value is 1,800,000 samples per second. Not supported by NI 4065.
         'name': 'WAVEFORM_POINTS',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
-points to acquire in a waveform acquisition.
+'documentation': {
+'description': '''
+For the NI 4070/4071/4072 only, specifies the number of points to acquire in a waveform acquisition.
 ''',
-        },
+},
     },
     1150022: {
         'access': 'read-write',
@@ -595,12 +525,11 @@ points to acquire in a waveform acquisition.
         'name': 'ADC_CALIBRATION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
-calibration mode.
+'documentation': {
+'description': '''
+For the NI 4070/4071/4072 only, specifies the ADC calibration mode.
 ''',
-        },
+},
     },
     1150023: {
         'access': 'read-write',
@@ -610,12 +539,11 @@ calibration mode.
         'name': 'OFFSET_COMP_OHMS',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
-offset compensated ohms.
+'documentation': {
+'description': '''
+For the NI 4070/4071/4072 only, enables or disables offset compensated ohms.
 ''',
-        },
+},
     },
     1150025: {
         'access': 'read-write',
@@ -625,13 +553,12 @@ offset compensated ohms.
         'name': 'CURRENT_SOURCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 Specifies the current source provided during diode measurements.
-
 The NI 4050 and NI 4060 are not supported.
 ''',
-        },
+},
     },
     1150026: {
         'access': 'read-write',
@@ -641,10 +568,12 @@ The NI 4050 and NI 4060 are not supported.
         'name': 'DC_NOISE_REJECTION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the DC noise rejection mode.',
-            'note': 'The NI 4050 and NI 4060 are not supported.',
-        },
+'documentation': {
+'description': '''
+Specifies the DC noise rejection mode.
+The NI 4050 and NI 4060 are not supported.
+''',
+},
     },
     1150027: {
         'access': 'read-write',
@@ -654,12 +583,11 @@ The NI 4050 and NI 4060 are not supported.
         'name': 'WAVEFORM_COUPLING',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
-coupling during a waveform acquisition.
+'documentation': {
+'description': '''
+For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisition.
 ''',
-        },
+},
     },
     1150028: {
         'access': 'read-write',
@@ -669,14 +597,12 @@ coupling during a waveform acquisition.
         'name': 'SETTLE_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the settling time in seconds. Use this property to override
-the default settling time. To return to the default, set this property
-to Auto (-1).
+'documentation': {
+'description': '''
+Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
+The NI 4050 and NI 4060 are not supported.
 ''',
-            'note': 'The NI 4050 and NI 4060 are not supported.',
-        },
+},
     },
     1150029: {
         'access': 'read-write',
@@ -686,10 +612,12 @@ to Auto (-1).
         'name': 'INPUT_RESISTANCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': 'Specifies the input resistance of the instrument.',
-            'note': 'The NI 4050 and NI 4060 are not supported.',
-        },
+'documentation': {
+'description': '''
+Specifies the input resistance of the instrument.
+The NI 4050 and NI 4060 are not supported.
+''',
+},
     },
     1150031: {
         'access': 'read-write',
@@ -699,13 +627,10 @@ to Auto (-1).
         'name': 'SAMPLE_DELAY_MODE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'For the NI 4060 only, specifies a delay interval after a sample trigger.',
-            'table_body': [['0', 'IVI compliant',
-                            'The Sample Interval property is only used when the Sample Trigger is set to Interval.'],
-                           ['1', 'Not IVI compliant',
-                                                                                                                       'The Sample Interval property is used as a delay after any type of Sample Trigger.']],
-        },
+'documentation': {
+'description': 'For the NI 4060 only, specifies a delay interval after a sample trigger.',
+'table_body': [['0', 'IVI compliant', 'The Sample Interval property is only used when the Sample Trigger is set to Interval.'], ['1', 'Not IVI compliant', 'The Sample Interval property is used as a delay after any type of Sample Trigger.']],
+},
     },
     1150032: {
         'access': 'read-write',
@@ -715,17 +640,12 @@ to Auto (-1).
         'name': 'NUMBER_OF_AVERAGES',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the number of averages to perform in a measurement. For the NI
-4080/4081/4082 and NI 4070/4071/4072, applies only when the aperture
-time is not set to Auto and Auto Zero is ON. The Number of Averages
-Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
-otherwise, the default is 1.
-
+'documentation': {
+'description': '''
+Specifies the number of averages to perform in a measurement. For the NI 4070/4071/4072,  applies only when the aperture time is not set to AUTO and Auto Zero is ON.  The default is 1.
 The NI 4050 and NI 4060 are not supported.
 ''',
-        },
+},
     },
     1150034: {
         'access': 'read-write',
@@ -735,13 +655,11 @@ The NI 4050 and NI 4060 are not supported.
         'name': 'LATENCY',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the number of measurements transferred at a time from the
-instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
-the transfer size.
+'documentation': {
+'description': '''
+Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
 ''',
-        },
+},
     },
     1150037: {
         'access': 'read-write',
@@ -751,30 +669,28 @@ the transfer size.
         'name': 'BUFFER_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the size in samples of the internal data buffer. Maximum size
-is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
-chooses the buffer size.
+'documentation': {
+'description': '''
+Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.
 ''',
-        },
+},
     },
     1150044: {
         'access': 'read only',
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Auto Range Value',
-        'name': 'FREQ_VOLTAGE_AUTO_RANGE_VALUE',
+        'name': 'FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
 the frequency voltage range. If auto ranging is enabled, shows the
 actual value of the active frequency voltage range. If not Auto Ranging,
 the value is the same as that of the Frequency Voltage Range property.
 ''',
-        },
+},
     },
     1150045: {
         'access': 'read-write',
@@ -784,19 +700,12 @@ the value is the same as that of the Frequency Voltage Range property.
         'name': 'CABLE_COMP_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4081 and NI 4072 only, specifies the type of cable
-compensation that is applied to the current capacitance or inductance
-measurement for the current range.
+'documentation': {
+'description': '''
+For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
+Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
 ''',
-            'note': '''
-Changing the function or the range using property nodes or through
-`niDMM Config
-Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
-this property to the default value.
-''',
-        },
+},
     },
     1150046: {
         'access': 'read-write',
@@ -806,19 +715,12 @@ this property to the default value.
         'name': 'SHORT_CABLE_COMP_REACTANCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, represents the reactive part
-(reactance) of the short cable compensation. The valid range is any real
-number >0. The default value (-1) indicates that compensation has not
-taken place.
+'documentation': {
+'description': '''
+For the NI 4072 only, represents the reactive part (reactance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
+Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
 ''',
-            'note': '''
-Changing the VI or the range through this property or through `niDMM
-Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
-resets this property to the default value.
-''',
-        },
+},
     },
     1150047: {
         'access': 'read-write',
@@ -828,19 +730,12 @@ resets this property to the default value.
         'name': 'SHORT_CABLE_COMP_RESISTANCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, represents the active part
-(resistance) of the short cable compensation. The valid range is any
-real number >0. The default value (-1) indicates that compensation has
-not taken place.
+'documentation': {
+'description': '''
+For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
+Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
 ''',
-            'note': '''
-Changing the VI or the range through this property or through `niDMM
-Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
-resets this property to the default value.
-''',
-        },
+},
     },
     1150048: {
         'access': 'read-write',
@@ -850,20 +745,12 @@ resets this property to the default value.
         'name': 'OPEN_CABLE_COMP_SUSCEPTANCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, specifies the reactive part
-(susceptance) of the open cable compensation. The valid range is any
-real number >0. The default value (-1.0) indicates that compensation has
-not taken place.
+'documentation': {
+'description': '''
+For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
+Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
 ''',
-            'note': '''
-Changing the function or the range using property nodes or through
-`niDMM Config
-Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
-this property to the default value.
-''',
-        },
+},
     },
     1150049: {
         'access': 'read-write',
@@ -873,20 +760,12 @@ this property to the default value.
         'name': 'OPEN_CABLE_COMP_CONDUCTANCE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, specifies the active part
-(conductance) of the open cable compensation. The valid range is any
-real number >0. The default value (-1.0) indicates that compensation has
-not taken place.
+'documentation': {
+'description': '''
+For the NI 4072 only, specifies the active part (conductance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
+Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
 ''',
-            'note': '''
-Changing the function or the range using property nodes or through
-`niDMM Config
-Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
-this property to the default value.
-''',
-        },
+},
     },
     1150052: {
         'access': 'read-write',
@@ -896,13 +775,11 @@ this property to the default value.
         'name': 'LC_CALCULATION_MODEL',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, specifies the type of algorithm that
-the measurement processing uses for capacitance and inductance
-measurements.
+'documentation': {
+'description': '''
+For the NI 4072 only, specifies the type of algorithm that the measurement processing uses for  capacitance and inductance measurements.
 ''',
-        },
+},
     },
     1150053: {
         'access': 'read-write',
@@ -912,12 +789,11 @@ measurements.
         'name': 'DC_BIAS',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, controls the available DC bias for
-capacitance measurements.
+'documentation': {
+'description': '''
+For the NI 4072 only, controls the available DC bias for capacitance measurements.
 ''',
-        },
+},
     },
     1150054: {
         'access': 'read only',
@@ -927,13 +803,11 @@ capacitance measurements.
         'name': 'SERIAL_NUMBER',
         'resettable': 'No',
         'type': 'ViString',
-        'documentation': {
-            'description': '''
-A string containing the serial number of the instrument. This property
-corresponds to the serial number label that is attached to most
-products.
+'documentation': {
+'description': '''
+A string containing the serial number of the instrument. This attribute corresponds  to the serial number label that is attached to most products.
 ''',
-        },
+},
     },
     1150055: {
         'access': 'read-write',
@@ -943,24 +817,23 @@ products.
         'name': 'LC_NUMBER_MEAS_TO_AVERAGE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-For the NI 4082 and NI 4072 only, specifies the number of LC
-measurements that are averaged to produce one reading.
+'documentation': {
+'description': '''
+For the NI 4072 only, specifies the number of LC measurements that are averaged to produce one reading.
 ''',
-        },
+},
     },
     1150061: {
         'access': 'read only',
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Product ID',
-        'name': 'CONFIG_PRODUCT_NUMBER',
+        'name': 'INSTRUMENT_PRODUCT_ID',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'The PCI product ID.',
-        },
+'documentation': {
+'description': 'The PCI product ID.',
+},
     },
     1150120: {
         'access': 'read-write',
@@ -970,9 +843,12 @@ measurements that are averaged to produce one reading.
         'name': 'TEMP_RTD_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the RTD type.',
-        },
+'documentation': {
+'description': '''
+Specifies the type of RTD used to measure temperature. The default value is NIDMM_VAL_TEMP_RTD_PT3851.
+Refer to the NIDMM_ATTR_TEMP_RTD_TYPE topic in the NI Digital Multimeters Help for additional information about defined values.
+''',
+},
     },
     1150121: {
         'access': 'read-write',
@@ -982,12 +858,11 @@ measurements that are averaged to produce one reading.
         'name': 'TEMP_RTD_A',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-**RTD Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the RTD Type property   is set to Custom. The default value is 3.9083e-3 (Pt3851).
 ''',
-        },
+},
     },
     1150122: {
         'access': 'read-write',
@@ -997,12 +872,11 @@ Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
         'name': 'TEMP_RTD_B',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-**RTD Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -5.775e-7(Pt3851).
 ''',
-        },
+},
     },
     1150123: {
         'access': 'read-write',
@@ -1012,12 +886,11 @@ Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
         'name': 'TEMP_RTD_C',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-**RTD Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -4.183e-12(Pt3851).
 ''',
-        },
+},
     },
     1150124: {
         'access': 'read-write',
@@ -1027,9 +900,12 @@ Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
         'name': 'TEMP_THERMISTOR_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the thermistor type.',
-        },
+'documentation': {
+'description': '''
+Specifies the type of thermistor used to measure the temperature. The default value is  NIDMM_VAL_TEMP_THERMISTOR_44006.
+Refer to the NIDMM_ATTR_TEMP_THERMISTOR_TYPE topic in the NI Digital Multimeters Help for additional information about defined values.
+''',
+},
     },
     1150125: {
         'access': 'read-write',
@@ -1039,12 +915,11 @@ Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
         'name': 'TEMP_THERMISTOR_A',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-the **Thermistor Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Steinhart-Hart A coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 0.0010295 (44006).
 ''',
-        },
+},
     },
     1150126: {
         'access': 'read-write',
@@ -1054,12 +929,11 @@ the **Thermistor Type property** is set to Custom.
         'name': 'TEMP_THERMISTOR_B',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-the **Thermistor Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Steinhart-Hart B coefficient for thermistor scaling when the Thermistor Type  proerty is set to Custom. The default value is 0.0002391 (44006).
 ''',
-        },
+},
     },
     1150127: {
         'access': 'read-write',
@@ -1069,12 +943,11 @@ the **Thermistor Type property** is set to Custom.
         'name': 'TEMP_THERMISTOR_C',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-the **Thermistor Type property** is set to Custom.
+'documentation': {
+'description': '''
+Specifies the Steinhart-Hart C coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 1.568e-7 (44006).
 ''',
-        },
+},
     },
     1250001: {
         'access': 'read-write',
@@ -1084,19 +957,13 @@ the **Thermistor Type property** is set to Custom.
         'name': 'FUNCTION',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the measurement function. If you are setting this property
-directly, you must also set the `Operation
-Mode <pniDMM_OperationMode.html>`__ property, which controls whether the
-DMM takes standard single or multipoint measurements, or acquires a
-waveform. If you are programming properties directly, you must set the
-Operation Mode property before setting other configuration properties.
-If the Operation Mode property is set to Waveform Mode, the only valid
-function types are Waveform Voltage and Waveform Current. Set the
-Operation Mode property to IVIDMM Mode to set all other function values.
+'documentation': {
+'description': '''
+Specifies the measurement function.
+Refer to the NIDMM_ATTR_FUNCTION topic in  the NI Digital Multimeters Help for device-specific information.
+If you are setting this attribute directly, you must also set the NIDMM_ATTR_OPERATION_MODE attribute,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming attributes directly, you must set the NIDMM_ATTR_OPERATION_MODE attribute before  setting other configuration attributes. If the NIDMM_ATTR_OPERATION_MODE attribute is set to NIDMM_VAL_WAVEFORM_MODE,  the only valid function types are NIDMM_VAL_WAVEFORM_VOLTAGE and NIDMM_VAL_WAVEFORM_CURRENT. Set the  NIDMM_ATTR_OPERATION_MODE attribute to NIDMM_VAL_IVIDMM_MODE to set all other function values.
 ''',
-        },
+},
     },
     1250002: {
         'access': 'read-write',
@@ -1106,25 +973,18 @@ Operation Mode property to IVIDMM Mode to set all other function values.
         'name': 'RANGE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the measurement range. Use positive values to represent the
-absolute value of the maximum expected measurement. The value is in
-units appropriate for the current value of the Function property. For
-example, if the Function property is set to DC Volts, the units are
-volts.
+'documentation': {
+'description': '''
+Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.
+The NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.
+NIDMM_VAL_AUTO_RANGE_ON -1.0
+NI-DMM performs an Auto Range before acquiring the measurement.
+NIDMM_VAL_AUTO_RANGE_OFF -2.0
+NI-DMM sets the Range to the current NIDMM_ATTR_AUTO_RANGE_VALUE and uses this range  for all subsequent measurements until the measurement configuration is changed.
+NIDMM_VAL_AUTO_RANGE_ONCE -3.0
+NI-DMM performs an Auto Range before acquiring the next measurement. The NIDMM_ATTR_AUTO_RANGE_VALUE  is stored and used for all subsequent measurements until the measurement configuration is changed.
 ''',
-            'note': '''
-The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
-trigger and sample trigger are set to Immediate.
-''',
-            'table_body': [['(-1.0)', 'Auto Range On',
-                            'NI-DMM performs an Auto Range before acquiring the measurement.'], ['(-2.0)',
-                                                                                                 'Auto Range Off',
-                                                                                                 'NI-DMM sets the Range to the current `Auto Range Value <pnidmm_AutoRangeValue.html>`__ and uses this range for all subsequent measurements until the measurement configuration is changed.'],
-                           ['(-3.0)', 'Auto Range Once',
-                                                                                                                                                                                                                                                                                                 'NI-DMM performs an Auto Range before acquiring the next measurement. The `Auto Range Value <pnidmm_AutoRangeValue.html>`__ is stored and used for all subsequent measurements until the measurement configuration is changed.']],
-        },
+},
     },
     1250003: {
         'access': 'read-write',
@@ -1134,19 +994,12 @@ trigger and sample trigger are set to Immediate.
         'name': 'RESOLUTION_DIGITS',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the measurement resolution in digits. Setting this property to
-higher values increases the measurement accuracy. Setting this property
-to lower values increases the measurement speed.
+'documentation': {
+'description': '''
+Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
+NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
 ''',
-            'note': '''
-NI-DMM ignores this property for capacitance and inductance measurements
-on the NI 4082 and NI 4072. To achieve better resolution for such
-measurements, use the `Number of LC Measurements to
-Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
-''',
-        },
+},
     },
     1250004: {
         'access': 'read-write',
@@ -1156,20 +1009,13 @@ Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
         'name': 'TRIGGER_SOURCE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the trigger source. When `niDMM
-Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
-waits for the trigger specified with this property. After it receives
-the trigger, the DMM waits the length of time specified with the
-`Trigger Delay <pnidmm_TriggerDelay.html>`__ property. The DMM then
-takes a measurement.
-
-To determine which values are supported by each device, refer to the
-`LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*.
+'documentation': {
+'description': '''
+Specifies the trigger source. When niDMM_Initiate is called, the DMM waits  for the trigger specified with this attribute. After it receives the trigger,  the DMM waits the length of time specified with the NIDMM_ATTR_TRIGGER_DELAY  attribute. The DMM then takes a measurement.
+This attribute is not supported on the NI 4050.
+To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
 ''',
-        },
+},
     },
     1250005: {
         'access': 'read-write',
@@ -1179,38 +1025,17 @@ in the *NI Digital Multimeters Help*.
         'name': 'TRIGGER_DELAY',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the time (in seconds) that the DMM waits after it has received
-a trigger before taking a measurement. The default value is Auto Delay
-(-1), which means that the DMM waits an appropriate settling time before
-taking the measurement.
-
-The NI 4080/4081/4082 uses the value specified in this property as
-additional settling time. The valid range for Trigger Delay is Auto
-Delay (-1) or 0.0 - 150.0 seconds, and the onboard timing resolution is
-10.0 ns.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional settling time. For these devices, the valid range
-for Trigger Delay is Auto Delay (-1) or 0.0 - 149.0 seconds and the
-onboard timing resolution is 34.72 ns.
-
-On the NI 4060, if this property is set to 0, the DMM does not settle
-before taking the measurement. On the NI 4060, the valid range for
-Trigger Delay (-1) is 0.0-12.0 seconds and the onboard timing resolution
-is 100 ms.
-
-When using the NI 4050, this property must be set to Auto Delay (-1).
-
+'documentation': {
+'description': '''
+Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
+The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
+On the NI 4060, if this attribute is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.
+When using the NI 4050, this attribute must be set to AUTO DELAY (-1).
 Use positive values to set the trigger delay in seconds.
-
-Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
-0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
-
-Default Value: Auto Delay
+Valid Range: NIDMM_VAL_AUTO_DELAY (-1.0), 0.0-12.0 seconds (NI 4060 only)
+Default Value: NIDMM_VAL_AUTO_DELAY
 ''',
-        },
+},
     },
     1250006: {
         'access': 'read-write',
@@ -1220,15 +1045,12 @@ Default Value: Auto Delay
         'name': 'AC_MIN_FREQ',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the minimum frequency component of the input signal for AC
-measurements. This property affects the DMM only when you set the
-Function property to AC measurements. The valid range is 1 Hz-300 kHz
-for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+'documentation': {
+'description': '''
+Specifies the minimum frequency component of the input signal for AC  measurements. This attribute affects the DMM only when you set the  NIDMM_ATTR_FUNCTION attribute to AC measurements.
+The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 ''',
-        },
+},
     },
     1250007: {
         'access': 'read-write',
@@ -1238,19 +1060,12 @@ for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
         'name': 'AC_MAX_FREQ',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the maximum frequency component of the input signal for AC
-measurements. This property is used only for error checking and verifies
-that the value of this parameter is less than the maximum frequency of
-the device. This property affects the DMM only when you set the Function
-property to AC measurements.
-
-The valid ranges are shown in the following table.
+'documentation': {
+'description': '''
+Specifies the maximum frequency component of the input signal for AC  measurements. This attribute is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This attribute affects the DMM only when you set the   NIDMM_ATTR_FUNCTION attribute to AC measurements.
+The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 ''',
-            'table_body': [['NI 4080/4081/4082, NI 4070/4071/4072', '1 Hz-300 kHz'], ['NI 4065', '10 Hz-100 Hz'],
-                           ['NI 4050/4060', '20 Hz-25 kHz']],
-        },
+},
     },
     1250008: {
         'access': 'read-write',
@@ -1260,18 +1075,12 @@ The valid ranges are shown in the following table.
         'name': 'RESOLUTION_ABSOLUTE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the measurement resolution in absolute units. Setting this
-property to higher values increases the measurement accuracy. Setting
-this property to lower values increases the measurement speed.
+'documentation': {
+'description': '''
+Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
+NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
 ''',
-            'note': '''
-NI-DMM ignores this property for capacitance and inductance measurements
-on the NI 4082 and NI 4072. To achieve better resolution for such
-measurements, use the Number of LC Measurements to Average property.
-''',
-        },
+},
     },
     1250101: {
         'access': 'read-write',
@@ -1281,16 +1090,11 @@ measurements, use the Number of LC Measurements to Average property.
         'name': 'FREQ_VOLTAGE_RANGE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
-amplitude of the input signal for frequency measurements.
+'documentation': {
+'description': '''
+Specifies the maximum amplitude of the input signal for frequency  measurements.
 ''',
-            'table_body': [['Auto Range On', '-1.0',
-                            'Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.'],
-                           ['Auto Range Off', '-2.0',
-                                                                                                                                                                  'Disables Auto Ranging. NI-DMM sets the voltage range to the last calculated voltage range.']],
-        },
+},
     },
     1250201: {
         'access': 'read-write',
@@ -1300,9 +1104,11 @@ amplitude of the input signal for frequency measurements.
         'name': 'TEMP_TRANSDUCER_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the transducer type.',
-        },
+'documentation': {
+'description': '''
+Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
+''',
+},
     },
     1250231: {
         'access': 'read-write',
@@ -1312,9 +1118,11 @@ amplitude of the input signal for frequency measurements.
         'name': 'TEMP_TC_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the thermocouple type.',
-        },
+'documentation': {
+'description': '''
+Specifies the type of thermocouple used to measure the temperature. The default value is NIDMM_VAL_TEMP_TC_J.
+''',
+},
     },
     1250232: {
         'access': 'read-write',
@@ -1324,9 +1132,11 @@ amplitude of the input signal for frequency measurements.
         'name': 'TEMP_TC_REF_JUNC_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the thermocouple reference junction type.',
-        },
+'documentation': {
+'description': '''
+Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
+''',
+},
     },
     1250233: {
         'access': 'read-write',
@@ -1336,12 +1146,11 @@ amplitude of the input signal for frequency measurements.
         'name': 'TEMP_TC_FIXED_REF_JUNC',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the value of the fixed reference junction temperature for a
-thermocouple in degrees Celsius.
+'documentation': {
+'description': '''
+Specifies the reference junction temperature when a fixed reference junction is used to take  a thermocouple measurement. The default value is 25.0 (°C).
 ''',
-        },
+},
     },
     1250242: {
         'access': 'read-write',
@@ -1351,9 +1160,11 @@ thermocouple in degrees Celsius.
         'name': 'TEMP_RTD_RES',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': 'Specifies the RTD resistance at 0 degrees Celsius.',
-        },
+'documentation': {
+'description': '''
+Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported RTDs,  including custom RTDs. The default value is 100 (?).
+''',
+},
     },
     1250301: {
         'access': 'read-write',
@@ -1363,17 +1174,11 @@ thermocouple in degrees Celsius.
         'name': 'SAMPLE_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the number of measurements the DMM takes each time it receives
-a trigger in a multiple point acquisition. Setting Sample Count to 0 on
-the NI 4050 and NI 4060 causes the device to take continuous
-measurements. Otherwise, setting Sample Count to 0 causes the
-conditional statement "Measurements equal to Sample Count" to always
-evaluate to False, and causes the DMM to continue taking measurements in
-the inner loop.
+'documentation': {
+'description': '''
+Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
 ''',
-        },
+},
     },
     1250302: {
         'access': 'read-write',
@@ -1383,15 +1188,12 @@ the inner loop.
         'name': 'SAMPLE_TRIGGER',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 Specifies the sample trigger source.
-
-To determine which values are supported by each device, refer to the
-`LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*.
+To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
 ''',
-        },
+},
     },
     1250303: {
         'access': 'read-write',
@@ -1401,27 +1203,15 @@ in the *NI Digital Multimeters Help*.
         'name': 'SAMPLE_INTERVAL',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the amount of time in seconds the DMM waits between
-measurement cycles. This property only applies when the Sample Trigger
-property is set to INTERVAL. The default value (-1) ensures that the DMM
-settles for a recommended time, which is the same as using an immediate
-trigger.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional delay. On these devices, the onboard timing
-resolution is 34.72 ns and the valid range is 0-149 s.
-
-On the NI 4060, the value for this property is used as the settling
-time. When this property is set to 0, the NI 4060 does not settle
-between measurement cycles. The onboard timing resolution is 1 micro s
-on the NI 4060.
-
+'documentation': {
+'description': '''
+Specifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the NIDMM_ATTR_SAMPLE_TRIGGER attribute is set to INTERVAL.
+On the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
+The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.
 Only positive values are valid when setting the sample interval.
+The NI 4050 is not supported.
 ''',
-            'note': 'The NI 4080/4081/4082 and NI 4050 are not supported.',
-        },
+},
     },
     1250304: {
         'access': 'read-write',
@@ -1431,18 +1221,14 @@ Only positive values are valid when setting the sample interval.
         'name': 'TRIGGER_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the number of triggers the DMM receives before returning to
-the Idle state. This property can be set to any positive ViInt32 value
-for the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082.
-
-The NI 4050/4060 only support this property being set to 1.
-
-Refer to `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in
-the *NI Digital Multimeters Help* for more information.
+'documentation': {
+'description': '''
+Specifies the number of triggers the DMM receives before returning to the  Idle state.
+This attribute can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
+The NI 4050 and NI 4060 support this attribute being set to 1.
+Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
 ''',
-        },
+},
     },
     1250305: {
         'access': 'read-write',
@@ -1452,16 +1238,13 @@ the *NI Digital Multimeters Help* for more information.
         'name': 'MEAS_COMPLETE_DEST',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
+'documentation': {
+'description': '''
 Specifies the destination of the measurement complete (MC) signal.
-
-To determine which values are supported by each device, refer to the
-`LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*.
+The NI 4050 is not supported.
+To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
 ''',
-            'note': 'The NI 4050 is not supported.',
-        },
+},
     },
     1250321: {
         'access': 'read-write',
@@ -1471,32 +1254,14 @@ in the *NI Digital Multimeters Help*.
         'name': 'APERTURE_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the measurement aperture time for the current configuration.
-Aperture time is specified in units set by the Aperture Time Units
-property. To override the default aperture, set this property to the
-desired aperture time after calling `niDMM Config
-Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__. To return
-to the default, set this property to Aperture Time Auto (-1).
-
-Any number of powerline cycles (PLCs) within the minimum and maximum
-ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
-
-On the NI 4065 the minimum aperture time is 333 micro s and the maximum
-aperture time is 78.2 s. If setting the number of averages directly, the
-total measurement time is aperture time X the number of averages, which
-must be less than 72.8 s. The aperture times allowed are 333 micro s,
-667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
-ms, and so on. If you set an aperture time other than 333 micro s, 667
-micro s, or multiples of 1.11 ms, the value will be coerced up to the
-next supported aperture time.
-
-On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
-are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
-50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
+'documentation': {
+'description': '''
+Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by NIDMM_ATTR_APERTURE_TIME_UNITS. To  override the default aperture, set this attribute to the desired  aperture time after calling niDMM_ConfigureMeasurement. To return to the  default, set this attribute to NIDMM_VAL_APERTURE_TIME_AUTO (-1).
+On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
+On the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.
+On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 ''',
-        },
+},
     },
     1250322: {
         'access': 'read-write',
@@ -1506,10 +1271,12 @@ are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
         'name': 'APERTURE_TIME_UNITS',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': 'Specifies the units of aperture time for the current configuration.',
-            'note': 'The NI 4060 does not support an aperture time set in seconds.',
-        },
+'documentation': {
+'description': '''
+Specifies the units of aperture time for the current configuration.
+The NI 4060 does not support an aperture time set in seconds.
+''',
+},
     },
     1250331: {
         'access': 'read only',
@@ -1519,13 +1286,11 @@ are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
         'name': 'AUTO_RANGE_VALUE',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the value of the range. If auto ranging is enabled, shows the
-actual value of the active range. The value of this property is set
-during a read operation.
+'documentation': {
+'description': '''
+Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this attribute is set during a read operation.
 ''',
-        },
+},
     },
     1250332: {
         'access': 'read-write',
@@ -1535,12 +1300,12 @@ during a read operation.
         'name': 'AUTO_ZERO',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the AutoZero mode. This property is not supported for the NI
-4050.
+'documentation': {
+'description': '''
+Specifies the AutoZero mode.
+The NI 4050 is not supported.
 ''',
-        },
+},
     },
     1250333: {
         'access': 'read-write',
@@ -1550,24 +1315,12 @@ Specifies the AutoZero mode. This property is not supported for the NI
         'name': 'POWERLINE_FREQ',
         'resettable': 'No',
         'type': 'ViReal64',
-        'documentation': {
-            'description': '''
-Specifies the powerline frequency. The NI 4060 and NI 4050 use this
-value to select an aperture time to reject powerline noise by selecting
-the appropriate internal sample clock and filter. The NI 4065, NI
-4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
-for setting the Aperture Time property in powerline cycles.
-
-After configuring powerline frequency, set the Aperture Time Units
-property to PLCs. When setting the Aperture Time property, select the
-number of PLCs for the powerline frequency. For example, if powerline
-frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
-aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
-powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
-6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
+'documentation': {
+'description': '''
+Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the NIDMM_ATTR_APERTURE_TIME  attribute in powerline cycles (PLCs).
+After configuring powerline frequency, set the NIDMM_ATTR_APERTURE_TIME_UNITS attribute to PLCs.  When setting the NIDMM_ATTR_APERTURE_TIME attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
 ''',
-            'note': 'For 400 Hz powerline frequency, use the 50 Hz setting.',
-        },
+},
     },
     1250334: {
         'access': 'read-write',
@@ -1577,11 +1330,10 @@ powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
         'name': 'TRIGGER_SLOPE',
         'resettable': 'No',
         'type': 'ViInt32',
-        'documentation': {
-            'description': '''
-Specifies the edge of the signal from the specified trigger source on
-which the DMM is triggered.
+'documentation': {
+'description': '''
+Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
 ''',
-        },
+},
     },
 }
