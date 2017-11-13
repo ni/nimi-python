@@ -16,7 +16,7 @@ define log_command
 	@echo '$1' >> $(COMMAND_LOG)
 endef
 
-# Helper function for running a command with a tracking file 
+# Helper function for running a command with a tracking file
 # created/updated upon completion
 # $1 is tracking file path
 # $2 is command to run
@@ -28,6 +28,6 @@ define make_with_tracking_file
 endef
 
 # Delete the file whose absence will trigger tox to run
-define trigger_tests
+define trigger_unit_tests
 	$(_hide_cmds)$(if $(wildcard $(TOX_RUN_DONE)),rm $(TOX_RUN_DONE))
 endef
