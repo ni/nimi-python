@@ -8,4 +8,18 @@
 enums_codegen_method = {
 }
 
+enums_additional_enums = {
+    'RelativeTo': {
+        'values': [
+            {
+                'name': 'WAVEFORM_POSITION_START',
+                'value': 0,
+            },
+            {
+                'name': 'WAVEFORM_POSITION_CURRENT',
+                'value': 1,
+            },
+        ],
+    },
+}
 
