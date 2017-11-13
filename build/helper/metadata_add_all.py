@@ -259,7 +259,7 @@ def _add_enum_value_python_name(enum_info, config):
         prefix = prefix[:-1]
 
     # If the prefix is in the whitelist, we don't want to remove it so set to empty string
-    if 'whitelist_prefix' in config and prefix in config['whitelist_prefix']:
+    if 'enum_whitelist_prefix' in config and prefix in config['enum_whitelist_prefix']:
         prefix = ''
 
     # We only remove the prefix if there is one and it isn't '_'.
@@ -281,7 +281,7 @@ def _add_enum_value_python_name(enum_info, config):
     suffix = ''.join(reversed(suffix))
 
     # If the suffix is in the whitelist, we don't want to remove it so set to empty string
-    if 'whitelist_suffix' in config and suffix in config['whitelist_suffix']:
+    if 'enum_whitelist_suffix' in config and suffix in config['enum_whitelist_suffix']:
         suffix = ''
 
     # We only remove the suffix if there is one.
