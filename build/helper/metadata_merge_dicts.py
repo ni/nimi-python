@@ -24,7 +24,6 @@ def merge_helper(metadata, metadata_type, config):
     for m in metadata:
         if len(metadata[m]) == 0:
             to_delete.append(m)
-
     for m in to_delete:
         metadata.pop(m, None)
 
