@@ -3374,7 +3374,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range(1)], int(sequence_handle_ctype.value)
 
-    def create_arb_sequence(self, sequence_length, waveform_handles_array, loop_counts_array):
+    def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
         '''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -3436,7 +3436,7 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 9
+        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 6
         waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
         loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
         sequence_handle_ctype = visatype.ViInt32()  # case 14

@@ -1157,7 +1157,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_arb_sequence(sequence_length, waveform_handles_array, loop_counts_array)
+.. function:: create_arb_sequence(waveform_handles_array, loop_counts_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
