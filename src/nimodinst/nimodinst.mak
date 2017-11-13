@@ -16,5 +16,5 @@ $(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako $(BUILD_HELPER
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
 # Need to signal the top level makefile to run tests again
-	$(_hide_cmds)$(call trigger_tests)
+	$(_hide_cmds)$(call trigger_unit_tests)
 
