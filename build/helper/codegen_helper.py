@@ -75,10 +75,10 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
     # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
     val_suffix = '.value'
     module_name = ''
-    c = find_custom_type(output_parameter, config)
-    if c is not None:
+    custom_type = find_custom_type(output_parameter, config)
+    if custom_type is not None:
         val_suffix = ''
-        module_name = c['file_name'] + '.'
+        module_name = custom_type['file_name'] + '.'
 
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
