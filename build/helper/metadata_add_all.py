@@ -350,9 +350,21 @@ def _compare_dicts(actual, expected):
         assert k in actual, 'Key {0} not in actual'.format(k)
 
 
+config_for_testing = {
+    'session_handle_parameter_name': 'vi',
+    'module_name': 'nifake',
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'custom_types': [],
+}
+
+
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
-    actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    actual = add_all_function_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
@@ -539,7 +551,7 @@ def test_add_all_metadata_simple():
 
 def _do_the_test_add_attributes_metadata(attributes, expected):
     actual = copy.deepcopy(attributes)
-    actual = add_all_attribute_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    actual = add_all_attribute_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
@@ -578,7 +590,7 @@ def test_add_attributes_metadata_simple():
 
 def _do_the_test_add_enums_metadata(enums, expected):
     actual = copy.deepcopy(enums)
-    actual = add_all_enum_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake', 'functions': {}, 'attributes': {}, 'modules': {'metadata.enums_addon': {}}})
+    actual = add_all_enum_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
