@@ -306,8 +306,8 @@ nifgen.Session methods
         Specifies the handle of the arbitrary sequence that you want the signal
         generator to produce. NI-FGEN sets the
         :py:data:`nifgen.ARB\_SEQUENCE\_HANDLE` attribute to this value. You can
-        create an arbitrary sequence using the :py:func:`nifgen.create_arb_sequence` or
-        :py:func:`nifgen.create_advanced_arb_sequence` function. These functions return a
+        create an arbitrary sequence using the :py:func:`nifgen.CreateArbSequence` or
+        :py:func:`nifgen.create_arb_sequence` function. These functions return a
         handle that you use to identify the sequence.
 
         **Default Value**: None
@@ -1000,7 +1000,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
+.. function:: create_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -1008,8 +1008,8 @@ nifgen.Session methods
     :py:func:`nifgen.configure_arb_sequence` function to specify what arbitrary sequence
     you want the signal generator to produce.
 
-    The :py:func:`nifgen.create_advanced_arb_sequence` function extends on the
-    :py:func:`nifgen.create_arb_sequence` function by adding the ability to set the
+    The :py:func:`nifgen.create_arb_sequence` function extends on the
+    :py:func:`nifgen.CreateArbSequence` function by adding the ability to set the
     number of samples in each sequence step and to set marker locations.
 
     An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -1147,99 +1147,6 @@ nifgen.Session methods
 
 
         sequence_handle (int): 
-
-
-            Returns the handle that identifies the new arbitrary sequence. You can
-            pass this handle to nifgen\_ConfigureArbSequence to generate the
-            arbitrary sequence.
-
-            
-
-
-
-.. function:: create_arb_sequence(waveform_handles_array, loop_counts_array)
-
-    Creates an arbitrary sequence from an array of waveform handles and an
-    array of corresponding loop counts. This function returns a handle that
-    identifies the sequence. You pass this handle to the
-    nifgen\_ConfigureArbSequence function to specify what arbitrary sequence
-    you want the signal generator to produce.
-
-    An arbitrary sequence consists of multiple waveforms. For each waveform,
-    you can specify the number of times that the signal generator produces
-    the waveform before proceeding to the next waveform. The number of times
-    to repeat a specific waveform is called the loop count.
-
-    
-
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
-        function.
-
-
-
-    :param sequence_length:
-
-
-        Specifies the number of waveforms in the new arbitrary sequence that you
-        want to create. The value you pass must be between the minimum and
-        maximum sequence lengths that the signal generator allows. You can
-        obtain the minimum and maximum sequence lengths from
-        **minimumSequenceLength** and **maximumSequenceLength** in the
-        nifgen\_QueryArbSeqCapabilities function.
-
-        **Default Value**: None
-
-        
-
-
-    :type sequence_length: int
-    :param waveform_handles_array:
-
-
-        Specifies the array of waveform handles from which you want to create a
-        new arbitrary sequence. The array must have at least as many elements as
-        the value that you specify in **sequenceLength**. Each
-        **waveformHandlesArray** element has a corresponding **loopCountsArray**
-        element that indicates how many times that waveform is repeated. You
-        obtain waveform handles when you create arbitrary waveforms with the
-        nifgen\_AllocateWaveform function or one of the following niFgen
-        CreateWaveform functions:
-
-        -  nifgen\_CreateWaveformF64
-        -  nifgen\_CreateWaveformI16
-        -  nifgen\_CreateWaveformFromFileI16
-        -  nifgen\_CreateWaveformFromFileF64
-        -  nifgen\_CreateWaveformFromFileHWS
-
-        **Default Value**: None
-
-        
-
-
-    :type waveform_handles_array: list of int
-    :param loop_counts_array:
-
-
-        Specifies the array of loop counts you want to use to create a new
-        arbitrary sequence. The array must have at least as many elements as the
-        value that you specify in the **sequenceLength** parameter. Each
-        **loopCountsArray** element corresponds to a **waveformHandlesArray**
-        element and indicates how many times to repeat that waveform. Each
-        element of the **loopCountsArray** must be less than or equal to the
-        maximum number of loop counts that the signal generator allows. You can
-        obtain the maximum loop count from **maximumLoopCount** in the
-        nifgen\_QueryArbSeqCapabilities function.
-
-        **Default Value**: None
-
-        
-
-
-    :type loop_counts_array: list of int
-
-    :rtype: int
-    :return:
 
 
             Returns the handle that identifies the new arbitrary sequence. You can

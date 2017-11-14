@@ -827,6 +827,16 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def simple_function(self):
+        '''simple_function
+
+        This function takes no parameters other than the session.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFake_PoorlyNamedSimpleFunction(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def read(self, maximum_time):
         '''read
 
@@ -963,16 +973,6 @@ class Session(_SessionBase):
         number_of_elements_ctype = visatype.ViInt32(len(cs))  # case 6
         cs_ctype = (custom_struct.custom_struct * len(cs))(*[custom_struct.custom_struct(c) for c in cs])  # case 5
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def simple_function(self):
-        '''simple_function
-
-        This function takes no parameters other than the session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFake_SimpleFunction(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

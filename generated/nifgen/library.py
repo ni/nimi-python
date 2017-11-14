@@ -36,7 +36,6 @@ class Library(object):
         self.niFgen_ConfigureFreqList_cfunc = None
         self.niFgen_ConfigureStandardWaveform_cfunc = None
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
-        self.niFgen_CreateArbSequence_cfunc = None
         self.niFgen_CreateFreqList_cfunc = None
         self.niFgen_CreateWaveformF64_cfunc = None
         self.niFgen_CreateWaveformFromFileF64_cfunc = None
@@ -241,14 +240,6 @@ class Library(object):
                 self.niFgen_CreateAdvancedArbSequence_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateAdvancedArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateAdvancedArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle)
-
-    def niFgen_CreateArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CreateArbSequence_cfunc is None:
-                self.niFgen_CreateArbSequence_cfunc = self._library.niFgen_CreateArbSequence
-                self.niFgen_CreateArbSequence_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_CreateArbSequence_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CreateArbSequence_cfunc(vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle)
 
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         with self._func_lock:

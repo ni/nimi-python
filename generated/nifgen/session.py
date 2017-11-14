@@ -1069,8 +1069,8 @@ class _SessionBase(object):
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to produce. NI-FGEN sets the
                 ARB_SEQUENCE_HANDLE attribute to this value. You can
-                create an arbitrary sequence using the create_arb_sequence or
-                create_advanced_arb_sequence function. These functions return a
+                create an arbitrary sequence using the CreateArbSequence or
+                create_arb_sequence function. These functions return a
                 handle that you use to identify the sequence.
 
                 **Default Value**: None
@@ -3263,8 +3263,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
-        '''create_advanced_arb_sequence
+    def create_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
+        '''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
         array of corresponding loop counts. This function returns a handle that
@@ -3272,8 +3272,8 @@ class Session(_SessionBase):
         configure_arb_sequence function to specify what arbitrary sequence
         you want the signal generator to produce.
 
-        The create_advanced_arb_sequence function extends on the
-        create_arb_sequence function by adding the ability to set the
+        The create_arb_sequence function extends on the
+        CreateArbSequence function by adding the ability to set the
         number of samples in each sequence step and to set marker locations.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3373,76 +3373,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range(1)], int(sequence_handle_ctype.value)
-
-    def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
-        '''create_arb_sequence
-
-        Creates an arbitrary sequence from an array of waveform handles and an
-        array of corresponding loop counts. This function returns a handle that
-        identifies the sequence. You pass this handle to the
-        nifgen_ConfigureArbSequence function to specify what arbitrary sequence
-        you want the signal generator to produce.
-
-        An arbitrary sequence consists of multiple waveforms. For each waveform,
-        you can specify the number of times that the signal generator produces
-        the waveform before proceeding to the next waveform. The number of times
-        to repeat a specific waveform is called the loop count.
-
-        Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
-        function.
-
-        Args:
-            sequence_length (int): Specifies the number of waveforms in the new arbitrary sequence that you
-                want to create. The value you pass must be between the minimum and
-                maximum sequence lengths that the signal generator allows. You can
-                obtain the minimum and maximum sequence lengths from
-                **minimumSequenceLength** and **maximumSequenceLength** in the
-                nifgen_QueryArbSeqCapabilities function.
-
-                **Default Value**: None
-            waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
-                new arbitrary sequence. The array must have at least as many elements as
-                the value that you specify in **sequenceLength**. Each
-                **waveformHandlesArray** element has a corresponding **loopCountsArray**
-                element that indicates how many times that waveform is repeated. You
-                obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform function or one of the following niFgen
-                CreateWaveform functions:
-
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
-
-                **Default Value**: None
-            loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
-                arbitrary sequence. The array must have at least as many elements as the
-                value that you specify in the **sequenceLength** parameter. Each
-                **loopCountsArray** element corresponds to a **waveformHandlesArray**
-                element and indicates how many times to repeat that waveform. Each
-                element of the **loopCountsArray** must be less than or equal to the
-                maximum number of loop counts that the signal generator allows. You can
-                obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities function.
-
-                **Default Value**: None
-
-        Returns:
-            sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
-                pass this handle to nifgen_ConfigureArbSequence to generate the
-                arbitrary sequence.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 6
-        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
-        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
-        sequence_handle_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, ctypes.pointer(sequence_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(sequence_handle_ctype.value)
 
     def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
