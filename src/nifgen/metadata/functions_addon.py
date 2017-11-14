@@ -20,6 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    'CreateArbSequence':                    { 'codegen_method': 'no'        },  # Python allows default values for parameters, so we don't need both CreateArbSequence and CreateAdvancedArbSequence
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
@@ -91,7 +92,6 @@ functions_buffer_info = {
     'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },  # TODO(marcoskirsch): #537
     'Write.*Waveform':                      { 'parameters': { 4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
     'CreateAdvancedArbSequence':            { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, }, }, },  # TODO(marcoskirsch): Suffers from #515
-    'CreateArbSequence':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, }, }, },  # TODO(marcoskirsch): Suffers from #515
     'CreateFreqList':                       { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'frequencyListLength'}, }, }, },  # TODO(marcoskirsch): Suffers from #515
 }
 
@@ -117,4 +117,9 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+}
+
+# Manually provided Python names for methods, rather than deriving from original names.
+functions_custom_python_name = {
+    'CreateAdvancedArbSequence':            { 'python_name': 'create_arb_sequence' },  # Python allows default values for parameters, so we don't need both CreateArbSequence and CreateAdvancedArbSequence
 }
