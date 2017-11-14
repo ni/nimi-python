@@ -21,7 +21,7 @@ enums_additional_enums = {
             },
         ],
     },
-    'trigger_when': {
+    'TriggerWhen': {
         'values': [
             {
                 'name': 'HighLevel',
