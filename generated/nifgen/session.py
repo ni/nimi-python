@@ -98,10 +98,7 @@ class _SessionBase(object):
     '''
     aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''
-    Controls the specified auxiliary power pin. Setting this property to
-    TRUE energizes the auxiliary power when the session is committed. When
-    this property is FALSE, the power pin of the connector outputs no power.
-    **Default Value**: FALSE
+    Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
     '''
     bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
     '''
@@ -115,11 +112,6 @@ class _SessionBase(object):
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
     '''
     Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
-    '''
-    channel_count = attributes.AttributeViInt32(1050203)
-    '''
-    Returns the number of channels that the specific instrument  driver supports.
-    For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     channel_delay = attributes.AttributeViReal64(1150369)
     '''
@@ -564,6 +556,11 @@ class _SessionBase(object):
     module_revision = attributes.AttributeViString(1150390)
     '''
     A string that contains the module revision  for the device that you are currently using.
+    '''
+    num_channels = attributes.AttributeViInt32(1050203)
+    '''
+    Indicates the number of channels that the specific instrument  driver supports.
+    For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     offset_dac_value = attributes.AttributeViInt32(1150224)
     '''

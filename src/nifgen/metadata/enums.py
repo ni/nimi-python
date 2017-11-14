@@ -9,32 +9,28 @@ enums = {
     'AnalogPath': {
         'values': [
             {
-                'name': 'MAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'NIFGEN_VAL_MAIN_ANALOG_PATH',
                 'value': 0,
 'documentation': {
 'description': 'Specifies use of the main path.  NI-FGEN chooses the amplifier based on the user-specified gain.',
 },
             },
             {
-                'name': 'DIRECT',
-                'suffix': '_ANALOG_PATH',
+                'name': 'NIFGEN_VAL_DIRECT_ANALOG_PATH',
                 'value': 1,
 'documentation': {
 'description': 'Specifies use of the direct path.',
 },
             },
             {
-                'name': 'FIXED_LOW_GAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'NIFGEN_VAL_FIXED_LOW_GAIN_ANALOG_PATH',
                 'value': 2,
 'documentation': {
 'description': 'Specifies use of the low-gain amplifier in the main path, no matter  what value the user specifies for gain. This setting limits the output  range.',
 },
             },
             {
-                'name': 'FIXED_HIGH_GAIN',
-                'suffix': '_ANALOG_PATH',
+                'name': 'NIFGEN_VAL_FIXED_HIGH_GAIN_ANALOG_PATH',
                 'value': 3,
 'documentation': {
 'description': 'Specifies use of the high-gain amplifier in the main path.',
@@ -45,48 +41,42 @@ enums = {
     'BusType': {
         'values': [
             {
-                'name': 'INVALID',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_INVALID',
                 'value': 0,
 'documentation': {
 'description': 'Indicates an invalid bus type.',
 },
             },
             {
-                'name': 'AT',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_AT',
                 'value': 1,
 'documentation': {
 'description': 'Indicates the signal generator is the AT bus type.',
 },
             },
             {
-                'name': 'PCI',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_PCI',
                 'value': 2,
 'documentation': {
 'description': 'Indicates the signal generator is the PCI bus type.',
 },
             },
             {
-                'name': 'PXI',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_PXI',
                 'value': 3,
 'documentation': {
 'description': 'Indicates the signal generator is the PXI bus type.',
 },
             },
             {
-                'name': 'VXI',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_VXI',
                 'value': 4,
 'documentation': {
 'description': 'Indicates the signal generator is the VXI bus type.',
 },
             },
             {
-                'name': 'PCMCIA',
-                'prefix': 'BUS_',
+                'name': 'NIFGEN_VAL_BUS_PCMCIA',
                 'value': 5,
 'documentation': {
 'description': 'Indicates the signal generator is the PCI-CMA bus type.',
@@ -104,49 +94,49 @@ enums = {
     'CalADCInput': {
         'values': [
             {
-                'name': 'ANALOG_OUTPUT',
+                'name': 'NIFGEN_VAL_ANALOG_OUTPUT',
                 'value': 0,
 'documentation': {
 'description': 'Specifies that the ADC measures the analog output.',
 },
             },
             {
-                'name': 'INTERNAL_VOLTAGE_REFERENCE',
+                'name': 'NIFGEN_VAL_INTERNAL_VOLTAGE_REFERENCE',
                 'value': 1,
 'documentation': {
 'description': 'Specifies that the ADC measures the internal voltage reference.',
 },
             },
             {
-                'name': 'GROUND',
+                'name': 'NIFGEN_VAL_GROUND',
                 'value': 2,
 'documentation': {
 'description': 'Specifies that the ADC measures the ground voltage.',
 },
             },
             {
-                'name': 'ANALOG_OUTPUT_DIFFERENTIAL',
+                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_DIFFERENTIAL',
                 'value': 3,
 'documentation': {
 'description': 'Specifies that the ADC measures the differential analog output.',
 },
             },
             {
-                'name': 'ANALOG_OUTPUT_PLUS',
+                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_PLUS',
                 'value': 4,
 'documentation': {
 'description': 'Specifies that the ADC measures the positive differential analog output.',
 },
             },
             {
-                'name': 'ANALOG_OUTPUT_MINUS',
+                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_MINUS',
                 'value': 5,
 'documentation': {
 'description': 'Specifies that the ADC measures the negative differential analog output.',
 },
             },
             {
-                'name': 'ANALOG_OUTPUT_IDLE',
+                'name': 'NIFGEN_VAL_ANALOG_OUTPUT_IDLE',
                 'value': 6,
 'documentation': {
 'description': 'Specifies that the ADC measures the idle analog output.',
@@ -157,21 +147,21 @@ enums = {
     'ClockMode': {
         'values': [
             {
-                'name': 'HIGH_RESOLUTION',
+                'name': 'NIFGEN_VAL_HIGH_RESOLUTION',
                 'value': 0,
 'documentation': {
 'description': 'High resolution sampling—Sample rate is generated by a high–resolution clock source.',
 },
             },
             {
-                'name': 'DIVIDE_DOWN',
+                'name': 'NIFGEN_VAL_DIVIDE_DOWN',
                 'value': 1,
 'documentation': {
 'description': 'Divide down sampling—Sample rates are generated by dividing the source frequency.',
 },
             },
             {
-                'name': 'AUTOMATIC',
+                'name': 'NIFGEN_VAL_AUTOMATIC',
                 'value': 2,
 'documentation': {
 'description': 'Automatic Selection—NI-FGEN selects between the divide–down and high–resolution clocking modes.',
@@ -182,16 +172,14 @@ enums = {
     'DataMarkerEventLevelPolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -202,16 +190,14 @@ enums = {
     'DataProcessingMode': {
         'values': [
             {
-                'name': 'REAL',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_REAL',
                 'value': 0,
 'documentation': {
 'description': 'The waveform data points are real numbers (I data).',
 },
             },
             {
-                'name': 'COMPLEX',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_COMPLEX',
                 'value': 1,
 'documentation': {
 'description': 'The waveform data points are complex numbers (I/Q data).',
@@ -222,16 +208,14 @@ enums = {
     'DoneEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -242,14 +226,14 @@ enums = {
     'DoneEventDelayUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -260,14 +244,14 @@ enums = {
     'DoneEventOutputBehavior': {
         'values': [
             {
-                'name': 'PULSE',
+                'name': 'NIFGEN_VAL_PULSE',
                 'value': 101,
 'documentation': {
 'description': 'Triggers a pulse for a specified period of time.',
 },
             },
             {
-                'name': 'LEVEL',
+                'name': 'NIFGEN_VAL_LEVEL',
                 'value': 102,
 'documentation': {
 'description': 'Shifts high or low while the event is active, depending  on the active state you specify.',
@@ -278,16 +262,14 @@ enums = {
     'DoneEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -298,14 +280,14 @@ enums = {
     'DoneEventPulseWidthUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -316,40 +298,35 @@ enums = {
     'FilterType': {
         'values': [
             {
-                'name': 'FLAT',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_FLAT',
                 'value': 0,
 'documentation': {
 'description': 'Applies a flat filter to the data with the passband value specified  in the NIFGEN_ATTR_OSP_FIR_FILTER_FLAT_PASSBAND attribute.',
 },
             },
             {
-                'name': 'RAISED_COSINE',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_RAISED_COSINE',
                 'value': 1,
 'documentation': {
 'description': 'Applies a raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_RAISED_COSINE_ALPHA attribute.',
 },
             },
             {
-                'name': 'ROOT_RAISED_COSINE',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_ROOT_RAISED_COSINE',
                 'value': 2,
 'documentation': {
 'description': 'Applies a root raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.',
 },
             },
             {
-                'name': 'GAUSSIAN',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_GAUSSIAN',
                 'value': 3,
 'documentation': {
 'description': 'Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN_ATTR_OSP_FIR_FILTER_GAUSSIAN_BT attribute.',
 },
             },
             {
-                'name': 'CUSTOM',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_CUSTOM',
                 'value': 4,
 'documentation': {
 'description': 'Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.',
@@ -360,16 +337,14 @@ enums = {
     'IdleBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST',
-                'suffix': '_VALUE',
+                'name': 'NIFGEN_VAL_HOLD_LAST_VALUE',
                 'value': 400,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.',
 },
             },
             {
-                'name': 'JUMP_TO',
-                'suffix': '_VALUE',
+                'name': 'NIFGEN_VAL_JUMP_TO_VALUE',
                 'value': 401,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.',
@@ -380,14 +355,14 @@ enums = {
     'MarkerEventDelayUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -398,14 +373,14 @@ enums = {
     'MarkerEventOutputBehavior': {
         'values': [
             {
-                'name': 'PULSE',
+                'name': 'NIFGEN_VAL_PULSE',
                 'value': 101,
 'documentation': {
 'description': 'Triggers a pulse for a specified period of time.',
 },
             },
             {
-                'name': 'LEVEL',
+                'name': 'NIFGEN_VAL_LEVEL',
                 'value': 102,
 'documentation': {
 'description': 'Shifts high or low while the event is active, depending  on the active state you specify.',
@@ -426,16 +401,14 @@ active state you specify.
     'MarkerEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -446,14 +419,14 @@ active state you specify.
     'MarkerEventPulseWidthUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -464,14 +437,14 @@ active state you specify.
     'MarkerEventToggleInitialState': {
         'values': [
             {
-                'name': 'HIGH',
+                'name': 'NIFGEN_VAL_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'Sets the initial state of the Marker event to high.',
 },
             },
             {
-                'name': 'LOW',
+                'name': 'NIFGEN_VAL_LOW',
                 'value': 102,
 'documentation': {
 'description': 'Sets the initial state of the Marker event to low.',
@@ -482,16 +455,14 @@ active state you specify.
     'OSPMode': {
         'values': [
             {
-                'name': 'IF',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_IF',
                 'value': 0,
 'documentation': {
 'description': 'The OSP block generates intermediate frequency (IF) data.',
 },
             },
             {
-                'name': 'BASEBAND',
-                'prefix': 'OSP_',
+                'name': 'NIFGEN_VAL_OSP_BASEBAND',
                 'value': 1,
 'documentation': {
 'description': 'The OSP block generates baseband data.',
@@ -502,16 +473,14 @@ active state you specify.
     'OSPOverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'NIFGEN_VAL_ERROR_REPORTING_ERROR',
                 'value': 0,
 'documentation': {
 'description': 'NI-FGEN returns errors whenever an overflow has occurred in the OSP block.',
 },
             },
             {
-                'name': 'DISABLED',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'NIFGEN_VAL_ERROR_REPORTING_DISABLED',
                 'value': 2,
 'documentation': {
 'description': 'NI-FGEN does not return errors when an overflow occurs in the OSP block.',
@@ -525,7 +494,7 @@ active state you specify.
                 'name': 'NIFGEN_VAL_OPERATE_CONTINUOUS',
                 'value': 0,
 'documentation': {
-'description': 'Continuous operation',
+'description': 'Continuous Operation',
 },
             },
         ],
@@ -533,32 +502,28 @@ active state you specify.
     'OutputMode': {
         'values': [
             {
-                'name': 'FUNC',
-                'prefix': 'OUTPUT_',
+                'name': 'NIFGEN_VAL_OUTPUT_FUNC',
                 'value': 0,
 'documentation': {
 'description': 'Standard Function mode—  Generates standard function waveforms  such as sine, square, triangle, and so on.',
 },
             },
             {
-                'name': 'ARB',
-                'prefix': 'OUTPUT_',
+                'name': 'NIFGEN_VAL_OUTPUT_ARB',
                 'value': 1,
 'documentation': {
 'description': 'Arbitrary waveform mode—Generates  waveforms from user-created/provided  waveform arrays of numeric data.',
 },
             },
             {
-                'name': 'SEQ',
-                'prefix': 'OUTPUT_',
+                'name': 'NIFGEN_VAL_OUTPUT_SEQ',
                 'value': 2,
 'documentation': {
 'description': 'Arbitrary sequence mode —  Generates downloaded waveforms  in an order your specify.',
 },
             },
             {
-                'name': 'FREQ_LIST',
-                'prefix': 'OUTPUT_',
+                'name': 'NIFGEN_VAL_OUTPUT_FREQ_LIST',
                 'value': 101,
 'documentation': {
 'description': 'Frequency List mode—Generates a  standard function using a list of  frequencies you define.',
@@ -579,16 +544,14 @@ waveforms in complex combinations.
     'P2PAddressType': {
         'values': [
             {
-                'name': 'PHYSICAL',
-                'prefix': 'ADDR_',
+                'name': 'NIFGEN_VAL_ADDR_PHYSICAL',
                 'value': 0,
 'documentation': {
 'description': 'Physical',
 },
             },
             {
-                'name': 'VIRTUAL',
-                'prefix': 'ADDR_',
+                'name': 'NIFGEN_VAL_ADDR_VIRTUAL',
                 'value': 1,
 'documentation': {
 'description': 'Physical',
@@ -599,16 +562,14 @@ waveforms in complex combinations.
     'ReadyForStartEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -806,16 +767,14 @@ is used as the source.
     'ScriptTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'NIFGEN_VAL_RISING_EDGE',
                 'value': 101,
 'documentation': {
 'description': 'Rising Edge',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'NIFGEN_VAL_FALLING_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Falling Edge',
@@ -826,16 +785,14 @@ is used as the source.
     'ScriptTriggerDigitalLevelActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'High Level',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'Low Level',
@@ -846,28 +803,28 @@ is used as the source.
     'ScriptTriggerType': {
         'values': [
             {
-                'name': 'TRIG_NONE',
+                'name': 'NIFGEN_VAL_TRIG_NONE',
                 'value': 101,
 'documentation': {
 'description': 'No trigger is configured. Signal generation starts immediately.',
 },
             },
             {
-                'name': 'DIGITAL_EDGE',
+                'name': 'NIFGEN_VAL_DIGITAL_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Trigger is asserted when a digital edge is detected.',
 },
             },
             {
-                'name': 'DIGITAL_LEVEL',
+                'name': 'NIFGEN_VAL_DIGITAL_LEVEL',
                 'value': 103,
 'documentation': {
 'description': 'Trigger is asserted when a digital level is detected.',
 },
             },
             {
-                'name': 'SOFTWARE_EDGE',
+                'name': 'NIFGEN_VAL_SOFTWARE_EDGE',
                 'value': 104,
 'documentation': {
 'description': 'Trigger is asserted when a software edge is detected.',
@@ -878,16 +835,14 @@ is used as the source.
     'StartTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'NIFGEN_VAL_RISING_EDGE',
                 'value': 101,
 'documentation': {
 'description': 'Rising Edge',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'NIFGEN_VAL_FALLING_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Falling Edge',
@@ -898,28 +853,28 @@ is used as the source.
     'StartTriggerType': {
         'values': [
             {
-                'name': 'TRIG_NONE',
+                'name': 'NIFGEN_VAL_TRIG_NONE',
                 'value': 101,
 'documentation': {
 'description': 'None',
 },
             },
             {
-                'name': 'DIGITAL_EDGE',
+                'name': 'NIFGEN_VAL_DIGITAL_EDGE',
                 'value': 102,
 'documentation': {
 'description': 'Digital Edge',
 },
             },
             {
-                'name': 'SOFTWARE_EDGE',
+                'name': 'NIFGEN_VAL_SOFTWARE_EDGE',
                 'value': 104,
 'documentation': {
 'description': 'Software Edge',
 },
             },
             {
-                'name': 'P2P_ENDPOINT_FULLNESS',
+                'name': 'NIFGEN_VAL_P2P_ENDPOINT_FULLNESS',
                 'value': 106,
 'documentation': {
 'description': 'P2P Endpoint Fullness',
@@ -930,16 +885,14 @@ is used as the source.
     'StartedEventActiveLevel': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -950,14 +903,14 @@ is used as the source.
     'StartedEventDelayUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -968,14 +921,14 @@ is used as the source.
     'StartedEventOutputBehavior': {
         'values': [
             {
-                'name': 'PULSE',
+                'name': 'NIFGEN_VAL_PULSE',
                 'value': 101,
 'documentation': {
 'description': 'Triggers a pulse for a specified period of time.',
 },
             },
             {
-                'name': 'LEVEL',
+                'name': 'NIFGEN_VAL_LEVEL',
                 'value': 102,
 'documentation': {
 'description': 'Shifts high or low while the event is active, depending  on the active state you specify.',
@@ -986,16 +939,14 @@ is used as the source.
     'StartedEventPulsePolarity': {
         'values': [
             {
-                'name': 'HIGH',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is high.',
 },
             },
             {
-                'name': 'LOW',
-                'prefix': 'ACTIVE_',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
 'documentation': {
 'description': 'When the operation is ready to start, the Ready for Start  event level is low.',
@@ -1006,14 +957,14 @@ is used as the source.
     'StartedEventPulseWidthUnits': {
         'values': [
             {
-                'name': 'SAMPLE_CLOCK_PERIODS',
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
                 'value': 101,
 'documentation': {
 'description': 'Specifies the pulse width in Sample clock periods.',
 },
             },
             {
-                'name': 'SECONDS',
+                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102,
 'documentation': {
 'description': 'Specifies the pulse width in seconds.',
@@ -1024,105 +975,105 @@ is used as the source.
     'SynchronizationSource': {
         'values': [
             {
-                'name': 'TTL0',
+                'name': 'NIFGEN_VAL_TTL0',
                 'value': 111,
 'documentation': {
 'description': 'PXI TRIG0 or VXI TTL0',
 },
             },
             {
-                'name': 'TTL1',
+                'name': 'NIFGEN_VAL_TTL1',
                 'value': 112,
 'documentation': {
 'description': 'PXI TRIG1 or VXI TTL1',
 },
             },
             {
-                'name': 'TTL2',
+                'name': 'NIFGEN_VAL_TTL2',
                 'value': 113,
 'documentation': {
 'description': 'PXI TRIG2 or VXI TTL2',
 },
             },
             {
-                'name': 'TTL3',
+                'name': 'NIFGEN_VAL_TTL3',
                 'value': 114,
 'documentation': {
 'description': 'PXI TRIG3 or VXI TTL3',
 },
             },
             {
-                'name': 'TTL4',
+                'name': 'NIFGEN_VAL_TTL4',
                 'value': 115,
 'documentation': {
 'description': 'PXI TRIG4 or VXI TTL4',
 },
             },
             {
-                'name': 'TTL5',
+                'name': 'NIFGEN_VAL_TTL5',
                 'value': 116,
 'documentation': {
 'description': 'PXI TRIG5 or VXI TTL5',
 },
             },
             {
-                'name': 'TTL6',
+                'name': 'NIFGEN_VAL_TTL6',
                 'value': 117,
 'documentation': {
 'description': 'PXI TRIG6 or VXI TTL6',
 },
             },
             {
-                'name': 'RTSI_0',
+                'name': 'NIFGEN_VAL_RTSI_0',
                 'value': 141,
 'documentation': {
 'description': 'RTSI 0',
 },
             },
             {
-                'name': 'RTSI_1',
+                'name': 'NIFGEN_VAL_RTSI_1',
                 'value': 142,
 'documentation': {
 'description': 'RTSI 1',
 },
             },
             {
-                'name': 'RTSI_2',
+                'name': 'NIFGEN_VAL_RTSI_2',
                 'value': 143,
 'documentation': {
 'description': 'RTSI 2',
 },
             },
             {
-                'name': 'RTSI_3',
+                'name': 'NIFGEN_VAL_RTSI_3',
                 'value': 144,
 'documentation': {
 'description': 'RTSI 3',
 },
             },
             {
-                'name': 'RTSI_4',
+                'name': 'NIFGEN_VAL_RTSI_4',
                 'value': 145,
 'documentation': {
 'description': 'RTSI 4',
 },
             },
             {
-                'name': 'RTSI_5',
+                'name': 'NIFGEN_VAL_RTSI_5',
                 'value': 146,
 'documentation': {
 'description': 'RTSI 5',
 },
             },
             {
-                'name': 'RTSI_6',
+                'name': 'NIFGEN_VAL_RTSI_6',
                 'value': 147,
 'documentation': {
 'description': 'RTSI 6',
 },
             },
             {
-                'name': 'NONE',
+                'name': 'NIFGEN_VAL_NONE',
                 'value': 1000,
 'documentation': {
 'description': 'No Synchronization Source',
@@ -1133,14 +1084,14 @@ is used as the source.
     'TerminalConfiguration': {
         'values': [
             {
-                'name': 'SINGLE_ENDED',
+                'name': 'NIFGEN_VAL_SINGLE_ENDED',
                 'value': 300,
 'documentation': {
 'description': 'Single-ended operation',
 },
             },
             {
-                'name': 'DIFFERENTIAL',
+                'name': 'NIFGEN_VAL_DIFFERENTIAL',
                 'value': 301,
 'documentation': {
 'description': 'Differential operation',
@@ -1151,21 +1102,21 @@ is used as the source.
     'TriggerMode': {
         'values': [
             {
-                'name': 'SINGLE',
+                'name': 'NIFGEN_VAL_SINGLE',
                 'value': 1,
 'documentation': {
 'description': 'Single Trigger Mode - The waveform you describe in the sequence list is  generated only once by going through the entire staging list. Only one  trigger is required to start the waveform generation. You can use Single  trigger mode with the output mode in any mode. After a trigger is  received, the waveform generation starts from the first stage and  continues through to the last stage. Then, the last stage generates  repeatedly until you stop the waveform generation.',
 },
             },
             {
-                'name': 'CONTINUOUS',
+                'name': 'NIFGEN_VAL_CONTINUOUS',
                 'value': 2,
 'documentation': {
 'description': 'Continuous Trigger Mode - The waveform you describe in the staging list generates infinitely by repeatedly cycling through the staging list.  After a trigger is received, the waveform generation starts from the  first stage and continues through to the last stage. After the last stage  completes, the waveform generation loops back to the start of the  first stage and continues until it is stopped. Only one trigger is  required to start the waveform generation.',
 },
             },
             {
-                'name': 'STEPPED',
+                'name': 'NIFGEN_VAL_STEPPED',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1176,7 +1127,7 @@ trigger mode.
 },
             },
             {
-                'name': 'BURST',
+                'name': 'NIFGEN_VAL_BURST',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1191,199 +1142,80 @@ trigger mode.
     'TriggerSource': {
         'values': [
             {
-                'name': 'IMMEDIATE',
+                'name': 'NIFGEN_VAL_IMMEDIATE',
                 'value': 0,
 'documentation': {
 'description': 'Immediate-The signal generator does not wait for a trigger of any kind.',
 },
             },
             {
-                'name': 'EXTERNAL',
+                'name': 'NIFGEN_VAL_EXTERNAL',
                 'value': 1,
 'documentation': {
 'description': 'External-The signal generator waits for a trigger on the external trigger input',
 },
             },
             {
-                'name': 'SOFTWARE_TRIG',
+                'name': 'NIFGEN_VAL_SOFTWARE_TRIG',
                 'value': 2,
 'documentation': {
 'description': 'Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.',
 },
             },
             {
-                'name': 'TTL0',
+                'name': 'NIFGEN_VAL_TTL0',
                 'value': 111,
 'documentation': {
 'description': 'PXI TRIG0 or VXI TTL0',
 },
             },
             {
-                'name': 'TTL1',
+                'name': 'NIFGEN_VAL_TTL1',
                 'value': 112,
 'documentation': {
 'description': 'PXI TRIG1 or VXI TTL1',
 },
             },
             {
-                'name': 'TTL2',
+                'name': 'NIFGEN_VAL_TTL2',
                 'value': 113,
 'documentation': {
 'description': 'PXI TRIG2 or VXI TTL2',
 },
             },
             {
-                'name': 'TTL3',
+                'name': 'NIFGEN_VAL_TTL3',
                 'value': 114,
 'documentation': {
 'description': 'PXI TRIG3 or VXI TTL3',
 },
             },
             {
-                'name': 'TTL4',
+                'name': 'NIFGEN_VAL_TTL4',
                 'value': 115,
 'documentation': {
 'description': 'PXI TRIG4 or VXI TTL4',
 },
             },
             {
-                'name': 'TTL5',
+                'name': 'NIFGEN_VAL_TTL5',
                 'value': 116,
 'documentation': {
 'description': 'PXI TRIG5 or VXI TTL5',
 },
             },
             {
-                'name': 'TTL6',
+                'name': 'NIFGEN_VAL_TTL6',
                 'value': 117,
 'documentation': {
 'description': 'PXI TRIG6 or VXI TTL6',
 },
             },
             {
-                'name': 'PXI_STAR',
-                'value': 131,
-'documentation': {
-'description': 'PXI star',
-},
-            },
-            {
-                'name': 'RTSI_0',
-                'value': 141,
-'documentation': {
-'description': 'RTSI line 0',
-},
-            },
-            {
-                'name': 'RTSI_1',
-                'value': 142,
-'documentation': {
-'description': 'RTSI line 1',
-},
-            },
-            {
-                'name': 'RTSI_2',
-                'value': 143,
-'documentation': {
-'description': 'RTSI line 2',
-},
-            },
-            {
-                'name': 'RTSI_3',
-                'value': 144,
-'documentation': {
-'description': 'RTSI line 3',
-},
-            },
-            {
-                'name': 'RTSI_4',
-                'value': 145,
-'documentation': {
-'description': 'RTSI line 4',
-},
-            },
-            {
-                'name': 'RTSI_5',
-                'value': 146,
-'documentation': {
-'description': 'RTSI line 5',
-},
-            },
-            {
-                'name': 'RTSI_6',
-                'value': 147,
-'documentation': {
-'description': 'RTSI line 6',
-},
-            },
-            {
-                'name': 'RTSI_7',
-                'value': 1010,
-'documentation': {
-'description': 'RTSI line 7',
-},
-            },
-            {
-                'name': 'PFI_0',
-                'value': 1011,
-'documentation': {
-'description': 'PFI 0',
-},
-            },
-            {
-                'name': 'PFI_1',
-                'value': 1012,
-'documentation': {
-'description': 'PFI 1',
-},
-            },
-            {
-                'name': 'PFI_2',
-                'value': 1013,
-'documentation': {
-'description': 'PFI 2',
-},
-            },
-            {
-                'name': 'PFI_3',
-                'value': 1014,
-'documentation': {
-'description': 'PFI 3',
-},
-            },
-            {
-                'name': 'NIFGEN_VAL_OTHER_TERMINAL',
-                'value': 1018,
-'documentation': {
-'description': 'Specifies that another terminal is used.',
-},
-            },
-        ],
-    },
-    'UpdateClockSource': {
-        'values': [
-            {
-                'name': 'NIFGEN_VAL_INTERNAL',
-                'value': 0,
-'documentation': {
-'description': 'Internal update clock',
-},
-            },
-            {
-                'name': 'NIFGEN_VAL_EXTERNAL',
-                'value': 1,
-'documentation': {
-'description': 'External update clock given on the IO connector',
-},
-            },
-            {
                 'name': 'NIFGEN_VAL_PXI_STAR',
                 'value': 131,
 'documentation': {
-'description': '''
-(PXI only) PXI star trigger line. This choice is valid only in PXI
-chassis slots 3 through 15.
-''',
+'description': 'PXI star',
 },
             },
             {
@@ -1439,7 +1271,165 @@ chassis slots 3 through 15.
                 'name': 'NIFGEN_VAL_RTSI_7',
                 'value': 1010,
 'documentation': {
-'description': '(PCI only) RTSI line 7',
+'description': 'RTSI line 7',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_PFI_0',
+                'value': 1011,
+'documentation': {
+'description': 'PFI 0',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_PFI_1',
+                'value': 1012,
+'documentation': {
+'description': 'PFI 1',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_PFI_2',
+                'value': 1013,
+'documentation': {
+'description': 'PFI 2',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_PFI_3',
+                'value': 1014,
+'documentation': {
+'description': 'PFI 3',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_OTHER_TERMINAL',
+                'value': 1018,
+'documentation': {
+'description': 'Specifies that another terminal is used.',
+},
+            },
+        ],
+    },
+    'UpdateClockSource': {
+        'values': [
+            {
+                'name': 'NIFGEN_VAL_INTERNAL',
+                'value': 0,
+'documentation': {
+'description': 'Internal Update Clock',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_EXTERNAL',
+                'value': 1,
+'documentation': {
+'description': 'External update clock given on the IO front panel connector',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL1',
+                'value': 112,
+'documentation': {
+'description': 'TTL1',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL2',
+                'value': 113,
+'documentation': {
+'description': 'TTL2',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL3',
+                'value': 114,
+'documentation': {
+'description': 'TTL3',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL4',
+                'value': 115,
+'documentation': {
+'description': 'TTL4',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL5',
+                'value': 116,
+'documentation': {
+'description': 'TTL5',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_TTL6',
+                'value': 117,
+'documentation': {
+'description': 'TTL6',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_PXI_STAR',
+                'value': 131,
+'documentation': {
+'description': 'PXI Star Trigger Line',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_0',
+                'value': 141,
+'documentation': {
+'description': 'RTSI 0',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_1',
+                'value': 142,
+'documentation': {
+'description': 'RTSI 1',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_2',
+                'value': 143,
+'documentation': {
+'description': 'RTSI 2',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_3',
+                'value': 144,
+'documentation': {
+'description': 'RTSI 3',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_4',
+                'value': 145,
+'documentation': {
+'description': 'RTSI 4',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_5',
+                'value': 146,
+'documentation': {
+'description': 'RTSI 5',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_6',
+                'value': 147,
+'documentation': {
+'description': 'RTSI 6',
+},
+            },
+            {
+                'name': 'NIFGEN_VAL_RTSI_7',
+                'value': 1010,
+'documentation': {
+'description': 'RTSI 7',
 },
             },
             {
@@ -1453,14 +1443,14 @@ chassis slots 3 through 15.
                 'name': 'NIFGEN_VAL_CLK_IN',
                 'value': 1202,
 'documentation': {
-'description': 'Coaxial CLK IN connector on the board front panel',
+'description': 'CLK IN front panel connector',
 },
             },
             {
                 'name': 'NIFGEN_VAL_DDC_CLK_IN',
                 'value': 1203,
 'documentation': {
-'description': 'DDC CLK IN line of the Digital Data & Control connector',
+'description': 'DDC CLK IN line of the Digital Data & Control front panel connector',
 },
             },
         ],
@@ -1468,56 +1458,56 @@ chassis slots 3 through 15.
     'VideoWaveformType': {
         'values': [
             {
-                'name': 'PAL_B',
+                'name': 'NIFGEN_VAL_PAL_B',
                 'value': 0,
 'documentation': {
 'description': 'PAL B Video Type',
 },
             },
             {
-                'name': 'PAL_D',
+                'name': 'NIFGEN_VAL_PAL_D',
                 'value': 1,
 'documentation': {
 'description': 'PAL D Video Type',
 },
             },
             {
-                'name': 'PAL_G',
+                'name': 'NIFGEN_VAL_PAL_G',
                 'value': 2,
 'documentation': {
 'description': 'PAL G Video Type',
 },
             },
             {
-                'name': 'PAL_H',
+                'name': 'NIFGEN_VAL_PAL_H',
                 'value': 3,
 'documentation': {
 'description': 'PAL H Video Type',
 },
             },
             {
-                'name': 'PAL_I',
+                'name': 'NIFGEN_VAL_PAL_I',
                 'value': 4,
 'documentation': {
 'description': 'PAL I Video Type',
 },
             },
             {
-                'name': 'PAL_M',
+                'name': 'NIFGEN_VAL_PAL_M',
                 'value': 5,
 'documentation': {
 'description': 'PAL M Video Type',
 },
             },
             {
-                'name': 'PAL_N',
+                'name': 'NIFGEN_VAL_PAL_N',
                 'value': 6,
 'documentation': {
 'description': 'PAL N Video Type',
 },
             },
             {
-                'name': 'NTSC_M',
+                'name': 'NIFGEN_VAL_NTSC_M',
                 'value': 7,
 'documentation': {
 'description': 'NTSC M Video Type',
@@ -1528,16 +1518,14 @@ chassis slots 3 through 15.
     'WaitBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST',
-                'suffix': '_VALUE',
+                'name': 'NIFGEN_VAL_HOLD_LAST_VALUE',
                 'value': 400,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.',
 },
             },
             {
-                'name': 'JUMP_TO',
-                'suffix': '_VALUE',
+                'name': 'NIFGEN_VAL_JUMP_TO_VALUE',
                 'value': 401,
 'documentation': {
 'description': 'While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.',
@@ -1548,64 +1536,56 @@ chassis slots 3 through 15.
     'Waveform': {
         'values': [
             {
-                'name': 'SINE',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_SINE',
                 'value': 1,
 'documentation': {
 'description': 'Sinusoid waveform',
 },
             },
             {
-                'name': 'SQUARE',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_SQUARE',
                 'value': 2,
 'documentation': {
 'description': 'Square waveform',
 },
             },
             {
-                'name': 'TRIANGLE',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_TRIANGLE',
                 'value': 3,
 'documentation': {
 'description': 'Triange waveform',
 },
             },
             {
-                'name': 'RAMP_UP',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_RAMP_UP',
                 'value': 4,
 'documentation': {
 'description': 'Positive ramp waveform',
 },
             },
             {
-                'name': 'RAMP_DOWN',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_RAMP_DOWN',
                 'value': 5,
 'documentation': {
 'description': 'Negative ramp waveform',
 },
             },
             {
-                'name': 'DC',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_DC',
                 'value': 6,
 'documentation': {
 'description': 'Constant voltage',
 },
             },
             {
-                'name': 'NOISE',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_NOISE',
                 'value': 101,
 'documentation': {
 'description': 'White noise',
 },
             },
             {
-                'name': 'USER',
-                'prefix': 'WFM_',
+                'name': 'NIFGEN_VAL_WFM_USER',
                 'value': 102,
 'documentation': {
 'description': 'User-defined waveform as defined by the niFgen_DefineUserStandardWaveform function.',

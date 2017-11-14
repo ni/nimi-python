@@ -31,5 +31,6 @@ from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_size_parameter  # noqa: F401
 
 from build.helper.metadata_merge_dicts import merge_dicts  # noqa: F401
+from build.helper.metadata_merge_dicts import merge_helper  # noqa: F401
 
 
