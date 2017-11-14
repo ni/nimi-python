@@ -182,6 +182,119 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: ExportSignal
+
+    .. py:attribute:: nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT
+
+
+
+        Exports the Source Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.MEASURE_COMPLETE_EVENT
+
+
+
+        Exports the Measure Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT
+
+
+
+        Exports the Sequence Iteration Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.SEQUENCE_ENGINE_DONE_EVENT
+
+
+
+        Exports the Sequence Engine Done event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.PULSE_COMPLETE_EVENT
+
+
+
+        Exports the Pulse Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT
+
+
+
+        Exports the Ready Pulse Trigger event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.START_TRIGGER
+
+
+
+        Exports the Start trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.SOURCE_TRIGGER
+
+
+
+        Exports the Source trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.MEASURE_TRIGGER
+
+
+
+        Exports the Measure trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.SEQUENCE_ADVANCE_TRIGGER
+
+
+
+        Exports the Sequence Advance trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ExportSignal.PULSE_TRIGGER
+
+
+
+        Exports the Pulse trigger.
+
+        
+
+
+
+
 .. py:data:: MeasureWhen
 
     .. py:attribute:: nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE

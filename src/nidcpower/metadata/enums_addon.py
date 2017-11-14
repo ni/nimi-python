@@ -97,6 +97,87 @@ enums_additional_enums = {
             }
         ],
     },
+    'ExportSignal': {
+        'values': [
+            {
+                'name': 'SOURCE_COMPLETE_EVENT',
+                'value': 1030,
+                'documentation': {
+                    'description': 'Exports the Source Complete event.',
+                },
+            },
+            {
+                'name': 'MEASURE_COMPLETE_EVENT',
+                'value': 1031,
+                'documentation': {
+                    'description': 'Exports the Measure Complete event.',
+                },
+            },
+            {
+                'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT',
+                'value': 1032,
+                'documentation': {
+                    'description': 'Exports the Sequence Iteration Complete event.',
+                },
+            },  
+            {
+                'name': 'SEQUENCE_ENGINE_DONE_EVENT',
+                'value': 1033,
+                'documentation': {
+                    'description': 'Exports the Sequence Engine Done event.',
+                },
+            },
+            {
+                'name': 'PULSE_COMPLETE_EVENT',
+                'value': 1051,
+                'documentation': {
+                    'description': 'Exports the Pulse Complete event.',
+                },
+            },
+            {
+                'name': 'READY_FOR_PULSE_TRIGGER_EVENT',
+                'value': 1052,
+                'documentation': {
+                    'description': 'Exports the Ready Pulse Trigger event.',
+                },
+            },
+            {
+                'name': 'START_TRIGGER',
+                'value': 1034,
+                'documentation': {
+                    'description': 'Exports the Start trigger.',
+                },
+            },
+            {
+                'name': 'SOURCE_TRIGGER',
+                'value': 1035,
+                'documentation': {
+                    'description': 'Exports the Source trigger.',
+                },
+            },
+            {
+                'name': 'MEASURE_TRIGGER',
+                'value': 1036,
+                'documentation': {
+                    'description': 'Exports the Measure trigger.',
+                },
+            },
+            {
+                'name': 'SEQUENCE_ADVANCE_TRIGGER',
+                'value': 1037,
+                'documentation': {
+                    'description': 'Exports the Sequence Advance trigger.',
+                },
+            },
+            {
+                'name': 'PULSE_TRIGGER',
+                'value': 1053,
+                'documentation': {
+                    'description': 'Exports the Pulse trigger.',
+                },
+            },          
+        ],
+    },
 }
 
 
