@@ -178,3 +178,28 @@ def test_resets(session):
 def test_wait_until_done(session):
     session.wait_until_done(20)
 
+
+def test_user_standard_waveform(session):
+    wfm_points = [1] * 8192
+    session.output_mode = nifgen.OutputMode.FUNC
+    session.configure_standard_waveform(nifgen.Waveform.USER, 1.0, 2000000, 1.0, 0.0)
+    session.define_user_standard_waveform(wfm_points)
+    session.clear_user_standard_waveform()
+
+
+# TODO(bhaswath): Doesn't work, issue #596
+'''
+def test_fir_filter_coefficients():
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
+        coeff_array = [1, 0, -1]
+        session.configure_custom_fir_filter_coefficients(coeff_array)
+        session.commit()
+        array, size = session.get_fir_filter_coefficients()
+        assert size == len(coeff_array)
+'''
+
+
+def test_configure_triggers(session):
+    session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
+    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.trigger_when.HighLevel)
+
