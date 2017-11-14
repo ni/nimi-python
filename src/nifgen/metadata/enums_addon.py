@@ -21,5 +21,16 @@ enums_additional_enums = {
             },
         ],
     },
+    'trigger_when': {
+        'values': [
+            {
+                'name': 'HighLevel',
+                'value': 101,
+            },
+            {
+                'name': 'LowLevel',
+                'value': 102,
+            },
+        ],
+    },
 }
-
