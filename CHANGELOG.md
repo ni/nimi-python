@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
   * #### Added
   * #### Changed
+    * Renamed create_advanced_arb_sequence to create_arb_sequence, replacing original method as it's a superset
   * #### Removed
 * ### NI-SCOPE
   * #### Added
