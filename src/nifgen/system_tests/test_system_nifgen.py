@@ -201,5 +201,5 @@ def test_fir_filter_coefficients():
 
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.trigger_when.HighLevel)
+    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HighLevel)
 
