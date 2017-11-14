@@ -94,9 +94,17 @@ def test_create_arb_sequence(session):
     waveform_handles_array = [session.create_waveform_f64(waveform_data)]
     # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
     assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
-    assert 1 == session.create_arb_sequence(waveform_handles_array, [10], sample_counts_arra=[256])
-    assert 2 == session.create_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
-    assert 3 == session.create_arb_sequence(waveform_handles_array, [10], sample_counts_arra=[256], marker_location_array=[0])
+    assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
+
+
+def test_create_advanced_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert ([-1], 0) == session.create_advanced_arb_sequence(waveform_handles_array, [10])
+    assert ([-1], 1) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256])
+    assert ([0], 2) == session.create_advanced_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
+    assert ([0], 3) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256], marker_location_array=[0])
 
 
 def test_disable(session):
