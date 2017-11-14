@@ -171,3 +171,52 @@ def test_query_arb_seq_capabilities(session):
     assert minimum_sequence_length == 1
     assert maximum_sequence_length == 65535
     assert maximum_loop_count == 16777215
+
+
+def test_arb_seq(session):
+    waveform_data = [-32767, -25485, -18204, -10922, -3641, 3641, 10922, 18204, 25485, 32767]
+    waveform_data_2 = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    session._abort_generation()
+    session.arb_sample_rate = 20000000
+    session.arb_gain = 1
+    session.output_mode = nifgen.OutputMode.SEQ
+    session.clear_arb_memory()
+    session.create_waveform_i16(waveform_data)
+    session.create_waveform_i16(waveform_data_2)
+    session.clear_arb_sequence(-1)
+    session.configure_arb_sequence(session.create_advanced_arb_sequence([0, 1], [1, 1], sample_counts_array=[], marker_location_array=[-1, -1])[1], 1, 0)  # May have to change sample_counts_array when issue#594 fixed
+    session.commit()
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 20000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(20000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    arb_gain = session.arb_gain
+    assert arb_gain == 1
+
+
+def test_arb_script(session):
+    waveform_data = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_SCRIPT
+    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.write_named_waveform_i16('wfmSine', waveform_data)
+    session.arb_sample_rate = 10000000
+    script = '''script myScript0
+    repeat 3
+    Generate wfmSine
+   end repeat
+end script'''
+    session.write_script(script)
+    session.script_to_generate = 'myScript0'
+    session.commit()
+    session.delete_script('myScript0')
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+
+
+def test_reset(session):
+    default_output_mode = session.output_mode
+    assert default_output_mode == nifgen.OutputMode.ARB
+    session.output_mode = nifgen.OutputMode.SEQ
+    assert session.output_mode == nifgen.OutputMode.SEQ
+    session.reset()
+    assert session.output_mode == nifgen.OutputMode.ARB
