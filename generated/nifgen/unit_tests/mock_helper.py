@@ -55,6 +55,9 @@ class SideEffectsHelper(object):
         self._defaults['CreateAdvancedArbSequence']['return'] = 0
         self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray'] = None
         self._defaults['CreateAdvancedArbSequence']['sequenceHandle'] = None
+        self._defaults['CreateArbSequence'] = {}
+        self._defaults['CreateArbSequence']['return'] = 0
+        self._defaults['CreateArbSequence']['sequenceHandle'] = None
         self._defaults['CreateFreqList'] = {}
         self._defaults['CreateFreqList']['return'] = 0
         self._defaults['CreateFreqList']['frequencyListHandle'] = None
@@ -323,6 +326,14 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_CreateAdvancedArbSequence", param='sequenceHandle')
         sequence_handle.contents.value = self._defaults['CreateAdvancedArbSequence']['sequenceHandle']
         return self._defaults['CreateAdvancedArbSequence']['return']
+
+    def niFgen_CreateArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
+        if self._defaults['CreateArbSequence']['return'] != 0:
+            return self._defaults['CreateArbSequence']['return']
+        if self._defaults['CreateArbSequence']['sequenceHandle'] is None:
+            raise MockFunctionCallError("niFgen_CreateArbSequence", param='sequenceHandle')
+        sequence_handle.contents.value = self._defaults['CreateArbSequence']['sequenceHandle']
+        return self._defaults['CreateArbSequence']['return']
 
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         if self._defaults['CreateFreqList']['return'] != 0:
@@ -788,6 +799,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureStandardWaveform.return_value = 0
         mock_library.niFgen_CreateAdvancedArbSequence.side_effect = MockFunctionCallError("niFgen_CreateAdvancedArbSequence")
         mock_library.niFgen_CreateAdvancedArbSequence.return_value = 0
+        mock_library.niFgen_CreateArbSequence.side_effect = MockFunctionCallError("niFgen_CreateArbSequence")
+        mock_library.niFgen_CreateArbSequence.return_value = 0
         mock_library.niFgen_CreateFreqList.side_effect = MockFunctionCallError("niFgen_CreateFreqList")
         mock_library.niFgen_CreateFreqList.return_value = 0
         mock_library.niFgen_CreateWaveformF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformF64")

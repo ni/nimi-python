@@ -1069,8 +1069,8 @@ class _SessionBase(object):
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to produce. NI-FGEN sets the
                 ARB_SEQUENCE_HANDLE attribute to this value. You can
-                create an arbitrary sequence using the CreateArbSequence or
-                create_arb_sequence function. These functions return a
+                create an arbitrary sequence using the create_arb_sequence or
+                create_advanced_arb_sequence function. These functions return a
                 handle that you use to identify the sequence.
 
                 **Default Value**: None
@@ -1211,8 +1211,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(len(coefficients_array))  # case 6
-        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
+        number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case 6
+        coefficients_array_ctype = None if coefficients_array is None else (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1468,8 +1468,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1646,8 +1646,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1694,8 +1694,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2615,8 +2615,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2663,8 +2663,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2702,8 +2702,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2778,8 +2778,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3263,8 +3263,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
-        '''create_arb_sequence
+    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
+        '''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
         array of corresponding loop counts. This function returns a handle that
@@ -3272,8 +3272,8 @@ class Session(_SessionBase):
         configure_arb_sequence function to specify what arbitrary sequence
         you want the signal generator to produce.
 
-        The create_arb_sequence function extends on the
-        CreateArbSequence function by adding the ability to set the
+        The create_advanced_arb_sequence function extends on the
+        create_arb_sequence function by adding the ability to set the
         number of samples in each sequence step and to set marker locations.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3363,16 +3363,86 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 6
-        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
-        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
-        sample_counts_array_ctype = (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
-        marker_location_array_ctype = (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case 4
+        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
+        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sample_counts_array_ctype = None if sample_counts_array is None else (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
+        marker_location_array_ctype = None if marker_location_array is None else (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case 4
         coerced_markers_array_ctype = (visatype.ViInt32 * 1)()  # case 11
         sequence_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range(1)], int(sequence_handle_ctype.value)
+
+    def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
+        '''create_arb_sequence
+
+        Creates an arbitrary sequence from an array of waveform handles and an
+        array of corresponding loop counts. This function returns a handle that
+        identifies the sequence. You pass this handle to the
+        nifgen_ConfigureArbSequence function to specify what arbitrary sequence
+        you want the signal generator to produce.
+
+        An arbitrary sequence consists of multiple waveforms. For each waveform,
+        you can specify the number of times that the signal generator produces
+        the waveform before proceeding to the next waveform. The number of times
+        to repeat a specific waveform is called the loop count.
+
+        Note:
+        You must call the nifgen_ConfigureOutputMode function to set the
+        **outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
+        function.
+
+        Args:
+            sequence_length (int): Specifies the number of waveforms in the new arbitrary sequence that you
+                want to create. The value you pass must be between the minimum and
+                maximum sequence lengths that the signal generator allows. You can
+                obtain the minimum and maximum sequence lengths from
+                **minimumSequenceLength** and **maximumSequenceLength** in the
+                nifgen_QueryArbSeqCapabilities function.
+
+                **Default Value**: None
+            waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
+                new arbitrary sequence. The array must have at least as many elements as
+                the value that you specify in **sequenceLength**. Each
+                **waveformHandlesArray** element has a corresponding **loopCountsArray**
+                element that indicates how many times that waveform is repeated. You
+                obtain waveform handles when you create arbitrary waveforms with the
+                nifgen_AllocateWaveform function or one of the following niFgen
+                CreateWaveform functions:
+
+                -  nifgen_CreateWaveformF64
+                -  nifgen_CreateWaveformI16
+                -  nifgen_CreateWaveformFromFileI16
+                -  nifgen_CreateWaveformFromFileF64
+                -  nifgen_CreateWaveformFromFileHWS
+
+                **Default Value**: None
+            loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
+                arbitrary sequence. The array must have at least as many elements as the
+                value that you specify in the **sequenceLength** parameter. Each
+                **loopCountsArray** element corresponds to a **waveformHandlesArray**
+                element and indicates how many times to repeat that waveform. Each
+                element of the **loopCountsArray** must be less than or equal to the
+                maximum number of loop counts that the signal generator allows. You can
+                obtain the maximum loop count from **maximumLoopCount** in the
+                nifgen_QueryArbSeqCapabilities function.
+
+                **Default Value**: None
+
+        Returns:
+            sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
+                pass this handle to nifgen_ConfigureArbSequence to generate the
+                arbitrary sequence.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
+        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sequence_handle_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, ctypes.pointer(sequence_handle_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(sequence_handle_ctype.value)
 
     def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
@@ -3459,9 +3529,9 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         waveform_ctype = visatype.ViInt32(waveform.value)  # case 10
-        frequency_list_length_ctype = visatype.ViInt32(len(frequency_array))  # case 6
-        frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
-        duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
+        frequency_list_length_ctype = visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case 6
+        frequency_array_ctype = None if frequency_array is None else (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
+        duration_array_ctype = None if duration_array is None else (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
         frequency_list_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, ctypes.pointer(frequency_list_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

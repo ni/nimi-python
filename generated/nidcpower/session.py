@@ -2513,9 +2513,9 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        values_ctype = (visatype.ViReal64 * len(values))(*values)  # case 4
-        source_delays_ctype = (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
-        size_ctype = visatype.ViUInt32(len(values))  # case 6
+        values_ctype = None if values is None else (visatype.ViReal64 * len(values))(*values)  # case 4
+        source_delays_ctype = None if source_delays is None else (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
+        size_ctype = visatype.ViUInt32(0 if values is None else len(values))  # case 6
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2995,8 +2995,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case 3
-        attribute_id_count_ctype = visatype.ViInt32(len(attribute_ids))  # case 6
-        attribute_ids_ctype = (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case 4
+        attribute_id_count_ctype = visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case 6
+        attribute_ids_ctype = None if attribute_ids is None else (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case 4
         set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case 9
         error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

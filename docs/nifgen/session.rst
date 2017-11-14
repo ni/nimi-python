@@ -442,7 +442,9 @@ nifgen.Session
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`configure_standard_waveform`              | waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0                                  |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
-   | :py:func:`create_arb_sequence`                      | waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None |
+   | :py:func:`create_advanced_arb_sequence`             | waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None |
+   +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
+   | :py:func:`create_arb_sequence`                      | waveform_handles_array, loop_counts_array                                                       |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`create_freq_list`                         | waveform, frequency_array, duration_array                                                       |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+

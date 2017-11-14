@@ -77,8 +77,8 @@ class SideEffectsHelper(object):
         self._defaults['Initiate']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
-        self._defaults['MultipleArrayTypes']['passedInArray'] = None
-        self._defaults['MultipleArrayTypes']['aFixedArray'] = None
+        self._defaults['MultipleArrayTypes']['outputArray'] = None
+        self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] = None
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
         self._defaults['ParametersAreMultipleTypes'] = {}
@@ -333,25 +333,25 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
-    def niFake_MultipleArrayTypes(self, passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array):  # noqa: N802
+    def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
             return self._defaults['MultipleArrayTypes']['return']
-        if self._defaults['MultipleArrayTypes']['passedInArray'] is None:
-            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='passedInArray')
-        a = self._defaults['MultipleArrayTypes']['passedInArray']
+        if self._defaults['MultipleArrayTypes']['outputArray'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArray')
+        a = self._defaults['MultipleArrayTypes']['outputArray']
         import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
-        for i in range(min(len(passed_in_array), len(a))):
-            passed_in_array[i] = a[i]
-        if self._defaults['MultipleArrayTypes']['aFixedArray'] is None:
-            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='aFixedArray')
-        a = self._defaults['MultipleArrayTypes']['aFixedArray']
+        for i in range(min(len(output_array), len(a))):
+            output_array[i] = a[i]
+        if self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArrayOfFixedLength')
+        a = self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength']
         import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
-        for i in range(min(len(a_fixed_array), len(a))):
-            a_fixed_array[i] = a[i]
+        for i in range(min(len(output_array_of_fixed_length), len(a))):
+            output_array_of_fixed_length[i] = a[i]
         return self._defaults['MultipleArrayTypes']['return']
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
