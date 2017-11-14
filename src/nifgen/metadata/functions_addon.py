@@ -71,7 +71,7 @@ functions_enums = {
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  # TODO: issue #538
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'trigger_when',              }, }, },  # TODO: issue #538
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',              }, }, },  # TODO: issue #538
 }
 
 functions_issues = {
