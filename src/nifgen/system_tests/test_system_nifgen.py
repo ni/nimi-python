@@ -225,3 +225,23 @@ def test_reset(session):
     assert session.output_mode == nifgen.OutputMode.SEQ
     session.reset()
     assert session.output_mode == nifgen.OutputMode.ARB
+
+
+def test_reset_device(session):
+    default_trigger_mode = session.trigger_mode
+    assert default_trigger_mode == nifgen.TriggerMode.CONTINUOUS
+    session.trigger_mode = nifgen.TriggerMode.STEPPED
+    non_default_trigger_mode = nifgen.TriggerMode.STEPPED
+    assert non_default_trigger_mode == nifgen.TriggerMode.STEPPED
+    session.reset_device()
+    assert session.trigger_mode == nifgen.TriggerMode.CONTINUOUS
+
+
+def test_reset_with_default(session):
+    default_sample_rate = session.arb_sample_rate
+    assert default_sample_rate == 250000000.0
+    session.arb_sample_rate = 100000000.0
+    non_default_arb_sample_rate = session.arb_sample_rate
+    assert non_default_arb_sample_rate == 100000000.0
+    session.reset_with_defaults()
+    assert session.arb_sample_rate == 250000000.0
