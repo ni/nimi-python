@@ -618,6 +618,48 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    def get_array_for_python_code_custom_type(self):
+        '''get_array_for_python_code_custom_type
+
+        This function returns an array for use in python-code size mechanism.
+
+        Returns:
+            array_out (list of CustomStruct): Array os custom typeusing puthon-code size mechanism
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.6
+        error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+
+    def get_array_for_python_code_double(self):
+        '''get_array_for_python_code_double
+
+        This function returns an array for use in python-code size mechanism.
+
+        Returns:
+            array_out (list of float): Array of double using puthon-code size mechanism
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.6
+        error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+
+    def get_array_size_for_python_code(self):
+        '''get_array_size_for_python_code
+
+        This function returns the size of the array for use in python-code size mechanism.
+
+        Returns:
+            size_out (int): Size of array
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        size_out_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_GetArraySizeForPythonCode(vi_ctype, ctypes.pointer(size_out_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(size_out_ctype.value)
+
     def get_array_using_ivi_dance(self):
         '''get_array_using_ivi_dance
 
@@ -660,7 +702,7 @@ class Session(_SessionBase):
             number_of_elements (int): Number of elements in the array.
 
         Returns:
-            cs (list of CustomStruct): Set using custom type
+            cs (list of CustomStruct): Get using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8

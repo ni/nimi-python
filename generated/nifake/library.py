@@ -28,6 +28,9 @@ class Library(object):
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
         self.niFake_GetAnIviDanceString_cfunc = None
+        self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
+        self.niFake_GetArrayForPythonCodeDouble_cfunc = None
+        self.niFake_GetArraySizeForPythonCode_cfunc = None
         self.niFake_GetArrayUsingIVIDance_cfunc = None
         self.niFake_GetAttributeViBoolean_cfunc = None
         self.niFake_GetAttributeViInt32_cfunc = None
@@ -132,6 +135,30 @@ class Library(object):
                 self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
+
+    def niFake_GetArrayForPythonCodeCustomType(self, vi, array_out):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetArrayForPythonCodeCustomType_cfunc is None:
+                self.niFake_GetArrayForPythonCodeCustomType_cfunc = self._library.niFake_GetArrayForPythonCodeCustomType
+                self.niFake_GetArrayForPythonCodeCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct)]  # noqa: F405
+                self.niFake_GetArrayForPythonCodeCustomType_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetArrayForPythonCodeCustomType_cfunc(vi, array_out)
+
+    def niFake_GetArrayForPythonCodeDouble(self, vi, array_out):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetArrayForPythonCodeDouble_cfunc is None:
+                self.niFake_GetArrayForPythonCodeDouble_cfunc = self._library.niFake_GetArrayForPythonCodeDouble
+                self.niFake_GetArrayForPythonCodeDouble_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_GetArrayForPythonCodeDouble_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetArrayForPythonCodeDouble_cfunc(vi, array_out)
+
+    def niFake_GetArraySizeForPythonCode(self, vi, size_out):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetArraySizeForPythonCode_cfunc is None:
+                self.niFake_GetArraySizeForPythonCode_cfunc = self._library.niFake_GetArraySizeForPythonCode
+                self.niFake_GetArraySizeForPythonCode_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_GetArraySizeForPythonCode_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetArraySizeForPythonCode_cfunc(vi, size_out)
 
     def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
         with self._func_lock:

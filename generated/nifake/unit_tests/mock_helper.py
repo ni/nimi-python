@@ -38,6 +38,15 @@ class SideEffectsHelper(object):
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
+        self._defaults['GetArrayForPythonCodeCustomType'] = {}
+        self._defaults['GetArrayForPythonCodeCustomType']['return'] = 0
+        self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] = None
+        self._defaults['GetArrayForPythonCodeDouble'] = {}
+        self._defaults['GetArrayForPythonCodeDouble']['return'] = 0
+        self._defaults['GetArrayForPythonCodeDouble']['arrayOut'] = None
+        self._defaults['GetArraySizeForPythonCode'] = {}
+        self._defaults['GetArraySizeForPythonCode']['return'] = 0
+        self._defaults['GetArraySizeForPythonCode']['sizeOut'] = None
         self._defaults['GetArrayUsingIVIDance'] = {}
         self._defaults['GetArrayUsingIVIDance']['return'] = 0
         self._defaults['GetArrayUsingIVIDance']['arrayOut'] = None
@@ -219,6 +228,40 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAnIviDanceString']['aString'])
         a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
         return self._defaults['GetAnIviDanceString']['return']
+
+    def niFake_GetArrayForPythonCodeCustomType(self, vi, array_out):  # noqa: N802
+        if self._defaults['GetArrayForPythonCodeCustomType']['return'] != 0:
+            return self._defaults['GetArrayForPythonCodeCustomType']['return']
+        if self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] is None:
+            raise MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType", param='arrayOut')
+        a = self._defaults['GetArrayForPythonCodeCustomType']['arrayOut']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(array_out), len(a))):
+            array_out[i] = a[i]
+        return self._defaults['GetArrayForPythonCodeCustomType']['return']
+
+    def niFake_GetArrayForPythonCodeDouble(self, vi, array_out):  # noqa: N802
+        if self._defaults['GetArrayForPythonCodeDouble']['return'] != 0:
+            return self._defaults['GetArrayForPythonCodeDouble']['return']
+        if self._defaults['GetArrayForPythonCodeDouble']['arrayOut'] is None:
+            raise MockFunctionCallError("niFake_GetArrayForPythonCodeDouble", param='arrayOut')
+        a = self._defaults['GetArrayForPythonCodeDouble']['arrayOut']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(array_out), len(a))):
+            array_out[i] = a[i]
+        return self._defaults['GetArrayForPythonCodeDouble']['return']
+
+    def niFake_GetArraySizeForPythonCode(self, vi, size_out):  # noqa: N802
+        if self._defaults['GetArraySizeForPythonCode']['return'] != 0:
+            return self._defaults['GetArraySizeForPythonCode']['return']
+        if self._defaults['GetArraySizeForPythonCode']['sizeOut'] is None:
+            raise MockFunctionCallError("niFake_GetArraySizeForPythonCode", param='sizeOut')
+        size_out.contents.value = self._defaults['GetArraySizeForPythonCode']['sizeOut']
+        return self._defaults['GetArraySizeForPythonCode']['return']
 
     def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
         if self._defaults['GetArrayUsingIVIDance']['return'] != 0:
@@ -539,6 +582,12 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
+        mock_library.niFake_GetArrayForPythonCodeCustomType.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType")
+        mock_library.niFake_GetArrayForPythonCodeCustomType.return_value = 0
+        mock_library.niFake_GetArrayForPythonCodeDouble.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeDouble")
+        mock_library.niFake_GetArrayForPythonCodeDouble.return_value = 0
+        mock_library.niFake_GetArraySizeForPythonCode.side_effect = MockFunctionCallError("niFake_GetArraySizeForPythonCode")
+        mock_library.niFake_GetArraySizeForPythonCode.return_value = 0
         mock_library.niFake_GetArrayUsingIVIDance.side_effect = MockFunctionCallError("niFake_GetArrayUsingIVIDance")
         mock_library.niFake_GetArrayUsingIVIDance.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")
