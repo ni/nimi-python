@@ -152,7 +152,7 @@ def test_read_current_temperature(session):
 
 def test_allocate_waveform(session):
     try:
-        waveforme_data = [ 1, 1, 1, 1, 1, -1 , -1, -1, -1, -1, 1]
+        waveforme_data = [1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1]
         session.write_waveform(session.allocate_waveform(10), waveforme_data)
     except nifgen.Error as e:
         assert e.code == -1074126841  # Writing more data than allocated
