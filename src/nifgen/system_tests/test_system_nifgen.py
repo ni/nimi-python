@@ -151,7 +151,11 @@ def test_read_current_temperature(session):
 
 
 def test_allocate_waveform(session):
-    session.allocate_waveform(1024)
+    try:
+        waveforme_data = [ 1, 1, 1, 1, 1, -1 , -1, -1, -1, -1, 1]
+        session.write_waveform(session.allocate_waveform(10), waveforme_data)
+    except nifgen.Error as e:
+        assert e.code == -1074126841  # Writing more data than allocated
 
 
 def test_clear_waveform_memory(session):
@@ -163,7 +167,7 @@ def test_clear_waveform_memory(session):
 
 def test_query_arb_seq_capabilities(session):
     maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count = session.query_arb_seq_capabilities()
-    assert maximum_number_of_sequences == 65535  # maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count are 65535, 1, 65535, 16777215 respectively for simulated 5433
+    assert maximum_number_of_sequences == 65535
     assert minimum_sequence_length == 1
     assert maximum_sequence_length == 65535
     assert maximum_loop_count == 16777215
