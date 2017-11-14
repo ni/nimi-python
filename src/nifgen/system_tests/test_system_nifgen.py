@@ -191,7 +191,8 @@ def test_arb_seq(session):
     assert in_range is True
     session.arb_sample_rate = 10000000
     session.create_arb_sequence(2, [0, 1], [1, 1])
-    in_range = abs(actual_sample_rate - 20000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(20000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
     assert in_range is True
     arb_gain = session.arb_gain
     assert arb_gain == 1
