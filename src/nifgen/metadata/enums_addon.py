@@ -12,11 +12,11 @@ enums_additional_enums = {
     'RelativeTo': {
         'values': [
             {
-                'name': 'WAVEFORM_POSITION_START',
+                'name': 'START',
                 'value': 0,
             },
             {
-                'name': 'WAVEFORM_POSITION_CURRENT',
+                'name': 'CURRENT',
                 'value': 1,
             },
         ],
