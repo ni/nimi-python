@@ -95,7 +95,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
-    'mechanism': 'fixed, passed-in, len',  # any but ivi-dance
+    'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,

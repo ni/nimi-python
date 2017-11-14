@@ -92,6 +92,8 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         else:
             if output_parameter['size']['mechanism'] == 'fixed':
                 size = str(output_parameter['size']['value'])
+            elif output_parameter['size']['mechanism'] == 'python-code':
+                size = output_parameter['size']['value']
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
                 size = size_parameter['ctypes_variable_name'] + '.value'
@@ -133,6 +135,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
     '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     We've identified many different cases on how these need to be initialized based on the parameter:
+        0. Mechanism is python-code:                                    (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
         1. Input session handle:                                        visatype.ViSession(self._vi)
         2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
@@ -158,7 +161,22 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
     # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
-    if parameter['direction'] == 'in':
+    if parameter['size']['mechanism'] == 'python-code':
+        size = parameter['size']['value']
+        # Now we need to replicate some of the same conditions from below
+        if parameter['is_buffer'] is False:
+            definition = '{0}  # case 0.0'.format(size)
+        elif parameter['direction'] == 'in':
+            assert parameter['is_buffer'] is True
+            if custom_type is None:
+                definition = '({0}.{1} * {2})(*{3})  # case 0.2'.format(module_name, parameter['ctypes_type'], parameter['python_name'], size, parameter['python_name'])
+            else:
+                definition = '({0}.{1} * {2})(*[{0}.{1}(c) for c in {3}])  # case 0.4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], size, parameter['python_name'])
+        else:
+            assert parameter['is_buffer'] is True
+            assert parameter['direction'] == 'out'
+            definition = '({0}.{1} * {2})()  # case 0.6'.format(module_name, parameter['ctypes_type'], size)
+    elif parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif parameter['is_repeated_capability'] is True:
