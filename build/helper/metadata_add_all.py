@@ -24,11 +24,12 @@ def _add_name(function, name):
 
 
 def _add_python_method_name(function, name):
-    '''Adds a python_name' key/value pair to the function metadata'''
-    if function['codegen_method'] == 'private':
-        function['python_name'] = '_' + camelcase_to_snakecase(name)
-    else:
-        function['python_name'] = camelcase_to_snakecase(name)
+    '''Adds a python_name' key/value pair to the function metadata if not already specified'''
+    if 'python_name' not in function:
+        if function['codegen_method'] == 'private':
+            function['python_name'] = '_' + camelcase_to_snakecase(name)
+        else:
+            function['python_name'] = camelcase_to_snakecase(name)
     return function
 
 
