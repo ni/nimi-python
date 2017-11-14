@@ -1869,12 +1869,93 @@ functions = {
                 'name': 'cs',
                 'type': 'custom_struct[]',
                 'documentation': {
-                    'description': 'Set using custom type',
+                    'description': 'Get using custom type',
                 },
             },
         ],
         'documentation': {
             'description': 'This function returns a custom type.',
+        },
+    },
+    'GetArraySizeForPythonCode': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'sizeOut',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Size of array',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns the size of the array for use in python-code size mechanism.',
+        },
+    },
+    'GetArrayForPythonCodeDouble': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'arrayOut',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array of double using puthon-code size mechanism',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array for use in python-code size mechanism.',
+        },
+    },
+    'GetArrayForPythonCodeCustomType': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'arrayOut',
+                'type': 'custom_struct[]',
+                'documentation': {
+                    'description': 'Array os custom typeusing puthon-code size mechanism',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array for use in python-code size mechanism.',
         },
     },
     #TODO(marcoskirsch): More cases to add:
