@@ -57,7 +57,8 @@ functions_enums = {
     'WaitForEvent':                                 { 'parameters': { 1: { 'enum': 'Event',                       }, }, },
     'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
     'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
-    # @TODO add all enums
+    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'ExportSignal',                }, }, },
+	# @TODO add all enums
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.

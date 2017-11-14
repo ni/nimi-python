@@ -29,6 +29,7 @@ attributes_codegen_method = {
     1250005: { "codegen_method": "no" },  # OPERATION_MODE
     1150109: { "codegen_method": "no" },  # ACTUAL_ARB_SAMPLE_RATE
     1150221: { "codegen_method": "no" },  # DAQMX_TASK
+    1050322: { "codegen_method": "no" },  # IO_SESSION
     1150391: { "codegen_method": "no" },  # P2P_ENABLED - P2P Attribute
     1150392: { "codegen_method": "no" },  # P2P_DESTINATION_CHANNELS - P2P Attribute
     1150393: { "codegen_method": "no" },  # P2P_ENDPOINT_SIZE - P2P Attribute

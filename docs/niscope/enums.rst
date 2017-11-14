@@ -522,7 +522,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: StreamingPositionType
 
-    .. py:attribute:: niscope.StreamingPositionType.START_TRIGGER
+    .. py:attribute:: niscope.StreamingPositionType.START
 
 
 
@@ -532,7 +532,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.StreamingPositionType.REFERENCE_TRIGGER
+    .. py:attribute:: niscope.StreamingPositionType.REFERENCE
 
 
 
@@ -543,7 +543,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.StreamingPositionType.SYNC_TRIGGER
+    .. py:attribute:: niscope.StreamingPositionType.SYNC
 
 
 
