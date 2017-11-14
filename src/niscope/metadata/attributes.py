@@ -2366,20 +2366,15 @@ Returns the size in samples of the peer-to-peer endpoint.
         'channel_based': 'False',
         'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Manual:Manual Configuration Enabled',
-        'name': 'MANUAL_CONFIGURATION_ENABLED',
+        'name': 'P2P_ADVANCED_ATTRIBUTES_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables and disables manual configuration of a peer-to-peer endpoint.
-These attributes cannot be used if an endpoint is being configured by
-NI-P2P, or a resource reservation error will result. This property is
-endpoint-based.
+Enables/disables the advanced attributes for a peer-to-peer endpoint. These attributes cannot be used if  an endpoint is being configured by NI-P2P, or a resource reservation error will occur.
+Default Value: VI_FALSE
 ''',
-'note': '''
-This property can be used only with high-speed digitizers that support
-peer-to-peer streaming.
-''',
+'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.',
 },
     },
     1150344: {
@@ -2589,19 +2584,13 @@ Returns the number of samples transferred per record when you set the
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:NCO Center Frequency',
-        'name': 'CARRIER_NCO_CENTER_FREQUENCY',
+        'name': 'DDC_NCO_FREQUENCY',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Controls the frequency of the timing NCO. The default value is
-0X8000000.
-Specifies the timing NCO center frequency in binary format as follows:
-N = ( *:sub:`out`* / *F\ :sub:`resampler`* ) & 2\ :sup:`32`
-where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
-is the resampled frequency.
-The value is transferred to the active register during the next initiate
-acquisition operation.
+Specifies the Carrier NCO Center Frequency. The coerced value can be read back..
+Default Value: 15.0e6
 ''',
 },
     },
@@ -2610,15 +2599,13 @@ acquisition operation.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:Phase Offset',
-        'name': 'CARRIER_PHASE_OFFSET',
+        'name': 'DDC_NCO_PHASE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Offsets the phase of the timing NCO in binary format. The value is
-transferred to the active register during the next initiate acquisition.
-The default value is 0.
-Valid Range: 0 to 6.283185307179586476925286766558
+Specifies the Carrier Phase Offset. The coerced value can be read back.
+Default Value: 0.0
 ''',
 },
     },
@@ -2639,22 +2626,13 @@ Valid Range: 0 to 6.283185307179586476925286766558
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable DDC',
-        'name': 'ENABLE_DDC',
+        'name': 'DDC_ENABLE',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Disables programming the DDC when set to FALSE. The default value is
-TRUE.
-This property is supported for NI 5620/5621 digitizers only. For NI
-5142/5622 digitizers, use the `DDC Enabled <pniScope_DDCEnabled.html>`__
-property.
-Custom programming of the DDC using NI-SCOPE property nodes is not
-supported by National Instruments.
-National Instruments supports using the DDC only when the Modulation
-Toolkit and/or Spectral Measurements Toolkit are used, because they make
-use of the DDC automatically (that is, without user intervention) when
-configuration settings allow.
+Set this to VI_FALSE to disable programming of the DDC.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -2663,15 +2641,13 @@ configuration settings allow.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Decimation',
-        'name': 'CIC_DECIMATION',
+        'name': 'DDC_CIC_DECIMATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Controls the decimation in the CIC filter. The CIC filter reduces the
-sample rate of a wideband signal to a rate that other filters in the DDC
-can process. The default value is 4.
-Valid Range: 4 to 32
+Controls the decimation in the CIC filter. The CIC filter reduces the sample rate  of a wideband signal to a rate that other filters in the DDC can process.
+Default Value: 4
 ''',
 },
     },
@@ -2680,15 +2656,13 @@ Valid Range: 4 to 32
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Shift Gain',
-        'name': 'CIC_SHIFT_GAIN',
+        'name': 'DDC_CIC_SHIFT_GAIN',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Controls the shift gain at the input to the CIC filter. The CIC filter
-reduces the sample rate of a wideband signal to a rate that other
-filters in the DDC can process. The default value is 0.
-Valid Range: 0 to 15
+Controls the shift gain at the input to the CIC filter. The CIC filter reduces  the sample rate of a wideband signal to a rate that other filters in the DDC can process.
+Default Value: 0
 ''',
 },
     },
@@ -2697,13 +2671,13 @@ Valid Range: 0 to 15
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Enable',
-        'name': 'DISCR._ENABLE',
+        'name': 'DDC_DISCRIMINATOR_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables or disables the discriminator. If set to TRUE, frequency
-discriminator is enabled. The default value is FALSE.
+Set this to VI_TRUE to enable the frequency discriminator.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -2712,13 +2686,13 @@ discriminator is enabled. The default value is FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Decimation',
-        'name': 'DISCRIMINATOR_FIR_DECIMATION',
+        'name': 'DDC_DISCRIMINATOR_FIR_DECIMATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the amount of decimation. The default value is 1.
-Valid Range: 1 to 8
+Sets the amount of decimation, from 1 to 8.
+Default Value: 1
 ''',
 },
     },
@@ -2727,13 +2701,13 @@ Valid Range: 1 to 8
         'channel_based': 'True',
         'enum': 'DiscriminatorFIRSymmetry',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry',
-        'name': 'DISCRIMINATOR_FIR_SYMMETRY',
+        'name': 'DDC_DISCRIMINATOR_FIR_SYMMETRY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the discriminator FIR symmetry to symmetric or asymmetric. The
-default value is Symmetric.
+Sets the discriminator FIR symmetry to symmetric or asymmetric.
+Default Value: Symmetric
 ''',
 },
     },
@@ -2742,13 +2716,13 @@ default value is Symmetric.
         'channel_based': 'True',
         'enum': 'DiscriminatorFIRSymmetryType',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry Type',
-        'name': 'DISCRIMINATOR_FIR_SYMMETRY_TYPE',
+        'name': 'DDC_DISCRIMINATOR_FIR_SYMMETRY_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the discriminator FIR symmetry type to even or odd. The default
-value is even.
+Sets the discriminator FIR symmetry type to even or odd.
+Default Value: Even
 ''',
 },
     },
@@ -2757,13 +2731,15 @@ value is even.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Taps',
-        'name': 'DISCRIMINATOR_FIR_TAPS',
+        'name': 'DDC_DISCRIMINATOR_FIR_NUM_TAPS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the discriminator FIR number of taps. The default value is 1.
-Valid Range: 1 to 63
+Sets the discriminator FIR number of taps.
+Valid Values:
+1 to 63.
+Default Value: 1
 ''',
 },
     },
@@ -2772,13 +2748,13 @@ Valid Range: 1 to 63
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Delay',
-        'name': 'DISCRIMINATOR_DELAY',
+        'name': 'DDC_DISCRIMINATOR_DELAY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the number of delays in the discriminator. The default value is 1.
-Valid Range: 1 to 8
+Sets the number of delays in the discriminator, from 1 to 8.
+Default Value: 1
 ''',
 },
     },
@@ -2787,13 +2763,13 @@ Valid Range: 1 to 8
         'channel_based': 'True',
         'enum': 'DiscriminatorFIRInputSource',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Input Source',
-        'name': 'DISCRIMINATOR_FIR_INPUT_SOURCE',
+        'name': 'DDC_DISCRIMINATOR_FIR_INPUT_SOURCE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the discriminator FIR input source to Phase, Magnitude, or
-Resampler. The default value is Phase.
+Sets the discriminator FIR input source to phase, magnitude, or resampler.
+Default Value: Phase
 ''',
 },
     },
@@ -2802,14 +2778,13 @@ Resampler. The default value is Phase.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Phase Multiplier',
-        'name': 'DISCRIMINATOR_PHASE_MULTIPLIER',
+        'name': 'DDC_DISCRIMINATOR_PHASE_MULTIPLIER',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Programs the coordinate converter to multiply the phase output by 1, 2,
-4, or 8. Multiplying the phase output removes phase modulation before
-the frequency is measured. The default value is 0.
+Programs the coordinate converter to multiply the phase output by 1, 2, 4, or 8. Multiplying the phase output  removes phase modulation before the frequency is measured.
+Default Value: 0
 ''',
 },
     },
@@ -2818,13 +2793,13 @@ the frequency is measured. The default value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Decimation',
-        'name': 'PROG._FIR_FILTER_DECIMATION',
+        'name': 'DDC_PFIR_DECIMATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the programmable FIR filter decimation. The default value is
-1.
+Specifies the programmable FIR filter decimation.
+Default Value: 1
 ''',
 },
     },
@@ -2833,13 +2808,16 @@ Specifies the programmable FIR filter decimation. The default value is
         'channel_based': 'True',
         'enum': 'ProgFIRFilterSymmetry',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry',
-        'name': 'PROG._FIR_FILTER_SYMMETRY',
+        'name': 'DDC_PFIR_SYMMETRY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets either a Symmetric or Asymmetric filter. The default value is
-Symmetric.
+Sets either a symmetric or asymmetric filter.
+Valid Values:
+NISCOPE_VAL_SYMMETRIC (0)
+NISCOPE_VAL_ASYMMETRIC (1)
+Default Value: Symmetric
 ''',
 },
     },
@@ -2848,11 +2826,17 @@ Symmetric.
         'channel_based': 'True',
         'enum': 'ProgFIRFilterSymmetryType',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry Type',
-        'name': 'PROG._FIR_FILTER_SYMMETRY_TYPE',
+        'name': 'DDC_PFIR_SYMMETRY_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Sets either even or odd symmetry. The default value is Even.',
+'description': '''
+Sets either even or odd symmetry.
+Valid Values:
+NISCOPE_VAL_EVEN (0)
+NISCOPE_VAL_ODD (1)
+Default Value: Even
+''',
 },
     },
     1151033: {
@@ -2860,13 +2844,13 @@ Symmetric.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Taps',
-        'name': 'PROG._FIR_FILTER_TAPS',
+        'name': 'DDC_PFIR_NUM_TAPS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Defines the number of taps (in other words, coefficients) for a FIR
-filter. The default value is 25.
+Number of taps in the FIR filter, from 1 to 255.
+Default Value: 1
 ''',
 },
     },
@@ -2875,13 +2859,16 @@ filter. The default value is 25.
         'channel_based': 'True',
         'enum': 'ProgFIRFilterRealComplex',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Real/Complex',
-        'name': 'PROG._FIR_FILTER_REALCOMPLEX',
+        'name': 'DDC_PFIR_REAL_OR_COMPLEX',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets either a Complex filter or a dual Real filter. The default value is
-Real.
+Sets either a complex filter or a dual real filter.
+Valid Values:
+NISCOPE_VAL_REAL (0)
+NISCOPE_VAL_COMPLEX (1)
+Default Value: Real
 ''',
 },
     },
@@ -2890,14 +2877,13 @@ Real.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Upper Gain Limit',
-        'name': 'AGC_UPPER_GAIN_LIMIT',
+        'name': 'DDC_AGC_UPPER_GAIN_LIMIT',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Sets the maximum gain and minimum signal levels in the
-`AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default value is
-6.020600.
+Sets the maximum gain and minimum signal levels in the AGC.
+Default Value: 6.020600
 ''',
 },
     },
@@ -2906,14 +2892,13 @@ Sets the maximum gain and minimum signal levels in the
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Lower Gain Limit',
-        'name': 'AGC_LOWER_GAIN_LIMIT',
+        'name': 'DDC_AGC_LOWER_GAIN_LIMIT',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Sets the minimum gain and maximum signal levels in the
-`AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default value is
-6.020600.
+Sets the minimum gain and maximum signal levels in the AGC.
+Default Value: 6.020600
 ''',
 },
     },
@@ -2922,15 +2907,13 @@ Sets the minimum gain and maximum signal levels in the
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Exponent',
-        'name': 'AGC_LOOP_GAIN_0_EXPONENT',
+        'name': 'DDC_AGC_LOOP_GAIN_0_EXPONENT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Along with the `AGC Loop Gain 0
-Mantissa <pniScope_AGCLoopGain0Mantissa.html>`__ property, sets the loop
-gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-value is 0.
+Along with NISCOPE_ATTR_DDC_AGC_LOOP_GAIN_0_MANTISSA, sets the loop gain for the AGC.
+Default Value: 0
 ''',
 },
     },
@@ -2939,15 +2922,13 @@ value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Mantissa',
-        'name': 'AGC_LOOP_GAIN_0_MANTISSA',
+        'name': 'DDC_AGC_LOOP_GAIN_0_MANTISSA',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Along with the `AGC Loop Gain 0
-Exponent <pniScope_AGCLoopGain0Exponent.html>`__ property, sets the loop
-gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-value is 0.
+Along with NISCOPE_ATTR_DDC_AGC_LOOP_GAIN_0_EXPONENT, sets the loop gain for the AGC.
+Default Value: 0
 ''',
 },
     },
@@ -2956,15 +2937,13 @@ value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Exponent',
-        'name': 'AGC_LOOP_GAIN_1_EXPONENT',
+        'name': 'DDC_AGC_LOOP_GAIN_1_EXPONENT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Along with `AGC Loop Gain 1
-Mantissa <pniScope_AGCLoopGain1Mantissa.html>`__ property, sets the loop
-gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-value is 0.
+Along with NISCOPE_ATTR_DDC_AGC_LOOP_GAIN_1_MANTISSA, sets the loop gain for the AGC.
+Default Value: 0
 ''',
 },
     },
@@ -2973,15 +2952,13 @@ value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Mantissa',
-        'name': 'AGC_LOOP_GAIN_1_MANTISSA',
+        'name': 'DDC_AGC_LOOP_GAIN_1_MANTISSA',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Along with `AGC Loop Gain 1
-Exponent <pniScope_AGCLoopGain1Exponent.html>`__ property, sets the loop
-gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-value is 0.
+Along with NISCOPE_ATTR_DDC_AGC_LOOP_GAIN_1_EXPONENT, sets the loop gain for the AGC.
+Default Value: 0
 ''',
 },
     },
@@ -2990,13 +2967,13 @@ value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Threshold',
-        'name': 'AGC_THRESHOLD',
+        'name': 'DDC_AGC_THRESHOLD',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Sets the gain error in the `AGC <Digitizers.chm::/Glossary.html#AGC>`__.
-The default value is 0x034D.
+Sets the gain error in the AGC.
+Default Value: 0x034D
 ''',
 },
     },
@@ -3005,13 +2982,16 @@ The default value is 0x034D.
         'channel_based': 'True',
         'enum': 'AGCAverageControl',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Average Control',
-        'name': 'AGC_AVERAGE_CONTROL',
+        'name': 'DDC_AGC_AVERAGE_CONTROL',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Averages the `AGC <Digitizers.chm::/Glossary.html#AGC>`__ values. The
-default value is Mean.
+Averages the AGC values.
+Valid Values:
+0 - Mean
+1 - Median
+Default Value: 0
 ''',
 },
     },
@@ -3020,13 +3000,13 @@ default value is Mean.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Bypass',
-        'name': 'HALFBAND_FILTER_BYPASS',
+        'name': 'DDC_HALFBAND_BYPASSED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables or bypasses the halfband filters. If set to TRUE, halfband
-filters are bypassed. The default is TRUE.
+Enables or bypasses the halfband filters. If set to VI_TRUE, halfband filters are bypassed.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -3035,13 +3015,13 @@ filters are bypassed. The default is TRUE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 1 Enable',
-        'name': 'HALFBAND_FILTER_1_ENABLE',
+        'name': 'DDC_HALFBAND_1_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables halfband filter 1. If TRUE, filter is enabled. The default is
-TRUE.
+Enables halfband filter 1.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -3050,13 +3030,13 @@ TRUE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 2 Enable',
-        'name': 'HALFBAND_FILTER_2_ENABLE',
+        'name': 'DDC_HALFBAND_2_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables halfband filter 2. If TRUE, filter is enabled. The default is
-FALSE.
+Enables halfband filter 2.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3065,13 +3045,13 @@ FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 3 Enable',
-        'name': 'HALFBAND_FILTER_3_ENABLE',
+        'name': 'DDC_HALFBAND_3_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables halfband filter 3. If TRUE, filter is enabled. The default is
-FALSE.
+Enables halfband filter 3.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3080,13 +3060,13 @@ FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 4 Enable',
-        'name': 'HALFBAND_FILTER_4_ENABLE',
+        'name': 'DDC_HALFBAND_4_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables halfband filter 4. If TRUE, filter is enabled. The default is
-FALSE.
+Enables halfband filter 4.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3095,13 +3075,13 @@ FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 5 Enable',
-        'name': 'HALFBAND_FILTER_5_ENABLE',
+        'name': 'DDC_HALFBAND_5_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables halfband filter 5. If TRUE, filter is enabled. The default is
-FALSE.
+Enables halfband filter 5.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3110,13 +3090,17 @@ FALSE.
         'channel_based': 'True',
         'enum': 'AOUTParallelOutputSource',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Output Configuration:Parallel:AOUT Source',
-        'name': 'AOUT_PARALLEL_OUTPUT_SOURCE',
+        'name': 'DDC_AOUT_PARALLEL_OUTPUT_SOURCE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the source for the AOUT parallel output from the
-`DDC <Digitizers.chm::/Glossary.html#DDC>`__. The default is I Data.
+Specifies the source for the AOUT parallel output from the DDC.
+Valid Values:
+NISCOPE_VAL_I_DATA (0)
+NISCOPE_VAL_MAGNITUDE_DATA (1)
+NISCOPE_VAL_FREQ_DATA (2)
+Default Value: I Data
 ''',
 },
     },
@@ -3125,13 +3109,17 @@ Specifies the source for the AOUT parallel output from the
         'channel_based': 'True',
         'enum': 'BOUTParallelOutputSource',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Output Configuration:Parallel:BOUT Source',
-        'name': 'BOUT_PARALLEL_OUTPUT_SOURCE',
+        'name': 'DDC_BOUT_PARALLEL_OUTPUT_SOURCE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the source for the BOUT parallel output from the
-`DDC <Digitizers.chm::/Glossary.html#DDC>`__. The default is Q Data.
+Specifies the source for the BOUT parallel output from the DDC.
+Valid Values:
+NISCOPE_VAL_MAGNITUDE_DATA (1)
+NISCOPE_VAL_Q_DATA (3)
+NISCOPE_VAL_PHASE_DATA (4)
+Default Value: Q Data
 ''',
 },
     },
@@ -3140,13 +3128,13 @@ Specifies the source for the BOUT parallel output from the
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Test Mode Sin/Cos',
-        'name': 'TEST_MODE_SINCOS',
+        'name': 'DDC_TEST_SINE_COSINE',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Enables the special test mode where the carrier NCO outputs are set to
-0x7FFF. The default is FALSE.
+Enables the special test mode where the carrier NCO outputs are set to 0x7FFF.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3155,14 +3143,14 @@ Enables the special test mode where the carrier NCO outputs are set to
         'channel_based': 'True',
         'enum': 'CoordinateConverterInput',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Coordinate Converter Input',
-        'name': 'COORDINATE_CONVERTER_INPUT',
+        'name': 'DDC_COORDINATE_CONVERTER_INPUT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Selects the source for the input to the coordinate converter, either the
-HB filter or the Programmable FIR. the default value is Programmable
-FIR.
+Selects the source for the input to the coordinate converter, either the HB filter or the programmable FIR.
+Valid Values:
+0 - Resampler HB 1 - Programmable FIR Default Value: 1
 ''',
 },
     },
@@ -3171,13 +3159,13 @@ FIR.
         'channel_based': 'True',
         'enum': 'QInputtoCoordConverter',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Q Input to Coord. Converter',
-        'name': 'Q_INPUT_TO_COORD._CONVERTER',
+        'name': 'DDC_Q_INPUT_TO_COORD_CONVERTER_INPUT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Either enables or zeros out the Q input to coordinate converter. The
-default value is I and Q.
+Either enables or zeros out the Q input to coordinate converter.
+Default Value: I and Q
 ''',
 },
     },
@@ -3186,11 +3174,17 @@ default value is I and Q.
         'channel_based': 'True',
         'enum': 'SyncoutCLKSelect',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Syncout CLK Select',
-        'name': 'SYNCOUT_CLK_SELECT',
+        'name': 'DDC_SYNCOUT_CLK_SELECT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Source for Syncout CLK. The default value is CLK IN.',
+'description': '''
+Source for Syncout CLK.
+Valid Values:
+0 - CLKIN
+1 - PROCCLK
+Default Value: CLKIN
+''',
 },
     },
     1151120: {
@@ -3198,15 +3192,13 @@ default value is I and Q.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Accum. Load on Update',
-        'name': 'TIMING_NCO_PHASE_ACCUM._LOAD_ON_UPDATE',
+        'name': 'DDC_TIMING_NCO_PHASE_ACCUM_LOAD',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-When TRUE, updates the `timing
-NCO <Digitizers.chm::/Glossary.html#timingNCO>`__ frequency to zero the
-feedback of the phase accumulator as well as update the phase and
-frequency. The default value is TRUE.
+When TRUE, updates the timing NCO frequency to zero the feedback of the phase accumulator as well as  update the phase and frequency.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -3215,14 +3207,13 @@ frequency. The default value is TRUE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Clear Phase Accum.',
-        'name': 'TIMING_NCO_CLEAR_PHASE_ACCUM.',
+        'name': 'DDC_TIMING_NCO_CLEAR_PHASE_ACCUM',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If FALSE, enables the accumulator in the `timing
-NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. If TRUE, zeros out
-feedback in the accumulator. The default value is FALSE.
+If set to FALSE, enables the accumulator in the timing NCO. If set to TRUE, zeros out feedback  in the accumulator.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3231,14 +3222,13 @@ feedback in the accumulator. The default value is FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Enable Offset Freq.',
-        'name': 'TIMING_NCO_ENABLE_OFFSET_FREQ.',
+        'name': 'DDC_TIMING_NCO_ENABLE_OFFSET_FREQ',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If TRUE, enables offset frequency in the `timing
-NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. If FALSE, applies no
-offset frequency. The default value is FALSE.
+If set to TRUE, enables offset frequency in the timing NCO. If set to FALSE, applies no offset frequency.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3247,14 +3237,18 @@ offset frequency. The default value is FALSE.
         'channel_based': 'True',
         'enum': 'TimingNCOFreqOffsetBits',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Frequency Offset Bits',
-        'name': 'TIMING_NCO_FREQ._OFFSET_BITS',
+        'name': 'DDC_TIMING_NCO_NUM_OFFSET_FREQ_BITS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the number of offset bits in the `timing
-NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. The default value is
-8 bits.
+Specifies the number of offset bits in the timing NCO.
+Valid Values:
+0 - 8 bits
+1 - 16 bits
+2 - 24 bits
+3 - 32 bits
+Default Value: 8 bits
 ''',
 },
     },
@@ -3263,18 +3257,13 @@ NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. The default value is
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Center Frequency',
-        'name': 'TIMING_NCO_CENTER_FREQ.',
+        'name': 'DDC_TIMING_NCO_CENTER_FREQUENCY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Controls the frequency of the timing NCO. Specifies the timing NCO
-center frequency in binary format:
-*N = (F:sub:`out` / F\ :sub:`resampler`) & 2\ :sup:`32`*
-where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
-is the resampled frequency.
-The value is transferred to the active register during the next initiate
-acquisition operation. The default value is 0X8000000.
+Controls the frequency of the timing NCO. Specifies the timing NCO center frequency in binary format:
+N = (Fout / Fresampler) X 2^32
 ''',
 },
     },
@@ -3283,16 +3272,13 @@ acquisition operation. The default value is 0X8000000.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Offset',
-        'name': 'TIMING_NCO_PHASE_OFFSET',
+        'name': 'DDC_TIMING_NCO_PHASE_OFFSET',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Offsets the phase of the `timing
-NCO <Digitizers.chm::/Glossary.html#timingNCO>`__ in binary format. The
-value is transferred to the active register during the next initiate
-acquisition. The default value is 0.
-Valid Range: 0 to 6.283185307179586476925286766558
+Offsets the phase of the timing NCO in binary format.  The value is transfered to the Active Register during the next initiate acquisition operation.
+Default Value: 0
 ''',
 },
     },
@@ -3301,11 +3287,15 @@ Valid Range: 0 to 6.283185307179586476925286766558
         'channel_based': 'True',
         'enum': 'ResamplerFilterMode',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Filter Mode',
-        'name': 'RESAMPLER_FILTER_MODE',
+        'name': 'DDC_RESAMPLER_FILTER_MODE_SELECT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Selects the resampling filter mode.',
+'description': '''
+Selects the resampling filter mode.
+Valid Values:
+1 - Resampler Enabled 2 - HB 1 Enabled 3 - Resampler and HB 1 6 - Both HB Filters 7 - Resampler and Both HB Filters Default Value: 1
+''',
 },
     },
     1151127: {
@@ -3313,16 +3303,13 @@ Valid Range: 0 to 6.283185307179586476925286766558
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Bypass',
-        'name': 'RESAMPLER_BYPASS',
+        'name': 'DDC_RESAMPLER_BYPASS',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Either enables or bypasses the resampler filter in the DDC. The
-resampler is a polyphase filter that allows the output sample rate to
-have a non-integer relationship to the input sample rate. In essence, it
-acts as a fixed interpolation filter followed by an NCO controlled
-decimator. The default value is TRUE.
+Either enables or bypasses the resampler filter in the DDC.  Set to VI_TRUE to bypass the resampling filter section.
+Default Value: VI_TRUE
 ''',
 },
     },
@@ -3331,13 +3318,13 @@ decimator. The default value is TRUE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Output Pulse Delay',
-        'name': 'RESAMPLER_OUTPUT_PULSE_DELAY',
+        'name': 'DDC_RESAMPLER_OUTPUT_PULSE_DELAY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Programs the delay between output samples when interpolating. These
-outputs can be delayed from 2 to 255 clocks. The default value is 16.
+Programs the delay between output samples when interpolating. These outputs can be delayed from 2 to 255 clocks.
+Default Value: 16
 ''',
 },
     },
@@ -3346,14 +3333,13 @@ outputs can be delayed from 2 to 255 clocks. The default value is 16.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:NCO Divide',
-        'name': 'RESAMPLER_NCO_DIVIDE',
+        'name': 'DDC_NCO_DIVIDE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Divides down the
-`resampler <Digitizers.chm::/Glossary.html#resampler>`__ NCO output by
-the value loaded into the register plus one. The default value is 2.
+Divides down the Resampler NCO output by the value loaded into the register plus one.
+Default Value: 2
 ''',
 },
     },
@@ -3362,17 +3348,13 @@ the value loaded into the register plus one. The default value is 2.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Reference Divide',
-        'name': 'RESAMPLER_REFERENCE_DIVIDE',
+        'name': 'DDC_REFERENCE_DIVIDE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Divides down the reference clock by the value loaded into the register
-plus one. Load with a value that is one less than the desired period.
-The default value is 2.
-**Related topics:**
-`Reference Clock/Phase-Lock
-Loop <digitizers.chm::/Reference_Clock.html>`__
+Divides down the reference clock by the value loaded into the register plus one.  Load with a value that is one less than the desired period.
+Default Value: 2
 ''',
 },
     },
@@ -3386,8 +3368,8 @@ Loop <digitizers.chm::/Reference_Clock.html>`__
         'type': 'ViBoolean',
 'documentation': {
 'description': '''
-Applies dither at the input of the ADC. Set this property to TRUE to
-enable dither. The default value is FALSE.
+Set to VI_TRUE to enable the analog dither on the NI 5620/5621.
+Default Value: VI_FALSE
 ''',
 },
     },
@@ -3396,13 +3378,12 @@ enable dither. The default value is FALSE.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Combined Decimation',
-        'name': 'COMBINED_DECIMATION',
+        'name': 'DDC_COMBINED_DECIMATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the combined `DDC <Digitizers.chm::/Glossary.html#DDC>`__
-decimation.
+Returns the combined DDC decimation.
 ''',
 },
     },
@@ -3415,7 +3396,9 @@ decimation.
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
-'description': '',
+'description': '''
+Voltage of the DAC that controls the oscillator, used for external calibration.
+''',
 },
     },
     1151303: {
@@ -3442,12 +3425,7 @@ If TRUE, the PLL has remained locked to the external reference clock since it wa
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies a delay in seconds that is used by `niScope\_Initiate
-Acquisition <scopeviref.chm::/niScope_Initiate_Acquisition.html>`__ to
-allow additional delay between programming of the vertical range,
-trigger level, DDC, and the start of the acquisition. This property is
-supported only on the NI 5112 and the NI 5620/5621. The default value is
-0.0.
+Specifies the delay in seconds that is used by niScope_InitiateAcquisition to allow additional  delay between programming of the vertical range, trigger level, DDC, and the start of the acquisition.  This attribute is only supported for the NI 5112 and the NI 5620/5621.
 ''',
 },
     },

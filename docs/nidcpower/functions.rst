@@ -648,7 +648,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`nidcpower.ExportSignal`
     :param signal_identifier:
 
 
