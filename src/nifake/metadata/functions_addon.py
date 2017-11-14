@@ -65,3 +65,7 @@ functions_default_value = {
     'EnumInputFunctionWithDefaults':   { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
+# Manually provided Python names for methods, rather than deriving from original names.
+functions_custom_python_name = {
+    'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
+}

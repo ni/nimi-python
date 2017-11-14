@@ -140,10 +140,10 @@ class TestSession(object):
     # Methods
 
     def test_simple_function(self):
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
         with nifake.Session('dev1') as session:
             session.simple_function()
-            self.patched_library.niFake_SimpleFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niFake_PoorlyNamedSimpleFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_get_a_number(self):
         test_number = 16
@@ -389,8 +389,8 @@ class TestSession(object):
     def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
@@ -447,8 +447,8 @@ class TestSession(object):
     def test_method_with_warning(self):
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
@@ -789,8 +789,8 @@ class TestSession(object):
 
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
@@ -808,8 +808,8 @@ class TestSession(object):
     def test_get_error_description_error_message_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"

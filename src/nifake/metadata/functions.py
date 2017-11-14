@@ -844,7 +844,7 @@ functions = {
 
     #### Different function cases
 
-    'SimpleFunction': {
+    'PoorlyNamedSimpleFunction': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
