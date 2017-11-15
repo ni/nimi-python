@@ -254,7 +254,7 @@ def test_named_waveform_operations(session):
     wfm_data_f64 = [0.0, 1.0]
     wfm_data_i16 = [1, 0]
     session.allocate_named_waveform(wfm_name, wfm_size)
-    session.set_named_waveform_next_write_position(wfm_name, nifgen.RelativeTo.NIFGEN_VAL_WAVEFORM_POSITION_START, write_offset)
+    session.set_named_waveform_next_write_position(wfm_name, nifgen.RelativeTo.START, write_offset)
     session.write_named_waveform_f64(wfm_name, wfm_data_f64)
     session.write_named_waveform_i16(wfm_name, wfm_data_i16)
     session.delete_named_waveform(wfm_name)
