@@ -33,4 +33,84 @@ enums_additional_enums = {
             },
         ],
     },
+    'ByteOrder': {
+        'values': [
+            {
+                'name': 'NIFGEN_VAL_LITTLE_ENDIAN',
+                'value': 0,
+            },
+            {
+                'name': 'NIFGEN_VAL_BIG_ENDIAN',
+                'value': 1,
+            },
+        ],
+    },
+    'Signal': {
+        'values': [
+            {
+                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
+                'value': 1019,
+            },
+            {
+                'name': 'NIFGEN_VAL_SYNC_OUT',
+                'value': 1002,
+            },
+            {
+                'name': 'NIFGEN_VAL_START_TRIGGER',
+                'value': 1004,
+            },
+            {
+                'name': 'NIFGEN_VAL_MARKER_EVENT',
+                'value': 1001,
+            },
+            {
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_TIMEBASE',
+                'value': 1006,
+            },
+            {
+                'name': 'NIFGEN_VAL_SYNCHRONIZATION',
+                'value': 1007,
+            },
+            {
+                'name': 'NIFGEN_VAL_SAMPLE_CLOCK',
+                'value': 101,
+            },
+            {
+                'name': 'NIFGEN_VAL_REFERENCE_CLOCK',
+                'value': 102,
+            },
+            {
+                'name': 'NIFGEN_VAL_SCRIPT_TRIGGER',
+                'value': 103,
+            },
+            {
+                'name': 'NIFGEN_VAL_READY_FOR_START_EVENT',
+                'value': 105,
+            },
+            {
+                'name': 'NIFGEN_VAL_STARTED_EVENT',
+                'value': 106,
+            },
+            {
+                'name': 'NIFGEN_VAL_DONE_EVENT',
+                'value': 107,
+            },
+            {
+                'name': 'NIFGEN_VAL_DATA_MARKER_EVENT',
+                'value': 108,
+            },
+        ],
+    },
+    'Trigger': {
+        'values': [
+            {
+                'name': 'START_TRIGGER',
+                'value': 1004,
+            },
+            {
+                'name': 'SCRIPT_TRIGGER',
+                'value': 103,
+            },
+        ],
+    },
 }
