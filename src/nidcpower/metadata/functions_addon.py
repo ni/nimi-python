@@ -42,6 +42,8 @@ functions_codegen_method = {
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
     'MeasureMultiple':                 { 'codegen_method': 'no',       },  # Issue 444
+    'GetAttributeViInt64':             { 'codegen_method': 'no',       },  # Not used in python API
+    'SetAttributeViInt64':             { 'codegen_method': 'no',       },  # Not used in python API
 }
 
 # Attach the given parameter to the given enum from enums.py
