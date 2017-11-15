@@ -225,7 +225,7 @@ def test_reset(session):
     assert session.output_mode == nifgen.OutputMode.SEQ
     session.reset()
     assert session.output_mode == nifgen.OutputMode.ARB
-
+ 
 
 def test_reset_device(session):
     default_trigger_mode = session.trigger_mode
@@ -253,7 +253,7 @@ def test_write_binary_waveform(session):
 
 '''
 (TODO) Jaleel , check it after issue #538 fixed
-def test_set_waveform_next_write_possition(session):
+def test_set_waveform_next_write_position(session):
     session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)  # Enable after RelativeTo enum added to enums_addon.py
 
 
