@@ -1724,58 +1724,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_attribute_vi_int64(self, attribute_id):
-        '''_get_attribute_vi_int64
-
-        | Queries the value of a ViInt64 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
-
-            session['0,1']._get_attribute_vi_int64(attribute_id)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViReal64. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViReal64 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (int): Returns the current value of the attribute. Passes the address of a
-                ViReal64 variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt64()  # case 14
-        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
-
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -2296,61 +2244,6 @@ class _SessionBase(object):
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
         attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 9
         error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int64
-
-        | Sets the value of a ViInt64 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
-
-            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViReal64. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViReal64 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case 9
-        error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
