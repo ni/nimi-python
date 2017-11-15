@@ -225,7 +225,7 @@ def test_reset(session):
     assert session.output_mode == nifgen.OutputMode.SEQ
     session.reset()
     assert session.output_mode == nifgen.OutputMode.ARB
- 
+
 
 def test_reset_device(session):
     default_trigger_mode = session.trigger_mode
