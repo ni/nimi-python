@@ -200,7 +200,7 @@ def test_arb_seq(session):
 
 def test_arb_script(session):
     waveform_data = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_SCRIPT
+    session.output_mode = nifgen.OutputMode.SCRIPT
     session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
     session.write_named_waveform_i16('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
