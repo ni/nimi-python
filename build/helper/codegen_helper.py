@@ -228,3 +228,201 @@ def get_dictionary_snippet(d, indent=4):
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
 
+
+# Let's do some unit testing!
+# We need a config object for our testing
+config_for_testing = {
+    'session_handle_parameter_name': 'vi',
+    'module_name': 'nifake',
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'custom_types': [
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+    ],
+}
+
+
+params = [
+    {
+        'ctypes_type': 'ViSession',
+        'ctypes_type_library_call': 'ViSession',
+        'ctypes_variable_name': 'vi_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Identifies a particular instrument session.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': True,
+        'library_method_call_snippet': 'vi_ctype',
+        'name': 'vi',
+        'python_name': 'vi',
+        'python_name_with_default': 'vi',
+        'python_name_with_doc_default': 'vi',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViSession',
+    },
+    {
+        'ctypes_type': 'ViInt64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
+        'ctypes_variable_name': 'output_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'A big number on its way out.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
+        'name': 'output',
+        'python_name': 'output',
+        'python_name_with_default': 'output',
+        'python_name_with_doc_default': 'output',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt64'
+    },
+    {
+        'ctypes_type': 'ViChar',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'error_message_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'The error information formatted into a string.'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'error_message_ctype',
+        'name': 'errorMessage',
+        'python_name': 'error_message',
+        'python_name_with_default': 'error_message',
+        'python_name_with_doc_default': 'error_message',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 256},
+        'type': 'ViChar'
+    },
+    {
+        'ctypes_type': 'custom_struct',
+        'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
+        'ctypes_variable_name': 'array_out_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'Array os custom typeusing puthon-code size mechanism'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'array_out_ctype',
+        'name': 'arrayOut',
+        'original_type': 'custom_struct[]',
+        'python_name': 'array_out',
+        'python_name_with_default': 'array_out',
+        'python_name_with_doc_default': 'array_out',
+        'python_type': 'CustomStruct',
+        'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
+        'type': 'custom_struct'
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_type_library_call': 'ViInt32',
+        'ctypes_variable_name': 'number_of_elements_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Number of elements in the array.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'number_of_elements_ctype',
+        'name': 'numberOfElements',
+        'python_name': 'number_of_elements',
+        'python_name_with_default': 'number_of_elements',
+        'python_name_with_doc_default': 'number_of_elements',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt32'
+    },
+    {
+        'ctypes_type': 'ViInt16',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt16)',
+        'ctypes_variable_name': 'an_array_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'Contains an array of enums, stored as 16 bit integers under the hood '},
+        'enum': 'Turtle',
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'an_array_ctype',
+        'name': 'anArray',
+        'python_name': 'an_array',
+        'python_name_with_default': 'an_array',
+        'python_name_with_doc_default': 'an_array',
+        'python_type': 'enums.Turtle',
+        'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
+        'type': 'ViInt16'
+    },
+    {
+        'ctypes_type': 'ViInt16',
+        'ctypes_type_library_call': 'ViInt16',
+        'ctypes_variable_name': 'an_int_enum_ctype',
+        'direction': 'in',
+        'documentation': {
+            'description': 'Indicates a ninja turtle',
+            'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']]
+        },
+        'enum': 'Turtle',
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'an_int_enum_ctype',
+        'name': 'anIntEnum',
+        'python_name': 'an_int_enum',
+        'python_name_with_default': 'an_int_enum',
+        'python_name_with_doc_default': 'an_int_enum',
+        'python_type': 'enums.Turtle',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt16'
+    },
+]
+
+
+def test_get_method_return_snippet_vi():
+    param = [params[0]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return'
+
+
+def test_get_method_return_snippet_int():
+    param = [params[1]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return int(output_ctype.value)'
+
+
+def test_get_method_return_snippet_string():
+    param = [params[2]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
+
+
+def test_get_method_return_snippet_custom_type():
+    param = [params[3]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]'
+
+
+def test_get_method_return_snippet_enum():
+    param = [params[4], params[5]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
+
+
+def test_get_enum_type_check_snippet():
+    param = params[6]
+    assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
+
+
+def test_get_buffer_parameter_for_size_parameter_none():
+    param = _get_buffer_parameter_for_size_parameter(params[0], params)
+    assert param is None
+
+
+def test_get_buffer_parameter_for_size_parameter():
+    param = _get_buffer_parameter_for_size_parameter(params[4], params)
+    assert param == params[5]
+
+
