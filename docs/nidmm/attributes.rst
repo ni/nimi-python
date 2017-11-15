@@ -375,12 +375,9 @@ nidmm.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
             - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
 
-.. py:attribute:: frequency_voltage_auto_range_value
+.. py:attribute:: freq_voltage_autorange
 
-    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
-    the frequency voltage range. If auto ranging is enabled, shows the
-    actual value of the active frequency voltage range. If not Auto Ranging,
-    the value is the same as that of the Frequency Voltage Range property.
+    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  NIDMM_ATTR_FREQ_VOLTAGE_RANGE.
 
     The following table lists the characteristics of this property.
 
@@ -400,7 +397,7 @@ nidmm.Session properties
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
-            - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE**
+            - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTORANGE**
 
 .. py:attribute:: freq_voltage_range
 

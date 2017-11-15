@@ -280,7 +280,9 @@ A string containing the capabilities and extension groups supported by the  spec
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Returns the major version number of this instrument driver.',
+'description': '''
+Returns the major version number of this instrument driver.
+''',
 },
     },
     1050504: {
@@ -292,7 +294,9 @@ A string containing the capabilities and extension groups supported by the  spec
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'Returns the minor version number of this instrument driver.',
+'description': '''
+The minor version number of this instrument driver.
+''',
 },
     },
     1050510: {
@@ -427,11 +431,13 @@ engine.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Obsolete:Misc:IDQuery response',
-        'name': 'IDQUERY_RESPONSE',
+        'name': 'ID_QUERY_RESPONSE',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
-'description': 'A string containing the type of instrument used in the current session.',
+'description': '''
+A string containing the type of instrument used in the current session.
+''',
 },
     },
     1150002: {
@@ -628,8 +634,13 @@ The NI 4050 and NI 4060 are not supported.
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
-'description': 'For the NI 4060 only, specifies a delay interval after a sample trigger.',
-'table_body': [['0', 'IVI compliant', 'The Sample Interval property is only used when the Sample Trigger is set to Interval.'], ['1', 'Not IVI compliant', 'The Sample Interval property is used as a delay after any type of Sample Trigger.']],
+'description': '''
+For the NI 4060 only, specifies a delay interval after an sample external trigger.
+0
+NIDMM_ATTR_SAMPLE_INTERVAL is only used when the Sample Trigger attribute is set to  INTERVAL.
+1
+NIDMM_ATTR_SAMPLE_INTERVAL is used as a delay after ANY type of Sample  Trigger
+''',
 },
     },
     1150032: {
@@ -680,15 +691,12 @@ Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) 
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Auto Range Value',
-        'name': 'FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE',
+        'name': 'FREQ_VOLTAGE_AUTORANGE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
 'description': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
-the frequency voltage range. If auto ranging is enabled, shows the
-actual value of the active frequency voltage range. If not Auto Ranging,
-the value is the same as that of the Frequency Voltage Range property.
+For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  NIDMM_ATTR_FREQ_VOLTAGE_RANGE.
 ''',
 },
     },

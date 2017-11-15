@@ -9,7 +9,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: HandshakingInitiation
 
-    .. py:attribute:: niswitch.HandshakingInitiation.MEASUREMENT_DEVICE_INITIATED
+    .. py:attribute:: niswitch.HandshakingInitiation.MEASUREMENT_DEVICE
 
 
 
@@ -29,7 +29,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.HandshakingInitiation.SWITCH_INITIATED
+    .. py:attribute:: niswitch.HandshakingInitiation.SWITCH
 
 
 
@@ -111,7 +111,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: RelayAction
 
-    .. py:attribute:: niswitch.RelayAction.OPEN_RELAY
+    .. py:attribute:: niswitch.RelayAction.OPEN
 
 
 
@@ -121,7 +121,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.RelayAction.CLOSE_RELAY
+    .. py:attribute:: niswitch.RelayAction.CLOSE
 
 
 

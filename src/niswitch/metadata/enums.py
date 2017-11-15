@@ -469,70 +469,70 @@ line before processing the next entry in the scan list.
     'ScanAdvancedOutput': {
         'values': [
             {
-                'name': 'NONE',
+                'name': 'NISWITCH_VAL_NONE',
                 'value': 0,
 'documentation': {
 'description': 'The switch device does not produce a Scan Advanced Output trigger.',
 },
             },
             {
-                'name': 'EXTERNAL',
+                'name': 'NISWITCH_VAL_EXTERNAL',
                 'value': 2,
 'documentation': {
 'description': 'External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.',
 },
             },
             {
-                'name': 'TTL0',
+                'name': 'NISWITCH_VAL_TTL0',
                 'value': 111,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG0 line.',
 },
             },
             {
-                'name': 'TTL1',
+                'name': 'NISWITCH_VAL_TTL1',
                 'value': 112,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG1 line.',
 },
             },
             {
-                'name': 'TTL2',
+                'name': 'NISWITCH_VAL_TTL2',
                 'value': 113,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG2 line.',
 },
             },
             {
-                'name': 'TTL3',
+                'name': 'NISWITCH_VAL_TTL3',
                 'value': 114,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG3 line.',
 },
             },
             {
-                'name': 'TTL4',
+                'name': 'NISWITCH_VAL_TTL4',
                 'value': 115,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG4 line.',
 },
             },
             {
-                'name': 'TTL5',
+                'name': 'NISWITCH_VAL_TTL5',
                 'value': 116,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG5 line.',
 },
             },
             {
-                'name': 'TTL6',
+                'name': 'NISWITCH_VAL_TTL6',
                 'value': 117,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG6 line.',
 },
             },
             {
-                'name': 'TTL7',
+                'name': 'NISWITCH_VAL_TTL7',
                 'value': 118,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG7 line.',
@@ -549,14 +549,14 @@ Star trigger bus before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'REARCONNECTOR',
+                'name': 'NISWITCH_VAL_REARCONNECTOR',
                 'value': 1000,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output  trigger on the rear connector.',
 },
             },
             {
-                'name': 'FRONTCONNECTOR',
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR',
                 'value': 1001,
 'documentation': {
 'description': 'The switch device produces the Scan Advanced Output  trigger on the front connector.',
@@ -807,16 +807,14 @@ connector module 12.
     'ScanAdvancedPolarity': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'NISWITCH_VAL_RISING_EDGE',
                 'value': 0,
 'documentation': {
 'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'NISWITCH_VAL_FALLING_EDGE',
                 'value': 1,
 'documentation': {
 'description': 'The trigger occurs on the falling edge of the signal.',
@@ -827,21 +825,21 @@ connector module 12.
     'ScanMode': {
         'values': [
             {
-                'name': 'NONE',
+                'name': 'NISWITCH_VAL_NONE',
                 'value': 0,
 'documentation': {
 'description': 'No implicit action on connections when scanning.',
 },
             },
             {
-                'name': 'BREAK_BEFORE_MAKE',
+                'name': 'NISWITCH_VAL_BREAK_BEFORE_MAKE',
                 'value': 1,
 'documentation': {
 'description': 'When scanning, the switch device breaks existing connections before  making new connections.',
 },
             },
             {
-                'name': 'BREAK_AFTER_MAKE',
+                'name': 'NISWITCH_VAL_BREAK_AFTER_MAKE',
                 'value': 2,
 'documentation': {
 'description': 'When scanning, the switch device breaks existing connections after making  new connections.',
@@ -852,98 +850,98 @@ connector module 12.
     'TriggerInput': {
         'values': [
             {
-                'name': 'IMMEDIATE',
+                'name': 'NISWITCH_VAL_IMMEDIATE',
                 'value': 1,
 'documentation': {
 'description': 'Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'EXTERNAL',
+                'name': 'NISWITCH_VAL_EXTERNAL',
                 'value': 2,
 'documentation': {
 'description': 'External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'SOFTWARE_TRIG',
+                'name': 'NISWITCH_VAL_SOFTWARE_TRIG',
                 'value': 3,
 'documentation': {
 'description': 'The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL0',
+                'name': 'NISWITCH_VAL_TTL0',
                 'value': 111,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL1',
+                'name': 'NISWITCH_VAL_TTL1',
                 'value': 112,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL2',
+                'name': 'NISWITCH_VAL_TTL2',
                 'value': 113,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL3',
+                'name': 'NISWITCH_VAL_TTL3',
                 'value': 114,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL4',
+                'name': 'NISWITCH_VAL_TTL4',
                 'value': 115,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL5',
+                'name': 'NISWITCH_VAL_TTL5',
                 'value': 116,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL6',
+                'name': 'NISWITCH_VAL_TTL6',
                 'value': 117,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'TTL7',
+                'name': 'NISWITCH_VAL_TTL7',
                 'value': 118,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'PXI_STAR',
+                'name': 'NISWITCH_VAL_PXI_STAR',
                 'value': 125,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.',
 },
             },
             {
-                'name': 'REARCONNECTOR',
+                'name': 'NISWITCH_VAL_REARCONNECTOR',
                 'value': 1000,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the  rear connector.',
 },
             },
             {
-                'name': 'FRONTCONNECTOR',
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR',
                 'value': 1001,
 'documentation': {
 'description': 'The switch device waits until it receives a trigger on the  front connector.',
@@ -1194,16 +1192,14 @@ connector module 12.
     'TriggerInputPolarity': {
         'values': [
             {
-                'name': 'RISING',
-                'suffix': '_EDGE',
+                'name': 'NISWITCH_VAL_RISING_EDGE',
                 'value': 0,
 'documentation': {
 'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING',
-                'suffix': '_EDGE',
+                'name': 'NISWITCH_VAL_FALLING_EDGE',
                 'value': 1,
 'documentation': {
 'description': 'The trigger occurs on the falling edge of the signal.',

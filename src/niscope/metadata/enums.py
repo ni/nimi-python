@@ -61,21 +61,21 @@ the DDC.
     'AcquisitionType': {
         'values': [
             {
-                'name': 'NORMAL',
+                'name': 'NISCOPE_VAL_NORMAL',
                 'value': 0,
 'documentation': {
 'description': 'Sets the digitizer to normal resolution mode. The digitizer can use real-time sampling or equivalent-time sampling.',
 },
             },
             {
-                'name': 'FLEXRES',
+                'name': 'NISCOPE_VAL_FLEXRES',
                 'value': 1001,
 'documentation': {
 'description': 'Sets the digitizer to flexible resolution mode if supported.  The digitizer uses different hardware configurations to change the resolution depending on the sampling rate used.',
 },
             },
             {
-                'name': 'DDC',
+                'name': 'NISCOPE_VAL_DDC',
                 'value': 1002,
 'documentation': {
 'description': 'Sets the digitizer to DDC mode on the NI 5620/5621.',
@@ -86,16 +86,14 @@ the DDC.
     'AddressType': {
         'values': [
             {
-                'name': 'PHYSICAL',
-                'prefix': 'ADDR_',
+                'name': 'NISCOPE_VAL_ADDR_PHYSICAL',
                 'value': 0,
 'documentation': {
 'description': 'Physical address.',
 },
             },
             {
-                'name': 'VIRTUAL',
-                'prefix': 'ADDR_',
+                'name': 'NISCOPE_VAL_ADDR_VIRTUAL',
                 'value': 1,
 'documentation': {
 'description': 'Virtual address.',
@@ -271,14 +269,14 @@ coordinate converter.
     'DataProcessingMode': {
         'values': [
             {
-                'name': 'REAL',
+                'name': 'NISCOPE_VAL_REAL',
                 'value': 0,
 'documentation': {
 'description': 'The waveform data points are real numbers (I data).',
 },
             },
             {
-                'name': 'COMPLEX',
+                'name': 'NISCOPE_VAL_COMPLEX',
                 'value': 1,
 'documentation': {
 'description': 'The waveform data points are complex numbers (IQ data).',
@@ -289,18 +287,23 @@ coordinate converter.
     'DiscriminatorFIRInputSource': {
         'values': [
             {
-                'name': 'PHASE',
+                'name': 'NISCOPE_VAL_PHASE',
                 'value': 0,
 'documentation': {
 'description': 'Sets the discriminator FIR input source to phase.',
 },
             },
             {
-                'name': 'MAGNITUDE',
+                'name': 'NISCOPE_VAL_MAGNITUDE',
                 'value': 1,
 'documentation': {
 'description': 'Sets the discriminator FIR input source to magnitude.',
 },
+            },
+            {
+                'name': 'NISCOPE_VAL_RESAMPLER',
+                'value': 2,
+
             },
             {
                 'name': 'RESAMPLER',
@@ -314,14 +317,14 @@ coordinate converter.
     'DiscriminatorFIRSymmetry': {
         'values': [
             {
-                'name': 'SYMMETRIC',
+                'name': 'NISCOPE_VAL_SYMMETRIC',
                 'value': 0,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry to symmetric.',
 },
             },
             {
-                'name': 'ASYMMETRIC',
+                'name': 'NISCOPE_VAL_ASYMMETRIC',
                 'value': 1,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry to asymmetric.',
@@ -332,14 +335,14 @@ coordinate converter.
     'DiscriminatorFIRSymmetryType': {
         'values': [
             {
-                'name': 'EVEN',
+                'name': 'NISCOPE_VAL_EVEN',
                 'value': 0,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry type to even.',
 },
             },
             {
-                'name': 'ODD',
+                'name': 'NISCOPE_VAL_ODD',
                 'value': 1,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry type to odd.',
@@ -396,35 +399,35 @@ coordinate converter.
     'FetchRelativeTo': {
         'values': [
             {
-                'name': 'READ_POINTER',
+                'name': 'NISCOPE_VAL_READ_POINTER',
                 'value': 388,
 'documentation': {
 'description': 'The read pointer is set to zero when a new acquisition is initiated. After every fetch the read pointer is incremeted to be the sample after the last sample retrieved.  Therefore, you can repeatedly fetch relative to the read pointer for a continuous acquisition program.',
 },
             },
             {
-                'name': 'PRETRIGGER',
+                'name': 'NISCOPE_VAL_PRETRIGGER',
                 'value': 477,
 'documentation': {
 'description': 'Fetches relative to the first pretrigger point requested with niScope_ConfigureHorizontalTiming.',
 },
             },
             {
-                'name': 'NOW',
+                'name': 'NISCOPE_VAL_NOW',
                 'value': 481,
 'documentation': {
 'description': 'Fetch data at the last sample acquired.',
 },
             },
             {
-                'name': 'START',
+                'name': 'NISCOPE_VAL_START',
                 'value': 482,
 'documentation': {
 'description': 'Fetch data starting at the first point sampled by the digitizer.',
 },
             },
             {
-                'name': 'TRIGGER',
+                'name': 'NISCOPE_VAL_TRIGGER',
                 'value': 483,
 'documentation': {
 'description': 'Fetch at the first posttrigger sample.',
@@ -467,28 +470,28 @@ coordinate converter.
     'FlexFIRAntialiasFilterType': {
         'values': [
             {
-                'name': '_48_TAP_STANDARD',
+                'name': 'NISCOPE_VAL_48_TAP_STANDARD',
                 'value': 0,
 'documentation': {
 'description': 'This filter is optimized for alias protection and frequency-domain flatness',
 },
             },
             {
-                'name': '_48_TAP_HANNING',
+                'name': 'NISCOPE_VAL_48_TAP_HANNING',
                 'value': 1,
 'documentation': {
 'description': 'This filter is optimized for the lowest possible bandwidth for a 48 tap filter and maximizes the SNR',
 },
             },
             {
-                'name': '_16_TAP_HANNING',
+                'name': 'NISCOPE_VAL_16_TAP_HANNING',
                 'value': 2,
 'documentation': {
 'description': 'This filter is optimized for the lowest possible bandwidth for a 16 tap filter and maximizes the SNR',
 },
             },
             {
-                'name': '_8_TAP_HANNING',
+                'name': 'NISCOPE_VAL_8_TAP_HANNING',
                 'value': 3,
 'documentation': {
 'description': 'This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR',
@@ -499,16 +502,14 @@ coordinate converter.
     'NotificationType': {
         'values': [
             {
-                'name': 'NEVER',
-                'prefix': 'NOTIFY_',
+                'name': 'NISCOPE_VAL_NOTIFY_NEVER',
                 'value': 0,
 'documentation': {
 'description': 'Never send notification.',
 },
             },
             {
-                'name': 'DONE',
-                'prefix': 'NOTIFY_',
+                'name': 'NISCOPE_VAL_NOTIFY_DONE',
                 'value': 1,
 'documentation': {
 'description': 'Notify when digitizer acquisition is done.',
@@ -519,8 +520,7 @@ coordinate converter.
     'OverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'NISCOPE_VAL_ERROR_REPORTING_ERROR',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -530,8 +530,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'WARNING',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'NISCOPE_VAL_ERROR_REPORTING_WARNING',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -541,8 +540,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'DISABLED',
-                'prefix': 'ERROR_REPORTING_',
+                'name': 'NISCOPE_VAL_ERROR_REPORTING_DISABLED',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -602,14 +600,14 @@ the low/high method,
     'ProgFIRFilterSymmetry': {
         'values': [
             {
-                'name': 'SYMMETRIC',
+                'name': 'NISCOPE_VAL_SYMMETRIC',
                 'value': 0,
 'documentation': {
 'description': 'Sets a symmetric filter.',
 },
             },
             {
-                'name': 'ASYMMETRIC',
+                'name': 'NISCOPE_VAL_ASYMMETRIC',
                 'value': 1,
 'documentation': {
 'description': 'Sets an asymmetric filter.',
@@ -620,14 +618,14 @@ the low/high method,
     'ProgFIRFilterSymmetryType': {
         'values': [
             {
-                'name': 'EVEN',
+                'name': 'NISCOPE_VAL_EVEN',
                 'value': 0,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry type to even.',
 },
             },
             {
-                'name': 'ODD',
+                'name': 'NISCOPE_VAL_ODD',
                 'value': 1,
 'documentation': {
 'description': 'Sets the discriminator FIR symmetry type to odd.',
@@ -656,16 +654,14 @@ the low/high method,
     'RISMethod': {
         'values': [
             {
-                'name': 'EXACT_NUM_AVERAGES',
-                'prefix': 'RIS_',
+                'name': 'NISCOPE_VAL_RIS_EXACT_NUM_AVERAGES',
                 'value': 1,
 'documentation': {
 'description': 'Acquires exactly the specified number of records for each bin in the RIS acquisition.  An error is returned from the fetch function if the RIS acquisition does not successfully acquire the specified number of waveforms within the timeout period.  You may call the fetch function again to allow more time for the acquisition to finish.',
 },
             },
             {
-                'name': 'MIN_NUM_AVERAGES',
-                'prefix': 'RIS_',
+                'name': 'NISCOPE_VAL_RIS_MIN_NUM_AVERAGES',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -675,16 +671,14 @@ distributed points.
 },
             },
             {
-                'name': 'INCOMPLETE',
-                'prefix': 'RIS_',
+                'name': 'NISCOPE_VAL_RIS_INCOMPLETE',
                 'value': 3,
 'documentation': {
 'description': 'Returns the RIS waveform after the specified timeout even if it is incomplete.  If no waveforms have been acquired in certain bins, these bins will have a NaN (when fetching scaled data) or a zero (when fetching binary data). A warning (positive error code) is returned from the fetch function if the RIS acquisition did not finish.  The acquisition aborts when data is returned.',
 },
             },
             {
-                'name': 'LIMITED_BIN_WIDTH',
-                'prefix': 'RIS_',
+                'name': 'NISCOPE_VAL_RIS_LIMITED_BIN_WIDTH',
                 'value': 5,
 'documentation': {
 'description': 'Limits the waveforms in the various bins to be within 200 ps of the center of the bin.',
@@ -716,14 +710,14 @@ units.
     'RefTriggerDetectorLocation': {
         'values': [
             {
-                'name': 'ANALOG_DETECTION_CIRCUIT',
+                'name': 'NISCOPE_VAL_ANALOG_DETECTION_CIRCUIT',
                 'value': 0,
 'documentation': {
 'description': 'use the hardware analog circuitry to implement the reference trigger.  This option will trigger before any onboard signal processing.',
 },
             },
             {
-                'name': 'DDC_OUTPUT',
+                'name': 'NISCOPE_VAL_DDC_OUTPUT',
                 'value': 1,
 'documentation': {
 'description': 'use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.',
@@ -819,21 +813,21 @@ position.
     'TerminalConfiguration': {
         'values': [
             {
-                'name': 'SINGLE_ENDED',
+                'name': 'NISCOPE_VAL_SINGLE_ENDED',
                 'value': 0,
 'documentation': {
 'description': 'Channel is single ended',
 },
             },
             {
-                'name': 'UNBALANCED_DIFFERENTIAL',
+                'name': 'NISCOPE_VAL_UNBALANCED_DIFFERENTIAL',
                 'value': 1,
 'documentation': {
 'description': 'Channel is unbalanced differential',
 },
             },
             {
-                'name': 'DIFFERENTIAL',
+                'name': 'NISCOPE_VAL_DIFFERENTIAL',
                 'value': 2,
 'documentation': {
 'description': 'Channel is differential',
@@ -876,35 +870,42 @@ position.
     'TriggerCoupling': {
         'values': [
             {
-                'name': 'AC',
+                'name': 'NISCOPE_VAL_AC',
                 'value': 0,
 'documentation': {
 'description': 'AC coupling',
 },
             },
             {
-                'name': 'DC',
+                'name': 'NISCOPE_VAL_DC',
                 'value': 1,
 'documentation': {
 'description': 'DC coupling',
 },
             },
             {
-                'name': 'HF_REJECT',
+                'name': 'NISCOPE_VAL_HF_REJECT',
                 'value': 2,
 'documentation': {
 'description': 'Highpass filter coupling',
 },
             },
             {
-                'name': 'LF_REJECT',
+                'name': 'NISCOPE_VAL_LF_REJECT',
                 'value': 3,
 'documentation': {
 'description': 'Lowpass filter coupling',
 },
             },
             {
-                'name': 'AC_PLUS_HF_REJECT',
+                'name': 'LF_REJECT',
+                'value': 4,
+'documentation': {
+'description': 'LF Reject filter.',
+},
+            },
+            {
+                'name': 'NISCOPE_VAL_AC_PLUS_HF_REJECT',
                 'value': 1001,
 'documentation': {
 'description': 'Highpass and lowpass filter coupling',
@@ -915,14 +916,14 @@ position.
     'TriggerModifier': {
         'values': [
             {
-                'name': 'NO_TRIGGER_MOD',
+                'name': 'NISCOPE_VAL_NO_TRIGGER_MOD',
                 'value': 1,
 'documentation': {
 'description': 'Normal triggering.',
 },
             },
             {
-                'name': 'AUTO',
+                'name': 'NISCOPE_VAL_AUTO',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -936,14 +937,14 @@ after a certain amount of time.
     'TriggerSlope': {
         'values': [
             {
-                'name': 'NEGATIVE',
+                'name': 'NISCOPE_VAL_NEGATIVE',
                 'value': 0,
 'documentation': {
 'description': 'Falling edge',
 },
             },
             {
-                'name': 'POSITIVE',
+                'name': 'NISCOPE_VAL_POSITIVE',
                 'value': 1,
 'documentation': {
 'description': 'Rising edge',
@@ -954,56 +955,49 @@ after a certain amount of time.
     'TriggerType': {
         'values': [
             {
-                'name': 'EDGE',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_EDGE_TRIGGER',
                 'value': 1,
 'documentation': {
 'description': 'Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with niScope_ConfigureTriggerEdge.',
 },
             },
             {
-                'name': 'TV',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_TV_TRIGGER',
                 'value': 5,
 'documentation': {
 'description': 'Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.',
 },
             },
             {
-                'name': 'IMMEDIATE',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_IMMEDIATE_TRIGGER',
                 'value': 6,
 'documentation': {
 'description': 'Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.',
 },
             },
             {
-                'name': 'HYSTERESIS',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_HYSTERESIS_TRIGGER',
                 'value': 1001,
 'documentation': {
 'description': 'Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with niScope_ConfigureTriggerHysteresis.',
 },
             },
             {
-                'name': 'DIGITAL',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_DIGITAL_TRIGGER',
                 'value': 1002,
 'documentation': {
 'description': 'Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with niScope_ConfigureTriggerDigital.',
 },
             },
             {
-                'name': 'WINDOW',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_WINDOW_TRIGGER',
                 'value': 1003,
 'documentation': {
 'description': 'Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with niScope_ConfigureTriggerWindow.',
 },
             },
             {
-                'name': 'SOFTWARE',
-                'suffix': '_TRIGGER',
+                'name': 'NISCOPE_VAL_SOFTWARE_TRIGGER',
                 'value': 1004,
 'documentation': {
 'description': 'Configures the digitizer for software triggering.  A software trigger occurs when niScope_SendSoftwareTrigger is called.',
@@ -1014,16 +1008,14 @@ after a certain amount of time.
     'TriggerWindowMode': {
         'values': [
             {
-                'name': 'ENTERING',
-                'suffix': '_WINDOW',
+                'name': 'NISCOPE_VAL_ENTERING_WINDOW',
                 'value': 0,
 'documentation': {
 'description': 'Trigger upon entering the window',
 },
             },
             {
-                'name': 'LEAVING',
-                'suffix': '_WINDOW',
+                'name': 'NISCOPE_VAL_LEAVING_WINDOW',
                 'value': 1,
 'documentation': {
 'description': 'Trigger upon leaving the window',
@@ -1034,21 +1026,21 @@ after a certain amount of time.
     'VerticalCoupling': {
         'values': [
             {
-                'name': 'AC',
+                'name': 'NISCOPE_VAL_AC',
                 'value': 0,
 'documentation': {
 'description': 'AC coupling',
 },
             },
             {
-                'name': 'DC',
+                'name': 'NISCOPE_VAL_DC',
                 'value': 1,
 'documentation': {
 'description': 'DC coupling',
 },
             },
             {
-                'name': 'GND',
+                'name': 'NISCOPE_VAL_GND',
                 'value': 2,
 'documentation': {
 'description': 'GND coupling',
@@ -1059,16 +1051,14 @@ after a certain amount of time.
     'VideoPolarity': {
         'values': [
             {
-                'name': 'POSITIVE',
-                'prefix': 'TV_',
+                'name': 'NISCOPE_VAL_TV_POSITIVE',
                 'value': 1,
 'documentation': {
 'description': 'Specifies that the video signal has positive polarity.',
 },
             },
             {
-                'name': 'NEGATIVE',
-                'prefix': 'TV_',
+                'name': 'NISCOPE_VAL_TV_NEGATIVE',
                 'value': 2,
 'documentation': {
 'description': 'Specifies that the video signal has negative polarity.',
@@ -1079,21 +1069,21 @@ after a certain amount of time.
     'VideoSignalFormat': {
         'values': [
             {
-                'name': 'NTSC',
+                'name': 'NISCOPE_VAL_NTSC',
                 'value': 1,
 'documentation': {
 'description': 'NTSC signal format supports line numbers from 1 to 525',
 },
             },
             {
-                'name': 'PAL',
+                'name': 'NISCOPE_VAL_PAL',
                 'value': 2,
 'documentation': {
 'description': 'PAL signal format supports line numbers from 1 to 625',
 },
             },
             {
-                'name': 'SECAM',
+                'name': 'NISCOPE_VAL_SECAM',
                 'value': 3,
 'documentation': {
 'description': 'SECAM signal format supports line numbers from 1 to 625',
@@ -1101,97 +1091,202 @@ after a certain amount of time.
             },
             {
                 'name': 'M_PAL',
+                'value': 4,
+'documentation': {
+'description': 'Specifies M-PAL signal format.',
+},
+            },
+            {
+                'name': '_480I59_94_FPS',
+                'value': 5,
+'documentation': {
+'description': 'Specifies 480i/59.94 signal format.',
+},
+            },
+            {
+                'name': '_480I60_FPS',
+                'value': 6,
+'documentation': {
+'description': 'Specifies 480i/60 signal format.',
+},
+            },
+            {
+                'name': '_480P59_94_FPS',
+                'value': 7,
+'documentation': {
+'description': 'Specifies 480p/59.94 signal format.',
+},
+            },
+            {
+                'name': '_480P60_FPS',
+                'value': 8,
+'documentation': {
+'description': 'Specifies 480p/60 Fps signal format.',
+},
+            },
+            {
+                'name': '_576I60_FPS',
+                'value': 9,
+'documentation': {
+'description': 'Specifies 576i/60 fps signal format.',
+},
+            },
+            {
+                'name': '_576P50_FPS',
+                'value': 10,
+'documentation': {
+'description': 'Specifies 576p/50 Fps signal format.',
+},
+            },
+            {
+                'name': '_720P30_FPS',
+                'value': 11,
+'documentation': {
+'description': 'Specifies 720p/30 Fps signal format.',
+},
+            },
+            {
+                'name': '_720P50_FPS',
+                'value': 12,
+'documentation': {
+'description': 'Specifies 720p/50 Fps signal format.',
+},
+            },
+            {
+                'name': '_720P59_94_FPS',
+                'value': 13,
+'documentation': {
+'description': 'Specifies 720p/59.94 Fps signal format.',
+},
+            },
+            {
+                'name': '_720P60_FPS',
+                'value': 14,
+'documentation': {
+'description': 'Specifies 720p/60 Fps signal format.',
+},
+            },
+            {
+                'name': '_1080I50_FPS',
+                'value': 15,
+'documentation': {
+'description': 'Specifies 1080i/50 fps signal format.',
+},
+            },
+            {
+                'name': '_1080I59_94_FPS',
+                'value': 16,
+'documentation': {
+'description': 'Specifies 1080i/59.94 fps signal format.',
+},
+            },
+            {
+                'name': '_1080I60_FPS',
+                'value': 17,
+'documentation': {
+'description': 'Specifies 1080i/60 fps signal format.',
+},
+            },
+            {
+                'name': '_1080P24_FPS',
+                'value': 18,
+'documentation': {
+'description': 'Specifies 1080p/24 Fps signal format.',
+},
+            },
+            {
+                'name': 'NISCOPE_VAL_M_PAL',
                 'value': 1001,
 'documentation': {
 'description': 'M-PAL signal format supports line numbers from 1 to 525',
 },
             },
             {
-                'name': '_480I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_480I_59_94_FIELDS_PER_SECOND',
                 'value': 1010,
 'documentation': {
 'description': '480 lines, interlaced, 59.94 fields per second',
 },
             },
             {
-                'name': '_480I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_480I_60_FIELDS_PER_SECOND',
                 'value': 1011,
 'documentation': {
 'description': '480 lines, interlaced, 60 fields per second',
 },
             },
             {
-                'name': '_480P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_480P_59_94_FRAMES_PER_SECOND',
                 'value': 1015,
 'documentation': {
 'description': '480 lines, progressive, 59.94 frames per second',
 },
             },
             {
-                'name': '_480P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_480P_60_FRAMES_PER_SECOND',
                 'value': 1016,
 'documentation': {
 'description': '480 lines, progressive,60 frames per second',
 },
             },
             {
-                'name': '_576I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_576I_50_FIELDS_PER_SECOND',
                 'value': 1020,
 'documentation': {
 'description': '576 lines, interlaced, 50 fields per second',
 },
             },
             {
-                'name': '_576P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_576P_50_FRAMES_PER_SECOND',
                 'value': 1025,
 'documentation': {
 'description': '576 lines, progressive, 50 frames per second',
 },
             },
             {
-                'name': '_720P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_50_FRAMES_PER_SECOND',
                 'value': 1031,
 'documentation': {
 'description': '720 lines, progressive, 50 frames per second',
 },
             },
             {
-                'name': '_720P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_59_94_FRAMES_PER_SECOND',
                 'value': 1032,
 'documentation': {
 'description': '720 lines, progressive, 59.94 frames per second',
 },
             },
             {
-                'name': '_720P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_60_FRAMES_PER_SECOND',
                 'value': 1033,
 'documentation': {
 'description': '720 lines, progressive, 60 frames per second',
 },
             },
             {
-                'name': '_1080I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_50_FIELDS_PER_SECOND',
                 'value': 1040,
 'documentation': {
 'description': '1,080 lines, interlaced, 50 fields per second',
 },
             },
             {
-                'name': '_1080I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_59_94_FIELDS_PER_SECOND',
                 'value': 1041,
 'documentation': {
 'description': '1,080 lines, interlaced, 59.94 fields per second',
 },
             },
             {
-                'name': '_1080I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_60_FIELDS_PER_SECOND',
                 'value': 1042,
 'documentation': {
 'description': '1,080 lines, interlaced, 60 fields per second',
 },
             },
             {
-                'name': '_1080P_24_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080P_24_FRAMES_PER_SECOND',
                 'value': 1045,
 'documentation': {
 'description': '1,080 lines, progressive, 24 frames per second',
@@ -1202,40 +1297,35 @@ after a certain amount of time.
     'VideoTriggerEvent': {
         'values': [
             {
-                'name': 'FIELD1',
-                'prefix': 'TV_EVENT_',
+                'name': 'NISCOPE_VAL_TV_EVENT_FIELD1',
                 'value': 1,
 'documentation': {
 'description': 'Trigger on field 1 of the signal',
 },
             },
             {
-                'name': 'FIELD2',
-                'prefix': 'TV_EVENT_',
+                'name': 'NISCOPE_VAL_TV_EVENT_FIELD2',
                 'value': 2,
 'documentation': {
 'description': 'Trigger on field 2 of the signal',
 },
             },
             {
-                'name': 'ANY_FIELD',
-                'prefix': 'TV_EVENT_',
+                'name': 'NISCOPE_VAL_TV_EVENT_ANY_FIELD',
                 'value': 3,
 'documentation': {
 'description': 'Trigger on the first field acquired',
 },
             },
             {
-                'name': 'ANY_LINE',
-                'prefix': 'TV_EVENT_',
+                'name': 'NISCOPE_VAL_TV_EVENT_ANY_LINE',
                 'value': 4,
 'documentation': {
 'description': 'Trigger on the first line acquired',
 },
             },
             {
-                'name': 'LINE_NUMBER',
-                'prefix': 'TV_EVENT_',
+                'name': 'NISCOPE_VAL_TV_EVENT_LINE_NUMBER',
                 'value': 5,
 'documentation': {
 'description': 'Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.',

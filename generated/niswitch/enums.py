@@ -4,7 +4,7 @@ from enum import Enum
 
 
 class HandshakingInitiation(Enum):
-    MEASUREMENT_DEVICE_INITIATED = 0
+    MEASUREMENT_DEVICE = 0
     '''
     The `niSwitch Initiate
     Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI does not
@@ -18,7 +18,7 @@ class HandshakingInitiation(Enum):
     signal. Thus, the first MC of the measurement device initiates
     handshaking.
     '''
-    SWITCH_INITIATED = 1
+    SWITCH = 1
     '''
     The `niSwitch Initiate
     Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI returns
@@ -58,11 +58,11 @@ class PathCapability(Enum):
 
 
 class RelayAction(Enum):
-    OPEN_RELAY = 20
+    OPEN = 20
     '''
     Open Relay
     '''
-    CLOSE_RELAY = 21
+    CLOSE = 21
     '''
     Close Relay
     '''

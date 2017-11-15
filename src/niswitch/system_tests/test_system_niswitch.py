@@ -14,7 +14,7 @@ def session():
 def test_relayclose(session):
     relay_name = 'kr0c0'
     assert session.get_relay_position(relay_name) == niswitch.RelayPosition.OPEN
-    session.relay_control(relay_name, niswitch.RelayAction.CLOSE_RELAY)
+    session.relay_control(relay_name, niswitch.RelayAction.CLOSE)
     assert session.get_relay_position(relay_name) == niswitch.RelayPosition.CLOSED
     relay_count = session.get_relay_count(relay_name)
     assert relay_count == 0

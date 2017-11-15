@@ -1,7 +1,7 @@
 OUTPUT_DIR := $(BIN_DIR)/$(DRIVER)
 LOG_DIR := $(OUTPUT_DIR)/log
 MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
-UNIT_TEST_DIR := $(MODULE_DIR)/tests
+UNIT_TEST_DIR := $(MODULE_DIR)/unit_tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
@@ -56,8 +56,8 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     library_singleton.py \
     session.py \
     errors.py \
-    tests/mock_helper.py \
-    tests/matchers.py \
+    unit_tests/mock_helper.py \
+    unit_tests/matchers.py \
     __init__.py \
 
 DEFAULT_PY_FILES_TO_COPY := \

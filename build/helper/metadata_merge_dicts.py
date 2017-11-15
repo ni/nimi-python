@@ -6,6 +6,30 @@ import re
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
+def merge_helper(metadata, metadata_type, config):
+    metadata_module = 'metadata.{0}_addon'.format(metadata_type)
+    if 'modules' in config and metadata_module in config['modules']:
+        for m in dir(config['modules'][metadata_module]):
+            if m.startswith('{0}_'.format(metadata_type)):
+                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m))
+            # We need to explicitly copy new entries
+            if m == '{0}_additional_{0}'.format(metadata_type):
+                outof = config['modules'][metadata_module].__getattribute__(m)
+                for a in outof:
+                    metadata[a] = outof[a]
+
+    # Delete any entries that are empty
+    # Have to do this in two steps. Otherwise the dictionary changes size and errors
+    to_delete = []
+    for m in metadata:
+        if len(metadata[m]) == 0:
+            to_delete.append(m)
+    for m in to_delete:
+        metadata.pop(m, None)
+
+    return metadata
+
+
 def merge_dicts(into, outof):
     '''merge_dicts
 

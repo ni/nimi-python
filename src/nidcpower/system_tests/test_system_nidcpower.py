@@ -111,7 +111,7 @@ def test_measure():
         session.voltage_level_range = 6
         session.voltage_level = 2
         with session.initiate():
-            reading = session.measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
+            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
             assert session.query_in_compliance() is False
         assert reading == 2
 
@@ -119,8 +119,8 @@ def test_measure():
 def test_query_output_state():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         with session.initiate():
-            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
-            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT) is False
+            assert session.query_output_state(nidcpower.OutputStates.VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
+            assert session.query_output_state(nidcpower.OutputStates.CURRENT) is False
 
 
 def test_config_aperture_time():
@@ -256,13 +256,10 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-# TODO(bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
-'''
 def test_export_signal(single_channel_session):
     expected_trigger_terminal = "/4162/Engine0/MeasureTrigger"
-    single_channel_session.export_signal(nidcpower.Event.SOURCE_COMPLETE, expected_trigger_terminal)
+    single_channel_session.export_signal(nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT, expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
-'''
 
 
 def test_configure_digital_edge_measure_trigger(single_channel_session):

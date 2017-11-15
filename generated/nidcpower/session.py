@@ -3111,7 +3111,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            signal (int): Specifies which trigger or event to export.
+            signal (enums.ExportSignal): Specifies which trigger or event to export.
                 **Defined Values:**
 
                 +--------------------------------------------------------+------------------------------------------------+
@@ -3161,8 +3161,10 @@ class Session(_SessionBase):
                 | "PXI_Trig7" | PXI trigger line 7   |
                 +-------------+----------------------+
         '''
+        if type(signal) is not enums.ExportSignal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        signal_ctype = visatype.ViInt32(signal)  # case 9
+        signal_ctype = visatype.ViInt32(signal.value)  # case 10
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
         error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)

@@ -150,6 +150,103 @@ def test_read_current_temperature(session):
     assert session.read_current_temperature() > 25.0
 
 
+def test_allocate_waveform(session):
+    try:
+        waveforme_data = [1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1]
+        session.write_waveform(session.allocate_waveform(10), waveforme_data)
+    except nifgen.Error as e:
+        assert e.code == -1074126841  # Writing more data than allocated
+
+
+def test_clear_waveform_memory(session):
+    session.clear_arb_memory()
+    session.clear_user_standard_waveform()
+    session.clear_arb_sequence(-1)
+    session.clear_arb_waveform(-1)
+
+
+def test_query_arb_seq_capabilities(session):
+    maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count = session.query_arb_seq_capabilities()
+    assert maximum_number_of_sequences == 65535
+    assert minimum_sequence_length == 1
+    assert maximum_sequence_length == 65535
+    assert maximum_loop_count == 16777215
+
+
+def test_arb_seq(session):
+    waveform_data = [-32767, -25485, -18204, -10922, -3641, 3641, 10922, 18204, 25485, 32767]
+    waveform_data_2 = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    session._abort_generation()
+    session.arb_sample_rate = 20000000
+    session.arb_gain = 1
+    session.output_mode = nifgen.OutputMode.SEQ
+    session.clear_arb_memory()
+    session.create_waveform_i16(waveform_data)
+    session.create_waveform_i16(waveform_data_2)
+    session.clear_arb_sequence(-1)
+    session.configure_arb_sequence(session.create_advanced_arb_sequence([0, 1], [1, 1], sample_counts_array=[], marker_location_array=[-1, -1])[1], 1, 0)  # May have to change sample_counts_array when issue#594 fixed
+    session.commit()
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 20000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(20000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    session.arb_sample_rate = 10000000
+    session.create_arb_sequence(2, [0, 1], [1, 1])
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    arb_gain = session.arb_gain
+    assert arb_gain == 1
+
+
+def test_arb_script(session):
+    waveform_data = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_SCRIPT
+    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.write_named_waveform_i16('wfmSine', waveform_data)
+    session.arb_sample_rate = 10000000
+    script = '''script myScript0
+    repeat 3
+    Generate wfmSine
+   end repeat
+end script'''
+    session.write_script(script)
+    session.script_to_generate = 'myScript0'
+    session.commit()
+    session.delete_script('myScript0')
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+
+
+def test_reset(session):
+    default_output_mode = session.output_mode
+    assert default_output_mode == nifgen.OutputMode.ARB
+    session.output_mode = nifgen.OutputMode.SEQ
+    assert session.output_mode == nifgen.OutputMode.SEQ
+    session.reset()
+    assert session.output_mode == nifgen.OutputMode.ARB
+
+
+def test_reset_device(session):
+    default_trigger_mode = session.trigger_mode
+    assert default_trigger_mode == nifgen.TriggerMode.CONTINUOUS
+    session.trigger_mode = nifgen.TriggerMode.STEPPED
+    non_default_trigger_mode = nifgen.TriggerMode.STEPPED
+    assert non_default_trigger_mode == nifgen.TriggerMode.STEPPED
+    session.reset_device()
+    assert session.trigger_mode == nifgen.TriggerMode.CONTINUOUS
+
+
+def test_reset_with_default(session):
+    default_sample_rate = session.arb_sample_rate
+    assert default_sample_rate == 250000000.0
+    session.arb_sample_rate = 100000000.0
+    non_default_arb_sample_rate = session.arb_sample_rate
+    assert non_default_arb_sample_rate == 100000000.0
+    session.reset_with_defaults()
+    assert session.arb_sample_rate == 250000000.0
+
+
 def test_named_waveform_operations(session):
     wfm_name = 'Waveform'
     wfm_size = 4096
@@ -167,12 +264,6 @@ def test_adjust_sample_clock_relative_delay():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 is not supporting adjust_sample_clock_relative_delay right now
         delay = 1e-09
         session.adjust_sample_clock_relative_delay(delay)
-
-
-def test_resets(session):
-    session.reset_with_defaults()
-    session.reset()
-    session.reset_device()
 
 
 def test_wait_until_done(session):
