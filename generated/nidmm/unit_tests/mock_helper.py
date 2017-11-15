@@ -68,9 +68,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
-        self._defaults['GetAttributeViString'] = {}
-        self._defaults['GetAttributeViString']['return'] = 0
-        self._defaults['GetAttributeViString']['attributeValue'] = None
         self._defaults['GetAutoRangeValue'] = {}
         self._defaults['GetAutoRangeValue']['return'] = 0
         self._defaults['GetAutoRangeValue']['actualRange'] = None
@@ -140,8 +137,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViInt32']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
-        self._defaults['SetAttributeViString'] = {}
-        self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -309,16 +304,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViReal64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
-
-    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViString']['return'] != 0:
-            return self._defaults['GetAttributeViString']['return']
-        if self._defaults['GetAttributeViString']['attributeValue'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
-        if buffer_size.value == 0:
-            return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
-        return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
         if self._defaults['GetAutoRangeValue']['return'] != 0:
@@ -517,11 +502,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViString']['return'] != 0:
-            return self._defaults['SetAttributeViString']['return']
-        return self._defaults['SetAttributeViString']['return']
-
     def niDMM_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -607,8 +587,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetAttributeViInt32.return_value = 0
         mock_library.niDMM_GetAttributeViReal64.side_effect = MockFunctionCallError("niDMM_GetAttributeViReal64")
         mock_library.niDMM_GetAttributeViReal64.return_value = 0
-        mock_library.niDMM_GetAttributeViString.side_effect = MockFunctionCallError("niDMM_GetAttributeViString")
-        mock_library.niDMM_GetAttributeViString.return_value = 0
         mock_library.niDMM_GetAutoRangeValue.side_effect = MockFunctionCallError("niDMM_GetAutoRangeValue")
         mock_library.niDMM_GetAutoRangeValue.return_value = 0
         mock_library.niDMM_GetCalDateAndTime.side_effect = MockFunctionCallError("niDMM_GetCalDateAndTime")
@@ -653,8 +631,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViInt32.return_value = 0
         mock_library.niDMM_SetAttributeViReal64.side_effect = MockFunctionCallError("niDMM_SetAttributeViReal64")
         mock_library.niDMM_SetAttributeViReal64.return_value = 0
-        mock_library.niDMM_SetAttributeViString.side_effect = MockFunctionCallError("niDMM_SetAttributeViString")
-        mock_library.niDMM_SetAttributeViString.return_value = 0
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = 0
         mock_library.niDMM_error_message.side_effect = MockFunctionCallError("niDMM_error_message")
