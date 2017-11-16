@@ -229,7 +229,7 @@ class SideEffectsHelper(object):
         a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
         return self._defaults['GetAnIviDanceString']['return']
 
-    def niFake_GetArrayForPythonCodeCustomType(self, vi, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         if self._defaults['GetArrayForPythonCodeCustomType']['return'] != 0:
             return self._defaults['GetArrayForPythonCodeCustomType']['return']
         if self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] is None:
@@ -242,7 +242,7 @@ class SideEffectsHelper(object):
             array_out[i] = a[i]
         return self._defaults['GetArrayForPythonCodeCustomType']['return']
 
-    def niFake_GetArrayForPythonCodeDouble(self, vi, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeDouble(self, vi, number_of_elements, array_out):  # noqa: N802
         if self._defaults['GetArrayForPythonCodeDouble']['return'] != 0:
             return self._defaults['GetArrayForPythonCodeDouble']['return']
         if self._defaults['GetArrayForPythonCodeDouble']['arrayOut'] is None:

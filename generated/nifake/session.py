@@ -623,12 +623,16 @@ class Session(_SessionBase):
 
         This function returns an array for use in python-code size mechanism.
 
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
         Returns:
-            array_out (list of CustomStruct): Array os custom typeusing puthon-code size mechanism
+            array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.6
-        error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, array_out_ctype)
+        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
+        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.2
+        error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
@@ -637,12 +641,16 @@ class Session(_SessionBase):
 
         This function returns an array for use in python-code size mechanism.
 
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
         Returns:
             array_out (list of float): Array of double using puthon-code size mechanism
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.6
-        error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, array_out_ctype)
+        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
+        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.2
+        error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 

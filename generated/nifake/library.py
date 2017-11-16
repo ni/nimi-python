@@ -136,21 +136,21 @@ class Library(object):
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
 
-    def niFake_GetArrayForPythonCodeCustomType(self, vi, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArrayForPythonCodeCustomType_cfunc is None:
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc = self._library.niFake_GetArrayForPythonCodeCustomType
-                self.niFake_GetArrayForPythonCodeCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct)]  # noqa: F405
+                self.niFake_GetArrayForPythonCodeCustomType_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct)]  # noqa: F405
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_GetArrayForPythonCodeCustomType_cfunc(vi, array_out)
+        return self.niFake_GetArrayForPythonCodeCustomType_cfunc(vi, number_of_elements, array_out)
 
-    def niFake_GetArrayForPythonCodeDouble(self, vi, array_out):  # noqa: N802
+    def niFake_GetArrayForPythonCodeDouble(self, vi, number_of_elements, array_out):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetArrayForPythonCodeDouble_cfunc is None:
                 self.niFake_GetArrayForPythonCodeDouble_cfunc = self._library.niFake_GetArrayForPythonCodeDouble
-                self.niFake_GetArrayForPythonCodeDouble_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_GetArrayForPythonCodeDouble_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_GetArrayForPythonCodeDouble_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_GetArrayForPythonCodeDouble_cfunc(vi, array_out)
+        return self.niFake_GetArrayForPythonCodeDouble_cfunc(vi, number_of_elements, array_out)
 
     def niFake_GetArraySizeForPythonCode(self, vi, size_out):  # noqa: N802
         with self._func_lock:
