@@ -334,10 +334,7 @@ nifgen.Session properties
 
 .. py:attribute:: aux_power_enabled
 
-    Controls the specified auxiliary power pin. Setting this property to
-    TRUE energizes the auxiliary power when the session is committed. When
-    this property is FALSE, the power pin of the connector outputs no power.
-    **Default Value**: FALSE
+    Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
 
     The following table lists the characteristics of this property.
 
@@ -431,31 +428,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Calibration:Cal ADC Input**
             - C Attribute: **NIFGEN_ATTR_CAL_ADC_INPUT**
-
-.. py:attribute:: channel_count
-
-    Returns the number of channels that the specific instrument  driver supports.
-    For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
-            - C Attribute: **NIFGEN_ATTR_CHANNEL_COUNT**
 
 .. py:attribute:: channel_delay
 
@@ -2855,6 +2827,31 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision**
             - C Attribute: **NIFGEN_ATTR_MODULE_REVISION**
+
+.. py:attribute:: num_channels
+
+    Indicates the number of channels that the specific instrument  driver supports.
+    For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
+            - C Attribute: **NIFGEN_ATTR_NUM_CHANNELS**
 
 .. py:attribute:: offset_dac_value
 

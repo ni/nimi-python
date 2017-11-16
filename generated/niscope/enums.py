@@ -241,16 +241,16 @@ class RefTriggerDetectorLocation(Enum):
 
 
 class StreamingPositionType(Enum):
-    START_TRIGGER = 0
+    START = 0
     '''
     Data is streamed from the start trigger.
     '''
-    REFERENCE_TRIGGER = 1
+    REFERENCE = 1
     '''
     Data is streamed relative to the reference trigger and reference
     position.
     '''
-    SYNC_TRIGGER = 2
+    SYNC = 2
     '''
     Data is streamed relative to the sync trigger and reference position.
     '''

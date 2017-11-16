@@ -1716,7 +1716,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 9
-        coefficients_ctype = (visatype.ViReal64 * len(coefficients))(*coefficients)  # case 4
+        coefficients_ctype = None if coefficients is None else (visatype.ViReal64 * len(coefficients))(*coefficients)  # case 4
         error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(vi_ctype, channel_list_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2178,9 +2178,9 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         buffer_size_ctype = visatype.ViInt32(buffer_size)  # case 9
-        frequencies_ctype = (visatype.ViReal64 * len(frequencies))(*frequencies)  # case 4
-        amplitudes_ctype = (visatype.ViReal64 * len(amplitudes))(*amplitudes)  # case 4
-        phases_ctype = (visatype.ViReal64 * len(phases))(*phases)  # case 4
+        frequencies_ctype = None if frequencies is None else (visatype.ViReal64 * len(frequencies))(*frequencies)  # case 4
+        amplitudes_ctype = None if amplitudes is None else (visatype.ViReal64 * len(amplitudes))(*amplitudes)  # case 4
+        phases_ctype = None if phases is None else (visatype.ViReal64 * len(phases))(*phases)  # case 4
         number_of_frequencies_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, ctypes.pointer(number_of_frequencies_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

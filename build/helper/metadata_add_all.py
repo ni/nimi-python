@@ -4,7 +4,7 @@ from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
-from .metadata_merge_dicts import merge_dicts
+from .metadata_merge_dicts import merge_helper
 
 import codecs
 import copy
@@ -24,11 +24,12 @@ def _add_name(function, name):
 
 
 def _add_python_method_name(function, name):
-    '''Adds a python_name' key/value pair to the function metadata'''
-    if function['codegen_method'] == 'private':
-        function['python_name'] = '_' + camelcase_to_snakecase(name)
-    else:
-        function['python_name'] = camelcase_to_snakecase(name)
+    '''Adds a python_name' key/value pair to the function metadata if not already specified'''
+    if 'python_name' not in function:
+        if function['codegen_method'] == 'private':
+            function['python_name'] = '_' + camelcase_to_snakecase(name)
+        else:
+            function['python_name'] = camelcase_to_snakecase(name)
     return function
 
 
@@ -164,15 +165,7 @@ def _add_is_session_handle(parameter):
 
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.functions_addon']):
-            if m.startswith('functions_'):
-                merge_dicts(functions, config['modules']['metadata.functions_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'functions_additional_functions':
-                outof = config['modules']['metadata.functions_addon'].__getattribute__(m)
-                for f in outof:
-                    functions[f] = outof[f]
+    functions = merge_helper(functions, 'functions', config)
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -209,15 +202,7 @@ def _add_python_name(a, attributes):
 
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.attributes_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.attributes_addon']):
-            if m.startswith('attributes_'):
-                merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'attributes_additional_attributes':
-                outof = config['modules']['metadata.attributes_addon'].__getattribute__(m)
-                for a in outof:
-                    attributes[a] = outof[a]
+    attributes = merge_helper(attributes, 'attributes', config)
 
     for a in attributes:
         _add_attr_codegen_method(a, attributes)
@@ -263,17 +248,62 @@ def _add_enum_codegen_method(enums, config):
                     enums[e]['codegen_method'] = a_codegen_method
 
 
+def _add_enum_value_python_name(enum_info, config):
+    for v in enum_info['values']:
+        v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+
+    # We are using an os.path function do find any common prefix. So that we don't
+    # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
+    names = [v['python_name'] for v in enum_info['values']]
+    prefix = os.path.commonprefix(names)
+    while len(prefix) > 0 and prefix[-1] != '_':
+        prefix = prefix[:-1]
+
+    # If the prefix is in the whitelist, we don't want to remove it so set to empty string
+    if 'enum_whitelist_prefix' in config and prefix in config['enum_whitelist_prefix']:
+        prefix = ''
+
+    # We only remove the prefix if there is one and it isn't '_'.
+    # '_' only means the name starts with a number
+    if len(prefix) > 0 and prefix != '_':
+        for v in enum_info['values']:
+            assert v['python_name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
+            v['prefix'] = prefix
+            v['python_name'] = v['python_name'].replace(prefix, '')
+
+    # Now we need to look for common suffixes
+    # Using the slow method of reversing a string for readability
+    rev_names = [''.join(reversed(v['python_name'])) for v in enum_info['values']]
+    suffix = os.path.commonprefix(rev_names)
+    while len(suffix) > 0 and suffix[-1] != '_':
+        suffix = suffix[:-1]
+
+    # Unreverse the suffix
+    suffix = ''.join(reversed(suffix))
+
+    # If the suffix is in the whitelist, we don't want to remove it so set to empty string
+    if 'enum_whitelist_suffix' in config and suffix in config['enum_whitelist_suffix']:
+        suffix = ''
+
+    # We only remove the suffix if there is one.
+    # '_' only means the name starts with a number
+    if len(suffix) > 0:
+        for v in enum_info['values']:
+            assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
+            v['suffix'] = suffix
+            v['python_name'] = v['python_name'].replace(suffix, '')
+
+    # We need to check again to see if we need a leading '_' due to the first character of the name being a number
+    for v in enum_info['values']:
+        if v['python_name'][0].isdigit():
+            v['python_name'] = '_' + v['python_name']
+
+    return enum_info
+
+
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.enums_addon' in config['modules']:
-        for m in dir(config['modules']['metadata.enums_addon']):
-            if m.startswith('enums_'):
-                merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
-            # We need to explicitly copy new entries
-            if m == 'enums_additional_enums':
-                outof = config['modules']['metadata.enums_addon'].__getattribute__(m)
-                for e in outof:
-                    enums[e] = outof[e]
+    enums = merge_helper(enums, 'enums', config)
 
     # Workaround for NI Internal CAR #675174
     try:
@@ -284,6 +314,9 @@ def add_all_enum_metadata(enums, config):
         pass
 
     _add_enum_codegen_method(enums, config)
+    for e in enums:
+        enums[e] = _add_enum_value_python_name(enums[e], config)
+
     return enums
 
 
@@ -615,10 +648,10 @@ def test_add_enums_metadata_simple():
         'Color': {
             'codegen_method': 'no',
             'values': [
-                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1},
-                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2},
-                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2},
-                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2}
+                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
+                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
+                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
+                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
             ]
         },
     }

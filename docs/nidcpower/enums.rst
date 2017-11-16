@@ -330,7 +330,7 @@ Enums used in NI-DCPower
 
 .. py:data:: MeasurementTypes
 
-    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_CURRENT
+    .. py:attribute:: nidcpower.MeasurementTypes.CURRENT
 
 
 
@@ -340,7 +340,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+    .. py:attribute:: nidcpower.MeasurementTypes.VOLTAGE
 
 
 
@@ -419,7 +419,7 @@ Enums used in NI-DCPower
 
 .. py:data:: OutputStates
 
-    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE
+    .. py:attribute:: nidcpower.OutputStates.VOLTAGE
 
 
 
@@ -429,7 +429,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT
+    .. py:attribute:: nidcpower.OutputStates.CURRENT
 
 
 
@@ -689,7 +689,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.TriggerType.DIGITAL
+    .. py:attribute:: nidcpower.TriggerType.DIGITAL_EDGE
 
 
 
@@ -699,7 +699,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.TriggerType.SOFTWARE
+    .. py:attribute:: nidcpower.TriggerType.SOFTWARE_EDGE
 
 
 

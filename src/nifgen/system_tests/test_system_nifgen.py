@@ -148,3 +148,114 @@ def test_query_freq_list_capabilities(session):
 
 def test_read_current_temperature(session):
     assert session.read_current_temperature() > 25.0
+
+
+def test_allocate_waveform(session):
+    try:
+        waveforme_data = [1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1]
+        session.write_waveform(session.allocate_waveform(10), waveforme_data)
+    except nifgen.Error as e:
+        assert e.code == -1074126841  # Writing more data than allocated
+
+
+def test_clear_waveform_memory(session):
+    session.clear_arb_memory()
+    session.clear_user_standard_waveform()
+    session.clear_arb_sequence(-1)
+    session.clear_arb_waveform(-1)
+
+
+def test_query_arb_seq_capabilities(session):
+    maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count = session.query_arb_seq_capabilities()
+    assert maximum_number_of_sequences == 65535
+    assert minimum_sequence_length == 1
+    assert maximum_sequence_length == 65535
+    assert maximum_loop_count == 16777215
+
+
+def test_create_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
+    assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
+
+
+def test_create_advanced_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert ([-1], 0) == session.create_advanced_arb_sequence(waveform_handles_array, [10])
+    assert ([-1], 1) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256])
+    assert ([0], 2) == session.create_advanced_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
+    assert ([0], 3) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256], marker_location_array=[0])
+
+
+def test_arb_script(session):
+    waveform_data = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    session.output_mode = nifgen.OutputMode.SCRIPT
+    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.write_named_waveform_i16('wfmSine', waveform_data)
+    session.arb_sample_rate = 10000000
+    script = '''script myScript0
+    repeat 3
+    Generate wfmSine
+   end repeat
+end script'''
+    session.write_script(script)
+    session.script_to_generate = 'myScript0'
+    session.commit()
+    session.delete_script('myScript0')
+    actual_sample_rate = session.arb_sample_rate
+    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+
+
+def test_reset(session):
+    default_output_mode = session.output_mode
+    assert default_output_mode == nifgen.OutputMode.ARB
+    session.output_mode = nifgen.OutputMode.SEQ
+    assert session.output_mode == nifgen.OutputMode.SEQ
+    session.reset()
+    assert session.output_mode == nifgen.OutputMode.ARB
+
+
+def test_reset_device(session):
+    default_trigger_mode = session.trigger_mode
+    assert default_trigger_mode == nifgen.TriggerMode.CONTINUOUS
+    session.trigger_mode = nifgen.TriggerMode.STEPPED
+    non_default_trigger_mode = nifgen.TriggerMode.STEPPED
+    assert non_default_trigger_mode == nifgen.TriggerMode.STEPPED
+    session.reset_device()
+    assert session.trigger_mode == nifgen.TriggerMode.CONTINUOUS
+
+
+def test_reset_with_default(session):
+    default_sample_rate = session.arb_sample_rate
+    assert default_sample_rate == 250000000.0
+    session.arb_sample_rate = 100000000.0
+    non_default_arb_sample_rate = session.arb_sample_rate
+    assert non_default_arb_sample_rate == 100000000.0
+    session.reset_with_defaults()
+    assert session.arb_sample_rate == 250000000.0
+
+
+def test_write_binary_waveform(session):
+    session.write_binary16_waveform(session.allocate_waveform(10), [0, 0, 0, 1, 1, 1, 2, 2])
+
+
+'''
+(TODO) Jaleel , check it after issue #538 fixed
+def test_set_waveform_next_write_position(session):
+    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)  # Enable after RelativeTo enum added to enums_addon.py
+
+
+def test_export_signal(session):
+    expected_trigger_terminal = "PXI_Trig0"
+    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)  # Enable after issue #538 fixed
+    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
+
+
+def test_write_waveform_from_filei64(session):
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
+'''

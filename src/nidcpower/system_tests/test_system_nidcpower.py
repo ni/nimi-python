@@ -111,7 +111,7 @@ def test_measure():
         session.voltage_level_range = 6
         session.voltage_level = 2
         with session.initiate():
-            reading = session.measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
+            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
             assert session.query_in_compliance() is False
         assert reading == 2
 
@@ -119,8 +119,8 @@ def test_measure():
 def test_query_output_state():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         with session.initiate():
-            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
-            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT) is False
+            assert session.query_output_state(nidcpower.OutputStates.VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
+            assert session.query_output_state(nidcpower.OutputStates.CURRENT) is False
 
 
 def test_config_aperture_time():
@@ -332,3 +332,9 @@ def test_get_ext_cal_last_temp(session):
 def test_get_ext_cal_recommended_interval(session):
     months = session.get_ext_cal_recommended_interval()
     assert months == 12
+
+
+def test_set_get_vi_int_64_attribute(session):
+    session['0'].active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session['0'].active_advanced_sequence_step
+    assert read_advanced_sequence_step == 1

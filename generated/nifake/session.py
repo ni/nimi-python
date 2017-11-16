@@ -485,8 +485,8 @@ class Session(_SessionBase):
             an_array (list of float): Contains an array of float numbers
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        number_of_elements_ctype = visatype.ViInt32(len(an_array))  # case 6
-        an_array_ctype = (visatype.ViReal64 * len(an_array))(*an_array)  # case 4
+        number_of_elements_ctype = visatype.ViInt32(0 if an_array is None else len(an_array))  # case 6
+        an_array_ctype = None if an_array is None else (visatype.ViReal64 * len(an_array))(*an_array)  # case 4
         error_code = self._library.niFake_ArrayInputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -618,6 +618,56 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    def get_array_for_python_code_custom_type(self):
+        '''get_array_for_python_code_custom_type
+
+        This function returns an array for use in python-code size mechanism.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
+        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.2
+        error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+
+    def get_array_for_python_code_double(self):
+        '''get_array_for_python_code_double
+
+        This function returns an array for use in python-code size mechanism.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            array_out (list of float): Array of double using puthon-code size mechanism
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
+        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.2
+        error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+
+    def get_array_size_for_python_code(self):
+        '''get_array_size_for_python_code
+
+        This function returns the size of the array for use in python-code size mechanism.
+
+        Returns:
+            size_out (int): Size of array
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        size_out_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_GetArraySizeForPythonCode(vi_ctype, ctypes.pointer(size_out_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(size_out_ctype.value)
+
     def get_array_using_ivi_dance(self):
         '''get_array_using_ivi_dance
 
@@ -660,7 +710,7 @@ class Session(_SessionBase):
             number_of_elements (int): Number of elements in the array.
 
         Returns:
-            cs (list of CustomStruct): Set using custom type
+            cs (list of CustomStruct): Get using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8
@@ -746,30 +796,33 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def multiple_array_types(self, passed_in_array_size, len_array):
+    def multiple_array_types(self, output_array_size, input_array_of_integers, input_array_of_floats=None):
         '''multiple_array_types
 
-        Returns multiple types of arrays.
+        Receives and returns multiple types of arrays.
 
         Args:
-            passed_in_array_size (int): Number of measurements to acquire.
-            len_array_size (int): Size of lenArray
-            len_array (list of float): Contains an array of float numbers.
+            output_array_size (int): Size of the array that will be returned.
+            input_array_sizes (int): Size of inputArrayOfFloats and inputArrayOfIntegers
+            input_array_of_floats (list of float): Array of floats
+            input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
 
         Returns:
-            passed_in_array (list of float): An array with size passed in.
+            output_array (list of float): Array that will be returned.
 
-                Note: The size must be at least arraySize.
-            a_fixed_array (list of float): An array of doubles with fixed size.
+                Note: The size must be at least outputArraySize.
+            output_array_of_fixed_length (list of float): An array of doubles with fixed size.
         '''
-        passed_in_array_size_ctype = visatype.ViInt32(passed_in_array_size)  # case 8
-        passed_in_array_ctype = (visatype.ViReal64 * passed_in_array_size)()  # case 13
-        a_fixed_array_ctype = (visatype.ViReal64 * 3)()  # case 11
-        len_array_size_ctype = visatype.ViInt32(len(len_array))  # case 6
-        len_array_ctype = (visatype.ViReal64 * len(len_array))(*len_array)  # case 4
-        error_code = self._library.niFake_MultipleArrayTypes(passed_in_array_size_ctype, passed_in_array_ctype, a_fixed_array_ctype, len_array_size_ctype, len_array_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        output_array_size_ctype = visatype.ViInt32(output_array_size)  # case 8
+        output_array_ctype = (visatype.ViReal64 * output_array_size)()  # case 13
+        output_array_of_fixed_length_ctype = (visatype.ViReal64 * 3)()  # case 11
+        input_array_sizes_ctype = visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case 6
+        input_array_of_floats_ctype = None if input_array_of_floats is None else (visatype.ViReal64 * len(input_array_of_floats))(*input_array_of_floats)  # case 4
+        input_array_of_integers_ctype = None if input_array_of_integers is None else (visatype.ViInt16 * len(input_array_of_integers))(*input_array_of_integers)  # case 4
+        error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(passed_in_array_ctype[i]) for i in range(passed_in_array_size_ctype.value)], [float(a_fixed_array_ctype[i]) for i in range(3)]
+        return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
 
     def one_input_function(self, a_number):
         '''one_input_function
@@ -821,9 +874,19 @@ class Session(_SessionBase):
         an_int_enum_ctype = visatype.ViInt16(an_int_enum.value)  # case 10
         a_float_ctype = visatype.ViReal64(a_float)  # case 9
         a_float_enum_ctype = visatype.ViReal64(a_float_enum.value)  # case 10
-        string_size_ctype = visatype.ViInt32(len(a_string))  # case 6
+        string_size_ctype = visatype.ViInt32(0 if a_string is None else len(a_string))  # case 6
         a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case 3
         error_code = self._library.niFake_ParametersAreMultipleTypes(vi_ctype, a_boolean_ctype, an_int32_ctype, an_int64_ctype, an_int_enum_ctype, a_float_ctype, a_float_enum_ctype, string_size_ctype, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def simple_function(self):
+        '''simple_function
+
+        This function takes no parameters other than the session.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFake_PoorlyNamedSimpleFunction(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -960,19 +1023,9 @@ class Session(_SessionBase):
             cs (list of CustomStruct): Set using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        number_of_elements_ctype = visatype.ViInt32(len(cs))  # case 6
+        number_of_elements_ctype = visatype.ViInt32(0 if cs is None else len(cs))  # case 6
         cs_ctype = (custom_struct.custom_struct * len(cs))(*[custom_struct.custom_struct(c) for c in cs])  # case 5
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def simple_function(self):
-        '''simple_function
-
-        This function takes no parameters other than the session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFake_SimpleFunction(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

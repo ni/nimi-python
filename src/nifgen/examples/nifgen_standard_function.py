@@ -14,11 +14,10 @@ parser.add_argument('-p', '--phase', default=0.0, type=float, help='Start Phase 
 args = parser.parse_args()
 
 with nifgen.Session(args.name) as session:
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FUNC  # TODO(marcoskirsch): name to change per #553
+    session.output_mode = nifgen.OutputMode.FUNC
     session.configure_standard_waveform(waveform=nifgen.Waveform[args.waveform], amplitude=args.amplitude, frequency=args.frequency, dc_offset=args.offset, start_phase=args.phase)
     with session.initiate():
         try:
             input("Press Enter to abort generation...")
         except SyntaxError:
             pass
-
