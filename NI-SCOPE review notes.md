@@ -1,7 +1,5 @@
 NI-SCOPE review notes for addons
 
-Left it at configure_trigger_window, will continue
-
 Buffer sizes
     * configure_equalization_filter_coefficients
     * get_equalization_filter_coefficients number_of_coefficients should be queried from attribute
@@ -21,6 +19,8 @@ Defaults
     * configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
     * configure_trigger_software 0.0 0.0
     * configure_trigger_video enable_dc_restore False, line_number 1, holdoff 0.0, delay 0.0
+    * configure_trigger_window holdoff 0.0, delay 0.0
+    export_signal signal_identifier:'None' (string)
 
 Enums
     * add_waveform_processing shoudl have enum
@@ -35,6 +35,9 @@ Enums
     * configure_trigger_edge slope, trigger_coupling
     * configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
     * configure_trigger_video signal_format, event, polarity, trigger_coupling
+    * configure_trigger_window window_mode, trigger_coupling
+    * export_signal signal
+    * send_software_trigger_edge which_trigger
 
 Other notes
     * Make cal_self_calibrate name consistnet
@@ -48,6 +51,16 @@ Other notes
         * When in doubt - don't include the function
     * actual_meas_wfm_size private
     * actual_num_waveforms private
+    * Make sure we aren't removing useful ext cal functions
+    * The following still need review, awaiting PR from Mark
+        * 'Fetch'
+        * 'FetchArrayMeasurement'
+        * 'FetchBinary16'
+        * 'FetchBinary32'
+        * 'FetchBinary8'
+        * 'FetchComplex'
+        * 'FetchComplexBinary16'
+        * 'Read'
 
 Remove
     * check_attribute_vi_boolean and rest
@@ -65,6 +78,15 @@ Remove
     * configure_trigger (use configure_trigger_...)
     * configure_trigger_coupling
     * configure_trigger_output use export signal
-
-
+    * fetch_waveform
+    * fetch_waveform_measurement
+    * get_channel_name
+    * get_error_message
+    * get_stream_endpoint_handle
+    * is_invalid_wfm_element
+    * read_waveform
+    * read_waveform_measurement
+    * sample_rate
+    * send_sw_trigger
+    * error_handler
 
