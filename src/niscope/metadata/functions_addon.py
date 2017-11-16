@@ -43,6 +43,9 @@ functions_codegen_method = {
     'AdjustSampleClockRelativeDelay':  { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     'ConfigureAcquisition':            { 'codegen_method': 'no',       },
     'ConfigureAcquisitionRecord':      { 'codegen_method': 'no',       },
+    'ConfigureChannel':                { 'codegen_method': 'no',       },
+    'ConfigureClock':                  { 'codegen_method': 'no',       },  # use export_signal
+    'ConfigureEdgeTriggerSource':      { 'codegen_method': 'no',       },
 
 }
 

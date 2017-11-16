@@ -70,9 +70,6 @@ Everything listed here needs to be implemented.
 
 ##Remove
 
-* configure_channel
-* configure_clock - use export signal and reference clock attribute source
-* configure_edge_trigger_source (obsolete)
 * configure_tv_trigger_line_number
 * configure_tv_trigger_source (obsolete)
 * configure_trigger (use configure_trigger_...)
