@@ -44,6 +44,10 @@ def test_vi_string_attribute(session):
 '''
 
 
+def test_get_vi_string_attribute(session):
+    assert session.serial_number == 'FFFFFFFF'
+
+
 def test_vi_int32_attribute(session):
     session.sample_count = 5
     assert 5 == session.sample_count

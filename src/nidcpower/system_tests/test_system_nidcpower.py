@@ -336,6 +336,5 @@ def test_get_ext_cal_recommended_interval(session):
 
 def test_set_get_vi_int_64_attribute(session):
     session['0'].active_advanced_sequence_step = 1
-    read_session = session['0'].active_advanced_sequence_step
-    assert read_session == 1
-
+    read_advanced_sequence_step = session['0'].active_advanced_sequence_step
+    assert read_advanced_sequence_step == 1
