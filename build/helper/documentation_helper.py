@@ -342,7 +342,7 @@ def get_function_rst(fname, config, indent=0):
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
+    input_params = filter_parameters(function, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -403,7 +403,7 @@ def get_function_docstring(fname, config, indent=0):
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
+    input_params = filter_parameters(function, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
