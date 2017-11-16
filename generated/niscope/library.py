@@ -31,15 +31,10 @@ class Library(object):
         self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = None
         self.niScope_ConfigureHorizontalTiming_cfunc = None
         self.niScope_ConfigureRefLevels_cfunc = None
-        self.niScope_ConfigureTVTriggerLineNumber_cfunc = None
-        self.niScope_ConfigureTVTriggerSource_cfunc = None
-        self.niScope_ConfigureTrigger_cfunc = None
-        self.niScope_ConfigureTriggerCoupling_cfunc = None
         self.niScope_ConfigureTriggerDigital_cfunc = None
         self.niScope_ConfigureTriggerEdge_cfunc = None
         self.niScope_ConfigureTriggerHysteresis_cfunc = None
         self.niScope_ConfigureTriggerImmediate_cfunc = None
-        self.niScope_ConfigureTriggerOutput_cfunc = None
         self.niScope_ConfigureTriggerSoftware_cfunc = None
         self.niScope_ConfigureTriggerVideo_cfunc = None
         self.niScope_ConfigureTriggerWindow_cfunc = None
@@ -196,38 +191,6 @@ class Library(object):
                 self.niScope_ConfigureRefLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureRefLevels_cfunc(vi, low, mid, high)
 
-    def niScope_ConfigureTVTriggerLineNumber(self, vi, line_number):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureTVTriggerLineNumber_cfunc is None:
-                self.niScope_ConfigureTVTriggerLineNumber_cfunc = self._library.niScope_ConfigureTVTriggerLineNumber
-                self.niScope_ConfigureTVTriggerLineNumber_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niScope_ConfigureTVTriggerLineNumber_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureTVTriggerLineNumber_cfunc(vi, line_number)
-
-    def niScope_ConfigureTVTriggerSource(self, vi, source, signal_format, event, polarity):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureTVTriggerSource_cfunc is None:
-                self.niScope_ConfigureTVTriggerSource_cfunc = self._library.niScope_ConfigureTVTriggerSource
-                self.niScope_ConfigureTVTriggerSource_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ViInt32]  # noqa: F405
-                self.niScope_ConfigureTVTriggerSource_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureTVTriggerSource_cfunc(vi, source, signal_format, event, polarity)
-
-    def niScope_ConfigureTrigger(self, vi, trigger_type, holdoff):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureTrigger_cfunc is None:
-                self.niScope_ConfigureTrigger_cfunc = self._library.niScope_ConfigureTrigger
-                self.niScope_ConfigureTrigger_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
-                self.niScope_ConfigureTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureTrigger_cfunc(vi, trigger_type, holdoff)
-
-    def niScope_ConfigureTriggerCoupling(self, vi, coupling):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureTriggerCoupling_cfunc is None:
-                self.niScope_ConfigureTriggerCoupling_cfunc = self._library.niScope_ConfigureTriggerCoupling
-                self.niScope_ConfigureTriggerCoupling_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niScope_ConfigureTriggerCoupling_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureTriggerCoupling_cfunc(vi, coupling)
-
     def niScope_ConfigureTriggerDigital(self, vi, trigger_source, slope, holdoff, delay):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureTriggerDigital_cfunc is None:
@@ -259,14 +222,6 @@ class Library(object):
                 self.niScope_ConfigureTriggerImmediate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ConfigureTriggerImmediate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerImmediate_cfunc(vi)
-
-    def niScope_ConfigureTriggerOutput(self, vi, trigger_event, trigger_output):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureTriggerOutput_cfunc is None:
-                self.niScope_ConfigureTriggerOutput_cfunc = self._library.niScope_ConfigureTriggerOutput
-                self.niScope_ConfigureTriggerOutput_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niScope_ConfigureTriggerOutput_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureTriggerOutput_cfunc(vi, trigger_event, trigger_output)
 
     def niScope_ConfigureTriggerSoftware(self, vi, holdoff, delay):  # noqa: N802
         with self._func_lock:

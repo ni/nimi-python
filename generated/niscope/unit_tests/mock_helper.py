@@ -45,14 +45,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureHorizontalTiming']['return'] = 0
         self._defaults['ConfigureRefLevels'] = {}
         self._defaults['ConfigureRefLevels']['return'] = 0
-        self._defaults['ConfigureTVTriggerLineNumber'] = {}
-        self._defaults['ConfigureTVTriggerLineNumber']['return'] = 0
-        self._defaults['ConfigureTVTriggerSource'] = {}
-        self._defaults['ConfigureTVTriggerSource']['return'] = 0
-        self._defaults['ConfigureTrigger'] = {}
-        self._defaults['ConfigureTrigger']['return'] = 0
-        self._defaults['ConfigureTriggerCoupling'] = {}
-        self._defaults['ConfigureTriggerCoupling']['return'] = 0
         self._defaults['ConfigureTriggerDigital'] = {}
         self._defaults['ConfigureTriggerDigital']['return'] = 0
         self._defaults['ConfigureTriggerEdge'] = {}
@@ -61,8 +53,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureTriggerHysteresis']['return'] = 0
         self._defaults['ConfigureTriggerImmediate'] = {}
         self._defaults['ConfigureTriggerImmediate']['return'] = 0
-        self._defaults['ConfigureTriggerOutput'] = {}
-        self._defaults['ConfigureTriggerOutput']['return'] = 0
         self._defaults['ConfigureTriggerSoftware'] = {}
         self._defaults['ConfigureTriggerSoftware']['return'] = 0
         self._defaults['ConfigureTriggerVideo'] = {}
@@ -272,26 +262,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureRefLevels']['return']
         return self._defaults['ConfigureRefLevels']['return']
 
-    def niScope_ConfigureTVTriggerLineNumber(self, vi, line_number):  # noqa: N802
-        if self._defaults['ConfigureTVTriggerLineNumber']['return'] != 0:
-            return self._defaults['ConfigureTVTriggerLineNumber']['return']
-        return self._defaults['ConfigureTVTriggerLineNumber']['return']
-
-    def niScope_ConfigureTVTriggerSource(self, vi, source, signal_format, event, polarity):  # noqa: N802
-        if self._defaults['ConfigureTVTriggerSource']['return'] != 0:
-            return self._defaults['ConfigureTVTriggerSource']['return']
-        return self._defaults['ConfigureTVTriggerSource']['return']
-
-    def niScope_ConfigureTrigger(self, vi, trigger_type, holdoff):  # noqa: N802
-        if self._defaults['ConfigureTrigger']['return'] != 0:
-            return self._defaults['ConfigureTrigger']['return']
-        return self._defaults['ConfigureTrigger']['return']
-
-    def niScope_ConfigureTriggerCoupling(self, vi, coupling):  # noqa: N802
-        if self._defaults['ConfigureTriggerCoupling']['return'] != 0:
-            return self._defaults['ConfigureTriggerCoupling']['return']
-        return self._defaults['ConfigureTriggerCoupling']['return']
-
     def niScope_ConfigureTriggerDigital(self, vi, trigger_source, slope, holdoff, delay):  # noqa: N802
         if self._defaults['ConfigureTriggerDigital']['return'] != 0:
             return self._defaults['ConfigureTriggerDigital']['return']
@@ -311,11 +281,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureTriggerImmediate']['return'] != 0:
             return self._defaults['ConfigureTriggerImmediate']['return']
         return self._defaults['ConfigureTriggerImmediate']['return']
-
-    def niScope_ConfigureTriggerOutput(self, vi, trigger_event, trigger_output):  # noqa: N802
-        if self._defaults['ConfigureTriggerOutput']['return'] != 0:
-            return self._defaults['ConfigureTriggerOutput']['return']
-        return self._defaults['ConfigureTriggerOutput']['return']
 
     def niScope_ConfigureTriggerSoftware(self, vi, holdoff, delay):  # noqa: N802
         if self._defaults['ConfigureTriggerSoftware']['return'] != 0:
@@ -757,14 +722,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ConfigureHorizontalTiming.return_value = 0
         mock_library.niScope_ConfigureRefLevels.side_effect = MockFunctionCallError("niScope_ConfigureRefLevels")
         mock_library.niScope_ConfigureRefLevels.return_value = 0
-        mock_library.niScope_ConfigureTVTriggerLineNumber.side_effect = MockFunctionCallError("niScope_ConfigureTVTriggerLineNumber")
-        mock_library.niScope_ConfigureTVTriggerLineNumber.return_value = 0
-        mock_library.niScope_ConfigureTVTriggerSource.side_effect = MockFunctionCallError("niScope_ConfigureTVTriggerSource")
-        mock_library.niScope_ConfigureTVTriggerSource.return_value = 0
-        mock_library.niScope_ConfigureTrigger.side_effect = MockFunctionCallError("niScope_ConfigureTrigger")
-        mock_library.niScope_ConfigureTrigger.return_value = 0
-        mock_library.niScope_ConfigureTriggerCoupling.side_effect = MockFunctionCallError("niScope_ConfigureTriggerCoupling")
-        mock_library.niScope_ConfigureTriggerCoupling.return_value = 0
         mock_library.niScope_ConfigureTriggerDigital.side_effect = MockFunctionCallError("niScope_ConfigureTriggerDigital")
         mock_library.niScope_ConfigureTriggerDigital.return_value = 0
         mock_library.niScope_ConfigureTriggerEdge.side_effect = MockFunctionCallError("niScope_ConfigureTriggerEdge")
@@ -773,8 +730,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ConfigureTriggerHysteresis.return_value = 0
         mock_library.niScope_ConfigureTriggerImmediate.side_effect = MockFunctionCallError("niScope_ConfigureTriggerImmediate")
         mock_library.niScope_ConfigureTriggerImmediate.return_value = 0
-        mock_library.niScope_ConfigureTriggerOutput.side_effect = MockFunctionCallError("niScope_ConfigureTriggerOutput")
-        mock_library.niScope_ConfigureTriggerOutput.return_value = 0
         mock_library.niScope_ConfigureTriggerSoftware.side_effect = MockFunctionCallError("niScope_ConfigureTriggerSoftware")
         mock_library.niScope_ConfigureTriggerSoftware.return_value = 0
         mock_library.niScope_ConfigureTriggerVideo.side_effect = MockFunctionCallError("niScope_ConfigureTriggerVideo")

@@ -46,6 +46,11 @@ functions_codegen_method = {
     'ConfigureChannel':                { 'codegen_method': 'no',       },
     'ConfigureClock':                  { 'codegen_method': 'no',       },  # use export_signal
     'ConfigureEdgeTriggerSource':      { 'codegen_method': 'no',       },
+    'ConfigureTVTriggerLineNumber':     { 'codegen_method': 'no',       },
+    'ConfigureTVTriggerSource':         { 'codegen_method': 'no',       },
+    'ConfigureTrigger':                 { 'codegen_method': 'no',       },
+    'ConfigureTriggerCoupling':         { 'codegen_method': 'no',       },
+    'ConfigureTriggerOutput':           { 'codegen_method': 'no',       },  # use export_signal
 
 }
 

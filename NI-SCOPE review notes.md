@@ -70,11 +70,6 @@ Everything listed here needs to be implemented.
 
 ##Remove
 
-* configure_tv_trigger_line_number
-* configure_tv_trigger_source (obsolete)
-* configure_trigger (use configure_trigger_...)
-* configure_trigger_coupling
-* configure_trigger_output use export signal
 * fetch_waveform
 * fetch_waveform_measurement
 * get_channel_name
