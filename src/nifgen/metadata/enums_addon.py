@@ -101,16 +101,4 @@ enums_additional_enums = {
             },
         ],
     },
-    'Trigger': {
-        'values': [
-            {
-                'name': 'START_TRIGGER',
-                'value': 1004,
-            },
-            {
-                'name': 'SCRIPT_TRIGGER',
-                'value': 103,
-            },
-        ],
-    },
 }
