@@ -36,7 +36,7 @@ def test_vi_boolean_attribute(session):
     assert session.interchange_check is False
 
 
-def test_get_vi_string_attribute(session):
+def test_vi_string_attribute(session):
     assert session.serial_number == 'FFFFFFFF'
     try:
         session.serial_number = 'FFFFFFFA'
