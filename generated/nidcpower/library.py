@@ -33,6 +33,7 @@ class Library(object):
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
+        self.niDCPower_GetAttributeViInt64_cfunc = None
         self.niDCPower_GetAttributeViReal64_cfunc = None
         self.niDCPower_GetAttributeViString_cfunc = None
         self.niDCPower_GetChannelName_cfunc = None
@@ -56,6 +57,7 @@ class Library(object):
         self.niDCPower_SendSoftwareEdgeTrigger_cfunc = None
         self.niDCPower_SetAttributeViBoolean_cfunc = None
         self.niDCPower_SetAttributeViInt32_cfunc = None
+        self.niDCPower_SetAttributeViInt64_cfunc = None
         self.niDCPower_SetAttributeViReal64_cfunc = None
         self.niDCPower_SetAttributeViString_cfunc = None
         self.niDCPower_SetSequence_cfunc = None
@@ -192,6 +194,14 @@ class Library(object):
                 self.niDCPower_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niDCPower_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetAttributeViInt64_cfunc is None:
+                self.niDCPower_GetAttributeViInt64_cfunc = self._library.niDCPower_GetAttributeViInt64
+                self.niDCPower_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
+                self.niDCPower_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
     def niDCPower_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
@@ -376,6 +386,14 @@ class Library(object):
                 self.niDCPower_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niDCPower_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niDCPower_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_SetAttributeViInt64_cfunc is None:
+                self.niDCPower_SetAttributeViInt64_cfunc = self._library.niDCPower_SetAttributeViInt64
+                self.niDCPower_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
+                self.niDCPower_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
     def niDCPower_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
