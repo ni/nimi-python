@@ -67,18 +67,3 @@ Everything listed here needs to be implemented.
     * 'FetchComplex'
     * 'FetchComplexBinary16'
     * 'Read'
-
-##Remove
-
-* fetch_waveform
-* fetch_waveform_measurement
-* get_channel_name
-* get_error_message
-* get_stream_endpoint_handle
-* is_invalid_wfm_element
-* read_waveform
-* read_waveform_measurement
-* sample_rate
-* send_sw_trigger
-* error_handler
-

@@ -51,7 +51,17 @@ functions_codegen_method = {
     'ConfigureTrigger':                 { 'codegen_method': 'no',       },
     'ConfigureTriggerCoupling':         { 'codegen_method': 'no',       },
     'ConfigureTriggerOutput':           { 'codegen_method': 'no',       },  # use export_signal
-
+    'FetchWaveform':                    { 'codegen_method': 'no',       },
+    'FetchWaveformMeasurement':         { 'codegen_method': 'no',       },
+    'GetChannelName':                   { 'codegen_method': 'no',       },
+    'GetErrorMessage':                  { 'codegen_method': 'no',       },
+    'GetStreamEndpointHandle':          { 'codegen_method': 'no',       },
+    'IsInvalidWfmElement':              { 'codegen_method': 'no',       },
+    'ReadWaveform':                     { 'codegen_method': 'no',       },
+    'ReadWaveformMeasurement':          { 'codegen_method': 'no',       },
+    'SampleRate':                       { 'codegen_method': 'no',       },
+    'SendSWTrigger':                    { 'codegen_method': 'no',       },
+    'errorHandler':                     { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
