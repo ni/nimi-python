@@ -1,4 +1,4 @@
-NI-SCOPE review notes for addons
+NI-SCOPE review notes for addons. Everything listed here needs to be implemented.
 
 Buffer sizes
     * configure_equalization_filter_coefficients
