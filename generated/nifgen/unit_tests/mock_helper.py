@@ -16,8 +16,6 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['AbortGeneration'] = {}
         self._defaults['AbortGeneration']['return'] = 0
-        self._defaults['AdjustSampleClockRelativeDelay'] = {}
-        self._defaults['AdjustSampleClockRelativeDelay']['return'] = 0
         self._defaults['AllocateNamedWaveform'] = {}
         self._defaults['AllocateNamedWaveform']['return'] = 0
         self._defaults['AllocateWaveform'] = {}
@@ -222,11 +220,6 @@ class SideEffectsHelper(object):
         if self._defaults['AbortGeneration']['return'] != 0:
             return self._defaults['AbortGeneration']['return']
         return self._defaults['AbortGeneration']['return']
-
-    def niFgen_AdjustSampleClockRelativeDelay(self, vi, adjustment_time):  # noqa: N802
-        if self._defaults['AdjustSampleClockRelativeDelay']['return'] != 0:
-            return self._defaults['AdjustSampleClockRelativeDelay']['return']
-        return self._defaults['AdjustSampleClockRelativeDelay']['return']
 
     def niFgen_AllocateNamedWaveform(self, vi, channel_name, waveform_name, waveform_size):  # noqa: N802
         if self._defaults['AllocateNamedWaveform']['return'] != 0:
@@ -763,8 +756,6 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFgen_AbortGeneration.side_effect = MockFunctionCallError("niFgen_AbortGeneration")
         mock_library.niFgen_AbortGeneration.return_value = 0
-        mock_library.niFgen_AdjustSampleClockRelativeDelay.side_effect = MockFunctionCallError("niFgen_AdjustSampleClockRelativeDelay")
-        mock_library.niFgen_AdjustSampleClockRelativeDelay.return_value = 0
         mock_library.niFgen_AllocateNamedWaveform.side_effect = MockFunctionCallError("niFgen_AllocateNamedWaveform")
         mock_library.niFgen_AllocateNamedWaveform.return_value = 0
         mock_library.niFgen_AllocateWaveform.side_effect = MockFunctionCallError("niFgen_AllocateWaveform")
