@@ -36,16 +36,12 @@ def test_vi_boolean_attribute(session):
     assert session.interchange_check is False
 
 
-'''
-# TODO(texasaggie97) enable when there is a writable string attribute
-def test_vi_string_attribute(session):
-    session.error_elaboration = 'Test'
-    assert 'Test' == session.error_elaboration
-'''
-
-
 def test_get_vi_string_attribute(session):
     assert session.serial_number == 'FFFFFFFF'
+    try:
+        session.serial_number = 'FFFFFFFA'
+    except nidmm.Error as e:
+        assert e.code == -1074135027  # Attribute is read-only
 
 
 def test_vi_int32_attribute(session):
