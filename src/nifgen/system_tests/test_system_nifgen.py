@@ -173,29 +173,22 @@ def test_query_arb_seq_capabilities(session):
     assert maximum_loop_count == 16777215
 
 
-def test_arb_seq(session):
-    waveform_data = [-32767, -25485, -18204, -10922, -3641, 3641, 10922, 18204, 25485, 32767]
-    waveform_data_2 = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
-    session._abort_generation()
-    session.arb_sample_rate = 20000000
-    session.arb_gain = 1
-    session.output_mode = nifgen.OutputMode.SEQ
-    session.clear_arb_memory()
-    session.create_waveform_i16(waveform_data)
-    session.create_waveform_i16(waveform_data_2)
-    session.clear_arb_sequence(-1)
-    session.configure_arb_sequence(session.create_advanced_arb_sequence([0, 1], [1, 1], sample_counts_array=[], marker_location_array=[-1, -1])[1], 1, 0)  # May have to change sample_counts_array when issue#594 fixed
-    session.commit()
-    actual_sample_rate = session.arb_sample_rate
-    in_range = abs(actual_sample_rate - 20000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(20000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
-    session.arb_sample_rate = 10000000
-    session.create_arb_sequence(2, [0, 1], [1, 1])
-    actual_sample_rate = session.arb_sample_rate
-    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
-    arb_gain = session.arb_gain
-    assert arb_gain == 1
+def test_create_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
+    assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
+
+
+def test_create_advanced_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert ([-1], 0) == session.create_advanced_arb_sequence(waveform_handles_array, [10])
+    assert ([-1], 1) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256])
+    assert ([0], 2) == session.create_advanced_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
+    assert ([0], 3) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256], marker_location_array=[0])
 
 
 def test_arb_script(session):

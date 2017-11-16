@@ -77,12 +77,14 @@ class SideEffectsHelper(object):
         self._defaults['Initiate']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
-        self._defaults['MultipleArrayTypes']['passedInArray'] = None
-        self._defaults['MultipleArrayTypes']['aFixedArray'] = None
+        self._defaults['MultipleArrayTypes']['outputArray'] = None
+        self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] = None
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
         self._defaults['ParametersAreMultipleTypes'] = {}
         self._defaults['ParametersAreMultipleTypes']['return'] = 0
+        self._defaults['PoorlyNamedSimpleFunction'] = {}
+        self._defaults['PoorlyNamedSimpleFunction']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
@@ -121,8 +123,6 @@ class SideEffectsHelper(object):
         self._defaults['SetCustomType']['return'] = 0
         self._defaults['SetCustomTypeArray'] = {}
         self._defaults['SetCustomTypeArray']['return'] = 0
-        self._defaults['SimpleFunction'] = {}
-        self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
         self._defaults['Use64BitNumber'] = {}
@@ -333,25 +333,25 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
-    def niFake_MultipleArrayTypes(self, passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array):  # noqa: N802
+    def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
             return self._defaults['MultipleArrayTypes']['return']
-        if self._defaults['MultipleArrayTypes']['passedInArray'] is None:
-            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='passedInArray')
-        a = self._defaults['MultipleArrayTypes']['passedInArray']
+        if self._defaults['MultipleArrayTypes']['outputArray'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArray')
+        a = self._defaults['MultipleArrayTypes']['outputArray']
         import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
-        for i in range(min(len(passed_in_array), len(a))):
-            passed_in_array[i] = a[i]
-        if self._defaults['MultipleArrayTypes']['aFixedArray'] is None:
-            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='aFixedArray')
-        a = self._defaults['MultipleArrayTypes']['aFixedArray']
+        for i in range(min(len(output_array), len(a))):
+            output_array[i] = a[i]
+        if self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArrayOfFixedLength')
+        a = self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength']
         import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
-        for i in range(min(len(a_fixed_array), len(a))):
-            a_fixed_array[i] = a[i]
+        for i in range(min(len(output_array_of_fixed_length), len(a))):
+            output_array_of_fixed_length[i] = a[i]
         return self._defaults['MultipleArrayTypes']['return']
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
@@ -363,6 +363,11 @@ class SideEffectsHelper(object):
         if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
             return self._defaults['ParametersAreMultipleTypes']['return']
         return self._defaults['ParametersAreMultipleTypes']['return']
+
+    def niFake_PoorlyNamedSimpleFunction(self, vi):  # noqa: N802
+        if self._defaults['PoorlyNamedSimpleFunction']['return'] != 0:
+            return self._defaults['PoorlyNamedSimpleFunction']['return']
+        return self._defaults['PoorlyNamedSimpleFunction']['return']
 
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
@@ -483,11 +488,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetCustomTypeArray']['return']
         return self._defaults['SetCustomTypeArray']['return']
 
-    def niFake_SimpleFunction(self, vi):  # noqa: N802
-        if self._defaults['SimpleFunction']['return'] != 0:
-            return self._defaults['SimpleFunction']['return']
-        return self._defaults['SimpleFunction']['return']
-
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['TwoInputFunction']['return'] != 0:
             return self._defaults['TwoInputFunction']['return']
@@ -569,6 +569,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_OneInputFunction.return_value = 0
         mock_library.niFake_ParametersAreMultipleTypes.side_effect = MockFunctionCallError("niFake_ParametersAreMultipleTypes")
         mock_library.niFake_ParametersAreMultipleTypes.return_value = 0
+        mock_library.niFake_PoorlyNamedSimpleFunction.side_effect = MockFunctionCallError("niFake_PoorlyNamedSimpleFunction")
+        mock_library.niFake_PoorlyNamedSimpleFunction.return_value = 0
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
@@ -593,8 +595,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SetCustomTypeArray.side_effect = MockFunctionCallError("niFake_SetCustomTypeArray")
         mock_library.niFake_SetCustomTypeArray.return_value = 0
-        mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
-        mock_library.niFake_SimpleFunction.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = 0
         mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")

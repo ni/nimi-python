@@ -43,6 +43,7 @@ class Library(object):
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_ParametersAreMultipleTypes_cfunc = None
+        self.niFake_PoorlyNamedSimpleFunction_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
@@ -55,7 +56,6 @@ class Library(object):
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SetCustomType_cfunc = None
         self.niFake_SetCustomTypeArray_cfunc = None
-        self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
         self.niFake_close_cfunc = None
@@ -229,13 +229,13 @@ class Library(object):
                 self.niFake_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Initiate_cfunc(vi)
 
-    def niFake_MultipleArrayTypes(self, passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array):  # noqa: N802
+    def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         with self._func_lock:
             if self.niFake_MultipleArrayTypes_cfunc is None:
                 self.niFake_MultipleArrayTypes_cfunc = self._library.niFake_MultipleArrayTypes
-                self.niFake_MultipleArrayTypes_cfunc.argtypes = [ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_MultipleArrayTypes_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFake_MultipleArrayTypes_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_MultipleArrayTypes_cfunc(passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array)
+        return self.niFake_MultipleArrayTypes_cfunc(vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers)
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         with self._func_lock:
@@ -252,6 +252,14 @@ class Library(object):
                 self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ParametersAreMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
+
+    def niFake_PoorlyNamedSimpleFunction(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_PoorlyNamedSimpleFunction_cfunc is None:
+                self.niFake_PoorlyNamedSimpleFunction_cfunc = self._library.niFake_PoorlyNamedSimpleFunction
+                self.niFake_PoorlyNamedSimpleFunction_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niFake_PoorlyNamedSimpleFunction_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_PoorlyNamedSimpleFunction_cfunc(vi)
 
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
@@ -348,14 +356,6 @@ class Library(object):
                 self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct)]  # noqa: F405
                 self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
-
-    def niFake_SimpleFunction(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_SimpleFunction_cfunc is None:
-                self.niFake_SimpleFunction_cfunc = self._library.niFake_SimpleFunction
-                self.niFake_SimpleFunction_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niFake_SimpleFunction_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_SimpleFunction_cfunc(vi)
 
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:

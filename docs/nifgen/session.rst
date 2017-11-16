@@ -444,7 +444,7 @@ nifgen.Session
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`create_advanced_arb_sequence`             | waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
-   | :py:func:`create_arb_sequence`                      | sequence_length, waveform_handles_array, loop_counts_array                                      |
+   | :py:func:`create_arb_sequence`                      | waveform_handles_array, loop_counts_array                                                       |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`create_freq_list`                         | waveform, frequency_array, duration_array                                                       |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+

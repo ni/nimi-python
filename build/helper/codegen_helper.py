@@ -136,9 +136,9 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         1. Input session handle:                                        visatype.ViSession(self._vi)
         2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-        4. Input buffer (not string):                                   (visatype.ViInt32 * len(list))(*list)
+        4. Input buffer (not string):                                   None if list is None else (visatype.ViInt32 * len(list))(*list)
         5. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
-        6. Input is size of input buffer:                               visatype.ViInt32(len(list))
+        6. Input is size of input buffer:                               visatype.ViInt32(0 if list is None else len(list))
         7. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
         8. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
         9. Input scalar:                                                visatype.ViInt32(parameter_name)
@@ -166,14 +166,14 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
         elif parameter['is_buffer'] is True and custom_type is None:
-            definition = '({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         elif parameter['is_buffer'] is True and custom_type is not None:
             definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
                 if corresponding_buffer_parameter['direction'] == 'in':
-                    definition = '{0}.{1}(len({2}))  # case 6'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                    definition = '{0}.{1}(0 if {2} is None else len({2}))  # case 6'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
