@@ -29,14 +29,14 @@ functions_codegen_method = {
     'SampleMode':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':    { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':          { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchArrayMeasurement':           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary16':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary32':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary8':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchComplex':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'Read':                            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'Fetch':                           { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchArrayMeasurement':           { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary16':                   { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary32':                   { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary8':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchComplex':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'Read':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
 }
 
 # Attach the given parameter to the given enum from enums.py
