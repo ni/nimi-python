@@ -15,7 +15,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
-    'mechanism': 'any',
+    'mechanism': 'fixed, passed-in, len',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
@@ -25,7 +25,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
-    'mechanism': 'any',
+    'mechanism': 'fixed, passed-in',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
