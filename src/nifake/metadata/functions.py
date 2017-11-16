@@ -1918,6 +1918,15 @@ functions = {
                 },
             },
             {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
                 'direction': 'out',
                 'enum': None,
                 'name': 'arrayOut',
@@ -1945,12 +1954,21 @@ functions = {
                 },
             },
             {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
                 'direction': 'out',
                 'enum': None,
                 'name': 'arrayOut',
                 'type': 'custom_struct[]',
                 'documentation': {
-                    'description': 'Array os custom typeusing puthon-code size mechanism',
+                    'description': 'Array of custom type using puthon-code size mechanism',
                 },
             },
         ],
