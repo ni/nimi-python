@@ -8,8 +8,10 @@ functions_codegen_method = {
     'InitiateAcquisition':             { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
+    'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
+    'IsDeviceReady':                   { 'codegen_method': 'no',       },  # Used by SFP to address a very slow to come up digitizer.
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
@@ -37,6 +39,11 @@ functions_codegen_method = {
     'FetchComplex':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'Read':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'ActualRecordLength':              { 'codegen_method': 'no',       },
+    'AdjustSampleClockRelativeDelay':  { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
+    'ConfigureAcquisition':            { 'codegen_method': 'no',       },
+    'ConfigureAcquisitionRecord':      { 'codegen_method': 'no',       },
+
 }
 
 # Attach the given parameter to the given enum from enums.py

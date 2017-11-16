@@ -70,13 +70,6 @@ Everything listed here needs to be implemented.
 
 ##Remove
 
-* check_attribute_vi_boolean and rest
-* is_device_ready
-* actual_record_length
-* adjust_sample_clock_relative_delay
-* adjust_sample_clock_relative_delay ALSO REMOVE FROM NI-FGEN
-* configure_acquisition
-* configure_acquisition_record
 * configure_channel
 * configure_clock - use export signal and reference clock attribute source
 * configure_edge_trigger_source (obsolete)
