@@ -890,10 +890,40 @@ class TestSession(object):
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         self.side_effects_helper['GetCustomTypeArray']['cs'] = cs_ctype
         with nifake.Session('dev1') as session:
-            cs = session.get_custom_type_array(len(cs_ctype))
-            assert len(cs) == len(cs_ctype)
-            for i in range(len(cs_ctype)):
-                assert cs[i].struct_int == cs_ctype[i].struct_int
-                assert cs[i].struct_double == cs_ctype[i].struct_double
+            cs_test = session.get_custom_type_array(len(cs_ctype))
+            assert len(cs_test) == len(cs_ctype)
+            for actual, expected in zip(cs_test, cs):
+                assert actual.struct_int == expected.struct_int
+                assert actual.struct_double == expected.struct_double
 
+    # python-code size mechanism
+
+    def test_get_array_using_python_code_double(self):
+        import nifake.visatype
+        self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
+        self.patched_library.niFake_GetArrayForPythonCodeDouble.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeDouble
+        array_out = [42.0, 43.0, 44.0]
+        array_out_ctype = (nifake.visatype.ViReal64 * len(array_out))(*array_out)
+        self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(array_out)
+        self.side_effects_helper['GetArrayForPythonCodeDouble']['arrayOut'] = array_out_ctype
+        with nifake.Session('dev1') as session:
+            array_out_test = session.get_array_for_python_code_double()
+            assert len(array_out_test) == len(array_out)
+            for actual, expected in zip(array_out_test, array_out):
+                assert actual == expected
+
+    def test_get_array_using_python_code_custom_type(self):
+        import nifake.visatype
+        self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
+        self.patched_library.niFake_GetArrayForPythonCodeCustomType.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeCustomType
+        cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
+        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(cs)
+        self.side_effects_helper['GetArrayForPythonCodeCustomType']['arrayOut'] = cs_ctype
+        with nifake.Session('dev1') as session:
+            cs_test = session.get_array_for_python_code_custom_type()
+            assert len(cs_test) == len(cs)
+            for actual, expected in zip(cs_test, cs):
+                assert actual.struct_int == expected.struct_int
+                assert actual.struct_double == expected.struct_double
 

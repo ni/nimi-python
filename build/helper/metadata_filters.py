@@ -15,7 +15,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
-    'mechanism': 'any',
+    'mechanism': 'fixed, passed-in, len',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
@@ -25,7 +25,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
-    'mechanism': 'any',
+    'mechanism': 'fixed, passed-in',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
@@ -95,7 +95,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
-    'mechanism': 'fixed, passed-in, len',  # any but ivi-dance
+    'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
@@ -142,11 +142,11 @@ def filter_parameters(function, parameter_usage_options):
     parameters_to_use = []
 
     # Filter based on options
-    size_parameter = ''
-    # If we are being called looking for the ivi-dance param or the len param, we do not care about the size param so we do
+    size_parameter = None
+    # If we are being called looking for the ivi-dance, len or code param, we do not care about the size param so we do
     #  not call back into ourselves, to avoid infinite recursion
-    if not parameter_usage_options == ParameterUsageOptions.IVI_DANCE_PARAMETER and not parameter_usage_options == ParameterUsageOptions.LEN_PARAMETER:
-        # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
+    if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
+        # Find the size parameter - we are assuming there can only be one
         size_parameter = find_size_parameter(filter_ivi_dance_parameter(function), function['parameters'])
         if size_parameter is None:
             size_parameter = find_size_parameter(filter_len_parameter(function), function['parameters'])
