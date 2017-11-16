@@ -215,7 +215,6 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
-            buffer_size (int): Number of bytes in attributeValue. You can IVI-dance with this.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -234,9 +233,6 @@ class _SessionBase(object):
         '''_get_error
 
         Returns the error information associated with the session.
-
-        Args:
-            buffer_size (int): Number of bytes in description buffer.
 
         Returns:
             error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
@@ -481,7 +477,6 @@ class Session(_SessionBase):
         This function takes an array parameter.
 
         Args:
-            number_of_elements (int): Number of elements in the array.
             an_array (list of float): Contains an array of float numbers
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
@@ -603,9 +598,6 @@ class Session(_SessionBase):
         '''get_an_ivi_dance_string
 
         Returns a string using the IVI dance.
-
-        Args:
-            buffer_size (int): Number of bytes in aString You can IVI-dance with this.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         buffer_size_ctype = visatype.ViInt32()  # case 7
@@ -623,9 +615,6 @@ class Session(_SessionBase):
 
         This function returns an array for use in python-code size mechanism.
 
-        Args:
-            number_of_elements (int): Number of elements in the array.
-
         Returns:
             array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
         '''
@@ -640,9 +629,6 @@ class Session(_SessionBase):
         '''get_array_for_python_code_double
 
         This function returns an array for use in python-code size mechanism.
-
-        Args:
-            number_of_elements (int): Number of elements in the array.
 
         Returns:
             array_out (list of float): Array of double using puthon-code size mechanism
@@ -672,9 +658,6 @@ class Session(_SessionBase):
         '''get_array_using_ivi_dance
 
         This function returns an array of float whose size is determined with the IVI dance.
-
-        Args:
-            array_size (int): Specifies the size of the buffer for copyint arrayOut onto.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         array_size_ctype = visatype.ViInt32()  # case 7
@@ -803,9 +786,8 @@ class Session(_SessionBase):
 
         Args:
             output_array_size (int): Size of the array that will be returned.
-            input_array_sizes (int): Size of inputArrayOfFloats and inputArrayOfIntegers
-            input_array_of_floats (list of float): Array of floats
             input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
+            input_array_of_floats (list of float): Array of floats
 
         Returns:
             output_array (list of float): Array that will be returned.
@@ -860,7 +842,6 @@ class Session(_SessionBase):
                 +---+---------------+
             a_float (float): The measured value.
             a_float_enum (enums.FloatEnum): A float enum.
-            string_size (int): Number of bytes allocated for aString
             a_string (string): An IVI dance string.
         '''
         if type(an_int_enum) is not enums.Turtle:
@@ -957,7 +938,6 @@ class Session(_SessionBase):
 
         Args:
             array_size (int): Number of measurements to acquire.
-            string_size (int): Number of bytes allocated for aString
 
         Returns:
             a_boolean (bool): Contains a boolean.
@@ -1019,7 +999,6 @@ class Session(_SessionBase):
         This function takes an array of custom types.
 
         Args:
-            number_of_elements (int): Number of elements in the array.
             cs (list of CustomStruct): Set using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1

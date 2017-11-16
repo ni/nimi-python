@@ -1587,6 +1587,7 @@ class _SessionBase(object):
             session['0,1'].fetch_multiple(count, timeout=1.0)
 
         Args:
+            count (int): Specifies the number of measurements to fetch.
             timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -1595,7 +1596,6 @@ class _SessionBase(object):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
-            count (int): Specifies the number of measurements to fetch.
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
@@ -1863,18 +1863,6 @@ class _SessionBase(object):
                    control to a manual input control. If the attribute in this ring
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
-            buffer_size (int): Passes the number of bytes in the buffer and specifies the number of
-                bytes in the ViChar array you specify for **value**. If the current
-                value of **value**, including the terminating NUL byte, is larger than
-                the size you indicate in this parameter, the function copies (buffer
-                size - 1) bytes into the buffer, places an ASCII NUL byte at the end of
-                the buffer, and returns the buffer size you must pass to get the entire
-                value. For example, if the value is 123456 and the buffer size is 4, the
-                function places 123 into the buffer and returns 7.
-                To obtain the required buffer size, you can pass 0 for this attribute
-                and VI_NULL for **value**. If you want the function to fill in the
-                buffer regardless of the number of bytes in the value, pass a negative
-                number for this attribute.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1907,15 +1895,6 @@ class _SessionBase(object):
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
-            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
-                **channelName**. If the **channelName**, including the terminating NUL
-                byte, contains more bytes than you indicate in this attribute, the
-                function copies (buffer size - 1) bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the buffer size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                the buffer size is 4, the function places 123 into the buffer and
-                returns 7.
-                If you pass 0, you can pass VI_NULL for **channelName**.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -1946,18 +1925,6 @@ class _SessionBase(object):
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
           ClearError.
-
-        Args:
-            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
-                **description**.
-                If the error description, including the terminating NUL byte, contains
-                more bytes than you indicate in this attribute, the function copies
-                (buffer size - 1) bytes into the buffer, places an ASCII NUL byte at the
-                end of the buffer, and returns the buffer size you must pass to get the
-                entire value. For example, if the value is 123456 and the buffer size is
-                4, the function places 123 into the buffer and returns 7.
-                If you pass 0 for this attribute, you can pass VI_NULL for
-                **description**.
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
@@ -2498,18 +2465,16 @@ class _SessionBase(object):
             session['0,1'].set_sequence(source_delays, values=None)
 
         Args:
+            source_delays (list of float): Specifies the source delay that follows the configuration of each value
+                in the sequence.
+                **Valid Values**:
+                The valid values are between 0 and 167 seconds.
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
-            source_delays (list of float): Specifies the source delay that follows the configuration of each value
-                in the sequence.
-                **Valid Values**:
-                The valid values are between 0 and 167 seconds.
-            size (int): The number of elements in the Values and the Source Delays arrays. The
-                Values and Source Delays arrays should have the same size.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2900,7 +2865,6 @@ class Session(_SessionBase):
 
         Args:
             sequence_name (string): Specifies the name of the sequence to create.
-            attribute_id_count (int): Specifies the number of attributes in the attributeIDs array.
             attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
                 in an advanced sequence for each NI-DCPower device that supports
@@ -3137,7 +3101,6 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+------------------------------------------------+
                 | NIDCPOWER_VAL_PULSE_TRIGGER (1053)                     | Exports the Pulse trigger.                     |
                 +--------------------------------------------------------+------------------------------------------------+
-            signal_identifier (string): Reserved for future use. Pass in an empty string for this parameter.
             output_terminal (string): Specifies where to export the selected signal.
                 **Relative Terminals**:
 
@@ -3160,6 +3123,7 @@ class Session(_SessionBase):
                 +-------------+----------------------+
                 | "PXI_Trig7" | PXI trigger line 7   |
                 +-------------+----------------------+
+            signal_identifier (string): Reserved for future use. Pass in an empty string for this parameter.
         '''
         if type(signal) is not enums.ExportSignal:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
