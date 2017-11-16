@@ -50,8 +50,6 @@ functions_codegen_method = {
     'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetAttributeViString':            { 'codegen_method': 'no',       },  # Not used in Python APIs
-    'SetAttributeViString':            { 'codegen_method': 'no',       },  # Not used in Python APIs	
 }
 
 # Attach the given parameter to the given enum from enums.py
