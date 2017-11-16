@@ -535,6 +535,61 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    def _get_attribute_vi_string(self, attribute_id):
+        '''_get_attribute_vi_string
+
+        Queries the value of a ViString attribute. You can use this function to
+        get the values of instrument-specific attributes and inherent IVI
+        attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid.
+           You must provide a ViChar array to serve as a buffer for the value.
+           You pass the number of bytes in the buffer as the Array Size
+           parameter.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
+                **Attribute_Value** parameter.
+
+                If the current value of the attribute, including the terminating NULL
+                byte, contains more bytes that you indicate in this parameter, the
+                function copies **buffer_size**—1 bytes into the buffer, places an
+                ASCII NUL byte at the end of the buffer, and returns the buffer size you
+                must pass to get the entire value. For example, if the value is "123456"
+                and the **buffer_size** is 4, the function places "123" into the buffer
+                and returns 7.
+
+                If you pass a negative number, the function copies the value to the
+                buffer regardless of the number of bytes in the value. If you pass 0,
+                you can pass VI_NULL for the **Attribute_Value** buffer parameter.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        buffer_size_ctype = visatype.ViInt32()  # case 7
+        attribute_value_ctype = None  # case 12
+        error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode(self._encoding)
+
     def _get_error(self):
         '''_get_error
 
@@ -720,6 +775,55 @@ class _SessionBase(object):
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
         attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 9
         error_code = self._library.niDMM_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
+
+        This function sets the value of a ViString attribute.
+
+        This is a low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid
+           or is different than the value you specify.
+
+        This instrument driver contains high-level functions that set most of
+        the instrument attributes. It is best to use the high-level driver
+        functions as much as possible. They handle order dependencies and
+        multithread locking for you. In addition, they perform status checking
+        only after setting all of the attributes.
+
+        In contrast, when you set multiple attributes using the SetAttribute
+        functions, the functions check the instrument status after each call.
+        Also, when state caching is enabled, the high-level functions that
+        configure multiple attributes perform instrument I/O only for the
+        attributes whose value you change. Thus, you can safely call the
+        high-level functions without the penalty of redundant instrument I/O.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (string): Pass the value that you want to set the attribute to.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
+        error_code = self._library.niDMM_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
