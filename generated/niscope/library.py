@@ -21,26 +21,13 @@ class Library(object):
         self.niScope_AcquisitionStatus_cfunc = None
         self.niScope_ActualMeasWfmSize_cfunc = None
         self.niScope_ActualNumWfms_cfunc = None
-        self.niScope_ActualRecordLength_cfunc = None
         self.niScope_AddWaveformProcessing_cfunc = None
-        self.niScope_AdjustSampleClockRelativeDelay_cfunc = None
         self.niScope_AutoSetup_cfunc = None
         self.niScope_CalSelfCalibrate_cfunc = None
-        self.niScope_CheckAttributeViBoolean_cfunc = None
-        self.niScope_CheckAttributeViInt32_cfunc = None
-        self.niScope_CheckAttributeViInt64_cfunc = None
-        self.niScope_CheckAttributeViReal64_cfunc = None
-        self.niScope_CheckAttributeViSession_cfunc = None
-        self.niScope_CheckAttributeViString_cfunc = None
         self.niScope_ClearWaveformMeasurementStats_cfunc = None
         self.niScope_ClearWaveformProcessing_cfunc = None
         self.niScope_Commit_cfunc = None
-        self.niScope_ConfigureAcquisition_cfunc = None
-        self.niScope_ConfigureAcquisitionRecord_cfunc = None
         self.niScope_ConfigureChanCharacteristics_cfunc = None
-        self.niScope_ConfigureChannel_cfunc = None
-        self.niScope_ConfigureClock_cfunc = None
-        self.niScope_ConfigureEdgeTriggerSource_cfunc = None
         self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = None
         self.niScope_ConfigureHorizontalTiming_cfunc = None
         self.niScope_ConfigureRefLevels_cfunc = None
@@ -76,7 +63,6 @@ class Library(object):
         self.niScope_GetStreamEndpointHandle_cfunc = None
         self.niScope_InitWithOptions_cfunc = None
         self.niScope_InitiateAcquisition_cfunc = None
-        self.niScope_IsDeviceReady_cfunc = None
         self.niScope_IsInvalidWfmElement_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
         self.niScope_ProbeCompensationSignalStop_cfunc = None
@@ -130,14 +116,6 @@ class Library(object):
                 self.niScope_ActualNumWfms_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualNumWfms_cfunc(vi, channel_list, num_wfms)
 
-    def niScope_ActualRecordLength(self, vi, record_length):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ActualRecordLength_cfunc is None:
-                self.niScope_ActualRecordLength_cfunc = self._library.niScope_ActualRecordLength
-                self.niScope_ActualRecordLength_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niScope_ActualRecordLength_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ActualRecordLength_cfunc(vi, record_length)
-
     def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
         with self._func_lock:
             if self.niScope_AddWaveformProcessing_cfunc is None:
@@ -145,14 +123,6 @@ class Library(object):
                 self.niScope_AddWaveformProcessing_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_AddWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AddWaveformProcessing_cfunc(vi, channel_list, meas_function)
-
-    def niScope_AdjustSampleClockRelativeDelay(self, vi, delay):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_AdjustSampleClockRelativeDelay_cfunc is None:
-                self.niScope_AdjustSampleClockRelativeDelay_cfunc = self._library.niScope_AdjustSampleClockRelativeDelay
-                self.niScope_AdjustSampleClockRelativeDelay_cfunc.argtypes = [ViSession, ViReal64]  # noqa: F405
-                self.niScope_AdjustSampleClockRelativeDelay_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_AdjustSampleClockRelativeDelay_cfunc(vi, delay)
 
     def niScope_AutoSetup(self, vi):  # noqa: N802
         with self._func_lock:
@@ -169,54 +139,6 @@ class Library(object):
                 self.niScope_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalSelfCalibrate_cfunc(vi, channel_list, option)
-
-    def niScope_CheckAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViBoolean_cfunc is None:
-                self.niScope_CheckAttributeViBoolean_cfunc = self._library.niScope_CheckAttributeViBoolean
-                self.niScope_CheckAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
-                self.niScope_CheckAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_CheckAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViInt32_cfunc is None:
-                self.niScope_CheckAttributeViInt32_cfunc = self._library.niScope_CheckAttributeViInt32
-                self.niScope_CheckAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
-                self.niScope_CheckAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_CheckAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViInt64_cfunc is None:
-                self.niScope_CheckAttributeViInt64_cfunc = self._library.niScope_CheckAttributeViInt64
-                self.niScope_CheckAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
-                self.niScope_CheckAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_CheckAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViReal64_cfunc is None:
-                self.niScope_CheckAttributeViReal64_cfunc = self._library.niScope_CheckAttributeViReal64
-                self.niScope_CheckAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
-                self.niScope_CheckAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_CheckAttributeViSession(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViSession_cfunc is None:
-                self.niScope_CheckAttributeViSession_cfunc = self._library.niScope_CheckAttributeViSession
-                self.niScope_CheckAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViSession]  # noqa: F405
-                self.niScope_CheckAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViSession_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_CheckAttributeViString(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_CheckAttributeViString_cfunc is None:
-                self.niScope_CheckAttributeViString_cfunc = self._library.niScope_CheckAttributeViString
-                self.niScope_CheckAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niScope_CheckAttributeViString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_CheckAttributeViString_cfunc(vi, channel_list, attribute_id, value)
 
     def niScope_ClearWaveformMeasurementStats(self, vi, channel_list, clearable_measurement_function):  # noqa: N802
         with self._func_lock:
@@ -242,22 +164,6 @@ class Library(object):
                 self.niScope_Commit_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Commit_cfunc(vi)
 
-    def niScope_ConfigureAcquisition(self, vi, acquisition_type):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureAcquisition_cfunc is None:
-                self.niScope_ConfigureAcquisition_cfunc = self._library.niScope_ConfigureAcquisition
-                self.niScope_ConfigureAcquisition_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niScope_ConfigureAcquisition_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureAcquisition_cfunc(vi, acquisition_type)
-
-    def niScope_ConfigureAcquisitionRecord(self, vi, time_per_record, min_num_points, acquisition_start_time):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureAcquisitionRecord_cfunc is None:
-                self.niScope_ConfigureAcquisitionRecord_cfunc = self._library.niScope_ConfigureAcquisitionRecord
-                self.niScope_ConfigureAcquisitionRecord_cfunc.argtypes = [ViSession, ViReal64, ViInt32, ViReal64]  # noqa: F405
-                self.niScope_ConfigureAcquisitionRecord_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureAcquisitionRecord_cfunc(vi, time_per_record, min_num_points, acquisition_start_time)
-
     def niScope_ConfigureChanCharacteristics(self, vi, channel_list, input_impedance, max_input_frequency):  # noqa: N802
         with self._func_lock:
             if self.niScope_ConfigureChanCharacteristics_cfunc is None:
@@ -265,30 +171,6 @@ class Library(object):
                 self.niScope_ConfigureChanCharacteristics_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureChanCharacteristics_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureChanCharacteristics_cfunc(vi, channel_list, input_impedance, max_input_frequency)
-
-    def niScope_ConfigureChannel(self, vi, channel, range, offset, coupling, probe_attenuation, enabled):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureChannel_cfunc is None:
-                self.niScope_ConfigureChannel_cfunc = self._library.niScope_ConfigureChannel
-                self.niScope_ConfigureChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViReal64, ViBoolean]  # noqa: F405
-                self.niScope_ConfigureChannel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureChannel_cfunc(vi, channel, range, offset, coupling, probe_attenuation, enabled)
-
-    def niScope_ConfigureClock(self, vi, input_clock_source, output_clock_source, clock_sync_pulse_source, master_enabled):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureClock_cfunc is None:
-                self.niScope_ConfigureClock_cfunc = self._library.niScope_ConfigureClock
-                self.niScope_ConfigureClock_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean]  # noqa: F405
-                self.niScope_ConfigureClock_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureClock_cfunc(vi, input_clock_source, output_clock_source, clock_sync_pulse_source, master_enabled)
-
-    def niScope_ConfigureEdgeTriggerSource(self, vi, source, level, slope):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ConfigureEdgeTriggerSource_cfunc is None:
-                self.niScope_ConfigureEdgeTriggerSource_cfunc = self._library.niScope_ConfigureEdgeTriggerSource
-                self.niScope_ConfigureEdgeTriggerSource_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
-                self.niScope_ConfigureEdgeTriggerSource_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ConfigureEdgeTriggerSource_cfunc(vi, source, level, slope)
 
     def niScope_ConfigureEqualizationFilterCoefficients(self, vi, channel_list, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:
@@ -569,14 +451,6 @@ class Library(object):
                 self.niScope_InitiateAcquisition_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_InitiateAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitiateAcquisition_cfunc(vi)
-
-    def niScope_IsDeviceReady(self, resource_name, channel_list, device_ready):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_IsDeviceReady_cfunc is None:
-                self.niScope_IsDeviceReady_cfunc = self._library.niScope_IsDeviceReady
-                self.niScope_IsDeviceReady_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViBoolean)]  # noqa: F405
-                self.niScope_IsDeviceReady_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_IsDeviceReady_cfunc(resource_name, channel_list, device_ready)
 
     def niScope_IsInvalidWfmElement(self, vi, element_value, is_invalid):  # noqa: N802
         with self._func_lock:
