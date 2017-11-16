@@ -264,7 +264,5 @@ def test_export_signal(session):
 
 
 def test_write_waveform_from_filei64(session):
-    session.arb_sample_rate = 40000000
-    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'systemtest_dependencies', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
-    sample_rate = session.arb_sample_rate
-    assert sample_rate == 40000000'''
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
+'''

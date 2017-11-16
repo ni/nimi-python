@@ -30,5 +30,4 @@ with nifgen.Session(args.name) as session:
         try:
             input("Press Enter to abort generation...")
         except SyntaxError:
-            pass
-
+pass
