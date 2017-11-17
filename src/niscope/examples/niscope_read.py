@@ -17,14 +17,15 @@ with niscope.Session(args.name, False, False, 'Simulate=1, DriverSetup=Model:516
     session.configure_vertical(args.voltage, 0.0, 0, 1.0, True)
     session.configure_horizontal_timing(50000000, args.length, 50.0, 1, True)
     wfm, wfm_infos = session[args.channels].read(1, args.length)
-    print(len(wfm))
-    for wfm_info in wfm_infos:
-        print('Absolute X0: {0}'.format(wfm_info.absolute_initial_x))
-        print('Relative X0: {0}'.format(wfm_info.relative_initial_x))
-        print('dt: {0}'.format(wfm_info.x_increment))
-        print('actual samples: {0}'.format(wfm_info.actual_samples))
-        print('offset: {0}'.format(wfm_info.offset))
-        print('gain: {0}'.format(wfm_info.gain))
-        print('reserved1: {0}'.format(wfm_info.reserved1))
-        print('reserved2: {0}'.format(wfm_info.reserved2))
+    print('Number of samples acquired: {0}'.format(len(wfm)))
+    row_format = '    {:<20}: {:0.6f<20}'
+    for i in range(len(wfm_infos)):
+        wfm_info = wfm_infos[i]
+        print('Waveform {0} information:')
+        print(row_format.format('Absolute X0', wfm_info.absolute_initial_x))
+        print(row_format.format('Relative X0', wfm_info.relative_initial_x))
+        print(row_format.format('dt', wfm_info.x_increment))
+        print(row_format.format('actual samples', wfm_info.actual_samples))
+        print(row_format.format('offset', wfm_info.offset))
+        print(row_format.format('gain', wfm_info.gain))
 
