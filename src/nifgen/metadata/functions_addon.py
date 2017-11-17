@@ -56,6 +56,7 @@ functions_codegen_method = {
     'revision_query':                       { 'codegen_method': 'no',       },
     '.+Complex.+':                          { 'codegen_method': 'no',       },
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
+    'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
 }
 
 # Attach the given parameter to the given enum from enums.py
