@@ -197,7 +197,7 @@ def filter_ivi_dance_parameter(function):
     params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
     if len(params) == 0:
         return None
-    assert len(params) == 1, 'Found more than one ivi-dance parameter: {0}'.format(pp.pformat(params))
+    assert len(params) == 1, 'Found several ivi-dance parameters, expected only one. Found: {0}'.format([x['name'] for x in params])
     return params[0]
 
 
