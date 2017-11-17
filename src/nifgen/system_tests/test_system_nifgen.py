@@ -117,11 +117,9 @@ def test_get_ext_cal_recommended_interval(session):
     assert recommended_interval == 24  # recommended external cal interval is 24 months
 
 
-''' TODO(Jaleel) Enable after Issue#558 fixed
 def test_get_hardware_state():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
         assert session.get_hardware_state() == nifgen.HardwareState.IDLE
-'''
 
 
 def test_get_self_cal_last_temp(session):
@@ -161,6 +159,7 @@ def test_allocate_waveform(session):
 def test_clear_waveform_memory(session):
     session.clear_arb_memory()
     session.clear_user_standard_waveform()
+    session.configure_arb_sequence(0, 1.0, 0)
     session.clear_arb_sequence(-1)
     session.clear_arb_waveform(-1)
 
@@ -307,4 +306,11 @@ def test_fir_filter_coefficients():
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
     session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.ACTIVE_HIGH)
+
+
+# TODO(bhaswath): Enable after Issue 597 is fixed
+'''
+def test_send_software_edge_trigger(session):
+    session.send_software_edge_trigger(nifgen.Trigger.SCRIPT_TRIGGER, '')
+'''
 
