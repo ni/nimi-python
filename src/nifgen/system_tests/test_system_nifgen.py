@@ -85,9 +85,9 @@ def test_clear_freq_list(session):
 
 
 def test_configure_arb_waveform(session):
-    waveform_data = [0.000000, 0.049068, 0.098017, 0.146730, 0.195090, 0.242980, 0.290285, 0.336890, 0.382683, 0.427555]
+    waveform_data = [0, 8, 7, 3, 9, 1, 5, 6, 2, 4]
     session.output_mode = nifgen.OutputMode.ARB
-    session.configure_arb_waveform(session.create_waveform_f64(waveform_data), 1.0, 0.0)
+    session.configure_arb_waveform(session.create_waveform_i16(waveform_data), 1.0, 0.0)
 
 
 def test_disable(session):
