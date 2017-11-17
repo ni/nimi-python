@@ -16,7 +16,9 @@ functions_codegen_method = {
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
-    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalSelfCalibrate':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -55,7 +57,8 @@ functions_enums = {
     'WaitForEvent':                                 { 'parameters': { 1: { 'enum': 'Event',                       }, }, },
     'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
     'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
-    # @TODO add all enums
+    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'ExportSignal',                }, }, },
+	# @TODO add all enums
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.

@@ -24,11 +24,10 @@ def create_waveform_data(number_of_samples):
 
 waveform_data = create_waveform_data(args.samples)
 with nifgen.Session(args.name) as session:
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_ARB  # TODO(marcoskirsch): name to change per #553
+    session.output_mode = nifgen.OutputMode.ARB
     session.configure_arb_waveform(session.create_waveform_f64(waveform_data), args.gain, args.offset)
     with session.initiate():
         try:
             input("Press Enter to abort generation...")
         except SyntaxError:
             pass
-

@@ -38,15 +38,19 @@ functions_buffer_info = {
     'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'ReturnMultipleTypes':                   { 'parameters': { 8: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, },
                                                               10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
-    'MultipleArrayTypes':                    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'passedInArraySize'}, },
-                                                               2: { 'size': {'mechanism':'fixed', 'value':3}, },
-                                                               4: { 'size': {'mechanism':'len', 'value':'lenArraySize'}, }, }, },
+    'MultipleArrayTypes':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'outputArraySize'}, },
+                                                               3: { 'size': {'mechanism':'fixed', 'value':3}, },
+                                                               5: { 'size': {'mechanism':'len', 'value':'inputArraySizes'}, }, }, },
     'ParametersAreMultipleTypes':            { 'parameters': { 8: { 'size': {'mechanism':'len', 'value':'stringSize'}, }, }, },
     'BoolArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
     'EnumArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
     'GetArrayUsingIVIDance':                 { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
     'SetCustomTypeArray':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
     'GetCustomTypeArray':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
+    'GetArrayForPythonCodeDouble':           { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, },
+                                                               2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
+    'GetArrayForPythonCodeCustomType':       { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, },
+                                                               2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -59,9 +63,14 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitWithOptions':                 { 'parameters': { 1: { 'default_value': False, },
-                                                         2: { 'default_value': False, },
-                                                         3: { 'default_value': '', }, }, },
-    'EnumInputFunctionWithDefaults':   { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
+    'InitWithOptions':                  { 'parameters': { 1: { 'default_value': False, },
+                                                          2: { 'default_value': False, },
+                                                          3: { 'default_value': '', }, }, },
+    'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
+    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
+# Manually provided Python names for methods, rather than deriving from original names.
+functions_custom_python_name = {
+    'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
+}

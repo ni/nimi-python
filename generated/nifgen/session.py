@@ -98,10 +98,7 @@ class _SessionBase(object):
     '''
     aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''
-    Controls the specified auxiliary power pin. Setting this property to
-    TRUE energizes the auxiliary power when the session is committed. When
-    this property is FALSE, the power pin of the connector outputs no power.
-    **Default Value**: FALSE
+    Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
     '''
     bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
     '''
@@ -115,11 +112,6 @@ class _SessionBase(object):
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
     '''
     Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
-    '''
-    channel_count = attributes.AttributeViInt32(1050203)
-    '''
-    Returns the number of channels that the specific instrument  driver supports.
-    For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     channel_delay = attributes.AttributeViReal64(1150369)
     '''
@@ -564,6 +556,11 @@ class _SessionBase(object):
     module_revision = attributes.AttributeViString(1150390)
     '''
     A string that contains the module revision  for the device that you are currently using.
+    '''
+    num_channels = attributes.AttributeViInt32(1050203)
+    '''
+    Indicates the number of channels that the specific instrument  driver supports.
+    For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     offset_dac_value = attributes.AttributeViInt32(1150224)
     '''
@@ -1201,7 +1198,6 @@ class _SessionBase(object):
             session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
-            number_of_coefficients (int): Specifies the number of coefficients. The NI 5441 requires 95.
             coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
                 FIR filter coefficients. For the NI 5441, provide a symmetric array of
                 95 coefficients to this parameter. The array must have at least as many
@@ -1211,8 +1207,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(len(coefficients_array))  # case 6
-        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
+        number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case 6
+        coefficients_array_ctype = None if coefficients_array is None else (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1364,17 +1360,6 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
                 function to NIFGEN_VAL_WFM_DC.
-            dc_offset (float): Specifies the DC offset of the standard waveform that you want the
-                signal generator to produce. The value is the offset from ground to the
-                center of the waveform you specify with the **waveform** parameter,
-                observed at the output terminal. For example, to configure a waveform
-                with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-                **dcOffset** to 5.00 V. NI-FGEN sets the FUNC_DC_OFFSET
-                attribute to this value.
-
-                **Units**: volts
-
-                **Default Value**: None
             frequency (float): | Specifies the frequency of the standard waveform that you want the
                   signal generator to produce. NI-FGEN sets the
                   FUNC_FREQUENCY attribute to this value.
@@ -1387,6 +1372,17 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
                 function to NIFGEN_VAL_WFM_DC.
+            dc_offset (float): Specifies the DC offset of the standard waveform that you want the
+                signal generator to produce. The value is the offset from ground to the
+                center of the waveform you specify with the **waveform** parameter,
+                observed at the output terminal. For example, to configure a waveform
+                with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
+                **dcOffset** to 5.00 V. NI-FGEN sets the FUNC_DC_OFFSET
+                attribute to this value.
+
+                **Units**: volts
+
+                **Default Value**: None
             start_phase (float): Specifies the horizontal offset of the standard waveform that you want
                 the signal generator to produce. Specify this parameter in degrees of
                 one waveform cycle. NI-FGEN sets the FUNC_START_PHASE
@@ -1439,20 +1435,6 @@ class _SessionBase(object):
             session['0,1'].create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                You can obtain these values from the **maximumWaveformSize**,
-                **minimumWaveformSize**, and **waveformQuantum** parameters of the
-                nifgen_QueryArbWfmCapabilities function.
-
-                | ****Default Value**:** None
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
@@ -1468,8 +1450,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1618,21 +1600,6 @@ class _SessionBase(object):
             session['0,1'].create_waveform_i16(waveform_data_array)
 
         Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                You can obtain these values from the **maximumWaveformSize**,
-                **minimumWaveformSize**, and **waveformQuantum** parameters of the
-                nifgen_QueryArbWfmCapabilities function.
-
-                |
-                | ****Default Value**:** None
             waveform_data_array (list of int): Specify the array of data that you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in the Waveform Size parameter.
@@ -1646,8 +1613,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1681,8 +1648,6 @@ class _SessionBase(object):
             session['0,1'].define_user_standard_waveform(waveform_data_array)
 
         Args:
-            waveform_size (int): Specifies the size of the waveform in samples.
-                **Default Value**: 16384
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
@@ -1694,8 +1659,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 6
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1938,22 +1903,6 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
-            array_size (int): Specifies the number of bytes in the ViChar array you specify for the
-                **attributeValue** parameter.
-
-                If the current value of the attribute, including the terminating NUL
-                byte, contains more bytes than you indicate in this parameter, the
-                function copies **arraySize** – 1 bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the array size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                **arraySize** is 4, the function places 123 into the buffer and returns
-                7.
-
-                If you pass a negative number, the function copies the value to the
-                buffer regardless of the number of bytes in the value.
-
-                If you pass 0, you can pass VI_NULL for the **attributeValue** buffer
-                parameter.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1983,15 +1932,6 @@ class _SessionBase(object):
         pass to the _get_error or nifgen_ClearError functions. This
         situation occurs when a call to the nifgen_init or
         nifgen_InitWithOptions function fails.
-
-        Args:
-            error_description_buffer_size (int): Specifies the size of the **errorDescription** array.
-
-                You can determine the array size needed to store the entire error
-                description by setting this parameter to 0. The function then ignores
-                the **errorDescription** buffer, which may be set to VI_NULL, and gives
-                as its return value the required buffer size. You can then call the
-                function a second time using the correct buffer size.
 
         Returns:
             error_code (int): The error code for the session or execution thread.
@@ -2048,9 +1988,6 @@ class _SessionBase(object):
         nifgen.Session instance, and calling this method on the result.:
 
             session['0,1'].get_fir_filter_coefficients()
-
-        Args:
-            array_size (int): Specifies the size of the coefficient array
 
         Returns:
             number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
@@ -2605,9 +2542,6 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
             data (list of int): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
@@ -2615,8 +2549,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2654,17 +2588,14 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2693,17 +2624,14 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
             data (list of int): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2769,17 +2697,14 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
-        size_ctype = visatype.ViInt32(len(data))  # case 6
-        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2860,32 +2785,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niFgen_AbortGeneration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def adjust_sample_clock_relative_delay(self, adjustment_time):
-        '''adjust_sample_clock_relative_delay
-
-        Delays (or phase shifts) the Sample Clock, which delays the generated
-        signal. Delaying the Sample Clock can be useful when synchronizing the
-        output of multiple modules or when intentionally phase shifting the
-        output relative to a fixed reference, such as the PLL Reference Clock.
-
-        Adjustment time can be positive or negative, but it must be less than or
-        equal to the Sample Clock period. The delay takes effect immediately
-        after this function is called. To delay an external Sample Clock, use
-        the SAMPLE_CLOCK_ABSOLUTE_DELAY attribute.
-
-        Args:
-            adjustment_time (float): Specifies the amount of time to adjust the Sample Clock delay.
-
-                **Units**: Seconds
-
-                **Default Value**: 0
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        adjustment_time_ctype = visatype.ViReal64(adjustment_time)  # case 9
-        error_code = self._library.niFgen_AdjustSampleClockRelativeDelay(vi_ctype, adjustment_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3289,14 +3188,6 @@ class Session(_SessionBase):
         function.
 
         Args:
-            sequence_length (int): Specifies the number of waveforms in the new arbitrary sequence that you
-                want to create. The value you pass must be between the minimum and
-                maximum sequence lengths that the signal generator allows. You can
-                obtain the minimum and maximum sequence lengths from
-                **minimumSequenceLength** and **maximumSequenceLength** in the
-                nifgen_QueryArbSeqCapabilities function.
-
-                **Default Value**: None
             waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value that you specify in **sequenceLength**. Each
@@ -3363,18 +3254,18 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 6
-        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
-        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
-        sample_counts_array_ctype = (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
-        marker_location_array_ctype = (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case 4
+        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
+        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sample_counts_array_ctype = None if sample_counts_array is None else (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
+        marker_location_array_ctype = None if marker_location_array is None else (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case 4
         coerced_markers_array_ctype = (visatype.ViInt32 * 1)()  # case 11
         sequence_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range(1)], int(sequence_handle_ctype.value)
 
-    def create_arb_sequence(self, sequence_length, waveform_handles_array, loop_counts_array):
+    def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
         '''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -3394,14 +3285,6 @@ class Session(_SessionBase):
         function.
 
         Args:
-            sequence_length (int): Specifies the number of waveforms in the new arbitrary sequence that you
-                want to create. The value you pass must be between the minimum and
-                maximum sequence lengths that the signal generator allows. You can
-                obtain the minimum and maximum sequence lengths from
-                **minimumSequenceLength** and **maximumSequenceLength** in the
-                nifgen_QueryArbSeqCapabilities function.
-
-                **Default Value**: None
             waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value that you specify in **sequenceLength**. Each
@@ -3436,9 +3319,9 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 9
-        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
-        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
+        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
         sequence_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3490,17 +3373,6 @@ class Session(_SessionBase):
                 +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
                 | NIFGEN_VAL_WFM_USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
                 +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-            frequency_list_length (int): Specifies the number of steps in the frequency list you want to create.
-                The value must be between the minimum and maximum frequency list lengths
-                that the signal generator allows. You can obtain the minimum and maximum
-                frequency list lengths from the **minimumFrequencyListLength** and
-                **maximumFrequencyListLength** parameters in the
-                nifgen_QueryFreqListCapabilities function.
-
-                **frequency** and **duration** must each be at least as long as this
-                frequency list length.
-
-                **Default Value**: None
             frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
                 **frequencyListLength**. Each **frequencyArray** element has a
@@ -3529,9 +3401,9 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         waveform_ctype = visatype.ViInt32(waveform.value)  # case 10
-        frequency_list_length_ctype = visatype.ViInt32(len(frequency_array))  # case 6
-        frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
-        duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
+        frequency_list_length_ctype = visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case 6
+        frequency_array_ctype = None if frequency_array is None else (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
+        duration_array_ctype = None if duration_array is None else (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
         frequency_list_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, ctypes.pointer(frequency_list_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

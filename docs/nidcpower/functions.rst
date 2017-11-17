@@ -388,15 +388,6 @@ nidcpower.Session methods
 
 
     :type sequence_name: string
-    :param attribute_id_count:
-
-
-        Specifies the number of attributes in the attributeIDs array.
-
-        
-
-
-    :type attribute_id_count: int
     :param attribute_ids:
 
 
@@ -648,16 +639,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+------------------------------------------------+
 
 
-    :type signal: int
-    :param signal_identifier:
-
-
-        Reserved for future use. Pass in an empty string for this parameter.
-
-        
-
-
-    :type signal_identifier: string
+    :type signal: :py:data:`nidcpower.ExportSignal`
     :param output_terminal:
 
 
@@ -686,6 +668,15 @@ nidcpower.Session methods
 
 
     :type output_terminal: string
+    :param signal_identifier:
+
+
+        Reserved for future use. Pass in an empty string for this parameter.
+
+        
+
+
+    :type signal_identifier: string
 
 .. function:: fetch_multiple(count, timeout=1.0)
 
@@ -720,6 +711,15 @@ nidcpower.Session methods
             session['0,1'].fetch_multiple(count, timeout=1.0)
 
 
+    :param count:
+
+
+        Specifies the number of measurements to fetch.
+
+        
+
+
+    :type count: int
     :param timeout:
 
 
@@ -735,15 +735,6 @@ nidcpower.Session methods
 
 
     :type timeout: float
-    :param count:
-
-
-        Specifies the number of measurements to fetch.
-
-        
-
-
-    :type count: int
 
     :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
 
@@ -816,23 +807,103 @@ nidcpower.Session methods
 
 
     :type index: int
-    :param buffer_size:
+
+.. function:: get_ext_cal_last_date_and_time()
+
+    Returns the date and time of the last successful calibration. The time
+    returned is 24-hour (military) local time; for example, if the device
+    was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
+    for **minutes**.
+
+    
 
 
-        Specifies the number of bytes in the ViChar array you specify for
-        **channelName**. If the **channelName**, including the terminating NUL
-        byte, contains more bytes than you indicate in this attribute, the
-        function copies (buffer size - 1) bytes into the buffer, places an ASCII
-        NUL byte at the end of the buffer, and returns the buffer size you must
-        pass to get the entire value. For example, if the value is 123456 and
-        the buffer size is 4, the function places 123 into the buffer and
-        returns 7.
-        If you pass 0, you can pass VI\_NULL for **channelName**.
 
-        
+    :rtype: tuple (year, month, day, hour, minute)
+
+        WHERE
+
+        year (int): 
 
 
-    :type buffer_size: int
+            Returns the **year** the device was last calibrated.
+
+            
+
+
+        month (int): 
+
+
+            Returns the **month** in which the device was last calibrated.
+
+            
+
+
+        day (int): 
+
+
+            Returns the **day** on which the device was last calibrated.
+
+            
+
+
+        hour (int): 
+
+
+            Returns the **hour** (in 24-hour time) in which the device was last
+            calibrated.
+
+            
+
+
+        minute (int): 
+
+
+            Returns the **minute** in which the device was last calibrated.
+
+            
+
+
+
+.. function:: get_ext_cal_last_temp()
+
+    Returns the onboard **temperature** of the device, in degrees Celsius,
+    during the last successful external calibration.
+
+    
+
+
+
+    :rtype: float
+    :return:
+
+
+            Returns the onboard **temperature** of the device, in degrees Celsius,
+            during the last successful external calibration.
+
+            
+
+
+
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended maximum interval, in **months**, between
+    external calibrations.
+
+    
+
+
+
+    :rtype: int
+    :return:
+
+
+            Specifies the recommended maximum interval, in **months**, between
+            external calibrations.
+
+            
+
+
 
 .. function:: get_self_cal_last_date_and_time()
 
@@ -1321,6 +1392,18 @@ nidcpower.Session methods
             session['0,1'].set_sequence(source_delays, values=None)
 
 
+    :param source_delays:
+
+
+        Specifies the source delay that follows the configuration of each value
+        in the sequence.
+        **Valid Values**:
+        The valid values are between 0 and 167 seconds.
+
+        
+
+
+    :type source_delays: list of float
     :param values:
 
 
@@ -1335,28 +1418,6 @@ nidcpower.Session methods
 
 
     :type values: list of float
-    :param source_delays:
-
-
-        Specifies the source delay that follows the configuration of each value
-        in the sequence.
-        **Valid Values**:
-        The valid values are between 0 and 167 seconds.
-
-        
-
-
-    :type source_delays: list of float
-    :param size:
-
-
-        The number of elements in the Values and the Source Delays arrays. The
-        Values and Source Delays arrays should have the same size.
-
-        
-
-
-    :type size: int
 
 .. function:: wait_for_event(event_id, timeout=10.0)
 

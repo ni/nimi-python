@@ -140,10 +140,10 @@ class TestSession(object):
     # Methods
 
     def test_simple_function(self):
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
         with nifake.Session('dev1') as session:
             session.simple_function()
-            self.patched_library.niFake_SimpleFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niFake_PoorlyNamedSimpleFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_get_a_number(self):
         test_number = 16
@@ -329,17 +329,51 @@ class TestSession(object):
 
     def test_multiple_array_types(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
-        passed_in_array = [0.0, 1.0]
-        passed_in_array_size = len(passed_in_array)
-        fixed_size_array = [2.0, 3.0, 4.0]
-        len_array = [5.0, 6.0, 7.0, 8.0]
-        self.side_effects_helper['MultipleArrayTypes']['passedInArray'] = passed_in_array
-        self.side_effects_helper['MultipleArrayTypes']['aFixedArray'] = fixed_size_array
-        self.side_effects_helper['MultipleArrayTypes']['return'] = 0
+        expected_output_array = [0.2, 0.4]
+        expected_output_array_of_fixed_length = [-6, -7, -8]
+        output_array_size = len(expected_output_array)
+        input_array_of_integers = [1, 2]
+        input_array_of_floats = [-1.0, -2.0]
+        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
+        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
         with nifake.Session('dev1') as session:
-            passed_in_array_result, fixed_size_array_result = session.multiple_array_types(passed_in_array_size, len_array)
-            assert passed_in_array == passed_in_array_result
-            assert fixed_size_array == fixed_size_array_result
+            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
+            assert output_array == output_array
+            assert expected_output_array_of_fixed_length == output_array_of_fixed_length
+            self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
+                matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                matchers.ViInt32Matcher(output_array_size),
+                matchers.ViReal64BufferMatcher(output_array_size),
+                matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
+                matchers.ViInt32Matcher(len(input_array_of_integers)),
+                matchers.ViReal64BufferMatcher(input_array_of_floats),
+                matchers.ViInt16BufferMatcher(input_array_of_integers)
+            )
+
+    # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
+    '''
+    def test_multiple_array_types_none_input(self):
+        self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
+        expected_output_array = [0.2, 0.4]
+        expected_output_array_of_fixed_length = [-6, -7, -8]
+        output_array_size = len(expected_output_array)
+        input_array_of_integers = [1, 2]
+        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
+        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
+        with nifake.Session('dev1') as session:
+            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers)
+            assert output_array == output_array
+            assert expected_output_array_of_fixed_length == output_array_of_fixed_length
+            self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
+                matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                matchers.ViInt32Matcher(output_array_size),
+                matchers.ViReal64BufferMatcher(output_array_size),
+                matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
+                matchers.ViInt32Matcher(len(input_array_of_integers)),
+                None,
+                matchers.ViInt16BufferMatcher(input_array_of_integers)
+            )
+    '''
 
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
@@ -389,8 +423,8 @@ class TestSession(object):
     def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
@@ -447,8 +481,8 @@ class TestSession(object):
     def test_method_with_warning(self):
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
@@ -789,8 +823,8 @@ class TestSession(object):
 
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
@@ -808,8 +842,8 @@ class TestSession(object):
     def test_get_error_description_error_message_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
@@ -856,10 +890,40 @@ class TestSession(object):
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         self.side_effects_helper['GetCustomTypeArray']['cs'] = cs_ctype
         with nifake.Session('dev1') as session:
-            cs = session.get_custom_type_array(len(cs_ctype))
-            assert len(cs) == len(cs_ctype)
-            for i in range(len(cs_ctype)):
-                assert cs[i].struct_int == cs_ctype[i].struct_int
-                assert cs[i].struct_double == cs_ctype[i].struct_double
+            cs_test = session.get_custom_type_array(len(cs_ctype))
+            assert len(cs_test) == len(cs_ctype)
+            for actual, expected in zip(cs_test, cs):
+                assert actual.struct_int == expected.struct_int
+                assert actual.struct_double == expected.struct_double
 
+    # python-code size mechanism
+
+    def test_get_array_using_python_code_double(self):
+        import nifake.visatype
+        self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
+        self.patched_library.niFake_GetArrayForPythonCodeDouble.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeDouble
+        array_out = [42.0, 43.0, 44.0]
+        array_out_ctype = (nifake.visatype.ViReal64 * len(array_out))(*array_out)
+        self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(array_out)
+        self.side_effects_helper['GetArrayForPythonCodeDouble']['arrayOut'] = array_out_ctype
+        with nifake.Session('dev1') as session:
+            array_out_test = session.get_array_for_python_code_double()
+            assert len(array_out_test) == len(array_out)
+            for actual, expected in zip(array_out_test, array_out):
+                assert actual == expected
+
+    def test_get_array_using_python_code_custom_type(self):
+        import nifake.visatype
+        self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
+        self.patched_library.niFake_GetArrayForPythonCodeCustomType.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeCustomType
+        cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
+        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(cs)
+        self.side_effects_helper['GetArrayForPythonCodeCustomType']['arrayOut'] = cs_ctype
+        with nifake.Session('dev1') as session:
+            cs_test = session.get_array_for_python_code_custom_type()
+            assert len(cs_test) == len(cs)
+            for actual, expected in zip(cs_test, cs):
+                assert actual.struct_int == expected.struct_int
+                assert actual.struct_double == expected.struct_double
 

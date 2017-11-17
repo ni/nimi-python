@@ -702,17 +702,6 @@ class _SessionBase(object):
                 change this ring control to a manual input box. - If the attribute in
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
-            array_size (int): Pass the number of bytes in the ViChar array you specify for the
-                Attribute Value parameter. If the current value of the attribute,
-                including the terminating NUL byte, contains more bytes that you
-                indicate in this parameter, the function copies Array Size-1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the array size you must pass to get the entire value. For
-                example, if the value is "123456" and the Array Size is 4, the function
-                places "123" into the buffer and returns 7. If you pass a negative
-                number, the function copies the value to the buffer regardless of the
-                number of bytes in the value. If you pass 0, you can pass VI_NULL for
-                the Attribute Value buffer parameter. Default Value:512
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -744,19 +733,6 @@ class _SessionBase(object):
         invalid session, the function does nothing and returns an error.
         Normally, the error information describes the first error that occurred
         since the user last called _get_error or ClearError.
-
-        Args:
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
-                Description parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies buffer_size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Description buffer parameter. Default Value: None
 
         Returns:
             code (int): Returns the error code for the session or execution thread. If you pass
@@ -1215,12 +1191,6 @@ class Session(_SessionBase):
         the scan list.
 
         Args:
-            scan_delay (float): The minimum length of time you want the switch device to wait after it
-                creates a path until it asserts a trigger on the scan advanced output
-                line. The driver uses this value to set the Scan Delay attribute. The
-                scan delay is in addition to the settling time.The driver uses this
-                value to set the SCAN_DELAY attribute. Express this
-                value in seconds. Default value: 0.0 s
             trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
                 driver uses this value to set the TRIGGER_INPUT
                 attribute. The switch device waits for the trigger you specify when it
@@ -1235,6 +1205,12 @@ class Session(_SessionBase):
                 a trigger on the line you specify with this parameter. Refer to the
                 SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
                 a list of valid values.
+            scan_delay (float): The minimum length of time you want the switch device to wait after it
+                creates a path until it asserts a trigger on the scan advanced output
+                line. The driver uses this value to set the Scan Delay attribute. The
+                scan delay is in addition to the settling time.The driver uses this
+                value to set the SCAN_DELAY attribute. Express this
+                value in seconds. Default value: 0.0 s
         '''
         if type(trigger_input) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
@@ -1409,17 +1385,6 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Channel
-                Name Buffer parameter. If the channel name string, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Coercion Record buffer parameter. Default Value: None
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -1457,17 +1422,6 @@ class Session(_SessionBase):
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Path
-                List parameter. If the current value of the attribute, including the
-                terminating NULL byte, contains more bytes that you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NULL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "R1->C1" and the Buffer Size is 4, the function places "R1-"
-                into the buffer and returns 7. If you pass 0, you can pass VI_NULL for
-                the Path parameter. This enables you to find out the path size and to
-                allocate the buffer of the appropriate size before calling this function
-                again.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
@@ -1517,17 +1471,6 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
-            relay_name_buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Relay
-                Name Buffer parameter. If the relay name string, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Coercion Record buffer parameter. Default Value: None
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9

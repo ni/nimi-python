@@ -133,20 +133,6 @@ niswitch.Session methods
 
 
 
-    :param scan_delay:
-
-
-        The minimum length of time you want the switch device to wait after it
-        creates a path until it asserts a trigger on the scan advanced output
-        line. The driver uses this value to set the Scan Delay attribute. The
-        scan delay is in addition to the settling time.The driver uses this
-        value to set the :py:data:`niswitch.SCAN\_DELAY` attribute. Express this
-        value in seconds. Default value: 0.0 s
-
-        
-
-
-    :type scan_delay: float
     :param trigger_input:
 
 
@@ -177,6 +163,20 @@ niswitch.Session methods
 
 
     :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutput`
+    :param scan_delay:
+
+
+        The minimum length of time you want the switch device to wait after it
+        creates a path until it asserts a trigger on the scan advanced output
+        line. The driver uses this value to set the Scan Delay attribute. The
+        scan delay is in addition to the settling time.The driver uses this
+        value to set the :py:data:`niswitch.SCAN\_DELAY` attribute. Express this
+        value in seconds. Default value: 0.0 s
+
+        
+
+
+    :type scan_delay: float
 
 .. function:: connect(channel1, channel2)
 
@@ -375,25 +375,6 @@ niswitch.Session methods
 
 
     :type index: int
-    :param buffer_size:
-
-
-        Pass the number of bytes in the ViChar array you specify for the Channel
-        Name Buffer parameter. If the channel name string, including the
-        terminating NUL byte, contains more bytes than you indicate in this
-        parameter, the function copies Buffer Size - 1 bytes into the buffer,
-        places an ASCII NUL byte at the end of the buffer, and returns the
-        buffer size you must pass to get the entire value. For example, if the
-        value is "123456" and the Buffer Size is 4, the function places "123"
-        into the buffer and returns 7. If you pass a negative number, the
-        function copies the value to the buffer regardless of the number of
-        bytes in the value. If you pass 0, you can pass VI\_NULL for the
-        Coercion Record buffer parameter. Default Value: None
-
-        
-
-
-    :type buffer_size: int
 
 .. function:: get_path(channel1, channel2)
 
@@ -437,25 +418,6 @@ niswitch.Session methods
 
 
     :type channel2: string
-    :param buffer_size:
-
-
-        Pass the number of bytes in the ViChar array you specify for the Path
-        List parameter. If the current value of the attribute, including the
-        terminating NULL byte, contains more bytes that you indicate in this
-        parameter, the function copies Buffer Size - 1 bytes into the buffer,
-        places an ASCII NULL byte at the end of the buffer, and returns the
-        buffer size you must pass to get the entire value. For example, if the
-        value is "R1->C1" and the Buffer Size is 4, the function places "R1-"
-        into the buffer and returns 7. If you pass 0, you can pass VI\_NULL for
-        the Path parameter. This enables you to find out the path size and to
-        allocate the buffer of the appropriate size before calling this function
-        again.
-
-        
-
-
-    :type buffer_size: int
 
 .. function:: get_relay_count(relay_name)
 
@@ -512,25 +474,6 @@ niswitch.Session methods
 
 
     :type index: int
-    :param relay_name_buffer_size:
-
-
-        Pass the number of bytes in the ViChar array you specify for the Relay
-        Name Buffer parameter. If the relay name string, including the
-        terminating NUL byte, contains more bytes than you indicate in this
-        parameter, the function copies Buffer Size - 1 bytes into the buffer,
-        places an ASCII NUL byte at the end of the buffer, and returns the
-        buffer size you must pass to get the entire value. For example, if the
-        value is "123456" and the Buffer Size is 4, the function places "123"
-        into the buffer and returns 7. If you pass a negative number, the
-        function copies the value to the buffer regardless of the number of
-        bytes in the value. If you pass 0, you can pass VI\_NULL for the
-        Coercion Record buffer parameter. Default Value: None
-
-        
-
-
-    :type relay_name_buffer_size: int
 
 .. function:: get_relay_position(relay_name)
 

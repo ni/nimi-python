@@ -19,6 +19,7 @@ functions_codegen_method = {
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
     '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'GetExtCalRecommendedInterval':    { 'codegen_method': 'public',   },  # This function is useful on regular (not only calibration) sessions.
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                 { 'codegen_method': 'no',       },
     'SetCalPassword':                  { 'codegen_method': 'no',       },

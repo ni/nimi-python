@@ -194,15 +194,6 @@ class Session(object):
         required to hold the error information string as its return value. You
         can then allocate an appropriately sized string character buffer and
         call this function again.
-
-        Args:
-            error_info_buffer_size (int): The size of the buffer allocated and passed in as the errorInfo
-                parameter. The buffer should be large enough to hold the errorInfo
-                string (including a NULL terminating character). The size of the buffer
-                allocated and passed in as the errorInfo parameter. The buffer should be
-                large enough to hold the errorInfo string (including a NULL terminating
-                character). Refer to the function help to find out how to determine the
-                exact buffer size required.
         '''
         error_info_buffer_size_ctype = visatype.ViInt32()  # case 7
         error_info_ctype = None  # case 12
@@ -281,11 +272,6 @@ class Session(object):
                 DEVICE_MODEL--the model of the device (for example, NI
                 PXI-5122) SERIAL_NUMBER--the serial number of the
                 device
-            attribute_value_buffer_size (int): The size of the buffer allocated and passed in as the attributeValue
-                parameter. The buffer should be large enough to hold the attribute value
-                string (including a NULL terminating character). Refer to the
-                Description section for information on how to determine the exact buffer
-                size required.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
