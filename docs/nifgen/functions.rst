@@ -3,36 +3,6 @@ nifgen.Session methods
 
 .. py:currentmodule:: nifgen
 
-.. function:: adjust_sample_clock_relative_delay(adjustment_time)
-
-    Delays (or phase shifts) the Sample Clock, which delays the generated
-    signal. Delaying the Sample Clock can be useful when synchronizing the
-    output of multiple modules or when intentionally phase shifting the
-    output relative to a fixed reference, such as the PLL Reference Clock.
-
-    Adjustment time can be positive or negative, but it must be less than or
-    equal to the Sample Clock period. The delay takes effect immediately
-    after this function is called. To delay an external Sample Clock, use
-    the :py:data:`nifgen.SAMPLE\_CLOCK\_ABSOLUTE\_DELAY` attribute.
-
-    
-
-
-
-    :param adjustment_time:
-
-
-        Specifies the amount of time to adjust the Sample Clock delay.
-
-        **Units**: Seconds
-
-        **Default Value**: 0
-
-        
-
-
-    :type adjustment_time: float
-
 .. function:: allocate_named_waveform(waveform_name, waveform_size)
 
     Specifies the size of a named waveform up front so that it can be
