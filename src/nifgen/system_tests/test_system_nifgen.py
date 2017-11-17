@@ -1,5 +1,6 @@
 import nifgen
 import pytest
+import os
 
 
 @pytest.fixture(scope='function')
@@ -243,21 +244,18 @@ def test_write_binary_waveform(session):
     session.write_binary16_waveform(session.allocate_waveform(10), [0, 0, 0, 1, 1, 1, 2, 2])
 
 
-'''
-(TODO) Jaleel , check it after issue #538 fixed
 def test_set_waveform_next_write_position(session):
-    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)  # Enable after RelativeTo enum added to enums_addon.py
+    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
 
 def test_export_signal(session):
     expected_trigger_terminal = "PXI_Trig0"
-    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)  # Enable after issue #538 fixed
+    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
 
 
 def test_write_waveform_from_filei64(session):
-    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
-'''
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
 
 
 def test_named_waveform_operations(session):
