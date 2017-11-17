@@ -57,6 +57,7 @@ functions_codegen_method = {
     '.+Complex.+':                          { 'codegen_method': 'no',       },
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
+	'.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # Not used by python APIs
 }
 
 # Attach the given parameter to the given enum from enums.py
