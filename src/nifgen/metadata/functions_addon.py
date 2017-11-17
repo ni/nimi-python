@@ -62,17 +62,17 @@ functions_codegen_method = {
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
-    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
-    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
+    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
+    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
     'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  # TODO: issue #538
-    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
-    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
-    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  # TODO: issue #538
+    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  
+    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
+    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
+    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },  # TODO: issue #538
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },  
 }
 
 functions_issues = {
