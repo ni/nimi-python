@@ -6,7 +6,7 @@ from niscope import visatype
 # This class is an internal implementation detail
 # ctypes definition
 # Name must match exactly what the name of the structure type is named in the C API.
-class niScope_wfmInfo(ctypes.Structure):  # noqa N801
+class struct_niScope_wfmInfo(ctypes.Structure):  # noqa N801
     _pack_ = 8
     _fields_ = [
         ('absolute_initial_x', visatype.ViReal64),
