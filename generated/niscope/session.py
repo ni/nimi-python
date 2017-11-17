@@ -1886,7 +1886,6 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
-            buf_size (int): The number of bytes in the ViChar array you specify for **value**.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1946,10 +1945,6 @@ class _SessionBase(object):
         Note:
         This function is included for compliance with the IviScope Class
         Specification.
-
-        Args:
-            buffer_size (int): Pass the Error Code that is returned from any of the instrument driver
-                functions.
 
         Returns:
             error_code (int): Passes the number of bytes in the ViChar array you specify for the
