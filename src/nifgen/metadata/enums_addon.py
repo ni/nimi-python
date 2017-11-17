@@ -24,11 +24,11 @@ enums_additional_enums = {
     'TriggerWhen': {
         'values': [
             {
-                'name': 'HighLevel',
+                'name': 'NIFGEN_VAL_ACTIVE_HIGH',
                 'value': 101,
             },
             {
-                'name': 'LowLevel',
+                'name': 'NIFGEN_VAL_ACTIVE_LOW',
                 'value': 102,
             },
         ],
