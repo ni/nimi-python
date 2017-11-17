@@ -2788,32 +2788,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def adjust_sample_clock_relative_delay(self, adjustment_time):
-        '''adjust_sample_clock_relative_delay
-
-        Delays (or phase shifts) the Sample Clock, which delays the generated
-        signal. Delaying the Sample Clock can be useful when synchronizing the
-        output of multiple modules or when intentionally phase shifting the
-        output relative to a fixed reference, such as the PLL Reference Clock.
-
-        Adjustment time can be positive or negative, but it must be less than or
-        equal to the Sample Clock period. The delay takes effect immediately
-        after this function is called. To delay an external Sample Clock, use
-        the SAMPLE_CLOCK_ABSOLUTE_DELAY attribute.
-
-        Args:
-            adjustment_time (float): Specifies the amount of time to adjust the Sample Clock delay.
-
-                **Units**: Seconds
-
-                **Default Value**: 0
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        adjustment_time_ctype = visatype.ViReal64(adjustment_time)  # case 9
-        error_code = self._library.niFgen_AdjustSampleClockRelativeDelay(vi_ctype, adjustment_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def clear_arb_memory(self):
         '''clear_arb_memory
 
