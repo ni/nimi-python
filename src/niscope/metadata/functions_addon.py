@@ -4,39 +4,64 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                 { 'codegen_method': 'private',  },
-    'InitiateAcquisition':             { 'codegen_method': 'private',  },
-    'close':                           { 'codegen_method': 'private',  },
-    'Abort':                           { 'codegen_method': 'private',  },
-    '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'private',  },
-    'GetError':                        { 'codegen_method': 'private',  },
-    'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
-    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    '.+UserDefined.+':                 { 'codegen_method': 'no',       },
-    'SetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'error_query':                     { 'codegen_method': 'no',       },
-    'revision_query':                  { 'codegen_method': 'no',       },
-    'SampleMode':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
-    'GetNormalizationCoefficients':    { 'codegen_method': 'no',       },  # Has void param
-    'GetScalingCoefficients':          { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchArrayMeasurement':           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary16':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary32':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchBinary8':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchComplex':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
-    'Read':                            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'InitWithOptions':                  { 'codegen_method': 'private',  },
+    'InitiateAcquisition':              { 'codegen_method': 'private',  },
+    'close':                            { 'codegen_method': 'private',  },
+    'Abort':                            { 'codegen_method': 'private',  },
+    'CheckAttribute.+':                 { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
+    '.etAttribute.+':                   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                             { 'codegen_method': 'no',       },
+    'IsDeviceReady':                    { 'codegen_method': 'no',       },  # Used by SFP to address a very slow to come up digitizer.
+    'error_message':                    { 'codegen_method': 'private',  },
+    'GetError':                         { 'codegen_method': 'private',  },
+    'ClearError':                       { 'codegen_method': 'no',       },
+    'LockSession':                      { 'codegen_method': 'no',       },
+    'UnlockSession':                    { 'codegen_method': 'no',       },
+    '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    '.+UserDefined.+':                  { 'codegen_method': 'no',       },
+    'SetAttributeViSession':            { 'codegen_method': 'no',       },
+    'GetAttributeViSession':            { 'codegen_method': 'no',       },
+    'GetNextInterchangeWarning':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':            { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':         { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':            { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                      { 'codegen_method': 'no',       },
+    'revision_query':                   { 'codegen_method': 'no',       },
+    'SampleMode':                       { 'codegen_method': 'no',       },  # Equivalent attribute is available
+    'GetNormalizationCoefficients':     { 'codegen_method': 'no',       },  # Has void param
+    'GetScalingCoefficients':           { 'codegen_method': 'no',       },  # Has void param
+    'Fetch':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'Read':                             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
+    'ActualRecordLength':               { 'codegen_method': 'no',       },
+    'AdjustSampleClockRelativeDelay':   { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
+    'ConfigureAcquisition':             { 'codegen_method': 'no',       },
+    'ConfigureAcquisitionRecord':       { 'codegen_method': 'no',       },
+    'ConfigureChannel':                 { 'codegen_method': 'no',       },
+    'ConfigureClock':                   { 'codegen_method': 'no',       },  # use export_signal
+    'ConfigureEdgeTriggerSource':       { 'codegen_method': 'no',       },
+    'ConfigureTVTriggerLineNumber':     { 'codegen_method': 'no',       },
+    'ConfigureTVTriggerSource':         { 'codegen_method': 'no',       },
+    'ConfigureTrigger':                 { 'codegen_method': 'no',       },
+    'ConfigureTriggerCoupling':         { 'codegen_method': 'no',       },
+    'ConfigureTriggerOutput':           { 'codegen_method': 'no',       },  # use export_signal
+    'FetchWaveform':                    { 'codegen_method': 'no',       },
+    'FetchWaveformMeasurement':         { 'codegen_method': 'no',       },
+    'GetChannelName':                   { 'codegen_method': 'no',       },
+    'GetErrorMessage':                  { 'codegen_method': 'no',       },
+    'GetStreamEndpointHandle':          { 'codegen_method': 'no',       },
+    'IsInvalidWfmElement':              { 'codegen_method': 'no',       },
+    'ReadWaveform':                     { 'codegen_method': 'no',       },
+    'ReadWaveformMeasurement':          { 'codegen_method': 'no',       },
+    'SampleRate':                       { 'codegen_method': 'no',       },
+    'SendSWTrigger':                    { 'codegen_method': 'no',       },
+    'errorHandler':                     { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
