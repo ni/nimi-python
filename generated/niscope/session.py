@@ -8,7 +8,7 @@ from niscope import errors
 from niscope import library_singleton
 from niscope import visatype
 
-from niscope import wfm_info  # noqa: F401
+from niscope import waveform_info  # noqa: F401
 
 
 class _Acquisition(object):
@@ -2023,6 +2023,96 @@ class _SessionBase(object):
         error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, ctypes.pointer(number_of_frequencies_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_frequencies_ctype.value)
+
+    def read(self, timeout, num_samples):
+        '''read
+
+        Initiates an acquisition, waits for it to complete, and retrieves the
+        data. The process is similar to calling _initiate_acquisition,
+        acquisition_status, and Fetch. The only difference is
+        that with read, you enable all channels specified with
+        **channelList** before the acquisition; in the other method, you enable
+        the channels with configure_vertical.
+
+        This function may return multiple waveforms depending on the number of
+        channels, the acquisition type, and the number of records you specify.
+
+        Note:
+        Some functionality is not supported in all digitizers. Refer to
+        `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].read(timeout, num_samples)
+
+        Args:
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the
+                acquisition finishes with fewer points than requested, some devices
+                return partial data if the acquisition finished, was aborted, or a
+                timeout of 0 was used. If it fails to complete within the timeout
+                period, the function returns an error.
+
+        Returns:
+            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+                waveforms. Call ActualNumwfms to determine the number of
+                waveforms.
+
+                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+                first. For example, with a channel list of 0,1, you would have the
+                following index values:
+
+                index 0 = record 0, channel 0
+
+                index *x* = record 0, channel 1
+
+                index 2\ *x* = record 1, channel 0
+
+                index 3\ *x* = record 1, channel 1
+
+                Where *x* = the record length
+            wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
+                information about each waveform:
+
+                -  **relativeInitialX**—the time (in seconds) from the trigger to the
+                   first sample in the fetched waveform
+                -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+                   sample. This timestamp is comparable between records and
+                   acquisitions; devices that do not support this parameter use 0 for
+                   this output.
+                -  **xIncrement**—the time between points in the acquired waveform in
+                   seconds
+                -  **actualSamples**—the actual number of samples fetched and placed in
+                   the waveform array
+                -  **gain**—the gain factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                -  **offset**—the offset factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                Call actual_num_wfms to determine the size of this array.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
+        wfm_ctype = (visatype.ViReal64 * (num_samples * self.actual_num_wfms()))()  # case 0.2
+        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
+        error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(wfm_ctype[i]) for i in range((num_samples * self.actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms())]
 
     def read_measurement(self, timeout, scalar_meas_function):
         '''read_measurement

@@ -110,6 +110,10 @@ class SideEffectsHelper(object):
         self._defaults['ProbeCompensationSignalStart']['return'] = 0
         self._defaults['ProbeCompensationSignalStop'] = {}
         self._defaults['ProbeCompensationSignalStop']['return'] = 0
+        self._defaults['Read'] = {}
+        self._defaults['Read']['return'] = 0
+        self._defaults['Read']['Wfm'] = None
+        self._defaults['Read']['wfmInfo'] = None
         self._defaults['ReadMeasurement'] = {}
         self._defaults['ReadMeasurement']['return'] = 0
         self._defaults['ReadMeasurement']['Result'] = None
@@ -438,6 +442,27 @@ class SideEffectsHelper(object):
             return self._defaults['ProbeCompensationSignalStop']['return']
         return self._defaults['ProbeCompensationSignalStop']['return']
 
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['Read']['return'] != 0:
+            return self._defaults['Read']['return']
+        if self._defaults['Read']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_Read", param='Wfm')
+        a = self._defaults['Read']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['Read']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_Read", param='wfmInfo')
+        a = self._defaults['Read']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['Read']['return']
+
     def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         if self._defaults['ReadMeasurement']['return'] != 0:
             return self._defaults['ReadMeasurement']['return']
@@ -595,6 +620,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_ProbeCompensationSignalStart.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStop.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStop")
         mock_library.niScope_ProbeCompensationSignalStop.return_value = 0
+        mock_library.niScope_Read.side_effect = MockFunctionCallError("niScope_Read")
+        mock_library.niScope_Read.return_value = 0
         mock_library.niScope_ReadMeasurement.side_effect = MockFunctionCallError("niScope_ReadMeasurement")
         mock_library.niScope_ReadMeasurement.return_value = 0
         mock_library.niScope_ResetDevice.side_effect = MockFunctionCallError("niScope_ResetDevice")

@@ -1617,6 +1617,121 @@ niscope.Session methods
 
 
 
+.. function:: read(timeout, num_samples)
+
+    Initiates an acquisition, waits for it to complete, and retrieves the
+    data. The process is similar to calling :py:func:`niscope._initiate_acquisition`,
+    :py:func:`niscope.acquisition_status`, and :py:func:`niscope.Fetch`. The only difference is
+    that with :py:func:`niscope.read`, you enable all channels specified with
+    **channelList** before the acquisition; in the other method, you enable
+    the channels with :py:func:`niscope.configure_vertical`.
+
+    This function may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
+
+    
+
+    .. note:: Some functionality is not supported in all digitizers. Refer to
+        `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].read(timeout, num_samples)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param num_samples:
+
+
+        The maximum number of samples to fetch for each waveform. If the
+        acquisition finishes with fewer points than requested, some devices
+        return partial data if the acquisition finished, was aborted, or a
+        timeout of 0 was used. If it fails to complete within the timeout
+        period, the function returns an error.
+
+        
+
+
+    :type num_samples: int
+
+    :rtype: tuple (wfm, wfm_info)
+
+        WHERE
+
+        wfm (list of float): 
+
+
+            Returns an array whose length is the **numSamples** times number of
+            waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+            waveforms.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with a channel list of 0,1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of structures with the following timing and scaling
+            information about each waveform:
+
+            -  **relativeInitialX**—the time (in seconds) from the trigger to the
+               first sample in the fetched waveform
+            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+               sample. This timestamp is comparable between records and
+               acquisitions; devices that do not support this parameter use 0 for
+               this output.
+            -  **xIncrement**—the time between points in the acquired waveform in
+               seconds
+            -  **actualSamples**—the actual number of samples fetched and placed in
+               the waveform array
+            -  **gain**—the gain factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            -  **offset**—the offset factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+
+            
+
+
+
 .. function:: read_measurement(timeout, scalar_meas_function)
 
     Initiates an acquisition, waits for it to complete, and performs the

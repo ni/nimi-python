@@ -5,7 +5,7 @@ import threading
 
 from niscope.visatype import *  # noqa: F403,H303
 
-from niscope import wfm_info  # noqa: F401
+from niscope import waveform_info  # noqa: F401
 
 
 class Library(object):
@@ -57,6 +57,7 @@ class Library(object):
         self.niScope_InitiateAcquisition_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
         self.niScope_ProbeCompensationSignalStop_cfunc = None
+        self.niScope_Read_cfunc = None
         self.niScope_ReadMeasurement_cfunc = None
         self.niScope_ResetDevice_cfunc = None
         self.niScope_ResetWithDefaults_cfunc = None
@@ -373,6 +374,14 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStop_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
+
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_Read_cfunc is None:
+                self.niScope_Read_cfunc = self._library.niScope_Read
+                self.niScope_Read_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
     def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:
