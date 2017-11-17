@@ -173,29 +173,22 @@ def test_query_arb_seq_capabilities(session):
     assert maximum_loop_count == 16777215
 
 
-def test_arb_seq(session):
-    waveform_data = [-32767, -25485, -18204, -10922, -3641, 3641, 10922, 18204, 25485, 32767]
-    waveform_data_2 = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
-    session._abort_generation()
-    session.arb_sample_rate = 20000000
-    session.arb_gain = 1
-    session.output_mode = nifgen.OutputMode.SEQ
-    session.clear_arb_memory()
-    session.create_waveform_i16(waveform_data)
-    session.create_waveform_i16(waveform_data_2)
-    session.clear_arb_sequence(-1)
-    session.configure_arb_sequence(session.create_advanced_arb_sequence([0, 1], [1, 1], sample_counts_array=[], marker_location_array=[-1, -1])[1], 1, 0)  # May have to change sample_counts_array when issue#594 fixed
-    session.commit()
-    actual_sample_rate = session.arb_sample_rate
-    in_range = abs(actual_sample_rate - 20000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(20000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
-    session.arb_sample_rate = 10000000
-    session.create_arb_sequence(2, [0, 1], [1, 1])
-    actual_sample_rate = session.arb_sample_rate
-    in_range = abs(actual_sample_rate - 10000000) <= max(1e-09 * max(abs(actual_sample_rate), abs(10000000)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
-    arb_gain = session.arb_gain
-    assert arb_gain == 1
+def test_create_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
+    assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
+
+
+def test_create_advanced_arb_sequence(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
+    assert ([-1], 0) == session.create_advanced_arb_sequence(waveform_handles_array, [10])
+    assert ([-1], 1) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256])
+    assert ([0], 2) == session.create_advanced_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
+    assert ([0], 3) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256], marker_location_array=[0])
 
 
 def test_arb_script(session):
@@ -247,6 +240,27 @@ def test_reset_with_default(session):
     assert session.arb_sample_rate == 250000000.0
 
 
+def test_write_binary_waveform(session):
+    session.write_binary16_waveform(session.allocate_waveform(10), [0, 0, 0, 1, 1, 1, 2, 2])
+
+
+'''
+(TODO) Jaleel , check it after issue #538 fixed
+def test_set_waveform_next_write_position(session):
+    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)  # Enable after RelativeTo enum added to enums_addon.py
+
+
+def test_export_signal(session):
+    expected_trigger_terminal = "PXI_Trig0"
+    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)  # Enable after issue #538 fixed
+    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
+
+
+def test_write_waveform_from_filei64(session):
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
+'''
+
+
 def test_named_waveform_operations(session):
     wfm_name = 'Waveform'
     wfm_size = 4096
@@ -292,5 +306,5 @@ def test_fir_filter_coefficients():
 
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HighLevel)
+    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.ACTIVE_HIGH)
 

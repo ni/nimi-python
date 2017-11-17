@@ -844,7 +844,7 @@ functions = {
 
     #### Different function cases
 
-    'SimpleFunction': {
+    'PoorlyNamedSimpleFunction': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
@@ -1571,28 +1571,37 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'passedInArraySize',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'outputArraySize',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Number of measurements to acquire.',
+                    'description': 'Size of the array that will be returned.',
                 },
             },
             {
                 'direction': 'out',
                 'enum': None,
                 'is_buffer': True,
-                'name': 'passedInArray',
+                'name': 'outputArray',
                 'type': 'ViReal64',
                 'documentation': {
-                    'description': 'An array with size passed in.',
-                    'note': 'The size must be at least arraySize.',
+                    'description': 'Array that will be returned.',
+                    'note': 'The size must be at least outputArraySize.',
                 },
             },
             {
                 'direction': 'out',
                 'enum': None,
                 'is_buffer': True,
-                'name': 'aFixedArray',
+                'name': 'outputArrayOfFixedLength',
                 'type': 'ViReal64',
                 'documentation': {
                     'description': 'An array of doubles with fixed size.',
@@ -1601,25 +1610,34 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'lenArraySize',
+                'name': 'inputArraySizes',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Size of lenArray',
+                    'description': 'Size of inputArrayOfFloats and inputArrayOfIntegers',
                 },
             },
             {
                 'direction': 'in',
                 'enum': None,
                 'is_buffer': True,
-                'name': 'lenArray',
+                'name': 'inputArrayOfFloats',
                 'type': 'ViReal64',
                 'documentation': {
-                    'description': 'Contains an array of float numbers.',
+                    'description': 'Array of floats',
                 },
             },
-        ],
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'inputArrayOfIntegers',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.',
+                },
+            },        ],
         'documentation': {
-            'description': 'Returns multiple types of arrays.',
+            'description': 'Receives and returns multiple types of arrays.',
         },
     },
 
@@ -1869,12 +1887,111 @@ functions = {
                 'name': 'cs',
                 'type': 'custom_struct[]',
                 'documentation': {
-                    'description': 'Set using custom type',
+                    'description': 'Get using custom type',
                 },
             },
         ],
         'documentation': {
             'description': 'This function returns a custom type.',
+        },
+    },
+    'GetArraySizeForPythonCode': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'sizeOut',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Size of array',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns the size of the array for use in python-code size mechanism.',
+        },
+    },
+    'GetArrayForPythonCodeDouble': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'arrayOut',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array of double using puthon-code size mechanism',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array for use in python-code size mechanism.',
+        },
+    },
+    'GetArrayForPythonCodeCustomType': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'arrayOut',
+                'type': 'custom_struct[]',
+                'documentation': {
+                    'description': 'Array of custom type using puthon-code size mechanism',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array for use in python-code size mechanism.',
         },
     },
     #TODO(marcoskirsch): More cases to add:

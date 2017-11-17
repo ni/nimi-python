@@ -18,7 +18,6 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFgen_AbortGeneration_cfunc = None
-        self.niFgen_AdjustSampleClockRelativeDelay_cfunc = None
         self.niFgen_AllocateNamedWaveform_cfunc = None
         self.niFgen_AllocateWaveform_cfunc = None
         self.niFgen_ClearArbMemory_cfunc = None
@@ -97,14 +96,6 @@ class Library(object):
                 self.niFgen_AbortGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_AbortGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AbortGeneration_cfunc(vi)
-
-    def niFgen_AdjustSampleClockRelativeDelay(self, vi, adjustment_time):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_AdjustSampleClockRelativeDelay_cfunc is None:
-                self.niFgen_AdjustSampleClockRelativeDelay_cfunc = self._library.niFgen_AdjustSampleClockRelativeDelay
-                self.niFgen_AdjustSampleClockRelativeDelay_cfunc.argtypes = [ViSession, ViReal64]  # noqa: F405
-                self.niFgen_AdjustSampleClockRelativeDelay_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_AdjustSampleClockRelativeDelay_cfunc(vi, adjustment_time)
 
     def niFgen_AllocateNamedWaveform(self, vi, channel_name, waveform_name, waveform_size):  # noqa: N802
         with self._func_lock:

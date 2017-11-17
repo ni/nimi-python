@@ -3,36 +3,6 @@ nifgen.Session methods
 
 .. py:currentmodule:: nifgen
 
-.. function:: adjust_sample_clock_relative_delay(adjustment_time)
-
-    Delays (or phase shifts) the Sample Clock, which delays the generated
-    signal. Delaying the Sample Clock can be useful when synchronizing the
-    output of multiple modules or when intentionally phase shifting the
-    output relative to a fixed reference, such as the PLL Reference Clock.
-
-    Adjustment time can be positive or negative, but it must be less than or
-    equal to the Sample Clock period. The delay takes effect immediately
-    after this function is called. To delay an external Sample Clock, use
-    the :py:data:`nifgen.SAMPLE\_CLOCK\_ABSOLUTE\_DELAY` attribute.
-
-    
-
-
-
-    :param adjustment_time:
-
-
-        Specifies the amount of time to adjust the Sample Clock delay.
-
-        **Units**: Seconds
-
-        **Default Value**: 0
-
-        
-
-
-    :type adjustment_time: float
-
 .. function:: allocate_named_waveform(waveform_name, waveform_size)
 
     Specifies the size of a named waveform up front so that it can be
@@ -469,15 +439,6 @@ nifgen.Session methods
             session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
 
-    :param number_of_coefficients:
-
-
-        Specifies the number of coefficients. The NI 5441 requires 95.
-
-        
-
-
-    :type number_of_coefficients: int
     :param coefficients_array:
 
 
@@ -939,25 +900,6 @@ nifgen.Session methods
 
 
     :type amplitude: float
-    :param dc_offset:
-
-
-        Specifies the DC offset of the standard waveform that you want the
-        signal generator to produce. The value is the offset from ground to the
-        center of the waveform you specify with the **waveform** parameter,
-        observed at the output terminal. For example, to configure a waveform
-        with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.FUNC\_DC\_OFFSET`
-        attribute to this value.
-
-        **Units**: volts
-
-        **Default Value**: None
-
-        
-
-
-    :type dc_offset: float
     :param frequency:
 
 
@@ -977,6 +919,25 @@ nifgen.Session methods
 
 
     :type frequency: float
+    :param dc_offset:
+
+
+        Specifies the DC offset of the standard waveform that you want the
+        signal generator to produce. The value is the offset from ground to the
+        center of the waveform you specify with the **waveform** parameter,
+        observed at the output terminal. For example, to configure a waveform
+        with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
+        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.FUNC\_DC\_OFFSET`
+        attribute to this value.
+
+        **Units**: volts
+
+        **Default Value**: None
+
+        
+
+
+    :type dc_offset: float
     :param start_phase:
 
 
@@ -1027,22 +988,6 @@ nifgen.Session methods
 
 
 
-    :param sequence_length:
-
-
-        Specifies the number of waveforms in the new arbitrary sequence that you
-        want to create. The value you pass must be between the minimum and
-        maximum sequence lengths that the signal generator allows. You can
-        obtain the minimum and maximum sequence lengths from
-        **minimumSequenceLength** and **maximumSequenceLength** in the
-        nifgen\_QueryArbSeqCapabilities function.
-
-        **Default Value**: None
-
-        
-
-
-    :type sequence_length: int
     :param waveform_handles_array:
 
 
@@ -1157,7 +1102,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_arb_sequence(sequence_length, waveform_handles_array, loop_counts_array)
+.. function:: create_arb_sequence(waveform_handles_array, loop_counts_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -1178,22 +1123,6 @@ nifgen.Session methods
 
 
 
-    :param sequence_length:
-
-
-        Specifies the number of waveforms in the new arbitrary sequence that you
-        want to create. The value you pass must be between the minimum and
-        maximum sequence lengths that the signal generator allows. You can
-        obtain the minimum and maximum sequence lengths from
-        **minimumSequenceLength** and **maximumSequenceLength** in the
-        nifgen\_QueryArbSeqCapabilities function.
-
-        **Default Value**: None
-
-        
-
-
-    :type sequence_length: int
     :param waveform_handles_array:
 
 
@@ -1303,25 +1232,6 @@ nifgen.Session methods
 
 
     :type waveform: :py:data:`nifgen.Waveform`
-    :param frequency_list_length:
-
-
-        Specifies the number of steps in the frequency list you want to create.
-        The value must be between the minimum and maximum frequency list lengths
-        that the signal generator allows. You can obtain the minimum and maximum
-        frequency list lengths from the **minimumFrequencyListLength** and
-        **maximumFrequencyListLength** parameters in the
-        nifgen\_QueryFreqListCapabilities function.
-
-        **frequency** and **duration** must each be at least as long as this
-        frequency list length.
-
-        **Default Value**: None
-
-        
-
-
-    :type frequency_list_length: int
     :param frequency_array:
 
 
@@ -1394,28 +1304,6 @@ nifgen.Session methods
             session['0,1'].create_waveform_f64(waveform_data_array)
 
 
-    :param waveform_size:
-
-
-        | Specifies the size of the arbitrary waveform that you want to create.
-        | The size must meet the following restrictions:
-
-        -  The size must be less than or equal to the maximum waveform size that
-           the device allows.
-        -  The size must be greater than or equal to the minimum waveform size
-           that the device allows.
-        -  The size must be an integer multiple of the device waveform quantum.
-
-        You can obtain these values from the **maximumWaveformSize**,
-        **minimumWaveformSize**, and **waveformQuantum** parameters of the
-        nifgen\_QueryArbWfmCapabilities function.
-
-        | ****Default Value**:** None
-
-        
-
-
-    :type waveform_size: int
     :param waveform_data_array:
 
 
@@ -1611,29 +1499,6 @@ nifgen.Session methods
             session['0,1'].create_waveform_i16(waveform_data_array)
 
 
-    :param waveform_size:
-
-
-        | Specifies the size of the arbitrary waveform that you want to create.
-        | The size must meet the following restrictions:
-
-        -  The size must be less than or equal to the maximum waveform size that
-           the device allows.
-        -  The size must be greater than or equal to the minimum waveform size
-           that the device allows.
-        -  The size must be an integer multiple of the device waveform quantum.
-
-        You can obtain these values from the **maximumWaveformSize**,
-        **minimumWaveformSize**, and **waveformQuantum** parameters of the
-        nifgen\_QueryArbWfmCapabilities function.
-
-        |
-        | ****Default Value**:** None
-
-        
-
-
-    :type waveform_size: int
     :param waveform_data_array:
 
 
@@ -1690,16 +1555,6 @@ nifgen.Session methods
             session['0,1'].define_user_standard_waveform(waveform_data_array)
 
 
-    :param waveform_size:
-
-
-        Specifies the size of the waveform in samples.
-        **Default Value**: 16384
-
-        
-
-
-    :type waveform_size: int
     :param waveform_data_array:
 
 
@@ -2055,16 +1910,6 @@ nifgen.Session methods
 
             session['0,1'].get_fir_filter_coefficients()
 
-
-    :param array_size:
-
-
-        Specifies the size of the coefficient array
-
-        
-
-
-    :type array_size: int
 
     :rtype: int
     :return:
@@ -2723,17 +2568,6 @@ nifgen.Session methods
 
 
     :type waveform_handle: int
-    :param size:
-
-
-        Specifies the number of samples to load into the waveform.
-
-        **Default Value**: 0
-
-        
-
-
-    :type size: int
     :param data:
 
 
@@ -2790,17 +2624,6 @@ nifgen.Session methods
 
 
     :type waveform_name: string
-    :param size:
-
-
-        Specifies the number of samples to load into the waveform.
-
-        **Default Value**: 0
-
-        
-
-
-    :type size: int
     :param data:
 
 
@@ -2847,17 +2670,6 @@ nifgen.Session methods
 
 
     :type waveform_name: string
-    :param size:
-
-
-        Specifies the number of samples to load into the waveform.
-
-        **Default Value**: 0
-
-        
-
-
-    :type size: int
     :param data:
 
 
@@ -2945,17 +2757,6 @@ nifgen.Session methods
 
 
     :type waveform_handle: int
-    :param size:
-
-
-        Specifies the number of samples to load into the waveform.
-
-        **Default Value**: 0
-
-        
-
-
-    :type size: int
     :param data:
 
 

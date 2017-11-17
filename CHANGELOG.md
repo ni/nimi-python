@@ -38,6 +38,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * adjust_sample_clock_relative_delay()
 * ### NI-SCOPE
   * #### Added
     * Initial release
