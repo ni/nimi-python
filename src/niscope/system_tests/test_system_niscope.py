@@ -14,10 +14,6 @@ def test_self_test(session):
     assert message == 'Scope Self Tests PASSED.'
 
 
-def test_get_channel_name(session):
-    assert session.get_channel_name(2, 3) == '1'
-
-
 def test_reset(session):
     deault_fetch_relative_to = session.fetch_relative_to
     assert deault_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
@@ -46,10 +42,6 @@ def test_reset_with_defaults(session):
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_with_defaults()
     assert session.meas_time_histogram_high_time == 0.0005
-
-
-def test_sample_rate(session):
-    assert session.sample_rate() == 1000000.0  # default sample rate for simulated 5164
 
 
 def test_get_error(session):
