@@ -101,4 +101,28 @@ enums_additional_enums = {
             },
         ],
     },
+    'HardwareState': {
+        'values': [
+            {
+                'name': 'NIFGEN_VAL_IDLE',
+                'value': 0,
+            },
+            {
+                'name': 'NIFGEN_VAL_WAITING_FOR_START_TRIGGER',
+                'value': 1,
+            },
+            {
+                'name': 'NIFGEN_VAL_RUNNING',
+                'value': 2,
+            },
+            {
+                'name': 'NIFGEN_VAL_DONE',
+                'value': 3,
+            },
+            {
+                'name': 'NIFGEN_VAL_HARDWARE_ERROR',
+                'value': 4,
+            },
+        ],
+    },
 }
