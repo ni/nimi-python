@@ -23,7 +23,7 @@ config = {
     },
     'init_function': 'InitWithOptions',
     'custom_types': [
-        {'file_name': 'wfm_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'niScope_wfmInfo', },
+        {'file_name': 'waveform_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'struct_niScope_wfmInfo', },
     ],
 }
 
