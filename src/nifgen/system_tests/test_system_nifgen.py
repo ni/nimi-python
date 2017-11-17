@@ -250,7 +250,7 @@ def test_set_waveform_next_write_position(session):
 
 def test_export_signal(session):
     expected_trigger_terminal = "PXI_Trig0"
-    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)
+    session.export_signal(nifgen.Signal.START_TRIGGER, "", expected_trigger_terminal)
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
 
 
@@ -269,12 +269,6 @@ def test_named_waveform_operations(session):
     session.write_named_waveform_f64(wfm_name, wfm_data_f64)
     session.write_named_waveform_i16(wfm_name, wfm_data_i16)
     session.delete_named_waveform(wfm_name)
-
-
-def test_adjust_sample_clock_relative_delay():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 is not supporting adjust_sample_clock_relative_delay right now
-        delay = 1e-09
-        session.adjust_sample_clock_relative_delay(delay)
 
 
 def test_wait_until_done(session):
@@ -303,7 +297,7 @@ def test_fir_filter_coefficients():
 
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.ACTIVE_HIGH)
+    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
 
 
 # TODO(bhaswath): Enable after Issue 597 is fixed
