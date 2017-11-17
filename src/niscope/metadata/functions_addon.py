@@ -31,8 +31,6 @@ functions_codegen_method = {
     'SampleMode':                       { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':     { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':           { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'ActualRecordLength':               { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':   { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     'ConfigureAcquisition':             { 'codegen_method': 'no',       },
@@ -77,6 +75,11 @@ functions_buffer_info = {
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'Read':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
                                                       5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'Fetch':                        { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
+                                                      5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':        { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_meas_wfm_size()'}, },
+                                                      5: { 'size': {'mechanism':'python-code', 'value':'(self.actual_meas_wfm_size() * self.actual_num_wfms())'}, },
+                                                      6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
