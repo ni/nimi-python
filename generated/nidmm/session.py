@@ -562,20 +562,6 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
-                **Attribute_Value** parameter.
-
-                If the current value of the attribute, including the terminating NULL
-                byte, contains more bytes that you indicate in this parameter, the
-                function copies **buffer_size**—1 bytes into the buffer, places an
-                ASCII NUL byte at the end of the buffer, and returns the buffer size you
-                must pass to get the entire value. For example, if the value is "123456"
-                and the **buffer_size** is 4, the function places "123" into the buffer
-                and returns 7.
-
-                If you pass a negative number, the function copies the value to the
-                buffer regardless of the number of bytes in the value. If you pass 0,
-                you can pass VI_NULL for the **Attribute_Value** buffer parameter.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -598,21 +584,6 @@ class _SessionBase(object):
         error information for the session. If you leave the
         **Instrument_Handle** unwired, this function retrieves and then clears
         the error information for the process.
-
-        Args:
-            buffer_size (int): Passes the number of bytes in the ViChar array you specify for the
-                **Description** parameter. If the error description, including the
-                terminating NULL byte, contains more bytes than you indicate in this
-                parameter, the function copies **buffer_size** –1 bytes into the
-                buffer, places an ASCII NULL byte at the end of the buffer, and returns
-                the **buffer_size** you must pass to get the entire value.
-
-                For example, if the value is "123456" and the **buffer_size** is 4, the
-                function places "123" into the buffer and returns 7. If you pass a
-                negative number, the function copies the value to the buffer regardless
-                of the number of bytes in the value. If you pass 0, you can pass
-                VI_NULL for the **Description** buffer parameter. The default value is
-                None.
 
         Returns:
             error_code (int): Returns the **error_code** for the session or execution thread. If you
@@ -1426,6 +1397,13 @@ class Session(_SessionBase):
         _initiate to initiate a measurement before calling this function.
 
         Args:
+            array_size (int): Specifies the number of measurements to acquire. The maximum number of
+                measurements for a finite acquisition is the (**Trigger Count** x
+                **Sample Count**) parameters in configure_multi_point.
+
+                For continuous acquisitions, up to 100,000 points can be returned at
+                once. The number of measurements can be a subset. The valid range is any
+                positive ViInt32. The default value is 1.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
@@ -1436,13 +1414,6 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int): Specifies the number of measurements to acquire. The maximum number of
-                measurements for a finite acquisition is the (**Trigger Count** x
-                **Sample Count**) parameters in configure_multi_point.
-
-                For continuous acquisitions, up to 100,000 points can be returned at
-                once. The number of measurements can be a subset. The valid range is any
-                positive ViInt32. The default value is 1.
 
         Returns:
             reading_array (list of float): An array of measurement values.
@@ -1469,6 +1440,10 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
+            array_size (int): Specifies the number of waveform points to return. You specify the total
+                number of points that the DMM acquires in the **Waveform Points**
+                parameter of configure_waveform_acquisition. The default value is
+                1.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
@@ -1479,10 +1454,6 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int): Specifies the number of waveform points to return. You specify the total
-                number of points that the DMM acquires in the **Waveform Points**
-                parameter of configure_waveform_acquisition. The default value is
-                1.
 
         Returns:
             waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
@@ -1914,6 +1885,13 @@ class Session(_SessionBase):
         configure_multi_point.
 
         Args:
+            array_size (int): Specifies the number of measurements to acquire. The maximum number of
+                measurements for a finite acquisition is the (**Trigger Count** x
+                **Sample Count**) parameters in configure_multi_point.
+
+                For continuous acquisitions, up to 100,000 points can be returned at
+                once. The number of measurements can be a subset. The valid range is any
+                positive ViInt32. The default value is 1.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
@@ -1924,13 +1902,6 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int): Specifies the number of measurements to acquire. The maximum number of
-                measurements for a finite acquisition is the (**Trigger Count** x
-                **Sample Count**) parameters in configure_multi_point.
-
-                For continuous acquisitions, up to 100,000 points can be returned at
-                once. The number of measurements can be a subset. The valid range is any
-                positive ViInt32. The default value is 1.
 
         Returns:
             reading_array (list of float): An array of measurement values.
@@ -2001,6 +1972,10 @@ class Session(_SessionBase):
         configure_waveform_acquisition.
 
         Args:
+            array_size (int): Specifies the number of waveform points to return. You specify the total
+                number of points that the DMM acquires in the **Waveform Points**
+                parameter of configure_waveform_acquisition. The default value is
+                1.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
@@ -2011,10 +1986,6 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int): Specifies the number of waveform points to return. You specify the total
-                number of points that the DMM acquires in the **Waveform Points**
-                parameter of configure_waveform_acquisition. The default value is
-                1.
 
         Returns:
             waveform_array (list of float): An array of measurement values.

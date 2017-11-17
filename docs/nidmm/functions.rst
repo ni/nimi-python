@@ -698,6 +698,21 @@ nidmm.Session methods
 
 
 
+    :param array_size:
+
+
+        Specifies the number of measurements to acquire. The maximum number of
+        measurements for a finite acquisition is the (**Trigger Count** x
+        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
+
+        For continuous acquisitions, up to 100,000 points can be returned at
+        once. The number of measurements can be a subset. The valid range is any
+        positive ViInt32. The default value is 1.
+
+        
+
+
+    :type array_size: int
     :param maximum_time:
 
 
@@ -716,21 +731,6 @@ nidmm.Session methods
 
 
     :type maximum_time: int
-    :param array_size:
-
-
-        Specifies the number of measurements to acquire. The maximum number of
-        measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
-
-        For continuous acquisitions, up to 100,000 points can be returned at
-        once. The number of measurements can be a subset. The valid range is any
-        positive ViInt32. The default value is 1.
-
-        
-
-
-    :type array_size: int
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -766,6 +766,18 @@ nidmm.Session methods
 
 
 
+    :param array_size:
+
+
+        Specifies the number of waveform points to return. You specify the total
+        number of points that the DMM acquires in the **Waveform Points**
+        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
+        1.
+
+        
+
+
+    :type array_size: int
     :param maximum_time:
 
 
@@ -784,18 +796,6 @@ nidmm.Session methods
 
 
     :type maximum_time: int
-    :param array_size:
-
-
-        Specifies the number of waveform points to return. You specify the total
-        number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
-        1.
-
-        
-
-
-    :type array_size: int
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1232,6 +1232,21 @@ nidmm.Session methods
 
 
 
+    :param array_size:
+
+
+        Specifies the number of measurements to acquire. The maximum number of
+        measurements for a finite acquisition is the (**Trigger Count** x
+        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
+
+        For continuous acquisitions, up to 100,000 points can be returned at
+        once. The number of measurements can be a subset. The valid range is any
+        positive ViInt32. The default value is 1.
+
+        
+
+
+    :type array_size: int
     :param maximum_time:
 
 
@@ -1250,21 +1265,6 @@ nidmm.Session methods
 
 
     :type maximum_time: int
-    :param array_size:
-
-
-        Specifies the number of measurements to acquire. The maximum number of
-        measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
-
-        For continuous acquisitions, up to 100,000 points can be returned at
-        once. The number of measurements can be a subset. The valid range is any
-        positive ViInt32. The default value is 1.
-
-        
-
-
-    :type array_size: int
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1354,6 +1354,18 @@ nidmm.Session methods
 
 
 
+    :param array_size:
+
+
+        Specifies the number of waveform points to return. You specify the total
+        number of points that the DMM acquires in the **Waveform Points**
+        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
+        1.
+
+        
+
+
+    :type array_size: int
     :param maximum_time:
 
 
@@ -1372,18 +1384,6 @@ nidmm.Session methods
 
 
     :type maximum_time: int
-    :param array_size:
-
-
-        Specifies the number of waveform points to return. You specify the total
-        number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
-        1.
-
-        
-
-
-    :type array_size: int
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
