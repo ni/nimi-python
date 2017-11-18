@@ -55,11 +55,6 @@ Everything listed here needs to be implemented.
 * The following still need review, awaiting PR from Mark
     * 'Fetch'
     * 'FetchArrayMeasurement'
-    * 'FetchBinary16'
-    * 'FetchBinary32'
-    * 'FetchBinary8'
-    * 'FetchComplex'
-    * 'FetchComplexBinary16'
     * 'Read'
 * Add system tests for all touched functions
 

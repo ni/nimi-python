@@ -31,14 +31,6 @@ functions_codegen_method = {
     'SampleMode':                       { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':     { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':           { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'Read':                             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'ActualRecordLength':               { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':   { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     'ConfigureAcquisition':             { 'codegen_method': 'no',       },
@@ -63,15 +55,11 @@ functions_codegen_method = {
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
     'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
-    'FetchMeasurement':                 { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
-    'FetchMeasurementStats':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result mean stdev min max num_in_stats should come from actual_num_waveforms (issue #519)
-    'ReadMeasurement':                  { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
-    'GetEqualizationFilterCoefficients':{ 'codegen_method': 'no',       },  # TODO(marcoskirsch): equalization_num_coefficients (issue #519)
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
 }
 
 # Attach the given parameter to the given enum from enums.py
