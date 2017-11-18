@@ -250,7 +250,7 @@ niscope.Session methods
     Every time a measurement is called, the statistics information is
     updated, including the min, max, mean, standard deviation, and number of
     updates. This information is fetched with
-    :py:func:`niscope.FetchMeasurementStats`. The multi-acquisition array measurements
+    :py:func:`niscope.fetch_measurement_stats`. The multi-acquisition array measurements
     are also cleared with this function.
 
     
@@ -476,7 +476,7 @@ niscope.Session methods
     :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`
 
     This function configures the reference levels for waveform measurements.
-    Call this function before calling :py:func:`niscope.FetchMeasurement` to take a
+    Call this function before calling :py:func:`niscope.fetch_measurement` to take a
     rise time, fall time, width negative, width positive, duty cycle
     negative, or duty cycle positive measurement.
 
@@ -1286,6 +1286,458 @@ niscope.Session methods
 
     :type output_terminal: string
 
+.. function:: fetch(timeout, num_samples)
+
+    Returns the waveform from a previously initiated acquisition that the
+    digitizer acquires for the specified channel. This function returns
+    scaled voltage waveforms.
+
+    This function may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
+
+    
+
+    .. note:: You can use :py:func:`niscope.read` instead of this function. :py:func:`niscope.read`
+        starts an acquisition on all enabled channels, waits for the acquisition
+        to complete, and returns the waveform for the specified channel.
+
+        Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch(timeout, num_samples)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param num_samples:
+
+
+        The maximum number of samples to fetch for each waveform. If the
+        acquisition finishes with fewer points than requested, some devices
+        return partial data if the acquisition finished, was aborted, or a
+        timeout of 0 was used. If it fails to complete within the timeout
+        period, the function returns an error.
+
+        
+
+
+    :type num_samples: int
+
+    :rtype: tuple (wfm, wfm_info)
+
+        WHERE
+
+        wfm (list of float): 
+
+
+            Returns an array whose length is the **numSamples** times number of
+            waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+            waveforms.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with a channel list of 0,1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of structures with the following timing and scaling
+            information about each waveform:
+
+            -  **relativeInitialX**—the time (in seconds) from the trigger to the
+               first sample in the fetched waveform
+            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+               sample. This timestamp is comparable between records and
+               acquisitions; devices that do not support this parameter use 0 for
+               this output.
+            -  **xIncrement**—the time between points in the acquired waveform in
+               seconds
+            -  **actualSamples**—the actual number of samples fetched and placed in
+               the waveform array
+            -  **gain**—the gain factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            -  **offset**—the offset factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+
+            
+
+
+
+.. function:: fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+
+    Obtains a waveform from the digitizer and returns the specified
+    measurement array. This function may return multiple waveforms depending
+    on the number of channels, the acquisition type, and the number of
+    records you specify.
+
+    
+
+    .. note:: Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param array_meas_function:
+
+
+        The `array
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+        to perform.
+
+        
+
+
+    :type array_meas_function: int
+
+    :rtype: tuple (meas_wfm, wfm_info)
+
+        WHERE
+
+        meas_wfm (list of float): 
+
+
+            Returns an array whose length is the number of waveforms times
+            **measWfmSize**; call :py:func:`niscope.actual_num_wfms` to determine the number of
+            waveforms; call :py:func:`niscope.actual_meas_wfm_size` to determine the size of each
+            waveform.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with channel list of 0, 1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of structures with the following timing and scaling
+            information about each waveform:
+
+            -  **relativeInitialX**—the time (in seconds) from the trigger to the
+               first sample in the fetched waveform
+            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+               sample. This timestamp is comparable between records and
+               acquisitions; devices that do not support this parameter use 0 for
+               this output.
+            -  **xIncrement**—the time between points in the acquired waveform in
+               seconds
+            -  **actualSamples**—the actual number of samples fetched and placed in
+               the waveform array
+            -  **gain**—the gain factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            -  **offset**—the offset factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+
+            
+
+
+
+.. function:: fetch_measurement(timeout, scalar_meas_function)
+
+    Fetches a waveform from the digitizer and performs the specified
+    waveform measurement. Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references by using
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_measurement(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed.
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: list of float
+    :return:
+
+
+            Contains an array of all measurements acquired; call
+            :py:func:`niscope.actual_num_wfms` to determine the array length.
+
+            
+
+
+
+.. function:: fetch_measurement_stats(timeout, scalar_meas_function)
+
+    Obtains a waveform measurement and returns the measurement value. This
+    function may return multiple statistical results depending on the number
+    of channels, the acquisition type, and the number of records you
+    specify.
+
+    You specify a particular measurement type, such as rise time, frequency,
+    or voltage peak-to-peak. The waveform on which the digitizer calculates
+    the waveform measurement is from an acquisition that you previously
+    initiated. The statistics for the specified measurement function are
+    returned, where the statistics are updated once every acquisition when
+    the specified measurement is fetched by any of the Fetch Measurement
+    functions. If a Fetch Measurement function has not been called, this
+    function fetches the data on which to perform the measurement. The
+    statistics are cleared by calling
+    :py:func:`niscope.clear_waveform_measurement_stats`. Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information on incorporating fetch functions in your application.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references with
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_measurement_stats(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed on each fetched waveform.
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
+
+        WHERE
+
+        result (list of float): 
+
+
+            Returns the resulting measurement
+
+            
+
+
+        mean (list of float): 
+
+
+            Returns the mean scalar value, which is obtained by averaging each
+            :py:func:`niscope.fetch_measurement_stats` call.
+
+            
+
+
+        stdev (list of float): 
+
+
+            Returns the standard deviation of the most recent **numInStats**
+            measurements.
+
+            
+
+
+        min (list of float): 
+
+
+            Returns the smallest scalar value acquired (the minimum of the
+            **numInStats** measurements).
+
+            
+
+
+        max (list of float): 
+
+
+            Returns the largest scalar value acquired (the maximum of the
+            **numInStats** measurements).
+
+            
+
+
+        num_in_stats (list of int): 
+
+
+            Returns the number of times :py:func:`niscope.fetch_measurement_stats` has been
+            called.
+
+            
+
+
+
+.. function:: get_equalization_filter_coefficients(number_of_coefficients)
+
+    Retrieves the custom coefficients for the equalization FIR filter on the
+    device. This filter is designed to compensate the input signal for
+    artifacts introduced to the signal outside of the digitizer. Because
+    this filter is a generic FIR filter, any coefficients are valid.
+    Coefficient values should be between +1 and –1.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+
+
+    :param number_of_coefficients:
+
+
+        The number of coefficients being passed in the **coefficients** array.
+
+        
+
+
+    :type number_of_coefficients: int
+
+    :rtype: list of float
+    :return:
+
+
+            The custom coefficients for the equalization FIR filter on the device.
+            These coefficients should be between +1 and –1. You can obtain the
+            number of coefficients from the
+            `:py:data:`niscope.EQUALIZATION\_NUM\_COEFFICIENTS` <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+            attribute.
+
+            
+
+
+
 .. function:: probe_compensation_signal_start()
 
     Starts the 1 kHz square wave output on PFI 1 for probe compensation.
@@ -1299,6 +1751,185 @@ niscope.Session methods
     Stops the 1 kHz square wave output on PFI 1 for probe compensation.
 
     
+
+
+
+.. function:: read(timeout, num_samples)
+
+    Initiates an acquisition, waits for it to complete, and retrieves the
+    data. The process is similar to calling :py:func:`niscope._initiate_acquisition`,
+    :py:func:`niscope.acquisition_status`, and :py:func:`niscope.fetch`. The only difference is
+    that with :py:func:`niscope.read`, you enable all channels specified with
+    **channelList** before the acquisition; in the other method, you enable
+    the channels with :py:func:`niscope.configure_vertical`.
+
+    This function may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
+
+    
+
+    .. note:: Some functionality is not supported in all digitizers. Refer to
+        `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].read(timeout, num_samples)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param num_samples:
+
+
+        The maximum number of samples to fetch for each waveform. If the
+        acquisition finishes with fewer points than requested, some devices
+        return partial data if the acquisition finished, was aborted, or a
+        timeout of 0 was used. If it fails to complete within the timeout
+        period, the function returns an error.
+
+        
+
+
+    :type num_samples: int
+
+    :rtype: tuple (wfm, wfm_info)
+
+        WHERE
+
+        wfm (list of float): 
+
+
+            Returns an array whose length is the **numSamples** times number of
+            waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+            waveforms.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with a channel list of 0,1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of structures with the following timing and scaling
+            information about each waveform:
+
+            -  **relativeInitialX**—the time (in seconds) from the trigger to the
+               first sample in the fetched waveform
+            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+               sample. This timestamp is comparable between records and
+               acquisitions; devices that do not support this parameter use 0 for
+               this output.
+            -  **xIncrement**—the time between points in the acquired waveform in
+               seconds
+            -  **actualSamples**—the actual number of samples fetched and placed in
+               the waveform array
+            -  **gain**—the gain factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            -  **offset**—the offset factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+
+            
+
+
+
+.. function:: read_measurement(timeout, scalar_meas_function)
+
+    Initiates an acquisition, waits for it to complete, and performs the
+    specified waveform measurement for a single channel and record or for
+    multiple channels and records.
+
+    Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references by using
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].read_measurement(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: list of float
+    :return:
+
+
+            Contains an array of all measurements acquired. Call
+            :py:func:`niscope.actual_num_wfms` to determine the array length.
+
+            
 
 
 
