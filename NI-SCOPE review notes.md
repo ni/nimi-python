@@ -1,6 +1,6 @@
 #NI-SCOPE review notes for addons.
 
-Everything listed here needs to be implemented.
+Everything listed here still needs to be implemented.
 
 ##Defaults
 
@@ -40,8 +40,7 @@ Everything listed here needs to be implemented.
 
 ##Other notes
 
-* Make cal_self_calibrate name consistent
-* The following still need review, awaiting PR from Mark
+* The following still need review. PR to support them has been merged.
     * 'Fetch'
     * 'FetchArrayMeasurement'
     * 'Read'
