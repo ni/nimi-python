@@ -54,11 +54,16 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # Not currently supporting complex numbers
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # Not currently supporting complex numbers
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
+    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
+    'FetchMeasurement':                 { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
+    'FetchMeasurementStats':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result mean stdev min max num_in_stats should come from actual_num_waveforms (issue #519)
+    'ReadMeasurement':                  { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
+    'GetEqualizationFilterCoefficients':{ 'codegen_method': 'no',       },  # TODO(marcoskirsch): equalization_num_coefficients (issue #519)
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # Not currently supporting complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # Not currently supporting complex numbers. Issue #514
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # Not currently supporting fetching binary. Issue #511
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary. Issue #511
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary. Issue #511
 }
 
 # Attach the given parameter to the given enum from enums.py
