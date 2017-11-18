@@ -60,6 +60,8 @@ functions_codegen_method = {
     'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
+    'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -80,21 +82,21 @@ functions_buffer_info = {
     # 'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
     #                                                               4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
     #                                                               5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
-    'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
-                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
-                                                                  7: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
-                                                                  8: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
-                                                                  9: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
-    'ReadMeasurement':                          { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
-    'Read':                                     { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
-    'Fetch':                                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
-    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_meas_wfm_size()'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self.actual_meas_wfm_size() * self.actual_num_wfms())'}, },
-                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  7: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  8: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  9: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'ReadMeasurement':                          { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'Read':                                     { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'Fetch':                                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size() * self._actual_num_wfms())'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.

@@ -40,18 +40,7 @@ Everything listed here needs to be implemented.
 
 ##Other notes
 
-* Make cal_self_calibrate name consistnet
-* Keep configure_chan_characteristics
-* fetch_measurement needs size mechanism python_code
-* fetch_measurement_stats size mechanism python_code
-* number_of_coefficients size mechanism python_code (from attribute)
-* get_frequency_response parameters should be outputs
-* In wiki guidelines specify
-    * we do reset=false in init
-    * When in doubt - don't include the function
-* actual_meas_wfm_size private
-* actual_num_waveforms private
-* Make sure we aren't removing useful ext cal functions
+* Make cal_self_calibrate name consistent
 * The following still need review, awaiting PR from Mark
     * 'Fetch'
     * 'FetchArrayMeasurement'

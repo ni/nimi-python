@@ -30,67 +30,6 @@ niscope.Session methods
 
 
 
-.. function:: actual_meas_wfm_size(array_meas_function)
-
-    Returns the total available size of an array measurement acquisition.
-
-    
-
-
-
-    :param array_meas_function:
-
-
-        The `array
-        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-        to perform.
-
-        
-
-
-    :type array_meas_function: int
-
-    :rtype: int
-    :return:
-
-
-            Returns the size (in number of samples) of the resulting analysis
-            waveform.
-
-            
-
-
-
-.. function:: actual_num_wfms()
-
-    Helps you to declare appropriately sized waveforms. NI-SCOPE handles the
-    channel list parsing for you.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].actual_num_wfms()
-
-
-    :rtype: int
-    :return:
-
-
-            Returns the number of records times the number of channels; if you are
-            operating in DDC mode (NI 5620/5621 only), this value is multiplied by
-            two.
-
-            
-
-
-
 .. function:: add_waveform_processing(meas_function)
 
     Adds one measurement to the list of processing steps that are completed
@@ -1396,7 +1335,7 @@ niscope.Session methods
 
             voltage = binary data × gain factor + offset
 
-            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
 
             
 
@@ -1458,8 +1397,8 @@ niscope.Session methods
 
 
             Returns an array whose length is the number of waveforms times
-            **measWfmSize**; call :py:func:`niscope.actual_num_wfms` to determine the number of
-            waveforms; call :py:func:`niscope.actual_meas_wfm_size` to determine the size of each
+            **measWfmSize**; call :py:func:`niscope._actual_num_wfms` to determine the number of
+            waveforms; call :py:func:`niscope._actual_meas_wfm_size` to determine the size of each
             waveform.
 
             NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -1505,7 +1444,7 @@ niscope.Session methods
 
             voltage = binary data × gain factor + offset
 
-            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
 
             
 
@@ -1566,7 +1505,7 @@ niscope.Session methods
 
 
             Contains an array of all measurements acquired; call
-            :py:func:`niscope.actual_num_wfms` to determine the array length.
+            :py:func:`niscope._actual_num_wfms` to determine the array length.
 
             
 
@@ -1863,7 +1802,7 @@ niscope.Session methods
 
             voltage = binary data × gain factor + offset
 
-            Call :py:func:`niscope.actual_num_wfms` to determine the size of this array.
+            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
 
             
 
@@ -1927,7 +1866,7 @@ niscope.Session methods
 
 
             Contains an array of all measurements acquired. Call
-            :py:func:`niscope.actual_num_wfms` to determine the array length.
+            :py:func:`niscope._actual_num_wfms` to determine the array length.
 
             
 
