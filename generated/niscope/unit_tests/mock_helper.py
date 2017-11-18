@@ -65,6 +65,14 @@ class SideEffectsHelper(object):
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
+        self._defaults['Fetch'] = {}
+        self._defaults['Fetch']['return'] = 0
+        self._defaults['Fetch']['Wfm'] = None
+        self._defaults['Fetch']['wfmInfo'] = None
+        self._defaults['FetchArrayMeasurement'] = {}
+        self._defaults['FetchArrayMeasurement']['return'] = 0
+        self._defaults['FetchArrayMeasurement']['measWfm'] = None
+        self._defaults['FetchArrayMeasurement']['wfmInfo'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['Value'] = None
@@ -93,6 +101,10 @@ class SideEffectsHelper(object):
         self._defaults['ProbeCompensationSignalStart']['return'] = 0
         self._defaults['ProbeCompensationSignalStop'] = {}
         self._defaults['ProbeCompensationSignalStop']['return'] = 0
+        self._defaults['Read'] = {}
+        self._defaults['Read']['return'] = 0
+        self._defaults['Read']['Wfm'] = None
+        self._defaults['Read']['wfmInfo'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -253,6 +265,48 @@ class SideEffectsHelper(object):
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
 
+    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['Fetch']['return'] != 0:
+            return self._defaults['Fetch']['return']
+        if self._defaults['Fetch']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_Fetch", param='Wfm')
+        a = self._defaults['Fetch']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['Fetch']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_Fetch", param='wfmInfo')
+        a = self._defaults['Fetch']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['Fetch']['return']
+
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchArrayMeasurement']['return'] != 0:
+            return self._defaults['FetchArrayMeasurement']['return']
+        if self._defaults['FetchArrayMeasurement']['measWfm'] is None:
+            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='measWfm')
+        a = self._defaults['FetchArrayMeasurement']['measWfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(meas_wfm), len(a))):
+            meas_wfm[i] = a[i]
+        if self._defaults['FetchArrayMeasurement']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='wfmInfo')
+        a = self._defaults['FetchArrayMeasurement']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['FetchArrayMeasurement']['return']
+
     def niScope_GetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
@@ -330,6 +384,27 @@ class SideEffectsHelper(object):
         if self._defaults['ProbeCompensationSignalStop']['return'] != 0:
             return self._defaults['ProbeCompensationSignalStop']['return']
         return self._defaults['ProbeCompensationSignalStop']['return']
+
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['Read']['return'] != 0:
+            return self._defaults['Read']['return']
+        if self._defaults['Read']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_Read", param='Wfm')
+        a = self._defaults['Read']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['Read']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_Read", param='wfmInfo')
+        a = self._defaults['Read']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['Read']['return']
 
     def niScope_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
@@ -447,6 +522,10 @@ class SideEffectsHelper(object):
         mock_library.niScope_Disable.return_value = 0
         mock_library.niScope_ExportSignal.side_effect = MockFunctionCallError("niScope_ExportSignal")
         mock_library.niScope_ExportSignal.return_value = 0
+        mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
+        mock_library.niScope_Fetch.return_value = 0
+        mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")
+        mock_library.niScope_FetchArrayMeasurement.return_value = 0
         mock_library.niScope_GetAttributeViBoolean.side_effect = MockFunctionCallError("niScope_GetAttributeViBoolean")
         mock_library.niScope_GetAttributeViBoolean.return_value = 0
         mock_library.niScope_GetAttributeViInt32.side_effect = MockFunctionCallError("niScope_GetAttributeViInt32")
@@ -467,6 +546,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_ProbeCompensationSignalStart.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStop.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStop")
         mock_library.niScope_ProbeCompensationSignalStop.return_value = 0
+        mock_library.niScope_Read.side_effect = MockFunctionCallError("niScope_Read")
+        mock_library.niScope_Read.return_value = 0
         mock_library.niScope_ResetDevice.side_effect = MockFunctionCallError("niScope_ResetDevice")
         mock_library.niScope_ResetDevice.return_value = 0
         mock_library.niScope_ResetWithDefaults.side_effect = MockFunctionCallError("niScope_ResetWithDefaults")
