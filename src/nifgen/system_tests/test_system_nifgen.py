@@ -182,13 +182,19 @@ def test_create_arb_sequence(session):
 
 
 def test_create_advanced_arb_sequence(session):
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
-    # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
-    assert ([-1], 0) == session.create_advanced_arb_sequence(waveform_handles_array, [10])
-    assert ([-1], 1) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256])
-    assert ([0], 2) == session.create_advanced_arb_sequence(waveform_handles_array, [10], marker_location_array=[0])
-    assert ([0], 3) == session.create_advanced_arb_sequence(waveform_handles_array, [10], sample_counts_array=[256], marker_location_array=[0])
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+        seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        waveform_handles_array = [session.create_waveform_f64(waveform_data), session.create_waveform_f64(waveform_data), session.create_waveform_f64(waveform_data)]
+        marker_location_array = [0, 16, 32]
+        sample_counts_array = [256, 128, 64]
+        loop_counts_array = [10, 20, 30]
+        session.output_mode = nifgen.OutputMode.SEQ
+        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+        assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
+        assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
+        assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+        assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
 def test_arb_script(session):
