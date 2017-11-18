@@ -5,6 +5,8 @@ import threading
 
 from niscope.visatype import *  # noqa: F403,H303
 
+from niscope import waveform_info  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -41,6 +43,8 @@ class Library(object):
         self.niScope_ConfigureVertical_cfunc = None
         self.niScope_Disable_cfunc = None
         self.niScope_ExportSignal_cfunc = None
+        self.niScope_Fetch_cfunc = None
+        self.niScope_FetchArrayMeasurement_cfunc = None
         self.niScope_FetchMeasurement_cfunc = None
         self.niScope_FetchMeasurementStats_cfunc = None
         self.niScope_GetAttributeViBoolean_cfunc = None
@@ -55,6 +59,7 @@ class Library(object):
         self.niScope_InitiateAcquisition_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
         self.niScope_ProbeCompensationSignalStop_cfunc = None
+        self.niScope_Read_cfunc = None
         self.niScope_ReadMeasurement_cfunc = None
         self.niScope_ResetDevice_cfunc = None
         self.niScope_ResetWithDefaults_cfunc = None
@@ -260,6 +265,22 @@ class Library(object):
                 self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
+    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_Fetch_cfunc is None:
+                self.niScope_Fetch_cfunc = self._library.niScope_Fetch
+                self.niScope_Fetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_FetchArrayMeasurement_cfunc is None:
+                self.niScope_FetchArrayMeasurement_cfunc = self._library.niScope_FetchArrayMeasurement
+                self.niScope_FetchArrayMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchArrayMeasurement_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info)
+
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchMeasurement_cfunc is None:
@@ -371,6 +392,14 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStop_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
+
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_Read_cfunc is None:
+                self.niScope_Read_cfunc = self._library.niScope_Read
+                self.niScope_Read_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
     def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:

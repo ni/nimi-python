@@ -31,14 +31,6 @@ functions_codegen_method = {
     'SampleMode':                       { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':     { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':           { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'Read':                             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'ActualRecordLength':               { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':   { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     'ConfigureAcquisition':             { 'codegen_method': 'no',       },
@@ -62,6 +54,11 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # Not currently supporting complex numbers
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # Not currently supporting complex numbers
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # Not currently supporting fetching binary
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -76,6 +73,13 @@ functions_buffer_info = {
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'Read':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
+                                                      5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'Fetch':                        { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
+                                                      5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':        { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_meas_wfm_size()'}, },
+                                                      5: { 'size': {'mechanism':'python-code', 'value':'(self.actual_meas_wfm_size() * self.actual_num_wfms())'}, },
+                                                      6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

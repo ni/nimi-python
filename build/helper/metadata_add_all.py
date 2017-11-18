@@ -4,6 +4,7 @@ from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
+from .metadata_find import find_custom_type
 from .metadata_merge_dicts import merge_helper
 
 import codecs
@@ -54,13 +55,18 @@ def _add_ctypes_variable_name(parameter):
     return parameter
 
 
-def _add_ctypes_type(parameter):
+def _add_ctypes_type(parameter, config):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type']
+    module_name = ''
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name'] + '.'
+
     if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
-        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
-        parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+        parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
 
     return parameter
 
@@ -163,6 +169,11 @@ def _add_is_session_handle(parameter):
         parameter['is_session_handle'] = parameter['type'] == 'ViSession' and parameter['direction'] == 'in'
 
 
+def _fix_type(parameter):
+    '''Replace any spaces in the parameter type with an underscore.'''
+    parameter['type'] = parameter['type'].replace(' ', '_')
+
+
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config)
@@ -174,10 +185,11 @@ def add_all_function_metadata(functions, config):
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
+            _fix_type(p)
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
-            _add_ctypes_type(p)
+            _add_ctypes_type(p, config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -377,9 +389,21 @@ def _compare_dicts(actual, expected):
         assert k in actual, 'Key {0} not in actual'.format(k)
 
 
+config_for_testing = {
+    'session_handle_parameter_name': 'vi',
+    'module_name': 'nifake',
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'custom_types': [],
+}
+
+
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
-    actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    actual = add_all_function_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
@@ -566,7 +590,7 @@ def test_add_all_metadata_simple():
 
 def _do_the_test_add_attributes_metadata(attributes, expected):
     actual = copy.deepcopy(attributes)
-    actual = add_all_attribute_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
+    actual = add_all_attribute_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
@@ -605,7 +629,7 @@ def test_add_attributes_metadata_simple():
 
 def _do_the_test_add_enums_metadata(enums, expected):
     actual = copy.deepcopy(enums)
-    actual = add_all_enum_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake', 'functions': {}, 'attributes': {}, 'modules': {'metadata.enums_addon': {}}})
+    actual = add_all_enum_metadata(actual, config_for_testing)
     _compare_dicts(actual, expected)
 
 
