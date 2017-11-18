@@ -63,9 +63,6 @@ functions_codegen_method = {
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
     'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
-    'FetchMeasurement':                 { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms
-    'FetchMeasurementStats':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result mean stdev min max num_in_stats should come from actual_num_waveforms
-    'ReadMeasurement':                  { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -86,6 +83,14 @@ functions_buffer_info = {
     # 'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
     #                                                               4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
     #                                                               5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
+    'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
+                                                                  7: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
+                                                                  8: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
+                                                                  9: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
+    'ReadMeasurement':                          { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.
