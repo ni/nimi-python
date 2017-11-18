@@ -6,14 +6,14 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
-parser = argparse.ArgumentParser(description='Outputs the specified voltage, then takes the specified number of voltage and current readings.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments SMU')
+parser = argparse.ArgumentParser(description='Acquires one record from the given channels.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments Digitizer')
 parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
 parser.add_argument('-l', '--length', default='1000', type=int, help='Measure record length')
 parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range')
 args = parser.parse_args()
 
-with niscope.Session(args.name, False, False, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as session:
+with niscope.Session(args.name, False, False, '') as session:
     session.configure_vertical(args.voltage, 0.0, 0, 1.0, True)
     session.configure_horizontal_timing(50000000, args.length, 50.0, 1, True)
     wfm, wfm_infos = session[args.channels].read(1, args.length)
