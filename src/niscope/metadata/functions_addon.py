@@ -63,6 +63,15 @@ functions_codegen_method = {
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
     'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
+    'FetchMeasurement':                 { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
+    'FetchMeasurementStats':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result mean stdev min max num_in_stats should come from actual_num_waveforms (issue #519)
+    'ReadMeasurement':                  { 'codegen_method': 'no',       },  # TODO(marcoskirsch): result should come from actual_num_waveforms (issue #519)
+    'GetEqualizationFilterCoefficients':{ 'codegen_method': 'no',       },  # TODO(marcoskirsch): equalization_num_coefficients (issue #519)
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # No support for fetching binary. Issue #511
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -91,6 +100,13 @@ functions_buffer_info = {
                                                                   8: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, },
                                                                   9: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
     'ReadMeasurement':                          { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_waveforms()'}, }, }, },
+    'Read':                                     { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'Fetch':                                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self.actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self.actual_meas_wfm_size()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self.actual_meas_wfm_size() * self.actual_num_wfms())'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self.actual_num_wfms()'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.
@@ -98,6 +114,8 @@ functions_bad_source_metadata = {
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
                                                                   4: { 'direction': 'out'},
                                                                   5: { 'direction': 'out'}, }, },
+
+
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

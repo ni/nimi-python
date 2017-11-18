@@ -5,6 +5,8 @@ import threading
 
 from niscope.visatype import *  # noqa: F403,H303
 
+from niscope import waveform_info  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -41,20 +43,16 @@ class Library(object):
         self.niScope_ConfigureVertical_cfunc = None
         self.niScope_Disable_cfunc = None
         self.niScope_ExportSignal_cfunc = None
-        self.niScope_FetchMeasurement_cfunc = None
-        self.niScope_FetchMeasurementStats_cfunc = None
         self.niScope_GetAttributeViBoolean_cfunc = None
         self.niScope_GetAttributeViInt32_cfunc = None
         self.niScope_GetAttributeViInt64_cfunc = None
         self.niScope_GetAttributeViReal64_cfunc = None
         self.niScope_GetAttributeViString_cfunc = None
-        self.niScope_GetEqualizationFilterCoefficients_cfunc = None
         self.niScope_GetError_cfunc = None
         self.niScope_InitWithOptions_cfunc = None
         self.niScope_InitiateAcquisition_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
         self.niScope_ProbeCompensationSignalStop_cfunc = None
-        self.niScope_ReadMeasurement_cfunc = None
         self.niScope_ResetDevice_cfunc = None
         self.niScope_ResetWithDefaults_cfunc = None
         self.niScope_SendSoftwareTriggerEdge_cfunc = None
@@ -259,22 +257,6 @@ class Library(object):
                 self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
-    def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_FetchMeasurement_cfunc is None:
-                self.niScope_FetchMeasurement_cfunc = self._library.niScope_FetchMeasurement
-                self.niScope_FetchMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niScope_FetchMeasurement_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchMeasurement_cfunc(vi, channel_list, timeout, scalar_meas_function, result)
-
-    def niScope_FetchMeasurementStats(self, vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_FetchMeasurementStats_cfunc is None:
-                self.niScope_FetchMeasurementStats_cfunc = self._library.niScope_FetchMeasurementStats
-                self.niScope_FetchMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niScope_FetchMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchMeasurementStats_cfunc(vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats)
-
     def niScope_GetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViBoolean_cfunc is None:
@@ -315,14 +297,6 @@ class Library(object):
                 self.niScope_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViString_cfunc(vi, channel_list, attribute_id, buf_size, value)
 
-    def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_GetEqualizationFilterCoefficients_cfunc is None:
-                self.niScope_GetEqualizationFilterCoefficients_cfunc = self._library.niScope_GetEqualizationFilterCoefficients
-                self.niScope_GetEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niScope_GetEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_GetEqualizationFilterCoefficients_cfunc(vi, channel, number_of_coefficients, coefficients)
-
     def niScope_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetError_cfunc is None:
@@ -362,14 +336,6 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStop_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
-
-    def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ReadMeasurement_cfunc is None:
-                self.niScope_ReadMeasurement_cfunc = self._library.niScope_ReadMeasurement
-                self.niScope_ReadMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niScope_ReadMeasurement_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ReadMeasurement_cfunc(vi, channel_list, timeout, scalar_meas_function, result)
 
     def niScope_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
