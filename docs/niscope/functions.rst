@@ -250,7 +250,7 @@ niscope.Session methods
     Every time a measurement is called, the statistics information is
     updated, including the min, max, mean, standard deviation, and number of
     updates. This information is fetched with
-    :py:func:`niscope.FetchMeasurementStats`. The multi-acquisition array measurements
+    :py:func:`niscope.fetch_measurement_stats`. The multi-acquisition array measurements
     are also cleared with this function.
 
     
@@ -476,7 +476,7 @@ niscope.Session methods
     :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`
 
     This function configures the reference levels for waveform measurements.
-    Call this function before calling :py:func:`niscope.FetchMeasurement` to take a
+    Call this function before calling :py:func:`niscope.fetch_measurement` to take a
     rise time, fall time, width negative, width positive, duty cycle
     negative, or duty cycle positive measurement.
 
@@ -1286,6 +1286,188 @@ niscope.Session methods
 
     :type output_terminal: string
 
+.. function:: fetch_measurement(timeout, scalar_meas_function)
+
+    Fetches a waveform from the digitizer and performs the specified
+    waveform measurement. Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references by using
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_measurement(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed.
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: list of float
+    :return:
+
+
+            Contains an array of all measurements acquired; call
+            :py:func:`niscope.actual_num_wfms` to determine the array length.
+
+            
+
+
+
+.. function:: fetch_measurement_stats(timeout, scalar_meas_function)
+
+    Obtains a waveform measurement and returns the measurement value. This
+    function may return multiple statistical results depending on the number
+    of channels, the acquisition type, and the number of records you
+    specify.
+
+    You specify a particular measurement type, such as rise time, frequency,
+    or voltage peak-to-peak. The waveform on which the digitizer calculates
+    the waveform measurement is from an acquisition that you previously
+    initiated. The statistics for the specified measurement function are
+    returned, where the statistics are updated once every acquisition when
+    the specified measurement is fetched by any of the Fetch Measurement
+    functions. If a Fetch Measurement function has not been called, this
+    function fetches the data on which to perform the measurement. The
+    statistics are cleared by calling
+    :py:func:`niscope.clear_waveform_measurement_stats`. Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information on incorporating fetch functions in your application.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references with
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_measurement_stats(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed on each fetched waveform.
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
+
+        WHERE
+
+        result (list of float): 
+
+
+            Returns the resulting measurement
+
+            
+
+
+        mean (list of float): 
+
+
+            Returns the mean scalar value, which is obtained by averaging each
+            :py:func:`niscope.fetch_measurement_stats` call.
+
+            
+
+
+        stdev (list of float): 
+
+
+            Returns the standard deviation of the most recent **numInStats**
+            measurements.
+
+            
+
+
+        min (list of float): 
+
+
+            Returns the smallest scalar value acquired (the minimum of the
+            **numInStats** measurements).
+
+            
+
+
+        max (list of float): 
+
+
+            Returns the largest scalar value acquired (the maximum of the
+            **numInStats** measurements).
+
+            
+
+
+        num_in_stats (list of int): 
+
+
+            Returns the number of times :py:func:`niscope.fetch_measurement_stats` has been
+            called.
+
+            
+
+
+
 .. function:: get_equalization_filter_coefficients(number_of_coefficients)
 
     Retrieves the custom coefficients for the equalization FIR filter on the
@@ -1344,6 +1526,70 @@ niscope.Session methods
     Stops the 1 kHz square wave output on PFI 1 for probe compensation.
 
     
+
+
+
+.. function:: read_measurement(timeout, scalar_meas_function)
+
+    Initiates an acquisition, waits for it to complete, and performs the
+    specified waveform measurement for a single channel and record or for
+    multiple channels and records.
+
+    Refer to `Using Fetch
+    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information.
+
+    Many of the measurements use the low, mid, and high reference levels.
+    You configure the low, mid, and high references by using
+    :py:data:`niscope.MEAS\_CHAN\_LOW\_REF\_LEVEL`,
+    :py:data:`niscope.MEAS\_CHAN\_MID\_REF\_LEVEL`, and
+    :py:data:`niscope.MEAS\_CHAN\_HIGH\_REF\_LEVEL` to set each channel
+    differently.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].read_measurement(timeout, scalar_meas_function)
+
+
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+    :param scalar_meas_function:
+
+
+        The `scalar
+        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+        to be performed
+
+        
+
+
+    :type scalar_meas_function: int
+
+    :rtype: list of float
+    :return:
+
+
+            Contains an array of all measurements acquired. Call
+            :py:func:`niscope.actual_num_wfms` to determine the array length.
+
+            
 
 
 
