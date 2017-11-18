@@ -2106,11 +2106,11 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 9
-        coefficients_ctype = (visatype.ViReal64 * self.equalization_num_coefficients)()  # case 0.2
+        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        coefficients_ctype = (visatype.ViReal64 * number_of_coefficients)()  # case 13
         error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_ctype[i]) for i in range(self.equalization_num_coefficients)]
+        return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
 
     def _get_error(self):
         '''_get_error

@@ -22,7 +22,7 @@ Everything listed here needs to be implemented.
 
 ##Enums
 
-* add_waveform_processing shoudl have enum
+* add_waveform_processing should have enum
 * cal_self_calibrate needs enum
 * clear_waveform_measurement_stats needs enum
 * configure_vertical coupling is enum
