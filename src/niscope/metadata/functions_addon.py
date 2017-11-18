@@ -98,6 +98,7 @@ functions_buffer_info = {
 }
 
 # The extracted metadata is incorrect. Patch it here.
+# TODO(marcoskirsch): Tracked by NI internal bug 677141. Remove when that's fixed and new metadata is extracted.
 functions_bad_source_metadata = {
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
                                                                   4: { 'direction': 'out'},
