@@ -2,12 +2,6 @@
 
 Everything listed here needs to be implemented.
 
-##Buffer sizes
-
-* configure_equalization_filter_coefficients
-* get_equalization_filter_coefficients number_of_coefficients should be queried from attribute
-* get_frequency_response is ivi dance
-
 ##Defaults
 
 * cal_self_calibrate default None or 0 or maybe there's an enum value
@@ -67,3 +61,4 @@ Everything listed here needs to be implemented.
     * 'FetchComplex'
     * 'FetchComplexBinary16'
     * 'Read'
+
