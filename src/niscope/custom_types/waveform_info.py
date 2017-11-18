@@ -71,3 +71,14 @@ class WaveformInfo(object):
             self.__class__.__name__, self.absolute_initial_x, self.relative_initial_x, self.x_increment,
             self.actual_samples, self.offset, self.gain)
 
+    def __str__(self):
+        row_format_g = '{:<20}: {:,.6g}'
+        row_format_d = '{:<20}: {:,}'
+        string_representation = ''
+        string_representation += row_format_g.format('Absolute X0', wfm_info.absolute_initial_x)) + '\n'
+        string_representation += row_format_g.format('Relative X0', wfm_info.relative_initial_x)) + '\n'
+        string_representation += row_format_g.format('dt', wfm_info.x_increment)) + '\n'
+        string_representation += row_format_d.format('actual samples', wfm_info.actual_samples)) + '\n'
+        string_representation += row_format_g.format('offset', wfm_info.offset)) + '\n'
+        string_representation += row_format_g.format('gain', wfm_info.gain))
+

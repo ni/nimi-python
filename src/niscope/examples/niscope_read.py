@@ -18,16 +18,8 @@ with niscope.Session(args.name, False, False, '') as session:
     session.configure_horizontal_timing(50000000, args.length, 50.0, 1, True)
     wfm, wfm_infos = session[args.channels].read(1, args.length)
     print('Number of samples acquired: {:,}\n'.format(len(wfm)))
-    row_format_g = '    {:<20}: {:,.6g}'
-    row_format_d = '    {:<20}: {:,}'
     for i in range(len(wfm_infos)):
-        wfm_info = wfm_infos[i]
         print('Waveform {0} information:'.format(i))
-        print(row_format_g.format('Absolute X0', wfm_info.absolute_initial_x))
-        print(row_format_g.format('Relative X0', wfm_info.relative_initial_x))
-        print(row_format_g.format('dt', wfm_info.x_increment))
-        print(row_format_d.format('actual samples', wfm_info.actual_samples))
-        print(row_format_g.format('offset', wfm_info.offset))
-        print(row_format_g.format('gain', wfm_info.gain))
+        print(wfm_infos[i] + '\n\n')
 
 
