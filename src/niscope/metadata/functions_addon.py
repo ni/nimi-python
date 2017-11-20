@@ -68,6 +68,30 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
+    'AddWaveformProcessing':                           { 'parameters': { 2: { 'enum': 'ArrayMeasurement',                }, }, },
+    'CalSelfCalibrate':                                { 'parameters': { 2: { 'enum': 'Option',                          }, }, },
+    'ClearWaveformMeasurementStats':                   { 'parameters': { 2: { 'enum': 'ClearableMeasurement',            }, }, },
+    'ConfigureChanCharacteristics':                    { 'parameters': { 2: { 'enum': 'InputImpedance',                  }, }, },
+    'ConfigureVertical':                               { 'parameters': { 4: { 'enum': 'VerticalCoupling',                }, }, },
+    'ConfigureTriggerDigital':                         { 'parameters': { 1: { 'enum': 'TriggerSourceDigital',            }, }, },
+    'ConfigureTriggerDigital':                         { 'parameters': { 2: { 'enum': 'TriggerSlope',                    }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerEdge':                            { 'parameters': { 1: { 'enum': 'TriggerSource',                   }, }, },
+    'ConfigureTriggerEdge':                            { 'parameters': { 3: { 'enum': 'TriggerSlope',                    }, }, },  # Generate code when issue #617 fixed
+    'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 1: { 'enum': 'TriggerSource',                   }, }, }, 
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 4: { 'enum': 'TriggerSlope',                    }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 5: { 'enum': 'TriggerCoupling',                 }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerVideo':                           { 'parameters': { 1: { 'enum': 'TriggerSource',                   }, }, }, 
+    'ConfigureTriggerVideo':                           { 'parameters': { 3: { 'enum': 'VideoSignalFormat',               }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerVideo':                           { 'parameters': { 4: { 'enum': 'VideoTriggerEvent',               }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerVideo':                           { 'parameters': { 6: { 'enum': 'VideoPolarity',                   }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerVideo':                           { 'parameters': { 7: { 'enum': 'TriggerCoupling',                 }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerWindow':                          { 'parameters': { 1: { 'enum': 'TriggerSource',                   }, }, }, 
+    'ConfigureTriggerWindow':                          { 'parameters': { 4: { 'enum': 'TriggerWindowMode',               }, }, },  # Generate code when issue #617 fixed 
+    'ConfigureTriggerWindow':                          { 'parameters': { 5: { 'enum': 'TriggerCoupling',                 }, }, },  # Generate code when issue #617 fixed 
+    'ExportSignal':                                    { 'parameters': { 1: { 'enum': 'ExportableSignals',               }, }, }, 
+    'ExportSignal':                                    { 'parameters': { 2: { 'enum': 'WhichSignal',                     }, }, },  # Generate code when issue #617 fixed 
+    'ExportSignal':                                    { 'parameters': { 3: { 'enum': 'ExportDestinations',              }, }, },  # Generate code when issue #617 fixed 
     # @TODO add all enums
 }
 
