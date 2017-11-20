@@ -40,6 +40,269 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: ArrayMeasurement
+
+    .. py:attribute:: niscope.ArrayMeasurement.Last_Acq._Histogram
+
+
+
+        Last Acquisition Histogram
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Multi_Acq._Voltage_Histogram
+
+
+
+        Multi Acquisition Voltage Histogram
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Multi_Acq._Time_Histogram
+
+
+
+        Multi Acquisition Time Histogram
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Multi_Acq._Average
+
+
+
+        Multi Acquisition Average
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Polynomial_Interpolation
+
+
+
+        Polynomial Interpolation
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Array_Integral
+
+
+
+        Array Integral
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Derivative
+
+
+
+        Derivative
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Inverse
+
+
+
+        Inverse
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Multiply_Channels
+
+
+
+        Multiply Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Add_Channels
+
+
+
+        Add Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Subtract_Channels
+
+
+
+        Subtract Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Divide_Channels
+
+
+
+        Divide Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Array_Offset
+
+
+
+        Array Offset
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Array_Gain
+
+
+
+        Array Gain
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Hanning_Window
+
+
+
+        Hanning Window
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Flat_Top_Window
+
+
+
+        Flat Top Window
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Hamming_Window
+
+
+
+        Hamming Window
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Triangle_Window
+
+
+
+        Triangle Window
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Blackman_Window
+
+
+
+        Blackman Window
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.FIR_Windowed_Filter
+
+
+
+        FIR Windowed Filter
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Bessel_IIR_Filter
+
+
+
+        Bessel IIR Filter
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Butterworth_IIR_Filter
+
+
+
+        Butterworth IIR Filter
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.Chebyshev_IIR_Filter
+
+
+
+        Chebyshev IIR Filter
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.FFT_Phase_Spectrum
+
+
+
+        FFT Phase Spectrum
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.FFT_Amp._Spectrum_(Volts_RMS)
+
+
+
+        FFT Amp. Spectrum (Volts RMS)
+
+        
+
+
+
+    .. py:attribute:: niscope.ArrayMeasurement.FFT_Amp._Spectrum_(dB)
+
+
+
+        FFT Amp. Spectrum (dB)
+
+        
+
+
+
+
 .. py:data:: BoolEnableDisableChan
 
     .. py:attribute:: niscope.BoolEnableDisableChan.DISABLED
@@ -134,6 +397,269 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: ClearableMeasurement
+
+    .. py:attribute:: niscope.ClearableMeasurement.All_Measurements
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Multi_Acq._Voltage_Histogram
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Multi_Acq._Time_Histogram
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Multi_Acq._Average
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Frequency
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Period
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Average_Period
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Rise_Time
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Fall_Time
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Rising_Slew_Rate
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Falling_Slew_Rate
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Overshoot
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Preshoot
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_RMS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Cycle_RMS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AC_Estimate
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FFT_Amplitude
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Average
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Cycle_Average
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.DC_Estimate
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Max
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Min
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Peak-to-Peak
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_High
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Low
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Amplitude
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Top
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Base
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Voltage_Base-to-Top
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Negative_Width
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Positive_Width
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Negative_Duty_Cycle
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Positive_Duty_Cycle
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Integral
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Area
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Cycle_Area
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Delay
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Phase_Delay
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Low_Ref_Volts
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Mid_Ref_Volts
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.High_Ref_Volts
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Mean
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Median
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Mode
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Max
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Min
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Peak-to-Peak
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Mean_+_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Mean_+_2_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Mean_+_3_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._Hits
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Volt._Hist._New_Hits
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Mean
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Median
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Mode
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Max
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Min
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Peak-to-Peak
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Mean_+_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Mean_+_2_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Mean_+_3_Stdev
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._Hits
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.Time_Hist._New_Hits
+
+
+
+
 .. py:data:: DataProcessingMode
 
     .. py:attribute:: niscope.DataProcessingMode.REAL
@@ -153,6 +679,93 @@ Enums used in NI-SCOPE
         The waveform data points are complex numbers (IQ data).
 
         
+
+
+
+
+.. py:data:: ExportDestinations
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_0/RTSI_0
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_1/RTSI_1
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_2/RTSI_2
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_3/RTSI_3
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_4/RTSI_4
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_5/RTSI_5
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_6/RTSI_6
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Trigger_Line_7/RTSI_7_(RTSI_Clock)
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PXI_Star_Trigger
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PFI_0
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PFI_1
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.PFI_2
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.Clock_Out
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_0
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_1
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_2
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_3
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_4
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_5
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_6
+
+
+
+    .. py:attribute:: niscope.ExportDestinations.AUX_0/PFI_7
 
 
 
@@ -353,6 +966,40 @@ Enums used in NI-SCOPE
 
 
         This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+
+        
+
+
+
+
+.. py:data:: InputImpedance
+
+    .. py:attribute:: niscope.InputImpedance._1_mega_ohm
+
+
+
+    .. py:attribute:: niscope.InputImpedance._50_ohms
+
+
+
+
+.. py:data:: Option
+
+    .. py:attribute:: niscope.Option.Self_Calibrate_All_Channels
+
+
+
+        Self Calibrating all Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.Option.Restore_External_Calibration
+
+
+
+        Restore External Calibration.
 
         
 

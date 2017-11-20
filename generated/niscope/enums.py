@@ -18,6 +18,113 @@ class AcquisitionType(Enum):
     '''
 
 
+class ArrayMeasurement(Enum):
+    Last_Acq._Histogram = 4001
+    '''
+    Last Acquisition Histogram
+    '''
+    Multi_Acq._Voltage_Histogram = 4004
+    '''
+    Multi Acquisition Voltage Histogram
+    '''
+    Multi_Acq._Time_Histogram = 4005
+    '''
+    Multi Acquisition Time Histogram
+    '''
+    Multi_Acq._Average = 4016
+    '''
+    Multi Acquisition Average
+    '''
+    Polynomial_Interpolation = 4011
+    '''
+    Polynomial Interpolation
+    '''
+    Array_Integral = 4006
+    '''
+    Array Integral
+    '''
+    Derivative = 4007
+    '''
+    Derivative
+    '''
+    Inverse = 4008
+    '''
+    Inverse
+    '''
+    Multiply_Channels = 4012
+    '''
+    Multiply Channels
+    '''
+    Add_Channels = 4013
+    '''
+    Add Channels
+    '''
+    Subtract_Channels = 4014
+    '''
+    Subtract Channels
+    '''
+    Divide_Channels = 4015
+    '''
+    Divide Channels
+    '''
+    Array_Offset = 4025
+    '''
+    Array Offset
+    '''
+    Array_Gain = 4026
+    '''
+    Array Gain
+    '''
+    Hanning_Window = 4009
+    '''
+    Hanning Window
+    '''
+    Flat_Top_Window = 4010
+    '''
+    Flat Top Window
+    '''
+    Hamming_Window = 4020
+    '''
+    Hamming Window
+    '''
+    Triangle_Window = 4023
+    '''
+    Triangle Window
+    '''
+    Blackman_Window = 4024
+    '''
+    Blackman Window
+    '''
+    FIR_Windowed_Filter = 4021
+    '''
+    FIR Windowed Filter
+    '''
+    Bessel_IIR_Filter = 4022
+    '''
+    Bessel IIR Filter
+    '''
+    Butterworth_IIR_Filter = 4017
+    '''
+    Butterworth IIR Filter
+    '''
+    Chebyshev_IIR_Filter = 4018
+    '''
+    Chebyshev IIR Filter
+    '''
+    FFT_Phase_Spectrum = 4002
+    '''
+    FFT Phase Spectrum
+    '''
+    FFT_Amp._Spectrum_(Volts_RMS) = 4003
+    '''
+    FFT Amp. Spectrum (Volts RMS)
+    '''
+    FFT_Amp._Spectrum_(dB) = 4019
+    '''
+    FFT Amp. Spectrum (dB)
+    '''
+
+
 class BoolEnableDisableChan(Enum):
     DISABLED = 0
     '''
@@ -64,6 +171,74 @@ class BoolEnableDisableTIS(Enum):
     '''
 
 
+class ClearableMeasurement(Enum):
+    All_Measurements = 10000
+    Multi_Acq._Voltage_Histogram = 4004
+    Multi_Acq._Time_Histogram = 4005
+    Multi_Acq._Average = 4016
+    Frequency = 2
+    Period = 3
+    Average_Period = 1015
+    Rise_Time = 0
+    Fall_Time = 1
+    Rising_Slew_Rate = 1010
+    Falling_Slew_Rate = 1011
+    Overshoot = 18
+    Preshoot = 19
+    Voltage_RMS = 4
+    Voltage_Cycle_RMS = 16
+    AC_Estimate = 1012
+    FFT_Amplitude = 1009
+    Voltage_Average = 10
+    Voltage_Cycle_Average = 17
+    DC_Estimate = 1013
+    Voltage_Max = 6
+    Voltage_Min = 7
+    Voltage_Peak-to-Peak = 5
+    Voltage_High = 8
+    Voltage_Low = 9
+    Voltage_Amplitude = 15
+    Voltage_Top = 1007
+    Voltage_Base = 1006
+    Voltage_Base-to-Top = 1017
+    Negative_Width = 11
+    Positive_Width = 12
+    Negative_Duty_Cycle = 13
+    Positive_Duty_Cycle = 14
+    Integral = 1005
+    Area = 1003
+    Cycle_Area = 1004
+    Time_Delay = 1014
+    Phase_Delay = 1018
+    Low_Ref_Volts = 1000
+    Mid_Ref_Volts = 1001
+    High_Ref_Volts = 1002
+    Volt._Hist._Mean = 2000
+    Volt._Hist._Stdev = 2001
+    Volt._Hist._Median = 2003
+    Volt._Hist._Mode = 2010
+    Volt._Hist._Max = 2005
+    Volt._Hist._Min = 2006
+    Volt._Hist._Peak-to-Peak = 2002
+    Volt._Hist._Mean_+_Stdev = 2007
+    Volt._Hist._Mean_+_2_Stdev = 2008
+    Volt._Hist._Mean_+_3_Stdev = 2009
+    Volt._Hist._Hits = 2004
+    Volt._Hist._New_Hits = 2011
+    Time_Hist._Mean = 3000
+    Time_Hist._Stdev = 3001
+    Time_Hist._Median = 3003
+    Time_Hist._Mode = 3010
+    Time_Hist._Max = 3005
+    Time_Hist._Min = 3006
+    Time_Hist._Peak-to-Peak = 3002
+    Time_Hist._Mean_+_Stdev = 3007
+    Time_Hist._Mean_+_2_Stdev = 3008
+    Time_Hist._Mean_+_3_Stdev = 3009
+    Time_Hist._Hits = 3004
+    Time_Hist._New_Hits = 3011
+
+
 class DataProcessingMode(Enum):
     REAL = 0
     '''
@@ -73,6 +248,30 @@ class DataProcessingMode(Enum):
     '''
     The waveform data points are complex numbers (IQ data).
     '''
+
+
+class ExportDestinations(Enum):
+    PXI_Trigger_Line_0/RTSI_0 = 'VAL_RTSI_0'
+    PXI_Trigger_Line_1/RTSI_1 = 'VAL_RTSI_1'
+    PXI_Trigger_Line_2/RTSI_2 = 'VAL_RTSI_2'
+    PXI_Trigger_Line_3/RTSI_3 = 'VAL_RTSI_3'
+    PXI_Trigger_Line_4/RTSI_4 = 'VAL_RTSI_4'
+    PXI_Trigger_Line_5/RTSI_5 = 'VAL_RTSI_5'
+    PXI_Trigger_Line_6/RTSI_6 = 'VAL_RTSI_6'
+    PXI_Trigger_Line_7/RTSI_7_(RTSI_Clock) = 'VAL_RTSI_7'
+    PXI_Star_Trigger = 'VAL_PXI_STAR'
+    PFI_0 = 'VAL_PFI_0'
+    PFI_1 = 'VAL_PFI_1'
+    PFI_2 = 'VAL_PFI_2'
+    Clock_Out = 'VAL_CLK_OUT'
+    AUX_0/PFI_0 = 'VAL_AUX_0_PFI_0'
+    AUX_0/PFI_1 = 'VAL_AUX_0_PFI_1'
+    AUX_0/PFI_2 = 'VAL_AUX_0_PFI_2'
+    AUX_0/PFI_3 = 'VAL_AUX_0_PFI_3'
+    AUX_0/PFI_4 = 'VAL_AUX_0_PFI_4'
+    AUX_0/PFI_5 = 'VAL_AUX_0_PFI_5'
+    AUX_0/PFI_6 = 'VAL_AUX_0_PFI_6'
+    AUX_0/PFI_7 = 'VAL_AUX_0_PFI_7'
 
 
 class FIRFilterWindow(Enum):
@@ -160,6 +359,22 @@ class FlexFIRAntialiasFilterType(Enum):
     _8_TAP_HANNING = 3
     '''
     This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+    '''
+
+
+class InputImpedance(Enum):
+    _1_mega_ohm = 0
+    _50_ohms = 2
+
+
+class Option(Enum):
+    Self_Calibrate_All_Channels = 0
+    '''
+    Self Calibrating all Channels
+    '''
+    Restore_External_Calibration = 1
+    '''
+    Restore External Calibration.
     '''
 
 

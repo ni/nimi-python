@@ -1391,13 +1391,15 @@ class _SessionBase(object):
             session['0,1'].add_waveform_processing(meas_function)
 
         Args:
-            meas_function (int): The `array
+            meas_function (enums.ArrayMeasurement): The `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to add.
         '''
+        if type(meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        meas_function_ctype = visatype.ViInt32(meas_function)  # case 9
+        meas_function_ctype = visatype.ViInt32(meas_function.value)  # case 10
         error_code = self._library.niScope_AddWaveformProcessing(vi_ctype, channel_list_ctype, meas_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1428,13 +1430,15 @@ class _SessionBase(object):
             session['0,1'].cal_self_calibrate(option)
 
         Args:
-            option (int): The calibration option. Use VI_NULL for a normal self-calibration
+            option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
                 operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
                 restore the previous calibration.
         '''
+        if type(option) is not enums.Option:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Option))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        option_ctype = visatype.ViInt32(option)  # case 9
+        option_ctype = visatype.ViInt32(option.value)  # case 10
         error_code = self._library.niScope_CalSelfCalibrate(vi_ctype, channel_list_ctype, option_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1462,15 +1466,17 @@ class _SessionBase(object):
             session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function)
 
         Args:
-            clearable_measurement_function (int): The `scalar
+            clearable_measurement_function (enums.ClearableMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 or `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to clear the stats for.
         '''
+        if type(clearable_measurement_function) is not enums.ClearableMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function)  # case 9
+        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function.value)  # case 10
         error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1514,16 +1520,18 @@ class _SessionBase(object):
             session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
-            input_impedance (float): The input impedance for the channel; NI-SCOPE sets
+            input_impedance (enums.InputImpedance): The input impedance for the channel; NI-SCOPE sets
                 INPUT_IMPEDANCE to this value.
             max_input_frequency (float): The bandwidth for the channel; NI-SCOPE sets
                 MAX_INPUT_FREQUENCY to this value. Pass 0 for this
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
         '''
+        if type(input_impedance) is not enums.InputImpedance:
+            raise TypeError('Parameter mode must be of type ' + str(enums.InputImpedance))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        input_impedance_ctype = visatype.ViReal64(input_impedance)  # case 9
+        input_impedance_ctype = visatype.ViReal64(input_impedance.value)  # case 10
         max_input_frequency_ctype = visatype.ViReal64(max_input_frequency)  # case 9
         error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1584,18 +1592,20 @@ class _SessionBase(object):
                 more information.
             offset (float): Specifies the vertical offset. Refer to VERTICAL_OFFSET
                 for more information.
-            coupling (int): Specifies how to couple the input signal. Refer to
+            coupling (enums.VerticalCoupling): Specifies how to couple the input signal. Refer to
                 VERTICAL_COUPLING for more information.
             probe_attenuation (float): Specifies the probe attenuation. Refer to
                 PROBE_ATTENUATION for valid values.
             enabled (bool): Specifies whether the channel is enabled for acquisition. Refer to
                 CHANNEL_ENABLED for more information.
         '''
+        if type(coupling) is not enums.VerticalCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         range_ctype = visatype.ViReal64(range)  # case 9
         offset_ctype = visatype.ViReal64(offset)  # case 9
-        coupling_ctype = visatype.ViInt32(coupling)  # case 9
+        coupling_ctype = visatype.ViInt32(coupling.value)  # case 10
         probe_attenuation_ctype = visatype.ViReal64(probe_attenuation)  # case 9
         enabled_ctype = visatype.ViBoolean(enabled)  # case 9
         error_code = self._library.niScope_ConfigureVertical(vi_ctype, channel_list_ctype, range_ctype, offset_ctype, coupling_ctype, probe_attenuation_ctype, enabled_ctype)
@@ -2645,7 +2655,7 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
@@ -2655,9 +2665,11 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
-        slope_ctype = visatype.ViInt32(slope)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
@@ -2695,7 +2707,7 @@ class Session(_SessionBase):
             slope (int): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2704,11 +2716,13 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
         slope_ctype = visatype.ViInt32(slope)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
@@ -2755,7 +2769,7 @@ class Session(_SessionBase):
             slope (int): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2764,12 +2778,14 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
         hysteresis_ctype = visatype.ViReal64(hysteresis)  # case 9
         slope_ctype = visatype.ViInt32(slope)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
@@ -2876,7 +2892,7 @@ class Session(_SessionBase):
 
                 Default value: 1
             polarity (int): Specifies the polarity of the video signal sync.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2885,6 +2901,8 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         enable_dc_restore_ctype = visatype.ViBoolean(enable_dc_restore)  # case 9
@@ -2892,7 +2910,7 @@ class Session(_SessionBase):
         event_ctype = visatype.ViInt32(event)  # case 9
         line_number_ctype = visatype.ViInt32(line_number)  # case 9
         polarity_ctype = visatype.ViInt32(polarity)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
@@ -2935,7 +2953,7 @@ class Session(_SessionBase):
                 triggering.
             window_mode (int): Specifies whether you want the trigger to occur when the signal enters
                 or leaves a window.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2944,12 +2962,14 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         low_level_ctype = visatype.ViReal64(low_level)  # case 9
         high_level_ctype = visatype.ViReal64(high_level)  # case 9
         window_mode_ctype = visatype.ViInt32(window_mode)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
@@ -3050,6 +3070,8 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_CLK_OUT  | ("VAL_CLK_OUT")  |
                 +----------------------+------------------+
         '''
+        if type(output_terminal) is not enums.ExportDestinations:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ExportDestinations))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         signal_ctype = visatype.ViInt32(signal)  # case 9
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
