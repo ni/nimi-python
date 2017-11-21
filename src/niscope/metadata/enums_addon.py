@@ -175,190 +175,190 @@ replacement_enums = {
     },
     'ArrayMeasurement': {
         'values': [
-            #{  # (TODO) Jaleel: Recheck after Issue#618 fixed
-            #    'name': "None",
-            #    'value': 4000,
-            #    'documentation': {
-            #        'description': 'None',
-            #    },
-            #},
             {
-                'name': 'Last_Acq._Histogram',
+                'name': 'NO_MEASUREMENT',
+                'value': 4000,
+                'documentation': {
+                    'description': 'None',
+                },
+            },
+            {
+                'name': 'LAST_ACQ_HISTOGRAM',
                 'value': 4001,
                 'documentation': {
                     'description': 'Last Acquisition Histogram ',
                 },
             },
             {
-                'name': 'Multi_Acq._Voltage_Histogram',
+                'name': 'MULTI_ACQ_VOLTAGE_HISTOGRAM',
                 'value': 4004,
                 'documentation': {
                     'description': 'Multi Acquisition Voltage Histogram',
                 },
             },
             {
-                'name': 'Multi_Acq._Time_Histogram',
+                'name': 'MULTI_ACQ_TIME_HISTOGRAM',
                 'value': 4005,
                 'documentation': {
                     'description': 'Multi Acquisition Time Histogram',
                 },
             },
             {
-                'name': 'Multi_Acq._Average',
+                'name': 'MULTI_ACQ_AVERAGE',
                 'value': 4016,
                 'documentation': {
                     'description': 'Multi Acquisition Average',
                 },
             },
             {
-                'name': 'Polynomial_Interpolation',
+                'name': 'POLYNOMIAL_INTERPOLATION',
                 'value': 4011,
                 'documentation': {
                     'description': 'Polynomial Interpolation',
                 },
             },
             {
-                'name': 'Array_Integral',
+                'name': 'ARRAY_INTEGRAL',
                 'value': 4006,
                 'documentation': {
                     'description': 'Array Integral',
                 },
             },
             {
-                'name': 'Derivative',
+                'name': 'DERIVATIVE',
                 'value': 4007,
                 'documentation': {
                     'description': 'Derivative',
                 },
             },
             {
-                'name': 'Inverse',
+                'name': 'INVERSE',
                 'value': 4008,
                 'documentation': {
                     'description': 'Inverse',
                 },
             },
             {
-                'name': 'Multiply_Channels',
+                'name': 'MULTIPLY_CHANNELS',
                 'value': 4012,
                 'documentation': {
                     'description': 'Multiply Channels',
                 },
             },
             {
-                'name': 'Add_Channels',
+                'name': 'ADD_CHANNELS',
                 'value': 4013,
                 'documentation': {
                     'description': 'Add Channels',
                 },
             },
             {
-                'name': 'Subtract_Channels',
+                'name': 'SUBTRACT_CHANNELS',
                 'value': 4014,
                 'documentation': {
                     'description': 'Subtract Channels',
                 },
             },
             {
-                'name': 'Divide_Channels',
+                'name': 'DIVIDE_CHANNELS',
                 'value': 4015,
                 'documentation': {
                     'description': 'Divide Channels',
                 },
             },
             {
-                'name': 'Array_Offset',
+                'name': 'ARRAY_OFFSET',
                 'value': 4025,
                 'documentation': {
                     'description': 'Array Offset',
                 },
             },
             {
-                'name': 'Array_Gain',
+                'name': 'ARRAY_GAIN',
                 'value': 4026,
                 'documentation': {
                     'description': 'Array Gain',
                 },
             },
             {
-                'name': 'Hanning_Window',
+                'name': 'HANNING_WINDOW',
                 'value': 4009,
                 'documentation': {
                     'description': 'Hanning Window',
                 },
             },
             {
-                'name': 'Flat_Top_Window',
+                'name': 'FLAT_TOP_WINDOW',
                 'value': 4010,
                 'documentation': {
                     'description': 'Flat Top Window',
                 },
             },
             {
-                'name': 'Hamming_Window',
+                'name': 'HAMMING_WINDOW',
                 'value': 4020,
                 'documentation': {
                     'description': 'Hamming Window',
                 },
             },
             {
-                'name': 'Triangle_Window',
+                'name': 'TRIANGLE_WINDOW',
                 'value': 4023,
                 'documentation': {
                     'description': 'Triangle Window',
                 },
             },
             {
-                'name': 'Blackman_Window',
+                'name': 'BLACKMAN_WINDOW',
                 'value': 4024,
                 'documentation': {
                     'description': 'Blackman Window',
                 },
             },
             {
-                'name': 'FIR_Windowed_Filter',
+                'name': 'WINDOWED_FIR_FILTER',
                 'value': 4021,
                 'documentation': {
                     'description': 'FIR Windowed Filter',
                 },
             },
             {
-                'name': 'Bessel_IIR_Filter',
+                'name': 'BESSEL_FILTER',
                 'value': 4022,
                 'documentation': {
                     'description': 'Bessel IIR Filter',
                 },
             },
             {
-                'name': 'Butterworth_IIR_Filter',
+                'name': 'BUTTERWORTH_FILTER',
                 'value': 4017,
                 'documentation': {
                     'description': 'Butterworth IIR Filter',
                 },
             },
             {
-                'name': 'Chebyshev_IIR_Filter',
+                'name': 'CHEBYSHEV_FILTER',
                 'value': 4018,
                 'documentation': {
                     'description': 'Chebyshev IIR Filter',
                 },
             },
             {
-                'name': 'FFT_Phase_Spectrum',
+                'name': 'FFT_PHASE_SPECTRUM',
                 'value': 4002,
                 'documentation': {
                     'description': 'FFT Phase Spectrum',
                 },
             },
             {
-                'name': 'FFT_Amp._Spectrum_(Volts_RMS)',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'FFT_AMP_SPECTRUM_VOLTS_RMS', 
                 'value': 4003,
                 'documentation': {
                     'description': 'FFT Amp. Spectrum (Volts RMS)',
                 },
             },
             {
-                'name': 'FFT_Amp._Spectrum_(dB)',  
+                'name': 'FFT_AMP_SPECTRUM_DB',  
                 'value': 4019,
                 'documentation': {
                     'description': 'FFT Amp. Spectrum (dB)',
@@ -369,14 +369,14 @@ replacement_enums = {
     'Option': {
         'values': [
             {
-                'name': 'Self_Calibrate_All_Channels',
+                'name': 'SELF_CALIBRATE_ALL_CHANNELS',
                 'value': 0,
                 'documentation': {
                     'description': 'Self Calibrating all Channels',
                 },
             },
             {
-                'name': 'Restore_External_Calibration',
+                'name': 'RESTORE_EXTERNAL_CALIBRATION',
                 'value': 1,
                 'documentation': {
                     'description': 'Restore External Calibration.',
@@ -387,264 +387,272 @@ replacement_enums = {
     'ClearableMeasurement': {
         'values': [
             {
-                'name':'All_Measurements',
+                'name':'ALL_MEASUREMENTS',
                 'value':10000,
             },
             {
-                'name':'Multi_Acq._Voltage_Histogram',
+                'name':'MULTI_ACQ_VOLTAGE_HISTOGRAM',
                 'value':4004,
             },
             {
-                'name':'Multi_Acq._Time_Histogram',
+                'name':'MULTI_ACQ_TIME_HISTOGRAM',
                 'value':4005,
             },
             {
-                'name':'Multi_Acq._Average',
+                'name':'MULTI_ACQ_AVERAGE',
                 'value':4016,
             },
             {
-                'name':'Frequency',
+                'name':'FREQUENCY',
                 'value':2,
             },
+			{
+                'name':'AVERAGE_FREQUENCY',
+                'value':1016,
+            },
+			{
+                'name':'FFT_FREQUENCY',
+                'value':1008,
+            },
             {
-                'name':'Period',
+                'name':'PERIOD',
                 'value':3,
             },
             {
-                'name':'Average_Period',
+                'name':'AVERAGE_PERIOD',
                 'value':1015,
             },          
             {
-                'name':'Rise_Time',
+                'name':'RISE_TIME',
                 'value':0,
             },
             {
-                'name':'Fall_Time',
+                'name':'FALL_TIME',
                 'value':1,
             },          
             {
-                'name':'Rising_Slew_Rate',
+                'name':'RISE_SLEW_RATE',
                 'value':1010,
             },          
             {
-                'name':'Falling_Slew_Rate',
+                'name':'FALL_SLEW_RATE',
                 'value':1011,
             },          
             {
-                'name':'Overshoot',
+                'name':'OVERSHOOT',
                 'value':18,
             },          
             {
-                'name':'Preshoot',
+                'name':'PRESHOOT',
                 'value':19,
             },          
             {
-                'name':'Voltage_RMS',
+                'name':'VOLTAGE_RMS',
                 'value':4,
             },          
             {
-                'name':'Voltage_Cycle_RMS',
+                'name':'VOLTAGE_CYCLE_RMS',
                 'value':16,
             },          
             {
-                'name':'AC_Estimate',
+                'name':'AC_ESTIMATE',
                 'value':1012,
             },          
             {
-                'name':'FFT_Amplitude',
+                'name':'FFT_AMPLITUDE',
                 'value':1009,
             },          
             {
-                'name':'Voltage_Average',
+                'name':'VOLTAGE_AVERAGE',
                 'value':10,
             },          
             {
-                'name':'Voltage_Cycle_Average',
+                'name':'VOLTAGE_CYCLE_AVERAGE',
                 'value':17,
             },          
             {
-                'name':'DC_Estimate',
+                'name':'DC_ESTIMATE',
                 'value':1013,
             },
             {
-                'name':'Voltage_Max',
+                'name':'VOLTAGE_MAX',
                 'value':6,
             },
             {
-                'name':'Voltage_Min',
+                'name':'VOLTAGE_MIN',
                 'value':7,
             },
             {
-                'name':'Voltage_Peak-to-Peak',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_PEAK_TO_PEAK', 
                 'value':5,
             },  
             {
-                'name':'Voltage_High',
+                'name':'VOLTAGE_HIGH',
                 'value':8,
             },
             {
-                'name':'Voltage_Low',
+                'name':'VOLTAGE_LOW',
                 'value':9,
             },
             {
-                'name':'Voltage_Amplitude',
+                'name':'AMPLITUDE',
                 'value':15,
             },
             {
-                'name':'Voltage_Top',
+                'name':'VOLTAGE_TOP',
                 'value':1007,
             },
             {
-                'name':'Voltage_Base',
+                'name':'VOLTAGE_BASE',
                 'value':1006,
             },
             {
-                'name':'Voltage_Base-to-Top',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_BASE_TO_TOP', 
                 'value':1017,
             },
             {
-                'name':'Negative_Width',
+                'name':'WIDTH_NEG',
                 'value':11,
             },
             {
-                'name':'Positive_Width',
+                'name':'WIDTH_POS',
                 'value':12,
             },
             {
-                'name':'Negative_Duty_Cycle',
+                'name':'DUTY_CYCLE_NEG',
                 'value':13,
             },
             {
-                'name':'Positive_Duty_Cycle',
+                'name':'DUTY_CYCLE_POS',
                 'value':14,
             },
             {
-                'name':'Integral',
+                'name':'INTEGRAL',
                 'value':1005,
             },
             {
-                'name':'Area',
+                'name':'AREA',
                 'value':1003,
             },
             {
-                'name':'Cycle_Area',
+                'name':'CYCLE_AREA',
                 'value':1004,
             },
             
             {
-                'name':'Time_Delay',
+                'name':'TIME_DELAY',
                 'value':1014,
             },
             {
-                'name':'Phase_Delay',
+                'name':'PHASE_DELAY',
                 'value':1018,
             },
             {
-                'name':'Low_Ref_Volts',
+                'name':'LOW_REF_VOLTS',
                 'value':1000,
             },
             {
-                'name':'Mid_Ref_Volts',
+                'name':'MID_REF_VOLTS',
                 'value':1001,
             },
             {
-                'name':'High_Ref_Volts',
+                'name':'HIGH_REF_VOLTS',
                 'value':1002,
             },
             {
-                'name':'Volt._Hist._Mean',
+                'name':'VOLTAGE_HISTOGRAM_MEAN',
                 'value':2000,
             },
             {
-                'name':'Volt._Hist._Stdev',
+                'name':'VOLTAGE_HISTOGRAM_STDEV',
                 'value':2001,
             },
             {
-                'name':'Volt._Hist._Median',
+                'name':'VOLTAGE_HISTOGRAM_MEDIAN',
                 'value':2003,
             },
             {
-                'name':'Volt._Hist._Mode',
+                'name':'VOLTAGE_HISTOGRAM_MODE',
                 'value':2010,
             },
             {
-                'name':'Volt._Hist._Max',
+                'name':'VOLTAGE_HISTOGRAM_MAX',
                 'value':2005,
             },
             {
-                'name':'Volt._Hist._Min',
+                'name':'VOLTAGE_HISTOGRAM_MIN',
                 'value':2006,
             },
             {
-                'name':'Volt._Hist._Peak-to-Peak',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_HISTOGRAM_PEAK_TO_PEAK', 
                 'value':2002,
             },
             {
-                'name':'Volt._Hist._Mean_+_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV', 
                 'value':2007,
             },
             {
-                'name':'Volt._Hist._Mean_+_2_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV', 
                 'value':2008,
             },
             {
-                'name':'Volt._Hist._Mean_+_3_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV', 
                 'value':2009,
             },
             {
-                'name':'Volt._Hist._Hits',
+                'name':'VOLTAGE_HISTOGRAM_HITS',
                 'value':2004,
             },
             {
-                'name':'Volt._Hist._New_Hits',
+                'name':'VOLTAGE_HISTOGRAM_NEW_HITS',
                 'value':2011,
             },
             {
-                'name':'Time_Hist._Mean',
+                'name':'TIME_HISTOGRAM_MEAN',
                 'value':3000,
             },
             {
-                'name':'Time_Hist._Stdev',
+                'name':'TIME_HISTOGRAM_STDEV',
                 'value':3001,
             },
             {
-                'name':'Time_Hist._Median',
+                'name':'TIME_HISTOGRAM_MEDIAN',
                 'value':3003,
             },
             {
-                'name':'Time_Hist._Mode',
+                'name':'TIME_HISTOGRAM_MODE',
                 'value':3010,
             },
             {
-                'name':'Time_Hist._Max',
+                'name':'TIME_HISTOGRAM_MAX',
                 'value':3005,
             },
             {
-                'name':'Time_Hist._Min',
+                'name':'TIME_HISTOGRAM_MIN',
                 'value':3006,
             },
             {
-                'name':'Time_Hist._Peak-to-Peak',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'TIME_HISTOGRAM_PEAK_TO_PEAK', 
                 'value':3002,
             },
             {
-                'name':'Time_Hist._Mean_+_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_STDEV', 
                 'value':3007,
             },
             {
-                'name':'Time_Hist._Mean_+_2_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_2_STDEV', 
                 'value':3008,
             },
             {
-                'name':'Time_Hist._Mean_+_3_Stdev',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_3_STDEV', 
                 'value':3009,
             },
             {
-                'name':'Time_Hist._Hits',
+                'name':'TIME_HISTOGRAM_HITS',
                 'value':3004,
             },
             {
-                'name':'Time_Hist._New_Hits',
+                'name':'TIME_HISTOGRAM_NEW_HITS',
                 'value':3011,
             },          
         ],
@@ -652,11 +660,11 @@ replacement_enums = {
     'InputImpedance': {
         'values': [
             {
-                'name': '1_mega_ohm',
+                'name': '_1_MEG_OHM',
                 'value': 0,
             },
             {
-                'name': '50_ohms',
+                'name': '_50_OHMS',
                 'value': 2,
             },          
         ],
@@ -704,39 +712,39 @@ replacement_enums = {
                 'value': 'VAL_PFI_2',
             },
             {
-                'name': 'PXI_Star_Trigger',
+                'name': 'PXI_STAR',
                 'value': 'VAL_PXI_STAR',
             },
             {
-                'name': 'AUX_0/PFI_0',
-                'value': 'VAL_AUX_0_PFI_0',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_0',
+                'value': 'VAL_AUX_0_PFI_0', 
             },
             {
-                'name': 'AUX_0/PFI_1',
-                'value': 'VAL_AUX_0_PFI_1',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_1',
+                'value': 'VAL_AUX_0_PFI_1', 
             },
             {
-                'name': 'AUX_0/PFI_2',
-                'value': 'VAL_AUX_0_PFI_2',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_2',
+                'value': 'VAL_AUX_0_PFI_2', 
             },
             {
-                'name': 'AUX_0/PFI_3',
-                'value': 'VAL_AUX_0_PFI_3',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_3',
+                'value': 'VAL_AUX_0_PFI_3', 
             },
             {
-                'name': 'AUX_0/PFI_4',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_4', 
                 'value': 'VAL_AUX_0_PFI_4',
             },
             {
-                'name': 'AUX_0/PFI_5',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_5', 
                 'value': 'VAL_AUX_0_PFI_5',
             },
             {
-                'name': 'AUX_0/PFI_6',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'VAL_AUX_0_PFI_6', 
                 'value': 'VAL_AUX_0_PFI_6',
             },
             {
-                'name': 'AUX_0/PFI_7',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'VAL_AUX_0_PFI_7', 
                 'value': 'VAL_AUX_0_PFI_7',
             },
         ],
@@ -776,111 +784,95 @@ replacement_enums = {
                 'value': 7,
             },
             {
-                'name': 'External TRIG',
+                'name': 'VAL_EXTERNAL',
                 'value': 'VAL_EXTERNAL',
             },
         ],
     },
    'ExportableSignals': {   
         'values': [
-            #{  # (TODO) Jaleel: Recheck after Issue#618 fixed
-            #    'name': 'None',
-            #    'value': 0,
-            #},
             {
-                'name': 'Start_Trigger',
+                'name': 'START_TRIGGER',
                 'value': 2,
             },
             {
-                'name': 'Advance_Trigger',
+                'name': 'ADVANCE_TRIGGER',
                 'value': 5,
             },
             {
-                'name': 'Reference_Trigger',
+                'name': 'REF_TRIGGER',
                 'value': 1,
             },
             {
-                'name': 'End_of_Record_Event',
+                'name': 'END_OF_RECORD_EVENT',
                 'value': 4,
             },
             {
-                'name': 'End_of_Acquisition_Event',
+                'name': 'END_OF_ACQUISITION_EVENT',
                 'value': 3,
             },
             {
-                'name': 'Ready_for_Start_Event',
+                'name': 'READY_FOR_START_EVENT',
                 'value': 7,
             },
             {
-                'name': 'Ready_for_Advance_Event',
+                'name': 'READY_FOR_ADVANCE_EVENT',
                 'value': 6,
             },
             {
-                'name': 'Ready_for_Reference_Event',
+                'name': 'READY_FOR_REF_EVENT',
                 'value': 10,
             },
             {
-                'name': 'Reference_Clock',
+                'name': 'REF_CLOCK',
                 'value': 100,
             },
             {
-                'name': 'Sample_Clock',
+                'name': 'SAMPLE_CLOCK',
                 'value': 101,
             },
             {
-                'name': '5_Volt_Power',
+                'name': '5V_OUT',
                 'value': 13,
             },
         ],
     },
-   #'WhichSignal': {  # (TODO) Jaleel: Recheck after Issue#618 fixed
-   #     'values': [
-   #        {
-   #             'name': 'None',
-   #             'value': 'None',
-   #         },
-   # 	],
-   #},
    'ExportDestinations': {   
         'values': [
-            #{  # (TODO) Jaleel: Recheck after Issue#618 fixed  
-            #    'name': 'None',
-            #    'value': 'VAL_NO_SOURCE',
-            #},
 			{
-                'name': 'PXI_Trigger_Line_0/RTSI_0',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_0', 
                 'value': 'VAL_RTSI_0',
             },
 			{
-                'name': 'PXI_Trigger_Line_1/RTSI_1',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_1', 
                 'value': 'VAL_RTSI_1',
             },
 			{
-                'name': 'PXI_Trigger_Line_2/RTSI_2',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_2', 
                 'value': 'VAL_RTSI_2',
             },
 			{
-                'name': 'PXI_Trigger_Line_3/RTSI_3',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_3', 
                 'value': 'VAL_RTSI_3',
             },
 			{
-                'name': 'PXI_Trigger_Line_4/RTSI_4',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_4', 
                 'value': 'VAL_RTSI_4',
             },
 			{
-                'name': 'PXI_Trigger_Line_5/RTSI_5',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_5', 
                 'value': 'VAL_RTSI_5',
             },
 			{
-                'name': 'PXI_Trigger_Line_6/RTSI_6',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_6', 
                 'value': 'VAL_RTSI_6',
             },
 			{
-                'name': 'PXI_Trigger_Line_7/RTSI_7_(RTSI_Clock)',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'RTSI_7', 
                 'value': 'VAL_RTSI_7',
             },
 			{
-                'name': 'PXI_Star_Trigger',
+                'name': 'PXI_STAR',
                 'value': 'VAL_PXI_STAR',
             },
 			{
@@ -896,39 +888,39 @@ replacement_enums = {
                 'value': 'VAL_PFI_2',
             },
 			{
-                'name': 'Clock_Out',
+                'name': 'CLK_OUT',
                 'value': 'VAL_CLK_OUT',
             },
 			{
-                'name': 'AUX_0/PFI_0',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_0', 
                 'value': 'VAL_AUX_0_PFI_0',
             },
 			{
-                'name': 'AUX_0/PFI_1',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_1', 
                 'value': 'VAL_AUX_0_PFI_1',
             },
 			{
-                'name': 'AUX_0/PFI_2',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_2', 
                 'value': 'VAL_AUX_0_PFI_2',
             },
 			{
-                'name': 'AUX_0/PFI_3',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_3', 
                 'value': 'VAL_AUX_0_PFI_3',
             },
 			{
-                'name': 'AUX_0/PFI_4',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_4', 
                 'value': 'VAL_AUX_0_PFI_4',
             },
 			{
-                'name': 'AUX_0/PFI_5',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_5', 
                 'value': 'VAL_AUX_0_PFI_5',
             },
 			{
-                'name': 'AUX_0/PFI_6',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_6', 
                 'value': 'VAL_AUX_0_PFI_6',
             },
 			{
-                'name': 'AUX_0/PFI_7',  # (TODO) Jaleel: Recheck after Issue#619 fixed
+                'name': 'AUX_0_PFI_7', 
                 'value': 'VAL_AUX_0_PFI_7',
             },
 		],
