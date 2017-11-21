@@ -8,7 +8,7 @@
 enums_codegen_method = {
 }
 
-enums_additional_enums = {
+replacement_enums = {
     'Trigger': {
         'values': [
             {
