@@ -14,7 +14,7 @@ def test_read(session):
     test_record_length = 2000
     test_channels = '0,1'
     test_num_channels = 2
-    session.configure_vertical(test_voltage, 0.0, 0, 1.0, True)
+    session.configure_vertical(test_voltage, 0.0, niscope.VerticalCoupling.AC, 1.0, True)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     wfm, wfm_infos = session[test_channels].read(1, test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
@@ -26,7 +26,7 @@ def test_fetch(session):
     test_record_length = 2000
     test_channels = '0,1'
     test_num_channels = 2
-    session.configure_vertical(test_voltage, 0.0, 0, 1.0, True)
+    session.configure_vertical(test_voltage, 0.0, niscope.VerticalCoupling.AC, 1.0, True)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         wfm, wfm_infos = session[test_channels].fetch(1, test_record_length)
@@ -77,3 +77,11 @@ def test_get_error(session):
     except niscope.Error as e:
         assert e.code == -1074135027  # Error : Attribute is read-only.
         assert e.description.find('Attribute is read-only.') != -1
+
+
+def test_acquisition_status(session):
+    assert session.acquisition_status() == 1
+
+
+def test_self_cal(session):
+    session.cal_self_calibrate(niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
