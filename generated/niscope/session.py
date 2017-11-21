@@ -2665,6 +2665,8 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSourceDigital:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSourceDigital))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
@@ -2704,7 +2706,7 @@ class Session(_SessionBase):
                 for defined values.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
@@ -2716,12 +2718,16 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
-        slope_ctype = visatype.ViInt32(slope)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
@@ -2766,7 +2772,7 @@ class Session(_SessionBase):
                 hysteresis value you specify with this parameter, has the slope you
                 specify with **slope**, and passes through the **level**. Refer to
                 TRIGGER_HYSTERESIS for defined values.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
@@ -2778,13 +2784,17 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
         hysteresis_ctype = visatype.ViReal64(hysteresis)  # case 9
-        slope_ctype = visatype.ViInt32(slope)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
@@ -2879,10 +2889,10 @@ class Session(_SessionBase):
                 line between the end of the color burst and the beginning of the active
                 image) is moved to zero volt. Refer to
                 ENABLE_DC_RESTORE for defined values.
-            signal_format (int): Specifies the type of video signal sync the digitizer should look for.
+            signal_format (enums.VideoSignalFormat): Specifies the type of video signal sync the digitizer should look for.
                 Refer to TV_TRIGGER_SIGNAL_FORMAT for more
                 information.
-            event (int): Specifies the TV event you want to trigger on. You can trigger on a
+            event (enums.VideoTriggerEvent): Specifies the TV event you want to trigger on. You can trigger on a
                 specific or on the next coming line or field of the signal.
             line_number (int): Selects the line number to trigger on. The line number range covers an
                 entire frame and is referenced as shown on `Vertical Blanking and
@@ -2891,7 +2901,7 @@ class Session(_SessionBase):
                 TV_TRIGGER_LINE_NUMBER for more information.
 
                 Default value: 1
-            polarity (int): Specifies the polarity of the video signal sync.
+            polarity (enums.VideoPolarity): Specifies the polarity of the video signal sync.
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
@@ -2901,15 +2911,23 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        if type(signal_format) is not enums.VideoSignalFormat:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
+        if type(event) is not enums.VideoTriggerEvent:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoTriggerEvent))
+        if type(polarity) is not enums.VideoPolarity:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoPolarity))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         enable_dc_restore_ctype = visatype.ViBoolean(enable_dc_restore)  # case 9
-        signal_format_ctype = visatype.ViInt32(signal_format)  # case 9
-        event_ctype = visatype.ViInt32(event)  # case 9
+        signal_format_ctype = visatype.ViInt32(signal_format.value)  # case 10
+        event_ctype = visatype.ViInt32(event.value)  # case 10
         line_number_ctype = visatype.ViInt32(line_number)  # case 9
-        polarity_ctype = visatype.ViInt32(polarity)  # case 9
+        polarity_ctype = visatype.ViInt32(polarity.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
@@ -2951,7 +2969,7 @@ class Session(_SessionBase):
                 triggering.
             high_level (float): Passes the voltage threshold you want the digitizer to use for high
                 triggering.
-            window_mode (int): Specifies whether you want the trigger to occur when the signal enters
+            window_mode (enums.TriggerWindowMode): Specifies whether you want the trigger to occur when the signal enters
                 or leaves a window.
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
@@ -2962,13 +2980,15 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(window_mode) is not enums.TriggerWindowMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         low_level_ctype = visatype.ViReal64(low_level)  # case 9
         high_level_ctype = visatype.ViReal64(high_level)  # case 9
-        window_mode_ctype = visatype.ViInt32(window_mode)  # case 9
+        window_mode_ctype = visatype.ViInt32(window_mode.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
@@ -3009,7 +3029,7 @@ class Session(_SessionBase):
         Note: This function replaces ConfigureTriggerOutput.
 
         Args:
-            signal (int): signal (clock, trigger, or event) to export.
+            signal (enums.ExportableSignals): signal (clock, trigger, or event) to export.
 
                 **Defined Values**
 
@@ -3070,10 +3090,12 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_CLK_OUT  | ("VAL_CLK_OUT")  |
                 +----------------------+------------------+
         '''
+        if type(signal) is not enums.ExportableSignals:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
         if type(output_terminal) is not enums.ExportDestinations:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportDestinations))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        signal_ctype = visatype.ViInt32(signal)  # case 9
+        signal_ctype = visatype.ViInt32(signal.value)  # case 10
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
         error_code = self._library.niScope_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)

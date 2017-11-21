@@ -679,7 +679,7 @@ niscope.Session methods
         
 
 
-    :type slope: int
+    :type slope: :py:data:`niscope.TriggerSlope`
     :param trigger_coupling:
 
 
@@ -785,7 +785,7 @@ niscope.Session methods
         
 
 
-    :type slope: int
+    :type slope: :py:data:`niscope.TriggerSlope`
     :param trigger_coupling:
 
 
@@ -941,7 +941,7 @@ niscope.Session methods
         
 
 
-    :type signal_format: int
+    :type signal_format: :py:data:`niscope.VideoSignalFormat`
     :param event:
 
 
@@ -951,7 +951,7 @@ niscope.Session methods
         
 
 
-    :type event: int
+    :type event: :py:data:`niscope.VideoTriggerEvent`
     :param line_number:
 
 
@@ -975,7 +975,7 @@ niscope.Session methods
         
 
 
-    :type polarity: int
+    :type polarity: :py:data:`niscope.VideoPolarity`
     :param trigger_coupling:
 
 
@@ -1077,7 +1077,7 @@ niscope.Session methods
         
 
 
-    :type window_mode: int
+    :type window_mode: :py:data:`niscope.TriggerWindowMode`
     :param trigger_coupling:
 
 
@@ -1246,7 +1246,7 @@ niscope.Session methods
         +-------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`niscope.ExportableSignals`
     :param signal_identifier:
 
 
