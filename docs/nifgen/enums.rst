@@ -1374,6 +1374,17 @@ Enums used in NI-FGEN
 
 
 
+.. py:data:: Trigger
+
+    .. py:attribute:: nifgen.Trigger.START
+
+
+
+    .. py:attribute:: nifgen.Trigger.SCRIPT
+
+
+
+
 .. py:data:: TriggerMode
 
     .. py:attribute:: nifgen.TriggerMode.SINGLE
