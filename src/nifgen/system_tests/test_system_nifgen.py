@@ -306,9 +306,9 @@ def test_configure_triggers(session):
     session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
 
 
-# TODO(bhaswath): Enable after Issue 597 is fixed
-'''
 def test_send_software_edge_trigger(session):
-    session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, '')
-'''
+    waveform_data = [0, 1, 2, 3, 3, 2, 1, 0]
+    session.create_waveform_i16(waveform_data)
+    with session.initiate():
+        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
 
