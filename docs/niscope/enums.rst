@@ -983,39 +983,167 @@ Enums used in NI-SCOPE
 
 .. py:data:: TriggerSource
 
-    .. py:attribute:: niscope.TriggerSource.Channel_0
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_0
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_1
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_1
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_2
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_2
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_3
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_3
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_4
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_4
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_5
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_5
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_6
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_6
 
 
 
-    .. py:attribute:: niscope.TriggerSource.Channel_7
+    .. py:attribute:: niscope.TriggerSource.CHANNEL_7
 
 
 
-    .. py:attribute:: niscope.TriggerSource.VAL_EXTERNAL
+    .. py:attribute:: niscope.TriggerSource.IMMEDIATE
+
+
+
+    .. py:attribute:: niscope.TriggerSource.EXTERNAL
+
+
+
+    .. py:attribute:: niscope.TriggerSource.SW_TRIG_FUNC
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL2
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL3
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL4
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL5
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL6
+
+
+
+    .. py:attribute:: niscope.TriggerSource.TTL7
+
+
+
+    .. py:attribute:: niscope.TriggerSource.ECL0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.ECL1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.PXI_STAR
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_3
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_4
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_5
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_6
+
+
+
+    .. py:attribute:: niscope.TriggerSource.RTSI_7
+
+
+
+    .. py:attribute:: niscope.TriggerSource.PFI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.PFI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.PFI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_3
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_4
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_5
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_6
+
+
+
+    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_7
 
 
 

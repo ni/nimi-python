@@ -544,43 +544,171 @@ replacement_enums = {
             },
         ],
     },
-   'TriggerSource': {
+    'TriggerSource': {
         'values': [
             {
-                'name': 'Channel_0',
-                'value': 0,
+                'name': 'NISCOPE_VAL_CHANNEL_0',
+                'value': '0',
             },
             {
-                'name': 'Channel_1',
-                'value': 1,
+                'name': 'NISCOPE_VAL_CHANNEL_1',
+                'value': '1',
             },
             {
-                'name': 'Channel_2',
-                'value': 2,
+                'name': 'NISCOPE_VAL_CHANNEL_2',
+                'value': '2',
             },
             {
-                'name': 'Channel_3',
-                'value': 3,
+                'name': 'NISCOPE_VAL_CHANNEL_3',
+                'value': '3',
             },
             {
-                'name': 'Channel_4',
-                'value': 4,
+                'name': 'NISCOPE_VAL_CHANNEL_4',
+                'value': '4',
             },
             {
-                'name': 'Channel_5',
-                'value': 5,
+                'name': 'NISCOPE_VAL_CHANNEL_5',
+                'value': '5',
             },
             {
-                'name': 'Channel_6',
-                'value': 6,
+                'name': 'NISCOPE_VAL_CHANNEL_6',
+                'value': '6',
             },
             {
-                'name': 'Channel_7',
-                'value': 7,
+                'name': 'NISCOPE_VAL_CHANNEL_7',
+                'value': '7',
             },
             {
-                'name': 'VAL_EXTERNAL',
+                'name': 'NISCOPE_VAL_IMMEDIATE',
+                'value': 'VAL_IMMEDIATE',
+            },
+            {
+                'name': 'NISCOPE_VAL_EXTERNAL',
                 'value': 'VAL_EXTERNAL',
+            },
+            {
+                'name': 'NISCOPE_VAL_SW_TRIG_FUNC',
+                'value': 'VAL_SW_TRIG_FUNC',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL0',
+                'value': 'VAL_TTL0',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL1',
+                'value': 'VAL_TTL1',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL2',
+                'value': 'VAL_TTL2',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL3',
+                'value': 'VAL_TTL3',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL4',
+                'value': 'VAL_TTL4',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL5',
+                'value': 'VAL_TTL5',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL6',
+                'value': 'VAL_TTL6',
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL7',
+                'value': 'VAL_TTL7',
+            },
+            {
+                'name': 'NISCOPE_VAL_ECL0',
+                'value': 'VAL_ECL0',
+            },
+            {
+                'name': 'NISCOPE_VAL_ECL1',
+                'value': 'VAL_ECL1',
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_STAR',
+                'value': 'VAL_PXI_STAR',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_0',
+                'value': 'VAL_RTSI_0',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_1',
+                'value': 'VAL_RTSI_1',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_2',
+                'value': 'VAL_RTSI_2',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_3',
+                'value': 'VAL_RTSI_3',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_4',
+                'value': 'VAL_RTSI_4',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_5',
+                'value': 'VAL_RTSI_5',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_6',
+                'value': 'VAL_RTSI_6',
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_7',
+                'value': 'VAL_RTSI_7',
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_0',
+                'value': 'VAL_PFI_0',
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_1',
+                'value': 'VAL_PFI_1',
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_2',
+                'value': 'VAL_PFI_2',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_0',
+                'value': 'VAL_AUX_0_PFI_0',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_1',
+                'value': 'VAL_AUX_0_PFI_1',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_2',
+                'value': 'VAL_AUX_0_PFI_2',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_3',
+                'value': 'VAL_AUX_0_PFI_3',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_4',
+                'value': 'VAL_AUX_0_PFI_4',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_5',
+                'value': 'VAL_AUX_0_PFI_5',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_6',
+                'value': 'VAL_AUX_0_PFI_6',
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_7',
+                'value': 'VAL_AUX_0_PFI_7',
             },
         ],
     },

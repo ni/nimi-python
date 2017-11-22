@@ -399,15 +399,47 @@ class TriggerSlope(Enum):
 
 
 class TriggerSource(Enum):
-    Channel_0 = 0
-    Channel_1 = 1
-    Channel_2 = 2
-    Channel_3 = 3
-    Channel_4 = 4
-    Channel_5 = 5
-    Channel_6 = 6
-    Channel_7 = 7
-    VAL_EXTERNAL = 'VAL_EXTERNAL'
+    CHANNEL_0 = '0'
+    CHANNEL_1 = '1'
+    CHANNEL_2 = '2'
+    CHANNEL_3 = '3'
+    CHANNEL_4 = '4'
+    CHANNEL_5 = '5'
+    CHANNEL_6 = '6'
+    CHANNEL_7 = '7'
+    IMMEDIATE = 'VAL_IMMEDIATE'
+    EXTERNAL = 'VAL_EXTERNAL'
+    SW_TRIG_FUNC = 'VAL_SW_TRIG_FUNC'
+    TTL0 = 'VAL_TTL0'
+    TTL1 = 'VAL_TTL1'
+    TTL2 = 'VAL_TTL2'
+    TTL3 = 'VAL_TTL3'
+    TTL4 = 'VAL_TTL4'
+    TTL5 = 'VAL_TTL5'
+    TTL6 = 'VAL_TTL6'
+    TTL7 = 'VAL_TTL7'
+    ECL0 = 'VAL_ECL0'
+    ECL1 = 'VAL_ECL1'
+    PXI_STAR = 'VAL_PXI_STAR'
+    RTSI_0 = 'VAL_RTSI_0'
+    RTSI_1 = 'VAL_RTSI_1'
+    RTSI_2 = 'VAL_RTSI_2'
+    RTSI_3 = 'VAL_RTSI_3'
+    RTSI_4 = 'VAL_RTSI_4'
+    RTSI_5 = 'VAL_RTSI_5'
+    RTSI_6 = 'VAL_RTSI_6'
+    RTSI_7 = 'VAL_RTSI_7'
+    PFI_0 = 'VAL_PFI_0'
+    PFI_1 = 'VAL_PFI_1'
+    PFI_2 = 'VAL_PFI_2'
+    AUX_0_PFI_0 = 'VAL_AUX_0_PFI_0'
+    AUX_0_PFI_1 = 'VAL_AUX_0_PFI_1'
+    AUX_0_PFI_2 = 'VAL_AUX_0_PFI_2'
+    AUX_0_PFI_3 = 'VAL_AUX_0_PFI_3'
+    AUX_0_PFI_4 = 'VAL_AUX_0_PFI_4'
+    AUX_0_PFI_5 = 'VAL_AUX_0_PFI_5'
+    AUX_0_PFI_6 = 'VAL_AUX_0_PFI_6'
+    AUX_0_PFI_7 = 'VAL_AUX_0_PFI_7'
 
 
 class TriggerSourceDigital(Enum):
