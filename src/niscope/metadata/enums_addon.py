@@ -42,91 +42,91 @@ replacement_enums = {
 },
             },
             {
-                'name': 'NISCOPE_VAL__480I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_480I_59_94_FIELDS_PER_SECOND',
                 'value': 1010,
 'documentation': {
 'description': '480 lines, interlaced, 59.94 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__480I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_480I_60_FIELDS_PER_SECOND',
                 'value': 1011,
 'documentation': {
 'description': '480 lines, interlaced, 60 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__480P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_480P_59_94_FRAMES_PER_SECOND',
                 'value': 1015,
 'documentation': {
 'description': '480 lines, progressive, 59.94 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__480P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_480P_60_FRAMES_PER_SECOND',
                 'value': 1016,
 'documentation': {
 'description': '480 lines, progressive,60 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__576I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_576I_50_FIELDS_PER_SECOND',
                 'value': 1020,
 'documentation': {
 'description': '576 lines, interlaced, 50 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__576P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_576P_50_FRAMES_PER_SECOND',
                 'value': 1025,
 'documentation': {
 'description': '576 lines, progressive, 50 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__720P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_50_FRAMES_PER_SECOND',
                 'value': 1031,
 'documentation': {
 'description': '720 lines, progressive, 50 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__720P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_59_94_FRAMES_PER_SECOND',
                 'value': 1032,
 'documentation': {
 'description': '720 lines, progressive, 59.94 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__720P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_720P_60_FRAMES_PER_SECOND',
                 'value': 1033,
 'documentation': {
 'description': '720 lines, progressive, 60 frames per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__1080I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_50_FIELDS_PER_SECOND',
                 'value': 1040,
 'documentation': {
 'description': '1,080 lines, interlaced, 50 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__1080I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_59_94_FIELDS_PER_SECOND',
                 'value': 1041,
 'documentation': {
 'description': '1,080 lines, interlaced, 59.94 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__1080I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080I_60_FIELDS_PER_SECOND',
                 'value': 1042,
 'documentation': {
 'description': '1,080 lines, interlaced, 60 fields per second',
 },
             },
             {
-                'name': 'NISCOPE_VAL__1080P_24_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_1080P_24_FRAMES_PER_SECOND',
                 'value': 1045,
 'documentation': {
 'description': '1,080 lines, progressive, 24 frames per second',
