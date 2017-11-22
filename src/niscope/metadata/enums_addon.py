@@ -3,7 +3,7 @@
 
 # We are not code genning enums that have been marked as obsolete prior to the initial
 # Python API bindings release
-# We also do not codegen enums associated with P2P or External Calibration since neither 
+# We also do not codegen enums associated with P2P or External Calibration since neither
 # are supported in Python
 enums_codegen_method = {
 }
@@ -351,14 +351,14 @@ replacement_enums = {
                 },
             },
             {
-                'name': 'FFT_AMP_SPECTRUM_VOLTS_RMS', 
+                'name': 'FFT_AMP_SPECTRUM_VOLTS_RMS',
                 'value': 4003,
                 'documentation': {
                     'description': 'FFT Amp. Spectrum (Volts RMS)',
                 },
             },
             {
-                'name': 'FFT_AMP_SPECTRUM_DB',  
+                'name': 'FFT_AMP_SPECTRUM_DB',
                 'value': 4019,
                 'documentation': {
                     'description': 'FFT Amp. Spectrum (dB)',
@@ -421,7 +421,7 @@ replacement_enums = {
             {
                 'name':'AVERAGE_PERIOD',
                 'value':1015,
-            },          
+            },
             {
                 'name':'RISE_TIME',
                 'value':0,
@@ -429,47 +429,47 @@ replacement_enums = {
             {
                 'name':'FALL_TIME',
                 'value':1,
-            },          
+            },
             {
                 'name':'RISE_SLEW_RATE',
                 'value':1010,
-            },          
+            },
             {
                 'name':'FALL_SLEW_RATE',
                 'value':1011,
-            },          
+            },
             {
                 'name':'OVERSHOOT',
                 'value':18,
-            },          
+            },
             {
                 'name':'PRESHOOT',
                 'value':19,
-            },          
+            },
             {
                 'name':'VOLTAGE_RMS',
                 'value':4,
-            },          
+            },
             {
                 'name':'VOLTAGE_CYCLE_RMS',
                 'value':16,
-            },          
+            },
             {
                 'name':'AC_ESTIMATE',
                 'value':1012,
-            },          
+            },
             {
                 'name':'FFT_AMPLITUDE',
                 'value':1009,
-            },          
+            },
             {
                 'name':'VOLTAGE_AVERAGE',
                 'value':10,
-            },          
+            },
             {
                 'name':'VOLTAGE_CYCLE_AVERAGE',
                 'value':17,
-            },          
+            },
             {
                 'name':'DC_ESTIMATE',
                 'value':1013,
@@ -483,9 +483,9 @@ replacement_enums = {
                 'value':7,
             },
             {
-                'name':'VOLTAGE_PEAK_TO_PEAK', 
+                'name':'VOLTAGE_PEAK_TO_PEAK',
                 'value':5,
-            },  
+            },
             {
                 'name':'VOLTAGE_HIGH',
                 'value':8,
@@ -507,7 +507,7 @@ replacement_enums = {
                 'value':1006,
             },
             {
-                'name':'VOLTAGE_BASE_TO_TOP', 
+                'name':'VOLTAGE_BASE_TO_TOP',
                 'value':1017,
             },
             {
@@ -538,7 +538,7 @@ replacement_enums = {
                 'name':'CYCLE_AREA',
                 'value':1004,
             },
-            
+
             {
                 'name':'TIME_DELAY',
                 'value':1014,
@@ -584,19 +584,19 @@ replacement_enums = {
                 'value':2006,
             },
             {
-                'name':'VOLTAGE_HISTOGRAM_PEAK_TO_PEAK', 
+                'name':'VOLTAGE_HISTOGRAM_PEAK_TO_PEAK',
                 'value':2002,
             },
             {
-                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV', 
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV',
                 'value':2007,
             },
             {
-                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV', 
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV',
                 'value':2008,
             },
             {
-                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV', 
+                'name':'VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV',
                 'value':2009,
             },
             {
@@ -632,19 +632,19 @@ replacement_enums = {
                 'value':3006,
             },
             {
-                'name':'TIME_HISTOGRAM_PEAK_TO_PEAK', 
+                'name':'TIME_HISTOGRAM_PEAK_TO_PEAK',
                 'value':3002,
             },
             {
-                'name':'TIME_HISTOGRAM_MEAN_PLUS_STDEV', 
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_STDEV',
                 'value':3007,
             },
             {
-                'name':'TIME_HISTOGRAM_MEAN_PLUS_2_STDEV', 
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_2_STDEV',
                 'value':3008,
             },
             {
-                'name':'TIME_HISTOGRAM_MEAN_PLUS_3_STDEV', 
+                'name':'TIME_HISTOGRAM_MEAN_PLUS_3_STDEV',
                 'value':3009,
             },
             {
@@ -654,7 +654,7 @@ replacement_enums = {
             {
                 'name':'TIME_HISTOGRAM_NEW_HITS',
                 'value':3011,
-            },          
+            },
         ],
     },
     'InputImpedance': {
@@ -666,7 +666,7 @@ replacement_enums = {
             {
                 'name': '_50_OHMS',
                 'value': 2,
-            },          
+            },
         ],
     },
    'TriggerSourceDigital': {
@@ -717,39 +717,39 @@ replacement_enums = {
             },
             {
                 'name': 'AUX_0_PFI_0',
-                'value': 'VAL_AUX_0_PFI_0', 
+                'value': 'VAL_AUX_0_PFI_0',
             },
             {
                 'name': 'AUX_0_PFI_1',
-                'value': 'VAL_AUX_0_PFI_1', 
+                'value': 'VAL_AUX_0_PFI_1',
             },
             {
                 'name': 'AUX_0_PFI_2',
-                'value': 'VAL_AUX_0_PFI_2', 
+                'value': 'VAL_AUX_0_PFI_2',
             },
             {
                 'name': 'AUX_0_PFI_3',
-                'value': 'VAL_AUX_0_PFI_3', 
+                'value': 'VAL_AUX_0_PFI_3',
             },
             {
-                'name': 'AUX_0_PFI_4', 
+                'name': 'AUX_0_PFI_4',
                 'value': 'VAL_AUX_0_PFI_4',
             },
             {
-                'name': 'AUX_0_PFI_5', 
+                'name': 'AUX_0_PFI_5',
                 'value': 'VAL_AUX_0_PFI_5',
             },
             {
-                'name': 'VAL_AUX_0_PFI_6', 
+                'name': 'VAL_AUX_0_PFI_6',
                 'value': 'VAL_AUX_0_PFI_6',
             },
             {
-                'name': 'VAL_AUX_0_PFI_7', 
+                'name': 'VAL_AUX_0_PFI_7',
                 'value': 'VAL_AUX_0_PFI_7',
             },
         ],
     },
-   'TriggerSource': {   
+   'TriggerSource': {
         'values': [
             {
                 'name': 'Channel_0',
@@ -789,7 +789,7 @@ replacement_enums = {
             },
         ],
     },
-   'ExportableSignals': {   
+   'ExportableSignals': {
         'values': [
             {
                 'name': 'START_TRIGGER',
@@ -837,38 +837,38 @@ replacement_enums = {
             },
         ],
     },
-   'ExportDestinations': {   
+   'ExportDestinations': {
         'values': [
 			{
-                'name': 'RTSI_0', 
+                'name': 'RTSI_0',
                 'value': 'VAL_RTSI_0',
             },
 			{
-                'name': 'RTSI_1', 
+                'name': 'RTSI_1',
                 'value': 'VAL_RTSI_1',
             },
 			{
-                'name': 'RTSI_2', 
+                'name': 'RTSI_2',
                 'value': 'VAL_RTSI_2',
             },
 			{
-                'name': 'RTSI_3', 
+                'name': 'RTSI_3',
                 'value': 'VAL_RTSI_3',
             },
 			{
-                'name': 'RTSI_4', 
+                'name': 'RTSI_4',
                 'value': 'VAL_RTSI_4',
             },
 			{
-                'name': 'RTSI_5', 
+                'name': 'RTSI_5',
                 'value': 'VAL_RTSI_5',
             },
 			{
-                'name': 'RTSI_6', 
+                'name': 'RTSI_6',
                 'value': 'VAL_RTSI_6',
             },
 			{
-                'name': 'RTSI_7', 
+                'name': 'RTSI_7',
                 'value': 'VAL_RTSI_7',
             },
 			{
@@ -892,37 +892,57 @@ replacement_enums = {
                 'value': 'VAL_CLK_OUT',
             },
 			{
-                'name': 'AUX_0_PFI_0', 
+                'name': 'AUX_0_PFI_0',
                 'value': 'VAL_AUX_0_PFI_0',
             },
 			{
-                'name': 'AUX_0_PFI_1', 
+                'name': 'AUX_0_PFI_1',
                 'value': 'VAL_AUX_0_PFI_1',
             },
 			{
-                'name': 'AUX_0_PFI_2', 
+                'name': 'AUX_0_PFI_2',
                 'value': 'VAL_AUX_0_PFI_2',
             },
 			{
-                'name': 'AUX_0_PFI_3', 
+                'name': 'AUX_0_PFI_3',
                 'value': 'VAL_AUX_0_PFI_3',
             },
 			{
-                'name': 'AUX_0_PFI_4', 
+                'name': 'AUX_0_PFI_4',
                 'value': 'VAL_AUX_0_PFI_4',
             },
 			{
-                'name': 'AUX_0_PFI_5', 
+                'name': 'AUX_0_PFI_5',
                 'value': 'VAL_AUX_0_PFI_5',
             },
 			{
-                'name': 'AUX_0_PFI_6', 
+                'name': 'AUX_0_PFI_6',
                 'value': 'VAL_AUX_0_PFI_6',
             },
 			{
-                'name': 'AUX_0_PFI_7', 
+                'name': 'AUX_0_PFI_7',
                 'value': 'VAL_AUX_0_PFI_7',
             },
 		],
-	},	
+	},
+   'WhichTrigger': {
+        'values': [
+            {
+                'name': 'SOFTWARE_TRIGGER_START',
+                'value': 0,
+            },
+			{
+                'name': 'SOFTWARE_TRIGGER_ARM_REFERENCE',
+                'value': 1,
+            },
+			{
+                'name': 'SOFTWARE_TRIGGER_REFERENCE',
+                'value': 2,
+            },
+			{
+                'name': 'SOFTWARE_TRIGGER_ADVANCE',
+                'value': 3,
+            },
+		],
+   },
 }
