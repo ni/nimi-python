@@ -790,7 +790,6 @@ replacement_enums = {
             },
         ],
     },
-    },
     'ExportableSignals': {
         'values': [
             {
@@ -1210,11 +1209,11 @@ replacement_enums = {
         'values': [
             {
                 'name': 'ACQ_COMPLETE',
-                'value': 0,
+                'value': 1,
             },
             {
                 'name': 'ACQ_IN_PROGRESS',
-                'value': 1,
+                'value': 0,
             },
             {
                 'name': 'ACQ_STATUS_UNKNOWN',

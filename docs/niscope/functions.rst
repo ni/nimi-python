@@ -12,7 +12,7 @@ niscope.Session methods
 
 
 
-    :rtype: int
+    :rtype: :py:data:`niscope.AcquisitionStatus`
     :return:
 
 

@@ -2399,7 +2399,7 @@ class Session(_SessionBase):
         output parameter.
 
         Returns:
-            acquisition_status (int): Returns whether the acquisition is complete, in progress, or unknown.
+            acquisition_status (enums.AcquisitionStatus): Returns whether the acquisition is complete, in progress, or unknown.
 
                 **Defined Values**
 
@@ -2413,7 +2413,7 @@ class Session(_SessionBase):
         acquisition_status_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(acquisition_status_ctype.value)
+        return enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def actual_meas_wfm_size(self, array_meas_function):
         '''actual_meas_wfm_size

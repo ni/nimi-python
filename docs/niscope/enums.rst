@@ -7,6 +7,21 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: AcquisitionStatus
+
+    .. py:attribute:: niscope.AcquisitionStatus.COMPLETE
+
+
+
+    .. py:attribute:: niscope.AcquisitionStatus.IN_PROGRESS
+
+
+
+    .. py:attribute:: niscope.AcquisitionStatus.STATUS_UNKNOWN
+
+
+
+
 .. py:data:: AcquisitionType
 
     .. py:attribute:: niscope.AcquisitionType.NORMAL

@@ -3,6 +3,12 @@
 from enum import Enum
 
 
+class AcquisitionStatus(Enum):
+    COMPLETE = 0
+    IN_PROGRESS = 1
+    STATUS_UNKNOWN = -1
+
+
 class AcquisitionType(Enum):
     NORMAL = 0
     '''
