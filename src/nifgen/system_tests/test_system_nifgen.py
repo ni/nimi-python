@@ -181,7 +181,7 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-def test_create_advanced_arb_sequence(session):
+def test_create_advanced_arb_sequence():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
