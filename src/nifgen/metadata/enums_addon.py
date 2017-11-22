@@ -8,4 +8,19 @@
 enums_codegen_method = {
 }
 
+replacement_enums = {
+    'Trigger': {
+        'values': [
+            {
+                'name': 'NIFGEN_VAL_START_TRIGGER',
+                'value': 1004,
+            },
+            {
+                'name': 'NIFGEN_VAL_SCRIPT_TRIGGER',
+                'value': 103,
+            },
+        ],
+    },
+}
 
+ 
