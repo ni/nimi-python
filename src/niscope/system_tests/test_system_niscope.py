@@ -20,7 +20,7 @@ def test_vi_string_attribute(session):
     start_trigger_source = session.acq_arm_source
     assert start_trigger_source == 'NISCOPE_VAL_IMMEDIATE'
 
-        
+
 # Basic usability tests
 def test_read(session):
     test_voltage = 1.0
