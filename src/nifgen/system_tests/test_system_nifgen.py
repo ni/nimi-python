@@ -206,8 +206,8 @@ def test_arb_script(session):
     script = '''script myScript0
     repeat 3
     Generate wfmSine
-   end repeat
-end script'''
+    end repeat
+    end script'''
     session.write_script(script)
     session.script_to_generate = 'myScript0'
     session.commit()
