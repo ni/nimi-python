@@ -714,7 +714,7 @@ nifgen.Session methods
         +-------------+-------------------------------------------------+
 
 
-    :type trigger_when: int
+    :type trigger_when: :py:data:`nifgen.TriggerWhen`
 
 .. function:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 

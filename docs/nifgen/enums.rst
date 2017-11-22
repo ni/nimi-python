@@ -123,6 +123,17 @@ Enums used in NI-FGEN
 
 
 
+.. py:data:: ByteOrder
+
+    .. py:attribute:: nifgen.ByteOrder.LITTLE
+
+
+
+    .. py:attribute:: nifgen.ByteOrder.BIG
+
+
+
+
 .. py:data:: CalADCInput
 
     .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT
@@ -439,6 +450,29 @@ Enums used in NI-FGEN
         Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.
 
         
+
+
+
+
+.. py:data:: HardwareState
+
+    .. py:attribute:: nifgen.HardwareState.IDLE
+
+
+
+    .. py:attribute:: nifgen.HardwareState.WAITING_FOR_START_TRIGGER
+
+
+
+    .. py:attribute:: nifgen.HardwareState.RUNNING
+
+
+
+    .. py:attribute:: nifgen.HardwareState.DONE
+
+
+
+    .. py:attribute:: nifgen.HardwareState.HARDWARE_ERROR
 
 
 
@@ -770,6 +804,17 @@ Enums used in NI-FGEN
 
 
 
+.. py:data:: RelativeTo
+
+    .. py:attribute:: nifgen.RelativeTo.START
+
+
+
+    .. py:attribute:: nifgen.RelativeTo.CURRENT
+
+
+
+
 .. py:data:: SampleClockSource
 
     .. py:attribute:: nifgen.SampleClockSource.CLOCK_IN
@@ -1013,6 +1058,61 @@ Enums used in NI-FGEN
         Trigger is asserted when a software edge is detected.
 
         
+
+
+
+
+.. py:data:: Signal
+
+    .. py:attribute:: nifgen.Signal.ONBOARD_REFERENCE_CLOCK
+
+
+
+    .. py:attribute:: nifgen.Signal.SYNC_OUT
+
+
+
+    .. py:attribute:: nifgen.Signal.START_TRIGGER
+
+
+
+    .. py:attribute:: nifgen.Signal.MARKER_EVENT
+
+
+
+    .. py:attribute:: nifgen.Signal.SAMPLE_CLOCK_TIMEBASE
+
+
+
+    .. py:attribute:: nifgen.Signal.SYNCHRONIZATION
+
+
+
+    .. py:attribute:: nifgen.Signal.SAMPLE_CLOCK
+
+
+
+    .. py:attribute:: nifgen.Signal.REFERENCE_CLOCK
+
+
+
+    .. py:attribute:: nifgen.Signal.SCRIPT_TRIGGER
+
+
+
+    .. py:attribute:: nifgen.Signal.READY_FOR_START_EVENT
+
+
+
+    .. py:attribute:: nifgen.Signal.STARTED_EVENT
+
+
+
+    .. py:attribute:: nifgen.Signal.DONE_EVENT
+
+
+
+    .. py:attribute:: nifgen.Signal.DATA_MARKER_EVENT
 
 
 
@@ -1374,6 +1474,17 @@ Enums used in NI-FGEN
 
 
 
+.. py:data:: Trigger
+
+    .. py:attribute:: nifgen.Trigger.START
+
+
+
+    .. py:attribute:: nifgen.Trigger.SCRIPT
+
+
+
+
 .. py:data:: TriggerMode
 
     .. py:attribute:: nifgen.TriggerMode.SINGLE
@@ -1662,6 +1773,17 @@ Enums used in NI-FGEN
         Specifies that another terminal is used.
 
         
+
+
+
+
+.. py:data:: TriggerWhen
+
+    .. py:attribute:: nifgen.TriggerWhen.HIGH
+
+
+
+    .. py:attribute:: nifgen.TriggerWhen.LOW
 
 
 
