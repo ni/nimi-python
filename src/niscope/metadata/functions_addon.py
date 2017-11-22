@@ -66,7 +66,16 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    # @TODO add all enums
+    'CalSelfCalibrate':                                { 'parameters': { 2: { 'enum': 'Option',                          }, }, },
+    'ClearWaveformMeasurementStats':                   { 'parameters': { 2: { 'enum': 'ClearableMeasurement',            }, }, },
+    'ConfigureTriggerDigital':                         { 'parameters': { 1: { 'enum': 'TriggerSourceDigital',            },
+                                                                         2: { 'enum': 'TriggerSlope',                    }, }, },
+    'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 },
+                                                                         3: { 'enum': 'TriggerSlope', },
+                                                                         1 :{ 'enum': 'TriggerSource', }, }, },
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 1: { 'enum': 'TriggerSource',                   },
+                                                                         4: { 'enum': 'TriggerSlope',                    },
+                                                                         5: { 'enum': 'TriggerCoupling',                 }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.

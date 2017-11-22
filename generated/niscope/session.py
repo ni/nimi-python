@@ -1428,13 +1428,15 @@ class _SessionBase(object):
             session['0,1'].cal_self_calibrate(option)
 
         Args:
-            option (int): The calibration option. Use VI_NULL for a normal self-calibration
+            option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
                 operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
                 restore the previous calibration.
         '''
+        if type(option) is not enums.Option:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Option))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        option_ctype = visatype.ViInt32(option)  # case 9
+        option_ctype = visatype.ViInt32(option.value)  # case 10
         error_code = self._library.niScope_CalSelfCalibrate(vi_ctype, channel_list_ctype, option_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1462,15 +1464,17 @@ class _SessionBase(object):
             session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function)
 
         Args:
-            clearable_measurement_function (int): The `scalar
+            clearable_measurement_function (enums.ClearableMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 or `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to clear the stats for.
         '''
+        if type(clearable_measurement_function) is not enums.ClearableMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function)  # case 9
+        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function.value)  # case 10
         error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2841,7 +2845,7 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
@@ -2851,9 +2855,13 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSourceDigital:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSourceDigital))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
-        slope_ctype = visatype.ViInt32(slope)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
@@ -2888,10 +2896,10 @@ class Session(_SessionBase):
                 for defined values.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2900,11 +2908,17 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
-        slope_ctype = visatype.ViInt32(slope)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
@@ -2948,10 +2962,10 @@ class Session(_SessionBase):
                 hysteresis value you specify with this parameter, has the slope you
                 specify with **slope**, and passes through the **level**. Refer to
                 TRIGGER_HYSTERESIS for defined values.
-            slope (int): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (int): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
@@ -2960,12 +2974,18 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         level_ctype = visatype.ViReal64(level)  # case 9
         hysteresis_ctype = visatype.ViReal64(hysteresis)  # case 9
-        slope_ctype = visatype.ViInt32(slope)  # case 9
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 9
+        slope_ctype = visatype.ViInt32(slope.value)  # case 10
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
         delay_ctype = visatype.ViReal64(delay)  # case 9
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)

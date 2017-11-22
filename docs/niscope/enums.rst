@@ -134,6 +134,277 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: ClearableMeasurement
+
+    .. py:attribute:: niscope.ClearableMeasurement.ALL_MEASUREMENTS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.MULTI_ACQ_VOLTAGE_HISTOGRAM
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.MULTI_ACQ_TIME_HISTOGRAM
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.MULTI_ACQ_AVERAGE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AVERAGE_FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FFT_FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.PERIOD
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AVERAGE_PERIOD
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.RISE_TIME
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FALL_TIME
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.RISE_SLEW_RATE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FALL_SLEW_RATE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.OVERSHOOT
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.PRESHOOT
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_RMS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_CYCLE_RMS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AC_ESTIMATE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.FFT_AMPLITUDE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_AVERAGE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_CYCLE_AVERAGE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.DC_ESTIMATE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_MAX
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_MIN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HIGH
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_LOW
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AMPLITUDE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_TOP
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_BASE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_BASE_TO_TOP
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.WIDTH_NEG
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.WIDTH_POS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.DUTY_CYCLE_NEG
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.DUTY_CYCLE_POS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.INTEGRAL
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.AREA
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.CYCLE_AREA
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_DELAY
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.PHASE_DELAY
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.LOW_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.MID_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.HIGH_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.VOLTAGE_HISTOGRAM_NEW_HITS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_MEAN_PLUS_3_STDEV
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: niscope.ClearableMeasurement.TIME_HISTOGRAM_NEW_HITS
+
+
+
+
 .. py:data:: DataProcessingMode
 
     .. py:attribute:: niscope.DataProcessingMode.REAL
@@ -353,6 +624,29 @@ Enums used in NI-SCOPE
 
 
         This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+
+        
+
+
+
+
+.. py:data:: Option
+
+    .. py:attribute:: niscope.Option.SELF_CALIBRATE_ALL_CHANNELS
+
+
+
+        Self Calibrating all Channels
+
+        
+
+
+
+    .. py:attribute:: niscope.Option.RESTORE_EXTERNAL_CALIBRATION
+
+
+
+        Restore External Calibration.
 
         
 
@@ -683,6 +977,124 @@ Enums used in NI-SCOPE
         Rising edge
 
         
+
+
+
+
+.. py:data:: TriggerSource
+
+    .. py:attribute:: niscope.TriggerSource.Channel_0
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_1
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_2
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_3
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_4
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_5
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_6
+
+
+
+    .. py:attribute:: niscope.TriggerSource.Channel_7
+
+
+
+    .. py:attribute:: niscope.TriggerSource.VAL_EXTERNAL
+
+
+
+
+.. py:data:: TriggerSourceDigital
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_3
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_4
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_5
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_6
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.PFI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.PFI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.PFI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.PXI_STAR
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_0
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_1
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_2
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_3
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_4
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_5
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.VAL_AUX_0_PFI_6
+
+
+
+    .. py:attribute:: niscope.TriggerSourceDigital.VAL_AUX_0_PFI_7
 
 
 

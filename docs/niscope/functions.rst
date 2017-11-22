@@ -177,7 +177,7 @@ niscope.Session methods
         
 
 
-    :type option: int
+    :type option: :py:data:`niscope.Option`
 
 .. function:: clear_waveform_measurement_stats(clearable_measurement_function)
 
@@ -217,7 +217,7 @@ niscope.Session methods
         
 
 
-    :type clearable_measurement_function: int
+    :type clearable_measurement_function: :py:data:`niscope.ClearableMeasurement`
 
 .. function:: clear_waveform_processing()
 
@@ -530,7 +530,7 @@ niscope.Session methods
         
 
 
-    :type slope: int
+    :type slope: :py:data:`niscope.TriggerSlope`
     :param holdoff:
 
 
@@ -609,7 +609,7 @@ niscope.Session methods
         
 
 
-    :type slope: int
+    :type slope: :py:data:`niscope.TriggerSlope`
     :param trigger_coupling:
 
 
@@ -619,7 +619,7 @@ niscope.Session methods
         
 
 
-    :type trigger_coupling: int
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param holdoff:
 
 
@@ -715,7 +715,7 @@ niscope.Session methods
         
 
 
-    :type slope: int
+    :type slope: :py:data:`niscope.TriggerSlope`
     :param trigger_coupling:
 
 
@@ -725,7 +725,7 @@ niscope.Session methods
         
 
 
-    :type trigger_coupling: int
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param holdoff:
 
 
