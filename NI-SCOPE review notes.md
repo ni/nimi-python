@@ -2,15 +2,6 @@
 
 Everything listed here still needs to be implemented.
 
-##Defaults
-
-* cal_self_calibrate default None or 0 or maybe there's an enum value
-* clear_waveform_measurement_stats default to NISCOPE_VAL_ALL_MEASUREMENTS
-* configure_trigger_digital slope rising, holdoff 0.0, delay 0.0
-* configure_trigger_edge level 0.0, slope rising, holdoff 0.0, delay 0.0
-* configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
-
-
 ##Enums
 
 * add_waveform_processing should have enum
