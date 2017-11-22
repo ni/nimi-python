@@ -6,19 +6,18 @@ Everything listed here still needs to be implemented.
 
 * cal_self_calibrate default None or 0 or maybe there's an enum value
 * clear_waveform_measurement_stats default to NISCOPE_VAL_ALL_MEASUREMENTS
+* configure_trigger_digital slope rising, holdoff 0.0, delay 0.0
+* configure_trigger_edge level 0.0, slope rising, holdoff 0.0, delay 0.0
+* configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
+
 * configure_vertical offset 0, probe_attenuation 1, enabled True
 * fetch_measurement timeout 5.0
 * fetch_measurement_stats timeout 5.0
 * read_measurement timeout 5.0
-* __init__ id_query=False reset_device=False option_string=''
 * configure_ref_levels(low 10.0, mid 50.0, high 90.0)
-* configure_trigger_digital slope rising, holdoff 0.0, delay 0.0
-* configure_trigger_edge level 0.0, slope rising, holdoff 0.0, delay 0.0
-* configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
 * configure_trigger_software 0.0 0.0
 * configure_trigger_video enable_dc_restore False, line_number 1, holdoff 0.0, delay 0.0
 * configure_trigger_window holdoff 0.0, delay 0.0
-* export_signal signal_identifier:'None' (string)
 
 ##Enums
 
