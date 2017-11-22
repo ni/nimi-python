@@ -1567,7 +1567,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_vertical(self, range, coupling, offset=0, probe_attenuation=1, enabled=True):
+    def configure_vertical(self, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):
         '''configure_vertical
 
         Configures the most commonly configured attributes of the digitizer
@@ -1580,7 +1580,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_vertical(range, coupling, offset=0, probe_attenuation=1, enabled=True)
+            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
             range (float): Specifies the vertical range Refer to VERTICAL_RANGE for

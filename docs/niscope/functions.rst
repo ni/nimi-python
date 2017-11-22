@@ -1041,7 +1041,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_vertical(range, coupling, offset=0, probe_attenuation=1, enabled=True)
+.. function:: configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
     Configures the most commonly configured attributes of the digitizer
     vertical subsystem, such as the range, offset, coupling, probe
@@ -1057,7 +1057,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_vertical(range, coupling, offset=0, probe_attenuation=1, enabled=True)
+            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
 
     :param range:
