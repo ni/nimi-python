@@ -313,7 +313,7 @@ class TestSession(object):
             assert result_int32 == int32_val
             assert isinstance(result_int32, int)
             assert result_int64 == int64_val
-            assert isinstance(result_int64, int)
+            assert isinstance(result_int64, six.integer_types)
             assert result_enum == enum_val
             assert isinstance(result_enum, nifake.Turtle)
             assert result_float == float_val
