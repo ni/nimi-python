@@ -403,7 +403,7 @@ niscope.Session methods
 
     :type enforce_realtime: bool
 
-.. function:: configure_ref_levels(low, mid, high)
+.. function:: configure_ref_levels(low=10.0, mid=50.0, high=90.0)
 
     This function is included for compliance with the IviScope Class
     Specification.
@@ -762,7 +762,7 @@ niscope.Session methods
 
 
 
-.. function:: configure_trigger_software(holdoff, delay)
+.. function:: configure_trigger_software(holdoff=0.0, delay=0.0)
 
     Configures common properties for software triggering.
 
@@ -812,7 +812,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_video(trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
+.. function:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=0.0, delay=0.0)
 
     Configures the common properties for video triggering, including the
     signal format, TV event, line number, polarity, and enable DC restore. A
@@ -849,18 +849,6 @@ niscope.Session methods
 
 
     :type trigger_source: string
-    :param enable_dc_restore:
-
-
-        Offsets each video line so the clamping level (the portion of the video
-        line between the end of the color burst and the beginning of the active
-        image) is moved to zero volt. Refer to
-        :py:data:`niscope.ENABLE\_DC\_RESTORE` for defined values.
-
-        
-
-
-    :type enable_dc_restore: bool
     :param signal_format:
 
 
@@ -882,21 +870,6 @@ niscope.Session methods
 
 
     :type event: int
-    :param line_number:
-
-
-        Selects the line number to trigger on. The line number range covers an
-        entire frame and is referenced as shown on `Vertical Blanking and
-        Synchronization
-        Signal <REPLACE_DRIVER_SPECIFIC_URL_1(gray_scale_image)>`__. Refer to
-        :py:data:`niscope.TV\_TRIGGER\_LINE\_NUMBER` for more information.
-
-        Default value: 1
-
-        
-
-
-    :type line_number: int
     :param polarity:
 
 
@@ -916,6 +889,33 @@ niscope.Session methods
 
 
     :type trigger_coupling: int
+    :param enable_dc_restore:
+
+
+        Offsets each video line so the clamping level (the portion of the video
+        line between the end of the color burst and the beginning of the active
+        image) is moved to zero volt. Refer to
+        :py:data:`niscope.ENABLE\_DC\_RESTORE` for defined values.
+
+        
+
+
+    :type enable_dc_restore: bool
+    :param line_number:
+
+
+        Selects the line number to trigger on. The line number range covers an
+        entire frame and is referenced as shown on `Vertical Blanking and
+        Synchronization
+        Signal <REPLACE_DRIVER_SPECIFIC_URL_1(gray_scale_image)>`__. Refer to
+        :py:data:`niscope.TV\_TRIGGER\_LINE\_NUMBER` for more information.
+
+        Default value: 1
+
+        
+
+
+    :type line_number: int
     :param holdoff:
 
 
@@ -939,7 +939,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay)
+.. function:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=0.0, delay=0.0)
 
     Configures common properties for analog window triggering. A window
     trigger occurs when a signal enters or leaves a window you specify with
@@ -1041,7 +1041,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_vertical(range, offset, coupling, probe_attenuation, enabled)
+.. function:: configure_vertical(range, coupling, offset=0, probe_attenuation=1, enabled=True)
 
     Configures the most commonly configured attributes of the digitizer
     vertical subsystem, such as the range, offset, coupling, probe
@@ -1057,7 +1057,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_vertical(range, offset, coupling, probe_attenuation, enabled)
+            session['0,1'].configure_vertical(range, coupling, offset=0, probe_attenuation=1, enabled=True)
 
 
     :param range:
@@ -1070,16 +1070,6 @@ niscope.Session methods
 
 
     :type range: float
-    :param offset:
-
-
-        Specifies the vertical offset. Refer to :py:data:`niscope.VERTICAL\_OFFSET`
-        for more information.
-
-        
-
-
-    :type offset: float
     :param coupling:
 
 
@@ -1090,6 +1080,16 @@ niscope.Session methods
 
 
     :type coupling: int
+    :param offset:
+
+
+        Specifies the vertical offset. Refer to :py:data:`niscope.VERTICAL\_OFFSET`
+        for more information.
+
+        
+
+
+    :type offset: float
     :param probe_attenuation:
 
 
@@ -1120,7 +1120,7 @@ niscope.Session methods
 
 
 
-.. function:: export_signal(signal, signal_identifier, output_terminal)
+.. function:: export_signal(signal, output_terminal, signal_identifier='None')
 
     Configures the digitizer to generate a signal that other devices can
     detect when configured for digital triggering or sharing clocks. The
@@ -1177,15 +1177,6 @@ niscope.Session methods
 
 
     :type signal: int
-    :param signal_identifier:
-
-
-        Describes the signal being exported.
-
-        
-
-
-    :type signal_identifier: string
     :param output_terminal:
 
 
@@ -1224,6 +1215,15 @@ niscope.Session methods
 
 
     :type output_terminal: string
+    :param signal_identifier:
+
+
+        Describes the signal being exported.
+
+        
+
+
+    :type signal_identifier: string
 
 .. function:: fetch(timeout, num_samples)
 
@@ -1450,7 +1450,7 @@ niscope.Session methods
 
 
 
-.. function:: fetch_measurement(timeout, scalar_meas_function)
+.. function:: fetch_measurement(scalar_meas_function, timeout=5.0)
 
     Fetches a waveform from the digitizer and performs the specified
     waveform measurement. Refer to `Using Fetch
@@ -1474,20 +1474,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement(timeout, scalar_meas_function)
+            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param scalar_meas_function:
 
 
@@ -1499,6 +1488,17 @@ niscope.Session methods
 
 
     :type scalar_meas_function: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: list of float
     :return:
@@ -1511,7 +1511,7 @@ niscope.Session methods
 
 
 
-.. function:: fetch_measurement_stats(timeout, scalar_meas_function)
+.. function:: fetch_measurement_stats(scalar_meas_function, timeout=5.0)
 
     Obtains a waveform measurement and returns the measurement value. This
     function may return multiple statistical results depending on the number
@@ -1548,20 +1548,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement_stats(timeout, scalar_meas_function)
+            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param scalar_meas_function:
 
 
@@ -1573,6 +1562,17 @@ niscope.Session methods
 
 
     :type scalar_meas_function: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
 
@@ -1808,7 +1808,7 @@ niscope.Session methods
 
 
 
-.. function:: read_measurement(timeout, scalar_meas_function)
+.. function:: read_measurement(scalar_meas_function, timeout=5.0)
 
     Initiates an acquisition, waits for it to complete, and performs the
     specified waveform measurement for a single channel and record or for
@@ -1835,20 +1835,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read_measurement(timeout, scalar_meas_function)
+            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param scalar_meas_function:
 
 
@@ -1860,6 +1849,17 @@ niscope.Session methods
 
 
     :type scalar_meas_function: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: list of float
     :return:
