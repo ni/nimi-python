@@ -4,8 +4,8 @@ from enum import Enum
 
 
 class AcquisitionStatus(Enum):
-    COMPLETE = 0
-    IN_PROGRESS = 1
+    COMPLETE = 1
+    IN_PROGRESS = 0
     STATUS_UNKNOWN = -1
 
 
