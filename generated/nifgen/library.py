@@ -48,7 +48,6 @@ class Library(object):
         self.niFgen_ExportSignal_cfunc = None
         self.niFgen_GetAttributeViBoolean_cfunc = None
         self.niFgen_GetAttributeViInt32_cfunc = None
-        self.niFgen_GetAttributeViInt64_cfunc = None
         self.niFgen_GetAttributeViReal64_cfunc = None
         self.niFgen_GetAttributeViString_cfunc = None
         self.niFgen_GetError_cfunc = None
@@ -73,7 +72,6 @@ class Library(object):
         self.niFgen_SendSoftwareEdgeTrigger_cfunc = None
         self.niFgen_SetAttributeViBoolean_cfunc = None
         self.niFgen_SetAttributeViInt32_cfunc = None
-        self.niFgen_SetAttributeViInt64_cfunc = None
         self.niFgen_SetAttributeViReal64_cfunc = None
         self.niFgen_SetAttributeViString_cfunc = None
         self.niFgen_SetNamedWaveformNextWritePosition_cfunc = None
@@ -337,14 +335,6 @@ class Library(object):
                 self.niFgen_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niFgen_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_GetAttributeViInt64_cfunc is None:
-                self.niFgen_GetAttributeViInt64_cfunc = self._library.niFgen_GetAttributeViInt64
-                self.niFgen_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
-                self.niFgen_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
-
     def niFgen_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViReal64_cfunc is None:
@@ -536,14 +526,6 @@ class Library(object):
                 self.niFgen_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niFgen_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_SetAttributeViInt64_cfunc is None:
-                self.niFgen_SetAttributeViInt64_cfunc = self._library.niFgen_SetAttributeViInt64
-                self.niFgen_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
-                self.niFgen_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
     def niFgen_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

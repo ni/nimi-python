@@ -31,14 +31,6 @@ functions_codegen_method = {
     'SampleMode':                       { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':     { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':           { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
-    'Read':                             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): temporarily removed, need to add back, See: #543
     'ActualRecordLength':               { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':   { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     'ConfigureAcquisition':             { 'codegen_method': 'no',       },
@@ -62,6 +54,14 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
+    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
+    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
+    'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -71,11 +71,42 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufSize'}, }, }, },
-    'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
-    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetError':                                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'self_test':                                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetAttributeViString':                     { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufSize'}, }, }, },
+    'GetCalUserDefinedInfo':                    { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'ConfigureEqualizationFilterCoefficients':  { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
+    'GetEqualizationFilterCoefficients':        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'numberOfCoefficients'}, }, }, },
+    # TODO(marcoskirsch): Won't work until we fix #606
+    # 'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+    #                                                               4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+    #                                                               5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  7: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  8: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
+                                                                  9: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'ReadMeasurement':                          { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'Read':                                     { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'Fetch':                                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size()'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size() * self._actual_num_wfms())'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+}
+
+# The extracted metadata is incorrect. Patch it here.
+# TODO(marcoskirsch): Tracked by NI internal bug 677141. Remove when that's fixed and new metadata is extracted.
+functions_bad_source_metadata = {
+    'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
+                                                                  4: { 'direction': 'out'},
+                                                                  5: { 'direction': 'out'}, }, },
+
+
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

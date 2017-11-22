@@ -87,9 +87,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
         self._defaults['GetAttributeViInt32']['attributeValue'] = None
-        self._defaults['GetAttributeViInt64'] = {}
-        self._defaults['GetAttributeViInt64']['return'] = 0
-        self._defaults['GetAttributeViInt64']['attributeValue'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
@@ -176,8 +173,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
         self._defaults['SetAttributeViInt32']['return'] = 0
-        self._defaults['SetAttributeViInt64'] = {}
-        self._defaults['SetAttributeViInt64']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
@@ -408,14 +403,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
-
-    def niFgen_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViInt64']['return'] != 0:
-            return self._defaults['GetAttributeViInt64']['return']
-        if self._defaults['GetAttributeViInt64']['attributeValue'] is None:
-            raise MockFunctionCallError("niFgen_GetAttributeViInt64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
-        return self._defaults['GetAttributeViInt64']['return']
 
     def niFgen_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
@@ -658,11 +645,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
 
-    def niFgen_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViInt64']['return'] != 0:
-            return self._defaults['SetAttributeViInt64']['return']
-        return self._defaults['SetAttributeViInt64']['return']
-
     def niFgen_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
             return self._defaults['SetAttributeViReal64']['return']
@@ -816,8 +798,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetAttributeViBoolean.return_value = 0
         mock_library.niFgen_GetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_GetAttributeViInt32")
         mock_library.niFgen_GetAttributeViInt32.return_value = 0
-        mock_library.niFgen_GetAttributeViInt64.side_effect = MockFunctionCallError("niFgen_GetAttributeViInt64")
-        mock_library.niFgen_GetAttributeViInt64.return_value = 0
         mock_library.niFgen_GetAttributeViReal64.side_effect = MockFunctionCallError("niFgen_GetAttributeViReal64")
         mock_library.niFgen_GetAttributeViReal64.return_value = 0
         mock_library.niFgen_GetAttributeViString.side_effect = MockFunctionCallError("niFgen_GetAttributeViString")
@@ -866,8 +846,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetAttributeViBoolean.return_value = 0
         mock_library.niFgen_SetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_SetAttributeViInt32")
         mock_library.niFgen_SetAttributeViInt32.return_value = 0
-        mock_library.niFgen_SetAttributeViInt64.side_effect = MockFunctionCallError("niFgen_SetAttributeViInt64")
-        mock_library.niFgen_SetAttributeViInt64.return_value = 0
         mock_library.niFgen_SetAttributeViReal64.side_effect = MockFunctionCallError("niFgen_SetAttributeViReal64")
         mock_library.niFgen_SetAttributeViReal64.return_value = 0
         mock_library.niFgen_SetAttributeViString.side_effect = MockFunctionCallError("niFgen_SetAttributeViString")

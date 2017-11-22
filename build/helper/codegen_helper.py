@@ -69,16 +69,16 @@ def get_params_snippet(function, parameter_usage_options):
 
 def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
+    assert output_parameter['direction'] == 'out', 'Expected parameter {0} (a.k.a. {1}) to have direction out'.format(output_parameter['name'], output_parameter['python_name'])
     return_type_snippet = ''
 
     # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
     val_suffix = '.value'
     module_name = ''
-    c = find_custom_type(output_parameter, config)
-    if c is not None:
+    custom_type = find_custom_type(output_parameter, config)
+    if custom_type is not None:
         val_suffix = ''
-        module_name = c['file_name'] + '.'
+        module_name = custom_type['file_name'] + '.'
 
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
@@ -204,6 +204,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         if parameter['is_buffer'] is True:
             assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
             if parameter['size']['mechanism'] == 'fixed':
+                assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
                 definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             elif parameter['size']['mechanism'] == 'ivi-dance':
                 definition = 'None  # case 12'
@@ -211,7 +212,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
                 size_parameter = find_size_parameter(parameter, parameters)
                 definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
-                assert False, 'Unknown mechanism: ' + str(parameter)
+                assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
         else:
             definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
 
