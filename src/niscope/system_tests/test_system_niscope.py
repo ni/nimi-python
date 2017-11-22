@@ -8,6 +8,19 @@ def session():
         yield simulated_session
 
 
+# Attribute tests
+def test_vi_boolean_attribute(session):
+    session.allow_more_records_than_memory = False
+    default_option = session.allow_more_records_than_memory
+    assert default_option is False
+
+
+def test_vi_string_attribute(session):
+    session.acq_arm_source = 'NISCOPE_VAL_IMMEDIATE'
+    start_trigger_source = session.acq_arm_source
+    assert start_trigger_source == 'NISCOPE_VAL_IMMEDIATE'
+
+        
 # Basic usability tests
 def test_read(session):
     test_voltage = 1.0
