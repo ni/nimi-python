@@ -387,7 +387,7 @@ enums = {
 },
             },
             {
-                'name': 'TOGGLE',
+                'name': 'NIFGEN_VAL_TOGGLE',
                 'value': 103,
 'documentation': {
 'description': '''
@@ -580,7 +580,7 @@ waveforms in complex combinations.
     'ReferenceClockSource': {
         'values': [
             {
-                'name': 'CLOCK_IN',
+                'name': 'NIFGEN_VAL_CLOCK_IN',
                 'value': 'ClkIn',
 'documentation': {
 'description': '''
@@ -590,14 +590,14 @@ used as the Reference Clock source.
 },
             },
             {
-                'name': 'NONE',
+                'name': 'NIFGEN_VAL_NONE',
                 'value': 'None',
 'documentation': {
 'description': 'Specifies that a Reference Clock is not used.',
 },
             },
             {
-                'name': 'ONBOARD_REFERENCE_CLOCK',
+                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
                 'value': 'OnboardRefClk',
 'documentation': {
 'description': '''
@@ -607,14 +607,14 @@ Clock source.
 },
             },
             {
-                'name': 'PXI_CLOCK',
+                'name': 'NIFGEN_VAL_PXI_CLOCK',
                 'value': 'PXI_Clk',
 'documentation': {
 'description': 'Specifies the PXI Clock is used as the Reference Clock source.',
 },
             },
             {
-                'name': 'RTSI_7',
+                'name': 'NIFGEN_VAL_RTSI_7',
                 'value': 'RTSI7',
 'documentation': {
 'description': 'Specifies that the RTSI line 7 is used as the Reference Clock source.',
@@ -625,7 +625,7 @@ Clock source.
     'SampleClockSource': {
         'values': [
             {
-                'name': 'CLOCK_IN',
+                'name': 'NIFGEN_VAL_CLOCK_IN',
                 'value': '"ClkIn"',
 'documentation': {
 'description': '''
@@ -635,7 +635,7 @@ the Sample Clock source.
 },
             },
             {
-                'name': 'DDC_CLOCK_IN',
+                'name': 'NIFGEN_VAL_DDC_CLOCK_IN',
                 'value': '"DDC_ClkIn"',
 'documentation': {
 'description': '''
@@ -645,14 +645,14 @@ Clock source.
 },
             },
             {
-                'name': 'ONBOARD_CLOCK',
+                'name': 'NIFGEN_VAL_ONBOARD_CLOCK',
                 'value': '"OnboardClock"',
 'documentation': {
 'description': 'Specifies that the onboard clock is used as the Sample Clock source.',
 },
             },
             {
-                'name': 'PXI_STAR_LINE',
+                'name': 'NIFGEN_VAL_PXI_STAR_LINE',
                 'value': '"PXI_Star"',
 'documentation': {
 'description': '''
@@ -662,7 +662,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_0RTSI_0',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_0RTSI_0',
                 'value': '"PXI_Trig0"',
 'documentation': {
 'description': '''
@@ -672,7 +672,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_1RTSI_1',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_1RTSI_1',
                 'value': '"PXI_Trig1"',
 'documentation': {
 'description': '''
@@ -682,7 +682,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_2RTSI_2',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_2RTSI_2',
                 'value': '"PXI_Trig2"',
 'documentation': {
 'description': '''
@@ -692,7 +692,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_3RTSI_3',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_3RTSI_3',
                 'value': '"PXI_Trig3"',
 'documentation': {
 'description': '''
@@ -702,7 +702,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_4RTSI_4',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_4RTSI_4',
                 'value': '"PXI_Trig4"',
 'documentation': {
 'description': '''
@@ -712,7 +712,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_5RTSI_5',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_5RTSI_5',
                 'value': '"PXI_Trig5"',
 'documentation': {
 'description': '''
@@ -722,7 +722,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_6RTSI_6',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_6RTSI_6',
                 'value': '"PXI_Trig6"',
 'documentation': {
 'description': '''
@@ -732,7 +732,7 @@ source.
 },
             },
             {
-                'name': 'PXI_TRIGGER_LINE_7RTSI_7',
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_7RTSI_7',
                 'value': '"PXI_Trig7"',
 'documentation': {
 'description': '''
@@ -746,7 +746,7 @@ source.
     'SampleClockTimebaseSource': {
         'values': [
             {
-                'name': 'CLOCK_IN',
+                'name': 'NIFGEN_VAL_CLOCK_IN',
                 'value': '"ClkIn"',
 'documentation': {
 'description': '''
@@ -756,7 +756,7 @@ is used as the source.
 },
             },
             {
-                'name': 'ONBOARD_CLOCK',
+                'name': 'NIFGEN_VAL_ONBOARD_CLOCK',
                 'value': '"OnboardClock"',
 'documentation': {
 'description': 'Specifies that the onboard Sample Clock timebase is used as the source.',

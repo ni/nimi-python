@@ -9,14 +9,14 @@ enums = {
     'AGCAverageControl': {
         'values': [
             {
-                'name': 'MEAN',
+                'name': 'NISCOPE_VAL_MEAN',
                 'value': 0,
 'documentation': {
 'description': 'Mean average.',
 },
             },
             {
-                'name': 'MEDIAN',
+                'name': 'NISCOPE_VAL_MEDIAN',
                 'value': 1,
 'documentation': {
 'description': 'Median average.',
@@ -27,7 +27,7 @@ enums = {
     'AOUTParallelOutputSource': {
         'values': [
             {
-                'name': 'I_DATA',
+                'name': 'NISCOPE_VAL_I_DATA',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -37,7 +37,7 @@ DDC.
 },
             },
             {
-                'name': 'MAGNITUDE_DATA',
+                'name': 'NISCOPE_VAL_MAGNITUDE_DATA',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -47,7 +47,7 @@ the DDC.
 },
             },
             {
-                'name': 'FREQUENCY_DATA',
+                'name': 'NISCOPE_VAL_FREQUENCY_DATA',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -104,21 +104,21 @@ the DDC.
     'BOUTParallelOutputSource': {
         'values': [
             {
-                'name': 'MAGNITUDE_DATA',
+                'name': 'NISCOPE_VAL_MAGNITUDE_DATA',
                 'value': 1,
 'documentation': {
 'description': 'Specifies magnitude data as the source.',
 },
             },
             {
-                'name': 'Q_DATA',
+                'name': 'NISCOPE_VAL_Q_DATA',
                 'value': 3,
 'documentation': {
 'description': 'Specifies Q data as the source.',
 },
             },
             {
-                'name': 'PHASE_DATA',
+                'name': 'NISCOPE_VAL_PHASE_DATA',
                 'value': 4,
 'documentation': {
 'description': 'Specifies phase data as the source.',
@@ -129,14 +129,14 @@ the DDC.
     'BoolEnableDisable': {
         'values': [
             {
-                'name': 'DISABLED',
+                'name': 'NISCOPE_VAL_DISABLED',
                 'value': 0,
 'documentation': {
 'description': 'Disabled',
 },
             },
             {
-                'name': 'ENABLED',
+                'name': 'NISCOPE_VAL_ENABLED',
                 'value': 1,
 'documentation': {
 'description': 'Enabled',
@@ -147,14 +147,14 @@ the DDC.
     'BoolEnableDisableChan': {
         'values': [
             {
-                'name': 'DISABLED',
+                'name': 'NISCOPE_VAL_DISABLED',
                 'value': 0,
 'documentation': {
 'description': 'Does not acquire a waveform for the channel.',
 },
             },
             {
-                'name': 'ENABLED',
+                'name': 'NISCOPE_VAL_ENABLED',
                 'value': 1,
 'documentation': {
 'description': 'Acquires a waveform for the channel.',
@@ -165,7 +165,7 @@ the DDC.
     'BoolEnableDisableIQ': {
         'values': [
             {
-                'name': 'DISABLED',
+                'name': 'NISCOPE_VAL_DISABLED',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -175,7 +175,7 @@ III...QQQ...
 },
             },
             {
-                'name': 'ENABLED',
+                'name': 'NISCOPE_VAL_ENABLED',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -189,14 +189,14 @@ format: IQIQIQ...
     'BoolEnableDisableRealtime': {
         'values': [
             {
-                'name': 'DISABLED',
+                'name': 'NISCOPE_VAL_DISABLED',
                 'value': 0,
 'documentation': {
 'description': 'Allow both real-time and equivalent-time measurements.',
 },
             },
             {
-                'name': 'ENABLED',
+                'name': 'NISCOPE_VAL_ENABLED',
                 'value': 1,
 'documentation': {
 'description': 'Allow only real-time measurements.',
@@ -207,7 +207,7 @@ format: IQIQIQ...
     'BoolEnableDisableTIS': {
         'values': [
             {
-                'name': 'DISABLED',
+                'name': 'NISCOPE_VAL_DISABLED',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -216,7 +216,7 @@ format: IQIQIQ...
 },
             },
             {
-                'name': 'ENABLED',
+                'name': 'NISCOPE_VAL_ENABLED',
                 'value': 1,
 'documentation': {
 'description': 'Use multiple interleaved ADCs to acquire data for this channel.',
@@ -227,7 +227,7 @@ format: IQIQIQ...
     'CoordinateConverterInput': {
         'values': [
             {
-                'name': 'RESAMPLER_HB',
+                'name': 'NISCOPE_VAL_RESAMPLER_HB',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -237,7 +237,7 @@ converter.
 },
             },
             {
-                'name': 'PROGRAMMABLE_FIR',
+                'name': 'NISCOPE_VAL_PROGRAMMABLE_FIR',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -251,14 +251,14 @@ coordinate converter.
     'DataJustificationMode': {
         'values': [
             {
-                'name': 'LEFT',
+                'name': 'NISCOPE_VAL_LEFT',
                 'value': 1,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'RIGHT',
+                'name': 'NISCOPE_VAL_RIGHT',
                 'value': 2,
 'documentation': {
 'description': '',
@@ -306,7 +306,7 @@ coordinate converter.
 
             },
             {
-                'name': 'RESAMPLER',
+                'name': 'NISCOPE_VAL_RESAMPLER',
                 'value': 3,
 'documentation': {
 'description': 'Sets the discriminator FIR input source to resampler.',
@@ -353,42 +353,42 @@ coordinate converter.
     'FIRFilterWindow': {
         'values': [
             {
-                'name': 'NONE',
+                'name': 'NISCOPE_VAL_NONE',
                 'value': 0,
 'documentation': {
 'description': 'No window.',
 },
             },
             {
-                'name': 'HANNING',
+                'name': 'NISCOPE_VAL_HANNING',
                 'value': 409,
 'documentation': {
 'description': 'Specifies a Hanning window.',
 },
             },
             {
-                'name': 'FLAT_TOP',
+                'name': 'NISCOPE_VAL_FLAT_TOP',
                 'value': 410,
 'documentation': {
 'description': 'Specifies a Flat Top window.',
 },
             },
             {
-                'name': 'HAMMING',
+                'name': 'NISCOPE_VAL_HAMMING',
                 'value': 420,
 'documentation': {
 'description': 'Specifies a Hamming window.',
 },
             },
             {
-                'name': 'TRIANGLE',
+                'name': 'NISCOPE_VAL_TRIANGLE',
                 'value': 423,
 'documentation': {
 'description': 'Specifies a Triangle window.',
 },
             },
             {
-                'name': 'BLACKMAN',
+                'name': 'NISCOPE_VAL_BLACKMAN',
                 'value': 424,
 'documentation': {
 'description': 'Specifies a Blackman window.',
@@ -438,28 +438,28 @@ coordinate converter.
     'FilterType': {
         'values': [
             {
-                'name': 'LOWPASS',
+                'name': 'NISCOPE_VAL_LOWPASS',
                 'value': 0,
 'documentation': {
 'description': 'Specifies lowpass as the filter type.',
 },
             },
             {
-                'name': 'HIGHPASS',
+                'name': 'NISCOPE_VAL_HIGHPASS',
                 'value': 1,
 'documentation': {
 'description': 'Specifies highpass as the filter type.',
 },
             },
             {
-                'name': 'BANDPASS',
+                'name': 'NISCOPE_VAL_BANDPASS',
                 'value': 2,
 'documentation': {
 'description': 'Specifies bandpass as the filter type.',
 },
             },
             {
-                'name': 'BANDSTOP',
+                'name': 'NISCOPE_VAL_BANDSTOP',
                 'value': 3,
 'documentation': {
 'description': 'Specifies bandstop as the filter type.',
@@ -554,7 +554,7 @@ OSP block.
     'PercentageMethod': {
         'values': [
             {
-                'name': 'LOWHIGH',
+                'name': 'NISCOPE_VAL_LOWHIGH',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -564,14 +564,14 @@ the low/high method,
 },
             },
             {
-                'name': 'MINMAX',
+                'name': 'NISCOPE_VAL_MINMAX',
                 'value': 1,
 'documentation': {
 'description': 'Reference level percentages are computed using the min/max method.',
 },
             },
             {
-                'name': 'BASETOP',
+                'name': 'NISCOPE_VAL_BASETOP',
                 'value': 2,
 'documentation': {
 'description': 'Reference level percentages are computed using the base/top method.',
@@ -582,14 +582,14 @@ the low/high method,
     'ProgFIRFilterRealComplex': {
         'values': [
             {
-                'name': 'REAL',
+                'name': 'NISCOPE_VAL_REAL',
                 'value': 0,
 'documentation': {
 'description': 'Sets a dual real filter.',
 },
             },
             {
-                'name': 'COMPLEX',
+                'name': 'NISCOPE_VAL_COMPLEX',
                 'value': 1,
 'documentation': {
 'description': 'Sets a complex filter.',
@@ -636,14 +636,14 @@ the low/high method,
     'QInputtoCoordConverter': {
         'values': [
             {
-                'name': 'I_AND_Q',
+                'name': 'NISCOPE_VAL_I_AND_Q',
                 'value': 0,
 'documentation': {
 'description': 'Enables the Q input to coordinate converter.',
 },
             },
             {
-                'name': 'Q_ZEROED',
+                'name': 'NISCOPE_VAL_Q_ZEROED',
                 'value': 1,
 'documentation': {
 'description': 'Zeroes out the Q input the to coordinate converter.',
@@ -689,14 +689,14 @@ distributed points.
     'RefLevelUnits': {
         'values': [
             {
-                'name': 'VOLTS',
+                'name': 'NISCOPE_VAL_VOLTS',
                 'value': 0,
 'documentation': {
 'description': 'Specifies that the reference levels are given in units of volts.',
 },
             },
             {
-                'name': 'PERCENTAGE',
+                'name': 'NISCOPE_VAL_PERCENTAGE',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -728,35 +728,35 @@ units.
     'ResamplerFilterMode': {
         'values': [
             {
-                'name': 'RESAMPLER_ENABLED',
+                'name': 'NISCOPE_VAL_RESAMPLER_ENABLED',
                 'value': 1,
 'documentation': {
 'description': 'Resampler enabled.',
 },
             },
             {
-                'name': 'HB_1_ENABLED',
+                'name': 'NISCOPE_VAL_HB_1_ENABLED',
                 'value': 2,
 'documentation': {
 'description': 'HB 1 enabled.',
 },
             },
             {
-                'name': 'RESAMPLER_AND_HB_1',
+                'name': 'NISCOPE_VAL_RESAMPLER_AND_HB_1',
                 'value': 3,
 'documentation': {
 'description': 'Resampler and HB 1.',
 },
             },
             {
-                'name': 'BOTH_HB_FILTERS',
+                'name': 'NISCOPE_VAL_BOTH_HB_FILTERS',
                 'value': 6,
 'documentation': {
 'description': 'Both HB Filters.',
 },
             },
             {
-                'name': 'RESAMPLER_AND_BOTH_HB_FILTERS',
+                'name': 'NISCOPE_VAL_RESAMPLER_AND_BOTH_HB_FILTERS',
                 'value': 7,
 'documentation': {
 'description': 'Resampler and Both HB Filters.',
@@ -767,14 +767,14 @@ units.
     'StreamingPositionType': {
         'values': [
             {
-                'name': 'START_TRIGGER',
+                'name': 'NISCOPE_VAL_START_TRIGGER',
                 'value': 0,
 'documentation': {
 'description': 'Data is streamed from the start trigger.',
 },
             },
             {
-                'name': 'REFERENCE_TRIGGER',
+                'name': 'NISCOPE_VAL_REFERENCE_TRIGGER',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -784,7 +784,7 @@ position.
 },
             },
             {
-                'name': 'SYNC_TRIGGER',
+                'name': 'NISCOPE_VAL_SYNC_TRIGGER',
                 'value': 2,
 'documentation': {
 'description': 'Data is streamed relative to the sync trigger and reference position.',
@@ -795,14 +795,14 @@ position.
     'SyncoutCLKSelect': {
         'values': [
             {
-                'name': 'CLKIN',
+                'name': 'NISCOPE_VAL_CLKIN',
                 'value': 0,
 'documentation': {
 'description': 'Specifies CLKIN as the source for Syncout CLK.',
 },
             },
             {
-                'name': 'PROCCLK',
+                'name': 'NISCOPE_VAL_PROCCLK',
                 'value': 1,
 'documentation': {
 'description': 'Specifies PROCCLK as the source for Syncout CLK.',
@@ -838,28 +838,28 @@ position.
     'TimingNCOFreqOffsetBits': {
         'values': [
             {
-                'name': '_8_BITS',
+                'name': 'NISCOPE_VAL__8_BITS',
                 'value': 0,
 'documentation': {
 'description': 'Specifies 8 offset bits in the timing NCO.',
 },
             },
             {
-                'name': '_16_BITS',
+                'name': 'NISCOPE_VAL__16_BITS',
                 'value': 1,
 'documentation': {
 'description': 'Specifies 16 offset bits in the timing NCO.',
 },
             },
             {
-                'name': '_24_BITS',
+                'name': 'NISCOPE_VAL__24_BITS',
                 'value': 2,
 'documentation': {
 'description': 'Specifies 24 offset bits in the timing NCO.',
 },
             },
             {
-                'name': '_32_BITS',
+                'name': 'NISCOPE_VAL__32_BITS',
                 'value': 3,
 'documentation': {
 'description': 'Specifies 32 offset bits in the timing NCO.',
@@ -898,7 +898,7 @@ position.
 },
             },
             {
-                'name': 'LF_REJECT',
+                'name': 'NISCOPE_VAL_LF_REJECT',
                 'value': 4,
 'documentation': {
 'description': 'LF Reject filter.',
@@ -1090,105 +1090,105 @@ after a certain amount of time.
 },
             },
             {
-                'name': 'M_PAL',
+                'name': 'NISCOPE_VAL_M_PAL',
                 'value': 4,
 'documentation': {
 'description': 'Specifies M-PAL signal format.',
 },
             },
             {
-                'name': '_480I59_94_FPS',
+                'name': 'NISCOPE_VAL__480I59_94_FPS',
                 'value': 5,
 'documentation': {
 'description': 'Specifies 480i/59.94 signal format.',
 },
             },
             {
-                'name': '_480I60_FPS',
+                'name': 'NISCOPE_VAL__480I60_FPS',
                 'value': 6,
 'documentation': {
 'description': 'Specifies 480i/60 signal format.',
 },
             },
             {
-                'name': '_480P59_94_FPS',
+                'name': 'NISCOPE_VAL__480P59_94_FPS',
                 'value': 7,
 'documentation': {
 'description': 'Specifies 480p/59.94 signal format.',
 },
             },
             {
-                'name': '_480P60_FPS',
+                'name': 'NISCOPE_VAL__480P60_FPS',
                 'value': 8,
 'documentation': {
 'description': 'Specifies 480p/60 Fps signal format.',
 },
             },
             {
-                'name': '_576I60_FPS',
+                'name': 'NISCOPE_VAL__576I60_FPS',
                 'value': 9,
 'documentation': {
 'description': 'Specifies 576i/60 fps signal format.',
 },
             },
             {
-                'name': '_576P50_FPS',
+                'name': 'NISCOPE_VAL__576P50_FPS',
                 'value': 10,
 'documentation': {
 'description': 'Specifies 576p/50 Fps signal format.',
 },
             },
             {
-                'name': '_720P30_FPS',
+                'name': 'NISCOPE_VAL__720P30_FPS',
                 'value': 11,
 'documentation': {
 'description': 'Specifies 720p/30 Fps signal format.',
 },
             },
             {
-                'name': '_720P50_FPS',
+                'name': 'NISCOPE_VAL__720P50_FPS',
                 'value': 12,
 'documentation': {
 'description': 'Specifies 720p/50 Fps signal format.',
 },
             },
             {
-                'name': '_720P59_94_FPS',
+                'name': 'NISCOPE_VAL__720P59_94_FPS',
                 'value': 13,
 'documentation': {
 'description': 'Specifies 720p/59.94 Fps signal format.',
 },
             },
             {
-                'name': '_720P60_FPS',
+                'name': 'NISCOPE_VAL__720P60_FPS',
                 'value': 14,
 'documentation': {
 'description': 'Specifies 720p/60 Fps signal format.',
 },
             },
             {
-                'name': '_1080I50_FPS',
+                'name': 'NISCOPE_VAL__1080I50_FPS',
                 'value': 15,
 'documentation': {
 'description': 'Specifies 1080i/50 fps signal format.',
 },
             },
             {
-                'name': '_1080I59_94_FPS',
+                'name': 'NISCOPE_VAL__1080I59_94_FPS',
                 'value': 16,
 'documentation': {
 'description': 'Specifies 1080i/59.94 fps signal format.',
 },
             },
             {
-                'name': '_1080I60_FPS',
+                'name': 'NISCOPE_VAL__1080I60_FPS',
                 'value': 17,
 'documentation': {
 'description': 'Specifies 1080i/60 fps signal format.',
 },
             },
             {
-                'name': '_1080P24_FPS',
+                'name': 'NISCOPE_VAL__1080P24_FPS',
                 'value': 18,
 'documentation': {
 'description': 'Specifies 1080p/24 Fps signal format.',

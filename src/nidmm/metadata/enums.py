@@ -34,35 +34,35 @@ enums = {
     'AcquisitionStatus': {
         'values': [
             {
-                'name': 'RUNNING',
+                'name': 'NIDMM_VAL_RUNNING',
                 'value': 0,
 'documentation': {
 'description': 'Running',
 },
             },
             {
-                'name': 'FINISHED_WITH_BACKLOG',
+                'name': 'NIDMM_VAL_FINISHED_WITH_BACKLOG',
                 'value': 1,
 'documentation': {
 'description': 'Finished with **Backlog**',
 },
             },
             {
-                'name': 'FINISHED_WITH_NO_BACKLOG',
+                'name': 'NIDMM_VAL_FINISHED_WITH_NO_BACKLOG',
                 'value': 2,
 'documentation': {
 'description': 'Finished with no **Backlog**',
 },
             },
             {
-                'name': 'PAUSED',
+                'name': 'NIDMM_VAL_PAUSED',
                 'value': 3,
 'documentation': {
 'description': 'Paused',
 },
             },
             {
-                'name': 'NO_ACQUISITION_IN_PROGRESS',
+                'name': 'NIDMM_VAL_NO_ACQUISITION_IN_PROGRESS',
                 'value': 4,
 'documentation': {
 'description': 'No acquisition in progress',
@@ -237,35 +237,35 @@ enums = {
     'DigitsResolution': {
         'values': [
             {
-                'name': '_3_5',
+                'name': 'NIDMM_VAL__3_5',
                 'value': 3.5,
 'documentation': {
 'description': 'Specifies 3.5 digits resolution.',
 },
             },
             {
-                'name': '_4_5',
+                'name': 'NIDMM_VAL__4_5',
                 'value': 4.5,
 'documentation': {
 'description': 'Specifies 4.5 digits resolution.',
 },
             },
             {
-                'name': '_5_5',
+                'name': 'NIDMM_VAL__5_5',
                 'value': 5.5,
 'documentation': {
 'description': 'Specifies 5.5 digits resolution.',
 },
             },
             {
-                'name': '_6_5',
+                'name': 'NIDMM_VAL__6_5',
                 'value': 6.5,
 'documentation': {
 'description': 'Specifies 6.5 digits resolution.',
 },
             },
             {
-                'name': '_7_5',
+                'name': 'NIDMM_VAL__7_5',
                 'value': 7.5,
 'documentation': {
 'description': 'Specifies 7.5 digits resolution.',
@@ -332,7 +332,7 @@ enums = {
 },
             },
             {
-                'name': 'TEMPERATURE',
+                'name': 'NIDMM_VAL_TEMPERATURE',
                 'value': 108,
 'documentation': {
 'description': 'NI 4065, and NI 4070/4071/4072 supported.',
@@ -803,7 +803,7 @@ and C coefficients.
     'ThermocoupleReferenceJunctionType': {
         'values': [
             {
-                'name': 'FIXED',
+                'name': 'NIDMM_VAL_FIXED',
                 'value': 2,
 'documentation': {
 'description': '''
