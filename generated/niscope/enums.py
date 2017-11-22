@@ -383,8 +383,8 @@ class FlexFIRAntialiasFilterType(Enum):
 
 
 class InputImpedance(Enum):
-    _1_MEG_OHM = 0
-    _50_OHMS = 2
+    _1_MEG_OHM = 1000000.0
+    _50_OHMS = 50.0
 
 
 class Option(Enum):
