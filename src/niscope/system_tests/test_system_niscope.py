@@ -80,7 +80,7 @@ def test_get_error(session):
 
 
 def test_acquisition_status(session):
-    assert session.acquisition_status() == 1
+    assert session.acquisition_status() == niscope.AcquisitionStatus.COMPLETE
 
 
 def test_self_cal(session):
