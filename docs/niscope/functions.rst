@@ -1703,7 +1703,7 @@ niscope.Session methods
         
 
 
-    :type which_trigger: int
+    :type which_trigger: :py:data:`niscope.WhichTrigger`
 
 .. function:: reset()
 

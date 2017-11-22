@@ -1893,3 +1893,22 @@ Enums used in NI-SCOPE
         
 
 
+
+
+.. py:data:: WhichTrigger
+
+    .. py:attribute:: niscope.WhichTrigger.START
+
+
+
+    .. py:attribute:: niscope.WhichTrigger.ARM_REFERENCE
+
+
+
+    .. py:attribute:: niscope.WhichTrigger.REFERENCE
+
+
+
+    .. py:attribute:: niscope.WhichTrigger.ADVANCE
+
+

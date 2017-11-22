@@ -746,3 +746,10 @@ class VideoTriggerEvent(Enum):
     '''
     Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.
     '''
+
+
+class WhichTrigger(Enum):
+    START = 0
+    ARM_REFERENCE = 1
+    REFERENCE = 2
+    ADVANCE = 3

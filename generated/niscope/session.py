@@ -3311,7 +3311,7 @@ class Session(_SessionBase):
         the corresponding trigger to the digitizer.
 
         Args:
-            which_trigger (int): Specifies the type of trigger to send to the digitizer.
+            which_trigger (enums.WhichTrigger): Specifies the type of trigger to send to the digitizer.
 
                 **Defined Values**
 
@@ -3320,8 +3320,10 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_SOFTWARE_TRIGGER_REFERENCE (2L)
                 | NISCOPE_VAL_SOFTWARE_TRIGGER_ADVANCE (3L)
         '''
+        if type(which_trigger) is not enums.WhichTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        which_trigger_ctype = visatype.ViInt32(which_trigger)  # case 9
+        which_trigger_ctype = visatype.ViInt32(which_trigger.value)  # case 10
         error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
