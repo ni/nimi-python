@@ -88,14 +88,14 @@ enums = {
     'CurrentLimitBehavior': {
         'values': [
             {
-                'name': 'NIDCPOWER_VAL_CURRENT_REGULATE',
+                'name': 'CURRENT_REGULATE',
                 'value': 13613,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NIDCPOWER_VAL_CURRENT_TRIP',
+                'name': 'CURRENT_TRIP',
                 'value': 13614,
 'documentation': {
 'description': '',

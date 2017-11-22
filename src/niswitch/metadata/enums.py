@@ -9,14 +9,14 @@ enums = {
     'CabledModuleScanAdvancedBus': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_NONE',
+                'name': 'NONE',
                 'value': 0,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'name': 'PXI_TRIG0',
                 'value': 111,
 'documentation': {
 'description': '''
@@ -26,7 +26,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'name': 'PXI_TRIG1',
                 'value': 112,
 'documentation': {
 'description': '''
@@ -36,7 +36,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'name': 'PXI_TRIG2',
                 'value': 113,
 'documentation': {
 'description': '''
@@ -46,7 +46,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'name': 'PXI_TRIG3',
                 'value': 114,
 'documentation': {
 'description': '''
@@ -56,7 +56,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'name': 'PXI_TRIG4',
                 'value': 115,
 'documentation': {
 'description': '''
@@ -66,7 +66,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'name': 'PXI_TRIG5',
                 'value': 116,
 'documentation': {
 'description': '''
@@ -76,7 +76,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'name': 'PXI_TRIG6',
                 'value': 117,
 'documentation': {
 'description': '''
@@ -86,7 +86,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'name': 'PXI_TRIG7',
                 'value': 118,
 'documentation': {
 'description': '''
@@ -100,63 +100,63 @@ line before processing the next entry in the scan list.
     'CabledModuleTriggerBus': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_NONE',
+                'name': 'NONE',
                 'value': 0,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'name': 'PXI_TRIG0',
                 'value': 111,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'name': 'PXI_TRIG1',
                 'value': 112,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'name': 'PXI_TRIG2',
                 'value': 113,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'name': 'PXI_TRIG3',
                 'value': 114,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'name': 'PXI_TRIG4',
                 'value': 115,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'name': 'PXI_TRIG5',
                 'value': 116,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'name': 'PXI_TRIG6',
                 'value': 117,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'name': 'PXI_TRIG7',
                 'value': 118,
 'documentation': {
 'description': '',
@@ -167,7 +167,7 @@ line before processing the next entry in the scan list.
     'HandshakingInitiation': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED',
+                'name': 'MEASUREMENT_DEVICE_INITIATED',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -186,7 +186,7 @@ handshaking.
 },
             },
             {
-                'name': 'NISWITCH_VAL_SWITCH_INITIATED',
+                'name': 'SWITCH_INITIATED',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -205,14 +205,14 @@ advanced output signal of the switch module initiates handshaking.
     'MasterSlaveScanAdvancedBus': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_NONE',
+                'name': 'NONE',
                 'value': 0,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'name': 'PXI_TRIG0',
                 'value': 111,
 'documentation': {
 'description': '''
@@ -222,7 +222,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'name': 'PXI_TRIG1',
                 'value': 112,
 'documentation': {
 'description': '''
@@ -232,7 +232,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'name': 'PXI_TRIG2',
                 'value': 113,
 'documentation': {
 'description': '''
@@ -242,7 +242,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'name': 'PXI_TRIG3',
                 'value': 114,
 'documentation': {
 'description': '''
@@ -252,7 +252,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'name': 'PXI_TRIG4',
                 'value': 115,
 'documentation': {
 'description': '''
@@ -262,7 +262,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'name': 'PXI_TRIG5',
                 'value': 116,
 'documentation': {
 'description': '''
@@ -272,7 +272,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'name': 'PXI_TRIG6',
                 'value': 117,
 'documentation': {
 'description': '''
@@ -282,7 +282,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'name': 'PXI_TRIG7',
                 'value': 118,
 'documentation': {
 'description': '''
@@ -296,14 +296,14 @@ line before processing the next entry in the scan list.
     'MasterSlaveTriggerBus': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_NONE',
+                'name': 'NONE',
                 'value': 0,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'name': 'PXI_TRIG0',
                 'value': 111,
 'documentation': {
 'description': '''
@@ -313,7 +313,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'name': 'PXI_TRIG1',
                 'value': 112,
 'documentation': {
 'description': '''
@@ -323,7 +323,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'name': 'PXI_TRIG2',
                 'value': 113,
 'documentation': {
 'description': '''
@@ -333,7 +333,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'name': 'PXI_TRIG3',
                 'value': 114,
 'documentation': {
 'description': '''
@@ -343,7 +343,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'name': 'PXI_TRIG4',
                 'value': 115,
 'documentation': {
 'description': '''
@@ -353,7 +353,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'name': 'PXI_TRIG5',
                 'value': 116,
 'documentation': {
 'description': '''
@@ -363,7 +363,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'name': 'PXI_TRIG6',
                 'value': 117,
 'documentation': {
 'description': '''
@@ -373,7 +373,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'name': 'PXI_TRIG7',
                 'value': 118,
 'documentation': {
 'description': '''
@@ -387,42 +387,42 @@ line before processing the next entry in the scan list.
     'PathCapability': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_PATH_AVAILABLE',
+                'name': 'PATH_AVAILABLE',
                 'value': 1,
 'documentation': {
 'description': 'Path Available',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PATH_EXISTS',
+                'name': 'PATH_EXISTS',
                 'value': 2,
 'documentation': {
 'description': 'Path Exists',
 },
             },
             {
-                'name': 'NISWITCH_VAL_PATH_UNSUPPORTED',
+                'name': 'PATH_UNSUPPORTED',
                 'value': 3,
 'documentation': {
 'description': 'Path Unsupported',
 },
             },
             {
-                'name': 'NISWITCH_VAL_RESOURCE_IN_USE',
+                'name': 'RESOURCE_IN_USE',
                 'value': 4,
 'documentation': {
 'description': 'Resource in use',
 },
             },
             {
-                'name': 'NISWITCH_VAL_SOURCE_CONFLICT',
+                'name': 'SOURCE_CONFLICT',
                 'value': 5,
 'documentation': {
 'description': 'Source conflict',
 },
             },
             {
-                'name': 'NISWITCH_VAL_CHANNEL_NOT_AVAILABLE',
+                'name': 'CHANNEL_NOT_AVAILABLE',
                 'value': 6,
 'documentation': {
 'description': 'Channel not available',
@@ -433,14 +433,14 @@ line before processing the next entry in the scan list.
     'RelayAction': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_OPEN_RELAY',
+                'name': 'OPEN_RELAY',
                 'value': 20,
 'documentation': {
 'description': 'Open Relay',
 },
             },
             {
-                'name': 'NISWITCH_VAL_CLOSE_RELAY',
+                'name': 'CLOSE_RELAY',
                 'value': 21,
 'documentation': {
 'description': 'Close Relay',
@@ -451,14 +451,14 @@ line before processing the next entry in the scan list.
     'RelayPosition': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_OPEN',
+                'name': 'OPEN',
                 'value': 10,
 'documentation': {
 'description': 'Open',
 },
             },
             {
-                'name': 'NISWITCH_VAL_CLOSED',
+                'name': 'CLOSED',
                 'value': 11,
 'documentation': {
 'description': 'Closed',
@@ -539,7 +539,7 @@ line before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_PXI_STAR',
+                'name': 'PXI_STAR',
                 'value': 125,
 'documentation': {
 'description': '''
@@ -563,7 +563,7 @@ Star trigger bus before processing the next entry in the scan list.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE1',
+                'name': 'REARCONNECTOR_MODULE1',
                 'value': 1021,
 'documentation': {
 'description': '''
@@ -573,7 +573,7 @@ connector module 1.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE2',
+                'name': 'REARCONNECTOR_MODULE2',
                 'value': 1022,
 'documentation': {
 'description': '''
@@ -583,7 +583,7 @@ connector module 2.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE3',
+                'name': 'REARCONNECTOR_MODULE3',
                 'value': 1023,
 'documentation': {
 'description': '''
@@ -593,7 +593,7 @@ connector module 3.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE4',
+                'name': 'REARCONNECTOR_MODULE4',
                 'value': 1024,
 'documentation': {
 'description': '''
@@ -603,7 +603,7 @@ connector module 4.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE5',
+                'name': 'REARCONNECTOR_MODULE5',
                 'value': 1025,
 'documentation': {
 'description': '''
@@ -613,7 +613,7 @@ connector module 5.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE6',
+                'name': 'REARCONNECTOR_MODULE6',
                 'value': 1026,
 'documentation': {
 'description': '''
@@ -623,7 +623,7 @@ connector module 6.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE7',
+                'name': 'REARCONNECTOR_MODULE7',
                 'value': 1027,
 'documentation': {
 'description': '''
@@ -633,7 +633,7 @@ connector module 7.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE8',
+                'name': 'REARCONNECTOR_MODULE8',
                 'value': 1028,
 'documentation': {
 'description': '''
@@ -643,7 +643,7 @@ connector module 8.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE9',
+                'name': 'REARCONNECTOR_MODULE9',
                 'value': 1029,
 'documentation': {
 'description': '''
@@ -653,7 +653,7 @@ connector module 9.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE10',
+                'name': 'REARCONNECTOR_MODULE10',
                 'value': 1030,
 'documentation': {
 'description': '''
@@ -663,7 +663,7 @@ connector module 10.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE11',
+                'name': 'REARCONNECTOR_MODULE11',
                 'value': 1031,
 'documentation': {
 'description': '''
@@ -673,7 +673,7 @@ connector module 11.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE12',
+                'name': 'REARCONNECTOR_MODULE12',
                 'value': 1032,
 'documentation': {
 'description': '''
@@ -683,7 +683,7 @@ connector module 12.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE1',
+                'name': 'FRONTCONNECTOR_MODULE1',
                 'value': 1041,
 'documentation': {
 'description': '''
@@ -693,7 +693,7 @@ connector module 1.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE2',
+                'name': 'FRONTCONNECTOR_MODULE2',
                 'value': 1042,
 'documentation': {
 'description': '''
@@ -703,7 +703,7 @@ connector module 2.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE3',
+                'name': 'FRONTCONNECTOR_MODULE3',
                 'value': 1043,
 'documentation': {
 'description': '''
@@ -713,7 +713,7 @@ connector module 3.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE4',
+                'name': 'FRONTCONNECTOR_MODULE4',
                 'value': 1044,
 'documentation': {
 'description': '''
@@ -723,7 +723,7 @@ connector module 4.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE5',
+                'name': 'FRONTCONNECTOR_MODULE5',
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -733,7 +733,7 @@ connector module 5.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE6',
+                'name': 'FRONTCONNECTOR_MODULE6',
                 'value': 1046,
 'documentation': {
 'description': '''
@@ -743,7 +743,7 @@ connector module 6.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE7',
+                'name': 'FRONTCONNECTOR_MODULE7',
                 'value': 1047,
 'documentation': {
 'description': '''
@@ -753,7 +753,7 @@ connector module 7.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE8',
+                'name': 'FRONTCONNECTOR_MODULE8',
                 'value': 1048,
 'documentation': {
 'description': '''
@@ -763,7 +763,7 @@ connector module 8.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE9',
+                'name': 'FRONTCONNECTOR_MODULE9',
                 'value': 1049,
 'documentation': {
 'description': '''
@@ -773,7 +773,7 @@ connector module 9.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE10',
+                'name': 'FRONTCONNECTOR_MODULE10',
                 'value': 1050,
 'documentation': {
 'description': '''
@@ -783,7 +783,7 @@ connector module 10.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE11',
+                'name': 'FRONTCONNECTOR_MODULE11',
                 'value': 1051,
 'documentation': {
 'description': '''
@@ -793,7 +793,7 @@ connector module 11.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE12',
+                'name': 'FRONTCONNECTOR_MODULE12',
                 'value': 1052,
 'documentation': {
 'description': '''
@@ -948,7 +948,7 @@ connector module 12.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE1',
+                'name': 'REARCONNECTOR_MODULE1',
                 'value': 1021,
 'documentation': {
 'description': '''
@@ -958,7 +958,7 @@ connector module 1.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE2',
+                'name': 'REARCONNECTOR_MODULE2',
                 'value': 1022,
 'documentation': {
 'description': '''
@@ -968,7 +968,7 @@ connector module 2.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE3',
+                'name': 'REARCONNECTOR_MODULE3',
                 'value': 1023,
 'documentation': {
 'description': '''
@@ -978,7 +978,7 @@ connector module 3.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE4',
+                'name': 'REARCONNECTOR_MODULE4',
                 'value': 1024,
 'documentation': {
 'description': '''
@@ -988,7 +988,7 @@ connector module 4.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE5',
+                'name': 'REARCONNECTOR_MODULE5',
                 'value': 1025,
 'documentation': {
 'description': '''
@@ -998,7 +998,7 @@ connector module 5.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE6',
+                'name': 'REARCONNECTOR_MODULE6',
                 'value': 1026,
 'documentation': {
 'description': '''
@@ -1008,7 +1008,7 @@ connector module 6.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE7',
+                'name': 'REARCONNECTOR_MODULE7',
                 'value': 1027,
 'documentation': {
 'description': '''
@@ -1018,7 +1018,7 @@ connector module 7.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE8',
+                'name': 'REARCONNECTOR_MODULE8',
                 'value': 1028,
 'documentation': {
 'description': '''
@@ -1028,7 +1028,7 @@ connector module 8.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE9',
+                'name': 'REARCONNECTOR_MODULE9',
                 'value': 1029,
 'documentation': {
 'description': '''
@@ -1038,7 +1038,7 @@ connector module 9.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE10',
+                'name': 'REARCONNECTOR_MODULE10',
                 'value': 1030,
 'documentation': {
 'description': '''
@@ -1048,7 +1048,7 @@ connector module 10.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE11',
+                'name': 'REARCONNECTOR_MODULE11',
                 'value': 1031,
 'documentation': {
 'description': '''
@@ -1058,7 +1058,7 @@ connector module 11.
 },
             },
             {
-                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE12',
+                'name': 'REARCONNECTOR_MODULE12',
                 'value': 1032,
 'documentation': {
 'description': '''
@@ -1068,7 +1068,7 @@ connector module 12.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE1',
+                'name': 'FRONTCONNECTOR_MODULE1',
                 'value': 1041,
 'documentation': {
 'description': '''
@@ -1078,7 +1078,7 @@ connector module 1.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE2',
+                'name': 'FRONTCONNECTOR_MODULE2',
                 'value': 1042,
 'documentation': {
 'description': '''
@@ -1088,7 +1088,7 @@ connector module 2.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE3',
+                'name': 'FRONTCONNECTOR_MODULE3',
                 'value': 1043,
 'documentation': {
 'description': '''
@@ -1098,7 +1098,7 @@ connector module 3.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE4',
+                'name': 'FRONTCONNECTOR_MODULE4',
                 'value': 1044,
 'documentation': {
 'description': '''
@@ -1108,7 +1108,7 @@ connector module 4.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE5',
+                'name': 'FRONTCONNECTOR_MODULE5',
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -1118,7 +1118,7 @@ connector module 5.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE6',
+                'name': 'FRONTCONNECTOR_MODULE6',
                 'value': 1046,
 'documentation': {
 'description': '''
@@ -1128,7 +1128,7 @@ connector module 6.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE7',
+                'name': 'FRONTCONNECTOR_MODULE7',
                 'value': 1047,
 'documentation': {
 'description': '''
@@ -1138,7 +1138,7 @@ connector module 7.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE8',
+                'name': 'FRONTCONNECTOR_MODULE8',
                 'value': 1048,
 'documentation': {
 'description': '''
@@ -1148,7 +1148,7 @@ connector module 8.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE9',
+                'name': 'FRONTCONNECTOR_MODULE9',
                 'value': 1049,
 'documentation': {
 'description': '''
@@ -1158,7 +1158,7 @@ connector module 9.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE10',
+                'name': 'FRONTCONNECTOR_MODULE10',
                 'value': 1050,
 'documentation': {
 'description': '''
@@ -1168,7 +1168,7 @@ connector module 10.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE11',
+                'name': 'FRONTCONNECTOR_MODULE11',
                 'value': 1051,
 'documentation': {
 'description': '''
@@ -1178,7 +1178,7 @@ connector module 11.
 },
             },
             {
-                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE12',
+                'name': 'FRONTCONNECTOR_MODULE12',
                 'value': 1052,
 'documentation': {
 'description': '''
@@ -1210,21 +1210,21 @@ connector module 12.
     'TriggerMode': {
         'values': [
             {
-                'name': 'NISWITCH_VAL_SINGLE',
+                'name': 'SINGLE',
                 'value': 0,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_MASTER',
+                'name': 'MASTER',
                 'value': 1,
 'documentation': {
 'description': '',
 },
             },
             {
-                'name': 'NISWITCH_VAL_SLAVE',
+                'name': 'SLAVE',
                 'value': 2,
 'documentation': {
 'description': '',

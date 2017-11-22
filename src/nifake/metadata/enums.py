@@ -6,28 +6,28 @@ enums = {
     'Color': {
         'values': [
             {
-                'name': 'NIFAKE_VAL_RED',
+                'name': 'RED',
                 'value': 1,
                 'documentation': {
                     'description': 'Like blood.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_BLUE',
+                'name': 'BLUE',
                 'value': 2,
                 'documentation': {
                     'description': 'Like the sky.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_YELLOW',
+                'name': 'YELLOW',
                 'value': 2,
                 'documentation': {
                     'description': 'Like a banana.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_BLACK',
+                'name': 'BLACK',
                 'value': 2,
                 'documentation': {
                     'description': 'Like this developer\'s conscience.',
@@ -38,28 +38,28 @@ enums = {
     'Turtle': {
         'values': [
             {
-                'name': 'NIFAKE_VAL_LEONARDO',
+                'name': 'LEONARDO',
                 'value': 0,
                 'documentation': {
                     'description': 'Wields two katanas.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_DONATELLO',
+                'name': 'DONATELLO',
                 'value': 1,
                 'documentation': {
                     'description': 'Uses a bo staff.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_RAPHAEL',
+                'name': 'RAPHAEL',
                 'value': 2,
                 'documentation': {
                     'description': 'Has a pair of sai.',
                 }
             },
             {
-                'name': 'NIFAKE_VAL_MICHELANGELO',
+                'name': 'MICHELANGELO',
                 'value': 3,
                 'documentation': {
                     'description': 'Owns nunchucks.',
@@ -70,35 +70,35 @@ enums = {
     'FloatEnum': {
         'values': [
             {
-                'name': 'NIFAKE_VAL_THREE_POINT_FIVE',
+                'name': 'THREE_POINT_FIVE',
                 'value': 3.5,
                 'documentation': {
                     'description': 'Specifies 3.5 digits resolution.',
                 },
             },
             {
-                'name': 'NIFAKE_VAL_FOUR_POINT_FIVE',
+                'name': 'FOUR_POINT_FIVE',
                 'value': 4.5,
                 'documentation': {
                     'description': 'Specifies 4.5 digits resolution.',
                 },
             },
             {
-                'name': 'NIFAKE_VAL_FIVE_POINT_FIVE',
+                'name': 'FIVE_POINT_FIVE',
                 'value': 5.5,
                 'documentation': {
                     'description': 'Specifies 5.5 digits resolution.',
                 },
             },
             {
-                'name': 'NIFAKE_VAL_SIX_POINT_FIVE',
+                'name': 'SIX_POINT_FIVE',
                 'value': 6.5,
                 'documentation': {
                     'description': 'Specifies 6.5 digits resolution.',
                 },
             },
             {
-                'name': 'NIFAKE_VAL_SEVEN_POINT_FIVE',
+                'name': 'SEVEN_POINT_FIVE',
                 'value': 7.5,
                 'documentation': {
                     'description': 'Specifies 7.5 digits resolution.',
