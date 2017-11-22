@@ -138,7 +138,7 @@ niscope.Session methods
 
 
 
-.. function:: cal_self_calibrate(option)
+.. function:: cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
     Self-calibrates most NI digitizers, including all SMC-based devices and
     most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
@@ -164,7 +164,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].cal_self_calibrate(option)
+            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
 
     :param option:
@@ -179,7 +179,7 @@ niscope.Session methods
 
     :type option: :py:data:`niscope.Option`
 
-.. function:: clear_waveform_measurement_stats(clearable_measurement_function)
+.. function:: clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
     Clears the waveform stats on the channel and measurement you specify. If
     you want to clear all of the measurements, use
@@ -202,7 +202,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
 
     :param clearable_measurement_function:
@@ -475,7 +475,7 @@ niscope.Session methods
 
     :type high: float
 
-.. function:: configure_trigger_digital(trigger_source, slope, holdoff, delay)
+.. function:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures the common properties of a digital trigger.
 
@@ -554,7 +554,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_edge(trigger_source, level, slope, trigger_coupling, holdoff, delay)
+.. function:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures common properties for analog edge triggering.
 
@@ -589,6 +589,16 @@ niscope.Session methods
 
 
     :type trigger_source: string
+    :param trigger_coupling:
+
+
+        Applies coupling and filtering options to the trigger signal. Refer to
+        :py:data:`niscope.TRIGGER\_COUPLING` for more information.
+
+        
+
+
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param level:
 
 
@@ -610,16 +620,6 @@ niscope.Session methods
 
 
     :type slope: :py:data:`niscope.TriggerSlope`
-    :param trigger_coupling:
-
-
-        Applies coupling and filtering options to the trigger signal. Refer to
-        :py:data:`niscope.TRIGGER\_COUPLING` for more information.
-
-        
-
-
-    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param holdoff:
 
 
@@ -643,7 +643,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_hysteresis(trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay)
+.. function:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures common properties for analog hysteresis triggering. This kind
     of trigger specifies an additional value, specified in the
@@ -682,6 +682,16 @@ niscope.Session methods
 
 
     :type trigger_source: string
+    :param trigger_coupling:
+
+
+        Applies coupling and filtering options to the trigger signal. Refer to
+        :py:data:`niscope.TRIGGER\_COUPLING` for more information.
+
+        
+
+
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param level:
 
 
@@ -716,16 +726,6 @@ niscope.Session methods
 
 
     :type slope: :py:data:`niscope.TriggerSlope`
-    :param trigger_coupling:
-
-
-        Applies coupling and filtering options to the trigger signal. Refer to
-        :py:data:`niscope.TRIGGER\_COUPLING` for more information.
-
-        
-
-
-    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param holdoff:
 
 

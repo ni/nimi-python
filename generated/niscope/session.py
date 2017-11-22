@@ -1402,7 +1402,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_self_calibrate(self, option):
+    def cal_self_calibrate(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
         '''cal_self_calibrate
 
         Self-calibrates most NI digitizers, including all SMC-based devices and
@@ -1425,7 +1425,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option)
+            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1441,7 +1441,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_measurement_stats(self, clearable_measurement_function):
+    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
         '''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
@@ -1461,7 +1461,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -2809,7 +2809,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope, holdoff, delay):
+    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -2868,7 +2868,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, level, slope, trigger_coupling, holdoff, delay):
+    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -2894,13 +2894,13 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                TRIGGER_COUPLING for more information.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
@@ -2925,7 +2925,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
+    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -2955,6 +2955,8 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                TRIGGER_COUPLING for more information.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
             hysteresis (float): The size of the hysteresis window on either side of the **level** in
@@ -2965,8 +2967,6 @@ class Session(_SessionBase):
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
