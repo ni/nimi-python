@@ -85,3 +85,30 @@ def test_acquisition_status(session):
 
 def test_self_cal(session):
     session.cal_self_calibrate(niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+
+
+def test_probe_compensation_signal(session):
+    session.probe_compensation_signal_start()
+    session.probe_compensation_signal_start()
+
+
+def test_configure_channel_characteristics(session):
+    session.configure_vertical(5.0, 0.0, niscope.VerticalCoupling.DC, 1.0, True)
+    session.auto_setup()
+    session.configure_horizontal_timing(10000000, 1000, 50.0, 1, True)
+    session.trigger_modifier = niscope.TriggerModifier.AUTO
+    session.configure_trigger_immediate()
+    session.horz_record_length == 1000
+    session.horz_sample_rate == 10000000
+
+
+def test_waveform_processing(session):
+    session.configure_vertical(5.0, 0.0, niscope.VerticalCoupling.DC, 1.0, True)
+    session.configure_horizontal_timing(10000000, 4096, 50.0, 1, True)
+    session['0'].read(5, 2000)
+    session.add_waveform_processing(niscope.ArrayMeasurement.NO_MEASUREMENT)
+    session.add_waveform_processing(niscope.ArrayMeasurement.FFT_AMP_SPECTRUM_DB)
+    session.clear_waveform_measurement_stats(niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+    session.clear_waveform_processing()
+    session.horz_record_length == 4096
+    session.horz_sample_rate == 10000000

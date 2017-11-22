@@ -406,11 +406,11 @@ replacement_enums = {
                 'name':'FREQUENCY',
                 'value':2,
             },
-			{
+            {
                 'name':'AVERAGE_FREQUENCY',
                 'value':1016,
             },
-			{
+            {
                 'name':'FFT_FREQUENCY',
                 'value':1008,
             },
@@ -661,11 +661,11 @@ replacement_enums = {
         'values': [
             {
                 'name': '_1_MEG_OHM',
-                'value': 0,
+                'value': 1000000.0,
             },
             {
                 'name': '_50_OHMS',
-                'value': 2,
+                'value': 50.0,
             },
         ],
     },
@@ -839,110 +839,110 @@ replacement_enums = {
     },
    'ExportDestinations': {
         'values': [
-			{
+            {
                 'name': 'RTSI_0',
                 'value': 'VAL_RTSI_0',
             },
-			{
+            {
                 'name': 'RTSI_1',
                 'value': 'VAL_RTSI_1',
             },
-			{
+            {
                 'name': 'RTSI_2',
                 'value': 'VAL_RTSI_2',
             },
-			{
+            {
                 'name': 'RTSI_3',
                 'value': 'VAL_RTSI_3',
             },
-			{
+            {
                 'name': 'RTSI_4',
                 'value': 'VAL_RTSI_4',
             },
-			{
+            {
                 'name': 'RTSI_5',
                 'value': 'VAL_RTSI_5',
             },
-			{
+            {
                 'name': 'RTSI_6',
                 'value': 'VAL_RTSI_6',
             },
-			{
+            {
                 'name': 'RTSI_7',
                 'value': 'VAL_RTSI_7',
             },
-			{
+            {
                 'name': 'PXI_STAR',
                 'value': 'VAL_PXI_STAR',
             },
-			{
+            {
                 'name': 'PFI_0',
                 'value': 'VAL_PFI_0',
             },
-			{
+            {
                 'name': 'PFI_1',
                 'value': 'VAL_PFI_1',
             },
-			{
+            {
                 'name': 'PFI_2',
                 'value': 'VAL_PFI_2',
             },
-			{
+            {
                 'name': 'CLK_OUT',
                 'value': 'VAL_CLK_OUT',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_0',
                 'value': 'VAL_AUX_0_PFI_0',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_1',
                 'value': 'VAL_AUX_0_PFI_1',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_2',
                 'value': 'VAL_AUX_0_PFI_2',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_3',
                 'value': 'VAL_AUX_0_PFI_3',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_4',
                 'value': 'VAL_AUX_0_PFI_4',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_5',
                 'value': 'VAL_AUX_0_PFI_5',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_6',
                 'value': 'VAL_AUX_0_PFI_6',
             },
-			{
+            {
                 'name': 'AUX_0_PFI_7',
                 'value': 'VAL_AUX_0_PFI_7',
             },
-		],
-	},
+        ],
+    },
    'WhichTrigger': {
         'values': [
             {
                 'name': 'SOFTWARE_TRIGGER_START',
                 'value': 0,
             },
-			{
+            {
                 'name': 'SOFTWARE_TRIGGER_ARM_REFERENCE',
                 'value': 1,
             },
-			{
+            {
                 'name': 'SOFTWARE_TRIGGER_REFERENCE',
                 'value': 2,
             },
-			{
+            {
                 'name': 'SOFTWARE_TRIGGER_ADVANCE',
                 'value': 3,
             },
-		],
+        ],
    },
 }
