@@ -12,23 +12,23 @@ enums_additional_enums = {
     'SendSoftwareEdgeTriggerType': {
         'values': [
             {
-                'name': 'START',
+                'name': 'NIDCPOWER_VAL_START',
                 'value': 1034,
             },
             {
-                'name': 'SOURCE',
+                'name': 'NIDCPOWER_VAL_SOURCE',
                 'value': 1035,
             },
             {
-                'name': 'MEASURE',
+                'name': 'NIDCPOWER_VAL_MEASURE',
                 'value': 1036,
             },
             {
-                'name': 'SEQUENCE_ADVANCE',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE',
                 'value': 1037,
             },
             {
-                'name': 'PULSE',
+                'name': 'NIDCPOWER_VAL_PULSE',
                 'value': 1053,
             },
         ],
@@ -36,27 +36,27 @@ enums_additional_enums = {
     'Event': {
         'values': [
             {
-                'name': 'SOURCE_COMPLETE',
+                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE',
                 'value': 1030,
             },
             {
-                'name': 'MEASURE_COMPLETE',
+                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE',
                 'value': 1031,
             },
             {
-                'name': 'SEQUENCE_ITERATION_COMPLETE',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE',
                 'value': 1032,
             },
             {
-                'name': 'SEQUENCE_ENGINE_DONE',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE',
                 'value': 1033,
             },
             {
-                'name': 'PULSE_COMPLETE',
+                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE',
                 'value': 1051,
             },
             {
-                'name': 'READY_FOR_PULSE_TRIGGER',
+                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
                 'value': 1052,
             },
         ],
@@ -64,14 +64,14 @@ enums_additional_enums = {
     'MeasurementTypes': {
         'values': [
             {
-                'name': 'MEASURE_CURRENT',
+                'name': 'NIDCPOWER_VAL_MEASURE_CURRENT',
                 'value': 0,
                 'documentation': {
                     'description': 'The device measures current.',
                 },
             },
             {
-                'name': 'MEASURE_VOLTAGE',
+                'name': 'NIDCPOWER_VAL_MEASURE_VOLTAGE',
                 'value': 1,
                 'documentation': {
                     'description': 'The device measures voltage.',
@@ -82,14 +82,14 @@ enums_additional_enums = {
     'OutputStates': {
         'values': [
             {
-                'name': 'OUTPUT_CONSTANT_VOLTAGE',
+                'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
                 'value': 0,
                 'documentation': {
                     'description': 'The device maintains a constant voltage by adjusting the current ',
                 },
             },
             {
-                'name': 'OUTPUT_CONSTANT_CURRENT',
+                'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                 'value': 1,
                 'documentation': {
                     'description': 'The device maintains a constant current by adjusting the voltage.',
@@ -100,77 +100,77 @@ enums_additional_enums = {
     'ExportSignal': {
         'values': [
             {
-                'name': 'SOURCE_COMPLETE_EVENT',
+                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT',
                 'value': 1030,
                 'documentation': {
                     'description': 'Exports the Source Complete event.',
                 },
             },
             {
-                'name': 'MEASURE_COMPLETE_EVENT',
+                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT',
                 'value': 1031,
                 'documentation': {
                     'description': 'Exports the Measure Complete event.',
                 },
             },
             {
-                'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT',
                 'value': 1032,
                 'documentation': {
                     'description': 'Exports the Sequence Iteration Complete event.',
                 },
             },  
             {
-                'name': 'SEQUENCE_ENGINE_DONE_EVENT',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT',
                 'value': 1033,
                 'documentation': {
                     'description': 'Exports the Sequence Engine Done event.',
                 },
             },
             {
-                'name': 'PULSE_COMPLETE_EVENT',
+                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT',
                 'value': 1051,
                 'documentation': {
                     'description': 'Exports the Pulse Complete event.',
                 },
             },
             {
-                'name': 'READY_FOR_PULSE_TRIGGER_EVENT',
+                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
                 'value': 1052,
                 'documentation': {
                     'description': 'Exports the Ready Pulse Trigger event.',
                 },
             },
             {
-                'name': 'START_TRIGGER',
+                'name': 'NIDCPOWER_VAL_START_TRIGGER',
                 'value': 1034,
                 'documentation': {
                     'description': 'Exports the Start trigger.',
                 },
             },
             {
-                'name': 'SOURCE_TRIGGER',
+                'name': 'NIDCPOWER_VAL_SOURCE_TRIGGER',
                 'value': 1035,
                 'documentation': {
                     'description': 'Exports the Source trigger.',
                 },
             },
             {
-                'name': 'MEASURE_TRIGGER',
+                'name': 'NIDCPOWER_VAL_MEASURE_TRIGGER',
                 'value': 1036,
                 'documentation': {
                     'description': 'Exports the Measure trigger.',
                 },
             },
             {
-                'name': 'SEQUENCE_ADVANCE_TRIGGER',
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER',
                 'value': 1037,
                 'documentation': {
                     'description': 'Exports the Sequence Advance trigger.',
                 },
             },
             {
-                'name': 'PULSE_TRIGGER',
+                'name': 'NIDCPOWER_VAL_PULSE_TRIGGER',
                 'value': 1053,
                 'documentation': {
                     'description': 'Exports the Pulse trigger.',
