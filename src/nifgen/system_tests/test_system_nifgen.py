@@ -309,6 +309,6 @@ def test_configure_triggers(session):
 # TODO(bhaswath): Enable after Issue 597 is fixed
 '''
 def test_send_software_edge_trigger(session):
-    session.send_software_edge_trigger(nifgen.Trigger.SCRIPT_TRIGGER, '')
+    session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, '')
 '''
 
