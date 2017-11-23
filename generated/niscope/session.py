@@ -1729,7 +1729,7 @@ class _SessionBase(object):
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
-            array_meas_function (int): The `array
+            array_meas_function (enums.ArrayMeasurement): The `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to perform.
 
@@ -1777,10 +1777,12 @@ class _SessionBase(object):
 
                 Call actual_num_wfms to determine the size of this array.
         '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function)  # case 9
+        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
         meas_wfm_size_ctype = visatype.ViInt32(self.actual_meas_wfm_size())  # case 0.0
         meas_wfm_ctype = (visatype.ViReal64 * (self.actual_meas_wfm_size() * self.actual_num_wfms()))()  # case 0.2
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
@@ -2421,7 +2423,7 @@ class Session(_SessionBase):
         Returns the total available size of an array measurement acquisition.
 
         Args:
-            array_meas_function (int): The `array
+            array_meas_function (enums.ArrayMeasurement): The `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to perform.
 
@@ -2429,8 +2431,10 @@ class Session(_SessionBase):
             meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
                 waveform.
         '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function)  # case 9
+        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
         meas_waveform_size_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

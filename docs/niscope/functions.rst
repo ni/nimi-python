@@ -48,7 +48,7 @@ niscope.Session methods
         
 
 
-    :type array_meas_function: int
+    :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
 
     :rtype: int
     :return:
@@ -1457,7 +1457,7 @@ niscope.Session methods
         
 
 
-    :type array_meas_function: int
+    :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
 
     :rtype: tuple (meas_wfm, wfm_info)
 
