@@ -97,7 +97,6 @@ functions_enums = {
     'ReadMeasurement':                                 { 'parameters': { 3: { 'enum': 'ScalarMeasurement',               }, }, },
     'AcquisitionStatus':                               { 'parameters': { 1: { 'enum': 'AcquisitionStatus',               }, }, },
     'ActualMeasWfmSize':                               { 'parameters': { 1: { 'enum': 'ArrayMeasurement',                }, }, },
-    'ActualMeasWfmSize':                               { 'parameters': { 1: { 'enum': 'ArrayMeasurement',                }, }, },
     'FetchArrayMeasurement':                           { 'parameters': { 3: { 'enum': 'ArrayMeasurement',                }, }, },
 }
 
