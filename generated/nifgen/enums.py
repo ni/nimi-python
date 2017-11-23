@@ -53,6 +53,11 @@ class BusType(Enum):
     '''
 
 
+class ByteOrder(Enum):
+    LITTLE = 0
+    BIG = 1
+
+
 class CalADCInput(Enum):
     ANALOG_OUTPUT = 0
     '''
@@ -197,6 +202,14 @@ class FilterType(Enum):
     '''
     Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.
     '''
+
+
+class HardwareState(Enum):
+    IDLE = 0
+    WAITING_FOR_START_TRIGGER = 1
+    RUNNING = 2
+    DONE = 3
+    HARDWARE_ERROR = 4
 
 
 class IdleBehavior(Enum):
@@ -352,6 +365,11 @@ class ReferenceClockSource(Enum):
     '''
 
 
+class RelativeTo(Enum):
+    START = 0
+    CURRENT = 1
+
+
 class SampleClockSource(Enum):
     CLOCK_IN = '"ClkIn"'
     '''
@@ -465,6 +483,22 @@ class ScriptTriggerType(Enum):
     '''
     Trigger is asserted when a software edge is detected.
     '''
+
+
+class Signal(Enum):
+    ONBOARD_REFERENCE_CLOCK = 1019
+    SYNC_OUT = 1002
+    START_TRIGGER = 1004
+    MARKER_EVENT = 1001
+    SAMPLE_CLOCK_TIMEBASE = 1006
+    SYNCHRONIZATION = 1007
+    SAMPLE_CLOCK = 101
+    REFERENCE_CLOCK = 102
+    SCRIPT_TRIGGER = 103
+    READY_FOR_START_EVENT = 105
+    STARTED_EVENT = 106
+    DONE_EVENT = 107
+    DATA_MARKER_EVENT = 108
 
 
 class StartTriggerDigitalEdgeEdge(Enum):
@@ -626,6 +660,11 @@ class TerminalConfiguration(Enum):
     '''
 
 
+class Trigger(Enum):
+    START = 1004
+    SCRIPT = 103
+
+
 class TriggerMode(Enum):
     SINGLE = 1
     '''
@@ -748,6 +787,11 @@ class TriggerSource(Enum):
     '''
     Specifies that another terminal is used.
     '''
+
+
+class TriggerWhen(Enum):
+    HIGH = 101
+    LOW = 102
 
 
 class VideoWaveformType(Enum):

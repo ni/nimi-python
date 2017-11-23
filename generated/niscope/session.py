@@ -1343,8 +1343,8 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def actual_num_wfms(self):
-        '''actual_num_wfms
+    def _actual_num_wfms(self):
+        '''_actual_num_wfms
 
         Helps you to declare appropriately sized waveforms. NI-SCOPE handles the
         channel list parsing for you.
@@ -1355,7 +1355,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].actual_num_wfms()
+            session['0,1']._actual_num_wfms()
 
         Returns:
             num_wfms (int): Returns the number of records times the number of channels; if you are
@@ -1454,7 +1454,7 @@ class _SessionBase(object):
         Every time a measurement is called, the statistics information is
         updated, including the min, max, mean, standard deviation, and number of
         updates. This information is fetched with
-        FetchMeasurementStats. The multi-acquisition array measurements
+        fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this function.
 
         Tip:
@@ -1537,7 +1537,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_equalization_filter_coefficients(self, number_of_coefficients, coefficients):
+    def configure_equalization_filter_coefficients(self, coefficients):
         '''configure_equalization_filter_coefficients
 
         Configures the custom coefficients for the equalization FIR filter on
@@ -1552,10 +1552,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_equalization_filter_coefficients(number_of_coefficients, coefficients)
+            session['0,1'].configure_equalization_filter_coefficients(coefficients)
 
         Args:
-            number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
@@ -1566,7 +1565,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 9
+        number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients is None else len(coefficients))  # case 6
         coefficients_ctype = None if coefficients is None else (visatype.ViReal64 * len(coefficients))(*coefficients)  # case 4
         error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(vi_ctype, channel_list_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1691,17 +1690,17 @@ class _SessionBase(object):
 
                 voltage = binary data × gain factor + offset
 
-                Call actual_num_wfms to determine the size of this array.
+                Call _actual_num_wfms to determine the size of this array.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
-        wfm_ctype = (visatype.ViReal64 * (num_samples * self.actual_num_wfms()))()  # case 0.2
-        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
+        wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case 0.2
+        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self.actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms())]
+        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def fetch_array_measurement(self, timeout, array_meas_function):
         '''fetch_array_measurement
@@ -1735,8 +1734,8 @@ class _SessionBase(object):
 
         Returns:
             meas_wfm (list of float): Returns an array whose length is the number of waveforms times
-                **measWfmSize**; call actual_num_wfms to determine the number of
-                waveforms; call actual_meas_wfm_size to determine the size of each
+                **measWfmSize**; call _actual_num_wfms to determine the number of
+                waveforms; call _actual_meas_wfm_size to determine the size of each
                 waveform.
 
                 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -1775,7 +1774,7 @@ class _SessionBase(object):
 
                 voltage = binary data × gain factor + offset
 
-                Call actual_num_wfms to determine the size of this array.
+                Call _actual_num_wfms to determine the size of this array.
         '''
         if type(array_meas_function) is not enums.ArrayMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
@@ -1788,7 +1787,122 @@ class _SessionBase(object):
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((self.actual_meas_wfm_size() * self.actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms())]
+        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size() * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+
+    def fetch_measurement(self, timeout, scalar_meas_function):
+        '''fetch_measurement
+
+        Fetches a waveform from the digitizer and performs the specified
+        waveform measurement. Refer to `Using Fetch
+        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information.
+
+        Many of the measurements use the low, mid, and high reference levels.
+        You configure the low, mid, and high references by using
+        MEAS_CHAN_LOW_REF_LEVEL,
+        MEAS_CHAN_MID_REF_LEVEL, and
+        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        differently.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].fetch_measurement(timeout, scalar_meas_function)
+
+        Args:
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+            scalar_meas_function (int): The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed.
+
+        Returns:
+            result (list of float): Contains an array of all measurements acquired; call
+                _actual_num_wfms to determine the array length.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
+
+    def fetch_measurement_stats(self, timeout, scalar_meas_function):
+        '''fetch_measurement_stats
+
+        Obtains a waveform measurement and returns the measurement value. This
+        function may return multiple statistical results depending on the number
+        of channels, the acquisition type, and the number of records you
+        specify.
+
+        You specify a particular measurement type, such as rise time, frequency,
+        or voltage peak-to-peak. The waveform on which the digitizer calculates
+        the waveform measurement is from an acquisition that you previously
+        initiated. The statistics for the specified measurement function are
+        returned, where the statistics are updated once every acquisition when
+        the specified measurement is fetched by any of the Fetch Measurement
+        functions. If a Fetch Measurement function has not been called, this
+        function fetches the data on which to perform the measurement. The
+        statistics are cleared by calling
+        clear_waveform_measurement_stats. Refer to `Using Fetch
+        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on incorporating fetch functions in your application.
+
+        Many of the measurements use the low, mid, and high reference levels.
+        You configure the low, mid, and high references with
+        MEAS_CHAN_LOW_REF_LEVEL,
+        MEAS_CHAN_MID_REF_LEVEL, and
+        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        differently.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].fetch_measurement_stats(timeout, scalar_meas_function)
+
+        Args:
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+            scalar_meas_function (int): The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed on each fetched waveform.
+
+        Returns:
+            result (list of float): Returns the resulting measurement
+            mean (list of float): Returns the mean scalar value, which is obtained by averaging each
+                fetch_measurement_stats call.
+            stdev (list of float): Returns the standard deviation of the most recent **numInStats**
+                measurements.
+            min (list of float): Returns the smallest scalar value acquired (the minimum of the
+                **numInStats** measurements).
+            max (list of float): Returns the largest scalar value acquired (the maximum of the
+                **numInStats** measurements).
+            num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
+                called.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        mean_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        stdev_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        min_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        max_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        num_in_stats_ctype = (visatype.ViInt32 * self._actual_num_wfms())()  # case 0.2
+        error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())], [float(mean_ctype[i]) for i in range(self._actual_num_wfms())], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms())], [float(min_ctype[i]) for i in range(self._actual_num_wfms())], [float(max_ctype[i]) for i in range(self._actual_num_wfms())], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -1975,6 +2089,41 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
+    def get_equalization_filter_coefficients(self, number_of_coefficients):
+        '''get_equalization_filter_coefficients
+
+        Retrieves the custom coefficients for the equalization FIR filter on the
+        device. This filter is designed to compensate the input signal for
+        artifacts introduced to the signal outside of the digitizer. Because
+        this filter is a generic FIR filter, any coefficients are valid.
+        Coefficient values should be between +1 and –1.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+
+        Args:
+            number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
+
+        Returns:
+            coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
+                These coefficients should be between +1 and –1. You can obtain the
+                number of coefficients from the
+                `EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+                attribute.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        coefficients_ctype = (visatype.ViReal64 * number_of_coefficients)()  # case 13
+        error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
+
     def _get_error(self):
         '''_get_error
 
@@ -2092,17 +2241,64 @@ class _SessionBase(object):
 
                 voltage = binary data × gain factor + offset
 
-                Call actual_num_wfms to determine the size of this array.
+                Call _actual_num_wfms to determine the size of this array.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
-        wfm_ctype = (visatype.ViReal64 * (num_samples * self.actual_num_wfms()))()  # case 0.2
-        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
+        wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case 0.2
+        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self.actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms())]
+        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+
+    def read_measurement(self, timeout, scalar_meas_function):
+        '''read_measurement
+
+        Initiates an acquisition, waits for it to complete, and performs the
+        specified waveform measurement for a single channel and record or for
+        multiple channels and records.
+
+        Refer to `Using Fetch
+        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information.
+
+        Many of the measurements use the low, mid, and high reference levels.
+        You configure the low, mid, and high references by using
+        MEAS_CHAN_LOW_REF_LEVEL,
+        MEAS_CHAN_MID_REF_LEVEL, and
+        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        differently.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].read_measurement(timeout, scalar_meas_function)
+
+        Args:
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+            scalar_meas_function (int): The `scalar
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
+                to be performed
+
+        Returns:
+            result (list of float): Contains an array of all measurements acquired. Call
+                _actual_num_wfms to determine the array length.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
+        error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _set_attribute_vi_boolean(self, attribute_id, value):
         '''_set_attribute_vi_boolean
@@ -2417,8 +2613,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
 
-    def actual_meas_wfm_size(self, array_meas_function):
-        '''actual_meas_wfm_size
+    def _actual_meas_wfm_size(self, array_meas_function):
+        '''_actual_meas_wfm_size
 
         Returns the total available size of an array measurement acquisition.
 
@@ -2582,7 +2778,7 @@ class Session(_SessionBase):
         MEAS_CHAN_MID_REF_LEVEL
 
         This function configures the reference levels for waveform measurements.
-        Call this function before calling FetchMeasurement to take a
+        Call this function before calling fetch_measurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
 
