@@ -27,7 +27,7 @@ def test_read(session):
     test_record_length = 2000
     test_channels = '0,1'
     test_num_channels = 2
-    session.configure_vertical(test_voltage, 0.0, niscope.VerticalCoupling.AC, 1.0, True)
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     wfm, wfm_infos = session[test_channels].read(1, test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
@@ -39,7 +39,7 @@ def test_fetch(session):
     test_record_length = 2000
     test_channels = '0,1'
     test_num_channels = 2
-    session.configure_vertical(test_voltage, 0.0, niscope.VerticalCoupling.AC, 1.0, True)
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         wfm, wfm_infos = session[test_channels].fetch(1, test_record_length)
@@ -106,7 +106,7 @@ def test_probe_compensation_signal(session):
 
 
 def test_configure_channel_characteristics(session):
-    session.configure_vertical(5.0, 0.0, niscope.VerticalCoupling.DC, 1.0, True)
+    session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.auto_setup()
     session.configure_horizontal_timing(10000000, 1000, 50.0, 1, True)
     session.trigger_modifier = niscope.TriggerModifier.AUTO
@@ -116,7 +116,7 @@ def test_configure_channel_characteristics(session):
 
 
 def test_waveform_processing(session):
-    session.configure_vertical(5.0, 0.0, niscope.VerticalCoupling.DC, 1.0, True)
+    session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.configure_horizontal_timing(10000000, 4096, 50.0, 1, True)
     session['0'].read(5, 2000)
     session.add_waveform_processing(niscope.ArrayMeasurement.NO_MEASUREMENT)
