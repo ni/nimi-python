@@ -73,7 +73,7 @@ functions_enums = {
     'ConfigureVertical':                               { 'parameters': { 4: { 'enum': 'VerticalCoupling',                }, }, },
     'ConfigureTriggerDigital':                         { 'parameters': { 2: { 'enum': 'TriggerSlope',                    }, }, },
     'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 },
-                                                                         3: { 'enum': 'TriggerSlope',                    },}, },
+                                                                         3: { 'enum': 'TriggerSlope',                    }, }, },
     'ConfigureTriggerHysteresis':                      { 'parameters': { 4: { 'enum': 'TriggerSlope',                    },
                                                                          5: { 'enum': 'TriggerCoupling',                 }, }, },
     'ConfigureTriggerVideo':                           { 'parameters': { 3: { 'enum': 'VideoSignalFormat',               },
