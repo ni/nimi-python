@@ -1404,7 +1404,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_self_calibrate(self, option):
+    def cal_self_calibrate(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
         '''cal_self_calibrate
 
         Self-calibrates most NI digitizers, including all SMC-based devices and
@@ -1427,7 +1427,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option)
+            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1443,7 +1443,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_measurement_stats(self, clearable_measurement_function):
+    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
         '''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
@@ -1463,7 +1463,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -1571,7 +1571,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_vertical(self, range, offset, coupling, probe_attenuation, enabled):
+    def configure_vertical(self, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):
         '''configure_vertical
 
         Configures the most commonly configured attributes of the digitizer
@@ -1584,15 +1584,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_vertical(range, offset, coupling, probe_attenuation, enabled)
+            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
             range (float): Specifies the vertical range Refer to VERTICAL_RANGE for
                 more information.
-            offset (float): Specifies the vertical offset. Refer to VERTICAL_OFFSET
-                for more information.
             coupling (enums.VerticalCoupling): Specifies how to couple the input signal. Refer to
                 VERTICAL_COUPLING for more information.
+            offset (float): Specifies the vertical offset. Refer to VERTICAL_OFFSET
+                for more information.
             probe_attenuation (float): Specifies the probe attenuation. Refer to
                 PROBE_ATTENUATION for valid values.
             enabled (bool): Specifies whether the channel is enabled for acquisition. Refer to
@@ -1789,7 +1789,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size() * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_measurement(self, timeout, scalar_meas_function):
+    def fetch_measurement(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
@@ -1810,15 +1810,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement(timeout, scalar_meas_function)
+            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             result (list of float): Contains an array of all measurements acquired; call
@@ -1835,7 +1835,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_measurement_stats(self, timeout, scalar_meas_function):
+    def fetch_measurement_stats(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -1869,15 +1869,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement_stats(timeout, scalar_meas_function)
+            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             result (list of float): Returns the resulting measurement
@@ -2257,7 +2257,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def read_measurement(self, timeout, scalar_meas_function):
+    def read_measurement(self, scalar_meas_function, timeout=5.0):
         '''read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
@@ -2281,15 +2281,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_measurement(timeout, scalar_meas_function)
+            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             result (list of float): Contains an array of all measurements acquired. Call
@@ -2556,7 +2556,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, id_query, reset_device, option_string):
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
@@ -2771,7 +2771,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_ref_levels(self, low, mid, high):
+    def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
         '''configure_ref_levels
 
         This function is included for compliance with the IviScope Class
@@ -2825,7 +2825,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope, holdoff, delay):
+    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -2882,7 +2882,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, level, slope, trigger_coupling, holdoff, delay):
+    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -2908,13 +2908,13 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                TRIGGER_COUPLING for more information.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
@@ -2937,7 +2937,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay):
+    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -2967,6 +2967,8 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                TRIGGER_COUPLING for more information.
             level (float): The voltage threshold for the trigger. Refer to
                 TRIGGER_LEVEL for more information.
             hysteresis (float): The size of the hysteresis window on either side of the **level** in
@@ -2977,8 +2979,6 @@ class Session(_SessionBase):
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
@@ -3017,7 +3017,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_software(self, holdoff, delay):
+    def configure_trigger_software(self, holdoff=0.0, delay=0.0):
         '''configure_trigger_software
 
         Configures common properties for software triggering.
@@ -3057,7 +3057,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_video(self, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay):
+    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=0.0, delay=0.0):
         '''configure_trigger_video
 
         Configures the common properties for video triggering, including the
@@ -3085,15 +3085,18 @@ class Session(_SessionBase):
         Args:
             trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
                 for defined values.
-            enable_dc_restore (bool): Offsets each video line so the clamping level (the portion of the video
-                line between the end of the color burst and the beginning of the active
-                image) is moved to zero volt. Refer to
-                ENABLE_DC_RESTORE for defined values.
             signal_format (enums.VideoSignalFormat): Specifies the type of video signal sync the digitizer should look for.
                 Refer to TV_TRIGGER_SIGNAL_FORMAT for more
                 information.
             event (enums.VideoTriggerEvent): Specifies the TV event you want to trigger on. You can trigger on a
                 specific or on the next coming line or field of the signal.
+            polarity (enums.VideoPolarity): Specifies the polarity of the video signal sync.
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                TRIGGER_COUPLING for more information.
+            enable_dc_restore (bool): Offsets each video line so the clamping level (the portion of the video
+                line between the end of the color burst and the beginning of the active
+                image) is moved to zero volt. Refer to
+                ENABLE_DC_RESTORE for defined values.
             line_number (int): Selects the line number to trigger on. The line number range covers an
                 entire frame and is referenced as shown on `Vertical Blanking and
                 Synchronization
@@ -3101,9 +3104,6 @@ class Session(_SessionBase):
                 TV_TRIGGER_LINE_NUMBER for more information.
 
                 Default value: 1
-            polarity (enums.VideoPolarity): Specifies the polarity of the video signal sync.
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
@@ -3133,7 +3133,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay):
+    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=0.0, delay=0.0):
         '''configure_trigger_window
 
         Configures common properties for analog window triggering. A window
@@ -3205,7 +3205,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, signal_identifier, output_terminal):
+    def export_signal(self, signal, output_terminal, signal_identifier='None'):
         '''export_signal
 
         Configures the digitizer to generate a signal that other devices can
@@ -3254,7 +3254,6 @@ class Session(_SessionBase):
                 +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
                 | NISCOPE_VAL_5V_OUT                   | (13)  | Exports a 5 V power supply.                                                                     |
                 +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-            signal_identifier (string): Describes the signal being exported.
             output_terminal (string): Identifies the hardware signal line on which the digital pulse is
                 generated.
 
@@ -3287,6 +3286,7 @@ class Session(_SessionBase):
                 +----------------------+------------------+
                 | NISCOPE_VAL_CLK_OUT  | ("VAL_CLK_OUT")  |
                 +----------------------+------------------+
+            signal_identifier (string): Describes the signal being exported.
         '''
         if type(signal) is not enums.ExportableSignals:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
@@ -3298,7 +3298,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
         Performs the following initialization actions:
