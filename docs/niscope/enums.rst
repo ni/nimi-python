@@ -716,93 +716,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: ExportDestinations
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_0
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_1
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_2
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_3
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_4
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_5
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_6
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.RTSI_7
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.PXI_STAR
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.PFI_0
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.PFI_1
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.PFI_2
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.CLK_OUT
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_0
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_1
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_2
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_3
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_4
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_5
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_6
-
-
-
-    .. py:attribute:: niscope.ExportDestinations.AUX_0_PFI_7
-
-
-
-
 .. py:data:: ExportableSignals
 
     .. py:attribute:: niscope.ExportableSignals.START_TRIGGER
@@ -1247,6 +1160,267 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: ScalarMeasurement
+
+    .. py:attribute:: niscope.ScalarMeasurement.NO_MEASUREMENT
+
+
+
+        None
+
+        
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.AVERAGE_FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.FFT_FREQUENCY
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.PERIOD
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.AVERAGE_PERIOD
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.RISE_TIME
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.FALL_TIME
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.RISE_SLEW_RATE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.FALL_SLEW_RATE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.OVERSHOOT
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.PRESHOOT
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_RMS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_CYCLE_RMS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.AC_ESTIMATE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.FFT_AMPLITUDE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_AVERAGE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_CYCLE_AVERAGE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.DC_ESTIMATE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_MAX
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_MIN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HIGH
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_LOW
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.AMPLITUDE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_TOP
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_BASE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_BASE_TO_TOP
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.WIDTH_NEG
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.WIDTH_POS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.DUTY_CYCLE_NEG
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.DUTY_CYCLE_POS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.INTEGRAL
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.AREA
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.CYCLE_AREA
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_DELAY
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.PHASE_DELAY
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.LOW_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.MID_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.HIGH_REF_VOLTS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.VOLTAGE_HISTOGRAM_NEW_HITS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MEAN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MEDIAN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MODE
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MAX
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MIN
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_PEAK_TO_PEAK
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MEAN_PLUS_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_MEAN_PLUS_2_STDEV
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_HITS
+
+
+
+    .. py:attribute:: niscope.ScalarMeasurement.TIME_HISTOGRAM_NEW_HITS
+
+
+
+
 .. py:data:: StreamingPositionType
 
     .. py:attribute:: niscope.StreamingPositionType.START
@@ -1410,252 +1584,6 @@ Enums used in NI-SCOPE
         Rising edge
 
         
-
-
-
-
-.. py:data:: TriggerSource
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_2
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_3
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_4
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_5
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_6
-
-
-
-    .. py:attribute:: niscope.TriggerSource.CHANNEL_7
-
-
-
-    .. py:attribute:: niscope.TriggerSource.IMMEDIATE
-
-
-
-    .. py:attribute:: niscope.TriggerSource.EXTERNAL
-
-
-
-    .. py:attribute:: niscope.TriggerSource.SW_TRIG_FUNC
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL2
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL3
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL4
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL5
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL6
-
-
-
-    .. py:attribute:: niscope.TriggerSource.TTL7
-
-
-
-    .. py:attribute:: niscope.TriggerSource.ECL0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.ECL1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.PXI_STAR
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_3
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_4
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_5
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_6
-
-
-
-    .. py:attribute:: niscope.TriggerSource.RTSI_7
-
-
-
-    .. py:attribute:: niscope.TriggerSource.PFI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.PFI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.PFI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_3
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_4
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_5
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_6
-
-
-
-    .. py:attribute:: niscope.TriggerSource.AUX_0_PFI_7
-
-
-
-
-.. py:data:: TriggerSourceDigital
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_3
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_4
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_5
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.RTSI_6
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.PFI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.PFI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.PFI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.PXI_STAR
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_0
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_1
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_2
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_3
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_4
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.AUX_0_PFI_5
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.VAL_AUX_0_PFI_6
-
-
-
-    .. py:attribute:: niscope.TriggerSourceDigital.VAL_AUX_0_PFI_7
 
 
 

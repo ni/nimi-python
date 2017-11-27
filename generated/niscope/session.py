@@ -1782,9 +1782,9 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
         array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_wfm_size_ctype = visatype.ViInt32(self.actual_meas_wfm_size())  # case 0.0
-        meas_wfm_ctype = (visatype.ViReal64 * (self.actual_meas_wfm_size() * self.actual_num_wfms()))()  # case 0.2
-        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self.actual_num_wfms())()  # case 0.2
+        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size())  # case 0.0
+        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size() * self._actual_num_wfms()))()  # case 0.2
+        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size() * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
@@ -1816,7 +1816,7 @@ class _SessionBase(object):
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
-            scalar_meas_function (int): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
 
@@ -1824,10 +1824,12 @@ class _SessionBase(object):
             result (list of float): Contains an array of all measurements acquired; call
                 _actual_num_wfms to determine the array length.
         '''
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1873,7 +1875,7 @@ class _SessionBase(object):
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
-            scalar_meas_function (int): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
 
@@ -1890,10 +1892,12 @@ class _SessionBase(object):
             num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
                 called.
         '''
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
         mean_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
         stdev_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
@@ -2283,7 +2287,7 @@ class _SessionBase(object):
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
-            scalar_meas_function (int): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
 
@@ -2291,10 +2295,12 @@ class _SessionBase(object):
             result (list of float): Contains an array of all measurements acquired. Call
                 _actual_num_wfms to determine the array length.
         '''
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 9
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2865,8 +2871,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSourceDigital:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSourceDigital))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
@@ -2918,8 +2922,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
@@ -2984,8 +2986,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
@@ -3111,8 +3111,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         if type(signal_format) is not enums.VideoSignalFormat:
             raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
         if type(event) is not enums.VideoTriggerEvent:
@@ -3292,8 +3290,6 @@ class Session(_SessionBase):
         '''
         if type(signal) is not enums.ExportableSignals:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
-        if type(output_terminal) is not enums.ExportDestinations:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ExportDestinations))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         signal_ctype = visatype.ViInt32(signal.value)  # case 10
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
