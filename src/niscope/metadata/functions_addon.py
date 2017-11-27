@@ -66,7 +66,13 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    # @TODO add all enums
+    'CalSelfCalibrate':                                { 'parameters': { 2: { 'enum': 'Option',                          }, }, },
+    'ClearWaveformMeasurementStats':                   { 'parameters': { 2: { 'enum': 'ClearableMeasurement',            }, }, },
+    'ConfigureTriggerDigital':                         { 'parameters': { 2: { 'enum': 'TriggerSlope',                    }, }, },
+    'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 },
+                                                                         3: { 'enum': 'TriggerSlope',                    }, }, },
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 4: { 'enum': 'TriggerSlope',                    },
+                                                                         5: { 'enum': 'TriggerCoupling',                 }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -118,6 +124,41 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
+    'InitWithOptions':                               { 'parameters': { 1: { 'default_value': False, },
+                                                                       2: { 'default_value': False, },
+                                                                       3: { 'default_value': '', }, }, },
+    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': 'None', }, }, },
+    'ConfigureTriggerWindow':                        { 'parameters': { 6: { 'default_value': 0.0, },
+                                                                       7: { 'default_value': 0.0, }, }, },
+    'ConfigureTriggerVideo':                         { 'parameters': { 2: { 'default_value': False, },
+                                                                       5: { 'default_value': 1, },
+                                                                       8: { 'default_value': 0.0, },
+                                                                       9: { 'default_value': 0.0, }, }, },
+    'ConfigureTriggerSoftware':                      { 'parameters': { 1: { 'default_value': 0.0, },
+                                                                       2: { 'default_value': 0.0, }, }, },
+    'ReadMeasurement':                               { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'FetchMeasurement':                              { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'FetchMeasurementStats':                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'ConfigureVertical':                             { 'parameters': { 3: { 'default_value': 0.0, },
+                                                                       5: { 'default_value': 1.0, },
+                                                                       6: { 'default_value': True, }, }, },
+    'ConfigureRefLevels':                            { 'parameters': { 1: { 'default_value': 10.0, },
+                                                                       2: { 'default_value': 50.0, },
+                                                                       3: { 'default_value': 90.0, }, }, },
+    'CalSelfCalibrate':                              { 'parameters': { 2: { 'default_value': 'Option.SELF_CALIBRATE_ALL_CHANNELS', }, }, },
+    'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
+    'ConfigureTriggerDigital':                       { 'parameters': { 2: { 'default_value': 'TriggerSlope.POSITIVE', },
+                                                                       3: { 'default_value': 0.0, },
+                                                                       4: { 'default_value': 0.0, }, }, },
+    'ConfigureTriggerEdge':                          { 'parameters': { 2: { 'default_value': 0.0, },
+                                                                       3: { 'default_value': 'TriggerSlope.POSITIVE', },
+                                                                       5: { 'default_value': 0.0, },
+                                                                       6: { 'default_value': 0.0, }, }, },
+    'ConfigureTriggerHysteresis':                    { 'parameters': { 2: { 'default_value': 0.0, },
+                                                                       3: { 'default_value': 0.05, },
+                                                                       4: { 'default_value': 'TriggerSlope.POSITIVE', },
+                                                                       6: { 'default_value': 0.0, },
+                                                                       7: { 'default_value': 0.0, }, }, },
 }
 
