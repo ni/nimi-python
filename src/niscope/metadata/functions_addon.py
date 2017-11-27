@@ -68,13 +68,10 @@ functions_codegen_method = {
 functions_enums = {
     'CalSelfCalibrate':                                { 'parameters': { 2: { 'enum': 'Option',                          }, }, },
     'ClearWaveformMeasurementStats':                   { 'parameters': { 2: { 'enum': 'ClearableMeasurement',            }, }, },
-    'ConfigureTriggerDigital':                         { 'parameters': { 1: { 'enum': 'TriggerSourceDigital',            },
-                                                                         2: { 'enum': 'TriggerSlope',                    }, }, },
+    'ConfigureTriggerDigital':                         { 'parameters': { 2: { 'enum': 'TriggerSlope',                    }, }, },
     'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 },
-                                                                         3: { 'enum': 'TriggerSlope', },
-                                                                         1 :{ 'enum': 'TriggerSource', }, }, },
-    'ConfigureTriggerHysteresis':                      { 'parameters': { 1: { 'enum': 'TriggerSource',                   },
-                                                                         4: { 'enum': 'TriggerSlope',                    },
+                                                                         3: { 'enum': 'TriggerSlope',                    }, }, },
+    'ConfigureTriggerHysteresis':                      { 'parameters': { 4: { 'enum': 'TriggerSlope',                    },
                                                                          5: { 'enum': 'TriggerCoupling',                 }, }, },
 }
 

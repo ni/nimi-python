@@ -2855,8 +2855,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSourceDigital:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSourceDigital))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
@@ -2908,8 +2906,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
@@ -2974,8 +2970,6 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
