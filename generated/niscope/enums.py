@@ -3,6 +3,12 @@
 from enum import Enum
 
 
+class AcquisitionStatus(Enum):
+    COMPLETE = 1
+    IN_PROGRESS = 0
+    STATUS_UNKNOWN = -1
+
+
 class AcquisitionType(Enum):
     NORMAL = 0
     '''
@@ -15,6 +21,117 @@ class AcquisitionType(Enum):
     DDC = 1002
     '''
     Sets the digitizer to DDC mode on the NI 5620/5621.
+    '''
+
+
+class ArrayMeasurement(Enum):
+    NO_MEASUREMENT = 4000
+    '''
+    None
+    '''
+    LAST_ACQ_HISTOGRAM = 4001
+    '''
+    Last Acquisition Histogram
+    '''
+    MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
+    '''
+    Multi Acquisition Voltage Histogram
+    '''
+    MULTI_ACQ_TIME_HISTOGRAM = 4005
+    '''
+    Multi Acquisition Time Histogram
+    '''
+    MULTI_ACQ_AVERAGE = 4016
+    '''
+    Multi Acquisition Average
+    '''
+    POLYNOMIAL_INTERPOLATION = 4011
+    '''
+    Polynomial Interpolation
+    '''
+    ARRAY_INTEGRAL = 4006
+    '''
+    Array Integral
+    '''
+    DERIVATIVE = 4007
+    '''
+    Derivative
+    '''
+    INVERSE = 4008
+    '''
+    Inverse
+    '''
+    MULTIPLY_CHANNELS = 4012
+    '''
+    Multiply Channels
+    '''
+    ADD_CHANNELS = 4013
+    '''
+    Add Channels
+    '''
+    SUBTRACT_CHANNELS = 4014
+    '''
+    Subtract Channels
+    '''
+    DIVIDE_CHANNELS = 4015
+    '''
+    Divide Channels
+    '''
+    ARRAY_OFFSET = 4025
+    '''
+    Array Offset
+    '''
+    ARRAY_GAIN = 4026
+    '''
+    Array Gain
+    '''
+    HANNING_WINDOW = 4009
+    '''
+    Hanning Window
+    '''
+    FLAT_TOP_WINDOW = 4010
+    '''
+    Flat Top Window
+    '''
+    HAMMING_WINDOW = 4020
+    '''
+    Hamming Window
+    '''
+    TRIANGLE_WINDOW = 4023
+    '''
+    Triangle Window
+    '''
+    BLACKMAN_WINDOW = 4024
+    '''
+    Blackman Window
+    '''
+    WINDOWED_FIR_FILTER = 4021
+    '''
+    FIR Windowed Filter
+    '''
+    BESSEL_FILTER = 4022
+    '''
+    Bessel IIR Filter
+    '''
+    BUTTERWORTH_FILTER = 4017
+    '''
+    Butterworth IIR Filter
+    '''
+    CHEBYSHEV_FILTER = 4018
+    '''
+    Chebyshev IIR Filter
+    '''
+    FFT_PHASE_SPECTRUM = 4002
+    '''
+    FFT Phase Spectrum
+    '''
+    FFT_AMP_SPECTRUM_VOLTS_RMS = 4003
+    '''
+    FFT Amp. Spectrum (Volts RMS)
+    '''
+    FFT_AMP_SPECTRUM_DB = 4019
+    '''
+    FFT Amp. Spectrum (dB)
     '''
 
 
@@ -145,6 +262,20 @@ class DataProcessingMode(Enum):
     '''
 
 
+class ExportableSignals(Enum):
+    START_TRIGGER = 2
+    ADVANCE_TRIGGER = 5
+    REF_TRIGGER = 1
+    END_OF_RECORD_EVENT = 4
+    END_OF_ACQUISITION_EVENT = 3
+    READY_FOR_START_EVENT = 7
+    READY_FOR_ADVANCE_EVENT = 6
+    READY_FOR_REF_EVENT = 10
+    REF_CLOCK = 100
+    SAMPLE_CLOCK = 101
+    _5V_OUT = 13
+
+
 class FIRFilterWindow(Enum):
     NONE = 0
     '''
@@ -233,6 +364,11 @@ class FlexFIRAntialiasFilterType(Enum):
     '''
 
 
+class InputImpedance(Enum):
+    _1_MEG_OHM = 1000000.0
+    _50_OHMS = 50.0
+
+
 class Option(Enum):
     SELF_CALIBRATE_ALL_CHANNELS = 0
     '''
@@ -319,6 +455,75 @@ class RefTriggerDetectorLocation(Enum):
     '''
     use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.
     '''
+
+
+class ScalarMeasurement(Enum):
+    NO_MEASUREMENT = 4000
+    '''
+    None
+    '''
+    FREQUENCY = 2
+    AVERAGE_FREQUENCY = 1016
+    FFT_FREQUENCY = 1008
+    PERIOD = 3
+    AVERAGE_PERIOD = 1015
+    RISE_TIME = 0
+    FALL_TIME = 1
+    RISE_SLEW_RATE = 1010
+    FALL_SLEW_RATE = 1011
+    OVERSHOOT = 18
+    PRESHOOT = 19
+    VOLTAGE_RMS = 4
+    VOLTAGE_CYCLE_RMS = 16
+    AC_ESTIMATE = 1012
+    FFT_AMPLITUDE = 1009
+    VOLTAGE_AVERAGE = 10
+    VOLTAGE_CYCLE_AVERAGE = 17
+    DC_ESTIMATE = 1013
+    VOLTAGE_MAX = 6
+    VOLTAGE_MIN = 7
+    VOLTAGE_PEAK_TO_PEAK = 5
+    VOLTAGE_HIGH = 8
+    VOLTAGE_LOW = 9
+    AMPLITUDE = 15
+    VOLTAGE_TOP = 1007
+    VOLTAGE_BASE = 1006
+    VOLTAGE_BASE_TO_TOP = 1017
+    WIDTH_NEG = 11
+    WIDTH_POS = 12
+    DUTY_CYCLE_NEG = 13
+    DUTY_CYCLE_POS = 14
+    INTEGRAL = 1005
+    AREA = 1003
+    CYCLE_AREA = 1004
+    TIME_DELAY = 1014
+    PHASE_DELAY = 1018
+    LOW_REF_VOLTS = 1000
+    MID_REF_VOLTS = 1001
+    HIGH_REF_VOLTS = 1002
+    VOLTAGE_HISTOGRAM_MEAN = 2000
+    VOLTAGE_HISTOGRAM_STDEV = 2001
+    VOLTAGE_HISTOGRAM_MEDIAN = 2003
+    VOLTAGE_HISTOGRAM_MODE = 2010
+    VOLTAGE_HISTOGRAM_MAX = 2005
+    VOLTAGE_HISTOGRAM_MIN = 2006
+    VOLTAGE_HISTOGRAM_PEAK_TO_PEAK = 2002
+    VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV = 2007
+    VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV = 2008
+    VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV = 2009
+    VOLTAGE_HISTOGRAM_HITS = 2004
+    VOLTAGE_HISTOGRAM_NEW_HITS = 2011
+    TIME_HISTOGRAM_MEAN = 3000
+    TIME_HISTOGRAM_STDEV = 3001
+    TIME_HISTOGRAM_MEDIAN = 3003
+    TIME_HISTOGRAM_MODE = 3010
+    TIME_HISTOGRAM_MAX = 3005
+    TIME_HISTOGRAM_MIN = 3006
+    TIME_HISTOGRAM_PEAK_TO_PEAK = 3002
+    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3008
+    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3009
+    TIME_HISTOGRAM_HITS = 3004
+    TIME_HISTOGRAM_NEW_HITS = 3011
 
 
 class StreamingPositionType(Enum):
@@ -558,3 +763,10 @@ class VideoTriggerEvent(Enum):
     '''
     Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.
     '''
+
+
+class WhichTrigger(Enum):
+    START = 0
+    ARM_REFERENCE = 1
+    REFERENCE = 2
+    ADVANCE = 3

@@ -12,7 +12,7 @@ niscope.Session methods
 
 
 
-    :rtype: int
+    :rtype: :py:data:`niscope.AcquisitionStatus`
     :return:
 
 
@@ -65,7 +65,7 @@ niscope.Session methods
         
 
 
-    :type meas_function: int
+    :type meas_function: :py:data:`niscope.ArrayMeasurement`
 
 .. function:: auto_setup()
 
@@ -279,7 +279,7 @@ niscope.Session methods
         
 
 
-    :type input_impedance: float
+    :type input_impedance: :py:data:`niscope.InputImpedance`
     :param max_input_frequency:
 
 
@@ -859,7 +859,7 @@ niscope.Session methods
         
 
 
-    :type signal_format: int
+    :type signal_format: :py:data:`niscope.VideoSignalFormat`
     :param event:
 
 
@@ -869,7 +869,7 @@ niscope.Session methods
         
 
 
-    :type event: int
+    :type event: :py:data:`niscope.VideoTriggerEvent`
     :param polarity:
 
 
@@ -878,7 +878,7 @@ niscope.Session methods
         
 
 
-    :type polarity: int
+    :type polarity: :py:data:`niscope.VideoPolarity`
     :param trigger_coupling:
 
 
@@ -888,7 +888,7 @@ niscope.Session methods
         
 
 
-    :type trigger_coupling: int
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param enable_dc_restore:
 
 
@@ -1007,7 +1007,7 @@ niscope.Session methods
         
 
 
-    :type window_mode: int
+    :type window_mode: :py:data:`niscope.TriggerWindowMode`
     :param trigger_coupling:
 
 
@@ -1017,7 +1017,7 @@ niscope.Session methods
         
 
 
-    :type trigger_coupling: int
+    :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
     :param holdoff:
 
 
@@ -1079,7 +1079,7 @@ niscope.Session methods
         
 
 
-    :type coupling: int
+    :type coupling: :py:data:`niscope.VerticalCoupling`
     :param offset:
 
 
@@ -1176,7 +1176,7 @@ niscope.Session methods
         +-------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`niscope.ExportableSignals`
     :param output_terminal:
 
 
@@ -1387,7 +1387,7 @@ niscope.Session methods
         
 
 
-    :type array_meas_function: int
+    :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
 
     :rtype: tuple (meas_wfm, wfm_info)
 
@@ -1487,7 +1487,7 @@ niscope.Session methods
         
 
 
-    :type scalar_meas_function: int
+    :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
     :param timeout:
 
 
@@ -1561,7 +1561,7 @@ niscope.Session methods
         
 
 
-    :type scalar_meas_function: int
+    :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
     :param timeout:
 
 
@@ -1848,7 +1848,7 @@ niscope.Session methods
         
 
 
-    :type scalar_meas_function: int
+    :type scalar_meas_function: :py:data:`niscope.ScalarMeasurement`
     :param timeout:
 
 
@@ -1924,7 +1924,7 @@ niscope.Session methods
         
 
 
-    :type which_trigger: int
+    :type which_trigger: :py:data:`niscope.WhichTrigger`
 
 .. function:: reset()
 
