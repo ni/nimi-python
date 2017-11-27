@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
 * [0.3.0](#030---2017-10-13)
 * [0.2.0](#020---2017-09-20)
@@ -13,10 +14,8 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
-    * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
-    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-ModInst
@@ -29,20 +28,35 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DCPower
   * #### Added
-    * get_ext_cal_last_date_and_time()
-    * get_ext_cal_last_temp()
-    * get_ext_cal_recommended_interval()
   * #### Changed
   * #### Removed
 * ### NI-FGEN
   * #### Added
   * #### Changed
   * #### Removed
+* ### NI-SCOPE
+  * #### Added
+  * #### Changed
+  * #### Removed
+
+## 0.5.0 - 2017-11-27
+* ### ALL
+  * #### Removed
+    * enum definitions that are not referenced by a function and/or an attributes
+* ### NI-DMM
+  * #### Added
+    * get_ext_cal_recommended_interval()
+* ### NI-DCPower
+  * #### Added
+    * get_ext_cal_last_date_and_time()
+    * get_ext_cal_last_temp()
+    * get_ext_cal_recommended_interval()
+* ### NI-FGEN
+  * #### Removed
     * adjust_sample_clock_relative_delay()
 * ### NI-SCOPE
   * #### Added
     * Initial release
-  * #### Changed
   * #### Removed
     * Removed Peer to Peer attributes
 
