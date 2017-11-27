@@ -1,4 +1,5 @@
 import nifgen
+import os
 import pytest
 
 
@@ -84,9 +85,9 @@ def test_clear_freq_list(session):
 
 
 def test_configure_arb_waveform(session):
-    waveform_data = [0.000000, 0.049068, 0.098017, 0.146730, 0.195090, 0.242980, 0.290285, 0.336890, 0.382683, 0.427555]
+    waveform_data = [0, 8, 7, 3, 9, 1, 5, 6, 2, 4]
     session.output_mode = nifgen.OutputMode.ARB
-    session.configure_arb_waveform(session.create_waveform_f64(waveform_data), 1.0, 0.0)
+    session.configure_arb_waveform(session.create_waveform_i16(waveform_data), 1.0, 0.0)
 
 
 def test_disable(session):
@@ -117,11 +118,9 @@ def test_get_ext_cal_recommended_interval(session):
     assert recommended_interval == 24  # recommended external cal interval is 24 months
 
 
-''' TODO(Jaleel) Enable after Issue#558 fixed
 def test_get_hardware_state():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
         assert session.get_hardware_state() == nifgen.HardwareState.IDLE
-'''
 
 
 def test_get_self_cal_last_temp(session):
@@ -161,6 +160,7 @@ def test_allocate_waveform(session):
 def test_clear_waveform_memory(session):
     session.clear_arb_memory()
     session.clear_user_standard_waveform()
+    session.configure_arb_sequence(0, 1.0, 0)
     session.clear_arb_sequence(-1)
     session.clear_arb_waveform(-1)
 
@@ -181,7 +181,7 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-def test_create_advanced_arb_sequence(session):
+def test_create_advanced_arb_sequence():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
@@ -206,8 +206,8 @@ def test_arb_script(session):
     script = '''script myScript0
     repeat 3
     Generate wfmSine
-   end repeat
-end script'''
+    end repeat
+    end script'''
     session.write_script(script)
     session.script_to_generate = 'myScript0'
     session.commit()
@@ -250,18 +250,65 @@ def test_write_binary_waveform(session):
     session.write_binary16_waveform(session.allocate_waveform(10), [0, 0, 0, 1, 1, 1, 2, 2])
 
 
-'''
-(TODO) Jaleel , check it after issue #538 fixed
 def test_set_waveform_next_write_position(session):
-    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)  # Enable after RelativeTo enum added to enums_addon.py
+    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
 
 def test_export_signal(session):
     expected_trigger_terminal = "PXI_Trig0"
-    session.export_signal(nifgen.ExportSignal.START_TRIGGER, "", expected_trigger_terminal)  # Enable after issue #538 fixed
+    session.export_signal(nifgen.Signal.START_TRIGGER, "", expected_trigger_terminal)
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
 
 
 def test_write_waveform_from_filei64(session):
-    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG_ENDIAN)  # Enable after issue #538 fixed
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+
+
+def test_named_waveform_operations(session):
+    wfm_name = 'Waveform'
+    wfm_size = 4096
+    write_offset = 0
+    wfm_data_f64 = [0.0, 1.0]
+    wfm_data_i16 = [1, 0]
+    session.allocate_named_waveform(wfm_name, wfm_size)
+    session.set_named_waveform_next_write_position(wfm_name, nifgen.RelativeTo.START, write_offset)
+    session.write_named_waveform_f64(wfm_name, wfm_data_f64)
+    session.write_named_waveform_i16(wfm_name, wfm_data_i16)
+    session.delete_named_waveform(wfm_name)
+
+
+def test_wait_until_done(session):
+    session.wait_until_done(20)
+
+
+def test_user_standard_waveform(session):
+    wfm_points = [1] * 8192
+    session.output_mode = nifgen.OutputMode.FUNC
+    session.configure_standard_waveform(nifgen.Waveform.USER, 1.0, 2000000, 1.0, 0.0)
+    session.define_user_standard_waveform(wfm_points)
+    session.clear_user_standard_waveform()
+
+
+# TODO(bhaswath): Doesn't work, issue #596
 '''
+def test_fir_filter_coefficients():
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
+        coeff_array = [1, 0, -1]
+        session.configure_custom_fir_filter_coefficients(coeff_array)
+        session.commit()
+        array, size = session.get_fir_filter_coefficients()
+        assert size == len(coeff_array)
+'''
+
+
+def test_configure_triggers(session):
+    session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
+    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
+
+
+def test_send_software_edge_trigger(session):
+    waveform_data = [0, 1, 2, 3, 3, 2, 1, 0]
+    session.create_waveform_i16(waveform_data)
+    with session.initiate():
+        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+

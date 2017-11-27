@@ -3053,7 +3053,7 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
-            trigger_when (int): Specifies whether the Script Trigger asserts on a high or low digital
+            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
                 level.
 
                 **Defined Values**
@@ -3066,10 +3066,12 @@ class Session(_SessionBase):
                 | "LowLevel"  | Script Trigger asserts on a low digital level.  |
                 +-------------+-------------------------------------------------+
         '''
+        if type(trigger_when) is not enums.TriggerWhen:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
-        trigger_when_ctype = visatype.ViInt32(trigger_when)  # case 9
+        trigger_when_ctype = visatype.ViInt32(trigger_when.value)  # case 10
         error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
