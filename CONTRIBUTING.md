@@ -23,23 +23,29 @@ To contribute to this project, it is recommended that you follow these steps:
 In order to build **[nimi-python](https://github.com/ni/nimi-python)**, you must have the
 following installed:
 
-* [Python 3](https://www.python.org/downloads/)
-    - Add Python install location to the Windows path.
+* [Python](https://www.python.org/downloads/) - Windows (Not Windows Subsystem for Linux)
+    - Install Python 2.7 x64
+    - Install at least one Python 3.x x64 - 3.4, 3.5 or 3.6 will all work
+    - Optional - 32 bit versions
+    - Ensure pip support is installed for all versions
+    - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonX.Y for 64 bit and c:\pythonX.Y-32 for 32 bit
+
 * [GNU Make](https://www.gnu.org/software/make/)
-    - If you're on Windows 10
-        - Install the [Windows Subsystem for Linux]
+    - If you're on Windows 10 (using Windows Subsystem for Linux)
+        - Install and enable [Windows Subsystem for Linux]
         (https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
         - Install make
 
                 sudo apt-get install make
 
-    - If you're on Windows 7 or 8:
+    - If you're on Windows 7, 8 or 10 (not using WSL):
         - [Install mingw (msys-base)](http://www.mingw.org/wiki/Getting_Started).
         - Add <mingw Install Path>\msys\1.0\bin to Windows path.
 
     - If you're on macOS
         - Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
         - Install command line developer tools
+
 * [PyPI](https://pip.pypa.io/en/latest/installing/)
 
         sudo apt-get install python3-pip
@@ -47,7 +53,27 @@ following installed:
 
 * Additional Python Modules (install using [PyPI](https://pypi.python.org/pypi))
 
-        sudo pip3 install tox --upgrade
+        sudo pip install tox tox-globinterpreter --upgrade
+
+* Configure tox interpreter search - only required on Windows when not using WSL
+    - Copy <path to 64 bit python 3>\python.exe <path to 64 bit python3>\python3.exe
+        - This can be any supported version of python 3
+    - cd to GitHub repo location
+    - <path to python 2>\python -m tox --scan <path 1>\python.exe <path 2>\python3.exe
+        - path 1 
+            - Can not use spaces, instead you can use wildcards
+            - Ex: c:\Program*\Python*\python.exe
+        - path 2
+            - Should be the path to the 64 bit python 3 where pythone.exe exists
+        - Ex: `"c:\Program Files (x86)\Python27\python" -m tox --scan c:/Program*/Python*/python.exe c:/Program*/Python*/python3.exe`
+        - This should list out each version of python installed plus one more for python3
+
+                interpreters:
+                python2.7 c:\Program Files\Python27\python.exe
+                python2.7 c:\Program Files (x86)\Python27\python.exe
+                python3.6 c:\Program Files\Python36\python.exe
+                python3.6 c:\Program Files (x86)\Python36\python.exe
+                python3 c:\Program Files\Python36\python3.exe
 
 In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
@@ -96,6 +122,15 @@ This will work on Unix-based systems including Windows Subsystem for Linux.
 Then run the system tests for the desired driver, for example:
 
     pytest bin/nidmm/system_tests
+
+You can also use tox to run the system tests using all installed 64 bit Python versions
+
+    tox -e py27-system_tests,py34-system_tests,py35-system_tests,py36-system_tests
+
+You can also use tox to run the system tests using all installed 32 bit Python versions
+
+    tox --32 -e py27-system_tests,py34-system_tests,py35-system_tests,py36-system_tests
+
 
 Contributing
 ------------
@@ -151,4 +186,5 @@ By making a contribution to this project, I certify that:
 
 See [LICENSE](https://github.com/ni/nimi-python/blob/master/LICENSE) for details about
 how **[nimi-python](https://github.com/ni/nimi-python)** is licensed.
+
 
