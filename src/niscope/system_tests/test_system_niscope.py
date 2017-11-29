@@ -153,6 +153,7 @@ def test_configure_trigger_hysteresis(session):
     assert '1' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
+
 def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
@@ -176,15 +177,3 @@ def test_export_signal(session):
     expected_trigger_terminal = "VAL_PFI_0"
     session.export_signal(niscope.ExportableSignals.START_TRIGGER, expected_trigger_terminal)
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
-
-
-def test_fetch_read_measuremet(session):
-    active_channel = session['0']
-    read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
-    expected_measurement = 10000
-    in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
-    fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
-    expected_measurement = 10000
-    in_range = abs(fetch_measurement - fetch_measurement) <= max(1e-02 * max(abs(fetch_measurement), abs(fetch_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
