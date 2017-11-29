@@ -125,3 +125,66 @@ def test_waveform_processing(session):
     session.clear_waveform_processing()
     session.horz_record_length == 4096
     session.horz_sample_rate == 10000000
+
+
+def test_configure_ref_levels(session):
+    session.configure_ref_levels()
+    session.commit()
+    assert session.meas_chan_high_ref_level == 90.0
+
+
+# revisit after #630 closed
+def test_configure_trigger_digital(session):
+    session.configure_trigger_digital('VAL_RTSI_0')
+    session.vertical_range = 5
+    assert 'VAL_RTSI_0' == session.trigger_source
+
+
+def test_configure_trigger_edge(session):
+    assert niscope.TriggerSlope.POSITIVE == session.trigger_slope
+    session.configure_trigger_edge('0', niscope.TriggerCoupling.DC)
+    session.commit()
+    assert '0' == session.trigger_source
+    assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_configure_trigger_hysteresis(session):
+    session.configure_trigger_hysteresis('1', niscope.TriggerCoupling.DC)
+    assert '1' == session.trigger_source
+    assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+def test_configure_trigger_software(session):
+    session.configure_trigger_software()
+
+
+def test_configure_trigger_video():
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+        session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+        assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
+        assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
+        assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
+        assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_configure_trigger_window(session):
+    session.configure_trigger_window('1', 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
+    assert '1' == session.trigger_source
+    assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
+
+
+def test_export_signal(session):
+    expected_trigger_terminal = "VAL_PFI_0"
+    session.export_signal(niscope.ExportableSignals.START_TRIGGER, expected_trigger_terminal)
+    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
+
+
+def test_fetch_measuremet(session):
+    active_channel = session['0']
+    read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
+    expected_measurement = 10000
+    in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
+    expected_measurement = 10000
+    in_range = abs(fetch_measurement - fetch_measurement) <= max(1e-02 * max(abs(fetch_measurement), abs(fetch_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
