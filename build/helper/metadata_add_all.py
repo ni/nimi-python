@@ -149,6 +149,14 @@ def _add_default_value_name_for_docs(parameter, module_name):
 _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
 
 
+def _add_template_name(f):
+    '''Add default function template name if not already defined'''
+    if 'function_template' not in f:
+        f['function_template'] = 'session_default_function.py.mako'
+    if f['function_template'][0] != '/':
+        f['function_template'] = '/' + f['function_template']
+
+
 def _add_has_repeated_capability(f):
     '''Adds a boolean 'has_repeated_capability' to the function metadata by inferring it from its parameter names, if not previously populated..'''
     if 'has_repeated_capability' not in f:
@@ -183,6 +191,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
+        _add_template_name(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _fix_type(p)
@@ -473,6 +482,7 @@ def test_add_all_metadata_simple():
             },
             'has_repeated_capability': True,
             'is_error_handling': False,
+            'function_template': '/session_default_function.py.mako',
             'parameters': [
                 {
                     'ctypes_type': 'ViSession',
@@ -527,6 +537,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
+            'function_template': '/session_default_function.py.mako',
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
