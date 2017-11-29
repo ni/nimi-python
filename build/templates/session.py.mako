@@ -12,7 +12,6 @@ ${encoding_tag}
     functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
-    c_function_prefix = config['c_function_prefix']
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
 
@@ -121,7 +120,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['has_repeated_capability'] or v['is_error_handling']}):
-${render_method(functions[func_name])}
+<%include file="/session_default_function.py.mako" args="f=functions[func_name], config=config" />\
 % endfor
 
 class _RepeatedCapability(_SessionBase):
@@ -166,7 +165,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['has_repeated_capability'] and not v['is_error_handling']}):
-${render_method(functions[func_name])}
+<%include file="/session_default_function.py.mako" args="f=functions[func_name], config=config" />\
 % endfor
 
 
