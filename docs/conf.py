@@ -18,7 +18,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import pkg_resources
 import sys
 sys.path.insert(0, os.path.abspath('../generated'))
 
@@ -63,13 +62,8 @@ author = 'National Instruments'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-# We expect the nidmm package to be installed prior to building documentation
-# tox is configured to install the just built wheel.
-# We use this to get the version that will be in the webpage title
-# There is not an overall configuration so we picked one driver to be representative of the version
-#
 # The full version, including alpha/beta/rc tags.
-release = pkg_resources.get_distribution("nidmm").version
+release = '0.6.0.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -191,3 +185,4 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
