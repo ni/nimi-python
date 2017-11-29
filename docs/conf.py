@@ -65,6 +65,11 @@ author = 'National Instruments'
 #
 # The short X.Y version.
 version = pkg_resources.get_distribution("nidmm").version
+# We expect the nidmm package to be installed prior to building documentation
+# tox is configured to install the just built wheel.
+# We use this to get the version that will be in the webpage title
+# There is not an overall configuration so we picked one driver to be representative of the version
+#
 # The full version, including alpha/beta/rc tags.
 release = version
 
