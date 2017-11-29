@@ -102,7 +102,7 @@ def test_self_cal(session):
 
 def test_probe_compensation_signal(session):
     session.probe_compensation_signal_start()
-    session.probe_compensation_signal_start()
+    session.probe_compensation_signal_stop()
 
 
 def test_configure_channel_characteristics(session):
@@ -178,7 +178,7 @@ def test_export_signal(session):
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
 
 
-def test_fetch_measuremet(session):
+def test_fetch_read_measuremet(session):
     active_channel = session['0']
     read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
     expected_measurement = 10000
