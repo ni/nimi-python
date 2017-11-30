@@ -57,7 +57,7 @@ functions_codegen_method = {
     'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary8':                     { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
@@ -117,9 +117,11 @@ functions_buffer_info = {
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'Fetch':                                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchBinary8':                             { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size()'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size() * self._actual_num_wfms())'}, },
-                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms(array_meas_function)'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.
@@ -178,4 +180,14 @@ functions_default_value = {
                                                                        6: { 'default_value': 0.0, },
                                                                        7: { 'default_value': 0.0, }, }, },
 }
+
+functions_numpy_support = {
+    'FetchBinary8':                                  { 'function_template': 'session_numpy_function.py.mako', },
+}
+
+functions_numpy_support_parameters = {
+    'FetchBinary8':                                  { 'parameters': { 4: { 'numpy': True, }, }, },
+}
+
+
 
