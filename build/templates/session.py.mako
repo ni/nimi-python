@@ -120,7 +120,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['has_repeated_capability'] or v['is_error_handling']}):
-<%include file="${functions[func_name]['function_template']}" args="f=functions[func_name], config=config" />\
+<%include file="${functions[func_name]['method_template_filename']}" args="f=functions[func_name], config=config" />\
 % endfor
 
 class _RepeatedCapability(_SessionBase):
@@ -165,7 +165,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['has_repeated_capability'] and not v['is_error_handling']}):
-<%include file="${functions[func_name]['function_template']}" args="f=functions[func_name], config=config" />\
+<%include file="${functions[func_name]['method_template_filename']}" args="f=functions[func_name], config=config" />\
 % endfor
 
 
