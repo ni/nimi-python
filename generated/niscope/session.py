@@ -1343,6 +1343,29 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    def _actual_meas_wfm_size(self, array_meas_function):
+        '''_actual_meas_wfm_size
+
+        Returns the total available size of an array measurement acquisition.
+
+        Args:
+            array_meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+        Returns:
+            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
+                waveform.
+        '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
+        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(meas_waveform_size_ctype.value)
+
     def _actual_num_wfms(self):
         '''_actual_num_wfms
 
@@ -1782,12 +1805,12 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
         array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size())  # case 0.0
-        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size() * self._actual_num_wfms()))()  # case 0.2
+        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case 0.0
+        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))()  # case 0.2
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size() * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def fetch_measurement(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement
@@ -2618,29 +2641,6 @@ class Session(_SessionBase):
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
-
-    def _actual_meas_wfm_size(self, array_meas_function):
-        '''_actual_meas_wfm_size
-
-        Returns the total available size of an array measurement acquisition.
-
-        Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-
-        Returns:
-            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
-                waveform.
-        '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(meas_waveform_size_ctype.value)
 
     def auto_setup(self):
         '''auto_setup
