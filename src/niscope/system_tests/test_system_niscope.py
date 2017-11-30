@@ -145,6 +145,34 @@ def test_fetch_read_measurement(session):
     assert 1000 == actual_number_of_samples  # Driver returns 1000 for simulated 5164
 
 
+def test_configure_chan_characteristics(session):
+    session.vertical_range = 4.0
+    session.configure_chan_characteristics(niscope.InputImpedance._50_OHMS, 0)
+    assert 50.0 == session.input_impedance
+
+
+# TODO(injaleea): check after issue #639 fixed, will have to modify after according to fix for issue#614
+def test_filter_coefficients():
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXIe') as session:  # filter coefficients methods are available on devices with OSP
+        assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
+        try:
+            filter_coefficients = [1.0, 0.0, 0.0]
+            session.configure_equalization_filter_coefficients(filter_coefficients)
+        except niscope.Error as e:
+            assert e.code == -1074135024  # coefficients list should have 35 items
+
+
+def test_send_software_trigger_edge(session):
+    session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
+
+
+def test_disable(session):
+    assert session.allow_more_records_than_memory is False
+    session.allow_more_records_than_memory = True
+    session.disable()
+    assert session.allow_more_records_than_memory is False
+
+
 def test_configure_ref_levels(session):
     session.configure_ref_levels()
     assert 90.0 == session.meas_chan_high_ref_level
