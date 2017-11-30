@@ -49,7 +49,6 @@ class Library(object):
         self.niScope_FetchMeasurementStats_cfunc = None
         self.niScope_GetAttributeViBoolean_cfunc = None
         self.niScope_GetAttributeViInt32_cfunc = None
-        self.niScope_GetAttributeViInt64_cfunc = None
         self.niScope_GetAttributeViReal64_cfunc = None
         self.niScope_GetAttributeViString_cfunc = None
         self.niScope_GetEqualizationFilterCoefficients_cfunc = None
@@ -65,7 +64,6 @@ class Library(object):
         self.niScope_SendSoftwareTriggerEdge_cfunc = None
         self.niScope_SetAttributeViBoolean_cfunc = None
         self.niScope_SetAttributeViInt32_cfunc = None
-        self.niScope_SetAttributeViInt64_cfunc = None
         self.niScope_SetAttributeViReal64_cfunc = None
         self.niScope_SetAttributeViString_cfunc = None
         self.niScope_close_cfunc = None
@@ -312,14 +310,6 @@ class Library(object):
                 self.niScope_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
 
-    def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_GetAttributeViInt64_cfunc is None:
-                self.niScope_GetAttributeViInt64_cfunc = self._library.niScope_GetAttributeViInt64
-                self.niScope_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
-                self.niScope_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_GetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
-
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetAttributeViReal64_cfunc is None:
@@ -439,14 +429,6 @@ class Library(object):
                 self.niScope_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niScope_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
-
-    def niScope_SetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_SetAttributeViInt64_cfunc is None:
-                self.niScope_SetAttributeViInt64_cfunc = self._library.niScope_SetAttributeViInt64
-                self.niScope_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
-                self.niScope_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_SetAttributeViInt64_cfunc(vi, channel_list, attribute_id, value)
 
     def niScope_SetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         with self._func_lock:
