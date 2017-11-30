@@ -72,8 +72,11 @@ def _add_ctypes_type(parameter, config):
     return parameter
 
 
-def _add_numpy_type(parameter, config):
-    '''Adds numpy type and library call keys for if numpy is true'''
+def _add_numpy_info(parameter, config):
+    '''Adds numpy information, including type and library call keys for if numpy is true'''
+    if 'numpy' not in parameter:
+        parameter['numpy'] = False
+
     if parameter['numpy']:
         parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
         module_name = 'numpy.'
@@ -214,6 +217,7 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
+            _add_numpy_info(p, config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -510,6 +514,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': False,
                     'is_session_handle': True,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
@@ -534,6 +539,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': True,
                     'is_session_handle': False,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': True,
                     'name': 'channelName',
@@ -556,6 +562,7 @@ def test_add_all_metadata_simple():
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
+                'numpy': False,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -579,6 +586,7 @@ def test_add_all_metadata_simple():
             }, {
                 'direction': 'out',
                 'enum': None,
+                'numpy': False,
                 'name': 'status',
                 'type': 'ViChar',
                 'original_type': 'ViString',
