@@ -171,7 +171,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         else:
             assert parameter['is_buffer'] is True
             assert parameter['direction'] == 'out'
-            definition = '({0}.{1} * {2})()  # case 0.2'.format(module_name, parameter['ctypes_type'], size)
+            if parameter['numpy']:
+                definition = 'numpy.ctypeslib.as_ctypes(numpy.empty({0}, dtype=numpy.{1}))  # case 0.2'.format(size, parameter['numpy_type'])
+            else:
+                definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
     elif parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
