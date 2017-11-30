@@ -149,6 +149,14 @@ def _add_default_value_name_for_docs(parameter, module_name):
 _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
 
 
+def _add_method_template_filename(f):
+    '''Adds 'method_template_filename' value to function metadata if not found. This is the mako template that will be used to render the method.'''
+    if 'method_template_filename' not in f:
+        f['method_template_filename'] = 'session_default_method.py.mako'
+    if f['method_template_filename'][0] != '/':
+        f['method_template_filename'] = '/' + f['method_template_filename']
+
+
 def _add_has_repeated_capability(f):
     '''Adds a boolean 'has_repeated_capability' to the function metadata by inferring it from its parameter names, if not previously populated..'''
     if 'has_repeated_capability' not in f:
@@ -183,6 +191,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
+        _add_method_template_filename(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _fix_type(p)
@@ -473,6 +482,7 @@ def test_add_all_metadata_simple():
             },
             'has_repeated_capability': True,
             'is_error_handling': False,
+            'method_template_filename': '/session_default_method.py.mako',
             'parameters': [
                 {
                     'ctypes_type': 'ViSession',
@@ -527,6 +537,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
+            'method_template_filename': '/session_default_method.py.mako',
             'parameters': [{
                 'direction': 'in',
                 'enum': None,

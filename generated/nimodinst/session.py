@@ -164,7 +164,6 @@ class Session(object):
             self._handle = 0
 
     ''' These are code-generated '''
-
     def _close_installed_devices_session(self):
         '''_close_installed_devices_session
 
@@ -325,4 +324,5 @@ class Session(object):
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
+
 
