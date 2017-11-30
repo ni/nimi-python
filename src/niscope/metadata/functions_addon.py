@@ -62,6 +62,7 @@ functions_codegen_method = {
     'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
+    '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.	
 }
 
 # Attach the given parameter to the given enum from enums.py
