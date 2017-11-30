@@ -89,6 +89,8 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         if output_parameter['type'] == 'ViChar':
             # 'self._encoding' is a variable on the session object
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
+        elif output_parameter['numpy']:
+            snippet = output_parameter['ctypes_variable_name']
         else:
             if output_parameter['size']['mechanism'] == 'fixed':
                 size = str(output_parameter['size']['value'])
