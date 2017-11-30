@@ -105,7 +105,7 @@ def test_probe_compensation_signal(session):
     session.probe_compensation_signal_start()
 
 
-def test_configure_channel_characteristics(session):
+def test_configure_horizontal_timing(session):
     session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.auto_setup()
     session.configure_horizontal_timing(10000000, 1000, 50.0, 1, True)
@@ -125,3 +125,45 @@ def test_waveform_processing(session):
     session.clear_waveform_processing()
     session.horz_record_length == 4096
     session.horz_sample_rate == 10000000
+
+
+def test_fetch_read_measuremet(session):
+    active_channel = session['0']
+    read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
+    expected_measurement = 10000
+    in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
+    in_range = abs(fetch_measurement - expected_measurement) <= max(1e-02 * max(abs(fetch_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
+    in_range = abs(measurement_stats - expected_measurement) <= max(1e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+
+
+def test_configure_chan_characteristics(session):
+    session.vertical_range = 4.0
+    session.configure_chan_characteristics(niscope.InputImpedance._50_OHMS, 0)
+    assert 50.0 == session.input_impedance
+
+
+# TODO(injaleea): check after issue #639 fixed, will have to modify after according to fix for issue#614
+def test_filters():
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXIe') as session:  # filter coefficients methods are available on devices with OSP
+        assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
+        try:
+            fir_conf = [1.0, 0.0, 0.0]
+            session.configure_equalization_filter_coefficients(fir_conf)
+        except niscope.Error as e:
+            assert e.code == -1074135024  # coefficients list should have 35 items
+
+
+def test_send_software_trigger_edge(session):
+    session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
+
+
+def test_disable(session):
+    assert session.allow_more_records_than_memory is False
+    session.allow_more_records_than_memory = True
+    session.disable()
+    assert session.allow_more_records_than_memory is False
