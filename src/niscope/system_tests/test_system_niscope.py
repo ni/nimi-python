@@ -129,11 +129,9 @@ def test_waveform_processing(session):
 
 def test_configure_ref_levels(session):
     session.configure_ref_levels()
-    session.commit()
-    assert session.meas_chan_high_ref_level == 90.0
+    assert 90.0 == session.meas_chan_high_ref_level
 
 
-# revisit after #630 closed
 def test_configure_trigger_digital(session):
     session.configure_trigger_digital('VAL_RTSI_0')
     session.vertical_range = 5
