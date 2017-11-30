@@ -148,12 +148,12 @@ def test_configure_chan_characteristics(session):
 
 
 # TODO(injaleea): check after issue #639 fixed, will have to modify after according to fix for issue#614
-def test_filters():
+def test_filter_coefficients():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXIe') as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
         try:
-            fir_conf = [1.0, 0.0, 0.0]
-            session.configure_equalization_filter_coefficients(fir_conf)
+            filter_coefficients = [1.0, 0.0, 0.0]
+            session.configure_equalization_filter_coefficients(filter_coefficients)
         except niscope.Error as e:
             assert e.code == -1074135024  # coefficients list should have 35 items
 
