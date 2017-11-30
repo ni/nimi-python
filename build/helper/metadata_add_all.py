@@ -152,9 +152,9 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_template_name(f):
     '''Add default function template name if not already defined'''
     if 'function_template' not in f:
-        f['function_template'] = 'session_default_function.py.mako'
     if f['function_template'][0] != '/':
         f['function_template'] = '/' + f['function_template']
+        f['method_template_filename'] = 'session_default_method.py.mako'
 
 
 def _add_has_repeated_capability(f):
