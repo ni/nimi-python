@@ -1,6 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
+from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
@@ -67,6 +68,20 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
+
+    return parameter
+
+
+def _add_numpy_type(parameter, config):
+    '''Adds numpy type and library call keys for if numpy is true'''
+    if parameter['numpy']:
+        parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
+        module_name = 'numpy.'
+
+        if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+            parameter['numpy_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['numpy_type'] + ")"
+        else:
+            parameter['numpy_type_library_call'] = module_name + parameter['numpy_type']
 
     return parameter
 
