@@ -266,6 +266,7 @@ params = [
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViSession',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt64',
@@ -284,7 +285,8 @@ params = [
         'python_name_with_doc_default': 'output',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt64'
+        'type': 'ViInt64',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViChar',
@@ -303,7 +305,8 @@ params = [
         'python_name_with_doc_default': 'error_message',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 256},
-        'type': 'ViChar'
+        'type': 'ViChar',
+        'numpy': False,
     },
     {
         'ctypes_type': 'custom_struct',
@@ -323,7 +326,8 @@ params = [
         'python_name_with_doc_default': 'array_out',
         'python_type': 'CustomStruct',
         'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
-        'type': 'custom_struct'
+        'type': 'custom_struct',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -342,7 +346,8 @@ params = [
         'python_name_with_doc_default': 'number_of_elements',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -361,7 +366,8 @@ params = [
         'python_name_with_doc_default': 'an_array',
         'python_type': 'enums.Turtle',
         'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
-        'type': 'ViInt16'
+        'type': 'ViInt16',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -383,7 +389,30 @@ params = [
         'python_name_with_doc_default': 'an_int_enum',
         'python_type': 'enums.Turtle',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt16'
+        'type': 'ViInt16',
+        'numpy': False,
+    },
+    {
+        'ctypes_type': 'ViInt64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
+        'ctypes_variable_name': 'output_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'A big number on its way out.'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
+        'name': 'output',
+        'python_name': 'output',
+        'python_name_with_default': 'output',
+        'python_name_with_doc_default': 'output',
+        'python_type': 'int',
+        'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
+        'type': 'ViInt64',
+        'numpy': True,
+        'numpy_type': 'int64',
+        'numpy_type_library_call': 'numpy.int64',
     },
 ]
 
@@ -411,6 +440,11 @@ def test_get_method_return_snippet_custom_type():
 def test_get_method_return_snippet_enum():
     param = [params[4], params[5]]
     assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
+
+
+def test_get_method_return_snippet_numpy():
+    param = [params[4], params[7]]
+    assert get_method_return_snippet(param, config_for_testing) == 'return output_ctype'
 
 
 def test_get_enum_type_check_snippet():
