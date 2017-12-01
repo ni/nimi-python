@@ -3,6 +3,7 @@
 import codecs
 import logging
 from mako.exceptions import RichTraceback
+from mako.lookup import TemplateLookup
 from mako.template import Template
 import pprint
 import sys
@@ -12,7 +13,9 @@ pp = pprint.PrettyPrinter(indent=4)
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
-        template = Template(filename=template_name)
+        module_name = template_params['metadata'].config['module_name']
+        lookup = TemplateLookup(directories=['build/templates', 'src/{0}/templates'.format(module_name)])
+        template = Template(filename=template_name, lookup=lookup)
         rendered_template = template.render(template_parameters=template_params)
 
     except Exception:
