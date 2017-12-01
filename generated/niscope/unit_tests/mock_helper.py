@@ -94,9 +94,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
         self._defaults['GetAttributeViInt32']['Value'] = None
-        self._defaults['GetAttributeViInt64'] = {}
-        self._defaults['GetAttributeViInt64']['return'] = 0
-        self._defaults['GetAttributeViInt64']['Value'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['Value'] = None
@@ -136,8 +133,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
         self._defaults['SetAttributeViInt32']['return'] = 0
-        self._defaults['SetAttributeViInt64'] = {}
-        self._defaults['SetAttributeViInt64']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
@@ -431,14 +426,6 @@ class SideEffectsHelper(object):
         value.contents.value = self._defaults['GetAttributeViInt32']['Value']
         return self._defaults['GetAttributeViInt32']['return']
 
-    def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        if self._defaults['GetAttributeViInt64']['return'] != 0:
-            return self._defaults['GetAttributeViInt64']['return']
-        if self._defaults['GetAttributeViInt64']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViInt64", param='Value')
-        value.contents.value = self._defaults['GetAttributeViInt64']['Value']
-        return self._defaults['GetAttributeViInt64']['return']
-
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
@@ -565,11 +552,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
 
-    def niScope_SetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
-        if self._defaults['SetAttributeViInt64']['return'] != 0:
-            return self._defaults['SetAttributeViInt64']['return']
-        return self._defaults['SetAttributeViInt64']['return']
-
     def niScope_SetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
             return self._defaults['SetAttributeViReal64']['return']
@@ -670,8 +652,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_GetAttributeViBoolean.return_value = 0
         mock_library.niScope_GetAttributeViInt32.side_effect = MockFunctionCallError("niScope_GetAttributeViInt32")
         mock_library.niScope_GetAttributeViInt32.return_value = 0
-        mock_library.niScope_GetAttributeViInt64.side_effect = MockFunctionCallError("niScope_GetAttributeViInt64")
-        mock_library.niScope_GetAttributeViInt64.return_value = 0
         mock_library.niScope_GetAttributeViReal64.side_effect = MockFunctionCallError("niScope_GetAttributeViReal64")
         mock_library.niScope_GetAttributeViReal64.return_value = 0
         mock_library.niScope_GetAttributeViString.side_effect = MockFunctionCallError("niScope_GetAttributeViString")
@@ -702,8 +682,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViBoolean.return_value = 0
         mock_library.niScope_SetAttributeViInt32.side_effect = MockFunctionCallError("niScope_SetAttributeViInt32")
         mock_library.niScope_SetAttributeViInt32.return_value = 0
-        mock_library.niScope_SetAttributeViInt64.side_effect = MockFunctionCallError("niScope_SetAttributeViInt64")
-        mock_library.niScope_SetAttributeViInt64.return_value = 0
         mock_library.niScope_SetAttributeViReal64.side_effect = MockFunctionCallError("niScope_SetAttributeViReal64")
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
