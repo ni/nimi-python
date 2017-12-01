@@ -2,30 +2,24 @@
 | master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|             |
 +----------------------+----------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                                |
-+----------------------+------------+---------------------------------------------------+
-| Versions             | NI-DCPower | |nidcpowerLatestVersion| |nidcpowerPythonVersion| |
-|                      +------------+---------------------------------------------------+
-|                      | NI-DMM     | |nidmmLatestVersion| |nidmmPythonVersion|         |
-|                      +------------+---------------------------------------------------+
-|                      | NI-FGEN    | |nifgenLatestVersion| |nifgenPythonVersion|       |
-|                      +------------+---------------------------------------------------+
-|                      | NI-SCOPE   | |niscopeLatestVersion| |niscopePythonVersion|     |
-|                      +------------+---------------------------------------------------+
-|                      | NI-SWITCH  | |niswitchLatestVersion| |niswitchPythonVersion|   |
-|                      +------------+---------------------------------------------------+
-|                      | NI-ModInst | |nimodinstLatestVersion| |nimodinstPythonVersion| |
-+----------------------+------------+---------------------------------------------------+
++----------------------+------------+------+---------------------------------------------------+
+| Versions             | NI-DCPower | 17.6.0 | |nidcpowerLatestVersion| |nidcpowerPythonVersion| |
+|                      +------------+--------+---------------------------------------------------+
+|                      | NI-DMM     | 17.1.0 | |nidmmLatestVersion| |nidmmPythonVersion|         |
+|                      +------------+--------+---------------------------------------------------+
+|                      | NI-FGEN    | 17.0.0 | |nifgenLatestVersion| |nifgenPythonVersion|       |
+|                      +------------+--------+---------------------------------------------------+
+|                      | NI-SCOPE   | 17.0.2 | |niscopeLatestVersion| |niscopePythonVersion|     |
+|                      +------------+--------+---------------------------------------------------+
+|                      | NI-SWITCH  | 17.0.0 | |niswitchLatestVersion| |niswitchPythonVersion|   |
+|                      +------------+--------+---------------------------------------------------+
+|                      | NI-ModInst | 17.0.0 | |nimodinstLatestVersion| |nimodinstPythonVersion| |
++----------------------+------------+--------+---------------------------------------------------+
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       National Instruments
 ===========  ============================================================================================================================
-
-+-----------+-----------------------------------------------------------------------+
-| WARNING!! | NI Modular Instruments Python API is currently under development. You |
-|           | are welcome to use it, and we welcome feedback, but be prepared for   |
-|           | changes to the APIs.                                                  |
-+-----------+-----------------------------------------------------------------------+
 
 .. _about-section:
 
