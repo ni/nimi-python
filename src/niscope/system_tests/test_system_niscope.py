@@ -127,7 +127,7 @@ def test_waveform_processing(session):
     session.horz_sample_rate == 10000000
 
 
-def test_fetch_read_measuremet(session):
+def test_fetch_read_measurement(session):
     active_channel = session['0']
     read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
     expected_measurement = 10000
@@ -139,11 +139,10 @@ def test_fetch_read_measuremet(session):
     measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
     in_range = abs(measurement_stats - expected_measurement) <= max(1e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
     assert in_range is True
-    '''
-    (TODO)injaleea: fix after issue#629 fixed
-    fetch_measurement = session.fetch_array_measurement(-1, niscope.ArrayMeasurement.ARRAY_GAIN)[1][3]  # extracting actual number of samples from measurement
-    assert 1500 == fetch_measurement  # actual number of sample should be 1500 for a simulated 5164
-    '''
+    waveform, waveform_info = active_channel.fetch_array_measurement(-1, niscope.ArrayMeasurement.ARRAY_GAIN)
+    actual_number_of_samples = waveform_info[0].actual_samples
+    assert 1000 == len(waveform)  # Driver returns 1000 for simulated 5164
+    assert 1000 == actual_number_of_samples  # Driver returns 1000 for simulated 5164
 
 
 def test_configure_chan_characteristics(session):

@@ -62,7 +62,7 @@ functions_codegen_method = {
     'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
-    '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.	
+    '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -120,9 +120,9 @@ functions_buffer_info = {
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchBinary8':                             { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
-    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size()'}, },
+    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
-                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms(array_meas_function)'}, }, }, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.
@@ -131,8 +131,6 @@ functions_bad_source_metadata = {
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
                                                                   4: { 'direction': 'out'},
                                                                   5: { 'direction': 'out'}, }, },
-
-
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -141,6 +139,10 @@ functions_bad_source_metadata = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True },
     'GetError':                     { 'is_error_handling': True },
+}
+
+functions_render_in_session_base = {
+    'ActualMeasWfmSize':               { 'render_in_session_base': True, },  # Internally called by function with a repeated capability.
 }
 
 # Default values for method parameters
