@@ -23,13 +23,15 @@
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
-        ${helper.get_ctype_variable_declaration_snippet(p, parameters, config)}
+<% ivi_dance_step = 1 if (p == ivi_dance_parameter or p == ivi_dance_size_parameter) else None %>\
+        ${helper.get_ctype_variable_declaration_snippet(p, parameters, config, ivi_dance_step=ivi_dance_step)}
 % endfor
 % if ivi_dance_parameter is not None:
+<% ivi_dance_step = 2 %>\
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
-        ${ivi_dance_size_parameter['ctypes_variable_name']} = visatype.${ivi_dance_size_parameter['ctypes_type']}(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['ctypes_variable_name']}.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        ${helper.get_ctype_variable_declaration_snippet(ivi_dance_size_parameter, parameters, config, ivi_dance_step=2)}
+        ${helper.get_ctype_variable_declaration_snippet(ivi_dance_parameter, parameters, config, ivi_dance_step=2)}
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
