@@ -131,7 +131,7 @@ def _get_buffer_parameter_for_size_parameter(parameter, parameters):
     return None
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters, config, ivi_dance_step=None):
+def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config):
     '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     ivi_dance_step should be:
