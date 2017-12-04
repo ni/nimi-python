@@ -133,25 +133,32 @@ def _get_buffer_parameter_for_size_parameter(parameter, parameters):
     return None
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters, config):
+def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config):
     '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
+    ivi_dance_step should be:
+        None for parameters that are not IVI-dance related.
+        1 for declaration before the first call to the Library.
+        2 for declaration after the first call to the Library.
+
     We've identified many different cases on how these need to be initialized based on the parameter:
-        0. Mechanism is python-code:                                    (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
-        1. Input session handle:                                        visatype.ViSession(self._vi)
-        2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
-        3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-        4. Input buffer (not string):                                   None if list is None else (visatype.ViInt32 * len(list))(*list)
-        5. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
-        6. Input is size of input buffer:                               visatype.ViInt32(0 if list is None else len(list))
-        7. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
-        8. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
-        9. Input scalar:                                                visatype.ViInt32(parameter_name)
-       10. Input enum:                                                  visatype.ViInt32(parameter_name.value)
-       11. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
-       12. Output buffer with mechanism ivi-dance:                      None
-       13. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
-       14. Output scalar or enum:                                       visatype.ViInt32()
+        0. Mechanism is python-code:                                        (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
+        1. Input session handle:                                            visatype.ViSession(self._vi)
+        2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        4. Input buffer (not string):                                       None if list is None else (visatype.ViInt32 * len(list))(*list)
+        5. Input buffer (custom type):                                      (custom_struct * len(list))(*[custom_struct(l) for l in list])
+        6. Input is size of input buffer:                                   visatype.ViInt32(0 if list is None else len(list))
+        7. Input is size of output buffer with mechanism ivi-dance, step 1: visatype.ViInt32()
+        7.5. Input is size of output buffer with mechanism ivi-dance, step 2:   visatype.ViInt32(error_code)
+        8. Input is size of output buffer with mechanism passed-in:         visatype.ViInt32(buffer_size)
+        9. Input scalar:                                                    visatype.ViInt32(parameter_name)
+       10. Input enum:                                                      visatype.ViInt32(parameter_name.value)
+       11. Output buffer with mechanism fixed-size:                         visatype.ViInt32 * 256
+       12. Output buffer with mechanism ivi-dance, step 1:                  None
+       12.5 Output buffer with mechanism ivi-dance, step 2:                 (visatype.ViInt32 * buffer_size_ctype.value)()
+       13. Output buffer with mechanism passed-in:                          (visatype.ViInt32 * buffer_size)()
+       14. Output scalar or enum:                                           visatype.ViInt32()
     '''
 
     # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
@@ -196,7 +203,11 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
-                        definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                        if ivi_dance_step == 1:
+                            definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                        else:
+                            assert ivi_dance_step is 2, "Parameter '{0}' is size for a buffer with 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
+                            definition = '{0}.{1}(error_code)  # case 7.5'.format(module_name, parameter['ctypes_type'])
                     else:
                         assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
                         definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -212,7 +223,12 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
                 assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
                 definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             elif parameter['size']['mechanism'] == 'ivi-dance':
-                definition = 'None  # case 12'
+                if ivi_dance_step == 1:
+                    definition = 'None  # case 12'
+                else:
+                    assert ivi_dance_step is 2, "Parameter '{0}' has 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
+                    size_parameter = find_size_parameter(parameter, parameters)
+                    definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
                 definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
