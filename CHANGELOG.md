@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
   * #### Added
   * #### Changed
-    * Added default values for fetch and read
+    * Added default values for timeout on the fetch, fetch_array_measurement, and read functions.
   * #### Removed
 
 ## 0.5.0 - 2017-11-27
