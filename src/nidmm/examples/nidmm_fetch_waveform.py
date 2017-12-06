@@ -20,7 +20,7 @@ with nidmm.Session(args.name) as session:
         while True:
             time.sleep(0.1)
             backlog, acquisition_state = session.read_status()
-            if (acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG):
+            if acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG:
                 break
             measurements, samples_acquired = session.fetch_waveform(array_size=backlog)
             print(measurements)
