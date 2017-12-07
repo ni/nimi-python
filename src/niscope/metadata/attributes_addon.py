@@ -5,6 +5,8 @@
 # Python API bindings release
 # We also do not need to codegen attributes that apply to P2P since it is not supported in Python
 attributes_codegen_method = {
+    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
+    1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
     1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION
     1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION
     1050553: { "codegen_method": "no" },  # ENGINE_REVISION
@@ -79,6 +81,8 @@ attributes_codegen_method = {
     1151301: { "codegen_method": "no" },  # DDC_COMBINED_DECIMATION
     1151302: { "codegen_method": "no" },  # SERIAL_DAC_CAL_VOLTAGE
     1151304: { "codegen_method": "no" },  # DELAY_BEFORE_INITIATE
+    1151305: { "codegen_method": "no" },  # DDC_DIRECT_REGISTER_ADDRESS
+    1151306: { "codegen_method": "no" },  # DDC_DIRECT_REGISTER_DATA
     1150328: { "codegen_method": "no" },  # P2P_SAMPLES_AVAIL_IN_ENDPOINT - P2P Attribute
     1150329: { "codegen_method": "no" },  # P2P_DATA_TRANS_PERMISSION_ADDR - P2P Attribute
     1150330: { "codegen_method": "no" },  # P2P_DATA_TRANS_PERMISSION_ADDR_TYPE - P2P Attribute

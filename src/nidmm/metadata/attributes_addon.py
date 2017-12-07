@@ -4,6 +4,8 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 attributes_codegen_method = {
+    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
+    1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
     1050101: { "codegen_method": "no" },  # PRIMARY_ERROR
     1050102: { "codegen_method": "no" },  # SECONDARY_ERROR
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION
@@ -22,6 +24,7 @@ attributes_codegen_method = {
     1150005: { "codegen_method": "no" },  # AI_NUM_CHANNELS
     1150006: { "codegen_method": "no" },  # FILTER_NOTCH
     1150007: { "codegen_method": "no" },  # CONVER_PER_SAMPLE
+    1150031: { "codegen_method": "no" },  # SAMPLE_DELAY_MODE
 }
 
 
