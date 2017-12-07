@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
-    * Removed init_with_topology. Clients should use niswitch.Session.init(). See #660.
+    * Removed init_with_topology. Clients should use niswitch.Session() constructor. See #660.
 * ### NI-DCPower
   * #### Added
   * #### Changed
