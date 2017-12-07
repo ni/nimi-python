@@ -24,6 +24,7 @@ class Library(object):
         self.niFake_BoolArrayOutputFunction_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
+        self.niFake_FetchWaveform_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
@@ -49,7 +50,6 @@ class Library(object):
         self.niFake_PoorlyNamedSimpleFunction_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
-        self.niFake_ReadMultiPoint_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
         self.niFake_ReturnMultipleTypes_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
@@ -103,6 +103,14 @@ class Library(object):
                 self.niFake_EnumInputFunctionWithDefaults_cfunc.argtypes = [ViSession, ViInt16]  # noqa: F405
                 self.niFake_EnumInputFunctionWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_EnumInputFunctionWithDefaults_cfunc(vi, a_turtle)
+
+    def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_FetchWaveform_cfunc is None:
+                self.niFake_FetchWaveform_cfunc = self._library.niFake_FetchWaveform
+                self.niFake_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         with self._func_lock:
@@ -303,14 +311,6 @@ class Library(object):
                 self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_ReadFromChannel_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
-
-    def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_ReadMultiPoint_cfunc is None:
-                self.niFake_ReadMultiPoint_cfunc = self._library.niFake_ReadMultiPoint
-                self.niFake_ReadMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFake_ReadMultiPoint_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_ReadMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
 
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:

@@ -548,6 +548,26 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def fetch_waveform(self, number_of_samples):
+        '''fetch_waveform
+
+        Returns waveform data.
+
+        Args:
+            number_of_samples (int): Number of samples to return
+
+        Returns:
+            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            actual_number_of_samples (int): Number of samples actually fetched.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        waveform_data_ctype = (visatype.ViReal64 * number_of_samples)()  # case 13
+        actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
+
     def get_a_boolean(self):
         '''get_a_boolean
 
@@ -888,30 +908,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
-
-    def read_multi_point(self, maximum_time, array_size):
-        '''read_multi_point
-
-        Acquires multiple measurements and returns an array of measured values.
-
-        Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
-            array_size (int): Number of measurements to acquire.
-
-        Returns:
-            reading_array (list of float): An array of measurement values.
-
-                Note: The size must be at least arraySize.
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
-        array_size_ctype = visatype.ViInt32(array_size)  # case 8
-        reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
-        actual_number_of_points_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niFake_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
