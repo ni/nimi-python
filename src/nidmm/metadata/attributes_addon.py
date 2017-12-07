@@ -15,7 +15,7 @@ attributes_codegen_method = {
     1050321: { "codegen_method": "no" },  # VISA_RM_SESSION
     1050051: { "codegen_method": "no" },  # DEFER_UPDATE
     1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES
-    1250003: { "enum": None           },
+    1250003: { "enum": None           },  # RESOLUTION
     1150008: { "codegen_method": "no" },  # START_TRIGGER
     1150009: { "codegen_method": "no" },  # START_TRIG_SLOPE
     1150011: { "codegen_method": "no" },  # SAMPLE_TRIGGER_DELAY
