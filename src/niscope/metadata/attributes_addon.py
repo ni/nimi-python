@@ -5,8 +5,8 @@
 # Python API bindings release
 # We also do not need to codegen attributes that apply to P2P since it is not supported in Python
 attributes_codegen_method = {
-    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
+    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION
     1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION
     1050553: { "codegen_method": "no" },  # ENGINE_REVISION
@@ -31,6 +31,7 @@ attributes_codegen_method = {
     1150063: { "codegen_method": "no" },  # STAR_TRIGGER_OUTPUT_EVENT
     1151000: { "codegen_method": "no" },  # DDC_NCO_FREQUENCY
     1151001: { "codegen_method": "no" },  # DDC_NCO_PHASE
+    1151003: { "codegen_method": "no" },  # DDC_ENABLE
     1151010: { "codegen_method": "no" },  # DDC_CIC_DECIMATION
     1151011: { "codegen_method": "no" },  # DDC_CIC_SHIFT_GAIN
     1151020: { "codegen_method": "no" },  # DDC_DISCRIMINATOR_ENABLED
