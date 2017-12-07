@@ -8,6 +8,6 @@
 enums_codegen_method = {
 }
 
-replacement_enums = {
-    'DigitsResolution': {},
+enums_additional_enums = {
+    'DigitsResolution': {},  # Just delete this enum. Otherwise we have to make it so that it will generate valid code
 }
