@@ -1188,32 +1188,6 @@ niswitch.Session properties
             - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
             - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
 
-.. py:attribute:: query_instrument_status
-
-    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
-    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
-            - C Attribute: **NISWITCH_ATTR_QUERY_INSTRUMENT_STATUS**
-
 .. py:attribute:: range_check
 
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
@@ -1561,30 +1535,6 @@ niswitch.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
-
-.. py:attribute:: specific_driver_prefix
-
-    A string that contains the prefix for the instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
-            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_PREFIX**
 
 .. py:attribute:: specific_driver_revision
 

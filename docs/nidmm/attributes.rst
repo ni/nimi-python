@@ -939,32 +939,6 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
             - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
 
-.. py:attribute:: query_instrument_status
-
-    Specifies whether the instrument driver queries the instrument status after  each operation. Querying the instrument status is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable status checking and maximize performance.
-    The instrument driver can choose to ignore status checking for particular  attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
-            - C Attribute: **NIDMM_ATTR_QUERY_INSTRUMENT_STATUS**
-
 .. py:attribute:: range
 
     Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.
@@ -1078,17 +1052,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`DigitsResolution` |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1119,34 +1093,6 @@ nidmm.Session properties
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Count**
             - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
-
-.. py:attribute:: sample_delay_mode
-
-    For the NI 4060 only, specifies a delay interval after an sample external trigger.
-    0
-    NIDMM_ATTR_SAMPLE_INTERVAL is only used when the Sample Trigger attribute is set to  INTERVAL.
-    1
-    NIDMM_ATTR_SAMPLE_INTERVAL is used as a delay after ANY type of Sample  Trigger
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Multi Point Acquisition:Sample Delay Mode**
-            - C Attribute: **NIDMM_ATTR_SAMPLE_DELAY_MODE**
 
 .. py:attribute:: sample_interval
 
@@ -1494,31 +1440,6 @@ nidmm.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
-
-.. py:attribute:: specific_driver_prefix
-
-    The prefix for the specific instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
-    The prefix can be up to a maximum of eight characters.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
-            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_PREFIX**
 
 .. py:attribute:: specific_driver_revision
 

@@ -349,12 +349,6 @@ class _SessionBase(object):
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
-    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
@@ -433,10 +427,6 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver.
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    A string that contains the prefix for the instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
     '''
     specific_driver_revision = attributes.AttributeViString(1050551)
     '''

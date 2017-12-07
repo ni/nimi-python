@@ -231,22 +231,6 @@ class _SessionBase(object):
     Complex (1)
     Default Value: Complex
     '''
-    ddc_direct_register_address = attributes.AttributeViInt32(1151305)
-    '''
-    Used for directly accessing the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers.
-    '''
-    ddc_direct_register_data = attributes.AttributeViInt32(1151306)
-    '''
-    Used for directly accessing the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers. The default
-    value is 0.
-    '''
-    ddc_enable = attributes.AttributeViBoolean(1151003)
-    '''
-    Set this to VI_FALSE to disable programming of the DDC.
-    Default Value: VI_TRUE
-    '''
     ddc_enabled = attributes.AttributeViBoolean(1150300)
     '''
     Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
@@ -1028,12 +1012,6 @@ class _SessionBase(object):
         session['0,1'].probe_attenuation = var
         var = session['0,1'].probe_attenuation
     '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
-    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
@@ -1159,10 +1137,6 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    A string that contains the prefix for the instrument driver. The name of each user-callable  function in this driver starts with this prefix.
     '''
     specific_driver_revision = attributes.AttributeViString(1050551)
     '''
