@@ -4,8 +4,8 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 attributes_codegen_method = {
-    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
+    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION
     1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION
     1050553: { "codegen_method": "no" },  # ENGINE_REVISION
