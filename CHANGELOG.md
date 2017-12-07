@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-Switch
   * #### Added
   * #### Changed
+    * Made init_with_topology a private function.
   * #### Removed
 * ### NI-DCPower
   * #### Added
