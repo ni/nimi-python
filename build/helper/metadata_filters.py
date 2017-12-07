@@ -15,6 +15,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
@@ -25,6 +26,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
@@ -35,6 +37,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METH
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
@@ -45,6 +48,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
@@ -55,6 +59,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
@@ -65,6 +70,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
@@ -75,6 +81,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
@@ -85,6 +92,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
@@ -95,8 +103,22 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
 }
+
+_parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': True,
+    'mechanism': 'any',
+}
+
 _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
@@ -105,6 +127,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'ivi-dance',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
@@ -115,6 +138,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'len',
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
@@ -125,6 +149,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': True,
+    'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
 }
 
@@ -165,6 +190,8 @@ def filter_parameters(function, parameter_usage_options):
         if x['enum'] is None and options_to_use['skip_non_enum_parameter']:
             skip = True
         if options_to_use['mechanism'] != 'any' and x['size']['mechanism'] not in options_to_use['mechanism']:
+            skip = True
+        if options_to_use['skip_all_except_numpy_parameters'] and not x['numpy']:
             skip = True
         if not skip:
             parameters_to_use.append(x)

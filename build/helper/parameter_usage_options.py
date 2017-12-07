@@ -24,9 +24,11 @@ class ParameterUsageOptions(Enum):
     '''Get all output parameters, other than ivi-dance'''
     IVI_DANCE_PARAMETER = 10
     '''Get the ivi-dance parameter'''
-    LEN_PARAMETER = 11
+    NUMPY_PARAMETERS = 11
+    '''Get all buffer parameters that support numpy.array in the Python API'''
+    LEN_PARAMETER = 12
     '''Get the len parameter'''
-    INPUT_ENUM_PARAMETERS = 12
+    INPUT_ENUM_PARAMETERS = 13
     '''Get any input parameters whose type is enum'''
 
 

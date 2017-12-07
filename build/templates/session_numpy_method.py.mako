@@ -1,6 +1,6 @@
 <%page args="f, config"/>\
 <%
-    '''Renders a Session method corresponding to the passed-in function metadata.'''
+    '''Renders a Session method corresponding to the passed-in function metadata using numpy.array for buffers.'''
 
     import build.helper as helper
 
@@ -24,16 +24,13 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
-        ${helper.get_ctype_variable_declaration_snippet(p, parameters, config)}
+% for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
+        ${helper.get_numpy_array_declaration_snippet(parameter, parameters)}
 % endfor
-% if ivi_dance_parameter is not None:
-        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
-        ${ivi_dance_size_parameter['ctypes_variable_name']} = visatype.${ivi_dance_size_parameter['ctypes_type']}(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['ctypes_variable_name']}.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-% endif
+% for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+        ${helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, config, use_numpy_array=parameter['numpy'])}
+% endfor
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters, config)}
+        ${helper.get_method_return_snippet(parameters, config, use_numpy_array=True)}
 
