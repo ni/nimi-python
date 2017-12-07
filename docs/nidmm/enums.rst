@@ -311,6 +311,29 @@ Enums used in NI-DMM
 
 
 
+.. py:data:: DigitsResolution
+
+    .. py:attribute:: nidmm.DigitsResolution.THREEPOINTFIVE
+
+
+
+    .. py:attribute:: nidmm.DigitsResolution.FOURPOINTFIVE
+
+
+
+    .. py:attribute:: nidmm.DigitsResolution.FIVEPOINTFIVE
+
+
+
+    .. py:attribute:: nidmm.DigitsResolution.SIXPOINTFIVE
+
+
+
+    .. py:attribute:: nidmm.DigitsResolution.SEVENPOINTFIVE
+
+
+
+
 .. py:data:: Function
 
     .. py:attribute:: nidmm.Function.DC_VOLTS

@@ -139,6 +139,14 @@ class DCNoiseRejection(Enum):
     '''
 
 
+class DigitsResolution(Enum):
+    THREEPOINTFIVE = 3.5
+    FOURPOINTFIVE = 4.5
+    FIVEPOINTFIVE = 5.5
+    SIXPOINTFIVE = 6.5
+    SEVENPOINTFIVE = 7.5
+
+
 class Function(Enum):
     DC_VOLTS = 1
     '''

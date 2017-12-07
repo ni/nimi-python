@@ -621,6 +621,30 @@ nidmm.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
             - C Attribute: **NIDMM_ATTR_INTERCHANGE_CHECK**
 
+.. py:attribute:: io_resource_descriptor
+
+    A string containing the resource descriptor of the instrument.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
+            - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
+
 .. py:attribute:: latency
 
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
@@ -915,6 +939,32 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
             - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
 
+.. py:attribute:: query_instrument_status
+
+    Specifies whether the instrument driver queries the instrument status after  each operation. Querying the instrument status is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable status checking and maximize performance.
+    The instrument driver can choose to ignore status checking for particular  attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
+            - C Attribute: **NIDMM_ATTR_QUERY_INSTRUMENT_STATUS**
+
 .. py:attribute:: range
 
     Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.
@@ -1021,6 +1071,31 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Absolute Resolution**
             - C Attribute: **NIDMM_ATTR_RESOLUTION_ABSOLUTE**
 
+.. py:attribute:: resolution_digits
+
+    Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
+    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | :py:data:`DigitsResolution` |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Configuration:Digits Resolution**
+            - C Attribute: **NIDMM_ATTR_RESOLUTION_DIGITS**
+
 .. py:attribute:: sample_count
 
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
@@ -1044,6 +1119,34 @@ nidmm.Session properties
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Count**
             - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
+
+.. py:attribute:: sample_delay_mode
+
+    For the NI 4060 only, specifies a delay interval after an sample external trigger.
+    0
+    NIDMM_ATTR_SAMPLE_INTERVAL is only used when the Sample Trigger attribute is set to  INTERVAL.
+    1
+    NIDMM_ATTR_SAMPLE_INTERVAL is used as a delay after ANY type of Sample  Trigger
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Multi Point Acquisition:Sample Delay Mode**
+            - C Attribute: **NIDMM_ATTR_SAMPLE_DELAY_MODE**
 
 .. py:attribute:: sample_interval
 
@@ -1343,6 +1446,103 @@ nidmm.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+.. py:attribute:: specific_driver_major_version
+
+    Returns the major version number of this instrument driver.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
+            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MAJOR_VERSION**
+
+.. py:attribute:: specific_driver_minor_version
+
+    The minor version number of this instrument driver.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
+            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
+
+.. py:attribute:: specific_driver_prefix
+
+    The prefix for the specific instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
+    The prefix can be up to a maximum of eight characters.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
+            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_PREFIX**
+
+.. py:attribute:: specific_driver_revision
+
+    A string that contains additional version information about this specific  instrument driver.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
+            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 

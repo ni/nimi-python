@@ -145,6 +145,10 @@ class _SessionBase(object):
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call niDMM_GetNextInterchangeWarning  to extract interchange warnings.  Call niDMM_ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
     '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    A string containing the resource descriptor of the instrument.
+    '''
     latency = attributes.AttributeViInt32(1150034)
     '''
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
@@ -199,6 +203,12 @@ class _SessionBase(object):
     Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the NIDMM_ATTR_APERTURE_TIME  attribute in powerline cycles (PLCs).
     After configuring powerline frequency, set the NIDMM_ATTR_APERTURE_TIME_UNITS attribute to PLCs.  When setting the NIDMM_ATTR_APERTURE_TIME attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
     '''
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
+    '''
+    Specifies whether the instrument driver queries the instrument status after  each operation. Querying the instrument status is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable status checking and maximize performance.
+    The instrument driver can choose to ignore status checking for particular  attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
+    '''
     range = attributes.AttributeViReal64(1250002)
     '''
     Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.
@@ -225,9 +235,22 @@ class _SessionBase(object):
     Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
     NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
     '''
+    resolution_digits = attributes.AttributeEnum(attributes.AttributeViReal64, enums.DigitsResolution, 1250003)
+    '''
+    Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
+    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
+    '''
     sample_count = attributes.AttributeViInt32(1250301)
     '''
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
+    '''
+    sample_delay_mode = attributes.AttributeViInt32(1150031)
+    '''
+    For the NI 4060 only, specifies a delay interval after an sample external trigger.
+    0
+    NIDMM_ATTR_SAMPLE_INTERVAL is only used when the Sample Trigger attribute is set to  INTERVAL.
+    1
+    NIDMM_ATTR_SAMPLE_INTERVAL is used as a delay after ANY type of Sample  Trigger
     '''
     sample_interval = attributes.AttributeViReal64(1250303)
     '''
@@ -287,6 +310,23 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string containing a description of the specific driver.
+    '''
+    specific_driver_major_version = attributes.AttributeViInt32(1050503)
+    '''
+    Returns the major version number of this instrument driver.
+    '''
+    specific_driver_minor_version = attributes.AttributeViInt32(1050504)
+    '''
+    The minor version number of this instrument driver.
+    '''
+    specific_driver_prefix = attributes.AttributeViString(1050302)
+    '''
+    The prefix for the specific instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
+    The prefix can be up to a maximum of eight characters.
+    '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this specific  instrument driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''

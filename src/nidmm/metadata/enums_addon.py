@@ -8,6 +8,29 @@
 enums_codegen_method = {
 }
 
-enums_additional_enums = {
-    'DigitsResolution': {},  # Just delete this enum. Otherwise we have to make it so that it will generate valid code
+replacement_enums = {
+    'DigitsResolution': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_DIGITS_RESOLUTION_THREEPOINTFIVE',
+                'value': 3.5,
+            },
+            {
+                'name': 'NIDMM_VAL_DIGITS_RESOLUTION_FOURPOINTFIVE',
+                'value': 4.5,
+            },
+            {
+                'name': 'NIDMM_VAL_DIGITS_RESOLUTION_FIVEPOINTFIVE',
+                'value': 5.5,
+            },
+            {
+                'name': 'NIDMM_VAL_DIGITS_RESOLUTION_SIXPOINTFIVE',
+                'value': 6.5,
+            },
+            {
+                'name': 'NIDMM_VAL_DIGITS_RESOLUTION_SEVENPOINTFIVE',
+                'value': 7.5,
+            },
+        ],
+    },
 }
