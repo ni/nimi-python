@@ -4,6 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
+    'InitWithTopology':                { 'codegen_method': 'private',       },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
