@@ -1167,63 +1167,6 @@ functions = {
         },
     },
 
-    'ReadMultiPoint': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'maximumTime',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in years.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'arraySize',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Number of measurements to acquire.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'is_buffer': True,
-                'name': 'readingArray',
-                'type': 'ViReal64',
-                'documentation': {
-                    'description': 'An array of measurement values.',
-                    'note': 'The size must be at least arraySize.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'name': 'actualNumberOfPoints',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Indicates the number of measured values actually retrieved.',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'Acquires multiple measurements and returns an array of measured values.',
-        },
-    },
-
     'GetEnumValue': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1994,6 +1937,51 @@ functions = {
             'description': 'This function returns an array for use in python-code size mechanism.',
         },
     },
+    'FetchWaveform': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                }
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of samples to return',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'waveformData',
+                'type': 'ViReal64[ ]',
+                'documentation': {
+                    'description': 'Samples fetched from the device. Array should be numberOfSamples big.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'actualNumberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of samples actually fetched.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns waveform data.',
+        },
+    },
     #TODO(marcoskirsch): More cases to add:
-    #     Waveforms as inputs and outputs
+    #     Waveform as input
 }
