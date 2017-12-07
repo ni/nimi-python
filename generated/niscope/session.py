@@ -159,6 +159,11 @@ class _SessionBase(object):
     The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
     The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
     '''
+    channel_count = attributes.AttributeViInt32(1050203)
+    '''
+    Indicates the number of channels that the specific instrument driver  supports.
+    For channel-based properties, the IVI engine maintains a separate cache value for each channel.
+    '''
     channel_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableChan, 1250005)
     '''
     Specifies whether the digitizer acquires a waveform for the channel.
@@ -225,6 +230,22 @@ class _SessionBase(object):
     Real (0)
     Complex (1)
     Default Value: Complex
+    '''
+    ddc_direct_register_address = attributes.AttributeViInt32(1151305)
+    '''
+    Used for directly accessing the
+    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers.
+    '''
+    ddc_direct_register_data = attributes.AttributeViInt32(1151306)
+    '''
+    Used for directly accessing the
+    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers. The default
+    value is 0.
+    '''
+    ddc_enable = attributes.AttributeViBoolean(1151003)
+    '''
+    Set this to VI_FALSE to disable programming of the DDC.
+    Default Value: VI_TRUE
     '''
     ddc_enabled = attributes.AttributeViBoolean(1150300)
     '''
@@ -586,6 +607,11 @@ class _SessionBase(object):
 
     Note: If disabled, warranted specifications are not guaranteed.
     '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    '''
     logical_name = attributes.AttributeViString(1050305)
     '''
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
@@ -593,6 +619,26 @@ class _SessionBase(object):
     master_enable = attributes.AttributeViBoolean(1150008)
     '''
     Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
+    '''
+    max_input_frequency = attributes.AttributeViReal64(1250006)
+    '''
+    Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+    Defined Values:
+    NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
+    NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
+    NISCOPE_VAL_20MHZ_BANDWIDTH (20000000.0)
+    NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
+    NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
+    NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_input_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_input_frequency.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_input_frequency = var
+        var = session['0,1'].max_input_frequency
     '''
     max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''
@@ -982,6 +1028,12 @@ class _SessionBase(object):
         session['0,1'].probe_attenuation = var
         var = session['0,1'].probe_attenuation
     '''
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
+    '''
+    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
+    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
@@ -1107,6 +1159,14 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver
+    '''
+    specific_driver_prefix = attributes.AttributeViString(1050302)
+    '''
+    A string that contains the prefix for the instrument driver. The name of each user-callable  function in this driver starts with this prefix.
+    '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this  instrument driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''

@@ -127,6 +127,12 @@ class _SessionBase(object):
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
     '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    Indicates the resource descriptor the driver  uses to identify the physical device.
+    If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
+    '''
     is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
     This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the niSwitch_Connect function.  Configuration channels are not available  for external connections.
@@ -343,6 +349,12 @@ class _SessionBase(object):
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
+    '''
+    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
+    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
@@ -421,6 +433,14 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver.
+    '''
+    specific_driver_prefix = attributes.AttributeViString(1050302)
+    '''
+    A string that contains the prefix for the instrument driver.  The name of each  user-callable function in this driver starts with this prefix.
+    '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this  instrument driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''

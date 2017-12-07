@@ -444,6 +444,31 @@ niscope.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
             - C Attribute: **NISCOPE_ATTR_CACHE**
 
+.. py:attribute:: channel_count
+
+    Indicates the number of channels that the specific instrument driver  supports.
+    For channel-based properties, the IVI engine maintains a separate cache value for each channel.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
+            - C Attribute: **NISCOPE_ATTR_CHANNEL_COUNT**
+
 .. py:attribute:: channel_enabled
 
     Specifies whether the digitizer acquires a waveform for the channel.
@@ -682,6 +707,82 @@ niscope.Session properties
 
             - LabVIEW Property: **Onboard Signal Processing:DDC:Data Processing Mode**
             - C Attribute: **NISCOPE_ATTR_DDC_DATA_PROCESSING_MODE**
+
+.. py:attribute:: ddc_direct_register_address
+
+    Used for directly accessing the
+    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Address**
+            - C Attribute: **NISCOPE_ATTR_DDC_DIRECT_REGISTER_ADDRESS**
+
+.. py:attribute:: ddc_direct_register_data
+
+    Used for directly accessing the
+    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers. The default
+    value is 0.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Data**
+            - C Attribute: **NISCOPE_ATTR_DDC_DIRECT_REGISTER_DATA**
+
+.. py:attribute:: ddc_enable
+
+    Set this to VI_FALSE to disable programming of the DDC.
+    Default Value: VI_TRUE
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable DDC**
+            - C Attribute: **NISCOPE_ATTR_DDC_ENABLE**
 
 .. py:attribute:: ddc_enabled
 
@@ -2038,6 +2139,31 @@ niscope.Session properties
             - LabVIEW Property: **Vertical:Advanced:Interleaving Offset Correction Enabled**
             - C Attribute: **NISCOPE_ATTR_INTERLEAVING_OFFSET_CORRECTION_ENABLED**
 
+.. py:attribute:: io_resource_descriptor
+
+    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
+            - C Attribute: **NISCOPE_ATTR_IO_RESOURCE_DESCRIPTOR**
+
 .. py:attribute:: logical_name
 
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
@@ -2085,6 +2211,50 @@ niscope.Session properties
 
             - LabVIEW Property: **Synchronization:Master Enable**
             - C Attribute: **NISCOPE_ATTR_MASTER_ENABLE**
+
+.. py:attribute:: max_input_frequency
+
+    Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+    Defined Values:
+    NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
+    NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
+    NISCOPE_VAL_20MHZ_BANDWIDTH (20000000.0)
+    NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
+    NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
+    NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
+
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_input_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_input_frequency.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_input_frequency = var
+            var = session['0,1'].max_input_frequency
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Vertical:Maximum Input Frequency**
+            - C Attribute: **NISCOPE_ATTR_MAX_INPUT_FREQUENCY**
 
 .. py:attribute:: max_real_time_sampling_rate
 
@@ -3374,6 +3544,32 @@ niscope.Session properties
             - LabVIEW Property: **Vertical:Probe Attenuation**
             - C Attribute: **NISCOPE_ATTR_PROBE_ATTENUATION**
 
+.. py:attribute:: query_instrument_status
+
+    Specifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance
+    The instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
+    The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
+            - C Attribute: **NISCOPE_ATTR_QUERY_INSTRUMENT_STATUS**
+
 .. py:attribute:: range_check
 
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
@@ -4019,6 +4215,54 @@ niscope.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NISCOPE_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+.. py:attribute:: specific_driver_prefix
+
+    A string that contains the prefix for the instrument driver. The name of each user-callable  function in this driver starts with this prefix.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
+            - C Attribute: **NISCOPE_ATTR_SPECIFIC_DRIVER_PREFIX**
+
+.. py:attribute:: specific_driver_revision
+
+    A string that contains additional version information about this  instrument driver.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
+            - C Attribute: **NISCOPE_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 

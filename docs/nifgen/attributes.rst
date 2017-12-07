@@ -2227,6 +2227,30 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name**
             - C Attribute: **NIFGEN_ATTR_LOGICAL_NAME**
 
+.. py:attribute:: major_version
+
+    Returns the major version number of NI-FGEN.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Obsolete:Major Version**
+            - C Attribute: **NIFGEN_ATTR_MAJOR_VERSION**
+
 .. py:attribute:: marker_events_count
 
     Returns the number of markers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
@@ -2707,6 +2731,30 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Memory Size**
             - C Attribute: **NIFGEN_ATTR_MEMORY_SIZE**
+
+.. py:attribute:: minor_version
+
+    Returns the minor version number of NI-FGEN.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Obsolete:Minor Version**
+            - C Attribute: **NIFGEN_ATTR_MINOR_VERSION**
 
 .. py:attribute:: min_freq_list_duration
 
@@ -3703,6 +3751,32 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Calibration:Pre-Amplifier Attenuation**
             - C Attribute: **NIFGEN_ATTR_PRE_AMPLIFIER_ATTENUATION**
 
+.. py:attribute:: query_instrument_status
+
+    Specifies whether NI-FGEN queries the device status  after each operation. Querying the device status is very useful  for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable status checking and maximize  performance.
+    NI-FGEN can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.
+    Use niFgen_InitWithOptions to override the default value.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Query Instrument Status**
+            - C Attribute: **NIFGEN_ATTR_QUERY_INSTRUMENT_STATUS**
+
 .. py:attribute:: range_check
 
     Specifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
@@ -4194,6 +4268,54 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+.. py:attribute:: specific_driver_prefix
+
+    A string that contains the prefix for NI-FGEN. The name of each  user-callable function in NI-FGEN starts with this prefix.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix**
+            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_PREFIX**
+
+.. py:attribute:: specific_driver_revision
+
+    A string that contains additional version information about  NI-FGEN.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Revision**
+            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 
