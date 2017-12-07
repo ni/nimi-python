@@ -17,7 +17,6 @@ NI Modular Instruments Python Documentation
    nifgen
    niscope
    niswitch
-   nimodinst
 
 Indices and tables
 ==================

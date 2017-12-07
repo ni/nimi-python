@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * Removed the entire API.
 * ### NI-Switch
   * #### Added
   * #### Changed

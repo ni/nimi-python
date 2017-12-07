@@ -12,8 +12,6 @@
 |                      | NI-SCOPE   | |niscopeLatestVersion| |niscopePythonVersion|     |
 |                      +------------+---------------------------------------------------+
 |                      | NI-SWITCH  | |niswitchLatestVersion| |niswitchPythonVersion|   |
-|                      +------------+---------------------------------------------------+
-|                      | NI-ModInst | |nimodinstLatestVersion| |nimodinstPythonVersion| |
 +----------------------+------------+---------------------------------------------------+
 
 ===========  ============================================================================================================================
@@ -43,7 +41,6 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 * NI-FGEN (Python module: nifgen)
 * NI-SCOPE (Python module: niscope)
 * NI-SWITCH (Python module: niswitch)
-* NI-ModInst (Python module: nimodinst)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -181,14 +178,6 @@ licenses allow for non-commercial and commercial use.
 .. |nidmmPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :target: http://pypi.python.org/pypi/nidmm
-
-.. |nimodinstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
-    :alt: Latest NI-ModInst Version
-    :target: http://pypi.python.org/pypi/nimodinst
-
-.. |nimodinstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
-    :alt: NI-ModInst supported Python versions
-    :target: http://pypi.python.org/pypi/nimodinst
 
 .. |niswitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
     :alt: Latest NI-SWITCH Version
