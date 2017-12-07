@@ -25,8 +25,8 @@ All notable changes to this project will be documented in this file.
 * ### NI-Switch
   * #### Added
   * #### Changed
-    * Made init_with_topology a private function.
   * #### Removed
+    * Removed init_with_topology. Clients should use niswitch.Session.init(). See #660.
 * ### NI-DCPower
   * #### Added
   * #### Changed
