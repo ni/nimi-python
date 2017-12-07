@@ -47,6 +47,22 @@ def test_fetch(session):
     assert len(wfm_infos) == test_num_channels
 
 
+# TODO(marcoskirsch): eventually we'll want to test fetch_into() which will dispatch into the appropriate private fetch method.
+def test_fetch_binary8_numpy(session):
+    import numpy
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = '0,1'
+    test_num_channels = 2
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    with session.initiate():
+        wfm, wfm_infos = session[test_channels]._fetch_binary8_numpy(timeout=5.0, num_samples=test_record_length)
+    assert len(wfm) == test_num_channels * test_record_length
+    assert type(wfm) is numpy.ndarray
+    assert len(wfm_infos) == test_num_channels
+
+
 def test_self_test(session):
     result, message = session.self_test()
     assert result == 0
