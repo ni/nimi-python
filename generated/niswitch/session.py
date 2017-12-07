@@ -1048,8 +1048,8 @@ class Session(_SessionBase):
 
     def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
         super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling init_with_topology().
-        self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._vi = 0  # This must be set before calling _init_with_topology().
+        self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
         self._is_frozen = True
 
     def __enter__(self):
@@ -1506,12 +1506,12 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
-    def init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
-        '''init_with_topology
+    def _init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        '''_init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
-        init_with_topology creates a new IVI instrument driver session
+        _init_with_topology creates a new IVI instrument driver session
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
@@ -1735,7 +1735,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                init_with_topology, InitWithOptions, or init
+                _init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
