@@ -76,7 +76,7 @@ functions_custom_python_name = {
 }
 
 functions_numpy_support = {
-    'FetchWaveform':                        { 'method_template_filename': 'session_numpy_method.py.mako', },
+    'FetchWaveform':                        { 'method_template_filename': 'session_default_and_numpy_method.py.mako', },
 }
 
 functions_numpy_support_parameters = {

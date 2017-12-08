@@ -171,7 +171,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     custom_type = find_custom_type(parameter, config)
     if custom_type is not None:
         module_name = custom_type['file_name']
-    elif parameter['numpy'] is True:
+    elif parameter['numpy'] is True and use_numpy_array is True:
         module_name = 'numpy'
     else:
         module_name = 'visatype'
@@ -245,10 +245,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
                     definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
-                if parameter['numpy'] is False:
-                    definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
-                else:
+                if parameter['numpy'] is True and use_numpy_array is True:
                     definition = '({0}.empty({1}, dtype={0}.{2}, order="C"))  # case 13.5'.format(module_name, size_parameter['python_name'], parameter['numpy_type'])
+                else:
+                    definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
                 assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
         else:
