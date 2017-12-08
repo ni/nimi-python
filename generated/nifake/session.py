@@ -548,6 +548,28 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+
+    def fetch_waveform(self, number_of_samples):
+        '''fetch_waveform
+
+        Returns waveform data.
+
+        Args:
+            number_of_samples (int): Number of samples to return
+
+        Returns:
+            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            actual_number_of_samples (int): Number of samples actually fetched.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        waveform_data_ctype = (visatype.ViReal64 * number_of_samples)()  # case 13
+        actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
+
+
     def fetch_waveform_numpy(self, number_of_samples):
         '''fetch_waveform
 

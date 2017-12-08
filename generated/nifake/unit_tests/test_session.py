@@ -262,8 +262,6 @@ class TestSession(object):
             calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16Matcher(0)), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16Matcher(1))]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
-    # TODO(marcoskirsch): Re-enable once we generate both default and numpy flavors of method.
-    '''
     def test_fetch_waveform(self):
         expected_waveform = [1.0, 0.1, 42, .42]
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
@@ -275,7 +273,6 @@ class TestSession(object):
             assert actual_number_of_samples == len(expected_waveform)
             assert waveform == expected_waveform
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
-    '''
 
     def test_fetch_waveform_numpy(self):
         import numpy
