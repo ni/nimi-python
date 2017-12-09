@@ -6,15 +6,9 @@
 
     parameters = f['parameters']
     c_function_prefix = config['c_function_prefix']
-
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
-    ivi_dance_parameter = helper.filter_ivi_dance_parameter(f)
-    ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
-    len_parameter = helper.filter_len_parameter(f)
-    len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
-    assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
-    def ${f['python_name']}_numpy(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}_into(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f['name'], config, indent=8)}
@@ -25,7 +19,10 @@
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
-        ${helper.get_numpy_array_declaration_snippet(parameter, parameters)}
+        if type(${parameter['python_name']}) is not numpy.ndarray or numpy.isfortran(${parameter['python_name']}) is True:
+                raise TypeError('${parameter['python_name']} must be numpy.ndarray in C-order')
+        if ${parameter['python_name']}.dtype is not numpy.dtype('${parameter['numpy_type']}'):
+                raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
 % endfor
 % for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
         ${helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, config, use_numpy_array=parameter['numpy'])}
