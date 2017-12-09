@@ -49,8 +49,8 @@ def test_fetch(session):
 
 # TODO(marcoskirsch): eventually we'll want to test fetch_into() which will dispatch into the appropriate private fetch method.
 def test_fetch_binary8_into(session):
-    import numpy
     import math
+    import numpy
     test_voltage = 1.0
     test_record_length = 2000
     test_channels = '0,1'
