@@ -11,6 +11,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
@@ -18,10 +19,23 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len',
 }
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': True,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': True,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': False,
+    'skip_all_except_numpy_parameters': False,
+    'mechanism': 'fixed, passed-in',
+}
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
@@ -33,6 +47,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METH
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'skip_repeated_capability_parameter': True,
@@ -44,6 +59,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': True,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -55,6 +71,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': True,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -66,6 +83,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -77,6 +95,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -88,6 +107,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': True,
@@ -99,6 +119,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -111,6 +132,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -123,6 +145,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
     'skip_output_parameters': False,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -134,6 +157,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': False,
@@ -145,6 +169,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
+    'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'skip_repeated_capability_parameter': True,
@@ -193,6 +218,8 @@ def filter_parameters(function, parameter_usage_options):
             skip = True
         if options_to_use['skip_all_except_numpy_parameters'] and not x['numpy']:
             skip = True
+        if options_to_use['but_keep_output_numpy_array_parameters'] is True and x['numpy'] is True:
+            skip = False
         if not skip:
             parameters_to_use.append(x)
 
