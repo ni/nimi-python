@@ -55,7 +55,7 @@ def test_fetch_binary8_into(session):
     test_record_length = 2000
     test_channels = '0,1'
     test_num_channels = 2
-    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.uint8)
+    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
     wfm.fill(float('nan'))
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
