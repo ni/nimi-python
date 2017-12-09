@@ -61,7 +61,7 @@ def test_fetch_binary8_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels]._fetch_binary8_numpy(timeout=5.0, num_samples=test_record_length, wfm)
+        wfm_infos = session[test_channels]._fetch_binary8_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels

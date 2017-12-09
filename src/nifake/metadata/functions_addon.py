@@ -75,10 +75,10 @@ functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
 }
 
-functions_numpy_support = {
+functions_method_template_filename = {
     'FetchWaveform':                        { 'method_template_filename': 'session_default_and_numpy_method.py.mako', },
 }
 
-functions_numpy_support_parameters = {
+functions_numpy = {
     'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }

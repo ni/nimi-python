@@ -184,11 +184,11 @@ functions_default_value = {
                                                                        7: { 'default_value': 0.0, }, }, },
 }
 
-functions_numpy_support = {
+functions_method_template_filename = {
     'FetchBinary8':                                  { 'method_template_filename': 'session_numpy_method.py.mako', },
 }
 
-functions_numpy_support_parameters = {
+functions_numpy = {
     'FetchBinary8':                                  { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
