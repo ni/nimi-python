@@ -12,6 +12,10 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] 
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name_with_default',
+}
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name',
@@ -89,9 +93,6 @@ def _get_output_param_return_snippet(output_parameter, parameters, config, use_n
         if output_parameter['type'] == 'ViChar':
             # 'self._encoding' is a variable on the session object
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
-        elif output_parameter['numpy'] and use_numpy_array:
-            # TODO(marcoskirsch): use metadata 'numpy_variable_name'
-            snippet = output_parameter['python_name'] + "_numpy"
         else:
             if output_parameter['size']['mechanism'] == 'fixed':
                 size = str(output_parameter['size']['value'])
@@ -108,12 +109,14 @@ def _get_output_param_return_snippet(output_parameter, parameters, config, use_n
     return snippet
 
 
+# TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
 def get_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters, config, use_numpy_array=use_numpy_array))
+            if x['numpy'] is False or use_numpy_array is False:
+                snippets.append(_get_output_param_return_snippet(x, parameters, config, use_numpy_array=use_numpy_array))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -160,8 +163,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
        12. Output buffer with mechanism ivi-dance, step 1:                  None
        12.5 Output buffer with mechanism ivi-dance, step 2:                 (visatype.ViInt32 * buffer_size_ctype.value)()
        13. Output buffer with mechanism passed-in:                          (visatype.ViInt32 * buffer_size)()
-       13.5. Output buffer with mechanism passed-in (numpy):                numpy.empty(buffer_size, dtype=numpy.float64, order="C")
-                                                                            numpy.ctypeslib.as_ctypes(numpy.empty((num_samples * self._actual_num_wfms()), dtype=numpy.int8))
+       13.5. Output buffer with mechanism passed-in (numpy):                numpy.ctypeslib.as_ctypes(waveform)
        14. Output scalar or enum:                                           visatype.ViInt32()
     '''
 
@@ -190,8 +192,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
             assert parameter['is_buffer'] is True
             assert parameter['direction'] == 'out'
             if parameter['numpy'] is True and use_numpy_array is True:
-                # TODO(marcoskirsch): use metadata varilabe numpy_variable_name or something instead of appending here.
-                definition = 'numpy.ctypeslib.as_ctypes({0}_numpy)  # case 0.2'.format(parameter['python_name'])
+                definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
             else:
                 definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
     elif parameter['direction'] == 'in':
@@ -246,7 +247,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
                 if parameter['numpy'] is True and use_numpy_array is True:
-                    definition = '({0}.empty({1}, dtype={0}.{2}, order="C"))  # case 13.5'.format(module_name, size_parameter['python_name'], parameter['numpy_type'])
+                    definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
                 else:
                     definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
@@ -255,19 +256,6 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
             definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
 
     return parameter['ctypes_variable_name'] + ' = ' + definition
-
-
-def get_numpy_array_declaration_snippet(parameter, parameters):
-    '''Returns python snippet that declares and initializes a numpy.array variable.'''
-    assert parameter['numpy'] is True
-    if parameter['size']['mechanism'] == 'python-code':
-        size = parameter['size']['value']
-    elif parameter['size']['mechanism'] == 'passed-in':
-        size_parameter = find_size_parameter(parameter, parameters)
-        size = size_parameter['python_name']
-    snippet = parameter['python_name'] + "_numpy = "  # TODO(marcoskirsch): put this in metadata numpy_variable_name or something
-    snippet += 'numpy.empty({0}, dtype=numpy.{1}, order="C")'.format(size, parameter['numpy_type'])
-    return snippet
 
 
 def get_dictionary_snippet(d, indent=4):
@@ -488,9 +476,9 @@ def test_get_method_return_snippet_enum():
     assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
 
 
-def test_get_method_return_snippet_numpy():
+def test_get_method_return_snippet_into():
     param = [params[4], params[7]]
-    assert get_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return output_numpy'
+    assert get_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
 
 
 def test_get_enum_type_check_snippet():
