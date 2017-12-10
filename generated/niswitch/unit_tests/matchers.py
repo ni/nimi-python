@@ -4,7 +4,6 @@ These work well with our visatype definitions.
 
 import ctypes
 from niswitch import visatype
-import numpy
 
 # Base classes
 
@@ -237,24 +236,3 @@ class ViInt64BufferMatcher(_BufferMatcher):
 class ViReal64BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, visatype.ViReal64, expected_size_or_value)
-
-
-# numpy.array
-
-
-class NumpyArrayMatcher(object):
-    def __init__(self, expected_size_or_value):
-        if isinstance(expected_size_or_value, int):
-            # Were given the size of the array
-            self.expected_value = None
-            self.expected_size = expected_size_or_value
-        else:
-            # Were given a list or something that behaves like a list
-            self.expected_value = expected_size_or_value
-            self.expected_size = len(expected_size_or_value)
-
-    def __eq__(self, other):
-        if self.expected_value is None:
-            return self.expected_size == len(other)
-        else:
-            return numpy.array_equal(self.expected_value, other)
