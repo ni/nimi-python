@@ -188,16 +188,13 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
     assert not parameter['is_buffer']
 
-    if parameter['size']['mechanism'] == 'python-code':
-        size = parameter['size']['value']
-        # Now we need to replicate some of the same conditions from below
-        # We only support non-buffer/array in parameters or buffer/array out parameters
-        assert parameter['direction'] == 'in'
-        assert parameter['is_buffer'] is False
-        definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], size)
-    elif parameter['direction'] == 'in':
+    if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+        elif parameter['size']['mechanism'] == 'python-code':
+            size = parameter['size']['value']
+            # Now we need to replicate some of the same conditions from below
+            definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], size)
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
@@ -228,13 +225,6 @@ def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, iv
 def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     assert parameter['is_buffer'] is True
 
-    if parameter['size']['mechanism'] == 'python-code':
-        size = parameter['size']['value']
-        assert parameter['direction'] == 'out'
-        if parameter['numpy'] is True and use_numpy_array is True:
-            definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
-        else:
-            definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
     elif parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
@@ -251,7 +241,13 @@ def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, i
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
-        if parameter['size']['mechanism'] == 'fixed':
+        if parameter['size']['mechanism'] == 'python-code':
+            size = parameter['size']['value']
+            if parameter['numpy'] is True and use_numpy_array is True:
+                definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
+            else:
+                definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
+        elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
             definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['size']['mechanism'] == 'ivi-dance':
