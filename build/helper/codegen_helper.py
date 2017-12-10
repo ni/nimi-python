@@ -167,7 +167,14 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
        14. Output scalar or enum:                                           visatype.ViInt32()
     '''
 
-    assert use_numpy_array is False or (use_numpy_array and parameter['is_buffer']), "It only makes sense to use_numpy_array on buffers. Check metadata for parameter {0}".format(parameter['name'])
+    if parameter['is_buffer'] is True:
+        return _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, config, use_numpy_array)
+    else:
+        return _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, config)
+
+
+def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, config):
+    assert not parameter['is_buffer']
 
     # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
     custom_type = find_custom_type(parameter, config)
@@ -178,38 +185,16 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     else:
         module_name = 'visatype'
 
-    # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
-    # Suggestions on how to improve readability are welcome.
-    # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
     if parameter['size']['mechanism'] == 'python-code':
         size = parameter['size']['value']
         # Now we need to replicate some of the same conditions from below
         # We only support non-buffer/array in parameters or buffer/array out parameters
-        if parameter['direction'] == 'in':
-            assert parameter['is_buffer'] is False
-            definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], size)
-        else:
-            assert parameter['is_buffer'] is True
-            assert parameter['direction'] == 'out'
-            if parameter['numpy'] is True and use_numpy_array is True:
-                definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
-            else:
-                definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
+        assert parameter['direction'] == 'in'
+        assert parameter['is_buffer'] is False
+        definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], size)
     elif parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
-        elif parameter['is_repeated_capability'] is True:
-            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
-        elif parameter['type'] == 'ViChar':
-            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
-        elif parameter['is_buffer'] is True and custom_type is None:
-            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
-        elif parameter['is_buffer'] is True and custom_type is not None:
-            if parameter['numpy'] is False:
-                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
-            else:
-                assert False, "Yet to implement numpy.array as input parameter."
-                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5.5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
@@ -232,28 +217,64 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
                 definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
-        if parameter['is_buffer'] is True:
-            assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
-            if parameter['size']['mechanism'] == 'fixed':
-                assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
-                definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
-            elif parameter['size']['mechanism'] == 'ivi-dance':
-                if ivi_dance_step == 1:
-                    definition = 'None  # case 12'
-                else:
-                    assert ivi_dance_step is 2, "Parameter '{0}' has 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
-                    size_parameter = find_size_parameter(parameter, parameters)
-                    definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
-            elif parameter['size']['mechanism'] == 'passed-in':
-                size_parameter = find_size_parameter(parameter, parameters)
-                if parameter['numpy'] is True and use_numpy_array is True:
-                    definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
-                else:
-                    definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
-            else:
-                assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
+        definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
+
+    return parameter['ctypes_variable_name'] + ' = ' + definition
+
+
+def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, config, use_numpy_array):
+    assert parameter['is_buffer'] is True
+
+    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
+    custom_type = find_custom_type(parameter, config)
+    if custom_type is not None:
+        module_name = custom_type['file_name']
+    elif parameter['numpy'] is True and use_numpy_array is True:
+        module_name = 'numpy'
+    else:
+        module_name = 'visatype'
+
+    if parameter['size']['mechanism'] == 'python-code':
+        size = parameter['size']['value']
+        assert parameter['direction'] == 'out'
+        if parameter['numpy'] is True and use_numpy_array is True:
+            definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
         else:
-            definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
+            definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
+    elif parameter['direction'] == 'in':
+        if parameter['is_repeated_capability'] is True:
+            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
+        elif parameter['type'] == 'ViChar':
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
+        elif custom_type is None:
+            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+        else:
+            if parameter['numpy'] is False:
+                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            else:
+                assert False, "Yet to implement numpy.array as input parameter."
+                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5.5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+    else:
+        assert parameter['direction'] == 'out'
+        assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
+        if parameter['size']['mechanism'] == 'fixed':
+            assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
+            definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+        elif parameter['size']['mechanism'] == 'ivi-dance':
+            if ivi_dance_step == 1:
+                definition = 'None  # case 12'
+            else:
+                assert ivi_dance_step is 2, "Parameter '{0}' has 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
+                size_parameter = find_size_parameter(parameter, parameters)
+                definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
+        elif parameter['size']['mechanism'] == 'passed-in':
+            size_parameter = find_size_parameter(parameter, parameters)
+            if parameter['numpy'] is True and use_numpy_array is True:
+                definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
+            else:
+                definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+        else:
+            assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
     return parameter['ctypes_variable_name'] + ' = ' + definition
 
