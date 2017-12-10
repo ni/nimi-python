@@ -167,23 +167,26 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
        14. Output scalar or enum:                                           visatype.ViInt32()
     '''
 
-    if parameter['is_buffer'] is True:
-        return _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, config, use_numpy_array)
-    else:
-        return _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, config)
-
-
-def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, config):
-    assert not parameter['is_buffer']
-
-    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
     custom_type = find_custom_type(parameter, config)
+
+    # Determine the module.
     if custom_type is not None:
+        # Module is the file associated with that type.
         module_name = custom_type['file_name']
     elif parameter['numpy'] is True and use_numpy_array is True:
+        assert parameter['is_buffer'] is True
         module_name = 'numpy'
     else:
         module_name = 'visatype'
+
+    if parameter['is_buffer'] is True:
+        return _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
+    else:
+        return _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
+
+
+def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
+    assert not parameter['is_buffer']
 
     if parameter['size']['mechanism'] == 'python-code':
         size = parameter['size']['value']
@@ -222,17 +225,8 @@ def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, iv
     return parameter['ctypes_variable_name'] + ' = ' + definition
 
 
-def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, config, use_numpy_array):
+def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     assert parameter['is_buffer'] is True
-
-    # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
-    custom_type = find_custom_type(parameter, config)
-    if custom_type is not None:
-        module_name = custom_type['file_name']
-    elif parameter['numpy'] is True and use_numpy_array is True:
-        module_name = 'numpy'
-    else:
-        module_name = 'visatype'
 
     if parameter['size']['mechanism'] == 'python-code':
         size = parameter['size']['value']
