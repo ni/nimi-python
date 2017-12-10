@@ -1037,7 +1037,7 @@ class Session(_SessionBase):
 
         Args:
             a_number (float): Contains a number
-            a_string (int): Contains a string
+            a_string (string): Contains a string
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViReal64(a_number)  # case 9
