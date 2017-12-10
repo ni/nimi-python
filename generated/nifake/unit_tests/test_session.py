@@ -285,7 +285,7 @@ class TestSession(object):
             actual_number_of_samples = session.fetch_waveform_into(len(expected_waveform), waveform)
             assert actual_number_of_samples == len(expected_waveform)
             assert numpy.array_equal(waveform, expected_waveform)
-            self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.NumpyArrayMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
+            self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into_wrong_type(self):
         import numpy
