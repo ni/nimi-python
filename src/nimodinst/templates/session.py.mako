@@ -149,6 +149,8 @@ class Session(object):
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
-<%include file="${functions[func_name]['method_template_filename']}" args="f=functions[func_name], config=config" />\
+% for method_template_filename in functions[func_name]['method_template_filenames']:
+<%include file="${method_template_filename}" args="f=functions[func_name], config=config" />\
+% endfor
 % endfor
 

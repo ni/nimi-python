@@ -28,7 +28,6 @@ functions_enums = {
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'ReadMultiPoint':                        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':                  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
     'ReturnANumberAndAString':               { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
@@ -51,6 +50,7 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'GetArrayForPythonCodeCustomType':       { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, },
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
+    'FetchWaveform':                         { 'parameters':  { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -73,4 +73,12 @@ functions_default_value = {
 # Manually provided Python names for methods, rather than deriving from original names.
 functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
+}
+
+functions_method_template_filename = {
+    'FetchWaveform':                        { 'method_template_filename': 'session_default_and_numpy_method.py.mako', },
+}
+
+functions_numpy = {
+    'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }

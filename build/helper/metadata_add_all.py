@@ -1,6 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
+from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
@@ -67,6 +68,23 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
+
+    return parameter
+
+
+def _add_numpy_info(parameter, config):
+    '''Adds numpy information, including type and library call keys for if numpy is true'''
+    if 'numpy' not in parameter:
+        parameter['numpy'] = False
+
+    if parameter['numpy']:
+        parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
+        module_name = 'numpy.'
+
+        if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+            parameter['numpy_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['numpy_type'] + ")"
+        else:
+            parameter['numpy_type_library_call'] = module_name + parameter['numpy_type']
 
     return parameter
 
@@ -149,12 +167,15 @@ def _add_default_value_name_for_docs(parameter, module_name):
 _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
 
 
-def _add_method_template_filename(f):
-    '''Adds 'method_template_filename' value to function metadata if not found. This is the mako template that will be used to render the method.'''
-    if 'method_template_filename' not in f:
-        f['method_template_filename'] = 'session_default_method.py.mako'
-    if f['method_template_filename'][0] != '/':
-        f['method_template_filename'] = '/' + f['method_template_filename']
+def _add_method_template_filenames(f):
+    '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
+    if 'method_template_filenames' not in f:
+        f['method_template_filenames'] = ['session_default_method.py.mako']
+    # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
+    prefixed_filenames = []
+    for filename in f['method_template_filenames']:
+        prefixed_filenames.append('/' + filename if filename != '/' else filename)
+    f['method_template_filenames'] = prefixed_filenames
 
 
 def _add_has_repeated_capability(f):
@@ -202,7 +223,7 @@ def add_all_function_metadata(functions, config):
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         _add_render_in_session_base(functions[f])
-        _add_method_template_filename(functions[f])
+        _add_method_template_filenames(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _fix_type(p)
@@ -210,6 +231,7 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
+            _add_numpy_info(p, config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -494,7 +516,7 @@ def test_add_all_metadata_simple():
             'has_repeated_capability': True,
             'is_error_handling': False,
             'render_in_session_base': True,
-            'method_template_filename': '/session_default_method.py.mako',
+            'method_template_filenames': ['/session_default_method.py.mako'],
             'parameters': [
                 {
                     'ctypes_type': 'ViSession',
@@ -507,6 +529,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': False,
                     'is_session_handle': True,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
@@ -531,6 +554,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': True,
                     'is_session_handle': False,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': True,
                     'name': 'channelName',
@@ -549,10 +573,11 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
-            'method_template_filename': '/session_default_method.py.mako',
+            'method_template_filenames': ['/session_default_method.py.mako'],
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
+                'numpy': False,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -576,6 +601,7 @@ def test_add_all_metadata_simple():
             }, {
                 'direction': 'out',
                 'enum': None,
+                'numpy': False,
                 'name': 'status',
                 'type': 'ViChar',
                 'original_type': 'ViString',

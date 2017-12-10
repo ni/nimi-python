@@ -12,6 +12,10 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] 
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name_with_default',
+}
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name',
@@ -67,7 +71,7 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters, config):
+def _get_output_param_return_snippet(output_parameter, parameters, config, use_numpy_array=False):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', 'Expected parameter {0} (a.k.a. {1}) to have direction out'.format(output_parameter['name'], output_parameter['python_name'])
     return_type_snippet = ''
@@ -105,12 +109,14 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
     return snippet
 
 
-def get_method_return_snippet(parameters, config):
+# TODO(marcoskirsch): Retrofit to call filter_parameters(function, parameter_usage_options)
+def get_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters, config))
+            if x['numpy'] is False or use_numpy_array is False:
+                snippets.append(_get_output_param_return_snippet(x, parameters, config, use_numpy_array=use_numpy_array))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -131,32 +137,46 @@ def _get_buffer_parameter_for_size_parameter(parameter, parameters):
     return None
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters, config):
+def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config, use_numpy_array=False):
     '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
+    ivi_dance_step should be:
+        None for parameters that are not IVI-dance related.
+        1 for declaration before the first call to the Library.
+        2 for declaration after the first call to the Library.
+
     We've identified many different cases on how these need to be initialized based on the parameter:
-        0. Mechanism is python-code:                                    (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
-        1. Input session handle:                                        visatype.ViSession(self._vi)
-        2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
-        3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-        4. Input buffer (not string):                                   None if list is None else (visatype.ViInt32 * len(list))(*list)
-        5. Input buffer (custom type):                                  (custom_struct * len(list))(*[custom_struct(l) for l in list])
-        6. Input is size of input buffer:                               visatype.ViInt32(0 if list is None else len(list))
-        7. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
-        8. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
-        9. Input scalar:                                                visatype.ViInt32(parameter_name)
-       10. Input enum:                                                  visatype.ViInt32(parameter_name.value)
-       11. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
-       12. Output buffer with mechanism ivi-dance:                      None
-       13. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
-       14. Output scalar or enum:                                       visatype.ViInt32()
+        0. Mechanism is python-code:                                        (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
+        1. Input session handle:                                            visatype.ViSession(self._vi)
+        2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        4. Input buffer (not string):                                       None if list is None else (visatype.ViInt32 * len(list))(*list)
+        5. Input buffer (custom type):                                      (custom_struct * len(list))(*[custom_struct(l) for l in list])
+        5.5. Input buffer (numpy):                                          ...
+        6. Input is size of input buffer:                                   visatype.ViInt32(0 if list is None else len(list))
+        7. Input is size of output buffer with mechanism ivi-dance, step 1: visatype.ViInt32()
+        7.5. Input is size of output buffer with mechanism ivi-dance, step 2:   visatype.ViInt32(error_code)
+        8. Input is size of output buffer with mechanism passed-in:         visatype.ViInt32(buffer_size)
+        9. Input scalar:                                                    visatype.ViInt32(parameter_name)
+       10. Input enum:                                                      visatype.ViInt32(parameter_name.value)
+       11. Output buffer with mechanism fixed-size:                         visatype.ViInt32 * 256
+       12. Output buffer with mechanism ivi-dance, step 1:                  None
+       12.5 Output buffer with mechanism ivi-dance, step 2:                 (visatype.ViInt32 * buffer_size_ctype.value)()
+       13. Output buffer with mechanism passed-in:                          (visatype.ViInt32 * buffer_size)()
+       13.5. Output buffer with mechanism passed-in (numpy):                numpy.ctypeslib.as_ctypes(waveform)
+       14. Output scalar or enum:                                           visatype.ViInt32()
     '''
 
+    assert use_numpy_array is False or (use_numpy_array and parameter['is_buffer']), "It only makes sense to use_numpy_array on buffers. Check metadata for parameter {0}".format(parameter['name'])
+
     # First we need to determine the module. If it is a custom type then the module is the file associated with that type, otherwise 'visatype'
-    module_name = 'visatype'
     custom_type = find_custom_type(parameter, config)
     if custom_type is not None:
         module_name = custom_type['file_name']
+    elif parameter['numpy'] is True and use_numpy_array is True:
+        module_name = 'numpy'
+    else:
+        module_name = 'visatype'
 
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
@@ -171,7 +191,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         else:
             assert parameter['is_buffer'] is True
             assert parameter['direction'] == 'out'
-            definition = '({0}.{1} * {2})()  # case 0.2'.format(module_name, parameter['ctypes_type'], size)
+            if parameter['numpy'] is True and use_numpy_array is True:
+                definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
+            else:
+                definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
     elif parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -182,7 +205,11 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
         elif parameter['is_buffer'] is True and custom_type is None:
             definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         elif parameter['is_buffer'] is True and custom_type is not None:
-            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            if parameter['numpy'] is False:
+                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            else:
+                assert False, "Yet to implement numpy.array as input parameter."
+                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5.5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
@@ -191,7 +218,11 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
-                        definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                        if ivi_dance_step == 1:
+                            definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                        else:
+                            assert ivi_dance_step is 2, "Parameter '{0}' is size for a buffer with 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
+                            definition = '{0}.{1}(error_code)  # case 7.5'.format(module_name, parameter['ctypes_type'])
                     else:
                         assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
                         definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -207,10 +238,18 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
                 assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
                 definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             elif parameter['size']['mechanism'] == 'ivi-dance':
-                definition = 'None  # case 12'
+                if ivi_dance_step == 1:
+                    definition = 'None  # case 12'
+                else:
+                    assert ivi_dance_step is 2, "Parameter '{0}' has 'mechanism':'ivi-dance', please specify ivi_dance_step".format(parameter['name'])
+                    size_parameter = find_size_parameter(parameter, parameters)
+                    definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
             elif parameter['size']['mechanism'] == 'passed-in':
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+                if parameter['numpy'] is True and use_numpy_array is True:
+                    definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
+                else:
+                    definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
                 assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
         else:
@@ -261,6 +300,7 @@ params = [
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViSession',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt64',
@@ -279,7 +319,8 @@ params = [
         'python_name_with_doc_default': 'output',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt64'
+        'type': 'ViInt64',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViChar',
@@ -298,7 +339,8 @@ params = [
         'python_name_with_doc_default': 'error_message',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 256},
-        'type': 'ViChar'
+        'type': 'ViChar',
+        'numpy': False,
     },
     {
         'ctypes_type': 'custom_struct',
@@ -318,7 +360,8 @@ params = [
         'python_name_with_doc_default': 'array_out',
         'python_type': 'CustomStruct',
         'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
-        'type': 'custom_struct'
+        'type': 'custom_struct',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -337,7 +380,8 @@ params = [
         'python_name_with_doc_default': 'number_of_elements',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -356,7 +400,8 @@ params = [
         'python_name_with_doc_default': 'an_array',
         'python_type': 'enums.Turtle',
         'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
-        'type': 'ViInt16'
+        'type': 'ViInt16',
+        'numpy': False,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -378,7 +423,30 @@ params = [
         'python_name_with_doc_default': 'an_int_enum',
         'python_type': 'enums.Turtle',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt16'
+        'type': 'ViInt16',
+        'numpy': False,
+    },
+    {
+        'ctypes_type': 'ViInt64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
+        'ctypes_variable_name': 'output_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'A big number on its way out.'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
+        'name': 'output',
+        'python_name': 'output',
+        'python_name_with_default': 'output',
+        'python_name_with_doc_default': 'output',
+        'python_type': 'int',
+        'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
+        'type': 'ViInt64',
+        'numpy': True,
+        'numpy_type': 'int64',
+        'numpy_type_library_call': 'numpy.int64',
     },
 ]
 
@@ -406,6 +474,11 @@ def test_get_method_return_snippet_custom_type():
 def test_get_method_return_snippet_enum():
     param = [params[4], params[5]]
     assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
+
+
+def test_get_method_return_snippet_into():
+    param = [params[4], params[7]]
+    assert get_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
 
 
 def test_get_enum_type_check_snippet():

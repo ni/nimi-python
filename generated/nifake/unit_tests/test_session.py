@@ -262,20 +262,50 @@ class TestSession(object):
             calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16Matcher(0)), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16Matcher(1))]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
-    def test_multipoint_read(self):
-        test_maximum_time = 1000
-        test_reading_array = [1.0, 0.1, 42, .42]
-        test_actual_number_of_points = len(test_reading_array)
-        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
-        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
-        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
+    def test_fetch_waveform(self):
+        expected_waveform = [1.0, 0.1, 42, .42]
+        self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
+        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
+        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
         with nifake.Session('dev1') as session:
-            measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
-            assert len(measurements) == test_actual_number_of_points
-            assert isinstance(measurements[0], float)
-            assert points == test_actual_number_of_points
-            assert measurements == test_reading_array
-            self.patched_library.niFake_ReadMultiPoint.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViInt32Matcher(len(test_reading_array)), matchers.ViReal64BufferMatcher(len(test_reading_array)), matchers.ViInt32PointerMatcher())
+            waveform, actual_number_of_samples = session.fetch_waveform(len(expected_waveform))
+            assert isinstance(waveform[0], float)
+            assert actual_number_of_samples == len(expected_waveform)
+            assert waveform == expected_waveform
+            self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
+
+    def test_fetch_waveform_into(self):
+        import numpy
+        expected_waveform = [1.0, 0.1, 42, .42]
+        self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
+        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
+        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
+        with nifake.Session('dev1') as session:
+            waveform = numpy.empty(len(expected_waveform), numpy.float64)
+            actual_number_of_samples = session.fetch_waveform_into(len(expected_waveform), waveform)
+            assert actual_number_of_samples == len(expected_waveform)
+            assert numpy.array_equal(waveform, expected_waveform)
+            self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.NumpyArrayMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
+
+    def test_fetch_waveform_into_wrong_type(self):
+        import numpy
+        length = 10
+        with nifake.Session('dev1') as session:
+            waveforms = [
+                10,
+                10.5,
+                "Not a numpy.ndarray",
+                range(length),
+                [i + 0.0 for i in range(length)],
+                numpy.empty(length, numpy.int32),
+                numpy.empty(length, numpy.uint8)
+            ]
+            for w in waveforms:
+                try:
+                    session.fetch_waveform_into(length, w)
+                    assert False
+                except TypeError:
+                    pass
 
     def test_array_input_function(self):
         test_array = [1, 2, 3, 4]

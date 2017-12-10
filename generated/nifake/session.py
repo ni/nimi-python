@@ -223,8 +223,8 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 12
         error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -243,8 +243,8 @@ class _SessionBase(object):
         description_ctype = None  # case 12
         error_code = self._library.niFake_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niFake_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -548,6 +548,52 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def fetch_waveform(self, number_of_samples):
+        '''fetch_waveform
+
+        Returns waveform data.
+
+        Args:
+            number_of_samples (int): Number of samples to return
+
+        Returns:
+            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            actual_number_of_samples (int): Number of samples actually fetched.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        waveform_data_ctype = (visatype.ViReal64 * number_of_samples)()  # case 13
+        actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
+
+    def fetch_waveform_into(self, number_of_samples, waveform_data):
+        '''fetch_waveform
+
+        Returns waveform data.
+
+        Args:
+            number_of_samples (int): Number of samples to return
+
+        Returns:
+            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            actual_number_of_samples (int): Number of samples actually fetched.
+        '''
+        import numpy
+
+        if type(waveform_data) is not numpy.ndarray or numpy.isfortran(waveform_data) is True:
+                raise TypeError('waveform_data must be numpy.ndarray in C-order')
+        if waveform_data.dtype is not numpy.dtype('float64'):
+                raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case 13.5
+        actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(actual_number_of_samples_ctype.value)
+
     def get_a_boolean(self):
         '''get_a_boolean
 
@@ -604,8 +650,8 @@ class Session(_SessionBase):
         a_string_ctype = None  # case 12
         error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        a_string_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        a_string_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -620,7 +666,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
-        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.2
+        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.4
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -635,7 +681,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
-        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.2
+        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.4
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -664,8 +710,8 @@ class Session(_SessionBase):
         array_out_ctype = None  # case 12
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        array_out_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        array_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        array_out_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # case 12.5
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
@@ -889,30 +935,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def read_multi_point(self, maximum_time, array_size):
-        '''read_multi_point
-
-        Acquires multiple measurements and returns an array of measured values.
-
-        Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
-            array_size (int): Number of measurements to acquire.
-
-        Returns:
-            reading_array (list of float): An array of measurement values.
-
-                Note: The size must be at least arraySize.
-            actual_number_of_points (int): Indicates the number of measured values actually retrieved.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
-        array_size_ctype = visatype.ViInt32(array_size)  # case 8
-        reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
-        actual_number_of_points_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niFake_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
-
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
 
@@ -973,8 +995,8 @@ class Session(_SessionBase):
         a_string_ctype = None  # case 12
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        string_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        string_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # case 12.5
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)

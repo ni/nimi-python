@@ -18,7 +18,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import pkg_resources
 import sys
 sys.path.insert(0, os.path.abspath('../generated'))
 
@@ -69,7 +68,7 @@ author = 'National Instruments'
 # There is not an overall configuration so we picked one driver to be representative of the version
 #
 # The full version, including alpha/beta/rc tags.
-release = pkg_resources.get_distribution("nidmm").version
+release = '0.6.0.dev0'
 # The short X.Y version.
 version = release[:3]
 

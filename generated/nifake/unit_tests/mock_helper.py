@@ -26,6 +26,10 @@ class SideEffectsHelper(object):
         self._defaults['EnumArrayOutputFunction']['anArray'] = None
         self._defaults['EnumInputFunctionWithDefaults'] = {}
         self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
+        self._defaults['FetchWaveform'] = {}
+        self._defaults['FetchWaveform']['return'] = 0
+        self._defaults['FetchWaveform']['waveformData'] = None
+        self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -100,10 +104,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadFromChannel'] = {}
         self._defaults['ReadFromChannel']['return'] = 0
         self._defaults['ReadFromChannel']['reading'] = None
-        self._defaults['ReadMultiPoint'] = {}
-        self._defaults['ReadMultiPoint']['return'] = 0
-        self._defaults['ReadMultiPoint']['readingArray'] = None
-        self._defaults['ReadMultiPoint']['actualNumberOfPoints'] = None
         self._defaults['ReturnANumberAndAString'] = {}
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
@@ -189,6 +189,22 @@ class SideEffectsHelper(object):
         if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['EnumInputFunctionWithDefaults']['return']
         return self._defaults['EnumInputFunctionWithDefaults']['return']
+
+    def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
+        if self._defaults['FetchWaveform']['return'] != 0:
+            return self._defaults['FetchWaveform']['return']
+        if self._defaults['FetchWaveform']['waveformData'] is None:
+            raise MockFunctionCallError("niFake_FetchWaveform", param='waveformData')
+        a = self._defaults['FetchWaveform']['waveformData']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(waveform_data), len(a))):
+            waveform_data[i] = a[i]
+        if self._defaults['FetchWaveform']['actualNumberOfSamples'] is None:
+            raise MockFunctionCallError("niFake_FetchWaveform", param='actualNumberOfSamples')
+        actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
+        return self._defaults['FetchWaveform']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -428,22 +444,6 @@ class SideEffectsHelper(object):
         reading.contents.value = self._defaults['ReadFromChannel']['reading']
         return self._defaults['ReadFromChannel']['return']
 
-    def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
-        if self._defaults['ReadMultiPoint']['return'] != 0:
-            return self._defaults['ReadMultiPoint']['return']
-        if self._defaults['ReadMultiPoint']['readingArray'] is None:
-            raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
-        a = self._defaults['ReadMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(reading_array), len(a))):
-            reading_array[i] = a[i]
-        if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
-            raise MockFunctionCallError("niFake_ReadMultiPoint", param='actualNumberOfPoints')
-        actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
-        return self._defaults['ReadMultiPoint']['return']
-
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['ReturnANumberAndAString']['return'] != 0:
             return self._defaults['ReturnANumberAndAString']['return']
@@ -574,6 +574,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_EnumArrayOutputFunction.return_value = 0
         mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
         mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
+        mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
+        mock_library.niFake_FetchWaveform.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = 0
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
@@ -624,8 +626,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
         mock_library.niFake_ReadFromChannel.return_value = 0
-        mock_library.niFake_ReadMultiPoint.side_effect = MockFunctionCallError("niFake_ReadMultiPoint")
-        mock_library.niFake_ReadMultiPoint.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
