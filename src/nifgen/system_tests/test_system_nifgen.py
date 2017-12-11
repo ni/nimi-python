@@ -312,3 +312,9 @@ def test_send_software_edge_trigger(session):
     with session.initiate():
         session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
 
+
+def test_write_waveform_from_file_f64(session):
+    try:
+        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+    except nifgen.Error as e:
+        assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.
