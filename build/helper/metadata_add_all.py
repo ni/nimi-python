@@ -174,7 +174,7 @@ def _add_method_template_filenames(f):
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     prefixed_filenames = []
     for filename in f['method_template_filenames']:
-        prefixed_filenames.append('/' + filename if filename != '/' else filename)
+        prefixed_filenames.append('/' + filename if filename[0] != '/' else filename)
     f['method_template_filenames'] = prefixed_filenames
 
 
@@ -454,6 +454,7 @@ def test_add_all_metadata_simple():
         'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
+            'method_template_filenames': ['/cool_template.py.mako'],
             'parameters': [
                 {
                     'direction': 'in',
@@ -516,7 +517,7 @@ def test_add_all_metadata_simple():
             'has_repeated_capability': True,
             'is_error_handling': False,
             'render_in_session_base': True,
-            'method_template_filenames': ['/session_default_method.py.mako'],
+            'method_template_filenames': ['/cool_template.py.mako'],
             'parameters': [
                 {
                     'ctypes_type': 'ViSession',

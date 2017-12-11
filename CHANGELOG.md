@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * Removed init_with_topology. Clients should use niswitch.Session() constructor. See #660.
 * ### NI-DCPower
   * #### Added
   * #### Changed
@@ -37,6 +38,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
   * #### Added
   * #### Changed
+    * Added default values for timeout on the fetch, fetch_array_measurement, and read functions.
   * #### Removed
 
 ## 0.5.0 - 2017-11-27

@@ -29,7 +29,7 @@ def test_read(session):
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    wfm, wfm_infos = session[test_channels].read(1, test_record_length)
+    wfm, wfm_infos = session[test_channels].read(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -42,7 +42,7 @@ def test_fetch(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm, wfm_infos = session[test_channels].fetch(1, test_record_length)
+        wfm, wfm_infos = session[test_channels].fetch(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -138,7 +138,7 @@ def test_configure_horizontal_timing(session):
 def test_waveform_processing(session):
     session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.configure_horizontal_timing(10000000, 4096, 50.0, 1, True)
-    session['0'].read(5, 2000)
+    session['0'].read(2000)
     session.add_waveform_processing(niscope.ArrayMeasurement.NO_MEASUREMENT)
     session.add_waveform_processing(niscope.ArrayMeasurement.FFT_AMP_SPECTRUM_DB)
     session.clear_waveform_measurement_stats(niscope.ClearableMeasurement.ALL_MEASUREMENTS)
@@ -159,7 +159,7 @@ def test_fetch_read_measurement(session):
     measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
     in_range = abs(measurement_stats - expected_measurement) <= max(1e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
     assert in_range is True
-    waveform, waveform_info = active_channel.fetch_array_measurement(-1, niscope.ArrayMeasurement.ARRAY_GAIN)
+    waveform, waveform_info = active_channel.fetch_array_measurement(niscope.ArrayMeasurement.ARRAY_GAIN)
     actual_number_of_samples = waveform_info[0].actual_samples
     assert 1000 == len(waveform)  # Driver returns 1000 for simulated 5164
     assert 1000 == actual_number_of_samples  # Driver returns 1000 for simulated 5164

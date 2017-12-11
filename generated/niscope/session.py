@@ -1634,7 +1634,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, timeout, num_samples):
+    def fetch(self, num_samples, timeout=5.0):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1660,17 +1660,17 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(timeout, num_samples)
+            session['0,1'].fetch(num_samples, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -1725,7 +1725,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_array_measurement(self, timeout, array_meas_function):
+    def fetch_array_measurement(self, array_meas_function, timeout=5.0):
         '''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -1745,15 +1745,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+            session['0,1'].fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             array_meas_function (enums.ArrayMeasurement): The `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to perform.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             meas_wfm (list of float): Returns an array whose length is the number of waveforms times
@@ -2251,7 +2251,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def read(self, timeout, num_samples):
+    def read(self, num_samples, timeout=5.0):
         '''read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -2276,17 +2276,17 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(timeout, num_samples)
+            session['0,1'].read(num_samples, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
