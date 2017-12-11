@@ -7,11 +7,6 @@
 attributes_codegen_method = {
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
     1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
-    1050203: { "codegen_method": "no" },  # NUM_CHANNELS
-    1050551: { "codegen_method": "no" },  # DRIVER_REVISION
-    1050304: { "codegen_method": "no" },  # RESOURCE_DESCRIPTOR
-    1050503: { "codegen_method": "no" },  # DRIVER_MAJOR_VERSION
-    1050504: { "codegen_method": "no" },  # DRIVER_MINOR_VERSION
     1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION
     1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION
     1050553: { "codegen_method": "no" },  # ENGINE_REVISION
@@ -21,7 +16,6 @@ attributes_codegen_method = {
     1050101: { "codegen_method": "no" },  # PRIMARY_ERROR
     1050102: { "codegen_method": "no" },  # SECONDARY_ERROR
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION
-    1250006: { "codegen_method": "no" },  # BANDWIDTH
     1150010: { "codegen_method": "no" },  # TRIGGER_OUTPUT_EVENT
     1150011: { "codegen_method": "no" },  # TRIGGER_OUTPUT_SOURCE
     1150091: { "codegen_method": "no" },  # EXPORT_SAMP_CLK_OUTPUT_TERM

@@ -438,6 +438,32 @@ niswitch.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
             - C Attribute: **NISWITCH_ATTR_INTERCHANGE_CHECK**
 
+.. py:attribute:: io_resource_descriptor
+
+    Indicates the resource descriptor the driver  uses to identify the physical device.
+    If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
+            - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
+
 .. py:attribute:: is_configuration_channel
 
     This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the niSwitch_Connect function.  Configuration channels are not available  for external connections.
@@ -1509,6 +1535,30 @@ niswitch.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+.. py:attribute:: specific_driver_revision
+
+    A string that contains additional version information about this  instrument driver.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | str       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
+            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 

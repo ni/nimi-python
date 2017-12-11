@@ -456,6 +456,10 @@ class _SessionBase(object):
     A string containing the logical name that you specified when opening the  current IVI session.
     You may pass a logical name to niFgen_init or  niFgen_InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
+    major_version = attributes.AttributeViInt32(1050503)
+    '''
+    Returns the major version number of NI-FGEN.
+    '''
     marker_events_count = attributes.AttributeViInt32(1150271)
     '''
     Returns the number of markers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
@@ -536,6 +540,10 @@ class _SessionBase(object):
     memory_size = attributes.AttributeViInt32(1150242)
     '''
     The total amount of memory, in bytes, on the signal generator.
+    '''
+    minor_version = attributes.AttributeViInt32(1050504)
+    '''
+    Returns the minor version number of NI-FGEN.
     '''
     min_freq_list_duration = attributes.AttributeViReal64(1150212)
     '''
@@ -809,6 +817,10 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Returns a brief description of NI-FGEN.
+    '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about  NI-FGEN.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
