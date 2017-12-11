@@ -120,7 +120,9 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
-<%include file="${functions[func_name]['method_template_filename']}" args="f=functions[func_name], config=config" />\
+% for method_template_filename in functions[func_name]['method_template_filenames']:
+<%include file="${method_template_filename}" args="f=functions[func_name], config=config" />\
+% endfor
 % endfor
 
 class _RepeatedCapability(_SessionBase):
@@ -165,7 +167,9 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
-<%include file="${functions[func_name]['method_template_filename']}" args="f=functions[func_name], config=config" />\
+% for method_template_filename in functions[func_name]['method_template_filenames']:
+<%include file="${method_template_filename}" args="f=functions[func_name], config=config" />\
+% endfor
 % endfor
 
 
