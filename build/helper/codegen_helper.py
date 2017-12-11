@@ -169,7 +169,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 
 
 def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
-    ''' These are the different cases for initializing the ctype variable for scalars:
+    '''These are the different cases for initializing the ctype variable for scalars:
 
         1. Input session handle:                                            visatype.ViSession(self._vi)
       0.0. Input is size of buffer with mechanism is python-code:           visatype.ViInt32(<custom python code>)
@@ -217,7 +217,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
 
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
-    ''' These are the different cases for initializing the ctype variable for buffers:
+    '''These are the different cases for initializing the ctype variable for buffers:
 
         2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
