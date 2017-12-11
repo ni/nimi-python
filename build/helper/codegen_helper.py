@@ -219,12 +219,11 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     '''These are the different cases for initializing the ctype variable for buffers:
 
+     13.5. Input/output numpy array:                                        numpy.ctypeslib.as_ctypes(waveform)
         2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
         5. Input buffer (custom type):                                      (custom_struct * len(list))(*[custom_struct(l) for l in list])
-      5.5. Input buffer (numpy):                                            Not yet implemented
         4. Input buffer of simple types:                                    None if list is None else (visatype.ViInt32 * len(list))(*list)
-     13.5. Output buffer with mechanism passed-in (numpy):                  numpy.ctypeslib.as_ctypes(waveform)
       0.4. Output buffer with mechanism python-code:                        (visatype.ViInt32 * (<custom python code>))()
        11. Output buffer with mechanism fixed-size:                         visatype.ViInt32 * 256
        12. Output buffer with mechanism ivi-dance, step 1:                  None
@@ -234,23 +233,21 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
 
     assert parameter['is_buffer'] is True
 
-    if parameter['direction'] == 'in':
+    if parameter['numpy'] is True and use_numpy_array is True:
+        definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
+    elif parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
         elif custom_type is not None:
             definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
-        elif parameter['numpy'] is True and use_numpy_array is True:
-            assert False, "Yet to implement numpy.array as input parameter.  # case 5.5"
         else:
             definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
-        if parameter['numpy'] is True and use_numpy_array is True:
-            definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
-        elif parameter['size']['mechanism'] == 'python-code':
+        if parameter['size']['mechanism'] == 'python-code':
             definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])

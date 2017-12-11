@@ -76,9 +76,11 @@ functions_custom_python_name = {
 }
 
 functions_method_template_filenames = {
-    'FetchWaveform':                        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_method.py.mako'], },
+    'FetchWaveform':                        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_read_method.py.mako'], },
+    'WriteWaveform':                        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
 }
 
 functions_numpy = {
     'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
+    'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
