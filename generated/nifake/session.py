@@ -567,10 +567,12 @@ class Session(_SessionBase):
         '''
         import numpy
 
-        if type(waveform_data) is not numpy.ndarray or numpy.isfortran(waveform_data) is True:
-                raise TypeError('waveform_data must be numpy.ndarray in C-order')
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
         if waveform_data.dtype is not numpy.dtype('float64'):
-                raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
         waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case 13.5
@@ -1062,6 +1064,29 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case 6
         waveform_ctype = None if waveform is None else (visatype.ViReal64 * len(waveform))(*waveform)  # case 4
+        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def write_waveform_numpy(self, waveform):
+        '''write_waveform
+
+        Writes waveform to the driver
+
+        Args:
+            waveform (list of float): Waveform data.
+        '''
+        import numpy
+
+        if type(waveform) is not numpy.ndarray:
+            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
+        if numpy.isfortran(waveform) is True:
+            raise TypeError('waveform must be in C-order')
+        if waveform.dtype is not numpy.dtype('float64'):
+            raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case 6
+        waveform_ctype = numpy.ctypeslib.as_ctypes(waveform)  # case 13.5
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

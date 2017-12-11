@@ -314,6 +314,14 @@ class TestSession(object):
             session.write_waveform(expected_waveform)
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
 
+    def test_write_waveform_numpy(self):
+        import numpy
+        expected_waveform = numpy.array([1.1, 2.2, 3.3, 4.4], order='C')
+        self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+        with nifake.Session('dev1') as session:
+            session.write_waveform_numpy(expected_waveform)
+            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
+
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         boolean_val = True
