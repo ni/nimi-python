@@ -1,4 +1,3 @@
-* Add support for numpy.ndarray as input parameter (i.e. write_waveform)
 * Generate `_into` flavors of all niscope fetch functions:
     * ~~FetchBinary8~~
     * FetchBinary16
@@ -22,5 +21,4 @@
 * Reorder cases in `get_ctype_variable_declaration_snippet` (no more 13.5 and such)
 * `get_method_return_snippet` should leverage filter_parameters()
 * Documentation doesn't show `_into` methods. Fix.
-* `session_numpy_method.py.mako` is not a very descriptive name, rename once we add the template for creating waveforms.
 * __str__() for matcher classes would be nice.
