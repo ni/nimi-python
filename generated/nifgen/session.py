@@ -1888,8 +1888,8 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 12
         error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        array_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case 12.5
         error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -1927,8 +1927,8 @@ class _SessionBase(object):
         error_description_ctype = None  # case 12
         error_code = self._library.niFgen_GetError(vi_ctype, ctypes.pointer(error_code_ctype), error_description_buffer_size_ctype, error_description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_description_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        error_description_ctype = (visatype.ViChar * error_description_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_description_buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        error_description_ctype = (visatype.ViChar * error_description_buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niFgen_GetError(vi_ctype, ctypes.pointer(error_code_ctype), error_description_buffer_size_ctype, error_description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
@@ -1977,8 +1977,8 @@ class _SessionBase(object):
         number_of_coefficients_read_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        array_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # case 12.5
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
