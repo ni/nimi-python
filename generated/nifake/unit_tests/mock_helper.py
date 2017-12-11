@@ -102,10 +102,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadFromChannel'] = {}
         self._defaults['ReadFromChannel']['return'] = 0
         self._defaults['ReadFromChannel']['reading'] = None
-        self._defaults['ReadMultiPoint'] = {}
-        self._defaults['ReadMultiPoint']['return'] = 0
-        self._defaults['ReadMultiPoint']['readingArray'] = None
-        self._defaults['ReadMultiPoint']['actualNumberOfPoints'] = None
         self._defaults['ReturnANumberAndAString'] = {}
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
@@ -443,22 +439,6 @@ class SideEffectsHelper(object):
         reading.contents.value = self._defaults['ReadFromChannel']['reading']
         return self._defaults['ReadFromChannel']['return']
 
-    def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
-        if self._defaults['ReadMultiPoint']['return'] != 0:
-            return self._defaults['ReadMultiPoint']['return']
-        if self._defaults['ReadMultiPoint']['readingArray'] is None:
-            raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
-        a = self._defaults['ReadMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(reading_array), len(a))):
-            reading_array[i] = a[i]
-        if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
-            raise MockFunctionCallError("niFake_ReadMultiPoint", param='actualNumberOfPoints')
-        actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
-        return self._defaults['ReadMultiPoint']['return']
-
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['ReturnANumberAndAString']['return'] != 0:
             return self._defaults['ReturnANumberAndAString']['return']
@@ -644,8 +624,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
         mock_library.niFake_ReadFromChannel.return_value = 0
-        mock_library.niFake_ReadMultiPoint.side_effect = MockFunctionCallError("niFake_ReadMultiPoint")
-        mock_library.niFake_ReadMultiPoint.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
