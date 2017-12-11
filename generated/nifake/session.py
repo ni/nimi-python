@@ -471,21 +471,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def array_input_function(self, an_array):
-        '''array_input_function
-
-        This function takes an array parameter.
-
-        Args:
-            an_array (list of float): Contains an array of float numbers
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        number_of_elements_ctype = visatype.ViInt32(0 if an_array is None else len(an_array))  # case 6
-        an_array_ctype = None if an_array is None else (visatype.ViReal64 * len(an_array))(*an_array)  # case 4
-        error_code = self._library.niFake_ArrayInputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def bool_array_output_function(self, number_of_elements):
         '''bool_array_output_function
 
@@ -1065,6 +1050,21 @@ class Session(_SessionBase):
         error_code = self._library.niFake_Use64BitNumber(vi_ctype, input_ctype, ctypes.pointer(output_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(output_ctype.value)
+
+    def write_waveform(self, waveform):
+        '''write_waveform
+
+        Writes waveform to the driver
+
+        Args:
+            waveform (list of float): Waveform data.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case 6
+        waveform_ctype = None if waveform is None else (visatype.ViReal64 * len(waveform))(*waveform)  # case 4
+        error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _close(self):
         '''_close
