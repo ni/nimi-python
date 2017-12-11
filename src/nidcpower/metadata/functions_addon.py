@@ -8,7 +8,6 @@ functions_codegen_method = {
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
-    'Abort':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
     'error_message':                   { 'codegen_method': 'private',  },

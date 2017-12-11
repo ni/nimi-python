@@ -33,7 +33,6 @@ functions_codegen_method = {
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
-    'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
     'GetError':                             { 'codegen_method': 'private',  },

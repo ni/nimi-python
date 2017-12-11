@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
   * #### Added
   * #### Changed
+    * Changed abort() to be a public function.
   * #### Removed
 * ### NI-DMM
   * #### Added
