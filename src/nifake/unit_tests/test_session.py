@@ -277,13 +277,12 @@ class TestSession(object):
             assert measurements == test_reading_array
             self.patched_library.niFake_ReadMultiPoint.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViInt32Matcher(len(test_reading_array)), matchers.ViReal64BufferMatcher(len(test_reading_array)), matchers.ViInt32PointerMatcher())
 
-    def test_array_input_function(self):
-        test_array = [1, 2, 3, 4]
-        test_array_size = len(test_array)
-        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
+    def test_write_waveform(self):
+        expected_waveform = [1.1, 2.2, 3.3, 4.4]
+        self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
         with nifake.Session('dev1') as session:
-            session.array_input_function(test_array)
-            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViReal64BufferMatcher(test_array))
+            session.write_waveform(expected_waveform)
+            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
 
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
