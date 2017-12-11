@@ -145,26 +145,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         1 for declaration before the first call to the Library.
         2 for declaration after the first call to the Library.
 
-    We've identified many different cases on how these need to be initialized based on the parameter:
-        0. Mechanism is python-code:                                        (wfm_info.struct_niScope_WfmInfo * (self.actual_num_channels * num_samples))()
-        1. Input session handle:                                            visatype.ViSession(self._vi)
-        2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
-        3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-        4. Input buffer (not string):                                       None if list is None else (visatype.ViInt32 * len(list))(*list)
-        5. Input buffer (custom type):                                      (custom_struct * len(list))(*[custom_struct(l) for l in list])
-        5.5. Input buffer (numpy):                                          ...
-        6. Input is size of input buffer:                                   visatype.ViInt32(0 if list is None else len(list))
-        7. Input is size of output buffer with mechanism ivi-dance, step 1: visatype.ViInt32()
-        7.5. Input is size of output buffer with mechanism ivi-dance, step 2:   visatype.ViInt32(error_code)
-        8. Input is size of output buffer with mechanism passed-in:         visatype.ViInt32(buffer_size)
-        9. Input scalar:                                                    visatype.ViInt32(parameter_name)
-       10. Input enum:                                                      visatype.ViInt32(parameter_name.value)
-       11. Output buffer with mechanism fixed-size:                         visatype.ViInt32 * 256
-       12. Output buffer with mechanism ivi-dance, step 1:                  None
-       12.5 Output buffer with mechanism ivi-dance, step 2:                 (visatype.ViInt32 * buffer_size_ctype.value)()
-       13. Output buffer with mechanism passed-in:                          (visatype.ViInt32 * buffer_size)()
-       13.5. Output buffer with mechanism passed-in (numpy):                numpy.ctypeslib.as_ctypes(waveform)
-       14. Output scalar or enum:                                           visatype.ViInt32()
+    Logic for creating the appropriate snippet is split up in two helper functions. One for scalars and one for buffers.
     '''
 
     custom_type = find_custom_type(parameter, config)
@@ -186,7 +167,21 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 
     return parameter['ctypes_variable_name'] + ' = ' + definition
 
+
 def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
+    ''' These are the different cases for initializing the ctype variable for scalars:
+
+        1. Input session handle:                                            visatype.ViSession(self._vi)
+      0.0. Input is size of buffer with mechanism is python-code:           visatype.ViInt32(<custom python code>)
+       10. Input enum:                                                      visatype.ViInt32(parameter_name.value)
+        9. Input scalar:                                                    visatype.ViInt32(parameter_name)
+        6. Input is size of input buffer:                                   visatype.ViInt32(0 if list is None else len(list))
+        7. Input is size of output buffer with mechanism ivi-dance, step 1: visatype.ViInt32()
+      7.5. Input is size of output buffer with mechanism ivi-dance, step 2: visatype.ViInt32(error_code)
+        8. Input is size of output buffer with mechanism passed-in:         visatype.ViInt32(buffer_size)
+       14. Output scalar or enum:                                           visatype.ViInt32()
+    '''
+
     assert parameter['is_buffer'] is False
     assert parameter['numpy'] is False
     corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
@@ -222,6 +217,21 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
 
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
+    ''' These are the different cases for initializing the ctype variable for buffers:
+
+        2. Input repeated capability:                                       ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        3. Input string:                                                    ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        5. Input buffer (custom type):                                      (custom_struct * len(list))(*[custom_struct(l) for l in list])
+      5.5. Input buffer (numpy):                                            Not yet implemented
+        4. Input buffer of simple types:                                    None if list is None else (visatype.ViInt32 * len(list))(*list)
+     13.5. Output buffer with mechanism passed-in (numpy):                  numpy.ctypeslib.as_ctypes(waveform)
+      0.4. Output buffer with mechanism python-code:                        (visatype.ViInt32 * (<custom python code>))()
+       11. Output buffer with mechanism fixed-size:                         visatype.ViInt32 * 256
+       12. Output buffer with mechanism ivi-dance, step 1:                  None
+     12.5. Output buffer with mechanism ivi-dance, step 2:                  (visatype.ViInt32 * buffer_size_ctype.value)()
+       13. Output buffer with mechanism passed-in:                          (visatype.ViInt32 * buffer_size)()
+    '''
+
     assert parameter['is_buffer'] is True
 
     if parameter['direction'] == 'in':
@@ -229,12 +239,12 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
-        elif custom_type is None:
-            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+        elif custom_type is not None:
+            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         elif parameter['numpy'] is True and use_numpy_array is True:
             assert False, "Yet to implement numpy.array as input parameter.  # case 5.5"
         else:
-            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
