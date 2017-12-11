@@ -16,8 +16,6 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['ArrayInputFunction'] = {}
-        self._defaults['ArrayInputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
@@ -26,6 +24,10 @@ class SideEffectsHelper(object):
         self._defaults['EnumArrayOutputFunction']['anArray'] = None
         self._defaults['EnumInputFunctionWithDefaults'] = {}
         self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
+        self._defaults['FetchWaveform'] = {}
+        self._defaults['FetchWaveform']['return'] = 0
+        self._defaults['FetchWaveform']['waveformData'] = None
+        self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -137,6 +139,8 @@ class SideEffectsHelper(object):
         self._defaults['Use64BitNumber'] = {}
         self._defaults['Use64BitNumber']['return'] = 0
         self._defaults['Use64BitNumber']['output'] = None
+        self._defaults['WriteWaveform'] = {}
+        self._defaults['WriteWaveform']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -153,11 +157,6 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
-
-    def niFake_ArrayInputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
-        if self._defaults['ArrayInputFunction']['return'] != 0:
-            return self._defaults['ArrayInputFunction']['return']
-        return self._defaults['ArrayInputFunction']['return']
 
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['BoolArrayOutputFunction']['return'] != 0:
@@ -189,6 +188,22 @@ class SideEffectsHelper(object):
         if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['EnumInputFunctionWithDefaults']['return']
         return self._defaults['EnumInputFunctionWithDefaults']['return']
+
+    def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
+        if self._defaults['FetchWaveform']['return'] != 0:
+            return self._defaults['FetchWaveform']['return']
+        if self._defaults['FetchWaveform']['waveformData'] is None:
+            raise MockFunctionCallError("niFake_FetchWaveform", param='waveformData')
+        a = self._defaults['FetchWaveform']['waveformData']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(waveform_data), len(a))):
+            waveform_data[i] = a[i]
+        if self._defaults['FetchWaveform']['actualNumberOfSamples'] is None:
+            raise MockFunctionCallError("niFake_FetchWaveform", param='actualNumberOfSamples')
+        actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
+        return self._defaults['FetchWaveform']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -544,6 +559,11 @@ class SideEffectsHelper(object):
         output.contents.value = self._defaults['Use64BitNumber']['output']
         return self._defaults['Use64BitNumber']['return']
 
+    def niFake_WriteWaveform(self, vi, number_of_samples, waveform):  # noqa: N802
+        if self._defaults['WriteWaveform']['return'] != 0:
+            return self._defaults['WriteWaveform']['return']
+        return self._defaults['WriteWaveform']['return']
+
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -566,14 +586,14 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = 0
-        mock_library.niFake_ArrayInputFunction.side_effect = MockFunctionCallError("niFake_ArrayInputFunction")
-        mock_library.niFake_ArrayInputFunction.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
         mock_library.niFake_EnumArrayOutputFunction.side_effect = MockFunctionCallError("niFake_EnumArrayOutputFunction")
         mock_library.niFake_EnumArrayOutputFunction.return_value = 0
         mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
         mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
+        mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
+        mock_library.niFake_FetchWaveform.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = 0
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
@@ -648,6 +668,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_TwoInputFunction.return_value = 0
         mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")
         mock_library.niFake_Use64BitNumber.return_value = 0
+        mock_library.niFake_WriteWaveform.side_effect = MockFunctionCallError("niFake_WriteWaveform")
+        mock_library.niFake_WriteWaveform.return_value = 0
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = 0
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
