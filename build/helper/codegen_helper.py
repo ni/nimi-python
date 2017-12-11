@@ -186,7 +186,8 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
 
 
 def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
-    assert not parameter['is_buffer']
+    assert parameter['is_buffer'] is False
+    assert parameter['numpy'] is False
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
@@ -225,7 +226,7 @@ def _get_ctype_variable_declaration_snippet_for_scalar(parameter, parameters, iv
 def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     assert parameter['is_buffer'] is True
 
-    elif parameter['direction'] == 'in':
+    if parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
         elif parameter['type'] == 'ViChar':
@@ -233,18 +234,17 @@ def _get_ctype_variable_declaration_snippet_for_buffers(parameter, parameters, i
         elif custom_type is None:
             definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            if parameter['numpy'] is False:
-                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            if parameter['numpy'] is True and use_numpy_array is True:
+                assert False, "Yet to implement numpy.array as input parameter.  # case 5.5"
             else:
-                assert False, "Yet to implement numpy.array as input parameter."
-                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5.5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+                definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
         if parameter['size']['mechanism'] == 'python-code':
             size = parameter['size']['value']
             if parameter['numpy'] is True and use_numpy_array is True:
-                definition = 'numpy.ctypeslib.as_ctypes({0})  # case 0.2'.format(parameter['python_name'])
+                definition = '{0}.ctypeslib.as_ctypes({1})  # case 0.2'.format(module_name, parameter['python_name'])
             else:
                 definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], size)
         elif parameter['size']['mechanism'] == 'fixed':
