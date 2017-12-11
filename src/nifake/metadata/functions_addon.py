@@ -28,7 +28,6 @@ functions_enums = {
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'ReadMultiPoint':                        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':                  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
     'ReturnANumberAndAString':               { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
