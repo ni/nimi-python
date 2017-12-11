@@ -916,9 +916,8 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Contains a string',
                 },
