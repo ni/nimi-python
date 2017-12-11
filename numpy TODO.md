@@ -6,6 +6,13 @@
     * Fetch (double)
 * Generate `_into` flavors of all niscope read functions:
 * Generate numpy flavors of all nifgen read/write waveform functions
+    * create_waveform_f64(self, waveform_data_array)
+    * create_waveform_i16(self, waveform_data_array)
+    * define_user_standard_waveform(self, waveform_data_array)
+    * write_binary16_waveform(self, waveform_handle, data)
+    * write_named_waveform_f64(self, waveform_name, data)
+    * write_named_waveform_i16(self, waveform_name, data)
+    * write_waveform(self, waveform_handle, data)
 * Create "dispatching" methods for:
     * niscope.fetch
     * nifgen.create
