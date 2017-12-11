@@ -18,7 +18,7 @@ class _Acquisition(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -2549,14 +2549,14 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort(self):
-        '''_abort
+    def abort(self):
+        '''abort
 
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration functions called after this function are not applied until
         the _initiate function is called. If power output is enabled
-        when you call the _abort function, the output channels remain
+        when you call the abort function, the output channels remain
         in their current state and continue providing power.
 
         Use the ConfigureOutputEnabled function to disable power
@@ -3337,7 +3337,7 @@ class Session(_SessionBase):
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Committed state call the _abort
+        state. To return to the Committed state call the abort
         function. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for information about the

@@ -18,7 +18,7 @@ class _Generation(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort_generation()
+        self._session.abort_generation()
 
 
 class _SessionBase(object):
@@ -2581,8 +2581,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort_generation(self):
-        '''_abort_generation
+    def abort_generation(self):
+        '''abort_generation
 
         Aborts any previously initiated signal generation. Call the
         nifgen_InitiateGeneration function to cause the signal generator to

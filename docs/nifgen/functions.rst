@@ -3,6 +3,16 @@ nifgen.Session methods
 
 .. py:currentmodule:: nifgen
 
+.. function:: abort_generation()
+
+    Aborts any previously initiated signal generation. Call the
+    nifgen\_InitiateGeneration function to cause the signal generator to
+    produce a signal again.
+
+    
+
+
+
 .. function:: allocate_named_waveform(waveform_name, waveform_size)
 
     Specifies the size of a named waveform up front so that it can be

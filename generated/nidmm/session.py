@@ -18,7 +18,7 @@ class _Acquisition(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -881,8 +881,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort(self):
-        '''_abort
+    def abort(self):
+        '''abort
 
         Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
