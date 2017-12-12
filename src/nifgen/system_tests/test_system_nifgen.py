@@ -246,8 +246,41 @@ def test_reset_with_default(session):
     assert session.arb_sample_rate == 250000000.0
 
 
-def test_write_binary_waveform(session):
-    session.write_binary16_waveform(session.allocate_waveform(10), [0, 0, 0, 1, 1, 1, 2, 2])
+def test_write_waveform_list(session):
+    data = [0.1] * 10000
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_waveform_numpy_float64(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.float64)
+    data.fill(0.5)
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_waveform_numpy_int16(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.int16)
+    data.fill(256)
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_waveform_wrong_type(session):
+    import numpy
+    waveform_handle = session.allocate_waveform(100)
+    invalid_waveforms = ['Not waveform data',
+                         numpy.zeros(100, dtype=numpy.uint16),
+                         numpy.zeros(100, dtype=numpy.float32),
+                         42,
+                         3.14159,
+                        ]
+    for data in invalid_waveforms:
+        try:
+            session.write_waveform(waveform_handle, data)
+            assert False
+        except TypeError as e:
+            print(data)
+            print(e)
 
 
 def test_set_waveform_next_write_position(session):

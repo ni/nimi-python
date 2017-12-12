@@ -20,6 +20,12 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    #'CreateWaveformF64':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
+    #'CreateWaveformI16':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
+    'WriteBinary16Waveform':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
+    #'WriteNamedWaveformF64':                { 'codegen_method': 'private',  },  # Called from public method write_named_waveform()
+    #'WriteNamedWaveformI16':                { 'codegen_method': 'private',  },  # Called from public method write_named_waveform()
+    'WriteWaveform':                        { 'codegen_method': 'private',  },  # Called from public method write_waveform()
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
@@ -63,17 +69,17 @@ functions_codegen_method = {
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
-    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
-    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
+    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
+    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
     'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  
-    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
-    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
-    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  
+    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },
+    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
+    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
+    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },  
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
 functions_issues = {
@@ -121,5 +127,79 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+}
+
+# Functions not in original metadata.
+functions_additional_functions = {
+    'WriteWaveformDispatcher': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'waveformHandle',
+                'type': 'ViInt32',
+                'documentation': {
+                'description': '''
+                    Handle of an arbitrary waveform previously allocated with
+                    the niFgen\_AllocateWaveform function.
+                ''',
+            },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Size',
+                'type': 'ViInt32',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Data',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': '''
+                        Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray with dtype int16 or float64.
+                    ''',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''Writes data to the waveform in onboard memory.
+
+By default, subsequent calls to this function
+continue writing data from the position of the last sample written. You
+can set the write position and offset by calling the
+nifgen\_SetWaveformNextWritePosition function.''',
+        },
+    },
+}
+
+functions_python_name = {
+    'WriteWaveformDispatcher':      { 'python_name': 'write_waveform' },
+}
+
+functions_method_template_filenames = {
+    'WriteWaveformDispatcher':      { 'method_template_filenames': ['write_waveform.py.mako'], },
+    'WriteWaveform':                { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
+    'WriteBinary16Waveform':        { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
+}
+
+functions_numpy = {
+    'WriteWaveform':                { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
