@@ -9,7 +9,7 @@ python:
   - 3.4
   - 2.7
   - pypy3.5-5.9.0
-  - pypy-5.8.0
+  - pypy2.7-5.8.0
 
 install:
   - pip install --upgrade tox tox-travis coveralls
