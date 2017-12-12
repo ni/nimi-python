@@ -13,7 +13,7 @@ parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset (
 parser.add_argument('-p', '--phase', default=0.0, type=float, help='Start Phase (deg)')
 args = parser.parse_args()
 
-with nifgen.Session(args.name) as session:
+with nifgen.Session(resource_name=args.name) as session:
     session.output_mode = nifgen.OutputMode.FUNC
     session.configure_standard_waveform(waveform=nifgen.Waveform[args.waveform], amplitude=args.amplitude, frequency=args.frequency, dc_offset=args.offset, start_phase=args.phase)
     with session.initiate():

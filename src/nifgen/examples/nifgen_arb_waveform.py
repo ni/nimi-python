@@ -7,7 +7,6 @@ import nifgen
 supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
 parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
-parser.add_argument('-r', '--rate', default=100e6, type=float, help='Sample Rate (Hz)')
 parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of Samples')
 parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
 parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset')
@@ -23,9 +22,10 @@ def create_waveform_data(number_of_samples):
 
 
 waveform_data = create_waveform_data(args.samples)
-with nifgen.Session(args.name) as session:
+with nifgen.Session(resource_name=args.name) as session:
     session.output_mode = nifgen.OutputMode.ARB
-    session.configure_arb_waveform(session.create_waveform_f64(waveform_data), args.gain, args.offset)
+    waveform = session.create_waveform(waveform_data_array=waveform_data)
+    session.configure_arb_waveform(waveform_handle=waveform, gain=args.gain, offset=args.offset)
     with session.initiate():
         try:
             input("Press Enter to abort generation...")
