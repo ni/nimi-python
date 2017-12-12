@@ -29,6 +29,11 @@ functions_codegen_method = {
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
 }
 
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'AbortScan':                    { 'python_name': 'abort',    },
+}
+
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',            }, }, },
