@@ -14,9 +14,9 @@ parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage ra
 args = parser.parse_args()
 
 with niscope.Session(args.name, False, False, '') as session:
-    session.configure_vertical(args.voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, args.length, 50.0, 1, True)
-    wfm, wfm_infos = session[args.channels].read(args.length)
+    session.configure_vertical(range=args.voltage, coupling=niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(min_sample_rate=50000000, min_num_pts=args.length, ref_position=50.0, num_records=1, enforce_realtime=True)
+    wfm, wfm_infos = session[args.channels].read(num_samples=args.length)
     print('Number of samples acquired: {:,}\n'.format(len(wfm)))
     for i in range(len(wfm_infos)):
         print('Waveform {0} information:'.format(i))
