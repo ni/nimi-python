@@ -33,7 +33,6 @@ functions_buffer_info = {
     'ReturnANumberAndAString':               { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
     'GetAStringOfFixedMaximumSize':          { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
     'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'ReturnMultipleTypes':                   { 'parameters': { 8: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, },
                                                               10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
@@ -50,7 +49,8 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'GetArrayForPythonCodeCustomType':       { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, },
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
-    'FetchWaveform':                         { 'parameters':  { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
+    'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
+    'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
