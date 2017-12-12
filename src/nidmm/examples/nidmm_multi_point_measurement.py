@@ -12,9 +12,9 @@ parser.add_argument('-s', '--samples', default=10, type=int, help='The number of
 parser.add_argument('-t', '--triggers', default=1, type=int, help='Sets the number of triggers you want the DMM to receive before returning to the Idle state.')
 args = parser.parse_args()
 
-with nidmm.Session(args.name) as session:
-    session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
-    session.configure_multi_point(args.triggers, args.samples)
+with nidmm.Session(resource_name=args.name) as session:
+    session.configure_measurement_digits(measurement_function=nidmm.Function[args.function], range=args.range, resolution_digits=args.digits)
+    session.configure_multi_point(trigger_count=args.triggers, sample_count=args.samples)
     measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
     print('Number of measurements: ', numberOfMeasurements)
     print('Measurements: ', measurements)

@@ -11,6 +11,6 @@ parser.add_argument('-r', '--range', default=10, type=float, help='Measurement r
 parser.add_argument('-d', '--digits', default=6.5, type=float, help='Digits of resolution for the measurement.')
 args = parser.parse_args()
 
-with nidmm.Session(args.name) as session:
-    session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
+with nidmm.Session(resource_name=args.name) as session:
+    session.configure_measurement_digits(measurement_function=nidmm.Function[args.function], range=args.range, resolution_digits=args.digits)
     print(session.read())

@@ -14,8 +14,8 @@ parser.add_argument('-s', '--rate', default=1000, type=int, help='Specifies the 
 args = parser.parse_args()
 
 
-with nidmm.Session(args.name) as session:
-    session.configure_waveform_acquisition(nidmm.Function[args.function], args.range, args.rate, args.points)
+with nidmm.Session(resource_name=args.name) as session:
+    session.configure_waveform_acquisition(measurement_function=nidmm.Function[args.function], range=args.range, rate=args.rate, waveform_points=args.points)
     with session.initiate():
         while True:
             time.sleep(0.1)
