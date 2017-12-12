@@ -10,6 +10,7 @@ parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of 
 parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of Samples')
 parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
 parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
 
@@ -22,7 +23,7 @@ def create_waveform_data(number_of_samples):
 
 
 waveform_data = create_waveform_data(args.samples)
-with nifgen.Session(resource_name=args.name) as session:
+with nifgen.Session(resource_name=args.name, option_string=args.option) as session:
     session.output_mode = nifgen.OutputMode.ARB
     waveform = session.create_waveform(waveform_data_array=waveform_data)
     session.configure_arb_waveform(waveform_handle=waveform, gain=args.gain, offset=args.offset)

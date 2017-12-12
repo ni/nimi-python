@@ -9,6 +9,7 @@ parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
 parser.add_argument('-v1', '--voltage1', default=1.0, type=float, help='Voltage level 1 (volts)')
 parser.add_argument('-v2', '--voltage2', default=2.0, type=float, help='Voltage level 2 (volts)')
 parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (seconds)')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
 
@@ -21,7 +22,7 @@ def print_fetched_measurements(voltage_measurements, current_measurements, in_co
 
 measurement_timeout = args.delay + 1.0
 
-with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels, option_string=args.option) as session:
 
     # Configure the session.
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT

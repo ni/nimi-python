@@ -9,8 +9,9 @@ parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of 
 parser.add_argument('-f', '--function', default=supported_functions[0], choices=supported_functions, type=str.upper, help='Measurement function.')
 parser.add_argument('-r', '--range', default=10, type=float, help='Measurement range.')
 parser.add_argument('-d', '--digits', default=6.5, type=float, help='Digits of resolution for the measurement.')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
-with nidmm.Session(resource_name=args.name) as session:
+with nidmm.Session(resource_name=args.name, option_string=args.option) as session:
     session.configure_measurement_digits(measurement_function=nidmm.Function[args.function], range=args.range, resolution_digits=args.digits)
     print(session.read())

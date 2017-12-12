@@ -8,9 +8,10 @@ parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of 
 parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
 parser.add_argument('-l', '--length', default='20', type=int, help='Measure record length')
 parser.add_argument('-v', '--voltage', default=5.0, type=float, help='Voltage level')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
-with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels, option_string=args.option) as session:
 
     # Configure the session.
     session.measure_record_length = args.length

@@ -11,10 +11,11 @@ parser.add_argument('-r', '--range', default=10, type=float, help='Measurement r
 parser.add_argument('-d', '--digits', default=6.5, type=float, help='Digits of resolution for the measurement.')
 parser.add_argument('-p', '--points', default=10, type=int, help='Specifies the number of points to acquire before the waveform acquisition completes.')
 parser.add_argument('-s', '--rate', default=1000, type=int, help='Specifies the rate of the acquisition in samples per second.')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
 
-with nidmm.Session(resource_name=args.name) as session:
+with nidmm.Session(resource_name=args.name, option_string=args.option) as session:
     session.configure_waveform_acquisition(measurement_function=nidmm.Function[args.function], range=args.range, rate=args.rate, waveform_points=args.points)
     with session.initiate():
         while True:

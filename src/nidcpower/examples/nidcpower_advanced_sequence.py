@@ -12,6 +12,7 @@ parser.add_argument('-v0', '--voltage_start', default=1.0, type=float, help='Vol
 parser.add_argument('-vf', '--voltage_final', default=3.0, type=float, help='Voltage level at which sweep ends')
 parser.add_argument('-c0', '--current_start', default=100e-6, type=float, help='Current level at which sweep starts')
 parser.add_argument('-cf', '--current_final', default=300e-6, type=float, help='Current level at which sweep ends')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
 # The Python API should provide these values. But it doesn't. Issue #504. For now, put magic values here.
@@ -30,7 +31,7 @@ def create_sweep(begin_value, end_value, number_of_steps):
     return sweep
 
 
-with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels, option_string=args.option) as session:
 
     session.source_mode = nidcpower.SourceMode.SEQUENCE
     session.source_delay = 0.1

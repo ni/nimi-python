@@ -10,9 +10,10 @@ parser.add_argument('-r', '--range', default=10, type=float, help='Measurement r
 parser.add_argument('-d', '--digits', default=6.5, type=float, help='Digits of resolution for the measurement.')
 parser.add_argument('-s', '--samples', default=10, type=int, help='The number of measurements the DMM makes.')
 parser.add_argument('-t', '--triggers', default=1, type=int, help='Sets the number of triggers you want the DMM to receive before returning to the Idle state.')
+parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
-with nidmm.Session(resource_name=args.name) as session:
+with nidmm.Session(resource_name=args.name, option_string=args.option) as session:
     session.configure_measurement_digits(measurement_function=nidmm.Function[args.function], range=args.range, resolution_digits=args.digits)
     session.configure_multi_point(trigger_count=args.triggers, sample_count=args.samples)
     measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
