@@ -15,7 +15,7 @@ parser.add_argument('-cf', '--current_final', default=300e-6, type=float, help='
 args = parser.parse_args()
 
 # The Python API should provide these values. But it doesn't. Issue #504. For now, put magic values here.
-attribute_ids = [
+sequence_attribute_ids = [
     1150008,  # output_function
     1250001,  # voltage_level
     1150009,  # current_level
@@ -30,13 +30,13 @@ def create_sweep(begin_value, end_value, number_of_steps):
     return sweep
 
 
-with nidcpower.Session(args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
 
     session.source_mode = nidcpower.SourceMode.SEQUENCE
     session.source_delay = 0.1
     session.voltage_level_autorange = nidcpower.VoltageLevelAutorange.ON
     session.current_level_autorange = nidcpower.CurrentLevelAutorange.ON
-    session.create_advanced_sequence('my_sequence', attribute_ids)
+    session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=sequence_attribute_ids)
     voltages = create_sweep(args.voltage_start, args.voltage_final, args.steps)
     currents = create_sweep(args.current_start, args.current_final, args.steps)
 
@@ -52,7 +52,7 @@ with nidcpower.Session(args.name, channels=args.channels) as session:
 
     with session.initiate():
         session.wait_for_event(nidcpower.Event.SEQUENCE_ENGINE_DONE)
-        voltage_measurements, current_measurements, in_compliance, _ = session.fetch_multiple(args.steps * 2)
+        voltage_measurements, current_measurements, in_compliance, _ = session.fetch_multiple(count=args.steps * 2)
 
     # Print a table with the measurements
     programmed_levels = voltages + currents

@@ -19,9 +19,9 @@ def print_fetched_measurements(voltage_measurements, current_measurements, in_co
     print('        In compliance: {0}'.format(in_compliance[0]))
 
 
-timeout = args.delay + 1.0
+measurement_timeout = args.delay + 1.0
 
-with nidcpower.Session(args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
 
     # Configure the session.
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
@@ -35,8 +35,8 @@ with nidcpower.Session(args.name, channels=args.channels) as session:
 
     with session.initiate():
         print('Voltage 1:')
-        print_fetched_measurements(*session.fetch_multiple(1, timeout))
+        print_fetched_measurements(*session.fetch_multiple(count=1, timeout=measurement_timeout))
         session.voltage_level = args.voltage2  # on-the-fly set
         print('Voltage 2:')
-        print_fetched_measurements(*session.fetch_multiple(1, timeout))
+        print_fetched_measurements(*session.fetch_multiple(count=1, timeout=measurement_timeout))
         session.output_enabled = False

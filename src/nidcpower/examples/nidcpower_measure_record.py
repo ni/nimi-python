@@ -10,7 +10,7 @@ parser.add_argument('-l', '--length', default='20', type=int, help='Measure reco
 parser.add_argument('-v', '--voltage', default=5.0, type=float, help='Voltage level')
 args = parser.parse_args()
 
-with nidcpower.Session(args.name, channels=args.channels) as session:
+with nidcpower.Session(resource_name=args.name, channels=args.channels) as session:
 
     # Configure the session.
     session.measure_record_length = args.length
@@ -26,7 +26,7 @@ with nidcpower.Session(args.name, channels=args.channels) as session:
     samples_acquired = 0
     with session.initiate():
         while samples_acquired < args.length:
-            voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(session.fetch_backlog)
+            voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(count=session.fetch_backlog)
             assert len(voltage_measurements) == len(current_measurements) == len(in_compliance) == actual_count
             for i in range(actual_count):
                 samples_acquired += 1
