@@ -272,8 +272,7 @@ def test_write_waveform_wrong_type(session):
                          numpy.zeros(100, dtype=numpy.uint16),
                          numpy.zeros(100, dtype=numpy.float32),
                          42,
-                         3.14159,
-                        ]
+                         3.14159, ]
     for data in invalid_waveforms:
         try:
             session.write_waveform(waveform_handle, data)
