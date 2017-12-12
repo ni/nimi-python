@@ -3,7 +3,7 @@ niswitch.Session methods
 
 .. py:currentmodule:: niswitch
 
-.. function:: abort_scan()
+.. function:: abort()
 
     Aborts the scan in progress. Initiate a scan with
     :py:func:`niswitch._initiate_scan`. If the switch module is not scanning,

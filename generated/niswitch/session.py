@@ -18,7 +18,7 @@ class _Scan(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.abort_scan()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -1085,8 +1085,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def abort_scan(self):
-        '''abort_scan
+    def abort(self):
+        '''abort
 
         Aborts the scan in progress. Initiate a scan with
         _initiate_scan. If the switch module is not scanning,
@@ -1767,7 +1767,7 @@ class Session(_SessionBase):
         than GetAttribute, AbortScan, or SendSoftwareTrigger. All other
         functions return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
         scanning operation, To stop the scanning operation, call
-        abort_scan.
+        abort.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niSwitch_InitiateScan(vi_ctype)

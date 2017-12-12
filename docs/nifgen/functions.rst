@@ -3,7 +3,7 @@ nifgen.Session methods
 
 .. py:currentmodule:: nifgen
 
-.. function:: abort_generation()
+.. function:: abort()
 
     Aborts any previously initiated signal generation. Call the
     nifgen\_InitiateGeneration function to cause the signal generator to
