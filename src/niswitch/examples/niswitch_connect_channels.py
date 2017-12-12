@@ -9,8 +9,8 @@ parser.add_argument('-ch1', '--channel1', default='c0', type=str, help='Channel 
 parser.add_argument('-ch2', '--channel2', default='r0', type=str, help='Channel Two.')
 args = parser.parse_args()
 
-with niswitch.Session(args.name) as session:
-    session.connect(args.channel1, args.channel2)
+with niswitch.Session(resource_name=args.name) as session:
+    session.connect(channel1=args.channel1, channel2=args.channel2)
     print('Channel ', args.channel1, ' and ', args.channel2, ' are now connected.')
-    session.disconnect(args.channel1, args.channel2)
+    session.disconnect(channel1=args.channel1, channel2=args.channel2)
     print('Channel ', args.channel1, ' and ', args.channel2, ' are now disconnected.')
