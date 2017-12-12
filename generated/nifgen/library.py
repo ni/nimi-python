@@ -82,6 +82,7 @@ class Library(object):
         self.niFgen_WriteNamedWaveformI16_cfunc = None
         self.niFgen_WriteScript_cfunc = None
         self.niFgen_WriteWaveform_cfunc = None
+        self.niFgen_WriteWaveformDispatcher_cfunc = None
         self.niFgen_close_cfunc = None
         self.niFgen_error_message_cfunc = None
         self.niFgen_reset_cfunc = None
@@ -606,6 +607,14 @@ class Library(object):
                 self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
+
+    def niFgen_WriteWaveformDispatcher(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_WriteWaveformDispatcher_cfunc is None:
+                self.niFgen_WriteWaveformDispatcher_cfunc = self._library.niFgen_WriteWaveformDispatcher
+                self.niFgen_WriteWaveformDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_WriteWaveformDispatcher_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_WriteWaveformDispatcher_cfunc(vi, channel_name, waveform_handle, size, data)
 
     def niFgen_close(self, vi):  # noqa: N802
         with self._func_lock:
