@@ -13,7 +13,7 @@ parser.add_argument('-l', '--length', default='1000', type=int, help='Measure re
 parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range')
 args = parser.parse_args()
 
-with niscope.Session(args.name, False, False, '') as session:
+with niscope.Session(resource_name=args.name) as session:
     session.configure_vertical(range=args.voltage, coupling=niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(min_sample_rate=50000000, min_num_pts=args.length, ref_position=50.0, num_records=1, enforce_realtime=True)
     wfm, wfm_infos = session[args.channels].read(num_samples=args.length)
