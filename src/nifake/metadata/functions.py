@@ -1281,44 +1281,6 @@ functions = {
             'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.',
         },
     },
-    'ArrayInputFunction': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'numberOfElements',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Number of elements in the array.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'is_buffer': True,
-                'name': 'anArray',
-                'type': 'ViReal64',
-                'documentation': {
-                    'description': 'Contains an array of float numbers',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'This function takes an array parameter.',
-        },
-    },
-
     'BoolArrayOutputFunction': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1963,7 +1925,7 @@ functions = {
                 'direction': 'out',
                 'enum': None,
                 'name': 'waveformData',
-                'type': 'ViReal64[ ]',
+                'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'Samples fetched from the device. Array should be numberOfSamples big.',
                 },
@@ -1982,6 +1944,40 @@ functions = {
             'description': 'Returns waveform data.',
         },
     },
-    #TODO(marcoskirsch): More cases to add:
-    #     Waveform as input
+    'WriteWaveform': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                }
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'How many samples the waveform contains.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'waveform',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Waveform data.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Writes waveform to the driver',
+        },
+    }
 }
