@@ -152,8 +152,8 @@ nifgen.Session methods
         You can create multiple arbitrary waveforms using one of the following
         niFgen Create Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform_f64`
-        -  :py:func:`nifgen.create_waveform_i16`
+        -  :py:func:`nifgen.create_waveform`
+        -  :py:func:`nifgen.CreateWaveformI16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -358,8 +358,8 @@ nifgen.Session methods
         create an arbitrary waveform using one of the following niFgen Create
         Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform_f64`
-        -  :py:func:`nifgen.create_waveform_i16`
+        -  :py:func:`nifgen.create_waveform`
+        -  :py:func:`nifgen.CreateWaveformI16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -1279,7 +1279,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_f64(waveform_data_array)
+.. function:: create_waveform(waveform_data_array)
 
     Creates an onboard waveform from binary F64 (floating point double) data
     for use in Arbitrary Waveform output mode or Arbitrary Sequence output
@@ -1301,7 +1301,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_f64(waveform_data_array)
+            session['0,1'].create_waveform(waveform_data_array)
 
 
     :param waveform_data_array:
@@ -1462,57 +1462,6 @@ nifgen.Session methods
 
 
     :type byte_order: :py:data:`nifgen.ByteOrder`
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_waveform_i16(waveform_data_array)
-
-    Creates an onboard waveform from binary 16-bit signed integer (I16) data
-    for use in Arbitrary Waveform or Arbitrary Sequence output mode. The
-    **waveformHandle** returned can later be used for setting the active
-    waveform, changing the data in the waveform, building sequences of
-    waveforms, or deleting the waveform when it is no longer needed.
-
-    
-
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].create_waveform_i16(waveform_data_array)
-
-
-    :param waveform_data_array:
-
-
-        Specify the array of data that you want to use for the new arbitrary
-        waveform. The array must have at least as many elements as the value
-        that you specify in the Waveform Size parameter.
-        You must normalize the data points in the array to be between -32768 and
-        +32767.
-        ****Default Value**:** None
-
-        
-
-
-    :type waveform_data_array: list of int
 
     :rtype: int
     :return:
@@ -2530,57 +2479,7 @@ nifgen.Session methods
 
     :type max_time: int
 
-.. function:: write_binary16_waveform(waveform_handle, data)
-
-    Writes binary data to the waveform in onboard memory. The waveform
-    handle passed must have been created by a call to the
-    nifgen\_AllocateWaveform or the nifgen\_CreateWaveformI16 function.
-
-    By default, the subsequent call to the :py:func:`nifgen.write_binary16_waveform`
-    function continues writing data from the position of the last sample
-    written. You can set the write position and offset by calling the
-    nifgen\_SetWaveformNextWritePosition function. If streaming is enabled,
-    you can write more data than the allocated waveform size in onboard
-    memory. Refer to the
-    `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-    information about streaming data.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].write_binary16_waveform(waveform_handle, data)
-
-
-    :param waveform_handle:
-
-
-        Specifies the handle of the arbitrary waveform previously allocated with
-        the nifgen\_AllocateWaveform function.
-
-        
-
-
-    :type waveform_handle: int
-    :param data:
-
-
-        Specifies the array of data to load into the waveform. The array must
-        have at least as many elements as the value in **size**. The binary data
-        is left-justified.
-
-        
-
-
-    :type data: list of int
-
-.. function:: write_named_waveform_f64(waveform_name, data)
+.. function:: write_named_waveform(waveform_name, data)
 
     Writes floating-point data to the waveform in onboard memory. The
     waveform handle passed in must have been created by a call to the
@@ -2593,7 +2492,7 @@ nifgen.Session methods
     -  nifgen\_CreateWaveformFromFileF64
     -  nifgen\_CreateWaveformFromFileHWS
 
-    By default, the subsequent call to the :py:func:`nifgen.write_named_waveform_f64`
+    By default, the subsequent call to the :py:func:`nifgen.write_named_waveform`
     function continues writing data from the position of the last sample
     written. You can set the write position and offset by calling the
     nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
@@ -2612,7 +2511,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_named_waveform_f64(waveform_name, data)
+            session['0,1'].write_named_waveform(waveform_name, data)
 
 
     :param waveform_name:
@@ -2634,52 +2533,6 @@ nifgen.Session methods
 
 
     :type data: list of float
-
-.. function:: write_named_waveform_i16(waveform_name, data)
-
-    Writes binary data to the named waveform in onboard memory.
-
-    By default, the subsequent call to the :py:func:`nifgen.write_named_waveform_i16`
-    function continues writing data from the position of the last sample
-    written. You can set the write position and offset by calling the
-    nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
-    enabled, you can write more data than the allocated waveform size in
-    onboard memory. Refer to the
-    `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-    information about streaming data.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].write_named_waveform_i16(waveform_name, data)
-
-
-    :param waveform_name:
-
-
-        Specifies the name to associate with the allocated waveform.
-
-        
-
-
-    :type waveform_name: string
-    :param data:
-
-
-        Specifies the array of data to load into the waveform. The array must
-        have at least as many elements as the value in **size**.
-
-        
-
-
-    :type data: list of int
 
 .. function:: write_script(script)
 

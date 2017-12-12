@@ -10,6 +10,8 @@ import zipfile
 
 parser = argparse.ArgumentParser(description='Downloads the latest release nimi-python and runs system tests on the specified driver.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str, help='Driver Name.')
+parser.add_argument('-pv', '--python_version', required=False, type=str, help='Python version to be run.', default='py27')  # pass py36 if wanted to run on python-3.6
+parser.add_argument('-pb', '--python_bitness', required=False, type=str, help='Python bitness to be run.', default=' ')  # pass '--32' if you want to run on a 32bit python if both available
 args = parser.parse_args()
 
 
@@ -54,5 +56,5 @@ print(zip_folder)
 print('****Running system tests in tox.****')
 tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0])
 os.chdir(tox_dir)
-result = os.system('python -m tox -e ' + args.driver + '_system_tests')
+result = os.system('tox ' + args.python_bitness + ' -e ' + args.python_version + '-' + args.driver + '_system_tests')
 sys.exit(result)

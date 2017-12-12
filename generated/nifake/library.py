@@ -380,7 +380,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_TwoInputFunction_cfunc is None:
                 self.niFake_TwoInputFunction_cfunc = self._library.niFake_TwoInputFunction
-                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession, ViReal64, ViChar]  # noqa: F405
+                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession, ViReal64, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
 
