@@ -9,13 +9,15 @@ parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of 
 parser.add_argument('-d', '--device', default=False, action='store_true', help='Prints information for the device')
 parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all relays on the device')
 parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all channels on the device')
+parser.add_argument('-t', '--topology', default='Configured Topology', type=str, help='Topology.')
+parser.add_argument('-s', '--simulate', default=False, type=bool, help='Topology.')
 args = parser.parse_args()
 
 if not (args.device or args.channel or args.relay):
     parser.print_help()
     sys.exit()
 
-with niswitch.Session(resource_name=args.name) as session:
+with niswitch.Session(resource_name=args.name, topology=args.topology, simulate=args.simulate) as session:
     if args.device:
         print('Device Info:')
         row_format = '{:<18}' * (2)
