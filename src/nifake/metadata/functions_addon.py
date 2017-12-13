@@ -7,7 +7,6 @@ functions_codegen_method = {
     'InitWithOptions':          { 'codegen_method': 'private',  },
     'Initiate':                 { 'codegen_method': 'private',  },
     'close':                    { 'codegen_method': 'private',  },
-    'Abort':                    { 'codegen_method': 'private',  },
     '.etAttribute.+':           { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
@@ -28,13 +27,11 @@ functions_enums = {
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'ReadMultiPoint':                        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':                  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
     'ReturnANumberAndAString':               { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
     'GetAStringOfFixedMaximumSize':          { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
     'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'ReturnMultipleTypes':                   { 'parameters': { 8: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, },
                                                               10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
@@ -51,6 +48,8 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'GetArrayForPythonCodeCustomType':       { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, },
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
+    'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
+    'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

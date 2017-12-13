@@ -29,7 +29,7 @@ def test_read(session):
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    wfm, wfm_infos = session[test_channels].read(1, test_record_length)
+    wfm, wfm_infos = session[test_channels].read(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -42,7 +42,7 @@ def test_fetch(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm, wfm_infos = session[test_channels].fetch(1, test_record_length)
+        wfm, wfm_infos = session[test_channels].fetch(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -102,10 +102,10 @@ def test_self_cal(session):
 
 def test_probe_compensation_signal(session):
     session.probe_compensation_signal_start()
-    session.probe_compensation_signal_start()
+    session.probe_compensation_signal_stop()
 
 
-def test_configure_channel_characteristics(session):
+def test_configure_horizontal_timing(session):
     session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.auto_setup()
     session.configure_horizontal_timing(10000000, 1000, 50.0, 1, True)
@@ -118,10 +118,111 @@ def test_configure_channel_characteristics(session):
 def test_waveform_processing(session):
     session.configure_vertical(5.0, niscope.VerticalCoupling.DC)
     session.configure_horizontal_timing(10000000, 4096, 50.0, 1, True)
-    session['0'].read(5, 2000)
+    session['0'].read(2000)
     session.add_waveform_processing(niscope.ArrayMeasurement.NO_MEASUREMENT)
     session.add_waveform_processing(niscope.ArrayMeasurement.FFT_AMP_SPECTRUM_DB)
     session.clear_waveform_measurement_stats(niscope.ClearableMeasurement.ALL_MEASUREMENTS)
     session.clear_waveform_processing()
     session.horz_record_length == 4096
     session.horz_sample_rate == 10000000
+
+
+def test_fetch_read_measurement(session):
+    active_channel = session['0']
+    read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
+    expected_measurement = 10000
+    in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
+    in_range = abs(fetch_measurement - expected_measurement) <= max(1e-02 * max(abs(fetch_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
+    in_range = abs(measurement_stats - expected_measurement) <= max(1e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True
+    waveform, waveform_info = active_channel.fetch_array_measurement(niscope.ArrayMeasurement.ARRAY_GAIN)
+    actual_number_of_samples = waveform_info[0].actual_samples
+    assert 1000 == len(waveform)  # Driver returns 1000 for simulated 5164
+    assert 1000 == actual_number_of_samples  # Driver returns 1000 for simulated 5164
+
+
+def test_configure_chan_characteristics(session):
+    session.vertical_range = 4.0
+    session.configure_chan_characteristics(niscope.InputImpedance._50_OHMS, 0)
+    assert 50.0 == session.input_impedance
+
+
+'''
+# TODO(frank): re-add after issue #650 is fixed.
+def test_filter_coefficients():
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
+        assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
+        try:
+            filter_coefficients = [1.0, 0.0, 0.0]
+            session.configure_equalization_filter_coefficients(filter_coefficients)
+        except niscope.Error as e:
+            assert e.code == -1074135024  # coefficients list should have 35 items
+'''
+
+
+def test_send_software_trigger_edge(session):
+    session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
+
+
+def test_disable(session):
+    assert session.allow_more_records_than_memory is False
+    session.allow_more_records_than_memory = True
+    session.disable()
+    assert session.allow_more_records_than_memory is False
+
+
+def test_configure_ref_levels(session):
+    session.configure_ref_levels()
+    assert 90.0 == session.meas_chan_high_ref_level
+
+
+def test_configure_trigger_digital(session):
+    session.configure_trigger_digital('VAL_RTSI_0')
+    session.vertical_range = 5
+    assert 'VAL_RTSI_0' == session.trigger_source
+
+
+def test_configure_trigger_edge(session):
+    assert niscope.TriggerSlope.POSITIVE == session.trigger_slope
+    session.configure_trigger_edge('0', niscope.TriggerCoupling.DC)
+    session.commit()
+    assert '0' == session.trigger_source
+    assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_configure_trigger_hysteresis(session):
+    session.configure_trigger_hysteresis('1', niscope.TriggerCoupling.DC)
+    assert '1' == session.trigger_source
+    assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_configure_trigger_software(session):
+    session.configure_trigger_software()
+
+
+'''
+# TODO(frank): re-add after issue #650 is fixed.
+def test_configure_trigger_video():
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+        session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+        assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
+        assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
+        assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
+        assert niscope.TriggerCoupling.DC == session.trigger_coupling
+'''
+
+
+def test_configure_trigger_window(session):
+    session.configure_trigger_window('1', 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
+    assert '1' == session.trigger_source
+    assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
+
+
+def test_export_signal(session):
+    expected_trigger_terminal = "VAL_PFI_0"
+    session.export_signal(niscope.ExportableSignals.START_TRIGGER, expected_trigger_terminal)
+    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal

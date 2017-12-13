@@ -20,6 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    'CreateWaveformI16':                    { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
@@ -27,10 +28,11 @@ functions_codegen_method = {
     'ResetAttribute':                       { 'codegen_method': 'no',       },  # Issue #531
     'RouteSignalOut':                       { 'codegen_method': 'no',       },  # Use string-based routing instead
     'WriteBinary16AnalogStaticValue':       { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'WriteBinary16Waveform':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
+    'WriteNamedWaveformI16':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
-    'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
     'GetError':                             { 'codegen_method': 'private',  },
@@ -60,20 +62,27 @@ functions_codegen_method = {
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
 }
 
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'CreateWaveformF64':    { 'python_name': 'create_waveform',         },
+    'WriteNamedWaveformF64':{ 'python_name': 'write_named_waveform',    },
+    'AbortGeneration':      { 'python_name': 'abort',    },
+}
+
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
-    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
-    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  
+    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
+    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
     'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  
-    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
-    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  
-    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  
+    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },
+    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
+    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
+    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },  
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
 functions_issues = {

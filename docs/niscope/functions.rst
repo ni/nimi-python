@@ -3,6 +3,15 @@ niscope.Session methods
 
 .. py:currentmodule:: niscope
 
+.. function:: abort()
+
+    Aborts an acquisition and returns the digitizer to the Idle state. Call
+    this function if the digitizer times out waiting for a trigger.
+
+    
+
+
+
 .. function:: acquisition_status()
 
     Returns status information about the acquisition to the **status**
@@ -1225,7 +1234,7 @@ niscope.Session methods
 
     :type signal_identifier: string
 
-.. function:: fetch(timeout, num_samples)
+.. function:: fetch(num_samples, timeout=5.0)
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This function returns
@@ -1253,20 +1262,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(timeout, num_samples)
+            session['0,1'].fetch(num_samples, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param num_samples:
 
 
@@ -1280,6 +1278,17 @@ niscope.Session methods
 
 
     :type num_samples: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: tuple (wfm, wfm_info)
 
@@ -1341,7 +1350,7 @@ niscope.Session methods
 
 
 
-.. function:: fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+.. function:: fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
 
     Obtains a waveform from the digitizer and returns the specified
     measurement array. This function may return multiple waveforms depending
@@ -1363,20 +1372,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+            session['0,1'].fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param array_meas_function:
 
 
@@ -1388,6 +1386,17 @@ niscope.Session methods
 
 
     :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: tuple (meas_wfm, wfm_info)
 
@@ -1693,7 +1702,7 @@ niscope.Session methods
 
 
 
-.. function:: read(timeout, num_samples)
+.. function:: read(num_samples, timeout=5.0)
 
     Initiates an acquisition, waits for it to complete, and retrieves the
     data. The process is similar to calling :py:func:`niscope._initiate_acquisition`,
@@ -1720,20 +1729,9 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read(timeout, num_samples)
+            session['0,1'].read(num_samples, timeout=5.0)
 
 
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
     :param num_samples:
 
 
@@ -1747,6 +1745,17 @@ niscope.Session methods
 
 
     :type num_samples: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
 
     :rtype: tuple (wfm, wfm_info)
 

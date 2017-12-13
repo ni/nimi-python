@@ -18,7 +18,7 @@ class _Scan(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort_scan()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -126,6 +126,12 @@ class _SessionBase(object):
     The default value is VI_FALSE.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
+    '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    Indicates the resource descriptor the driver  uses to identify the physical device.
+    If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
     '''
     is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
@@ -422,6 +428,10 @@ class _SessionBase(object):
     '''
     A string that contains a brief description of the specific  driver.
     '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this  instrument driver.
+    '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies this driver.
@@ -710,8 +720,8 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 12
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        array_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case 12.5
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -744,8 +754,8 @@ class _SessionBase(object):
         description_ctype = None  # case 12
         error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -1048,8 +1058,8 @@ class Session(_SessionBase):
 
     def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
         super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling init_with_topology().
-        self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._vi = 0  # This must be set before calling _init_with_topology().
+        self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
         self._is_frozen = True
 
     def __enter__(self):
@@ -1075,8 +1085,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort_scan(self):
-        '''_abort_scan
+    def abort(self):
+        '''abort
 
         Aborts the scan in progress. Initiate a scan with
         _initiate_scan. If the switch module is not scanning,
@@ -1392,8 +1402,8 @@ class Session(_SessionBase):
         channel_name_buffer_ctype = None  # case 12
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
@@ -1430,8 +1440,8 @@ class Session(_SessionBase):
         path_ctype = None  # case 12
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
@@ -1478,8 +1488,8 @@ class Session(_SessionBase):
         relay_name_buffer_ctype = None  # case 12
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
@@ -1506,12 +1516,12 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
-    def init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
-        '''init_with_topology
+    def _init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        '''_init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
-        init_with_topology creates a new IVI instrument driver session
+        _init_with_topology creates a new IVI instrument driver session
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
@@ -1735,7 +1745,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                init_with_topology, InitWithOptions, or init
+                _init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
@@ -1757,7 +1767,7 @@ class Session(_SessionBase):
         than GetAttribute, AbortScan, or SendSoftwareTrigger. All other
         functions return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
         scanning operation, To stop the scanning operation, call
-        _abort_scan.
+        abort.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niSwitch_InitiateScan(vi_ctype)

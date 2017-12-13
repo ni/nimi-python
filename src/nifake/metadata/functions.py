@@ -917,7 +917,7 @@ functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Contains a string',
                 },
@@ -1167,63 +1167,6 @@ functions = {
         },
     },
 
-    'ReadMultiPoint': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'maximumTime',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in years.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'arraySize',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Number of measurements to acquire.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'is_buffer': True,
-                'name': 'readingArray',
-                'type': 'ViReal64',
-                'documentation': {
-                    'description': 'An array of measurement values.',
-                    'note': 'The size must be at least arraySize.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'name': 'actualNumberOfPoints',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Indicates the number of measured values actually retrieved.',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'Acquires multiple measurements and returns an array of measured values.',
-        },
-    },
-
     'GetEnumValue': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1338,44 +1281,6 @@ functions = {
             'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.',
         },
     },
-    'ArrayInputFunction': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'numberOfElements',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Number of elements in the array.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'is_buffer': True,
-                'name': 'anArray',
-                'type': 'ViReal64',
-                'documentation': {
-                    'description': 'Contains an array of float numbers',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'This function takes an array parameter.',
-        },
-    },
-
     'BoolArrayOutputFunction': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1994,6 +1899,85 @@ functions = {
             'description': 'This function returns an array for use in python-code size mechanism.',
         },
     },
-    #TODO(marcoskirsch): More cases to add:
-    #     Waveforms as inputs and outputs
+    'FetchWaveform': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                }
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of samples to return',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'waveformData',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Samples fetched from the device. Array should be numberOfSamples big.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'actualNumberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of samples actually fetched.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns waveform data.',
+        },
+    },
+    'WriteWaveform': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                }
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'How many samples the waveform contains.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'waveform',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Waveform data.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Writes waveform to the driver',
+        },
+    }
 }

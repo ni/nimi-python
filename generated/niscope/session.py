@@ -20,7 +20,7 @@ class _Acquisition(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -158,6 +158,11 @@ class _SessionBase(object):
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
     The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
+    '''
+    channel_count = attributes.AttributeViInt32(1050203)
+    '''
+    Indicates the number of channels that the specific instrument driver  supports.
+    For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
     channel_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableChan, 1250005)
     '''
@@ -586,6 +591,11 @@ class _SessionBase(object):
 
     Note: If disabled, warranted specifications are not guaranteed.
     '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    '''
     logical_name = attributes.AttributeViString(1050305)
     '''
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
@@ -593,6 +603,26 @@ class _SessionBase(object):
     master_enable = attributes.AttributeViBoolean(1150008)
     '''
     Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
+    '''
+    max_input_frequency = attributes.AttributeViReal64(1250006)
+    '''
+    Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+    Defined Values:
+    NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
+    NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
+    NISCOPE_VAL_20MHZ_BANDWIDTH (20000000.0)
+    NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
+    NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
+    NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_input_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_input_frequency.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_input_frequency = var
+        var = session['0,1'].max_input_frequency
     '''
     max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''
@@ -1108,6 +1138,10 @@ class _SessionBase(object):
     '''
     A string that contains a brief description of the specific  driver
     '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this  instrument driver.
+    '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies this driver.
@@ -1342,6 +1376,29 @@ class _SessionBase(object):
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
+
+    def _actual_meas_wfm_size(self, array_meas_function):
+        '''_actual_meas_wfm_size
+
+        Returns the total available size of an array measurement acquisition.
+
+        Args:
+            array_meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+        Returns:
+            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
+                waveform.
+        '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
+        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(meas_waveform_size_ctype.value)
 
     def _actual_num_wfms(self):
         '''_actual_num_wfms
@@ -1611,7 +1668,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, timeout, num_samples):
+    def fetch(self, num_samples, timeout=5.0):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1637,17 +1694,17 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(timeout, num_samples)
+            session['0,1'].fetch(num_samples, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -1702,7 +1759,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_array_measurement(self, timeout, array_meas_function):
+    def fetch_array_measurement(self, array_meas_function, timeout=5.0):
         '''fetch_array_measurement
 
         Obtains a waveform from the digitizer and returns the specified
@@ -1722,15 +1779,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_array_measurement(timeout, array_meas_function, meas_wfm_size)
+            session['0,1'].fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             array_meas_function (enums.ArrayMeasurement): The `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to perform.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             meas_wfm (list of float): Returns an array whose length is the number of waveforms times
@@ -1782,12 +1839,12 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
         array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size())  # case 0.0
-        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size() * self._actual_num_wfms()))()  # case 0.2
+        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case 0.0
+        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))()  # case 0.2
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.2
         error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size() * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def fetch_measurement(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement
@@ -1977,40 +2034,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
-    def _get_attribute_vi_int64(self, attribute_id):
-        '''_get_attribute_vi_int64
-
-        Queries the value of a ViInt64 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled and the currently cached value is invalid.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session['0,1']._get_attribute_vi_int64(attribute_id)
-
-        Args:
-            attribute_id (int): The ID of an attribute.
-
-        Returns:
-            value (int): Returns the current value of the attribute.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        value_ctype = visatype.ViInt64()  # case 14
-        error_code = self._library.niScope_GetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, ctypes.pointer(value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(value_ctype.value)
-
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -2087,8 +2110,8 @@ class _SessionBase(object):
         value_ctype = None  # case 12
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buf_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        value_ctype = (visatype.ViChar * buf_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buf_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        value_ctype = (visatype.ViChar * buf_size_ctype.value)()  # case 12.5
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
@@ -2161,13 +2184,13 @@ class _SessionBase(object):
         description_ctype = None  # case 12
         error_code = self._library.niScope_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niScope_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def read(self, timeout, num_samples):
+    def read(self, num_samples, timeout=5.0):
         '''read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -2192,17 +2215,17 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(timeout, num_samples)
+            session['0,1'].read(num_samples, timeout=5.0)
 
         Args:
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -2400,53 +2423,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_int64(self, attribute_id, value):
-        '''_set_attribute_vi_int64
-
-        Sets the value of a ViInt64 attribute. This is a low-level function that
-        you can use to set the values of instrument-specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled and the currently cached value is invalid or
-           is different than the value you specify.
-
-        Note:
-        NI-SCOPE contains high-level functions that set most of the instrument
-        attributes. Use the high-level functions as much as possible because
-        they handle order dependencies and multithread locking for you. In
-        addition, high-level functions perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
-        instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
-        redundant instrument I/O.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session['0,1']._set_attribute_vi_int64(attribute_id, value)
-
-        Args:
-            attribute_id (int): The ID of an attribute.
-            value (int): The value that you want to set the attribute. Some values might not be
-                valid depending on the current settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        value_ctype = visatype.ViInt64(value)  # case 9
-        error_code = self._library.niScope_SetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _set_attribute_vi_real64(self, attribute_id, value):
         '''_set_attribute_vi_real64
 
@@ -2585,8 +2561,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort(self):
-        '''_abort
+    def abort(self):
+        '''abort
 
         Aborts an acquisition and returns the digitizer to the Idle state. Call
         this function if the digitizer times out waiting for a trigger.
@@ -2618,29 +2594,6 @@ class Session(_SessionBase):
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
-
-    def _actual_meas_wfm_size(self, array_meas_function):
-        '''_actual_meas_wfm_size
-
-        Returns the total available size of an array measurement acquisition.
-
-        Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-
-        Returns:
-            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
-                waveform.
-        '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(meas_waveform_size_ctype.value)
 
     def auto_setup(self):
         '''auto_setup

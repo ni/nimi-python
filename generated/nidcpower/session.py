@@ -18,7 +18,7 @@ class _Acquisition(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -1871,8 +1871,8 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 12
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -1902,8 +1902,8 @@ class _SessionBase(object):
         channel_name_ctype = None  # case 12
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        channel_name_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        channel_name_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
@@ -1935,8 +1935,8 @@ class _SessionBase(object):
         description_ctype = None  # case 12
         error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -2549,14 +2549,14 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort(self):
-        '''_abort
+    def abort(self):
+        '''abort
 
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration functions called after this function are not applied until
         the _initiate function is called. If power output is enabled
-        when you call the _abort function, the output channels remain
+        when you call the abort function, the output channels remain
         in their current state and continue providing power.
 
         Use the ConfigureOutputEnabled function to disable power
@@ -3337,7 +3337,7 @@ class Session(_SessionBase):
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Committed state call the _abort
+        state. To return to the Committed state call the abort
         function. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for information about the

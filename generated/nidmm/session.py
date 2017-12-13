@@ -18,7 +18,7 @@ class _Acquisition(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -145,6 +145,10 @@ class _SessionBase(object):
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call niDMM_GetNextInterchangeWarning  to extract interchange warnings.  Call niDMM_ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
     '''
+    io_resource_descriptor = attributes.AttributeViString(1050304)
+    '''
+    A string containing the resource descriptor of the instrument.
+    '''
     latency = attributes.AttributeViInt32(1150034)
     '''
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
@@ -225,6 +229,11 @@ class _SessionBase(object):
     Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
     NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
     '''
+    resolution_digits = attributes.AttributeViReal64(1250003)
+    '''
+    Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
+    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
+    '''
     sample_count = attributes.AttributeViInt32(1250301)
     '''
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
@@ -287,6 +296,18 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string containing a description of the specific driver.
+    '''
+    specific_driver_major_version = attributes.AttributeViInt32(1050503)
+    '''
+    Returns the major version number of this instrument driver.
+    '''
+    specific_driver_minor_version = attributes.AttributeViInt32(1050504)
+    '''
+    The minor version number of this instrument driver.
+    '''
+    specific_driver_revision = attributes.AttributeViString(1050551)
+    '''
+    A string that contains additional version information about this specific  instrument driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
@@ -570,8 +591,8 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 12
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -596,8 +617,8 @@ class _SessionBase(object):
         description_ctype = None  # case 12
         error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
         error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -860,8 +881,8 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _abort(self):
-        '''_abort
+    def abort(self):
+        '''abort
 
         Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
