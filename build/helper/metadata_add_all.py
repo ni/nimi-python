@@ -169,7 +169,7 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_method_templates(f):
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
     if 'method_templates' not in f:
-        f['method_templates'] = [{'filename': 'session_default_method.py.mako', 'suffix': '', }, ]
+        f['method_templates'] = [{'filename': '/default_method.py.mako', 'suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     for method_template in f['method_templates']:
         method_template['filename'] = '/' + method_template['filename'] if method_template['filename'][0] != '/' else method_template['filename']
@@ -571,7 +571,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
-            'method_templates': [{'filename': '/session_default_method.py.mako', 'suffix': '', }, ],
+            'method_templates': [{'filename': '/default_method.py.mako', 'suffix': '', }, ],
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
