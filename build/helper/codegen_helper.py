@@ -287,7 +287,11 @@ def get_dictionary_snippet(d, indent=4):
     return ('\n' + (' ' * indent)).join(d_lines)
 
 
+#
 # Let's do some unit testing!
+#
+
+
 # We need a config object for our testing
 config_for_testing = {
     'session_handle_parameter_name': 'vi',
@@ -303,7 +307,8 @@ config_for_testing = {
 }
 
 
-params = [
+# We also need some function parameters that cover all cases.
+parameters_for_testing = [
     {
         'ctypes_type': 'ViSession',
         'ctypes_type_library_call': 'ViSession',
@@ -369,7 +374,7 @@ params = [
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'array_out_ctype',
         'direction': 'out',
-        'documentation': {'description': 'Array os custom typeusing puthon-code size mechanism'},
+        'documentation': {'description': 'Array of custom type using python-code size mechanism'},
         'enum': None,
         'is_buffer': True,
         'is_repeated_capability': False,
@@ -470,51 +475,226 @@ params = [
         'numpy_type': 'int64',
         'numpy_type_library_call': 'numpy.int64',
     },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_type_library_call': 'ViInt32',
+        'ctypes_variable_name': 'number_of_elements_python_code_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Number of elements in the array, determined via mechanism python-code.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'number_of_elements_python_code_ctype',
+        'name': 'numberOfElementsPythonCode',
+        'numpy': False,
+        'python_name': 'number_of_elements_python_code',
+        'python_name_with_default': 'number_of_elements_python_code',
+        'python_name_with_doc_default': 'number_of_elements_python_code',
+        'python_type': 'int',
+        'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
+        'type': 'ViInt32'
+    },
+    {
+        'ctypes_type': 'ViInt16',
+        'ctypes_type_library_call': 'ViInt16',
+        'ctypes_variable_name': 'input_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'An input value.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_ctype',
+        'name': 'input',
+        'numpy': False,
+        'python_name': 'input',
+        'python_name_with_default': 'input',
+        'python_name_with_doc_default': 'input',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt16'
+    },
+    {
+        'ctypes_type': 'ViReal64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+        'ctypes_variable_name': 'input_array_ctype',
+        'default_value': None,
+        'direction': 'in',
+        'documentation': {'description': 'Input array of floats'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_ctype',
+        'name': 'inputArray',
+        'numpy': False,
+        'python_name': 'input_array',
+        'python_name_with_default': 'input_array=None',
+        'python_name_with_doc_default': 'input_array=None',
+        'python_type': 'float',
+        'size': {'mechanism': 'len', 'value': 'inputArraySize'},
+        'type': 'ViReal64'
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_type_library_call': 'ViInt32',
+        'ctypes_variable_name': 'input_array_size_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Size of inputArray'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_size_ctype',
+        'name': 'inputArraySize',
+        'numpy': False,
+        'python_name': 'input_array_size',
+        'python_name_with_default': 'input_array_size',
+        'python_name_with_doc_default': 'input_array_size',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt32'
+    },
+    {
+        'ctypes_type': 'ViInt32',
+        'ctypes_type_library_call': 'ViInt32',
+        'ctypes_variable_name': 'string_size_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Number of bytes allocated for aString'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'string_size_ctype',
+        'name': 'stringSize',
+        'numpy': False,
+        'python_name': 'string_size',
+        'python_name_with_default': 'string_size',
+        'python_name_with_doc_default': 'string_size',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt32'
+    },
+    {
+        'ctypes_type': 'ViChar',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'a_string_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'An IVI dance string.'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_ctype',
+        'name': 'aString',
+        'numpy': False,
+        'python_name': 'a_string',
+        'python_name_with_default': 'a_string',
+        'python_name_with_doc_default': 'a_string',
+        'python_type': 'int',
+        'size': {'mechanism': 'ivi-dance', 'value': 'stringSize'},
+        'type': 'ViChar'
+    },
 ]
 
 
 def test_get_method_return_snippet_vi():
-    param = [params[0]]
+    param = [parameters_for_testing[0]]
     assert get_method_return_snippet(param, config_for_testing) == 'return'
 
 
 def test_get_method_return_snippet_int():
-    param = [params[1]]
+    param = [parameters_for_testing[1]]
     assert get_method_return_snippet(param, config_for_testing) == 'return int(output_ctype.value)'
 
 
 def test_get_method_return_snippet_string():
-    param = [params[2]]
+    param = [parameters_for_testing[2]]
     assert get_method_return_snippet(param, config_for_testing) == 'return error_message_ctype.value.decode(self._encoding)'
 
 
 def test_get_method_return_snippet_custom_type():
-    param = [params[3]]
+    param = [parameters_for_testing[3]]
     assert get_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]'
 
 
 def test_get_method_return_snippet_enum():
-    param = [params[4], params[5]]
+    param = [parameters_for_testing[4], parameters_for_testing[5]]
     assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
 
 
 def test_get_method_return_snippet_into():
-    param = [params[4], params[7]]
+    param = [parameters_for_testing[4], parameters_for_testing[7]]
     assert get_method_return_snippet(param, config_for_testing, use_numpy_array=True) == 'return'
 
 
 def test_get_enum_type_check_snippet():
-    param = params[6]
+    param = parameters_for_testing[6]
     assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
 
 
 def test_get_buffer_parameter_for_size_parameter_none():
-    param = _get_buffer_parameter_for_size_parameter(params[0], params)
+    param = _get_buffer_parameter_for_size_parameter(parameters_for_testing[0], parameters_for_testing)
     assert param is None
 
 
 def test_get_buffer_parameter_for_size_parameter():
-    param = _get_buffer_parameter_for_size_parameter(params[4], params)
-    assert param == params[5]
+    param = _get_buffer_parameter_for_size_parameter(parameters_for_testing[4], parameters_for_testing)
+    assert param == parameters_for_testing[5]
+
+
+def test_get_ctype_variable_declaration_snippet_case_1():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "vi_ctype = visatype.ViSession(self._vi)  # case 1"
+
+
+def test_get_ctype_variable_declaration_snippet_case_0_0():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[8], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "number_of_elements_python_code_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0"
+
+
+def test_get_ctype_variable_declaration_snippet_case_10():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[6], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "an_int_enum_ctype = visatype.ViInt16(an_int_enum.value)  # case 10"
+
+
+def test_get_ctype_variable_declaration_snippet_case_9():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "input_ctype = visatype.ViInt16(input)  # case 9"
+
+
+def test_get_ctype_variable_declaration_snippet_case_6():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[11], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "input_array_size_ctype = visatype.ViInt32(0 if input_array is None else len(input_array))  # case 6"
+
+
+def test_get_ctype_variable_declaration_snippet_case_7():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    assert snippet == "string_size_ctype = visatype.ViInt32()  # case 7"
+
+
+def test_get_ctype_variable_declaration_snippet_case_7_5():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == "string_size_ctype = visatype.ViInt32(error_code)  # case 7.5"
+
+
+def test_get_ctype_variable_declaration_snippet_case_8():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8"
+
+
+def test_get_ctype_variable_declaration_snippet_case_14():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "output_ctype = visatype.ViInt64()  # case 14"
+
+
+def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
+    try:
+        snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        assert False
+    except AssertionError:
+        pass
+
 
 
