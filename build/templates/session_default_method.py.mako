@@ -1,4 +1,4 @@
-<%page args="f, config"/>\
+<%page args="f, config, suffix"/>\
 <%
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 

@@ -120,8 +120,8 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
-% for method_template_filename in functions[func_name]['method_template_filenames']:
-<%include file="${method_template_filename}" args="f=functions[func_name], config=config" />\
+% for method_template in functions[func_name]['method_templates']:
+<%include file="${method_template['filename']}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
 % endfor
 % endfor
 
@@ -167,8 +167,8 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
-% for method_template_filename in functions[func_name]['method_template_filenames']:
-<%include file="${method_template_filename}" args="f=functions[func_name], config=config" />\
+% for method_template in functions[func_name]['method_templates']:
+<%include file="${method_template['filename']}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
 % endfor
 % endfor
 
