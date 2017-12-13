@@ -10,7 +10,7 @@ parser.add_argument('-d', '--device', default=False, action='store_true', help='
 parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all relays on the device')
 parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all channels on the device')
 parser.add_argument('-t', '--topology', default='Configured Topology', type=str, help='Topology.')
-parser.add_argument('-s', '--simulate', default=False, type=bool, help='Topology.')
+parser.add_argument('-s', '--simulate', default=False, type=bool, help='Simulate Device.')
 args = parser.parse_args()
 
 if not (args.device or args.channel or args.relay):
