@@ -5,7 +5,7 @@ import niswitch
 import sys
 
 parser = argparse.ArgumentParser(description='Prints information for the specified National Instruments Switch module.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments Switch.')
+parser.add_argument('-n', '--resource_name', default='PXI1Slot2', help='Resource name of a National Instruments Switch.')
 parser.add_argument('-d', '--device', default=False, action='store_true', help='Prints information for the device')
 parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all relays on the device')
 parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all channels on the device')
@@ -17,7 +17,7 @@ if not (args.device or args.channel or args.relay):
     parser.print_help()
     sys.exit()
 
-with niswitch.Session(resource_name=args.name, topology=args.topology, simulate=args.simulate) as session:
+with niswitch.Session(resource_name=args.resource_name, topology=args.topology, simulate=args.simulate) as session:
     if args.device:
         print('Device Info:')
         row_format = '{:<18}' * (2)
@@ -39,5 +39,5 @@ with niswitch.Session(resource_name=args.name, topology=args.topology, simulate=
         row_format = '{:6}' + ' ' * 12 + '{:<15}{:<22}{:6}'
         print(row_format.format('Number', 'Name', 'Position', 'Count'))
         for i in range(1, session.number_of_relays + 1):
-            current_relay_name = session.get_relay_name(index=i)
-            print(row_format.format(i, current_relay_name, session.get_relay_position(relay_name=current_relay_name), session.get_relay_count(relay_name=current_relay_name)))
+            relay_name = session.get_relay_name(index=i)
+            print(row_format.format(i, relay_name, session.get_relay_position(relay_name=relay_name), session.get_relay_count(relay_name=relay_name)))
