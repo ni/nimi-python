@@ -17,7 +17,7 @@
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(f['name'], config, indent=8)}
+        ${helper.get_function_docstring(f, config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}

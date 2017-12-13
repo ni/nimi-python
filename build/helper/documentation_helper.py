@@ -323,7 +323,7 @@ rep_cap_method_desc_rst = rep_cap_method_desc + '''
 '''
 
 
-def get_function_rst(fname, config, indent=0):
+def get_function_rst(function, config, indent=0):
     '''Gets rst formatted documentation for given function
 
     Args:
@@ -333,7 +333,6 @@ def get_function_rst(fname, config, indent=0):
     Returns:
         str: rst formatted documentation
     '''
-    function = config['functions'][fname]
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
 
@@ -386,7 +385,7 @@ rep_cap_method_desc_docstring = rep_cap_method_desc + '''
 '''
 
 
-def get_function_docstring(fname, config, indent=0):
+def get_function_docstring(function, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
@@ -397,7 +396,6 @@ def get_function_docstring(fname, config, indent=0):
         str: docstring formatted documentation
     '''
     docstring = ''
-    function = config['functions'][fname]
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
 
@@ -641,7 +639,7 @@ wanted to choose.''',
 
 
 def test_get_function_rst():
-    actual_function_rst = get_function_rst('GetTurtleID', config, 0)
+    actual_function_rst = get_function_rst(config['functions']['GetTurtleID'], config, 0)
     expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
 
     Returns the **ID** of selected Turtle Type.
@@ -683,7 +681,7 @@ def test_get_function_rst():
 
 
 def test_get_function_docstring():
-    actual_function_docstring = get_function_docstring('GetTurtleID', config, 0)
+    actual_function_docstring = get_function_docstring(config['functions']['GetTurtleID'], config, 0)
     expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
 
 Note: The RAPHAEL Turtles dont have an ID.

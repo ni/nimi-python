@@ -11,7 +11,7 @@
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(f['name'], config, indent=8)}
+        ${helper.get_function_docstring(f, config, indent=8)}
         '''
         import numpy
 
