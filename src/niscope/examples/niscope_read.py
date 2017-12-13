@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='Acquires one record from the given
 parser.add_argument('-n', '--resource_name', default='PXI1Slot2', help='Resource name of a National Instruments Digitizer')
 parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
 parser.add_argument('-l', '--length', default='1000', type=int, help='Measure record length')
-parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range')
+parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range (V)')
 parser.add_argument('-op', '--option_string', default='', type=str, help='Option string')
 args = parser.parse_args()
 

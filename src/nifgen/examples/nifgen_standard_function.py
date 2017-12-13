@@ -10,9 +10,9 @@ parser.add_argument('-n', '--resource_name', default='PXI1Slot2', help='Resource
 parser.add_argument('-w', '--waveform', default=supported_waveforms[0], choices=supported_waveforms, type=str.upper, help='Standard waveform')
 parser.add_argument('-f', '--frequency', default=1000, type=float, help='Frequency (Hz)')
 parser.add_argument('-a', '--amplitude', default=1.0, type=float, help='Amplitude (Vpk-pk)')
-parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset (V)')
-parser.add_argument('-p', '--phase', default=0.0, type=float, help='Start Phase (deg)')
-parser.add_argument('-t', '--time', default=5, type=float, help='Generation Time')
+parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC offset (V)')
+parser.add_argument('-p', '--phase', default=0.0, type=float, help='Start phase (deg)')
+parser.add_argument('-t', '--time', default=5.0, type=float, help='Generation time (s)')
 parser.add_argument('-op', '--option_string', default='', type=str, help='Option string')
 args = parser.parse_args()
 

@@ -8,7 +8,7 @@ parser.add_argument('-n', '--resource_name', default='PXI1Slot2', help='Resource
 parser.add_argument('-r', '--relay', default='k0', type=str, help='Relay Name.')
 parser.add_argument('-a', '--action', default='OPEN', choices=niswitch.RelayAction.__members__.keys(), type=str.upper, help='Relay Action.')
 parser.add_argument('-t', '--topology', default='Configured Topology', type=str, help='Topology.')
-parser.add_argument('-s', '--simulate', default=False, type=bool, help='Simulate Device.')
+parser.add_argument('-s', '--simulate', default=False, type=bool, help='Simulate device.')
 args = parser.parse_args()
 
 with niswitch.Session(resource_name=args.resource_name, topology=args.topology, simulate=args.simulate) as session:

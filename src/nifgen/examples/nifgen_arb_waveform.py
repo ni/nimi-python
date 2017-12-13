@@ -8,10 +8,10 @@ import time
 supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
 parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-n', '--resource_name', default='PXI1Slot2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
-parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of Samples')
+parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of samples')
 parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
-parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset')
-parser.add_argument('-t', '--time', default=5, type=float, help='Generation Time')
+parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC offset (V)')
+parser.add_argument('-t', '--time', default=5.0, type=float, help='Generation time (s)')
 parser.add_argument('-op', '--option_string', default='', type=str, help='Option string')
 args = parser.parse_args()
 
