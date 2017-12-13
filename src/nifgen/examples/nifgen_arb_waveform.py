@@ -3,6 +3,7 @@
 import argparse
 import math
 import nifgen
+import time
 
 supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
 parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -10,6 +11,7 @@ parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of 
 parser.add_argument('-s', '--samples', default=100000, type=int, help='Number of Samples')
 parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
 parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset')
+parser.add_argument('-t', '--time', default=5, type=float, help='Generation Time')
 parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
@@ -28,7 +30,4 @@ with nifgen.Session(resource_name=args.name, option_string=args.option) as sessi
     waveform = session.create_waveform(waveform_data_array=waveform_data)
     session.configure_arb_waveform(waveform_handle=waveform, gain=args.gain, offset=args.offset)
     with session.initiate():
-        try:
-            input("Press Enter to abort generation...")
-        except SyntaxError:
-            pass
+        time.sleep(args.time)

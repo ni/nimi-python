@@ -2,6 +2,7 @@
 
 import argparse
 import nifgen
+import time
 
 supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
 parser = argparse.ArgumentParser(description='Generates the standard function.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -11,6 +12,7 @@ parser.add_argument('-f', '--frequency', default=1000, type=float, help='Frequen
 parser.add_argument('-a', '--amplitude', default=1.0, type=float, help='Amplitude (Vpk-pk)')
 parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset (V)')
 parser.add_argument('-p', '--phase', default=0.0, type=float, help='Start Phase (deg)')
+parser.add_argument('-t', '--time', default=5, type=float, help='Generation Time')
 parser.add_argument('-op', '--option', default='', type=str, help='Option String')
 args = parser.parse_args()
 
@@ -18,7 +20,4 @@ with nifgen.Session(resource_name=args.name, option_string=args.option) as sessi
     session.output_mode = nifgen.OutputMode.FUNC
     session.configure_standard_waveform(waveform=nifgen.Waveform[args.waveform], amplitude=args.amplitude, frequency=args.frequency, dc_offset=args.offset, start_phase=args.phase)
     with session.initiate():
-        try:
-            input("Press Enter to abort generation...")
-        except SyntaxError:
-            pass
+        time.sleep(args.time)
