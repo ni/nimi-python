@@ -33,7 +33,6 @@ functions_codegen_method = {
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
-    'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
     'GetError':                             { 'codegen_method': 'private',  },
@@ -67,6 +66,7 @@ functions_codegen_method = {
 functions_python_name = {
     'CreateWaveformF64':    { 'python_name': 'create_waveform',         },
     'WriteNamedWaveformF64':{ 'python_name': 'write_named_waveform',    },
+    'AbortGeneration':      { 'python_name': 'abort',    },
 }
 
 # Attach the given parameter to the given enum from enums.py

@@ -8,7 +8,6 @@ functions_codegen_method = {
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
-    'Abort':                           { 'codegen_method': 'private',  },
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
@@ -28,6 +27,11 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
+}
+
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'AbortScan':                    { 'python_name': 'abort',    },
 }
 
 # Attach the given parameter to the given enum from enums.py

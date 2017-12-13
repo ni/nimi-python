@@ -3,6 +3,15 @@ nidmm.Session methods
 
 .. py:currentmodule:: nidmm
 
+.. function:: abort()
+
+    Aborts a previously initiated measurement and returns the DMM to the
+    Idle state.
+
+    
+
+
+
 .. function:: configure_ac_bandwidth(ac_minimum_frequency_hz, ac_maximum_frequency_hz)
 
     Configures the :py:data:`nidmm.AC\_MIN\_FREQ` and :py:data:`nidmm.AC\_MAX\_FREQ`
