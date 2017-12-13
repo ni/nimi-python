@@ -1,8 +1,8 @@
-from enum import Enum
 from .metadata_filters import filter_parameters
 from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
+from enum import Enum
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
