@@ -3,6 +3,15 @@ niscope.Session methods
 
 .. py:currentmodule:: niscope
 
+.. function:: abort()
+
+    Aborts an acquisition and returns the digitizer to the Idle state. Call
+    this function if the digitizer times out waiting for a trigger.
+
+    
+
+
+
 .. function:: acquisition_status()
 
     Returns status information about the acquisition to the **status**

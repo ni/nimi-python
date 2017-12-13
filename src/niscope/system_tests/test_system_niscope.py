@@ -174,7 +174,7 @@ def test_configure_chan_characteristics(session):
 '''
 # TODO(frank): re-add after issue #650 is fixed.
 def test_filter_coefficients():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXIe') as session:  # filter coefficients methods are available on devices with OSP
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
         try:
             filter_coefficients = [1.0, 0.0, 0.0]

@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
   * #### Added
+    * Added the abort() function.
   * #### Changed
   * #### Removed
 * ### NI-DMM
@@ -34,7 +35,12 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
   * #### Added
   * #### Changed
+    * Renamed `create_waveform_f64` -> `create_waveform`
+    * Renamed `write_named_waveform_f64` -> `write_named_waveform`
   * #### Removed
+    * ~~`create_waveform_i16`~~
+    * ~~`write_binary16_waveform`~~
+    * ~~`write_named_waveform_i16`~~
 * ### NI-SCOPE
   * #### Added
   * #### Changed

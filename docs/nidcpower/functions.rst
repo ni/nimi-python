@@ -3,6 +3,33 @@ nidcpower.Session methods
 
 .. py:currentmodule:: nidcpower
 
+.. function:: abort()
+
+    Transitions the NI-DCPower session from the Running state to the
+    Committed state. If a sequence is running, it is stopped. Any
+    configuration functions called after this function are not applied until
+    the :py:func:`nidcpower._initiate` function is called. If power output is enabled
+    when you call the :py:func:`nidcpower.abort` function, the output channels remain
+    in their current state and continue providing power.
+
+    Use the :py:func:`nidcpower.ConfigureOutputEnabled` function to disable power
+    output on a per channel basis. Use the :py:func:`nidcpower.reset` function to
+    disable output on all channels.
+
+    Refer to the `Programming
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+    the *NI DC Power Supplies and SMUs Help* for information about the
+    specific NI-DCPower software states.
+
+    **Related Topics:**
+
+    `Programming
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+    
+
+
+
 .. function:: commit()
 
     Applies previously configured settings to the device. Calling this

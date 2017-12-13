@@ -54,6 +54,7 @@ clean: start
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)

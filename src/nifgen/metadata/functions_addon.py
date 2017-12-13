@@ -33,10 +33,11 @@ functions_codegen_method = {
     'ResetAttribute':                       { 'codegen_method': 'no',       },  # Issue #531
     'RouteSignalOut':                       { 'codegen_method': 'no',       },  # Use string-based routing instead
     'WriteBinary16AnalogStaticValue':       { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'WriteBinary16Waveform':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
+    'WriteNamedWaveformI16':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
-    'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
     'GetError':                             { 'codegen_method': 'private',  },
@@ -64,6 +65,13 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
+}
+
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'CreateWaveformF64':    { 'python_name': 'create_waveform',         },
+    'WriteNamedWaveformF64':{ 'python_name': 'write_named_waveform',    },
+    'AbortGeneration':      { 'python_name': 'abort',    },
 }
 
 # Attach the given parameter to the given enum from enums.py

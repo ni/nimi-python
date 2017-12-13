@@ -85,9 +85,9 @@ def test_clear_freq_list(session):
 
 
 def test_configure_arb_waveform(session):
-    waveform_data = [0, 8, 7, 3, 9, 1, 5, 6, 2, 4]
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.ARB
-    session.configure_arb_waveform(session.create_waveform_i16(waveform_data), 1.0, 0.0)
+    session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
 
 
 def test_disable(session):
@@ -175,7 +175,7 @@ def test_query_arb_seq_capabilities(session):
 
 def test_create_arb_sequence(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session.create_waveform_f64(waveform_data)]
+    waveform_handles_array = [session.create_waveform(waveform_data)]
     # This relies on value of sequence handles starting at 0 and incrementing, not ideal but true for now.
     assert 0 == session.create_arb_sequence(waveform_handles_array, [10])
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
@@ -185,7 +185,7 @@ def test_create_advanced_arb_sequence():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        waveform_handles_array = [session.create_waveform_f64(waveform_data), session.create_waveform_f64(waveform_data), session.create_waveform_f64(waveform_data)]
+        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
         marker_location_array = [0, 16, 32]
         sample_counts_array = [256, 128, 64]
         loop_counts_array = [10, 20, 30]
@@ -198,10 +198,10 @@ def test_create_advanced_arb_sequence():
 
 
 def test_arb_script(session):
-    waveform_data = [0, 9630, 15582, 15582, 9630, 0, -9630, -15582, -15582, -9630]
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT
     session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
-    session.write_named_waveform_i16('wfmSine', waveform_data)
+    session.write_named_waveform('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
     script = '''script myScript0
     repeat 3
@@ -297,16 +297,16 @@ def test_write_waveform_from_filei64(session):
 
 
 def test_named_waveform_operations(session):
-    wfm_name = 'Waveform'
-    wfm_size = 4096
+    waveform_name = 'Waveform'
+    waveform_size = 4096
     write_offset = 0
-    wfm_data_f64 = [0.0, 1.0]
-    wfm_data_i16 = [1, 0]
-    session.allocate_named_waveform(wfm_name, wfm_size)
-    session.set_named_waveform_next_write_position(wfm_name, nifgen.RelativeTo.START, write_offset)
-    session.write_named_waveform_f64(wfm_name, wfm_data_f64)
-    session.write_named_waveform_i16(wfm_name, wfm_data_i16)
-    session.delete_named_waveform(wfm_name)
+    waveform_data_1 = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_data_2 = [x * (-1.0 / 256.0) for x in range(256)]
+    session.allocate_named_waveform(waveform_name, waveform_size)
+    session.set_named_waveform_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
+    session.write_named_waveform(waveform_name, waveform_data_1)
+    session.write_named_waveform(waveform_name, waveform_data_2)
+    session.delete_named_waveform(waveform_name)
 
 
 def test_wait_until_done(session):
@@ -339,8 +339,14 @@ def test_configure_triggers(session):
 
 
 def test_send_software_edge_trigger(session):
-    waveform_data = [0, 1, 2, 3, 3, 2, 1, 0]
-    session.create_waveform_i16(waveform_data)
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
     with session.initiate():
         session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
 
+
+def test_write_waveform_from_file_f64(session):
+    try:
+        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+    except nifgen.Error as e:
+        assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.

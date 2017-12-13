@@ -3,6 +3,16 @@ niswitch.Session methods
 
 .. py:currentmodule:: niswitch
 
+.. function:: abort()
+
+    Aborts the scan in progress. Initiate a scan with
+    :py:func:`niswitch._initiate_scan`. If the switch module is not scanning,
+    NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
+
+    
+
+
+
 .. function:: can_connect(channel1, channel2)
 
     Verifies that a path between channel 1 and channel 2 can be created. If

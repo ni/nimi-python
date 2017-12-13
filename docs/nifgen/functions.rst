@@ -3,6 +3,16 @@ nifgen.Session methods
 
 .. py:currentmodule:: nifgen
 
+.. function:: abort_generation()
+
+    Aborts any previously initiated signal generation. Call the
+    nifgen\_InitiateGeneration function to cause the signal generator to
+    produce a signal again.
+
+    
+
+
+
 .. function:: allocate_named_waveform(waveform_name, waveform_size)
 
     Specifies the size of a named waveform up front so that it can be
@@ -2584,52 +2594,6 @@ nifgen.Session methods
 
 
     :type data: list of float
-
-.. function:: write_named_waveform_i16(waveform_name, data)
-
-    Writes binary data to the named waveform in onboard memory.
-
-    By default, the subsequent call to the :py:func:`nifgen.write_named_waveform_i16`
-    function continues writing data from the position of the last sample
-    written. You can set the write position and offset by calling the
-    nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
-    enabled, you can write more data than the allocated waveform size in
-    onboard memory. Refer to the
-    `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-    information about streaming data.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].write_named_waveform_i16(waveform_name, data)
-
-
-    :param waveform_name:
-
-
-        Specifies the name to associate with the allocated waveform.
-
-        
-
-
-    :type waveform_name: string
-    :param data:
-
-
-        Specifies the array of data to load into the waveform. The array must
-        have at least as many elements as the value in **size**.
-
-        
-
-
-    :type data: list of int
 
 .. function:: write_script(script)
 

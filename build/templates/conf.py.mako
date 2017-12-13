@@ -1,3 +1,9 @@
+<%
+from datetime import datetime
+
+config = template_parameters['metadata'].config
+current_year = datetime.today().year
+%>\
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
@@ -55,7 +61,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI Modular Instruments Python API'
-copyright = '2017-2017, National Instruments'
+copyright = '2017-${current_year}, National Instruments'
 author = 'National Instruments'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +69,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '0.6.0.dev0'
+release = '${config['module_version']}'
 # The short X.Y version.
 version = release[:3]
 
