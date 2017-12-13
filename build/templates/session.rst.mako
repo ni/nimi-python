@@ -35,14 +35,12 @@ table = helper.as_rest_table(table_contents)
 
 <%
 table_contents = []
-table_contents.append(('Method', 'Parameters'))
+table_contents.append(['Method name'])
 for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
-        param_list = helper.get_params_snippet(functions[f], helper.ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD)
-        if len(param_list) == 0:
-            param_list = " "
-        table_contents.append((':py:func:`{0}`'.format(name), param_list))
+        for method_template in functions[f]['method_templates']:
+            table_contents.append([':py:func:`{0}{1}`'.format(name, method_template['suffix'])])
 
 table = helper.as_rest_table(table_contents)
 %>\
