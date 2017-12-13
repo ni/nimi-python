@@ -691,12 +691,12 @@ def test_get_ctype_variable_declaration_snippet_case_14():
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
     try:
-        snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
         assert False
     except AssertionError:
         pass
 
 
-#TODO(marcoskirsch): unit tests for reamining cases of get_ctype_variable_declaration_snippet(): parameter is a buffer.
+# TODO(marcoskirsch): unit tests for reamining cases of get_ctype_variable_declaration_snippet(): parameter is a buffer.
 
 
