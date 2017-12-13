@@ -73,18 +73,17 @@ def _add_ctypes_type(parameter, config):
 
 
 def _add_numpy_info(parameter, config):
-    '''Adds numpy information, including type and library call keys for if numpy is true'''
+    '''Adds the following numpy-related information:
+
+             numpy: Default to False unless already set. True for buffers that allow being passed as a numpy.ndarray.
+        numpy_type: The name of the element type to use in the numpy.ndarray.
+    '''
+
     if 'numpy' not in parameter:
         parameter['numpy'] = False
 
     if parameter['numpy']:
         parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
-        module_name = 'numpy.'
-
-        if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
-            parameter['numpy_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['numpy_type'] + ")"
-        else:
-            parameter['numpy_type_library_call'] = module_name + parameter['numpy_type']
 
     return parameter
 

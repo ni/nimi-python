@@ -3,6 +3,7 @@ from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
 from build.helper.codegen_helper import get_method_return_snippet  # noqa: F401
 from build.helper.codegen_helper import get_params_snippet  # noqa: F401
+from build.helper.codegen_helper import IviDanceStep  # noqa: F401
 
 from build.helper.parameter_usage_options import ParameterUsageOptions  # noqa: F401
 
