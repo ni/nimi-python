@@ -553,6 +553,32 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
 
+    def fetch_waveform_into(self, number_of_samples, waveform_data):
+        '''fetch_waveform
+
+        Returns waveform data.
+
+        Args:
+            number_of_samples (int): Number of samples to return
+
+        Returns:
+            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            actual_number_of_samples (int): Number of samples actually fetched.
+        '''
+        import numpy
+
+        if type(waveform_data) is not numpy.ndarray or numpy.isfortran(waveform_data) is True:
+                raise TypeError('waveform_data must be numpy.ndarray in C-order')
+        if waveform_data.dtype is not numpy.dtype('float64'):
+                raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case 13.5
+        actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(actual_number_of_samples_ctype.value)
+
     def get_a_boolean(self):
         '''get_a_boolean
 
@@ -625,7 +651,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
-        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.2
+        array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case 0.4
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -640,7 +666,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
-        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.2
+        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case 0.4
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]

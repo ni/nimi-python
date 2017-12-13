@@ -13,6 +13,7 @@ ViChar = ctypes.c_char
 ViUInt32 = ctypes.c_ulong
 ViInt32 = ctypes.c_long
 ViInt16 = ctypes.c_short
+ViInt8 = ctypes.c_int8
 ViUInt16 = ctypes.c_ushort
 ViInt64 = ctypes.c_longlong
 ViString = ctypes.c_char_p

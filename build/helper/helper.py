@@ -40,6 +40,8 @@ def get_python_type_for_api_type(api_type, config):
         'ViString': 'str',
         'ViConstString': 'str',
         'ViString': 'str',
+        'ViInt8': 'int',
+        'ViUInt8': 'int',
         'ViInt16': 'int',
         'ViUInt16': 'int',
         'ViInt32': 'int',
@@ -63,7 +65,36 @@ def get_python_type_for_api_type(api_type, config):
             if c['ctypes_type'] == api_type:
                 return c['python_name']
         # We didn't find it so assert
-        assert False, 'Unknown visa_type: {0}'.format(api_type)
+        assert False, 'Unknown api_type: {0}'.format(api_type)
+
+
+def get_numpy_type_for_api_type(api_type, config):
+    '''Returns the numpy type to use in the Python API from the original visa or custom type used in the C API
+
+    Do not use this with enums.
+    '''
+    type_map = {
+        'ViBoolean': 'bool_',
+        'ViInt8': 'int8',
+        'ViUInt8': 'uint8',
+        'ViInt16': 'int16',
+        'ViUInt16': 'uint16',
+        'ViInt32': 'int32',
+        'ViUInt32': 'uint32',
+        'ViInt64': 'int64',
+        'ViUInt64': 'uint64',
+        'ViReal32': 'float32',
+        'ViReal64': 'float64',
+    }
+
+    if api_type in type_map:
+        return type_map[api_type]
+    else:
+        for c in config['custom_types']:
+            if c['ctypes_type'] == api_type:
+                return c['python_name']
+        # We didn't find it so assert
+        assert False, 'Unknown api_type: {0}'.format(api_type)
 
 
 

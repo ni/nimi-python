@@ -1,6 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
+from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
@@ -67,6 +68,22 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
+
+    return parameter
+
+
+def _add_numpy_info(parameter, config):
+    '''Adds the following numpy-related information:
+
+             numpy: Default to False unless already set. True for buffers that allow being passed as a numpy.ndarray.
+        numpy_type: The name of the element type to use in the numpy.ndarray.
+    '''
+
+    if 'numpy' not in parameter:
+        parameter['numpy'] = False
+
+    if parameter['numpy']:
+        parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
 
     return parameter
 
@@ -213,6 +230,7 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
+            _add_numpy_info(p, config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -511,6 +529,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': False,
                     'is_session_handle': True,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
@@ -535,6 +554,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': True,
                     'is_session_handle': False,
                     'enum': None,
+                    'numpy': False,
                     'python_type': 'int',
                     'is_buffer': True,
                     'name': 'channelName',
@@ -557,6 +577,7 @@ def test_add_all_metadata_simple():
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
+                'numpy': False,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -580,6 +601,7 @@ def test_add_all_metadata_simple():
             }, {
                 'direction': 'out',
                 'enum': None,
+                'numpy': False,
                 'name': 'status',
                 'type': 'ViChar',
                 'original_type': 'ViString',

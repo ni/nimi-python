@@ -73,3 +73,11 @@ functions_default_value = {
 functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
 }
+
+functions_method_template_filenames = {
+    'FetchWaveform':                        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_method.py.mako'], },
+}
+
+functions_numpy = {
+    'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
+}

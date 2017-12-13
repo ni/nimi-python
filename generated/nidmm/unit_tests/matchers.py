@@ -236,4 +236,3 @@ class ViInt64BufferMatcher(_BufferMatcher):
 class ViReal64BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, visatype.ViReal64, expected_size_or_value)
-
