@@ -697,4 +697,6 @@ def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
         pass
 
 
+#TODO(marcoskirsch): unit tests for reamining cases of get_ctype_variable_declaration_snippet(): parameter is a buffer.
+
 
