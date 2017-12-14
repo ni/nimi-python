@@ -296,15 +296,20 @@ def _fix_references(doc, cfg, make_link=False):
     return doc
 
 
-def format_type_for_rst_documentation(param, config):
-    p_type = param['python_type']
-    if param['enum'] is not None:
+def format_type_for_rst_documentation(param, config, numpy):
+    if numpy:
+        p_type = param['numpy_type']
+    elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+    else:
+        p_type = param['python_type']
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
     if param['type'] == 'ViChar' and param['is_buffer'] is True:
         p_type = 'string'
+    elif param['is_buffer'] is True and numpy is True:
+        p_type = 'numpy array of ' + p_type
     elif param['is_buffer'] is True:
         p_type = 'list of ' + p_type
     return p_type
@@ -329,6 +334,9 @@ def get_function_rst(function, config, method_template, numpy, indent):
     suffix = method_template['suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    if numpy:
+        session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
@@ -345,20 +353,20 @@ def get_function_rst(function, config, method_template, numpy, indent):
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = format_type_for_rst_documentation(p, config)
+        p_type = format_type_for_rst_documentation(p, config, numpy)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
+    output_params = filter_parameters(function, output_parameters)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = format_type_for_rst_documentation(p, config)
+            p_type = format_type_for_rst_documentation(p, config, numpy)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = format_type_for_rst_documentation(p, config)
+        p_type = format_type_for_rst_documentation(p, config, numpy)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
@@ -680,7 +688,7 @@ def test_get_param_rst():
 
 
 def test_get_param_type():
-    actual_param_type = format_type_for_rst_documentation(config['functions']['GetTurtleID']['parameters'][1], config)
+    actual_param_type = format_type_for_rst_documentation(config['functions']['GetTurtleID']['parameters'][1], config, False)
     expected_param_type = 'int'
     assert_rst_strings_are_equal(expected_param_type, actual_param_type)
 
