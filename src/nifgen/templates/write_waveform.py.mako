@@ -32,4 +32,3 @@
         else:
             write_handle_method(waveform_name_or_handle, data)
 
-

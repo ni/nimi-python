@@ -2527,11 +2527,17 @@ class _SessionBase(object):
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('float64'):
+            raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
-        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
+        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case 13.5
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2565,11 +2571,17 @@ class _SessionBase(object):
         '''
         import numpy
 
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('int16'):
+            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
-        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
+        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case 13.5
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2747,7 +2759,6 @@ class _SessionBase(object):
             write_named_method(waveform_name_or_handle, data)
         else:
             write_handle_method(waveform_name_or_handle, data)
-
 
     def _error_message(self, error_code):
         '''_error_message

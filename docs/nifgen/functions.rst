@@ -162,8 +162,8 @@ nifgen.Session methods
         You can create multiple arbitrary waveforms using one of the following
         niFgen Create Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform_f64`
-        -  :py:func:`nifgen.create_waveform_i16`
+        -  :py:func:`nifgen.create_waveform`
+        -  :py:func:`nifgen.CreateWaveformI16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -368,8 +368,8 @@ nifgen.Session methods
         create an arbitrary waveform using one of the following niFgen Create
         Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform_f64`
-        -  :py:func:`nifgen.create_waveform_i16`
+        -  :py:func:`nifgen.create_waveform`
+        -  :py:func:`nifgen.CreateWaveformI16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -1289,59 +1289,6 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_f64(waveform_data_array)
-
-    Creates an onboard waveform from binary F64 (floating point double) data
-    for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-    mode. The **waveformHandle** returned can later be used for setting the
-    active waveform, changing the data in the waveform, building sequences
-    of waveforms, or deleting the waveform when it is no longer needed.
-
-    
-
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].create_waveform_f64(waveform_data_array)
-
-
-    :param waveform_data_array:
-
-
-        Specifies the array of data you want to use for the new arbitrary
-        waveform. The array must have at least as many elements as the value
-        that you specify in **waveformSize**.
-
-        You must normalize the data points in the array to be between –1.00 and
-        +1.00.
-
-        **Default Value**: None
-
-        
-
-
-    :type waveform_data_array: list of float
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
 .. function:: create_waveform_from_file_f64(file_name, byte_order)
 
     This function takes the floating point double (F64) data from the
@@ -1472,57 +1419,6 @@ nifgen.Session methods
 
 
     :type byte_order: :py:data:`nifgen.ByteOrder`
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_waveform_i16(waveform_data_array)
-
-    Creates an onboard waveform from binary 16-bit signed integer (I16) data
-    for use in Arbitrary Waveform or Arbitrary Sequence output mode. The
-    **waveformHandle** returned can later be used for setting the active
-    waveform, changing the data in the waveform, building sequences of
-    waveforms, or deleting the waveform when it is no longer needed.
-
-    
-
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].create_waveform_i16(waveform_data_array)
-
-
-    :param waveform_data_array:
-
-
-        Specify the array of data that you want to use for the new arbitrary
-        waveform. The array must have at least as many elements as the value
-        that you specify in the Waveform Size parameter.
-        You must normalize the data points in the array to be between -32768 and
-        +32767.
-        ****Default Value**:** None
-
-        
-
-
-    :type waveform_data_array: list of int
 
     :rtype: int
     :return:

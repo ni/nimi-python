@@ -204,6 +204,8 @@ functions_method_template_filenames = {
 
 functions_numpy = {
     'WriteWaveform':                { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteNamedWaveform':           { 'parameters': { 4: { 'numpy': True, }, }, },
     'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteNamedWaveformI16':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
