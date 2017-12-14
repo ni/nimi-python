@@ -83,3 +83,4 @@ functions_numpy = {
     'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
+

@@ -96,5 +96,3 @@ def get_numpy_type_for_api_type(api_type, config):
         # We didn't find it so assert
         assert False, 'Unknown visa_type: {0}'.format(api_type)
 
-
-

@@ -232,7 +232,6 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         3. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
         5. Input buffer (custom type):                                          (custom_struct * len(list))(*[custom_struct(l) for l in list])
         4. Input buffer of simple types:                                        None if list is None else (visatype.ViInt32 * len(list))(*list)
-     13.5. Output buffer with mechanism passed-in (numpy):                      numpy.ctypeslib.as_ctypes(waveform)
       0.4. Output buffer with mechanism python-code:                            (visatype.ViInt32 * (<custom python code>))()
        11. Output buffer with mechanism fixed-size:                             visatype.ViInt32 * 256
        12. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None

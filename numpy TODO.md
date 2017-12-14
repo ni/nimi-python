@@ -22,3 +22,4 @@
     * Doesn't show `_into` methods. Fix.
     * For nifgen.Session.write() it shows type as list of float
 * __str__() for matcher classes would be nice.
+

@@ -567,12 +567,19 @@ class Session(_SessionBase):
         '''
         import numpy
 
+<<<<<<< HEAD
         if type(waveform_data) is not numpy.ndarray:
             raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
         if numpy.isfortran(waveform_data) is True:
             raise TypeError('waveform_data must be in C-order')
         if waveform_data.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+=======
+        if type(waveform_data) is not numpy.ndarray or numpy.isfortran(waveform_data) is True:
+                raise TypeError('waveform_data must be numpy.ndarray in C-order')
+        if waveform_data.dtype is not numpy.dtype('float64'):
+                raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+>>>>>>> master
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
         waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case 13.5
