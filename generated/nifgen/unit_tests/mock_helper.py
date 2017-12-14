@@ -68,9 +68,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateWaveformFromFileI16'] = {}
         self._defaults['CreateWaveformFromFileI16']['return'] = 0
         self._defaults['CreateWaveformFromFileI16']['waveformHandle'] = None
-        self._defaults['CreateWaveformI16'] = {}
-        self._defaults['CreateWaveformI16']['return'] = 0
-        self._defaults['CreateWaveformI16']['waveformHandle'] = None
         self._defaults['DefineUserStandardWaveform'] = {}
         self._defaults['DefineUserStandardWaveform']['return'] = 0
         self._defaults['DeleteNamedWaveform'] = {}
@@ -183,8 +180,12 @@ class SideEffectsHelper(object):
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
+        self._defaults['WriteBinary16Waveform'] = {}
+        self._defaults['WriteBinary16Waveform']['return'] = 0
         self._defaults['WriteNamedWaveformF64'] = {}
         self._defaults['WriteNamedWaveformF64']['return'] = 0
+        self._defaults['WriteNamedWaveformI16'] = {}
+        self._defaults['WriteNamedWaveformI16']['return'] = 0
         self._defaults['WriteScript'] = {}
         self._defaults['WriteScript']['return'] = 0
         self._defaults['WriteWaveform'] = {}
@@ -352,14 +353,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_CreateWaveformFromFileI16", param='waveformHandle')
         waveform_handle.contents.value = self._defaults['CreateWaveformFromFileI16']['waveformHandle']
         return self._defaults['CreateWaveformFromFileI16']['return']
-
-    def niFgen_CreateWaveformI16(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateWaveformI16']['return'] != 0:
-            return self._defaults['CreateWaveformI16']['return']
-        if self._defaults['CreateWaveformI16']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateWaveformI16", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformI16']['waveformHandle']
-        return self._defaults['CreateWaveformI16']['return']
 
     def niFgen_DefineUserStandardWaveform(self, vi, channel_name, waveform_size, waveform_data_array):  # noqa: N802
         if self._defaults['DefineUserStandardWaveform']['return'] != 0:
@@ -668,10 +661,20 @@ class SideEffectsHelper(object):
             return self._defaults['WaitUntilDone']['return']
         return self._defaults['WaitUntilDone']['return']
 
+    def niFgen_WriteBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
+        if self._defaults['WriteBinary16Waveform']['return'] != 0:
+            return self._defaults['WriteBinary16Waveform']['return']
+        return self._defaults['WriteBinary16Waveform']['return']
+
     def niFgen_WriteNamedWaveformF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         if self._defaults['WriteNamedWaveformF64']['return'] != 0:
             return self._defaults['WriteNamedWaveformF64']['return']
         return self._defaults['WriteNamedWaveformF64']['return']
+
+    def niFgen_WriteNamedWaveformI16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
+        if self._defaults['WriteNamedWaveformI16']['return'] != 0:
+            return self._defaults['WriteNamedWaveformI16']['return']
+        return self._defaults['WriteNamedWaveformI16']['return']
 
     def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         if self._defaults['WriteScript']['return'] != 0:
@@ -683,7 +686,7 @@ class SideEffectsHelper(object):
             return self._defaults['WriteWaveform']['return']
         return self._defaults['WriteWaveform']['return']
 
-    def niFgen_WriteWaveformDispatcher(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
+    def niFgen_WriteWaveformDispatcher(self, vi, channel_name, waveform_name_or_handle, size, data):  # noqa: N802
         if self._defaults['WriteWaveformDispatcher']['return'] != 0:
             return self._defaults['WriteWaveformDispatcher']['return']
         return self._defaults['WriteWaveformDispatcher']['return']
@@ -775,8 +778,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_CreateWaveformFromFileF64.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileI16")
         mock_library.niFgen_CreateWaveformFromFileI16.return_value = 0
-        mock_library.niFgen_CreateWaveformI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformI16")
-        mock_library.niFgen_CreateWaveformI16.return_value = 0
         mock_library.niFgen_DefineUserStandardWaveform.side_effect = MockFunctionCallError("niFgen_DefineUserStandardWaveform")
         mock_library.niFgen_DefineUserStandardWaveform.return_value = 0
         mock_library.niFgen_DeleteNamedWaveform.side_effect = MockFunctionCallError("niFgen_DeleteNamedWaveform")
@@ -849,8 +850,12 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_WaitUntilDone.side_effect = MockFunctionCallError("niFgen_WaitUntilDone")
         mock_library.niFgen_WaitUntilDone.return_value = 0
+        mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
+        mock_library.niFgen_WriteBinary16Waveform.return_value = 0
         mock_library.niFgen_WriteNamedWaveformF64.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformF64")
         mock_library.niFgen_WriteNamedWaveformF64.return_value = 0
+        mock_library.niFgen_WriteNamedWaveformI16.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformI16")
+        mock_library.niFgen_WriteNamedWaveformI16.return_value = 0
         mock_library.niFgen_WriteScript.side_effect = MockFunctionCallError("niFgen_WriteScript")
         mock_library.niFgen_WriteScript.return_value = 0
         mock_library.niFgen_WriteWaveform.side_effect = MockFunctionCallError("niFgen_WriteWaveform")
