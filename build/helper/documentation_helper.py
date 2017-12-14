@@ -296,7 +296,7 @@ def _fix_references(doc, cfg, make_link=False):
     return doc
 
 
-def format_type_for_rst_documentation(param, config, numpy):
+def format_type_for_rst_documentation(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     elif param['enum'] is not None:
@@ -328,7 +328,7 @@ rep_cap_method_desc_rst = rep_cap_method_desc + '''
 '''
 
 
-def get_function_rst(function, config, method_template, numpy, indent=0):
+def get_function_rst(function, method_template, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used in rst documentation
 
     Args:
@@ -364,7 +364,7 @@ def get_function_rst(function, config, method_template, numpy, indent=0):
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = format_type_for_rst_documentation(p, config, numpy)
+        p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
     output_params = filter_parameters(function, output_parameters)
@@ -372,19 +372,19 @@ def get_function_rst(function, config, method_template, numpy, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = format_type_for_rst_documentation(p, config, numpy)
+            p_type = format_type_for_rst_documentation(p, numpy, config)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = format_type_for_rst_documentation(p, config, numpy)
+        p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
 
 
-def _format_type_for_docstring(param, config, numpy):
+def _format_type_for_docstring(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     else:
@@ -406,7 +406,7 @@ rep_cap_method_desc_docstring = rep_cap_method_desc + '''
 '''
 
 
-def get_function_docstring(function, config, method_template, numpy, indent=0):
+def get_function_docstring(function, method_template, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
@@ -435,7 +435,7 @@ def get_function_docstring(function, config, method_template, numpy, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config, numpy))
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
         ds = get_documentation_for_node_docstring(p, config, indent + 8)
         if len(ds) > 0:
             docstring += ' ' + ds
@@ -444,7 +444,7 @@ def get_function_docstring(function, config, method_template, numpy, indent=0):
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config, numpy))
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
             ds = get_documentation_for_node_docstring(p, config, indent + 8)
             if len(ds) > 0:
                 docstring += ' ' + ds
@@ -779,7 +779,7 @@ wanted to choose.''',
 def test_get_function_rst_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
-    actual_function_rst = get_function_rst(function, config, method_template=method_template, numpy=False, indent=0)
+    actual_function_rst = get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=0)
     expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
 
     Returns the **ID** of selected Turtle Type.
@@ -816,7 +816,7 @@ def test_get_function_rst_default():
 def test_get_function_rst_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
-    actual_function_rst = get_function_rst(function, config, method_template=method_template, numpy=True, indent=0)
+    actual_function_rst = get_function_rst(function, method_template=method_template, numpy=True, config=config, indent=0)
     expected_fuction_rst = '''.. function:: fetch_waveform(number_of_samples)
 
     Returns waveform data.
@@ -850,7 +850,7 @@ def test_get_function_rst_numpy():
 def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, config, method_template=method_template, numpy=False, indent=0)
+    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
     expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
 
 Note: The RAPHAEL Turtles dont have an ID.
@@ -879,7 +879,7 @@ Returns:
 def test_get_function_docstring_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, config, method_template=method_template, numpy=True, indent=0)
+    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
     print(actual_function_docstring)
     expected_fuction_docstring = '''Returns waveform data.
 
