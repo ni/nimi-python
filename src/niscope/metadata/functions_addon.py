@@ -188,7 +188,7 @@ functions_default_value = {
 
 functions_method_template_filenames = {
     'FetchBinary8':                                  { 'method_templates': [
-        { 'filename': 'numpy_method.py.mako', 'suffix': '_into', },
+        { 'filename': 'numpy_method', 'suffix': '_into', },
     ], },
 }
 

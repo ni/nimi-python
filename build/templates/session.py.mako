@@ -121,7 +121,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-<%include file="${'/session.py' + method_template['filename']}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
+<%include file="${'/session.py' + method_template['filename'] + '.py.mako'}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
 % endfor
 % endfor
 
@@ -168,7 +168,7 @@ class Session(_SessionBase):
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-<%include file="${'/session.py' + method_template['filename']}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
+<%include file="${'/session.py' + method_template['filename'] + '.py.mako'}" args="f=functions[func_name], config=config, suffix=method_template['suffix']" />\
 % endfor
 % endfor
 
