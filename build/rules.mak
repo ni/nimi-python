@@ -23,7 +23,7 @@ endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
 $(MODULE_DIR)/session.py: $(wildcard $(TEMPLATE_DIR)/session.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.py/*.mako)
-$(MODULE_DIR)/session.rst: $(wildcard $(TEMPLATE_DIR)/session.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.rst/*.mako)
+$(DRIVER_DOCS_DIR)/functions.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
 
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
