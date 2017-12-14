@@ -8,6 +8,7 @@
 
     functions = template_parameters['metadata'].functions
     functions = helper.filter_codegen_functions(functions)
+
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 
@@ -15,7 +16,9 @@ ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 
 % for fname in sorted(functions):
 %    if functions[fname]['codegen_method'] == 'public':
-${helper.get_function_rst(functions[fname], config, indent=0)}
+% for method_template in functions[fname]['method_templates']:
+<%include file="${'/functions.rst' + method_template['filename'] + '.rst.mako'}" args="function=functions[fname], config=config, method_template=method_template, indent=0" />\
+% endfor
 
 %    endif
 % endfor

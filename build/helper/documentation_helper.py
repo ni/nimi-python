@@ -296,7 +296,7 @@ def _fix_references(doc, cfg, make_link=False):
     return doc
 
 
-def _format_type_for_rst_documentation(param, config):
+def format_type_for_rst_documentation(param, config):
     p_type = param['python_type']
     if param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
@@ -321,51 +321,6 @@ rep_cap_method_desc_rst = rep_cap_method_desc + '''
 
     session['0,1'].{1}({2})
 '''
-
-
-def get_function_rst(function, config, indent=0):
-    '''Gets rst formatted documentation for given function
-
-    Args:
-        fname (str): Function name - key in function dictionary
-        function (dict): function entry correcsponding to fname in function dictionary
-
-    Returns:
-        str: rst formatted documentation
-    '''
-    if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
-
-    rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
-    indent += 4
-    rst += get_documentation_for_node_rst(function, config, indent)
-
-    input_params = filter_parameters(function, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-    if len(input_params) > 0:
-        rst += '\n'
-    for p in input_params:
-        rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
-        rst += get_documentation_for_node_rst(p, config, indent + 4)
-
-        p_type = _format_type_for_rst_documentation(p, config)
-        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
-
-    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
-    if len(output_params) > 1:
-        rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
-        rst += (' ' * (indent + 4)) + 'WHERE\n'
-        for p in output_params:
-            p_type = _format_type_for_rst_documentation(p, config)
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
-            rst += get_documentation_for_node_rst(p, config, indent + 8)
-    elif len(output_params) == 1:
-        p = output_params[0]
-        p_type = _format_type_for_rst_documentation(p, config)
-        rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
-        rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
-
-    return rst
 
 
 def _format_type_for_docstring(param, config):
@@ -503,13 +458,25 @@ def as_rest_table(data, header=True):
 
 def _remove_trailing_whitespace(s):
     '''Removes trailing whitespace and empty lines in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
-    return re.sub(r'\s+$', '', s, flags=re.M)
+    initial_lines = s.strip().splitlines()
+    fixed_lines = []
+    blank_lines = 0
+    for l in initial_lines:
+        stripped_line = l.strip()
+        if len(stripped_line) == 0 and blank_lines == 0:
+            fixed_lines.append(stripped_line)
+            blank_lines = 1
+        if len(stripped_line) > 0:
+            fixed_lines.append(stripped_line)
+            blank_lines = 0
+
+    return fixed_lines
 
 
 def assert_rst_strings_are_equal(expected, actual):
     '''Asserts rst formatted strings (multiline) are equal. Ignores trailing whitespace and empty lines.'''
-    expected = _remove_trailing_whitespace(expected).splitlines()
-    actual = _remove_trailing_whitespace(actual).splitlines()
+    expected = _remove_trailing_whitespace(expected)
+    actual = _remove_trailing_whitespace(actual)
     assert len(expected) == len(actual), 'Strings have different number of non-empty lines.'
     for expected_line, actual_line in zip(expected, actual):
         assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
@@ -639,18 +606,18 @@ wanted to choose.''',
 
 
 def test_get_function_rst():
-    actual_function_rst = get_function_rst(config['functions']['GetTurtleID'], config, 0)
-    expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
-
+    actual_function_rst = get_documentation_for_node_rst(config['functions']['GetTurtleID'], config, 0)
+    expected_fuction_rst = '''
     Returns the **ID** of selected Turtle Type.
 
-
-
     .. note:: The RAPHAEL Turtles dont have an ID.
+'''
+    assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
 
 
-    :param turtle_type:
-
+def test_get_param_rst():
+    actual_param_rst = get_documentation_for_node_rst(config['functions']['GetTurtleID']['parameters'][1], config, 0)
+    expected_param_rst = '''
 
         Specifies the type of Turtle type
         wanted to choose.
@@ -666,18 +633,14 @@ def test_get_function_rst():
         +---------------------------------+---+--------------+
 
         .. note:: You wont be able to import RAPHAEL
-
-    :type turtle_type: int
-
-    :rtype: float
-    :return:
+'''
+    assert_rst_strings_are_equal(expected_param_rst, actual_param_rst)
 
 
-            Returns the **ID** of selected turtle.
-
-
-''' # noqa
-    assert_rst_strings_are_equal(actual_function_rst, expected_fuction_rst)
+def test_get_param_type():
+    actual_param_type = format_type_for_rst_documentation(config['functions']['GetTurtleID']['parameters'][1], config)
+    expected_param_type = 'int'
+    assert_rst_strings_are_equal(expected_param_type, actual_param_type)
 
 
 def test_get_function_docstring():
