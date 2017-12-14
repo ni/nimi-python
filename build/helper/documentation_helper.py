@@ -552,7 +552,6 @@ def assert_rst_strings_are_equal(expected, actual):
     '''Asserts rst formatted strings (multiline) are equal. Ignores trailing whitespace and empty lines.'''
     expected = _remove_trailing_whitespace(expected)
     actual = _remove_trailing_whitespace(actual)
-    # assert len(expected) == len(actual), 'Strings have different number of non-empty lines.'
     for expected_line, actual_line in zip(expected, actual):
         assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
 
