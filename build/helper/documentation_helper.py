@@ -323,6 +323,48 @@ rep_cap_method_desc_rst = rep_cap_method_desc + '''
 '''
 
 
+def get_function_rst(function, config, method_template, numpy, indent):
+    '''Renders a Session method corresponding to the passed-in function metadata.'''
+
+    suffix = method_template['suffix']
+    session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
+    session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
+
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+
+    rst = '.. function:: ' + function['python_name'] + suffix + '('
+    rst += get_params_snippet(function, session_method) + ')'
+    indent += 4
+    rst += get_documentation_for_node_rst(function, config, indent)
+
+    input_params = filter_parameters(function, session_declaration)
+    if len(input_params) > 0:
+        rst += '\n'
+    for p in input_params:
+        rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
+        rst += get_documentation_for_node_rst(p, config, indent + 4)
+
+        p_type = format_type_for_rst_documentation(p, config)
+        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
+
+    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
+    if len(output_params) > 1:
+        rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
+        rst += (' ' * (indent + 4)) + 'WHERE\n'
+        for p in output_params:
+            p_type = format_type_for_rst_documentation(p, config)
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
+            rst += get_documentation_for_node_rst(p, config, indent + 8)
+    elif len(output_params) == 1:
+        p = output_params[0]
+        p_type = format_type_for_rst_documentation(p, config)
+        rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
+        rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
+
+    return rst
+
+
 def _format_type_for_docstring(param, config):
     p_type = param['python_type']
 
