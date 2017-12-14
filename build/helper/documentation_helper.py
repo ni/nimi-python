@@ -532,7 +532,7 @@ def as_rest_table(data, header=True):
 
 
 def _remove_trailing_whitespace(s):
-    '''Removes trailing whitespace and empty lines in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
+    '''Removes trailing whitespace and empty lines in multi-line strings.'''
     initial_lines = s.strip().splitlines()
     fixed_lines = []
     blank_lines = 0
