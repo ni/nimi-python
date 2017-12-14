@@ -1,4 +1,4 @@
-<%page args="f, config, suffix"/>\
+<%page args="f, config, method_template"/>\
 <%
     '''Renders a Session method corresponding to the passed-in function metadata using numpy.array for buffers.'''
 
@@ -7,11 +7,12 @@
     parameters = f['parameters']
     c_function_prefix = config['c_function_prefix']
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
+    suffix = method_template['suffix']
 %>\
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(f, config, indent=8)}
+        ${helper.get_function_docstring(f, config, method_template, True, indent=8)}
         '''
         import numpy
 
