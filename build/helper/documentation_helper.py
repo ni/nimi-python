@@ -342,7 +342,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
         str: rst formatted documentation
     '''
 
-    suffix = method_template['suffix']
+    suffix = method_template['method_python_name_suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
     output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
@@ -561,7 +561,7 @@ config = {
         'GetTurtleID': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
-            'method_templates': [{'filename': '/default_method', 'suffix': '', }, ],
+            'method_templates': [{'filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [
                 {
                     'direction': 'in',
@@ -658,7 +658,7 @@ wanted to choose.''',
             'documentation': {'description': 'Returns waveform data.'},
             'has_repeated_capability': False,
             'is_error_handling': False,
-            'method_templates': [{'filename': '/default_method', 'suffix': ''}, {'filename': '/numpy_method', 'suffix': '_into'}],
+            'method_templates': [{'filename': '/default_method', 'method_python_name_suffix': ''}, {'filename': '/numpy_method', 'method_python_name_suffix': '_into'}],
             'name': 'FetchWaveform',
             'parameters': [
                 {

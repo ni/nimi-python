@@ -40,7 +40,7 @@ for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
         for method_template in functions[f]['method_templates']:
-            table_contents.append([':py:func:`{0}{1}`'.format(name, method_template['suffix'])])
+            table_contents.append([':py:func:`{0}{1}`'.format(name, method_template['method_python_name_suffix'])])
 
 table = helper.as_rest_table(table_contents)
 %>\

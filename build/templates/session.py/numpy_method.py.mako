@@ -7,7 +7,7 @@
     parameters = f['parameters']
     c_function_prefix = config['c_function_prefix']
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
-    suffix = method_template['suffix']
+    suffix = method_template['method_python_name_suffix']
 %>\
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
         '''${f['python_name']}

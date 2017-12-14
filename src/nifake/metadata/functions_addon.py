@@ -76,8 +76,8 @@ functions_custom_python_name = {
 
 functions_method_template_filenames = {
     'FetchWaveform':                        { 'method_templates': [ 
-        { 'filename': 'default_method', 'suffix': '', },
-        { 'filename': 'numpy_method', 'suffix': '_into', },
+        { 'filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'filename': 'numpy_method', 'method_python_name_suffix': '_into', },
     ], },
 }
 
