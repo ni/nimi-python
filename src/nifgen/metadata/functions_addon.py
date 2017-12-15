@@ -152,10 +152,7 @@ functions_additional_functions = {
                 'name': 'waveformNameOrHandle',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                'description': '''
-                    The name (str) or handle (int) of an arbitrary waveform previously allocated with
-                    the niFgen\_AllocateNamedWaveform niFgen\_AllocateWaveform function.
-                ''',
+                'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with the niFgen\_AllocateNamedWaveform niFgen\_AllocateWaveform function.',
             },
             },
             {
@@ -170,9 +167,7 @@ functions_additional_functions = {
                 'name': 'Data',
                 'type': 'ViReal64[]',
                 'documentation': {
-                    'description': '''
-                        Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
-                    ''',
+                    'description': 'Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
                 },
             },
         ],
