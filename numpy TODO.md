@@ -18,4 +18,3 @@
     * Sometimes refers to private functions rather than public dispatchers.
 * __str__() for matcher classes would be nice.
 * "Dispatcher" functions generate code in Library but it's bogus and dead and confusing. We should skip doing that.
-

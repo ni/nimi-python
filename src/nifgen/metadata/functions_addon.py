@@ -130,8 +130,6 @@ functions_default_value = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
-
-
     'CreateWaveformDispatcher': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -203,7 +201,7 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
                     'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen\_AllocateNamedWaveform or niFgen\_AllocateWaveform.',
-                    },
+                },
             },
             {
                 'direction': 'in',
@@ -258,4 +256,3 @@ functions_numpy = {
     'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
     'WriteNamedWaveformI16':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
-
