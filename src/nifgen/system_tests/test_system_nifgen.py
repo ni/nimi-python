@@ -106,7 +106,7 @@ invalid_waveforms = ['Not waveform data',
                      numpy.zeros(100, dtype=numpy.uint16),
                      numpy.zeros(100, dtype=numpy.float32),
                      42,
-                     3.14159,]
+                     3.14159, ]
 
 
 def test_create_waveform_wrong_type(session):
