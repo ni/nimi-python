@@ -150,11 +150,13 @@ def test_read_current_temperature(session):
 
 
 def test_allocate_waveform(session):
+    handles = [session.allocate_waveform(100) in range(10)]
+    assert len(handles) == len(set(handles)), "Failed, waveform handles aren't unique."
     try:
-        waveforme_data = [1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1]
-        session.write_waveform(session.allocate_waveform(10), waveforme_data)
+        session.allocate_waveform(2000000000)
+        assert False
     except nifgen.Error as e:
-        assert e.code == -1074126841  # Writing more data than allocated
+        assert e.code == -1074101596  # Such a big waveform doesn't fit!
 
 
 def test_clear_waveform_memory(session):
@@ -201,7 +203,7 @@ def test_arb_script(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT
     session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
-    session.write_named_waveform('wfmSine', waveform_data)
+    session.write_waveform('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
     script = '''script myScript0
     repeat 3
@@ -246,6 +248,64 @@ def test_reset_with_default(session):
     assert session.arb_sample_rate == 250000000.0
 
 
+def test_write_waveform_from_list(session):
+    data = [0.1] * 10000
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_waveform_from_numpy_array_float64(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.float64)
+    data.fill(0.5)
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_waveform_numpy_array_int16(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.int16)
+    data.fill(256)
+    session.write_waveform(session.allocate_waveform(len(data)), data)
+
+
+def test_write_named_waveform_from_list(session):
+    data = [0.1] * 10000
+    session.allocate_named_waveform('foo', len(data))
+    session.write_waveform('foo', data)
+
+
+def test_write_named_waveform_from_numpy_array_float64(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.float64)
+    data.fill(0.5)
+    session.allocate_named_waveform('foo', len(data))
+    session.write_waveform('foo', data)
+
+
+def test_write_named_waveform_numpy_array_int16(session):
+    import numpy
+    data = numpy.ndarray(10000, dtype=numpy.int16)
+    data.fill(256)
+    session.allocate_named_waveform('foo', len(data))
+    session.write_waveform('foo', data)
+
+
+def test_write_waveform_wrong_type(session):
+    import numpy
+    waveform_handle = session.allocate_waveform(100)
+    invalid_waveforms = ['Not waveform data',
+                         numpy.zeros(100, dtype=numpy.uint16),
+                         numpy.zeros(100, dtype=numpy.float32),
+                         42,
+                         3.14159, ]
+    for data in invalid_waveforms:
+        try:
+            session.write_waveform(waveform_handle, data)
+            assert False
+        except TypeError as e:
+            print(data)
+            print(e)
+
+
 def test_set_waveform_next_write_position(session):
     session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
@@ -268,9 +328,16 @@ def test_named_waveform_operations(session):
     waveform_data_2 = [x * (-1.0 / 256.0) for x in range(256)]
     session.allocate_named_waveform(waveform_name, waveform_size)
     session.set_named_waveform_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
-    session.write_named_waveform(waveform_name, waveform_data_1)
-    session.write_named_waveform(waveform_name, waveform_data_2)
+    session.write_waveform(waveform_name, waveform_data_1)
+    session.write_waveform(waveform_name, waveform_data_2)
     session.delete_named_waveform(waveform_name)
+
+
+def test_write_waveform_from_file_f64(session):
+    try:
+        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+    except nifgen.Error as e:
+        assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.
 
 
 def test_wait_until_done(session):
@@ -308,9 +375,3 @@ def test_send_software_edge_trigger(session):
     with session.initiate():
         session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
 
-
-def test_write_waveform_from_file_f64(session):
-    try:
-        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
-    except nifgen.Error as e:
-        assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.

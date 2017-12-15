@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
   * #### Added
-    * Added the abort() function.
+    * `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
   * #### Changed
   * #### Removed
 * ### NI-DMM
@@ -27,24 +27,26 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
-    * Removed init_with_topology. Clients should use niswitch.Session() constructor. See #660.
+    * Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
 * ### NI-DCPower
   * #### Added
   * #### Changed
   * #### Removed
 * ### NI-FGEN
   * #### Added
+    * Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
+    * Support for calling `write_waveform` with a waveform handle (int) or a name (str).
   * #### Changed
     * Renamed `create_waveform_f64` -> `create_waveform`
-    * Renamed `write_named_waveform_f64` -> `write_named_waveform`
   * #### Removed
-    * ~~`create_waveform_i16`~~
-    * ~~`write_binary16_waveform`~~
-    * ~~`write_named_waveform_i16`~~
+    * `create_waveform_i16`
+    * `write_binary16_waveform`: Use `write_waveform`
+    * `write_named_waveform_i16`: Use `write_waveform`
+    * `write_named_waveform_f64`: Use `write_waveform`
 * ### NI-SCOPE
   * #### Added
   * #### Changed
-    * Added default values for timeout on the fetch, fetch_array_measurement, and read functions.
+    * Added default values for timeout on all fetch and read functions.
   * #### Removed
 
 ## 0.5.0 - 2017-11-27
@@ -53,15 +55,15 @@ All notable changes to this project will be documented in this file.
     * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
-    * get_ext_cal_recommended_interval()
+    * `get_ext_cal_recommended_interval`
 * ### NI-DCPower
   * #### Added
-    * get_ext_cal_last_date_and_time()
-    * get_ext_cal_last_temp()
-    * get_ext_cal_recommended_interval()
+    * `get_ext_cal_last_date_and_time`
+    * `get_ext_cal_last_temp`
+    * `get_ext_cal_recommended_interval`
 * ### NI-FGEN
   * #### Removed
-    * adjust_sample_clock_relative_delay()
+    * `adjust_sample_clock_relative_delay`
 * ### NI-SCOPE
   * #### Added
     * Initial release
@@ -76,29 +78,29 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
   * #### Changed
     * Removed incorrect leading underscore from some enum values:
-      * Function.AC_VOLTS_DC_COUPLED
-      * Function.WAVEFORM_CURRENT
-      * MeasurementCompleteDest.LBR_TRIG_0
-      * OperationMode.IVIDMM_MODE
-      * SampleTrigger.EXTERNAL
-      * SampleTrigger.TTL_3
-      * TriggerSource.TTL_0
-      * TriggerSource.TTL_3
-      * TriggerSource.TTL_7
-      * TriggerSource.PXI_STAR
-* ### NI-Switch
+      * `Function.AC_VOLTS_DC_COUPLED`
+      * `Function.WAVEFORM_CURRENT`
+      * `MeasurementCompleteDest.LBR_TRIG_0`
+      * `OperationMode.IVIDMM_MODE`
+      * `SampleTrigger.EXTERNAL`
+      * `SampleTrigger.TTL_3`
+      * `TriggerSource.TTL_0`
+      * `TriggerSource.TTL_3`
+      * `TriggerSource.TTL_7`
+      * `TriggerSource.PXI_STAR`
+* ### NI-SWITCH
   * #### Removed
-    * Support for is_debounced and is_scanning functions. Instead use the attribute of the same name.
+    * Support for `is_debounced` and `is_scanning` functions. Instead use the attribute of the same name.
 * ### NI-DCPower
   * #### Added
-    * New example nidcpower_advanced_sequence.py
+    * New example `nidcpower_advanced_sequence.py`
   * #### Changed
     * Fixed method signature for:
-      * wait_for_event
-      * create_sequence
-      * create_advanced_sequence
+      * `wait_for_event`
+      * `create_sequence`
+      * `create_advanced_sequence`
   * #### Removed
-    * Support for measure_multiple until issue #444 is addressed.
+    * Support for `measure_multiple` until issue #444 is addressed.
 * ### NI-FGEN
   * #### Added
     * Initial release
@@ -108,7 +110,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * Support for ViInt64 (64-bit integers)
   * #### Changed
-    * Modified how methods with repeated capabilities are invoked. There's no longer (for example) a "channel_name" input. Instead:
+    * Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
       ```python
       # Sets sequence on channels 0 through 3
       session['0-3'].set_sequence(values, source_delays)

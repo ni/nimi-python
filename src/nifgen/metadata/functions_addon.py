@@ -20,7 +20,12 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'CreateWaveformI16':                    { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
+    'CreateWaveformF64':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch): Call this from public method create_waveform()
+    'CreateWaveformI16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): Call this from public method create_waveform()
+    'WriteBinary16Waveform':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
+    'WriteNamedWaveformF64':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
+    'WriteNamedWaveformI16':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
+    'WriteWaveform':                        { 'codegen_method': 'private',  },  # Called from public method write_waveform()
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
@@ -28,8 +33,6 @@ functions_codegen_method = {
     'ResetAttribute':                       { 'codegen_method': 'no',       },  # Issue #531
     'RouteSignalOut':                       { 'codegen_method': 'no',       },  # Use string-based routing instead
     'WriteBinary16AnalogStaticValue':       { 'codegen_method': 'no',       },  # Use corresponding attribute instead
-    'WriteBinary16Waveform':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
-    'WriteNamedWaveformI16':                { 'codegen_method': 'no',       },  # Add back in once we support 'fast' numpy flavor of the method.
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
@@ -60,13 +63,6 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
-}
-
-# Override the 'python' name for some functions.
-functions_python_name = {
-    'CreateWaveformF64':    { 'python_name': 'create_waveform',         },
-    'WriteNamedWaveformF64':{ 'python_name': 'write_named_waveform',    },
-    'AbortGeneration':      { 'python_name': 'abort',    },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -130,5 +126,81 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+}
+
+# Functions not in original metadata.
+functions_additional_functions = {
+    'WriteWaveformDispatcher': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'waveformNameOrHandle',
+                'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
+                'documentation': {
+                'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with the niFgen\_AllocateNamedWaveform niFgen\_AllocateWaveform function.',
+            },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Size',
+                'type': 'ViInt32',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Data',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''Writes data to the waveform in onboard memory.
+
+By default, subsequent calls to this function
+continue writing data from the position of the last sample written. You
+can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
+nifgen\_SetWaveformNextWritePosition function.''',
+        },
+    },
+}
+
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'AbortGeneration':                      { 'python_name': 'abort',                   },
+    'CreateWaveformF64':                    { 'python_name': 'create_waveform',         },
+    'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
+}
+
+functions_method_template_filenames = {
+    'WriteWaveformDispatcher':      { 'method_template_filenames': ['write_waveform.py.mako'], },
+    'WriteWaveform':                { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
+    'WriteNamedWaveformF64':        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
+    'WriteBinary16Waveform':        { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
+    'WriteNamedWaveformI16':        { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
+}
+
+functions_numpy = {
+    'WriteWaveform':                { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteNamedWaveform':           { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
+    'WriteNamedWaveformI16':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
