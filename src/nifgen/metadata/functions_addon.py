@@ -20,8 +20,8 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'CreateWaveformF64':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch): Call this from public method create_waveform()
-    'CreateWaveformI16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch): Call this from public method create_waveform()
+    'CreateWaveformF64':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
+    'CreateWaveformI16':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
     'WriteNamedWaveformF64':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
     'WriteNamedWaveformI16':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
@@ -130,6 +130,56 @@ functions_default_value = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
+
+
+    'CreateWaveformDispatcher': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'waveformDataArray',
+                'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
+                'documentation': {
+                'description': 'Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'waveformHandle',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.',
+                },
+            },
+        ],
+'documentation': {
+'description': '''
+Creates an onboard waveform
+for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+mode.
+''',
+'note': '''
+You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or
+NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+''',
+},
+    },
+
     'WriteWaveformDispatcher': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -152,11 +202,8 @@ functions_additional_functions = {
                 'name': 'waveformNameOrHandle',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                'description': '''
-                    The name (str) or handle (int) of an arbitrary waveform previously allocated with
-                    the niFgen\_AllocateNamedWaveform niFgen\_AllocateWaveform function.
-                ''',
-            },
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen\_AllocateNamedWaveform or niFgen\_AllocateWaveform.',
+                    },
             },
             {
                 'direction': 'in',
@@ -168,11 +215,9 @@ functions_additional_functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'Data',
-                'type': 'ViReal64[]',
+                'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                    'description': '''
-                        Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
-                    ''',
+                    'description': 'Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
                 },
             },
         ],
@@ -190,11 +235,14 @@ nifgen\_SetWaveformNextWritePosition function.''',
 # Override the 'python' name for some functions.
 functions_python_name = {
     'AbortGeneration':                      { 'python_name': 'abort',                   },
-    'CreateWaveformF64':                    { 'python_name': 'create_waveform',         },
+    'CreateWaveformDispatcher':             { 'python_name': 'create_waveform'          },
     'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
 }
 
 functions_method_template_filenames = {
+    'CreateWaveformDispatcher':     { 'method_template_filenames': ['create_waveform.py.mako'], },
+    'CreateWaveformF64':            { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
+    'CreateWaveformI16':            { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
     'WriteWaveformDispatcher':      { 'method_template_filenames': ['write_waveform.py.mako'], },
     'WriteWaveform':                { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
     'WriteNamedWaveformF64':        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
@@ -203,6 +251,8 @@ functions_method_template_filenames = {
 }
 
 functions_numpy = {
+    'CreateWaveformF64':            { 'parameters': { 3: { 'numpy': True, }, }, },
+    'CreateWaveformI16':            { 'parameters': { 3: { 'numpy': True, }, }, },
     'WriteWaveform':                { 'parameters': { 4: { 'numpy': True, }, }, },
     'WriteNamedWaveform':           { 'parameters': { 4: { 'numpy': True, }, }, },
     'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
