@@ -2492,8 +2492,7 @@ nifgen.Session methods
     :param waveform_name_or_handle:
 
 
-        The name (str) or handle (int) of an arbitrary waveform previously allocated with
-                            the :py:func:`nifgen.allocate_named_waveform` :py:func:`nifgen.allocate_waveform` function.
+        The name (str) or handle (int) of an arbitrary waveform previously allocated with the :py:func:`nifgen.allocate_named_waveform` :py:func:`nifgen.allocate_waveform` function.
 
         
 
