@@ -72,7 +72,7 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters, config, use_numpy_array=False):
+def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', 'Expected parameter {0} (a.k.a. {1}) to have direction out'.format(output_parameter['name'], output_parameter['python_name'])
     return_type_snippet = ''
