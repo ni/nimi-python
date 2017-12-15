@@ -2498,15 +2498,9 @@ nifgen.Session methods
 
 
     :type waveform_name_or_handle: int
-    :param data:
+    :param size:
 
-
-        Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
-
-        
-
-
-    :type data: list of float
+    :type size: int
 
 .. function:: reset()
 
