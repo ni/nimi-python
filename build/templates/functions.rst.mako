@@ -17,7 +17,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 % for fname in sorted(functions):
 %    if functions[fname]['codegen_method'] == 'public':
 % for method_template in functions[fname]['method_templates']:
-<%include file="${'/functions.rst' + method_template['filename'] + '.rst.mako'}" args="function=functions[fname], config=config, method_template=method_template, indent=0" />\
+<%include file="${'/functions.rst' + method_template['documentation_filename'] + '.rst.mako'}" args="function=functions[fname], config=config, method_template=method_template, indent=0" />\
 % endfor
 
 %    endif

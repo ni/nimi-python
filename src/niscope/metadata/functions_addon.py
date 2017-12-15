@@ -189,7 +189,7 @@ functions_default_value = {
 functions_method_template_filenames = {
     'FetchBinary8':                                  {
         'method_templates': [
-            { 'filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+            { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
         ],
     },
 }

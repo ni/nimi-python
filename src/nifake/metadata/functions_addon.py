@@ -77,14 +77,14 @@ functions_custom_python_name = {
 functions_method_template_filenames = {
     'FetchWaveform':                        {
         'method_templates': [
-            { 'filename': 'default_method', 'method_python_name_suffix': '',  },
-            { 'filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+            { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '',  },
+            { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
         ], 
     },
     'WriteWaveform':                        {
         'method_templates': [
-            { 'filename': 'default_method', 'method_python_name_suffix': '', },
-            { 'filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
+            { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+            { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
         ],
     },
 }
