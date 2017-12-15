@@ -2396,8 +2396,48 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_named_waveform(self, waveform_name, data):
-        '''write_named_waveform
+    def _write_binary16_waveform(self, waveform_handle, data):
+        '''_write_binary16_waveform
+
+        Writes binary data to the waveform in onboard memory. The waveform
+        handle passed must have been created by a call to the
+        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.
+
+        By default, the subsequent call to the _write_binary16_waveform
+        function continues writing data from the position of the last sample
+        written. You can set the write position and offset by calling the
+        nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
+        you can write more data than the allocated waveform size in onboard
+        memory. Refer to the
+        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
+        information about streaming data.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1']._write_binary16_waveform(waveform_handle, data)
+
+        Args:
+            waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
+                the nifgen_AllocateWaveform function.
+            data (list of int): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**. The binary data
+                is left-justified.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _write_named_waveform_f64(self, waveform_name, data):
+        '''_write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
@@ -2410,7 +2450,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the write_named_waveform
+        By default, the subsequent call to the _write_named_waveform_f64
         function continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition function. If streaming is
@@ -2425,7 +2465,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_named_waveform(waveform_name, data)
+            session['0,1']._write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
@@ -2438,6 +2478,42 @@ class _SessionBase(object):
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
         data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _write_named_waveform_i16(self, waveform_name, data):
+        '''_write_named_waveform_i16
+
+        Writes binary data to the named waveform in onboard memory.
+
+        By default, the subsequent call to the _write_named_waveform_i16
+        function continues writing data from the position of the last sample
+        written. You can set the write position and offset by calling the
+        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
+        enabled, you can write more data than the allocated waveform size in
+        onboard memory. Refer to the
+        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
+        information about streaming data.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1']._write_named_waveform_i16(waveform_name, data)
+
+        Args:
+            waveform_name (string): Specifies the name to associate with the allocated waveform.
+            data (list of int): Specifies the array of data to load into the waveform. The array must
+                have at least as many elements as the value in **size**.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViInt16 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2468,8 +2544,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_waveform(self, waveform_handle, data):
-        '''write_waveform
+    def _write_waveform(self, waveform_handle, data):
+        '''_write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
@@ -2482,7 +2558,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the write_waveform function
+        By default, the subsequent call to the _write_waveform function
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
@@ -2497,7 +2573,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_waveform(waveform_handle, data)
+            session['0,1']._write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2511,6 +2587,37 @@ class _SessionBase(object):
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
         data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def write_waveform(self, waveform_name_or_handle, data):
+        '''write_waveform
+
+        Writes data to the waveform in onboard memory.
+
+        By default, subsequent calls to this function
+        continue writing data from the position of the last sample written. You
+        can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
+        nifgen_SetWaveformNextWritePosition function.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1'].write_waveform(waveform_name_or_handle, data)
+
+        Args:
+            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with the allocate_named_waveform allocate_waveform function.
+            data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_or_handle_ctype = visatype.ViInt32(waveform_name_or_handle)  # case 9
+        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case 6
+        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteWaveformDispatcher(vi_ctype, channel_name_ctype, waveform_name_or_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -1944,10 +1944,12 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(wfm) is not numpy.ndarray or numpy.isfortran(wfm) is True:
-                raise TypeError('wfm must be numpy.ndarray in C-order')
+        if type(wfm) is not numpy.ndarray:
+            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
+        if numpy.isfortran(wfm) is True:
+            raise TypeError('wfm must be in C-order')
         if wfm.dtype is not numpy.dtype('int8'):
-                raise TypeError('wfm must be numpy.ndarray of dtype=int8, is ' + str(wfm.dtype))
+            raise TypeError('wfm must be numpy.ndarray of dtype=int8, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 9
