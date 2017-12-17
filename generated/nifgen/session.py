@@ -1465,6 +1465,51 @@ class _SessionBase(object):
         else:
             return self._create_waveform_f64(waveform_data_array)
 
+    def _create_waveform_f64(self, waveform_data_array):
+        '''_create_waveform_f64
+
+        Creates an onboard waveform from binary F64 (floating point double) data
+        for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+        mode. The **waveformHandle** returned can later be used for setting the
+        active waveform, changing the data in the waveform, building sequences
+        of waveforms, or deleting the waveform when it is no longer needed.
+
+        Note:
+        You must call the nifgen_ConfigureOutputMode function to set the
+        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1']._create_waveform_f64(waveform_data_array)
+
+        Args:
+            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
+                waveform. The array must have at least as many elements as the value
+                that you specify in **waveformSize**.
+
+                You must normalize the data points in the array to be between –1.00 and
+                +1.00.
+
+                **Default Value**: None
+
+        Returns:
+            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
+                when referring to this waveform.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(waveform_handle_ctype.value)
+
     def _create_waveform_f64_numpy(self, waveform_data_array):
         '''_create_waveform_f64
 

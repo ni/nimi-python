@@ -242,6 +242,7 @@ functions_method_template_filenames = {
         { 'session_filename': 'create_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_numpy', },
     ], },
     'CreateWaveformF64':            { 'method_templates': [
+        { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
     ], },
     'CreateWaveformI16':            { 'method_templates': [
