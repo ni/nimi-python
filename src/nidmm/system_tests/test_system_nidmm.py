@@ -258,7 +258,7 @@ def test_fetch_waveform_into(session):
         waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
         # Initialize with NaN so we can later verify all samples were overwritten by the driver.
         waveform.fill(float('nan'))
-        measurements = session.fetch_waveform(number_of_points_to_read, waveform)
+        measurements = session.fetch_waveform_into(number_of_points_to_read, waveform)
     for sample in waveform:
         assert not math.isnan(sample)
 
