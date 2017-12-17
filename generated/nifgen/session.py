@@ -2423,7 +2423,10 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            data (list of int): Specifies the array of data to load into the waveform. The array must
+            size (int): Specifies the number of samples to load into the waveform.
+
+                **Default Value**: 0
+            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
         '''
@@ -2522,7 +2525,10 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            size (int): Specifies the number of samples to load into the waveform.
+
+                **Default Value**: 0
+            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         import numpy
@@ -2566,7 +2572,10 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            data (list of int): Specifies the array of data to load into the waveform. The array must
+            size (int): Specifies the number of samples to load into the waveform.
+
+                **Default Value**: 0
+            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         import numpy
@@ -2693,7 +2702,10 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            size (int): Specifies the number of samples to load into the waveform.
+
+                **Default Value**: 0
+            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
         import numpy

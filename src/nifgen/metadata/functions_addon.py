@@ -190,11 +190,23 @@ functions_python_name = {
 }
 
 functions_method_template_filenames = {
-    'WriteWaveformDispatcher':      { 'method_template_filenames': ['write_waveform.py.mako'], },
-    'WriteWaveform':                { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
-    'WriteNamedWaveformF64':        { 'method_template_filenames': ['session_default_method.py.mako', 'session_numpy_write_method.py.mako'], },
-    'WriteBinary16Waveform':        { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
-    'WriteNamedWaveformI16':        { 'method_template_filenames': ['session_numpy_write_method.py.mako'], },
+    'WriteWaveformDispatcher':      { 'method_templates': [
+        { 'session_filename': 'write_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'WriteWaveform':                { 'method_templates': [
+        { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
+    ], },
+    'WriteNamedWaveformF64':        { 'method_templates': [
+        { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', }, 
+        { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
+    ], },
+    'WriteBinary16Waveform':        { 'method_templates': [
+        { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
+    ], },
+    'WriteNamedWaveformI16':        { 'method_templates': [
+        { 'session_filename': 'numpy_write_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_numpy', },
+    ], },
 }
 
 functions_numpy = {

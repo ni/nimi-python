@@ -1,4 +1,4 @@
-<%page args="f, config"/>\
+<%page args="f, config, method_template"/>\
 <%
     '''Dispatches to the appropriate "write waveform" method based on the waveform type.'''
     import build.helper as helper
@@ -6,7 +6,7 @@
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(f['name'], config, indent=8)}
+        ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
         try:
             import numpy

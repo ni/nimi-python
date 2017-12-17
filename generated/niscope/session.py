@@ -1881,9 +1881,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
-
-        Returns:
-            wfm (list of int): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1900,7 +1898,26 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
-            wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
+
+        Returns:
+            wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
+                waveforms. Call ActualNumwfms to determine the number of
+                waveforms.
+
+                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+                first. For example, with a channel list of 0,1, you would have the
+                following index values:
+
+                index 0 = record 0, channel 0
+
+                index *x* = record 0, channel 1
+
+                index 2\ *x* = record 1, channel 0
+
+                index 3\ *x* = record 1, channel 1
+
+                Where *x* = the record length
+            wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
                 -  **relativeInitialX**—the time (in seconds) from the trigger to the
