@@ -296,15 +296,20 @@ def _fix_references(doc, cfg, make_link=False):
     return doc
 
 
-def _format_type_for_rst_documentation(param, config):
-    p_type = param['python_type']
-    if param['enum'] is not None:
+def format_type_for_rst_documentation(param, numpy, config):
+    if numpy and param['numpy']:
+        p_type = param['numpy_type']
+    elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+    else:
+        p_type = param['python_type']
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
     if param['type'] == 'ViChar' and param['is_buffer'] is True:
         p_type = 'string'
+    elif param['is_buffer'] is True and numpy is True:
+        p_type = 'numpy array of ' + p_type
     elif param['is_buffer'] is True:
         p_type = 'list of ' + p_type
     return p_type
@@ -323,59 +328,74 @@ rep_cap_method_desc_rst = rep_cap_method_desc + '''
 '''
 
 
-def get_function_rst(fname, config, indent=0):
-    '''Gets rst formatted documentation for given function
+def get_function_rst(function, method_template, numpy, config, indent=0):
+    '''Gets formatted documentation for given function that can be used in rst documentation
 
     Args:
-        fname (str): Function name - key in function dictionary
-        function (dict): function entry correcsponding to fname in function dictionary
+        function (dict): function dictionary
+        config (dict): configuration dictoionary (from metadata)
+        method_template (dict): entry from function['methos_temlates'] that corresponds to specific entry we are processon
+        numpy (boolean): Is the entry we are processing a numpy based method
+        indent (int): default 0 - initial indentation
 
     Returns:
         str: rst formatted documentation
     '''
-    function = config['functions'][fname]
-    if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
 
-    rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
+    suffix = method_template['method_python_name_suffix']
+    session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
+    session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    if numpy:
+        session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+
+    rst = '.. function:: ' + function['python_name'] + suffix + '('
+    rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_parameters(function, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+    input_params = filter_parameters(function, session_declaration)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = _format_type_for_rst_documentation(p, config)
+        p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
+    output_params = filter_parameters(function, output_parameters)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = _format_type_for_rst_documentation(p, config)
+            p_type = format_type_for_rst_documentation(p, numpy, config)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = _format_type_for_rst_documentation(p, config)
+        p_type = format_type_for_rst_documentation(p, numpy, config)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
 
 
-def _format_type_for_docstring(param, config):
-    p_type = param['python_type']
+def _format_type_for_docstring(param, numpy, config):
+    if numpy and param['numpy']:
+        p_type = param['numpy_type']
+    else:
+        p_type = param['python_type']
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
     if param['type'] == 'ViChar' and param['is_buffer'] is True:
         p_type = 'string'
+    elif param['is_buffer'] is True and numpy is True:
+        p_type = 'numpy array of ' + p_type
     elif param['is_buffer'] is True:
         p_type = 'list of ' + p_type
     return p_type
@@ -386,37 +406,45 @@ rep_cap_method_desc_docstring = rep_cap_method_desc + '''
 '''
 
 
-def get_function_docstring(fname, config, indent=0):
+def get_function_docstring(function, method_template, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
-        fname (str): Function name - key in function dictionary
-        function (dict): function entry correcsponding to fname in function dictionary
+        function (dict): function dictionary
+        config (dict): configuration dictoionary (from metadata)
+        method_template (dict): entry from function['methos_temlates'] that corresponds to specific entry we are processon
+        numpy (boolean): Is the entry we are processing a numpy based method
+        indent (int): default 0 - initial indentation
 
     Returns:
         str: docstring formatted documentation
     '''
+    session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
+    session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    if numpy:
+        session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
+
     docstring = ''
-    function = config['functions'][fname]
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_parameters(function, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+    input_params = filter_parameters(function, session_declaration)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
         ds = get_documentation_for_node_docstring(p, config, indent + 8)
         if len(ds) > 0:
             docstring += ' ' + ds
 
-    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
+    output_params = filter_parameters(function, output_parameters)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
             ds = get_documentation_for_node_docstring(p, config, indent + 8)
             if len(ds) > 0:
                 docstring += ' ' + ds
@@ -504,15 +532,26 @@ def as_rest_table(data, header=True):
 
 
 def _remove_trailing_whitespace(s):
-    '''Removes trailing whitespace and empty lines in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
-    return re.sub(r'\s+$', '', s, flags=re.M)
+    '''Removes trailing whitespace and empty lines in multi-line strings.'''
+    initial_lines = s.strip().splitlines()
+    fixed_lines = []
+    blank_lines = 0
+    for l in initial_lines:
+        stripped_line = l.strip()
+        if len(stripped_line) == 0 and blank_lines == 0:
+            fixed_lines.append(stripped_line)
+            blank_lines = 1
+        if len(stripped_line) > 0:
+            fixed_lines.append(stripped_line)
+            blank_lines = 0
+
+    return fixed_lines
 
 
 def assert_rst_strings_are_equal(expected, actual):
     '''Asserts rst formatted strings (multiline) are equal. Ignores trailing whitespace and empty lines.'''
-    expected = _remove_trailing_whitespace(expected).splitlines()
-    actual = _remove_trailing_whitespace(actual).splitlines()
-    assert len(expected) == len(actual), 'Strings have different number of non-empty lines.'
+    expected = _remove_trailing_whitespace(expected)
+    actual = _remove_trailing_whitespace(actual)
     for expected_line, actual_line in zip(expected, actual):
         assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
 
@@ -522,6 +561,7 @@ config = {
         'GetTurtleID': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
+            'method_templates': [{'filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [
                 {
                     'direction': 'in',
@@ -612,7 +652,102 @@ wanted to choose.''',
             'python_name': 'get_turtle_id',
             'is_error_handling': False,
             'has_repeated_capability': False
-        }
+        },
+        'FetchWaveform': {
+            'codegen_method': 'public',
+            'documentation': {'description': 'Returns waveform data.'},
+            'has_repeated_capability': False,
+            'is_error_handling': False,
+            'method_templates': [{'filename': '/default_method', 'method_python_name_suffix': ''}, {'filename': '/numpy_method', 'method_python_name_suffix': '_into'}],
+            'name': 'FetchWaveform',
+            'parameters': [
+                {
+                    'ctypes_type': 'ViSession',
+                    'ctypes_type_library_call': 'ViSession',
+                    'ctypes_variable_name': 'vi_ctype',
+                    'direction': 'in',
+                    'documentation': {'description': 'Identifies a particular instrument session.'},
+                    'enum': None,
+                    'is_buffer': False,
+                    'is_repeated_capability': False,
+                    'is_session_handle': True,
+                    'library_method_call_snippet': 'vi_ctype',
+                    'name': 'vi',
+                    'numpy': False,
+                    'python_name': 'vi',
+                    'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
+                    'python_type': 'int',
+                    'size': {'mechanism': 'fixed', 'value': 1},
+                    'type': 'ViSession'
+                },
+                {
+                    'ctypes_type': 'ViInt32',
+                    'ctypes_type_library_call': 'ViInt32',
+                    'ctypes_variable_name': 'number_of_samples_ctype',
+                    'direction': 'in',
+                    'documentation': {'description': 'Number of samples to return'},
+                    'enum': None,
+                    'is_buffer': False,
+                    'is_repeated_capability': False,
+                    'is_session_handle': False,
+                    'library_method_call_snippet': 'number_of_samples_ctype',
+                    'name': 'numberOfSamples',
+                    'numpy': False,
+                    'python_name': 'number_of_samples',
+                    'python_name_with_default': 'number_of_samples',
+                    'python_name_with_doc_default': 'number_of_samples',
+                    'python_type': 'int',
+                    'size': {'mechanism': 'fixed', 'value': 1},
+                    'type': 'ViInt32'
+                },
+                {
+                    'ctypes_type': 'ViReal64',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+                    'ctypes_variable_name': 'waveform_data_ctype',
+                    'direction': 'out',
+                    'documentation': {'description': 'Samples fetched from the device. Array should be numberOfSamples big.'},
+                    'enum': None,
+                    'is_buffer': True,
+                    'is_repeated_capability': False,
+                    'is_session_handle': False,
+                    'library_method_call_snippet': 'waveform_data_ctype',
+                    'name': 'waveformData',
+                    'numpy': True,
+                    'numpy_type': 'float64',
+                    'original_type': 'ViReal64[]',
+                    'python_name': 'waveform_data',
+                    'python_name_with_default': 'waveform_data',
+                    'python_name_with_doc_default': 'waveform_data',
+                    'python_type': 'float',
+                    'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                    'type': 'ViReal64'
+                },
+                {
+                    'ctypes_type': 'ViInt32',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
+                    'ctypes_variable_name': 'actual_number_of_samples_ctype',
+                    'direction': 'out',
+                    'documentation': {'description': 'Number of samples actually fetched.'},
+                    'enum': None,
+                    'is_buffer': False,
+                    'is_repeated_capability': False,
+                    'is_session_handle': False,
+                    'library_method_call_snippet': 'ctypes.pointer(actual_number_of_samples_ctype)',
+                    'name': 'actualNumberOfSamples',
+                    'numpy': False,
+                    'python_name': 'actual_number_of_samples',
+                    'python_name_with_default': 'actual_number_of_samples',
+                    'python_name_with_doc_default': 'actual_number_of_samples',
+                    'python_type': 'int',
+                    'size': {'mechanism': 'fixed', 'value': 1},
+                    'type': 'ViInt32'
+                }
+            ],
+            'python_name': 'fetch_waveform',
+            'render_in_session_base': False,
+            'returns': 'ViStatus'
+        },
     },
     'metadata_version': '1.0',
     'module_name': 'nifake',
@@ -640,50 +775,81 @@ wanted to choose.''',
 }
 
 
-def test_get_function_rst():
-    actual_function_rst = get_function_rst('GetTurtleID', config, 0)
+def test_get_function_rst_default():
+    function = config['functions']['GetTurtleID']
+    method_template = function['method_templates'][0]
+    actual_function_rst = get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=0)
     expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
 
     Returns the **ID** of selected Turtle Type.
 
-
-
     .. note:: The RAPHAEL Turtles dont have an ID.
-
 
     :param turtle_type:
 
+    Specifies the type of Turtle type
+    wanted to choose.
 
-        Specifies the type of Turtle type
-        wanted to choose.
+    +---------------------------------+---+--------------+
+    | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
+    +---------------------------------+---+--------------+
+    | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
+    +---------------------------------+---+--------------+
+    | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
+    +---------------------------------+---+--------------+
+    | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
+    +---------------------------------+---+--------------+
 
-        +---------------------------------+---+--------------+
-        | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
-        +---------------------------------+---+--------------+
-        | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
-        +---------------------------------+---+--------------+
-        | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
-        +---------------------------------+---+--------------+
-        | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
-        +---------------------------------+---+--------------+
-
-        .. note:: You wont be able to import RAPHAEL
+    .. note:: You wont be able to import RAPHAEL
 
     :type turtle_type: int
 
     :rtype: float
     :return:
 
-
-            Returns the **ID** of selected turtle.
-
-
-''' # noqa
-    assert_rst_strings_are_equal(actual_function_rst, expected_fuction_rst)
+        Returns the **ID** of selected turtle.
+'''
+    assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
 
 
-def test_get_function_docstring():
-    actual_function_docstring = get_function_docstring('GetTurtleID', config, 0)
+def test_get_function_rst_numpy():
+    function = config['functions']['FetchWaveform']
+    method_template = function['method_templates'][0]
+    actual_function_rst = get_function_rst(function, method_template=method_template, numpy=True, config=config, indent=0)
+    expected_fuction_rst = '''.. function:: fetch_waveform(number_of_samples)
+
+    Returns waveform data.
+
+    :param number_of_samples:
+
+        Number of samples to return
+
+    :type number_of_samples: int
+    :param waveform_data:
+
+        Samples fetched from the device. Array should be numberOfSamples big.
+
+    :type waveform_data: numpy array of float64
+
+    :rtype: tuple (waveform_data, actual_number_of_samples)
+
+        WHERE
+
+        waveform_data (numpy array of float64):
+
+            Samples fetched from the device. Array should be numberOfSamples big.
+
+        actual_number_of_samples (int):
+
+            Number of samples actually fetched.
+'''
+    assert_rst_strings_are_equal(expected_fuction_rst, actual_function_rst)
+
+
+def test_get_function_docstring_default():
+    function = config['functions']['GetTurtleID']
+    method_template = function['method_templates'][0]
+    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
     expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
 
 Note: The RAPHAEL Turtles dont have an ID.
@@ -707,6 +873,24 @@ Args:
 Returns:
     turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
     assert_rst_strings_are_equal(expected_function_docstring, actual_function_docstring)
+
+
+def test_get_function_docstring_numpy():
+    function = config['functions']['FetchWaveform']
+    method_template = function['method_templates'][0]
+    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
+    print(actual_function_docstring)
+    expected_fuction_docstring = '''Returns waveform data.
+
+    Args:
+        number_of_samples (int): Number of samples to return
+        waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+
+    Returns:
+        waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+        actual_number_of_samples (int): Number of samples actually fetched.
+'''
+    assert_rst_strings_are_equal(expected_fuction_docstring, actual_function_docstring)
 
 
 def test_get_rst_header_snippet():

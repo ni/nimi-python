@@ -560,9 +560,10 @@ class Session(_SessionBase):
 
         Args:
             number_of_samples (int): Number of samples to return
+            waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
 
         Returns:
-            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
             actual_number_of_samples (int): Number of samples actually fetched.
         '''
         import numpy
@@ -1074,7 +1075,8 @@ class Session(_SessionBase):
         Writes waveform to the driver
 
         Args:
-            waveform (list of float): Waveform data.
+            number_of_samples (int): How many samples the waveform contains.
+            waveform (numpy array of float64): Waveform data.
         '''
         import numpy
 

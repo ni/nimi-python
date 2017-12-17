@@ -187,7 +187,11 @@ functions_default_value = {
 }
 
 functions_method_template_filenames = {
-    'FetchBinary8':                                  { 'method_template_filenames': ['session_numpy_read_method.py.mako'], },
+    'FetchBinary8':                                  {
+        'method_templates': [
+            { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        ],
+    },
 }
 
 functions_numpy = {

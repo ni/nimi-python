@@ -1289,7 +1289,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform(waveform_data_array)
+.. function:: create_waveform_numpy(waveform_data_array)
 
     Creates an onboard waveform
     for use in Arbitrary Waveform output mode or Arbitrary Sequence output

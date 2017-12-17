@@ -166,15 +166,14 @@ def _add_default_value_name_for_docs(parameter, module_name):
 _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
 
 
-def _add_method_template_filenames(f):
+def _add_method_templates(f):
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
-    if 'method_template_filenames' not in f:
-        f['method_template_filenames'] = ['session_default_method.py.mako']
+    if 'method_templates' not in f:
+        f['method_templates'] = [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
-    prefixed_filenames = []
-    for filename in f['method_template_filenames']:
-        prefixed_filenames.append('/' + filename if filename[0] != '/' else filename)
-    f['method_template_filenames'] = prefixed_filenames
+    for method_template in f['method_templates']:
+        method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
+        method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
 
 
 def _add_has_repeated_capability(f):
@@ -222,7 +221,7 @@ def add_all_function_metadata(functions, config):
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         _add_render_in_session_base(functions[f])
-        _add_method_template_filenames(functions[f])
+        _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _fix_type(p)
@@ -453,7 +452,7 @@ def test_add_all_metadata_simple():
         'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
-            'method_template_filenames': ['/cool_template.py.mako'],
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
             'parameters': [
                 {
                     'direction': 'in',
@@ -516,7 +515,7 @@ def test_add_all_metadata_simple():
             'has_repeated_capability': True,
             'is_error_handling': False,
             'render_in_session_base': True,
-            'method_template_filenames': ['/cool_template.py.mako'],
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
             'parameters': [
                 {
                     'ctypes_type': 'ViSession',
@@ -573,7 +572,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
-            'method_template_filenames': ['/session_default_method.py.mako'],
+            'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [{
                 'direction': 'in',
                 'enum': None,
