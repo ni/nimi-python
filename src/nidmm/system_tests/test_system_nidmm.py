@@ -237,7 +237,7 @@ def test_configure_waveform_acquisition(session):
     session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 1800000, 400)
     assert session.function == nidmm.Function.WAVEFORM_VOLTAGE
     assert session.range == 100
-    assert session.waveform_rate == 100000
+    assert session.waveform_rate == 1800000
     assert session.waveform_points == 400
 
 
@@ -257,9 +257,9 @@ def test_fetch_waveform_into(session):
         number_of_points_to_read = 100000
         waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
         # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-        wfm.fill(float('nan'))
+        waveform.fill(float('nan'))
         measurements = session.fetch_waveform(number_of_points_to_read, waveform)
-    for sample in wfm:
+    for sample in waveform:
         assert not math.isnan(sample)
 
 
