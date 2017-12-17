@@ -1,4 +1,6 @@
+import math
 import nidmm
+import numpy
 import pytest
 import time
 
@@ -232,7 +234,7 @@ def test_configure_cable_compensation(session):
 
 
 def test_configure_waveform_acquisition(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 100000, 400)
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 1800000, 400)
     assert session.function == nidmm.Function.WAVEFORM_VOLTAGE
     assert session.range == 100
     assert session.waveform_rate == 100000
@@ -240,7 +242,7 @@ def test_configure_waveform_acquisition(session):
 
 
 def test_fetch_waveform(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 10)
     with session.initiate():
         number_of_points_to_read = 10
         measurements, actual_number_of_points = session.fetch_waveform(number_of_points_to_read)
@@ -249,9 +251,21 @@ def test_fetch_waveform(session):
         assert actual_number_of_points == number_of_points_to_read
 
 
+def test_fetch_waveform_into(session):
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 100000)
+    with session.initiate():
+        number_of_points_to_read = 100000
+        waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
+        # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+        wfm.fill(float('nan'))
+        measurements = session.fetch_waveform(number_of_points_to_read, waveform)
+    for sample in wfm:
+        assert not math.isnan(sample)
+
+
 def test_fetch_waveform_error(session):
     try:
-        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 10)
         with session.initiate():
             number_of_points_to_read = 100
             session.fetch_waveform(number_of_points_to_read)   # trying to fetch points more than configured
