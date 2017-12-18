@@ -1704,7 +1704,7 @@ niscope.Session methods
 
     Initiates an acquisition, waits for it to complete, and retrieves the
     data. The process is similar to calling :py:func:`niscope._initiate_acquisition`,
-    :py:func:`niscope.acquisition_status`, and :py:func:`niscope.fetch_double`. The only difference is
+    :py:func:`niscope.acquisition_status`, and :py:func:`niscope._fetch_double`. The only difference is
     that with :py:func:`niscope.read`, you enable all channels specified with
     **channelList** before the acquisition; in the other method, you enable
     the channels with :py:func:`niscope.configure_vertical`.

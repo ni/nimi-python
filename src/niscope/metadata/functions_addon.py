@@ -341,7 +341,7 @@ more information.
 
 # Override the 'python' name for some functions.
 functions_python_name = {
-    'Fetch':                      { 'python_name': 'fetch_double',                   },
+    'Fetch':                      { 'python_name': '_fetch_double',                   },
     'FetchDispatcher':            { 'python_name': 'fetch',                          },
 }
 
