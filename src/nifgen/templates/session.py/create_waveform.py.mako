@@ -8,19 +8,15 @@
 
         ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
-        try:
+        # Check the type by using string comparison so that we don't import numpy unecessarilly.
+        if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
             import numpy
-            numpy_imported = True
-        except ImportError:
-            numpy_imported = False
-
-        if numpy_imported is True and type(waveform_data_array) == numpy.ndarray:
             if waveform_data_array.dtype == numpy.float64:
                 return self._create_waveform_f64_numpy(waveform_data_array)
             elif waveform_data_array.dtype == numpy.int16:
                 return self._create_waveform_i16_numpy(waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
-        else:
-            return self._create_waveform_f64(waveform_data_array)
+
+        return self._create_waveform_f64(waveform_data_array)
 
