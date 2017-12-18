@@ -2,6 +2,7 @@ import matchers
 import math
 import mock_helper
 import nifake
+import numpy
 import six
 import warnings
 
@@ -275,7 +276,6 @@ class TestSession(object):
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into(self):
-        import numpy
         expected_waveform = [1.0, 0.1, 42, .42]
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
         self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
@@ -288,7 +288,6 @@ class TestSession(object):
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into_wrong_type(self):
-        import numpy
         length = 10
         with nifake.Session('dev1') as session:
             waveforms = [
@@ -315,7 +314,6 @@ class TestSession(object):
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
 
     def test_write_waveform_numpy(self):
-        import numpy
         expected_waveform = numpy.array([1.1, 2.2, 3.3, 4.4], order='C')
         self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
         with nifake.Session('dev1') as session:
