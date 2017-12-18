@@ -74,7 +74,7 @@ functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
 }
 
-functions_method_template_filenames = {
+functions_method_templates = {
     'FetchWaveform':                        {
         'method_templates': [
             { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '',  },

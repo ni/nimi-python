@@ -189,7 +189,7 @@ functions_python_name = {
     'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
 }
 
-functions_method_template_filenames = {
+functions_method_templates = {
     'WriteWaveformDispatcher':      { 'method_templates': [
         { 'session_filename': 'write_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },

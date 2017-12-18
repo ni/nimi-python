@@ -186,12 +186,12 @@ functions_default_value = {
                                                                        7: { 'default_value': 0.0, }, }, },
 }
 
-functions_method_template_filenames = {
     'FetchBinary8':                                  {
         'method_templates': [
             { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
         ],
     },
+functions_method_templates = {
 }
 
 functions_numpy = {
