@@ -59,6 +59,7 @@ functions_codegen_method = {
     'FetchBinary8':                     { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary16':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'FetchBinary32':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'Fetch':                            { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
@@ -193,9 +194,155 @@ functions_default_value = {
                                                                        7: { 'default_value': 0.0, }, }, },
 }
 
+# Functions not in original metadata.
+functions_additional_functions = {
+    'FetchDispatcher': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': '''
+The instrument handle you obtain from niScope\_init that identifies a
+particular instrument session.
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelList',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': '''
+The channel to configure. For more information, refer to `Channel String
+Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc)>`__.
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'default_value': 5.0,
+                'documentation': {
+                    'description': '''
+The time to wait in seconds for data to be acquired; using 0 for this
+parameter tells NI-SCOPE to fetch whatever is currently available. Using
+-1 for this parameter implies infinite timeout.
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': '''
+The maximum number of samples to fetch for each waveform. If the
+acquisition finishes with fewer points than requested, some devices
+return partial data if the acquisition finished, was aborted, or a
+timeout of 0 was used. If it fails to complete within the timeout
+period, the function returns an error.
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'Wfm',
+                'type': 'ViReal64[]', # Type doesn't really matter for this function
+                'default_value': None, 
+                'documentation': {
+                    'description': '''
+Returns an array whose length is the **numSamples** times number of
+waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms.
+
+NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+first. For example, with a channel list of 0,1, you would have the
+following index values:
+
+index 0 = record 0, channel 0
+
+index *x* = record 0, channel 1
+
+index 2\ *x* = record 1, channel 0
+
+index 3\ *x* = record 1, channel 1
+
+Where *x* = the record length
+''',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'wfmInfo',
+                'type': 'struct niScope_wfmInfo[]',
+                'documentation': {
+                    'description': '''
+Returns an array of structures with the following timing and scaling
+information about each waveform:
+
+-  **relativeInitialX**—the time (in seconds) from the trigger to the
+first sample in the fetched waveform
+-  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+sample. This timestamp is comparable between records and
+acquisitions; devices that do not support this parameter use 0 for
+this output.
+-  **xIncrement**—the time between points in the acquired waveform in
+seconds
+-  **actualSamples**—the actual number of samples fetched and placed in
+the waveform array
+-  **gain**—the gain factor of the given channel; useful for scaling
+binary data with the following formula:
+
+voltage = binary data × gain factor + offset
+
+-  **offset**—the offset factor of the given channel; useful for scaling
+binary data with the following formula:
+
+voltage = binary data × gain factor + offset
+
+Call niScope\_ActualNumWfms to determine the size of this array.
+''',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Returns the waveform from a previously initiated acquisition that the
+digitizer acquires for the specified channel. This function returns
+scaled voltage waveforms.
+
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.
+''',
+            'note': '''
+You can use niScope\_Read instead of this function. niScope\_Read
+starts an acquisition on all enabled channels, waits for the acquisition
+to complete, and returns the waveform for the specified channel.
+
+Some functionality, such as time stamping, is not supported in all
+digitizers. Refer to `Features Supported by
+Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+more information.
+''',
+        },
+    },
+}
+
 # Override the 'python' name for some functions.
 functions_python_name = {
     'Fetch':                      { 'python_name': 'fetch_double',                   },
+    'FetchDispatcher':            { 'python_name': 'fetch',                          },
 }
 
 functions_method_templates = {
@@ -212,6 +359,9 @@ functions_method_templates = {
         { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
     ], },
+    'FetchDispatcher':                               { 'method_templates': [
+        { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
 }
 
 functions_numpy = {
@@ -219,6 +369,7 @@ functions_numpy = {
     'FetchBinary16':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'FetchBinary32':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'Fetch':                                         { 'parameters': { 4: { 'numpy': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
 
