@@ -145,7 +145,17 @@ def _add_default_value_name(parameter):
     else:
         name = parameter['python_name']
 
+    # If 'numpy_default_value' is not defined, we will use the standard default value
+    if 'numpy_default_value' in parameter:
+        if 'enum' in parameter and parameter['enum'] is not None:
+            name_numpy = parameter['python_name'] + "=enums." + parameter['numpy_default_value']
+        else:
+            name_numpy = parameter['python_name'] + "=" + repr(parameter['numpy_default_value'])
+    else:
+        name_numpy = name
+
     parameter['python_name_with_default'] = name
+    parameter['python_name_with_numpy_default'] = name_numpy
 
 
 def _add_default_value_name_for_docs(parameter, module_name):
@@ -536,6 +546,7 @@ def test_add_all_metadata_simple():
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
+                    'python_name_with_numpy_default': 'vi',
                     'python_name_with_doc_default': 'vi',
                     'size': {
                         'mechanism': 'fixed',
@@ -561,6 +572,7 @@ def test_add_all_metadata_simple():
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
+                    'python_name_with_numpy_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViChar',
@@ -595,6 +607,7 @@ def test_add_all_metadata_simple():
                 },
                 'is_buffer': False,
                 'python_name_with_default': 'vi',
+                'python_name_with_numpy_default': 'vi',
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
@@ -620,6 +633,7 @@ def test_add_all_metadata_simple():
                 },
                 'is_buffer': True,
                 'python_name_with_default': 'status',
+                'python_name_with_numpy_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
