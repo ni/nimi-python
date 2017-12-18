@@ -163,7 +163,7 @@ def _add_default_value_name_for_docs(parameter, module_name):
 
 
 # Parameter names denoting channel/repeated capabilities was compiled by looking at public header files for different MI drivers.
-_repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
+_repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList', 'channelsString']
 
 
 def _add_method_templates(f):
