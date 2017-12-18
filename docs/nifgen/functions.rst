@@ -162,8 +162,8 @@ nifgen.Session methods
         You can create multiple arbitrary waveforms using one of the following
         niFgen Create Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform`
-        -  :py:func:`nifgen.CreateWaveformI16`
+        -  :py:func:`nifgen._create_waveform_f64`
+        -  :py:func:`nifgen._create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -368,8 +368,8 @@ nifgen.Session methods
         create an arbitrary waveform using one of the following niFgen Create
         Waveform functions:
 
-        -  :py:func:`nifgen.create_waveform`
-        -  :py:func:`nifgen.CreateWaveformI16`
+        -  :py:func:`nifgen._create_waveform_f64`
+        -  :py:func:`nifgen._create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
         -  :py:func:`nifgen.CreateWaveformFromFileHWS`
@@ -1284,6 +1284,48 @@ nifgen.Session methods
             Returns the handle that identifies the new frequency list. You can pass
             this handle to nifgen\_ConfigureFreqList to generate the arbitrary
             sequence.
+
+            
+
+
+
+.. function:: create_waveform_numpy(waveform_data_array)
+
+    Creates an onboard waveform
+    for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+    mode.
+
+    
+
+    .. note:: You must set :py:data:`nifgen.OUTPUT\_MODE` to NIFGEN\_VAL\_OUTPUT\_ARB or
+        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].create_waveform(waveform_data_array)
+
+
+    :param waveform_data_array:
+
+
+        Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+
+        
+
+
+    :type waveform_data_array: list of float
+
+    :rtype: int
+    :return:
+
+
+            The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
 
             
 
@@ -2492,7 +2534,7 @@ nifgen.Session methods
     :param waveform_name_or_handle:
 
 
-        The name (str) or handle (int) of an arbitrary waveform previously allocated with the :py:func:`nifgen.allocate_named_waveform` :py:func:`nifgen.allocate_waveform` function.
+        The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:func:`nifgen.allocate_named_waveform` or :py:func:`nifgen.allocate_waveform`.
 
         
 

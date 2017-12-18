@@ -1,4 +1,5 @@
 import nifgen
+import numpy
 import os
 import pytest
 
@@ -82,6 +83,39 @@ def test_frequency_list(session):
 
 def test_clear_freq_list(session):
     session.clear_freq_list(-1)
+
+
+def test_create_waveform_from_list(session):
+    data = [0.1] * 10000
+    assert type(session.create_waveform(data)) is int
+
+
+def test_create_waveform_from_numpy_array_float64(session):
+    data = numpy.ndarray(10000, dtype=numpy.float64)
+    data.fill(0.5)
+    assert type(session.create_waveform(data)) is int
+
+
+def test_create_waveform_numpy_array_int16(session):
+    data = numpy.ndarray(10000, dtype=numpy.int16)
+    data.fill(256)
+    assert type(session.create_waveform(data)) is int
+
+
+invalid_waveforms = ['Not waveform data',
+                     numpy.zeros(100, dtype=numpy.uint16),
+                     numpy.zeros(100, dtype=numpy.float32),
+                     42,
+                     3.14159, ]
+
+
+def test_create_waveform_wrong_type(session):
+    for data in invalid_waveforms:
+        try:
+            session.create_waveform(data)
+            assert False
+        except TypeError:
+            pass
 
 
 def test_configure_arb_waveform(session):
@@ -254,14 +288,12 @@ def test_write_waveform_from_list(session):
 
 
 def test_write_waveform_from_numpy_array_float64(session):
-    import numpy
     data = numpy.ndarray(10000, dtype=numpy.float64)
     data.fill(0.5)
     session.write_waveform(session.allocate_waveform(len(data)), data)
 
 
 def test_write_waveform_numpy_array_int16(session):
-    import numpy
     data = numpy.ndarray(10000, dtype=numpy.int16)
     data.fill(256)
     session.write_waveform(session.allocate_waveform(len(data)), data)
@@ -274,7 +306,6 @@ def test_write_named_waveform_from_list(session):
 
 
 def test_write_named_waveform_from_numpy_array_float64(session):
-    import numpy
     data = numpy.ndarray(10000, dtype=numpy.float64)
     data.fill(0.5)
     session.allocate_named_waveform('foo', len(data))
@@ -282,7 +313,6 @@ def test_write_named_waveform_from_numpy_array_float64(session):
 
 
 def test_write_named_waveform_numpy_array_int16(session):
-    import numpy
     data = numpy.ndarray(10000, dtype=numpy.int16)
     data.fill(256)
     session.allocate_named_waveform('foo', len(data))
@@ -290,20 +320,13 @@ def test_write_named_waveform_numpy_array_int16(session):
 
 
 def test_write_waveform_wrong_type(session):
-    import numpy
     waveform_handle = session.allocate_waveform(100)
-    invalid_waveforms = ['Not waveform data',
-                         numpy.zeros(100, dtype=numpy.uint16),
-                         numpy.zeros(100, dtype=numpy.float32),
-                         42,
-                         3.14159, ]
     for data in invalid_waveforms:
         try:
             session.write_waveform(waveform_handle, data)
             assert False
-        except TypeError as e:
-            print(data)
-            print(e)
+        except TypeError:
+            pass
 
 
 def test_set_waveform_next_write_position(session):

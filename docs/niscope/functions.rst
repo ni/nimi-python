@@ -1234,7 +1234,7 @@ niscope.Session methods
 
     :type signal_identifier: string
 
-.. function:: fetch(num_samples, timeout=5.0)
+.. function:: fetch_double(num_samples, timeout=5.0)
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This function returns
@@ -1262,7 +1262,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session['0,1'].fetch_double(num_samples, timeout=5.0)
 
 
     :param num_samples:
@@ -1319,6 +1319,146 @@ niscope.Session methods
 
 
         wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of structures with the following timing and scaling
+            information about each waveform:
+
+            -  **relativeInitialX**—the time (in seconds) from the trigger to the
+               first sample in the fetched waveform
+            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+               sample. This timestamp is comparable between records and
+               acquisitions; devices that do not support this parameter use 0 for
+               this output.
+            -  **xIncrement**—the time between points in the acquired waveform in
+               seconds
+            -  **actualSamples**—the actual number of samples fetched and placed in
+               the waveform array
+            -  **gain**—the gain factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            -  **offset**—the offset factor of the given channel; useful for scaling
+               binary data with the following formula:
+
+            voltage = binary data × gain factor + offset
+
+            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
+
+            
+
+
+.. function:: fetch_double_into(num_samples, timeout=5.0)
+
+    Returns the waveform from a previously initiated acquisition that the
+    digitizer acquires for the specified channel. This function returns
+    scaled voltage waveforms.
+
+    This function may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
+
+    
+
+    .. note:: You can use :py:func:`niscope.read` instead of this function. :py:func:`niscope.read`
+        starts an acquisition on all enabled channels, waits for the acquisition
+        to complete, and returns the waveform for the specified channel.
+
+        Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_double(num_samples, timeout=5.0)
+
+
+    :param num_samples:
+
+
+        The maximum number of samples to fetch for each waveform. If the
+        acquisition finishes with fewer points than requested, some devices
+        return partial data if the acquisition finished, was aborted, or a
+        timeout of 0 was used. If it fails to complete within the timeout
+        period, the function returns an error.
+
+        
+
+
+    :type num_samples: int
+    :param wfm:
+
+
+        Returns an array whose length is the **numSamples** times number of
+        waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+        waveforms.
+
+        NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+        first. For example, with a channel list of 0,1, you would have the
+        following index values:
+
+        index 0 = record 0, channel 0
+
+        index *x* = record 0, channel 1
+
+        index 2\ *x* = record 1, channel 0
+
+        index 3\ *x* = record 1, channel 1
+
+        Where *x* = the record length
+
+        
+
+
+    :type wfm: numpy array of float64
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this
+        parameter tells NI-SCOPE to fetch whatever is currently available. Using
+        -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+
+    :rtype: tuple (wfm, wfm_info)
+
+        WHERE
+
+        wfm (numpy array of float64): 
+
+
+            Returns an array whose length is the **numSamples** times number of
+            waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+            waveforms.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with a channel list of 0,1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (numpy array of WaveformInfo): 
 
 
             Returns an array of structures with the following timing and scaling
@@ -1706,7 +1846,7 @@ niscope.Session methods
 
     Initiates an acquisition, waits for it to complete, and retrieves the
     data. The process is similar to calling :py:func:`niscope._initiate_acquisition`,
-    :py:func:`niscope.acquisition_status`, and :py:func:`niscope.fetch`. The only difference is
+    :py:func:`niscope.acquisition_status`, and :py:func:`niscope.fetch_double`. The only difference is
     that with :py:func:`niscope.read`, you enable all channels specified with
     **channelList** before the acquisition; in the other method, you enable
     the channels with :py:func:`niscope.configure_vertical`.

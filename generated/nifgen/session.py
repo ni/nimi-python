@@ -1143,8 +1143,8 @@ class _SessionBase(object):
                 create an arbitrary waveform using one of the following niFgen Create
                 Waveform functions:
 
-                -  create_waveform
-                -  CreateWaveformI16
+                -  _create_waveform_f64
+                -  _create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
@@ -1427,6 +1427,47 @@ class _SessionBase(object):
     def create_waveform(self, waveform_data_array):
         '''create_waveform
 
+        Creates an onboard waveform
+        for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+        mode.
+
+        Note:
+        You must set OUTPUT_MODE to NIFGEN_VAL_OUTPUT_ARB or
+        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1'].create_waveform(waveform_data_array)
+
+        Args:
+            waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+
+        Returns:
+            waveform_handle (int): The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
+        '''
+        try:
+            import numpy
+            numpy_imported = True
+        except ImportError:
+            numpy_imported = False
+
+        if numpy_imported is True and type(waveform_data_array) == numpy.ndarray:
+            if waveform_data_array.dtype == numpy.float64:
+                return self._create_waveform_f64_numpy(waveform_data_array)
+            elif waveform_data_array.dtype == numpy.int16:
+                return self._create_waveform_i16_numpy(waveform_data_array)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
+        else:
+            return self._create_waveform_f64(waveform_data_array)
+
+    def _create_waveform_f64(self, waveform_data_array):
+        '''_create_waveform_f64
+
         Creates an onboard waveform from binary F64 (floating point double) data
         for use in Arbitrary Waveform output mode or Arbitrary Sequence output
         mode. The **waveformHandle** returned can later be used for setting the
@@ -1444,7 +1485,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform(waveform_data_array)
+            session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
@@ -1464,6 +1505,73 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
         waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(waveform_handle_ctype.value)
+
+    def _create_waveform_f64_numpy(self, waveform_data_array):
+        '''_create_waveform_f64
+
+        Creates an onboard waveform from binary F64 (floating point double) data
+        for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+        mode. The **waveformHandle** returned can later be used for setting the
+        active waveform, changing the data in the waveform, building sequences
+        of waveforms, or deleting the waveform when it is no longer needed.
+
+        Note:
+        You must call the nifgen_ConfigureOutputMode function to set the
+        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1']._create_waveform_f64(waveform_data_array)
+
+        Args:
+            waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
+                | The size must meet the following restrictions:
+
+                -  The size must be less than or equal to the maximum waveform size that
+                   the device allows.
+                -  The size must be greater than or equal to the minimum waveform size
+                   that the device allows.
+                -  The size must be an integer multiple of the device waveform quantum.
+
+                You can obtain these values from the **maximumWaveformSize**,
+                **minimumWaveformSize**, and **waveformQuantum** parameters of the
+                nifgen_QueryArbWfmCapabilities function.
+
+                | ****Default Value**:** None
+            waveform_data_array (numpy array of float64): Specifies the array of data you want to use for the new arbitrary
+                waveform. The array must have at least as many elements as the value
+                that you specify in **waveformSize**.
+
+                You must normalize the data points in the array to be between –1.00 and
+                +1.00.
+
+                **Default Value**: None
+
+        Returns:
+            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
+                when referring to this waveform.
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('float64'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_data_array.dtype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = numpy.ctypeslib.as_ctypes(waveform_data_array)  # case 13.5
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1586,6 +1694,72 @@ class _SessionBase(object):
         byte_order_ctype = visatype.ViInt32(byte_order.value)  # case 10
         waveform_handle_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(waveform_handle_ctype.value)
+
+    def _create_waveform_i16_numpy(self, waveform_data_array):
+        '''_create_waveform_i16
+
+        Creates an onboard waveform from binary 16-bit signed integer (I16) data
+        for use in Arbitrary Waveform or Arbitrary Sequence output mode. The
+        **waveformHandle** returned can later be used for setting the active
+        waveform, changing the data in the waveform, building sequences of
+        waveforms, or deleting the waveform when it is no longer needed.
+
+        Note:
+        You must call the nifgen_ConfigureOutputMode function to set the
+        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session['0,1']._create_waveform_i16(waveform_data_array)
+
+        Args:
+            waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
+                | The size must meet the following restrictions:
+
+                -  The size must be less than or equal to the maximum waveform size that
+                   the device allows.
+                -  The size must be greater than or equal to the minimum waveform size
+                   that the device allows.
+                -  The size must be an integer multiple of the device waveform quantum.
+
+                You can obtain these values from the **maximumWaveformSize**,
+                **minimumWaveformSize**, and **waveformQuantum** parameters of the
+                nifgen_QueryArbWfmCapabilities function.
+
+                |
+                | ****Default Value**:** None
+            waveform_data_array (numpy array of int16): Specify the array of data that you want to use for the new arbitrary
+                waveform. The array must have at least as many elements as the value
+                that you specify in the Waveform Size parameter.
+                You must normalize the data points in the array to be between -32768 and
+                +32767.
+                ****Default Value**:** None
+
+        Returns:
+            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
+                when referring to this waveform.
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case 6
+        waveform_data_array_ctype = numpy.ctypeslib.as_ctypes(waveform_data_array)  # case 13.5
+        waveform_handle_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -2744,7 +2918,7 @@ class _SessionBase(object):
             session['0,1'].write_waveform(waveform_name_or_handle, data)
 
         Args:
-            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with the allocate_named_waveform allocate_waveform function.
+            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
         '''
         try:
@@ -2911,8 +3085,8 @@ class Session(_SessionBase):
                 You can create multiple arbitrary waveforms using one of the following
                 niFgen Create Waveform functions:
 
-                -  create_waveform
-                -  CreateWaveformI16
+                -  _create_waveform_f64
+                -  _create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
