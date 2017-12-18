@@ -1354,11 +1354,7 @@ niscope.Session methods
 
     
 
-    .. note:: You can use :py:func:`niscope.read` instead of this function. :py:func:`niscope.read`
-        starts an acquisition on all enabled channels, waits for the acquisition
-        to complete, and returns the waveform for the specified channel.
-
-        Some functionality, such as time stamping, is not supported in all
+    .. note:: Some functionality, such as time stamping, is not supported in all
         digitizers. Refer to `Features Supported by
         Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
         more information.
@@ -1381,7 +1377,7 @@ niscope.Session methods
         acquisition finishes with fewer points than requested, some devices
         return partial data if the acquisition finished, was aborted, or a
         timeout of 0 was used. If it fails to complete within the timeout
-        period, the function returns an error.
+        period, the function throws an exception.
 
         
 
@@ -1390,8 +1386,8 @@ niscope.Session methods
     :param wfm:
 
 
-        Returns an array whose length is the **numSamples** times number of
-        waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
+        be **num_samples** times number of waveforms. Call :py:func:`niscope._actual_num_wfms` to determine the number of
         waveforms.
 
         NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -1408,6 +1404,20 @@ niscope.Session methods
 
         Where *x* = the record length
 
+        Types supported are
+
+        - `numpy.float64`
+        - `numpy.int8`
+        - `numpy.in16`
+        - `numpy.int32`
+
+        Example:
+
+        .. code-block:: python
+
+            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+
         
 
 
@@ -1415,9 +1425,7 @@ niscope.Session methods
     :param timeout:
 
 
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
+        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
         
 
@@ -1428,30 +1436,24 @@ niscope.Session methods
     :return:
 
 
-            Returns an array of structures with the following timing and scaling
-            information about each waveform:
+            Returns an array of classed with the following timing and scaling information about each waveform:
 
-            -  **relativeInitialX**—the time (in seconds) from the trigger to the
-            first sample in the fetched waveform
-            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
-            sample. This timestamp is comparable between records and
-            acquisitions; devices that do not support this parameter use 0 for
-            this output.
-            -  **xIncrement**—the time between points in the acquired waveform in
-            seconds
-            -  **actualSamples**—the actual number of samples fetched and placed in
-            the waveform array
-            -  **gain**—the gain factor of the given channel; useful for scaling
-            binary data with the following formula:
+                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            voltage = binary data × gain factor + offset
+                                    .. math::
 
-            -  **offset**—the offset factor of the given channel; useful for scaling
-            binary data with the following formula:
+                                        voltage = binary data * gain factor + offset
 
-            voltage = binary data × gain factor + offset
+                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
+                                    .. math::
+
+                                        voltage = binary data * gain factor + offset
+
+                                Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
 
             
 
@@ -1468,11 +1470,7 @@ niscope.Session methods
 
     
 
-    .. note:: You can use :py:func:`niscope.read` instead of this function. :py:func:`niscope.read`
-        starts an acquisition on all enabled channels, waits for the acquisition
-        to complete, and returns the waveform for the specified channel.
-
-        Some functionality, such as time stamping, is not supported in all
+    .. note:: Some functionality, such as time stamping, is not supported in all
         digitizers. Refer to `Features Supported by
         Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
         more information.
@@ -1495,7 +1493,7 @@ niscope.Session methods
         acquisition finishes with fewer points than requested, some devices
         return partial data if the acquisition finished, was aborted, or a
         timeout of 0 was used. If it fails to complete within the timeout
-        period, the function returns an error.
+        period, the function throws an exception.
 
         
 
@@ -1504,9 +1502,7 @@ niscope.Session methods
     :param timeout:
 
 
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
+        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
         
 
@@ -1521,7 +1517,7 @@ niscope.Session methods
 
 
             Returns an array whose length is the **numSamples** times number of
-            waveforms. Call :py:func:`niscope.ActualNumwfms` to determine the number of
+            waveforms. Call :py:func:`niscope._actual_num_wfms` to determine the number of
             waveforms.
 
             NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -1544,30 +1540,24 @@ niscope.Session methods
         wfm_info (list of WaveformInfo): 
 
 
-            Returns an array of structures with the following timing and scaling
-            information about each waveform:
+            Returns an array of classed with the following timing and scaling information about each waveform:
 
-            -  **relativeInitialX**—the time (in seconds) from the trigger to the
-            first sample in the fetched waveform
-            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
-            sample. This timestamp is comparable between records and
-            acquisitions; devices that do not support this parameter use 0 for
-            this output.
-            -  **xIncrement**—the time between points in the acquired waveform in
-            seconds
-            -  **actualSamples**—the actual number of samples fetched and placed in
-            the waveform array
-            -  **gain**—the gain factor of the given channel; useful for scaling
-            binary data with the following formula:
+                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            voltage = binary data × gain factor + offset
+                                    .. math::
 
-            -  **offset**—the offset factor of the given channel; useful for scaling
-            binary data with the following formula:
+                                        voltage = binary data * gain factor + offset
 
-            voltage = binary data × gain factor + offset
+                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
+                                    .. math::
+
+                                        voltage = binary data * gain factor + offset
+
+                                Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
 
             
 
