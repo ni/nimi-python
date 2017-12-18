@@ -193,6 +193,11 @@ functions_default_value = {
                                                                        7: { 'default_value': 0.0, }, }, },
 }
 
+# Override the 'python' name for some functions.
+functions_python_name = {
+    'Fetch':                      { 'python_name': 'fetch_double',                   },
+}
+
 functions_method_templates = {
     'FetchBinary8':                                  { 'method_templates': [
         { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
