@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
     * Support for calling `write_waveform` with a waveform handle (int) or a name (str).
+    * Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
   * #### Changed
     * Renamed `create_waveform_f64` -> `create_waveform`
   * #### Removed
@@ -194,4 +195,3 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 -->
-
