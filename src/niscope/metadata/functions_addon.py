@@ -56,10 +56,10 @@ functions_codegen_method = {
     'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
-    'FetchBinary16':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
-    'FetchBinary32':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
-    'Fetch':                            { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary8':                     { 'codegen_method': 'private',  },
+    'FetchBinary16':                    { 'codegen_method': 'private',  },
+    'FetchBinary32':                    { 'codegen_method': 'private',  },
+    'Fetch':                            { 'codegen_method': 'private',  },
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
