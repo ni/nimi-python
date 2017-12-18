@@ -2304,6 +2304,107 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
+    def fetch(self, num_samples, timeout=5.0, wfm=None):
+        '''fetch
+
+        Returns the waveform from a previously initiated acquisition that the
+        digitizer acquires for the specified channel. This function returns
+        scaled voltage waveforms.
+
+        This function may return multiple waveforms depending on the number of
+        channels, the acquisition type, and the number of records you specify.
+
+        Note:
+        You can use read instead of this function. read
+        starts an acquisition on all enabled channels, waits for the acquisition
+        to complete, and returns the waveform for the specified channel.
+
+        Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session['0,1'].fetch(num_samples, timeout=5.0, wfm=None)
+
+        Args:
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the
+                acquisition finishes with fewer points than requested, some devices
+                return partial data if the acquisition finished, was aborted, or a
+                timeout of 0 was used. If it fails to complete within the timeout
+                period, the function returns an error.
+            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+                waveforms. Call ActualNumwfms to determine the number of
+                waveforms.
+
+                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+                first. For example, with a channel list of 0,1, you would have the
+                following index values:
+
+                index 0 = record 0, channel 0
+
+                index *x* = record 0, channel 1
+
+                index 2\ *x* = record 1, channel 0
+
+                index 3\ *x* = record 1, channel 1
+
+                Where *x* = the record length
+
+        Returns:
+            wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
+                information about each waveform:
+
+                -  **relativeInitialX**—the time (in seconds) from the trigger to the
+                first sample in the fetched waveform
+                -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+                sample. This timestamp is comparable between records and
+                acquisitions; devices that do not support this parameter use 0 for
+                this output.
+                -  **xIncrement**—the time between points in the acquired waveform in
+                seconds
+                -  **actualSamples**—the actual number of samples fetched and placed in
+                the waveform array
+                -  **gain**—the gain factor of the given channel; useful for scaling
+                binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                -  **offset**—the offset factor of the given channel; useful for scaling
+                binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                Call _actual_num_wfms to determine the size of this array.
+        '''
+        try:
+            import numpy
+            numpy_imported = True
+        except ImportError:
+            numpy_imported = False
+
+        if wfm is not None and numpy_imported is True and type(wfm) == numpy.ndarray:
+            if wfm.dtype == numpy.float64:
+                return self._fetch_double_into(num_samples, wfm, timeout)
+            elif wfm.dtype == numpy.int8:
+                return self._fetch_binary8_into(num_samples, wfm, timeout)
+            elif wfm.dtype == numpy.int16:
+                return self._fetch_binary16_into(num_samples, wfm, timeout)
+            elif wfm.dtype == numpy.int32:
+                return self._fetch_binary32_into(num_samples, wfm, timeout)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+        else:
+            return self._fetch_double(num_samples, timeout)
+
     def fetch_measurement(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement
 
