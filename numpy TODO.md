@@ -14,4 +14,3 @@
     * For nifgen.Session.write_waveform() it shows type as list of float
     * WriteWaveformDispatcher needs good docs, what about the types displayed?
     * Sometimes refers to private functions rather than public dispatchers.
-* Only import numpy once. See https://github.com/ni/nimi-python/pull/690#pullrequestreview-83949244
