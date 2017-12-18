@@ -261,7 +261,7 @@ def test_fetch_waveform_into(session):
         measurements = session.fetch_waveform_into(number_of_points_to_read, waveform)
     for sample in waveform:
         assert not math.isnan(sample)
-        assert measurements == len(waveform)
+    assert measurements == len(waveform)
 
 
 def test_fetch_waveform_error(session):
