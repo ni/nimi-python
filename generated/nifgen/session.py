@@ -1449,21 +1449,17 @@ class _SessionBase(object):
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
         '''
-        try:
+        # Check the type by using string comparison so that we don't import numpy unecessarilly.
+        if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
             import numpy
-            numpy_imported = True
-        except ImportError:
-            numpy_imported = False
-
-        if numpy_imported is True and type(waveform_data_array) == numpy.ndarray:
             if waveform_data_array.dtype == numpy.float64:
                 return self._create_waveform_f64_numpy(waveform_data_array)
             elif waveform_data_array.dtype == numpy.int16:
                 return self._create_waveform_i16_numpy(waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
-        else:
-            return self._create_waveform_f64(waveform_data_array)
+
+        return self._create_waveform_f64(waveform_data_array)
 
     def _create_waveform_f64(self, waveform_data_array):
         '''_create_waveform_f64
@@ -2921,29 +2917,18 @@ class _SessionBase(object):
             waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
         '''
-        try:
+        use_named = isinstance(waveform_name_or_handle, str)
+        # Check the type by using string comparison so that we don't import numpy unecessarilly.
+        if str(type(data)).find("'numpy.ndarray'") != -1:
             import numpy
-            numpy_imported = True
-        except ImportError:
-            numpy_imported = False
-
-        if numpy_imported is True and type(data) == numpy.ndarray:
             if data.dtype == numpy.float64:
-                write_named_method = self._write_named_waveform_f64_numpy
-                write_handle_method = self._write_waveform_numpy
+                return self._write_named_waveform_f64_numpy(waveform_name_or_handle, data) if use_named else self._write_waveform_numpy(waveform_name_or_handle, data)
             elif data.dtype == numpy.int16:
-                write_named_method = self._write_named_waveform_i16_numpy
-                write_handle_method = self._write_binary16_waveform_numpy
+                return self._write_named_waveform_i16_numpy(waveform_name_or_handle, data) if use_named else self._write_binary16_waveform_numpy(waveform_name_or_handle, data)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.dtype, numpy.float64, numpy.int16))
-        else:
-            write_named_method = self._write_named_waveform_f64
-            write_handle_method = self._write_waveform
 
-        if isinstance(waveform_name_or_handle, str):
-            write_named_method(waveform_name_or_handle, data)
-        else:
-            write_handle_method(waveform_name_or_handle, data)
+        return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 
     def _error_message(self, error_code):
         '''_error_message
