@@ -57,8 +57,8 @@ functions_codegen_method = {
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
     'FetchBinary8':                     { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
-    'FetchBinary16':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
-    'FetchBinary32':                    { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary16':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
+    'FetchBinary32':                    { 'codegen_method': 'private',  },  # TODO(marcoskirsch):No support for fetching binary. Issue #511
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
@@ -119,6 +119,10 @@ functions_buffer_info = {
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchBinary8':                             { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchBinary16':                            { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchBinary32':                            { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
                                                                   6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
@@ -160,6 +164,9 @@ functions_default_value = {
                                                                        2: { 'default_value': 0.0, }, }, },
     'Read':                                          { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'Fetch':                                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'FetchBinary8':                                  { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'FetchBinary16':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'FetchBinary32':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchArrayMeasurement':                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'ReadMeasurement':                               { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchMeasurement':                              { 'parameters': { 2: { 'default_value': 5.0, }, }, },
@@ -186,16 +193,27 @@ functions_default_value = {
                                                                        7: { 'default_value': 0.0, }, }, },
 }
 
-    'FetchBinary8':                                  {
-        'method_templates': [
-            { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
-        ],
-    },
 functions_method_templates = {
+    'FetchBinary8':                                  { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+    ], },
+    'FetchBinary16':                                 { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+    ], },
+    'FetchBinary32':                                 { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+    ], },
+    'Fetch':                { 'method_templates': [
+        { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+    ], },
 }
 
 functions_numpy = {
     'FetchBinary8':                                  { 'parameters': { 4: { 'numpy': True, }, }, },
+    'FetchBinary16':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
+    'FetchBinary32':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
+    'Fetch':                                         { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
 
