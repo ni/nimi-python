@@ -1450,7 +1450,7 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
         '''
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
-        if str(type(waveform_data_array)) == "<type 'numpy.ndarray'>":
+        if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
             import numpy
             if waveform_data_array.dtype == numpy.float64:
                 return self._create_waveform_f64_numpy(waveform_data_array)
@@ -2919,7 +2919,7 @@ class _SessionBase(object):
         '''
         use_named = isinstance(waveform_name_or_handle, str)
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
-        if str(type(data)) == "<type 'numpy.ndarray'>":
+        if str(type(data)).find("'numpy.ndarray'") != -1:
             import numpy
             if data.dtype == numpy.float64:
                 return self._write_named_waveform_f64_numpy(waveform_name_or_handle, data) if use_named else self._write_waveform_numpy(waveform_name_or_handle, data)
