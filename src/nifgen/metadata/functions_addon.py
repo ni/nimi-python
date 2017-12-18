@@ -275,3 +275,4 @@ functions_numpy = {
     'WriteBinary16Waveform':        { 'parameters': { 4: { 'numpy': True, }, }, },
     'WriteNamedWaveformI16':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
+
