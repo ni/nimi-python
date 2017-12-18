@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DMM
   * #### Added
+    * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
   * #### Removed
 * ### NI-ModInst

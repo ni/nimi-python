@@ -87,7 +87,6 @@ functions_is_error_handling = {
     'GetError':                     { 'is_error_handling': True, },
 }
 
-
 # Default values for method parameters
 functions_default_value = {
     'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
@@ -104,5 +103,18 @@ functions_default_value = {
     'Read':                      { 'parameters': { 1: { 'default_value': -1, }, }, },
     'ReadMultiPoint':            { 'parameters': { 1: { 'default_value': -1, }, }, },
     'ReadWaveform':              { 'parameters': { 1: { 'default_value': -1, }, }, },
+}
+
+functions_method_template_filenames = {
+    'FetchWaveform':                        {
+        'method_templates': [
+            { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '',  },
+            { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        ],
+    },
+}
+
+functions_numpy = {
+    'FetchWaveform':                        { 'parameters': { 3: { 'numpy': True, }, }, },
 }
 

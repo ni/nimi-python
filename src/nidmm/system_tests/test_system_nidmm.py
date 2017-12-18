@@ -1,4 +1,6 @@
+import math
 import nidmm
+import numpy
 import pytest
 import time
 
@@ -232,29 +234,42 @@ def test_configure_cable_compensation(session):
 
 
 def test_configure_waveform_acquisition(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 100000, 400)
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 1800000, 400)
     assert session.function == nidmm.Function.WAVEFORM_VOLTAGE
     assert session.range == 100
-    assert session.waveform_rate == 100000
+    assert session.waveform_rate == 1800000
     assert session.waveform_points == 400
 
 
 def test_fetch_waveform(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+    number_of_points_to_read = 100
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
     with session.initiate():
-        number_of_points_to_read = 10
         measurements, actual_number_of_points = session.fetch_waveform(number_of_points_to_read)
         assert len(measurements) == number_of_points_to_read
         assert isinstance(measurements[1], float)
         assert actual_number_of_points == number_of_points_to_read
 
 
+def test_fetch_waveform_into(session):
+    number_of_points_to_read = 100
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
+    with session.initiate():
+        waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
+        # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+        waveform.fill(float('nan'))
+        measurements = session.fetch_waveform_into(number_of_points_to_read, waveform)
+    for sample in waveform:
+        assert not math.isnan(sample)
+    assert measurements == len(waveform)
+
+
 def test_fetch_waveform_error(session):
+    number_of_points_to_read = 100
     try:
-        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
         with session.initiate():
-            number_of_points_to_read = 100
-            session.fetch_waveform(number_of_points_to_read)   # trying to fetch points more than configured
+            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=1)   # trying to fetch points more than configured
             assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed
