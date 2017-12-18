@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
     * `get_ext_cal_last_date_and_time`
     * `get_ext_cal_last_temp`
     * `get_ext_cal_recommended_interval`
+    * `measure_multiple`
 * ### NI-FGEN
   * #### Removed
     * `adjust_sample_clock_relative_delay`
