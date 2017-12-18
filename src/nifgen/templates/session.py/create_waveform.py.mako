@@ -9,7 +9,7 @@
         ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
-        if str(type(waveform_data_array)) == "<type 'numpy.ndarray'>":
+        if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
             import numpy
             if waveform_data_array.dtype == numpy.float64:
                 return self._create_waveform_f64_numpy(waveform_data_array)

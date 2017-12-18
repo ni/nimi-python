@@ -10,7 +10,7 @@
         '''
         use_named = isinstance(waveform_name_or_handle, str)
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
-        if str(type(data)) == "<type 'numpy.ndarray'>":
+        if str(type(data)).find("'numpy.ndarray'") != -1:
             import numpy
             if data.dtype == numpy.float64:
                 return self._write_named_waveform_f64_numpy(waveform_name_or_handle, data) if use_named else self._write_waveform_numpy(waveform_name_or_handle, data)
