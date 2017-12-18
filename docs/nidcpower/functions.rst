@@ -1035,7 +1035,7 @@ nidcpower.Session methods
     Returns the measured value of either the voltage or current on the
     specified output channel. Each call to this function blocks other
     function calls until the hardware returns the **measurement**. To
-    measure multiple output channels, use the :py:func:`nidcpower.MeasureMultiple`
+    measure multiple output channels, use the :py:func:`nidcpower.measure_multiple`
     function.
 
     
@@ -1072,6 +1072,54 @@ nidcpower.Session methods
 
             Returns the value of the measurement, either in volts for voltage or
             amps for current.
+
+            
+
+
+
+.. function:: measure_multiple()
+
+    Returns arrays of the measured voltage and current values on the
+    specified output channel(s). Each call to this function blocks other
+    function calls until the measurements are returned from the device. The
+    order of the measurements returned in the array corresponds to the order
+    on the specified output channel(s).
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].measure_multiple()
+
+
+    :rtype: tuple (voltage_measurements, current_measurements)
+
+        WHERE
+
+        voltage_measurements (list of float): 
+
+
+            Returns an array of voltage measurements. The measurements in the array
+            are returned in the same order as the channels specified in
+            **channelName**. Ensure that sufficient space has been allocated for the
+            returned array.
+
+            
+
+
+        current_measurements (list of float): 
+
+
+            Returns an array of current measurements. The measurements in the array
+            are returned in the same order as the channels specified in
+            **channelName**. Ensure that sufficient space has been allocated for the
+            returned array.
 
             
 

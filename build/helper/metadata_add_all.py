@@ -163,7 +163,7 @@ def _add_default_value_name_for_docs(parameter, module_name):
 
 
 # Parameter names denoting channel/repeated capabilities was compiled by looking at public header files for different MI drivers.
-_repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
+_repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList', 'channelsString']
 
 
 def _add_method_templates(f):
@@ -173,7 +173,9 @@ def _add_method_templates(f):
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     for method_template in f['method_templates']:
         method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
-        method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
+        # Some functions don't get code-generated documentation (i.e. private methods) so no need to specify template for those.
+        if 'documentation_filename' in method_template and method_template['documentation_filename'] is not None:
+            method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
 
 
 def _add_has_repeated_capability(f):

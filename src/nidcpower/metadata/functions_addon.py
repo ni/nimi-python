@@ -40,7 +40,6 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'MeasureMultiple':                 { 'codegen_method': 'no',       },  # Issue 444
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -73,6 +72,8 @@ functions_buffer_info = {
     'FetchMultiple':                { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
                                                       5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
                                                       6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, },
+    'MeasureMultiple':              { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, },
+                                                      3: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, }, }, }
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -102,6 +103,38 @@ functions_default_value = {
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
                                                                        2: { 'default_value': 1.0, }, }, },
-
 }
 
+# Functions not in original metadata.
+functions_additional_functions = {
+    # What is this function? I've never seen it in niDCPower.h!
+    # It's a secret, undocumented NI-DCPower function and the key to the Python API figuring out how many points to return from nidcpower.Session.measure_multiple.
+    # Don't tell anyone about it, and don't ever use it directly in your programs. Thank you.
+    'ParseChannelCount': {
+        'codegen_method': 'private',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelsString',
+                'type': 'ViConstString',
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'numberOfChannels',
+                'type': 'ViUInt32',
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the number of channels.',
+        },
+    },
+}
