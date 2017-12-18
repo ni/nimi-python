@@ -49,7 +49,6 @@ def test_fetch(session):
     assert len(wfm_infos) == test_num_channels
 
 
-# TODO(marcoskirsch): eventually we'll want to test fetch_into() which will dispatch into the appropriate private fetch method.
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -61,7 +60,58 @@ def test_fetch_binary8_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels]._fetch_binary8_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
+        wfm_infos = session[test_channels].fetch_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
+    for sample in wfm:
+        assert not math.isnan(sample)
+    assert len(wfm_infos) == test_num_channels
+
+
+def test_fetch_binary16_into(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = '0,1'
+    test_num_channels = 2
+    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
+    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+    wfm.fill(float('nan'))
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    with session.initiate():
+        wfm_infos = session[test_channels].fetch_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
+    for sample in wfm:
+        assert not math.isnan(sample)
+    assert len(wfm_infos) == test_num_channels
+
+
+def test_fetch_binary32_into(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = '0,1'
+    test_num_channels = 2
+    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
+    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+    wfm.fill(float('nan'))
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    with session.initiate():
+        wfm_infos = session[test_channels].fetch_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
+    for sample in wfm:
+        assert not math.isnan(sample)
+    assert len(wfm_infos) == test_num_channels
+
+
+def test_fetch_double_into(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = '0,1'
+    test_num_channels = 2
+    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
+    # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+    wfm.fill(float('nan'))
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    with session.initiate():
+        wfm_infos = session[test_channels].fetch_into(timeout=5.0, num_samples=test_record_length, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
