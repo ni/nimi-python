@@ -242,9 +242,9 @@ def test_configure_waveform_acquisition(session):
 
 
 def test_fetch_waveform(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 10)
+    number_of_points_to_read = 100
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
     with session.initiate():
-        number_of_points_to_read = 10
         measurements, actual_number_of_points = session.fetch_waveform(number_of_points_to_read)
         assert len(measurements) == number_of_points_to_read
         assert isinstance(measurements[1], float)
@@ -252,9 +252,9 @@ def test_fetch_waveform(session):
 
 
 def test_fetch_waveform_into(session):
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 100000)
+    number_of_points_to_read = 100
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
     with session.initiate():
-        number_of_points_to_read = 100000
         waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
         # Initialize with NaN so we can later verify all samples were overwritten by the driver.
         waveform.fill(float('nan'))
@@ -265,11 +265,11 @@ def test_fetch_waveform_into(session):
 
 
 def test_fetch_waveform_error(session):
+    number_of_points_to_read = 100
     try:
-        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 10)
+        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
         with session.initiate():
-            number_of_points_to_read = 100
-            session.fetch_waveform(number_of_points_to_read)   # trying to fetch points more than configured
+            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=1)   # trying to fetch points more than configured
             assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed
