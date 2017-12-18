@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DMM
   * #### Added
+    * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
   * #### Removed
 * ### NI-ModInst
@@ -62,6 +63,7 @@ All notable changes to this project will be documented in this file.
     * `get_ext_cal_last_date_and_time`
     * `get_ext_cal_last_temp`
     * `get_ext_cal_recommended_interval`
+    * `measure_multiple`
 * ### NI-FGEN
   * #### Removed
     * `adjust_sample_clock_relative_delay`

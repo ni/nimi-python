@@ -347,17 +347,17 @@ functions_python_name = {
 
 functions_method_templates = {
     'FetchBinary8':                                  { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
     ], },
     'FetchBinary16':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
     ], },
     'FetchBinary32':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
     ], },
     'Fetch':                { 'method_templates': [
-        { 'session_filename': 'default_method', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
-        { 'session_filename': 'numpy_read_method', 'documentation_filename': 'numpy_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
     ], },
     'FetchDispatcher':                               { 'method_templates': [
         { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
