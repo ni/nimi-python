@@ -14,6 +14,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -26,6 +27,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_
     'but_keep_output_numpy_array_parameters': True,
     'skip_size_parameter': False,
     'reordered_for_default_values': True,
+    'default_type': 'numpy_default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -38,6 +40,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -50,6 +53,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METH
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': True,
     'reordered_for_default_values': True,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -62,6 +66,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'but_keep_output_numpy_array_parameters': True,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -74,6 +79,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'but_keep_output_numpy_array_parameters': True,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -86,6 +92,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -98,6 +105,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -110,6 +118,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -122,12 +131,12 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
 }
-
 _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
@@ -135,12 +144,12 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': True,
     'mechanism': 'any',
 }
-
 _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
@@ -148,6 +157,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -160,6 +170,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
@@ -172,6 +183,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'but_keep_output_numpy_array_parameters': False,
     'skip_size_parameter': False,
     'reordered_for_default_values': False,
+    'default_type': 'default_value',
     'skip_repeated_capability_parameter': True,
     'skip_non_enum_parameter': True,
     'skip_all_except_numpy_parameters': False,
@@ -227,10 +239,10 @@ def filter_parameters(function, parameter_usage_options):
     if options_to_use['reordered_for_default_values']:
         new_order = []
         for x in parameters_to_use:
-            if 'default_value' not in x:
+            if options_to_use['default_type'] not in x:
                 new_order.append(x)
         for x in parameters_to_use:
-            if 'default_value' in x:
+            if options_to_use['default_type'] in x:
                 new_order.append(x)
         parameters_to_use = new_order
 

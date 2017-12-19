@@ -164,7 +164,8 @@ functions_default_value = {
     'ConfigureTriggerSoftware':                      { 'parameters': { 1: { 'default_value': 0.0, },
                                                                        2: { 'default_value': 0.0, }, }, },
     'Read':                                          { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'Fetch':                                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+    'Fetch':                                         { 'parameters': { 2: { 'default_value': 5.0, }, 
+                                                                       3: { 'numpy_default_value': None, }, }, },
     'FetchBinary8':                                  { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchBinary16':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchBinary32':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
@@ -233,6 +234,7 @@ functions_additional_functions = {
                 'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
+                'numpy_default_value': None,
                 'documentation': {
                     'description': '''
 The maximum number of samples to fetch for each waveform. If the
@@ -354,6 +356,7 @@ more information.
                 'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
+                'numpy_default_value': None,
                 'documentation': {
                     'description': '''
 The maximum number of samples to fetch for each waveform. If the
