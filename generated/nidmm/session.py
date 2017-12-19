@@ -79,7 +79,7 @@ class _SessionBase(object):
     '''
     Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
     '''
-    current_source = attributes.AttributeEnum(attributes.AttributeViReal64, enums.CurrentSource, 1150025)
+    current_source = attributes.AttributeViReal64(1150025)
     '''
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.

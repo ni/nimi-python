@@ -202,49 +202,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: CurrentSource
-
-    .. py:attribute:: nidmm.CurrentSource._1_MICROAMP
-
-
-
-        NI 4070/4071/4072 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._10_MICROAMP
-
-
-
-        NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._100_MICROAMP
-
-
-
-        NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._1_MILLIAMP
-
-
-
-        NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-
-        
-
-
-
-
 .. py:data:: DCBias
 
     .. py:attribute:: nidmm.DCBias.OFF
