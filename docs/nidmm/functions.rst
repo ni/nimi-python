@@ -827,6 +827,7 @@ nidmm.Session methods
             
 
 
+
 .. function:: fetch_waveform_into(array_size, maximum_time=-1)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1002,48 +1003,9 @@ nidmm.Session methods
 
     :type cal_type: int
 
-    :rtype: tuple (month, day, year, hour, minute)
+    :rtype: datetime
 
-        WHERE
-
-        month (int): 
-
-
-            Indicates the **month** of the last calibration.
-
-            
-
-
-        day (int): 
-
-
-            Indicates the **day** of the last calibration.
-
-            
-
-
-        year (int): 
-
-
-            Indicates the **year** of the last calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Indicates the **hour** of the last calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Indicates the **minute** of the last calibration.
-
-            
+        datetime object representing the date and time of the last calibration of the given type
 
 
 
@@ -1490,6 +1452,16 @@ nidmm.Session methods
 
 
 
+.. function:: reset()
+
+    Resets the instrument to a known state and sends initialization commands
+    to the instrument. The initialization commands set instrument settings
+    to the state necessary for the operation of the instrument driver.
+
+    
+
+
+
 .. function:: reset_with_defaults()
 
     Resets the instrument to a known state and sends initialization commands
@@ -1511,30 +1483,6 @@ nidmm.Session methods
     .. note:: This function calls :py:func:`nidmm.reset`, and any configurations previous to
         the call will be lost. All attributes will be set to their default
         values after the call returns.
-
-
-
-.. function:: send_software_trigger()
-
-    Sends a command to trigger the DMM. Call this function if you have
-    configured either the :py:data:`nidmm.TRIGGER\_SOURCE` or
-    :py:data:`nidmm.SAMPLE\_TRIGGER` attributes. If the
-    :py:data:`nidmm.TRIGGER\_SOURCE` and/or :py:data:`nidmm.SAMPLE\_TRIGGER`
-    attributes are set to NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you
-    can use this function to override the trigger source that you configured
-    and trigger the device. The NI 4050 and NI 4060 are not supported.
-
-    
-
-
-
-.. function:: reset()
-
-    Resets the instrument to a known state and sends initialization commands
-    to the instrument. The initialization commands set instrument settings
-    to the state necessary for the operation of the instrument driver.
-
-    
 
 
 
@@ -1591,6 +1539,20 @@ nidmm.Session methods
             This error code indicates that the DMM should be repaired.
 
             
+
+
+
+.. function:: send_software_trigger()
+
+    Sends a command to trigger the DMM. Call this function if you have
+    configured either the :py:data:`nidmm.TRIGGER\_SOURCE` or
+    :py:data:`nidmm.SAMPLE\_TRIGGER` attributes. If the
+    :py:data:`nidmm.TRIGGER\_SOURCE` and/or :py:data:`nidmm.SAMPLE\_TRIGGER`
+    attributes are set to NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you
+    can use this function to override the trigger source that you configured
+    and trigger the device. The NI 4050 and NI 4060 are not supported.
+
+    
 
 
 
