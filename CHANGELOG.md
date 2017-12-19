@@ -19,7 +19,10 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
-    * Removed `actual_count` from `fetch_multiple()` returned tuple
+    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+    * Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_waveform()` returned tuple
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -33,7 +36,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
   * #### Added
   * #### Changed
-    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+    * Removed `actual_count` from `fetch_multiple()` returned tuple
   * #### Removed
 * ### NI-FGEN
   * #### Added

@@ -90,6 +90,9 @@ functions_is_error_handling = {
 # There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
 functions_remove_from_python_api = {
     'FetchWaveform':                { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
+    'FetchMultiPoint':              { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
+    'ReadMultiPoint':               { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
+    'ReadWaveform':                 { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
 }
 
 # Default values for method parameters
