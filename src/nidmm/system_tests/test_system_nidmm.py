@@ -147,7 +147,7 @@ def test_fetch_multiple(session):
     session.configure_multi_point(sample_count=10, trigger_count=1)
     with session.initiate():
         measurements = session.fetch_multi_point(5)
-        assert len(measurements[0]) == 5
+        assert len(measurements) == 5
         measurements = session.fetch_multi_point(5)
         backlog, acquisition_state = session.read_status()
         assert acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
