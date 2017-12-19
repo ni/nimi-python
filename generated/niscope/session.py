@@ -1668,8 +1668,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fetch_double(self, num_samples, timeout=5.0):
-        '''_fetch_double
+    def _fetch(self, num_samples, timeout=5.0):
+        '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
         digitizer acquires for the specified channel. This function returns
@@ -1694,7 +1694,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_double(num_samples, timeout=5.0)
+            session['0,1']._fetch(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1759,8 +1759,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_double_into(self, num_samples, wfm, timeout=5.0):
-        '''_fetch_double
+    def _fetch_into(self, num_samples, wfm, timeout=5.0):
+        '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
         digitizer acquires for the specified channel. This function returns
@@ -1785,7 +1785,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_double(num_samples, timeout=5.0)
+            session['0,1']._fetch(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2819,7 +2819,7 @@ class _SessionBase(object):
 
         Initiates an acquisition, waits for it to complete, and retrieves the
         data. The process is similar to calling _initiate_acquisition,
-        acquisition_status, and _fetch_double. The only difference is
+        acquisition_status, and _fetch. The only difference is
         that with read, you enable all channels specified with
         **channelList** before the acquisition; in the other method, you enable
         the channels with configure_vertical.
