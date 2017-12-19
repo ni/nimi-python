@@ -213,6 +213,12 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace(' ', '_')
 
 
+def _add_use_in_python_api(p):
+    '''Add 'use_in_python_api' if not there with value of True'''
+    if 'use_in_python_api' not in p:
+        p['use_in_python_api'] = True
+
+
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config)
@@ -225,6 +231,7 @@ def add_all_function_metadata(functions, config):
         _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
+            _add_use_in_python_api(p)
             _add_buffer_info(p)
             _fix_type(p)
             _add_python_parameter_name(p)
@@ -543,6 +550,7 @@ def test_add_all_metadata_simple():
                     },
                     'type': 'ViSession',
                     'library_method_call_snippet': 'vi_ctype',
+                    'use_in_python_api': True,
                 },
                 {
                     'ctypes_type': 'ViChar',
@@ -566,6 +574,7 @@ def test_add_all_metadata_simple():
                     'type': 'ViChar',
                     'original_type': 'ViString',
                     'library_method_call_snippet': 'channel_name_ctype',
+                    'use_in_python_api': True,
                 },
             ],
             'python_name': 'make_a_foo',
@@ -598,7 +607,8 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'vi_ctype'
+                'library_method_call_snippet': 'vi_ctype',
+                'use_in_python_api': True,
             }, {
                 'direction': 'out',
                 'enum': None,
@@ -623,7 +633,8 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype'
+                'library_method_call_snippet': 'status_ctype',
+                'use_in_python_api': True,
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
