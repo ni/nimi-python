@@ -26,6 +26,15 @@
             raise TypeError('${parameter['python_name']} must be in C-order')
         if ${parameter['python_name']}.dtype is not numpy.dtype('${parameter['numpy_type']}'):
             raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
+<%
+size_param = None
+if parameter['size']['mechanism'] == 'passed-in':
+    size_param = helper.find_size_parameter(parameter, f['parameters'])
+%>\
+% if size_param:
+        if ${size_param['python_name']} is None:
+            ${size_param['python_name']} = len(${parameter['python_name']})
+% endif
 % endfor
 % for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
         ${helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, config, use_numpy_array=parameter['numpy'])}

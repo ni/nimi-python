@@ -15,7 +15,7 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] 
 }
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_self': False,
-    'name_to_use': 'python_name_with_default',
+    'name_to_use': 'python_name_with_numpy_default',
 }
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,

@@ -258,7 +258,20 @@ def test_fetch_waveform_into(session):
         waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
         # Initialize with NaN so we can later verify all samples were overwritten by the driver.
         waveform.fill(float('nan'))
-        measurements = session.fetch_waveform_into(number_of_points_to_read, waveform)
+        measurements = session.fetch_waveform_into(waveform, maximum_time=-1, array_size=number_of_points_to_read)
+    for sample in waveform:
+        assert not math.isnan(sample)
+    assert measurements == len(waveform)
+
+
+def test_fetch_waveform_into_defaults(session):
+    number_of_points_to_read = 100
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
+    with session.initiate():
+        waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
+        # Initialize with NaN so we can later verify all samples were overwritten by the driver.
+        waveform.fill(float('nan'))
+        measurements = session.fetch_waveform_into(waveform)
     for sample in waveform:
         assert not math.isnan(sample)
     assert measurements == len(waveform)

@@ -553,14 +553,14 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
 
-    def fetch_waveform_into(self, number_of_samples, waveform_data):
+    def fetch_waveform_into(self, waveform_data, number_of_samples=None):
         '''fetch_waveform
 
         Returns waveform data.
 
         Args:
-            number_of_samples (int): Number of samples to return
             waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+            number_of_samples (int): Number of samples to return
 
         Returns:
             waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
@@ -574,6 +574,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be in C-order')
         if waveform_data.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
+        if number_of_samples is None:
+            number_of_samples = len(waveform_data)
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
         waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case 13.5

@@ -1759,7 +1759,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_into(self, wfm, timeout=5.0, num_samples=None):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1788,11 +1788,6 @@ class _SessionBase(object):
             session['0,1']._fetch(num_samples, timeout=5.0)
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the
-                acquisition finishes with fewer points than requested, some devices
-                return partial data if the acquisition finished, was aborted, or a
-                timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
             wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
@@ -1813,6 +1808,11 @@ class _SessionBase(object):
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the
+                acquisition finishes with fewer points than requested, some devices
+                return partial data if the acquisition finished, was aborted, or a
+                timeout of 0 was used. If it fails to complete within the timeout
+                period, the function returns an error.
 
         Returns:
             wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
@@ -2304,7 +2304,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, num_samples, wfm, timeout=5.0):
+    def fetch_into(self, wfm, timeout=5.0, num_samples=None):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2388,14 +2388,17 @@ class _SessionBase(object):
                                     Call _actual_num_wfms to determine the size of this array.
         '''
         import numpy
+        if num_samples is None:
+            num_samples = len(wfm) / self._actual_num_wfms()
+
         if wfm.dtype == numpy.float64:
-            return self._fetch_into(num_samples, wfm, timeout)
+            return self._fetch_into(wfm=wfm, num_samples=num_samples, timeout=timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into(num_samples, wfm, timeout)
+            return self._fetch_binary8_into(wfm=wfm, num_samples=num_samples, timeout=timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into(num_samples, wfm, timeout)
+            return self._fetch_binary16_into(wfm=wfm, num_samples=num_samples, timeout=timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into(num_samples, wfm, timeout)
+            return self._fetch_binary32_into(wfm=wfm, num_samples=num_samples, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
