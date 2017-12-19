@@ -29,7 +29,7 @@ with nidcpower.Session(resource_name=args.resource_name, channels=args.channels,
         while samples_acquired < args.length:
             voltage_measurements, current_measurements, in_compliance = session.fetch_multiple(count=session.fetch_backlog)
             assert len(voltage_measurements) == len(current_measurements) == len(in_compliance) == actual_count
-            for i in range(actual_count):
+            for i in range(len(voltage_measurements)):
                 samples_acquired += 1
                 print(row_format.format(samples_acquired, voltage_measurements[i], current_measurements[i], in_compliance[i]))
 
