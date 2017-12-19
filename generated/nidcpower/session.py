@@ -682,7 +682,7 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
-    power_line_frequency = attributes.AttributeEnum(attributes.AttributeViReal64, enums.PowerLineFrequency, 1150020)
+    power_line_frequency = attributes.AttributeViReal64(1150020)
     '''
     Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  NIDCPOWER_ATTR_APERTURE_TIME attribute in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.

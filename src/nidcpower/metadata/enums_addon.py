@@ -178,6 +178,7 @@ enums_additional_enums = {
             },          
         ],
     },
+    'PowerLineFrequency': {}, # This is not an enum, and is a constant. This enum should be removed.
 }
 
 
