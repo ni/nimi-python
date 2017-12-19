@@ -2392,13 +2392,13 @@ class _SessionBase(object):
             num_samples = len(wfm) / self._actual_num_wfms()
 
         if wfm.dtype == numpy.float64:
-            return self._fetch_into(num_samples, wfm, timeout)
+            return self._fetch_into(wfm, num_samples, timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into(num_samples, wfm, timeout)
+            return self._fetch_binary8_into(wfm, num_samples, timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into(num_samples, wfm, timeout)
+            return self._fetch_binary16_into(wfm, num_samples, timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into(num_samples, wfm, timeout)
+            return self._fetch_binary32_into(wfm, num_samples, timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
