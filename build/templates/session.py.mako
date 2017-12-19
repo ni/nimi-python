@@ -124,6 +124,11 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
+% for custom_method in config['custom_methods']:
+% if custom_method['channel_based']:
+<%include file="${'/session.py' + custom_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
+% endif
+% endfor
 
 class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
@@ -170,6 +175,11 @@ class Session(_SessionBase):
 % for method_template in functions[func_name]['method_templates']:
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
+% endfor
+% for custom_method in config['custom_methods']:
+% if not custom_method['channel_based']:
+<%include file="${'/session.py' + custom_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
+% endif
 % endfor
 
 

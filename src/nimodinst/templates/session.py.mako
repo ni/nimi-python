@@ -153,4 +153,7 @@ class Session(object):
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
+% for custom_method in config['custom_methods']:
+<%include file="${'/session.py' + custom_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
+% endfor
 

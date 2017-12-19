@@ -16,6 +16,9 @@
                 name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
                 doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
+    for custom_method in config['custom_methods']:
+        doc_list[custom_method['python_name']] = { 'filename': custom_method['documentation_filename'], 'method_template': None, 'function': None, }
+
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 
