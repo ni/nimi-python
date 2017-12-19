@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
   * #### Added
   * #### Changed
-    * Removed `actual_number_of_points` from `fetch_waveform()` return list
+    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
   * #### Removed
 * ### NI-FGEN
   * #### Added
