@@ -22,6 +22,9 @@ class _ScalarMatcher(object):
             return False
         return True
 
+    def __repr__(self):
+        return '{0}(expected_type={1}, expected_value={2})'.format(self.__class__.__name__, self.expected_type, self.expected_value)
+
 
 class _PointerMatcher(object):
     def __init__(self, expected_type):
@@ -32,6 +35,9 @@ class _PointerMatcher(object):
             print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.POINTER(self.expected_type), type(other)))
             return False
         return True
+
+    def __repr__(self):
+        return '{0}(expected_type={1})'.format(self.__class__.__name__, self.expected_type)
 
 
 class _BufferMatcher(object):
@@ -61,6 +67,9 @@ class _BufferMatcher(object):
                     print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value, self.expected_value))
                     return False
         return True
+
+    def __repr__(self):
+        return '{0}(expected_type={1})'.format(self.__class__.__name__, self.expected_type)
 
 
 # Strings
