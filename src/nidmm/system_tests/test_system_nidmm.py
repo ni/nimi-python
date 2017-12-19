@@ -180,7 +180,8 @@ def test_trigger_max_time_exceeded_errror(session):
     try:
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
         session.configure_multi_point(sample_count=10, trigger_count=1)
-        measurements = session.read_multi_point(15)
+        session.read_multi_point(15)
+        assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed
 
