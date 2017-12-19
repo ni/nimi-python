@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
+    * `get_cal_date_and_time` return datetime object instead of individual items for year, month, day, hour, minute
   * #### Removed
 * ### NI-ModInst
   * #### Added
