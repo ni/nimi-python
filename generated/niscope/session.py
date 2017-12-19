@@ -2389,7 +2389,7 @@ class _SessionBase(object):
         '''
         import numpy
         if wfm.dtype == numpy.float64:
-            return self._fetch_double_into(num_samples, wfm, timeout)
+            return self._fetch_into(num_samples, wfm, timeout)
         elif wfm.dtype == numpy.int8:
             return self._fetch_binary8_into(num_samples, wfm, timeout)
         elif wfm.dtype == numpy.int16:
@@ -2468,7 +2468,7 @@ class _SessionBase(object):
 
                                     Call _actual_num_wfms to determine the size of this array.
         '''
-        return self._fetch_double(num_samples, timeout)
+        return self._fetch(num_samples, timeout)
 
     def fetch_measurement(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement
