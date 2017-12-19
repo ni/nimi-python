@@ -47,6 +47,11 @@ All notable changes to this project will be documented in this file.
     * `write_named_waveform_f64`: Use `write_waveform`
 * ### NI-SCOPE
   * #### Added
+    * `fetch_into` for high-performance fetch using numpy.array. Supported element types:
+      * `numpy.float64`
+      * `numpy.int8`
+      * `numpy.int16`
+      * `numpy.int32`
   * #### Changed
     * Added default values for timeout on all fetch and read functions.
   * #### Removed

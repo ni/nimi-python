@@ -152,7 +152,7 @@ functions_additional_functions = {
                 'name': 'waveformDataArray',
                 'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                'description': 'Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
+                    'description': 'Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.',
                 },
             },
             {
@@ -165,17 +165,17 @@ functions_additional_functions = {
                 },
             },
         ],
-'documentation': {
-'description': '''
+        'documentation': {
+            'description': '''
 Creates an onboard waveform
 for use in Arbitrary Waveform output mode or Arbitrary Sequence output
 mode.
 ''',
-'note': '''
+            'note': '''
 You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or
 NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 ''',
-},
+        },
     },
 
     'WriteWaveformDispatcher': {
@@ -230,6 +230,7 @@ nifgen\_SetWaveformNextWritePosition function.''',
     },
 }
 
+
 # Override the 'python' name for some functions.
 functions_python_name = {
     'AbortGeneration':                      { 'python_name': 'abort',                   },
@@ -237,7 +238,7 @@ functions_python_name = {
     'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
 }
 
-functions_method_template_filenames = {
+functions_method_templates = {
     'CreateWaveformDispatcher':     { 'method_templates': [
         { 'session_filename': 'create_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_numpy', },
     ], },

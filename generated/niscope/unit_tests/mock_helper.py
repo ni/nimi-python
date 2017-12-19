@@ -73,10 +73,25 @@ class SideEffectsHelper(object):
         self._defaults['FetchArrayMeasurement']['return'] = 0
         self._defaults['FetchArrayMeasurement']['measWfm'] = None
         self._defaults['FetchArrayMeasurement']['wfmInfo'] = None
+        self._defaults['FetchBinary16'] = {}
+        self._defaults['FetchBinary16']['return'] = 0
+        self._defaults['FetchBinary16']['Wfm'] = None
+        self._defaults['FetchBinary16']['wfmInfo'] = None
+        self._defaults['FetchBinary32'] = {}
+        self._defaults['FetchBinary32']['return'] = 0
+        self._defaults['FetchBinary32']['Wfm'] = None
+        self._defaults['FetchBinary32']['wfmInfo'] = None
         self._defaults['FetchBinary8'] = {}
         self._defaults['FetchBinary8']['return'] = 0
         self._defaults['FetchBinary8']['Wfm'] = None
         self._defaults['FetchBinary8']['wfmInfo'] = None
+        self._defaults['FetchDispatcher'] = {}
+        self._defaults['FetchDispatcher']['return'] = 0
+        self._defaults['FetchDispatcher']['wfmInfo'] = None
+        self._defaults['FetchDouble'] = {}
+        self._defaults['FetchDouble']['return'] = 0
+        self._defaults['FetchDouble']['Wfm'] = None
+        self._defaults['FetchDouble']['wfmInfo'] = None
         self._defaults['FetchMeasurement'] = {}
         self._defaults['FetchMeasurement']['return'] = 0
         self._defaults['FetchMeasurement']['Result'] = None
@@ -323,6 +338,48 @@ class SideEffectsHelper(object):
             wfm_info[i] = a[i]
         return self._defaults['FetchArrayMeasurement']['return']
 
+    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchBinary16']['return'] != 0:
+            return self._defaults['FetchBinary16']['return']
+        if self._defaults['FetchBinary16']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary16", param='Wfm')
+        a = self._defaults['FetchBinary16']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['FetchBinary16']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary16", param='wfmInfo')
+        a = self._defaults['FetchBinary16']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['FetchBinary16']['return']
+
+    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchBinary32']['return'] != 0:
+            return self._defaults['FetchBinary32']['return']
+        if self._defaults['FetchBinary32']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary32", param='Wfm')
+        a = self._defaults['FetchBinary32']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['FetchBinary32']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary32", param='wfmInfo')
+        a = self._defaults['FetchBinary32']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['FetchBinary32']['return']
+
     def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary8']['return'] != 0:
             return self._defaults['FetchBinary8']['return']
@@ -343,6 +400,40 @@ class SideEffectsHelper(object):
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchBinary8']['return']
+
+    def niScope_FetchDispatcher(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchDispatcher']['return'] != 0:
+            return self._defaults['FetchDispatcher']['return']
+        if self._defaults['FetchDispatcher']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchDispatcher", param='wfmInfo')
+        a = self._defaults['FetchDispatcher']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['FetchDispatcher']['return']
+
+    def niScope_FetchDouble(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchDouble']['return'] != 0:
+            return self._defaults['FetchDouble']['return']
+        if self._defaults['FetchDouble']['Wfm'] is None:
+            raise MockFunctionCallError("niScope_FetchDouble", param='Wfm')
+        a = self._defaults['FetchDouble']['Wfm']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm), len(a))):
+            wfm[i] = a[i]
+        if self._defaults['FetchDouble']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchDouble", param='wfmInfo')
+        a = self._defaults['FetchDouble']['wfmInfo']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(wfm_info), len(a))):
+            wfm_info[i] = a[i]
+        return self._defaults['FetchDouble']['return']
 
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         if self._defaults['FetchMeasurement']['return'] != 0:
@@ -642,8 +733,16 @@ class SideEffectsHelper(object):
         mock_library.niScope_Fetch.return_value = 0
         mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")
         mock_library.niScope_FetchArrayMeasurement.return_value = 0
+        mock_library.niScope_FetchBinary16.side_effect = MockFunctionCallError("niScope_FetchBinary16")
+        mock_library.niScope_FetchBinary16.return_value = 0
+        mock_library.niScope_FetchBinary32.side_effect = MockFunctionCallError("niScope_FetchBinary32")
+        mock_library.niScope_FetchBinary32.return_value = 0
         mock_library.niScope_FetchBinary8.side_effect = MockFunctionCallError("niScope_FetchBinary8")
         mock_library.niScope_FetchBinary8.return_value = 0
+        mock_library.niScope_FetchDispatcher.side_effect = MockFunctionCallError("niScope_FetchDispatcher")
+        mock_library.niScope_FetchDispatcher.return_value = 0
+        mock_library.niScope_FetchDouble.side_effect = MockFunctionCallError("niScope_FetchDouble")
+        mock_library.niScope_FetchDouble.return_value = 0
         mock_library.niScope_FetchMeasurement.side_effect = MockFunctionCallError("niScope_FetchMeasurement")
         mock_library.niScope_FetchMeasurement.return_value = 0
         mock_library.niScope_FetchMeasurementStats.side_effect = MockFunctionCallError("niScope_FetchMeasurementStats")
