@@ -117,7 +117,8 @@ def get_method_return_snippet(parameters, config, use_numpy_array=False):
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
             if x['numpy'] is False or use_numpy_array is False:
-                snippets.append(_get_output_param_return_snippet(x, parameters, config))
+                if x['use_in_python_api']:
+                    snippets.append(_get_output_param_return_snippet(x, parameters, config))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -325,6 +326,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViSession',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt64',
@@ -345,6 +347,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViInt64',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViChar',
@@ -365,6 +368,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 256},
         'type': 'ViChar',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'custom_struct',
@@ -386,6 +390,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
         'type': 'custom_struct',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -406,6 +411,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViInt32',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -426,6 +432,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
         'type': 'ViInt16',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -449,6 +456,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViInt16',
         'numpy': False,
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt64',
@@ -471,6 +479,7 @@ parameters_for_testing = [
         'numpy': True,
         'numpy_type': 'int64',
         'numpy_type_library_call': 'numpy.int64',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -490,7 +499,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'number_of_elements_python_code',
         'python_type': 'int',
         'size': {'mechanism': 'python-code', 'value': 'self.get_array_size_for_python_code()'},
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt16',
@@ -510,7 +520,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'input',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt16'
+        'type': 'ViInt16',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViReal64',
@@ -531,7 +542,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'input_array=None',
         'python_type': 'float',
         'size': {'mechanism': 'len', 'value': 'inputArraySize'},
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -551,7 +563,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'input_array_size',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViInt32',
@@ -571,7 +584,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'string_size',
         'python_type': 'int',
         'size': {'mechanism': 'fixed', 'value': 1},
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'use_in_python_api': True,
     },
     {
         'ctypes_type': 'ViChar',
@@ -591,7 +605,8 @@ parameters_for_testing = [
         'python_name_with_doc_default': 'a_string',
         'python_type': 'int',
         'size': {'mechanism': 'ivi-dance', 'value': 'stringSize'},
-        'type': 'ViChar'
+        'type': 'ViChar',
+        'use_in_python_api': True,
     },
 ]
 
