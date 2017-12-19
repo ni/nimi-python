@@ -6,6 +6,7 @@ from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
 from .metadata_find import find_custom_type
+from .metadata_find import find_size_parameter
 from .metadata_merge_dicts import merge_helper
 
 import codecs
@@ -213,10 +214,14 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace(' ', '_')
 
 
-def _add_use_in_python_api(p):
+def _add_use_in_python_api(p, parameters):
     '''Add 'use_in_python_api' if not there with value of True'''
     if 'use_in_python_api' not in p:
         p['use_in_python_api'] = True
+
+    if p['size']['mechanism'] == 'len' or p['size']['mechanism'] == 'ivi-dance':
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
 
 
 def add_all_function_metadata(functions, config):
@@ -231,8 +236,8 @@ def add_all_function_metadata(functions, config):
         _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
-            _add_use_in_python_api(p)
             _add_buffer_info(p)
+            _add_use_in_python_api(p, functions[f]['parameters'])
             _fix_type(p)
             _add_python_parameter_name(p)
             _add_python_type(p, config)
