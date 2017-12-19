@@ -658,18 +658,6 @@ replacement_enums = {
             },
         ],
     },
-    'InputImpedance': {
-        'values': [
-            {
-                'name': 'NISCOPE_VAL_1_MEG_OHM',
-                'value': 1000000.0,
-            },
-            {
-                'name': 'NISCOPE_VAL_50_OHMS',
-                'value': 50.0,
-            },
-        ],
-    },
     'ExportableSignals': {
         'values': [
             {
@@ -1013,4 +1001,9 @@ replacement_enums = {
             },
         ],
     },
+}
+
+
+enums_additional_enums = {
+    'InputImpedance': {},  # This is not an enum, and is a constant. This enum should be removed.
 }

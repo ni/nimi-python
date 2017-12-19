@@ -965,17 +965,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: InputImpedance
-
-    .. py:attribute:: niscope.InputImpedance._1_MEG_OHM
-
-
-
-    .. py:attribute:: niscope.InputImpedance._50_OHMS
-
-
-
-
 .. py:data:: Option
 
     .. py:attribute:: niscope.Option.SELF_CALIBRATE_ALL_CHANNELS

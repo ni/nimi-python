@@ -1577,18 +1577,16 @@ class _SessionBase(object):
             session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
-            input_impedance (enums.InputImpedance): The input impedance for the channel; NI-SCOPE sets
+            input_impedance (float): The input impedance for the channel; NI-SCOPE sets
                 INPUT_IMPEDANCE to this value.
             max_input_frequency (float): The bandwidth for the channel; NI-SCOPE sets
                 MAX_INPUT_FREQUENCY to this value. Pass 0 for this
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
         '''
-        if type(input_impedance) is not enums.InputImpedance:
-            raise TypeError('Parameter mode must be of type ' + str(enums.InputImpedance))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        input_impedance_ctype = visatype.ViReal64(input_impedance.value)  # case 10
+        input_impedance_ctype = visatype.ViReal64(input_impedance)  # case 9
         max_input_frequency_ctype = visatype.ViReal64(max_input_frequency)  # case 9
         error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
