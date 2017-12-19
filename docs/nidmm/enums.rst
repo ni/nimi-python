@@ -421,39 +421,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: InputResistance
-
-    .. py:attribute:: nidmm.InputResistance._1_MEGAOHM
-
-
-
-        Input resistance of 1 M Ohm
-
-        
-
-
-
-    .. py:attribute:: nidmm.InputResistance._10_MEGAOHM
-
-
-
-        Input resistance of 10 M Ohm
-
-        
-
-
-
-    .. py:attribute:: nidmm.InputResistance.GREATER_THAN_10_GIGAOHM
-
-
-
-        Input resistance greater than 10 G Ohm
-
-        
-
-
-
-
 .. py:data:: LCCalculationModel
 
     .. py:attribute:: nidmm.LCCalculationModel.AUTO

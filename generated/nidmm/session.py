@@ -117,7 +117,7 @@ class _SessionBase(object):
     '''
     A string containing the capabilities and extension groups supported by the  specific driver.
     '''
-    input_resistance = attributes.AttributeEnum(attributes.AttributeViReal64, enums.InputResistance, 1150029)
+    input_resistance = attributes.AttributeViReal64(1150029)
     '''
     Specifies the input resistance of the instrument.
     The NI 4050 and NI 4060 are not supported.

@@ -183,21 +183,6 @@ class Function(Enum):
     '''
 
 
-class InputResistance(Enum):
-    _1_MEGAOHM = 1000000.0
-    '''
-    Input resistance of 1 M Ohm
-    '''
-    _10_MEGAOHM = 10000000.0
-    '''
-    Input resistance of 10 M Ohm
-    '''
-    GREATER_THAN_10_GIGAOHM = 10000000000.0
-    '''
-    Input resistance greater than 10 G Ohm
-    '''
-
-
 class LCCalculationModel(Enum):
     AUTO = -1
     '''
