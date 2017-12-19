@@ -17,5 +17,6 @@ config = {
         },
     },
     'custom_types': [],
+    'custom_methods': [],
 }
 

@@ -26,5 +26,6 @@ config = {
         {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
+    'custom_methods': [],
 }
 
