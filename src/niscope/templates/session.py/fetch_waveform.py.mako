@@ -11,6 +11,9 @@
         ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
         import numpy
+        if num_samples is None:
+            num_samples = len(wfm) / self._actual_num_wfms()
+
         if wfm.dtype == numpy.float64:
             return self._fetch_double_into(num_samples, wfm, timeout)
         elif wfm.dtype == numpy.int8:
