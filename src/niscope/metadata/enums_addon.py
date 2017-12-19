@@ -1005,5 +1005,5 @@ replacement_enums = {
 
 
 enums_additional_enums = {
-    'InputImpedance': {},  # This is not an enum, and is a constant. This enum should be removed.
+    'InputImpedance': {},  # Enum metadata actually contains constants.
 }
