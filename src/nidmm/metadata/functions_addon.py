@@ -87,6 +87,11 @@ functions_is_error_handling = {
     'GetError':                     { 'is_error_handling': True, },
 }
 
+# There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
+functions_remove_from_python_api = {
+    'FetchWaveform':                { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
+}
+
 # Default values for method parameters
 functions_default_value = {
     'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
