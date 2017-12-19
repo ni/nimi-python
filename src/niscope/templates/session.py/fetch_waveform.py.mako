@@ -15,7 +15,7 @@
             num_samples = len(wfm) / self._actual_num_wfms()
 
         if wfm.dtype == numpy.float64:
-            return self._fetch_double_into(num_samples, wfm, timeout)
+            return self._fetch_into(num_samples, wfm, timeout)
         elif wfm.dtype == numpy.int8:
             return self._fetch_binary8_into(num_samples, wfm, timeout)
         elif wfm.dtype == numpy.int16:
