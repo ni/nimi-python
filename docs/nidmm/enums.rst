@@ -712,29 +712,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: PowerlineFrequency
-
-    .. py:attribute:: nidmm.PowerlineFrequency._50
-
-
-
-        Specifies the powerline frequency as 50 Hz.
-
-        
-
-
-
-    .. py:attribute:: nidmm.PowerlineFrequency._60
-
-
-
-        Specifies the powerline frequency as 60 Hz.
-
-        
-
-
-
-
 .. py:data:: RTDType
 
     .. py:attribute:: nidmm.RTDType.CUSTOM

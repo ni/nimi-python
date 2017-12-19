@@ -10,4 +10,5 @@ enums_codegen_method = {
 
 enums_additional_enums = {
     'DigitsResolution': {},  # Just delete this enum. Otherwise we have to make it so that it will generate valid code
+    'PowerlineFrequency': {}, # This is not an enum, and is a constant. This enum should be removed.
 }

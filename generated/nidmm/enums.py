@@ -312,17 +312,6 @@ class OperationMode(Enum):
     '''
 
 
-class PowerlineFrequency(Enum):
-    _50 = 50.0
-    '''
-    Specifies the powerline frequency as 50 Hz.
-    '''
-    _60 = 60.0
-    '''
-    Specifies the powerline frequency as 60 Hz.
-    '''
-
-
 class RTDType(Enum):
     CUSTOM = 0
     '''
