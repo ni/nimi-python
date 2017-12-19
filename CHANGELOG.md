@@ -19,6 +19,9 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
+    * Property powerline_freq no longer uses enum PowerlineFrequency.
+    * Property current_source no longer uses enum CurrentSource.
+    * Property input_resistance no longer uses enum InputResistance.
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -32,6 +35,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
   * #### Added
   * #### Changed
+    * Property power_line_frequency no longer uses enum PowerLineFrequency.
   * #### Removed
 * ### NI-FGEN
   * #### Added
@@ -54,6 +58,7 @@ All notable changes to this project will be documented in this file.
       * `numpy.int32`
   * #### Changed
     * Added default values for timeout on all fetch and read functions.
+    * Property input_impedance no longer uses enum InputImpedance.
   * #### Removed
 
 ## 0.5.0 - 2017-11-27
