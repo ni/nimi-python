@@ -73,7 +73,7 @@ def _add_ctypes_type(parameter, config):
     return parameter
 
 
-def _add_numpy_info(parameter, config):
+def _add_numpy_info(parameter, parameters, config):
     '''Adds the following numpy-related information:
 
              numpy: Default to False unless already set. True for buffers that allow being passed as a numpy.ndarray.
@@ -85,6 +85,11 @@ def _add_numpy_info(parameter, config):
 
     if parameter['numpy']:
         parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
+
+        if parameter['size']['mechanism'] == 'passed-in':
+            size_param = find_size_parameter(parameter, parameters)
+            if size_param:
+                size_param['use_in_python_api'] = False
 
     return parameter
 
@@ -243,7 +248,7 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
-            _add_numpy_info(p, config)
+            _add_numpy_info(p, functions[f]['parameters'], config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
