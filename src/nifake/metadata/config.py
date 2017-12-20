@@ -26,6 +26,9 @@ config = {
         {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
-    'handcoded_methods': [],
+    'handcoded_methods': [
+        {'python_names': ['read', 'get_cal_date_and_time'], 'session_filename': '/datetime_wrappers', 'documentation_filename': '', 'render_in_session_base': False},
+        {'python_names': ['read_from_channel', ], 'session_filename': '/datetime_wrappers_channel', 'documentation_filename': '', 'render_in_session_base': True},
+    ],
 }
 

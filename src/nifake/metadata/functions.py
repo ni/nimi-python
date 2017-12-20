@@ -1980,5 +1980,80 @@ functions = {
         'documentation': {
             'description': 'Writes waveform to the driver',
         },
-    }
+    },
+    'GetCalDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM\_init or niDMM\_InitWithOptions. The default is None.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'calType',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the type of calibration performed (external or self-calibration).',
+                    'note': 'The NI 4065 does not support self-calibration.',
+                    'table_body': [['NIDMM\\_VAL\\_INTERNAL\\_AREA (default)', '0', 'Self-Calibration'], ['NIDMM\\_VAL\\_EXTERNAL\\_AREA', '1', 'External Calibration']],
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Indicates the **month** of the last calibration.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Day',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Indicates the **day** of the last calibration.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Year',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Indicates the **year** of the last calibration.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Hour',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Indicates the **hour** of the last calibration.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Minute',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Indicates the **minute** of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last calibration performed.',
+            'note': 'The NI 4050 and NI 4060 are not supported.',
+        },
+    },
 }

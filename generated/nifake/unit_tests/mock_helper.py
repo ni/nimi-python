@@ -67,6 +67,13 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
+        self._defaults['GetCalDateAndTime'] = {}
+        self._defaults['GetCalDateAndTime']['return'] = 0
+        self._defaults['GetCalDateAndTime']['Month'] = None
+        self._defaults['GetCalDateAndTime']['Day'] = None
+        self._defaults['GetCalDateAndTime']['Year'] = None
+        self._defaults['GetCalDateAndTime']['Hour'] = None
+        self._defaults['GetCalDateAndTime']['Minute'] = None
         self._defaults['GetCustomType'] = {}
         self._defaults['GetCustomType']['return'] = 0
         self._defaults['GetCustomType']['cs'] = None
@@ -326,6 +333,26 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niFake_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
+        if self._defaults['GetCalDateAndTime']['return'] != 0:
+            return self._defaults['GetCalDateAndTime']['return']
+        if self._defaults['GetCalDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+        if self._defaults['GetCalDateAndTime']['Day'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Day')
+        day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+        if self._defaults['GetCalDateAndTime']['Year'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Year')
+        year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+        if self._defaults['GetCalDateAndTime']['Hour'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Hour')
+        hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+        if self._defaults['GetCalDateAndTime']['Minute'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Minute')
+        minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
+        return self._defaults['GetCalDateAndTime']['return']
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         if self._defaults['GetCustomType']['return'] != 0:
@@ -600,6 +627,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAttributeViReal64.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
         mock_library.niFake_GetAttributeViString.return_value = 0
+        mock_library.niFake_GetCalDateAndTime.side_effect = MockFunctionCallError("niFake_GetCalDateAndTime")
+        mock_library.niFake_GetCalDateAndTime.return_value = 0
         mock_library.niFake_GetCustomType.side_effect = MockFunctionCallError("niFake_GetCustomType")
         mock_library.niFake_GetCustomType.return_value = 0
         mock_library.niFake_GetCustomTypeArray.side_effect = MockFunctionCallError("niFake_GetCustomTypeArray")

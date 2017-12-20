@@ -42,7 +42,8 @@ for f in sorted(functions):
             function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
 
 for handcoded_method in config['handcoded_methods']:
-    function_names.append(handcoded_method['python_name'])
+    for python_name in handcoded_method['python_names']:
+        function_names.append(python_name)
 
 table_contents = []
 table_contents.append(['Method name'])

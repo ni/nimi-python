@@ -37,6 +37,7 @@ class Library(object):
         self.niFake_GetAttributeViInt64_cfunc = None
         self.niFake_GetAttributeViReal64_cfunc = None
         self.niFake_GetAttributeViString_cfunc = None
+        self.niFake_GetCalDateAndTime_cfunc = None
         self.niFake_GetCustomType_cfunc = None
         self.niFake_GetCustomTypeArray_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
@@ -207,6 +208,14 @@ class Library(object):
                 self.niFake_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
+
+    def niFake_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetCalDateAndTime_cfunc is None:
+                self.niFake_GetCalDateAndTime_cfunc = self._library.niFake_GetCalDateAndTime
+                self.niFake_GetCalDateAndTime_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_GetCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetCalDateAndTime_cfunc(vi, cal_type, month, day, year, hour, minute)
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         with self._func_lock:

@@ -11,6 +11,9 @@ functions_codegen_method = {
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
     'GetError':                 { 'codegen_method': 'private',  },
+    'Read':                     { 'codegen_method': 'private',  },  # Public wrapper to allow timedelta
+    'ReadFromChannel':          { 'codegen_method': 'private',  },  # Public wrapper to allow timedelta
+    'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
 }

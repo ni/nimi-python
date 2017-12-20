@@ -249,8 +249,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def read_from_channel(self, maximum_time):
-        '''read_from_channel
+    def _read_from_channel(self, maximum_time):
+        '''_read_from_channel
 
         Acquires a single measurement and returns the measured value.
 
@@ -260,7 +260,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_from_channel(maximum_time)
+            session['0,1']._read_from_channel(maximum_time)
 
         Args:
             maximum_time (int): Specifies the **maximum_time** allowed in years.
@@ -418,6 +418,32 @@ class _SessionBase(object):
         error_code = self._library.niFake_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
+
+    def read_from_channel(self, maximum_time):
+        '''read_from_channel
+
+        Acquires a single measurement and returns the measured value.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1'].read_from_channel(maximum_time)
+
+        Args:
+            maximum_time (int or timedelta): Specifies the **maximum_time** allowed in years.
+
+        Returns:
+            reading (float): The measured value.
+        '''
+        if str(type(maximum_time)).find("'datetime.timedelta'") != -1:
+            years = int(maximum_time.days / 365)
+        else:
+            years = maximum_time
+
+        return self._read_from_channel(years)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -704,6 +730,42 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    def _get_cal_date_and_time(self, cal_type):
+        '''_get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
+                +-----------------------------------+---+----------------------+
+
+                Note: The NI 4065 does not support self-calibration.
+
+        Returns:
+            month (int): Indicates the **month** of the last calibration.
+            day (int): Indicates the **day** of the last calibration.
+            year (int): Indicates the **year** of the last calibration.
+            hour (int): Indicates the **hour** of the last calibration.
+            minute (int): Indicates the **minute** of the last calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        year_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
     def get_custom_type(self):
         '''get_custom_type
 
@@ -905,8 +967,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def read(self, maximum_time):
-        '''read
+    def _read(self, maximum_time):
+        '''_read
 
         Acquires a single measurement and returns the measured value.
 
@@ -1102,6 +1164,50 @@ class Session(_SessionBase):
         error_code = self._library.niFake_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def read(self, maximum_time):
+        '''read
+
+        Acquires a single measurement and returns the measured value.
+
+        Args:
+            maximum_time (int or timedelta): Specifies the **maximum_time** allowed in years.
+
+        Returns:
+            reading (float): The measured value.
+        '''
+        if str(type(maximum_time)).find("'datetime.timedelta'") != -1:
+            years = int(maximum_time.days / 365)
+        else:
+            years = maximum_time
+
+        return self._read(years)
+
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
+                +-----------------------------------+---+----------------------+
+
+                Note: The NI 4065 does not support self-calibration.
+
+        Returns:
+            datetime object representing the date and time of the last calibration
+        '''
+        import datetime
+
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
 
 
