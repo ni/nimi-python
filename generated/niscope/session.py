@@ -2304,7 +2304,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, num_samples, wfm, timeout=5.0):
+    def fetch_into(self, wfm, timeout=5.0):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
