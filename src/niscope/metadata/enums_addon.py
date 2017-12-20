@@ -1002,8 +1002,3 @@ replacement_enums = {
         ],
     },
 }
-
-
-enums_additional_enums = {
-    'InputImpedance': {},  # Enum metadata actually contains constants.
-}
