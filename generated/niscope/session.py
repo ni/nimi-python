@@ -1377,29 +1377,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def _actual_meas_wfm_size(self, array_meas_function):
-        '''_actual_meas_wfm_size
-
-        Returns the total available size of an array measurement acquisition.
-
-        Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-
-        Returns:
-            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
-                waveform.
-        '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(meas_waveform_size_ctype.value)
-
     def _actual_num_wfms(self):
         '''_actual_num_wfms
 

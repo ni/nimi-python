@@ -19,9 +19,6 @@ class SideEffectsHelper(object):
         self._defaults['AcquisitionStatus'] = {}
         self._defaults['AcquisitionStatus']['return'] = 0
         self._defaults['AcquisitionStatus']['acquisitionStatus'] = None
-        self._defaults['ActualMeasWfmSize'] = {}
-        self._defaults['ActualMeasWfmSize']['return'] = 0
-        self._defaults['ActualMeasWfmSize']['measWaveformSize'] = None
         self._defaults['ActualNumWfms'] = {}
         self._defaults['ActualNumWfms']['return'] = 0
         self._defaults['ActualNumWfms']['numWfms'] = None
@@ -171,14 +168,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_AcquisitionStatus", param='acquisitionStatus')
         acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
         return self._defaults['AcquisitionStatus']['return']
-
-    def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
-        if self._defaults['ActualMeasWfmSize']['return'] != 0:
-            return self._defaults['ActualMeasWfmSize']['return']
-        if self._defaults['ActualMeasWfmSize']['measWaveformSize'] is None:
-            raise MockFunctionCallError("niScope_ActualMeasWfmSize", param='measWaveformSize')
-        meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
-        return self._defaults['ActualMeasWfmSize']['return']
 
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         if self._defaults['ActualNumWfms']['return'] != 0:
@@ -646,8 +635,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_Abort.return_value = 0
         mock_library.niScope_AcquisitionStatus.side_effect = MockFunctionCallError("niScope_AcquisitionStatus")
         mock_library.niScope_AcquisitionStatus.return_value = 0
-        mock_library.niScope_ActualMeasWfmSize.side_effect = MockFunctionCallError("niScope_ActualMeasWfmSize")
-        mock_library.niScope_ActualMeasWfmSize.return_value = 0
         mock_library.niScope_ActualNumWfms.side_effect = MockFunctionCallError("niScope_ActualNumWfms")
         mock_library.niScope_ActualNumWfms.return_value = 0
         mock_library.niScope_AutoSetup.side_effect = MockFunctionCallError("niScope_AutoSetup")
