@@ -25,7 +25,7 @@ class custom_struct(ctypes.Structure):  # noqa N801
         return '{0}(data=None, struct_int={1}, struct_double={2}'.format(self.__class__.__name__, self.struct_int, self.struct_double)
 
     def __str__(self):
-        return __repr__()
+        return self.__repr__()
 
 
 class CustomStruct(object):
@@ -41,7 +41,7 @@ class CustomStruct(object):
         return '{0}(data=None, struct_int={1}, struct_double={2}'.format(self.__class__.__name__, self.struct_int, self.struct_double)
 
     def __str__(self):
-        return __repr__()
+        return self.__repr__()
 
 
 
