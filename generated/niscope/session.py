@@ -2304,7 +2304,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, num_samples, wfm, timeout=5.0):
+    def fetch_into(self, wfm, timeout=5.0):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2388,14 +2388,17 @@ class _SessionBase(object):
                                     Call _actual_num_wfms to determine the size of this array.
         '''
         import numpy
+
+        num_samples = int(len(wfm) / self._actual_num_wfms())
+
         if wfm.dtype == numpy.float64:
-            return self._fetch_into(num_samples, wfm, timeout)
+            return self._fetch_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into(num_samples, wfm, timeout)
+            return self._fetch_binary8_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into(num_samples, wfm, timeout)
+            return self._fetch_binary16_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into(num_samples, wfm, timeout)
+            return self._fetch_binary32_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 

@@ -279,9 +279,8 @@ class TestSession(object):
         self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
         self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
         with nifake.Session('dev1') as session:
-            waveform, actual_number_of_samples = session.fetch_waveform(len(expected_waveform))
+            waveform = session.fetch_waveform(len(expected_waveform))
             assert isinstance(waveform[0], float)
-            assert actual_number_of_samples == len(expected_waveform)
             assert waveform == expected_waveform
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
@@ -292,8 +291,7 @@ class TestSession(object):
         self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
         with nifake.Session('dev1') as session:
             waveform = numpy.empty(len(expected_waveform), numpy.float64)
-            actual_number_of_samples = session.fetch_waveform_into(len(expected_waveform), waveform)
-            assert actual_number_of_samples == len(expected_waveform)
+            session.fetch_waveform_into(waveform)
             assert numpy.array_equal(waveform, expected_waveform)
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
@@ -311,7 +309,7 @@ class TestSession(object):
             ]
             for w in waveforms:
                 try:
-                    session.fetch_waveform_into(length, w)
+                    session.fetch_waveform_into(w)
                     assert False
                 except TypeError:
                     pass

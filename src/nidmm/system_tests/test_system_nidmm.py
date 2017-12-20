@@ -28,9 +28,8 @@ def test_acquisition(session):
 def test_multi_point_acquisition(session):
     session.configure_multi_point(4, 2)
     session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-    measurements, numberOfMeasurements = session.read_multi_point(8)
+    measurements = session.read_multi_point(8)
     assert len(measurements) == 8
-    assert numberOfMeasurements == 8
 
 
 # Attribute tests
@@ -128,9 +127,8 @@ def test_fetch_error_while_not_initiated(session):
 def test_multi_point_acquisition_with_measurement_absolute(session):
     session.configure_multi_point(4, 2)
     session.configure_measurement_absolute(nidmm.Function.DC_VOLTS, 0.02, 0.001)
-    measurements, numberOfMeasurements = session.read_multi_point(8)
+    measurements = session.read_multi_point(8)
     assert len(measurements) == 8
-    assert numberOfMeasurements == 8
 
 
 def test_disable(session):
@@ -149,7 +147,7 @@ def test_fetch_multiple(session):
     session.configure_multi_point(sample_count=10, trigger_count=1)
     with session.initiate():
         measurements = session.fetch_multi_point(5)
-        assert len(measurements[0]) == 5
+        assert len(measurements) == 5
         measurements = session.fetch_multi_point(5)
         backlog, acquisition_state = session.read_status()
         assert acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
@@ -182,7 +180,8 @@ def test_trigger_max_time_exceeded_errror(session):
     try:
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
         session.configure_multi_point(sample_count=10, trigger_count=1)
-        measurements, numberOfMeasurements = session.read_multi_point(15)
+        session.read_multi_point(15)
+        assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed
 
@@ -245,10 +244,9 @@ def test_fetch_waveform(session):
     number_of_points_to_read = 100
     session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
     with session.initiate():
-        measurements, actual_number_of_points = session.fetch_waveform(number_of_points_to_read)
+        measurements = session.fetch_waveform(number_of_points_to_read)
         assert len(measurements) == number_of_points_to_read
         assert isinstance(measurements[1], float)
-        assert actual_number_of_points == number_of_points_to_read
 
 
 def test_fetch_waveform_into(session):
@@ -258,10 +256,9 @@ def test_fetch_waveform_into(session):
         waveform = numpy.empty(number_of_points_to_read, dtype=numpy.float64)
         # Initialize with NaN so we can later verify all samples were overwritten by the driver.
         waveform.fill(float('nan'))
-        measurements = session.fetch_waveform_into(number_of_points_to_read, waveform)
+        session.fetch_waveform_into(waveform)
     for sample in waveform:
         assert not math.isnan(sample)
-    assert measurements == len(waveform)
 
 
 def test_fetch_waveform_error(session):
@@ -298,9 +295,8 @@ def test_read_waveform(session):
     session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 1000)
     with session.initiate():
         number_of_points_to_read = 100
-        measurements, actual_number_of_points = session.read_waveform(number_of_points_to_read)
+        measurements = session.read_waveform(number_of_points_to_read)
         assert len(measurements) == number_of_points_to_read
-        assert actual_number_of_points == number_of_points_to_read
         assert isinstance(measurements[1], float)
 
 

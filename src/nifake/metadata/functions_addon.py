@@ -77,6 +77,11 @@ functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
 }
 
+# There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
+functions_remove_from_python_api = {
+    'FetchWaveform':                { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
+}
+
 functions_method_templates = {
     'FetchWaveform':                        {
         'method_templates': [

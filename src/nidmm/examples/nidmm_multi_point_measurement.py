@@ -16,6 +16,5 @@ args = parser.parse_args()
 with nidmm.Session(resource_name=args.resource_name, option_string=args.option_string) as session:
     session.configure_measurement_digits(measurement_function=nidmm.Function[args.function], range=args.range, resolution_digits=args.digits)
     session.configure_multi_point(trigger_count=args.triggers, sample_count=args.samples)
-    measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
-    print('Number of measurements: ', numberOfMeasurements)
+    measurements = session.read_multi_point(array_size=args.samples)
     print('Measurements: ', measurements)

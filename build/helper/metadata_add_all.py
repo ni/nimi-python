@@ -6,6 +6,7 @@ from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
 from .metadata_find import find_custom_type
+from .metadata_find import find_size_parameter
 from .metadata_merge_dicts import merge_helper
 
 import codecs
@@ -72,7 +73,7 @@ def _add_ctypes_type(parameter, config):
     return parameter
 
 
-def _add_numpy_info(parameter, config):
+def _add_numpy_info(parameter, parameters, config):
     '''Adds the following numpy-related information:
 
              numpy: Default to False unless already set. True for buffers that allow being passed as a numpy.ndarray.
@@ -84,6 +85,11 @@ def _add_numpy_info(parameter, config):
 
     if parameter['numpy']:
         parameter['numpy_type'] = get_numpy_type_for_api_type(parameter['type'], config)
+
+        if parameter['size']['mechanism'] == 'passed-in':
+            size_param = find_size_parameter(parameter, parameters)
+            if size_param:
+                size_param['use_in_python_api'] = False
 
     return parameter
 
@@ -213,6 +219,16 @@ def _fix_type(parameter):
     parameter['type'] = parameter['type'].replace(' ', '_')
 
 
+def _add_use_in_python_api(p, parameters):
+    '''Add 'use_in_python_api' if not there with value of True'''
+    if 'use_in_python_api' not in p:
+        p['use_in_python_api'] = True
+
+    if p['size']['mechanism'] == 'len' or p['size']['mechanism'] == 'ivi-dance':
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+
+
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config)
@@ -226,12 +242,13 @@ def add_all_function_metadata(functions, config):
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
+            _add_use_in_python_api(p, functions[f]['parameters'])
             _fix_type(p)
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
-            _add_numpy_info(p, config)
+            _add_numpy_info(p, functions[f]['parameters'], config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -543,6 +560,7 @@ def test_add_all_metadata_simple():
                     },
                     'type': 'ViSession',
                     'library_method_call_snippet': 'vi_ctype',
+                    'use_in_python_api': True,
                 },
                 {
                     'ctypes_type': 'ViChar',
@@ -566,6 +584,7 @@ def test_add_all_metadata_simple():
                     'type': 'ViChar',
                     'original_type': 'ViString',
                     'library_method_call_snippet': 'channel_name_ctype',
+                    'use_in_python_api': True,
                 },
             ],
             'python_name': 'make_a_foo',
@@ -598,7 +617,8 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'vi_ctype'
+                'library_method_call_snippet': 'vi_ctype',
+                'use_in_python_api': True,
             }, {
                 'direction': 'out',
                 'enum': None,
@@ -623,7 +643,8 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype'
+                'library_method_call_snippet': 'status_ctype',
+                'use_in_python_api': True,
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'

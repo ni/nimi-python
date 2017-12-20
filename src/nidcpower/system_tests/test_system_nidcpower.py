@@ -142,11 +142,10 @@ def test_fetch_multiple(single_channel_session):
     count = 10
     single_channel_session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
     with single_channel_session.initiate():
-        voltage_measurements, current_measurements, in_compliance, actual_count = single_channel_session.fetch_multiple(count)
+        voltage_measurements, current_measurements, in_compliance = single_channel_session.fetch_multiple(count)
         assert len(voltage_measurements) == count
         assert len(current_measurements) == count
         assert len(in_compliance) == count
-        assert actual_count == count
         assert isinstance(voltage_measurements[1], float)
         assert isinstance(current_measurements[1], float)
         assert in_compliance[1] in [True, False]
