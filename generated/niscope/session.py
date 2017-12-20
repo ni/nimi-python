@@ -1377,29 +1377,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def _actual_meas_wfm_size(self, array_meas_function):
-        '''_actual_meas_wfm_size
-
-        Returns the total available size of an array measurement acquisition.
-
-        Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-
-        Returns:
-            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
-                waveform.
-        '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_waveform_size_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(meas_waveform_size_ctype.value)
-
     def _actual_num_wfms(self):
         '''_actual_num_wfms
 
@@ -1425,41 +1402,6 @@ class _SessionBase(object):
         error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, ctypes.pointer(num_wfms_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
-
-    def add_waveform_processing(self, meas_function):
-        '''add_waveform_processing
-
-        Adds one measurement to the list of processing steps that are completed
-        before the measurement. The processing is added on a per channel basis,
-        and the processing measurements are completed in the same order they are
-        registered. All measurement library parameters—the attributes starting
-        with MEAS—are cached at the time of registering the
-        processing, and this set of parameters is used during the processing
-        step. The processing measurements are streamed, so the result of the
-        first processing step is used as the input for the next step. The
-        processing is done before any other measurements.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session['0,1'].add_waveform_processing(meas_function)
-
-        Args:
-            meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to add.
-        '''
-        if type(meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        meas_function_ctype = visatype.ViInt32(meas_function.value)  # case 10
-        error_code = self._library.niScope_AddWaveformProcessing(vi_ctype, channel_list_ctype, meas_function_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def cal_self_calibrate(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
         '''cal_self_calibrate
@@ -1538,30 +1480,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_processing(self):
-        '''clear_waveform_processing
-
-        Clears the list of processing steps assigned to the given channel. The
-        processing is added using the add_waveform_processing function,
-        where the processing steps are completed in the same order in which they
-        are registered. The processing measurements are streamed, so the result
-        of the first processing step is used as the input for the next step. The
-        processing is also done before any other measurements.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session['0,1'].clear_waveform_processing()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niScope_ClearWaveformProcessing(vi_ctype, channel_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_chan_characteristics(self, input_impedance, max_input_frequency):
         '''configure_chan_characteristics
 
@@ -1577,18 +1495,16 @@ class _SessionBase(object):
             session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
-            input_impedance (enums.InputImpedance): The input impedance for the channel; NI-SCOPE sets
+            input_impedance (float): The input impedance for the channel; NI-SCOPE sets
                 INPUT_IMPEDANCE to this value.
             max_input_frequency (float): The bandwidth for the channel; NI-SCOPE sets
                 MAX_INPUT_FREQUENCY to this value. Pass 0 for this
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
         '''
-        if type(input_impedance) is not enums.InputImpedance:
-            raise TypeError('Parameter mode must be of type ' + str(enums.InputImpedance))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        input_impedance_ctype = visatype.ViReal64(input_impedance.value)  # case 10
+        input_impedance_ctype = visatype.ViReal64(input_impedance)  # case 9
         max_input_frequency_ctype = visatype.ViReal64(max_input_frequency)  # case 9
         error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1874,93 +1790,6 @@ class _SessionBase(object):
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
-
-    def fetch_array_measurement(self, array_meas_function, timeout=5.0):
-        '''fetch_array_measurement
-
-        Obtains a waveform from the digitizer and returns the specified
-        measurement array. This function may return multiple waveforms depending
-        on the number of channels, the acquisition type, and the number of
-        records you specify.
-
-        Note:
-        Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session['0,1'].fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
-
-        Args:
-            array_meas_function (enums.ArrayMeasurement): The `array
-                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-                to perform.
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
-                parameter tells NI-SCOPE to fetch whatever is currently available. Using
-                -1 for this parameter implies infinite timeout.
-
-        Returns:
-            meas_wfm (list of float): Returns an array whose length is the number of waveforms times
-                **measWfmSize**; call _actual_num_wfms to determine the number of
-                waveforms; call _actual_meas_wfm_size to determine the size of each
-                waveform.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with channel list of 0, 1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-            wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
-                information about each waveform:
-
-                -  **relativeInitialX**—the time (in seconds) from the trigger to the
-                   first sample in the fetched waveform
-                -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
-                   sample. This timestamp is comparable between records and
-                   acquisitions; devices that do not support this parameter use 0 for
-                   this output.
-                -  **xIncrement**—the time between points in the acquired waveform in
-                   seconds
-                -  **actualSamples**—the actual number of samples fetched and placed in
-                   the waveform array
-                -  **gain**—the gain factor of the given channel; useful for scaling
-                   binary data with the following formula:
-
-                voltage = binary data × gain factor + offset
-
-                -  **offset**—the offset factor of the given channel; useful for scaling
-                   binary data with the following formula:
-
-                voltage = binary data × gain factor + offset
-
-                Call _actual_num_wfms to determine the size of this array.
-        '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
-        array_meas_function_ctype = visatype.ViInt32(array_meas_function.value)  # case 10
-        meas_wfm_size_ctype = visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case 0.0
-        meas_wfm_ctype = (visatype.ViReal64 * (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))()  # case 0.4
-        wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
-        error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary16_into(self, num_samples, wfm, timeout=5.0):
         '''_fetch_binary16

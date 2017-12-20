@@ -10,4 +10,7 @@ enums_codegen_method = {
 
 enums_additional_enums = {
     'DigitsResolution': {},  # Just delete this enum. Otherwise we have to make it so that it will generate valid code
+    'PowerlineFrequency': {}, # Enum metadata actually contains constants.
+    'CurrentSource': {}, # Enum metadata actually contains constants.
+    'InputResistance': {}, # Enum metadata actually contains constants.
 }

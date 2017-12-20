@@ -39,43 +39,6 @@ niscope.Session methods
 
 
 
-.. function:: add_waveform_processing(meas_function)
-
-    Adds one measurement to the list of processing steps that are completed
-    before the measurement. The processing is added on a per channel basis,
-    and the processing measurements are completed in the same order they are
-    registered. All measurement library parameters—the attributes starting
-    with :py:data:`niscope.MEAS`—are cached at the time of registering the
-    processing, and this set of parameters is used during the processing
-    step. The processing measurements are streamed, so the result of the
-    first processing step is used as the input for the next step. The
-    processing is done before any other measurements.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].add_waveform_processing(meas_function)
-
-
-    :param meas_function:
-
-
-        The `array
-        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-        to add.
-
-        
-
-
-    :type meas_function: :py:data:`niscope.ArrayMeasurement`
-
 .. function:: auto_setup()
 
     Automatically configures the instrument. When you call this function,
@@ -228,28 +191,6 @@ niscope.Session methods
 
     :type clearable_measurement_function: :py:data:`niscope.ClearableMeasurement`
 
-.. function:: clear_waveform_processing()
-
-    Clears the list of processing steps assigned to the given channel. The
-    processing is added using the :py:func:`niscope.add_waveform_processing` function,
-    where the processing steps are completed in the same order in which they
-    are registered. The processing measurements are streamed, so the result
-    of the first processing step is used as the input for the next step. The
-    processing is also done before any other measurements.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].clear_waveform_processing()
-
-
 .. function:: commit()
 
     Commits to hardware all the parameter settings associated with the task.
@@ -288,7 +229,7 @@ niscope.Session methods
         
 
 
-    :type input_impedance: :py:data:`niscope.InputImpedance`
+    :type input_impedance: float
     :param max_input_frequency:
 
 
@@ -1233,115 +1174,6 @@ niscope.Session methods
 
 
     :type signal_identifier: string
-
-.. function:: fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
-
-    Obtains a waveform from the digitizer and returns the specified
-    measurement array. This function may return multiple waveforms depending
-    on the number of channels, the acquisition type, and the number of
-    records you specify.
-
-    
-
-    .. note:: Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=5.0)
-
-
-    :param array_meas_function:
-
-
-        The `array
-        measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
-        to perform.
-
-        
-
-
-    :type array_meas_function: :py:data:`niscope.ArrayMeasurement`
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this
-        parameter tells NI-SCOPE to fetch whatever is currently available. Using
-        -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
-
-    :rtype: tuple (meas_wfm, wfm_info)
-
-        WHERE
-
-        meas_wfm (list of float): 
-
-
-            Returns an array whose length is the number of waveforms times
-            **measWfmSize**; call :py:func:`niscope._actual_num_wfms` to determine the number of
-            waveforms; call :py:func:`niscope._actual_meas_wfm_size` to determine the size of each
-            waveform.
-
-            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-            first. For example, with channel list of 0, 1, you would have the
-            following index values:
-
-            index 0 = record 0, channel 0
-
-            index *x* = record 0, channel 1
-
-            index 2\ *x* = record 1, channel 0
-
-            index 3\ *x* = record 1, channel 1
-
-            Where *x* = the record length
-
-            
-
-
-        wfm_info (list of WaveformInfo): 
-
-
-            Returns an array of structures with the following timing and scaling
-            information about each waveform:
-
-            -  **relativeInitialX**—the time (in seconds) from the trigger to the
-               first sample in the fetched waveform
-            -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
-               sample. This timestamp is comparable between records and
-               acquisitions; devices that do not support this parameter use 0 for
-               this output.
-            -  **xIncrement**—the time between points in the acquired waveform in
-               seconds
-            -  **actualSamples**—the actual number of samples fetched and placed in
-               the waveform array
-            -  **gain**—the gain factor of the given channel; useful for scaling
-               binary data with the following formula:
-
-            voltage = binary data × gain factor + offset
-
-            -  **offset**—the offset factor of the given channel; useful for scaling
-               binary data with the following formula:
-
-            voltage = binary data × gain factor + offset
-
-            Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
-
-            
-
-
 
 .. function:: fetch_into(num_samples, wfm, timeout=5.0)
 

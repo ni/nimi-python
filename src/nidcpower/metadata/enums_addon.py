@@ -178,6 +178,7 @@ enums_additional_enums = {
             },          
         ],
     },
+    'PowerLineFrequency': {}, # Enum metadata actually contains constants.
 }
 
 
