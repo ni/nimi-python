@@ -27,7 +27,7 @@ config = {
     },
     'custom_types': [],
     'handcoded_methods': [
-        {'python_name': 'get_cal_date_and_time', 'session_filename': '/get_cal_date_and_time', 'documentation_filename': '/get_cal_date_and_time', 'channel_based': False},
+        {'python_name': 'get_cal_date_and_time', 'session_filename': '/get_cal_date_and_time', 'documentation_filename': '/get_cal_date_and_time', 'render_in_session_base': False},
     ],
 }
 

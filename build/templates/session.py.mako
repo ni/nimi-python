@@ -125,7 +125,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 % endfor
 % endfor
 % for handcoded_method in config['handcoded_methods']:
-% if handcoded_method['channel_based']:
+% if handcoded_method['render_in_session_base']:
 <%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
 % endif
 % endfor
@@ -177,7 +177,7 @@ class Session(_SessionBase):
 % endfor
 % endfor
 % for handcoded_method in config['handcoded_methods']:
-% if not handcoded_method['channel_based']:
+% if not handcoded_method['render_in_session_base']:
 <%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
 % endif
 % endfor
