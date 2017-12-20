@@ -49,7 +49,7 @@ setup(
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
