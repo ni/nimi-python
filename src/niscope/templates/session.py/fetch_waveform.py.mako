@@ -12,7 +12,7 @@
         '''
         import numpy
 
-        num_samples = len(wfm) / self._actual_num_wfms()
+        num_samples = int(len(wfm) / self._actual_num_wfms())
 
         if wfm.dtype == numpy.float64:
             return self._fetch_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
