@@ -84,7 +84,7 @@ class _SessionBase(object):
     '''
     Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
     '''
-    current_source = attributes.AttributeEnum(attributes.AttributeViReal64, enums.CurrentSource, 1150025)
+    current_source = attributes.AttributeViReal64(1150025)
     '''
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.
@@ -122,7 +122,7 @@ class _SessionBase(object):
     '''
     A string containing the capabilities and extension groups supported by the  specific driver.
     '''
-    input_resistance = attributes.AttributeEnum(attributes.AttributeViReal64, enums.InputResistance, 1150029)
+    input_resistance = attributes.AttributeViReal64(1150029)
     '''
     Specifies the input resistance of the instrument.
     The NI 4050 and NI 4060 are not supported.
@@ -203,7 +203,7 @@ class _SessionBase(object):
     '''
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niDMM_ConfigureMeasurementDigits, NI-DMM sets this attribute to NIDMM_VAL_IVIDMM_MODE.  When you call niDMM_ConfigureWaveformAcquisition, NI-DMM sets this attribute to NIDMM_VAL_WAVEFORM_MODE.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
     '''
-    powerline_freq = attributes.AttributeEnum(attributes.AttributeViReal64, enums.PowerlineFrequency, 1250333)
+    powerline_freq = attributes.AttributeViReal64(1250333)
     '''
     Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the NIDMM_ATTR_APERTURE_TIME  attribute in powerline cycles (PLCs).
     After configuring powerline frequency, set the NIDMM_ATTR_APERTURE_TIME_UNITS attribute to PLCs.  When setting the NIDMM_ATTR_APERTURE_TIME attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
@@ -1470,7 +1470,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)]
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1507,9 +1507,9 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
 
-    def fetch_waveform_into(self, array_size, waveform_array, maximum_time=-1):
+    def fetch_waveform_into(self, waveform_array, maximum_time=-1):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1517,10 +1517,6 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
-            array_size (int): Specifies the number of waveform points to return. You specify the total
-                number of points that the DMM acquires in the **Waveform Points**
-                parameter of configure_waveform_acquisition. The default value is
-                1.
             waveform_array (numpy array of float64): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
@@ -1547,6 +1543,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_array must be in C-order')
         if waveform_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_array.dtype))
+        array_size = len(waveform_array)
+
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
@@ -1554,7 +1552,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(actual_number_of_points_ctype.value)
+        return
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -2005,7 +2003,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)]
 
     def read_status(self):
         '''read_status
@@ -2089,7 +2087,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
 
     def reset_with_defaults(self):
         '''reset_with_defaults

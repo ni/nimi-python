@@ -202,49 +202,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: CurrentSource
-
-    .. py:attribute:: nidmm.CurrentSource._1_MICROAMP
-
-
-
-        NI 4070/4071/4072 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._10_MICROAMP
-
-
-
-        NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._100_MICROAMP
-
-
-
-        NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-
-        
-
-
-
-    .. py:attribute:: nidmm.CurrentSource._1_MILLIAMP
-
-
-
-        NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-
-        
-
-
-
-
 .. py:data:: DCBias
 
     .. py:attribute:: nidmm.DCBias.OFF
@@ -464,39 +421,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: InputResistance
-
-    .. py:attribute:: nidmm.InputResistance._1_MEGAOHM
-
-
-
-        Input resistance of 1 M Ohm
-
-        
-
-
-
-    .. py:attribute:: nidmm.InputResistance._10_MEGAOHM
-
-
-
-        Input resistance of 10 M Ohm
-
-        
-
-
-
-    .. py:attribute:: nidmm.InputResistance.GREATER_THAN_10_GIGAOHM
-
-
-
-        Input resistance greater than 10 G Ohm
-
-        
-
-
-
-
 .. py:data:: LCCalculationModel
 
     .. py:attribute:: nidmm.LCCalculationModel.AUTO
@@ -706,29 +630,6 @@ Enums used in NI-DMM
 
 
         Waveform acquisition mode
-
-        
-
-
-
-
-.. py:data:: PowerlineFrequency
-
-    .. py:attribute:: nidmm.PowerlineFrequency._50
-
-
-
-        Specifies the powerline frequency as 50 Hz.
-
-        
-
-
-
-    .. py:attribute:: nidmm.PowerlineFrequency._60
-
-
-
-        Specifies the powerline frequency as 60 Hz.
 
         
 

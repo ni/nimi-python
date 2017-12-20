@@ -687,7 +687,7 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
-    power_line_frequency = attributes.AttributeEnum(attributes.AttributeViReal64, enums.PowerLineFrequency, 1150020)
+    power_line_frequency = attributes.AttributeViReal64(1150020)
     '''
     Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  NIDCPOWER_ATTR_APERTURE_TIME attribute in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
@@ -1627,7 +1627,7 @@ class _SessionBase(object):
         actual_count_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)], int(actual_count_ctype.value)
+        return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean

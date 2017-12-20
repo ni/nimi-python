@@ -19,22 +19,15 @@ class SideEffectsHelper(object):
         self._defaults['AcquisitionStatus'] = {}
         self._defaults['AcquisitionStatus']['return'] = 0
         self._defaults['AcquisitionStatus']['acquisitionStatus'] = None
-        self._defaults['ActualMeasWfmSize'] = {}
-        self._defaults['ActualMeasWfmSize']['return'] = 0
-        self._defaults['ActualMeasWfmSize']['measWaveformSize'] = None
         self._defaults['ActualNumWfms'] = {}
         self._defaults['ActualNumWfms']['return'] = 0
         self._defaults['ActualNumWfms']['numWfms'] = None
-        self._defaults['AddWaveformProcessing'] = {}
-        self._defaults['AddWaveformProcessing']['return'] = 0
         self._defaults['AutoSetup'] = {}
         self._defaults['AutoSetup']['return'] = 0
         self._defaults['CalSelfCalibrate'] = {}
         self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['ClearWaveformMeasurementStats'] = {}
         self._defaults['ClearWaveformMeasurementStats']['return'] = 0
-        self._defaults['ClearWaveformProcessing'] = {}
-        self._defaults['ClearWaveformProcessing']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureChanCharacteristics'] = {}
@@ -69,10 +62,6 @@ class SideEffectsHelper(object):
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Wfm'] = None
         self._defaults['Fetch']['wfmInfo'] = None
-        self._defaults['FetchArrayMeasurement'] = {}
-        self._defaults['FetchArrayMeasurement']['return'] = 0
-        self._defaults['FetchArrayMeasurement']['measWfm'] = None
-        self._defaults['FetchArrayMeasurement']['wfmInfo'] = None
         self._defaults['FetchBinary16'] = {}
         self._defaults['FetchBinary16']['return'] = 0
         self._defaults['FetchBinary16']['Wfm'] = None
@@ -180,14 +169,6 @@ class SideEffectsHelper(object):
         acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
         return self._defaults['AcquisitionStatus']['return']
 
-    def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
-        if self._defaults['ActualMeasWfmSize']['return'] != 0:
-            return self._defaults['ActualMeasWfmSize']['return']
-        if self._defaults['ActualMeasWfmSize']['measWaveformSize'] is None:
-            raise MockFunctionCallError("niScope_ActualMeasWfmSize", param='measWaveformSize')
-        meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
-        return self._defaults['ActualMeasWfmSize']['return']
-
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         if self._defaults['ActualNumWfms']['return'] != 0:
             return self._defaults['ActualNumWfms']['return']
@@ -195,11 +176,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_ActualNumWfms", param='numWfms')
         num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
         return self._defaults['ActualNumWfms']['return']
-
-    def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
-        if self._defaults['AddWaveformProcessing']['return'] != 0:
-            return self._defaults['AddWaveformProcessing']['return']
-        return self._defaults['AddWaveformProcessing']['return']
 
     def niScope_AutoSetup(self, vi):  # noqa: N802
         if self._defaults['AutoSetup']['return'] != 0:
@@ -215,11 +191,6 @@ class SideEffectsHelper(object):
         if self._defaults['ClearWaveformMeasurementStats']['return'] != 0:
             return self._defaults['ClearWaveformMeasurementStats']['return']
         return self._defaults['ClearWaveformMeasurementStats']['return']
-
-    def niScope_ClearWaveformProcessing(self, vi, channel_list):  # noqa: N802
-        if self._defaults['ClearWaveformProcessing']['return'] != 0:
-            return self._defaults['ClearWaveformProcessing']['return']
-        return self._defaults['ClearWaveformProcessing']['return']
 
     def niScope_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -316,27 +287,6 @@ class SideEffectsHelper(object):
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['Fetch']['return']
-
-    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
-        if self._defaults['FetchArrayMeasurement']['return'] != 0:
-            return self._defaults['FetchArrayMeasurement']['return']
-        if self._defaults['FetchArrayMeasurement']['measWfm'] is None:
-            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='measWfm')
-        a = self._defaults['FetchArrayMeasurement']['measWfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(meas_wfm), len(a))):
-            meas_wfm[i] = a[i]
-        if self._defaults['FetchArrayMeasurement']['wfmInfo'] is None:
-            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='wfmInfo')
-        a = self._defaults['FetchArrayMeasurement']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(wfm_info), len(a))):
-            wfm_info[i] = a[i]
-        return self._defaults['FetchArrayMeasurement']['return']
 
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary16']['return'] != 0:
@@ -685,20 +635,14 @@ class SideEffectsHelper(object):
         mock_library.niScope_Abort.return_value = 0
         mock_library.niScope_AcquisitionStatus.side_effect = MockFunctionCallError("niScope_AcquisitionStatus")
         mock_library.niScope_AcquisitionStatus.return_value = 0
-        mock_library.niScope_ActualMeasWfmSize.side_effect = MockFunctionCallError("niScope_ActualMeasWfmSize")
-        mock_library.niScope_ActualMeasWfmSize.return_value = 0
         mock_library.niScope_ActualNumWfms.side_effect = MockFunctionCallError("niScope_ActualNumWfms")
         mock_library.niScope_ActualNumWfms.return_value = 0
-        mock_library.niScope_AddWaveformProcessing.side_effect = MockFunctionCallError("niScope_AddWaveformProcessing")
-        mock_library.niScope_AddWaveformProcessing.return_value = 0
         mock_library.niScope_AutoSetup.side_effect = MockFunctionCallError("niScope_AutoSetup")
         mock_library.niScope_AutoSetup.return_value = 0
         mock_library.niScope_CalSelfCalibrate.side_effect = MockFunctionCallError("niScope_CalSelfCalibrate")
         mock_library.niScope_CalSelfCalibrate.return_value = 0
         mock_library.niScope_ClearWaveformMeasurementStats.side_effect = MockFunctionCallError("niScope_ClearWaveformMeasurementStats")
         mock_library.niScope_ClearWaveformMeasurementStats.return_value = 0
-        mock_library.niScope_ClearWaveformProcessing.side_effect = MockFunctionCallError("niScope_ClearWaveformProcessing")
-        mock_library.niScope_ClearWaveformProcessing.return_value = 0
         mock_library.niScope_Commit.side_effect = MockFunctionCallError("niScope_Commit")
         mock_library.niScope_Commit.return_value = 0
         mock_library.niScope_ConfigureChanCharacteristics.side_effect = MockFunctionCallError("niScope_ConfigureChanCharacteristics")
@@ -731,8 +675,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ExportSignal.return_value = 0
         mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
         mock_library.niScope_Fetch.return_value = 0
-        mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")
-        mock_library.niScope_FetchArrayMeasurement.return_value = 0
         mock_library.niScope_FetchBinary16.side_effect = MockFunctionCallError("niScope_FetchBinary16")
         mock_library.niScope_FetchBinary16.return_value = 0
         mock_library.niScope_FetchBinary32.side_effect = MockFunctionCallError("niScope_FetchBinary32")
