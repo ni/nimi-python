@@ -551,7 +551,7 @@ class Session(_SessionBase):
         actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)], int(actual_number_of_samples_ctype.value)
+        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)]
 
     def fetch_waveform_into(self, number_of_samples, waveform_data):
         '''fetch_waveform
@@ -580,7 +580,7 @@ class Session(_SessionBase):
         actual_number_of_samples_ctype = visatype.ViInt32()  # case 14
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(actual_number_of_samples_ctype.value)
+        return
 
     def get_a_boolean(self):
         '''get_a_boolean

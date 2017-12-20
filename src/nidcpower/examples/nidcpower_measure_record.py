@@ -22,14 +22,13 @@ with nidcpower.Session(resource_name=args.resource_name, channels=args.channels,
     session.commit()
     print('Effective measurement rate: {0} S/s'.format(session.measure_record_delta_time / 1))
 
+    samples_acquired = 0
     print('  #    Voltage    Current    In Compliance')
     row_format = '{0:3d}:   {1:8.6f}   {2:8.6f}   {3}'
-    samples_acquired = 0
     with session.initiate():
         while samples_acquired < args.length:
-            voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(count=session.fetch_backlog)
-            assert len(voltage_measurements) == len(current_measurements) == len(in_compliance) == actual_count
-            for i in range(actual_count):
-                samples_acquired += 1
-                print(row_format.format(samples_acquired, voltage_measurements[i], current_measurements[i], in_compliance[i]))
+            voltage_measurements, current_measurements, in_compliance = session.fetch_multiple(count=session.fetch_backlog)
+            samples_acquired += len(voltage_measurements)
+            for i in zip(range(len(voltage_measurements)), voltage_measurements, current_measurements, in_compliance):
+                print(row_format.format(i[0], i[1], i[2], i[3]))
 

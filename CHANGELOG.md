@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file.
     * Property powerline_freq no longer uses enum PowerlineFrequency.
     * Property current_source no longer uses enum CurrentSource.
     * Property input_resistance no longer uses enum InputResistance.
+    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+    * Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_waveform()` returned tuple
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -36,6 +40,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
     * Property power_line_frequency no longer uses enum PowerLineFrequency.
+    * Removed `actual_count` from `fetch_multiple()` returned tuple
   * #### Removed
 * ### NI-FGEN
   * #### Added

@@ -18,6 +18,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_session_handle': True,
@@ -30,6 +31,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
@@ -42,6 +44,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
@@ -54,6 +57,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METH
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_session_handle': False,
@@ -66,6 +70,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_session_handle': False,
@@ -78,6 +83,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_session_handle': False,
@@ -90,6 +96,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_session_handle': False,
@@ -102,6 +109,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'skip_session_handle': True,
@@ -114,6 +122,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'skip_session_handle': True,
@@ -126,8 +135,8 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
+    'use_in_python_api': True,
 }
-
 _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
@@ -139,8 +148,8 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': True,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
-
 _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
@@ -152,6 +161,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'ivi-dance',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'skip_session_handle': True,
@@ -164,6 +174,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'len',
+    'use_in_python_api': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'skip_session_handle': True,
@@ -176,6 +187,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'skip_non_enum_parameter': True,
     'skip_all_except_numpy_parameters': False,
     'mechanism': 'any',
+    'use_in_python_api': True,
 }
 
 
@@ -219,6 +231,8 @@ def filter_parameters(function, parameter_usage_options):
         if options_to_use['skip_all_except_numpy_parameters'] and not x['numpy']:
             skip = True
         if options_to_use['but_keep_output_numpy_array_parameters'] is True and x['numpy'] is True:
+            skip = False
+        if not options_to_use['use_in_python_api'] and not x['use_in_python_api']:
             skip = False
         if not skip:
             parameters_to_use.append(x)
