@@ -1490,7 +1490,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
 
-    def fetch_waveform_into(self, array_size, waveform_array, maximum_time=-1):
+    def fetch_waveform_into(self, waveform_array, maximum_time=-1):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1498,10 +1498,6 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
-            array_size (int): Specifies the number of waveform points to return. You specify the total
-                number of points that the DMM acquires in the **Waveform Points**
-                parameter of configure_waveform_acquisition. The default value is
-                1.
             waveform_array (numpy array of float64): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
@@ -1528,6 +1524,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_array must be in C-order')
         if waveform_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_array.dtype))
+        array_size = len(waveform_array)
+
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
