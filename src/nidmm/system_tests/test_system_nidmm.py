@@ -163,12 +163,12 @@ def test_get_auto_range_value(session):
 
 
 def test_get_cal_date_time(session):
-    last_cal = session.get_cal_date_and_time(0)
-    assert last_cal.month == 3
-    assert last_cal.day == 1
-    assert last_cal.year == 1940
-    assert last_cal.hour == 0
-    assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+    month, day, year, hour, minute = session.get_cal_date_and_time(0)
+    assert month == 3
+    assert day == 1
+    assert year == 1940
+    assert hour == 0
+    assert minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
 
 
 def test_get_last_cal_temperature(session):
