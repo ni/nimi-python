@@ -167,7 +167,8 @@ class CustomTypeBufferMatcher(object):
         return True
 
     def __repr__(self):
-        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self.expected_element_type), pp.pformat(self.expected_value))
+        expected_val_repr = '[' + ', '.join([x.__repr__() for x in self.expected_value]) + ']'
+        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self.expected_element_type), expected_val_repr)
 
     def __str__(self):
         ret_str = self.__repr__() + '\n'
