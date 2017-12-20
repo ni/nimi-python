@@ -2033,17 +2033,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | :py:data:`PowerLineFrequency` |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | True                          |
-    +----------------+-------------------------------+
-    | Resettable     | No                            |
-    +----------------+-------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

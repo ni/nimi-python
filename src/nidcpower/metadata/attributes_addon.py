@@ -4,6 +4,7 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 attributes_codegen_method = {
+    1150020: { "enum": None           },  # POWER_LINE_FREQUENCY
 }
 
 

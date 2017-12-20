@@ -207,17 +207,6 @@ class Polarity(Enum):
     '''
 
 
-class PowerLineFrequency(Enum):
-    _50 = 50.0
-    '''
-    Specifies a power line frequency of 50 Hz.
-    '''
-    _60 = 60.0
-    '''
-    Specifies a power line frequency of 60 Hz.
-    '''
-
-
 class PowerSource(Enum):
     INTERNAL = 1003
     '''

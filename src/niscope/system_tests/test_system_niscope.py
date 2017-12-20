@@ -201,7 +201,7 @@ def test_fetch_read_measurement(session):
 
 def test_configure_chan_characteristics(session):
     session.vertical_range = 4.0
-    session.configure_chan_characteristics(niscope.InputImpedance._50_OHMS, 0)
+    session.configure_chan_characteristics(50, 0)
     assert 50.0 == session.input_impedance
 
 

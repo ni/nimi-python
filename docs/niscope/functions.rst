@@ -229,7 +229,7 @@ niscope.Session methods
         
 
 
-    :type input_impedance: :py:data:`niscope.InputImpedance`
+    :type input_impedance: float
     :param max_input_frequency:
 
 
