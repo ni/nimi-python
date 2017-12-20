@@ -4,6 +4,9 @@ These work well with our visatype definitions.
 
 import ctypes
 from ${template_parameters['metadata'].config['module_name']} import visatype
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 # Base classes
 
@@ -23,7 +26,7 @@ class _ScalarMatcher(object):
         return True
 
     def __repr__(self):
-        return '{0}(expected_type={1}, expected_value={2})'.format(self.__class__.__name__, self.expected_type, self.expected_value)
+        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self.expected_type), pp.pformat(self.expected_value))
 
 
 class _PointerMatcher(object):
@@ -37,7 +40,7 @@ class _PointerMatcher(object):
         return True
 
     def __repr__(self):
-        return '{0}(expected_type={1})'.format(self.__class__.__name__, self.expected_type)
+        return '{0}({1})'.format(self.__class__.__name__, pp.pformat(self.expected_type))
 
 
 class _BufferMatcher(object):
@@ -51,6 +54,9 @@ class _BufferMatcher(object):
             self.expected_value = expected_size_or_value
             self.expected_size = len(expected_size_or_value)
         self.expected_type = expected_element_type * self.expected_size
+        # Store params for __repr__
+        self._expected_element_type = expected_element_type
+        self._expected_size_or_value = expected_size_or_value
 
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
@@ -69,7 +75,14 @@ class _BufferMatcher(object):
         return True
 
     def __repr__(self):
-        return '{0}(expected_type={1})'.format(self.__class__.__name__, self.expected_type)
+        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self._expected_element_type), pp.pformat(self._expected_size_or_value))
+
+    def __str__(self):
+        ret_str = self.__repr__() + '\n'
+        ret_str += '    expected_type  = ' + str(self.expected_type) + '\n'
+        ret_str += '    expected_value = ' + str(self.expected_value) + '\n'
+        ret_str += '    expected_size  = ' + str(self.expected_size) + '\n'
+        return ret_str
 
 
 # Strings
@@ -93,6 +106,9 @@ class ViStringMatcher(object):
             print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
             return False
         return True
+
+    def __repr__(self):
+        return '{0}({1})'.format(self.__class__.__name__, pp.pformat(self.expected_string_value))
 
 
 # Custom Type
@@ -121,6 +137,9 @@ class CustomTypeMatcher(object):
             return False
         return _compare_ctype_structs(self.expected_value, actual)
 
+    def __repr__(self):
+        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self.expected_type), pp.pformat(self.expected_value))
+
 
 class CustomTypeBufferMatcher(object):
     def __init__(self, expected_element_type, expected_value):
@@ -146,6 +165,15 @@ class CustomTypeBufferMatcher(object):
                 if not _compare_ctype_structs(e, a):
                     return False
         return True
+
+    def __repr__(self):
+        return '{0}({1}, {2})'.format(self.__class__.__name__, pp.pformat(self.expected_element_type), pp.pformat(self.expected_value))
+
+    def __str__(self):
+        ret_str = self.__repr__() + '\n'
+        ret_str += '    expected_type = ' + str(self.expected_type) + '\n'
+        ret_str += '    expected_size = ' + str(self.expected_size) + '\n'
+        return ret_str
 
 
 # Scalars
