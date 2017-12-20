@@ -23,6 +23,6 @@ config = {
     },
     'init_function': 'InitWithTopology',
     'custom_types': [],
-    'custom_methods': [],
+    'handcoded_methods': [],
 }
 

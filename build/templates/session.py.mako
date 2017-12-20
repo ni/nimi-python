@@ -124,9 +124,9 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-% for custom_method in config['custom_methods']:
-% if custom_method['channel_based']:
-<%include file="${'/session.py' + custom_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
+% for handcoded_method in config['handcoded_methods']:
+% if handcoded_method['channel_based']:
+<%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
 % endif
 % endfor
 
@@ -176,9 +176,9 @@ class Session(_SessionBase):
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-% for custom_method in config['custom_methods']:
-% if not custom_method['channel_based']:
-<%include file="${'/session.py' + custom_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
+% for handcoded_method in config['handcoded_methods']:
+% if not handcoded_method['channel_based']:
+<%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
 % endif
 % endfor
 
