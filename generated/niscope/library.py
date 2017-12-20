@@ -21,13 +21,10 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niScope_Abort_cfunc = None
         self.niScope_AcquisitionStatus_cfunc = None
-        self.niScope_ActualMeasWfmSize_cfunc = None
         self.niScope_ActualNumWfms_cfunc = None
-        self.niScope_AddWaveformProcessing_cfunc = None
         self.niScope_AutoSetup_cfunc = None
         self.niScope_CalSelfCalibrate_cfunc = None
         self.niScope_ClearWaveformMeasurementStats_cfunc = None
-        self.niScope_ClearWaveformProcessing_cfunc = None
         self.niScope_Commit_cfunc = None
         self.niScope_ConfigureChanCharacteristics_cfunc = None
         self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = None
@@ -44,7 +41,6 @@ class Library(object):
         self.niScope_Disable_cfunc = None
         self.niScope_ExportSignal_cfunc = None
         self.niScope_Fetch_cfunc = None
-        self.niScope_FetchArrayMeasurement_cfunc = None
         self.niScope_FetchBinary16_cfunc = None
         self.niScope_FetchBinary32_cfunc = None
         self.niScope_FetchBinary8_cfunc = None
@@ -91,14 +87,6 @@ class Library(object):
                 self.niScope_AcquisitionStatus_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_AcquisitionStatus_cfunc(vi, acquisition_status)
 
-    def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ActualMeasWfmSize_cfunc is None:
-                self.niScope_ActualMeasWfmSize_cfunc = self._library.niScope_ActualMeasWfmSize
-                self.niScope_ActualMeasWfmSize_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niScope_ActualMeasWfmSize_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ActualMeasWfmSize_cfunc(vi, array_meas_function, meas_waveform_size)
-
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         with self._func_lock:
             if self.niScope_ActualNumWfms_cfunc is None:
@@ -106,14 +94,6 @@ class Library(object):
                 self.niScope_ActualNumWfms_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_ActualNumWfms_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualNumWfms_cfunc(vi, channel_list, num_wfms)
-
-    def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_AddWaveformProcessing_cfunc is None:
-                self.niScope_AddWaveformProcessing_cfunc = self._library.niScope_AddWaveformProcessing
-                self.niScope_AddWaveformProcessing_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niScope_AddWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_AddWaveformProcessing_cfunc(vi, channel_list, meas_function)
 
     def niScope_AutoSetup(self, vi):  # noqa: N802
         with self._func_lock:
@@ -138,14 +118,6 @@ class Library(object):
                 self.niScope_ClearWaveformMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niScope_ClearWaveformMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformMeasurementStats_cfunc(vi, channel_list, clearable_measurement_function)
-
-    def niScope_ClearWaveformProcessing(self, vi, channel_list):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ClearWaveformProcessing_cfunc is None:
-                self.niScope_ClearWaveformProcessing_cfunc = self._library.niScope_ClearWaveformProcessing
-                self.niScope_ClearWaveformProcessing_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niScope_ClearWaveformProcessing_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ClearWaveformProcessing_cfunc(vi, channel_list)
 
     def niScope_Commit(self, vi):  # noqa: N802
         with self._func_lock:
@@ -274,14 +246,6 @@ class Library(object):
                 self.niScope_Fetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
-
-    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_FetchArrayMeasurement_cfunc is None:
-                self.niScope_FetchArrayMeasurement_cfunc = self._library.niScope_FetchArrayMeasurement
-                self.niScope_FetchArrayMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
-                self.niScope_FetchArrayMeasurement_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchArrayMeasurement_cfunc(vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info)
 
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
         with self._func_lock:
