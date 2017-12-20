@@ -49,7 +49,6 @@ functions_codegen_method = {
     'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetCalDateAndTime':               { 'codegen_method': 'private',  }, # Hand maintained wrapper method
 }
 
 # Attach the given parameter to the given enum from enums.py
