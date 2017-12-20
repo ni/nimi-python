@@ -55,9 +55,9 @@ All notable changes to this project will be documented in this file.
   * #### Changed
     * Added default values for timeout on all fetch and read functions.
   * #### Removed
-    * `AddWaveformProcessing`
-    * `ClearWaveformProcessing`
-    * `FetchArrayMeasurement`
+    * `AddWaveformProcessing` - See #667 for rationale
+    * `ClearWaveformProcessing` - See #667 for rationale
+    * `FetchArrayMeasurement` - See #667 for rationale
 
 ## 0.5.0 - 2017-11-27
 * ### ALL
