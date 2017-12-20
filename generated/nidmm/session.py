@@ -1595,8 +1595,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
 
-    def _get_cal_date_and_time(self, cal_type):
-        '''_get_cal_date_and_time
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 

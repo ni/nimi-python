@@ -1,22 +1,4 @@
 <%page args="f, config"/>\
-    def read(self, maximum_time):
-        '''read
-
-        Acquires a single measurement and returns the measured value.
-
-        Args:
-            maximum_time (int or timedelta): Specifies the **maximum_time** allowed in years.
-
-        Returns:
-            reading (float): The measured value.
-        '''
-        if str(type(maximum_time)).find("'datetime.timedelta'") != -1:
-            years = int(maximum_time.days / 365)
-        else:
-            years = maximum_time
-
-        return self._read(years)
-
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 

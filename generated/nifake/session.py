@@ -249,8 +249,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def _read_from_channel(self, maximum_time):
-        '''_read_from_channel
+    def read_from_channel(self, maximum_time):
+        '''read_from_channel
 
         Acquires a single measurement and returns the measured value.
 
@@ -260,7 +260,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._read_from_channel(maximum_time)
+            session['0,1'].read_from_channel(maximum_time)
 
         Args:
             maximum_time (int): Specifies the **maximum_time** allowed in years.
@@ -418,32 +418,6 @@ class _SessionBase(object):
         error_code = self._library.niFake_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
-
-    def read_from_channel(self, maximum_time):
-        '''read_from_channel
-
-        Acquires a single measurement and returns the measured value.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session instance, and calling this method on the result.:
-
-            session['0,1'].read_from_channel(maximum_time)
-
-        Args:
-            maximum_time (int or timedelta): Specifies the **maximum_time** allowed in years.
-
-        Returns:
-            reading (float): The measured value.
-        '''
-        if str(type(maximum_time)).find("'datetime.timedelta'") != -1:
-            years = int(maximum_time.days / 365)
-        else:
-            years = maximum_time
-
-        return self._read_from_channel(years)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -968,8 +942,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _read(self, maximum_time):
-        '''_read
+    def read(self, maximum_time):
+        '''read
 
         Acquires a single measurement and returns the measured value.
 
@@ -1164,24 +1138,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def read(self, maximum_time):
-        '''read
-
-        Acquires a single measurement and returns the measured value.
-
-        Args:
-            maximum_time (int or timedelta): Specifies the **maximum_time** allowed in years.
-
-        Returns:
-            reading (float): The measured value.
-        '''
-        if str(type(maximum_time)).find("'datetime.timedelta'") != -1:
-            years = int(maximum_time.days / 365)
-        else:
-            years = maximum_time
-
-        return self._read(years)
 
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
