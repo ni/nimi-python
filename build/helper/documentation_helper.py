@@ -585,7 +585,8 @@ config = {
                     'python_name_with_doc_default': 'vi',
                     'is_repeated_capability': False,
                     'is_session_handle': True,
-                    'library_method_call_snippet': 'self._vi'
+                    'library_method_call_snippet': 'self._vi',
+                    'use_in_python_api': True,
                 },
                 {
                     'direction': 'in',
@@ -617,7 +618,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'turtle_type',
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'turtle_type'
+                    'library_method_call_snippet': 'turtle_type',
+                    'use_in_python_api': True,
                 },
                 {
                     'direction': 'out',
@@ -641,7 +643,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'turtleId',
                     'is_repeated_capability': False,
                     'is_session_handle': False,
-                    'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)'
+                    'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)',
+                    'use_in_python_api': True,
                 }
             ],
             'documentation': {
@@ -679,7 +682,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'vi',
                     'python_type': 'int',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViSession'
+                    'type': 'ViSession',
+                    'use_in_python_api': True,
                 },
                 {
                     'ctypes_type': 'ViInt32',
@@ -699,7 +703,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'number_of_samples',
                     'python_type': 'int',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViInt32'
+                    'type': 'ViInt32',
+                    'use_in_python_api': True,
                 },
                 {
                     'ctypes_type': 'ViReal64',
@@ -721,7 +726,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'waveform_data',
                     'python_type': 'float',
                     'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
-                    'type': 'ViReal64'
+                    'type': 'ViReal64',
+                    'use_in_python_api': True,
                 },
                 {
                     'ctypes_type': 'ViInt32',
@@ -741,7 +747,8 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'actual_number_of_samples',
                     'python_type': 'int',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViInt32'
+                    'type': 'ViInt32',
+                    'use_in_python_api': True,
                 }
             ],
             'python_name': 'fetch_waveform',

@@ -64,11 +64,10 @@ Or **easy_install** from
 
   $ python -m easy_install nidmm
 
-You also can clone the project repository, build it, and install it::
+Contributing
+============
 
-  $ git clone https://github.com/ni/nimi-python.git
-  $ make
-  $ pip install -U bin\nidmm\dist\nidmm-0.1-py2.py3-none-any.whl
+We welcome contributions! You can clone the project repository, build it, and install it by `following these instructions <https://github.com/ni/nimi-python/blob/readme-contributing-link/CONTRIBUTING.md>`_.
 
 .. _usage-section:
 
