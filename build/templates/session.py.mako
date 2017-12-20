@@ -33,6 +33,38 @@ from ${module_name} import visatype
 from ${module_name} import ${c['file_name']}  # noqa: F401
 % endfor
 
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
+
+class _TimeoutConverter(object):
+    def __init__(self, value, library_type, library_units):
+        self._value = value
+        self._library_type = library_type
+        self._units = units
+
+        if str(type(value)).find("'datetime.timedelta'") != -1:
+            if units == 'seconds':
+                scaling = 1.0
+            elif units == 'milliseconds':
+                scaling = 1000
+            elif units == 'microseconds':
+                scaling = 1000000
+            else:
+                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(units))
+
+            self.value = value.total_seconds() * scaling
+        else:
+            self.value = value
+
+        self.ctype_value = library_type(self.value)
+
+    def __repr__(self):
+        return '{0}.{1}({2}, {3}, {4})'.format('${module_name}', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._api_type), pp.pformat(self._units))
+
+    def __str__(self):
+        return self.__repr__() + ' = ' + pp.pformat(self.value)
+
 
 % if session_context_manager is not None:
 class ${session_context_manager}(object):
