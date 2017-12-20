@@ -50,6 +50,9 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
+
+    twine_cmd = [python_cmd, '-m' 'twine']
+
     passthrough_params = ['-v' for i in range(args.verbose)]
     if args.test:
         passthrough_params.append('--test')
@@ -74,7 +77,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     if args.upload:
         logging.info('Uploading to PyPI')
-        call(['twine', 'upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
+        call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
 
     logging.info('Updating versions for next dev release')
     call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config.py'] + passthrough_params)
