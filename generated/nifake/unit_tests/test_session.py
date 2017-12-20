@@ -956,6 +956,7 @@ class TestSession(object):
         self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(cs)
         self.side_effects_helper['GetArrayForPythonCodeCustomType']['arrayOut'] = cs_ctype
         with nifake.Session('dev1') as session:
+            print(session)
             cs_test = session.get_array_for_python_code_custom_type()
             assert len(cs_test) == len(cs)
             for actual, expected in zip(cs_test, cs):
