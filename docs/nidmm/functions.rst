@@ -837,18 +837,6 @@ nidmm.Session methods
 
 
 
-    :param array_size:
-
-
-        Specifies the number of waveform points to return. You specify the total
-        number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
-        1.
-
-        
-
-
-    :type array_size: int
     :param waveform_array:
 
 

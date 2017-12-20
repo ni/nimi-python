@@ -1,4 +1,3 @@
-* `_into` methods should make the size parameter default to None, which means: get the size from the numpy.array and use that.
 * Reorder cases in `get_ctype_variable_declaration_snippet` (no more 13.5 and such)
 * `get_method_return_snippet` should leverage filter_parameters()
 * Documentation

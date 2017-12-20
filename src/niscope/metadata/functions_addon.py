@@ -482,6 +482,13 @@ functions_method_templates = {
     ], },
 }
 
+# We don't want the size parameter to be used in the public api for fetch
+# We do not hide them for the other _into functions since we want to be able
+#  to calculate the size in the dispatcher function
+functions_into_size_params = {
+    'FetchDispatcher':                               { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
+}
+
 functions_numpy = {
     'FetchBinary8':                                  { 'parameters': { 4: { 'numpy': True, }, }, },
     'FetchBinary16':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
