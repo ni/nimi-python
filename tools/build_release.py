@@ -7,7 +7,6 @@ from subprocess import call
 import sys
 
 python_cmd = 'py'
-tox_cmd = [python_cmd, '-m', 'tox']
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
@@ -39,6 +38,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
     verbosity_group.add_argument("--test", action="store_true", default=False, help="Run doctests and quit")
     verbosity_group.add_argument("--log-file", action="store", default=None, help="Send logging to listed file instead of stdout")
+    verbosity_group.add_argument("--python-cmd", action="store", default=None, help="Command to use for invoking python. Default: " + python_cmd)
     args = parser.parse_args()
 
     if args.verbose > 1:
@@ -50,7 +50,10 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
+    if args.python_cmd:
+        python_cmd = args.python_cmd
 
+    tox_cmd = [python_cmd, '-m', 'tox']
     twine_cmd = [python_cmd, '-m' 'twine']
 
     passthrough_params = ['-v' for i in range(args.verbose)]
