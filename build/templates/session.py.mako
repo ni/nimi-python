@@ -81,8 +81,8 @@ if attributes[attribute]['channel_based'] == 'True':
 % endfor
 <%
 init_function = functions[config['init_function']]
-init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
+init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
+init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_INIT_CALL)
 %>\
 
     def __init__(self, repeated_capability):
