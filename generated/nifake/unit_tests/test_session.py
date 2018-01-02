@@ -1,3 +1,4 @@
+import datetime
 import matchers
 import math
 import mock_helper
@@ -243,7 +244,18 @@ class TestSession(object):
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             assert test_reading == session.read(test_maximum_time)
-            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViReal64Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+
+    def test_single_point_read_timedelta(self):
+        test_maximum_time_ms = 100  # milliseconds
+        test_maximum_time_s = .1    # seconds
+        test_maximum_time_timedelta = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert test_reading == session.read(test_maximum_time_timedelta)
+            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViReal64Matcher(test_maximum_time_s), matchers.ViReal64PointerMatcher())
 
     def test_single_point_read_nan(self):
         test_maximum_time = 10
@@ -613,6 +625,18 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             value = session.read_from_channel(test_maximum_time)
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_session_timedelta(self):
+        test_maximum_time_ms = 10     # milliseconds
+        test_maximum_time_us = 10000  # microseconds
+        test_maximum_time_timedelta = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.read_from_channel(test_maximum_time_timedelta)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(test_maximum_time_us), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_repeated_capability_method_on_specific_channel(self):

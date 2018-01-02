@@ -292,7 +292,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_Read_cfunc is None:
                 self.niFake_Read_cfunc = self._library.niFake_Read
-                self.niFake_Read_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_Read_cfunc.argtypes = [ViSession, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Read_cfunc(vi, maximum_time, reading)
 
