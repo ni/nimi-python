@@ -41,17 +41,17 @@ class _TimedeltaConverter(object):
     def __init__(self, value, library_type, library_units):
         self._value = value
         self._library_type = library_type
-        self._units = units
+        self._library_units = library_units
 
         if str(type(value)).find("'datetime.timedelta'") != -1:
-            if units == 'seconds':
-                scaling = 1.0
-            elif units == 'milliseconds':
+            if library_units == 'seconds':
+                scaling = 1
+            elif library_units == 'milliseconds':
                 scaling = 1000
-            elif units == 'microseconds':
+            elif library_units == 'microseconds':
                 scaling = 1000000
             else:
-                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(units))
+                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(library_units))
 
             self.value = value.total_seconds() * scaling
         else:
@@ -60,7 +60,7 @@ class _TimedeltaConverter(object):
         self.ctype_value = library_type(self.value)
 
     def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format('${module_name}', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._api_type), pp.pformat(self._units))
+        return '{0}.{1}({2}, {3}, {4})'.format('${module_name}', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._library_type), pp.pformat(self._library_units))
 
     def __str__(self):
         return self.__repr__() + ' = ' + pp.pformat(self.value)
