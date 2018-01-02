@@ -77,14 +77,6 @@ class TestSession(object):
             for d in session:
                 pass
 
-    def test_iterating_next(self):
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
-        with nimodinst.Session('') as session:
-            assert len(session) == 2
-            d1 = session.next()
-            d2 = session.next()
-            assert d1 != d2
-
     def test_get_extended_error_info(self):
         error_string = 'Error'
         self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
