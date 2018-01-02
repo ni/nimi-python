@@ -10,6 +10,41 @@ from nifake import visatype
 
 from nifake import custom_struct  # noqa: F401
 
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
+
+class _TimedeltaConverter(object):
+    def __init__(self, value, library_type, library_units):
+        self._value = value
+        self._library_type = library_type
+        self._library_units = library_units
+
+        if str(type(value)).find("'datetime.timedelta'") != -1:
+            if library_units == 'seconds':
+                scaling = 1
+            elif library_units == 'milliseconds':
+                scaling = 1000
+            elif library_units == 'microseconds':
+                scaling = 1000000
+            else:
+                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(library_units))
+
+            self.value = value.total_seconds() * scaling
+        else:
+            self.value = value
+
+        if not library_type == visatype.ViReal64:
+            self.value = int(self.value)
+
+        self.ctype_value = library_type(self.value)
+
+    def __repr__(self):
+        return '{0}.{1}({2}, {3}, {4})'.format('nifake', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._library_type), pp.pformat(self._library_units))
+
+    def __str__(self):
+        return self.__repr__() + ' = ' + pp.pformat(self.value)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -263,14 +298,14 @@ class _SessionBase(object):
             session['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
+            maximum_time (int): Specifies the **maximum_time** allowed in microseconds.
 
         Returns:
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _TimedeltaConverter(maximum_time, visatype.ViInt32, 'microseconds').ctype_value  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -912,13 +947,13 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
+            maximum_time (float): Specifies the **maximum_time** allowed in seconds.
 
         Returns:
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _TimedeltaConverter(maximum_time, visatype.ViReal64, 'seconds').ctype_value  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
