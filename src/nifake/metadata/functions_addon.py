@@ -69,6 +69,16 @@ functions_default_value = {
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
+# Converted parameters
+functions_converters = {
+    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': '_TimedeltaConverter', 
+                                                               'python_api_converter_type': 'datetime.timedelta',
+                                                               'python_api_converter_additional_params': ["'seconds'"], }, }, },
+    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': '_TimedeltaConverter', 
+                                                               'python_api_converter_type': 'datetime.timedelta',
+                                                               'python_api_converter_additional_params': ["'microseconds'"], }, }, },
+}
+
 # Manually provided Python names for methods, rather than deriving from original names.
 functions_custom_python_name = {
     'PoorlyNamedSimpleFunction':            { 'python_name': 'simple_function' },
