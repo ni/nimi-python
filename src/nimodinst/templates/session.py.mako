@@ -124,22 +124,10 @@ class Session(object):
         return self._item_count
 
     def __iter__(self):
-        self._current_item = 0
-        return self
-
-    def get_next(self):
-        if self._current_item + 1 > self._item_count:
-            raise StopIteration
-        else:
-            result = Device(self, self._current_item)
-            self._current_item += 1
-            return result
-
-    def next(self):
-        return self.get_next()
-
-    def __next__(self):
-        return self.get_next()
+        devices = []
+        for i in range(self._item_count):
+            devices.append(Device(self, i))
+        return iter(devices)
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
