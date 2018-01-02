@@ -57,6 +57,9 @@ class _TimedeltaConverter(object):
         else:
             self.value = value
 
+        if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
+            self.value = int(self.value)
+
         self.ctype_value = library_type(self.value)
 
     def __repr__(self):
