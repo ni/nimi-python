@@ -37,7 +37,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 
-class _TimeoutConverter(object):
+class _TimedeltaConverter(object):
     def __init__(self, value, library_type, library_units):
         self._value = value
         self._library_type = library_type
