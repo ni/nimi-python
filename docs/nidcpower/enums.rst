@@ -63,52 +63,6 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: CurrentLevelAutorange
-
-    .. py:attribute:: nidcpower.CurrentLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: nidcpower.CurrentLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-
-.. py:data:: CurrentLimitAutorange
-
-    .. py:attribute:: nidcpower.CurrentLimitAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: nidcpower.CurrentLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-
 .. py:data:: DCNoiseRejection
 
     .. py:attribute:: nidcpower.DCNoiseRejection.SECOND_ORDER
@@ -681,52 +635,6 @@ Enums used in NI-DCPower
 
 
         The data operation starts when a software trigger occurs.
-
-        
-
-
-
-
-.. py:data:: VoltageLevelAutorange
-
-    .. py:attribute:: nidcpower.VoltageLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: nidcpower.VoltageLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-
-.. py:data:: VoltageLimitAutorange
-
-    .. py:attribute:: nidcpower.VoltageLimitAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: nidcpower.VoltageLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
 
         
 

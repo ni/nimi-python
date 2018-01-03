@@ -180,7 +180,7 @@ class _SessionBase(object):
         session['0,1'].current_level = var
         var = session['0,1'].current_level
     '''
-    current_level_autorange = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CurrentLevelAutorange, 1150017)
+    current_level_autorange = attributes.AttributeViInt32(1150017)
     '''
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.
@@ -234,7 +234,7 @@ class _SessionBase(object):
         session['0,1'].current_limit = var
         var = session['0,1'].current_limit
     '''
-    current_limit_autorange = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CurrentLimitAutorange, 1150016)
+    current_limit_autorange = attributes.AttributeViInt32(1150016)
     '''
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute. If you change this attribute from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.
@@ -1359,7 +1359,7 @@ class _SessionBase(object):
         session['0,1'].voltage_level = var
         var = session['0,1'].voltage_level
     '''
-    voltage_level_autorange = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VoltageLevelAutorange, 1150015)
+    voltage_level_autorange = attributes.AttributeViInt32(1150015)
     '''
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.
@@ -1413,7 +1413,7 @@ class _SessionBase(object):
         session['0,1'].voltage_limit = var
         var = session['0,1'].voltage_limit
     '''
-    voltage_limit_autorange = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VoltageLimitAutorange, 1150018)
+    voltage_limit_autorange = attributes.AttributeViInt32(1150018)
     '''
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
     If this attribute is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.

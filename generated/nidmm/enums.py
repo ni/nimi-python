@@ -90,17 +90,6 @@ class CableCompensationType(Enum):
     '''
 
 
-class DCBias(Enum):
-    OFF = 0
-    '''
-    NI-DMM programs the device not to use the DC bias
-    '''
-    ON = 1
-    '''
-    NI-DMM programs the device to use the DC bias
-    '''
-
-
 class DCNoiseRejection(Enum):
     AUTO = -1
     '''
@@ -253,17 +242,6 @@ class MeasurementDestinationSlope(Enum):
     NEGATIVE = 1
     '''
     Falling Edge
-    '''
-
-
-class OffsetCompensatedOhms(Enum):
-    OFF = 0
-    '''
-    The DMM disables offset compensated ohms.
-    '''
-    ON = 1
-    '''
-    The DMM enables offset compensated ohms.
     '''
 
 

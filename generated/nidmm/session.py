@@ -84,7 +84,7 @@ class _SessionBase(object):
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.
     '''
-    dc_bias = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCBias, 1150053)
+    dc_bias = attributes.AttributeViInt32(1150053)
     '''
     For the NI 4072 only, controls the available DC bias for capacitance measurements.
     '''
@@ -180,7 +180,7 @@ class _SessionBase(object):
     Specifies the number of averages to perform in a measurement. For the NI 4070/4071/4072,  applies only when the aperture time is not set to AUTO and Auto Zero is ON.  The default is 1.
     The NI 4050 and NI 4060 are not supported.
     '''
-    offset_comp_ohms = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OffsetCompensatedOhms, 1150023)
+    offset_comp_ohms = attributes.AttributeViInt32(1150023)
     '''
     For the NI 4070/4071/4072 only, enables or disables offset compensated ohms.
     '''

@@ -491,17 +491,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`BoolEnableDisableChan` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1136,17 +1136,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`BoolEnableDisableTIS` |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | True                            |
-    +----------------+---------------------------------+
-    | Resettable     | No                              |
-    +----------------+---------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1414,17 +1414,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------+
-    | Characteristic | Value                          |
-    +================+================================+
-    | Datatype       | :py:data:`BoolEnableDisableIQ` |
-    +----------------+--------------------------------+
-    | Permissions    | read-write                     |
-    +----------------+--------------------------------+
-    | Channel Based  | False                          |
-    +----------------+--------------------------------+
-    | Resettable     | No                             |
-    +----------------+--------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1707,17 +1707,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | :py:data:`BoolEnableDisableRealtime` |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | No                                   |
-    +----------------+--------------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

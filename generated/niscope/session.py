@@ -164,7 +164,7 @@ class _SessionBase(object):
     Indicates the number of channels that the specific instrument driver  supports.
     For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
-    channel_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableChan, 1250005)
+    channel_enabled = attributes.AttributeViBoolean(1250005)
     '''
     Specifies whether the digitizer acquires a waveform for the channel.
     Valid Values:
@@ -366,7 +366,7 @@ class _SessionBase(object):
     VI_TRUE - Enable DC restore
     VI_FALSE - Disable DC restore
     '''
-    enable_time_interleaved_sampling = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableTIS, 1150128)
+    enable_time_interleaved_sampling = attributes.AttributeViBoolean(1150128)
     '''
     Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
     Valid Values:
@@ -447,7 +447,7 @@ class _SessionBase(object):
     '''
     Set to VI_TRUE to retrieve one array with alternating values on the NI 5620/5621.  For example, this attribute can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to VI_TRUE, the resulting array will be twice the size of the actual record length.
     '''
-    fetch_interleaved_iq_data = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableIQ, 1150311)
+    fetch_interleaved_iq_data = attributes.AttributeViBoolean(1150311)
     '''
     Enables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: VI_TRUE
@@ -515,7 +515,7 @@ class _SessionBase(object):
     **Related topics:**
     `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
     '''
-    horz_enforce_realtime = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableRealtime, 1150004)
+    horz_enforce_realtime = attributes.AttributeViBoolean(1150004)
     '''
     Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
     '''
