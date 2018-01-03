@@ -179,6 +179,10 @@ enums_additional_enums = {
         ],
     },
     'PowerLineFrequency': {}, # Enum metadata actually contains constants.
+    'CurrentLimitAutorange': {},  # Delete because boolean values only
+    'CurrentLevelAutorange': {},  # Delete because boolean values only
+    'VoltageLevelAutorange': {},  # Delete because boolean values only
+    'VoltageLimitAutorange': {},  # Delete because boolean values only
 }
 
 

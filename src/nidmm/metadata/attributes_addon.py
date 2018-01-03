@@ -31,4 +31,7 @@ attributes_codegen_method = {
     1150031: { "codegen_method": "no" },  # SAMPLE_DELAY_MODE
 }
 
-
+attributes_remove_enum = {
+    1150053: { 'enum': None, }, # Disconnecting enum since it is a boolean
+    1150023: { 'enum': None, }, # Disconnecting enum since it is a boolean
+}

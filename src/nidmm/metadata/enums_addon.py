@@ -13,4 +13,6 @@ enums_additional_enums = {
     'PowerlineFrequency': {}, # Enum metadata actually contains constants.
     'CurrentSource': {}, # Enum metadata actually contains constants.
     'InputResistance': {}, # Enum metadata actually contains constants.
+    'DCBias': {},  # Delete because boolean values only
+    'OffsetCompensatedOhms': {},  # Delete because boolean values only
 }
