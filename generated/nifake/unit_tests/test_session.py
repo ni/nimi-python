@@ -479,7 +479,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session['100'].read_write_double = 5.0
+                session.channel['100'].read_write_double = 5.0
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code
@@ -621,14 +621,44 @@ class TestSession(object):
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
-            value = session['3'].read_from_channel(test_maximum_time)
+            value = session.channel['3'].read_from_channel(test_maximum_time)
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_specific_channel_number(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.channel[3].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_specific_channel_list_of_one(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.channel[[3]].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_specific_channel_list_multiple(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.channel[[0, 1, 3]].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1,3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_device_method_not_exist_on_repeated_capability_error(self):
         with nifake.Session('dev1') as session:
             try:
-                session['3'].simple_function()
+                session.channel['3'].simple_function()
                 assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
             except AttributeError:
                 pass
@@ -742,7 +772,7 @@ class TestSession(object):
         test_number = 100
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
-            attr_int = session['0,1'].read_write_integer
+            attr_int = session.channel['0,1'].read_write_integer
             assert(attr_int == test_number)
             self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1'), matchers.ViInt32Matcher(1000004), matchers.ViInt32PointerMatcher())
 
@@ -751,7 +781,7 @@ class TestSession(object):
         attribute_id = 1000001
         test_number = 0.001
         with nifake.Session('dev1') as session:
-            session['0-24'].read_write_double = test_number
+            session.channel['0-24'].read_write_double = test_number
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0-24'), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64Matcher(test_number))
 
     def test_get_attribute_int64(self):
@@ -825,18 +855,18 @@ class TestSession(object):
     def test_add_properties_to_repeated_capability_error_set(self):
         with nifake.Session('dev1') as session:
             try:
-                session['0'].non_existent_property = 5
+                session.channel['0'].non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_RepeatedCapbilities' object has no attribute 'non_existent_property'"
 
     def test_add_properties_to_repeated_capability_error_get(self):
         with nifake.Session('dev1') as session:
             try:
-                value = session['0'].non_existent_property  # noqa: F841
+                value = session.channel['0'].non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_RepeatedCapbilities' object has no attribute 'non_existent_property'"
 
     def test_set_enum_attribute_int32_error(self):
         with nifake.Session('dev1') as session:

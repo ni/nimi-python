@@ -21,7 +21,7 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _SessionBase(object):
+class _RepeatedCapbilities(object):
     '''Base class for all NI-DMM sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -411,10 +411,12 @@ class _SessionBase(object):
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
 
-    def __init__(self, repeated_capability):
+    def __init__(self, vi, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._vi = vi
         self._encoding = 'windows-1251'
+        self._is_frozen = True
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -840,33 +842,21 @@ class _SessionBase(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
+class Session(_RepeatedCapbilities):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
-        super(Session, self).__init__(repeated_capability='')
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self._is_frozen = True
+        super(Session, self).__init__(self._vi, repeated_capability='')
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
 
     def initiate(self):
         return _Acquisition(self)

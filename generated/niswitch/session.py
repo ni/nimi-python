@@ -21,7 +21,7 @@ class _Scan(object):
         self._session.abort()
 
 
-class _SessionBase(object):
+class _RepeatedCapbilities(object):
     '''Base class for all NI-SWITCH sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -471,10 +471,12 @@ class _SessionBase(object):
         var = session['0,1'].wire_mode
     '''
 
-    def __init__(self, repeated_capability):
+    def __init__(self, vi, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._vi = vi
         self._encoding = 'windows-1251'
+        self._is_frozen = True
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -1044,33 +1046,21 @@ class _SessionBase(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
+class Session(_RepeatedCapbilities):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
-        super(Session, self).__init__(repeated_capability='')
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
-        self._is_frozen = True
+        super(Session, self).__init__(self._vi, repeated_capability='')
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
 
     def initiate(self):
         return _Scan(self)
