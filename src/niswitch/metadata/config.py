@@ -23,5 +23,6 @@ config = {
     },
     'init_function': 'InitWithTopology',
     'custom_types': [],
+    'repeated_capabilities': [],
 }
 
