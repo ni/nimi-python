@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
         session.channel['0'].channel_enabled = True
         session.channel[0].channel_enabled = True
         session.channel[[0, 1, 3]].channel_enabled = True
+        wfm = session.channel[[0, 1, 3]].fetch(5000)
 
         # P2P repeated capabilities
         i = session.p2p_streams['0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
