@@ -50,8 +50,10 @@ class ${session_context_manager}(object):
 % endif
 % for rep_cap in config['repeated_capabilities']:
 class _${rep_cap['python_class_name']}(object):
-    def __init__(self, ${config['session_handle_parameter_name']}):
+    def __init__(self, ${config['session_handle_parameter_name']}, library, encoding):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        self._library = library
+        self._encoding = encoding
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
@@ -60,7 +62,7 @@ class _${rep_cap['python_class_name']}(object):
         else:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('${rep_cap['prefix'].lower()}') else '${rep_cap['prefix']}' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(self._${config['session_handle_parameter_name']}, ','.join(rep_cap_list))
+        return _RepeatedCapbilities(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 % endfor
@@ -101,12 +103,12 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 %>\
 
-    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._encoding = 'windows-1251'
-        self._is_frozen = True
+        self._library = library
+        self._encoding = encoding
+        self._is_frozen = freeze_it
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -147,14 +149,15 @@ class Session(_RepeatedCapbilities):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
+        super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 % for rep_cap in config['repeated_capabilities']:
-        self.${rep_cap['python_name']} = _${rep_cap['python_class_name']}(self._${config['session_handle_parameter_name']})
+        self.${rep_cap['python_name']} = _${rep_cap['python_class_name']}(self._${config['session_handle_parameter_name']}, self._library, self._encoding)
 % endfor
-        super(Session, self).__init__(self._${config['session_handle_parameter_name']}, repeated_capability='')
+        self._is_frozen = True
 
     def __enter__(self):
         return self
