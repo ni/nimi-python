@@ -352,7 +352,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
 
-    rst = '.. function:: ' + function['python_name'] + suffix + '('
+    rst = '.. py:method:: ' + function['python_name'] + suffix + '('
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -786,7 +786,7 @@ def test_get_function_rst_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
     actual_function_rst = get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=0)
-    expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
+    expected_fuction_rst = '''.. py:method:: get_turtle_id(turtle_type)
 
     Returns the **ID** of selected Turtle Type.
 
@@ -823,7 +823,7 @@ def test_get_function_rst_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
     actual_function_rst = get_function_rst(function, method_template=method_template, numpy=True, config=config, indent=0)
-    expected_fuction_rst = '''.. function:: fetch_waveform(number_of_samples)
+    expected_fuction_rst = '''.. py:method:: fetch_waveform(number_of_samples)
 
     Returns waveform data.
 
