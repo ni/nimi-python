@@ -28,9 +28,9 @@ class _Channel(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         if isinstance(repeated_capability, list):
-            rep_cap_list = [str(r) if str(r).startswith('') else '' + str(r) for r in repeated_capability]
+            rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
         else:
-            rep_cap_list = [str(repeated_capability) if str(repeated_capability).startswith('') else '' + str(repeated_capability)]
+            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
         return _RepeatedCapbilities(self._vi, ','.join(rep_cap_list))
 
@@ -42,9 +42,9 @@ class _P2PStreams(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         if isinstance(repeated_capability, list):
-            rep_cap_list = [str(r) if str(r).startswith('FIFOEndpoint') else 'FIFOEndpoint' + str(r) for r in repeated_capability]
+            rep_cap_list = [str(r) if str(r).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(r) for r in repeated_capability]
         else:
-            rep_cap_list = [str(repeated_capability) if str(repeated_capability).startswith('FIFOEndpoint') else 'FIFOEndpoint' + str(repeated_capability)]
+            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(repeated_capability)]
 
         return _RepeatedCapbilities(self._vi, ','.join(rep_cap_list))
 
