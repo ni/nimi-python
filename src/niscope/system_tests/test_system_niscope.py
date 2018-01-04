@@ -31,7 +31,7 @@ def test_read(session):
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    wfm, wfm_infos = session[test_channels].read(test_record_length)
+    wfm, wfm_infos = session.channel[test_channels].read(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -44,7 +44,7 @@ def test_fetch(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm, wfm_infos = session[test_channels].fetch(test_record_length)
+        wfm, wfm_infos = session.channel[test_channels].fetch(test_record_length)
     assert len(wfm) == test_num_channels * test_record_length
     assert len(wfm_infos) == test_num_channels
 
@@ -60,7 +60,7 @@ def test_fetch_binary8_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels].fetch_into(timeout=5.0, wfm=wfm)
+        wfm_infos = session.channel[test_channels].fetch_into(timeout=5.0, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -77,7 +77,7 @@ def test_fetch_binary16_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels].fetch_into(timeout=5.0, wfm=wfm)
+        wfm_infos = session.channel[test_channels].fetch_into(timeout=5.0, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -94,7 +94,7 @@ def test_fetch_binary32_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels].fetch_into(timeout=5.0, wfm=wfm)
+        wfm_infos = session.channel[test_channels].fetch_into(timeout=5.0, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -111,7 +111,7 @@ def test_fetch_double_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session[test_channels].fetch_into(timeout=5.0, wfm=wfm)
+        wfm_infos = session.channel[test_channels].fetch_into(timeout=5.0, wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -186,7 +186,7 @@ def test_configure_horizontal_timing(session):
 
 
 def test_fetch_read_measurement(session):
-    active_channel = session['0']
+    active_channel = session.channel['0']
     read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
     expected_measurement = 10000
     in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
