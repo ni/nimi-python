@@ -48,7 +48,23 @@ class ${session_context_manager}(object):
 
 
 % endif
-class _SessionBase(object):
+% for rep_cap in config['repeated_capabilities']:
+class _${rep_cap['python_class_name']}(object):
+    def __init__(self, ${config['session_handle_parameter_name']}):
+        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        if isinstance(repeated_capability, list):
+            rep_cap_list = [str(r) if str(r).startswith('${rep_cap['prefix']}') else '${rep_cap['prefix']}' + str(r) for r in repeated_capability]
+        else:
+            rep_cap_list = [str(repeated_capability) if str(repeated_capability).startswith('${rep_cap['prefix']}') else '${rep_cap['prefix']}' + str(repeated_capability)]
+
+        return _RepeatedCapbilities(self._${config['session_handle_parameter_name']}, ','.join(rep_cap_list))
+
+
+% endfor
+class _RepeatedCapbilities(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -85,10 +101,12 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 %>\
 
-    def __init__(self, repeated_capability):
+    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._encoding = 'windows-1251'
+        self._is_frozen = True
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -125,33 +143,24 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 % endfor
 % endfor
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
+class Session(_RepeatedCapbilities):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        super(Session, self).__init__(repeated_capability='')
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
-        self._is_frozen = True
+% for rep_cap in config['repeated_capabilities']:
+        self.${rep_cap['python_name']} = _${rep_cap['python_class_name']}(self._${config['session_handle_parameter_name']})
+% endfor
+        super(Session, self).__init__(self._${config['session_handle_parameter_name']}, repeated_capability='')
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._${config['session_handle_parameter_name']}, repeated_capability)
 
     def initiate(self):
         return ${session_context_manager}(self)
