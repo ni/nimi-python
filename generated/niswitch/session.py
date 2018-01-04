@@ -471,12 +471,12 @@ class _RepeatedCapbilities(object):
         var = session['0,1'].wire_mode
     '''
 
-    def __init__(self, vi, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
-        self._encoding = 'windows-1251'
-        self._is_frozen = True
+        self._library = library
+        self._encoding = encoding
+        self._is_frozen = freeze_it
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -1050,11 +1050,12 @@ class Session(_RepeatedCapbilities):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
-        super(Session, self).__init__(self._vi, repeated_capability='')
+        self._is_frozen = True
 
     def __enter__(self):
         return self

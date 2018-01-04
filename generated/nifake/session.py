@@ -24,8 +24,10 @@ class _Acquisition(object):
 
 
 class _Channel(object):
-    def __init__(self, vi):
+    def __init__(self, vi, library, encoding):
         self._vi = vi
+        self._library = library
+        self._encoding = encoding
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
@@ -34,7 +36,7 @@ class _Channel(object):
         else:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(self._vi, ','.join(rep_cap_list))
+        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 class _RepeatedCapbilities(object):
@@ -72,12 +74,12 @@ class _RepeatedCapbilities(object):
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, vi, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
-        self._encoding = 'windows-1251'
-        self._is_frozen = True
+        self._library = library
+        self._encoding = encoding
+        self._is_frozen = freeze_it
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -440,12 +442,13 @@ class Session(_RepeatedCapbilities):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+        super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self.channel = _Channel(self._vi)
-        super(Session, self).__init__(self._vi, repeated_capability='')
+        self.channel = _Channel(self._vi, self._library, self._encoding)
+        self._is_frozen = True
 
     def __enter__(self):
         return self

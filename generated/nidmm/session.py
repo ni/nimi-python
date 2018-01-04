@@ -411,12 +411,12 @@ class _RepeatedCapbilities(object):
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
 
-    def __init__(self, vi, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
-        self._encoding = 'windows-1251'
-        self._is_frozen = True
+        self._library = library
+        self._encoding = encoding
+        self._is_frozen = freeze_it
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -846,11 +846,12 @@ class Session(_RepeatedCapbilities):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+        super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        super(Session, self).__init__(self._vi, repeated_capability='')
+        self._is_frozen = True
 
     def __enter__(self):
         return self
