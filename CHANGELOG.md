@@ -1,7 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [0.5.0](#060---2017-12-20)
+* [0.6.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
 * [0.3.0](#030---2017-10-13)
@@ -14,6 +14,25 @@ All notable changes to this project will be documented in this file.
 * ### ALL
   * #### Added
   * #### Changed
+    * Repeated capabilities are no longer accessed directly on the session object. Instead there is now a repeated capabilies object for each type of repeated capability that the driver supports. Some drivers do not use repeated capabilities so there is no change for them.
+    * The repeated capabilities object can take integers or strings, a single item or a list.
+    * The repeated capabilities object knows the proper prefix and will add it if needed.
+    * The following are all legal
+        ```python
+        import niscope
+        session = niscope.Session('PXI1Slot2')
+
+        # Channel repeated capabilities
+        session.channel['0'].channel_enabled = True
+        session.channel[0].channel_enabled = True
+        session.channel[[0, 1, 3]].channel_enabled = True
+
+        # P2P repeated capabilities
+        i = session.p2p_streams['0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+        i = session.p2p_streams[0].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+        i = session.p2p_streams[[0, 1, 3]].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+        i = session.p2p_streams['FIFOEndpoint0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+        ```
   * #### Removed
 * ### NI-DMM
   * #### Added
@@ -29,14 +48,19 @@ All notable changes to this project will be documented in this file.
   * #### Removed
 * ### NI-DCPower
   * #### Added
+    * Channel repeated capability
   * #### Changed
   * #### Removed
 * ### NI-FGEN
   * #### Added
+    * Channel repeated capability
+    * P2P repeated capability
   * #### Changed
   * #### Removed
 * ### NI-SCOPE
   * #### Added
+    * Channel repeated capability
+    * P2P repeated capability
   * #### Changed
   * #### Removed
 
