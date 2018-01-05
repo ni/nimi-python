@@ -1,6 +1,8 @@
 
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
+from .doc_snippets import rep_cap_method_desc_docstring
+from .doc_snippets import rep_cap_method_desc_rst
 from .parameter_usage_options import ParameterUsageOptions
 
 import re
@@ -346,19 +348,6 @@ def format_type_for_rst_documentation(param, numpy, config):
     return p_type
 
 
-rep_cap_method_desc = '''
-This method requires repeated capabilities (usually channels). If called directly on the
-{0}.Session object, then the method will use all repeated capabilities in the session.
-You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session instance, and calling this method on the result.:
-'''
-rep_cap_method_desc_rst = rep_cap_method_desc + '''
-.. code:: python
-
-    session['0,1'].{1}({2})
-'''
-
-
 def get_function_rst(function, method_template, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used in rst documentation
 
@@ -430,11 +419,6 @@ def _format_type_for_docstring(param, numpy, config):
     elif param['is_buffer'] is True:
         p_type = 'list of ' + p_type
     return p_type
-
-
-rep_cap_method_desc_docstring = rep_cap_method_desc + '''
-    session['0,1'].{1}({2})
-'''
 
 
 def get_function_docstring(function, method_template, numpy, config, indent=0):
