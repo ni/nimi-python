@@ -324,7 +324,7 @@ You can specify a subset of repeated capabilities using the Python index notatio
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
 .. code:: python
 
-    session['0,1'].{1}({2})
+    session.channel[[0, 1]].{1}({2})
 '''
 
 
@@ -402,7 +402,7 @@ def _format_type_for_docstring(param, numpy, config):
 
 
 rep_cap_method_desc_docstring = rep_cap_method_desc + '''
-    session['0,1'].{1}({2})
+    session.channel[[0, 1]].{1}({2})
 '''
 
 
