@@ -89,8 +89,13 @@ def _get_rst_table_snippet(d, config, indent=0, make_link=True):
 def get_rst_admonition_snippet(admonition, d, config, indent=0):
     '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
     if admonition in d:
-        a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
-        a += get_indented_docstring_snippet(_fix_references(d[admonition], config, make_link=True), indent + 4)
+        admonition_content = d[admonition]
+        if not isinstance(admonition_content, list):
+            admonition_content = [admonition_content]
+        a = ''
+        for admonition_text in admonition_content:
+            a += '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
+            a += get_indented_docstring_snippet(_fix_references(admonition_text, config, make_link=True), indent + 4)
         return a
     else:
         return ''
@@ -131,6 +136,32 @@ def get_documentation_for_node_rst(node, config, indent=0):
     return doc
 
 
+def get_docstring_admonition_snippet(admonition, d, config, indent=0, extra_newline='\n'):
+    '''Returns a docstring formatted admonition if the given admonition ('note', 'caution') exists in the dictionary
+
+    Args:
+        admonition (str) - admonition to check and format. I.e. 'note', 'tip', etc.
+        d (dict) - documentation note dictionary
+        config (dict) - build configuration
+        indent (int) - how much each line should be indented
+        extra_newline (str) - empty string or newline - needed to keep docstring formatting correct
+
+    Returns:
+        str - empty string if no admonition, else formatted string with one or more admonitions
+    '''
+    if admonition in d:
+        admonition_content = d[admonition]
+        if not isinstance(admonition_content, list):
+            admonition_content = [admonition_content]
+        a = ''
+        for admonition_text in admonition_content:
+            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('{0}: {1}'.format(admonition.title(), admonition_text), config, make_link=False), indent)
+            extra_newline = '\n'
+        return a
+    else:
+        return ''
+
+
 def get_documentation_for_node_docstring(node, config, indent=0):
     '''Returns any documentaion information formatted for docstring
 
@@ -156,7 +187,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     nd = node['documentation']
     extra_newline = ''
     if 'caution' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Caution: ' + nd['caution'], config, make_link=False), indent)
+        doc += get_docstring_admonition_snippet('caution', nd, config, indent, extra_newline)
         extra_newline = '\n'
 
     if 'description' in nd:
@@ -168,11 +199,9 @@ def get_documentation_for_node_docstring(node, config, indent=0):
         doc += '\n' + extra_newline + (' ' * indent) + tbl
         extra_newline = '\n'
 
-    if 'note' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+    doc += get_docstring_admonition_snippet('note', nd, config, indent, extra_newline)
 
-    if 'tip' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
+    doc += get_docstring_admonition_snippet('tip', nd, config, indent, extra_newline)
 
     return doc.strip()
 
