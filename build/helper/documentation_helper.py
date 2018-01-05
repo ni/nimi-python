@@ -213,6 +213,57 @@ config = None
 
 
 def _find_attribute_by_name(attributes, name):
+def find_enum_by_value(enums, value, start_enum=None):
+    '''Returns the enum that contains the given value if there is one
+
+    There should only be one so return that individual parameter and not a list
+    '''
+    enum = []
+    values = []
+    if start_enum:
+        e = enums[start_enum]
+        for v in e['values']:
+            if v['name'] == value:
+                enum.append(e)
+                values.append(v)
+        if len(enum) == 1:
+            return enum[0], values[0]
+
+    for e_name in enums:
+        e = enums[e_name]
+        for v in e['values']:
+            if v['name'] == value:
+                enum.append(e)
+                values.append(v)
+
+    if len(enum) == 0 or len(enum) > 1:
+        return None, None
+    return enum[0], values[0]
+
+
+def _replace_enum_python_name(e_match):
+    '''callback function for enum value regex sub command
+
+    Args:
+        m (match object): Match object from the attribute substitution command
+
+    Returns:
+        str: python name of the enum value, possibly set to sphinx python domain data item link
+    '''
+    ename = e_match.group(1)
+    start_enum = config['start_enum']
+    if e_match:
+        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), ename.replace('\\', ''))
+        enum, value = find_enum_by_value(config['enums'], ename, start_enum)
+        if enum and enum['codegen_method'] != 'no':
+            ename = enum['python_name'] + '.' + value['python_name']
+
+    if config['make_link']:
+        return ':py:data:`~{0}.{1}`'.format(config['module_name'], ename)
+    else:
+        return '{0}'.format(ename)
+
+
     '''Returns the attribute with the given name if there is one
 
     There should only be one so return that individual parameter and not a list
@@ -311,12 +362,17 @@ def _fix_references(doc, cfg, make_link=False):
     config = cfg
 
     config['make_link'] = make_link
+    config['start_enum'] = None
+    if 'enum' in node:
+        config['start_enum'] = node['enum']
 
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
 
     doc = attr_re.sub(_replace_attribute_python_name, doc)
     doc = func_re.sub(_replace_func_python_name, doc)
+    doc = enum_re.sub(_replace_enum_python_name, doc)
 
     if 'driver_urls' in cfg:
         for url_key in cfg['driver_urls']:
@@ -326,6 +382,7 @@ def _fix_references(doc, cfg, make_link=False):
 
     if not make_link:
         doc = doc.replace('\_', '_')
+    del config['start_enum']
     return doc
 
 
