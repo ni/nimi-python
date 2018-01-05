@@ -223,13 +223,13 @@ def _find_attribute_by_name(attributes, name):
 
 
 def _replace_attribute_python_name(a_match):
-    '''callback function for regex sub command when link not needed
+    '''callback function for attribute regex sub command
 
     Args:
         m (match object): Match object from the attribute substitution command
 
     Returns:
-        str: python name of the attribute
+        str: python name of the attribute, possibly set to sphinx python domain data item link
     '''
     aname = "Unknown"
     if a_match:
@@ -245,13 +245,13 @@ def _replace_attribute_python_name(a_match):
 
 
 def _replace_func_python_name(f_match):
-    '''callback function for regex sub command when link needed
+    '''callback function for function regex sub command
 
     Args:
         f_match (match object): Match object from the function substitution command
 
     Returns:
-        str: rst link to function using python name
+        str: rst link to function using python name, possibly set to sphinx python domain meth item link
     '''
     fname = "Unknown"
     if f_match:
@@ -265,7 +265,7 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+        return ':py:meth:`{0}.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
@@ -303,6 +303,8 @@ def _fix_references(doc, cfg, make_link=False):
         str: documentation with references replaces based on make_link
     '''
 
+    # We have to put config into the global namespace because we need the information in the search
+    # callbacks but cannot pass them in via the search command itself
     global config
     config = cfg
 
