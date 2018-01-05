@@ -6,11 +6,12 @@
 # We also do not codegen enums associated with P2P or External Calibration since neither 
 # are supported in Python
 enums_codegen_method = {
+    'PowerlineFrequency': { "codegen_method": "no" }, # Enum metadata actually contains constants.
+    'CurrentSource': { "codegen_method": "no" }, # Enum metadata actually contains constants.
+    'InputResistance': { "codegen_method": "no" }, # Enum metadata actually contains constants.
 }
 
 enums_additional_enums = {
-    'DigitsResolution': {},  # Just delete this enum. Otherwise we have to make it so that it will generate valid code
-    'PowerlineFrequency': {}, # Enum metadata actually contains constants.
-    'CurrentSource': {}, # Enum metadata actually contains constants.
-    'InputResistance': {}, # Enum metadata actually contains constants.
+    'DigitsResolution': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
 }
+
