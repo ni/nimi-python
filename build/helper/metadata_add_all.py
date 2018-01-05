@@ -18,6 +18,7 @@ import codecs
 import copy
 import os
 import pprint
+import re
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
@@ -392,8 +393,171 @@ def add_all_enum_metadata(enums, config):
     _add_enum_codegen_method(enums, config)
     for e in enums:
         enums[e] = _add_enum_value_python_name(enums[e], config)
+        enums[e]['python_name'] = enums[e]['python_name'] if 'python_name' in enums[e] else e
 
     return enums
+
+
+def _need_func_note(nd, config):
+    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    for m in func_re.finditer(nd):
+        fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
+        try:
+            config['functions'][fname]['python_name']
+        except KeyError:
+            return True
+
+    return False
+
+
+def _need_attr_note(nd, config):
+    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in attr_re.finditer(nd):
+        aname = m.group(1).replace('\\', '')
+        attr = find_attribute_by_name(config['attributes'], aname)
+        if not attr:
+            return True
+
+    return False
+
+
+def _need_enum_note(nd, config, start_enum=None):
+    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in enum_re.finditer(nd):
+        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
+        enum, _ = find_enum_by_value(config['enums'], ename, start_enum=start_enum)
+        if not enum or enum['codegen_method'] == 'no':
+            return True
+    return False
+
+
+def _check_documentation(nd, config, start_enum=None):
+    keys_to_check = ['description', 'tip', 'caution', 'note']  # table_body needs special handling
+    need_func_note = False
+    need_attr_note = False
+    need_enum_note = False
+    for k in keys_to_check:
+        if k in nd:
+            need_func_note = need_func_note or _need_func_note(nd[k], config)
+            need_attr_note = need_attr_note or _need_attr_note(nd[k], config)
+            need_enum_note = need_enum_note or _need_enum_note(nd[k], config)
+
+    if 'table_body' in nd:
+        tb = nd['table_body']
+        for line in tb:
+            for cell in line:
+                need_func_note = need_func_note or _need_func_note(cell, config)
+                need_attr_note = need_attr_note or _need_attr_note(cell, config)
+                need_enum_note = need_enum_note or _need_enum_note(cell, config)
+
+    if need_func_note or need_attr_note or need_enum_note:
+        if 'note' not in nd:
+            nd['note'] = []
+        elif not isinstance(nd['note'], list):
+            nd['note'] = [nd['note']]
+
+    if need_func_note:
+        nd['note'].append(func_note_text)
+    if need_attr_note:
+        nd['note'].append(attr_note_text)
+    if need_enum_note:
+        nd['note'].append(enum_note_text)
+
+
+def _add_notes_re_links(config):
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            start_enum = None
+            if 'documentation' not in p:
+                continue
+            if 'enum' in p:
+                start_enum = p['enum']
+            _check_documentation(p['documentation'], config, start_enum)
+
+        if 'documentation' not in f:
+            continue
+        start_enum = None
+        if 'enum' in f:
+            start_enum = f['enum']
+        _check_documentation(f['documentation'], config, start_enum)
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        start_enum = None
+        if 'enum' in a:
+            start_enum = a['enum']
+        _check_documentation(a['documentation'], config, start_enum)
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _check_documentation(e['documentation'], config)
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _check_documentation(v['documentation'], config)
+
+
+def _check_tables(nd):
+    if 'table_header' not in nd and 'table_body' not in nd:
+        return  # We don't need to do anything
+
+    # First we get max length
+    max_len = 0
+    table_header = nd['table_header'] if 'table_header' in nd else None
+    table_body = nd['table_body']
+    if table_header:
+        max_len = len(table_header)
+    for line in table_body:
+        if len(line) > max_len:
+            max_len = len(line)
+
+    # Now make sure all lines have the same number of cells
+    if table_header:
+        while len(table_header) != max_len:
+            table_header.append('')
+    for line in table_body:
+        while len(line) != max_len:
+            line.append('')
+
+
+def _square_up_tables(config):
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            if 'documentation' not in p:
+                continue
+            _check_tables(p['documentation'])
+
+        if 'documentation' not in f:
+            continue
+        _check_tables(f['documentation'])
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        _check_tables(a['documentation'])
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _check_tables(e['documentation'])
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _check_tables(v['documentation'])
 
 
 def add_all_metadata(functions, attributes, enums, config):
@@ -411,6 +575,10 @@ def add_all_metadata(functions, attributes, enums, config):
 
     enums = add_all_enum_metadata(enums, config)
     config['enums'] = enums
+
+    _add_notes_re_links(config)
+
+    _square_up_tables(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
     metadata_dir = os.path.join('bin', 'processed_metadata')
@@ -748,6 +916,7 @@ def test_add_enums_metadata_simple():
     expected = {
         'Color': {
             'codegen_method': 'no',
+            'python_name': 'Color',
             'values': [
                 {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
                 {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},

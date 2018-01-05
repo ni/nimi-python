@@ -5,9 +5,12 @@ from .doc_snippets import rep_cap_method_desc_docstring
 from .doc_snippets import rep_cap_method_desc_rst
 from .parameter_usage_options import ParameterUsageOptions
 
+import pprint
 import re
 import string
 import sys
+
+pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 # Python 2/3 compatibility
@@ -56,7 +59,7 @@ def get_rst_header_snippet(t, header_level='='):
     return ret_val
 
 
-def _get_rst_table_snippet(d, config, indent=0, make_link=True):
+def _get_rst_table_snippet(node, d, config, indent=0, make_link=True):
     '''Returns an rst table snippet if table_header and/or table_body are in the dictionary'''
     if 'table_body' in d:
         table_body = d['table_body']
@@ -73,14 +76,14 @@ def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     if header:
         header_contents = []
         for i in table_header:
-            contents = _fix_references(i, config, make_link)
+            contents = _fix_references(node, i, config, make_link)
             header_contents.append(contents)
         table_contents.append(header_contents)
 
     for t in table_body:
         line_contents = []
         for i in t:
-            contents = _fix_references(i, config, make_link)
+            contents = _fix_references(node, i, config, make_link)
             line_contents.append(contents)
         table_contents.append(line_contents)
 
@@ -88,7 +91,7 @@ def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     return get_indented_docstring_snippet(table, indent)
 
 
-def get_rst_admonition_snippet(admonition, d, config, indent=0):
+def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
     '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
     if admonition in d:
         admonition_content = d[admonition]
@@ -97,7 +100,7 @@ def get_rst_admonition_snippet(admonition, d, config, indent=0):
         a = ''
         for admonition_text in admonition_content:
             a += '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
-            a += get_indented_docstring_snippet(_fix_references(admonition_text, config, make_link=True), indent + 4)
+            a += get_indented_docstring_snippet(_fix_references(node, admonition_text, config, make_link=True), indent + 4)
         return a
     else:
         return ''
@@ -125,20 +128,20 @@ def get_documentation_for_node_rst(node, config, indent=0):
         return doc
 
     nd = node['documentation']
-    doc += get_rst_admonition_snippet('caution', nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'caution', nd, config, indent)
     if 'description' in nd:
-        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=True), indent)
+        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, nd['description'], config, make_link=True), indent)
 
-    doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(nd, config, indent)
-    doc += get_rst_admonition_snippet('note', nd, config, indent)
+    doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(node, nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'note', nd, config, indent)
     doc += '\n'
-    doc += get_rst_admonition_snippet('tip', nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'tip', nd, config, indent)
     doc += '\n'
 
     return doc
 
 
-def get_docstring_admonition_snippet(admonition, d, config, indent=0, extra_newline='\n'):
+def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extra_newline='\n'):
     '''Returns a docstring formatted admonition if the given admonition ('note', 'caution') exists in the dictionary
 
     Args:
@@ -157,7 +160,7 @@ def get_docstring_admonition_snippet(admonition, d, config, indent=0, extra_newl
             admonition_content = [admonition_content]
         a = ''
         for admonition_text in admonition_content:
-            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('{0}: {1}'.format(admonition.title(), admonition_text), config, make_link=False), indent)
+            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, '{0}: {1}'.format(admonition.title(), admonition_text), config, make_link=False), indent)
             extra_newline = '\n'
         return a
     else:
@@ -189,21 +192,21 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     nd = node['documentation']
     extra_newline = ''
     if 'caution' in nd:
-        doc += get_docstring_admonition_snippet('caution', nd, config, indent, extra_newline)
+        doc += get_docstring_admonition_snippet(node, 'caution', nd, config, indent, extra_newline)
         extra_newline = '\n'
 
     if 'description' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, nd['description'], config, make_link=False), indent)
         extra_newline = '\n'
 
-    tbl = _get_rst_table_snippet(nd, config, indent, make_link=False)
+    tbl = _get_rst_table_snippet(node, nd, config, indent, make_link=False)
     if len(tbl) > 0:
         doc += '\n' + extra_newline + (' ' * indent) + tbl
         extra_newline = '\n'
 
-    doc += get_docstring_admonition_snippet('note', nd, config, indent, extra_newline)
+    doc += get_docstring_admonition_snippet(node, 'note', nd, config, indent, extra_newline)
 
-    doc += get_docstring_admonition_snippet('tip', nd, config, indent, extra_newline)
+    doc += get_docstring_admonition_snippet(node, 'tip', nd, config, indent, extra_newline)
 
     return doc.strip()
 
@@ -212,7 +215,6 @@ def get_documentation_for_node_docstring(node, config, indent=0):
 config = None
 
 
-def _find_attribute_by_name(attributes, name):
 def find_enum_by_value(enums, value, start_enum=None):
     '''Returns the enum that contains the given value if there is one
 
@@ -264,6 +266,7 @@ def _replace_enum_python_name(e_match):
         return '{0}'.format(ename)
 
 
+def find_attribute_by_name(attributes, name):
     '''Returns the attribute with the given name if there is one
 
     There should only be one so return that individual parameter and not a list
@@ -286,13 +289,13 @@ def _replace_attribute_python_name(a_match):
     '''
     aname = "Unknown"
     if a_match:
-        attr = _find_attribute_by_name(config['attributes'], a_match.group(1))
-        aname = a_match.group(1)
+        aname = a_match.group(1).replace('\\', '')
+        attr = find_attribute_by_name(config['attributes'], aname)
         if attr:
             aname = attr['name'].lower()
 
     if config['make_link']:
-        return ':py:data:`{0}.{1}`'.format(config['module_name'], aname)
+        return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
@@ -318,7 +321,7 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:meth:`{0}.{1}`'.format(config['module_name'], fname)
+        return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
@@ -342,7 +345,7 @@ def _replace_urls(u_match):
         return u_match.group(1)
 
 
-def _fix_references(doc, cfg, make_link=False):
+def _fix_references(node, doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
     Args:
@@ -382,7 +385,11 @@ def _fix_references(doc, cfg, make_link=False):
 
     if not make_link:
         doc = doc.replace('\_', '_')
+
+    # Clean up config
+    del config['make_link']
     del config['start_enum']
+
     return doc
 
 
