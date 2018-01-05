@@ -1,19 +1,19 @@
 niswitch.Session methods
 ========================
 
-.. py:currentmodule:: niswitch
+.. py:currentmodule:: niswitch.Session
 
-.. function:: abort()
+.. py:method:: abort()
 
     Aborts the scan in progress. Initiate a scan with
-    :py:func:`niswitch._initiate_scan`. If the switch module is not scanning,
+    :py:meth:`niswitch.Session._initiate_scan`. If the switch module is not scanning,
     NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
 
     
 
 
 
-.. function:: can_connect(channel1, channel2)
+.. py:method:: can_connect(channel1, channel2)
 
     Verifies that a path between channel 1 and channel 2 can be created. If
     a path is possible in the switch module, the availability of that path
@@ -55,41 +55,43 @@ niswitch.Session methods
 
 
             Indicates whether a path is valid. Possible values include:
-            ------------------------------------ NISWITCH\_VAL\_PATH\_AVAILABLE 1
-            NISWITCH\_VAL\_PATH\_EXISTS 2 NISWITCH\_VAL\_PATH\_UNSUPPORTED 3
-            NISWITCH\_VAL\_RSRC\_IN\_USE 4 NISWITCH\_VAL\_SOURCE\_CONFLICT 5
-            NISWITCH\_VAL\_CHANNEL\_NOT\_AVAILABLE 6 Notes: (1)
-            NISWITCH\_VAL\_PATH\_AVAILABLE indicates that the driver can create the
-            path at this time. (2) NISWITCH\_VAL\_PATH\_EXISTS indicates that the
-            path already exists. (3) NISWITCH\_VAL\_PATH\_UNSUPPORTED indicates that
+            ------------------------------------ :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` 1
+            :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` 2 :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` 3
+            :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` 5
+            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
+            :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` indicates that the driver can create the
+            path at this time. (2) :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` indicates that the
+            path already exists. (3) :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` indicates that
             the instrument is not capable of creating a path between the channels
-            you specify. (4) NISWITCH\_VAL\_RSRC\_IN\_USE indicates that although
+            you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
             the path is valid, the driver cannot create the path at this moment
             because the switch device is currently using one or more of the required
             channels to create another path. You must destroy the other path before
-            creating this one. (5) NISWITCH\_VAL\_SOURCE\_CONFLICT indicates that
+            creating this one. (5) :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` indicates that
             the instrument cannot create a path because both channels are connected
             to a different source channel. (6)
-            NISWITCH\_VAL\_CHANNEL\_NOT\_AVAILABLE indicates that the driver cannot
+            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
             create a path between the two channels because one of the channels is a
             configuration channel and thus unavailable for external connections.
 
             
 
+            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-.. function:: commit()
+
+.. py:method:: commit()
 
     Downloads the configured scan list and trigger settings to hardware.
-    Calling :py:func:`niswitch.commit` optional as it is implicitly called during
-    :py:func:`niswitch._initiate_scan`. Use :py:func:`niswitch.commit` to arm triggers in a given
+    Calling :py:meth:`niswitch.Session.commit` optional as it is implicitly called during
+    :py:meth:`niswitch.Session._initiate_scan`. Use :py:meth:`niswitch.Session.commit` to arm triggers in a given
     order or to control when expensive hardware operations are performed.
 
     
 
 
 
-.. function:: configure_scan_list(scanlist, scan_mode=niswitch.ScanMode.BREAK_BEFORE_MAKE)
+.. py:method:: configure_scan_list(scanlist, scan_mode=niswitch.ScanMode.BREAK_BEFORE_MAKE)
 
     Configures the scan list and scan mode used for scanning. Refer to
     Devices Overview to determine if the switch module supports scanning.
@@ -97,12 +99,14 @@ niswitch.Session methods
     semi-colons. For example, the following scan list will scan the first
     three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
     to Scan Lists for more information on scan list syntax To see the status
-    of the scan, call either :py:func:`niswitch.IsScanning` or
-    :py:func:`niswitch.wait_for_scan_complete`. Use the :py:func:`niswitch.configure_scan_trigger`
-    function to configure the scan trigger. Use the :py:func:`niswitch._initiate_scan`
+    of the scan, call either :py:meth:`niswitch.Session.IsScanning` or
+    :py:meth:`niswitch.Session.wait_for_scan_complete`. Use the :py:meth:`niswitch.Session.configure_scan_trigger`
+    function to configure the scan trigger. Use the :py:meth:`niswitch.Session._initiate_scan`
     function to start the scan.
 
     
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
 
@@ -129,11 +133,11 @@ niswitch.Session methods
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
-.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay=0.0)
+.. py:method:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay=0.0)
 
     Configures the scan triggers for the scan list established with
-    :py:func:`niswitch.configure_scan_list`. Refer to Devices Overview to determine if
-    the switch module supports scanning. :py:func:`niswitch.configure_scan_trigger` sets
+    :py:meth:`niswitch.Session.configure_scan_list`. Refer to Devices Overview to determine if
+    the switch module supports scanning. :py:meth:`niswitch.Session.configure_scan_trigger` sets
     the location that the switch expects to receive an input trigger to
     advance through the scan list. This function also sets the location
     where it outputs a scan advanced signal after it completes an entry in
@@ -147,11 +151,11 @@ niswitch.Session methods
 
 
         Trigger source you want the switch module to use during scanning. The
-        driver uses this value to set the :py:data:`niswitch.TRIGGER\_INPUT`
+        driver uses this value to set the :py:data:`niswitch.Session.trigger_input`
         attribute. The switch device waits for the trigger you specify when it
         encounters a semicolon in the scanlist. When the trigger occurs, the
         switch device advances to the next entry in the scanlist. Refer to the
-        :py:data:`niswitch.TRIGGER\_INPUT` topic in the NI Switches Help for a list
+        :py:data:`niswitch.Session.trigger_input` topic in the NI Switches Help for a list
         of valid values.
 
         
@@ -162,11 +166,11 @@ niswitch.Session methods
 
 
         Output destination of the scan advanced trigger signal. The driver uses
-        this value to set the :py:data:`niswitch.SCAN\_ADVANCED\_OUTPUT` attribute.
+        this value to set the :py:data:`niswitch.Session.scan_advanced_output` attribute.
         After the switch processes each entry in the scan list, it waits the
         length of time you specify in the Scan Delay parameter and then asserts
         a trigger on the line you specify with this parameter. Refer to the
-        :py:data:`niswitch.SCAN\_ADVANCED\_OUTPUT` topic in the NI Switches Help for
+        :py:data:`niswitch.Session.scan_advanced_output` topic in the NI Switches Help for
         a list of valid values.
 
         
@@ -180,7 +184,7 @@ niswitch.Session methods
         creates a path until it asserts a trigger on the scan advanced output
         line. The driver uses this value to set the Scan Delay attribute. The
         scan delay is in addition to the settling time.The driver uses this
-        value to set the :py:data:`niswitch.SCAN\_DELAY` attribute. Express this
+        value to set the :py:data:`niswitch.Session.scan_delay` attribute. Express this
         value in seconds. Default value: 0.0 s
 
         
@@ -188,15 +192,15 @@ niswitch.Session methods
 
     :type scan_delay: float
 
-.. function:: connect(channel1, channel2)
+.. py:method:: connect(channel1, channel2)
 
     Creates a path between channel 1 and channel 2. The driver calculates
     and uses the shortest path between the two channels. Refer to Immediate
     Operations for information about Channel Usage types. If a path is not
     available, the function returns one of the following errors: -
     NISWITCH\_ERROR\_EXPLICIT\_CONNECTION\_EXISTS, if the two channels are
-    already explicitly connected by calling either the :py:func:`niswitch.connect` or
-    :py:func:`niswitch.set_path` function. -
+    already explicitly connected by calling either the :py:meth:`niswitch.Session.connect` or
+    :py:meth:`niswitch.Session.set_path` function. -
     NISWITCH\_ERROR\_IS\_CONFIGURATION\_CHANNEL, if a channel is a
     configuration channel. Error elaboration contains information about
     which of the two channels is a configuration channel. -
@@ -238,7 +242,7 @@ niswitch.Session methods
 
     :type channel2: string
 
-.. function:: connect_multiple(connection_list)
+.. py:method:: connect_multiple(connection_list)
 
     Creates the connections between channels specified in Connection List.
     Specify connections with two endpoints only or the explicit path between
@@ -281,7 +285,7 @@ niswitch.Session methods
 
     :type connection_list: string
 
-.. function:: disable()
+.. py:method:: disable()
 
     Places the switch module in a quiescent state where it has minimal or no
     impact on the system to which it is connected. All channels are
@@ -291,10 +295,10 @@ niswitch.Session methods
 
 
 
-.. function:: disconnect(channel1, channel2)
+.. py:method:: disconnect(channel1, channel2)
 
     This function destroys the path between two channels that you create
-    with the :py:func:`niswitch.connect` or :py:func:`niswitch.set_path` function. If a path is
+    with the :py:meth:`niswitch.Session.connect` or :py:meth:`niswitch.Session.set_path` function. If a path is
     not connected or not available, the function returns the
     IVISWTCH\_ERROR\_NO\_SUCH\_PATH error.
 
@@ -327,7 +331,7 @@ niswitch.Session methods
 
     :type channel2: string
 
-.. function:: disconnect_all()
+.. py:method:: disconnect_all()
 
     Breaks all existing paths. If the switch module cannot break all paths,
     NISWITCH\_WARN\_PATH\_REMAINS warning is returned.
@@ -336,7 +340,7 @@ niswitch.Session methods
 
 
 
-.. function:: disconnect_multiple(disconnection_list)
+.. py:method:: disconnect_multiple(disconnection_list)
 
     Breaks the connections between channels specified in Disconnection List.
     If no connections exist between channels, NI-SWITCH returns an error. In
@@ -364,10 +368,10 @@ niswitch.Session methods
 
     :type disconnection_list: string
 
-.. function:: get_channel_name(index)
+.. py:method:: get_channel_name(index)
 
     Returns the channel string that is in the channel table at the specified
-    index. Use :py:func:`niswitch.get_channel_name` in a For Loop to get a complete list
+    index. Use :py:meth:`niswitch.Session.get_channel_name` in a For Loop to get a complete list
     of valid channel names for the switch module. Use the Channel Count
     attribute to determine the number of channels.
 
@@ -386,16 +390,16 @@ niswitch.Session methods
 
     :type index: int
 
-.. function:: get_path(channel1, channel2)
+.. py:method:: get_path(channel1, channel2)
 
     Returns a string that identifies the explicit path created with
-    :py:func:`niswitch.connect`. Pass this string to :py:func:`niswitch.set_path` to establish
+    :py:meth:`niswitch.Session.connect`. Pass this string to :py:meth:`niswitch.Session.set_path` to establish
     the exact same path in future connections. In some cases, multiple paths
-    are available between two channels. When you call :py:func:`niswitch.connect`, the
-    driver selects an available path. With :py:func:`niswitch.connect`, there is no
+    are available between two channels. When you call :py:meth:`niswitch.Session.connect`, the
+    driver selects an available path. With :py:meth:`niswitch.Session.connect`, there is no
     guarantee that the driver selected path will always be the same path
-    through the switch module. :py:func:`niswitch.get_path` only returns those paths
-    explicitly created by niSwitch Connect Channels or :py:func:`niswitch.set_path`.
+    through the switch module. :py:meth:`niswitch.Session.get_path` only returns those paths
+    explicitly created by niSwitch Connect Channels or :py:meth:`niswitch.Session.set_path`.
     For example, if you connect channels CH1 and CH3,and then channels CH2
     and CH3, an explicit path between channels CH1 and CH2 does not exist an
     error is returned
@@ -429,11 +433,11 @@ niswitch.Session methods
 
     :type channel2: string
 
-.. function:: get_relay_count(relay_name)
+.. py:method:: get_relay_count(relay_name)
 
     Returns the number of times the relay has changed from Closed to Open.
     Relay count is useful for tracking relay lifetime and usage. Call
-    :py:func:`niswitch.wait_for_debounce` before :py:func:`niswitch.get_relay_count` to ensure an
+    :py:meth:`niswitch.Session.wait_for_debounce` before :py:meth:`niswitch.Session.get_relay_count` to ensure an
     accurate count. Refer to the Relay Count topic in the NI Switches Help
     to determine if the switch module supports relay counting.
 
@@ -463,10 +467,10 @@ niswitch.Session methods
 
 
 
-.. function:: get_relay_name(index)
+.. py:method:: get_relay_name(index)
 
     Returns the relay name string that is in the relay list at the specified
-    index. Use :py:func:`niswitch.get_relay_name` in a For Loop to get a complete list
+    index. Use :py:meth:`niswitch.Session.get_relay_name` in a For Loop to get a complete list
     of valid relay names for the switch module. Use the Number of Relays
     attribute to determine the number of relays.
 
@@ -485,7 +489,7 @@ niswitch.Session methods
 
     :type index: int
 
-.. function:: get_relay_position(relay_name)
+.. py:method:: get_relay_position(relay_name)
 
     Returns the relay position for the relay specified in the Relay Name
     parameter.
@@ -510,14 +514,16 @@ niswitch.Session methods
     :return:
 
 
-            Indicates whether the relay is open or closed. NISWITCH\_VAL\_OPEN 10
+            Indicates whether the relay is open or closed. :py:data:`~niswitch.NISWITCH_VAL_OPEN` 10
             NIWITCH\_VAL\_CLOSED 11
 
             
 
+            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-.. function:: relay_control(relay_name, relay_action)
+
+.. py:method:: relay_control(relay_name, relay_action)
 
     Controls individual relays of the switch. When controlling individual
     relays, the protection offered by setting the usage of source channels
@@ -545,26 +551,28 @@ niswitch.Session methods
 
 
         Specifies whether to open or close a given relay. Default value: Relay
-        Close Defined values: NISWITCH\_VAL\_OPEN\_RELAY
-        NISWITCH\_VAL\_CLOSE\_RELAY (Default Value)
+        Close Defined values: :py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY`
+        :py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY` (Default Value)
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type relay_action: :py:data:`niswitch.RelayAction`
 
-.. function:: reset_with_defaults()
+.. py:method:: reset_with_defaults()
 
     Resets the switch module and applies initial user specified settings
     from the logical name used to initialize the session. If the session was
     created without a logical name, this function is equivalent to
-    :py:func:`niswitch.reset`.
+    :py:meth:`niswitch.Session.reset`.
 
     
 
 
 
-.. function:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
+.. py:method:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
 
     Routes the scan advanced output trigger from a trigger bus line (TTLx)
     to the front or rear connector.
@@ -577,10 +585,12 @@ niswitch.Session methods
 
 
         The scan advanced trigger destination. Valid locations are the
-        NISWITCH\_VAL\_FRONTCONNECTOR and NISWITCH\_VAL\_REARCONNECTOR. Default
-        value: NISWITCH\_VAL\_FRONTCONNECTOR
+        :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR` and :py:data:`~niswitch.ScanAdvancedOutput.REARCONNECTOR`. Default
+        value: :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR`
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
@@ -588,13 +598,15 @@ niswitch.Session methods
 
 
         The trigger line to route the scan advanced output trigger from the
-        front or rear connector. Select NISWITCH\_VAL\_NONE to break an existing
-        route. Default value: None Valid Values: NISWITCH\_VAL\_NONE
-        NISWITCH\_VAL\_TTL0 NISWITCH\_VAL\_TTL1 NISWITCH\_VAL\_TTL2
-        NISWITCH\_VAL\_TTL3 NISWITCH\_VAL\_TTL4 NISWITCH\_VAL\_TTL5
-        NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
+        front or rear connector. Select :py:data:`~niswitch.ScanAdvancedOutput.NONE` to break an existing
+        route. Default value: None Valid Values: :py:data:`~niswitch.ScanAdvancedOutput.NONE`
+        :py:data:`~niswitch.ScanAdvancedOutput.TTL0` :py:data:`~niswitch.ScanAdvancedOutput.TTL1` :py:data:`~niswitch.ScanAdvancedOutput.TTL2`
+        :py:data:`~niswitch.ScanAdvancedOutput.TTL3` :py:data:`~niswitch.ScanAdvancedOutput.TTL4` :py:data:`~niswitch.ScanAdvancedOutput.TTL5`
+        :py:data:`~niswitch.ScanAdvancedOutput.TTL6` :py:data:`~niswitch.ScanAdvancedOutput.TTL7`
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
@@ -609,7 +621,7 @@ niswitch.Session methods
 
     :type invert: bool
 
-.. function:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert=False)
+.. py:method:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert=False)
 
     Routes the input trigger from the front or rear connector to a trigger
     bus line (TTLx). To disconnect the route, call this function again and
@@ -623,24 +635,28 @@ niswitch.Session methods
 
 
         The location of the input trigger source on the switch module. Valid
-        locations are the NISWITCH\_VAL\_FRONTCONNECTOR and
-        NISWITCH\_VAL\_REARCONNECTOR. Default value:
-        NISWITCH\_VAL\_FRONTCONNECTOR
+        locations are the :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR` and
+        :py:data:`~niswitch.TriggerInput.REARCONNECTOR`. Default value:
+        :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR`
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
     :param trigger_input_bus_line:
 
 
-        The trigger line to route the input trigger. Select NISWITCH\_VAL\_NONE
+        The trigger line to route the input trigger. Select :py:data:`~niswitch.NISWITCH_VAL_NONE`
         to break an existing route. Default value: None Valid Values:
-        NISWITCH\_VAL\_NONE NISWITCH\_VAL\_TTL0 NISWITCH\_VAL\_TTL1
-        NISWITCH\_VAL\_TTL2 NISWITCH\_VAL\_TTL3 NISWITCH\_VAL\_TTL4
-        NISWITCH\_VAL\_TTL5 NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
+        :py:data:`~niswitch.NISWITCH_VAL_NONE` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
+        :py:data:`~niswitch.TriggerInput.TTL2` :py:data:`~niswitch.TriggerInput.TTL3` :py:data:`~niswitch.TriggerInput.TTL4`
+        :py:data:`~niswitch.TriggerInput.TTL5` :py:data:`~niswitch.TriggerInput.TTL6` :py:data:`~niswitch.TriggerInput.TTL7`
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
@@ -655,20 +671,20 @@ niswitch.Session methods
 
     :type invert: bool
 
-.. function:: send_software_trigger()
+.. py:method:: send_software_trigger()
 
     Sends a software trigger to the switch module specified in the NI-SWITCH
-    session. When the trigger input is set to NISWITCH\_VAL\_SOFTWARE\_TRIG
-    through either the :py:func:`niswitch.configure_scan_trigger` or the
-    :py:data:`niswitch.TRIGGER\_INPUT` attribute, the scan does not proceed from
-    a semi-colon (wait for trigger) until :py:func:`niswitch.send_software_trigger` is
+    session. When the trigger input is set to :py:data:`~niswitch.TriggerInput.SOFTWARE_TRIG`
+    through either the :py:meth:`niswitch.Session.configure_scan_trigger` or the
+    :py:data:`niswitch.Session.trigger_input` attribute, the scan does not proceed from
+    a semi-colon (wait for trigger) until :py:meth:`niswitch.Session.send_software_trigger` is
     called.
 
     
 
 
 
-.. function:: set_continuous_scan(continuous_scan)
+.. py:method:: set_continuous_scan(continuous_scan)
 
     Sets the to loop continuously through the scan list or to stop scanning
     after one pass through the scan list.
@@ -689,12 +705,12 @@ niswitch.Session methods
 
     :type continuous_scan: bool
 
-.. function:: set_path(path_list)
+.. py:method:: set_path(path_list)
 
     Connects two channels by specifying an explicit path in the path list
-    parameter. :py:func:`niswitch.set_path` is particularly useful where path
+    parameter. :py:meth:`niswitch.Session.set_path` is particularly useful where path
     repeatability is important, such as in calibrated signal paths. If this
-    is not necessary, use :py:func:`niswitch.connect`.
+    is not necessary, use :py:meth:`niswitch.Session.connect`.
 
     
 
@@ -708,14 +724,14 @@ niswitch.Session methods
         Every other channel in the path are configuration channels. Example of a
         valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
         configuration channel. Default value: None Obtain the path list for a
-        previously created path with :py:func:`niswitch.get_path`.
+        previously created path with :py:meth:`niswitch.Session.get_path`.
 
         
 
 
     :type path_list: string
 
-.. function:: wait_for_debounce(maximum_time_ms=5000)
+.. py:method:: wait_for_debounce(maximum_time_ms=5000)
 
     Pauses until all created paths have settled. If the time you specify
     with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -739,7 +755,7 @@ niswitch.Session methods
 
     :type maximum_time_ms: int
 
-.. function:: wait_for_scan_complete(maximum_time_ms=5000)
+.. py:method:: wait_for_scan_complete(maximum_time_ms=5000)
 
     Pauses until the switch module stops scanning or the maximum time has
     elapsed and returns a timeout error. If the time you specify with the
@@ -764,7 +780,7 @@ niswitch.Session methods
 
     :type maximum_time_ms: int
 
-.. function:: reset()
+.. py:method:: reset()
 
     Disconnects all created paths and returns the switch module to the state
     at initialization. Configuration channel and source channel settings
@@ -774,7 +790,7 @@ niswitch.Session methods
 
 
 
-.. function:: self_test()
+.. py:method:: self_test()
 
     Verifies that the driver can communicate with the switch module.
 

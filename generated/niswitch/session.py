@@ -542,6 +542,7 @@ class _SessionBase(object):
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
 
+
         Returns:
             attribute_value (bool): Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable. From the function panel window, you can use this
@@ -549,6 +550,7 @@ class _SessionBase(object):
                 Attribute ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -595,6 +597,7 @@ class _SessionBase(object):
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
 
+
         Returns:
             attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable. From the function panel window, you can use this
@@ -602,6 +605,7 @@ class _SessionBase(object):
                 Attribute ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -648,6 +652,7 @@ class _SessionBase(object):
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
 
+
         Returns:
             attribute_value (float): Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable. From the function panel window, you can use this
@@ -655,6 +660,7 @@ class _SessionBase(object):
                 Attribute ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -712,6 +718,7 @@ class _SessionBase(object):
                 change this ring control to a manual input box. - If the attribute in
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -744,9 +751,13 @@ class _SessionBase(object):
         Normally, the error information describes the first error that occurred
         since the user last called _get_error or ClearError.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
         Returns:
             code (int): Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         code_ctype = visatype.ViStatus()  # case 14
@@ -809,6 +820,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
+
             attribute_value (bool): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
@@ -816,6 +828,7 @@ class _SessionBase(object):
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -874,6 +887,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
+
             attribute_value (int): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
@@ -881,6 +895,7 @@ class _SessionBase(object):
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -939,6 +954,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
+
             attribute_value (float): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
@@ -946,6 +962,7 @@ class _SessionBase(object):
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1004,6 +1021,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
+
             attribute_value (string): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
@@ -1011,6 +1029,7 @@ class _SessionBase(object):
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1032,9 +1051,11 @@ class _SessionBase(object):
             error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
                 (VI_SUCCESS)
 
+
         Returns:
             error_message (string): The error information formatted into a string. You must pass a ViChar
                 array with at least 256 bytes.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus(error_code)  # case 9
@@ -1111,10 +1132,12 @@ class Session(_SessionBase):
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
+
             channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
+
 
         Returns:
             path_capability (enums.PathCapability): Indicates whether a path is valid. Possible values include:
@@ -1136,6 +1159,10 @@ class Session(_SessionBase):
                 NISWITCH_VAL_CHANNEL_NOT_AVAILABLE indicates that the driver cannot
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
@@ -1172,13 +1199,18 @@ class Session(_SessionBase):
         function to configure the scan trigger. Use the _initiate_scan
         function to start the scan.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
         Args:
             scanlist (string): The scan list to use. The driver uses this value to set the Scan List
                 attribute. Default value: None
+
             scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
                 scanning. The driver uses this value to set the Scan Mode attribute.
                 Refer to scan modes for more information. Default value: Break Before
                 Make
+
         '''
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
@@ -1202,25 +1234,28 @@ class Session(_SessionBase):
 
         Args:
             trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
-                driver uses this value to set the TRIGGER_INPUT
+                driver uses this value to set the trigger_input
                 attribute. The switch device waits for the trigger you specify when it
                 encounters a semicolon in the scanlist. When the trigger occurs, the
                 switch device advances to the next entry in the scanlist. Refer to the
-                TRIGGER_INPUT topic in the NI Switches Help for a list
+                trigger_input topic in the NI Switches Help for a list
                 of valid values.
+
             scan_advanced_output (enums.ScanAdvancedOutput): Output destination of the scan advanced trigger signal. The driver uses
-                this value to set the SCAN_ADVANCED_OUTPUT attribute.
+                this value to set the scan_advanced_output attribute.
                 After the switch processes each entry in the scan list, it waits the
                 length of time you specify in the Scan Delay parameter and then asserts
                 a trigger on the line you specify with this parameter. Refer to the
-                SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
+                scan_advanced_output topic in the NI Switches Help for
                 a list of valid values.
+
             scan_delay (float): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
                 line. The driver uses this value to set the Scan Delay attribute. The
                 scan delay is in addition to the settling time.The driver uses this
-                value to set the SCAN_DELAY attribute. Express this
+                value to set the scan_delay attribute. Express this
                 value in seconds. Default value: 0.0 s
+
         '''
         if type(trigger_input) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
@@ -1261,10 +1296,12 @@ class Session(_SessionBase):
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
+
             channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
@@ -1305,6 +1342,7 @@ class Session(_SessionBase):
                 Devices Overview for valid channel names for the switch module. Example
                 of a valid connection list: c0 -> r1, [c2 -> r2 -> c3] In this example,
                 r2 is a configuration channel. Default value: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case 3
@@ -1337,10 +1375,12 @@ class Session(_SessionBase):
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
+
             channel2 (string): Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
@@ -1377,6 +1417,7 @@ class Session(_SessionBase):
                 switch module. Example of a valid disconnection list: c0 -> r1, [c2 ->
                 r2 -> c3] In this example, r2 is a configuration channel. Default value:
                 None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case 3
@@ -1395,6 +1436,7 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -1428,10 +1470,12 @@ class Session(_SessionBase):
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
+
             channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
@@ -1460,8 +1504,10 @@ class Session(_SessionBase):
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
+
         Returns:
             relay_count (int): The number of relay cycles.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
@@ -1481,6 +1527,7 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -1505,9 +1552,14 @@ class Session(_SessionBase):
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
+
         Returns:
             relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
                 NIWITCH_VAL_CLOSED 11
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
@@ -1546,6 +1598,7 @@ class Session(_SessionBase):
                 to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
                 SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
                 0, device number 16 PXI::16 PXI bus 0, device number 16
+
             topology (string): Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
                 NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
@@ -1736,17 +1789,24 @@ class Session(_SessionBase):
                 NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
                 NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
                 NISWITCH_TOPOLOGY_2799_2_SPDT
+
             simulate (bool): Enables simulation of the switch module specified in the resource name
                 parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
                 (Default Value)
+
             reset_device (bool): Specifies whether to reset the switch module during the initialization
                 process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
                 - Currently unsupported. The device will not reset.
+
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
                 _init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
         topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case 3
@@ -1788,9 +1848,14 @@ class Session(_SessionBase):
             relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
+
             relay_action (enums.RelayAction): Specifies whether to open or close a given relay. Default value: Relay
                 Close Defined values: NISWITCH_VAL_OPEN_RELAY
                 NISWITCH_VAL_CLOSE_RELAY (Default Value)
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
@@ -1822,16 +1887,25 @@ class Session(_SessionBase):
 
         Args:
             scan_advanced_output_connector (enums.ScanAdvancedOutput): The scan advanced trigger destination. Valid locations are the
-                NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
-                value: NISWITCH_VAL_FRONTCONNECTOR
+                ScanAdvancedOutput.FRONTCONNECTOR and ScanAdvancedOutput.REARCONNECTOR. Default
+                value: ScanAdvancedOutput.FRONTCONNECTOR
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             scan_advanced_output_bus_line (enums.ScanAdvancedOutput): The trigger line to route the scan advanced output trigger from the
-                front or rear connector. Select NISWITCH_VAL_NONE to break an existing
-                route. Default value: None Valid Values: NISWITCH_VAL_NONE
-                NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
-                NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4 NISWITCH_VAL_TTL5
-                NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
+                front or rear connector. Select ScanAdvancedOutput.NONE to break an existing
+                route. Default value: None Valid Values: ScanAdvancedOutput.NONE
+                ScanAdvancedOutput.TTL0 ScanAdvancedOutput.TTL1 ScanAdvancedOutput.TTL2
+                ScanAdvancedOutput.TTL3 ScanAdvancedOutput.TTL4 ScanAdvancedOutput.TTL5
+                ScanAdvancedOutput.TTL6 ScanAdvancedOutput.TTL7
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
+
         '''
         if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
@@ -1854,16 +1928,25 @@ class Session(_SessionBase):
 
         Args:
             trigger_input_connector (enums.TriggerInput): The location of the input trigger source on the switch module. Valid
-                locations are the NISWITCH_VAL_FRONTCONNECTOR and
-                NISWITCH_VAL_REARCONNECTOR. Default value:
-                NISWITCH_VAL_FRONTCONNECTOR
+                locations are the TriggerInput.FRONTCONNECTOR and
+                TriggerInput.REARCONNECTOR. Default value:
+                TriggerInput.FRONTCONNECTOR
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             trigger_input_bus_line (enums.TriggerInput): The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
                 to break an existing route. Default value: None Valid Values:
-                NISWITCH_VAL_NONE NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1
-                NISWITCH_VAL_TTL2 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4
-                NISWITCH_VAL_TTL5 NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
+                NISWITCH_VAL_NONE TriggerInput.TTL0 TriggerInput.TTL1
+                TriggerInput.TTL2 TriggerInput.TTL3 TriggerInput.TTL4
+                TriggerInput.TTL5 TriggerInput.TTL6 TriggerInput.TTL7
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
+
         '''
         if type(trigger_input_connector) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
@@ -1881,9 +1964,9 @@ class Session(_SessionBase):
         '''send_software_trigger
 
         Sends a software trigger to the switch module specified in the NI-SWITCH
-        session. When the trigger input is set to NISWITCH_VAL_SOFTWARE_TRIG
+        session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
         through either the configure_scan_trigger or the
-        TRIGGER_INPUT attribute, the scan does not proceed from
+        trigger_input attribute, the scan does not proceed from
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
         '''
@@ -1902,6 +1985,7 @@ class Session(_SessionBase):
             continuous_scan (bool): If VI_TRUE, loops continuously through the scan list during scanning.
                 If VI_FALSE, the scan stops after one pass through the scan list.
                 Default value: VI_FALSE
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         continuous_scan_ctype = visatype.ViBoolean(continuous_scan)  # case 9
@@ -1924,6 +2008,7 @@ class Session(_SessionBase):
                 valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
                 configuration channel. Default value: None Obtain the path list for a
                 previously created path with get_path.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case 3
@@ -1944,6 +2029,7 @@ class Session(_SessionBase):
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
@@ -1965,6 +2051,7 @@ class Session(_SessionBase):
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
@@ -1980,6 +2067,9 @@ class Session(_SessionBase):
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
         call init or InitWithOptions.
+
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niSwitch_close(vi_ctype)
@@ -2005,8 +2095,10 @@ class Session(_SessionBase):
 
         Returns:
             self_test_result (int): Value returned from the switch device self-test. Passed 0 Failed 1
+
             self_test_message (string): Self-test response string from the switch device. You must pass a ViChar
                 array with at least 256 bytes.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_test_result_ctype = visatype.ViInt16()  # case 14

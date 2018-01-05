@@ -1,6 +1,6 @@
 nimodinst.Session methods
 =========================
 
-.. py:currentmodule:: nimodinst
+.. py:currentmodule:: nimodinst.Session
 
 

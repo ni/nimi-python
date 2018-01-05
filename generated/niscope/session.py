@@ -1395,6 +1395,7 @@ class _SessionBase(object):
             num_wfms (int): Returns the number of records times the number of channels; if you are
                 operating in DDC mode (NI 5620/5621 only), this value is multiplied by
                 two.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1420,6 +1421,12 @@ class _SessionBase(object):
         CalEnd is called with **action** set to
         NISCOPE_VAL_ACTION_STORE and no errors occur.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
         niscope.Session object, then the method will use all repeated capabilities in the session.
@@ -1432,6 +1439,10 @@ class _SessionBase(object):
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
                 operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
                 restore the previous calibration.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         if type(option) is not enums.Option:
             raise TypeError('Parameter mode must be of type ' + str(enums.Option))
@@ -1456,6 +1467,9 @@ class _SessionBase(object):
         fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this function.
 
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
         niscope.Session object, then the method will use all repeated capabilities in the session.
@@ -1470,6 +1484,7 @@ class _SessionBase(object):
                 or `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to clear the stats for.
+
         '''
         if type(clearable_measurement_function) is not enums.ClearableMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
@@ -1496,11 +1511,13 @@ class _SessionBase(object):
 
         Args:
             input_impedance (float): The input impedance for the channel; NI-SCOPE sets
-                INPUT_IMPEDANCE to this value.
+                input_impedance to this value.
+
             max_input_frequency (float): The bandwidth for the channel; NI-SCOPE sets
-                MAX_INPUT_FREQUENCY to this value. Pass 0 for this
+                max_input_frequency to this value. Pass 0 for this
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1531,10 +1548,11 @@ class _SessionBase(object):
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
-                `EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+                `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
                 attribute. The
-                `EQUALIZATION_FILTER_ENABLED <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
+                `equalization_filter_enabled <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
                 attribute must be set to TRUE to enable the filter.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1560,16 +1578,21 @@ class _SessionBase(object):
             session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
-            range (float): Specifies the vertical range Refer to VERTICAL_RANGE for
+            range (float): Specifies the vertical range Refer to vertical_range for
                 more information.
+
             coupling (enums.VerticalCoupling): Specifies how to couple the input signal. Refer to
-                VERTICAL_COUPLING for more information.
-            offset (float): Specifies the vertical offset. Refer to VERTICAL_OFFSET
+                vertical_coupling for more information.
+
+            offset (float): Specifies the vertical offset. Refer to vertical_offset
                 for more information.
+
             probe_attenuation (float): Specifies the probe attenuation. Refer to
-                PROBE_ATTENUATION for valid values.
+                probe_attenuation for valid values.
+
             enabled (bool): Specifies whether the channel is enabled for acquisition. Refer to
-                CHANNEL_ENABLED for more information.
+                channel_enabled for more information.
+
         '''
         if type(coupling) is not enums.VerticalCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
@@ -1618,9 +1641,11 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -1640,6 +1665,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -1664,6 +1693,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1709,6 +1739,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
@@ -1726,9 +1757,14 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
@@ -1748,6 +1784,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -1772,6 +1812,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         import numpy
 
@@ -1823,6 +1864,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             wfm (numpy array of int16): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
@@ -1840,9 +1882,14 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (numpy array of int16): Returns an array whose length is the **numSamples** times number of
@@ -1862,6 +1909,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -1886,6 +1937,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         import numpy
 
@@ -1937,6 +1989,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             wfm (numpy array of int32): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
@@ -1954,9 +2007,14 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (numpy array of int32): Returns an array whose length is the **numSamples** times number of
@@ -1976,6 +2034,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -2000,6 +2062,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         import numpy
 
@@ -2051,6 +2114,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
@@ -2068,9 +2132,14 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
@@ -2090,6 +2159,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -2114,6 +2187,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         import numpy
 
@@ -2163,6 +2237,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function throws an exception.
+
             wfm (list of float): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
                 be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of
                 waveforms.
@@ -2194,7 +2269,9 @@ class _SessionBase(object):
 
                     wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
                     wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
@@ -2215,6 +2292,7 @@ class _SessionBase(object):
                                             voltage = binary data * gain factor + offset
 
                                     Call _actual_num_wfms to determine the size of this array.
+
         '''
         import numpy
 
@@ -2261,7 +2339,9 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function throws an exception.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -2281,6 +2361,7 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
                                     -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
@@ -2299,6 +2380,7 @@ class _SessionBase(object):
                                             voltage = binary data * gain factor + offset
 
                                     Call _actual_num_wfms to determine the size of this array.
+
         '''
         return self._fetch(num_samples, timeout)
 
@@ -2312,9 +2394,9 @@ class _SessionBase(object):
 
         Many of the measurements use the low, mid, and high reference levels.
         You configure the low, mid, and high references by using
-        MEAS_CHAN_LOW_REF_LEVEL,
-        MEAS_CHAN_MID_REF_LEVEL, and
-        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        meas_chan_low_ref_level,
+        meas_chan_mid_ref_level, and
+        meas_chan_high_ref_level to set each channel
         differently.
 
         Tip:
@@ -2329,13 +2411,16 @@ class _SessionBase(object):
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
+
         Returns:
             result (list of float): Contains an array of all measurements acquired; call
                 _actual_num_wfms to determine the array length.
+
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
@@ -2371,9 +2456,9 @@ class _SessionBase(object):
 
         Many of the measurements use the low, mid, and high reference levels.
         You configure the low, mid, and high references with
-        MEAS_CHAN_LOW_REF_LEVEL,
-        MEAS_CHAN_MID_REF_LEVEL, and
-        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        meas_chan_low_ref_level,
+        meas_chan_mid_ref_level, and
+        meas_chan_high_ref_level to set each channel
         differently.
 
         Tip:
@@ -2388,22 +2473,30 @@ class _SessionBase(object):
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
+
         Returns:
             result (list of float): Returns the resulting measurement
+
             mean (list of float): Returns the mean scalar value, which is obtained by averaging each
                 fetch_measurement_stats call.
+
             stdev (list of float): Returns the standard deviation of the most recent **numInStats**
                 measurements.
+
             min (list of float): Returns the smallest scalar value acquired (the minimum of the
                 **numInStats** measurements).
+
             max (list of float): Returns the largest scalar value acquired (the maximum of the
                 **numInStats** measurements).
+
             num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
                 called.
+
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
@@ -2444,9 +2537,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): The ID of an attribute.
 
+
         Returns:
             value (bool): Returns the current value of the attribute; pass the address of a
                 ViBoolean variable.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2479,8 +2574,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): The ID of an attribute.
 
+
         Returns:
             value (int): Returns the current value of the attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2513,9 +2610,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): The ID of an attribute.
 
+
         Returns:
             value (float): Returns the current value of the attribute; pass the address of a
                 ViReal64 variable.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2558,6 +2657,7 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2592,12 +2692,14 @@ class _SessionBase(object):
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
 
+
         Returns:
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
-                `EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+                `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
                 attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2633,6 +2735,7 @@ class _SessionBase(object):
                 buffer regardless of the number of bytes in the value.
 
                 If you pass 0, you can pass VI_NULL for the **description** parameter.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus()  # case 14
@@ -2679,9 +2782,11 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
+
 
         Returns:
             wfm (list of float): Returns an array whose length is the **numSamples** times number of
@@ -2701,6 +2806,10 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
@@ -2725,6 +2834,7 @@ class _SessionBase(object):
                 voltage = binary data × gain factor + offset
 
                 Call _actual_num_wfms to determine the size of this array.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2749,9 +2859,9 @@ class _SessionBase(object):
 
         Many of the measurements use the low, mid, and high reference levels.
         You configure the low, mid, and high references by using
-        MEAS_CHAN_LOW_REF_LEVEL,
-        MEAS_CHAN_MID_REF_LEVEL, and
-        MEAS_CHAN_HIGH_REF_LEVEL to set each channel
+        meas_chan_low_ref_level,
+        meas_chan_mid_ref_level, and
+        meas_chan_high_ref_level to set each channel
         differently.
 
         Tip:
@@ -2766,13 +2876,16 @@ class _SessionBase(object):
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
+
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
+
         Returns:
             result (list of float): Contains an array of all measurements acquired. Call
                 _actual_num_wfms to determine the array length.
+
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
@@ -2821,8 +2934,10 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
+
             value (bool): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2868,8 +2983,10 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
+
             value (int): The value that you want to set the attribute. Some values might not be
                 valid depending on the current settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2915,8 +3032,10 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
+
             value (float): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2964,8 +3083,10 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): The ID of an attribute.
+
             value (string): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -3039,11 +3160,12 @@ class Session(_SessionBase):
 
                 **Defined Values**
 
-                NISCOPE_VAL_ACQ_COMPLETE
+                AcquisitionStatus.COMPLETE
 
-                NISCOPE_VAL_ACQ_IN_PROGRESS
+                AcquisitionStatus.IN_PROGRESS
 
-                NISCOPE_VAL_ACQ_STATUS_UNKNOWN
+                AcquisitionStatus.STATUS_UNKNOWN
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         acquisition_status_ctype = visatype.ViInt32()  # case 14
@@ -3069,57 +3191,57 @@ class Session(_SessionBase):
 
         The following settings are changed:
 
-        +--------------------+
-        | **General**        |
-        +--------------------+
-        | Acquisition mode   |
-        +--------------------+
-        | Reference clock    |
-        +--------------------+
-        | **Vertical**       |
-        +--------------------+
-        | Vertical coupling  |
-        +--------------------+
-        | Vertical bandwidth |
-        +--------------------+
-        | Vertical range     |
-        +--------------------+
-        | Vertical offset    |
-        +--------------------+
-        | Probe attenuation  |
-        +--------------------+
-        | Input impedance    |
-        +--------------------+
-        | **Horizontal**     |
-        +--------------------+
-        | Sample rate        |
-        +--------------------+
-        | Min record length  |
-        +--------------------+
-        | Enforce realtime   |
-        +--------------------+
-        | Number of Records  |
-        +--------------------+
-        | **Triggering**     |
-        +--------------------+
-        | Trigger type       |
-        +--------------------+
-        | Trigger channel    |
-        +--------------------+
-        | Trigger slope      |
-        +--------------------+
-        | Trigger coupling   |
-        +--------------------+
-        | Reference position |
-        +--------------------+
-        | Trigger level      |
-        +--------------------+
-        | Trigger delay      |
-        +--------------------+
-        | Trigger holdoff    |
-        +--------------------+
-        | Trigger output     |
-        +--------------------+
+        +--------------------+-----------------------------------------------+
+        | **General**        |                                               |
+        +--------------------+-----------------------------------------------+
+        | Acquisition mode   | Normal                                        |
+        +--------------------+-----------------------------------------------+
+        | Reference clock    | Internal                                      |
+        +--------------------+-----------------------------------------------+
+        | **Vertical**       |                                               |
+        +--------------------+-----------------------------------------------+
+        | Vertical coupling  | AC (DC for NI 5621)                           |
+        +--------------------+-----------------------------------------------+
+        | Vertical bandwidth | Full                                          |
+        +--------------------+-----------------------------------------------+
+        | Vertical range     | Changed by auto setup                         |
+        +--------------------+-----------------------------------------------+
+        | Vertical offset    | 0 V                                           |
+        +--------------------+-----------------------------------------------+
+        | Probe attenuation  | Unchanged by auto setup                       |
+        +--------------------+-----------------------------------------------+
+        | Input impedance    | Unchanged by auto setup                       |
+        +--------------------+-----------------------------------------------+
+        | **Horizontal**     |                                               |
+        +--------------------+-----------------------------------------------+
+        | Sample rate        | Changed by auto setup                         |
+        +--------------------+-----------------------------------------------+
+        | Min record length  | Changed by auto setup                         |
+        +--------------------+-----------------------------------------------+
+        | Enforce realtime   | True                                          |
+        +--------------------+-----------------------------------------------+
+        | Number of Records  | Changed to 1                                  |
+        +--------------------+-----------------------------------------------+
+        | **Triggering**     |                                               |
+        +--------------------+-----------------------------------------------+
+        | Trigger type       | Edge if signal present, otherwise immediate   |
+        +--------------------+-----------------------------------------------+
+        | Trigger channel    | Lowest numbered channel with a signal present |
+        +--------------------+-----------------------------------------------+
+        | Trigger slope      | Positive                                      |
+        +--------------------+-----------------------------------------------+
+        | Trigger coupling   | DC                                            |
+        +--------------------+-----------------------------------------------+
+        | Reference position | 50%                                           |
+        +--------------------+-----------------------------------------------+
+        | Trigger level      | 50% of signal on trigger channel              |
+        +--------------------+-----------------------------------------------+
+        | Trigger delay      | 0                                             |
+        +--------------------+-----------------------------------------------+
+        | Trigger holdoff    | 0                                             |
+        +--------------------+-----------------------------------------------+
+        | Trigger output     | None                                          |
+        +--------------------+-----------------------------------------------+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niScope_AutoSetup(vi_ctype)
@@ -3147,15 +3269,22 @@ class Session(_SessionBase):
 
         Args:
             min_sample_rate (float): The sampling rate for the acquisition. Refer to
-                MIN_SAMPLE_RATE for more information.
+                min_sample_rate for more information.
+
             min_num_pts (int): The minimum number of points you need in the record for each channel;
                 call ActualRecordLength to obtain the actual record length
                 used.
 
                 Valid Values: Greater than 1; limited by available memory
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             ref_position (float): The position of the Reference Event in the waveform record specified as
                 a percentage.
+
             num_records (int): The number of records to acquire
+
             enforce_realtime (bool): Indicates whether the digitizer enforces real-time measurements or
                 allows equivalent-time (RIS) measurements; not all digitizers support
                 RIS—refer to `Features Supported by
@@ -3169,6 +3298,7 @@ class Session(_SessionBase):
                 VI_TRUE—Allow real-time acquisitions only
 
                 VI_FALSE—Allow real-time and equivalent-time acquisitions
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         min_sample_rate_ctype = visatype.ViReal64(min_sample_rate)  # case 9
@@ -3188,9 +3318,9 @@ class Session(_SessionBase):
 
         Configures the reference levels for all channels of the digitizer. The
         levels may be set on a per channel basis by setting
-        MEAS_CHAN_HIGH_REF_LEVEL,
-        MEAS_CHAN_LOW_REF_LEVEL, and
-        MEAS_CHAN_MID_REF_LEVEL
+        meas_chan_high_ref_level,
+        meas_chan_low_ref_level, and
+        meas_chan_mid_ref_level
 
         This function configures the reference levels for waveform measurements.
         Call this function before calling fetch_measurement to take a
@@ -3202,29 +3332,32 @@ class Session(_SessionBase):
                 measurements.
 
                 Units: Either a percentage or voltage based on
-                MEAS_REF_LEVEL_UNITS. A percentage is calculated with
+                meas_ref_level_units. A percentage is calculated with
                 the voltage low and voltage high measurements representing 0% and 100%,
                 respectively.
 
                 Default Value: 10.0
+
             mid (float): Pass the mid reference you want the digitizer to use for waveform
                 measurements.
 
                 Units: Either a percentage or voltage based on
-                MEAS_REF_LEVEL_UNITS. A percentage is calculated with
+                meas_ref_level_units. A percentage is calculated with
                 the voltage low and voltage high measurements representing 0% and 100%,
                 respectively.
 
                 Default Value: 50.0
+
             high (float): Pass the high reference you want the digitizer to use for waveform
                 measurements.
 
                 Units: Either a percentage or voltage based on
-                MEAS_REF_LEVEL_UNITS. A percentage is calculated with
+                meas_ref_level_units. A percentage is calculated with
                 the voltage low and voltage high measurements representing 0% and 100%,
                 respectively.
 
                 Default Value: 90.0
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         low_ctype = visatype.ViReal64(low)  # case 9
@@ -3240,7 +3373,7 @@ class Session(_SessionBase):
         Configures the common properties of a digital trigger.
 
         When you initiate an acquisition, the digitizer waits for the start
-        trigger, which is configured through the ACQ_ARM_SOURCE
+        trigger, which is configured through the acq_arm_source
         (Start Trigger Source) attribute. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
@@ -3268,17 +3401,21 @@ class Session(_SessionBase):
         Digital triggering is not supported in RIS mode.
 
         Args:
-            trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
+            trigger_source (string): Specifies the trigger source. Refer to trigger_source
                 for defined values.
+
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to TRIGGER_SLOPE for more
+                the digitizer. Refer to trigger_slope for more
                 information.
+
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
@@ -3297,7 +3434,7 @@ class Session(_SessionBase):
         Configures common properties for analog edge triggering.
 
         When you initiate an acquisition, the digitizer waits for the start
-        trigger, which is configured through the ACQ_ARM_SOURCE
+        trigger, which is configured through the acq_arm_source
         (Start Trigger Source) attribute. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
@@ -3315,21 +3452,27 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
+            trigger_source (string): Specifies the trigger source. Refer to trigger_source
                 for defined values.
+
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
+                trigger_coupling for more information.
+
             level (float): The voltage threshold for the trigger. Refer to
-                TRIGGER_LEVEL for more information.
+                trigger_level for more information.
+
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to TRIGGER_SLOPE for more
+                the digitizer. Refer to trigger_slope for more
                 information.
+
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
@@ -3357,7 +3500,7 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the
-        ACQ_ARM_SOURCE. The default is immediate. Upon
+        acq_arm_source. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
@@ -3374,26 +3517,33 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
+            trigger_source (string): Specifies the trigger source. Refer to trigger_source
                 for defined values.
+
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
+                trigger_coupling for more information.
+
             level (float): The voltage threshold for the trigger. Refer to
-                TRIGGER_LEVEL for more information.
+                trigger_level for more information.
+
             hysteresis (float): The size of the hysteresis window on either side of the **level** in
                 volts; the digitizer triggers when the trigger signal passes through the
                 hysteresis value you specify with this parameter, has the slope you
                 specify with **slope**, and passes through the **level**. Refer to
-                TRIGGER_HYSTERESIS for defined values.
+                trigger_hysteresis for defined values.
+
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to TRIGGER_SLOPE for more
+                the digitizer. Refer to trigger_slope for more
                 information.
+
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
@@ -3432,7 +3582,7 @@ class Session(_SessionBase):
         Configures common properties for software triggering.
 
         When you initiate an acquisition, the digitizer waits for the start
-        trigger, which is configured through the ACQ_ARM_SOURCE
+        trigger, which is configured through the acq_arm_source
         (Start Trigger Source) attribute. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
@@ -3454,10 +3604,12 @@ class Session(_SessionBase):
         Args:
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
@@ -3474,7 +3626,7 @@ class Session(_SessionBase):
         video trigger occurs when the digitizer finds a valid video signal sync.
 
         When you initiate an acquisition, the digitizer waits for the start
-        trigger, which is configured through the ACQ_ARM_SOURCE
+        trigger, which is configured through the acq_arm_source
         (Start Trigger Source) attribute. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
@@ -3492,33 +3644,42 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
+            trigger_source (string): Specifies the trigger source. Refer to trigger_source
                 for defined values.
+
             signal_format (enums.VideoSignalFormat): Specifies the type of video signal sync the digitizer should look for.
-                Refer to TV_TRIGGER_SIGNAL_FORMAT for more
+                Refer to tv_trigger_signal_format for more
                 information.
+
             event (enums.VideoTriggerEvent): Specifies the TV event you want to trigger on. You can trigger on a
                 specific or on the next coming line or field of the signal.
+
             polarity (enums.VideoPolarity): Specifies the polarity of the video signal sync.
+
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
+                trigger_coupling for more information.
+
             enable_dc_restore (bool): Offsets each video line so the clamping level (the portion of the video
                 line between the end of the color burst and the beginning of the active
                 image) is moved to zero volt. Refer to
-                ENABLE_DC_RESTORE for defined values.
+                enable_dc_restore for defined values.
+
             line_number (int): Selects the line number to trigger on. The line number range covers an
                 entire frame and is referenced as shown on `Vertical Blanking and
                 Synchronization
                 Signal <REPLACE_DRIVER_SPECIFIC_URL_1(gray_scale_image)>`__. Refer to
-                TV_TRIGGER_LINE_NUMBER for more information.
+                tv_trigger_line_number for more information.
 
                 Default value: 1
+
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         if type(signal_format) is not enums.VideoSignalFormat:
             raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
@@ -3550,7 +3711,7 @@ class Session(_SessionBase):
         the **high level** or **low level** parameters.
 
         When you initiate an acquisition, the digitizer waits for the start
-        trigger, which is configured through the ACQ_ARM_SOURCE
+        trigger, which is configured through the acq_arm_source
         (Start Trigger Source) attribute. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
@@ -3570,22 +3731,29 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            trigger_source (string): Specifies the trigger source. Refer to TRIGGER_SOURCE
+            trigger_source (string): Specifies the trigger source. Refer to trigger_source
                 for defined values.
+
             low_level (float): Passes the voltage threshold you want the digitizer to use for low
                 triggering.
+
             high_level (float): Passes the voltage threshold you want the digitizer to use for high
                 triggering.
+
             window_mode (enums.TriggerWindowMode): Specifies whether you want the trigger to occur when the signal enters
                 or leaves a window.
+
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                TRIGGER_COUPLING for more information.
+                trigger_coupling for more information.
+
             holdoff (float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                TRIGGER_HOLDOFF for more information.
+                trigger_holdoff for more information.
+
             delay (float): How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to TRIGGER_DELAY_TIME for more
+                acquiring data. Refer to trigger_delay_time for more
                 information.
+
         '''
         if type(window_mode) is not enums.TriggerWindowMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
@@ -3635,34 +3803,41 @@ class Session(_SessionBase):
 
         Note: This function replaces ConfigureTriggerOutput.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         Args:
             signal (enums.ExportableSignals): signal (clock, trigger, or event) to export.
 
                 **Defined Values**
 
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_REF_TRIGGER              | (1)   | Generate a pulse when detecting the Stop/Reference trigger.                                     |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_START_TRIGGER            | (2)   | Generate a pulse when detecting a Start trigger.                                                |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_END_OF_ACQUISITION_EVENT | (3)   | Generate a pulse when the acquisition finishes.                                                 |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_END_OF_RECORD_EVENT      | (4)   | Generate a pulse at the end of the record.                                                      |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_ADVANCE_TRIGGER          | (5)   | Generate a pulse when detecting an Advance trigger.                                             |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_READY_FOR_ADVANCE_EVENT  | (6)   | Asserts when the digitizer is ready to advance to the next record.                              |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_READY_FOR_START_EVENT    | (7)   | Asserts when the digitizer is initiated and ready to accept a Start trigger and begin sampling. |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_READY_FOR_REF_EVENT      | (10)  | Asserts when the digitizer is ready to accept a Reference trigger.                              |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_REF_CLOCK                | (100) | Export the Reference clock for the digitizer to the specified terminal.                         |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_SAMPLE_CLOCK             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_5V_OUT                   | (13)  | Exports a 5 V power supply.                                                                     |
-                +--------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.REF_TRIGGER              | (1)   | Generate a pulse when detecting the Stop/Reference trigger.                                     |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.START_TRIGGER            | (2)   | Generate a pulse when detecting a Start trigger.                                                |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.END_OF_ACQUISITION_EVENT | (3)   | Generate a pulse when the acquisition finishes.                                                 |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.END_OF_RECORD_EVENT      | (4)   | Generate a pulse at the end of the record.                                                      |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.ADVANCE_TRIGGER          | (5)   | Generate a pulse when detecting an Advance trigger.                                             |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.READY_FOR_ADVANCE_EVENT  | (6)   | Asserts when the digitizer is ready to advance to the next record.                              |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.READY_FOR_START_EVENT    | (7)   | Asserts when the digitizer is initiated and ready to accept a Start trigger and begin sampling. |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.READY_FOR_REF_EVENT      | (10)  | Asserts when the digitizer is ready to accept a Reference trigger.                              |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.REF_CLOCK                | (100) | Export the Reference clock for the digitizer to the specified terminal.                         |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals.SAMPLE_CLOCK             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+                | ExportableSignals._5V_OUT                  | (13)  | Exports a 5 V power supply.                                                                     |
+                +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+
             output_terminal (string): Identifies the hardware signal line on which the digital pulse is
                 generated.
 
@@ -3695,7 +3870,12 @@ class Session(_SessionBase):
                 +----------------------+------------------+
                 | NISCOPE_VAL_CLK_OUT  | ("VAL_CLK_OUT")  |
                 +----------------------+------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             signal_identifier (string): Describes the signal being exported.
+
         '''
         if type(signal) is not enums.ExportableSignals:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
@@ -3772,6 +3952,7 @@ class Session(_SessionBase):
                 +---------+--------------------------------------+--------------------------------------------------+
                 | 5       | IVI logical name or IVI virtual name | myLogicalName (myLogicalName = name)             |
                 +---------+--------------------------------------+--------------------------------------------------+
+
             id_query (bool): Specify whether to perform an ID query.
 
                 When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
@@ -3786,6 +3967,7 @@ class Session(_SessionBase):
                 | VI_FALSE—Skip ID query
 
                 **Default Value**: VI_TRUE
+
             reset_device (bool): Specify whether to reset the device during the initialization process.
 
                 Default Value: VI_TRUE
@@ -3801,6 +3983,7 @@ class Session(_SessionBase):
                 wear on the electromechanical relays. Refer to `NI 5112
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
+
             option_string (string): | Specifies initialization commands. The following table lists the
                   attributes and the name you use in the **optionString** to identify
                   the attribute.
@@ -3830,9 +4013,11 @@ class Session(_SessionBase):
                 | No Data |
                 +---------+
 
+
         Returns:
             vi (int): Returns a session handle that you can use to identify the device in all
                 subsequent NI-SCOPE function calls.
+
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
         id_query_ctype = visatype.ViBoolean(id_query)  # case 9
@@ -3911,8 +4096,8 @@ class Session(_SessionBase):
         called configure_trigger_software when you want the Reference
         trigger to occur. You can also call this function to override a misused
         edge, digital, or hysteresis trigger. If you have configured
-        ACQ_ARM_SOURCE, ARM_REF_TRIG_SRC, or
-        ADV_TRIG_SRC, call this function when you want to send
+        acq_arm_source, arm_ref_trig_src, or
+        adv_trig_src, call this function when you want to send
         the corresponding trigger to the digitizer.
 
         Args:
@@ -3920,10 +4105,11 @@ class Session(_SessionBase):
 
                 **Defined Values**
 
-                | NISCOPE_VAL_SOFTWARE_TRIGGER_START (0L)
-                |  NISCOPE_VAL_SOFTWARE_TRIGGER_ARM_REFERENCE (1L)
-                | NISCOPE_VAL_SOFTWARE_TRIGGER_REFERENCE (2L)
-                | NISCOPE_VAL_SOFTWARE_TRIGGER_ADVANCE (3L)
+                | WhichTrigger.START (0L)
+                |  WhichTrigger.ARM_REFERENCE (1L)
+                | WhichTrigger.REFERENCE (2L)
+                | WhichTrigger.ADVANCE (3L)
+
         '''
         if type(which_trigger) is not enums.WhichTrigger:
             raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
@@ -3973,10 +4159,12 @@ class Session(_SessionBase):
                 0—Self-test passed
 
                 1—Self-test failed
+
             self_test_message (string): Returns the self-test response string from the instrument. Refer to the
                 device-specific help topics for an explanation of the string contents;
                 you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
                 in length.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_test_result_ctype = visatype.ViInt16()  # case 14

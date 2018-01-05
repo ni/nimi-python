@@ -9,7 +9,7 @@ Enums used in NI-DMM
 
 .. py:data:: ADCCalibration
 
-    .. py:attribute:: nidmm.ADCCalibration.AUTO
+    .. py:attribute:: ADCCalibration.AUTO
 
 
 
@@ -19,7 +19,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ADCCalibration.OFF
+    .. py:attribute:: ADCCalibration.OFF
 
 
 
@@ -29,7 +29,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ADCCalibration.ON
+    .. py:attribute:: ADCCalibration.ON
 
 
 
@@ -42,7 +42,7 @@ Enums used in NI-DMM
 
 .. py:data:: AcquisitionStatus
 
-    .. py:attribute:: nidmm.AcquisitionStatus.RUNNING
+    .. py:attribute:: AcquisitionStatus.RUNNING
 
 
 
@@ -52,7 +52,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AcquisitionStatus.FINISHED_WITH_BACKLOG
+    .. py:attribute:: AcquisitionStatus.FINISHED_WITH_BACKLOG
 
 
 
@@ -62,7 +62,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
+    .. py:attribute:: AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
 
 
 
@@ -72,7 +72,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AcquisitionStatus.PAUSED
+    .. py:attribute:: AcquisitionStatus.PAUSED
 
 
 
@@ -82,7 +82,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
+    .. py:attribute:: AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
 
 
 
@@ -95,7 +95,7 @@ Enums used in NI-DMM
 
 .. py:data:: ApertureTimeUnits
 
-    .. py:attribute:: nidmm.ApertureTimeUnits.SECONDS
+    .. py:attribute:: ApertureTimeUnits.SECONDS
 
 
 
@@ -105,7 +105,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ApertureTimeUnits.POWER_LINE_CYCLES
+    .. py:attribute:: ApertureTimeUnits.POWER_LINE_CYCLES
 
 
 
@@ -118,7 +118,7 @@ Enums used in NI-DMM
 
 .. py:data:: AutoZero
 
-    .. py:attribute:: nidmm.AutoZero.AUTO
+    .. py:attribute:: AutoZero.AUTO
 
 
 
@@ -128,7 +128,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.OFF
+    .. py:attribute:: AutoZero.OFF
 
 
 
@@ -138,7 +138,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.ON
+    .. py:attribute:: AutoZero.ON
 
 
 
@@ -148,7 +148,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.ONCE
+    .. py:attribute:: AutoZero.ONCE
 
 
 
@@ -161,7 +161,7 @@ Enums used in NI-DMM
 
 .. py:data:: CableCompensationType
 
-    .. py:attribute:: nidmm.CableCompensationType.NONE
+    .. py:attribute:: CableCompensationType.NONE
 
 
 
@@ -171,7 +171,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.OPEN
+    .. py:attribute:: CableCompensationType.OPEN
 
 
 
@@ -181,7 +181,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.SHORT
+    .. py:attribute:: CableCompensationType.SHORT
 
 
 
@@ -191,7 +191,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.OPEN_AND_SHORT
+    .. py:attribute:: CableCompensationType.OPEN_AND_SHORT
 
 
 
@@ -204,7 +204,7 @@ Enums used in NI-DMM
 
 .. py:data:: DCBias
 
-    .. py:attribute:: nidmm.DCBias.OFF
+    .. py:attribute:: DCBias.OFF
 
 
 
@@ -214,7 +214,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCBias.ON
+    .. py:attribute:: DCBias.ON
 
 
 
@@ -227,7 +227,7 @@ Enums used in NI-DMM
 
 .. py:data:: DCNoiseRejection
 
-    .. py:attribute:: nidmm.DCNoiseRejection.AUTO
+    .. py:attribute:: DCNoiseRejection.AUTO
 
 
 
@@ -237,7 +237,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.NORMAL
+    .. py:attribute:: DCNoiseRejection.NORMAL
 
 
 
@@ -247,7 +247,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.SECOND_ORDER
+    .. py:attribute:: DCNoiseRejection.SECOND_ORDER
 
 
 
@@ -257,7 +257,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.HIGH_ORDER
+    .. py:attribute:: DCNoiseRejection.HIGH_ORDER
 
 
 
@@ -270,7 +270,7 @@ Enums used in NI-DMM
 
 .. py:data:: Function
 
-    .. py:attribute:: nidmm.Function.DC_VOLTS
+    .. py:attribute:: Function.DC_VOLTS
 
 
 
@@ -280,7 +280,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.AC_VOLTS
+    .. py:attribute:: Function.AC_VOLTS
 
 
 
@@ -290,7 +290,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.DC_CURRENT
+    .. py:attribute:: Function.DC_CURRENT
 
 
 
@@ -300,7 +300,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.AC_CURRENT
+    .. py:attribute:: Function.AC_CURRENT
 
 
 
@@ -310,7 +310,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function._2_WIRE_RES
+    .. py:attribute:: Function._2_WIRE_RES
 
 
 
@@ -320,7 +320,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function._4_WIRE_RES
+    .. py:attribute:: Function._4_WIRE_RES
 
 
 
@@ -330,7 +330,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.FREQ
+    .. py:attribute:: Function.FREQ
 
 
 
@@ -340,7 +340,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.PERIOD
+    .. py:attribute:: Function.PERIOD
 
 
 
@@ -350,7 +350,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.TEMPERATURE
+    .. py:attribute:: Function.TEMPERATURE
 
 
 
@@ -360,7 +360,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.AC_VOLTS_DC_COUPLED
+    .. py:attribute:: Function.AC_VOLTS_DC_COUPLED
 
 
 
@@ -370,7 +370,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.DIODE
+    .. py:attribute:: Function.DIODE
 
 
 
@@ -380,7 +380,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.WAVEFORM_VOLTAGE
+    .. py:attribute:: Function.WAVEFORM_VOLTAGE
 
 
 
@@ -390,7 +390,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.WAVEFORM_CURRENT
+    .. py:attribute:: Function.WAVEFORM_CURRENT
 
 
 
@@ -400,7 +400,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.CAPACITANCE
+    .. py:attribute:: Function.CAPACITANCE
 
 
 
@@ -410,7 +410,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function.INDUCTANCE
+    .. py:attribute:: Function.INDUCTANCE
 
 
 
@@ -423,7 +423,7 @@ Enums used in NI-DMM
 
 .. py:data:: LCCalculationModel
 
-    .. py:attribute:: nidmm.LCCalculationModel.AUTO
+    .. py:attribute:: LCCalculationModel.AUTO
 
 
 
@@ -433,7 +433,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.LCCalculationModel.SERIES
+    .. py:attribute:: LCCalculationModel.SERIES
 
 
 
@@ -443,7 +443,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.LCCalculationModel.PARALLEL
+    .. py:attribute:: LCCalculationModel.PARALLEL
 
 
 
@@ -456,7 +456,7 @@ Enums used in NI-DMM
 
 .. py:data:: MeasurementCompleteDest
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.NONE
+    .. py:attribute:: MeasurementCompleteDest.NONE
 
 
 
@@ -466,7 +466,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.EXTERNAL
+    .. py:attribute:: MeasurementCompleteDest.EXTERNAL
 
 
 
@@ -476,7 +476,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG0
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG0
 
 
 
@@ -486,7 +486,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG1
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG1
 
 
 
@@ -496,7 +496,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG2
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG2
 
 
 
@@ -506,7 +506,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG3
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG3
 
 
 
@@ -516,7 +516,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG4
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG4
 
 
 
@@ -526,7 +526,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG5
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG5
 
 
 
@@ -536,7 +536,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG6
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG6
 
 
 
@@ -546,7 +546,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.PXI_TRIG7
+    .. py:attribute:: MeasurementCompleteDest.PXI_TRIG7
 
 
 
@@ -556,7 +556,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest.LBR_TRIG0
+    .. py:attribute:: MeasurementCompleteDest.LBR_TRIG0
 
 
 
@@ -569,7 +569,7 @@ Enums used in NI-DMM
 
 .. py:data:: MeasurementDestinationSlope
 
-    .. py:attribute:: nidmm.MeasurementDestinationSlope.POSITIVE
+    .. py:attribute:: MeasurementDestinationSlope.POSITIVE
 
 
 
@@ -579,7 +579,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementDestinationSlope.NEGATIVE
+    .. py:attribute:: MeasurementDestinationSlope.NEGATIVE
 
 
 
@@ -592,7 +592,7 @@ Enums used in NI-DMM
 
 .. py:data:: OffsetCompensatedOhms
 
-    .. py:attribute:: nidmm.OffsetCompensatedOhms.OFF
+    .. py:attribute:: OffsetCompensatedOhms.OFF
 
 
 
@@ -602,7 +602,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.OffsetCompensatedOhms.ON
+    .. py:attribute:: OffsetCompensatedOhms.ON
 
 
 
@@ -615,7 +615,7 @@ Enums used in NI-DMM
 
 .. py:data:: OperationMode
 
-    .. py:attribute:: nidmm.OperationMode.IVIDMM
+    .. py:attribute:: OperationMode.IVIDMM
 
 
 
@@ -625,7 +625,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.OperationMode.WAVEFORM
+    .. py:attribute:: OperationMode.WAVEFORM
 
 
 
@@ -638,7 +638,7 @@ Enums used in NI-DMM
 
 .. py:data:: RTDType
 
-    .. py:attribute:: nidmm.RTDType.CUSTOM
+    .. py:attribute:: RTDType.CUSTOM
 
 
 
@@ -649,7 +649,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3750
+    .. py:attribute:: RTDType.PT3750
 
 
 
@@ -659,7 +659,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3851
+    .. py:attribute:: RTDType.PT3851
 
 
 
@@ -669,7 +669,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3911
+    .. py:attribute:: RTDType.PT3911
 
 
 
@@ -679,7 +679,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3916
+    .. py:attribute:: RTDType.PT3916
 
 
 
@@ -689,7 +689,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3920
+    .. py:attribute:: RTDType.PT3920
 
 
 
@@ -699,7 +699,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.PT3928
+    .. py:attribute:: RTDType.PT3928
 
 
 
@@ -712,7 +712,7 @@ Enums used in NI-DMM
 
 .. py:data:: SampleTrigSlope
 
-    .. py:attribute:: nidmm.SampleTrigSlope.POSITIVE
+    .. py:attribute:: SampleTrigSlope.POSITIVE
 
 
 
@@ -722,7 +722,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigSlope.NEGATIVE
+    .. py:attribute:: SampleTrigSlope.NEGATIVE
 
 
 
@@ -735,7 +735,7 @@ Enums used in NI-DMM
 
 .. py:data:: SampleTrigger
 
-    .. py:attribute:: nidmm.SampleTrigger.IMMEDIATE
+    .. py:attribute:: SampleTrigger.IMMEDIATE
 
 
 
@@ -745,7 +745,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.EXTERNAL
+    .. py:attribute:: SampleTrigger.EXTERNAL
 
 
 
@@ -755,7 +755,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.SOFTWARE_TRIG
+    .. py:attribute:: SampleTrigger.SOFTWARE_TRIG
 
 
 
@@ -765,7 +765,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.INTERVAL
+    .. py:attribute:: SampleTrigger.INTERVAL
 
 
 
@@ -775,7 +775,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG0
+    .. py:attribute:: SampleTrigger.PXI_TRIG0
 
 
 
@@ -785,7 +785,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG1
+    .. py:attribute:: SampleTrigger.PXI_TRIG1
 
 
 
@@ -795,7 +795,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG2
+    .. py:attribute:: SampleTrigger.PXI_TRIG2
 
 
 
@@ -805,7 +805,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG3
+    .. py:attribute:: SampleTrigger.PXI_TRIG3
 
 
 
@@ -815,7 +815,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG4
+    .. py:attribute:: SampleTrigger.PXI_TRIG4
 
 
 
@@ -825,7 +825,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG5
+    .. py:attribute:: SampleTrigger.PXI_TRIG5
 
 
 
@@ -835,7 +835,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG6
+    .. py:attribute:: SampleTrigger.PXI_TRIG6
 
 
 
@@ -845,7 +845,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_TRIG7
+    .. py:attribute:: SampleTrigger.PXI_TRIG7
 
 
 
@@ -855,7 +855,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.PXI_STAR
+    .. py:attribute:: SampleTrigger.PXI_STAR
 
 
 
@@ -865,7 +865,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.AUX_TRIG1
+    .. py:attribute:: SampleTrigger.AUX_TRIG1
 
 
 
@@ -875,7 +875,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger.LBR_TRIG1
+    .. py:attribute:: SampleTrigger.LBR_TRIG1
 
 
 
@@ -888,7 +888,7 @@ Enums used in NI-DMM
 
 .. py:data:: ThermistorType
 
-    .. py:attribute:: nidmm.ThermistorType.CUSTOM
+    .. py:attribute:: ThermistorType.CUSTOM
 
 
 
@@ -898,7 +898,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType._44004
+    .. py:attribute:: ThermistorType._44004
 
 
 
@@ -908,7 +908,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType._44006
+    .. py:attribute:: ThermistorType._44006
 
 
 
@@ -918,7 +918,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType._44007
+    .. py:attribute:: ThermistorType._44007
 
 
 
@@ -931,7 +931,7 @@ Enums used in NI-DMM
 
 .. py:data:: ThermocoupleReferenceJunctionType
 
-    .. py:attribute:: nidmm.ThermocoupleReferenceJunctionType.FIXED
+    .. py:attribute:: ThermocoupleReferenceJunctionType.FIXED
 
 
 
@@ -945,7 +945,7 @@ Enums used in NI-DMM
 
 .. py:data:: ThermocoupleType
 
-    .. py:attribute:: nidmm.ThermocoupleType.B
+    .. py:attribute:: ThermocoupleType.B
 
 
 
@@ -955,7 +955,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.E
+    .. py:attribute:: ThermocoupleType.E
 
 
 
@@ -965,7 +965,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.J
+    .. py:attribute:: ThermocoupleType.J
 
 
 
@@ -975,7 +975,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.K
+    .. py:attribute:: ThermocoupleType.K
 
 
 
@@ -985,7 +985,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.N
+    .. py:attribute:: ThermocoupleType.N
 
 
 
@@ -995,7 +995,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.R
+    .. py:attribute:: ThermocoupleType.R
 
 
 
@@ -1005,7 +1005,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.S
+    .. py:attribute:: ThermocoupleType.S
 
 
 
@@ -1015,7 +1015,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.T
+    .. py:attribute:: ThermocoupleType.T
 
 
 
@@ -1028,7 +1028,7 @@ Enums used in NI-DMM
 
 .. py:data:: TransducerType
 
-    .. py:attribute:: nidmm.TransducerType.THERMOCOUPLE
+    .. py:attribute:: TransducerType.THERMOCOUPLE
 
 
 
@@ -1038,7 +1038,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TransducerType.THERMISTOR
+    .. py:attribute:: TransducerType.THERMISTOR
 
 
 
@@ -1048,7 +1048,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TransducerType._2_WIRE_RTD
+    .. py:attribute:: TransducerType._2_WIRE_RTD
 
 
 
@@ -1058,7 +1058,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TransducerType._4_WIRE_RTD
+    .. py:attribute:: TransducerType._4_WIRE_RTD
 
 
 
@@ -1071,7 +1071,7 @@ Enums used in NI-DMM
 
 .. py:data:: TriggerSlope
 
-    .. py:attribute:: nidmm.TriggerSlope.POSITIVE
+    .. py:attribute:: TriggerSlope.POSITIVE
 
 
 
@@ -1081,7 +1081,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSlope.NEGATIVE
+    .. py:attribute:: TriggerSlope.NEGATIVE
 
 
 
@@ -1094,7 +1094,7 @@ Enums used in NI-DMM
 
 .. py:data:: TriggerSource
 
-    .. py:attribute:: nidmm.TriggerSource.IMMEDIATE
+    .. py:attribute:: TriggerSource.IMMEDIATE
 
 
 
@@ -1104,7 +1104,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.EXTERNAL
+    .. py:attribute:: TriggerSource.EXTERNAL
 
 
 
@@ -1114,7 +1114,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.SOFTWARE_TRIG
+    .. py:attribute:: TriggerSource.SOFTWARE_TRIG
 
 
 
@@ -1124,7 +1124,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG0
+    .. py:attribute:: TriggerSource.PXI_TRIG0
 
 
 
@@ -1134,7 +1134,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG1
+    .. py:attribute:: TriggerSource.PXI_TRIG1
 
 
 
@@ -1144,7 +1144,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG2
+    .. py:attribute:: TriggerSource.PXI_TRIG2
 
 
 
@@ -1154,7 +1154,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG3
+    .. py:attribute:: TriggerSource.PXI_TRIG3
 
 
 
@@ -1164,7 +1164,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG4
+    .. py:attribute:: TriggerSource.PXI_TRIG4
 
 
 
@@ -1174,7 +1174,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG5
+    .. py:attribute:: TriggerSource.PXI_TRIG5
 
 
 
@@ -1184,7 +1184,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG6
+    .. py:attribute:: TriggerSource.PXI_TRIG6
 
 
 
@@ -1194,7 +1194,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_TRIG7
+    .. py:attribute:: TriggerSource.PXI_TRIG7
 
 
 
@@ -1204,7 +1204,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.PXI_STAR
+    .. py:attribute:: TriggerSource.PXI_STAR
 
 
 
@@ -1214,7 +1214,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.AUX_TRIG1
+    .. py:attribute:: TriggerSource.AUX_TRIG1
 
 
 
@@ -1224,7 +1224,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource.LBR_TRIG1
+    .. py:attribute:: TriggerSource.LBR_TRIG1
 
 
 
@@ -1237,7 +1237,7 @@ Enums used in NI-DMM
 
 .. py:data:: WaveformCoupling
 
-    .. py:attribute:: nidmm.WaveformCoupling.AC
+    .. py:attribute:: WaveformCoupling.AC
 
 
 
@@ -1247,7 +1247,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.WaveformCoupling.DC
+    .. py:attribute:: WaveformCoupling.DC
 
 
 

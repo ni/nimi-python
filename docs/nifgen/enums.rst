@@ -9,7 +9,7 @@ Enums used in NI-FGEN
 
 .. py:data:: AnalogPath
 
-    .. py:attribute:: nifgen.AnalogPath.MAIN
+    .. py:attribute:: AnalogPath.MAIN
 
 
 
@@ -19,7 +19,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.DIRECT
+    .. py:attribute:: AnalogPath.DIRECT
 
 
 
@@ -29,7 +29,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.FIXED_LOW_GAIN
+    .. py:attribute:: AnalogPath.FIXED_LOW_GAIN
 
 
 
@@ -39,7 +39,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.FIXED_HIGH_GAIN
+    .. py:attribute:: AnalogPath.FIXED_HIGH_GAIN
 
 
 
@@ -52,7 +52,7 @@ Enums used in NI-FGEN
 
 .. py:data:: BusType
 
-    .. py:attribute:: nifgen.BusType.INVALID
+    .. py:attribute:: BusType.INVALID
 
 
 
@@ -62,7 +62,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.AT
+    .. py:attribute:: BusType.AT
 
 
 
@@ -72,7 +72,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.PCI
+    .. py:attribute:: BusType.PCI
 
 
 
@@ -82,7 +82,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.PXI
+    .. py:attribute:: BusType.PXI
 
 
 
@@ -92,7 +92,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.VXI
+    .. py:attribute:: BusType.VXI
 
 
 
@@ -102,7 +102,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.PCMCIA
+    .. py:attribute:: BusType.PCMCIA
 
 
 
@@ -112,7 +112,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.PXIE
+    .. py:attribute:: BusType.PXIE
 
 
 
@@ -125,18 +125,18 @@ Enums used in NI-FGEN
 
 .. py:data:: ByteOrder
 
-    .. py:attribute:: nifgen.ByteOrder.LITTLE
+    .. py:attribute:: ByteOrder.LITTLE
 
 
 
-    .. py:attribute:: nifgen.ByteOrder.BIG
+    .. py:attribute:: ByteOrder.BIG
 
 
 
 
 .. py:data:: CalADCInput
 
-    .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT
+    .. py:attribute:: CalADCInput.ANALOG_OUTPUT
 
 
 
@@ -146,7 +146,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.INTERNAL_VOLTAGE_REFERENCE
+    .. py:attribute:: CalADCInput.INTERNAL_VOLTAGE_REFERENCE
 
 
 
@@ -156,7 +156,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.GROUND
+    .. py:attribute:: CalADCInput.GROUND
 
 
 
@@ -166,7 +166,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT_DIFFERENTIAL
+    .. py:attribute:: CalADCInput.ANALOG_OUTPUT_DIFFERENTIAL
 
 
 
@@ -176,7 +176,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT_PLUS
+    .. py:attribute:: CalADCInput.ANALOG_OUTPUT_PLUS
 
 
 
@@ -186,7 +186,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT_MINUS
+    .. py:attribute:: CalADCInput.ANALOG_OUTPUT_MINUS
 
 
 
@@ -196,7 +196,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.CalADCInput.ANALOG_OUTPUT_IDLE
+    .. py:attribute:: CalADCInput.ANALOG_OUTPUT_IDLE
 
 
 
@@ -209,7 +209,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ClockMode
 
-    .. py:attribute:: nifgen.ClockMode.HIGH_RESOLUTION
+    .. py:attribute:: ClockMode.HIGH_RESOLUTION
 
 
 
@@ -219,7 +219,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ClockMode.DIVIDE_DOWN
+    .. py:attribute:: ClockMode.DIVIDE_DOWN
 
 
 
@@ -229,7 +229,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ClockMode.AUTOMATIC
+    .. py:attribute:: ClockMode.AUTOMATIC
 
 
 
@@ -242,7 +242,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DataMarkerEventLevelPolarity
 
-    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.HIGH
+    .. py:attribute:: DataMarkerEventLevelPolarity.HIGH
 
 
 
@@ -252,7 +252,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.LOW
+    .. py:attribute:: DataMarkerEventLevelPolarity.LOW
 
 
 
@@ -265,7 +265,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DataProcessingMode
 
-    .. py:attribute:: nifgen.DataProcessingMode.REAL
+    .. py:attribute:: DataProcessingMode.REAL
 
 
 
@@ -275,7 +275,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DataProcessingMode.COMPLEX
+    .. py:attribute:: DataProcessingMode.COMPLEX
 
 
 
@@ -288,7 +288,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventActiveLevel
 
-    .. py:attribute:: nifgen.DoneEventActiveLevel.HIGH
+    .. py:attribute:: DoneEventActiveLevel.HIGH
 
 
 
@@ -298,7 +298,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventActiveLevel.LOW
+    .. py:attribute:: DoneEventActiveLevel.LOW
 
 
 
@@ -311,7 +311,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventDelayUnits
 
-    .. py:attribute:: nifgen.DoneEventDelayUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: DoneEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -321,7 +321,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventDelayUnits.SECONDS
+    .. py:attribute:: DoneEventDelayUnits.SECONDS
 
 
 
@@ -334,7 +334,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventOutputBehavior
 
-    .. py:attribute:: nifgen.DoneEventOutputBehavior.PULSE
+    .. py:attribute:: DoneEventOutputBehavior.PULSE
 
 
 
@@ -344,7 +344,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventOutputBehavior.LEVEL
+    .. py:attribute:: DoneEventOutputBehavior.LEVEL
 
 
 
@@ -357,7 +357,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventPulsePolarity
 
-    .. py:attribute:: nifgen.DoneEventPulsePolarity.HIGH
+    .. py:attribute:: DoneEventPulsePolarity.HIGH
 
 
 
@@ -367,7 +367,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventPulsePolarity.LOW
+    .. py:attribute:: DoneEventPulsePolarity.LOW
 
 
 
@@ -380,7 +380,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventPulseWidthUnits
 
-    .. py:attribute:: nifgen.DoneEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: DoneEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -390,7 +390,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventPulseWidthUnits.SECONDS
+    .. py:attribute:: DoneEventPulseWidthUnits.SECONDS
 
 
 
@@ -403,7 +403,7 @@ Enums used in NI-FGEN
 
 .. py:data:: FilterType
 
-    .. py:attribute:: nifgen.FilterType.FLAT
+    .. py:attribute:: FilterType.FLAT
 
 
 
@@ -413,7 +413,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.RAISED_COSINE
+    .. py:attribute:: FilterType.RAISED_COSINE
 
 
 
@@ -423,7 +423,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.ROOT_RAISED_COSINE
+    .. py:attribute:: FilterType.ROOT_RAISED_COSINE
 
 
 
@@ -433,7 +433,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.GAUSSIAN
+    .. py:attribute:: FilterType.GAUSSIAN
 
 
 
@@ -443,7 +443,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.CUSTOM
+    .. py:attribute:: FilterType.CUSTOM
 
 
 
@@ -456,30 +456,30 @@ Enums used in NI-FGEN
 
 .. py:data:: HardwareState
 
-    .. py:attribute:: nifgen.HardwareState.IDLE
+    .. py:attribute:: HardwareState.IDLE
 
 
 
-    .. py:attribute:: nifgen.HardwareState.WAITING_FOR_START_TRIGGER
+    .. py:attribute:: HardwareState.WAITING_FOR_START_TRIGGER
 
 
 
-    .. py:attribute:: nifgen.HardwareState.RUNNING
+    .. py:attribute:: HardwareState.RUNNING
 
 
 
-    .. py:attribute:: nifgen.HardwareState.DONE
+    .. py:attribute:: HardwareState.DONE
 
 
 
-    .. py:attribute:: nifgen.HardwareState.HARDWARE_ERROR
+    .. py:attribute:: HardwareState.HARDWARE_ERROR
 
 
 
 
 .. py:data:: IdleBehavior
 
-    .. py:attribute:: nifgen.IdleBehavior.HOLD_LAST
+    .. py:attribute:: IdleBehavior.HOLD_LAST
 
 
 
@@ -489,7 +489,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.IdleBehavior.JUMP_TO
+    .. py:attribute:: IdleBehavior.JUMP_TO
 
 
 
@@ -502,7 +502,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventDelayUnits
 
-    .. py:attribute:: nifgen.MarkerEventDelayUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: MarkerEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -512,7 +512,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventDelayUnits.SECONDS
+    .. py:attribute:: MarkerEventDelayUnits.SECONDS
 
 
 
@@ -525,7 +525,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventOutputBehavior
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.PULSE
+    .. py:attribute:: MarkerEventOutputBehavior.PULSE
 
 
 
@@ -535,7 +535,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.LEVEL
+    .. py:attribute:: MarkerEventOutputBehavior.LEVEL
 
 
 
@@ -545,7 +545,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventOutputBehavior.TOGGLE
+    .. py:attribute:: MarkerEventOutputBehavior.TOGGLE
 
 
 
@@ -559,7 +559,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventPulsePolarity
 
-    .. py:attribute:: nifgen.MarkerEventPulsePolarity.HIGH
+    .. py:attribute:: MarkerEventPulsePolarity.HIGH
 
 
 
@@ -569,7 +569,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventPulsePolarity.LOW
+    .. py:attribute:: MarkerEventPulsePolarity.LOW
 
 
 
@@ -582,7 +582,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventPulseWidthUnits
 
-    .. py:attribute:: nifgen.MarkerEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: MarkerEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -592,7 +592,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventPulseWidthUnits.SECONDS
+    .. py:attribute:: MarkerEventPulseWidthUnits.SECONDS
 
 
 
@@ -605,7 +605,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventToggleInitialState
 
-    .. py:attribute:: nifgen.MarkerEventToggleInitialState.HIGH
+    .. py:attribute:: MarkerEventToggleInitialState.HIGH
 
 
 
@@ -615,7 +615,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventToggleInitialState.LOW
+    .. py:attribute:: MarkerEventToggleInitialState.LOW
 
 
 
@@ -628,7 +628,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OSPMode
 
-    .. py:attribute:: nifgen.OSPMode.IF
+    .. py:attribute:: OSPMode.IF
 
 
 
@@ -638,7 +638,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OSPMode.BASEBAND
+    .. py:attribute:: OSPMode.BASEBAND
 
 
 
@@ -651,7 +651,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OSPOverflowErrorReporting
 
-    .. py:attribute:: nifgen.OSPOverflowErrorReporting.ERROR
+    .. py:attribute:: OSPOverflowErrorReporting.ERROR
 
 
 
@@ -661,7 +661,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OSPOverflowErrorReporting.DISABLED
+    .. py:attribute:: OSPOverflowErrorReporting.DISABLED
 
 
 
@@ -674,7 +674,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OutputMode
 
-    .. py:attribute:: nifgen.OutputMode.FUNC
+    .. py:attribute:: OutputMode.FUNC
 
 
 
@@ -684,7 +684,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.ARB
+    .. py:attribute:: OutputMode.ARB
 
 
 
@@ -694,7 +694,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.SEQ
+    .. py:attribute:: OutputMode.SEQ
 
 
 
@@ -704,7 +704,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.FREQ_LIST
+    .. py:attribute:: OutputMode.FREQ_LIST
 
 
 
@@ -714,7 +714,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.SCRIPT
+    .. py:attribute:: OutputMode.SCRIPT
 
 
 
@@ -728,7 +728,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ReadyForStartEventActiveLevel
 
-    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.HIGH
+    .. py:attribute:: ReadyForStartEventActiveLevel.HIGH
 
 
 
@@ -738,7 +738,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.LOW
+    .. py:attribute:: ReadyForStartEventActiveLevel.LOW
 
 
 
@@ -751,7 +751,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ReferenceClockSource
 
-    .. py:attribute:: nifgen.ReferenceClockSource.CLOCK_IN
+    .. py:attribute:: ReferenceClockSource.CLOCK_IN
 
 
 
@@ -762,7 +762,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReferenceClockSource.NONE
+    .. py:attribute:: ReferenceClockSource.NONE
 
 
 
@@ -772,7 +772,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReferenceClockSource.ONBOARD_REFERENCE_CLOCK
+    .. py:attribute:: ReferenceClockSource.ONBOARD_REFERENCE_CLOCK
 
 
 
@@ -783,7 +783,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReferenceClockSource.PXI_CLOCK
+    .. py:attribute:: ReferenceClockSource.PXI_CLOCK
 
 
 
@@ -793,7 +793,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReferenceClockSource.RTSI_7
+    .. py:attribute:: ReferenceClockSource.RTSI_7
 
 
 
@@ -806,18 +806,18 @@ Enums used in NI-FGEN
 
 .. py:data:: RelativeTo
 
-    .. py:attribute:: nifgen.RelativeTo.START
+    .. py:attribute:: RelativeTo.START
 
 
 
-    .. py:attribute:: nifgen.RelativeTo.CURRENT
+    .. py:attribute:: RelativeTo.CURRENT
 
 
 
 
 .. py:data:: SampleClockSource
 
-    .. py:attribute:: nifgen.SampleClockSource.CLOCK_IN
+    .. py:attribute:: SampleClockSource.CLOCK_IN
 
 
 
@@ -828,7 +828,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.DDC_CLOCK_IN
+    .. py:attribute:: SampleClockSource.DDC_CLOCK_IN
 
 
 
@@ -839,7 +839,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.ONBOARD_CLOCK
+    .. py:attribute:: SampleClockSource.ONBOARD_CLOCK
 
 
 
@@ -849,7 +849,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_STAR_LINE
+    .. py:attribute:: SampleClockSource.PXI_STAR_LINE
 
 
 
@@ -860,7 +860,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_0RTSI_0
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_0RTSI_0
 
 
 
@@ -871,7 +871,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_1RTSI_1
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_1RTSI_1
 
 
 
@@ -882,7 +882,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_2RTSI_2
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_2RTSI_2
 
 
 
@@ -893,7 +893,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_3RTSI_3
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_3RTSI_3
 
 
 
@@ -904,7 +904,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_4RTSI_4
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_4RTSI_4
 
 
 
@@ -915,7 +915,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_5RTSI_5
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_5RTSI_5
 
 
 
@@ -926,7 +926,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_6RTSI_6
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_6RTSI_6
 
 
 
@@ -937,7 +937,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockSource.PXI_TRIGGER_LINE_7RTSI_7
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_7RTSI_7
 
 
 
@@ -951,7 +951,7 @@ Enums used in NI-FGEN
 
 .. py:data:: SampleClockTimebaseSource
 
-    .. py:attribute:: nifgen.SampleClockTimebaseSource.CLOCK_IN
+    .. py:attribute:: SampleClockTimebaseSource.CLOCK_IN
 
 
 
@@ -962,7 +962,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SampleClockTimebaseSource.ONBOARD_CLOCK
+    .. py:attribute:: SampleClockTimebaseSource.ONBOARD_CLOCK
 
 
 
@@ -975,7 +975,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ScriptTriggerDigitalEdgeEdge
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.RISING
+    .. py:attribute:: ScriptTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -985,7 +985,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.FALLING
+    .. py:attribute:: ScriptTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -998,7 +998,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ScriptTriggerDigitalLevelActiveLevel
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.HIGH
+    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
 
 
 
@@ -1008,7 +1008,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.LOW
+    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.LOW
 
 
 
@@ -1021,7 +1021,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ScriptTriggerType
 
-    .. py:attribute:: nifgen.ScriptTriggerType.TRIG_NONE
+    .. py:attribute:: ScriptTriggerType.TRIG_NONE
 
 
 
@@ -1031,7 +1031,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerType.DIGITAL_EDGE
+    .. py:attribute:: ScriptTriggerType.DIGITAL_EDGE
 
 
 
@@ -1041,7 +1041,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerType.DIGITAL_LEVEL
+    .. py:attribute:: ScriptTriggerType.DIGITAL_LEVEL
 
 
 
@@ -1051,7 +1051,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerType.SOFTWARE_EDGE
+    .. py:attribute:: ScriptTriggerType.SOFTWARE_EDGE
 
 
 
@@ -1064,62 +1064,62 @@ Enums used in NI-FGEN
 
 .. py:data:: Signal
 
-    .. py:attribute:: nifgen.Signal.ONBOARD_REFERENCE_CLOCK
+    .. py:attribute:: Signal.ONBOARD_REFERENCE_CLOCK
 
 
 
-    .. py:attribute:: nifgen.Signal.SYNC_OUT
+    .. py:attribute:: Signal.SYNC_OUT
 
 
 
-    .. py:attribute:: nifgen.Signal.START_TRIGGER
+    .. py:attribute:: Signal.START_TRIGGER
 
 
 
-    .. py:attribute:: nifgen.Signal.MARKER_EVENT
+    .. py:attribute:: Signal.MARKER_EVENT
 
 
 
-    .. py:attribute:: nifgen.Signal.SAMPLE_CLOCK_TIMEBASE
+    .. py:attribute:: Signal.SAMPLE_CLOCK_TIMEBASE
 
 
 
-    .. py:attribute:: nifgen.Signal.SYNCHRONIZATION
+    .. py:attribute:: Signal.SYNCHRONIZATION
 
 
 
-    .. py:attribute:: nifgen.Signal.SAMPLE_CLOCK
+    .. py:attribute:: Signal.SAMPLE_CLOCK
 
 
 
-    .. py:attribute:: nifgen.Signal.REFERENCE_CLOCK
+    .. py:attribute:: Signal.REFERENCE_CLOCK
 
 
 
-    .. py:attribute:: nifgen.Signal.SCRIPT_TRIGGER
+    .. py:attribute:: Signal.SCRIPT_TRIGGER
 
 
 
-    .. py:attribute:: nifgen.Signal.READY_FOR_START_EVENT
+    .. py:attribute:: Signal.READY_FOR_START_EVENT
 
 
 
-    .. py:attribute:: nifgen.Signal.STARTED_EVENT
+    .. py:attribute:: Signal.STARTED_EVENT
 
 
 
-    .. py:attribute:: nifgen.Signal.DONE_EVENT
+    .. py:attribute:: Signal.DONE_EVENT
 
 
 
-    .. py:attribute:: nifgen.Signal.DATA_MARKER_EVENT
+    .. py:attribute:: Signal.DATA_MARKER_EVENT
 
 
 
 
 .. py:data:: StartTriggerDigitalEdgeEdge
 
-    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.RISING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -1129,7 +1129,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.FALLING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -1142,7 +1142,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartTriggerType
 
-    .. py:attribute:: nifgen.StartTriggerType.TRIG_NONE
+    .. py:attribute:: StartTriggerType.TRIG_NONE
 
 
 
@@ -1152,7 +1152,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartTriggerType.DIGITAL_EDGE
+    .. py:attribute:: StartTriggerType.DIGITAL_EDGE
 
 
 
@@ -1162,7 +1162,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartTriggerType.SOFTWARE_EDGE
+    .. py:attribute:: StartTriggerType.SOFTWARE_EDGE
 
 
 
@@ -1172,7 +1172,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartTriggerType.P2P_ENDPOINT_FULLNESS
+    .. py:attribute:: StartTriggerType.P2P_ENDPOINT_FULLNESS
 
 
 
@@ -1185,7 +1185,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventActiveLevel
 
-    .. py:attribute:: nifgen.StartedEventActiveLevel.HIGH
+    .. py:attribute:: StartedEventActiveLevel.HIGH
 
 
 
@@ -1195,7 +1195,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventActiveLevel.LOW
+    .. py:attribute:: StartedEventActiveLevel.LOW
 
 
 
@@ -1208,7 +1208,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventDelayUnits
 
-    .. py:attribute:: nifgen.StartedEventDelayUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: StartedEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -1218,7 +1218,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventDelayUnits.SECONDS
+    .. py:attribute:: StartedEventDelayUnits.SECONDS
 
 
 
@@ -1231,7 +1231,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventOutputBehavior
 
-    .. py:attribute:: nifgen.StartedEventOutputBehavior.PULSE
+    .. py:attribute:: StartedEventOutputBehavior.PULSE
 
 
 
@@ -1241,7 +1241,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventOutputBehavior.LEVEL
+    .. py:attribute:: StartedEventOutputBehavior.LEVEL
 
 
 
@@ -1254,7 +1254,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventPulsePolarity
 
-    .. py:attribute:: nifgen.StartedEventPulsePolarity.HIGH
+    .. py:attribute:: StartedEventPulsePolarity.HIGH
 
 
 
@@ -1264,7 +1264,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventPulsePolarity.LOW
+    .. py:attribute:: StartedEventPulsePolarity.LOW
 
 
 
@@ -1277,7 +1277,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventPulseWidthUnits
 
-    .. py:attribute:: nifgen.StartedEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: StartedEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -1287,7 +1287,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventPulseWidthUnits.SECONDS
+    .. py:attribute:: StartedEventPulseWidthUnits.SECONDS
 
 
 
@@ -1300,7 +1300,7 @@ Enums used in NI-FGEN
 
 .. py:data:: SynchronizationSource
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL0
+    .. py:attribute:: SynchronizationSource.TTL0
 
 
 
@@ -1310,7 +1310,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL1
+    .. py:attribute:: SynchronizationSource.TTL1
 
 
 
@@ -1320,7 +1320,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL2
+    .. py:attribute:: SynchronizationSource.TTL2
 
 
 
@@ -1330,7 +1330,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL3
+    .. py:attribute:: SynchronizationSource.TTL3
 
 
 
@@ -1340,7 +1340,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL4
+    .. py:attribute:: SynchronizationSource.TTL4
 
 
 
@@ -1350,7 +1350,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL5
+    .. py:attribute:: SynchronizationSource.TTL5
 
 
 
@@ -1360,7 +1360,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.TTL6
+    .. py:attribute:: SynchronizationSource.TTL6
 
 
 
@@ -1370,7 +1370,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_0
+    .. py:attribute:: SynchronizationSource.RTSI_0
 
 
 
@@ -1380,7 +1380,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_1
+    .. py:attribute:: SynchronizationSource.RTSI_1
 
 
 
@@ -1390,7 +1390,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_2
+    .. py:attribute:: SynchronizationSource.RTSI_2
 
 
 
@@ -1400,7 +1400,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_3
+    .. py:attribute:: SynchronizationSource.RTSI_3
 
 
 
@@ -1410,7 +1410,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_4
+    .. py:attribute:: SynchronizationSource.RTSI_4
 
 
 
@@ -1420,7 +1420,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_5
+    .. py:attribute:: SynchronizationSource.RTSI_5
 
 
 
@@ -1430,7 +1430,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.RTSI_6
+    .. py:attribute:: SynchronizationSource.RTSI_6
 
 
 
@@ -1440,7 +1440,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.SynchronizationSource.NONE
+    .. py:attribute:: SynchronizationSource.NONE
 
 
 
@@ -1453,7 +1453,7 @@ Enums used in NI-FGEN
 
 .. py:data:: TerminalConfiguration
 
-    .. py:attribute:: nifgen.TerminalConfiguration.SINGLE_ENDED
+    .. py:attribute:: TerminalConfiguration.SINGLE_ENDED
 
 
 
@@ -1463,7 +1463,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TerminalConfiguration.DIFFERENTIAL
+    .. py:attribute:: TerminalConfiguration.DIFFERENTIAL
 
 
 
@@ -1476,18 +1476,18 @@ Enums used in NI-FGEN
 
 .. py:data:: Trigger
 
-    .. py:attribute:: nifgen.Trigger.START
+    .. py:attribute:: Trigger.START
 
 
 
-    .. py:attribute:: nifgen.Trigger.SCRIPT
+    .. py:attribute:: Trigger.SCRIPT
 
 
 
 
 .. py:data:: TriggerMode
 
-    .. py:attribute:: nifgen.TriggerMode.SINGLE
+    .. py:attribute:: TriggerMode.SINGLE
 
 
 
@@ -1497,7 +1497,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerMode.CONTINUOUS
+    .. py:attribute:: TriggerMode.CONTINUOUS
 
 
 
@@ -1507,7 +1507,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerMode.STEPPED
+    .. py:attribute:: TriggerMode.STEPPED
 
 
 
@@ -1520,7 +1520,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerMode.BURST
+    .. py:attribute:: TriggerMode.BURST
 
 
 
@@ -1536,7 +1536,7 @@ Enums used in NI-FGEN
 
 .. py:data:: TriggerSource
 
-    .. py:attribute:: nifgen.TriggerSource.IMMEDIATE
+    .. py:attribute:: TriggerSource.IMMEDIATE
 
 
 
@@ -1546,7 +1546,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.EXTERNAL
+    .. py:attribute:: TriggerSource.EXTERNAL
 
 
 
@@ -1556,7 +1556,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.SOFTWARE_TRIG
+    .. py:attribute:: TriggerSource.SOFTWARE_TRIG
 
 
 
@@ -1566,7 +1566,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL0
+    .. py:attribute:: TriggerSource.TTL0
 
 
 
@@ -1576,7 +1576,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL1
+    .. py:attribute:: TriggerSource.TTL1
 
 
 
@@ -1586,7 +1586,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL2
+    .. py:attribute:: TriggerSource.TTL2
 
 
 
@@ -1596,7 +1596,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL3
+    .. py:attribute:: TriggerSource.TTL3
 
 
 
@@ -1606,7 +1606,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL4
+    .. py:attribute:: TriggerSource.TTL4
 
 
 
@@ -1616,7 +1616,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL5
+    .. py:attribute:: TriggerSource.TTL5
 
 
 
@@ -1626,7 +1626,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.TTL6
+    .. py:attribute:: TriggerSource.TTL6
 
 
 
@@ -1636,7 +1636,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.PXI_STAR
+    .. py:attribute:: TriggerSource.PXI_STAR
 
 
 
@@ -1646,7 +1646,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_0
+    .. py:attribute:: TriggerSource.RTSI_0
 
 
 
@@ -1656,7 +1656,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_1
+    .. py:attribute:: TriggerSource.RTSI_1
 
 
 
@@ -1666,7 +1666,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_2
+    .. py:attribute:: TriggerSource.RTSI_2
 
 
 
@@ -1676,7 +1676,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_3
+    .. py:attribute:: TriggerSource.RTSI_3
 
 
 
@@ -1686,7 +1686,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_4
+    .. py:attribute:: TriggerSource.RTSI_4
 
 
 
@@ -1696,7 +1696,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_5
+    .. py:attribute:: TriggerSource.RTSI_5
 
 
 
@@ -1706,7 +1706,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_6
+    .. py:attribute:: TriggerSource.RTSI_6
 
 
 
@@ -1716,7 +1716,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.RTSI_7
+    .. py:attribute:: TriggerSource.RTSI_7
 
 
 
@@ -1726,7 +1726,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.PFI_0
+    .. py:attribute:: TriggerSource.PFI_0
 
 
 
@@ -1736,7 +1736,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.PFI_1
+    .. py:attribute:: TriggerSource.PFI_1
 
 
 
@@ -1746,7 +1746,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.PFI_2
+    .. py:attribute:: TriggerSource.PFI_2
 
 
 
@@ -1756,7 +1756,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.PFI_3
+    .. py:attribute:: TriggerSource.PFI_3
 
 
 
@@ -1766,7 +1766,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.TriggerSource.OTHER_TERMINAL
+    .. py:attribute:: TriggerSource.OTHER_TERMINAL
 
 
 
@@ -1779,18 +1779,18 @@ Enums used in NI-FGEN
 
 .. py:data:: TriggerWhen
 
-    .. py:attribute:: nifgen.TriggerWhen.HIGH
+    .. py:attribute:: TriggerWhen.HIGH
 
 
 
-    .. py:attribute:: nifgen.TriggerWhen.LOW
+    .. py:attribute:: TriggerWhen.LOW
 
 
 
 
 .. py:data:: VideoWaveformType
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_B
+    .. py:attribute:: VideoWaveformType.PAL_B
 
 
 
@@ -1800,7 +1800,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_D
+    .. py:attribute:: VideoWaveformType.PAL_D
 
 
 
@@ -1810,7 +1810,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_G
+    .. py:attribute:: VideoWaveformType.PAL_G
 
 
 
@@ -1820,7 +1820,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_H
+    .. py:attribute:: VideoWaveformType.PAL_H
 
 
 
@@ -1830,7 +1830,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_I
+    .. py:attribute:: VideoWaveformType.PAL_I
 
 
 
@@ -1840,7 +1840,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_M
+    .. py:attribute:: VideoWaveformType.PAL_M
 
 
 
@@ -1850,7 +1850,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.PAL_N
+    .. py:attribute:: VideoWaveformType.PAL_N
 
 
 
@@ -1860,7 +1860,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.VideoWaveformType.NTSC_M
+    .. py:attribute:: VideoWaveformType.NTSC_M
 
 
 
@@ -1873,7 +1873,7 @@ Enums used in NI-FGEN
 
 .. py:data:: WaitBehavior
 
-    .. py:attribute:: nifgen.WaitBehavior.HOLD_LAST
+    .. py:attribute:: WaitBehavior.HOLD_LAST
 
 
 
@@ -1883,7 +1883,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.WaitBehavior.JUMP_TO
+    .. py:attribute:: WaitBehavior.JUMP_TO
 
 
 
@@ -1896,7 +1896,7 @@ Enums used in NI-FGEN
 
 .. py:data:: Waveform
 
-    .. py:attribute:: nifgen.Waveform.SINE
+    .. py:attribute:: Waveform.SINE
 
 
 
@@ -1906,7 +1906,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.SQUARE
+    .. py:attribute:: Waveform.SQUARE
 
 
 
@@ -1916,7 +1916,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.TRIANGLE
+    .. py:attribute:: Waveform.TRIANGLE
 
 
 
@@ -1926,7 +1926,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.RAMP_UP
+    .. py:attribute:: Waveform.RAMP_UP
 
 
 
@@ -1936,7 +1936,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.RAMP_DOWN
+    .. py:attribute:: Waveform.RAMP_DOWN
 
 
 
@@ -1946,7 +1946,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.DC
+    .. py:attribute:: Waveform.DC
 
 
 
@@ -1956,7 +1956,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.NOISE
+    .. py:attribute:: Waveform.NOISE
 
 
 
@@ -1966,7 +1966,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.USER
+    .. py:attribute:: Waveform.USER
 
 
 
