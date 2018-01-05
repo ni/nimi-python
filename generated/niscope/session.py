@@ -1423,7 +1423,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._actual_num_wfms()
+            session.channel[[0, 1]]._actual_num_wfms()
 
         Returns:
             num_wfms (int): Returns the number of records times the number of channels; if you are
@@ -1460,7 +1460,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channel[[0, 1]].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1496,7 +1496,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channel[[0, 1]].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -1526,7 +1526,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
+            session.channel[[0, 1]].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
             input_impedance (float): The input impedance for the channel; NI-SCOPE sets
@@ -1559,7 +1559,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_equalization_filter_coefficients(coefficients)
+            session.channel[[0, 1]].configure_equalization_filter_coefficients(coefficients)
 
         Args:
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
@@ -1591,7 +1591,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+            session.channel[[0, 1]].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
             range (float): Specifies the vertical range Refer to VERTICAL_RANGE for
@@ -1644,7 +1644,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session.channel[[0, 1]]._fetch(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1735,7 +1735,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session.channel[[0, 1]]._fetch(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1849,7 +1849,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary16(num_samples, timeout=5.0)
+            session.channel[[0, 1]]._fetch_binary16(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1963,7 +1963,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary32(num_samples, timeout=5.0)
+            session.channel[[0, 1]]._fetch_binary32(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2077,7 +2077,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary8(num_samples, timeout=5.0)
+            session.channel[[0, 1]]._fetch_binary8(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2189,7 +2189,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session.channel[[0, 1]].fetch(num_samples, wfm, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2287,7 +2287,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session.channel[[0, 1]].fetch(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2357,7 +2357,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
+            session.channel[[0, 1]].fetch_measurement(scalar_meas_function, timeout=5.0)
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2416,7 +2416,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+            session.channel[[0, 1]].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2473,7 +2473,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2508,7 +2508,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2542,7 +2542,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2588,7 +2588,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2621,7 +2621,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channel[[0, 1]].get_equalization_filter_coefficients(number_of_coefficients)
 
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
@@ -2705,7 +2705,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(num_samples, timeout=5.0)
+            session.channel[[0, 1]].read(num_samples, timeout=5.0)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2794,7 +2794,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
+            session.channel[[0, 1]].read_measurement(scalar_meas_function, timeout=5.0)
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2851,7 +2851,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, value)
+            session.channel[[0, 1]]._set_attribute_vi_boolean(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2898,7 +2898,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, value)
+            session.channel[[0, 1]]._set_attribute_vi_int32(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2945,7 +2945,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, value)
+            session.channel[[0, 1]]._set_attribute_vi_real64(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2994,7 +2994,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, value)
+            session.channel[[0, 1]]._set_attribute_vi_string(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.

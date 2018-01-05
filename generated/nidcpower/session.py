@@ -1550,7 +1550,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+            session.channel[[0, 1]].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
@@ -1602,7 +1602,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_multiple(count, timeout=1.0)
+            session.channel[[0, 1]].fetch_multiple(count, timeout=1.0)
 
         Args:
             count (int): Specifies the number of measurements to fetch.
@@ -1651,7 +1651,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -1703,7 +1703,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -1755,7 +1755,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int64(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -1807,7 +1807,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -1859,7 +1859,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channel[[0, 1]]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -1908,7 +1908,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_channel_name(index)
+            session.channel[[0, 1]].get_channel_name(index)
 
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
@@ -1974,7 +1974,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].measure(measurement_type)
+            session.channel[[0, 1]].measure(measurement_type)
 
         Args:
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
@@ -2015,7 +2015,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].measure_multiple()
+            session.channel[[0, 1]].measure_multiple()
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
@@ -2046,7 +2046,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._parse_channel_count()
+            session.channel[[0, 1]]._parse_channel_count()
 
         Returns:
             number_of_channels (int):
@@ -2088,7 +2088,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_in_compliance()
+            session.channel[[0, 1]].query_in_compliance()
 
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
@@ -2112,7 +2112,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_max_current_limit(voltage_level)
+            session.channel[[0, 1]].query_max_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2142,7 +2142,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_max_voltage_level(current_limit)
+            session.channel[[0, 1]].query_max_voltage_level(current_limit)
 
         Args:
             current_limit (float): Specifies the current limit to use when calculating the
@@ -2172,7 +2172,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_min_current_limit(voltage_level)
+            session.channel[[0, 1]].query_min_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2206,7 +2206,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_output_state(output_state)
+            session.channel[[0, 1]].query_output_state(output_state)
 
         Args:
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
@@ -2245,7 +2245,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channel[[0, 1]]._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2300,7 +2300,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channel[[0, 1]]._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2355,7 +2355,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+            session.channel[[0, 1]]._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2410,7 +2410,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channel[[0, 1]]._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2465,7 +2465,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channel[[0, 1]]._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2538,7 +2538,7 @@ class _RepeatedCapbilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_sequence(source_delays, values=None)
+            session.channel[[0, 1]].set_sequence(source_delays, values=None)
 
         Args:
             source_delays (list of float): Specifies the source delay that follows the configuration of each value
