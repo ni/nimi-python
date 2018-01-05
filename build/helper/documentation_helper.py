@@ -468,6 +468,7 @@ def get_function_docstring(function, method_template, numpy, config, indent=0):
         ds = get_documentation_for_node_docstring(p, config, indent + 8)
         if len(ds) > 0:
             docstring += ' ' + ds
+        docstring += '\n'
 
     output_params = filter_parameters(function, output_parameters)
     if len(output_params) > 0:
@@ -477,6 +478,7 @@ def get_function_docstring(function, method_template, numpy, config, indent=0):
             ds = get_documentation_for_node_docstring(p, config, indent + 8)
             if len(ds) > 0:
                 docstring += ' ' + ds
+            docstring += '\n'
 
     return docstring
 
@@ -920,10 +922,12 @@ def test_get_function_docstring_numpy():
 
     Args:
         number_of_samples (int): Number of samples to return
+
         waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
 
     Returns:
         waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+
         actual_number_of_samples (int): Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_docstring, actual_function_docstring)
