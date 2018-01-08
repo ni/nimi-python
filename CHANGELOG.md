@@ -56,6 +56,8 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * Channel repeated capability
     * P2P repeated capability
+    * Marker repeated capability
+    * Script Trigger repeated capability
   * #### Changed
   * #### Removed
 * ### NI-SCOPE
