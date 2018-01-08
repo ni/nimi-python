@@ -72,7 +72,7 @@ def test_reset_device():
     # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
     with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        channel = session.channel['0']
+        channel = session.channels['0']
         default_output_function = channel.output_function
         assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
         channel.output_function = nidcpower.OutputFunction.DC_CURRENT
@@ -82,7 +82,7 @@ def test_reset_device():
 
 
 def test_reset_with_default(session):
-    channel = session.channel['0']
+    channel = session.channels['0']
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
     channel.aperture_time_units == nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
     session.reset_with_defaults()
@@ -90,7 +90,7 @@ def test_reset_with_default(session):
 
 
 def test_reset(session):
-    channel = session.channel['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     channel.output_enabled = False
     session.reset()
@@ -98,7 +98,7 @@ def test_reset(session):
 
 
 def test_disable(session):
-    channel = session.channel['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     session.disable()
     assert channel.output_enabled is False
@@ -159,7 +159,7 @@ def test_measure_multiple(session):
         voltage_measurements, current_measurements = session.measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 12
         # now a subset of the channels
-        voltage_measurements, current_measurements = session.channel['0-3'].measure_multiple()
+        voltage_measurements, current_measurements = session.channels['0-3'].measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 4
 
 
@@ -313,6 +313,6 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session.channel['0'].active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session.channel['0'].active_advanced_sequence_step
+    session.channels['0'].active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
