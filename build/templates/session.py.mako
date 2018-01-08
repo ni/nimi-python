@@ -62,11 +62,11 @@ class _${rep_cap['python_class_name']}(object):
         else:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('${rep_cap['prefix'].lower()}') else '${rep_cap['prefix']}' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 % endfor
-class _RepeatedCapbilities(object):
+class _RepeatedCapabilities(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -145,7 +145,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 % endfor
 % endfor
 
-class Session(_RepeatedCapbilities):
+class Session(_RepeatedCapabilities):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
