@@ -772,7 +772,7 @@ class TestSession(object):
         test_number = 100
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
-            attr_int = session.channels['0,1'].read_write_integer
+            attr_int = session.channels[['0','1']].read_write_integer
             assert(attr_int == test_number)
             self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1'), matchers.ViInt32Matcher(1000004), matchers.ViInt32PointerMatcher())
 
@@ -781,8 +781,8 @@ class TestSession(object):
         attribute_id = 1000001
         test_number = 0.001
         with nifake.Session('dev1') as session:
-            session.channels['0-24'].read_write_double = test_number
-            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0-24'), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64Matcher(test_number))
+            session.channels[range(24)].read_write_double = test_number
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23'), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64Matcher(test_number))
 
     def test_get_attribute_int64(self):
         self.patched_library.niFake_GetAttributeViInt64.side_effect = self.side_effects_helper.niFake_GetAttributeViInt64
