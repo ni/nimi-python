@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
         session.channels['0'].channel_enabled = True
         session.channels[0].channel_enabled = True
         session.channels[[0, 1, 3]].channel_enabled = True
-        session.channels[range(7)].channel_enabled = True
+        session.channels[range(8)].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
         wfm = session.channels[[0, 1, 3]].fetch(5000)
 
         # P2P repeated capabilities

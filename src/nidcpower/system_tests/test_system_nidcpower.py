@@ -159,7 +159,7 @@ def test_measure_multiple(session):
         voltage_measurements, current_measurements = session.measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 12
         # now a subset of the channels
-        voltage_measurements, current_measurements = session.channels[range(3)].measure_multiple()
+        voltage_measurements, current_measurements = session.channels[range(4)].measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 4
 
 
