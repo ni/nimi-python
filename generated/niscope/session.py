@@ -23,7 +23,7 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _Channel(object):
+class _Channels(object):
     def __init__(self, vi, library, encoding):
         self._vi = vi
         self._library = library
@@ -31,12 +31,12 @@ class _Channel(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        else:
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 class _P2PStreams(object):
@@ -47,15 +47,15 @@ class _P2PStreams(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(r) for r in repeated_capability]
-        else:
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
-class _RepeatedCapbilities(object):
+class _RepeatedCapabilities(object):
     '''Base class for all NI-SCOPE sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -3010,7 +3010,7 @@ class _RepeatedCapbilities(object):
         return
 
 
-class Session(_RepeatedCapbilities):
+class Session(_RepeatedCapabilities):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
@@ -3019,7 +3019,7 @@ class Session(_RepeatedCapbilities):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self.channel = _Channel(self._vi, self._library, self._encoding)
+        self.channels = _Channels(self._vi, self._library, self._encoding)
         self.p2p_streams = _P2PStreams(self._vi, self._library, self._encoding)
         self._is_frozen = True
 

@@ -21,7 +21,7 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _Channel(object):
+class _Channels(object):
     def __init__(self, vi, library, encoding):
         self._vi = vi
         self._library = library
@@ -29,15 +29,15 @@ class _Channel(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        else:
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
-class _RepeatedCapbilities(object):
+class _RepeatedCapabilities(object):
     '''Base class for all NI-DCPower sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -2584,7 +2584,7 @@ class _RepeatedCapbilities(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class Session(_RepeatedCapbilities):
+class Session(_RepeatedCapabilities):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
     def __init__(self, resource_name, channels='', reset=False, option_string=''):
@@ -2593,7 +2593,7 @@ class Session(_RepeatedCapbilities):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
-        self.channel = _Channel(self._vi, self._library, self._encoding)
+        self.channels = _Channels(self._vi, self._library, self._encoding)
         self._is_frozen = True
 
     def __enter__(self):

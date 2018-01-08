@@ -21,7 +21,7 @@ class _Generation(object):
         self._session.abort()
 
 
-class _Channel(object):
+class _Channels(object):
     def __init__(self, vi, library, encoding):
         self._vi = vi
         self._library = library
@@ -29,12 +29,12 @@ class _Channel(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        else:
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 class _P2PStreams(object):
@@ -45,15 +45,47 @@ class _P2PStreams(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(r) for r in repeated_capability]
-        else:
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(repeated_capability)]
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
-class _RepeatedCapbilities(object):
+class _ScriptTriggers(object):
+    def __init__(self, vi, library, encoding):
+        self._vi = vi
+        self._library = library
+        self._encoding = encoding
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        try:
+            rep_cap_list = [str(r) if str(r).lower().startswith('scripttrigger') else 'ScriptTrigger' + str(r) for r in repeated_capability]
+        except TypeError:
+            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('scripttrigger') else 'ScriptTrigger' + str(repeated_capability)]
+
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+
+
+class _Markers(object):
+    def __init__(self, vi, library, encoding):
+        self._vi = vi
+        self._library = library
+        self._encoding = encoding
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        try:
+            rep_cap_list = [str(r) if str(r).lower().startswith('marker') else 'Marker' + str(r) for r in repeated_capability]
+        except TypeError:
+            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('marker') else 'Marker' + str(repeated_capability)]
+
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+
+
+class _RepeatedCapabilities(object):
     '''Base class for all NI-FGEN sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -2949,7 +2981,7 @@ class _RepeatedCapbilities(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class Session(_RepeatedCapbilities):
+class Session(_RepeatedCapabilities):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
     def __init__(self, resource_name, reset_device=False, option_string=''):
@@ -2958,8 +2990,10 @@ class Session(_RepeatedCapbilities):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, reset_device, option_string)
-        self.channel = _Channel(self._vi, self._library, self._encoding)
+        self.channels = _Channels(self._vi, self._library, self._encoding)
         self.p2p_streams = _P2PStreams(self._vi, self._library, self._encoding)
+        self.script_triggers = _ScriptTriggers(self._vi, self._library, self._encoding)
+        self.markers = _Markers(self._vi, self._library, self._encoding)
         self._is_frozen = True
 
     def __enter__(self):

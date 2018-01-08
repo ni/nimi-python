@@ -23,7 +23,7 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _Channel(object):
+class _Channels(object):
     def __init__(self, vi, library, encoding):
         self._vi = vi
         self._library = library
@@ -31,15 +31,20 @@ class _Channel(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        if isinstance(repeated_capability, list):
+        print('_Channels __getitem__. rep_cap = "{0}"'.format(repeated_capability))
+        try:
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        else:
+            print('It was an iterable')
+        except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
+            print('It was a singleton')
 
-        return _RepeatedCapbilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        calculates_repeated_capability = ','.join(rep_cap_list)
+        print('calculates_repeated_capability = "{0}"'.format(calculates_repeated_capability))
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=calculates_repeated_capability, library=self._library, encoding=self._encoding, freeze_it=True)
 
 
-class _RepeatedCapbilities(object):
+class _RepeatedCapabilities(object):
     '''Base class for all NI-FAKE sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -336,6 +341,7 @@ class _RepeatedCapbilities(object):
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
+        print('self._repeated_capability == "{0}"'.format(self._repeated_capability))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
@@ -438,7 +444,7 @@ class _RepeatedCapbilities(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class Session(_RepeatedCapbilities):
+class Session(_RepeatedCapabilities):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
@@ -447,7 +453,7 @@ class Session(_RepeatedCapbilities):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self.channel = _Channel(self._vi, self._library, self._encoding)
+        self.channels = _Channels(self._vi, self._library, self._encoding)
         self._is_frozen = True
 
     def __enter__(self):
