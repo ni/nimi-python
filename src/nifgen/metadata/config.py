@@ -24,7 +24,7 @@ config = {
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
     'repeated_capabilities': [
-        {'python_name': 'channel', 'python_class_name': 'Channel', 'prefix': '', },
+        {'python_name': 'channels', 'python_class_name': 'Channels', 'prefix': '', },
         {'python_name': 'p2p_streams', 'python_class_name': 'P2PStreams', 'prefix': 'FIFOEndpoint', },
     ],
 }

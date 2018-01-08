@@ -27,7 +27,7 @@ config = {
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
-        {'python_name': 'channel', 'python_class_name': 'Channel', 'prefix': '', },
+        {'python_name': 'channels', 'python_class_name': 'Channels', 'prefix': '', },
     ],
 }
 
