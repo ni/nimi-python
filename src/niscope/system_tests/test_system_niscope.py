@@ -27,7 +27,7 @@ def test_vi_string_attribute(session):
 def test_read(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(1)
+    test_channels = range(2)
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
@@ -52,7 +52,7 @@ def test_fetch(session):
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(1)
+    test_channels = range(2)
     test_num_channels = 2
     wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -69,7 +69,7 @@ def test_fetch_binary8_into(session):
 def test_fetch_binary16_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(1)
+    test_channels = range(2)
     test_num_channels = 2
     wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -86,7 +86,7 @@ def test_fetch_binary16_into(session):
 def test_fetch_binary32_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(1)
+    test_channels = range(2)
     test_num_channels = 2
     wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
@@ -103,7 +103,7 @@ def test_fetch_binary32_into(session):
 def test_fetch_double_into(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = range(1)
+    test_channels = range(2)
     test_num_channels = 2
     wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
