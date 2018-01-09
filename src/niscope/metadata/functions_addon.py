@@ -470,6 +470,7 @@ functions_method_templates = {
     ], },
     'FetchDouble':                                   { 'method_templates': [
         { 'session_filename': 'fetch_double', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'session_filename': 'fetch_array', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
 }
 
