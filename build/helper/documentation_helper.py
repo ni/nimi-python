@@ -160,7 +160,9 @@ def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extr
             admonition_content = [admonition_content]
         a = ''
         for admonition_text in admonition_content:
-            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, '{0}: {1}'.format(admonition.title(), admonition_text), config, make_link=False), indent)
+            admonition_text = '{0}: {1}'.format(admonition.title(), admonition_text)
+            admonition_text = _fix_references(node, admonition_text, config, make_link=False)
+            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(admonition_text, indent)
             extra_newline = '\n'
         return a
     else:
@@ -369,9 +371,12 @@ def _fix_references(node, doc, cfg, make_link=False):
     if 'enum' in node:
         config['start_enum'] = node['enum']
 
-    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
-    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
-    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    attr_search_string = '{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    func_search_string = '{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    enum_search_string = '{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    attr_re = re.compile(attr_search_string)
+    func_re = re.compile(func_search_string)
+    enum_re = re.compile(enum_search_string)
 
     doc = attr_re.sub(_replace_attribute_python_name, doc)
     doc = func_re.sub(_replace_func_python_name, doc)
@@ -671,22 +676,22 @@ config = {
                 },
                 {
                     'direction': 'in',
-                    'enum': None,
+                    'enum': 'Turtle',
                     'name': 'turtleType',
                     'type': 'ViInt32',
                     'documentation': {
                         'description': '''Specifies the type of Turtle type
 wanted to choose.''',
-                        'note': 'You wont be able to import RAPHAEL',
+                        'note': 'You wont be able to import NIFAKE\\_VAL\\_RAPHAEL',
                         'table_body': [
-                            ['NIFake\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
-                            ['NIFake\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
-                            ['NIFake\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
-                            ['NIFake\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
+                            ['NIFAKE\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
+                            ['NIFAKE\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
+                            ['NIFAKE\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
+                            ['NIFAKE\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
                         ]
                     },
                     'python_name': 'turtle_type',
-                    'python_type': 'int',
+                    'python_type': 'Turtle',
                     'ctypes_variable_name': 'turtle_type_ctype',
                     'ctypes_type': 'ViInt32',
                     'ctypes_type_library_call': 'ViInt32',
@@ -729,8 +734,12 @@ wanted to choose.''',
                 }
             ],
             'documentation': {
-                'description': 'Returns the **ID** of selected Turtle Type.',
-                'note': 'The RAPHAEL Turtles dont have an ID.'
+                'description': 'Returns the **ID** of selected Turtle Type. See `NIFAKE help <REPLACE_DRIVER_SPECIFIC_URL_1(fake_functional_overview)>`__',
+                'note': [
+                    'The NIFAKE\\_VAL\\_RAPHAEL Turtles dont have an ID.',
+                    'DO NOT call niFake\\_FetchWaveform after calling this function.',
+                    'NIFAKE\\_ATTR\\_READ\\_WRITE\\_BOOL will have an incorrect value after this calling this function',
+                ]
             },
             'name': 'GetTurtleID',
             'python_name': 'get_turtle_id',
@@ -844,6 +853,9 @@ wanted to choose.''',
     'driver_name': 'NI-FAKE',
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
     'session_handle_parameter_name': 'vi',
+    'driver_urls': {
+        'REPLACE_DRIVER_SPECIFIC_URL_1': 'http://zone.ni.com/reference/en-XX/help/370384T-01/fake/{0}/',
+    },
     'library_info':
     {
         'Windows': {
@@ -860,6 +872,60 @@ wanted to choose.''',
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'attributes': {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    },
+    'enums': {
+        'Turtle': {
+            'codegen_method': 'public',
+            'python_name': 'Turtle',
+            'values': [
+                {
+                    'name': 'NIFAKE_VAL_LEONARDO',
+                    'python_name': 'LEONARDO',
+                    'value': 0,
+                    'documentation': {
+                        'description': 'Wields two katanas.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_DONATELLO',
+                    'python_name': 'DONATELLO',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Uses a bo staff.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_RAPHAEL',
+                    'python_name': 'RAPHAEL',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Has a pair of sai.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_MICHELANGELO',
+                    'python_name': 'MICHELANGELO',
+                    'value': 3,
+                    'documentation': {
+                        'description': 'Owns nunchucks.',
+                    }
+                },
+            ],
+        },
+    },
 }
 
 
@@ -869,28 +935,32 @@ def test_get_function_rst_default():
     actual_function_rst = get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=0)
     expected_fuction_rst = '''.. py:method:: get_turtle_id(turtle_type)
 
-    Returns the **ID** of selected Turtle Type.
+    Returns the **ID** of selected Turtle Type. See `NIFAKE help <http://zone.ni.com/reference/en-XX/help/370384T-01/fake/fake_functional_overview/>`__
 
-    .. note:: The RAPHAEL Turtles dont have an ID.
+    .. note:: The :py:data:`~nifake.Turtle.RAPHAEL` Turtles dont have an ID.
+
+    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this function.
+
+    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this function
 
     :param turtle_type:
 
     Specifies the type of Turtle type
     wanted to choose.
 
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
-    +---------------------------------+---+--------------+
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.LEONARDO` (default) | 0 | LEONARDO     |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.DONATELLO`          | 1 | DONATELLO    |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.RAPHAEL`            | 2 | RAPHAEL      |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.MICHELANGELO`       | 3 | MICHELANGELO |
+    +----------------------------------------------+---+--------------+
 
-    .. note:: You wont be able to import RAPHAEL
+    .. note:: You wont be able to import :py:data:`~nifake.Turtle.RAPHAEL`
 
-    :type turtle_type: int
+    :type turtle_type: :py:data:`nifake.Turtle`
 
     :rtype: float
     :return:
@@ -938,25 +1008,29 @@ def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
     actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
-    expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
+    expected_function_docstring = '''Returns the **ID** of selected Turtle Type. See `NIFAKE help <fake_functional_overview>`__
 
-Note: The RAPHAEL Turtles dont have an ID.
+Note: The Turtle.RAPHAEL Turtles dont have an ID.
+
+Note: DO NOT call fetch_waveform after calling this function.
+
+Note: read_write_bool will have an incorrect value after this calling this function
 
 Args:
-    turtle_type (int): Specifies the type of Turtle type
+    turtle_type (Turtle): Specifies the type of Turtle type
         wanted to choose.
 
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_LEONARDO (default) | 0 | LEONARDO     |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_DONATELLO          | 1 | DONATELLO    |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_RAPHAEL            | 2 | RAPHAEL      |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_MICHELANGELO       | 3 | MICHELANGELO |
-        +-------------------------------+---+--------------+
+        +---------------------------+---+--------------+
+        | Turtle.LEONARDO (default) | 0 | LEONARDO     |
+        +---------------------------+---+--------------+
+        | Turtle.DONATELLO          | 1 | DONATELLO    |
+        +---------------------------+---+--------------+
+        | Turtle.RAPHAEL            | 2 | RAPHAEL      |
+        +---------------------------+---+--------------+
+        | Turtle.MICHELANGELO       | 3 | MICHELANGELO |
+        +---------------------------+---+--------------+
 
-        Note: You wont be able to import RAPHAEL
+        Note: You wont be able to import Turtle.RAPHAEL
 
 Returns:
     turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
@@ -967,7 +1041,6 @@ def test_get_function_docstring_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
     actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
-    print(actual_function_docstring)
     expected_fuction_docstring = '''Returns waveform data.
 
     Args:
