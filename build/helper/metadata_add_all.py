@@ -928,3 +928,142 @@ def test_add_enums_metadata_simple():
 
     _do_the_test_add_enums_metadata(enums, expected)
 
+
+def test_square_up_tables():
+    local_config = config_for_testing.copy()
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on.',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+                'table_header': ['Just one'],
+                'table_body': [['Just', 'two'], ['this', 'has', 'three']],
+            },
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = {}
+    local_config['enums'] = {}
+
+    _square_up_tables(local_config)
+    assert len(local_config['functions']['MakeAFoo']['documentation']['table_header']) == 3
+    for line in local_config['functions']['MakeAFoo']['documentation']['table_body']:
+        assert(len(line)) == 3
+
+
+def test_add_notes_re_links():
+    local_config = config_for_testing.copy()
+    local_config['c_function_prefix'] = 'niFake'
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session for niFake\_MakeAFoo using NIFAKE\_ATTR\_READ\_WRITE\_BOOL. You should use NIFAKE\_VAL\_BLUE',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on. Similar to niFake\_TakeAFoo using NIFAKE\_ATTR\_NOT\_HERE. Use NIFAKE\_VAL\_PURPLE',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+            },
+            'python_name': 'make_a_foo',
+        },
+    }
+    attributes = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    }
+    enums = {
+        'Color': {
+            'values': [
+                {
+                    'name': 'NIFAKE_VAL_RED',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Like blood.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLUE',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like the sky.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_YELLOW',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like a banana.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLACK',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like this developer\'s conscience.',
+                    }
+                },
+            ],
+            'codegen_method': 'public',
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = attributes
+    local_config['enums'] = enums
+
+    _add_notes_re_links(local_config)
+
+    assert 'note' not in local_config['functions']['MakeAFoo']['parameters'][0]['documentation']
+    assert func_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert attr_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert enum_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+
