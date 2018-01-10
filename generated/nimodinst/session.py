@@ -5,6 +5,11 @@ from nimodinst import errors
 from nimodinst import library_singleton
 from nimodinst import visatype
 
+# Used for __repr__ and __str__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class AttributeViInt32(object):
 
@@ -71,10 +76,27 @@ class Device(object):
         '''
         The socket number on which the device has been enumerated
         '''
+        self._param_list = 'owner=' + pp.pformat(owner) + ', index=' + pp.pformat(index)
         self._is_frozen = True
 
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
+
+    def __str__(self):
+        ret_str = self.__repr__() + ':\n'
+        ret_str += '    bus_number = ' + pp.pformat(self.bus_number) + '\n'
+        ret_str += '    chassis_number = ' + pp.pformat(self.chassis_number) + '\n'
+        ret_str += '    device_model = ' + pp.pformat(self.device_model) + '\n'
+        ret_str += '    device_name = ' + pp.pformat(self.device_name) + '\n'
+        ret_str += '    max_pciexpress_link_width = ' + pp.pformat(self.max_pciexpress_link_width) + '\n'
+        ret_str += '    pciexpress_link_width = ' + pp.pformat(self.pciexpress_link_width) + '\n'
+        ret_str += '    serial_number = ' + pp.pformat(self.serial_number) + '\n'
+        ret_str += '    slot_number = ' + pp.pformat(self.slot_number) + '\n'
+        ret_str += '    socket_number = ' + pp.pformat(self.socket_number) + '\n'
+        return ret_str
+
     def __getattribute__(self, name):
-        if name in ['_is_frozen', 'index']:
+        if name in ['_is_frozen', 'index', '_param_list', '__class__', '__name__', '__repr__', '__str__', '__setattr__', ]:
             return object.__getattribute__(self, name)
         else:
             return object.__getattribute__(self, name).__getitem__(None)
@@ -98,8 +120,18 @@ class Session(object):
         self._encoding = 'windows-1251'
         self._library = library_singleton.get()
         self._handle, self._item_count = self._open_installed_devices_session(driver)
+        self._param_list = "driver=" + pp.pformat(driver)
 
         self._is_frozen = True
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
+
+    def __str__(self):
+        ret_str = self.__repr__() + ':\n'
+        for i in range(self._item_count):
+            ret_str += str(Device(self, i)) + '\n'
+        return ret_str
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):

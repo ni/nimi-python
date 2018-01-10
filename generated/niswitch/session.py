@@ -8,6 +8,11 @@ from niswitch import errors
 from niswitch import library_singleton
 from niswitch import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Scan(object):
     def __init__(self, session):
@@ -475,6 +480,10 @@ class _SessionBase(object):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('niswitch', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -1071,6 +1080,10 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._vi = vi
+        param_list = []
+        param_list.append("vi=" + pp.pformat(vi))
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
@@ -1081,6 +1094,12 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("topology=" + pp.pformat(topology))
+        param_list.append("simulate=" + pp.pformat(simulate))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

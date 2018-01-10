@@ -105,3 +105,4 @@ def test_socket_number_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         assert isinstance(session[0].socket_number, int)
+

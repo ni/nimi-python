@@ -8,6 +8,11 @@ from nidcpower import errors
 from nidcpower import library_singleton
 from nidcpower import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -1471,6 +1476,10 @@ class _SessionBase(object):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -2625,6 +2634,10 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._vi = vi
+        param_list = []
+        param_list.append("vi=" + pp.pformat(vi))
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
@@ -2635,6 +2648,12 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("channels=" + pp.pformat(channels))
+        param_list.append("reset=" + pp.pformat(reset))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):
