@@ -28,7 +28,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='0.6.0.dev0',
+    version='0.6.1.dev0',
     description='NI-DMM Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
@@ -47,7 +47,7 @@ setup(
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",

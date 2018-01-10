@@ -8,6 +8,11 @@ from nidmm import errors
 from nidmm import library_singleton
 from nidmm import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -79,7 +84,7 @@ class _SessionBase(object):
     '''
     Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
     '''
-    current_source = attributes.AttributeEnum(attributes.AttributeViReal64, enums.CurrentSource, 1150025)
+    current_source = attributes.AttributeViReal64(1150025)
     '''
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.
@@ -117,7 +122,7 @@ class _SessionBase(object):
     '''
     A string containing the capabilities and extension groups supported by the  specific driver.
     '''
-    input_resistance = attributes.AttributeEnum(attributes.AttributeViReal64, enums.InputResistance, 1150029)
+    input_resistance = attributes.AttributeViReal64(1150029)
     '''
     Specifies the input resistance of the instrument.
     The NI 4050 and NI 4060 are not supported.
@@ -198,7 +203,7 @@ class _SessionBase(object):
     '''
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niDMM_ConfigureMeasurementDigits, NI-DMM sets this attribute to NIDMM_VAL_IVIDMM_MODE.  When you call niDMM_ConfigureWaveformAcquisition, NI-DMM sets this attribute to NIDMM_VAL_WAVEFORM_MODE.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
     '''
-    powerline_freq = attributes.AttributeEnum(attributes.AttributeViReal64, enums.PowerlineFrequency, 1250333)
+    powerline_freq = attributes.AttributeViReal64(1250333)
     '''
     Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the NIDMM_ATTR_APERTURE_TIME  attribute in powerline cycles (PLCs).
     After configuring powerline frequency, set the NIDMM_ATTR_APERTURE_TIME_UNITS attribute to PLCs.  When setting the NIDMM_ATTR_APERTURE_TIME attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
@@ -415,6 +420,10 @@ class _SessionBase(object):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nidmm', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -846,6 +855,10 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._vi = vi
+        param_list = []
+        param_list.append("vi=" + pp.pformat(vi))
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
@@ -856,6 +869,12 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("id_query=" + pp.pformat(id_query))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

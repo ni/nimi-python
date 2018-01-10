@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [0.5.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
 * [0.3.0](#030---2017-10-13)
@@ -12,17 +13,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
   * #### Added
-    * `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
   * #### Changed
   * #### Removed
 * ### NI-DMM
   * #### Added
-    * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
   * #### Changed
-    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
-    * Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
-    * Removed `actual_number_of_points` from `read_multi_point()` returned tuple
-    * Removed `actual_number_of_points` from `read_waveform()` returned tuple
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -32,12 +27,41 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
-    * Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
 * ### NI-DCPower
   * #### Added
   * #### Changed
-    * Removed `actual_count` from `fetch_multiple()` returned tuple
   * #### Removed
+* ### NI-FGEN
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-SCOPE
+  * #### Added
+  * #### Changed
+  * #### Removed
+
+## 0.6.0 - 2017-12-20
+* ### ALL
+  * #### Added
+    * `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+* ### NI-DMM
+  * #### Added
+    * `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
+  * #### Changed
+    * Property powerline_freq no longer uses enum PowerlineFrequency.
+    * Property current_source no longer uses enum CurrentSource.
+    * Property input_resistance no longer uses enum InputResistance.
+    * Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+    * Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_multi_point()` returned tuple
+    * Removed `actual_number_of_points` from `read_waveform()` returned tuple
+* ### NI-Switch
+  * #### Removed
+    * Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
+* ### NI-DCPower
+  * #### Changed
+    * Property power_line_frequency no longer uses enum PowerLineFrequency.
+    * Removed `actual_count` from `fetch_multiple()` returned tuple
 * ### NI-FGEN
   * #### Added
     * Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
@@ -59,7 +83,11 @@ All notable changes to this project will be documented in this file.
       * `numpy.int32`
   * #### Changed
     * Added default values for timeout on all fetch and read functions.
+    * Property input_impedance no longer uses enum InputImpedance.
   * #### Removed
+    * `AddWaveformProcessing` - See #667 for rationale
+    * `ClearWaveformProcessing` - See #667 for rationale
+    * `FetchArrayMeasurement` - See #667 for rationale
 
 ## 0.5.0 - 2017-11-27
 * ### ALL

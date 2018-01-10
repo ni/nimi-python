@@ -33,6 +33,11 @@ from ${module_name} import visatype
 from ${module_name} import ${c['file_name']}  # noqa: F401
 % endfor
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 % if session_context_manager is not None:
 class ${session_context_manager}(object):
@@ -83,12 +88,17 @@ if attributes[attribute]['channel_based'] == 'True':
 init_function = functions[config['init_function']]
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
+constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
 
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -136,6 +146,10 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        param_list = []
+        param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
@@ -146,6 +160,11 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        param_list = []
+%       for param in constructor_params:
+        param_list.append("${param['python_name']}=" + pp.pformat(${param['python_name']}))
+%       endfor
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

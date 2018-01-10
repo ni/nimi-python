@@ -75,7 +75,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     copyright_re = re.compile("copyright = '2017-(\d+), National Instruments'")
     m = copyright_re.search(contents)
     if m:
-        logging.info('Copyright year found, updating {0} to {1}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
+        logging.info('Copyright year found, updating {0} to {1}'.format(int(m.group(1)), datetime.now().year))
         contents = copyright_re.sub("copyright = '2017-{0}, National Instruments'".format(datetime.now().year), contents)
 
     with open(args.src_file, 'w') as content_file:

@@ -90,25 +90,6 @@ class CableCompensationType(Enum):
     '''
 
 
-class CurrentSource(Enum):
-    _1_MICROAMP = 1e-06
-    '''
-    NI 4070/4071/4072 are supported.
-    '''
-    _10_MICROAMP = 1e-05
-    '''
-    NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
-    '''
-    _100_MICROAMP = 0.0001
-    '''
-    NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-    '''
-    _1_MILLIAMP = 0.001
-    '''
-    NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
-    '''
-
-
 class DCBias(Enum):
     OFF = 0
     '''
@@ -199,21 +180,6 @@ class Function(Enum):
     INDUCTANCE = 1006
     '''
     Inductance
-    '''
-
-
-class InputResistance(Enum):
-    _1_MEGAOHM = 1000000.0
-    '''
-    Input resistance of 1 M Ohm
-    '''
-    _10_MEGAOHM = 10000000.0
-    '''
-    Input resistance of 10 M Ohm
-    '''
-    GREATER_THAN_10_GIGAOHM = 10000000000.0
-    '''
-    Input resistance greater than 10 G Ohm
     '''
 
 
@@ -309,17 +275,6 @@ class OperationMode(Enum):
     WAVEFORM = 1
     '''
     Waveform acquisition mode
-    '''
-
-
-class PowerlineFrequency(Enum):
-    _50 = 50.0
-    '''
-    Specifies the powerline frequency as 50 Hz.
-    '''
-    _60 = 60.0
-    '''
-    Specifies the powerline frequency as 60 Hz.
     '''
 
 

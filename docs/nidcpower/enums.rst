@@ -463,29 +463,6 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: PowerLineFrequency
-
-    .. py:attribute:: nidcpower.PowerLineFrequency._50
-
-
-
-        Specifies a power line frequency of 50 Hz.
-
-        
-
-
-
-    .. py:attribute:: nidcpower.PowerLineFrequency._60
-
-
-
-        Specifies a power line frequency of 60 Hz.
-
-        
-
-
-
-
 .. py:data:: PowerSource
 
     .. py:attribute:: nidcpower.PowerSource.INTERNAL

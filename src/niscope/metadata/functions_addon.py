@@ -60,17 +60,18 @@ functions_codegen_method = {
     'FetchBinary16':                    { 'codegen_method': 'private',  },
     'FetchBinary32':                    { 'codegen_method': 'private',  },
     'Fetch':                            { 'codegen_method': 'private',  },
-    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
+    'ClearWaveformProcessing':          { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
+    'AddWaveformProcessing':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
+    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
+    'ActualMeasWfmSize':                { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'AddWaveformProcessing':                           { 'parameters': { 2: { 'enum': 'ArrayMeasurement',                }, }, },
     'CalSelfCalibrate':                                { 'parameters': { 2: { 'enum': 'Option',                          }, }, },
     'ClearWaveformMeasurementStats':                   { 'parameters': { 2: { 'enum': 'ClearableMeasurement',            }, }, },
-    'ConfigureChanCharacteristics':                    { 'parameters': { 2: { 'enum': 'InputImpedance',                  }, }, },
     'ConfigureVertical':                               { 'parameters': { 4: { 'enum': 'VerticalCoupling',                }, }, },
     'ConfigureTriggerDigital':                         { 'parameters': { 2: { 'enum': 'TriggerSlope',                    }, }, },
     'ConfigureTriggerEdge':                            { 'parameters': { 4: { 'enum': 'TriggerCoupling',                 },
@@ -89,8 +90,6 @@ functions_enums = {
     'FetchMeasurementStats':                           { 'parameters': { 3: { 'enum': 'ScalarMeasurement',               }, }, },
     'ReadMeasurement':                                 { 'parameters': { 3: { 'enum': 'ScalarMeasurement',               }, }, },
     'AcquisitionStatus':                               { 'parameters': { 1: { 'enum': 'AcquisitionStatus',               }, }, },
-    'ActualMeasWfmSize':                               { 'parameters': { 1: { 'enum': 'ArrayMeasurement',                }, }, },
-    'FetchArrayMeasurement':                           { 'parameters': { 3: { 'enum': 'ArrayMeasurement',                }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -124,9 +123,6 @@ functions_buffer_info = {
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchBinary32':                            { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
-    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },
-                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
-                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
 }
 
 # The extracted metadata is incorrect. Patch it here.
@@ -143,10 +139,6 @@ functions_bad_source_metadata = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True },
     'GetError':                     { 'is_error_handling': True },
-}
-
-functions_render_in_session_base = {
-    'ActualMeasWfmSize':               { 'render_in_session_base': True, },  # Internally called by function with a repeated capability.
 }
 
 # Default values for method parameters
@@ -168,7 +160,6 @@ functions_default_value = {
     'FetchBinary8':                                  { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchBinary16':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchBinary32':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchArrayMeasurement':                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'ReadMeasurement':                               { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchMeasurement':                              { 'parameters': { 2: { 'default_value': 5.0, }, }, },
     'FetchMeasurementStats':                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
