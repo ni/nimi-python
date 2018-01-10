@@ -20,6 +20,10 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'mechanism': 'fixed, passed-in, len',
     'python_api_list': True,
 }
+# Only difference is we want to skip parameters not in api
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False
+
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
@@ -46,6 +50,9 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'mechanism': 'fixed, passed-in',
     'python_api_list': True,
 }
+# Only difference is we want to skip parameters not in api
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
+
 _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
