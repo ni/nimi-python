@@ -17,6 +17,11 @@ from ${module_name} import errors
 from ${module_name} import library_singleton
 from ${module_name} import visatype
 
+# Used for __repr__ and __str__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class AttributeViInt32(object):
 
@@ -55,10 +60,21 @@ class Device(object):
         '''
 %   endif
 % endfor
+        self._param_list = 'owner=' + pp.pformat(owner) + ', index=' + pp.pformat(index)
         self._is_frozen = True
 
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
+
+    def __str__(self):
+        ret_str = self.__repr__() + ':\n'
+% for attribute in helper.sorted_attrs(attributes):
+        ret_str += '    ${attributes[attribute]['name'].lower()} = ' + pp.pformat(self.${attributes[attribute]['name'].lower()}) + '\n'
+% endfor
+        return ret_str
+
     def __getattribute__(self, name):
-        if name in ['_is_frozen', 'index']:
+        if name in ['_is_frozen', 'index', '_param_list', '__class__', '__name__', '__repr__', '__str__', '__setattr__', ]:
             return object.__getattribute__(self, name)
         else:
             return object.__getattribute__(self, name).__getitem__(None)
@@ -82,8 +98,18 @@ class Session(object):
         self._encoding = 'windows-1251'
         self._library = library_singleton.get()
         self._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
+        self._param_list = "driver=" + pp.pformat(driver)
 
         self._is_frozen = True
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
+
+    def __str__(self):
+        ret_str = self.__repr__() + ':\n'
+        for i in range(self._item_count):
+            ret_str += str(Device(self, i)) + '\n'
+        return ret_str
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
