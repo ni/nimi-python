@@ -109,3 +109,8 @@ functions_numpy = {
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
+# Don't need ID_Query in the python API since they don't do anything
+functions_remove_parameters_from_python = {
+    'InitWithOptions':                      { 'parameters': { 1: { 'use_in_python_api': False, }, }, },
+}
+

@@ -56,8 +56,8 @@ class TestSession(object):
         errors_patcher.stop()
 
     def test_init_with_options_nondefault_and_close(self):
-        session = nifake.Session('FakeDevice', True, True, 'Some string')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(True), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
+        session = nifake.Session('FakeDevice', True, 'Some string')
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(False), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
@@ -983,4 +983,16 @@ class TestSession(object):
             for actual, expected in zip(cs_test, cs):
                 assert actual.struct_int == expected.struct_int
                 assert actual.struct_double == expected.struct_double
+
+    def test_matcher_prints(self):
+        assert matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(<class 'ctypes.c_ulong'>, 42)"
+        assert matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(<class 'ctypes.c_long'>, 4)"
+        assert matchers.ViStringMatcher('0-24').__repr__() == "ViStringMatcher('0-24')"
+        assert matchers.ViReal64Matcher(-42.0).__repr__() == "ViReal64Matcher(<class 'ctypes.c_double'>, -42.0)"
+        assert matchers.ViReal64PointerMatcher().__repr__() == "ViReal64PointerMatcher(<class 'ctypes.c_double'>)"
+        assert matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(<class 'ctypes.c_long'>)"
+        cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
+        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
+        assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
 

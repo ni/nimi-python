@@ -10,6 +10,7 @@ from nifake import visatype
 
 from nifake import custom_struct  # noqa: F401
 
+# Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -34,7 +35,7 @@ class _TimedeltaConverter(object):
         else:
             self.value = value
 
-        if not library_type == visatype.ViReal64:
+        if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
             self.value = int(self.value)
 
         self.ctype_value = library_type(self.value)
@@ -97,6 +98,10 @@ class _SessionBase(object):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nifake', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -461,16 +466,25 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._vi = vi
+        param_list = []
+        param_list.append("vi=" + pp.pformat(vi))
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):
