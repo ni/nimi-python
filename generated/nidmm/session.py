@@ -865,13 +865,12 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
-        param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
         param_list.append("option_string=" + pp.pformat(option_string))
         self._param_list = ', '.join(param_list)

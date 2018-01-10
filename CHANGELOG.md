@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
     * #### Added
     * #### Changed
+        * `nidmm.Session()` no longer takes id_query parameter
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `DCBias` - `DC_BIAS`
@@ -46,6 +47,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
+        * `niscope.Session()` no longer takes id_query parameter
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
