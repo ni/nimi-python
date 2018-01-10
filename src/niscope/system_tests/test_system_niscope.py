@@ -39,7 +39,7 @@ def test_read(session):
 def test_fetch(session):
     test_voltage = 1.0
     test_record_length = 2000
-    test_channels = '0,1'
+    test_channels = range(2)
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
