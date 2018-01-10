@@ -10,6 +10,11 @@ from nifake import visatype
 
 from nifake import custom_struct  # noqa: F401
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -31,17 +36,12 @@ class _Channels(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        print('_Channels __getitem__. rep_cap = "{0}"'.format(repeated_capability))
         try:
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-            print('It was an iterable')
         except TypeError:
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
-            print('It was a singleton')
 
-        calculates_repeated_capability = ','.join(rep_cap_list)
-        print('calculates_repeated_capability = "{0}"'.format(calculates_repeated_capability))
-        return _RepeatedCapabilities(vi=self._vi, repeated_capability=calculates_repeated_capability, library=self._library, encoding=self._encoding, freeze_it=True)
+        return _RepeatedCapabilities(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 class _RepeatedCapabilities(object):
@@ -84,7 +84,11 @@ class _RepeatedCapabilities(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
         self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nifake', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -341,7 +345,6 @@ class _RepeatedCapabilities(object):
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
-        print('self._repeated_capability == "{0}"'.format(self._repeated_capability))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
@@ -454,6 +457,12 @@ class Session(_RepeatedCapabilities):
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
         self.channels = _Channels(self._vi, self._library, self._encoding)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("id_query=" + pp.pformat(id_query))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

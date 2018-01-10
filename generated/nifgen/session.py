@@ -8,6 +8,11 @@ from nifgen import errors
 from nifgen import library_singleton
 from nifgen import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Generation(object):
     def __init__(self, session):
@@ -1006,7 +1011,11 @@ class _RepeatedCapabilities(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
         self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nifgen', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -2994,6 +3003,11 @@ class Session(_RepeatedCapabilities):
         self.p2p_streams = _P2PStreams(self._vi, self._library, self._encoding)
         self.script_triggers = _ScriptTriggers(self._vi, self._library, self._encoding)
         self.markers = _Markers(self._vi, self._library, self._encoding)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

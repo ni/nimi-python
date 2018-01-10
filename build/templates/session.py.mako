@@ -33,6 +33,11 @@ from ${module_name} import visatype
 from ${module_name} import ${c['file_name']}  # noqa: F401
 % endfor
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 % if session_context_manager is not None:
 class ${session_context_manager}(object):
@@ -101,6 +106,7 @@ if attributes[attribute]['channel_based'] == 'True':
 init_function = functions[config['init_function']]
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
+constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
 
     def __init__(self, repeated_capability, ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False):
@@ -108,7 +114,11 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
         self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -157,6 +167,11 @@ class Session(_RepeatedCapabilities):
 % for rep_cap in config['repeated_capabilities']:
         self.${rep_cap['python_name']} = _${rep_cap['python_class_name']}(self._${config['session_handle_parameter_name']}, self._library, self._encoding)
 % endfor
+        param_list = []
+%       for param in constructor_params:
+        param_list.append("${param['python_name']}=" + pp.pformat(${param['python_name']}))
+%       endfor
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

@@ -8,6 +8,11 @@ from nidcpower import errors
 from nidcpower import library_singleton
 from nidcpower import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -1488,7 +1493,11 @@ class _RepeatedCapabilities(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
         self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -2594,6 +2603,12 @@ class Session(_RepeatedCapabilities):
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
         self.channels = _Channels(self._vi, self._library, self._encoding)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("channels=" + pp.pformat(channels))
+        param_list.append("reset=" + pp.pformat(reset))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):

@@ -8,6 +8,11 @@ from nidmm import errors
 from nidmm import library_singleton
 from nidmm import visatype
 
+# Used for __repr__
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 class _Acquisition(object):
     def __init__(self, session):
@@ -416,7 +421,11 @@ class _RepeatedCapabilities(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
         self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nidmm', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -851,6 +860,12 @@ class Session(_RepeatedCapabilities):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("id_query=" + pp.pformat(id_query))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("option_string=" + pp.pformat(option_string))
+        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):
