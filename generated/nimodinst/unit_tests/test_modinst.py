@@ -244,4 +244,17 @@ class TestSession(object):
                 assert issubclass(w[0].category, nimodinst.NimodinstWarning)
                 assert error_string in str(w[0].message)
 
+    def test_repr_and_str(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViString
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = 42
+        self.side_effects_helper['GetInstalledDeviceAttributeViString']['attributeValue'] = 'fourty two'
+        with nimodinst.Session('') as session:
+            session
+            print(session)
+            for d in session:
+                d
+                print(d)
+
 
