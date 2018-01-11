@@ -9,7 +9,6 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -25,7 +24,6 @@ Use niFgen_InitWithOptions to override the default value.
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -41,7 +39,6 @@ Use niFgen_InitWithOptions to override the default value.
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -56,7 +53,6 @@ NI-FGEN can choose to always cache or to never cache  particular attributes rega
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -72,7 +68,6 @@ Use niFgen_InitWithOptions to override default value.
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -100,7 +95,6 @@ Use niFgen_InitWithOptions to override default value.
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -116,7 +110,6 @@ Interchangeability checking examines the attributes in a  capability group only 
     1050101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Primary Error',
         'name': 'PRIMARY_ERROR',
         'resettable': 'No',
@@ -130,7 +123,6 @@ Specifies a code that describes the first error that occurred since the last  ca
     1050102: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Secondary Error',
         'name': 'SECONDARY_ERROR',
         'resettable': 'No',
@@ -144,7 +136,6 @@ Specifies an optional code that provides additional information concerning the  
     1050103: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Error Elaboration',
         'name': 'ERROR_ELABORATION',
         'resettable': 'No',
@@ -158,7 +149,6 @@ Specifies an optional string that contains additional information concerning the
     1050203: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'NUM_CHANNELS',
         'resettable': 'No',
@@ -173,7 +163,6 @@ For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine mainta
     1050302: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
@@ -187,7 +176,6 @@ A string that contains the prefix for NI-FGEN. The name of each  user-callable f
     1050304: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
@@ -203,7 +191,6 @@ If you initialize NI-FGEN with the resource  descriptor, this attribute contains
     1050305: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
@@ -232,7 +219,6 @@ Specifies the I/O session that NI-FGEN uses  to communicate with the instrument.
     1050327: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
@@ -246,7 +232,6 @@ Returns a model code of the device. For NI-FGEN versions that support more than 
     1050401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
@@ -260,7 +245,6 @@ Returns a string that contains a comma-separated list of class-extention groups 
     1050503: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Major Version',
         'name': 'MAJOR_VERSION',
         'resettable': 'No',
@@ -272,7 +256,6 @@ Returns a string that contains a comma-separated list of class-extention groups 
     1050504: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Minor Version',
         'name': 'MINOR_VERSION',
         'resettable': 'No',
@@ -284,7 +267,6 @@ Returns a string that contains a comma-separated list of class-extention groups 
     1050510: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
@@ -298,7 +280,6 @@ A string that contains the firmware revision information  for the device that yo
     1050511: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
@@ -312,7 +293,6 @@ A string that contains the name of the device manufacturer you are currently  us
     1050512: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
@@ -326,7 +306,6 @@ A string that contains the model number or name of the device that you  are curr
     1050513: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
@@ -340,7 +319,6 @@ A string that contains the name of the vendor that supplies NI-FGEN.
     1050514: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
@@ -354,7 +332,6 @@ Returns a brief description of NI-FGEN.
     1050515: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
@@ -368,7 +345,6 @@ Returns the major version number of the class specification with which NI-FGEN i
     1050516: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
@@ -382,7 +358,6 @@ Returns the minor version number of the class specification with which NI-FGEN i
     1050551: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
@@ -406,7 +381,6 @@ A string that contains additional version information about  NI-FGEN.
     1150101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Advanced:Digital Pattern Enabled',
         'name': 'DIGITAL_PATTERN_ENABLED',
         'resettable': 'Yes',
@@ -418,7 +392,6 @@ A string that contains additional version information about  NI-FGEN.
     1150102: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Filters:Digital Filter Enabled',
         'name': 'DIGITAL_FILTER_ENABLED',
         'resettable': 'No',
@@ -430,7 +403,6 @@ A string that contains additional version information about  NI-FGEN.
     1150103: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Filters:Analog Filter Enabled',
         'name': 'ANALOG_FILTER_ENABLED',
         'resettable': 'No',
@@ -442,7 +414,6 @@ A string that contains additional version information about  NI-FGEN.
     1150104: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:5401/5411/5431:Filter Correction Frequency',
         'name': 'FILTER_CORRECTION_FREQUENCY',
         'resettable': 'No',
@@ -454,7 +425,6 @@ A string that contains additional version information about  NI-FGEN.
     1150105: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Sync Duty Cycle High',
         'name': 'SYNC_DUTY_CYCLE_HIGH',
         'resettable': 'No',
@@ -483,7 +453,6 @@ Controls the update clock source.
     1150107: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Reference Clock:Frequency',
         'name': 'REF_CLOCK_FREQUENCY',
         'resettable': 'Yes',
@@ -507,7 +476,6 @@ Controls the update clock source.
     1150109: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Actual Arb Sample Rate',
         'name': 'ACTUAL_ARB_SAMPLE_RATE',
         'resettable': 'No',
@@ -581,7 +549,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150208: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Handle',
         'name': 'FREQ_LIST_HANDLE',
         'resettable': 'No',
@@ -593,7 +560,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150209: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Number Of Frequency Lists',
         'name': 'MAX_NUM_FREQ_LISTS',
         'resettable': 'No',
@@ -605,7 +571,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150210: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Length',
         'name': 'MIN_FREQ_LIST_LENGTH',
         'resettable': 'No',
@@ -617,7 +582,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150211: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Length',
         'name': 'MAX_FREQ_LIST_LENGTH',
         'resettable': 'No',
@@ -629,7 +593,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150212: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Duration',
         'name': 'MIN_FREQ_LIST_DURATION',
         'resettable': 'No',
@@ -641,7 +604,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150213: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Duration',
         'name': 'MAX_FREQ_LIST_DURATION',
         'resettable': 'No',
@@ -653,7 +615,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150214: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Duration Quantum',
         'name': 'FREQ_LIST_DURATION_QUANTUM',
         'resettable': 'No',
@@ -689,7 +650,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150218: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Filters:Digital Filter Interpolation Factor',
         'name': 'DIGITAL_FILTER_INTERPOLATION_FACTOR',
         'resettable': 'No',
@@ -701,7 +661,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150219: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock:Exported Sample Clock Divisor',
         'name': 'EXPORTED_SAMPLE_CLOCK_DIVISOR',
         'resettable': 'Yes',
@@ -713,7 +672,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150220: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Load Impedance',
         'name': 'LOAD_IMPEDANCE',
         'resettable': 'Yes',
@@ -725,7 +683,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150221: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:DAQmx Task',
         'name': 'DAQMX_TASK',
         'resettable': 'No',
@@ -752,7 +709,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150223: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Calibration:Gain DAC Value',
         'name': 'GAIN_DAC_VALUE',
         'resettable': 'Yes',
@@ -764,7 +720,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150224: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Calibration:Offset DAC Value',
         'name': 'OFFSET_DAC_VALUE',
         'resettable': 'Yes',
@@ -776,7 +731,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150225: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Calibration:Oscillator Freq DAC Value',
         'name': 'OSCILLATOR_FREQ_DAC_VALUE',
         'resettable': 'Yes',
@@ -800,7 +754,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150228: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Calibration:Pre-Amplifier Attenuation',
         'name': 'PRE_AMPLIFIER_ATTENUATION',
         'resettable': 'Yes',
@@ -812,7 +765,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150229: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Calibration:Post-Amplifier Attenuation',
         'name': 'POST_AMPLIFIER_ATTENUATION',
         'resettable': 'Yes',
@@ -824,7 +776,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150230: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock Timebase:Exported Sample Clock Timebase Divisor',
         'name': 'EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR',
         'resettable': 'Yes',
@@ -836,7 +787,6 @@ The direct path presents a much smaller gain range, and you cannot adjust offset
     1150231: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Advanced:Sample Clock Absolute Delay',
         'name': 'SAMPLE_CLOCK_ABSOLUTE_DELAY',
         'resettable': 'Yes',
@@ -852,7 +802,6 @@ can only be applied when an external sample clock is used.
     1150232: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Advanced:Oscillator Phase DAC Value',
         'name': 'OSCILLATOR_PHASE_DAC_VALUE',
         'resettable': 'Yes',
@@ -864,7 +813,6 @@ can only be applied when an external sample clock is used.
     1150233: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Advanced:External Clock Delay Binary Value',
         'name': 'EXTERNAL_CLOCK_DELAY_BINARY_VALUE',
         'resettable': 'Yes',
@@ -876,7 +824,6 @@ can only be applied when an external sample clock is used.
     1150234: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Data Mask:Analog Data Mask',
         'name': 'ANALOG_DATA_MASK',
         'resettable': 'Yes',
@@ -888,7 +835,6 @@ can only be applied when an external sample clock is used.
     1150235: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Data Mask:Analog Static Value',
         'name': 'ANALOG_STATIC_VALUE',
         'resettable': 'Yes',
@@ -900,7 +846,6 @@ can only be applied when an external sample clock is used.
     1150236: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Data Mask:Digital Data Mask',
         'name': 'DIGITAL_DATA_MASK',
         'resettable': 'Yes',
@@ -912,7 +857,6 @@ can only be applied when an external sample clock is used.
     1150237: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Data Mask:Digital Static Value',
         'name': 'DIGITAL_STATIC_VALUE',
         'resettable': 'Yes',
@@ -924,7 +868,6 @@ can only be applied when an external sample clock is used.
     1150238: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Buffer Size',
         'name': 'FUNC_BUFFER_SIZE',
         'resettable': 'No',
@@ -940,7 +883,6 @@ implementation of Standard Function Mode on your device.
     1150239: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Maximum Buffer Size',
         'name': 'FUNC_MAX_BUFFER_SIZE',
         'resettable': 'No',
@@ -956,7 +898,6 @@ implementation of Standard Function Mode on your device.
     1150240: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:File Transfer Block Size',
         'name': 'FILE_TRANSFER_BLOCK_SIZE',
         'resettable': 'No',
@@ -968,7 +909,6 @@ implementation of Standard Function Mode on your device.
     1150241: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Data Transfer Block Size',
         'name': 'DATA_TRANSFER_BLOCK_SIZE',
         'resettable': 'Yes',
@@ -980,7 +920,6 @@ implementation of Standard Function Mode on your device.
     1150242: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Memory Size',
         'name': 'MEMORY_SIZE',
         'resettable': 'No',
@@ -992,7 +931,6 @@ implementation of Standard Function Mode on your device.
     1150243: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Serial Number',
         'name': 'SERIAL_NUMBER',
         'resettable': 'No',
@@ -1006,7 +944,6 @@ The signal generator's serial number.
     1150244: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Direct DMA Enabled',
         'name': 'DIRECT_DMA_ENABLED',
         'resettable': 'Yes',
@@ -1020,7 +957,6 @@ Enable the device for Direct DMA writes. When enabled, all Create Waveform and W
     1150245: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Window Size in Bytes',
         'name': 'DIRECT_DMA_WINDOW_SIZE',
         'resettable': 'Yes',
@@ -1032,7 +968,6 @@ Enable the device for Direct DMA writes. When enabled, all Create Waveform and W
     1150246: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:OSP Enabled',
         'name': 'OSP_ENABLED',
         'resettable': 'No',
@@ -1056,7 +991,6 @@ Enable the device for Direct DMA writes. When enabled, all Create Waveform and W
     1150248: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Rate',
         'name': 'OSP_IQ_RATE',
         'resettable': 'Yes',
@@ -1071,7 +1005,6 @@ NI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator t
     1150249: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Enabled',
         'name': 'OSP_CARRIER_ENABLED',
         'resettable': 'Yes',
@@ -1083,7 +1016,6 @@ NI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator t
     1150250: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Frequency',
         'name': 'OSP_CARRIER_FREQUENCY',
         'resettable': 'Yes',
@@ -1095,7 +1027,6 @@ NI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator t
     1150251: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase I',
         'name': 'OSP_CARRIER_PHASE_I',
         'resettable': 'Yes',
@@ -1107,7 +1038,6 @@ NI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator t
     1150252: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase Q',
         'name': 'OSP_CARRIER_PHASE_Q',
         'resettable': 'Yes',
@@ -1131,7 +1061,6 @@ NI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator t
     1150254: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Digital Gain',
         'name': 'DIGITAL_GAIN',
         'resettable': 'Yes',
@@ -1146,7 +1075,6 @@ Some signal generators support both digital gain and an analog gain (analog gain
     1150255: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Filter Enabled',
         'name': 'OSP_FIR_FILTER_ENABLED',
         'resettable': 'Yes',
@@ -1161,7 +1089,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150256: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Interpolation Factor',
         'name': 'OSP_FIR_FILTER_INTERPOLATION',
         'resettable': 'Yes',
@@ -1173,7 +1100,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150257: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Enabled',
         'name': 'OSP_CIC_FILTER_ENABLED',
         'resettable': 'Yes',
@@ -1188,7 +1114,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150258: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Interpolation Factor',
         'name': 'OSP_CIC_FILTER_INTERPOLATION',
         'resettable': 'Yes',
@@ -1200,7 +1125,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150259: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Root Raised Cosine:Alpha',
         'name': 'OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA',
         'resettable': 'Yes',
@@ -1212,7 +1136,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150260: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Raised Cosine:Alpha',
         'name': 'OSP_FIR_FILTER_RAISED_COSINE_ALPHA',
         'resettable': 'Yes',
@@ -1224,7 +1147,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150261: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Flat:Passband',
         'name': 'OSP_FIR_FILTER_FLAT_PASSBAND',
         'resettable': 'Yes',
@@ -1236,7 +1158,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150262: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Gaussian:BT',
         'name': 'OSP_FIR_FILTER_GAUSSIAN_BT',
         'resettable': 'Yes',
@@ -1248,7 +1169,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150263: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Gain',
         'name': 'OSP_CIC_FILTER_GAIN',
         'resettable': 'Yes',
@@ -1260,7 +1180,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150264: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain I',
         'name': 'OSP_PRE_FILTER_GAIN_I',
         'resettable': 'Yes',
@@ -1272,7 +1191,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150265: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain Q',
         'name': 'OSP_PRE_FILTER_GAIN_Q',
         'resettable': 'Yes',
@@ -1284,7 +1202,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150266: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset I',
         'name': 'OSP_PRE_FILTER_OFFSET_I',
         'resettable': 'Yes',
@@ -1296,7 +1213,6 @@ The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  a
     1150267: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset Q',
         'name': 'OSP_PRE_FILTER_OFFSET_Q',
         'resettable': 'Yes',
@@ -1323,7 +1239,6 @@ You can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow 
     1150269: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:OSP Overflow Status',
         'name': 'OSP_OVERFLOW_STATUS',
         'resettable': 'Yes',
@@ -1338,7 +1253,6 @@ Write 0 to this attribute to clear the current NIFGEN_ATTR_OSP_OVERFLOW_ERROR_RE
     1150270: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Script Mode:Script to Generate',
         'name': 'SCRIPT_TO_GENERATE',
         'resettable': 'No',
@@ -1353,7 +1267,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150271: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Marker Events Count',
         'name': 'MARKER_EVENTS_COUNT',
         'resettable': 'No',
@@ -1365,7 +1278,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150272: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Script Triggers Count',
         'name': 'SCRIPT_TRIGGERS_COUNT',
         'resettable': 'No',
@@ -1377,7 +1289,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150273: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Data Marker Events Count',
         'name': 'DATA_MARKER_EVENTS_COUNT',
         'resettable': 'No',
@@ -1389,7 +1300,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150274: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Window Address',
         'name': 'DIRECT_DMA_WINDOW_ADDRESS',
         'resettable': 'Yes',
@@ -1413,7 +1323,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150281: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Start:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_START_TRIGGER_SOURCE',
         'resettable': 'Yes',
@@ -1437,7 +1346,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150283: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Start:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1461,7 +1369,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150291: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Script:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE',
         'resettable': 'Yes',
@@ -1485,7 +1392,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150293: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Script:Digital Level:Source',
         'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE',
         'resettable': 'Yes',
@@ -1509,7 +1415,6 @@ Specifies which script the generator produces. To configure the generator to run
     1150295: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Script:Output Terminal',
         'name': 'EXPORTED_SCRIPT_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1524,7 +1429,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150310: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Ready For Start:Output Terminal',
         'name': 'READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1548,7 +1452,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150312: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Output Terminal',
         'name': 'MARKER_EVENT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1572,7 +1475,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150314: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Started:Output Terminal',
         'name': 'STARTED_EVENT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1584,7 +1486,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150315: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Done:Output Terminal',
         'name': 'DONE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1644,7 +1545,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150320: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock:Export Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1656,7 +1556,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150321: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Reference Clock:Export Output Terminal',
         'name': 'EXPORTED_REFERENCE_CLOCK_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1668,7 +1567,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150322: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Reference Clock:Onboard Reference Clock:Export Output Terminal',
         'name': 'EXPORTED_ONBOARD_REFERENCE_CLOCK_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1680,7 +1578,6 @@ Setting this attribute to an empty string means that when you commit the session
     1150323: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Filters:Flatness Correction Enabled',
         'name': 'FLATNESS_CORRECTION_ENABLED',
         'resettable': 'Yes',
@@ -1695,7 +1592,6 @@ This attribute should be set to VI_FALSE when performing Flatness Calibration.
     1150324: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Handle',
         'name': 'STREAMING_WAVEFORM_HANDLE',
         'resettable': 'No',
@@ -1710,7 +1606,6 @@ Used in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     1150325: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Space Available in Streaming Waveform',
         'name': 'STREAMING_SPACE_AVAILABLE_IN_WAVEFORM',
         'resettable': 'No',
@@ -1726,7 +1621,6 @@ Used in conjunction with the NIFGEN_ATTR_STREAMING_WAVEFORM_HANDLE or NIFGEN_ATT
     1150326: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Waveform Name',
         'name': 'STREAMING_WAVEFORM_NAME',
         'resettable': 'Yes',
@@ -1741,7 +1635,6 @@ Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     1150327: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Marker Position',
         'name': 'ARB_MARKER_POSITION',
         'resettable': 'No',
@@ -1756,7 +1649,6 @@ Use niFgen_ExportSignal to export the marker signal.
     1150328: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Repeat Count',
         'name': 'ARB_REPEAT_COUNT',
         'resettable': 'No',
@@ -1771,7 +1663,6 @@ When used during streaming, this attribute specifies the number of times to repe
     1150329: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock Timebase:Export Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1787,7 +1678,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150330: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Sync Out Output Terminal',
         'name': 'SYNC_OUT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1847,7 +1737,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150335: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Started:Pulse:Width Value',
         'name': 'STARTED_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
@@ -1859,7 +1748,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150336: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Done:Pulse:Width Value',
         'name': 'DONE_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
@@ -1871,7 +1759,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150337: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Data Marker:Data Bit Number',
         'name': 'DATA_MARKER_EVENT_DATA_BIT_NUMBER',
         'resettable': 'Yes',
@@ -1895,7 +1782,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150339: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Data Marker:Output Terminal',
         'name': 'DATA_MARKER_EVENT_OUTPUT_TERMINAL',
         'resettable': 'Yes',
@@ -1907,7 +1793,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150340: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Pulse:Width Value',
         'name': 'MARKER_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
@@ -1955,7 +1840,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150344: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Advanced:All Marker Events Live Status',
         'name': 'ALL_MARKER_EVENTS_LIVE_STATUS',
         'resettable': 'No',
@@ -1967,7 +1851,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150345: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Advanced:Live Status',
         'name': 'MARKER_EVENT_LIVE_STATUS',
         'resettable': 'No',
@@ -1979,7 +1862,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150348: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Ready For Start:Advanced:Live Status',
         'name': 'READY_FOR_START_EVENT_LIVE_STATUS',
         'resettable': 'No',
@@ -1991,7 +1873,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150349: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Advanced:All Marker Events Latched Status',
         'name': 'ALL_MARKER_EVENTS_LATCHED_STATUS',
         'resettable': 'Yes',
@@ -2003,7 +1884,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150350: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Advanced:Latched Status',
         'name': 'MARKER_EVENT_LATCHED_STATUS',
         'resettable': 'Yes',
@@ -2018,7 +1898,6 @@ Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     1150351: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Done:Advanced:Latched Status',
         'name': 'DONE_EVENT_LATCHED_STATUS',
         'resettable': 'No',
@@ -2030,7 +1909,6 @@ Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     1150352: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Started:Advanced:Latched Status',
         'name': 'STARTED_EVENT_LATCHED_STATUS',
         'resettable': 'No',
@@ -2042,7 +1920,6 @@ Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     1150354: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Marker:Advanced:Delay Value',
         'name': 'MARKER_EVENT_DELAY',
         'resettable': 'Yes',
@@ -2066,7 +1943,6 @@ Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     1150356: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Started:Advanced:Delay Value',
         'name': 'STARTED_EVENT_DELAY',
         'resettable': 'Yes',
@@ -2096,7 +1972,6 @@ attribute.  Valid units are seconds and sample clock periods.
     1150358: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Done:Advanced:Delay Value',
         'name': 'DONE_EVENT_DELAY',
         'resettable': 'Yes',
@@ -2120,7 +1995,6 @@ attribute.  Valid units are seconds and sample clock periods.
     1150362: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:PCI DMA Optimizations Enabled',
         'name': 'PCI_DMA_OPTIMIZATIONS_ENABLED',
         'resettable': 'Yes',
@@ -2148,7 +2022,6 @@ This attribute is enabled (VI_TRUE) by default, and NI recommends leaving it ena
     1150366: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Common Mode Offset',
         'name': 'COMMON_MODE_OFFSET',
         'resettable': 'Yes',
@@ -2176,7 +2049,6 @@ To change the device configuration, call the niFgen_AbortGeneration function or 
     1150368: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock Timebase:Rate',
         'name': 'SAMPLE_CLOCK_TIMEBASE_RATE',
         'resettable': 'Yes',
@@ -2192,7 +2064,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150369: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Channel Delay',
         'name': 'CHANNEL_DELAY',
         'resettable': 'Yes',
@@ -2216,7 +2087,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150371: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Frequency Shift',
         'name': 'OSP_FREQUENCY_SHIFT',
         'resettable': 'Yes',
@@ -2228,7 +2098,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150373: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Maximum Bandwidth',
         'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
         'resettable': 'Yes',
@@ -2240,7 +2109,6 @@ To change the device configuration, call niFgen_AbortGeneration or wait for the 
     1150374: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Preferred Packet Size',
         'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
         'resettable': 'Yes',
@@ -2260,7 +2128,6 @@ You cannot change this attribute while the device is generating a waveform. If y
     1150375: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Maximum In-Flight Read Requests',
         'name': 'DATA_TRANSFER_MAXIMUM_IN_FLIGHT_READS',
         'resettable': 'Yes',
@@ -2276,7 +2143,6 @@ If other devices in your system cannot tolerate long data latencies, it may be h
     1150376: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Advanced:External Sample Clock Multiplier',
         'name': 'EXTERNAL_SAMPLE_CLOCK_MULTIPLIER',
         'resettable': 'Yes',
@@ -2300,7 +2166,6 @@ If other devices in your system cannot tolerate long data latencies, it may be h
     1150378: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Advanced:Idle Value',
         'name': 'IDLE_VALUE',
         'resettable': 'Yes',
@@ -2324,7 +2189,6 @@ If other devices in your system cannot tolerate long data latencies, it may be h
     1150380: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Advanced:Wait Value',
         'name': 'WAIT_VALUE',
         'resettable': 'Yes',
@@ -2336,7 +2200,6 @@ If other devices in your system cannot tolerate long data latencies, it may be h
     1150389: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:Compensate for Filter Group Delay',
         'name': 'OSP_COMPENSATE_FOR_FILTER_GROUP_DELAY',
         'resettable': 'Yes',
@@ -2348,7 +2211,6 @@ If other devices in your system cannot tolerate long data latencies, it may be h
     1150390: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision',
         'name': 'MODULE_REVISION',
         'resettable': 'No',
@@ -2362,7 +2224,6 @@ A string that contains the module revision  for the device that you are currentl
     1150391: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:P2P Enabled',
         'name': 'P2P_ENABLED',
         'resettable': 'No',
@@ -2376,7 +2237,6 @@ Specifies whether the signal generator reads data from the peer-to-peer endpoint
     1150392: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Destination Channels',
         'name': 'P2P_DESTINATION_CHANNELS',
         'resettable': 'No',
@@ -2390,7 +2250,6 @@ Specifies which channels will be written to by a peer-to-peer endpoint. If multi
     1150393: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Size',
         'name': 'P2P_ENDPOINT_SIZE',
         'resettable': 'No',
@@ -2404,7 +2263,6 @@ Returns the size, in samples per channel, of the peer-to-peer endpoint. This att
     1150394: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Space Available In Endpoint',
         'name': 'P2P_SPACE_AVAILABLE_IN_ENDPOINT',
         'resettable': 'No',
@@ -2418,7 +2276,6 @@ Returns the current space available in the endpoint in samples per channel. You 
     1150395: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Most Space Available In Endpoint',
         'name': 'P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT',
         'resettable': 'No',
@@ -2433,7 +2290,6 @@ If you wish to minimize the latency for data to move through the endpoint and be
     1150396: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Count',
         'name': 'P2P_ENDPOINT_COUNT',
         'resettable': 'No',
@@ -2447,7 +2303,6 @@ Returns the number of peer-to-peer FIFO endpoints supported by the device.
     1150397: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Manual Configuration Enabled',
         'name': 'P2P_MANUAL_CONFIGURATION_ENABLED',
         'resettable': 'No',
@@ -2461,7 +2316,6 @@ Enables/disables manual configuration for a peer-to-peer endpoint. Enabling this
     1150398: {
         'access': 'write only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address',
         'name': 'P2P_DATA_TRANSFER_PERMISSION_ADDRESS',
         'resettable': 'No',
@@ -2495,7 +2349,6 @@ You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_EN
     1150400: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Interval',
         'name': 'P2P_DATA_TRANSFER_PERMISSION_INTERVAL',
         'resettable': 'No',
@@ -2510,7 +2363,6 @@ Default Value: 1,024 samples per channel
     1150401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address',
         'name': 'P2P_ENDPOINT_WINDOW_ADDRESS',
         'resettable': 'No',
@@ -2544,7 +2396,6 @@ You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_EN
     1150403: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Size',
         'name': 'P2P_ENDPOINT_WINDOW_SIZE',
         'resettable': 'No',
@@ -2561,7 +2412,6 @@ You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_EN
     1150405: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address',
         'name': 'P2P_DONE_NOTIFICATION_ADDRESS',
         'resettable': 'No',
@@ -2595,7 +2445,6 @@ You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_EN
     1150407: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Value',
         'name': 'P2P_DONE_NOTIFICATION_VALUE',
         'resettable': 'No',
@@ -2612,7 +2461,6 @@ You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_EN
     1150408: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Initial Credits',
         'name': 'P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS',
         'resettable': 'No',
@@ -2626,7 +2474,6 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
     1150409: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Streaming Write Timeout',
         'name': 'STREAMING_WRITE_TIMEOUT',
         'resettable': 'Yes',
@@ -2638,7 +2485,6 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
     1150410: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Start:P2P Endpoint Fullness:Level',
         'name': 'P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL',
         'resettable': 'No',
@@ -2650,7 +2496,6 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
     1150411: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Advanced:AUX Power Enabled',
         'name': 'AUX_POWER_ENABLED',
         'resettable': 'Yes',
@@ -2662,7 +2507,6 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
     1150412: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:FPGA Bitfile Path',
         'name': 'FPGA_BITFILE_PATH',
         'resettable': 'No',
@@ -2687,7 +2531,6 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
     1250002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Instrument:Obsolete:Ref Clock Source',
         'name': 'REF_CLOCK_SOURCE',
         'resettable': 'Yes',
@@ -2704,7 +2547,6 @@ specify.
     1250003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Output Enabled',
         'name': 'OUTPUT_ENABLED',
         'resettable': 'Yes',
@@ -2716,7 +2558,6 @@ specify.
     1250004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Output:Output Impedance',
         'name': 'OUTPUT_IMPEDANCE',
         'resettable': 'Yes',
@@ -2766,7 +2607,6 @@ niFgen_DefineUserStandardWaveform
     1250102: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Amplitude',
         'name': 'FUNC_AMPLITUDE',
         'resettable': 'No',
@@ -2784,7 +2624,6 @@ Units: Vpk-pk
     1250103: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:DC Offset',
         'name': 'FUNC_DC_OFFSET',
         'resettable': 'No',
@@ -2800,7 +2639,6 @@ Units: volts
     1250104: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Frequency',
         'name': 'FUNC_FREQUENCY',
         'resettable': 'No',
@@ -2820,7 +2658,6 @@ Units: hertz
     1250105: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Start Phase',
         'name': 'FUNC_START_PHASE',
         'resettable': 'No',
@@ -2838,7 +2675,6 @@ Units: Degrees of one cycle
     1250106: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Standard Function:Duty Cycle High',
         'name': 'FUNC_DUTY_CYCLE_HIGH',
         'resettable': 'No',
@@ -2855,7 +2691,6 @@ Units: Percentage of time the waveform is high
     1250201: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle',
         'name': 'ARB_WAVEFORM_HANDLE',
         'resettable': 'No',
@@ -2876,7 +2711,6 @@ Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT
     1250202: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Gain',
         'name': 'ARB_GAIN',
         'resettable': 'Yes',
@@ -2892,7 +2726,6 @@ Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB 
     1250203: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Offset',
         'name': 'ARB_OFFSET',
         'resettable': 'Yes',
@@ -2909,7 +2742,6 @@ Units: Volts
     1250204: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocks:Sample Clock:Rate',
         'name': 'ARB_SAMPLE_RATE',
         'resettable': 'Yes',
@@ -2924,7 +2756,6 @@ Units: Samples/s
     1250205: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Capabilities:Max Number of Waveforms',
         'name': 'MAX_NUM_WAVEFORMS',
         'resettable': 'No',
@@ -2936,7 +2767,6 @@ Units: Samples/s
     1250206: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Capabilities:Waveform Quantum',
         'name': 'WAVEFORM_QUANTUM',
         'resettable': 'No',
@@ -2951,7 +2781,6 @@ For example, when this attribute returns a value of 8, all waveform sizes must b
     1250207: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Capabilities:Min Waveform Size',
         'name': 'MIN_WAVEFORM_SIZE',
         'resettable': 'No',
@@ -2963,7 +2792,6 @@ For example, when this attribute returns a value of 8, all waveform sizes must b
     1250208: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Capabilities:Max Waveform Size',
         'name': 'MAX_WAVEFORM_SIZE',
         'resettable': 'No',
@@ -2975,7 +2803,6 @@ For example, when this attribute returns a value of 8, all waveform sizes must b
     1250211: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle',
         'name': 'ARB_SEQUENCE_HANDLE',
         'resettable': 'No',
@@ -2990,7 +2817,6 @@ Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT
     1250212: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Number of Sequences',
         'name': 'MAX_NUM_SEQUENCES',
         'resettable': 'No',
@@ -3002,7 +2828,6 @@ Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT
     1250213: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Min Sequence Length',
         'name': 'MIN_SEQUENCE_LENGTH',
         'resettable': 'No',
@@ -3014,7 +2839,6 @@ Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT
     1250214: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Sequence Length',
         'name': 'MAX_SEQUENCE_LENGTH',
         'resettable': 'No',
@@ -3026,7 +2850,6 @@ Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT
     1250215: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count',
         'name': 'MAX_LOOP_COUNT',
         'resettable': 'No',
