@@ -45,7 +45,7 @@ class AttributeViString(object):
         return self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id)
 
 
-class Device(object):
+class _Device(object):
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -85,6 +85,36 @@ class Device(object):
         object.__setattr__(self, name, value)
 
 
+class _DeviceIterable(object):
+    def __init__(self, owner, count):
+        self._current_index = 0
+        self._owner = owner
+        self._count = count
+        self._param_list = 'owner=' + pp.pformat(owner) + ', count=' + pp.pformat(count)
+        self._is_frozen = True
+
+    def get_next(self):
+        if self._current_index + 1 > self._count:
+            raise StopIteration
+        else:
+            self._current_index += 1
+            return _Device(self._owner, self._current_index)
+
+    def next(self):
+        return self.get_next()
+
+    def __next__(self):
+        return self.get_next()
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
+
+    def __str__(self):
+        ret_str = self.__repr__() + ':\n'
+        ret_str += '    current index = {0}'.format(self._current_index)
+        return ret_str
+
+
 class Session(object):
     '''${config['session_class_description']}'''
 
@@ -108,7 +138,7 @@ class Session(object):
     def __str__(self):
         ret_str = self.__repr__() + ':\n'
         for i in range(self._item_count):
-            ret_str += str(Device(self, i)) + '\n'
+            ret_str += str(_Device(self, i)) + '\n'
         return ret_str
 
     def __setattr__(self, key, value):
@@ -117,7 +147,7 @@ class Session(object):
         object.__setattr__(self, key, value)
 
     def __getitem__(self, index):
-        return Device(self, index)
+        return _Device(self, index)
 
     def __enter__(self):
         return self
@@ -150,10 +180,7 @@ class Session(object):
         return self._item_count
 
     def __iter__(self):
-        devices = []
-        for i in range(self._item_count):
-            devices.append(Device(self, i))
-        return iter(devices)
+        return _DeviceIterable(self, self._item_count)
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
