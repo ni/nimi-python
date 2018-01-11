@@ -178,7 +178,8 @@ enums_additional_enums = {
             },          
         ],
     },
-    'PowerLineFrequency': {}, # Enum metadata actually contains constants.
+    'PowerLineFrequency': {},  # Enum metadata actually contains constants.
+    'tBoolean': {},  # Enum just represents True/False
 }
 
 
