@@ -272,7 +272,7 @@ class _SessionBase(object):
             session['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
 
         Returns:
             reading (float): The measured value.
@@ -930,7 +930,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
 
         Returns:
             reading (float): The measured value.
