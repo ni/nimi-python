@@ -63,6 +63,29 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: ComplianceLimitSymmetry
+
+    .. py:attribute:: nidcpower.ComplianceLimitSymmetry.SYMMETRIC
+
+
+
+        Compliance limits are specified symmetrically about 0.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.ComplianceLimitSymmetry.ASYMMETRIC
+
+
+
+        Compliance limits can be specified asymmetrically with respect to 0.
+
+        
+
+
+
+
 .. py:data:: CurrentLevelAutorange
 
     .. py:attribute:: nidcpower.CurrentLevelAutorange.OFF

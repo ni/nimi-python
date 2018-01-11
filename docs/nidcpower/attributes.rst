@@ -286,6 +286,65 @@ nidcpower.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
             - C Attribute: **NIDCPOWER_ATTR_CHANNEL_COUNT**
 
+.. py:attribute:: compliance_limit_symmetry
+
+    Specifies whether compliance limits for current generation and voltage
+    generation for the device are applied symmetrically about 0 V and 0 A or
+    asymmetrically with respect to 0 V and 0 A.
+    When set to **Symmetric**, voltage limits and current limits are set
+    using a single property with a positive value. The resulting range is
+    bounded by this positive value and its opposite.
+    When set to **Asymmetric**, you must separately set a limit high and a
+    limit low using distinct properties.
+    Asymmetric limits must meet the following requirements:
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Symmetric
+    **Related Topics:**
+    `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: Refer to `Supported Properties by
+        Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+        information about supported devices.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        compliance_limit_symmetry.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        compliance_limit_symmetry.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].compliance_limit_symmetry = var
+            var = session['0,1'].compliance_limit_symmetry
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | :py:data:`ComplianceLimitSymmetry` |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | True                               |
+    +----------------+------------------------------------+
+    | Resettable     | No                                 |
+    +----------------+------------------------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Advanced:Compliance Limit Symmetry**
+            - C Attribute: **NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY**
+
 .. py:attribute:: current_compensation_frequency
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
@@ -497,7 +556,7 @@ nidcpower.Session properties
 .. py:attribute:: current_limit
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to  NIDCPOWER_VAL_SYMMETRIC.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
     Valid Values: The valid values for this attribute are defined by the values to which  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.
 
@@ -576,6 +635,132 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:DC Voltage:Current Limit Autorange**
             - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE**
+
+.. py:attribute:: current_limit_high
+
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired voltage on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Voltage**.
+    You must also specify a `Current Limit
+    Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Current Limit
+    Range <pniDCPower_CurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_limit_high = var
+            var = session['0,1'].current_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:DC Voltage:Current Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH**
+
+.. py:attribute:: current_limit_low
+
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired voltage on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Voltage**.
+    You must also specify a `Current Limit
+    High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [-`Current Limit
+    Range <pniDCPower_CurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_limit_low = var
+            var = session['0,1'].current_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:DC Voltage:Current Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_LOW**
 
 .. py:attribute:: current_limit_range
 
@@ -1839,14 +2024,19 @@ nidcpower.Session properties
     When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
     NIDCPOWER_ATTR_VOLTAGE_LEVEL
     NIDCPOWER_ATTR_CURRENT_LIMIT
+    NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH
+    NIDCPOWER_ATTR_CURRENT_LIMIT_LOW
     NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE
     NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE
+    NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY
     When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_CURRENT is selected:
     NIDCPOWER_ATTR_CURRENT_LEVEL
     NIDCPOWER_ATTR_VOLTAGE_LIMIT
+    NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH
+    NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW
     NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE
     NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE
-    Default Value: NIDCPOWER_VAL_DC_VOLTAGE
+    NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY
 
 
 
@@ -2187,6 +2377,138 @@ nidcpower.Session properties
             - LabVIEW Property: **Source:Pulse Voltage:Pulse Bias Current Limit**
             - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT**
 
+.. py:attribute:: pulse_bias_current_limit_high
+
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Bias Current Limit
+    Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [0, `Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_current_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_current_limit_high = var
+            var = session['0,1'].pulse_bias_current_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Voltage:Pulse Bias Current Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_HIGH**
+
+.. py:attribute:: pulse_bias_current_limit_low
+
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Bias Current Limit
+    High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_current_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_current_limit_low = var
+            var = session['0,1'].pulse_bias_current_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Voltage:Pulse Bias Current Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_LOW**
+
 .. py:attribute:: pulse_bias_delay
 
     Determines when, in seconds, the device generates the Pulse Complete event after generating the off level of a pulse.
@@ -2309,6 +2631,138 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:Pulse Current:Pulse Bias Voltage Limit**
             - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT**
+
+.. py:attribute:: pulse_bias_voltage_limit_high
+
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Bias Voltage Limit
+    Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [0, `Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_voltage_limit_high = var
+            var = session['0,1'].pulse_bias_voltage_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Current:Pulse Bias Voltage Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_HIGH**
+
+.. py:attribute:: pulse_bias_voltage_limit_low
+
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Bias Voltage Limit
+    High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_voltage_limit_low = var
+            var = session['0,1'].pulse_bias_voltage_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Current:Pulse Bias Voltage Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_LOW**
 
 .. py:attribute:: pulse_complete_event_output_terminal
 
@@ -2486,7 +2940,7 @@ nidcpower.Session properties
 .. py:attribute:: pulse_current_limit
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY  attribute is set to NIDCPOWER_VAL_SYMMETRIC.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
 
 
@@ -2523,6 +2977,138 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:Pulse Voltage:Pulse Current Limit**
             - C Attribute: **NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT**
+
+.. py:attribute:: pulse_current_limit_high
+
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Current Limit
+    Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_limit_high = var
+            var = session['0,1'].pulse_current_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Voltage:Pulse Current Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_HIGH**
+
+.. py:attribute:: pulse_current_limit_low
+
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Current Limit
+    High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_limit_low = var
+            var = session['0,1'].pulse_current_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Voltage:Pulse Current Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_LOW**
 
 .. py:attribute:: pulse_current_limit_range
 
@@ -2763,7 +3349,7 @@ nidcpower.Session properties
 .. py:attribute:: pulse_voltage_limit
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute  is set to NIDCPOWER_VAL_SYMMETRIC.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
 
 
@@ -2800,6 +3386,138 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:Pulse Current:Pulse Voltage Limit**
             - C Attribute: **NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT**
+
+.. py:attribute:: pulse_voltage_limit_high
+
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Voltage Limit
+    Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_limit_high = var
+            var = session['0,1'].pulse_voltage_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Current:Pulse Voltage Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_HIGH**
+
+.. py:attribute:: pulse_voltage_limit_low
+
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Voltage Limit
+    High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE or if the `Output
+        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        pulsing function.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_limit_low = var
+            var = session['0,1'].pulse_voltage_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:Pulse Current:Pulse Voltage Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_LOW**
 
 .. py:attribute:: pulse_voltage_limit_range
 
@@ -4115,7 +4833,7 @@ nidcpower.Session properties
 .. py:attribute:: voltage_limit
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT  and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_SYMMETRIC.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
     Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.
 
@@ -4194,6 +4912,132 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:DC Current:Voltage Limit Autorange**
             - C Attribute: **NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE**
+
+.. py:attribute:: voltage_limit_high
+
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired current on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Current**.
+    You must also specify a `Voltage Limit
+    Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Voltage Limit
+    Range <pniDCPower_VoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_limit_high = var
+            var = session['0,1'].voltage_limit_high
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:DC Current:Voltage Limit High**
+            - C Attribute: **NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH**
+
+.. py:attribute:: voltage_limit_low
+
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired current on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Current**.
+    You must also specify a `Voltage Limit
+    High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [-`Voltage Limit
+    Range <pniDCPower_VoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+
+
+    .. note:: The limit may be extended beyond the selected limit range if the
+        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        set to TRUE.
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_limit_low = var
+            var = session['0,1'].voltage_limit_low
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | float      |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Source:DC Current:Voltage Limit Low**
+            - C Attribute: **NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW**
 
 .. py:attribute:: voltage_limit_range
 
