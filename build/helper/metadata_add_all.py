@@ -19,11 +19,26 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
 
-def _add_name(function, name):
+# These functions can be used by any type, function, attribute or enum
+
+
+def _add_name(n, name):
     '''Adds a name' key/value pair to the function metadata'''
-    assert 'name' not in function, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
-    function['name'] = name
-    return function
+    assert 'name' not in n, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
+    n['name'] = name
+    return n
+
+
+def _add_codegen_method(n):
+    '''Add 'codegen_method' as public if it isn't already there'''
+    if 'codegen_method' not in n:
+        n['codegen_method'] = 'public'
+
+
+def _add_enum(n):
+    '''Add 'enum' as None if it isn't already there'''
+    if 'enum' not in n:
+        n['enum'] = None
 
 
 def _add_python_method_name(function, name):
@@ -241,6 +256,9 @@ def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config)
 
+    for f in functions:
+        _add_codegen_method(functions[f])
+
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
@@ -249,6 +267,7 @@ def add_all_function_metadata(functions, config):
         _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
+            _add_enum(p)
             _add_buffer_info(p)
             _add_use_in_python_api(p, functions[f]['parameters'])
             _fix_type(p)
@@ -265,12 +284,6 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
-def _add_attr_codegen_method(a, attributes):
-    '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
-    if 'codegen_method' not in attributes[a]:
-        attributes[a]['codegen_method'] = 'public'
-
-
 def _add_python_name(a, attributes):
     '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
     n = attributes[a]['name'].lower()
@@ -284,7 +297,8 @@ def add_all_attribute_metadata(attributes, config):
     attributes = merge_helper(attributes, 'attributes', config)
 
     for a in attributes:
-        _add_attr_codegen_method(a, attributes)
+        _add_codegen_method(attributes[a])
+        _add_enum(attributes[a])
         _add_python_name(a, attributes)
 
     return attributes
