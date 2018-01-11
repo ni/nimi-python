@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from nifake import _converters  # noqa: F401
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -13,38 +14,6 @@ from nifake import custom_struct  # noqa: F401
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-class _TimedeltaConverter(object):
-    def __init__(self, value, library_type, library_units):
-        self._value = value
-        self._library_type = library_type
-        self._library_units = library_units
-
-        if str(type(value)).find("'datetime.timedelta'") != -1:
-            if library_units == 'seconds':
-                scaling = 1
-            elif library_units == 'milliseconds':
-                scaling = 1000
-            elif library_units == 'microseconds':
-                scaling = 1000000
-            else:
-                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(library_units))
-
-            self.value = value.total_seconds() * scaling
-        else:
-            self.value = value
-
-        if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
-            self.value = int(self.value)
-
-        self.ctype_value = library_type(self.value)
-
-    def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format('nifake', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._library_type), pp.pformat(self._library_units))
-
-    def __str__(self):
-        return self.__repr__() + ' = ' + pp.pformat(self.value)
 
 
 class _Acquisition(object):
@@ -310,7 +279,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        maximum_time_ctype = _TimedeltaConverter(maximum_time, visatype.ViInt32, 'microseconds').ctype_value  # case 15
+        maximum_time_ctype = _converters.timedelta_converter_microseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -967,7 +936,7 @@ class Session(_SessionBase):
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = _TimedeltaConverter(maximum_time, visatype.ViReal64, 'seconds').ctype_value  # case 15
+        maximum_time_ctype = _converters.timedelta_converter_seconds(maximum_time, visatype.ViReal64)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

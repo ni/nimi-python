@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from niswitch import _converters  # noqa: F401
 from niswitch import attributes
 from niswitch import enums
 from niswitch import errors
@@ -11,38 +12,6 @@ from niswitch import visatype
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-class _TimedeltaConverter(object):
-    def __init__(self, value, library_type, library_units):
-        self._value = value
-        self._library_type = library_type
-        self._library_units = library_units
-
-        if str(type(value)).find("'datetime.timedelta'") != -1:
-            if library_units == 'seconds':
-                scaling = 1
-            elif library_units == 'milliseconds':
-                scaling = 1000
-            elif library_units == 'microseconds':
-                scaling = 1000000
-            else:
-                raise TypeError("units must be 'seconds', 'milliseconds', or 'microseconds'. Actual {0}".format(library_units))
-
-            self.value = value.total_seconds() * scaling
-        else:
-            self.value = value
-
-        if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
-            self.value = int(self.value)
-
-        self.ctype_value = library_type(self.value)
-
-    def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format('niswitch', self.__class__.__name__, pp.pformat(self._value), pp.pformat(self._library_type), pp.pformat(self._library_units))
-
-    def __str__(self):
-        return self.__repr__() + ' = ' + pp.pformat(self.value)
 
 
 class _Scan(object):
