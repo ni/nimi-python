@@ -2,11 +2,11 @@
 
 import argparse
 import niscope
-import pprint
-import time
 import numpy
 import platform
+import pprint
 import sys
+import time
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
