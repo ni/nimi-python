@@ -74,8 +74,19 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
         with nimodinst.Session('') as session:
             assert len(session) == 2
+            count = 0
             for d in session:
-                pass
+                count += 1
+            assert count == len(session)
+
+    def test_iterating_for_empty(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 0
+        with nimodinst.Session('') as session:
+            assert len(session) == 0
+            count = 0
+            for d in session:
+                count += 1
+            assert count == len(session)
 
     def test_get_extended_error_info(self):
         error_string = 'Error'
@@ -185,7 +196,7 @@ class TestSession(object):
                 session[0].non_existent_property
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Device' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_Device' object has no attribute 'non_existent_property'"
 
     def test_vi_int32_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
