@@ -71,12 +71,10 @@ functions_default_value = {
 
 # Converted parameters
 functions_converters = {
-    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': '_TimedeltaConverter', 
-                                                               'python_api_converter_type': 'datetime.timedelta',
-                                                               'python_api_converter_additional_params': ["'seconds'"], }, }, },
-    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': '_TimedeltaConverter', 
-                                                               'python_api_converter_type': 'datetime.timedelta',
-                                                               'python_api_converter_additional_params': ["'microseconds'"], }, }, },
+    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'timedelta_converter_seconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'timedelta_converter_microseconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
 # Manually provided Python names for methods, rather than deriving from original names.

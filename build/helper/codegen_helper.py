@@ -196,7 +196,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
       7.5. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
         8. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
        14. Output scalar or enum:                                               visatype.ViInt32()
-       15. Input uses converter                                                 _TimedeltaConverter(timeout, visatype.ViReal64, 'second')
+       15. Input uses converter                                                 timedelta_converter_seconds(timeout, visatype.ViReal64)
     '''
 
     assert parameter['is_buffer'] is False
@@ -211,8 +211,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         elif parameter['enum'] is not None:
             definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            converter_params = [parameter['python_name'], module_name + '.' + parameter['ctypes_type']] + parameter['python_api_converter_additional_params']
-            definition = '{0}({1}).ctype_value  # case 15'.format(parameter['python_api_converter_name'], ', '.join(converter_params))
+            definition = '_converters.{0}({1}, {2})  # case 15'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
         elif corresponding_buffer_parameter is None:
             definition = '{0}.{1}({2})  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameter['direction'] == 'in':
@@ -641,9 +640,8 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViReal64',
         'use_in_python_api': True,
-        'python_api_converter_name': '_TimedeltaConverter',
+        'python_api_converter_name': 'timedelta_converter_seconds',
         'python_api_converter_type': 'datetime.timedelta',
-        'python_api_converter_additional_params': ["'seconds'"],
     },
 ]
 
@@ -740,7 +738,7 @@ def test_get_ctype_variable_declaration_snippet_case_14():
 
 def test_get_ctype_variable_declaration_snippet_case_15():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "timeout_ctype = _TimedeltaConverter(timeout, visatype.ViReal64, 'seconds').ctype_value  # case 15"
+    assert snippet == "timeout_ctype = _converters.timedelta_converter_seconds(timeout, visatype.ViReal64)  # case 15"
 
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
