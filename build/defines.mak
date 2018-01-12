@@ -69,6 +69,8 @@ DEFAULT_RST_FILES_TO_GENERATE := \
     attributes.rst \
     functions.rst \
     examples.rst \
+    installation.inc \
+    status.inc \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
