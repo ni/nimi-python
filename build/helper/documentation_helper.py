@@ -301,6 +301,8 @@ def format_type_for_rst_documentation(param, numpy, config):
         p_type = param['numpy_type']
     elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+    elif 'python_api_converter_type' in param:
+        p_type = param['python_api_converter_type'] + ' or ' + param['python_type']
     else:
         p_type = param['python_type']
 
@@ -387,6 +389,8 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
 def _format_type_for_docstring(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
+    elif 'python_api_converter_type' in param:
+        p_type = param['python_api_converter_type'] + ' or ' + param['python_type']
     else:
         p_type = param['python_type']
 
