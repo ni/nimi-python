@@ -52,7 +52,7 @@ clean: start
 	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
 
