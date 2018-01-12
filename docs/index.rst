@@ -6,10 +6,24 @@
 NI Modular Instruments Python Documentation
 ============================================================
 
-.. include:: ../README.rst
+.. include:: _static/status_all.inc
+
+.. include:: _static/about.inc
+
+.. include:: _static/installation.inc
+
+.. include:: _static/contributing.inc
+
+.. include:: _static/usage.inc
+
+.. include:: _static/support.inc
+
+.. include:: _static/documentation.inc
+
+.. include:: _static/license.inc
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 0
    :caption: Drivers
 
    nidcpower
