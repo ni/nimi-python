@@ -54,6 +54,14 @@ def get_rst_header_snippet(t, header_level='='):
     return ret_val
 
 
+def get_rst_picture_reference(tag, url, title, link, indent=0):
+    '''Get rst formatted snippet that represents a picture'''
+    ret_val = (' ' * indent) + '.. |{0}| image:: {1}\n'.format(tag, url)
+    ret_val += (' ' * (indent + 4)) + ':alt: {0}\n'.format(title)
+    ret_val += (' ' * (indent + 4)) + ':target: {0}\n'.format(link)
+    return ret_val
+
+
 def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     '''Returns an rst table snippet if table_header and/or table_body are in the dictionary'''
     if 'table_body' in d:
@@ -941,3 +949,15 @@ at maximum size I can handle"""
     | ipsum | this is a random strinf | Yes, I am a random string |
     +-------+-------------------------+---------------------------+""" # noqa
     assert_rst_strings_are_equal(expected_documentation, actual_documentation)
+
+
+def test_get_rst_picture_reference():
+    actual_pic_ref = get_rst_picture_reference('test1', 'test2', 'test3', 'test4')
+    expected_pic_ref = """
+    .. |test1| image:: test2
+        :alt: test3
+        :target: test4
+    """
+    assert_rst_strings_are_equal(expected_pic_ref, actual_pic_ref)
+
+
