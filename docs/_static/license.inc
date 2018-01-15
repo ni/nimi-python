@@ -1,5 +1,3 @@
-:orphan:
-
 .. _license-section:
 
 License

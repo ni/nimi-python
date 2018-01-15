@@ -1,5 +1,3 @@
-:orphan:
-
 .. _installation-section:
 
 Installation

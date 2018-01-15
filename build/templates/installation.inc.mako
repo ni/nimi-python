@@ -9,8 +9,6 @@
     c_function_prefix = config['c_function_prefix']
 %>\
 
-:orphan:
-
 .. _${module_name}_installation-section:
 
 Installation

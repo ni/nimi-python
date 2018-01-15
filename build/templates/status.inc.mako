@@ -30,9 +30,6 @@ table_contents.append(['Author', 'National Instruments'])
 
 info_table = helper.as_rest_table(table_contents, header=False)
 %>
-
-:orphan:
-
 ${helper.get_rst_header_snippet('Project Status', '-')}
 
 ${helper.get_indented_docstring_snippet(status_table, indent=0)}

@@ -1,5 +1,3 @@
-:orphan:
-
 .. _about-section:
 
 .. image:: https://raw.githubusercontent.com/ni/nimi-python/master/docs/_static/python-dmm-small.jpg

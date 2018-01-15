@@ -1,5 +1,3 @@
-:orphan:
-
 .. _documentation-section:
 
 Documentation
