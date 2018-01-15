@@ -68,8 +68,8 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
+README := $(OUTPUT_DIR)/README.rst
 ifneq (nifake,$(DRIVER))
-  README := $(OUTPUT_DIR)/README.rst
   ROOT_README := $(ROOT_DIR)/README.rst
 endif
 
@@ -89,16 +89,23 @@ $(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FI
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
-# We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
-$(OUTPUT_DIR)/README.rst: $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
-	$(call trace_to_console, "Creating",$@)
-	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@_temp)
-	$(_hide_cmds)$(call log_command,sed -e 's/:orphan://g' $@_temp > $@)
-	$(_hide_cmds)$(call log_command,rm $@_temp)
+# If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
+ifeq (nifake,$(DRIVER))
+$(README):
+	$(call trace_to_console, "Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $(ROOT_DIR)/LICENSE $@)
 
-$(ROOT_DIR)/README.rst: $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
+else
+# We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
+$(README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
+	$(call trace_to_console, "Creating",$@)
+	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+
+$(ROOT_README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*) $(wildcard $(DOCS_DIR)/*/status.inc)
 	$(call trace_to_console, "Creating",$@)
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+
+endif
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
