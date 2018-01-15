@@ -179,7 +179,4 @@ class Session(object):
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-% for handcoded_method in config['handcoded_methods']:
-<%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
-% endfor
 

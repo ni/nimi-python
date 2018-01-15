@@ -134,11 +134,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
-% for handcoded_method in config['handcoded_methods']:
-% if handcoded_method['render_in_session_base']:
-<%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
-% endif
-% endfor
 
 class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
@@ -194,11 +189,6 @@ class Session(_SessionBase):
 % for method_template in functions[func_name]['method_templates']:
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
-% endfor
-% for handcoded_method in config['handcoded_methods']:
-% if not handcoded_method['render_in_session_base']:
-<%include file="${'/session.py' + handcoded_method['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config" />\
-% endif
 % endfor
 
 

@@ -16,10 +16,6 @@
                 name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
                 doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
-    # We place all the methods from each handcoded methods file in order by the first one listed
-    for handcoded_method in config['handcoded_methods']:
-        doc_list[handcoded_method['python_names']] = { 'filename': handcoded_method['documentation_filename'], 'method_template': None, 'function': None, }
-
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 
