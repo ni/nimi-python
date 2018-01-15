@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _nimodinst_installation-section:
 
 Installation

@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _niscope_installation-section:
 
 Installation

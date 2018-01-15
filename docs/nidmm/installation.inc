@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _nidmm_installation-section:
 
 Installation

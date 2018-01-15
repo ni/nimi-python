@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _niswitch_installation-section:
 
 Installation

@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _nidcpower_installation-section:
 
 Installation

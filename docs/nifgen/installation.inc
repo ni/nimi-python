@@ -1,6 +1,4 @@
 
-:orphan:
-
 .. _nifgen_installation-section:
 
 Installation
