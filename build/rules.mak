@@ -92,7 +92,7 @@ $(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FI
 # We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
 $(OUTPUT_DIR)/README.rst: $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
-	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(DRIVER_DOCS_DIR)/status.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@_temp)
+	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@_temp)
 	$(_hide_cmds)$(call log_command,sed -e 's/:orphan://g' $@_temp > $@)
 	$(_hide_cmds)$(call log_command,rm $@_temp)
 
