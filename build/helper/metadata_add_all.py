@@ -149,7 +149,9 @@ def _add_default_value_name(parameter):
         else:
             name_with_default = parameter['python_name'] + "=" + repr(parameter['default_value'])
 
-        if parameter['use_in_python_api']:
+        if 'python_api_converter_name' in parameter:
+            name_for_init = '_converters.{0}({1}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])
+        elif parameter['use_in_python_api']:
             name_for_init = parameter['python_name']
         else:
             name_for_init = parameter['default_value']
