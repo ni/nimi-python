@@ -78,6 +78,7 @@ functions_custom_python_name = {
 # There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
 functions_remove_from_python_api = {
     'FetchWaveform':                { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
+    'InitWithOptions':              { 'parameters': { 1: { 'use_in_python_api': False, }, }, },  # Don't need ID_Query in the python API since they don't do anything
 }
 
 functions_method_templates = {
@@ -142,4 +143,5 @@ functions_additional_functions = {
         },
     },
 }
+
 
