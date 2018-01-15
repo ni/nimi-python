@@ -71,9 +71,9 @@ functions_default_value = {
 
 # Converted parameters
 functions_converters = {
-    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'timedelta_converter_seconds', 
+    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
-    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'timedelta_converter_microseconds', 
+    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_microseconds', 
                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
