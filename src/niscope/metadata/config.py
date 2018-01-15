@@ -25,5 +25,6 @@ config = {
     'custom_types': [
         {'file_name': 'waveform_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'struct_niScope_wfmInfo', },
     ],
+    'last_tested_version': '17.0.2',
 }
 

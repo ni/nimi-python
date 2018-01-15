@@ -17,5 +17,6 @@ config = {
         },
     },
     'custom_types': [],
+    'last_tested_version': '17.0.0',
 }
 
