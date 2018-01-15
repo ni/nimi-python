@@ -1,6 +1,8 @@
 niswitch module
 =============================================================
 
+.. include:: _static/status_project.inc
+
 .. include:: niswitch/status.inc
 
 .. include:: niswitch/installation.inc
