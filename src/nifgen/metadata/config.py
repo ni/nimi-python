@@ -23,6 +23,5 @@ config = {
     },
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
-    'handcoded_methods': [],
 }
 

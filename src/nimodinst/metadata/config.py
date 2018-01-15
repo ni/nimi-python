@@ -17,6 +17,5 @@ config = {
         },
     },
     'custom_types': [],
-    'handcoded_methods': [],
 }
 

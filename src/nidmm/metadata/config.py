@@ -26,11 +26,6 @@ config = {
         'REPLACE_DRIVER_SPECIFIC_URL_1': 'http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/{0}/',
     },
     'custom_types': [],
-    'handcoded_methods': [],
 }
 
-# We will need this again when we work on #659
-#'handcoded_methods': [
-#    {'python_name': 'get_cal_date_and_time', 'session_filename': '/get_cal_date_and_time', 'documentation_filename': '/get_cal_date_and_time', 'render_in_session_base': False},
-#],
 

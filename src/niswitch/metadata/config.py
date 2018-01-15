@@ -23,6 +23,5 @@ config = {
     },
     'init_function': 'InitWithTopology',
     'custom_types': [],
-    'handcoded_methods': [],
 }
 
