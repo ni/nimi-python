@@ -100,3 +100,46 @@ functions_numpy = {
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
+# Functions not in original metadata.
+functions_additional_functions = {
+    'GetLastCalDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'calType',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the type of calibration performed (external or self-calibration).',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last calibration performed.',
+        },
+    },
+}
+

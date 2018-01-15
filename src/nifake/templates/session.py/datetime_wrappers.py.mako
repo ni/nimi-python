@@ -1,24 +1,15 @@
-<%page args="f, config"/>\
-    def get_cal_date_and_time(self, cal_type):
-        '''get_cal_date_and_time
+<%page args="f, config, method_template"/>\
+<%
+    import build.helper as helper
 
-        Returns the date and time of the last calibration performed.
+    parameters = f['parameters']
+    c_function_prefix = config['c_function_prefix']
 
-        Note: The NI 4050 and NI 4060 are not supported.
+%>\
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
+        '''${f['python_name']}
 
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-        Returns:
-            datetime object representing the date and time of the last calibration
+        ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
         import datetime
 
