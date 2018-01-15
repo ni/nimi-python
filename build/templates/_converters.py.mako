@@ -12,7 +12,7 @@ def _convert_timedelta(value, library_type, scaling):
         scaled_value = value
 
     if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
-        scaled_value = int(scaled_value)
+        scaled_value = int(scaled_value + 0.5)
 
     return library_type(scaled_value)
 
