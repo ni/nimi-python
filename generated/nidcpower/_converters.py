@@ -1,7 +1,7 @@
 from nidcpower import visatype
 
 
-def _timedelta_converter(value, library_type, scaling):
+def _convert_timedelta(value, library_type, scaling):
     if str(type(value)).find("'datetime.timedelta'") != -1:
         scaled_value = value.total_seconds() * scaling
     else:
@@ -13,16 +13,16 @@ def _timedelta_converter(value, library_type, scaling):
     return library_type(scaled_value)
 
 
-def timedelta_converter_seconds(value, library_type):
-    return _timedelta_converter(value, library_type, 1)
+def convert_timedelta_to_seconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1)
 
 
-def timedelta_converter_milliseconds(value, library_type):
-    return _timedelta_converter(value, library_type, 1000)
+def convert_timedelta_to_milliseconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1000)
 
 
-def timedelta_converter_microseconds(value, library_type):
-    return _timedelta_converter(value, library_type, 1000000)
+def convert_timedelta_to_microseconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1000000)
 
 
 

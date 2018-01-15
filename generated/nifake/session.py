@@ -279,7 +279,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        maximum_time_ctype = _converters.timedelta_converter_microseconds(maximum_time, visatype.ViInt32)  # case 15
+        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -936,7 +936,7 @@ class Session(_SessionBase):
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = _converters.timedelta_converter_seconds(maximum_time, visatype.ViReal64)  # case 15
+        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, visatype.ViReal64)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
