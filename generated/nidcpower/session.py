@@ -2,7 +2,7 @@
 # This file was generated
 import ctypes
 
-from nidcpower import _converters  # noqa: F401
+from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidcpower import attributes
 from nidcpower import enums
 from nidcpower import errors
