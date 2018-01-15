@@ -88,6 +88,9 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
+        self._defaults['GetLastCalDateAndTime'] = {}
+        self._defaults['GetLastCalDateAndTime']['return'] = 0
+        self._defaults['GetLastCalDateAndTime']['Month'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -401,6 +404,14 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niFake_GetLastCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
+        if self._defaults['GetLastCalDateAndTime']['return'] != 0:
+            return self._defaults['GetLastCalDateAndTime']['return']
+        if self._defaults['GetLastCalDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niFake_GetLastCalDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetLastCalDateAndTime']['Month']
+        return self._defaults['GetLastCalDateAndTime']['return']
+
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
@@ -637,6 +648,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
         mock_library.niFake_GetError.return_value = 0
+        mock_library.niFake_GetLastCalDateAndTime.side_effect = MockFunctionCallError("niFake_GetLastCalDateAndTime")
+        mock_library.niFake_GetLastCalDateAndTime.return_value = 0
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")

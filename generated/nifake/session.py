@@ -729,18 +729,8 @@ class Session(_SessionBase):
 
         Returns the date and time of the last calibration performed.
 
-        Note: The NI 4050 and NI 4060 are not supported.
-
         Args:
             cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
 
         Returns:
             month (int): Indicates the **month** of the last calibration.
@@ -821,6 +811,22 @@ class Session(_SessionBase):
         error_code = self._library.niFake_GetEnumValue(vi_ctype, ctypes.pointer(a_quantity_ctype), ctypes.pointer(a_turtle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
+
+    def get_last_cal_date_and_time(self, cal_type):
+        '''get_last_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        import datetime
+
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
@@ -1157,32 +1163,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def get_cal_date_and_time(self, cal_type):
-        '''get_cal_date_and_time
-
-        Returns the date and time of the last calibration performed.
-
-        Note: The NI 4050 and NI 4060 are not supported.
-
-        Args:
-            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-        Returns:
-            datetime object representing the date and time of the last calibration
-        '''
-        import datetime
-
-        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
-        return datetime.datetime(year, month, day, hour, minute)
 
 
 

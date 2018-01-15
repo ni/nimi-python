@@ -42,6 +42,7 @@ class Library(object):
         self.niFake_GetCustomTypeArray_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
+        self.niFake_GetLastCalDateAndTime_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
@@ -248,6 +249,14 @@ class Library(object):
                 self.niFake_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
+
+    def niFake_GetLastCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetLastCalDateAndTime_cfunc is None:
+                self.niFake_GetLastCalDateAndTime_cfunc = self._library.niFake_GetLastCalDateAndTime
+                self.niFake_GetLastCalDateAndTime_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(datetime.datetime)]  # noqa: F405
+                self.niFake_GetLastCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetLastCalDateAndTime_cfunc(vi, cal_type, month)
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
