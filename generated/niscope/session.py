@@ -3004,7 +3004,7 @@ class Session(_SessionBase):
     def __init__(self, resource_name, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, False, reset_device, _converters.init_with_options_converter(option_string, self._encoding))
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
