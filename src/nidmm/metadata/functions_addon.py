@@ -131,3 +131,9 @@ functions_remove_parameters_from_python = {
     'InitWithOptions':                      { 'parameters': { 1: { 'use_in_python_api': False, }, }, },
 }
 
+# Converted parameters
+functions_converters = {
+    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'init_with_options_converter', 
+                                                                   'python_api_converter_type': 'dict', }, }, },
+}
+
