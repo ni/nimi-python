@@ -84,19 +84,24 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
+ifneq (nifake,$(DRIVER))
+  README := $(OUTPUT_DIR)/README.rst
+  ROOT_README := $(ROOT_DIR)/README.rst
+endif
+
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
