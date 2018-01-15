@@ -1991,7 +1991,7 @@ functions = {
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM\_init or niDMM\_InitWithOptions. The default is None.',
+                    'description': 'Identifies a particular instrument session.',
                 },
             },
             {
@@ -2001,8 +2001,6 @@ functions = {
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Specifies the type of calibration performed (external or self-calibration).',
-                    'note': 'The NI 4065 does not support self-calibration.',
-                    'table_body': [['NIDMM\\_VAL\\_INTERNAL\\_AREA (default)', '0', 'Self-Calibration'], ['NIDMM\\_VAL\\_EXTERNAL\\_AREA', '1', 'External Calibration']],
                 },
             },
             {
@@ -2053,7 +2051,6 @@ functions = {
         ],
         'documentation': {
             'description': 'Returns the date and time of the last calibration performed.',
-            'note': 'The NI 4050 and NI 4060 are not supported.',
         },
     },
 }
