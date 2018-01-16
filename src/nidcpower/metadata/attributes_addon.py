@@ -9,8 +9,8 @@ attributes_codegen_method = {
 # If the associated enum represents boolean values only, disconnect
 attributes_remove_enum = {
     1150020: { "enum": None, },  # POWER_LINE_FREQUENCY
-    1150016: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150017: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150015: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150018: { 'enum': None, }, # Disconnecting enum since it is a boolean
+    1150016: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
+    1150017: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
+    1150015: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
+    1150018: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
 }

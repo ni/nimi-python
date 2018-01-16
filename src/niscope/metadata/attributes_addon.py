@@ -3,13 +3,13 @@
 
 # If the associated enum represents boolean values only, disconnect
 attributes_remove_enum = {
-    1150338: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150343: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150354: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1250005: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150311: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150004: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150128: { 'enum': None, }, # Disconnecting enum since it is a boolean
+    1150338: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1150343: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1150354: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1250005: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1150311: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1150004: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
+    1150128: { 'enum': None, 'python_type': 'bool', }, # Disconnecting enum since it is a boolean
 }
 
 # We are not code genning attributes that have been marked as obsolete prior to the initial

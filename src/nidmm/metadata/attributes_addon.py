@@ -32,6 +32,6 @@ attributes_codegen_method = {
 }
 
 attributes_remove_enum = {
-    1150053: { 'enum': None, }, # Disconnecting enum since it is a boolean
-    1150023: { 'enum': None, }, # Disconnecting enum since it is a boolean
+    1150053: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
+    1150023: { 'enum': None, 'python_type': 'bool', },  # Disconnecting enum since it is a boolean
 }
