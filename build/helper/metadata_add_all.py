@@ -144,10 +144,7 @@ def _add_library_method_call_snippet(parameter):
 def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
-        if 'enum' in parameter and parameter['enum'] is not None:
-            name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
-        else:
-            name_with_default = parameter['python_name'] + "=" + repr(parameter['default_value'])
+        name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
 
         if parameter['use_in_python_api']:
             name_for_init = parameter['python_name']

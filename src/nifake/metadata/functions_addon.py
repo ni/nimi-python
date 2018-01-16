@@ -65,9 +65,9 @@ functions_is_error_handling = {
 functions_default_value = {
     'InitWithOptions':                  { 'parameters': { 1: { 'default_value': False, },
                                                           2: { 'default_value': False, },
-                                                          3: { 'default_value': '', }, }, },
+                                                          3: { 'default_value': '""', }, }, },
     'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
-    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
+    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'enums.Turtle.LEONARDO', }, }, },
 }
 
 # Converted parameters

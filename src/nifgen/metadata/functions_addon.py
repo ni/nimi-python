@@ -114,15 +114,15 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '', },
+    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '""', },
                                                                       2: { 'default_value': False, },
-                                                                      3: { 'default_value': '', }, }, },
+                                                                      3: { 'default_value': '""', }, }, },
     'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       5: { 'default_value': 0.0, }, }, },
     'ConfigureStandardWaveform':                    { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       6: { 'default_value': 0.0, }, }, },
-    'ConfigureDigitalEdgeScriptTrigger':            { 'parameters': { 3: { 'default_value': 'ScriptTriggerDigitalEdgeEdge.RISING', }, }, },
-    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeScriptTrigger':            { 'parameters': { 3: { 'default_value': 'enums.ScriptTriggerDigitalEdgeEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'enums.StartTriggerDigitalEdgeEdge.RISING', }, }, },
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
