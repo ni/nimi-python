@@ -74,7 +74,7 @@ data_type = helper.get_python_type_for_api_type(attributes[attribute]['type'], c
 if 'python_type' in attributes[attribute]:
     data_type = attributes[attribute]['python_type']
 if attributes[attribute]['enum'] is not None:
-    data_type = attributes[attribute]["enum"]
+    data_type = module_name + '.' + attributes[attribute]["enum"]
 
 if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
