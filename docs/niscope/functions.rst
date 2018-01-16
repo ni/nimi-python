@@ -1175,6 +1175,110 @@ niscope.Session methods
 
     :type signal_identifier: string
 
+.. function:: fetch(num_samples, timeout=5.0)
+
+    Returns the waveform from a previously initiated acquisition that the
+    digitizer acquires for the specified channel. This function returns
+    scaled voltage waveforms.
+
+    This function may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
+
+    
+
+    .. note:: Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch(num_samples, timeout=5.0)
+
+
+    :param num_samples:
+
+
+        The maximum number of samples to fetch for each waveform. If the
+        acquisition finishes with fewer points than requested, some devices
+        return partial data if the acquisition finished, was aborted, or a
+        timeout of 0 was used. If it fails to complete within the timeout
+        period, the function throws an exception.
+
+        
+
+
+    :type num_samples: int
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
+
+    :rtype: tuple (wfm, wfm_info)
+
+        WHERE
+
+        wfm (list of float): 
+
+
+            Returns an array whose length is the **numSamples** times number of
+            waveforms. Call :py:func:`niscope._actual_num_wfms` to determine the number of
+            waveforms.
+
+            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+            first. For example, with a channel list of 0,1, you would have the
+            following index values:
+
+            index 0 = record 0, channel 0
+
+            index *x* = record 0, channel 1
+
+            index 2\ *x* = record 1, channel 0
+
+            index 3\ *x* = record 1, channel 1
+
+            Where *x* = the record length
+
+            
+
+
+        wfm_info (list of WaveformInfo): 
+
+
+            Returns an array of classed with the following timing and scaling information about each waveform:
+
+                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+
+                                    .. math::
+
+                                        voltage = binary data * gain factor + offset
+
+                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+
+                                    .. math::
+
+                                        voltage = binary data * gain factor + offset
+
+                                Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
+
+            
+
+
+
 .. function:: fetch_into(num_samples, wfm, timeout=5.0)
 
     Returns the waveform from a previously initiated acquisition that the
@@ -1266,213 +1370,6 @@ niscope.Session methods
 
     :rtype: list of WaveformInfo
     :return:
-
-
-            Returns an array of classed with the following timing and scaling information about each waveform:
-
-                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
-
-                                    .. math::
-
-                                        voltage = binary data * gain factor + offset
-
-                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-                                    .. math::
-
-                                        voltage = binary data * gain factor + offset
-
-                                Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
-
-            
-
-
-
-.. function:: fetch(num_samples, timeout=5.0)
-
-    Returns the waveform from a previously initiated acquisition that the
-    digitizer acquires for the specified channel. This function returns
-    scaled voltage waveforms.
-
-    This function may return multiple waveforms depending on the number of
-    channels, the acquisition type, and the number of records you specify.
-
-    
-
-    .. note:: Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].fetch(num_samples, timeout=5.0)
-
-
-    :param num_samples:
-
-
-        The maximum number of samples to fetch for each waveform. If the
-        acquisition finishes with fewer points than requested, some devices
-        return partial data if the acquisition finished, was aborted, or a
-        timeout of 0 was used. If it fails to complete within the timeout
-        period, the function throws an exception.
-
-        
-
-
-    :type num_samples: int
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
-
-    :rtype: tuple (wfm, wfm_info)
-
-        WHERE
-
-        wfm (list of float): 
-
-
-            Returns an array whose length is the **numSamples** times number of
-            waveforms. Call :py:func:`niscope._actual_num_wfms` to determine the number of
-            waveforms.
-
-            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-            first. For example, with a channel list of 0,1, you would have the
-            following index values:
-
-            index 0 = record 0, channel 0
-
-            index *x* = record 0, channel 1
-
-            index 2\ *x* = record 1, channel 0
-
-            index 3\ *x* = record 1, channel 1
-
-            Where *x* = the record length
-
-            
-
-
-        wfm_info (list of WaveformInfo): 
-
-
-            Returns an array of classed with the following timing and scaling information about each waveform:
-
-                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
-
-                                    .. math::
-
-                                        voltage = binary data * gain factor + offset
-
-                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-                                    .. math::
-
-                                        voltage = binary data * gain factor + offset
-
-                                Call :py:func:`niscope._actual_num_wfms` to determine the size of this array.
-
-            
-
-
-.. function:: fetch(num_samples, timeout=5.0)
-
-    Returns the waveform from a previously initiated acquisition that the
-    digitizer acquires for the specified channel. This function returns
-    scaled voltage waveforms.
-
-    This function may return multiple waveforms depending on the number of
-    channels, the acquisition type, and the number of records you specify.
-
-    
-
-    .. note:: Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].fetch(num_samples, timeout=5.0)
-
-
-    :param num_samples:
-
-
-        The maximum number of samples to fetch for each waveform. If the
-        acquisition finishes with fewer points than requested, some devices
-        return partial data if the acquisition finished, was aborted, or a
-        timeout of 0 was used. If it fails to complete within the timeout
-        period, the function throws an exception.
-
-        
-
-
-    :type num_samples: int
-    :param timeout:
-
-
-        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
-
-        
-
-
-    :type timeout: float
-
-    :rtype: tuple (wfm, wfm_info)
-
-        WHERE
-
-        wfm (list of float): 
-
-
-            Returns an array whose length is the **numSamples** times number of
-            waveforms. Call :py:func:`niscope._actual_num_wfms` to determine the number of
-            waveforms.
-
-            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-            first. For example, with a channel list of 0,1, you would have the
-            following index values:
-
-            index 0 = record 0, channel 0
-
-            index *x* = record 0, channel 1
-
-            index 2\ *x* = record 1, channel 0
-
-            index 3\ *x* = record 1, channel 1
-
-            Where *x* = the record length
-
-            
-
-
-        wfm_info (list of WaveformInfo): 
 
 
             Returns an array of classed with the following timing and scaling information about each waveform:
@@ -1920,6 +1817,16 @@ niscope.Session methods
 
 
 
+.. function:: reset()
+
+    Stops the acquisition, releases routes, and all session attributes are
+    reset to their `default
+    states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
+
+    
+
+
+
 .. function:: reset_device()
 
     Performs a hard reset of the device. Acquisition stops, all routes are
@@ -1938,47 +1845,6 @@ niscope.Session methods
     Performs a software reset of the device, returning it to the default
     state and applying any initial default settings from the IVI
     Configuration Store.
-
-    
-
-
-
-.. function:: send_software_trigger_edge(which_trigger)
-
-    Sends the selected trigger to the digitizer. Call this function if you
-    called :py:func:`niscope.configure_trigger_software` when you want the Reference
-    trigger to occur. You can also call this function to override a misused
-    edge, digital, or hysteresis trigger. If you have configured
-    :py:data:`niscope.ACQ\_ARM\_SOURCE`, :py:data:`niscope.ARM\_REF\_TRIG\_SRC`, or
-    :py:data:`niscope.ADV\_TRIG\_SRC`, call this function when you want to send
-    the corresponding trigger to the digitizer.
-
-    
-
-
-
-    :param which_trigger:
-
-
-        Specifies the type of trigger to send to the digitizer.
-
-        **Defined Values**
-
-        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_START (0L)
-        |  NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ARM\_REFERENCE (1L)
-        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_REFERENCE (2L)
-        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ADVANCE (3L)
-
-        
-
-
-    :type which_trigger: :py:data:`niscope.WhichTrigger`
-
-.. function:: reset()
-
-    Stops the acquisition, releases routes, and all session attributes are
-    reset to their `default
-    states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
 
     
 
@@ -2021,5 +1887,36 @@ niscope.Session methods
             
 
 
+
+.. function:: send_software_trigger_edge(which_trigger)
+
+    Sends the selected trigger to the digitizer. Call this function if you
+    called :py:func:`niscope.configure_trigger_software` when you want the Reference
+    trigger to occur. You can also call this function to override a misused
+    edge, digital, or hysteresis trigger. If you have configured
+    :py:data:`niscope.ACQ\_ARM\_SOURCE`, :py:data:`niscope.ARM\_REF\_TRIG\_SRC`, or
+    :py:data:`niscope.ADV\_TRIG\_SRC`, call this function when you want to send
+    the corresponding trigger to the digitizer.
+
+    
+
+
+
+    :param which_trigger:
+
+
+        Specifies the type of trigger to send to the digitizer.
+
+        **Defined Values**
+
+        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_START (0L)
+        |  NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ARM\_REFERENCE (1L)
+        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_REFERENCE (2L)
+        | NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ADVANCE (3L)
+
+        
+
+
+    :type which_trigger: :py:data:`niscope.WhichTrigger`
 
 
