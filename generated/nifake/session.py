@@ -445,7 +445,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
@@ -827,7 +827,7 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.

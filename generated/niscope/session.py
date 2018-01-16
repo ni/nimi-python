@@ -3632,7 +3632,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, output_terminal, signal_identifier=None):
+    def export_signal(self, signal, output_terminal, signal_identifier="None"):
         '''export_signal
 
         Configures the digitizer to generate a signal that other devices can
