@@ -84,26 +84,6 @@ attributes_codegen_method = {
     1151304: { "codegen_method": "no" },  # DELAY_BEFORE_INITIATE
     1151305: { "codegen_method": "no" },  # DDC_DIRECT_REGISTER_ADDRESS
     1151306: { "codegen_method": "no" },  # DDC_DIRECT_REGISTER_DATA
-    1150328: { "codegen_method": "no" },  # P2P_SAMPLES_AVAIL_IN_ENDPOINT - P2P Attribute
-    1150329: { "codegen_method": "no" },  # P2P_DATA_TRANS_PERMISSION_ADDR - P2P Attribute
-    1150330: { "codegen_method": "no" },  # P2P_DATA_TRANS_PERMISSION_ADDR_TYPE - P2P Attribute
-    1150331: { "codegen_method": "no" },  # P2P_DESTINATION_WINDOW_ADDR - P2P Attribute
-    1150332: { "codegen_method": "no" },  # P2P_DESTINATION_WINDOW_ADDR_TYPE - P2P Attribute
-    1150333: { "codegen_method": "no" },  # P2P_DESTINATION_WINDOW_SIZE - P2P Attribute
-    1150334: { "codegen_method": "no" },  # P2P_NOTIFY_PUSH_MESSAGE_ON - P2P Attribute
-    1150335: { "codegen_method": "no" },  # P2P_NOTIFY_MESSAGE_PUSH_ADDR - P2P Attribute
-    1150336: { "codegen_method": "no" },  # P2P_NOTIFY_MESSAGE_PUSH_ADDR_TYPE - P2P Attribute
-    1150337: { "codegen_method": "no" },  # P2P_NOTIFY_MESSAGE_PUSH_VALUE - P2P Attribute
-    1150338: { "codegen_method": "no" },  # P2P_ENABLED - P2P Attribute
-    1150339: { "codegen_method": "no" },  # P2P_CHANNELS_TO_STREAM - P2P Attribute
-    1150340: { "codegen_method": "no" },  # P2P_SAMPLES_TRANSFERRED - P2P Attribute
-    1150341: { "codegen_method": "no" },  # P2P_MOST_SAMPLES_AVAIL_IN_ENDPOINT - P2P Attribute
-    1150342: { "codegen_method": "no" },  # P2P_ENDPOINT_SIZE - P2P Attribute
-    1150343: { "codegen_method": "no" },  # MANUAL_CONFIGURATION_ENABLED - P2P Attribute
-    1150344: { "codegen_method": "no" },  # P2P_ENDPOINT_OVERFLOW - P2P Attribute
-    1150345: { "codegen_method": "no" },  # P2P_FIFO_ENDPOINT_COUNT - P2P Attribute
-    1150354: { "codegen_method": "no" },  # P2P_ONBOARD_MEMORY_ENABLED - P2P Attribute
-    1150380: { "codegen_method": "no" },  # SAMPLES_TRANSFERRED_PER_RECORD - P2P Attribute
 }
 
 
