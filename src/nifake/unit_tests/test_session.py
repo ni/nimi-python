@@ -1,3 +1,4 @@
+import datetime
 import matchers
 import math
 import mock_helper
@@ -960,6 +961,24 @@ class TestSession(object):
                 assert actual.struct_int == expected.struct_int
                 assert actual.struct_double == expected.struct_double
 
+    def test_get_cal_date_time(self):
+        self.patched_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
+        month = 12
+        day = 30
+        year = 1988
+        hour = 10
+        minute = 15
+        self.side_effects_helper['GetCalDateAndTime']['return'] = 0
+        self.side_effects_helper['GetCalDateAndTime']['Month'] = month
+        self.side_effects_helper['GetCalDateAndTime']['Day'] = day
+        self.side_effects_helper['GetCalDateAndTime']['Year'] = year
+        self.side_effects_helper['GetCalDateAndTime']['Hour'] = hour
+        self.side_effects_helper['GetCalDateAndTime']['Minute'] = minute
+        with nifake.Session('dev1') as session:
+            last_cal = session.get_last_cal_date_and_time(0)
+            assert isinstance(last_cal, datetime.datetime)
+            assert datetime.datetime(year, month, day, hour, minute) == last_cal
+
     def test_matcher_prints(self):
         assert matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(<class 'ctypes.c_ulong'>, 42)"
         assert matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(<class 'ctypes.c_long'>, 4)"
@@ -971,4 +990,5 @@ class TestSession(object):
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
         assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
+
 

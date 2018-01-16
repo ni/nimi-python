@@ -1355,6 +1355,19 @@ nidcpower.Session methods
 
 
 
+.. function:: reset()
+
+    Resets the device to a known state. This function disables power
+    generation, resets session attributes to their default values, commits
+    the session attributes, and leaves the session in the Uncommitted state.
+    Refer to the `Programming
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+    more information about NI-DCPower software states.
+
+    
+
+
+
 .. function:: reset_device()
 
     Resets the device to a known state. The function disables power
@@ -1386,6 +1399,48 @@ nidcpower.Session methods
     configurable attributes from the IVI configuration.
 
     
+
+
+
+.. function:: self_test()
+
+    Performs the device self-test routine and returns the test result(s).
+    Calling this function implicitly calls the :py:func:`nidcpower.reset` function.
+
+    When calling :py:func:`nidcpower.self_test` with the PXIe-4162/4163, specify all
+    channels of your PXIe-4162/4163 with the channels input of
+    :py:func:`nidcpower._initialize_with_channels`. You cannot self test a subset of
+    PXIe-4162/4163 channels.
+
+    
+
+
+
+    :rtype: tuple (self_test_result, self_test_message)
+
+        WHERE
+
+        self_test_result (int): 
+
+
+            Returns the value result from the device self-test.
+
+            +----------------+-------------------+
+            | Self-Test Code | Description       |
+            +================+===================+
+            | 0              | Self test passed. |
+            +----------------+-------------------+
+            | 1              | Self test failed. |
+            +----------------+-------------------+
+
+
+        self_test_message (string): 
+
+
+            Returns the self-test result message. The size of this array must be at
+            least 256 bytes.
+
+            
 
 
 
@@ -1546,60 +1601,5 @@ nidcpower.Session methods
 
 
     :type timeout: float
-
-.. function:: reset()
-
-    Resets the device to a known state. This function disables power
-    generation, resets session attributes to their default values, commits
-    the session attributes, and leaves the session in the Uncommitted state.
-    Refer to the `Programming
-    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
-    more information about NI-DCPower software states.
-
-    
-
-
-
-.. function:: self_test()
-
-    Performs the device self-test routine and returns the test result(s).
-    Calling this function implicitly calls the :py:func:`nidcpower.reset` function.
-
-    When calling :py:func:`nidcpower.self_test` with the PXIe-4162/4163, specify all
-    channels of your PXIe-4162/4163 with the channels input of
-    :py:func:`nidcpower._initialize_with_channels`. You cannot self test a subset of
-    PXIe-4162/4163 channels.
-
-    
-
-
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Returns the value result from the device self-test.
-
-            +----------------+-------------------+
-            | Self-Test Code | Description       |
-            +================+===================+
-            | 0              | Self test passed. |
-            +----------------+-------------------+
-            | 1              | Self test failed. |
-            +----------------+-------------------+
-
-
-        self_test_message (string): 
-
-
-            Returns the self-test result message. The size of this array must be at
-            least 256 bytes.
-
-            
-
-
 
 
