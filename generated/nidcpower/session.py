@@ -1541,7 +1541,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.enums.ApertureTimeUnits.SECONDS)
+            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your

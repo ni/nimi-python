@@ -1435,7 +1435,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option=niscope.enums.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1471,7 +1471,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.enums.ClearableMeasurement.ALL_MEASUREMENTS)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar

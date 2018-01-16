@@ -110,7 +110,7 @@ niscope.Session methods
 
 
 
-.. function:: cal_self_calibrate(option=niscope.enums.Option.SELF_CALIBRATE_ALL_CHANNELS)
+.. function:: cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
     Self-calibrates most NI digitizers, including all SMC-based devices and
     most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
@@ -136,7 +136,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].cal_self_calibrate(option=niscope.enums.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
 
     :param option:
@@ -151,7 +151,7 @@ niscope.Session methods
 
     :type option: :py:data:`niscope.Option`
 
-.. function:: clear_waveform_measurement_stats(clearable_measurement_function=niscope.enums.ClearableMeasurement.ALL_MEASUREMENTS)
+.. function:: clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
     Clears the waveform stats on the channel and measurement you specify. If
     you want to clear all of the measurements, use
@@ -174,7 +174,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.enums.ClearableMeasurement.ALL_MEASUREMENTS)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
 
     :param clearable_measurement_function:
@@ -425,7 +425,7 @@ niscope.Session methods
 
     :type high: float
 
-.. function:: configure_trigger_digital(trigger_source, slope=niscope.enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. function:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures the common properties of a digital trigger.
 
@@ -504,7 +504,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. function:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures common properties for analog edge triggering.
 
@@ -593,7 +593,7 @@ niscope.Session methods
 
     :type delay: float
 
-.. function:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. function:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
 
     Configures common properties for analog hysteresis triggering. This kind
     of trigger specifies an additional value, specified in the
