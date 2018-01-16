@@ -24,6 +24,28 @@ class AcquisitionType(Enum):
     '''
 
 
+class AddressType(Enum):
+    PHYSICAL = 0
+    '''
+    Physical address.
+    '''
+    VIRTUAL = 1
+    '''
+    Virtual address.
+    '''
+
+
+class BoolEnableDisable(Enum):
+    DISABLED = 0
+    '''
+    Disabled
+    '''
+    ENABLED = 1
+    '''
+    Enabled
+    '''
+
+
 class BoolEnableDisableChan(Enum):
     DISABLED = 0
     '''
@@ -250,6 +272,17 @@ class FlexFIRAntialiasFilterType(Enum):
     _8_TAP_HANNING = 3
     '''
     This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+    '''
+
+
+class NotificationType(Enum):
+    NEVER = 0
+    '''
+    Never send notification.
+    '''
+    DONE = 1
+    '''
+    Notify when digitizer acquisition is done.
     '''
 
 

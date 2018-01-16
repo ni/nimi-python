@@ -55,6 +55,52 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: AddressType
+
+    .. py:attribute:: niscope.AddressType.PHYSICAL
+
+
+
+        Physical address.
+
+        
+
+
+
+    .. py:attribute:: niscope.AddressType.VIRTUAL
+
+
+
+        Virtual address.
+
+        
+
+
+
+
+.. py:data:: BoolEnableDisable
+
+    .. py:attribute:: niscope.BoolEnableDisable.DISABLED
+
+
+
+        Disabled
+
+        
+
+
+
+    .. py:attribute:: niscope.BoolEnableDisable.ENABLED
+
+
+
+        Enabled
+
+        
+
+
+
+
 .. py:data:: BoolEnableDisableChan
 
     .. py:attribute:: niscope.BoolEnableDisableChan.DISABLED
@@ -686,6 +732,29 @@ Enums used in NI-SCOPE
 
 
         This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+
+        
+
+
+
+
+.. py:data:: NotificationType
+
+    .. py:attribute:: niscope.NotificationType.NEVER
+
+
+
+        Never send notification.
+
+        
+
+
+
+    .. py:attribute:: niscope.NotificationType.DONE
+
+
+
+        Notify when digitizer acquisition is done.
 
         
 

@@ -329,6 +329,17 @@ class OutputMode(Enum):
     '''
 
 
+class P2PAddressType(Enum):
+    PHYSICAL = 0
+    '''
+    Physical
+    '''
+    VIRTUAL = 1
+    '''
+    Physical
+    '''
+
+
 class ReadyForStartEventActiveLevel(Enum):
     HIGH = 101
     '''
