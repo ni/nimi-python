@@ -4,25 +4,23 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 
-# Disconnect attribute from enum, either because associated enum is just values, or because it 
-# just represents True/False
 attributes_enums = {
-    1150020: { "enum": None           },  # POWER_LINE_FREQUENCY
-    1050002: { "enum": None           },  # RANGE_CHECK
-    1050003: { "enum": None           },  # QUERY_INSTRUMENT_STATUS
-    1050004: { "enum": None           },  # CACHE
-    1050005: { "enum": None           },  # SIMULATE
-    1050006: { "enum": None           },  # RECORD_COERCIONS
-    1050021: { "enum": None           },  # INTERCHANGE_CHECK
-    1150002: { "enum": None           },  # AUXILIARY_POWER_SOURCE_AVAILABLE
-    1150006: { "enum": None           },  # RESET_AVERAGE_BEFORE_MEASUREMENT
-    1150007: { "enum": None           },  # OVERRANGING_ENABLED
-    1150060: { "enum": None           },  # OUTPUT_CONNECTED
-    1150064: { "enum": None           },  # MEASURE_RECORD_LENGTH_IS_FINITE
-    1150078: { "enum": None           },  # SEQUENCE_LOOP_COUNT_IS_FINITE
-    1150105: { "enum": None           },  # INTERLOCK_INPUT_OPEN
-    1250002: { "enum": None           },  # OVP_ENABLED
-    1250006: { "enum": None           },  # OUTPUT_ENABLED
+    1150020: { "enum": None           },  # POWER_LINE_FREQUENCY, Don't use the enum because a bool will do
+    1050002: { "enum": None           },  # RANGE_CHECK, Don't use the enum because a bool will do
+    1050003: { "enum": None           },  # QUERY_INSTRUMENT_STATUS, Don't use the enum because a bool will do
+    1050004: { "enum": None           },  # CACHE, Don't use the enum because a bool will do
+    1050005: { "enum": None           },  # SIMULATE, Don't use the enum because a bool will do
+    1050006: { "enum": None           },  # RECORD_COERCIONS, Don't use the enum because a bool will do
+    1050021: { "enum": None           },  # INTERCHANGE_CHECK, Don't use the enum because a bool will do
+    1150002: { "enum": None           },  # AUXILIARY_POWER_SOURCE_AVAILABLE, Don't use the enum because a bool will do
+    1150006: { "enum": None           },  # RESET_AVERAGE_BEFORE_MEASUREMENT, Don't use the enum because a bool will do
+    1150007: { "enum": None           },  # OVERRANGING_ENABLED, Don't use the enum because a bool will do
+    1150060: { "enum": None           },  # OUTPUT_CONNECTED, Don't use the enum because a bool will do
+    1150064: { "enum": None           },  # MEASURE_RECORD_LENGTH_IS_FINITE, Don't use the enum because a bool will do
+    1150078: { "enum": None           },  # SEQUENCE_LOOP_COUNT_IS_FINITE, Don't use the enum because a bool will do
+    1150105: { "enum": None           },  # INTERLOCK_INPUT_OPEN, Don't use the enum because a bool will do
+    1250002: { "enum": None           },  # OVP_ENABLED, Don't use the enum because a bool will do
+    1250006: { "enum": None           },  # OUTPUT_ENABLED, Don't use the enum because a bool will do
 }
 
 
