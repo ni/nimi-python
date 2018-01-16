@@ -1289,48 +1289,6 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_numpy(waveform_data_array)
-
-    Creates an onboard waveform
-    for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-    mode.
-
-    
-
-    .. note:: You must set :py:data:`nifgen.OUTPUT\_MODE` to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session.channel[[0, 1]].create_waveform(waveform_data_array)
-
-
-    :param waveform_data_array:
-
-
-        Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
-
-        
-
-
-    :type waveform_data_array: list of float
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
-
-            
-
-
-
 .. function:: create_waveform_from_file_f64(file_name, byte_order)
 
     This function takes the floating point double (F64) data from the
@@ -1468,6 +1426,48 @@ nifgen.Session methods
 
             The handle that identifies the new waveform. This handle is used later
             when referring to this waveform.
+
+            
+
+
+
+.. function:: create_waveform_numpy(waveform_data_array)
+
+    Creates an onboard waveform
+    for use in Arbitrary Waveform output mode or Arbitrary Sequence output
+    mode.
+
+    
+
+    .. note:: You must set :py:data:`nifgen.OUTPUT\_MODE` to NIFGEN\_VAL\_OUTPUT\_ARB or
+        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session.channel[[0, 1]].create_waveform(waveform_data_array)
+
+
+    :param waveform_data_array:
+
+
+        Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+
+        
+
+
+    :type waveform_data_array: list of float
+
+    :rtype: int
+    :return:
+
+
+            The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
 
             
 
@@ -2259,6 +2259,20 @@ nifgen.Session methods
 
 
 
+.. function:: reset()
+
+    Resets the instrument to a known state. This function aborts the
+    generation, clears all routes, and resets session attributes to the
+    default values. This function does not, however, commit the session
+    properties or configure the device hardware to its default state.
+
+    
+
+    .. note:: For the NI 5401/5404/5411/5431, this function exhibits the same
+        behavior as the nifgen\_ResetDevice function.
+
+
+
 .. function:: reset_device()
 
     Performs a hard reset on the device. Generation is stopped, all routes
@@ -2288,6 +2302,49 @@ nifgen.Session methods
     in the onboard EEPROM.
 
     
+
+
+
+.. function:: self_test()
+
+    Runs the instrument self-test routine and returns the test result(s).
+
+    
+
+    .. note:: When used on some signal generators, the device is reset after the
+        :py:func:`nifgen.self_test` function runs. If you use the :py:func:`nifgen.self_test`
+        function, your device may not be in its previously configured state
+        after the function runs.
+
+
+
+    :rtype: tuple (self_test_result, self_test_message)
+
+        WHERE
+
+        self_test_result (int): 
+
+
+            Contains the value returned from the instrument self-test. A value of 0
+            indicates success.
+
+            +----------------+------------------+
+            | Self-Test Code | Description      |
+            +================+==================+
+            | 0              | Passed self-test |
+            +----------------+------------------+
+            | 1              | Self-test failed |
+            +----------------+------------------+
+
+
+        self_test_message (string): 
+
+
+            Returns the self-test response string from the instrument.
+
+            You must pass a ViChar array with at least 256 bytes.
+
+            
 
 
 
@@ -2549,62 +2606,5 @@ nifgen.Session methods
 
 
     :type data: list of float
-
-.. function:: reset()
-
-    Resets the instrument to a known state. This function aborts the
-    generation, clears all routes, and resets session attributes to the
-    default values. This function does not, however, commit the session
-    properties or configure the device hardware to its default state.
-
-    
-
-    .. note:: For the NI 5401/5404/5411/5431, this function exhibits the same
-        behavior as the nifgen\_ResetDevice function.
-
-
-
-.. function:: self_test()
-
-    Runs the instrument self-test routine and returns the test result(s).
-
-    
-
-    .. note:: When used on some signal generators, the device is reset after the
-        :py:func:`nifgen.self_test` function runs. If you use the :py:func:`nifgen.self_test`
-        function, your device may not be in its previously configured state
-        after the function runs.
-
-
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Contains the value returned from the instrument self-test. A value of 0
-            indicates success.
-
-            +----------------+------------------+
-            | Self-Test Code | Description      |
-            +================+==================+
-            | 0              | Passed self-test |
-            +----------------+------------------+
-            | 1              | Self-test failed |
-            +----------------+------------------+
-
-
-        self_test_message (string): 
-
-
-            Returns the self-test response string from the instrument.
-
-            You must pass a ViChar array with at least 256 bytes.
-
-            
-
-
 
 

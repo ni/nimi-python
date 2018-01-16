@@ -727,6 +727,32 @@ class Session(_RepeatedCapabilities):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    def _get_cal_date_and_time(self, cal_type):
+        '''_get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+        Returns:
+            month (int): Indicates the **month** of the last calibration.
+            day (int): Indicates the **day** of the last calibration.
+            year (int): Indicates the **year** of the last calibration.
+            hour (int): Indicates the **hour** of the last calibration.
+            minute (int): Indicates the **minute** of the last calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        year_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
     def get_custom_type(self):
         '''get_custom_type
 
@@ -788,6 +814,22 @@ class Session(_RepeatedCapabilities):
         error_code = self._library.niFake_GetEnumValue(vi_ctype, ctypes.pointer(a_quantity_ctype), ctypes.pointer(a_turtle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
+
+    def get_last_cal_date_and_time(self, cal_type):
+        '''get_last_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        import datetime
+
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
