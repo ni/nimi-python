@@ -851,6 +851,7 @@ nidmm.Session methods
             
 
 
+
 .. py:method:: fetch_waveform_into(array_size, maximum_time=-1)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1514,6 +1515,16 @@ nidmm.Session methods
 
 
 
+.. py:method:: reset()
+
+    Resets the instrument to a known state and sends initialization commands
+    to the instrument. The initialization commands set instrument settings
+    to the state necessary for the operation of the instrument driver.
+
+    
+
+
+
 .. py:method:: reset_with_defaults()
 
     Resets the instrument to a known state and sends initialization commands
@@ -1535,32 +1546,6 @@ nidmm.Session methods
     .. note:: This function calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
         the call will be lost. All attributes will be set to their default
         values after the call returns.
-
-
-
-.. py:method:: send_software_trigger()
-
-    Sends a command to trigger the DMM. Call this function if you have
-    configured either the :py:data:`nidmm.Session.trigger_source` or
-    :py:data:`nidmm.Session.sample_trigger` attributes. If the
-    :py:data:`nidmm.Session.trigger_source` and/or :py:data:`nidmm.Session.sample_trigger`
-    attributes are set to :py:data:`~nidmm.NIDMM_VAL_EXTERNAL` or :py:data:`~nidmm.NIDMM_VAL_TTL` *n*, you
-    can use this function to override the trigger source that you configured
-    and trigger the device. The NI 4050 and NI 4060 are not supported.
-
-    
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-
-.. py:method:: reset()
-
-    Resets the instrument to a known state and sends initialization commands
-    to the instrument. The initialization commands set instrument settings
-    to the state necessary for the operation of the instrument driver.
-
-    
 
 
 
@@ -1617,6 +1602,22 @@ nidmm.Session methods
             This error code indicates that the DMM should be repaired.
 
             
+
+
+
+.. py:method:: send_software_trigger()
+
+    Sends a command to trigger the DMM. Call this function if you have
+    configured either the :py:data:`nidmm.Session.trigger_source` or
+    :py:data:`nidmm.Session.sample_trigger` attributes. If the
+    :py:data:`nidmm.Session.trigger_source` and/or :py:data:`nidmm.Session.sample_trigger`
+    attributes are set to :py:data:`~nidmm.NIDMM_VAL_EXTERNAL` or :py:data:`~nidmm.NIDMM_VAL_TTL` *n*, you
+    can use this function to override the trigger source that you configured
+    and trigger the device. The NI 4050 and NI 4060 are not supported.
+
+    
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
