@@ -33,7 +33,8 @@ class _SessionBase(object):
     _is_frozen = False
 
     active_advanced_sequence = attributes.AttributeViString(1150074)
-    '''
+    '''Data Type: str
+
     Specifies the advanced sequence to configure or generate.
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.
@@ -48,7 +49,8 @@ class _SessionBase(object):
         var = session['0,1'].active_advanced_sequence
     '''
     active_advanced_sequence_step = attributes.AttributeViInt64(1150075)
-    '''
+    '''Data Type: int
+
     Specifies the advanced sequence step to configure.
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.
@@ -63,7 +65,8 @@ class _SessionBase(object):
         var = session['0,1'].active_advanced_sequence_step
     '''
     aperture_time = attributes.AttributeViReal64(1150058)
-    '''
+    '''Data Type: float
+
     Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the NIDCPOWER_ATTR_APERTURE_TIME_UNITS attribute.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure  your measurements and for information about valid values.
@@ -81,7 +84,8 @@ class _SessionBase(object):
         var = session['0,1'].aperture_time
     '''
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
-    '''
+    '''Data Type: ApertureTimeUnits
+
     Specifies the units of the NIDCPOWER_ATTR_APERTURE_TIME attribute for the channel configuration.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about  how to configure your measurements and for information about valid values.
@@ -99,7 +103,8 @@ class _SessionBase(object):
         var = session['0,1'].aperture_time_units
     '''
     auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1150055)
-    '''
+    '''Data Type: AutoZero
+
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
     Default Value: The default value for the NI PXI-4132 is NIDCPOWER_VAL_ON. The default value for  all other devices is NIDCPOWER_VAL_OFF, which is the only supported value for these devices.
@@ -114,7 +119,8 @@ class _SessionBase(object):
         var = session['0,1'].auto_zero
     '''
     auxiliary_power_source_available = attributes.AttributeViBoolean(1150002)
-    '''
+    '''Data Type: bool
+
     Indicates whether an auxiliary power source is connected to the device.
     A value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
     power source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.
@@ -122,7 +128,8 @@ class _SessionBase(object):
     Note: This attribute does not necessarily indicate if the device is using the auxiliary
     '''
     cache = attributes.AttributeViBoolean(1050004)
-    '''
+    '''Data Type: bool
+
     Specifies whether to cache the value of attributes.
     When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
     NI-DCPower might always cache or never cache particular attributes regardless of the setting of this attribute.
@@ -130,11 +137,13 @@ class _SessionBase(object):
     Default Value: VI_TRUE
     '''
     channel_count = attributes.AttributeViInt32(1050203)
-    '''
+    '''Data Type: int
+
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based attributes, the IVI engine maintains a separate  cache value for each channel.
     '''
     current_compensation_frequency = attributes.AttributeViReal64(1150071)
-    '''
+    '''Data Type: float
+
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
     for information about supported devices.
     Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
@@ -151,7 +160,8 @@ class _SessionBase(object):
         var = session['0,1'].current_compensation_frequency
     '''
     current_gain_bandwidth = attributes.AttributeViReal64(1150070)
-    '''
+    '''Data Type: float
+
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This attribute takes effect when the channel is in Constant Current mode.
     for information about supported devices.
     Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
@@ -168,7 +178,8 @@ class _SessionBase(object):
         var = session['0,1'].current_gain_bandwidth
     '''
     current_level = attributes.AttributeViReal64(1150009)
-    '''
+    '''Data Type: float
+
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
@@ -186,7 +197,8 @@ class _SessionBase(object):
         var = session['0,1'].current_level
     '''
     current_level_autorange = attributes.AttributeViInt32(1150017)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.
     Query the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
@@ -203,7 +215,8 @@ class _SessionBase(object):
         var = session['0,1'].current_level_autorange
     '''
     current_level_range = attributes.AttributeViReal64(1150011)
-    '''
+    '''Data Type: float
+
     Specifies the current level range, in amps, for the specified channel(s).
     The range defines the valid value to which the current level can be set. Use the  NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.
     The NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
@@ -222,7 +235,8 @@ class _SessionBase(object):
         var = session['0,1'].current_level_range
     '''
     current_limit = attributes.AttributeViReal64(1250005)
-    '''
+    '''Data Type: float
+
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
@@ -240,7 +254,8 @@ class _SessionBase(object):
         var = session['0,1'].current_limit
     '''
     current_limit_autorange = attributes.AttributeViInt32(1150016)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute. If you change this attribute from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.
     Query the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
@@ -257,7 +272,8 @@ class _SessionBase(object):
         var = session['0,1'].current_limit_autorange
     '''
     current_limit_range = attributes.AttributeViReal64(1150004)
-    '''
+    '''Data Type: float
+
     Specifies the current limit range, in amps, for the specified channel(s).
     The range defines the valid value to which the current limit can be set. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE  attribute to enable automatic selection of the current limit range.
     The NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
@@ -276,7 +292,8 @@ class _SessionBase(object):
         var = session['0,1'].current_limit_range
     '''
     current_pole_zero_ratio = attributes.AttributeViReal64(1150072)
-    '''
+    '''Data Type: float
+
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Current mode.
     for information about supported devices.
     Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
@@ -293,7 +310,8 @@ class _SessionBase(object):
         var = session['0,1'].current_pole_zero_ratio
     '''
     dc_noise_rejection = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
-    '''
+    '''Data Type: DCNoiseRejection
+
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_NORMAL
@@ -301,7 +319,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_measure_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
-    '''
+    '''Data Type: DigitalEdge
+
     Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
     NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
     for information about supported devices.
@@ -310,7 +329,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_measure_trigger_input_terminal = attributes.AttributeViString(1150036)
-    '''
+    '''Data Type: str
+
     Specifies the input terminal for the Measure trigger. This attribute is used only when the  NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
     for this attribute.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.
@@ -319,14 +339,16 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_pulse_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
-    '''
+    '''Data Type: DigitalEdge
+
     Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
     Default Value: NIDCPOWER_VAL_RISING
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     digital_edge_pulse_trigger_input_terminal = attributes.AttributeViString(1150097)
-    '''
+    '''Data Type: str
+
     Specifies the input terminal for the Pulse trigger. This attribute is used only when the NIDCPOWER_ATTR_PULSE_TRIGGER_TYPE attribute is set to digital edge.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
@@ -334,7 +356,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     digital_edge_sequence_advance_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
-    '''
+    '''Data Type: DigitalEdge
+
     Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_RISING
@@ -342,7 +365,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_sequence_advance_trigger_input_terminal = attributes.AttributeViString(1150028)
-    '''
+    '''Data Type: str
+
     Specifies the input terminal for the Sequence Advance trigger. Use this attribute only when the  NIDCPOWER_ATTR_SEQUENCE_ADVANCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
@@ -351,7 +375,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in
     '''
     digital_edge_source_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
-    '''
+    '''Data Type: DigitalEdge
+
     Specifies whether to configure the Source trigger to assert on the rising or falling edge.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_RISING
@@ -359,7 +384,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_source_trigger_input_terminal = attributes.AttributeViString(1150032)
-    '''
+    '''Data Type: str
+
     Specifies the input terminal for the Source trigger. Use this attribute only when the  NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
     for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
@@ -368,7 +394,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
-    '''
+    '''Data Type: DigitalEdge
+
     Specifies whether to configure the Start trigger to assert on the rising or falling edge.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_RISING
@@ -376,7 +403,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_start_trigger_input_terminal = attributes.AttributeViString(1150023)
-    '''
+    '''Data Type: str
+
     Specifies the input terminal for the Start trigger. Use this attribute only when the NIDCPOWER_ATTR_START_TRIGGER_TYPE  attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
     for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.
@@ -385,13 +413,15 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     driver_setup = attributes.AttributeViString(1050007)
-    '''
+    '''Data Type: str
+
     Indicates the Driver Setup string that you specified when initializing the driver.
     Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This attribute is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the niDCPower_InitializeWithChannels function or through the  IVI Configuration Utility.
     You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the niDCPower_InitializeWithChannels function. If you do not specify a Driver Setup string, this attribute returns an empty string.
     '''
     exported_measure_trigger_output_terminal = attributes.AttributeViString(1150037)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Measure trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
     for information about supported devices.
@@ -400,7 +430,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     exported_pulse_trigger_output_terminal = attributes.AttributeViString(1150098)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Pulse trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
@@ -408,7 +439,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     exported_sequence_advance_trigger_output_terminal = attributes.AttributeViString(1150029)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Sequence Advance trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
     for information about supported devices.
@@ -417,7 +449,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     exported_source_trigger_output_terminal = attributes.AttributeViString(1150033)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Source trigger.
     Refer to the Device Routes tab in MAX for a list of the terminals available on your device.
     for information about supported devices.
@@ -426,7 +459,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     exported_start_trigger_output_terminal = attributes.AttributeViString(1150024)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Start trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available  on your device.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
@@ -435,27 +469,33 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     fetch_backlog = attributes.AttributeViInt32(1150056)
-    '''
+    '''Data Type: int
+
     Returns the number of measurements acquired that have not been fetched yet.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
-    '''
+    '''Data Type: str
+
     Contains a comma-separated list of class-extension groups that NI-DCPower implements.
     '''
     instrument_firmware_revision = attributes.AttributeViString(1050510)
-    '''
+    '''Data Type: str
+
     Contains the firmware revision information for the device you are currently using.
     '''
     instrument_manufacturer = attributes.AttributeViString(1050511)
-    '''
+    '''Data Type: str
+
     Contains the name of the manufacturer for the device you are currently using.
     '''
     instrument_model = attributes.AttributeViString(1050512)
-    '''
+    '''Data Type: str
+
     Contains the model number or name of the device that you are currently using.
     '''
     interchange_check = attributes.AttributeViBoolean(1050021)
-    '''
+    '''Data Type: bool
+
     Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower functions. VI_TRUE specifies that interchangeability checking is enabled.
     Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the niDCPower_GetNextInterchangeWarning function to retrieve  interchange warnings.
     Call the niDCPower_GetNextInterchangeWarning function to clear the list of interchangeability warnings  without reading them.
@@ -463,7 +503,8 @@ class _SessionBase(object):
     Default Value: VI_FALSE
     '''
     interlock_input_open = attributes.AttributeViBoolean(1150105)
-    '''
+    '''Data Type: bool
+
     Indicates whether the safety interlock circuit is open.
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about  the safety interlock circuit.
     about supported devices.
@@ -471,18 +512,21 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
-    '''
+    '''Data Type: str
+
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
     If you initialize NI-DCPower with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this attribute contains that value.
     '''
     logical_name = attributes.AttributeViString(1050305)
-    '''
+    '''Data Type: str
+
     Contains the logical name you specified when opening the current IVI session.
     You can pass a logical name to the niDCPower_InitializeWithChannels function.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a function section in the IVI Configuration file. The function section specifies a physical  device and initial user options.
     '''
     measure_buffer_size = attributes.AttributeViInt32(1150077)
-    '''
+    '''Data Type: int
+
     Specifies the number of samples that the active channel measurement buffer can hold.
     The default value is the maximum number of samples that a device is capable of recording in one second.
     for information about supported devices.
@@ -492,7 +536,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_delay = attributes.AttributeViReal64(1150046)
-    '''
+    '''Data Type: float
+
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
     Valid Values: 0 to 167 seconds
@@ -501,7 +546,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_output_terminal = attributes.AttributeViString(1150047)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Measure Complete event.
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
@@ -509,7 +555,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150044)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -517,7 +564,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_pulse_width = attributes.AttributeViReal64(1150045)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Measure Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse  width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
@@ -528,7 +576,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_record_delta_time = attributes.AttributeViReal64(1150065)
-    '''
+    '''Data Type: float
+
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this attribute after the desired measurement settings are committed.
     for information about supported devices.
     two measurements and the rest would differ.
@@ -536,7 +585,8 @@ class _SessionBase(object):
     Note: This attribute is not available when Auto Zero is configured to Once because the amount of time between the first
     '''
     measure_record_length = attributes.AttributeViInt32(1150063)
-    '''
+    '''Data Type: int
+
     Specifies how many measurements compose a measure record. When this attribute is set to a value greater than 1, the  NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
     for information about supported devices.
     Valid Values: 1 to 16,777,216
@@ -546,7 +596,8 @@ class _SessionBase(object):
     This attribute is not available in a session involving multiple channels.
     '''
     measure_record_length_is_finite = attributes.AttributeViBoolean(1150064)
-    '''
+    '''Data Type: bool
+
     Specifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
     for information about supported devices.
     Default Value: VI_TRUE
@@ -555,7 +606,8 @@ class _SessionBase(object):
     This attribute is not available in a session involving multiple channels.
     '''
     measure_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150034)
-    '''
+    '''Data Type: TriggerType
+
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_DIGITAL_EDGE
@@ -563,13 +615,15 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_when = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
-    '''
+    '''Data Type: MeasureWhen
+
     Specifies when the measure unit should acquire measurements. Unless this attribute is configured to  NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
     Default Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is  NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple  function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.
     '''
     output_capacitance = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
-    '''
+    '''Data Type: OutputCapacitance
+
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
     Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more  information about capacitance.
@@ -586,7 +640,8 @@ class _SessionBase(object):
         var = session['0,1'].output_capacitance
     '''
     output_connected = attributes.AttributeViBoolean(1150060)
-    '''
+    '''Data Type: bool
+
     Specifies whether the output relay is connected (closed) or disconnected (open). The NIDCPOWER_ATTR_OUTPUT_ENABLED  attribute does not change based on this attribute; they are independent of each other.
     about supported devices.
     Set this attribute to VI_FALSE to disconnect the output terminal from the output.
@@ -605,7 +660,8 @@ class _SessionBase(object):
         var = session['0,1'].output_connected
     '''
     output_enabled = attributes.AttributeViBoolean(1250006)
-    '''
+    '''Data Type: bool
+
     Specifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).
     Depending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output
     the niDCPower_Initiate function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
@@ -623,7 +679,8 @@ class _SessionBase(object):
         var = session['0,1'].output_enabled
     '''
     output_function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputFunction, 1150008)
-    '''
+    '''Data Type: OutputFunction
+
     Configures the function to generate on the specified channel(s).
     When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
     NIDCPOWER_ATTR_VOLTAGE_LEVEL
@@ -647,7 +704,8 @@ class _SessionBase(object):
         var = session['0,1'].output_function
     '''
     output_resistance = attributes.AttributeViReal64(1150061)
-    '''
+    '''Data Type: float
+
     Specifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is  available only when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
     Default Value: 0.0
@@ -664,13 +722,15 @@ class _SessionBase(object):
         var = session['0,1'].output_resistance
     '''
     overranging_enabled = attributes.AttributeViBoolean(1150007)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. VI_TRUE means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
     Default Value: VI_FALSE
     '''
     ovp_enabled = attributes.AttributeViBoolean(1250002)
-    '''
+    '''Data Type: bool
+
     Enables (VI_TRUE) or disables (VI_FALSE) overvoltage protection (OVP).
     Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about  overvoltage protection.
     for information about supported devices.
@@ -679,7 +739,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     ovp_limit = attributes.AttributeViReal64(1250003)
-    '''
+    '''Data Type: float
+
     Determines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.
     for information about supported devices.
     Valid Values: 2 V to 210 V
@@ -688,7 +749,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     power_line_frequency = attributes.AttributeViReal64(1150020)
-    '''
+    '''Data Type: float
+
     Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  NIDCPOWER_ATTR_APERTURE_TIME attribute in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
     Default Value: NIDCPOWER_VAL_60_HERTZ
@@ -705,7 +767,8 @@ class _SessionBase(object):
         var = session['0,1'].power_line_frequency
     '''
     power_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSource, 1150000)
-    '''
+    '''Data Type: PowerSource
+
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: NIDCPOWER_VAL_AUTOMATIC
     is set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_Initiate function.
@@ -713,11 +776,13 @@ class _SessionBase(object):
     Note: Automatic selection is not persistent and occurs only at the time this attribute
     '''
     power_source_in_use = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
-    '''
+    '''Data Type: PowerSourceInUse
+
     Indicates whether the device is using the internal or auxiliary power source to generate power.
     '''
     pulse_bias_current_level = attributes.AttributeViReal64(1150088)
-    '''
+    '''Data Type: float
+
     Specifies the pulse bias current level, in amps, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
@@ -734,7 +799,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_bias_current_level
     '''
     pulse_bias_current_limit = attributes.AttributeViReal64(1150083)
-    '''
+    '''Data Type: float
+
     Specifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE property.
@@ -751,7 +817,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_bias_current_limit
     '''
     pulse_bias_delay = attributes.AttributeViReal64(1150092)
-    '''
+    '''Data Type: float
+
     Determines when, in seconds, the device generates the Pulse Complete event after generating the off level of a pulse.
     Valid Values: 0 to 167 seconds
     Default Value: 16.67 milliseconds
@@ -768,7 +835,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_bias_delay
     '''
     pulse_bias_voltage_level = attributes.AttributeViReal64(1150082)
-    '''
+    '''Data Type: float
+
     Specifies the pulse bias voltage level, in volts, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE attribute.
@@ -785,7 +853,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_bias_voltage_level
     '''
     pulse_bias_voltage_limit = attributes.AttributeViReal64(1150089)
-    '''
+    '''Data Type: float
+
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
@@ -802,7 +871,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_bias_voltage_limit
     '''
     pulse_complete_event_output_terminal = attributes.AttributeViString(1150099)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Pulse Complete event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
     Default Value:The default value for PXI Express devices is 250 ns.
@@ -810,14 +880,16 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     pulse_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150100)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Pulse Complete event.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     pulse_complete_event_pulse_width = attributes.AttributeViReal64(1150101)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Pulse Complete event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for PXI Express devices is 1.6 microseconds.
@@ -826,7 +898,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     pulse_current_level = attributes.AttributeViReal64(1150086)
-    '''
+    '''Data Type: float
+
     Specifies the pulse current level, in amps, that the device attempts to generate on the specified channel(s) during the on phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
@@ -843,7 +916,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_current_level
     '''
     pulse_current_level_range = attributes.AttributeViReal64(1150090)
-    '''
+    '''Data Type: float
+
     Specifies the pulse current level range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current level and pulse bias current level.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
@@ -861,7 +935,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_current_level_range
     '''
     pulse_current_limit = attributes.AttributeViReal64(1150081)
-    '''
+    '''Data Type: float
+
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
@@ -878,7 +953,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_current_limit
     '''
     pulse_current_limit_range = attributes.AttributeViReal64(1150085)
-    '''
+    '''Data Type: float
+
     Specifies the pulse current limit range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
@@ -896,7 +972,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_current_limit_range
     '''
     pulse_off_time = attributes.AttributeViReal64(1150094)
-    '''
+    '''Data Type: float
+
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
@@ -913,7 +990,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_off_time
     '''
     pulse_on_time = attributes.AttributeViReal64(1150093)
-    '''
+    '''Data Type: float
+
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
@@ -930,14 +1008,16 @@ class _SessionBase(object):
         var = session['0,1'].pulse_on_time
     '''
     pulse_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150095)
-    '''
+    '''Data Type: TriggerType
+
     Specifies the behavior of the Pulse trigger.
     Default Value: NIDCPOWER_VAL_NONE
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     pulse_voltage_level = attributes.AttributeViReal64(1150080)
-    '''
+    '''Data Type: float
+
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
@@ -954,7 +1034,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_voltage_level
     '''
     pulse_voltage_level_range = attributes.AttributeViReal64(1150084)
-    '''
+    '''Data Type: float
+
     Specifies the pulse voltage level range, in volts, for the specified channel(s).
     The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
@@ -972,7 +1053,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_voltage_level_range
     '''
     pulse_voltage_limit = attributes.AttributeViReal64(1150087)
-    '''
+    '''Data Type: float
+
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
@@ -989,7 +1071,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_voltage_limit
     '''
     pulse_voltage_limit_range = attributes.AttributeViReal64(1150091)
-    '''
+    '''Data Type: float
+
     Specifies the pulse voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
@@ -1007,7 +1090,8 @@ class _SessionBase(object):
         var = session['0,1'].pulse_voltage_limit_range
     '''
     query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular attributes regardless of the setting of this attribute.
@@ -1015,28 +1099,32 @@ class _SessionBase(object):
     Default Value: VI_TRUE
     '''
     range_check = attributes.AttributeViBoolean(1050002)
-    '''
+    '''Data Type: bool
+
     Specifies whether to validate attribute values and function parameters.
     If this attribute is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower functions.  Range checking parameters is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable range checking and maximize performance.
     Use the niDCPower_InitializeWithChannels function to override this value.
     Default Value: VI_TRUE
     '''
     ready_for_pulse_trigger_event_output_terminal = attributes.AttributeViString(1150102)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     ready_for_pulse_trigger_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150103)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     ready_for_pulse_trigger_event_pulse_width = attributes.AttributeViReal64(1150104)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Ready For Pulse Trigger event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
@@ -1045,12 +1133,14 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
-    '''
+    '''Data Type: bool
+
     Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the niDCPower_GetNextCoercionRecord function to read and delete the earliest coercion record from the list.
     Default Value: The default value is VI_FALSE. Use the niDCPower_InitializeWithChannels function to override this value.
     '''
     reset_average_before_measurement = attributes.AttributeViBoolean(1150006)
-    '''
+    '''Data Type: bool
+
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (VI_TRUE) or  returns a measurement that has already begun or completed(VI_FALSE).
     for information about supported devices.
     When you set the NIDCPOWER_ATTR_SAMPLES_TO_AVERAGE attribute in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the niDCPower_MeasureMultiple function. To  force a synchronization in the running state, set this attribute to VI_TRUE, and then run the niDCPower_MeasureMultiple  function, specifying all channels in the channel name parameter. You can set the  NIDCPOWER_ATTR_RESET_AVERAGE_BEFORE_MEASUREMENT attribute to VI_FALSE after the niDCPower_MeasureMultiple function  completes.
@@ -1068,7 +1158,8 @@ class _SessionBase(object):
         var = session['0,1'].reset_average_before_measurement
     '''
     samples_to_average = attributes.AttributeViInt32(1150003)
-    '''
+    '''Data Type: int
+
     Specifies the number of samples to average when you take a measurement.
     Increasing the number of samples to average decreases measurement noise but increases the time required to take  a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for  optional attribute settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for  information about improving noise immunity for those devices.
     Default Value:
@@ -1091,7 +1182,8 @@ class _SessionBase(object):
         var = session['0,1'].samples_to_average
     '''
     self_calibration_persistence = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
-    '''
+    '''Data Type: SelfCalibrationPersistence
+
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.
     This attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.
     about supported devices.
@@ -1100,7 +1192,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
     '''
     sense = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Sense, 1150013)
-    '''
+    '''Data Type: Sense
+
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
     Default Value: The default value is NIDCPOWER_VAL_LOCAL if the device supports local sense.  Otherwise, the default and only supported value is NIDCPOWER_VAL_REMOTE.
@@ -1115,7 +1208,8 @@ class _SessionBase(object):
         var = session['0,1'].sense
     '''
     sequence_advance_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150026)
-    '''
+    '''Data Type: TriggerType
+
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_NONE
@@ -1123,7 +1217,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_engine_done_event_output_terminal = attributes.AttributeViString(1150050)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Sequence Engine Done Complete event.
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
@@ -1131,7 +1226,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_engine_done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150048)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -1139,7 +1235,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_engine_done_event_pulse_width = attributes.AttributeViReal64(1150049)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Sequence Engine Done event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
@@ -1150,7 +1247,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_iteration_complete_event_output_terminal = attributes.AttributeViString(1150040)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Sequence Iteration Complete event.
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
@@ -1158,7 +1256,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_iteration_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150038)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -1166,7 +1265,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_iteration_complete_event_pulse_width = attributes.AttributeViReal64(1150039)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Sequence Iteration Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width  value for PXI Express devices is 250 ns.
     The maximum event pulse width value for all devices is 1.6 microseconds.
@@ -1177,7 +1277,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in
     '''
     sequence_loop_count = attributes.AttributeViInt32(1150025)
-    '''
+    '''Data Type: int
+
     Specifies the number of times a sequence is run after initiation.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.
     for information about supported devices. When the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute  is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
@@ -1187,7 +1288,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_loop_count_is_finite = attributes.AttributeViBoolean(1150078)
-    '''
+    '''Data Type: bool
+
     Specifies whether a sequence should repeat indefinitely.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.
     NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE,  the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
@@ -1196,12 +1298,14 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. When the
     '''
     simulate = attributes.AttributeViBoolean(1050005)
-    '''
+    '''Data Type: bool
+
     Specifies whether to simulate NI-DCPower I/O operations. VI_TRUE specifies that operation is simulated.
     Default Value: VI_FALSE
     '''
     source_complete_event_output_terminal = attributes.AttributeViString(1150043)
-    '''
+    '''Data Type: str
+
     Specifies the output terminal for exporting the Source Complete event.
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
@@ -1209,7 +1313,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     source_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150041)
-    '''
+    '''Data Type: Polarity
+
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -1217,7 +1322,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     source_complete_event_pulse_width = attributes.AttributeViReal64(1150042)
-    '''
+    '''Data Type: float
+
     Specifies the width of the Source Complete event, in seconds.
     for information about supported devices.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.
@@ -1228,7 +1334,8 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     source_delay = attributes.AttributeViReal64(1150051)
-    '''
+    '''Data Type: float
+
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
     Valid Values: 0 to 167 seconds
@@ -1247,12 +1354,14 @@ class _SessionBase(object):
         var = session['0,1'].source_delay
     '''
     source_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SourceMode, 1150054)
-    '''
+    '''Data Type: SourceMode
+
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: NIDCPOWER_VAL_SINGLE_POINT
     '''
     source_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150030)
-    '''
+    '''Data Type: TriggerType
+
     Specifies the behavior of the Source trigger.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_NONE
@@ -1260,31 +1369,38 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
-    '''
+    '''Data Type: int
+
     Contains the major version number of the class specification with which NI-DCPower is compliant.
     '''
     specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
-    '''
+    '''Data Type: int
+
     Contains the minor version number of the class specification with which NI-DCPower is compliant.
     '''
     specific_driver_description = attributes.AttributeViString(1050514)
-    '''
+    '''Data Type: str
+
     Contains a brief description of the specific driver.
     '''
     specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
+    '''Data Type: str
+
     Contains the prefix for NI-DCPower. The name of each user-callable  function in NI-DCPower begins with this prefix.
     '''
     specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
+    '''Data Type: str
+
     Contains additional version information about NI-DCPower.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
-    '''
+    '''Data Type: str
+
     Contains the name of the vendor that supplies NI-DCPower.
     '''
     start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150021)
-    '''
+    '''Data Type: TriggerType
+
     Specifies the behavior of the Start trigger.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_NONE
@@ -1292,11 +1408,13 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     supported_instrument_models = attributes.AttributeViString(1050327)
-    '''
+    '''Data Type: str
+
     Contains a comma-separated (,) list of supported NI-DCPower device models.
     '''
     transient_response = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TransientResponse, 1150062)
-    '''
+    '''Data Type: TransientResponse
+
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.
     Default Value: NIDCPOWER_VAL_NORMAL
@@ -1313,7 +1431,8 @@ class _SessionBase(object):
         var = session['0,1'].transient_response
     '''
     voltage_compensation_frequency = attributes.AttributeViReal64(1150068)
-    '''
+    '''Data Type: float
+
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Voltage mode.
     for information about supported devices.
     Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of  the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
@@ -1330,7 +1449,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_compensation_frequency
     '''
     voltage_gain_bandwidth = attributes.AttributeViReal64(1150067)
-    '''
+    '''Data Type: float
+
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This attribute takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
     Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
@@ -1347,7 +1467,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_gain_bandwidth
     '''
     voltage_level = attributes.AttributeViReal64(1250001)
-    '''
+    '''Data Type: float
+
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
@@ -1365,7 +1486,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_level
     '''
     voltage_level_autorange = attributes.AttributeViInt32(1150015)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
     If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.
     Query the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
@@ -1382,7 +1504,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_level_autorange
     '''
     voltage_level_range = attributes.AttributeViReal64(1150005)
-    '''
+    '''Data Type: float
+
     Specifies the voltage level range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE  attribute to enable automatic selection of the voltage level range.
     The NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_VOLTAGE.
@@ -1401,7 +1524,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_level_range
     '''
     voltage_limit = attributes.AttributeViReal64(1150010)
-    '''
+    '''Data Type: float
+
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
     This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
@@ -1419,7 +1543,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_limit
     '''
     voltage_limit_autorange = attributes.AttributeViInt32(1150018)
-    '''
+    '''Data Type: bool
+
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
     If this attribute is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.
     Query the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function to find out  which range NI-DCPower automatically selects.
@@ -1436,7 +1561,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_limit_autorange
     '''
     voltage_limit_range = attributes.AttributeViReal64(1150012)
-    '''
+    '''Data Type: float
+
     Specifies the voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE  attribute to enable automatic selection of the voltage limit range.
     The NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
@@ -1455,7 +1581,8 @@ class _SessionBase(object):
         var = session['0,1'].voltage_limit_range
     '''
     voltage_pole_zero_ratio = attributes.AttributeViReal64(1150069)
-    '''
+    '''Data Type: float
+
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Voltage mode.
     for information about supported devices.
     Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.

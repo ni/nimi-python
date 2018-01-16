@@ -309,7 +309,7 @@ nidmm.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
@@ -825,7 +825,7 @@ nidmm.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+

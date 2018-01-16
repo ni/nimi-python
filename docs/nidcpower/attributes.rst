@@ -436,7 +436,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
@@ -562,7 +562,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
@@ -4054,7 +4054,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
@@ -4180,7 +4180,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Characteristic | Value      |
     +================+============+
-    | Datatype       | int        |
+    | Datatype       | bool       |
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
