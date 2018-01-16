@@ -1435,7 +1435,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session['0,1'].cal_self_calibrate(option=niscope.enums.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1471,7 +1471,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.enums.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -3001,7 +3001,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
@@ -3632,7 +3632,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, output_terminal, signal_identifier='None'):
+    def export_signal(self, signal, output_terminal, signal_identifier=None):
         '''export_signal
 
         Configures the digitizer to generate a signal that other devices can
@@ -3725,7 +3725,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         Performs the following initialization actions:

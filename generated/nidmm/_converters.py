@@ -2,12 +2,9 @@ from nidmm import visatype
 
 
 def _convert_timedelta(value, library_type, scaling):
-    if str(type(value)).find("'datetime.timedelta'") != -1:
-        scaled_value = value.total_seconds() * scaling
-    else:
-        scaled_value = value
+    scaled_value = value.total_seconds() * scaling
 
-    if not library_type == visatype.ViReal64:  # ctype integer types don't convert to int from float so we need to
+    if not library_type == visatype.ViReal64 and not library_type == visatype.ViReal32:  # ctype integer types don't convert to int from float so we need to
         scaled_value = int(scaled_value + 0.5)
 
     return library_type(scaled_value)
