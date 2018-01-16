@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
     * `nidmm.Session()` no longer takes id_query parameter
+    * Metadata updated to 17.5
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -31,6 +32,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
   * #### Added
   * #### Changed
+    * Metadata updated to 17.6.1
   * #### Removed
 * ### NI-FGEN
   * #### Added
