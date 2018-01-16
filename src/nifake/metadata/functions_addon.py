@@ -67,7 +67,7 @@ functions_default_value = {
                                                           2: { 'default_value': False, },
                                                           3: { 'default_value': '""', }, }, },
     'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
-    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'enums.Turtle.LEONARDO', }, }, },
+    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
 # Converted parameters
