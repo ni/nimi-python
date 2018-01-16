@@ -17,8 +17,10 @@ ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 <%
 a = attributes[attr]
 data_type = helper.get_python_type_for_api_type(a['type'], config)
-if attributes[attr]['enum'] is not None:
-    data_type = ':py:data:`' + attributes[attr]["enum"] + '`'
+if 'python_type' in a:
+    data_type = a['python_type']
+if a['enum'] is not None:
+    data_type = ':py:data:`' + a["enum"] + '`'
 table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', data_type),

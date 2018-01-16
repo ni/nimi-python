@@ -70,6 +70,12 @@ You can specify a subset of repeated capabilities using the Python index notatio
     session['0,1'].{0} = var
     var = session['0,1'].{0}
 '''
+data_type = helper.get_python_type_for_api_type(attributes[attribute]['type'], config)
+if 'python_type' in attributes[attribute]:
+    data_type = attributes[attribute]['python_type']
+if attributes[attribute]['enum'] is not None:
+    data_type = attributes[attribute]["enum"]
+
 if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
@@ -79,7 +85,8 @@ if attributes[attribute]['channel_based'] == 'True':
     ${attributes[attribute]['python_name']} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
-    '''
+    '''Data Type: ${data_type}
+
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
 %   endif
