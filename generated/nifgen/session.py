@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifgen import attributes
 from nifgen import enums
 from nifgen import errors
@@ -10,7 +11,6 @@ from nifgen import visatype
 
 # Used for __repr__
 import pprint
-
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -2156,7 +2156,7 @@ class _RepeatedCapabilities(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=''):
+    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=""):
         '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -2169,7 +2169,11 @@ class _RepeatedCapabilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
+<<<<<<< HEAD
             session.channel[[0, 1]]._initialize_with_channels(resource_name, reset_device=False, option_string='')
+=======
+            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
+>>>>>>> master
 
         Args:
             resource_name (string): Caution:
@@ -2993,7 +2997,7 @@ class _RepeatedCapabilities(object):
 class Session(_RepeatedCapabilities):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'

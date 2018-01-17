@@ -53,6 +53,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
     * Channel repeated capability
   * #### Changed
+    * Metadata updated to NI-DCPower 17.6.1
   * #### Removed
 * ### NI-FGEN
   * #### Added
@@ -265,3 +266,4 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 -->
+

@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from nidmm import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidmm import attributes
 from nidmm import enums
 from nidmm import errors
@@ -10,7 +11,6 @@ from nidmm import visatype
 
 # Used for __repr__
 import pprint
-
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -854,7 +854,7 @@ class _RepeatedCapabilities(object):
 class Session(_RepeatedCapabilities):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
@@ -1637,7 +1637,7 @@ class Session(_RepeatedCapabilities):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
-    def get_dev_temp(self, options=''):
+    def get_dev_temp(self, options=""):
         '''get_dev_temp
 
         Returns the current **Temperature** of the device.
@@ -1750,7 +1750,7 @@ class Session(_RepeatedCapabilities):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         This function completes the following tasks:
