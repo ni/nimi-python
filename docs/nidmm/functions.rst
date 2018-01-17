@@ -1064,7 +1064,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: get_dev_temp(options='')
+.. py:method:: get_dev_temp(options='""')
 
     Returns the current **Temperature** of the device.
 

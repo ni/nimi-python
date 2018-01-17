@@ -65,9 +65,17 @@ functions_is_error_handling = {
 functions_default_value = {
     'InitWithOptions':                  { 'parameters': { 1: { 'default_value': False, },
                                                           2: { 'default_value': False, },
-                                                          3: { 'default_value': '', }, }, },
+                                                          3: { 'default_value': '""', }, }, },
     'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
+}
+
+# Converted parameters
+functions_converters = {
+    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_microseconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
 # Manually provided Python names for methods, rather than deriving from original names.

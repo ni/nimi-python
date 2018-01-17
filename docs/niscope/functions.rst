@@ -1080,7 +1080,7 @@ niscope.Session methods
 
 
 
-.. py:method:: export_signal(signal, output_terminal, signal_identifier='None')
+.. py:method:: export_signal(signal, output_terminal, signal_identifier='"None"')
 
     Configures the digitizer to generate a signal that other devices can
     detect when configured for digital triggering or sharing clocks. The
