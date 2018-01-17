@@ -29,6 +29,6 @@ functions_is_error_handling = {
 functions_default_value = {
     'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
                                           2: { 'default_value': False, },
-                                          3: { 'default_value': '', }, }, },
+                                          3: { 'default_value': '""', }, }, },
 }
 

@@ -60,6 +60,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     unit_tests/mock_helper.py \
     unit_tests/matchers.py \
     __init__.py \
+    _converters.py \
 
 DEFAULT_PY_FILES_TO_COPY := \
     visatype.py \
