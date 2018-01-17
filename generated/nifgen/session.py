@@ -2169,11 +2169,7 @@ class _RepeatedCapabilities(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-<<<<<<< HEAD
-            session.channel[[0, 1]]._initialize_with_channels(resource_name, reset_device=False, option_string='')
-=======
-            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
->>>>>>> master
+            session.channel[[0, 1]]._initialize_with_channels(resource_name, reset_device=False, option_string='""')
 
         Args:
             resource_name (string): Caution:
