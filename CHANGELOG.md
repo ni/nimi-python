@@ -19,6 +19,17 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
+        * The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
+            * ConfigureMultiPoint
+            * ConfigureTrigger
+            * Fetch
+            * FetchMultiPoint
+            * FetchWaveform
+            * Read
+            * ReadMultiPoint
+            * ReadWaveform
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * GetCalDateAndTime
     * #### Removed
 * ### NI-ModInst
     * #### Added
