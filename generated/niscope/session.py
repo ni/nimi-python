@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from niscope import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from niscope import attributes
 from niscope import enums
 from niscope import errors
@@ -12,7 +13,6 @@ from niscope import waveform_info  # noqa: F401
 
 # Used for __repr__
 import pprint
-
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -3014,7 +3014,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
@@ -3645,7 +3645,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, output_terminal, signal_identifier='None'):
+    def export_signal(self, signal, output_terminal, signal_identifier="None"):
         '''export_signal
 
         Configures the digitizer to generate a signal that other devices can
@@ -3738,7 +3738,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         Performs the following initialization actions:
