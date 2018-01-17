@@ -1036,7 +1036,7 @@ nidmm.Session methods
 
 
 
-.. function:: get_dev_temp(options='')
+.. function:: get_dev_temp(options='""')
 
     Returns the current **Temperature** of the device.
 
