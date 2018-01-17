@@ -983,7 +983,7 @@ class TestSession(object):
         self.side_effects_helper['GetCalDateAndTime']['Hour'] = hour
         self.side_effects_helper['GetCalDateAndTime']['Minute'] = minute
         with nifake.Session('dev1') as session:
-            last_cal = session.get_last_cal_date_and_time(0)
+            last_cal = session.get_cal_date_and_time(0)
             assert isinstance(last_cal, datetime.datetime)
             assert datetime.datetime(year, month, day, hour, minute) == last_cal
 

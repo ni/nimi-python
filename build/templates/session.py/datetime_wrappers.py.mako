@@ -13,6 +13,6 @@
         '''
         import datetime
 
-        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        month, day, year, hour, minute = self._${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return datetime.datetime(year, month, day, hour, minute)
 

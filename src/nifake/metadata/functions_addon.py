@@ -10,8 +10,8 @@ functions_codegen_method = {
     '.etAttribute.+':           { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
-    'GetError':                 { 'codegen_method': 'private',  },
     'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetError':                 { 'codegen_method': 'private',  },
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
 }
@@ -114,6 +114,7 @@ functions_additional_functions = {
     'GetLastCalDateAndTime': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
+        'python_name': 'get_cal_date_and_time',
         'method_templates': [
             { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
