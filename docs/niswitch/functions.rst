@@ -553,6 +553,16 @@ niswitch.Session methods
 
     :type relay_action: :py:data:`niswitch.RelayAction`
 
+.. function:: reset()
+
+    Disconnects all created paths and returns the switch module to the state
+    at initialization. Configuration channel and source channel settings
+    remain unchanged.
+
+    
+
+
+
 .. function:: reset_with_defaults()
 
     Resets the switch module and applies initial user specified settings
@@ -654,6 +664,36 @@ niswitch.Session methods
 
 
     :type invert: bool
+
+.. function:: self_test()
+
+    Verifies that the driver can communicate with the switch module.
+
+    
+
+
+
+    :rtype: tuple (self_test_result, self_test_message)
+
+        WHERE
+
+        self_test_result (int): 
+
+
+            Value returned from the switch device self-test. Passed 0 Failed 1
+
+            
+
+
+        self_test_message (string): 
+
+
+            Self-test response string from the switch device. You must pass a ViChar
+            array with at least 256 bytes.
+
+            
+
+
 
 .. function:: send_software_trigger()
 
@@ -763,45 +803,5 @@ niswitch.Session methods
 
 
     :type maximum_time_ms: int
-
-.. function:: reset()
-
-    Disconnects all created paths and returns the switch module to the state
-    at initialization. Configuration channel and source channel settings
-    remain unchanged.
-
-    
-
-
-
-.. function:: self_test()
-
-    Verifies that the driver can communicate with the switch module.
-
-    
-
-
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Value returned from the switch device self-test. Passed 0 Failed 1
-
-            
-
-
-        self_test_message (string): 
-
-
-            Self-test response string from the switch device. You must pass a ViChar
-            array with at least 256 bytes.
-
-            
-
-
 
 

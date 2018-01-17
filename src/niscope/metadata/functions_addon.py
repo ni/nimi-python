@@ -145,8 +145,8 @@ functions_is_error_handling = {
 functions_default_value = {
     'InitWithOptions':                               { 'parameters': { 1: { 'default_value': False, },
                                                                        2: { 'default_value': False, },
-                                                                       3: { 'default_value': '', }, }, },
-    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': 'None', }, }, },
+                                                                       3: { 'default_value': '""', }, }, },
+    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '"None"', }, }, },
     'ConfigureTriggerWindow':                        { 'parameters': { 6: { 'default_value': 0.0, },
                                                                        7: { 'default_value': 0.0, }, }, },
     'ConfigureTriggerVideo':                         { 'parameters': { 2: { 'default_value': False, },

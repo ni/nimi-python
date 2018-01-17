@@ -74,16 +74,19 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
         with nimodinst.Session('') as session:
             assert len(session) == 2
+            count = 0
             for d in session:
-                pass
+                count += 1
+            assert count == len(session)
 
-    def test_iterating_next(self):
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
+    def test_iterating_for_empty(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 0
         with nimodinst.Session('') as session:
-            assert len(session) == 2
-            d1 = session.next()
-            d2 = session.next()
-            assert d1 != d2
+            assert len(session) == 0
+            count = 0
+            for d in session:
+                count += 1
+            assert count == len(session)
 
     def test_get_extended_error_info(self):
         error_string = 'Error'
@@ -193,7 +196,7 @@ class TestSession(object):
                 session[0].non_existent_property
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Device' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_Device' object has no attribute 'non_existent_property'"
 
     def test_vi_int32_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -243,5 +246,18 @@ class TestSession(object):
                 assert len(w) == 1
                 assert issubclass(w[0].category, nimodinst.NimodinstWarning)
                 assert error_string in str(w[0].message)
+
+    def test_repr_and_str(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViString
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = 42
+        self.side_effects_helper['GetInstalledDeviceAttributeViString']['attributeValue'] = 'fourty two'
+        with nimodinst.Session('') as session:
+            session
+            print(session)
+            for d in session:
+                d
+                print(d)
 
 

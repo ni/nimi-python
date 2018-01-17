@@ -302,7 +302,7 @@ def format_type_for_rst_documentation(param, numpy, config):
     elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
     elif 'python_api_converter_type' in param:
-        p_type = param['python_api_converter_type'] + ' or ' + param['python_type']
+        p_type = param['python_api_converter_type']
     else:
         p_type = param['python_type']
 

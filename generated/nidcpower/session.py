@@ -2,7 +2,7 @@
 # This file was generated
 import ctypes
 
-from nidcpower import _converters  # noqa: F401
+from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidcpower import attributes
 from nidcpower import enums
 from nidcpower import errors
@@ -2583,7 +2583,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels='', reset=False, option_string=''):
+    def __init__(self, resource_name, channels="", reset=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
@@ -3121,7 +3121,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, output_terminal, signal_identifier=''):
+    def export_signal(self, signal, output_terminal, signal_identifier=""):
         '''export_signal
 
         Routes signals (triggers and events) to the output terminal you specify.
@@ -3321,7 +3321,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, channels='', reset=False, option_string=''):
+    def _initialize_with_channels(self, resource_name, channels="", reset=False, option_string=""):
         '''_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU

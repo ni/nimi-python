@@ -91,9 +91,9 @@ functions_remove_from_python_api = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '""', },
                                                                        2: { 'default_value': False, },
-                                                                       3: { 'default_value': '', }, }, },
+                                                                       3: { 'default_value': '""', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
     'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
     'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
@@ -103,7 +103,7 @@ functions_default_value = {
     'ConfigureDigitalEdgeStartTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
-    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '', }, }, },
+    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
