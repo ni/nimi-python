@@ -12,36 +12,42 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-    * `nidmm.Session()` no longer takes id_query parameter
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `nidmm.Session()` no longer takes id_query parameter
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-    * Metadata updated to NI-DCPower 17.6.1
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
+        * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
+            * FetchMultiple
+            * WaitForEvent
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * GetExtCalLastDateAndTime
+            * GetSelfCalLastDateAndTime
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-  * `niscope.Session()` no longer takes id_query parameter
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `niscope.Session()` no longer takes id_query parameter
+    * #### Removed
 
 ## 0.6.0 - 2017-12-20
 * ### ALL

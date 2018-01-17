@@ -40,6 +40,8 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -142,4 +144,91 @@ functions_additional_functions = {
             'description': 'Returns the number of channels.',
         },
     },
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last successful calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.',
+        },
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_self_cal_last_date_and_time',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Returns the date and time the device was last calibrated.',
+                },
+            },
+        ],
+'documentation': {
+'description': '''
+Returns the date and time of the oldest successful self-calibration from 
+among the channels in the session.
+
+The time returned is 24-hour (military) local time; for example, if you
+have a session using channels 1 and 2, and a self-calibration was
+performed on channel 1 at 2:30 PM, and a self-calibration was performed
+on channel 2 at 3:00 PM on the same day, this function returns 14 for
+**hours** and 30 for **minutes**.
+''',
+'note': '''
+This function is not supported on all devices. Refer to `Supported
+Functions by
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+for more information about supported devices.
+''',
+        },
+    },
 }
+
+# Converted parameters
+functions_converters = {
+    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+}
+
+
