@@ -147,7 +147,7 @@ def _add_default_value_name(parameter):
         if 'enum' in parameter and parameter['enum'] is not None:
             name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
         else:
-            name_with_default = parameter['python_name'] + "=" + repr(parameter['default_value'])
+            name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
 
         if 'python_api_converter_name' in parameter:
             name_for_init = '_converters.{0}({1}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])

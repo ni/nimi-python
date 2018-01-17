@@ -11,6 +11,7 @@ functions_codegen_method = {
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
     'GetError':                 { 'codegen_method': 'private',  },
+    'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
 }
@@ -64,16 +65,16 @@ functions_is_error_handling = {
 functions_default_value = {
     'InitWithOptions':                  { 'parameters': { 1: { 'default_value': False, },
                                                           2: { 'default_value': False, },
-                                                          3: { 'default_value': '', }, }, },
+                                                          3: { 'default_value': '""', }, }, },
     'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
 # Converted parameters
 functions_converters = {
-    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'timedelta_converter_seconds', 
+    'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
-    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'timedelta_converter_microseconds', 
+    'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_microseconds', 
                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
@@ -85,6 +86,7 @@ functions_custom_python_name = {
 # There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
 functions_remove_from_python_api = {
     'FetchWaveform':                { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
+    'InitWithOptions':              { 'parameters': { 1: { 'use_in_python_api': False, }, }, },  # Don't need ID_Query in the python API since they don't do anything
 }
 
 functions_method_templates = {
@@ -107,8 +109,47 @@ functions_numpy = {
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
-# Don't need ID_Query in the python API since they don't do anything
-functions_remove_parameters_from_python = {
-    'InitWithOptions':                      { 'parameters': { 1: { 'use_in_python_api': False, }, }, },
+# Functions not in original metadata.
+functions_additional_functions = {
+    'GetLastCalDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'calType',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the type of calibration performed (external or self-calibration).',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last calibration performed.',
+        },
+    },
 }
+
 

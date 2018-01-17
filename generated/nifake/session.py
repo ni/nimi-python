@@ -2,7 +2,7 @@
 # This file was generated
 import ctypes
 
-from nifake import _converters  # noqa: F401
+from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -279,7 +279,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        maximum_time_ctype = _converters.timedelta_converter_microseconds(maximum_time, visatype.ViInt32)  # case 15
+        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -445,7 +445,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
@@ -723,6 +723,32 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    def _get_cal_date_and_time(self, cal_type):
+        '''_get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+        Returns:
+            month (int): Indicates the **month** of the last calibration.
+            day (int): Indicates the **day** of the last calibration.
+            year (int): Indicates the **year** of the last calibration.
+            hour (int): Indicates the **hour** of the last calibration.
+            minute (int): Indicates the **minute** of the last calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        year_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niFake_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
     def get_custom_type(self):
         '''get_custom_type
 
@@ -785,7 +811,23 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def get_last_cal_date_and_time(self, cal_type):
+        '''get_last_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        import datetime
+
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
+
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.
@@ -936,7 +978,7 @@ class Session(_SessionBase):
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = _converters.timedelta_converter_seconds(maximum_time, visatype.ViReal64)  # case 15
+        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, visatype.ViReal64)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

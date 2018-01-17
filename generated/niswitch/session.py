@@ -2,7 +2,7 @@
 # This file was generated
 import ctypes
 
-from niswitch import _converters  # noqa: F401
+from niswitch import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from niswitch import attributes
 from niswitch import enums
 from niswitch import errors
@@ -1069,7 +1069,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
-    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+    def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
@@ -1535,7 +1535,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
-    def _init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+    def _init_with_topology(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
         '''_init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent

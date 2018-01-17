@@ -2,7 +2,7 @@
 # This file was generated
 import ctypes
 
-from nifgen import _converters  # noqa: F401
+from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifgen import attributes
 from nifgen import enums
 from nifgen import errors
@@ -2090,7 +2090,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=''):
+    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=""):
         '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -2103,7 +2103,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='')
+            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
 
         Args:
             resource_name (string): Caution:
@@ -2940,7 +2940,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, reset_device, option_string)

@@ -237,15 +237,6 @@ class TestSession(object):
             self.patched_library.niFake_Abort.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
-    def test_single_point_read(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            assert test_reading == session.read(test_maximum_time)
-            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViReal64Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
-
     def test_single_point_read_timedelta(self):
         test_maximum_time_ms = 100  # milliseconds
         test_maximum_time_s = .1    # seconds
@@ -258,7 +249,8 @@ class TestSession(object):
             self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViReal64Matcher(test_maximum_time_s), matchers.ViReal64PointerMatcher())
 
     def test_single_point_read_nan(self):
-        test_maximum_time = 10
+        test_maximum_time_s = 10.0
+        test_maximum_time = datetime.timedelta(seconds=test_maximum_time_s)
         test_reading = float('NaN')
         self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
         self.side_effects_helper['Read']['reading'] = test_reading
@@ -539,7 +531,8 @@ class TestSession(object):
                 assert test_error_desc in str(w[0].message)
 
     def test_read_with_warning(self):
-        test_maximum_time = 10
+        test_maximum_time_s = 10.0
+        test_maximum_time = datetime.timedelta(seconds=test_maximum_time_s)
         test_reading = float('nan')
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
@@ -617,16 +610,6 @@ class TestSession(object):
 
     # Repeated Capabilities
 
-    def test_repeated_capability_method_on_session(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
-        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            value = session.read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
-        assert value == test_reading
-
     def test_repeated_capability_method_on_session_timedelta(self):
         test_maximum_time_ms = 10     # milliseconds
         test_maximum_time_us = 10000  # microseconds
@@ -640,13 +623,15 @@ class TestSession(object):
         assert value == test_reading
 
     def test_repeated_capability_method_on_specific_channel(self):
-        test_maximum_time = 10
+        test_maximum_time_ms = 10     # milliseconds
+        test_maximum_time_us = 10000  # microseconds
+        test_maximum_time = datetime.timedelta(milliseconds=test_maximum_time_ms)
         test_reading = 5
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             value = session['3'].read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time_us), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_device_method_not_exist_on_repeated_capability_error(self):
@@ -984,6 +969,24 @@ class TestSession(object):
                 assert actual.struct_int == expected.struct_int
                 assert actual.struct_double == expected.struct_double
 
+    def test_get_cal_date_time(self):
+        self.patched_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
+        month = 12
+        day = 30
+        year = 1988
+        hour = 10
+        minute = 15
+        self.side_effects_helper['GetCalDateAndTime']['return'] = 0
+        self.side_effects_helper['GetCalDateAndTime']['Month'] = month
+        self.side_effects_helper['GetCalDateAndTime']['Day'] = day
+        self.side_effects_helper['GetCalDateAndTime']['Year'] = year
+        self.side_effects_helper['GetCalDateAndTime']['Hour'] = hour
+        self.side_effects_helper['GetCalDateAndTime']['Minute'] = minute
+        with nifake.Session('dev1') as session:
+            last_cal = session.get_last_cal_date_and_time(0)
+            assert isinstance(last_cal, datetime.datetime)
+            assert datetime.datetime(year, month, day, hour, minute) == last_cal
+
     def test_matcher_prints(self):
         assert matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(<class 'ctypes.c_ulong'>, 42)"
         assert matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(<class 'ctypes.c_long'>, 4)"
@@ -995,4 +998,5 @@ class TestSession(object):
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
         assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
+
 

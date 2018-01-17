@@ -64,8 +64,9 @@ def get_python_type_for_api_type(api_type, config):
         for c in config['custom_types']:
             if c['ctypes_type'] == api_type:
                 return c['python_name']
-        # We didn't find it so assert
-        assert False, 'Unknown value for api_type: {0}'.format(api_type)
+
+    # We didn't find it anywhere so return as is
+    return api_type
 
 
 def get_numpy_type_for_api_type(api_type, config):
