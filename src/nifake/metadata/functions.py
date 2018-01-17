@@ -1148,9 +1148,9 @@ functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'maximumTime',
-                'type': 'ViInt32',
+                'type': 'ViReal64',
                 'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in years.',
+                    'description': 'Specifies the **maximum\_time** allowed in seconds.',
                 },
             },
             {
@@ -1236,7 +1236,7 @@ functions = {
                 'name': 'maximumTime',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in years.',
+                    'description': 'Specifies the **maximum\_time** allowed in microseconds.',
                 },
             },
             {

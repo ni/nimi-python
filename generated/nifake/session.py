@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -12,7 +13,6 @@ from nifake import custom_struct  # noqa: F401
 
 # Used for __repr__
 import pprint
-
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -272,14 +272,14 @@ class _SessionBase(object):
             session['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
 
         Returns:
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -445,7 +445,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=''):
+    def __init__(self, resource_name, reset_device=False, option_string=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, False, reset_device, option_string)
@@ -827,7 +827,7 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.
@@ -972,13 +972,13 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in years.
+            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
 
         Returns:
             reading (float): The measured value.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, visatype.ViReal64)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
