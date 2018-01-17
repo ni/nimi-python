@@ -22,6 +22,7 @@ ${encoding_tag}
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
 %>\
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from ${module_name} import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from ${module_name} import attributes

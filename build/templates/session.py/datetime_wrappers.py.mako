@@ -11,8 +11,6 @@
 
         ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
-        import datetime
-
         month, day, year, hour, minute = self._${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return datetime.datetime(year, month, day, hour, minute)
 
