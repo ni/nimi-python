@@ -107,9 +107,9 @@ functions_default_value = {
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
-    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
+    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
-                                                                       2: { 'default_value': 1.0, }, }, },
+                                                                       2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
 # Functions not in original metadata.
@@ -144,6 +144,7 @@ functions_additional_functions = {
             'description': 'Returns the number of channels.',
         },
     },
+    # Public function that wraps driver function but returns datetime object instead of individual items
     'GetLastExtCalLastDateAndTime': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
