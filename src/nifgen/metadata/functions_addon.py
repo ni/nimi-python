@@ -114,9 +114,9 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '', },
+    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '""', },
                                                                       2: { 'default_value': False, },
-                                                                      3: { 'default_value': '', }, }, },
+                                                                      3: { 'default_value': '""', }, }, },
     'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       5: { 'default_value': 0.0, }, }, },
     'ConfigureStandardWaveform':                    { 'parameters': { 4: { 'default_value': 0.0, },

@@ -614,7 +614,7 @@ nidcpower.Session methods
 
 
 
-.. function:: export_signal(signal, output_terminal, signal_identifier='')
+.. function:: export_signal(signal, output_terminal, signal_identifier='""')
 
     Routes signals (triggers and events) to the output terminal you specify.
     The route is created when the session is :py:func:`nidcpower.commit`.

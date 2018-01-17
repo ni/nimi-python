@@ -196,6 +196,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
       7.5. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
         8. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
        14. Output scalar or enum:                                               visatype.ViInt32()
+       15. Input uses converter                                                 timedelta_converter_seconds(timeout, visatype.ViReal64)
     '''
 
     assert parameter['is_buffer'] is False
@@ -209,6 +210,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
             definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+        elif 'python_api_converter_name' in parameter:
+            definition = '_converters.{0}({1}, {2})  # case 15'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
         elif corresponding_buffer_parameter is None:
             definition = '{0}.{1}({2})  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameter['direction'] == 'in':
@@ -315,7 +318,7 @@ config_for_testing = {
 
 # We also need some function parameters that cover all cases.
 parameters_for_testing = [
-    {
+    {  # 0
         'ctypes_type': 'ViSession',
         'ctypes_type_library_call': 'ViSession',
         'ctypes_variable_name': 'vi_ctype',
@@ -336,7 +339,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 1
         'ctypes_type': 'ViInt64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
         'ctypes_variable_name': 'output_ctype',
@@ -357,7 +360,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 2
         'ctypes_type': 'ViChar',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'error_message_ctype',
@@ -378,7 +381,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 3
         'ctypes_type': 'custom_struct',
         'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
         'ctypes_variable_name': 'array_out_ctype',
@@ -400,7 +403,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 4
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'number_of_elements_ctype',
@@ -421,7 +424,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 5
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt16)',
         'ctypes_variable_name': 'an_array_ctype',
@@ -442,7 +445,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 6
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ViInt16',
         'ctypes_variable_name': 'an_int_enum_ctype',
@@ -466,7 +469,7 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
-    {
+    {  # 7
         'ctypes_type': 'ViInt64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
         'ctypes_variable_name': 'output_ctype',
@@ -489,7 +492,7 @@ parameters_for_testing = [
         'numpy_type_library_call': 'numpy.int64',
         'use_in_python_api': True,
     },
-    {
+    {  # 8
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'number_of_elements_python_code_ctype',
@@ -510,7 +513,7 @@ parameters_for_testing = [
         'type': 'ViInt32',
         'use_in_python_api': True,
     },
-    {
+    {  # 9
         'ctypes_type': 'ViInt16',
         'ctypes_type_library_call': 'ViInt16',
         'ctypes_variable_name': 'input_ctype',
@@ -531,7 +534,7 @@ parameters_for_testing = [
         'type': 'ViInt16',
         'use_in_python_api': True,
     },
-    {
+    {  # 10
         'ctypes_type': 'ViReal64',
         'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
         'ctypes_variable_name': 'input_array_ctype',
@@ -553,7 +556,7 @@ parameters_for_testing = [
         'type': 'ViReal64',
         'use_in_python_api': True,
     },
-    {
+    {  # 11
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'input_array_size_ctype',
@@ -574,7 +577,7 @@ parameters_for_testing = [
         'type': 'ViInt32',
         'use_in_python_api': True,
     },
-    {
+    {  # 12
         'ctypes_type': 'ViInt32',
         'ctypes_type_library_call': 'ViInt32',
         'ctypes_variable_name': 'string_size_ctype',
@@ -595,7 +598,7 @@ parameters_for_testing = [
         'type': 'ViInt32',
         'use_in_python_api': True,
     },
-    {
+    {  # 13
         'ctypes_type': 'ViChar',
         'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
         'ctypes_variable_name': 'a_string_ctype',
@@ -615,6 +618,30 @@ parameters_for_testing = [
         'size': {'mechanism': 'ivi-dance', 'value': 'stringSize'},
         'type': 'ViChar',
         'use_in_python_api': True,
+    },
+    {  # 14
+        'ctypes_type': 'ViReal64',
+        'ctypes_type_library_call': 'ViReal64',
+        'ctypes_variable_name': 'timeout_ctype',
+        'default_value': 1.0,
+        'direction': 'in',
+        'documentation': {'description': 'Timeout in seconds'},
+        'enum': None,
+        'is_buffer': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'timeout_ctype',
+        'name': 'Timeout',
+        'numpy': False,
+        'python_name': 'timeout',
+        'python_name_with_default': 'timeout=1.0',
+        'python_name_with_doc_default': 'timeout=1.0',
+        'python_type': 'float',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViReal64',
+        'use_in_python_api': True,
+        'python_api_converter_name': 'timedelta_converter_seconds',
+        'python_api_converter_type': 'datetime.timedelta',
     },
 ]
 
@@ -707,6 +734,11 @@ def test_get_ctype_variable_declaration_snippet_case_8():
 def test_get_ctype_variable_declaration_snippet_case_14():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     assert snippet == "output_ctype = visatype.ViInt64()  # case 14"
+
+
+def test_get_ctype_variable_declaration_snippet_case_15():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == "timeout_ctype = _converters.timedelta_converter_seconds(timeout, visatype.ViReal64)  # case 15"
 
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():

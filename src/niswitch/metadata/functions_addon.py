@@ -70,10 +70,10 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitWithTopology':         { 'parameters': { 1: { 'default_value': 'Configured Topology', },
+    'InitWithTopology':         { 'parameters': { 1: { 'default_value': '"Configured Topology"', },
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
-                                                  4: { 'default_value': '', }, }, },
+                                                  4: { 'default_value': '""', }, }, },
     'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'ScanMode.BREAK_BEFORE_MAKE', }, }, },
     'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
