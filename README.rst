@@ -77,6 +77,8 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | Open Issues                   | |nidcpowerOpenIssues|    |
 +-------------------------------+--------------------------+
+| Open Pull Requests            | |nidcpowerOpenPRs|       |
++-------------------------------+--------------------------+
 
 
 .. |nidcpowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
@@ -94,6 +96,11 @@ NI-DCPower Python API Status
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anidcpower
 
 
+.. |nidcpowerOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nidcpower.svg
+    :alt: Pull Requests for NI-DCPower
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anidcpower
+
+
 
 NI-DMM Python API Status
 ------------------------
@@ -108,6 +115,8 @@ NI-DMM Python API Status
 | Supported Python Version      | |nidmmPythonVersion| |
 +-------------------------------+----------------------+
 | Open Issues                   | |nidmmOpenIssues|    |
++-------------------------------+----------------------+
+| Open Pull Requests            | |nidmmOpenPRs|       |
 +-------------------------------+----------------------+
 
 
@@ -126,6 +135,11 @@ NI-DMM Python API Status
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anidmm
 
 
+.. |nidmmOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nidmm.svg
+    :alt: Pull Requests for NI-DMM
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anidmm
+
+
 
 NI-FGEN Python API Status
 -------------------------
@@ -140,6 +154,8 @@ NI-FGEN Python API Status
 | Supported Python Version      | |nifgenPythonVersion| |
 +-------------------------------+-----------------------+
 | Open Issues                   | |nifgenOpenIssues|    |
++-------------------------------+-----------------------+
+| Open Pull Requests            | |nifgenOpenPRs|       |
 +-------------------------------+-----------------------+
 
 
@@ -158,6 +174,11 @@ NI-FGEN Python API Status
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anifgen
 
 
+.. |nifgenOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nifgen.svg
+    :alt: Pull Requests for NI-FGEN
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anifgen
+
+
 
 NI-ModInst Python API Status
 ----------------------------
@@ -172,6 +193,8 @@ NI-ModInst Python API Status
 | Supported Python Version      | |nimodinstPythonVersion| |
 +-------------------------------+--------------------------+
 | Open Issues                   | |nimodinstOpenIssues|    |
++-------------------------------+--------------------------+
+| Open Pull Requests            | |nimodinstOpenPRs|       |
 +-------------------------------+--------------------------+
 
 
@@ -190,6 +213,11 @@ NI-ModInst Python API Status
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Animodinst
 
 
+.. |nimodinstOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nimodinst.svg
+    :alt: Pull Requests for NI-ModInst
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Animodinst
+
+
 
 NI-SCOPE Python API Status
 --------------------------
@@ -204,6 +232,8 @@ NI-SCOPE Python API Status
 | Supported Python Version      | |niscopePythonVersion| |
 +-------------------------------+------------------------+
 | Open Issues                   | |niscopeOpenIssues|    |
++-------------------------------+------------------------+
+| Open Pull Requests            | |niscopeOpenPRs|       |
 +-------------------------------+------------------------+
 
 
@@ -222,6 +252,11 @@ NI-SCOPE Python API Status
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Aniscope
 
 
+.. |niscopeOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/niscope.svg
+    :alt: Pull Requests for NI-SCOPE
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Aniscope
+
+
 
 NI-SWITCH Python API Status
 ---------------------------
@@ -236,6 +271,8 @@ NI-SWITCH Python API Status
 | Supported Python Version      | |niswitchPythonVersion| |
 +-------------------------------+-------------------------+
 | Open Issues                   | |niswitchOpenIssues|    |
++-------------------------------+-------------------------+
+| Open Pull Requests            | |niswitchOpenPRs|       |
 +-------------------------------+-------------------------+
 
 
@@ -252,6 +289,11 @@ NI-SWITCH Python API Status
 .. |niswitchOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niswitch.svg
     :alt: Open Issues + Pull Requests for NI-SWITCH
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Aniswitch
+
+
+.. |niswitchOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/niswitch.svg
+    :alt: Pull Requests for NI-SWITCH
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Aniswitch
 
 
 .. _installation-section:

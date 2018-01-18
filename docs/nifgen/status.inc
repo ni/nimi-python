@@ -13,6 +13,8 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | Open Issues                   | |nifgenOpenIssues|    |
 +-------------------------------+-----------------------+
+| Open Pull Requests            | |nifgenOpenPRs|       |
++-------------------------------+-----------------------+
 
 
 .. |nifgenLatestVersion| image:: http://img.shields.io/pypi/v/nifgen.svg
@@ -28,5 +30,10 @@ NI-FGEN Python API Status
 .. |nifgenOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nifgen.svg
     :alt: Open Issues + Pull Requests for NI-FGEN
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anifgen
+
+
+.. |nifgenOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nifgen.svg
+    :alt: Pull Requests for NI-FGEN
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anifgen
 
 

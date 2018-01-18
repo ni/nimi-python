@@ -13,6 +13,8 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | Open Issues                   | |niswitchOpenIssues|    |
 +-------------------------------+-------------------------+
+| Open Pull Requests            | |niswitchOpenPRs|       |
++-------------------------------+-------------------------+
 
 
 .. |niswitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
@@ -28,5 +30,10 @@ NI-SWITCH Python API Status
 .. |niswitchOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niswitch.svg
     :alt: Open Issues + Pull Requests for NI-SWITCH
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Aniswitch
+
+
+.. |niswitchOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/niswitch.svg
+    :alt: Pull Requests for NI-SWITCH
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Aniswitch
 
 

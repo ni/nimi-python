@@ -13,6 +13,8 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | Open Issues                   | |nimodinstOpenIssues|    |
 +-------------------------------+--------------------------+
+| Open Pull Requests            | |nimodinstOpenPRs|       |
++-------------------------------+--------------------------+
 
 
 .. |nimodinstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
@@ -28,5 +30,10 @@ NI-ModInst Python API Status
 .. |nimodinstOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nimodinst.svg
     :alt: Open Issues + Pull Requests for NI-ModInst
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Animodinst
+
+
+.. |nimodinstOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nimodinst.svg
+    :alt: Pull Requests for NI-ModInst
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Animodinst
 
 

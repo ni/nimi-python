@@ -13,6 +13,8 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | Open Issues                   | |niscopeOpenIssues|    |
 +-------------------------------+------------------------+
+| Open Pull Requests            | |niscopeOpenPRs|       |
++-------------------------------+------------------------+
 
 
 .. |niscopeLatestVersion| image:: http://img.shields.io/pypi/v/niscope.svg
@@ -28,5 +30,10 @@ NI-SCOPE Python API Status
 .. |niscopeOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niscope.svg
     :alt: Open Issues + Pull Requests for NI-SCOPE
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Aniscope
+
+
+.. |niscopeOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/niscope.svg
+    :alt: Pull Requests for NI-SCOPE
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Aniscope
 
 

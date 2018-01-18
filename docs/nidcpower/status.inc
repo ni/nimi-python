@@ -13,6 +13,8 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | Open Issues                   | |nidcpowerOpenIssues|    |
 +-------------------------------+--------------------------+
+| Open Pull Requests            | |nidcpowerOpenPRs|       |
++-------------------------------+--------------------------+
 
 
 .. |nidcpowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
@@ -28,5 +30,10 @@ NI-DCPower Python API Status
 .. |nidcpowerOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidcpower.svg
     :alt: Open Issues + Pull Requests for NI-DCPower
     :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anidcpower
+
+
+.. |nidcpowerOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nidcpower.svg
+    :alt: Pull Requests for NI-DCPower
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anidcpower
 
 
