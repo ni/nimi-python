@@ -279,6 +279,19 @@ def _add_python_name(a, attributes):
     attributes[a]['python_name'] = n
 
 
+def _add_converter_defaults(a, attributes):
+    '''Add 'python_api_converter_name_to_driver' and 'python_api_converter_name_from_driver' as None if they do not exist'''
+    if 'python_api_converter_name_to_driver' not in attributes[a]:
+        attributes[a]['python_api_converter_name_to_driver'] = None
+    else:
+        attributes[a]['python_api_converter_name_to_driver'] = '_converters.' + attributes[a]['python_api_converter_name_to_driver']
+
+    if 'python_api_converter_name_from_driver' not in attributes[a]:
+        attributes[a]['python_api_converter_name_from_driver'] = None
+    else:
+        attributes[a]['python_api_converter_name_from_driver'] = '_converters.' + attributes[a]['python_api_converter_name_from_driver']
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config)
@@ -286,6 +299,7 @@ def add_all_attribute_metadata(attributes, config):
     for a in attributes:
         _add_attr_codegen_method(a, attributes)
         _add_python_name(a, attributes)
+        _add_converter_defaults(a, attributes)
 
     return attributes
 
@@ -704,7 +718,9 @@ def test_add_attributes_metadata_simple():
             'name': 'READ_WRITE_BOOL',
             'python_name': 'read_write_bool',
             'resettable': 'No',
-            'type': 'ViBoolean'
+            'type': 'ViBoolean',
+            'python_api_converter_name_to_driver': None,
+            'python_api_converter_name_from_driver': None,
         },
     }
 
