@@ -2143,7 +2143,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, timeout=5.0):
+    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2165,7 +2165,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2239,9 +2239,9 @@ class _SessionBase(object):
         elif wfm.dtype == numpy.int32:
             return self._fetch_binary32_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
         else:
-            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, {4} or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
-    def fetch(self, num_samples, timeout=5.0):
+    def fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2263,7 +2263,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the

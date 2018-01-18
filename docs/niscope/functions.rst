@@ -1175,7 +1175,7 @@ niscope.Session methods
 
     :type signal_identifier: string
 
-.. function:: fetch(num_samples, timeout=5.0)
+.. function:: fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This function returns
@@ -1199,7 +1199,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1279,7 +1279,7 @@ niscope.Session methods
 
 
 
-.. function:: fetch_into(num_samples, wfm, timeout=5.0)
+.. function:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This function returns
@@ -1303,7 +1303,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
