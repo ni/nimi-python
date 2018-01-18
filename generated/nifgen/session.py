@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifgen import attributes
@@ -3749,8 +3750,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
+    def _get_ext_cal_last_date_and_time(self):
+        '''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful external calibration.
         The time returned is 24-hour (military) local time; for example, if the
@@ -3837,8 +3838,40 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.HardwareState(state_ctype.value)
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        month, day, year, hour, minute = self._get_ext_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last successful self-calibration.
+
+        All values are returned as separate parameters. Each parameter is
+        returned as an integer, including the year, month, day, hour, minute,
+        and second. For example, if the device is calibrated in September 2013,
+        this function returns 9 for the **month** parameter and 2013 for the
+        **year** parameter.
+
+        The time returned is 24-hour (military) local time. For example, if the
+        device was calibrated at 2:30 PM, this function returns 14 for the
+        **hours** parameter and 30 for the **minutes** parameter.
+
+        Returns:
+            month (datetime.datetime): Returns the date and time the device was last calibrated.
+        '''
+        month, day, year, hour, minute = self._get_self_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
+    def _get_self_cal_last_date_and_time(self):
+        '''_get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
 
@@ -4156,10 +4189,10 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (int): Specifies the timeout value in milliseconds.
+            max_time (datetime.timedelta or int): Specifies the timeout value in milliseconds.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        max_time_ctype = visatype.ViInt32(max_time)  # case 9
+        max_time_ctype = _converters.convert_timedelta_to_milliseconds(max_time, visatype.ViInt32)  # case 15
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

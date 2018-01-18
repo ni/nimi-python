@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from niswitch import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from niswitch import attributes
@@ -1208,7 +1209,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1234,7 +1235,7 @@ class Session(_SessionBase):
                 a trigger on the line you specify with this parameter. Refer to the
                 SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
                 a list of valid values.
-            scan_delay (float): The minimum length of time you want the switch device to wait after it
+            scan_delay (datetime.timedelta or float): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
                 line. The driver uses this value to set the Scan Delay attribute. The
                 scan delay is in addition to the settling time.The driver uses this
@@ -1246,7 +1247,7 @@ class Session(_SessionBase):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case 9
+        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, visatype.ViReal64)  # case 15
         trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case 10
         scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case 10
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
@@ -1950,7 +1951,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms=5000):
+    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -1959,18 +1960,18 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (int): Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (datetime.timedelta or int): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case 15
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms=5000):
+    def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -1980,13 +1981,13 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (int): Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (datetime.timedelta or int): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 9
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case 15
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

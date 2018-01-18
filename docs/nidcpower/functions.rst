@@ -705,7 +705,7 @@ nidcpower.Session methods
 
     :type signal_identifier: string
 
-.. function:: fetch_multiple(count, timeout=1.0)
+.. function:: fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
@@ -735,7 +735,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_multiple(count, timeout=1.0)
+            session['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
 
     :param count:
@@ -761,7 +761,7 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
 
@@ -837,56 +837,17 @@ nidcpower.Session methods
 
 .. function:: get_ext_cal_last_date_and_time()
 
-    Returns the date and time of the last successful calibration. The time
-    returned is 24-hour (military) local time; for example, if the device
-    was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
-    for **minutes**.
+    Returns the date and time of the last successful calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.
 
     
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Returns the **year** the device was last calibrated.
-
-            
-
-
-        month (int): 
-
-
-            Returns the **month** in which the device was last calibrated.
-
-            
-
-
-        day (int): 
-
-
-            Returns the **day** on which the device was last calibrated.
-
-            
-
-
-        hour (int): 
-
-
-            Returns the **hour** (in 24-hour time) in which the device was last
-            calibrated.
-
-            
-
-
-        minute (int): 
-
-
-            Returns the **minute** in which the device was last calibrated.
+            Indicates date and time of the last calibration.
 
             
 
@@ -952,47 +913,11 @@ nidcpower.Session methods
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Returns the **year** the device was last calibrated.
-
-            
-
-
-        month (int): 
-
-
-            Returns the **month** in which the device was last calibrated.
-
-            
-
-
-        day (int): 
-
-
-            Returns the **day** on which the device was last calibrated.
-
-            
-
-
-        hour (int): 
-
-
-            Returns the **hour** (in 24-hour time) in which the device was last
-            calibrated.
-
-            
-
-
-        minute (int): 
-
-
-            Returns the **minute** in which the device was last calibrated.
+            Returns the date and time the device was last calibrated.
 
             
 
@@ -1544,7 +1469,7 @@ nidcpower.Session methods
 
     :type values: list of float
 
-.. function:: wait_for_event(event_id, timeout=10.0)
+.. function:: wait_for_event(event_id, timeout='datetime.timedelta(seconds=10.0)')
 
     Waits until the device has generated the specified event.
 
@@ -1598,6 +1523,6 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
 

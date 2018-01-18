@@ -193,7 +193,7 @@ nidmm.Session methods
 
     :type resolution_digits: float
 
-.. function:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=-1)
+.. function:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval='datetime.timedelta(seconds=-1)')
 
     Configures the attributes for multipoint measurements. These attributes
     include :py:data:`nidmm.TRIGGER\_COUNT`, :py:data:`nidmm.SAMPLE\_COUNT`,
@@ -268,7 +268,7 @@ nidmm.Session methods
         .. note:: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
 
 
-    :type sample_interval: float
+    :type sample_interval: datetime.timedelta
 
 .. function:: configure_open_cable_comp_values(conductance, susceptance)
 
@@ -528,7 +528,7 @@ nidmm.Session methods
 
     :type reference_junction_type: :py:data:`nidmm.ThermocoupleReferenceJunctionType`
 
-.. function:: configure_trigger(trigger_source, trigger_delay=-1)
+.. function:: configure_trigger(trigger_source, trigger_delay='datetime.timedelta(seconds=-1)')
 
     Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
     `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__ and `Using
@@ -573,7 +573,7 @@ nidmm.Session methods
             NIDMM\_VAL\_AUTO\_DELAY (-1).
 
 
-    :type trigger_delay: float
+    :type trigger_delay: datetime.timedelta
 
 .. function:: configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
@@ -657,7 +657,7 @@ nidmm.Session methods
 
 
 
-.. function:: fetch(maximum_time=-1)
+.. function:: fetch(maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Returns the value from a previously initiated measurement. You must call
     :py:func:`nidmm._initiate` before calling this function.
@@ -683,7 +683,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: float
     :return:
@@ -695,7 +695,7 @@ nidmm.Session methods
 
 
 
-.. function:: fetch_multi_point(array_size, maximum_time=-1)
+.. function:: fetch_multi_point(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
@@ -739,7 +739,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -765,7 +765,7 @@ nidmm.Session methods
 
 
 
-.. function:: fetch_waveform(array_size, maximum_time=-1)
+.. function:: fetch_waveform(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -804,7 +804,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -828,7 +828,7 @@ nidmm.Session methods
 
 
 
-.. function:: fetch_waveform_into(array_size, maximum_time=-1)
+.. function:: fetch_waveform_into(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -865,7 +865,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -959,78 +959,6 @@ nidmm.Session methods
             Indicates the **actual\_range** the DMM is using. Returns the value of
             the :py:data:`nidmm.AUTO\_RANGE\_VALUE` attribute. The units of the returned
             value depend on the function.
-
-            
-
-
-
-.. function:: get_cal_date_and_time(cal_type)
-
-    Returns the date and time of the last calibration performed.
-
-    
-
-    .. note:: The NI 4050 and NI 4060 are not supported.
-
-
-
-    :param cal_type:
-
-
-        Specifies the type of calibration performed (external or
-        self-calibration).
-
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
-        +--------------------------------------+---+----------------------+
-
-        .. note:: The NI 4065 does not support self-calibration.
-
-
-    :type cal_type: int
-
-    :rtype: tuple (month, day, year, hour, minute)
-
-        WHERE
-
-        month (int): 
-
-
-            Indicates the **month** of the last calibration.
-
-            
-
-
-        day (int): 
-
-
-            Indicates the **day** of the last calibration.
-
-            
-
-
-        year (int): 
-
-
-            Indicates the **year** of the last calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Indicates the **hour** of the last calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Indicates the **minute** of the last calibration.
 
             
 
@@ -1254,7 +1182,7 @@ nidmm.Session methods
 
 
 
-.. function:: read(maximum_time=-1)
+.. function:: read(maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Acquires a single measurement and returns the measured value.
 
@@ -1279,7 +1207,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: float
     :return:
@@ -1291,7 +1219,7 @@ nidmm.Session methods
 
 
 
-.. function:: read_multi_point(array_size, maximum_time=-1)
+.. function:: read_multi_point(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
@@ -1334,7 +1262,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1412,7 +1340,7 @@ nidmm.Session methods
 
 
 
-.. function:: read_waveform(array_size, maximum_time=-1)
+.. function:: read_waveform(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
@@ -1453,7 +1381,7 @@ nidmm.Session methods
         
 
 
-    :type maximum_time: int
+    :type maximum_time: datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 

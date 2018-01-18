@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidcpower import attributes
@@ -1565,7 +1566,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, count, timeout=1.0):
+    def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -1593,11 +1594,11 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_multiple(count, timeout=1.0)
+            session['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
         Args:
             count (int): Specifies the number of measurements to fetch.
-            timeout (float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -1619,7 +1620,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         count_ctype = visatype.ViInt32(count)  # case 8
         voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case 13
         current_measurements_ctype = (visatype.ViReal64 * count)()  # case 13
@@ -3212,8 +3213,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
+    def _get_ext_cal_last_date_and_time(self):
+        '''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration. The time
         returned is 24-hour (military) local time; for example, if the device
@@ -3270,8 +3271,43 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        month, day, year, hour, minute = self._get_ext_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the oldest successful self-calibration from
+        among the channels in the session.
+
+        The time returned is 24-hour (military) local time; for example, if you
+        have a session using channels 1 and 2, and a self-calibration was
+        performed on channel 1 at 2:30 PM, and a self-calibration was performed
+        on channel 2 at 3:00 PM on the same day, this function returns 14 for
+        **hours** and 30 for **minutes**.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Returns:
+            month (datetime.datetime): Returns the date and time the device was last calibrated.
+        '''
+        month, day, year, hour, minute = self._get_self_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
+    def _get_self_cal_last_date_and_time(self):
+        '''_get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from
         among the channels in the session.
@@ -3523,7 +3559,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_event(self, event_id, timeout=10.0):
+    def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
         '''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -3556,7 +3592,7 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+--------------------------------------------------+
                 | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +--------------------------------------------------------+--------------------------------------------------+
-            timeout (float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -3569,7 +3605,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Event))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         event_id_ctype = visatype.ViInt32(event_id.value)  # case 10
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -129,7 +129,7 @@ niswitch.Session methods
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
-.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay=0.0)
+.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay='datetime.timedelta(seconds=0.0)')
 
     Configures the scan triggers for the scan list established with
     :py:func:`niswitch.configure_scan_list`. Refer to Devices Overview to determine if
@@ -186,7 +186,7 @@ niswitch.Session methods
         
 
 
-    :type scan_delay: float
+    :type scan_delay: datetime.timedelta
 
 .. function:: connect(channel1, channel2)
 
@@ -755,7 +755,7 @@ niswitch.Session methods
 
     :type path_list: string
 
-.. function:: wait_for_debounce(maximum_time_ms=5000)
+.. function:: wait_for_debounce(maximum_time_ms='datetime.timedelta(milliseconds=5000)')
 
     Pauses until all created paths have settled. If the time you specify
     with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -777,9 +777,9 @@ niswitch.Session methods
         
 
 
-    :type maximum_time_ms: int
+    :type maximum_time_ms: datetime.timedelta
 
-.. function:: wait_for_scan_complete(maximum_time_ms=5000)
+.. function:: wait_for_scan_complete(maximum_time_ms='datetime.timedelta(milliseconds=5000)')
 
     Pauses until the switch module stops scanning or the maximum time has
     elapsed and returns a timeout error. If the time you specify with the
@@ -802,6 +802,6 @@ niswitch.Session methods
         
 
 
-    :type maximum_time_ms: int
+    :type maximum_time_ms: datetime.timedelta
 
 

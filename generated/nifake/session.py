@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifake import attributes
@@ -811,8 +812,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def get_last_cal_date_and_time(self, cal_type):
-        '''get_last_cal_date_and_time
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -822,8 +823,6 @@ class Session(_SessionBase):
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
         '''
-        import datetime
-
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 

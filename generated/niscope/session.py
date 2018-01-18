@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from niscope import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from niscope import attributes
@@ -1593,7 +1594,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fetch(self, num_samples, timeout=5.0):
+    def _fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1619,7 +1620,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1627,7 +1628,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -1676,7 +1677,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case 0.4
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -1684,7 +1685,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1710,7 +1711,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1735,7 +1736,7 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -1792,7 +1793,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=float64, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = numpy.ctypeslib.as_ctypes(wfm)  # case 13.5
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -1800,7 +1801,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary16_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary16_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
@@ -1824,7 +1825,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary16(num_samples, timeout=5.0)
+            session['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1849,7 +1850,7 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -1906,7 +1907,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int16, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = numpy.ctypeslib.as_ctypes(wfm)  # case 13.5
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -1914,7 +1915,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary32_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary32_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
@@ -1938,7 +1939,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary32(num_samples, timeout=5.0)
+            session['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1963,7 +1964,7 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2020,7 +2021,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int32, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = numpy.ctypeslib.as_ctypes(wfm)  # case 13.5
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -2028,7 +2029,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary8_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary8_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2052,7 +2053,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary8(num_samples, timeout=5.0)
+            session['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2077,7 +2078,7 @@ class _SessionBase(object):
                 index 3\ *x* = record 1, channel 1
 
                 Where *x* = the record length
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2134,7 +2135,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int8, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = numpy.ctypeslib.as_ctypes(wfm)  # case 13.5
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -2311,7 +2312,7 @@ class _SessionBase(object):
         '''
         return self._fetch(num_samples, timeout)
 
-    def fetch_measurement(self, scalar_meas_function, timeout=5.0):
+    def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
@@ -2332,13 +2333,13 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
+            session['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2350,14 +2351,14 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.4
         error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_measurement_stats(self, scalar_meas_function, timeout=5.0):
+    def fetch_measurement_stats(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -2391,13 +2392,13 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2418,7 +2419,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.4
         mean_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.4
@@ -2655,7 +2656,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def read(self, num_samples, timeout=5.0):
+    def read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -2680,7 +2681,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(num_samples, timeout=5.0)
+            session['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2688,7 +2689,7 @@ class _SessionBase(object):
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2737,7 +2738,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         num_samples_ctype = visatype.ViInt32(num_samples)  # case 9
         wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case 0.4
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case 0.4
@@ -2745,7 +2746,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def read_measurement(self, scalar_meas_function, timeout=5.0):
+    def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
@@ -2769,13 +2770,13 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
+            session['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2787,7 +2788,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = visatype.ViReal64(timeout)  # case 9
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case 10
         result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case 0.4
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
@@ -3252,7 +3253,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -3291,10 +3292,10 @@ class Session(_SessionBase):
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
@@ -3303,13 +3304,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
         slope_ctype = visatype.ViInt32(slope.value)  # case 10
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -3342,10 +3343,10 @@ class Session(_SessionBase):
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
@@ -3358,13 +3359,13 @@ class Session(_SessionBase):
         level_ctype = visatype.ViReal64(level)  # case 9
         slope_ctype = visatype.ViInt32(slope.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -3406,10 +3407,10 @@ class Session(_SessionBase):
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
@@ -3423,8 +3424,8 @@ class Session(_SessionBase):
         hysteresis_ctype = visatype.ViReal64(hysteresis)  # case 9
         slope_ctype = visatype.ViInt32(slope.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3444,7 +3445,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_software(self, holdoff=0.0, delay=0.0):
+    def configure_trigger_software(self, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_software
 
         Configures common properties for software triggering.
@@ -3470,21 +3471,21 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=0.0, delay=0.0):
+    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_video
 
         Configures the common properties for video triggering, including the
@@ -3531,10 +3532,10 @@ class Session(_SessionBase):
                 TV_TRIGGER_LINE_NUMBER for more information.
 
                 Default value: 1
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
@@ -3554,13 +3555,13 @@ class Session(_SessionBase):
         line_number_ctype = visatype.ViInt32(line_number)  # case 9
         polarity_ctype = visatype.ViInt32(polarity.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=0.0, delay=0.0):
+    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_window
 
         Configures common properties for analog window triggering. A window
@@ -3598,10 +3599,10 @@ class Session(_SessionBase):
                 or leaves a window.
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 TRIGGER_COUPLING for more information.
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
@@ -3615,8 +3616,8 @@ class Session(_SessionBase):
         high_level_ctype = visatype.ViReal64(high_level)  # case 9
         window_mode_ctype = visatype.ViInt32(window_mode.value)  # case 10
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case 10
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case 9
-        delay_ctype = visatype.ViReal64(delay)  # case 9
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case 15
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case 15
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
+import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
 from nidmm import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidmm import attributes
@@ -1056,7 +1057,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=-1):
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
         '''configure_multi_point
 
         Configures the attributes for multipoint measurements. These attributes
@@ -1085,7 +1086,7 @@ class Session(_SessionBase):
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
                 Routing <cvitrigger_routing>`__ section.
-            sample_interval (float): Sets the amount of time in seconds the DMM waits between measurement
+            sample_interval (datetime.timedelta or float): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets SAMPLE_INTERVAL to this value.
                 Specify a sample interval to add settling time between measurement
                 cycles or to decrease the measurement rate. **sample_interval** only
@@ -1106,7 +1107,7 @@ class Session(_SessionBase):
         trigger_count_ctype = visatype.ViInt32(trigger_count)  # case 9
         sample_count_ctype = visatype.ViInt32(sample_count)  # case 9
         sample_trigger_ctype = visatype.ViInt32(sample_trigger.value)  # case 10
-        sample_interval_ctype = visatype.ViReal64(sample_interval)  # case 9
+        sample_interval_ctype = _converters.convert_timedelta_to_seconds(sample_interval, visatype.ViReal64)  # case 15
         error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1295,7 +1296,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger(self, trigger_source, trigger_delay=-1):
+    def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
         '''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
@@ -1313,7 +1314,7 @@ class Session(_SessionBase):
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
                 Routing <cvitrigger_routing>`__ section.
-            trigger_delay (float): Specifies the time that the DMM waits after it has received a trigger
+            trigger_delay (datetime.timedelta or float): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 TRIGGER_DELAY attribute to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
@@ -1330,7 +1331,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = visatype.ViInt32(trigger_source.value)  # case 10
-        trigger_delay_ctype = visatype.ViReal64(trigger_delay)  # case 9
+        trigger_delay_ctype = _converters.convert_timedelta_to_seconds(trigger_delay, visatype.ViReal64)  # case 15
         error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1398,14 +1399,14 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, maximum_time=-1):
+    def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch
 
         Returns the value from a previously initiated measurement. You must call
         _initiate before calling this function.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1420,13 +1421,13 @@ class Session(_SessionBase):
             reading (float): The measured value returned from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def fetch_multi_point(self, array_size, maximum_time=-1):
+    def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
@@ -1443,7 +1444,7 @@ class Session(_SessionBase):
                 For continuous acquisitions, up to 100,000 points can be returned at
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1463,7 +1464,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
@@ -1471,7 +1472,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)]
 
-    def fetch_waveform(self, array_size, maximum_time=-1):
+    def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1483,7 +1484,7 @@ class Session(_SessionBase):
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1500,7 +1501,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
@@ -1508,7 +1509,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
 
-    def fetch_waveform_into(self, waveform_array, maximum_time=-1):
+    def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1518,7 +1519,7 @@ class Session(_SessionBase):
         Args:
             waveform_array (numpy array of float64): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1545,7 +1546,7 @@ class Session(_SessionBase):
         array_size = len(waveform_array)
 
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
         waveform_array_ctype = numpy.ctypeslib.as_ctypes(waveform_array)  # case 13.5
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
@@ -1633,22 +1634,10 @@ class Session(_SessionBase):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            month (int): Indicates the **month** of the last calibration.
-            day (int): Indicates the **day** of the last calibration.
-            year (int): Indicates the **year** of the last calibration.
-            hour (int): Indicates the **hour** of the last calibration.
-            minute (int): Indicates the **minute** of the last calibration.
+            month (datetime.datetime): Indicates date and time of the last calibration.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
-        month_ctype = visatype.ViInt32()  # case 14
-        day_ctype = visatype.ViInt32()  # case 14
-        year_ctype = visatype.ViInt32()  # case 14
-        hour_ctype = visatype.ViInt32()  # case 14
-        minute_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDMM_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
     def get_dev_temp(self, options=""):
         '''get_dev_temp
@@ -1933,13 +1922,13 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
-    def read(self, maximum_time=-1):
+    def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read
 
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1954,13 +1943,13 @@ class Session(_SessionBase):
             reading (float): The measured value returned from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         reading_ctype = visatype.ViReal64()  # case 14
         error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def read_multi_point(self, array_size, maximum_time=-1):
+    def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
@@ -1976,7 +1965,7 @@ class Session(_SessionBase):
                 For continuous acquisitions, up to 100,000 points can be returned at
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1996,7 +1985,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14
@@ -2046,7 +2035,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
-    def read_waveform(self, array_size, maximum_time=-1):
+    def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
@@ -2060,7 +2049,7 @@ class Session(_SessionBase):
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2080,7 +2069,7 @@ class Session(_SessionBase):
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 9
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case 15
         array_size_ctype = visatype.ViInt32(array_size)  # case 8
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 13
         actual_number_of_points_ctype = visatype.ViInt32()  # case 14

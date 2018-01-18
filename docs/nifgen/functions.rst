@@ -1728,55 +1728,17 @@ nifgen.Session methods
 
 .. function:: get_ext_cal_last_date_and_time()
 
-    Returns the date and time of the last successful external calibration.
-    The time returned is 24-hour (military) local time; for example, if the
-    device was calibrated at 2:30 PM, this function returns 14 for the
-    **hour** parameter and 30 for the **minute** parameter.
+    Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
     
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Specifies the year of the last successful calibration.
-
-            
-
-
-        month (int): 
-
-
-            Specifies the month of the last successful calibration.
-
-            
-
-
-        day (int): 
-
-
-            Specifies the day of the last successful calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Specifies the hour of the last successful calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Specifies the minute of the last successful calibration.
+            Indicates date and time of the last calibration.
 
             
 
@@ -1921,46 +1883,11 @@ nifgen.Session methods
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Specifies the year of the last successful calibration.
-
-            
-
-
-        month (int): 
-
-
-            Specifies the month of the last successful calibration.
-
-            
-
-
-        day (int): 
-
-
-            Specifies the day of the last successful calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Specifies the hour of the last successful calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Specifies the minute of the last successful calibration.
+            Returns the date and time the device was last calibrated.
 
             
 
@@ -2533,7 +2460,7 @@ nifgen.Session methods
         
 
 
-    :type max_time: int
+    :type max_time: datetime.timedelta
 
 .. function:: write_script(script)
 
