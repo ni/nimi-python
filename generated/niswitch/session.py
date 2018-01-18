@@ -406,7 +406,7 @@ class _SessionBase(object):
     The default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to override this value.
     '''
     scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
-    '''Type: niswitch.ScanAdvancedOutput
+    '''Type: enums.ScanAdvancedOutput
 
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
@@ -435,7 +435,7 @@ class _SessionBase(object):
     Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
     '''
     scan_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanMode, 1250021)
-    '''Type: niswitch.ScanMode
+    '''Type: enums.ScanMode
 
     This attribute specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this attribute specifies what happens to the  connection between CH1 and CH2.
     If the value of this attribute is NISWITCH_VAL_NONE, the switch device  takes no action on existing paths.  If the value is  NISWITCH_VAL_BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is NISWITCH_VAL_BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
@@ -505,12 +505,12 @@ class _SessionBase(object):
     This attribute returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
     trigger_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInput, 1250022)
-    '''Type: niswitch.TriggerInput
+    '''Type: enums.TriggerInput
 
     This attribute specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
     '''
     trigger_input_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
-    '''Type: niswitch.TriggerInputPolarity
+    '''Type: enums.TriggerInputPolarity
 
     Determines the behavior of the trigger Input.
     '''

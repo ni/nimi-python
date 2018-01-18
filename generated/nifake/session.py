@@ -35,7 +35,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
-    '''Type: nifake.FloatEnum
+    '''Type: enums.FloatEnum
 
     An attribute with an enum that is also a float
     '''
@@ -45,7 +45,7 @@ class _SessionBase(object):
     An attribute of type bool with read/write access.
     '''
     read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
-    '''Type: nifake.Color
+    '''Type: enums.Color
 
     An attribute of type Color with read/write access.
     '''

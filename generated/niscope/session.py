@@ -108,7 +108,7 @@ class _SessionBase(object):
     Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
     '''
     acquisition_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
-    '''Type: niscope.AcquisitionType
+    '''Type: enums.AcquisitionType
 
     Specifies how the digitizer acquires data and fills the waveform record.
     '''
@@ -203,7 +203,7 @@ class _SessionBase(object):
         var = session['0,1'].channel_enabled
     '''
     channel_terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
-    '''Type: niscope.TerminalConfiguration
+    '''Type: enums.TerminalConfiguration
 
     Specifies the terminal configuration for the channel.
 
@@ -252,7 +252,7 @@ class _SessionBase(object):
         var = session['0,1'].ddc_center_frequency
     '''
     ddc_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
-    '''Type: niscope.DataProcessingMode
+    '''Type: enums.DataProcessingMode
 
     The way in which data is processed by the DDC block.
     Valid Values:
@@ -529,13 +529,13 @@ class _SessionBase(object):
     Default Value: 0.
     '''
     fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
-    '''Type: niscope.FetchRelativeTo
+    '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
     Default Value: NISCOPE_VAL_PRETRIGGER
     '''
     flex_fir_antialias_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
-    '''Type: niscope.FlexFIRAntialiasFilterType
+    '''Type: enums.FlexFIRAntialiasFilterType
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
     Use this attribute to select from several types of filters to achieve desired filtering characteristics.
@@ -853,7 +853,7 @@ class _SessionBase(object):
         var = session['0,1'].meas_filter_transient_waveform_percent
     '''
     meas_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150035)
-    '''Type: niscope.FilterType
+    '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
     ·  NISCOPE_VAL_MEAS_LOWPASS
@@ -869,7 +869,7 @@ class _SessionBase(object):
     Default: 1.0e3 Hz
     '''
     meas_fir_filter_window = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
-    '''Type: niscope.FIRFilterWindow
+    '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
     NISCOPE_VAL_NONE
@@ -951,7 +951,7 @@ class _SessionBase(object):
         var = session['0,1'].meas_other_channel
     '''
     meas_percentage_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
-    '''Type: niscope.PercentageMethod
+    '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
     NISCOPE_VAL_MEAS_LOW_HIGH
@@ -975,7 +975,7 @@ class _SessionBase(object):
     Default: 1
     '''
     meas_ref_level_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
-    '''Type: niscope.RefLevelUnits
+    '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
     NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
@@ -1092,7 +1092,7 @@ class _SessionBase(object):
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
     '''
     overflow_error_reporting = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OverflowErrorReporting, 1150309)
-    '''Type: niscope.OverflowErrorReporting
+    '''Type: enums.OverflowErrorReporting
 
     Configures error reporting when the DDC block detects an overflow in any of its  stages. Overflows lead to clipping of the waveform.
     Valid Values:
@@ -1178,7 +1178,7 @@ class _SessionBase(object):
     If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
     ref_trigger_detector_location = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
-    '''Type: niscope.RefTriggerDetectorLocation
+    '''Type: enums.RefTriggerDetectorLocation
 
     Indicates which analog compare circuitry to use on the device.
     '''
@@ -1206,7 +1206,7 @@ class _SessionBase(object):
     VI_FALSE (0) - Do not use RIS sample rates in autosetup
     '''
     ris_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RISMethod, 1150071)
-    '''Type: niscope.RISMethod
+    '''Type: enums.RISMethod
 
     Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of NISCOPE_ATTR_MAX_REAL_TIME_SAMPLING_RATE.
     '''
@@ -1311,7 +1311,7 @@ class _SessionBase(object):
         var = session['0,1'].start_to_ref_trigger_holdoff
     '''
     stream_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
-    '''Type: niscope.StreamingPositionType
+    '''Type: enums.StreamingPositionType
 
     Determines which trigger peer-to-peer data is streamed relative to. The
     default value is **Start Trigger**.
@@ -1329,7 +1329,7 @@ class _SessionBase(object):
     Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered attribute to find out if the last acquisition was triggered.
     '''
     trigger_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
-    '''Type: niscope.TriggerCoupling
+    '''Type: enums.TriggerCoupling
 
     Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     '''
@@ -1381,7 +1381,7 @@ class _SessionBase(object):
     The values of the range and offset parameters in niScope_ConfigureVertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
     trigger_modifier = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
-    '''Type: niscope.TriggerModifier
+    '''Type: enums.TriggerModifier
 
     Configures the device to automatically complete an acquisition if a trigger has not been received.
     Valid Values:
@@ -1389,7 +1389,7 @@ class _SessionBase(object):
     Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
     '''
     trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
-    '''Type: niscope.TriggerSlope
+    '''Type: enums.TriggerSlope
 
     Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     '''
@@ -1414,7 +1414,7 @@ class _SessionBase(object):
     This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
     trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1250012)
-    '''Type: niscope.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the type of trigger to use.
     '''
@@ -1442,12 +1442,12 @@ class _SessionBase(object):
     Low Trigger Level < High Trigger Level
     '''
     trigger_window_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
-    '''Type: niscope.TriggerWindowMode
+    '''Type: enums.TriggerWindowMode
 
     Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL, or NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
     '''
     tv_trigger_event = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
-    '''Type: niscope.VideoTriggerEvent
+    '''Type: enums.VideoTriggerEvent
 
     Specifies the condition in the video signal that causes the digitizer to trigger.
     '''
@@ -1457,12 +1457,12 @@ class _SessionBase(object):
     Specifies the line on which to trigger, if NISCOPE_ATTR_TV_TRIGGER_EVENT is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
     tv_trigger_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
-    '''Type: niscope.VideoPolarity
+    '''Type: enums.VideoPolarity
 
     Specifies whether the video signal sync is positive or negative.
     '''
     tv_trigger_signal_format = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoSignalFormat, 1250201)
-    '''Type: niscope.VideoSignalFormat
+    '''Type: enums.VideoSignalFormat
 
     Specifies the type of video signal, such as NTSC, PAL, or SECAM.
 
@@ -1476,7 +1476,7 @@ class _SessionBase(object):
         var = session['0,1'].tv_trigger_signal_format
     '''
     vertical_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
-    '''Type: niscope.VerticalCoupling
+    '''Type: enums.VerticalCoupling
 
     Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 

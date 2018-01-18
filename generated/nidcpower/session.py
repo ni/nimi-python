@@ -84,7 +84,7 @@ class _SessionBase(object):
         var = session['0,1'].aperture_time
     '''
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
-    '''Type: nidcpower.ApertureTimeUnits
+    '''Type: enums.ApertureTimeUnits
 
     Specifies the units of the NIDCPOWER_ATTR_APERTURE_TIME attribute for the channel configuration.
     for information about supported devices.
@@ -103,7 +103,7 @@ class _SessionBase(object):
         var = session['0,1'].aperture_time_units
     '''
     auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1150055)
-    '''Type: nidcpower.AutoZero
+    '''Type: enums.AutoZero
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
@@ -310,7 +310,7 @@ class _SessionBase(object):
         var = session['0,1'].current_pole_zero_ratio
     '''
     dc_noise_rejection = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
-    '''Type: nidcpower.DCNoiseRejection
+    '''Type: enums.DCNoiseRejection
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
@@ -319,7 +319,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_measure_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
-    '''Type: nidcpower.DigitalEdge
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
     NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
@@ -339,7 +339,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_pulse_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
-    '''Type: nidcpower.DigitalEdge
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
     Default Value: NIDCPOWER_VAL_RISING
@@ -356,7 +356,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     digital_edge_sequence_advance_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
-    '''Type: nidcpower.DigitalEdge
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -375,7 +375,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in
     '''
     digital_edge_source_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
-    '''Type: nidcpower.DigitalEdge
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Source trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -394,7 +394,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
-    '''Type: nidcpower.DigitalEdge
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Start trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -555,7 +555,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150044)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
@@ -606,7 +606,7 @@ class _SessionBase(object):
     This attribute is not available in a session involving multiple channels.
     '''
     measure_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150034)
-    '''Type: nidcpower.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
@@ -615,14 +615,14 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_when = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
-    '''Type: nidcpower.MeasureWhen
+    '''Type: enums.MeasureWhen
 
     Specifies when the measure unit should acquire measurements. Unless this attribute is configured to  NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
     Default Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is  NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple  function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.
     '''
     output_capacitance = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
-    '''Type: nidcpower.OutputCapacitance
+    '''Type: enums.OutputCapacitance
 
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
@@ -679,7 +679,7 @@ class _SessionBase(object):
         var = session['0,1'].output_enabled
     '''
     output_function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputFunction, 1150008)
-    '''Type: nidcpower.OutputFunction
+    '''Type: enums.OutputFunction
 
     Configures the function to generate on the specified channel(s).
     When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
@@ -767,7 +767,7 @@ class _SessionBase(object):
         var = session['0,1'].power_line_frequency
     '''
     power_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSource, 1150000)
-    '''Type: nidcpower.PowerSource
+    '''Type: enums.PowerSource
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: NIDCPOWER_VAL_AUTOMATIC
@@ -776,7 +776,7 @@ class _SessionBase(object):
     Note: Automatic selection is not persistent and occurs only at the time this attribute
     '''
     power_source_in_use = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
-    '''Type: nidcpower.PowerSourceInUse
+    '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
     '''
@@ -880,7 +880,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     pulse_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150100)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Pulse Complete event.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -1008,7 +1008,7 @@ class _SessionBase(object):
         var = session['0,1'].pulse_on_time
     '''
     pulse_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150095)
-    '''Type: nidcpower.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Pulse trigger.
     Default Value: NIDCPOWER_VAL_NONE
@@ -1115,7 +1115,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
     '''
     ready_for_pulse_trigger_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150103)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
@@ -1182,7 +1182,7 @@ class _SessionBase(object):
         var = session['0,1'].samples_to_average
     '''
     self_calibration_persistence = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
-    '''Type: nidcpower.SelfCalibrationPersistence
+    '''Type: enums.SelfCalibrationPersistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.
     This attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.
@@ -1192,7 +1192,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
     '''
     sense = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Sense, 1150013)
-    '''Type: nidcpower.Sense
+    '''Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
@@ -1208,7 +1208,7 @@ class _SessionBase(object):
         var = session['0,1'].sense
     '''
     sequence_advance_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150026)
-    '''Type: nidcpower.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
@@ -1226,7 +1226,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_engine_done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150048)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
@@ -1256,7 +1256,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     sequence_iteration_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150038)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
@@ -1313,7 +1313,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     source_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150041)
-    '''Type: nidcpower.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
@@ -1354,13 +1354,13 @@ class _SessionBase(object):
         var = session['0,1'].source_delay
     '''
     source_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SourceMode, 1150054)
-    '''Type: nidcpower.SourceMode
+    '''Type: enums.SourceMode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: NIDCPOWER_VAL_SINGLE_POINT
     '''
     source_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150030)
-    '''Type: nidcpower.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
@@ -1399,7 +1399,7 @@ class _SessionBase(object):
     Contains the name of the vendor that supplies NI-DCPower.
     '''
     start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150021)
-    '''Type: nidcpower.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
@@ -1413,7 +1413,7 @@ class _SessionBase(object):
     Contains a comma-separated (,) list of supported NI-DCPower device models.
     '''
     transient_response = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TransientResponse, 1150062)
-    '''Type: nidcpower.TransientResponse
+    '''Type: enums.TransientResponse
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.

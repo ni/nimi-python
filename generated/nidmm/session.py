@@ -45,7 +45,7 @@ class _SessionBase(object):
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     adc_calibration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ADCCalibration, 1150022)
-    '''Type: nidmm.ADCCalibration
+    '''Type: enums.ADCCalibration
 
     For the NI 4070/4071/4072 only, specifies the ADC calibration mode.
     '''
@@ -58,7 +58,7 @@ class _SessionBase(object):
     On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
     '''
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1250322)
-    '''Type: nidmm.ApertureTimeUnits
+    '''Type: enums.ApertureTimeUnits
 
     Specifies the units of aperture time for the current configuration.
     The NI 4060 does not support an aperture time set in seconds.
@@ -69,7 +69,7 @@ class _SessionBase(object):
     Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this attribute is set during a read operation.
     '''
     auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1250332)
-    '''Type: nidmm.AutoZero
+    '''Type: enums.AutoZero
 
     Specifies the AutoZero mode.
     The NI 4050 is not supported.
@@ -80,7 +80,7 @@ class _SessionBase(object):
     Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.
     '''
     cable_comp_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CableCompensationType, 1150045)
-    '''Type: nidmm.CableCompensationType
+    '''Type: enums.CableCompensationType
 
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
@@ -107,7 +107,7 @@ class _SessionBase(object):
     For the NI 4072 only, controls the available DC bias for capacitance measurements.
     '''
     dc_noise_rejection = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCNoiseRejection, 1150026)
-    '''Type: nidmm.DCNoiseRejection
+    '''Type: enums.DCNoiseRejection
 
     Specifies the DC noise rejection mode.
     The NI 4050 and NI 4060 are not supported.
@@ -130,7 +130,7 @@ class _SessionBase(object):
     Specifies the maximum amplitude of the input signal for frequency  measurements.
     '''
     function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Function, 1250001)
-    '''Type: nidmm.Function
+    '''Type: enums.Function
 
     Specifies the measurement function.
     Refer to the NIDMM_ATTR_FUNCTION topic in  the NI Digital Multimeters Help for device-specific information.
@@ -186,7 +186,7 @@ class _SessionBase(object):
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
     '''
     lc_calculation_model = attributes.AttributeEnum(attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
-    '''Type: nidmm.LCCalculationModel
+    '''Type: enums.LCCalculationModel
 
     For the NI 4072 only, specifies the type of algorithm that the measurement processing uses for  capacitance and inductance measurements.
     '''
@@ -201,14 +201,14 @@ class _SessionBase(object):
     A string containing the logical name of the instrument.
     '''
     meas_complete_dest = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasurementCompleteDest, 1250305)
-    '''Type: nidmm.MeasurementCompleteDest
+    '''Type: enums.MeasurementCompleteDest
 
     Specifies the destination of the measurement complete (MC) signal.
     The NI 4050 is not supported.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     meas_dest_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasurementDestinationSlope, 1150002)
-    '''Type: nidmm.MeasurementDestinationSlope
+    '''Type: enums.MeasurementDestinationSlope
 
     Specifies the polarity of the generated measurement complete signal.
     '''
@@ -236,7 +236,7 @@ class _SessionBase(object):
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
     '''
     operation_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OperationMode, 1150014)
-    '''Type: nidmm.OperationMode
+    '''Type: enums.OperationMode
 
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niDMM_ConfigureMeasurementDigits, NI-DMM sets this attribute to NIDMM_VAL_IVIDMM_MODE.  When you call niDMM_ConfigureWaveformAcquisition, NI-DMM sets this attribute to NIDMM_VAL_WAVEFORM_MODE.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
     '''
@@ -297,13 +297,13 @@ class _SessionBase(object):
     The NI 4050 is not supported.
     '''
     sample_trigger = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SampleTrigger, 1250302)
-    '''Type: nidmm.SampleTrigger
+    '''Type: enums.SampleTrigger
 
     Specifies the sample trigger source.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     sample_trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SampleTrigSlope, 1150010)
-    '''Type: nidmm.SampleTrigSlope
+    '''Type: enums.SampleTrigSlope
 
     Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
     '''
@@ -404,7 +404,7 @@ class _SessionBase(object):
     Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported RTDs,  including custom RTDs. The default value is 100 (?).
     '''
     temp_rtd_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RTDType, 1150120)
-    '''Type: nidmm.RTDType
+    '''Type: enums.RTDType
 
     Specifies the type of RTD used to measure temperature. The default value is NIDMM_VAL_TEMP_RTD_PT3851.
     Refer to the NIDMM_ATTR_TEMP_RTD_TYPE topic in the NI Digital Multimeters Help for additional information about defined values.
@@ -415,12 +415,12 @@ class _SessionBase(object):
     Specifies the reference junction temperature when a fixed reference junction is used to take  a thermocouple measurement. The default value is 25.0 (°C).
     '''
     temp_tc_ref_junc_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
-    '''Type: nidmm.ThermocoupleReferenceJunctionType
+    '''Type: enums.ThermocoupleReferenceJunctionType
 
     Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
     '''
     temp_tc_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
-    '''Type: nidmm.ThermocoupleType
+    '''Type: enums.ThermocoupleType
 
     Specifies the type of thermocouple used to measure the temperature. The default value is NIDMM_VAL_TEMP_TC_J.
     '''
@@ -440,13 +440,13 @@ class _SessionBase(object):
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 1.568e-7 (44006).
     '''
     temp_thermistor_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermistorType, 1150124)
-    '''Type: nidmm.ThermistorType
+    '''Type: enums.ThermistorType
 
     Specifies the type of thermistor used to measure the temperature. The default value is  NIDMM_VAL_TEMP_THERMISTOR_44006.
     Refer to the NIDMM_ATTR_TEMP_THERMISTOR_TYPE topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
     temp_transducer_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TransducerType, 1250201)
-    '''Type: nidmm.TransducerType
+    '''Type: enums.TransducerType
 
     Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
     '''
@@ -470,19 +470,19 @@ class _SessionBase(object):
     Default Value: NIDMM_VAL_AUTO_DELAY
     '''
     trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
-    '''Type: nidmm.TriggerSlope
+    '''Type: enums.TriggerSlope
 
     Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
     '''
     trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250004)
-    '''Type: nidmm.TriggerSource
+    '''Type: enums.TriggerSource
 
     Specifies the trigger source. When niDMM_Initiate is called, the DMM waits  for the trigger specified with this attribute. After it receives the trigger,  the DMM waits the length of time specified with the NIDMM_ATTR_TRIGGER_DELAY  attribute. The DMM then takes a measurement.
     This attribute is not supported on the NI 4050.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     waveform_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaveformCoupling, 1150027)
-    '''Type: nidmm.WaveformCoupling
+    '''Type: enums.WaveformCoupling
 
     For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisition.
     '''

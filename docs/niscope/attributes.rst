@@ -203,17 +203,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | :py:data:`AcquisitionType` |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | No                         |
-    +----------------+----------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.AcquisitionType |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -528,17 +528,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`TerminalConfiguration` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.TerminalConfiguration |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | True                        |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -690,17 +690,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | :py:data:`DataProcessingMode` |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
-    | Resettable     | No                            |
-    +----------------+-------------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.DataProcessingMode |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | No                       |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1539,17 +1539,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | :py:data:`FetchRelativeTo` |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | No                         |
-    +----------------+----------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.FetchRelativeTo |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1577,17 +1577,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`FlexFIRAntialiasFilterType` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | True                                  |
-    +----------------+---------------------------------------+
-    | Resettable     | No                                    |
-    +----------------+---------------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.FlexFIRAntialiasFilterType |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | True                             |
+    +----------------+----------------------------------+
+    | Resettable     | No                               |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2618,17 +2618,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | :py:data:`FilterType` |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.FilterType |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | No               |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2688,17 +2688,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | :py:data:`FIRFilterWindow` |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | True                       |
-    +----------------+----------------------------+
-    | Resettable     | No                         |
-    +----------------+----------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.FIRFilterWindow |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | True                  |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2881,17 +2881,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`PercentageMethod` |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | True                        |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.PercentageMethod |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | True                   |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2946,17 +2946,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | :py:data:`RefLevelUnits` |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | True                     |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.RefLevelUnits |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | True                |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3340,17 +3340,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | :py:data:`OverflowErrorReporting` |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | No                                |
-    +----------------+-----------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.OverflowErrorReporting |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | No                           |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3671,17 +3671,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`RefTriggerDetectorLocation` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | False                                 |
-    +----------------+---------------------------------------+
-    | Resettable     | No                                    |
-    +----------------+---------------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.RefTriggerDetectorLocation |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | No                               |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3794,17 +3794,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | :py:data:`RISMethod` |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+-----------------+
+    | Characteristic | Value           |
+    +================+=================+
+    | Datatype       | enums.RISMethod |
+    +----------------+-----------------+
+    | Permissions    | read-write      |
+    +----------------+-----------------+
+    | Channel Based  | False           |
+    +----------------+-----------------+
+    | Resettable     | No              |
+    +----------------+-----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4212,17 +4212,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`StreamingPositionType` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.StreamingPositionType |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4284,17 +4284,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | :py:data:`TriggerCoupling` |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | No                         |
-    +----------------+----------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.TriggerCoupling |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4510,17 +4510,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | :py:data:`TriggerModifier` |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | No                         |
-    +----------------+----------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.TriggerModifier |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4534,17 +4534,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | :py:data:`TriggerSlope` |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.TriggerSlope |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | No                 |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4654,17 +4654,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | No                |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4739,17 +4739,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`TriggerWindowMode` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.TriggerWindowMode |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4763,17 +4763,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`VideoTriggerEvent` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoTriggerEvent |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4811,17 +4811,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | :py:data:`VideoPolarity` |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.VideoPolarity |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4848,17 +4848,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`VideoSignalFormat` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | True                         |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoSignalFormat |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | True                    |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4885,17 +4885,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`VerticalCoupling` |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | True                        |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.VerticalCoupling |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | True                   |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

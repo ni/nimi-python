@@ -53,7 +53,7 @@ class _SessionBase(object):
     Controls whether the signal generator applies to an analog filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
     '''
     analog_path = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AnalogPath, 1150222)
-    '''Type: nifgen.AnalogPath
+    '''Type: enums.AnalogPath
 
     Specifies the analog signal path that should be used. The main path allows you to configure gain, offset, analog filter status, output impedance, and output enable. The main path has two amplifier options, high- and low-gain.
     The direct path presents a much smaller gain range, and you cannot adjust offset or the filter status. The direct path also provides a smaller output range but also lower distortion. NI-FGEN normally chooses the amplifier based on the user-specified gain.
@@ -120,7 +120,7 @@ class _SessionBase(object):
     Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
     '''
     bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
-    '''Type: nifgen.BusType
+    '''Type: enums.BusType
 
     The bus type of the signal generator.
     '''
@@ -131,7 +131,7 @@ class _SessionBase(object):
     NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use niFgen_InitWithOptions to override the default value.
     '''
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
-    '''Type: nifgen.CalADCInput
+    '''Type: enums.CalADCInput
 
     Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
     '''
@@ -141,7 +141,7 @@ class _SessionBase(object):
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this attribute can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
     clock_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ClockMode, 1150110)
-    '''Type: nifgen.ClockMode
+    '''Type: enums.ClockMode
 
     Controls which clock mode is used for the signal generator.
     For signal generators that support it, this attribute allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
@@ -162,7 +162,7 @@ class _SessionBase(object):
     Specifies the bit number to assign to the Data Marker Event.
     '''
     data_marker_event_level_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
-    '''Type: nifgen.DataMarkerEventLevelPolarity
+    '''Type: enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
     '''
@@ -205,7 +205,7 @@ class _SessionBase(object):
     Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in NIFGEN_ATTR_DIGITAL_STATIC_VALUE.
     '''
     digital_edge_script_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150292)
-    '''Type: nifgen.ScriptTriggerDigitalEdgeEdge
+    '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
@@ -215,7 +215,7 @@ class _SessionBase(object):
     Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
-    '''Type: nifgen.StartTriggerDigitalEdgeEdge
+    '''Type: enums.StartTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
     '''
@@ -241,7 +241,7 @@ class _SessionBase(object):
     Some signal generators support both digital gain and an analog gain (analog gain is specified with the NIFGEN_ATTR_FUNC_AMPLITUDE attribute or the NIFGEN_ATTR_ARB_GAIN attribute). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a function of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
     digital_level_script_trigger_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
-    '''Type: nifgen.ScriptTriggerDigitalLevelActiveLevel
+    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
 
     Specifies the active level for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
     '''
@@ -281,7 +281,7 @@ class _SessionBase(object):
     Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  NIFGEN_ATTR_DONE_EVENT_DELAY attribute.
     '''
     done_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: nifgen.DoneEventDelayUnits
+    '''Type: enums.DoneEventDelayUnits
 
     Specifies the units applied to the value of the NIFGEN_ATTR_DONE_EVENT_DELAY attribute. Valid units are seconds and sample clock periods.
     '''
@@ -291,12 +291,12 @@ class _SessionBase(object):
     Returns the latched status of the specified Done Event.
     '''
     done_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: nifgen.DoneEventActiveLevel
+    '''Type: enums.DoneEventActiveLevel
 
     Specifies the output polarity of the Done Event.
     '''
     done_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: nifgen.DoneEventOutputBehavior
+    '''Type: enums.DoneEventOutputBehavior
 
     Specifies the output behavior for the Done Event.
     '''
@@ -306,7 +306,7 @@ class _SessionBase(object):
     Specifies the destination terminal for the Done Event.
     '''
     done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: nifgen.DoneEventPulsePolarity
+    '''Type: enums.DoneEventPulsePolarity
 
     Specifies the output polarity of the Done Event.
     '''
@@ -316,7 +316,7 @@ class _SessionBase(object):
     Specifies the pulse width for the Done Event.
     '''
     done_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: nifgen.DoneEventPulseWidthUnits
+    '''Type: enums.DoneEventPulseWidthUnits
 
     Specifies the pulse width units for the Done Event.
     '''
@@ -474,7 +474,7 @@ class _SessionBase(object):
     Note: This parameter does not affect signal generator behavior when you
     '''
     func_waveform = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Waveform, 1250101)
-    '''Type: nifgen.Waveform
+    '''Type: enums.Waveform
 
     This channel-based attribute specifies which standard waveform the signal generator produces.
     Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to  NIFGEN_VAL_OUTPUT_FUNC.
@@ -499,7 +499,7 @@ class _SessionBase(object):
     Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
     '''
     idle_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
-    '''Type: nifgen.IdleBehavior
+    '''Type: enums.IdleBehavior
 
     Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
     '''
@@ -565,7 +565,7 @@ class _SessionBase(object):
     Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.
     '''
     marker_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: nifgen.MarkerEventDelayUnits
+    '''Type: enums.MarkerEventDelayUnits
 
     Specifies the units applied to the value of the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.  Valid units are seconds and sample clock periods.
     '''
@@ -581,7 +581,7 @@ class _SessionBase(object):
     Returns the live status of the specified Marker Event.
     '''
     marker_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: nifgen.MarkerEventOutputBehavior
+    '''Type: enums.MarkerEventOutputBehavior
 
     Specifies the output behavior for the Marker Event.
     '''
@@ -591,7 +591,7 @@ class _SessionBase(object):
     Specifies the destination terminal for the Marker Event.
     '''
     marker_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: nifgen.MarkerEventPulsePolarity
+    '''Type: enums.MarkerEventPulsePolarity
 
     Specifies the output polarity of the Marker Event.
     '''
@@ -601,12 +601,12 @@ class _SessionBase(object):
     Specifies the pulse width for the Marker Event.
     '''
     marker_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: nifgen.MarkerEventPulseWidthUnits
+    '''Type: enums.MarkerEventPulseWidthUnits
 
     Specifies the pulse width units for the Marker Event.
     '''
     marker_event_toggle_initial_state = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: nifgen.MarkerEventToggleInitialState
+    '''Type: enums.MarkerEventToggleInitialState
 
     Specifies the output polarity of the Marker Event.
     '''
@@ -748,7 +748,7 @@ class _SessionBase(object):
     Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
     '''
     osp_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150247)
-    '''Type: nifgen.DataProcessingMode
+    '''Type: enums.DataProcessingMode
 
     The way in which data is processed by the OSP block.
     '''
@@ -789,7 +789,7 @@ class _SessionBase(object):
     Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_ROOT_RAISED_COSINE.
     '''
     osp_fir_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150253)
-    '''Type: nifgen.FilterType
+    '''Type: enums.FilterType
 
     Pulse-shaping filter type for the FIR filter.
     '''
@@ -799,12 +799,12 @@ class _SessionBase(object):
     Specifies the amount of frequency shift applied to the baseband signal.
     '''
     osp_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPMode, 1150370)
-    '''Type: nifgen.OSPMode
+    '''Type: enums.OSPMode
 
     Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.
     '''
     osp_overflow_error_reporting = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPOverflowErrorReporting, 1150268)
-    '''Type: nifgen.OSPOverflowErrorReporting
+    '''Type: enums.OSPOverflowErrorReporting
 
     Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
     You can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow  conditions whether or not the NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is  enabled. The device will continue to generate after an overflow whether or not the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is enabled.
@@ -846,7 +846,7 @@ class _SessionBase(object):
     This channel-based attribute specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
     output_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputMode, 1250001)
-    '''Type: nifgen.OutputMode
+    '''Type: enums.OutputMode
 
     Sets which output mode the signal generator will use. The value you specify determines which functions and attributes you use to configure the waveform the signal generator produces.
 
@@ -882,7 +882,7 @@ class _SessionBase(object):
     Use niFgen_InitWithOptions to override the default value.
     '''
     ready_for_start_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: nifgen.ReadyForStartEventActiveLevel
+    '''Type: enums.ReadyForStartEventActiveLevel
 
     Specifies the output polarity of the Ready for Start Event.
     '''
@@ -904,7 +904,7 @@ class _SessionBase(object):
     Use niFgen_InitWithOptions to override default value.
     '''
     reference_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
-    '''Type: nifgen.ReferenceClockSource
+    '''Type: enums.ReferenceClockSource
 
     Specifies the reference clock source used by the signal generator.
     The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this attribute to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
@@ -926,7 +926,7 @@ class _SessionBase(object):
     Note: For the NI 5421, absolute delay
     '''
     sample_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockSource, 1150112)
-    '''Type: nifgen.SampleClockSource
+    '''Type: enums.SampleClockSource
 
     Specifies the Sample clock source. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_DIVISOR  attribute, the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
     To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
@@ -942,7 +942,7 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     sample_clock_timebase_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
-    '''Type: nifgen.SampleClockTimebaseSource
+    '''Type: enums.SampleClockTimebaseSource
 
     Specifies the Sample Clock Timebase source.
     To change the device configuration, call the niFgen_AbortGeneration function or wait for the generation to complete.
@@ -962,7 +962,7 @@ class _SessionBase(object):
     Specifies the number of Script triggers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
     '''
     script_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerType, 1150290)
-    '''Type: nifgen.ScriptTriggerType
+    '''Type: enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this attribute, additional attributes may need to be configured to fully configure the trigger.
     '''
@@ -1010,7 +1010,7 @@ class _SessionBase(object):
     You can specify the units of the delay value by setting the NIFGEN_ATTR_STARTED_EVENT_DELAY attribute.
     '''
     started_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: nifgen.StartedEventDelayUnits
+    '''Type: enums.StartedEventDelayUnits
 
     Specifies the units applied to the value of the NIFGEN_ATTR_STARTED_EVENT_DELAY
     attribute.  Valid units are seconds and sample clock periods.
@@ -1021,12 +1021,12 @@ class _SessionBase(object):
     Specifies the latched status of the Started Event.
     '''
     started_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: nifgen.StartedEventActiveLevel
+    '''Type: enums.StartedEventActiveLevel
 
     Specifies the output polarity of the Started Event.
     '''
     started_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: nifgen.StartedEventOutputBehavior
+    '''Type: enums.StartedEventOutputBehavior
 
     Specifies the output behavior for the Started Event.
     '''
@@ -1036,7 +1036,7 @@ class _SessionBase(object):
     Specifies the destination terminal for the Started Event.
     '''
     started_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: nifgen.StartedEventPulsePolarity
+    '''Type: enums.StartedEventPulsePolarity
 
     Specifies the output polarity of the Started Event.
     '''
@@ -1046,12 +1046,12 @@ class _SessionBase(object):
     Specifies the pulse width for the Started Event.
     '''
     started_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: nifgen.StartedEventPulseWidthUnits
+    '''Type: enums.StartedEventPulseWidthUnits
 
     Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
-    '''Type: nifgen.StartTriggerType
+    '''Type: enums.StartTriggerType
 
     Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this attribute.
     '''
@@ -1085,7 +1085,7 @@ class _SessionBase(object):
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  attribute contains a comma-separated list of supported device  models.
     '''
     synchronization = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
-    '''Type: nifgen.SynchronizationSource
+    '''Type: enums.SynchronizationSource
 
     Specify the source of the synchronization signal that you want to use.
     '''
@@ -1101,29 +1101,29 @@ class _SessionBase(object):
     Specifies the terminal to which to export the SYNC OUT signal. This attribute is not supported for all devices.
     '''
     terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
-    '''Type: nifgen.TerminalConfiguration
+    '''Type: enums.TerminalConfiguration
 
     Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
     '''
     trigger_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerMode, 1150108)
-    '''Type: nifgen.TriggerMode
+    '''Type: enums.TriggerMode
 
     Controls the trigger mode.
     '''
     trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250302)
-    '''Type: nifgen.TriggerSource
+    '''Type: enums.TriggerSource
 
     Controls which trigger source the signal generator uses.
     After you call the niFgen_InitiateGeneration function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the NIFGEN_ATTR_CYCLE_COUNT attribute.
     This attribute is also the source for the trigger in the other trigger modes as specified by the NIFGEN_ATTR_TRIGGER_MODE attribute.
     '''
     video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
-    '''Type: nifgen.VideoWaveformType
+    '''Type: enums.VideoWaveformType
 
     Selects which waveform type that the NI 5431 generates. Setting this attribute ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
-    '''Type: nifgen.WaitBehavior
+    '''Type: enums.WaitBehavior
 
     Specifies the behavior of the output while waiting for a script trigger or during a wait instruction.  The output can be configured to hold the last generated voltage before waiting or jump to the Wait Value.
     '''
