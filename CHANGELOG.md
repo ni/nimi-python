@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
     * #### Added
     * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
@@ -251,3 +252,4 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 -->
+
