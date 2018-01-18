@@ -63,6 +63,8 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
+    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -126,6 +128,14 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+}
+
+# Converted parameters
+functions_converters = {
+    'AdjustSampleClockRelativeDelay':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                      'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                      'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
 # Functions not in original metadata.
@@ -226,6 +236,81 @@ By default, subsequent calls to this function
 continue writing data from the position of the last sample written. You
 can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
 nifgen\_SetWaveformNextWritePosition function.''',
+        },
+    },
+    # Public function that wraps driver function but returns datetime object instead of individual items
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.',
+        },
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_self_cal_last_date_and_time',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Returns the date and time the device was last calibrated.',
+                },
+            },
+        ],
+'documentation': {
+'description': '''
+Returns the date and time of the last successful self-calibration.
+
+All values are returned as separate parameters. Each parameter is
+returned as an integer, including the year, month, day, hour, minute,
+and second. For example, if the device is calibrated in September 2013,
+this function returns 9 for the **month** parameter and 2013 for the
+**year** parameter.
+
+The time returned is 24-hour (military) local time. For example, if the
+device was calibrated at 2:30 PM, this function returns 14 for the
+**hours** parameter and 30 for the **minutes** parameter.
+''',
         },
     },
 }

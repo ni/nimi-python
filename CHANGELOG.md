@@ -53,6 +53,12 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
+            * AdjustSampleClockRelativeDelay
+            * WaitUntilDone
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * GetExtCalLastDateAndTime
+            * GetSelfCalLastDateAndTime
     * #### Removed
 * ### NI-SCOPE
     * #### Added
