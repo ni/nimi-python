@@ -11,7 +11,7 @@ def _convert_timedelta(value, library_type, scaling):
     scaled_value = value.total_seconds() * scaling
 
     if not library_type == visatype.ViReal64 and not library_type == visatype.ViReal32:  # ctype integer types don't convert to int from float so we need to
-        scaled_value = int(scaled_value + 0.5)
+        scaled_value = int(scaled_value)
 
     return library_type(scaled_value)
 
