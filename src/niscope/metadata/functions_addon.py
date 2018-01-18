@@ -264,7 +264,7 @@ functions_additional_functions = {
                 'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
-                'default_value': 5.0,
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
@@ -385,7 +385,7 @@ more information.
                 'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
-                'default_value': 5.0,
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
