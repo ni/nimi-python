@@ -56,7 +56,7 @@ class AttributeViReal64(Attribute):
 
     def __set__(self, session, value):
         if self._converter_to_driver is not None:
-            value = self._converter_to_driver(value, int)
+            value = self._converter_to_driver(value, float)
         session._set_attribute_vi_real64(self._attribute_id, value)
 
 
@@ -70,7 +70,7 @@ class AttributeViString(Attribute):
 
     def __set__(self, session, value):
         if self._converter_to_driver is not None:
-            value = self._converter_to_driver(value, int)
+            value = self._converter_to_driver(value, str)
         session._set_attribute_vi_string(self._attribute_id, value)
 
 
@@ -84,7 +84,7 @@ class AttributeViBoolean(Attribute):
 
     def __set__(self, session, value):
         if self._converter_to_driver is not None:
-            value = self._converter_to_driver(value, int)
+            value = self._converter_to_driver(value, bool)
         session._set_attribute_vi_boolean(self._attribute_id, value)
 
 
