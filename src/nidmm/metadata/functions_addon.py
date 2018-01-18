@@ -152,8 +152,6 @@ functions_converters = {
                                                        'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
 
-
-
 # Functions not in original metadata.
 functions_additional_functions = {
     # Public function that wraps driver function but returns datetime object instead of individual items
