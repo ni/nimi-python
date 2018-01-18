@@ -43,13 +43,14 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter, config):
-    '''Adds the type to use in the Python API to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['python_type'] = get_python_type_for_api_type(parameter['type'], config)
-    else:
-        parameter['python_type'] = 'enums.' + parameter['enum']
-    return parameter
+def _add_python_type(item, config):
+    '''Adds the type to use in the Python API to the item metadata, if not already there'''
+    if 'python_type' not in item:
+        if item['enum'] is None:
+            item['python_type'] = get_python_type_for_api_type(item['type'], config)
+        else:
+            item['python_type'] = 'enums.' + item['enum']
+    return item
 
 
 def _add_ctypes_variable_name(parameter):
@@ -286,6 +287,7 @@ def add_all_attribute_metadata(attributes, config):
     for a in attributes:
         _add_attr_codegen_method(a, attributes)
         _add_python_name(a, attributes)
+        _add_python_type(attributes[a], config)
 
     return attributes
 
@@ -704,7 +706,8 @@ def test_add_attributes_metadata_simple():
             'name': 'READ_WRITE_BOOL',
             'python_name': 'read_write_bool',
             'resettable': 'No',
-            'type': 'ViBoolean'
+            'type': 'ViBoolean',
+            'python_type': 'bool',
         },
     }
 
