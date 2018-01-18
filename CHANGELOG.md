@@ -64,6 +64,19 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
+        * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
+            * ConfigureTriggerDigital
+            * ConfigureTriggerEdge
+            * ConfigureTriggerHysteresis
+            * ConfigureTriggerSoftware
+            * ConfigureTriggerVideo
+            * ConfigureTriggerWindow
+            * Fetch
+            * FetchBinary16
+            * FetchBinary32
+            * FetchBinary8
+            * FetchMeasurementStats
+            * Read
     * #### Removed
 
 ## 0.6.0 - 2017-12-20
