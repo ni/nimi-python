@@ -15,6 +15,7 @@ table_contents.append(['Driver Version Tested Against', config['last_tested_vers
 table_contents.append(['PyPI Version', '|{0}LatestVersion|'.format(module_name)])
 table_contents.append(['Supported Python Version', '|{0}PythonVersion|'.format(module_name)])
 table_contents.append(['Open Issues', '|{0}OpenIssues|'.format(module_name)])
+table_contents.append(['Open Pull Requests', '|{0}OpenPRs|'.format(module_name)])
 
 driver_status_table = helper.as_rest_table(table_contents, header=True)
 
@@ -29,4 +30,6 @@ ${helper.get_rst_picture_reference('{0}LatestVersion'.format(module_name), 'http
 ${helper.get_rst_picture_reference('{0}PythonVersion'.format(module_name), 'http://img.shields.io/pypi/pyversions/{0}.svg'.format(module_name), '{0} supported Python versions'.format(driver_name), 'http://pypi.python.org/pypi/{0}'.format(module_name), indent=0)}
 
 ${helper.get_rst_picture_reference('{0}OpenIssues'.format(module_name), 'https://img.shields.io/github/issues/ni/nimi-python/{0}.svg'.format(module_name), 'Open Issues + Pull Requests for {0}'.format(driver_name), 'https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3A{0}'.format(module_name), indent=0)}
+
+${helper.get_rst_picture_reference('{0}OpenPRs'.format(module_name), 'https://img.shields.io/github/issues-pr/ni/nimi-python/{0}.svg'.format(module_name), 'Pull Requests for {0}'.format(driver_name), 'https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3A{0}'.format(module_name), indent=0)}
 
