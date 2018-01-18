@@ -26,7 +26,7 @@ class _Scan(object):
         self._session.abort()
 
 
-class _RepeatedCapabilities(object):
+class _SessionBase(object):
     '''Base class for all NI-SWITCH sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -1055,7 +1055,7 @@ class _RepeatedCapabilities(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class Session(_RepeatedCapabilities):
+class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):

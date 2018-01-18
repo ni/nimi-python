@@ -26,7 +26,7 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _RepeatedCapabilities(object):
+class _SessionBase(object):
     '''Base class for all NI-DMM sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -851,7 +851,7 @@ class _RepeatedCapabilities(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class Session(_RepeatedCapabilities):
+class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     def __init__(self, resource_name, reset_device=False, option_string=""):

@@ -861,7 +861,7 @@ class TestSession(object):
                 session.channels['0'].non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapabilities' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_SessionBase' object has no attribute 'non_existent_property'"
 
     def test_add_properties_to_repeated_capability_error_get(self):
         with nifake.Session('dev1') as session:
@@ -869,7 +869,7 @@ class TestSession(object):
                 value = session.channels['0'].non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapabilities' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_SessionBase' object has no attribute 'non_existent_property'"
 
     def test_set_enum_attribute_int32_error(self):
         with nifake.Session('dev1') as session:
