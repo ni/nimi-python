@@ -6,7 +6,8 @@
     c_function_prefix = config['c_function_prefix']
 
     output_params_list = []
-    for p in config['functions'][f['real_datetime_call']]['parameters']:
+    called_function = config['functions'][f['real_datetime_call']]
+    for p in called_function['parameters']:
         if p['direction'] == 'out':
             output_params_list.append(p['python_name'])
 
@@ -18,6 +19,6 @@
 
         ${helper.get_function_docstring(f, method_template, False, config, indent=8)}
         '''
-        ${output_params} = self._${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
+        ${output_params} = self.${called_function['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return datetime.datetime(year, month, day, hour, minute)
 
