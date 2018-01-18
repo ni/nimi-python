@@ -32,12 +32,12 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    ac_max_freq = attributes.AttributeViReal64(1250007)
+    ac_max_freq = attributes.AttributeViReal64(1250007, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the maximum frequency component of the input signal for AC  measurements. This attribute is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This attribute affects the DMM only when you set the   NIDMM_ATTR_FUNCTION attribute to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
-    ac_min_freq = attributes.AttributeViReal64(1250006)
+    ac_min_freq = attributes.AttributeViReal64(1250006, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the minimum frequency component of the input signal for AC  measurements. This attribute affects the DMM only when you set the  NIDMM_ATTR_FUNCTION attribute to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
@@ -46,7 +46,7 @@ class _SessionBase(object):
     '''
     For the NI 4070/4071/4072 only, specifies the ADC calibration mode.
     '''
-    aperture_time = attributes.AttributeViReal64(1250321)
+    aperture_time = attributes.AttributeViReal64(1250321, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by NIDMM_ATTR_APERTURE_TIME_UNITS. To  override the default aperture, set this attribute to the desired  aperture time after calling niDMM_ConfigureMeasurement. To return to the  default, set this attribute to NIDMM_VAL_APERTURE_TIME_AUTO (-1).
     On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
@@ -58,7 +58,7 @@ class _SessionBase(object):
     Specifies the units of aperture time for the current configuration.
     The NI 4060 does not support an aperture time set in seconds.
     '''
-    auto_range_value = attributes.AttributeViReal64(1250331)
+    auto_range_value = attributes.AttributeViReal64(1250331, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this attribute is set during a read operation.
     '''
@@ -67,7 +67,7 @@ class _SessionBase(object):
     Specifies the AutoZero mode.
     The NI 4050 is not supported.
     '''
-    buffer_size = attributes.AttributeViInt32(1150037)
+    buffer_size = attributes.AttributeViInt32(1150037, converter_to_driver=None, converter_from_driver=None)
     '''
     Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.
     '''
@@ -76,15 +76,15 @@ class _SessionBase(object):
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
     '''
-    cache = attributes.AttributeViBoolean(1050004)
+    cache = attributes.AttributeViBoolean(1050004, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies whether to cache the value of attributes. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular attributes regardless of the setting of this  attribute. The default value is VI_TRUE (1). Use the niDMM_InitWithOptions  function to override this value.
     '''
-    channel_count = attributes.AttributeViInt32(1050203)
+    channel_count = attributes.AttributeViInt32(1050203, converter_to_driver=None, converter_from_driver=None)
     '''
     Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
     '''
-    current_source = attributes.AttributeViReal64(1150025)
+    current_source = attributes.AttributeViReal64(1150025, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.
@@ -98,17 +98,17 @@ class _SessionBase(object):
     Specifies the DC noise rejection mode.
     The NI 4050 and NI 4060 are not supported.
     '''
-    driver_setup = attributes.AttributeViString(1050007)
+    driver_setup = attributes.AttributeViString(1050007, converter_to_driver=None, converter_from_driver=None)
     '''
     This attribute indicates the Driver Setup string that the user specified when  initializing the driver.
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
     If the user does not specify a Driver Setup string, this attribute returns  an empty string.
     '''
-    freq_voltage_autorange = attributes.AttributeViReal64(1150044)
+    freq_voltage_autorange = attributes.AttributeViReal64(1150044, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  NIDMM_ATTR_FREQ_VOLTAGE_RANGE.
     '''
-    freq_voltage_range = attributes.AttributeViReal64(1250101)
+    freq_voltage_range = attributes.AttributeViReal64(1250101, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the maximum amplitude of the input signal for frequency  measurements.
     '''
@@ -118,43 +118,43 @@ class _SessionBase(object):
     Refer to the NIDMM_ATTR_FUNCTION topic in  the NI Digital Multimeters Help for device-specific information.
     If you are setting this attribute directly, you must also set the NIDMM_ATTR_OPERATION_MODE attribute,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming attributes directly, you must set the NIDMM_ATTR_OPERATION_MODE attribute before  setting other configuration attributes. If the NIDMM_ATTR_OPERATION_MODE attribute is set to NIDMM_VAL_WAVEFORM_MODE,  the only valid function types are NIDMM_VAL_WAVEFORM_VOLTAGE and NIDMM_VAL_WAVEFORM_CURRENT. Set the  NIDMM_ATTR_OPERATION_MODE attribute to NIDMM_VAL_IVIDMM_MODE to set all other function values.
     '''
-    group_capabilities = attributes.AttributeViString(1050401)
+    group_capabilities = attributes.AttributeViString(1050401, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the capabilities and extension groups supported by the  specific driver.
     '''
-    input_resistance = attributes.AttributeViReal64(1150029)
+    input_resistance = attributes.AttributeViReal64(1150029, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the input resistance of the instrument.
     The NI 4050 and NI 4060 are not supported.
     '''
-    instrument_firmware_revision = attributes.AttributeViString(1050510)
+    instrument_firmware_revision = attributes.AttributeViString(1050510, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the instrument firmware revision number.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511)
+    instrument_manufacturer = attributes.AttributeViString(1050511, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the manufacturer of the instrument.
     '''
-    instrument_model = attributes.AttributeViString(1050512)
+    instrument_model = attributes.AttributeViString(1050512, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the instrument model.
     '''
-    instrument_product_id = attributes.AttributeViInt32(1150061)
+    instrument_product_id = attributes.AttributeViInt32(1150061, converter_to_driver=None, converter_from_driver=None)
     '''
     The PCI product ID.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021)
+    interchange_check = attributes.AttributeViBoolean(1050021, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM functions.
     The default value is VI_FALSE.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call niDMM_GetNextInterchangeWarning  to extract interchange warnings.  Call niDMM_ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
+    io_resource_descriptor = attributes.AttributeViString(1050304, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the resource descriptor of the instrument.
     '''
-    latency = attributes.AttributeViInt32(1150034)
+    latency = attributes.AttributeViInt32(1150034, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
     '''
@@ -162,11 +162,11 @@ class _SessionBase(object):
     '''
     For the NI 4072 only, specifies the type of algorithm that the measurement processing uses for  capacitance and inductance measurements.
     '''
-    lc_number_meas_to_average = attributes.AttributeViInt32(1150055)
+    lc_number_meas_to_average = attributes.AttributeViInt32(1150055, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4072 only, specifies the number of LC measurements that are averaged to produce one reading.
     '''
-    logical_name = attributes.AttributeViString(1050305)
+    logical_name = attributes.AttributeViString(1050305, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the logical name of the instrument.
     '''
@@ -180,7 +180,7 @@ class _SessionBase(object):
     '''
     Specifies the polarity of the generated measurement complete signal.
     '''
-    number_of_averages = attributes.AttributeViInt32(1150032)
+    number_of_averages = attributes.AttributeViInt32(1150032, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the number of averages to perform in a measurement. For the NI 4070/4071/4072,  applies only when the aperture time is not set to AUTO and Auto Zero is ON.  The default is 1.
     The NI 4050 and NI 4060 are not supported.
@@ -189,12 +189,12 @@ class _SessionBase(object):
     '''
     For the NI 4070/4071/4072 only, enables or disables offset compensated ohms.
     '''
-    open_cable_comp_conductance = attributes.AttributeViReal64(1150049)
+    open_cable_comp_conductance = attributes.AttributeViReal64(1150049, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4072 only, specifies the active part (conductance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
     '''
-    open_cable_comp_susceptance = attributes.AttributeViReal64(1150048)
+    open_cable_comp_susceptance = attributes.AttributeViReal64(1150048, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
@@ -203,12 +203,12 @@ class _SessionBase(object):
     '''
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niDMM_ConfigureMeasurementDigits, NI-DMM sets this attribute to NIDMM_VAL_IVIDMM_MODE.  When you call niDMM_ConfigureWaveformAcquisition, NI-DMM sets this attribute to NIDMM_VAL_WAVEFORM_MODE.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
     '''
-    powerline_freq = attributes.AttributeViReal64(1250333)
+    powerline_freq = attributes.AttributeViReal64(1250333, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the NIDMM_ATTR_APERTURE_TIME  attribute in powerline cycles (PLCs).
     After configuring powerline frequency, set the NIDMM_ATTR_APERTURE_TIME_UNITS attribute to PLCs.  When setting the NIDMM_ATTR_APERTURE_TIME attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
     '''
-    range = attributes.AttributeViReal64(1250002)
+    range = attributes.AttributeViReal64(1250002, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the NIDMM_ATTR_FUNCTION attribute. For  example, if NIDMM_ATTR_FUNCTION is set to NIDMM_VAL_VOLTS, the units are  volts.
     The NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.
@@ -219,31 +219,31 @@ class _SessionBase(object):
     NIDMM_VAL_AUTO_RANGE_ONCE -3.0
     NI-DMM performs an Auto Range before acquiring the next measurement. The NIDMM_ATTR_AUTO_RANGE_VALUE  is stored and used for all subsequent measurements until the measurement configuration is changed.
     '''
-    range_check = attributes.AttributeViBoolean(1050002)
+    range_check = attributes.AttributeViBoolean(1050002, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies whether to validate attribute values and function parameters. If  enabled, the instrument driver validates the parameter values passed to  driver functions. Range checking parameters is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable range checking and maximize performance.
     The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  override this value.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006)
+    record_coercions = attributes.AttributeViBoolean(1050006, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call niDMM_GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
     The default value is VI_FALSE (0). Use the niDMM_InitWithOptions function to  override this value.
     '''
-    resolution_absolute = attributes.AttributeViReal64(1250008)
+    resolution_absolute = attributes.AttributeViReal64(1250008, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
     NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
     '''
-    resolution_digits = attributes.AttributeViReal64(1250003)
+    resolution_digits = attributes.AttributeViReal64(1250003, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
     NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE attribute.
     '''
-    sample_count = attributes.AttributeViInt32(1250301)
+    sample_count = attributes.AttributeViInt32(1250301, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
     '''
-    sample_interval = attributes.AttributeViReal64(1250303)
+    sample_interval = attributes.AttributeViReal64(1250303, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the NIDMM_ATTR_SAMPLE_TRIGGER attribute is set to INTERVAL.
     On the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
@@ -260,81 +260,81 @@ class _SessionBase(object):
     '''
     Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
     '''
-    serial_number = attributes.AttributeViString(1150054)
+    serial_number = attributes.AttributeViString(1150054, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the serial number of the instrument. This attribute corresponds  to the serial number label that is attached to most products.
     '''
-    settle_time = attributes.AttributeViReal64(1150028)
+    settle_time = attributes.AttributeViReal64(1150028, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
     '''
-    short_cable_comp_reactance = attributes.AttributeViReal64(1150046)
+    short_cable_comp_reactance = attributes.AttributeViReal64(1150046, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4072 only, represents the reactive part (reactance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
     '''
-    short_cable_comp_resistance = attributes.AttributeViReal64(1150047)
+    short_cable_comp_resistance = attributes.AttributeViReal64(1150047, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the function or the range through this attribute or through niDMM_ConfigureMeasurementDigits  resets the value of this attribute to the default value.
     '''
-    shunt_value = attributes.AttributeViReal64(1150003)
+    shunt_value = attributes.AttributeViReal64(1150003, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4050 only, specifies the shunt resistance value.
     The NI 4050 requires an external shunt resistor for current measurements.  This attribute should be set to the value of shunt resistor.
     '''
-    simulate = attributes.AttributeViBoolean(1050005)
+    simulate = attributes.AttributeViBoolean(1050005, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver functions perform range checking and  call IVI Get and Set functions, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver functions return calculated values.
     The default value is VI_FALSE (0). Use the niDMM_InitWithOptions function to  override this setting.
     Simulate can only be set within the InitWithOptions function.  The attribute value cannot be changed outside of the function.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515, converter_to_driver=None, converter_from_driver=None)
     '''
     The major version number of the class specification for the specific driver.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516, converter_to_driver=None, converter_from_driver=None)
     '''
     The minor version number of the class specification for the specific driver.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514)
+    specific_driver_description = attributes.AttributeViString(1050514, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing a description of the specific driver.
     '''
-    specific_driver_major_version = attributes.AttributeViInt32(1050503)
+    specific_driver_major_version = attributes.AttributeViInt32(1050503, converter_to_driver=None, converter_from_driver=None)
     '''
     Returns the major version number of this instrument driver.
     '''
-    specific_driver_minor_version = attributes.AttributeViInt32(1050504)
+    specific_driver_minor_version = attributes.AttributeViInt32(1050504, converter_to_driver=None, converter_from_driver=None)
     '''
     The minor version number of this instrument driver.
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
+    specific_driver_revision = attributes.AttributeViString(1050551, converter_to_driver=None, converter_from_driver=None)
     '''
     A string that contains additional version information about this specific  instrument driver.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513)
+    specific_driver_vendor = attributes.AttributeViString(1050513, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the vendor of the specific driver.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327)
+    supported_instrument_models = attributes.AttributeViString(1050327, converter_to_driver=None, converter_from_driver=None)
     '''
     A string containing the instrument models supported by the specific driver.
     '''
-    temp_rtd_a = attributes.AttributeViReal64(1150121)
+    temp_rtd_a = attributes.AttributeViReal64(1150121, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the RTD Type property   is set to Custom. The default value is 3.9083e-3 (Pt3851).
     '''
-    temp_rtd_b = attributes.AttributeViReal64(1150122)
+    temp_rtd_b = attributes.AttributeViReal64(1150122, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -5.775e-7(Pt3851).
     '''
-    temp_rtd_c = attributes.AttributeViReal64(1150123)
+    temp_rtd_c = attributes.AttributeViReal64(1150123, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -4.183e-12(Pt3851).
     '''
-    temp_rtd_res = attributes.AttributeViReal64(1250242)
+    temp_rtd_res = attributes.AttributeViReal64(1250242, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported RTDs,  including custom RTDs. The default value is 100 (?).
     '''
@@ -343,7 +343,7 @@ class _SessionBase(object):
     Specifies the type of RTD used to measure temperature. The default value is NIDMM_VAL_TEMP_RTD_PT3851.
     Refer to the NIDMM_ATTR_TEMP_RTD_TYPE topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
-    temp_tc_fixed_ref_junc = attributes.AttributeViReal64(1250233)
+    temp_tc_fixed_ref_junc = attributes.AttributeViReal64(1250233, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the reference junction temperature when a fixed reference junction is used to take  a thermocouple measurement. The default value is 25.0 (°C).
     '''
@@ -355,15 +355,15 @@ class _SessionBase(object):
     '''
     Specifies the type of thermocouple used to measure the temperature. The default value is NIDMM_VAL_TEMP_TC_J.
     '''
-    temp_thermistor_a = attributes.AttributeViReal64(1150125)
+    temp_thermistor_a = attributes.AttributeViReal64(1150125, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 0.0010295 (44006).
     '''
-    temp_thermistor_b = attributes.AttributeViReal64(1150126)
+    temp_thermistor_b = attributes.AttributeViReal64(1150126, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when the Thermistor Type  proerty is set to Custom. The default value is 0.0002391 (44006).
     '''
-    temp_thermistor_c = attributes.AttributeViReal64(1150127)
+    temp_thermistor_c = attributes.AttributeViReal64(1150127, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 1.568e-7 (44006).
     '''
@@ -376,14 +376,14 @@ class _SessionBase(object):
     '''
     Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
     '''
-    trigger_count = attributes.AttributeViInt32(1250304)
+    trigger_count = attributes.AttributeViInt32(1250304, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the number of triggers the DMM receives before returning to the  Idle state.
     This attribute can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
     The NI 4050 and NI 4060 support this attribute being set to 1.
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
     '''
-    trigger_delay = attributes.AttributeViReal64(1250005)
+    trigger_delay = attributes.AttributeViReal64(1250005, converter_to_driver=None, converter_from_driver=None)
     '''
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
     The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
@@ -407,11 +407,11 @@ class _SessionBase(object):
     '''
     For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisition.
     '''
-    waveform_points = attributes.AttributeViInt32(1150019)
+    waveform_points = attributes.AttributeViInt32(1150019, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4070/4071/4072 only, specifies the number of points to acquire in a waveform acquisition.
     '''
-    waveform_rate = attributes.AttributeViReal64(1150018)
+    waveform_rate = attributes.AttributeViReal64(1150018, converter_to_driver=None, converter_from_driver=None)
     '''
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
