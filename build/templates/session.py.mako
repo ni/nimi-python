@@ -71,7 +71,7 @@ class _${rep_cap['python_class_name']}(object):
 
 
 % endfor
-class _RepeatedCapabilities(object):
+class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -155,7 +155,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % endfor
 % endfor
 
-class Session(_RepeatedCapabilities):
+class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
