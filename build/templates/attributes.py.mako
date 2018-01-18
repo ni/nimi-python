@@ -12,52 +12,79 @@ ${encoding_tag}
 class Attribute(object):
     '''Base class for all typed attributes.'''
 
-    def __init__(self, attribute_id):
+    def __init__(self, attribute_id, converter_to_driver=None, converter_from_driver=None):
         self._attribute_id = attribute_id
+        self._converter_to_driver = converter_to_driver
+        self._converter_from_driver = converter_from_driver
 
 
 class AttributeViInt32(Attribute):
 
     def __get__(self, session, session_type):
-        return session._get_attribute_vi_int32(self._attribute_id)
+        value = session._get_attribute_vi_int32(self._attribute_id)
+        if self._converter_from_driver is not None:
+            value = self._converter_from_driver(value)
+        return value
 
     def __set__(self, session, value):
+        if self._converter_to_driver is not None:
+            value = self._converter_to_driver(value, int)
         session._set_attribute_vi_int32(self._attribute_id, value)
 
 
 class AttributeViInt64(Attribute):
 
     def __get__(self, session, session_type):
-        return session._get_attribute_vi_int64(self._attribute_id)
+        value = session._get_attribute_vi_int64(self._attribute_id)
+        if self._converter_from_driver is not None:
+            value = self._converter_from_driver(value)
+        return value
 
     def __set__(self, session, value):
+        if self._converter_to_driver is not None:
+            value = self._converter_to_driver(value, int)
         session._set_attribute_vi_int64(self._attribute_id, value)
 
 
 class AttributeViReal64(Attribute):
 
     def __get__(self, session, session_type):
-        return session._get_attribute_vi_real64(self._attribute_id)
+        value = session._get_attribute_vi_real64(self._attribute_id)
+        if self._converter_from_driver is not None:
+            value = self._converter_from_driver(value)
+        return value
 
     def __set__(self, session, value):
+        if self._converter_to_driver is not None:
+            value = self._converter_to_driver(value, int)
         session._set_attribute_vi_real64(self._attribute_id, value)
 
 
 class AttributeViString(Attribute):
 
     def __get__(self, session, session_type):
-        return session._get_attribute_vi_string(self._attribute_id)
+        value = session._get_attribute_vi_string(self._attribute_id)
+        if self._converter_from_driver is not None:
+            value = self._converter_from_driver(value)
+        return value
 
     def __set__(self, session, value):
+        if self._converter_to_driver is not None:
+            value = self._converter_to_driver(value, int)
         session._set_attribute_vi_string(self._attribute_id, value)
 
 
 class AttributeViBoolean(Attribute):
 
     def __get__(self, session, session_type):
-        return session._get_attribute_vi_boolean(self._attribute_id)
+        value = session._get_attribute_vi_boolean(self._attribute_id)
+        if self._converter_from_driver is not None:
+            value = self._converter_from_driver(value)
+        return value
 
     def __set__(self, session, value):
+        if self._converter_to_driver is not None:
+            value = self._converter_to_driver(value, int)
         session._set_attribute_vi_boolean(self._attribute_id, value)
 
 
