@@ -75,9 +75,18 @@ functions_default_value = {
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '""', }, }, },
     'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'ScanMode.BREAK_BEFORE_MAKE', }, }, },
-    'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, }, }, },
+    'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
-    'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 5000, }, }, },
-    'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 5000, }, }, },
+    'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
+    'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
+}
+
+functions_converters = {
+    'ConfigureScanTrigger':              { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'WaitForDebounce':                   { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'WaitForScanComplete':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
 }

@@ -20,16 +20,16 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
         * The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
-            * ConfigureMultiPoint
-            * ConfigureTrigger
-            * Fetch
-            * FetchMultiPoint
-            * FetchWaveform
-            * Read
-            * ReadMultiPoint
-            * ReadWaveform
+            * configure_multi_point
+            * configure_trigger
+            * fetch
+            * fetch_multi_point
+            * fetch_waveform
+            * read
+            * read_multi_point
+            * read_waveform
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * GetCalDateAndTime
+            * get_cal_date_and_time
     * #### Removed
 * ### NI-ModInst
     * #### Added
@@ -38,45 +38,46 @@ All notable changes to this project will be documented in this file.
 * ### NI-Switch
     * #### Added
     * #### Changed
+        * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
+            * configure_scan_trigger
+            * wait_for_debounce
+            * wait_for_scan_complete
     * #### Removed
 * ### NI-DCPower
     * #### Added
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-            * FetchMultiple
-            * WaitForEvent
+            * fetch_multiple
+            * wait_for_event
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * GetExtCalLastDateAndTime
-            * GetSelfCalLastDateAndTime
+            * get_ext_cal_last_date_and_time
+            * get_self_cal_last_date_and_time
     * #### Removed
 * ### NI-FGEN
     * #### Added
     * #### Changed
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-            * AdjustSampleClockRelativeDelay
-            * WaitUntilDone
+            * adjust_sample_clock_relative_delay
+            * wait_until+done
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * GetExtCalLastDateAndTime
-            * GetSelfCalLastDateAndTime
+            * get_ext_cal_last_date_and_time
+            * get_self_cal_last_date_and_time
     * #### Removed
 * ### NI-SCOPE
     * #### Added
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
-            * ConfigureTriggerDigital
-            * ConfigureTriggerEdge
-            * ConfigureTriggerHysteresis
-            * ConfigureTriggerSoftware
-            * ConfigureTriggerVideo
-            * ConfigureTriggerWindow
-            * Fetch
-            * FetchBinary16
-            * FetchBinary32
-            * FetchBinary8
-            * FetchMeasurementStats
-            * Read
+            * configure_trigger_digital
+            * configure_trigger_edge
+            * configure_trigger_hysteresis
+            * configure_trigger_software
+            * configure_trigger_video
+            * configure_trigger_window
+            * fetch
+            * fetch_measurement_stats
+            * read
     * #### Removed
 
 ## 0.6.0 - 2017-12-20
