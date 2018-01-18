@@ -10,8 +10,9 @@ import datetime
 def _convert_timedelta(value, library_type, scaling):
     scaled_value = value.total_seconds() * scaling
 
-    if not library_type == visatype.ViReal64 and not library_type == visatype.ViReal32:  # ctype integer types don't convert to int from float so we need to
-        scaled_value = int(scaled_value + 0.5)
+    # ctype integer types don't convert to int from float so we need to
+    if library_type in [visatype.ViInt64, visatype.ViInt32, visatype.ViUInt32, visatype.ViInt16, visatype.ViUInt16, visatype.ViInt8]:
+        scaled_value = int(scaled_value)
 
     return library_type(scaled_value)
 
