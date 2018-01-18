@@ -62,12 +62,23 @@ class _${rep_cap['python_class_name']}(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        # First try it as a list
         try:
-            rep_cap_list = [str(r) if str(r).lower().startswith('${rep_cap['prefix'].lower()}') else '${rep_cap['prefix']}' + str(r) for r in repeated_capability]
+            rep_cap_list = [str(r) if str(r).lower().startswith('${rep_cap["prefix"].lower()}') else '${rep_cap["prefix"]}' + str(r) for r in repeated_capability]
         except TypeError:
-            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('${rep_cap['prefix'].lower()}') else '${rep_cap['prefix']}' + str(repeated_capability)]
+            # Then try it as a slice
+            try:
+                def ifnone(a, b):
+                    return b if a is None else a
+                # Turn the slice into a list so we can iterate over it
+                rep_cap_list = list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))
+                # Add prefix to each entry
+                rep_cap_list = ['${rep_cap["prefix"]}' + str(r) for r in rep_cap_list]
+            # Otherwise it must be a single item
+            except TypeError:
+                rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('${rep_cap["prefix"].lower()}') else '${rep_cap["prefix"]}' + str(repeated_capability)]
 
-        return _RepeatedCapabilities(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _SessionBase(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 % endfor
