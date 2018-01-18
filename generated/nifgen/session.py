@@ -3846,7 +3846,7 @@ class Session(_SessionBase):
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
         '''
-        month, day, year, hour, minute = self._get_ext_cal_last_date_and_time()
+        year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
     def get_self_cal_last_date_and_time(self):
@@ -3867,7 +3867,7 @@ class Session(_SessionBase):
         Returns:
             month (datetime.datetime): Returns the date and time the device was last calibrated.
         '''
-        month, day, year, hour, minute = self._get_self_cal_last_date_and_time()
+        year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
     def _get_self_cal_last_date_and_time(self):

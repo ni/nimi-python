@@ -1614,8 +1614,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
 
-    def get_cal_date_and_time(self, cal_type):
-        '''get_cal_date_and_time
+    def _get_cal_date_and_time(self, cal_type):
+        '''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -1634,10 +1634,22 @@ class Session(_SessionBase):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            month (datetime.datetime): Indicates date and time of the last calibration.
+            month (int): Indicates the **month** of the last calibration.
+            day (int): Indicates the **day** of the last calibration.
+            year (int): Indicates the **year** of the last calibration.
+            hour (int): Indicates the **hour** of the last calibration.
+            minute (int): Indicates the **minute** of the last calibration.
         '''
-        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
-        return datetime.datetime(year, month, day, hour, minute)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
+        month_ctype = visatype.ViInt32()  # case 14
+        day_ctype = visatype.ViInt32()  # case 14
+        year_ctype = visatype.ViInt32()  # case 14
+        hour_ctype = visatype.ViInt32()  # case 14
+        minute_ctype = visatype.ViInt32()  # case 14
+        error_code = self._library.niDMM_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_dev_temp(self, options=""):
         '''get_dev_temp
@@ -1676,6 +1688,31 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
+
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or
+                self-calibration).
+
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
+                +-----------------------------------+---+----------------------+
+
+                Note: The NI 4065 does not support self-calibration.
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+        '''
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp

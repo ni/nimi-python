@@ -77,6 +77,10 @@ class SideEffectsHelper(object):
         self._defaults['GetCalDateAndTime'] = {}
         self._defaults['GetCalDateAndTime']['return'] = 0
         self._defaults['GetCalDateAndTime']['Month'] = None
+        self._defaults['GetCalDateAndTime']['Day'] = None
+        self._defaults['GetCalDateAndTime']['Year'] = None
+        self._defaults['GetCalDateAndTime']['Hour'] = None
+        self._defaults['GetCalDateAndTime']['Minute'] = None
         self._defaults['GetDevTemp'] = {}
         self._defaults['GetDevTemp']['return'] = 0
         self._defaults['GetDevTemp']['Temperature'] = None
@@ -87,6 +91,9 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
+        self._defaults['GetLastCalDateAndTime'] = {}
+        self._defaults['GetLastCalDateAndTime']['return'] = 0
+        self._defaults['GetLastCalDateAndTime']['Month'] = None
         self._defaults['GetLastCalTemp'] = {}
         self._defaults['GetLastCalTemp']['return'] = 0
         self._defaults['GetLastCalTemp']['Temperature'] = None
@@ -324,12 +331,24 @@ class SideEffectsHelper(object):
         actual_range.contents.value = self._defaults['GetAutoRangeValue']['actualRange']
         return self._defaults['GetAutoRangeValue']['return']
 
-    def niDMM_GetCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
+    def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
         if self._defaults['GetCalDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Month')
         month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+        if self._defaults['GetCalDateAndTime']['Day'] is None:
+            raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Day')
+        day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+        if self._defaults['GetCalDateAndTime']['Year'] is None:
+            raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Year')
+        year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+        if self._defaults['GetCalDateAndTime']['Hour'] is None:
+            raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Hour')
+        hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+        if self._defaults['GetCalDateAndTime']['Minute'] is None:
+            raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Minute')
+        minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
         return self._defaults['GetCalDateAndTime']['return']
 
     def niDMM_GetDevTemp(self, vi, options, temperature):  # noqa: N802
@@ -360,6 +379,14 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetExtCalRecommendedInterval", param='Months')
         months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
+
+    def niDMM_GetLastCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
+        if self._defaults['GetLastCalDateAndTime']['return'] != 0:
+            return self._defaults['GetLastCalDateAndTime']['return']
+        if self._defaults['GetLastCalDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niDMM_GetLastCalDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetLastCalDateAndTime']['Month']
+        return self._defaults['GetLastCalDateAndTime']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         if self._defaults['GetLastCalTemp']['return'] != 0:
@@ -603,6 +630,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetError.return_value = 0
         mock_library.niDMM_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDMM_GetExtCalRecommendedInterval")
         mock_library.niDMM_GetExtCalRecommendedInterval.return_value = 0
+        mock_library.niDMM_GetLastCalDateAndTime.side_effect = MockFunctionCallError("niDMM_GetLastCalDateAndTime")
+        mock_library.niDMM_GetLastCalDateAndTime.return_value = 0
         mock_library.niDMM_GetLastCalTemp.side_effect = MockFunctionCallError("niDMM_GetLastCalTemp")
         mock_library.niDMM_GetLastCalTemp.return_value = 0
         mock_library.niDMM_GetMeasurementPeriod.side_effect = MockFunctionCallError("niDMM_GetMeasurementPeriod")
