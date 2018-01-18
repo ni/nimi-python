@@ -149,6 +149,7 @@ functions_additional_functions = {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'python_name': 'get_ext_cal_last_date_and_time',
+        'real_datetime_call': 'GetExtCalLastDateAndTime',
         'method_templates': [
             { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
@@ -180,6 +181,7 @@ functions_additional_functions = {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'python_name': 'get_self_cal_last_date_and_time',
+        'real_datetime_call': 'GetSelfCalLastDateAndTime',
         'method_templates': [
             { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],

@@ -115,6 +115,7 @@ functions_additional_functions = {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'python_name': 'get_cal_date_and_time',
+        'real_datetime_call': 'GetCalDateAndTime',
         'method_templates': [
             { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
