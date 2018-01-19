@@ -1,8 +1,8 @@
 
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
-from .doc_snippets import rep_cap_method_desc_docstring
-from .doc_snippets import rep_cap_method_desc_rst
+from .documentation_snippets import rep_cap_method_desc_docstring
+from .documentation_snippets import rep_cap_method_desc_rst
 from .parameter_usage_options import ParameterUsageOptions
 
 import pprint

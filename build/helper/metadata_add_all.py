@@ -1,10 +1,10 @@
 # Useful functions for use in the metadata modules
 
-from .doc_snippets import attr_note_text
-from .doc_snippets import enum_note_text
-from .doc_snippets import func_note_text
 from .documentation_helper import find_attribute_by_name
 from .documentation_helper import find_enum_by_value
+from .documentation_snippets import attr_note_text
+from .documentation_snippets import enum_note_text
+from .documentation_snippets import func_note_text
 from .helper import camelcase_to_snakecase
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
