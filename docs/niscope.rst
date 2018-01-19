@@ -1,10 +1,6 @@
 niscope module
 =============================================================
 
-.. include:: _static/status_project.inc
-
-.. include:: niscope/status.inc
-
 .. include:: niscope/installation.inc
 
 .. include:: _static/niscope_usage.inc

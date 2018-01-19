@@ -1,10 +1,6 @@
 nidcpower module
 =============================================================
 
-.. include:: _static/status_project.inc
-
-.. include:: nidcpower/status.inc
-
 .. include:: nidcpower/installation.inc
 
 .. include:: _static/nidcpower_usage.inc

@@ -1,10 +1,6 @@
 nidmm module
 =============================================================
 
-.. include:: _static/status_project.inc
-
-.. include:: nidmm/status.inc
-
 .. include:: nidmm/installation.inc
 
 .. include:: _static/nidmm_usage.inc

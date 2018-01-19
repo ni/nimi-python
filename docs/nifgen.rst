@@ -1,10 +1,6 @@
 nifgen module
 =============================================================
 
-.. include:: _static/status_project.inc
-
-.. include:: nifgen/status.inc
-
 .. include:: nifgen/installation.inc
 
 .. include:: _static/nifgen_usage.inc

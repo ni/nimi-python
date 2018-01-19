@@ -1,10 +1,6 @@
 nimodinst module
 =============================================================
 
-.. include:: _static/status_project.inc
-
-.. include:: nimodinst/status.inc
-
 .. include:: nimodinst/installation.inc
 
 .. include:: _static/nimodinst_usage.inc
