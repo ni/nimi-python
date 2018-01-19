@@ -11,6 +11,7 @@ NI Modular Instruments Python Documentation
 .. toctree::
    :maxdepth: 0
    :caption: Drivers
+   :hidden:
 
    nidcpower
    nidmm
