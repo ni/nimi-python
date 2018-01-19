@@ -334,6 +334,7 @@ def _add_enum_codegen_method(enums, config):
 
 
 def _add_enum_value_python_name(enum_info, config):
+    '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
     for v in enum_info['values']:
         v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
 
@@ -407,6 +408,7 @@ def add_all_enum_metadata(enums, config):
 
 
 def _need_func_note(nd, config):
+    '''Determine if we need the extra note about function names not matching anything in Python'''
     func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
     for m in func_re.finditer(nd):
         fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
@@ -419,6 +421,7 @@ def _need_func_note(nd, config):
 
 
 def _need_attr_note(nd, config):
+    '''Determine if we need the extra note about attribute names not matching anything in Python'''
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     for m in attr_re.finditer(nd):
         aname = m.group(1).replace('\\', '')
@@ -430,6 +433,7 @@ def _need_attr_note(nd, config):
 
 
 def _need_enum_note(nd, config, start_enum=None):
+    '''Determine if we need the extra note about enum names not matching anything in Python'''
     enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     for m in enum_re.finditer(nd):
         ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
@@ -440,6 +444,17 @@ def _need_enum_note(nd, config, start_enum=None):
 
 
 def _check_documentation(nd, config, start_enum=None):
+    '''_check_documentation
+
+    Look through all the different documentation pieces for this node documentation object for
+    any references to functions, attributes or enums that will not exist in the Python API for
+    whatever reason. If we find something, we will add a note admonition stating that.
+    
+    Args:
+        nd (dict) - documentation dictionary - expected to follow standard layout we have been using
+        config (dict) - configuration information'
+        start_enum (book) - possible context - used for finding enums based on the value 
+    '''
     keys_to_check = ['description', 'tip', 'caution', 'note']  # table_body needs special handling
     need_func_note = False
     need_attr_note = False
@@ -473,6 +488,11 @@ def _check_documentation(nd, config, start_enum=None):
 
 
 def _add_notes_re_links(config):
+    '''_add_notes_re_links
+
+    Go through all documentation looking for names that won't exist in the Python API and
+    adding a note about it.
+    '''
     # First we go through the function and parameter documentation
     for f_name in config['functions']:
         f = config['functions'][f_name]
@@ -513,7 +533,13 @@ def _add_notes_re_links(config):
             _check_documentation(v['documentation'], config)
 
 
-def _check_tables(nd):
+def _square_up_table(nd):
+    '''_square_up_table
+
+    The function we use to generate rst tables requires the table be a rectangle. I.e. all
+    rows must have the same number of cells. This will check 'table_header' and 'table_body'
+    to get the longest row and then make sure they are all that length
+    '''
     if 'table_header' not in nd and 'table_body' not in nd:
         return  # We don't need to do anything
 
@@ -537,35 +563,36 @@ def _check_tables(nd):
 
 
 def _square_up_tables(config):
+    '''Go through all documentation and make sure tables rows have consistent lengths'''
     # First we go through the function and parameter documentation
     for f_name in config['functions']:
         f = config['functions'][f_name]
         for p in f['parameters']:
             if 'documentation' not in p:
                 continue
-            _check_tables(p['documentation'])
+            _square_up_table(p['documentation'])
 
         if 'documentation' not in f:
             continue
-        _check_tables(f['documentation'])
+        _square_up_table(f['documentation'])
 
     # Check attribute documentation
     for a_id in config['attributes']:
         a = config['attributes'][a_id]
         if 'documentation' not in a:
             continue
-        _check_tables(a['documentation'])
+        _square_up_table(a['documentation'])
 
     # Check enum documentation
     for e_name in config['enums']:
         e = config['enums'][e_name]
         if 'documentation' not in e:
             continue
-        _check_tables(e['documentation'])
+        _square_up_table(e['documentation'])
         for v in e['values']:
             if 'documentation' not in v:
                 continue
-            _check_tables(v['documentation'])
+            _square_up_table(v['documentation'])
 
 
 def add_all_metadata(functions, attributes, enums, config):
