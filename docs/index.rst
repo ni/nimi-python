@@ -7,6 +7,11 @@ NI Modular Instruments Python Documentation
 ============================================================
 
 .. include:: ../README.rst
+Additional Documentation
+------------------------
+
+Refer to your driver documentation for device-specific information and detailed API documentation.
+
 
 .. toctree::
    :maxdepth: 0
