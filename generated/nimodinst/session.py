@@ -266,6 +266,7 @@ class Session(object):
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
+
             attribute_id (int): The ID of the integer attribute you want to query. Valid Values Slot
                 Number--the slot (for example, in a PXI chassis) in which the device is
                 installed. This attribute can only be queried for PXI devices installed
@@ -279,9 +280,11 @@ class Session(object):
                 the form "PXI::::INSTR". Traditional NI-DAQ devices do not support the
                 chassis number, bus number, and socket number attributes.
 
+
         Returns:
             attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
                 the requested attribute.
+
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -312,12 +315,14 @@ class Session(object):
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
+
             attribute_id (int): The ID of the string attribute you want to query. Valid Values
-                DEVICE_NAME--the name of the device, which can be used
+                device_name--the name of the device, which can be used
                 to open an instrument driver session for that device
-                DEVICE_MODEL--the model of the device (for example, NI
-                PXI-5122) SERIAL_NUMBER--the serial number of the
+                device_model--the model of the device (for example, NI
+                PXI-5122) serial_number--the serial number of the
                 device
+
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 9
@@ -357,13 +362,16 @@ class Session(object):
                 you use the empty string for this parameter, NI-ModInst creates a list
                 of all Modular Instruments devices installed in the system.
 
+
         Returns:
             handle (int): A pointer to a ViSession variable that receives the value of the
                 NI-ModInst session handle. This value acts as a handle to the list of
                 installed devices and is used in other NI-ModInst functions.
+
             device_count (int): A pointer to an integer variable that receives the number of devices
                 found in the system that are supported by the driver specified in the
                 driver parameter.
+
         '''
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case 3
         handle_ctype = visatype.ViSession()  # case 14
