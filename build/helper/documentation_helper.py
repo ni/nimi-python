@@ -1,11 +1,19 @@
 
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
+from .documentation_snippets import attr_note_text
+from .documentation_snippets import enum_note_text
+from .documentation_snippets import func_note_text
+from .documentation_snippets import rep_cap_method_desc_docstring
+from .documentation_snippets import rep_cap_method_desc_rst
 from .parameter_usage_options import ParameterUsageOptions
 
+import pprint
 import re
 import string
 import sys
+
+pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 # Python 2/3 compatibility
@@ -62,7 +70,7 @@ def get_rst_picture_reference(tag, url, title, link, indent=0):
     return ret_val
 
 
-def _get_rst_table_snippet(d, config, indent=0, make_link=True):
+def _get_rst_table_snippet(node, d, config, indent=0, make_link=True):
     '''Returns an rst table snippet if table_header and/or table_body are in the dictionary'''
     if 'table_body' in d:
         table_body = d['table_body']
@@ -79,14 +87,14 @@ def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     if header:
         header_contents = []
         for i in table_header:
-            contents = _fix_references(i, config, make_link)
+            contents = _fix_references(node, i, config, make_link)
             header_contents.append(contents)
         table_contents.append(header_contents)
 
     for t in table_body:
         line_contents = []
         for i in t:
-            contents = _fix_references(i, config, make_link)
+            contents = _fix_references(node, i, config, make_link)
             line_contents.append(contents)
         table_contents.append(line_contents)
 
@@ -94,11 +102,16 @@ def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     return get_indented_docstring_snippet(table, indent)
 
 
-def get_rst_admonition_snippet(admonition, d, config, indent=0):
+def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
     '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
     if admonition in d:
-        a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
-        a += get_indented_docstring_snippet(_fix_references(d[admonition], config, make_link=True), indent + 4)
+        admonition_content = d[admonition]
+        if not isinstance(admonition_content, list):
+            admonition_content = [admonition_content]
+        a = ''
+        for admonition_text in admonition_content:
+            a += '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
+            a += get_indented_docstring_snippet(_fix_references(node, admonition_text, config, make_link=True), indent + 4)
         return a
     else:
         return ''
@@ -126,17 +139,45 @@ def get_documentation_for_node_rst(node, config, indent=0):
         return doc
 
     nd = node['documentation']
-    doc += get_rst_admonition_snippet('caution', nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'caution', nd, config, indent)
     if 'description' in nd:
-        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=True), indent)
+        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, nd['description'], config, make_link=True), indent)
 
-    doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(nd, config, indent)
-    doc += get_rst_admonition_snippet('note', nd, config, indent)
+    doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(node, nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'note', nd, config, indent)
     doc += '\n'
-    doc += get_rst_admonition_snippet('tip', nd, config, indent)
+    doc += get_rst_admonition_snippet(node, 'tip', nd, config, indent)
     doc += '\n'
 
     return doc
+
+
+def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extra_newline='\n'):
+    '''Returns a docstring formatted admonition if the given admonition ('note', 'caution') exists in the dictionary
+
+    Args:
+        admonition (str) - admonition to check and format. I.e. 'note', 'tip', etc.
+        d (dict) - documentation note dictionary
+        config (dict) - build configuration
+        indent (int) - how much each line should be indented
+        extra_newline (str) - empty string or newline - needed to keep docstring formatting correct
+
+    Returns:
+        str - empty string if no admonition, else formatted string with one or more admonitions
+    '''
+    if admonition in d:
+        admonition_content = d[admonition]
+        if not isinstance(admonition_content, list):
+            admonition_content = [admonition_content]
+        a = ''
+        for admonition_text in admonition_content:
+            admonition_text = '{0}: {1}'.format(admonition.title(), admonition_text)
+            admonition_text = _fix_references(node, admonition_text, config, make_link=False)
+            a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(admonition_text, indent)
+            extra_newline = '\n'
+        return a
+    else:
+        return ''
 
 
 def get_documentation_for_node_docstring(node, config, indent=0):
@@ -164,23 +205,21 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     nd = node['documentation']
     extra_newline = ''
     if 'caution' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Caution: ' + nd['caution'], config, make_link=False), indent)
+        doc += get_docstring_admonition_snippet(node, 'caution', nd, config, indent, extra_newline)
         extra_newline = '\n'
 
     if 'description' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(node, nd['description'], config, make_link=False), indent)
         extra_newline = '\n'
 
-    tbl = _get_rst_table_snippet(nd, config, indent, make_link=False)
+    tbl = _get_rst_table_snippet(node, nd, config, indent, make_link=False)
     if len(tbl) > 0:
         doc += '\n' + extra_newline + (' ' * indent) + tbl
         extra_newline = '\n'
 
-    if 'note' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+    doc += get_docstring_admonition_snippet(node, 'note', nd, config, indent, extra_newline)
 
-    if 'tip' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
+    doc += get_docstring_admonition_snippet(node, 'tip', nd, config, indent, extra_newline)
 
     return doc.strip()
 
@@ -189,7 +228,58 @@ def get_documentation_for_node_docstring(node, config, indent=0):
 config = None
 
 
-def _find_attribute_by_name(attributes, name):
+def find_enum_by_value(enums, value, start_enum=None):
+    '''Returns the enum that contains the given value if there is one
+
+    There should only be one so return that individual parameter and not a list
+    '''
+    enum = []
+    values = []
+    if start_enum:
+        e = enums[start_enum]
+        for v in e['values']:
+            if v['name'] == value:
+                enum.append(e)
+                values.append(v)
+        if len(enum) == 1:
+            return enum[0], values[0]
+
+    for e_name in enums:
+        e = enums[e_name]
+        for v in e['values']:
+            if v['name'] == value:
+                enum.append(e)
+                values.append(v)
+
+    if len(enum) == 0 or len(enum) > 1:
+        return None, None
+    return enum[0], values[0]
+
+
+def _replace_enum_python_name(e_match):
+    '''callback function for enum value regex sub command
+
+    Args:
+        m (match object): Match object from the attribute substitution command
+
+    Returns:
+        str: python name of the enum value, possibly set to sphinx python domain data item link
+    '''
+    ename = e_match.group(1)
+    start_enum = config['start_enum']
+    if e_match:
+        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), ename.replace('\\', ''))
+        enum, value = find_enum_by_value(config['enums'], ename, start_enum)
+        if enum and enum['codegen_method'] != 'no':
+            ename = enum['python_name'] + '.' + value['python_name']
+
+    if config['make_link']:
+        return ':py:data:`~{0}.{1}`'.format(config['module_name'], ename)
+    else:
+        return '{0}'.format(ename)
+
+
+def find_attribute_by_name(attributes, name):
     '''Returns the attribute with the given name if there is one
 
     There should only be one so return that individual parameter and not a list
@@ -202,35 +292,35 @@ def _find_attribute_by_name(attributes, name):
 
 
 def _replace_attribute_python_name(a_match):
-    '''callback function for regex sub command when link not needed
+    '''callback function for attribute regex sub command
 
     Args:
         m (match object): Match object from the attribute substitution command
 
     Returns:
-        str: python name of the attribute
+        str: python name of the attribute, possibly set to sphinx python domain data item link
     '''
     aname = "Unknown"
     if a_match:
-        attr = _find_attribute_by_name(config['attributes'], a_match.group(1))
-        aname = a_match.group(1)
+        aname = a_match.group(1).replace('\\', '')
+        attr = find_attribute_by_name(config['attributes'], aname)
         if attr:
             aname = attr['name'].lower()
 
     if config['make_link']:
-        return ':py:data:`{0}.{1}`'.format(config['module_name'], aname)
+        return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
 
 def _replace_func_python_name(f_match):
-    '''callback function for regex sub command when link needed
+    '''callback function for function regex sub command
 
     Args:
         f_match (match object): Match object from the function substitution command
 
     Returns:
-        str: rst link to function using python name
+        str: rst link to function using python name, possibly set to sphinx python domain meth item link
     '''
     fname = "Unknown"
     if f_match:
@@ -244,7 +334,7 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+        return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
@@ -268,7 +358,7 @@ def _replace_urls(u_match):
         return u_match.group(1)
 
 
-def _fix_references(doc, cfg, make_link=False):
+def _fix_references(node, doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
     Args:
@@ -282,16 +372,26 @@ def _fix_references(doc, cfg, make_link=False):
         str: documentation with references replaces based on make_link
     '''
 
+    # We have to put config into the global namespace because we need the information in the search
+    # callbacks but cannot pass them in via the search command itself
     global config
     config = cfg
 
     config['make_link'] = make_link
+    config['start_enum'] = None
+    if 'enum' in node:
+        config['start_enum'] = node['enum']
 
-    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
-    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    attr_search_string = '{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    func_search_string = '{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    enum_search_string = '{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    attr_re = re.compile(attr_search_string)
+    func_re = re.compile(func_search_string)
+    enum_re = re.compile(enum_search_string)
 
     doc = attr_re.sub(_replace_attribute_python_name, doc)
     doc = func_re.sub(_replace_func_python_name, doc)
+    doc = enum_re.sub(_replace_enum_python_name, doc)
 
     if 'driver_urls' in cfg:
         for url_key in cfg['driver_urls']:
@@ -301,6 +401,11 @@ def _fix_references(doc, cfg, make_link=False):
 
     if not make_link:
         doc = doc.replace('\_', '_')
+
+    # Clean up config
+    del config['make_link']
+    del config['start_enum']
+
     return doc
 
 
@@ -323,19 +428,6 @@ def format_type_for_rst_documentation(param, numpy, config):
     elif param['is_buffer'] is True:
         p_type = 'list of ' + p_type
     return p_type
-
-
-rep_cap_method_desc = '''
-This method requires repeated capabilities (usually channels). If called directly on the
-{0}.Session object, then the method will use all repeated capabilities in the session.
-You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session instance, and calling this method on the result.:
-'''
-rep_cap_method_desc_rst = rep_cap_method_desc + '''
-.. code:: python
-
-    session['0,1'].{1}({2})
-'''
 
 
 def get_function_rst(function, method_template, numpy, config, indent=0):
@@ -362,7 +454,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
 
-    rst = '.. function:: ' + function['python_name'] + suffix + '('
+    rst = '.. py:method:: ' + function['python_name'] + suffix + '('
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -413,11 +505,6 @@ def _format_type_for_docstring(param, numpy, config):
     return p_type
 
 
-rep_cap_method_desc_docstring = rep_cap_method_desc + '''
-    session['0,1'].{1}({2})
-'''
-
-
 def get_function_docstring(function, method_template, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
@@ -451,6 +538,7 @@ def get_function_docstring(function, method_template, numpy, config, indent=0):
         ds = get_documentation_for_node_docstring(p, config, indent + 8)
         if len(ds) > 0:
             docstring += ' ' + ds
+        docstring += '\n'
 
     output_params = filter_parameters(function, output_parameters)
     if len(output_params) > 0:
@@ -460,6 +548,7 @@ def get_function_docstring(function, method_template, numpy, config, indent=0):
             ds = get_documentation_for_node_docstring(p, config, indent + 8)
             if len(ds) > 0:
                 docstring += ' ' + ds
+            docstring += '\n'
 
     return docstring
 
@@ -540,6 +629,194 @@ def as_rest_table(data, header=True):
     return '\n'.join(table)
 
 
+def _square_up_table(nd):
+    '''_square_up_table
+
+    The function we use to generate rst tables requires the table be a rectangle. I.e. all
+    rows must have the same number of cells. This will check 'table_header' and 'table_body'
+    to get the longest row and then make sure they are all that length
+    '''
+    if 'table_header' not in nd and 'table_body' not in nd:
+        return  # We don't need to do anything
+
+    # First we get max length
+    max_len = 0
+    table_header = nd['table_header'] if 'table_header' in nd else None
+    table_body = nd['table_body']
+    if table_header:
+        max_len = len(table_header)
+    for line in table_body:
+        if len(line) > max_len:
+            max_len = len(line)
+
+    # Now make sure all lines have the same number of cells
+    if table_header:
+        while len(table_header) != max_len:
+            table_header.append('')
+    for line in table_body:
+        while len(line) != max_len:
+            line.append('')
+
+
+def square_up_tables(config):
+    '''Go through all documentation and make sure tables rows have consistent lengths'''
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            if 'documentation' not in p:
+                continue
+            _square_up_table(p['documentation'])
+
+        if 'documentation' not in f:
+            continue
+        _square_up_table(f['documentation'])
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        _square_up_table(a['documentation'])
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _square_up_table(e['documentation'])
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _square_up_table(v['documentation'])
+
+
+def _need_func_note(nd, config):
+    '''Determine if we need the extra note about function names not matching anything in Python'''
+    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    for m in func_re.finditer(nd):
+        fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
+        try:
+            config['functions'][fname]['python_name']
+        except KeyError:
+            return True
+
+    return False
+
+
+def _need_attr_note(nd, config):
+    '''Determine if we need the extra note about attribute names not matching anything in Python'''
+    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in attr_re.finditer(nd):
+        aname = m.group(1).replace('\\', '')
+        attr = find_attribute_by_name(config['attributes'], aname)
+        if not attr:
+            return True
+
+    return False
+
+
+def _need_enum_note(nd, config, start_enum=None):
+    '''Determine if we need the extra note about enum names not matching anything in Python'''
+    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in enum_re.finditer(nd):
+        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
+        enum, _ = find_enum_by_value(config['enums'], ename, start_enum=start_enum)
+        if not enum or enum['codegen_method'] == 'no':
+            return True
+    return False
+
+
+def _check_documentation(nd, config, start_enum=None):
+    '''_check_documentation
+
+    Look through all the different documentation pieces for this node documentation object for
+    any references to functions, attributes or enums that will not exist in the Python API for
+    whatever reason. If we find something, we will add a note admonition stating that.
+
+    Args:
+        nd (dict) - documentation dictionary - expected to follow standard layout we have been using
+        config (dict) - configuration information'
+        start_enum (book) - possible context - used for finding enums based on the value
+    '''
+    keys_to_check = ['description', 'tip', 'caution', 'note']  # table_body needs special handling
+    need_func_note = False
+    need_attr_note = False
+    need_enum_note = False
+    for k in keys_to_check:
+        if k in nd:
+            need_func_note = need_func_note or _need_func_note(nd[k], config)
+            need_attr_note = need_attr_note or _need_attr_note(nd[k], config)
+            need_enum_note = need_enum_note or _need_enum_note(nd[k], config)
+
+    if 'table_body' in nd:
+        tb = nd['table_body']
+        for line in tb:
+            for cell in line:
+                need_func_note = need_func_note or _need_func_note(cell, config)
+                need_attr_note = need_attr_note or _need_attr_note(cell, config)
+                need_enum_note = need_enum_note or _need_enum_note(cell, config)
+
+    if need_func_note or need_attr_note or need_enum_note:
+        if 'note' not in nd:
+            nd['note'] = []
+        elif not isinstance(nd['note'], list):
+            nd['note'] = [nd['note']]
+
+    if need_func_note:
+        nd['note'].append(func_note_text)
+    if need_attr_note:
+        nd['note'].append(attr_note_text)
+    if need_enum_note:
+        nd['note'].append(enum_note_text)
+
+
+def add_notes_re_links(config):
+    '''_add_notes_re_links
+
+    Go through all documentation looking for names that won't exist in the Python API and
+    adding a note about it.
+    '''
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            start_enum = None
+            if 'documentation' not in p:
+                continue
+            if 'enum' in p:
+                start_enum = p['enum']
+            _check_documentation(p['documentation'], config, start_enum)
+
+        if 'documentation' not in f:
+            continue
+        start_enum = None
+        if 'enum' in f:
+            start_enum = f['enum']
+        _check_documentation(f['documentation'], config, start_enum)
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        start_enum = None
+        if 'enum' in a:
+            start_enum = a['enum']
+        _check_documentation(a['documentation'], config, start_enum)
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _check_documentation(e['documentation'], config)
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _check_documentation(v['documentation'], config)
+
+
 # Unit Tests
 
 
@@ -602,22 +879,22 @@ config = {
                 },
                 {
                     'direction': 'in',
-                    'enum': None,
+                    'enum': 'Turtle',
                     'name': 'turtleType',
                     'type': 'ViInt32',
                     'documentation': {
                         'description': '''Specifies the type of Turtle type
 wanted to choose.''',
-                        'note': 'You wont be able to import RAPHAEL',
+                        'note': 'You wont be able to import NIFAKE\\_VAL\\_RAPHAEL',
                         'table_body': [
-                            ['NIFake\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
-                            ['NIFake\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
-                            ['NIFake\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
-                            ['NIFake\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
+                            ['NIFAKE\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
+                            ['NIFAKE\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
+                            ['NIFAKE\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
+                            ['NIFAKE\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
                         ]
                     },
                     'python_name': 'turtle_type',
-                    'python_type': 'int',
+                    'python_type': 'Turtle',
                     'ctypes_variable_name': 'turtle_type_ctype',
                     'ctypes_type': 'ViInt32',
                     'ctypes_type_library_call': 'ViInt32',
@@ -660,8 +937,12 @@ wanted to choose.''',
                 }
             ],
             'documentation': {
-                'description': 'Returns the **ID** of selected Turtle Type.',
-                'note': 'The RAPHAEL Turtles dont have an ID.'
+                'description': 'Returns the **ID** of selected Turtle Type. See `NIFAKE help <REPLACE_DRIVER_SPECIFIC_URL_1(fake_functional_overview)>`__',
+                'note': [
+                    'The NIFAKE\\_VAL\\_RAPHAEL Turtles dont have an ID.',
+                    'DO NOT call niFake\\_FetchWaveform after calling this function.',
+                    'NIFAKE\\_ATTR\\_READ\\_WRITE\\_BOOL will have an incorrect value after this calling this function',
+                ]
             },
             'name': 'GetTurtleID',
             'python_name': 'get_turtle_id',
@@ -775,6 +1056,9 @@ wanted to choose.''',
     'driver_name': 'NI-FAKE',
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
     'session_handle_parameter_name': 'vi',
+    'driver_urls': {
+        'REPLACE_DRIVER_SPECIFIC_URL_1': 'http://zone.ni.com/reference/en-XX/help/370384T-01/fake/{0}/',
+    },
     'library_info':
     {
         'Windows': {
@@ -791,6 +1075,60 @@ wanted to choose.''',
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'attributes': {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    },
+    'enums': {
+        'Turtle': {
+            'codegen_method': 'public',
+            'python_name': 'Turtle',
+            'values': [
+                {
+                    'name': 'NIFAKE_VAL_LEONARDO',
+                    'python_name': 'LEONARDO',
+                    'value': 0,
+                    'documentation': {
+                        'description': 'Wields two katanas.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_DONATELLO',
+                    'python_name': 'DONATELLO',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Uses a bo staff.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_RAPHAEL',
+                    'python_name': 'RAPHAEL',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Has a pair of sai.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_MICHELANGELO',
+                    'python_name': 'MICHELANGELO',
+                    'value': 3,
+                    'documentation': {
+                        'description': 'Owns nunchucks.',
+                    }
+                },
+            ],
+        },
+    },
 }
 
 
@@ -798,30 +1136,34 @@ def test_get_function_rst_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
     actual_function_rst = get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=0)
-    expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
+    expected_fuction_rst = '''.. py:method:: get_turtle_id(turtle_type)
 
-    Returns the **ID** of selected Turtle Type.
+    Returns the **ID** of selected Turtle Type. See `NIFAKE help <http://zone.ni.com/reference/en-XX/help/370384T-01/fake/fake_functional_overview/>`__
 
-    .. note:: The RAPHAEL Turtles dont have an ID.
+    .. note:: The :py:data:`~nifake.Turtle.RAPHAEL` Turtles dont have an ID.
+
+    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this function.
+
+    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this function
 
     :param turtle_type:
 
     Specifies the type of Turtle type
     wanted to choose.
 
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
-    +---------------------------------+---+--------------+
-    | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
-    +---------------------------------+---+--------------+
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.LEONARDO` (default) | 0 | LEONARDO     |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.DONATELLO`          | 1 | DONATELLO    |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.RAPHAEL`            | 2 | RAPHAEL      |
+    +----------------------------------------------+---+--------------+
+    | :py:data:`~nifake.Turtle.MICHELANGELO`       | 3 | MICHELANGELO |
+    +----------------------------------------------+---+--------------+
 
-    .. note:: You wont be able to import RAPHAEL
+    .. note:: You wont be able to import :py:data:`~nifake.Turtle.RAPHAEL`
 
-    :type turtle_type: int
+    :type turtle_type: :py:data:`nifake.Turtle`
 
     :rtype: float
     :return:
@@ -835,7 +1177,7 @@ def test_get_function_rst_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
     actual_function_rst = get_function_rst(function, method_template=method_template, numpy=True, config=config, indent=0)
-    expected_fuction_rst = '''.. function:: fetch_waveform(number_of_samples)
+    expected_fuction_rst = '''.. py:method:: fetch_waveform(number_of_samples)
 
     Returns waveform data.
 
@@ -869,25 +1211,29 @@ def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
     method_template = function['method_templates'][0]
     actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
-    expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
+    expected_function_docstring = '''Returns the **ID** of selected Turtle Type. See `NIFAKE help <fake_functional_overview>`__
 
-Note: The RAPHAEL Turtles dont have an ID.
+Note: The Turtle.RAPHAEL Turtles dont have an ID.
+
+Note: DO NOT call fetch_waveform after calling this function.
+
+Note: read_write_bool will have an incorrect value after this calling this function
 
 Args:
-    turtle_type (int): Specifies the type of Turtle type
+    turtle_type (Turtle): Specifies the type of Turtle type
         wanted to choose.
 
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_LEONARDO (default) | 0 | LEONARDO     |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_DONATELLO          | 1 | DONATELLO    |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_RAPHAEL            | 2 | RAPHAEL      |
-        +-------------------------------+---+--------------+
-        | NIFake_VAL_MICHELANGELO       | 3 | MICHELANGELO |
-        +-------------------------------+---+--------------+
+        +---------------------------+---+--------------+
+        | Turtle.LEONARDO (default) | 0 | LEONARDO     |
+        +---------------------------+---+--------------+
+        | Turtle.DONATELLO          | 1 | DONATELLO    |
+        +---------------------------+---+--------------+
+        | Turtle.RAPHAEL            | 2 | RAPHAEL      |
+        +---------------------------+---+--------------+
+        | Turtle.MICHELANGELO       | 3 | MICHELANGELO |
+        +---------------------------+---+--------------+
 
-        Note: You wont be able to import RAPHAEL
+        Note: You wont be able to import Turtle.RAPHAEL
 
 Returns:
     turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
@@ -898,15 +1244,16 @@ def test_get_function_docstring_numpy():
     function = config['functions']['FetchWaveform']
     method_template = function['method_templates'][0]
     actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
-    print(actual_function_docstring)
     expected_fuction_docstring = '''Returns waveform data.
 
     Args:
         number_of_samples (int): Number of samples to return
+
         waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
 
     Returns:
         waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+
         actual_number_of_samples (int): Number of samples actually fetched.
 '''
     assert_rst_strings_are_equal(expected_fuction_docstring, actual_function_docstring)
@@ -964,4 +1311,154 @@ def test_get_rst_picture_reference():
     """
     assert_rst_strings_are_equal(expected_pic_ref, actual_pic_ref)
 
+
+def test_square_up_tables():
+    local_config = config_for_testing.copy()
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on.',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+                'table_header': ['Just one'],
+                'table_body': [['Just', 'two'], ['this', 'has', 'three']],
+            },
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = {}
+    local_config['enums'] = {}
+
+    square_up_tables(local_config)
+    assert len(local_config['functions']['MakeAFoo']['documentation']['table_header']) == 3
+    for line in local_config['functions']['MakeAFoo']['documentation']['table_body']:
+        assert(len(line)) == 3
+
+
+config_for_testing = {
+    'session_handle_parameter_name': 'vi',
+    'module_name': 'nifake',
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'custom_types': [],
+}
+
+
+def test_add_notes_re_links():
+    local_config = config_for_testing.copy()
+    local_config['c_function_prefix'] = 'niFake'
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session for niFake\_MakeAFoo using NIFAKE\_ATTR\_READ\_WRITE\_BOOL. You should use NIFAKE\_VAL\_BLUE',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on. Similar to niFake\_TakeAFoo using NIFAKE\_ATTR\_NOT\_HERE. Use NIFAKE\_VAL\_PURPLE',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+            },
+            'python_name': 'make_a_foo',
+        },
+    }
+    attributes = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    }
+    enums = {
+        'Color': {
+            'values': [
+                {
+                    'name': 'NIFAKE_VAL_RED',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Like blood.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLUE',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like the sky.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_YELLOW',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like a banana.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLACK',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like this developer\'s conscience.',
+                    }
+                },
+            ],
+            'codegen_method': 'public',
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = attributes
+    local_config['enums'] = enums
+
+    add_notes_re_links(local_config)
+
+    assert 'note' not in local_config['functions']['MakeAFoo']['parameters'][0]['documentation']
+    assert func_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert attr_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert enum_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
 

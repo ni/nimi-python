@@ -998,9 +998,11 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
             waveform_size (int): Specifies the size of the waveform to allocate in samples.
 
                 **Default Value**: "4096"
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1032,9 +1034,11 @@ class _SessionBase(object):
         Args:
             waveform_size (int): Specifies, in samples, the size of the waveform to allocate.
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1068,8 +1072,8 @@ class _SessionBase(object):
         '''configure_arb_sequence
 
         Configures the signal generator attributes that affect arbitrary
-        sequence generation. Sets the ARB_SEQUENCE_HANDLE,
-        ARB_GAIN, and ARB_OFFSET attributes.
+        sequence generation. Sets the arb_sequence_handle,
+        arb_gain, and arb_offset attributes.
 
         Note:
         The signal generator must not be in the Generating state when you call
@@ -1086,12 +1090,13 @@ class _SessionBase(object):
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to produce. NI-FGEN sets the
-                ARB_SEQUENCE_HANDLE attribute to this value. You can
+                arb_sequence_handle attribute to this value. You can
                 create an arbitrary sequence using the create_arb_sequence or
                 create_advanced_arb_sequence function. These functions return a
                 handle that you use to identify the sequence.
 
                 **Default Value**: None
+
             gain (float): Specifies the factor by which the signal generator scales the arbitrary
                 waveforms in the sequence. When you create an arbitrary waveform, you
                 must first normalize the data points to a range of –1.00 to +1.00. You
@@ -1104,11 +1109,12 @@ class _SessionBase(object):
                 **Units**: unitless
 
                 **Default Value**: None
+
             offset (float): Specifies the value the signal generator adds to the arbitrary waveform
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                ARB_OFFSET attribute to this value.
+                arb_offset attribute to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1116,6 +1122,7 @@ class _SessionBase(object):
                 **Units**: volts
 
                 **Default Value**: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1130,8 +1137,8 @@ class _SessionBase(object):
         '''configure_arb_waveform
 
         Configures the attributes of the signal generator that affect arbitrary
-        waveform generation. Sets the ARB_WAVEFORM_HANDLE,
-        ARB_GAIN, and ARB_OFFSET attributes.
+        waveform generation. Sets the arb_waveform_handle,
+        arb_gain, and arb_offset attributes.
 
         Note:
         The signal generator must not be in the Generating state when you call
@@ -1148,7 +1155,7 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform you want the signal
                 generator to produce. NI-FGEN sets the
-                ARB_WAVEFORM_HANDLE attribute to this value. You can
+                arb_waveform_handle attribute to this value. You can
                 create an arbitrary waveform using one of the following niFgen Create
                 Waveform functions:
 
@@ -1161,6 +1168,10 @@ class _SessionBase(object):
                 These functions return a handle that you use to identify the waveform.
 
                 **Default Value**: None
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
             gain (float): Specifies the factor by which the signal generator scales the arbitrary
                 waveforms in the sequence. When you create an arbitrary waveform, you
                 must first normalize the data points to a range of –1.00 to +1.00. You
@@ -1173,11 +1184,12 @@ class _SessionBase(object):
                 **Units**: unitless
 
                 **Default Value**: None
+
             offset (float): Specifies the value the signal generator adds to the arbitrary waveform
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                ARB_OFFSET attribute to this value.
+                arb_offset attribute to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1185,6 +1197,7 @@ class _SessionBase(object):
                 **Units**: volts
 
                 **Default Value**: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1225,6 +1238,7 @@ class _SessionBase(object):
                 elements as the value that you specify in the **numberOfCoefficients**
                 parameter in this function.
                 The coefficients should range between –1.00 and +1.00.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1238,9 +1252,9 @@ class _SessionBase(object):
         '''configure_freq_list
 
         Configures the attributes of the signal generator that affect frequency
-        list generation (the FREQ_LIST_HANDLE,
-        FUNC_AMPLITUDE, FUNC_DC_OFFSET, and
-        FUNC_START_PHASE attributes).
+        list generation (the freq_list_handle,
+        func_amplitude, func_dc_offset, and
+        func_start_phase attributes).
 
         Note:
         The signal generator must not be in the Generating state when you call
@@ -1256,14 +1270,15 @@ class _SessionBase(object):
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
-                generator to produce. NI-FGEN sets the FREQ_LIST_HANDLE
+                generator to produce. NI-FGEN sets the freq_list_handle
                 attribute to this value. You can create a frequency list using the
                 create_freq_list function, which returns a handle that you use to
                 identify the list.
                 **Default Value**: None
+
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the FUNC_AMPLITUDE attribute to
+                terminal. NI-FGEN sets the func_amplitude attribute to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -1276,21 +1291,23 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to NIFGEN_VAL_WFM_DC.
+                function to Waveform.DC.
+
             dc_offset (float): Specifies the DC offset of the standard waveform that you want the
                 signal generator to produce. The value is the offset from ground to the
                 center of the waveform you specify with the **waveform** parameter,
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-                **dcOffset** to 5.00 V. NI-FGEN sets the FUNC_DC_OFFSET
+                **dcOffset** to 5.00 V. NI-FGEN sets the func_dc_offset
                 attribute to this value.
 
                 **Units**: volts
 
                 **Default Value**: None
+
             start_phase (float): Specifies the horizontal offset of the standard waveform you want the
                 signal generator to produce. Specify this attribute in degrees of one
-                waveform cycle. NI-FGEN sets the FUNC_START_PHASE
+                waveform cycle. NI-FGEN sets the func_start_phase
                 attribute to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
@@ -1302,7 +1319,8 @@ class _SessionBase(object):
 
                 Note:
                 This parameter does not affect signal generator behavior when you set
-                the **waveform** parameter to NIFGEN_VAL_WFM_DC.
+                the **waveform** parameter to Waveform.DC.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1320,16 +1338,19 @@ class _SessionBase(object):
         Configures the following attributes of the signal generator that affect
         standard waveform generation:
 
-        -  FUNC_WAVEFORM
-        -  FUNC_AMPLITUDE
-        -  FUNC_DC_OFFSET
-        -  FUNC_FREQUENCY
-        -  FUNC_START_PHASE
+        -  func_waveform
+        -  func_amplitude
+        -  func_dc_offset
+        -  func_frequency
+        -  func_start_phase
 
         Note:
         You must call the ConfigureOutputMode function with the
-        **outputMode** parameter set to NIFGEN_VAL_OUTPUT_FUNC before calling
+        **outputMode** parameter set to OutputMode.FUNC before calling
         this function.
+
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1341,33 +1362,34 @@ class _SessionBase(object):
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
+                produce. NI-FGEN sets the func_waveform attribute to this
                 value.
 
                 ****Defined Values****
 
-                **Default Value**: NIFGEN_VAL_WFM_SINE
+                **Default Value**: Waveform.SINE
 
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_NOISE     | Specifies that the signal generator produces white noise.                                                                            |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                            |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the FUNC_AMPLITUDE attribute to
+                terminal. NI-FGEN sets the func_amplitude attribute to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -1380,10 +1402,11 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to NIFGEN_VAL_WFM_DC.
+                function to Waveform.DC.
+
             frequency (float): | Specifies the frequency of the standard waveform that you want the
                   signal generator to produce. NI-FGEN sets the
-                  FUNC_FREQUENCY attribute to this value.
+                  func_frequency attribute to this value.
 
                 **Units**: hertz
 
@@ -1392,21 +1415,23 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to NIFGEN_VAL_WFM_DC.
+                function to Waveform.DC.
+
             dc_offset (float): Specifies the DC offset of the standard waveform that you want the
                 signal generator to produce. The value is the offset from ground to the
                 center of the waveform you specify with the **waveform** parameter,
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-                **dcOffset** to 5.00 V. NI-FGEN sets the FUNC_DC_OFFSET
+                **dcOffset** to 5.00 V. NI-FGEN sets the func_dc_offset
                 attribute to this value.
 
                 **Units**: volts
 
                 **Default Value**: None
+
             start_phase (float): Specifies the horizontal offset of the standard waveform that you want
                 the signal generator to produce. Specify this parameter in degrees of
-                one waveform cycle. NI-FGEN sets the FUNC_START_PHASE
+                one waveform cycle. NI-FGEN sets the func_start_phase
                 attribute to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
@@ -1418,7 +1443,8 @@ class _SessionBase(object):
 
                 Note:
                 This parameter does not affect signal generator behavior when you set
-                the **waveform** parameter to NIFGEN_VAL_WFM_DC.
+                the **waveform** parameter to Waveform.DC.
+
         '''
         if type(waveform) is not enums.Waveform:
             raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
@@ -1441,8 +1467,8 @@ class _SessionBase(object):
         mode.
 
         Note:
-        You must set OUTPUT_MODE to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+        You must set output_mode to OutputMode.ARB or
+        OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1455,8 +1481,10 @@ class _SessionBase(object):
         Args:
             waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
+
         '''
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
         if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
@@ -1481,8 +1509,8 @@ class _SessionBase(object):
 
         Note:
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+        **outputMode** parameter to OutputMode.ARB or
+        OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1502,9 +1530,11 @@ class _SessionBase(object):
 
                 **Default Value**: None
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1526,8 +1556,8 @@ class _SessionBase(object):
 
         Note:
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+        **outputMode** parameter to OutputMode.ARB or
+        OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1547,9 +1577,11 @@ class _SessionBase(object):
 
                 **Default Value**: None
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         import numpy
 
@@ -1580,7 +1612,7 @@ class _SessionBase(object):
 
         Note:
         The F64 data must be between –1.0 and +1.0 V. Use the
-        DIGITAL_GAIN attribute to generate different voltage
+        digital_gain attribute to generate different voltage
         outputs.
 
         Tip:
@@ -1593,18 +1625,19 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
+
             byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
                 |
-                | ****Default Value**:** NIFGEN_VAL_LITTLE_ENDIAN
+                | ****Default Value**:** ByteOrder.LITTLE
 
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_LITTLE_ENDIAN | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_BIG_ENDIAN    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -1613,9 +1646,11 @@ class _SessionBase(object):
                 Endian and Little Endian refer to the way data is stored in memory,
                 which can differ on different processors.
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         if type(byte_order) is not enums.ByteOrder:
             raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
@@ -1640,7 +1675,7 @@ class _SessionBase(object):
 
         Note:
         The I16 data (values between –32768 and +32767) is assumed to
-        represent –1 to +1 V. Use the DIGITAL_GAIN attribute to
+        represent –1 to +1 V. Use the digital_gain attribute to
         generate different voltage outputs.
 
         Tip:
@@ -1653,18 +1688,19 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
+
             byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
                 |
-                | ****Default Value**:** NIFGEN_VAL_LITTLE_ENDIAN
+                | ****Default Value**:** ByteOrder.LITTLE
 
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_LITTLE_ENDIAN | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_BIG_ENDIAN    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -1673,9 +1709,11 @@ class _SessionBase(object):
                 Endian and Little Endian refer to the way data is stored in memory,
                 which can differ on different processors.
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         if type(byte_order) is not enums.ByteOrder:
             raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
@@ -1699,8 +1737,8 @@ class _SessionBase(object):
 
         Note:
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
+        **outputMode** parameter to OutputMode.ARB or
+        OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1718,9 +1756,11 @@ class _SessionBase(object):
                 +32767.
                 ****Default Value**:** None
 
+
         Returns:
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
+
         '''
         import numpy
 
@@ -1746,7 +1786,7 @@ class _SessionBase(object):
         List output mode.
 
         To select the waveform, set the **waveform** parameter to
-        NIFGEN_VAL_WFM_USER with either the nifgen_ConfigureStandardWaveform
+        Waveform.USER with either the nifgen_ConfigureStandardWaveform
         or the nifgen_CreateFreqList function.
 
         The waveform data must be scaled between –1.0 and 1.0. Use the
@@ -1755,8 +1795,8 @@ class _SessionBase(object):
 
         Note:
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_FUNC or
-        NIFGEN_VAL_OUTPUT_FREQ_LIST before calling this function.
+        **outputMode** parameter to OutputMode.FUNC or
+        OutputMode.FREQ_LIST before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1775,6 +1815,7 @@ class _SessionBase(object):
                 +1.00.
 
                 **Default Value**: None
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1804,6 +1845,7 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1828,6 +1870,7 @@ class _SessionBase(object):
         Args:
             script_name (string): Specifies the name of the script you want to delete. The script name
                 appears in the text of the script following the script keyword.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1861,9 +1904,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of an attribute.
 
+
         Returns:
             attribute_value (bool): Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1896,9 +1941,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of an attribute.
 
+
         Returns:
             attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1933,9 +1980,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of an attribute.
 
+
         Returns:
             attribute_value (float): Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -1987,6 +2036,7 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2027,6 +2077,7 @@ class _SessionBase(object):
                 value.
 
                 If you are not interested in this value, you can pass VI_NULL.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus()  # case 14
@@ -2076,6 +2127,7 @@ class _SessionBase(object):
         Returns:
             number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
                 want to read.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2153,6 +2205,7 @@ class _SessionBase(object):
                 +-----------+--------------------------------------+------------------------+---------------------------------+
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
+
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. VI_TRUE specifies that the device is reset and performs the
                 same function as the nifgen_Reset function.
@@ -2166,6 +2219,7 @@ class _SessionBase(object):
                 +----------+---------------------+
                 | VI_FALSE | Do not reset device |
                 +----------+---------------------+
+
             option_string (string): Sets the initial value of certain session attributes.
 
                 The syntax for **optionString** is
@@ -2205,18 +2259,20 @@ class _SessionBase(object):
                 +------------------+-------------------------+-------------------+
                 | Attribute Name   | Attribute               | Values            |
                 +==================+=========================+===================+
-                | RangeCheck       | RANGE_CHECK             | VI_TRUE, VI_FALSE |
+                | RangeCheck       | range_check             | VI_TRUE, VI_FALSE |
                 +------------------+-------------------------+-------------------+
-                | QueryInstrStatus | QUERY_INSTRUMENT_STATUS | VI_TRUE, VI_FALSE |
+                | QueryInstrStatus | query_instrument_status | VI_TRUE, VI_FALSE |
                 +------------------+-------------------------+-------------------+
                 | Cache            | cache                   | VI_TRUE, VI_FALSE |
                 +------------------+-------------------------+-------------------+
                 | Simulate         | simulate                | VI_TRUE, VI_FALSE |
                 +------------------+-------------------------+-------------------+
 
+
         Returns:
             vi (int): Returns a session handle that you can use to identify the device in all
                 subsequent NI-FGEN function calls.
+
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2265,12 +2321,14 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
+
             attribute_value (bool): Specifies the value to which you want to set the attribute. **Default
                 Value**: None
 
                 Note:
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2318,12 +2376,14 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
+
             attribute_value (int): Specifies the value to which you want to set the attribute. **Default
                 Value**: None
 
                 Note:
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2371,12 +2431,14 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
+
             attribute_value (float): Specifies the value to which you want to set the attribute. **Default
                 Value**: None
 
                 Note:
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2424,12 +2486,14 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
+
             attribute_value (string): Specifies the value to which you want to set the attribute. **Default
                 Value**: None
 
                 Note:
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2467,19 +2531,22 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
                 ****Defined Values****
 
-                +------------------------------------------+-------------------------------------------------------------------------+
-                | NIFGEN_VAL_WAVEFORM_POSITION_START (0)   | Use the start of the waveform as the reference position.                |
-                +------------------------------------------+-------------------------------------------------------------------------+
-                | NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1) | Use the current position within the waveform as the reference position. |
-                +------------------------------------------+-------------------------------------------------------------------------+
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.START (0)   | Use the start of the waveform as the reference position.                |
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.CURRENT (1) | Use the current position within the waveform as the reference position. |
+                +------------------------+-------------------------------------------------------------------------+
+
             offset (int): Specifies the offset from the **relativeTo** parameter at which to start
                 loading the data into the waveform.
+
         '''
         if type(relative_to) is not enums.RelativeTo:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
@@ -2521,19 +2588,22 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
+
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
                 ****Defined Values****
 
-                +------------------------------------------+-------------------------------------------------------------------------+
-                | NIFGEN_VAL_WAVEFORM_POSITION_START (0)   | Use the start of the waveform as the reference position.                |
-                +------------------------------------------+-------------------------------------------------------------------------+
-                | NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1) | Use the current position within the waveform as the reference position. |
-                +------------------------------------------+-------------------------------------------------------------------------+
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.START (0)   | Use the start of the waveform as the reference position.                |
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.CURRENT (1) | Use the current position within the waveform as the reference position. |
+                +------------------------+-------------------------------------------------------------------------+
+
             offset (int): Specifies the offset from **relativeTo** at which to start loading the
                 data into the waveform.
+
         '''
         if type(relative_to) is not enums.RelativeTo:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
@@ -2573,9 +2643,11 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
+
             data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
+
         '''
         import numpy
 
@@ -2627,8 +2699,10 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2672,8 +2746,10 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
             data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
@@ -2716,8 +2792,10 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
+
             data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
@@ -2755,6 +2833,7 @@ class _SessionBase(object):
                 operation. Refer to `scripting
                 Instructions <REPLACE_DRIVER_SPECIFIC_URL_2(niscripted.chm',%20'scripting_instructions)>`__
                 for more information about writing scripts.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2797,8 +2876,10 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
+
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -2843,8 +2924,10 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
+
             data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
+
         '''
         import numpy
 
@@ -2883,7 +2966,9 @@ class _SessionBase(object):
 
         Args:
             waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+
         '''
         use_named = isinstance(waveform_name_or_handle, str)
         # Check the type by using string comparison so that we don't import numpy unecessarilly.
@@ -2910,11 +2995,13 @@ class _SessionBase(object):
 
                 **Default Value**: 0 (VI_SUCCESS)
 
+
         Returns:
             error_message (string): Returns the error message string read from the instrument error message
                 queue.
 
                 You must pass a ViChar array with at least 256 bytes.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus(error_code)  # case 9
@@ -3023,6 +3110,10 @@ class Session(_SessionBase):
                   generator
 
                 **Default Value**: None
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_handle_ctype = visatype.ViInt32(sequence_handle)  # case 9
@@ -3059,6 +3150,13 @@ class Session(_SessionBase):
                 generator.
 
                 **Default Value**: None
+
+                Note:
+                One or more of the referenced functions are not in the Python API for this driver.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 9
@@ -3089,6 +3187,10 @@ class Session(_SessionBase):
                 generator.
 
                 **Default Value**: None
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         frequency_list_handle_ctype = visatype.ViInt32(frequency_list_handle)  # case 9
@@ -3146,6 +3248,7 @@ class Session(_SessionBase):
                 +------------------+------------------+
                 | "ScriptTrigger3" | Script Trigger 3 |
                 +------------------+------------------+
+
             source (string): Specifies which trigger source the signal generator uses.
 
                 **Defined Values**
@@ -3187,17 +3290,22 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
+
             edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
-                ****Default Value**:** NIFGEN_VAL_RISING_EDGE
+                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
 
-                +-------------------------+------------------------------------------------------------------+
-                | NIFGEN_VAL_RISING_EDGE  | Occurs when the signal transitions from low level to high level. |
-                +-------------------------+------------------------------------------------------------------+
-                | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
-                +-------------------------+------------------------------------------------------------------+
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
+                +--------------------------------------+------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
@@ -3256,17 +3364,22 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
+
             edge (enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
-                ****Default Value**:** NIFGEN_VAL_RISING_EDGE
+                ****Default Value**:** StartTriggerDigitalEdgeEdge.RISING
 
-                +-------------------------+------------------------------------------------------------------+
-                | NIFGEN_VAL_RISING_EDGE  | Occurs when the signal transitions from low level to high level. |
-                +-------------------------+------------------------------------------------------------------+
-                | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
-                +-------------------------+------------------------------------------------------------------+
+                +-------------------------------------+------------------------------------------------------------------+
+                | StartTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
+                +-------------------------------------+------------------------------------------------------------------+
+                | StartTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
+                +-------------------------------------+------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
@@ -3298,6 +3411,7 @@ class Session(_SessionBase):
                 +------------------+------------------+
                 | "ScriptTrigger3" | Script Trigger 3 |
                 +------------------+------------------+
+
             source (string): Specifies which trigger source the signal generator uses.
 
                 **Defined Values**
@@ -3339,6 +3453,7 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
+
             trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
                 level.
 
@@ -3351,6 +3466,7 @@ class Session(_SessionBase):
                 +-------------+-------------------------------------------------+
                 | "LowLevel"  | Script Trigger asserts on a low digital level.  |
                 +-------------+-------------------------------------------------+
+
         '''
         if type(trigger_when) is not enums.TriggerWhen:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
@@ -3384,7 +3500,7 @@ class Session(_SessionBase):
         The signal generator must not be in the Generating state when you call
         this function.
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
+        **outputMode** parameter to OutputMode.SEQ before calling this
         function.
 
         Args:
@@ -3404,6 +3520,7 @@ class Session(_SessionBase):
                 -  nifgen_CreateWaveformFromFileHWS
 
                 **Default Value**: None
+
             loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
                 arbitrary sequence. The array must have at least as many elements as the
                 value that you specify in the **sequenceLength** parameter. Each
@@ -3415,6 +3532,7 @@ class Session(_SessionBase):
                 nifgen_QueryArbSeqCapabilities function.
 
                 **Default Value**: None
+
             sample_counts_array (list of int): Specifies the array of sample counts that you want to use to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value you specify in the **sequenceLength** parameter. Each
@@ -3427,6 +3545,7 @@ class Session(_SessionBase):
                 function.
 
                 **Default Value**: None
+
             marker_location_array (list of int): Specifies the array of marker locations to where you want a marker to be
                 generated in the sequence. The array must have at least as many elements
                 as the value you specify in the **sequenceLength** parameter. Each
@@ -3444,14 +3563,20 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
         Returns:
             coerced_markers_array (list of int): Returns an array of all given markers that are coerced (rounded) to the
                 nearest marker quantum. Not all devices coerce markers.
 
                 **Default Value**: None
+
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
                 pass this handle to nifgen_ConfigureArbSequence to generate the
                 arbitrary sequence.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
@@ -3481,7 +3606,7 @@ class Session(_SessionBase):
 
         Note:
         You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
+        **outputMode** parameter to OutputMode.SEQ before calling this
         function.
 
         Args:
@@ -3501,6 +3626,7 @@ class Session(_SessionBase):
                 -  nifgen_CreateWaveformFromFileHWS
 
                 **Default Value**: None
+
             loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
                 arbitrary sequence. The array must have at least as many elements as the
                 value that you specify in the **sequenceLength** parameter. Each
@@ -3513,10 +3639,12 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
+
         Returns:
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
                 pass this handle to nifgen_ConfigureArbSequence to generate the
                 arbitrary sequence.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case 6
@@ -3549,30 +3677,31 @@ class Session(_SessionBase):
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
+                produce. NI-FGEN sets the func_waveform attribute to this
                 value.
 
                 ****Defined Values****
 
-                **Default Value**: NIFGEN_VAL_WFM_SINE
+                **Default Value**: Waveform.SINE
 
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_NOISE     | Specifies that the signal generator produces white noise.                                                                            |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_WFM_USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
-                +--------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                            |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+
             frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
                 **frequencyListLength**. Each **frequencyArray** element has a
@@ -3582,6 +3711,7 @@ class Session(_SessionBase):
                 **Units**: hertz
 
                 **Default Value**: None
+
             duration_array (list of float): Specifies the array of durations to form the frequency list. The array
                 must have at least as many elements as the value that you specify in
                 **frequencyListLength**. Each **durationArray** element has a
@@ -3592,10 +3722,12 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
+
         Returns:
             frequency_list_handle (int): Returns the handle that identifies the new frequency list. You can pass
                 this handle to nifgen_ConfigureFreqList to generate the arbitrary
                 sequence.
+
         '''
         if type(waveform) is not enums.Waveform:
             raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
@@ -3635,69 +3767,77 @@ class Session(_SessionBase):
         If you export a signal with this function and commit the session, the
         signal is routed to the output terminal you specify.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
         Args:
             signal (enums.Signal): Specifies the source of the signal to route.
                 ****Defined Values****
 
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK | Onboard 10 MHz synchronization clock (PCI only)                                                                                                               |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNC_OUT                | SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.                                                              |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_START_TRIGGER           | Start Trigger                                                                                                                                                 |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_MARKER_EVENT            | Marker Event                                                                                                                                                  |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SAMPLE_CLOCK_TIMEBASE   | The clock from which the Sample Clock is derived                                                                                                              |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNCHRONIZATION         | Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SAMPLE_CLOCK            | Sample Clock                                                                                                                                                  |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_REFERENCE_CLOCK         | PLL Reference Clock                                                                                                                                           |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SCRIPT_TRIGGER          | Script Trigger                                                                                                                                                |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_READY_FOR_START_EVENT   | Ready For Start Event                                                                                                                                         |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_STARTED_EVENT           | Started Event                                                                                                                                                 |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_DONE_EVENT              | Done Event                                                                                                                                                    |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_DATA_MARKER_EVENT       | Data Marker Event                                                                                                                                             |
-                +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.ONBOARD_REFERENCE_CLOCK | Onboard 10 MHz synchronization clock (PCI only)                                                                                                               |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.SYNC_OUT                | SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.                                                              |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.START_TRIGGER           | Start Trigger                                                                                                                                                 |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.MARKER_EVENT            | Marker Event                                                                                                                                                  |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.SAMPLE_CLOCK_TIMEBASE   | The clock from which the Sample Clock is derived                                                                                                              |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.SYNCHRONIZATION         | Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.SAMPLE_CLOCK            | Sample Clock                                                                                                                                                  |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.REFERENCE_CLOCK         | PLL Reference Clock                                                                                                                                           |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.SCRIPT_TRIGGER          | Script Trigger                                                                                                                                                |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.READY_FOR_START_EVENT   | Ready For Start Event                                                                                                                                         |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.STARTED_EVENT           | Started Event                                                                                                                                                 |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.DONE_EVENT              | Done Event                                                                                                                                                    |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Signal.DATA_MARKER_EVENT       | Data Marker Event                                                                                                                                             |
+                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
             signal_identifier (string): Specifies which instance of the selected signal to export.
                 ****Defined Values****
 
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "" (empty string)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "ScriptTrigger0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "ScriptTrigger1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "ScriptTrigger2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "ScriptTrigger3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "Marker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "Marker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "Marker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "Marker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "DataMarker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "DataMarker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "DataMarker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | "DataMarker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | \* These Data Marker values apply only to single-channel devices or to multichannel devices that are configured for single-channel operation. When using a device that is configured for multichannel operation, specify the channel number along with the signal identifier. For example, to export Data Marker 0 on channel 1 of a device configured for multichannel operation, use the value "1/ DataMarker0." If you do not specify a channel when using a device configured for multichannel generation, DataMarker0 generates on all channels. |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "" (empty string)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Default (for non instance-based signals) |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "ScriptTrigger0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 0                         |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "ScriptTrigger1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 1                         |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "ScriptTrigger2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 2                         |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "ScriptTrigger3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 3                         |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "Marker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 0                                 |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "Marker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 1                                 |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "Marker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 2                                 |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "Marker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 3                                 |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "DataMarker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 0\*                          |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "DataMarker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 1\*                          |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "DataMarker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 2\*                          |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | "DataMarker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 3\*                          |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+                | \* These Data Marker values apply only to single-channel devices or to multichannel devices that are configured for single-channel operation. When using a device that is configured for multichannel operation, specify the channel number along with the signal identifier. For example, to export Data Marker 0 on channel 1 of a device configured for multichannel operation, use the value "1/ DataMarker0." If you do not specify a channel when using a device configured for multichannel generation, DataMarker0 generates on all channels. |                                          |
+                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+
             output_terminal (string): Specifies the output terminal to export the signal.
                 ****Defined Values****
 
@@ -3738,6 +3878,7 @@ class Session(_SessionBase):
                 terminals. For a complete list of the output terminals available on your
                 device, refer to the Routes topic for your device or the **Device
                 Routes** tab in MAX.
+
         '''
         if type(signal) is not enums.Signal:
             raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
@@ -3759,10 +3900,15 @@ class Session(_SessionBase):
 
         Returns:
             year (int): Specifies the year of the last successful calibration.
+
             month (int): Specifies the month of the last successful calibration.
+
             day (int): Specifies the day of the last successful calibration.
+
             hour (int): Specifies the hour of the last successful calibration.
+
             minute (int): Specifies the minute of the last successful calibration.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         year_ctype = visatype.ViInt32()  # case 14
@@ -3783,6 +3929,7 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Specifies the temperature at the last successful calibration in degrees
                 Celsius.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         temperature_ctype = visatype.ViReal64()  # case 14
@@ -3799,6 +3946,7 @@ class Session(_SessionBase):
         Returns:
             months (int): Specifies the recommended interval between external calibrations in
                 months.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         months_ctype = visatype.ViInt32()  # case 14
@@ -3819,17 +3967,18 @@ class Session(_SessionBase):
 
                 **Defined Values**
 
-                +--------------------------------------+--------------------------------------------+
-                | NIFGEN_VAL_IDLE                      | The device is in the Idle state.           |
-                +--------------------------------------+--------------------------------------------+
-                | NIFGEN_VAL_WAITING_FOR_START_TRIGGER | The device is waiting for Start Trigger.   |
-                +--------------------------------------+--------------------------------------------+
-                | NIFGEN_VAL_RUNNING                   | The device is in the Running state.        |
-                +--------------------------------------+--------------------------------------------+
-                | NIFGEN_VAL_DONE                      | The generation has completed successfully. |
-                +--------------------------------------+--------------------------------------------+
-                | NIFGEN_VAL_HARDWARE_ERROR            | There is a hardware error.                 |
-                +--------------------------------------+--------------------------------------------+
+                +-----------------------------------------+--------------------------------------------+
+                | HardwareState.IDLE                      | The device is in the Idle state.           |
+                +-----------------------------------------+--------------------------------------------+
+                | HardwareState.WAITING_FOR_START_TRIGGER | The device is waiting for Start Trigger.   |
+                +-----------------------------------------+--------------------------------------------+
+                | HardwareState.RUNNING                   | The device is in the Running state.        |
+                +-----------------------------------------+--------------------------------------------+
+                | HardwareState.DONE                      | The generation has completed successfully. |
+                +-----------------------------------------+--------------------------------------------+
+                | HardwareState.HARDWARE_ERROR            | There is a hardware error.                 |
+                +-----------------------------------------+--------------------------------------------+
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         state_ctype = visatype.ViInt32()  # case 14
@@ -3854,10 +4003,15 @@ class Session(_SessionBase):
 
         Returns:
             year (int): Specifies the year of the last successful calibration.
+
             month (int): Specifies the month of the last successful calibration.
+
             day (int): Specifies the day of the last successful calibration.
+
             hour (int): Specifies the hour of the last successful calibration.
+
             minute (int): Specifies the minute of the last successful calibration.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         year_ctype = visatype.ViInt32()  # case 14
@@ -3878,6 +4032,7 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Specifies the temperature at the last successful calibration in degrees
                 Celsius.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         temperature_ctype = visatype.ViReal64()  # case 14
@@ -3900,6 +4055,7 @@ class Session(_SessionBase):
                 +----------+------------------------------------+
                 | VI_FALSE | Self–calibration is not supported. |
                 +----------+------------------------------------+
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_cal_supported_ctype = visatype.ViBoolean()  # case 14
@@ -3941,6 +4097,7 @@ class Session(_SessionBase):
                 +----------+-----------------------------+
                 | VI_FALSE | Generation is not complete. |
                 +----------+-----------------------------+
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         done_ctype = visatype.ViBoolean()  # case 14
@@ -3952,24 +4109,28 @@ class Session(_SessionBase):
         '''query_arb_seq_capabilities
 
         Returns the attributes of the signal generator that are related to
-        creating arbitrary sequences (the MAX_NUM_SEQUENCES,
-        MIN_SEQUENCE_LENGTH,
-        MAX_SEQUENCE_LENGTH, and MAX_LOOP_COUNT
+        creating arbitrary sequences (the max_num_sequences,
+        min_sequence_length,
+        max_sequence_length, and max_loop_count
         attributes).
 
         Returns:
             maximum_number_of_sequences (int): Returns the maximum number of arbitrary waveform sequences that the
                 signal generator allows. NI-FGEN obtains this value from the
-                MAX_NUM_SEQUENCES attribute.
+                max_num_sequences attribute.
+
             minimum_sequence_length (int): Returns the minimum number of arbitrary waveforms the signal generator
                 allows in a sequence. NI-FGEN obtains this value from the
-                MIN_SEQUENCE_LENGTH attribute.
+                min_sequence_length attribute.
+
             maximum_sequence_length (int): Returns the maximum number of arbitrary waveforms the signal generator
                 allows in a sequence. NI-FGEN obtains this value from the
-                MAX_SEQUENCE_LENGTH attribute.
+                max_sequence_length attribute.
+
             maximum_loop_count (int): Returns the maximum number of times the signal generator can repeat an
                 arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-                MAX_LOOP_COUNT attribute.
+                max_loop_count attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_number_of_sequences_ctype = visatype.ViInt32()  # case 14
@@ -3995,20 +4156,24 @@ class Session(_SessionBase):
         Returns:
             maximum_number_of_waveforms (int): Returns the maximum number of arbitrary waveforms that the signal
                 generator allows. NI-FGEN obtains this value from the
-                MAX_NUM_WAVEFORMS attribute.
+                max_num_waveforms attribute.
+
             waveform_quantum (int): The size (number of points) of each waveform must be a multiple of a
                 constant quantum value. This parameter obtains the quantum value that
                 the signal generator uses. NI-FGEN returns this value from the
-                WAVEFORM_QUANTUM attribute.
+                waveform_quantum attribute.
 
                 For example, when this attribute returns a value of 8, all waveform
                 sizes must be a multiple of 8.
+
             minimum_waveform_size (int): Returns the minimum number of points that the signal generator allows in
                 a waveform. NI-FGEN obtains this value from the
-                MIN_WAVEFORM_SIZE attribute.
+                min_waveform_size attribute.
+
             maximum_waveform_size (int): Returns the maximum number of points that the signal generator allows in
                 a waveform. NI-FGEN obtains this value from the
-                MAX_WAVEFORM_SIZE attribute.
+                max_waveform_size attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_number_of_waveforms_ctype = visatype.ViInt32()  # case 14
@@ -4024,32 +4189,38 @@ class Session(_SessionBase):
 
         Returns the attributes of the signal generator that are related to
         creating frequency lists. These attributes are
-        MAX_NUM_FREQ_LISTS,
-        MIN_FREQ_LIST_LENGTH,
-        MAX_FREQ_LIST_LENGTH,
-        MIN_FREQ_LIST_DURATION,
-        MAX_FREQ_LIST_DURATION, and
-        FREQ_LIST_DURATION_QUANTUM.
+        max_num_freq_lists,
+        min_freq_list_length,
+        max_freq_list_length,
+        min_freq_list_duration,
+        max_freq_list_duration, and
+        freq_list_duration_quantum.
 
         Returns:
             maximum_number_of_freq_lists (int): Returns the maximum number of frequency lists that the signal generator
                 allows. NI-FGEN obtains this value from the
-                MAX_NUM_FREQ_LISTS attribute.
+                max_num_freq_lists attribute.
+
             minimum_frequency_list_length (int): Returns the minimum number of steps that the signal generator allows in
                 a frequency list. NI-FGEN obtains this value from the
-                MIN_FREQ_LIST_LENGTH attribute.
+                min_freq_list_length attribute.
+
             maximum_frequency_list_length (int): Returns the maximum number of steps that the signal generator allows in
                 a frequency list. NI-FGEN obtains this value from the
-                MAX_FREQ_LIST_LENGTH attribute.
+                max_freq_list_length attribute.
+
             minimum_frequency_list_duration (float): Returns the minimum duration that the signal generator allows in a step
                 of a frequency list. NI-FGEN obtains this value from the
-                MIN_FREQ_LIST_DURATION attribute.
+                min_freq_list_duration attribute.
+
             maximum_frequency_list_duration (float): Returns the maximum duration that the signal generator allows in a step
                 of a frequency list. NI-FGEN obtains this value from the
-                MAX_FREQ_LIST_DURATION attribute.
+                max_freq_list_duration attribute.
+
             frequency_list_duration_quantum (float): Returns the quantum of which all durations must be a multiple in a
                 frequency list. NI-FGEN obtains this value from the
-                FREQ_LIST_DURATION_QUANTUM attribute.
+                freq_list_duration_quantum attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_number_of_freq_lists_ctype = visatype.ViInt32()  # case 14
@@ -4071,6 +4242,7 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Returns the current temperature read from onboard temperature sensors,
                 in degrees Celsius.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         temperature_ctype = visatype.ViReal64()  # case 14
@@ -4131,14 +4303,16 @@ class Session(_SessionBase):
 
                 ****Defined Values****
 
-                +----------------------------+
-                | NIFGEN_VAL_DIVIDE_DOWN     |
-                +----------------------------+
-                | NIFGEN_VAL_HIGH_RESOLUTION |
-                +----------------------------+
-                | NIFGEN_VAL_AUTOMATIC       |
-                +----------------------------+
+                +---------------------------+
+                | ClockMode.DIVIDE_DOWN     |
+                +---------------------------+
+                | ClockMode.HIGH_RESOLUTION |
+                +---------------------------+
+                | ClockMode.AUTOMATIC       |
+                +---------------------------+
+
             trigger_id (string):
+
         '''
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
@@ -4157,6 +4331,7 @@ class Session(_SessionBase):
 
         Args:
             max_time (int): Specifies the timeout value in milliseconds.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         max_time_ctype = visatype.ViInt32(max_time)  # case 9
@@ -4234,9 +4409,11 @@ class Session(_SessionBase):
                 +----------------+------------------+
                 | 1              | Self-test failed |
                 +----------------+------------------+
+
             self_test_message (string): Returns the self-test response string from the instrument.
 
                 You must pass a ViChar array with at least 256 bytes.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_test_result_ctype = visatype.ViInt16()  # case 14

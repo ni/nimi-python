@@ -117,8 +117,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
+
         Returns:
             attribute_value (bool): Returns the value of the attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -144,8 +146,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
+
         Returns:
             attribute_value (int): Returns the value of the attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -171,8 +175,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
+
         Returns:
             attribute_value (int): Returns the value of the attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -198,8 +204,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
+
         Returns:
             attribute_value (float): Returns the value of the attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -224,6 +232,7 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -245,6 +254,7 @@ class _SessionBase(object):
 
         Returns:
             error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus()  # case 14
@@ -274,8 +284,10 @@ class _SessionBase(object):
         Args:
             maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
 
+
         Returns:
             reading (float): The measured value.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -300,7 +312,9 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
             attribute_value (bool): Pass the value that you want to set the attribute to.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -325,7 +339,9 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
             attribute_value (int): Pass the value that you want to set the attribute to.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -350,7 +366,9 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
             attribute_value (int): Pass the value that you want to set the attribute to.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -375,7 +393,9 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
             attribute_value (float): Pass the value that you want to set the attribute to.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -400,7 +420,9 @@ class _SessionBase(object):
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
+
             attribute_value (string): Pass the value that you want to set the attribute to.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
@@ -418,8 +440,10 @@ class _SessionBase(object):
         Args:
             error_code (int): The errorCode returned from the instrument.
 
+
         Returns:
             error_message (string): The error information formatted into a string.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus(error_code)  # case 9
@@ -497,8 +521,10 @@ class Session(_SessionBase):
         Args:
             number_of_elements (int): Number of elements in the array.
 
+
         Returns:
             an_array (list of bool): Contains an array of booleans
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8
@@ -515,8 +541,10 @@ class Session(_SessionBase):
         Args:
             number_of_elements (int): Number of elements in the array.
 
+
         Returns:
             an_array (list of enums.Turtle): Contains an array of enums, stored as 16 bit integers under the hood
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8
@@ -542,6 +570,7 @@ class Session(_SessionBase):
                 +---+---------------+
                 | 3 | Mich elangelo |
                 +---+---------------+
+
         '''
         if type(a_turtle) is not enums.Turtle:
             raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
@@ -559,9 +588,12 @@ class Session(_SessionBase):
         Args:
             number_of_samples (int): Number of samples to return
 
+
         Returns:
             waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+
             actual_number_of_samples (int): Number of samples actually fetched.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
@@ -579,9 +611,12 @@ class Session(_SessionBase):
         Args:
             waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
 
+
         Returns:
             waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+
             actual_number_of_samples (int): Number of samples actually fetched.
+
         '''
         import numpy
 
@@ -610,6 +645,7 @@ class Session(_SessionBase):
 
         Returns:
             a_boolean (bool): Contains a boolean.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_boolean_ctype = visatype.ViBoolean()  # case 14
@@ -626,6 +662,7 @@ class Session(_SessionBase):
 
         Returns:
             a_number (int): Contains a number.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViInt16()  # case 14
@@ -640,6 +677,7 @@ class Session(_SessionBase):
 
         Returns:
             a_string (string): String comes back here. Buffer must be 256 big.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_string_ctype = (visatype.ViChar * 256)()  # case 11
@@ -670,6 +708,7 @@ class Session(_SessionBase):
 
         Returns:
             array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
@@ -685,6 +724,7 @@ class Session(_SessionBase):
 
         Returns:
             array_out (list of float): Array of double using puthon-code size mechanism
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0
@@ -700,6 +740,7 @@ class Session(_SessionBase):
 
         Returns:
             size_out (int): Size of array
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         size_out_ctype = visatype.ViInt32()  # case 14
@@ -731,12 +772,18 @@ class Session(_SessionBase):
         Args:
             cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
+
         Returns:
             month (int): Indicates the **month** of the last calibration.
+
             day (int): Indicates the **day** of the last calibration.
+
             year (int): Indicates the **year** of the last calibration.
+
             hour (int): Indicates the **hour** of the last calibration.
+
             minute (int): Indicates the **minute** of the last calibration.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         cal_type_ctype = visatype.ViInt32(cal_type)  # case 9
@@ -756,6 +803,7 @@ class Session(_SessionBase):
 
         Returns:
             cs (CustomStruct): Set using custom type
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         cs_ctype = custom_struct.custom_struct()  # case 14
@@ -771,8 +819,10 @@ class Session(_SessionBase):
         Args:
             number_of_elements (int): Number of elements in the array.
 
+
         Returns:
             cs (list of CustomStruct): Get using custom type
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8
@@ -792,6 +842,7 @@ class Session(_SessionBase):
             a_quantity (int): This is an amount.
 
                 Note: The amount will be between -2^31 and (2^31-1)
+
             a_turtle (enums.Turtle): Indicates a ninja turtle
 
                 +---+---------------+
@@ -803,6 +854,7 @@ class Session(_SessionBase):
                 +---+---------------+
                 | 3 | Mich elangelo |
                 +---+---------------+
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_quantity_ctype = visatype.ViInt32()  # case 14
@@ -819,8 +871,10 @@ class Session(_SessionBase):
         Args:
             cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
+
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
+
         '''
         import datetime
 
@@ -836,6 +890,7 @@ class Session(_SessionBase):
             resource_name (string): Caution: This is just some string.
 
                 Contains the **resource_name** of the device to initialize.
+
             id_query (bool): NI-FAKE is probably not needed.
 
                 +-------------------+---+------------------+
@@ -843,6 +898,7 @@ class Session(_SessionBase):
                 +-------------------+---+------------------+
                 | VI_FALSE          | 0 | Skip ID Query    |
                 +-------------------+---+------------------+
+
             reset_device (bool): Specifies whether to reset
 
                 +-------------------+---+--------------+
@@ -850,10 +906,13 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
+
             option_string (string): Some options
+
 
         Returns:
             vi (int): Returns a ViSession handle that you use.
+
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
         id_query_ctype = visatype.ViBoolean(id_query)  # case 9
@@ -881,14 +940,19 @@ class Session(_SessionBase):
 
         Args:
             output_array_size (int): Size of the array that will be returned.
+
             input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
+
             input_array_of_floats (list of float): Array of floats
+
 
         Returns:
             output_array (list of float): Array that will be returned.
 
                 Note: The size must be at least outputArraySize.
+
             output_array_of_fixed_length (list of float): An array of doubles with fixed size.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         output_array_size_ctype = visatype.ViInt32(output_array_size)  # case 8
@@ -908,6 +972,7 @@ class Session(_SessionBase):
 
         Args:
             a_number (int): Contains a number
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViInt32(a_number)  # case 9
@@ -922,8 +987,11 @@ class Session(_SessionBase):
 
         Args:
             a_boolean (bool): Contains a boolean.
+
             an_int32 (int): Contains a 32-bit integer.
+
             an_int64 (int): Contains a 64-bit integer.
+
             an_int_enum (enums.Turtle): Indicates a ninja turtle
 
                 +---+---------------+
@@ -935,9 +1003,13 @@ class Session(_SessionBase):
                 +---+---------------+
                 | 3 | Mich elangelo |
                 +---+---------------+
+
             a_float (float): The measured value.
+
             a_float_enum (enums.FloatEnum): A float enum.
+
             a_string (string): An IVI dance string.
+
         '''
         if type(an_int_enum) is not enums.Turtle:
             raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
@@ -974,8 +1046,10 @@ class Session(_SessionBase):
         Args:
             maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
 
+
         Returns:
             reading (float): The measured value.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, visatype.ViReal64)  # case 15
@@ -993,7 +1067,9 @@ class Session(_SessionBase):
 
         Returns:
             a_number (int): Contains a number.
+
             a_string (string): Contains a string. Buffer must be 256 bytes or larger.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViInt16()  # case 14
@@ -1010,10 +1086,14 @@ class Session(_SessionBase):
         Args:
             array_size (int): Number of measurements to acquire.
 
+
         Returns:
             a_boolean (bool): Contains a boolean.
+
             an_int32 (int): Contains a 32-bit integer.
+
             an_int64 (int): Contains a 64-bit integer.
+
             an_int_enum (enums.Turtle): Indicates a ninja turtle
 
                 +---+---------------+
@@ -1025,11 +1105,15 @@ class Session(_SessionBase):
                 +---+---------------+
                 | 3 | Mich elangelo |
                 +---+---------------+
+
             a_float (float): The measured value.
+
             a_float_enum (enums.FloatEnum): A float enum.
+
             an_array (list of float): An array of measurement values.
 
                 Note: The size must be at least arraySize.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_boolean_ctype = visatype.ViBoolean()  # case 14
@@ -1057,6 +1141,7 @@ class Session(_SessionBase):
 
         Args:
             cs (CustomStruct): Set using custom type
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         cs_ctype = custom_struct.custom_struct(cs)  # case 9
@@ -1071,6 +1156,7 @@ class Session(_SessionBase):
 
         Args:
             cs (list of CustomStruct): Set using custom type
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(0 if cs is None else len(cs))  # case 6
@@ -1086,7 +1172,9 @@ class Session(_SessionBase):
 
         Args:
             a_number (float): Contains a number
+
             a_string (string): Contains a string
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViReal64(a_number)  # case 9
@@ -1105,8 +1193,10 @@ class Session(_SessionBase):
         Args:
             input (int): A big number on its way in.
 
+
         Returns:
             output (int): A big number on its way out.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         input_ctype = visatype.ViInt64(input)  # case 9
@@ -1122,6 +1212,7 @@ class Session(_SessionBase):
 
         Args:
             waveform (list of float): Waveform data.
+
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case 6
@@ -1137,6 +1228,7 @@ class Session(_SessionBase):
 
         Args:
             waveform (numpy array of float64): Waveform data.
+
         '''
         import numpy
 
