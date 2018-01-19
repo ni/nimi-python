@@ -1,6 +1,9 @@
 
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
+from .documentation_snippets import attr_note_text
+from .documentation_snippets import enum_note_text
+from .documentation_snippets import func_note_text
 from .documentation_snippets import rep_cap_method_desc_docstring
 from .documentation_snippets import rep_cap_method_desc_rst
 from .parameter_usage_options import ParameterUsageOptions
@@ -618,6 +621,194 @@ def as_rest_table(data, header=True):
     return '\n'.join(table)
 
 
+def _square_up_table(nd):
+    '''_square_up_table
+
+    The function we use to generate rst tables requires the table be a rectangle. I.e. all
+    rows must have the same number of cells. This will check 'table_header' and 'table_body'
+    to get the longest row and then make sure they are all that length
+    '''
+    if 'table_header' not in nd and 'table_body' not in nd:
+        return  # We don't need to do anything
+
+    # First we get max length
+    max_len = 0
+    table_header = nd['table_header'] if 'table_header' in nd else None
+    table_body = nd['table_body']
+    if table_header:
+        max_len = len(table_header)
+    for line in table_body:
+        if len(line) > max_len:
+            max_len = len(line)
+
+    # Now make sure all lines have the same number of cells
+    if table_header:
+        while len(table_header) != max_len:
+            table_header.append('')
+    for line in table_body:
+        while len(line) != max_len:
+            line.append('')
+
+
+def square_up_tables(config):
+    '''Go through all documentation and make sure tables rows have consistent lengths'''
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            if 'documentation' not in p:
+                continue
+            _square_up_table(p['documentation'])
+
+        if 'documentation' not in f:
+            continue
+        _square_up_table(f['documentation'])
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        _square_up_table(a['documentation'])
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _square_up_table(e['documentation'])
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _square_up_table(v['documentation'])
+
+
+def _need_func_note(nd, config):
+    '''Determine if we need the extra note about function names not matching anything in Python'''
+    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    for m in func_re.finditer(nd):
+        fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
+        try:
+            config['functions'][fname]['python_name']
+        except KeyError:
+            return True
+
+    return False
+
+
+def _need_attr_note(nd, config):
+    '''Determine if we need the extra note about attribute names not matching anything in Python'''
+    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in attr_re.finditer(nd):
+        aname = m.group(1).replace('\\', '')
+        attr = find_attribute_by_name(config['attributes'], aname)
+        if not attr:
+            return True
+
+    return False
+
+
+def _need_enum_note(nd, config, start_enum=None):
+    '''Determine if we need the extra note about enum names not matching anything in Python'''
+    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    for m in enum_re.finditer(nd):
+        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
+        enum, _ = find_enum_by_value(config['enums'], ename, start_enum=start_enum)
+        if not enum or enum['codegen_method'] == 'no':
+            return True
+    return False
+
+
+def _check_documentation(nd, config, start_enum=None):
+    '''_check_documentation
+
+    Look through all the different documentation pieces for this node documentation object for
+    any references to functions, attributes or enums that will not exist in the Python API for
+    whatever reason. If we find something, we will add a note admonition stating that.
+
+    Args:
+        nd (dict) - documentation dictionary - expected to follow standard layout we have been using
+        config (dict) - configuration information'
+        start_enum (book) - possible context - used for finding enums based on the value
+    '''
+    keys_to_check = ['description', 'tip', 'caution', 'note']  # table_body needs special handling
+    need_func_note = False
+    need_attr_note = False
+    need_enum_note = False
+    for k in keys_to_check:
+        if k in nd:
+            need_func_note = need_func_note or _need_func_note(nd[k], config)
+            need_attr_note = need_attr_note or _need_attr_note(nd[k], config)
+            need_enum_note = need_enum_note or _need_enum_note(nd[k], config)
+
+    if 'table_body' in nd:
+        tb = nd['table_body']
+        for line in tb:
+            for cell in line:
+                need_func_note = need_func_note or _need_func_note(cell, config)
+                need_attr_note = need_attr_note or _need_attr_note(cell, config)
+                need_enum_note = need_enum_note or _need_enum_note(cell, config)
+
+    if need_func_note or need_attr_note or need_enum_note:
+        if 'note' not in nd:
+            nd['note'] = []
+        elif not isinstance(nd['note'], list):
+            nd['note'] = [nd['note']]
+
+    if need_func_note:
+        nd['note'].append(func_note_text)
+    if need_attr_note:
+        nd['note'].append(attr_note_text)
+    if need_enum_note:
+        nd['note'].append(enum_note_text)
+
+
+def add_notes_re_links(config):
+    '''_add_notes_re_links
+
+    Go through all documentation looking for names that won't exist in the Python API and
+    adding a note about it.
+    '''
+    # First we go through the function and parameter documentation
+    for f_name in config['functions']:
+        f = config['functions'][f_name]
+        for p in f['parameters']:
+            start_enum = None
+            if 'documentation' not in p:
+                continue
+            if 'enum' in p:
+                start_enum = p['enum']
+            _check_documentation(p['documentation'], config, start_enum)
+
+        if 'documentation' not in f:
+            continue
+        start_enum = None
+        if 'enum' in f:
+            start_enum = f['enum']
+        _check_documentation(f['documentation'], config, start_enum)
+
+    # Check attribute documentation
+    for a_id in config['attributes']:
+        a = config['attributes'][a_id]
+        if 'documentation' not in a:
+            continue
+        start_enum = None
+        if 'enum' in a:
+            start_enum = a['enum']
+        _check_documentation(a['documentation'], config, start_enum)
+
+    # Check enum documentation
+    for e_name in config['enums']:
+        e = config['enums'][e_name]
+        if 'documentation' not in e:
+            continue
+        _check_documentation(e['documentation'], config)
+        for v in e['values']:
+            if 'documentation' not in v:
+                continue
+            _check_documentation(v['documentation'], config)
+
+
 # Unit Tests
 
 
@@ -1101,3 +1292,155 @@ at maximum size I can handle"""
     | ipsum | this is a random strinf | Yes, I am a random string |
     +-------+-------------------------+---------------------------+""" # noqa
     assert_rst_strings_are_equal(expected_documentation, actual_documentation)
+
+
+def test_square_up_tables():
+    local_config = config_for_testing.copy()
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on.',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+                'table_header': ['Just one'],
+                'table_body': [['Just', 'two'], ['this', 'has', 'three']],
+            },
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = {}
+    local_config['enums'] = {}
+
+    square_up_tables(local_config)
+    assert len(local_config['functions']['MakeAFoo']['documentation']['table_header']) == 3
+    for line in local_config['functions']['MakeAFoo']['documentation']['table_body']:
+        assert(len(line)) == 3
+
+
+config_for_testing = {
+    'session_handle_parameter_name': 'vi',
+    'module_name': 'nifake',
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'custom_types': [],
+}
+
+
+def test_add_notes_re_links():
+    local_config = config_for_testing.copy()
+    local_config['c_function_prefix'] = 'niFake'
+    functions = {
+        'MakeAFoo': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session for niFake\_MakeAFoo using NIFAKE\_ATTR\_READ\_WRITE\_BOOL. You should use NIFAKE\_VAL\_BLUE',
+                    },
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on. Similar to niFake\_TakeAFoo using NIFAKE\_ATTR\_NOT\_HERE. Use NIFAKE\_VAL\_PURPLE',
+                    },
+                },
+            ],
+            'documentation': {
+                'description': 'Performs a foo, and performs it well.',
+            },
+            'python_name': 'make_a_foo',
+        },
+    }
+    attributes = {
+        1000000: {
+            'access': 'read-write',
+            'channel_based': 'False',
+            'enum': None,
+            'lv_property': 'Fake attributes:Read Write Bool',
+            'name': 'READ_WRITE_BOOL',
+            'resettable': 'No',
+            'type': 'ViBoolean',
+            'documentation': {
+                'description': 'An attribute of type bool with read/write access.',
+            },
+        },
+    }
+    enums = {
+        'Color': {
+            'values': [
+                {
+                    'name': 'NIFAKE_VAL_RED',
+                    'value': 1,
+                    'documentation': {
+                        'description': 'Like blood.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLUE',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like the sky.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_YELLOW',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like a banana.',
+                    }
+                },
+                {
+                    'name': 'NIFAKE_VAL_BLACK',
+                    'value': 2,
+                    'documentation': {
+                        'description': 'Like this developer\'s conscience.',
+                    }
+                },
+            ],
+            'codegen_method': 'public',
+        },
+    }
+    local_config['functions'] = functions
+    local_config['attributes'] = attributes
+    local_config['enums'] = enums
+
+    add_notes_re_links(local_config)
+
+    assert 'note' not in local_config['functions']['MakeAFoo']['parameters'][0]['documentation']
+    assert func_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert attr_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+    assert enum_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
+
