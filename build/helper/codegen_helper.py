@@ -849,17 +849,14 @@ def test_get_ctype_variable_declaration_snippet_case_b540():
     assert snippet == ["array_in_ctype = (custom_struct.custom_struct * len(array_in))(*[custom_struct.custom_struct(c) for c in array_in])  # case B540"]
 
 
-''''
 def test_get_ctype_variable_declaration_snippet_case_b550():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
         'input_array_array = None if input_array is None else (array.array("d", input_array))  # case B550',
-        'input_array_addr = None if input_array is None else (input_array_array.buffer_info()[0])  # case B550',
-        'input_array_ctype = None if input_array is None else (ctypes.cast(input_array_addr, ctypes.POINTER(visatype.ViReal64 * len(input_array))))  # case B550',
+        'input_array_ctype = None if input_array is None else (_converters.convert_iterable_to_ctypes(input_array_array, (visatype.ViReal64 * len(input_array))))  # case B550',
     ]
     for actual_line, expected_line in zip(actual, expected):
         assert actual_line == expected_line
-'''
 
 
 def test_get_ctype_variable_declaration_snippet_case_b560():
