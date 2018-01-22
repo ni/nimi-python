@@ -60,8 +60,15 @@ class _BufferMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
-            return False
+            try:
+                other = other.contents
+            except AttributeError:
+                print('Not a pointer')
+                pass
+
+            if not isinstance(other, self.expected_type):
+                print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+                return False
         if self.expected_size != len(other):
             print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
             return False
@@ -94,10 +101,17 @@ class ViStringMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, ctypes.Array):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
-            return False
-        if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
-            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
+            try:
+                other = other.contents
+            except AttributeError:
+                print('Not a pointer')
+                pass
+
+            if not isinstance(other, ctypes.Array):
+                print("Unexpected string type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
+                return False
+        if len(other) < len(self.expected_string_value):
+            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value)))
             return False
         if not isinstance(other[0], bytes):
             print("Unexpected type. Not a string. Received: {0}".format(type(other[0])))
