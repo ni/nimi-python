@@ -119,5 +119,5 @@ def get_array_type_for_api_type(api_type):
     if api_type in type_map:
         return type_map[api_type]
     else:
-        assert False, 'Only simple types allowed for arrays: {0}'.format(api_type)
+        raise TypeError('Only simple types allowed for arrays: {0}'.format(api_type))
 
