@@ -8,6 +8,7 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
+
 # Base classes
 
 
@@ -59,8 +60,9 @@ class _BufferMatcher(object):
         self._expected_size_or_value = expected_size_or_value
 
     def __eq__(self, other):
-        if not isinstance(other, self.expected_type):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+        # If we get a type of list then we will accept that instead of the actual type.
+        if not isinstance(other, self.expected_type) and not isinstance(other, list):
+            print("Unexpected type. Expected: {0} or {1}. Received: {2}".format(self.expected_type, list, type(other)))
             return False
         if self.expected_size != len(other):
             print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
@@ -70,7 +72,7 @@ class _BufferMatcher(object):
             # Go element by element, which allows for reporting the first index where different values were found.
             for i in range(0, len(self.expected_value)):
                 if self.expected_value[i] != other[i]:
-                    print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value, self.expected_value))
+                    print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value[i], other[i]))
                     return False
         return True
 
@@ -274,3 +276,6 @@ class ViInt64BufferMatcher(_BufferMatcher):
 class ViReal64BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, visatype.ViReal64, expected_size_or_value)
+
+
+

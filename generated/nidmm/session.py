@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from nidmm import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidmm import attributes
@@ -1638,7 +1640,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        waveform_array_ctype = numpy.ctypeslib.as_ctypes(waveform_array)  # case B510
+        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array)  # case B510
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

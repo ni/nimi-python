@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidcpower import attributes
@@ -2042,8 +2044,12 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
-        voltage_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
-        current_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
+        voltage_measurements_size = self._parse_channel_count()  # case B560
+        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
+        voltage_measurements_ctype = _converters.convert_iterable_to_ctypes(voltage_measurements_array, (visatype.ViReal64 * voltage_measurements_size))  # case B560
+        current_measurements_size = self._parse_channel_count()  # case B560
+        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
+        current_measurements_ctype = _converters.convert_iterable_to_ctypes(current_measurements_array, (visatype.ViReal64 * current_measurements_size))  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
@@ -2592,8 +2598,10 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
-        values_ctype = None if values is None else (visatype.ViReal64 * len(values))(*values)  # case B550
-        source_delays_ctype = None if source_delays is None else (visatype.ViReal64 * len(source_delays))(*source_delays)  # case B550
+        values_array = None if values is None else (array.array("d", values))  # case B550
+        values_ctype = None if values is None else (_converters.convert_iterable_to_ctypes(values_array, (visatype.ViReal64 * len(values))))  # case B550
+        source_delays_array = None if source_delays is None else (array.array("d", source_delays))  # case B550
+        source_delays_ctype = None if source_delays is None else (_converters.convert_iterable_to_ctypes(source_delays_array, (visatype.ViReal64 * len(source_delays))))  # case B550
         size_ctype = visatype.ViUInt32(0 if values is None else len(values))  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3092,7 +3100,8 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case B530
         attribute_id_count_ctype = visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = None if attribute_ids is None else (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case B550
+        attribute_ids_array = None if attribute_ids is None else (array.array("l", attribute_ids))  # case B550
+        attribute_ids_ctype = None if attribute_ids is None else (_converters.convert_iterable_to_ctypes(attribute_ids_array, (visatype.ViInt32 * len(attribute_ids))))  # case B550
         set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

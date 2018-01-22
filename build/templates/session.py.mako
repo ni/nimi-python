@@ -23,6 +23,7 @@ ${encoding_tag}
 %>\
 import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from ${module_name} import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from ${module_name} import attributes

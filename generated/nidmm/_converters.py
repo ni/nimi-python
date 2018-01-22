@@ -1,5 +1,7 @@
 from nidmm import visatype
 
+import array
+import ctypes
 import datetime
 
 
@@ -22,6 +24,18 @@ def convert_timedelta_to_milliseconds(value, library_type):
 
 def convert_timedelta_to_microseconds(value, library_type):
     return _convert_timedelta(value, library_type, 1000000)
+
+
+def convert_iterable_to_ctypes(value, library_type=None):
+    ctypes_type = None
+    if isinstance(value, array.array):
+        addr, _ = value.buffer_info()
+        ctypes_type = ctypes.cast(addr, ctypes.POINTER(library_type))
+    elif str(type(value)).find("'numpy.ndarray'") != -1:
+        import numpy
+        ctypes_type = numpy.ctypeslib.as_ctypes(value)
+
+    return ctypes_type
 
 
 # Tests

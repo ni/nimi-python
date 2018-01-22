@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifake import attributes
@@ -617,7 +619,7 @@ class Session(_SessionBase):
 
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case S190
-        waveform_data_ctype = numpy.ctypeslib.as_ctypes(waveform_data)  # case B510
+        waveform_data_ctype = _converters.convert_iterable_to_ctypes(waveform_data)  # case B510
         actual_number_of_samples_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, ctypes.pointer(actual_number_of_samples_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -715,7 +717,9 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
-        array_out_ctype = (visatype.ViReal64 * self.get_array_size_for_python_code())()  # case B560
+        array_out_size = self.get_array_size_for_python_code()  # case B560
+        array_out_array = array.array("d", [0] * array_out_size)  # case B560
+        array_out_ctype = _converters.convert_iterable_to_ctypes(array_out_array, (visatype.ViReal64 * array_out_size))  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -920,7 +924,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def multiple_array_types(self, output_array_size, input_array_of_integers, input_array_of_floats=None):
+    def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
         '''multiple_array_types
 
         Receives and returns multiple types of arrays.
@@ -928,9 +932,9 @@ class Session(_SessionBase):
         Args:
             output_array_size (int): Size of the array that will be returned.
 
-            input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
-
             input_array_of_floats (list of float): Array of floats
+
+            input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
 
 
         Returns:
@@ -946,8 +950,10 @@ class Session(_SessionBase):
         output_array_ctype = (visatype.ViReal64 * output_array_size)()  # case B600
         output_array_of_fixed_length_ctype = (visatype.ViReal64 * 3)()  # case B570
         input_array_sizes_ctype = visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
-        input_array_of_floats_ctype = None if input_array_of_floats is None else (visatype.ViReal64 * len(input_array_of_floats))(*input_array_of_floats)  # case B550
-        input_array_of_integers_ctype = None if input_array_of_integers is None else (visatype.ViInt16 * len(input_array_of_integers))(*input_array_of_integers)  # case B550
+        input_array_of_floats_array = None if input_array_of_floats is None else (array.array("d", input_array_of_floats))  # case B550
+        input_array_of_floats_ctype = None if input_array_of_floats is None else (_converters.convert_iterable_to_ctypes(input_array_of_floats_array, (visatype.ViReal64 * len(input_array_of_floats))))  # case B550
+        input_array_of_integers_array = None if input_array_of_integers is None else (array.array("h", input_array_of_integers))  # case B550
+        input_array_of_integers_ctype = None if input_array_of_integers is None else (_converters.convert_iterable_to_ctypes(input_array_of_integers_array, (visatype.ViInt16 * len(input_array_of_integers))))  # case B550
         error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
@@ -1203,7 +1209,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_ctype = None if waveform is None else (visatype.ViReal64 * len(waveform))(*waveform)  # case B550
+        waveform_array = None if waveform is None else (array.array("d", waveform))  # case B550
+        waveform_ctype = None if waveform is None else (_converters.convert_iterable_to_ctypes(waveform_array, (visatype.ViReal64 * len(waveform))))  # case B550
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1227,7 +1234,7 @@ class Session(_SessionBase):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_ctype = numpy.ctypeslib.as_ctypes(waveform)  # case B510
+        waveform_ctype = _converters.convert_iterable_to_ctypes(waveform)  # case B510
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

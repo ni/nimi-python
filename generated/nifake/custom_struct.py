@@ -1,3 +1,4 @@
+import struct
 import ctypes
 
 from nifake import visatype
@@ -22,7 +23,7 @@ class custom_struct(ctypes.Structure):  # noqa N801
             self.struct_double = struct_double
 
     def __repr__(self):
-        return '{0}(data=None, struct_int={1}, struct_double={2}'.format(self.__class__.__name__, self.struct_int, self.struct_double)
+        return '{0}(data=None, struct_int={1}, struct_double={2})'.format(self.__class__.__name__, self.struct_int, self.struct_double)
 
     def __str__(self):
         return self.__repr__()
@@ -38,10 +39,15 @@ class CustomStruct(object):
             self.struct_double = struct_double
 
     def __repr__(self):
-        return '{0}(data=None, struct_int={1}, struct_double={2}'.format(self.__class__.__name__, self.struct_int, self.struct_double)
+        return '{0}(data=None, struct_int={1}, struct_double={2})'.format(self.__class__.__name__, self.struct_int, self.struct_double)
 
     def __str__(self):
         return self.__repr__()
 
+    def get_struct_type(self):
+        return 'ld'
+
+    def get_struct(self):
+        return struct.pack(self.get_struct_type(), self.struct_int, self.struct_double)
 
 
