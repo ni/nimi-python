@@ -21,6 +21,7 @@ ${encoding_tag}
         session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
 %>\
+import array  # noqa: F401
 import ctypes
 
 from ${module_name} import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
