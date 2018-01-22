@@ -97,3 +97,27 @@ def get_numpy_type_for_api_type(api_type, config):
         # We didn't find it so assert
         assert False, 'Unknown value for api_type: {0}'.format(api_type)
 
+
+def get_array_type_for_api_type(api_type):
+    '''Returns the array type to use in the Python API from the original visa or custom type used in the C API
+
+    Do not use this with enums.
+    '''
+    type_map = {
+        'ViInt8': 'b',
+        'ViUInt8': 'B',
+        'ViInt16': 'h',
+        'ViUInt16': 'H',
+        'ViInt32': 'l',
+        'ViUInt32': 'L',
+        'ViInt64': 'q',  # Not supported in 2.7?
+        'ViUInt64': 'Q',  # Not supported in 2.7?
+        'ViReal32': 'f',
+        'ViReal64': 'd',
+    }
+
+    if api_type in type_map:
+        return type_map[api_type]
+    else:
+        assert False, 'Only simple types allowed for arrays: {0}'.format(api_type)
+
