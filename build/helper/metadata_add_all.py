@@ -113,16 +113,17 @@ def _add_buffer_info(parameter):
     # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
     # and is_buffer True
     t = parameter['type']
-    if t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
-        parameter['type'] = 'ViChar'
-        parameter['original_type'] = t
-        parameter['is_buffer'] = True
-
     if (t.find('[ ]') > 0) or (t.find('[]') > 0):
         assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
         parameter['type'] = t.replace('[ ]', '').replace('[]', '')
         parameter['original_type'] = t
         parameter['is_buffer'] = True
+
+    # We set all string types to ViString, and say it is NOT a buffer/array
+    if t == 'ViConstString' or t == 'ViRsrc' or (t == 'ViChar' and parameter['is_buffer']):
+        parameter['type'] = 'ViString'
+        parameter['original_type'] = t
+        parameter['is_buffer'] = False
 
     if 'size' not in parameter:
         # Not populated, assume {'mechanism': 'fixed', 'value': 1}
@@ -137,7 +138,7 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:  # and parameter['type'] != 'ViString'
         parameter['library_method_call_snippet'] = 'ctypes.pointer({0})'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
@@ -580,9 +581,9 @@ def test_add_all_metadata_simple():
                     'python_name_or_default_for_init': 'vi',
                 },
                 {
-                    'ctypes_type': 'ViChar',
+                    'ctypes_type': 'ViString',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                    'ctypes_type_library_call': 'ViString',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
@@ -591,15 +592,14 @@ def test_add_all_metadata_simple():
                     'is_session_handle': False,
                     'enum': None,
                     'numpy': False,
-                    'python_type': 'int',
-                    'is_buffer': True,
+                    'python_type': 'str',
+                    'is_buffer': False,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViChar',
-                    'original_type': 'ViString',
+                    'type': 'ViString',
                     'library_method_call_snippet': 'channel_name_ctype',
                     'use_in_python_api': True,
                     'python_name_or_default_for_init': 'channel_name',
@@ -643,26 +643,25 @@ def test_add_all_metadata_simple():
                 'enum': None,
                 'numpy': False,
                 'name': 'status',
-                'type': 'ViChar',
-                'original_type': 'ViString',
+                'type': 'ViString',
                 'documentation': {
                     'description': 'Return a device status'
                 },
                 'python_name': 'status',
-                'python_type': 'int',
+                'python_type': 'str',
                 'ctypes_variable_name': 'status_ctype',
-                'ctypes_type': 'ViChar',
-                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                'ctypes_type': 'ViString',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViString)',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
                 },
-                'is_buffer': True,
+                'is_buffer': False,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype',
+                'library_method_call_snippet': 'ctypes.pointer(status_ctype)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
             }],
