@@ -317,7 +317,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
+            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -366,7 +367,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+        for i in range(len(self._defaults['GetError']['Description'])):
+            description[i] = self._defaults['GetError']['Description'][i]
         return self._defaults['GetError']['return']
 
     def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802

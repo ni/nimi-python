@@ -137,7 +137,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequence_cfunc is None:
                 self.niDCPower_CreateAdvancedSequence_cfunc = self._library.niDCPower_CreateAdvancedSequence
-                self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
+                self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
                 self.niDCPower_CreateAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequence_cfunc(vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
 
@@ -153,7 +153,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_DeleteAdvancedSequence_cfunc is None:
                 self.niDCPower_DeleteAdvancedSequence_cfunc = self._library.niDCPower_DeleteAdvancedSequence
-                self.niDCPower_DeleteAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_DeleteAdvancedSequence_cfunc.argtypes = [ViSession, ViString]  # noqa: F405
                 self.niDCPower_DeleteAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_DeleteAdvancedSequence_cfunc(vi, sequence_name)
 
@@ -281,7 +281,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_InitializeWithChannels_cfunc is None:
                 self.niDCPower_InitializeWithChannels_cfunc = self._library.niDCPower_InitializeWithChannels
-                self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ViString, ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
 
@@ -313,7 +313,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ParseChannelCount_cfunc is None:
                 self.niDCPower_ParseChannelCount_cfunc = self._library.niDCPower_ParseChannelCount
-                self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
+                self.niDCPower_ParseChannelCount_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViUInt32)]  # noqa: F405
                 self.niDCPower_ParseChannelCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ParseChannelCount_cfunc(vi, channels_string, number_of_channels)
 

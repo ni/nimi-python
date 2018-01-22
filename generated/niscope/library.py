@@ -235,7 +235,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ExportSignal_cfunc is None:
                 self.niScope_ExportSignal_cfunc = self._library.niScope_ExportSignal
-                self.niScope_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ViString, ViString]  # noqa: F405
                 self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
@@ -355,7 +355,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_InitWithOptions_cfunc is None:
                 self.niScope_InitWithOptions_cfunc = self._library.niScope_InitWithOptions
-                self.niScope_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niScope_InitWithOptions_cfunc.argtypes = [ViString, ViBoolean, ViBoolean, ViString, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niScope_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 

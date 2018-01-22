@@ -206,7 +206,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
+            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
@@ -216,7 +217,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
-        channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
+        for i in range(len(self._defaults['GetChannelName']['channelNameBuffer'])):
+            channel_name_buffer[i] = self._defaults['GetChannelName']['channelNameBuffer'][i]
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -229,7 +231,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+        for i in range(len(self._defaults['GetError']['Description'])):
+            description[i] = self._defaults['GetError']['Description'][i]
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -239,7 +242,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size.value == 0:
             return len(self._defaults['GetPath']['Path'])
-        path.value = self._defaults['GetPath']['Path'].encode('ascii')
+        for i in range(len(self._defaults['GetPath']['Path'])):
+            path[i] = self._defaults['GetPath']['Path'][i]
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -257,7 +261,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size.value == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
-        relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
+        for i in range(len(self._defaults['GetRelayName']['relayNameBuffer'])):
+            relay_name_buffer[i] = self._defaults['GetRelayName']['relayNameBuffer'][i]
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802

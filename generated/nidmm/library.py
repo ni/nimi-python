@@ -224,7 +224,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetAttributeViBoolean_cfunc is None:
                 self.niDMM_GetAttributeViBoolean_cfunc = self._library.niDMM_GetAttributeViBoolean
-                self.niDMM_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDMM_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -232,7 +232,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetAttributeViInt32_cfunc is None:
                 self.niDMM_GetAttributeViInt32_cfunc = self._library.niDMM_GetAttributeViInt32
-                self.niDMM_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -240,7 +240,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetAttributeViReal64_cfunc is None:
                 self.niDMM_GetAttributeViReal64_cfunc = self._library.niDMM_GetAttributeViReal64
-                self.niDMM_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDMM_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -248,7 +248,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetAttributeViString_cfunc is None:
                 self.niDMM_GetAttributeViString_cfunc = self._library.niDMM_GetAttributeViString
-                self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
@@ -272,7 +272,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetDevTemp_cfunc is None:
                 self.niDMM_GetDevTemp_cfunc = self._library.niDMM_GetDevTemp
-                self.niDMM_GetDevTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDMM_GetDevTemp_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetDevTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetDevTemp_cfunc(vi, options, temperature)
 
@@ -320,7 +320,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_InitWithOptions_cfunc is None:
                 self.niDMM_InitWithOptions_cfunc = self._library.niDMM_InitWithOptions
-                self.niDMM_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niDMM_InitWithOptions_cfunc.argtypes = [ViString, ViBoolean, ViBoolean, ViString, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDMM_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
@@ -408,7 +408,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_SetAttributeViBoolean_cfunc is None:
                 self.niDMM_SetAttributeViBoolean_cfunc = self._library.niDMM_SetAttributeViBoolean
-                self.niDMM_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
+                self.niDMM_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
                 self.niDMM_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -416,7 +416,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_SetAttributeViInt32_cfunc is None:
                 self.niDMM_SetAttributeViInt32_cfunc = self._library.niDMM_SetAttributeViInt32
-                self.niDMM_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
+                self.niDMM_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
                 self.niDMM_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -424,7 +424,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_SetAttributeViReal64_cfunc is None:
                 self.niDMM_SetAttributeViReal64_cfunc = self._library.niDMM_SetAttributeViReal64
-                self.niDMM_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
+                self.niDMM_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
                 self.niDMM_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -432,7 +432,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_SetAttributeViString_cfunc is None:
                 self.niDMM_SetAttributeViString_cfunc = self._library.niDMM_SetAttributeViString
-                self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 

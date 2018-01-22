@@ -416,7 +416,7 @@ nidcpower.Session methods
         
 
 
-    :type sequence_name: string
+    :type sequence_name: str
     :param attribute_ids:
 
 
@@ -604,7 +604,7 @@ nidcpower.Session methods
         
 
 
-    :type sequence_name: string
+    :type sequence_name: str
 
 .. py:method:: disable()
 

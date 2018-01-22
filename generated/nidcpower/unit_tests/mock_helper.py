@@ -298,7 +298,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
+            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
         return self._defaults['GetAttributeViString']['return']
 
     def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
@@ -308,7 +309,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelName'])
-        channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
+        for i in range(len(self._defaults['GetChannelName']['channelName'])):
+            channel_name[i] = self._defaults['GetChannelName']['channelName'][i]
         return self._defaults['GetChannelName']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -321,7 +323,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+        for i in range(len(self._defaults['GetError']['Description'])):
+            description[i] = self._defaults['GetError']['Description'][i]
         return self._defaults['GetError']['return']
 
     def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802

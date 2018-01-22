@@ -558,7 +558,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViBoolean()  # case S200
         error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -613,7 +613,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -668,7 +668,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViReal64()  # case S200
         error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -726,7 +726,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         array_size_ctype = visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case B580
@@ -736,7 +736,7 @@ class _SessionBase(object):
         attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case B590
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
+        return [int(attribute_value_ctype[i]) for i in range(array_size_ctype.value)]
 
     def _get_error(self):
         '''_get_error
@@ -774,7 +774,7 @@ class _SessionBase(object):
         description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case B590
         error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+        return int(code_ctype.value), [int(description_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -836,7 +836,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -903,7 +903,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -970,7 +970,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -1037,9 +1037,9 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case B530
+        attribute_value_ctype = None if attribute_value is None else (visatype.ViChar * len(attribute_value))(*attribute_value)  # case B550
         error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1067,7 +1067,7 @@ class _SessionBase(object):
         error_message_ctype = (visatype.ViChar * 256)()  # case B570
         error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        return [int(error_message_ctype[i]) for i in range(256)]
 
 
 class _RepeatedCapability(_SessionBase):
@@ -1133,12 +1133,12 @@ class Session(_SessionBase):
         returned.
 
         Args:
-            channel1 (string): Input one of the channel names of the desired path. Pass the other
+            channel1 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
-            channel2 (string): Input one of the channel names of the desired path. Pass the other
+            channel2 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
@@ -1170,8 +1170,8 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case B530
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case B530
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         path_capability_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1208,7 +1208,7 @@ class Session(_SessionBase):
         One or more of the referenced functions are not in the Python API for this driver.
 
         Args:
-            scanlist (string): The scan list to use. The driver uses this value to set the Scan List
+            scanlist (str): The scan list to use. The driver uses this value to set the Scan List
                 attribute. Default value: None
 
             scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
@@ -1220,7 +1220,7 @@ class Session(_SessionBase):
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case B530
+        scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case C020
         scan_mode_ctype = visatype.ViInt32(scan_mode.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1297,20 +1297,20 @@ class Session(_SessionBase):
         CH2, then the path also exists between channels CH2 and CH1.
 
         Args:
-            channel1 (string): Input one of the channel names of the desired path. Pass the other
+            channel1 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
-            channel2 (string): Input one of the channel names of the desired path. Pass the other
+            channel2 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case B530
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case B530
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_Connect(vi_ctype, channel1_ctype, channel2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1340,7 +1340,7 @@ class Session(_SessionBase):
         ch2, then the path also exists between channels ch1 and ch2.
 
         Args:
-            connection_list (string): Connection List specifies a list of connections between channels to
+            connection_list (str): Connection List specifies a list of connections between channels to
                 make. NI-SWITCH validates the connection list, and aborts execution of
                 the list if errors are returned. Refer to Connection and Disconnection
                 List Syntax for valid connection list syntax and examples. Refer to
@@ -1350,7 +1350,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case B530
+        connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_ConnectMultiple(vi_ctype, connection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1376,20 +1376,20 @@ class Session(_SessionBase):
         IVISWTCH_ERROR_NO_SUCH_PATH error.
 
         Args:
-            channel1 (string): Input one of the channel names of the path to break. Pass the other
+            channel1 (str): Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
-            channel2 (string): Input one of the channel names of the path to break. Pass the other
+            channel2 (str): Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case B530
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case B530
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_Disconnect(vi_ctype, channel1_ctype, channel2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1414,7 +1414,7 @@ class Session(_SessionBase):
         error occurred.
 
         Args:
-            disconnection_list (string): Disconnection List specifies a list of connections between channels to
+            disconnection_list (str): Disconnection List specifies a list of connections between channels to
                 break. NI-SWITCH validates the disconnection list, and aborts execution
                 of the list if errors are returned. Refer to Connection and
                 Disconnection List Syntax for valid disconnection list syntax and
@@ -1425,7 +1425,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case B530
+        disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_DisconnectMultiple(vi_ctype, disconnection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1453,7 +1453,7 @@ class Session(_SessionBase):
         channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case B590
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_buffer_ctype.value.decode(self._encoding)
+        return [int(channel_name_buffer_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -1471,20 +1471,20 @@ class Session(_SessionBase):
         error is returned
 
         Args:
-            channel1 (string): Input one of the channel names of the desired path. Pass the other
+            channel1 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
-            channel2 (string): Input one of the channel names of the desired path. Pass the other
+            channel2 (str): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case B530
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case B530
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         buffer_size_ctype = visatype.ViInt32()  # case S170
         path_ctype = None  # case B580
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
@@ -1493,7 +1493,7 @@ class Session(_SessionBase):
         path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case B590
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return path_ctype.value.decode(self._encoding)
+        return [int(path_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def get_relay_count(self, relay_name):
         '''get_relay_count
@@ -1505,7 +1505,7 @@ class Session(_SessionBase):
         to determine if the switch module supports relay counting.
 
         Args:
-            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (str): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
@@ -1515,7 +1515,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case B530
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
         relay_count_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1544,7 +1544,7 @@ class Session(_SessionBase):
         relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case B590
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return relay_name_buffer_ctype.value.decode(self._encoding)
+        return [int(relay_name_buffer_ctype[i]) for i in range(relay_name_buffer_size_ctype.value)]
 
     def get_relay_position(self, relay_name):
         '''get_relay_position
@@ -1553,7 +1553,7 @@ class Session(_SessionBase):
         parameter.
 
         Args:
-            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (str): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
@@ -1567,7 +1567,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case B530
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
         relay_position_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1592,7 +1592,7 @@ class Session(_SessionBase):
         and setting the simulate parameter to VI_TRUE.
 
         Args:
-            resource_name (string): Resource name of the switch module to initialize. Default value: None
+            resource_name (str): Resource name of the switch module to initialize. Default value: None
                 Syntax: Optional fields are shown in square brackets ([]). Configured in
                 MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
                 NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
@@ -1604,7 +1604,7 @@ class Session(_SessionBase):
                 SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
                 0, device number 16 PXI::16 PXI bus 0, device number 16
 
-            topology (string): Pass the topology name you want to use for the switch you specify with
+            topology (str): Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
                 NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
                 was configured for the device in MAX. Default Value:
@@ -1813,8 +1813,8 @@ class Session(_SessionBase):
                 One or more of the referenced functions are not in the Python API for this driver.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case B530
-        topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case B530
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case C020
         simulate_ctype = visatype.ViBoolean(simulate)  # case S150
         reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
         vi_ctype = visatype.ViSession()  # case S200
@@ -1850,7 +1850,7 @@ class Session(_SessionBase):
         supports individual relay control.
 
         Args:
-            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (str): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
@@ -1865,7 +1865,7 @@ class Session(_SessionBase):
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case B530
+        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
         relay_action_ctype = visatype.ViInt32(relay_action.value)  # case S130
         error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2007,7 +2007,7 @@ class Session(_SessionBase):
         is not necessary, use connect.
 
         Args:
-            path_list (string): A string composed of comma-separated paths between channel 1 and channel
+            path_list (str): A string composed of comma-separated paths between channel 1 and channel
                 2. The first and last names in the path are the endpoints of the path.
                 Every other channel in the path are configuration channels. Example of a
                 valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
@@ -2016,7 +2016,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case B530
+        path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_SetPath(vi_ctype, path_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2110,7 +2110,7 @@ class Session(_SessionBase):
         self_test_message_ctype = (visatype.ViChar * 256)()  # case B570
         error_code = self._library.niSwitch_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+        return int(self_test_result_ctype.value), [int(self_test_message_ctype[i]) for i in range(256)]
 
 
 

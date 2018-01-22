@@ -1082,7 +1082,7 @@ nidmm.Session methods
         
 
 
-    :type options: string
+    :type options: str
 
     :rtype: float
     :return:

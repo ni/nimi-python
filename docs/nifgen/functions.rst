@@ -41,7 +41,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
     :param waveform_size:
 
 
@@ -502,7 +502,7 @@ nifgen.Session methods
         +------------------+------------------+
 
 
-    :type trigger_id: string
+    :type trigger_id: str
     :param source:
 
 
@@ -549,7 +549,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param edge:
 
 
@@ -624,7 +624,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param edge:
 
 
@@ -673,7 +673,7 @@ nifgen.Session methods
         +------------------+------------------+
 
 
-    :type trigger_id: string
+    :type trigger_id: str
     :param source:
 
 
@@ -720,7 +720,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param trigger_when:
 
 
@@ -1341,7 +1341,7 @@ nifgen.Session methods
         
 
 
-    :type file_name: string
+    :type file_name: str
     :param byte_order:
 
 
@@ -1412,7 +1412,7 @@ nifgen.Session methods
         
 
 
-    :type file_name: string
+    :type file_name: str
     :param byte_order:
 
 
@@ -1567,7 +1567,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
 
 .. py:method:: delete_script(script_name)
 
@@ -1595,7 +1595,7 @@ nifgen.Session methods
         
 
 
-    :type script_name: string
+    :type script_name: str
 
 .. py:method:: disable()
 
@@ -1701,7 +1701,7 @@ nifgen.Session methods
         +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
     :param output_terminal:
 
 
@@ -1746,7 +1746,7 @@ nifgen.Session methods
             Routes** tab in MAX.
 
 
-    :type output_terminal: string
+    :type output_terminal: str
 
 .. py:method:: get_ext_cal_last_date_and_time()
 
@@ -2401,7 +2401,7 @@ nifgen.Session methods
     :type trigger: :py:data:`nifgen.Trigger`
     :param trigger_id:
 
-    :type trigger_id: string
+    :type trigger_id: str
 
 .. py:method:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
@@ -2441,7 +2441,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
     :param relative_to:
 
 
@@ -2586,7 +2586,7 @@ nifgen.Session methods
         
 
 
-    :type script: string
+    :type script: str
 
 .. py:method:: write_waveform(waveform_name_or_handle, data)
 

@@ -1180,7 +1180,7 @@ niscope.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type output_terminal: string
+    :type output_terminal: str
     :param signal_identifier:
 
 
@@ -1189,7 +1189,7 @@ niscope.Session methods
         
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
 
 .. py:method:: fetch(num_samples, timeout=5.0)
 

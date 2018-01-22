@@ -482,7 +482,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViBoolean()  # case S200
         error_code = self._library.niDMM_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -521,7 +521,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -560,7 +560,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
@@ -597,7 +597,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         buffer_size_ctype = visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case B580
@@ -607,7 +607,7 @@ class _SessionBase(object):
         attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case B590
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
+        return [int(attribute_value_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def _get_error(self):
         '''_get_error
@@ -634,7 +634,7 @@ class _SessionBase(object):
         description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case B590
         error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
+        return int(error_code_ctype.value), [int(description_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -680,7 +680,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -731,7 +731,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -782,7 +782,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
@@ -833,9 +833,9 @@ class _SessionBase(object):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case B530
+        attribute_value_ctype = None if attribute_value is None else (visatype.ViChar * len(attribute_value))(*attribute_value)  # case B550
         error_code = self._library.niDMM_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -860,7 +860,7 @@ class _SessionBase(object):
         error_message_ctype = (visatype.ViChar * 256)()  # case B570
         error_code = self._library.niDMM_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        return [int(error_message_ctype[i]) for i in range(256)]
 
 
 class _RepeatedCapability(_SessionBase):
@@ -1761,7 +1761,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            options (string): Reserved.
+            options (str): Reserved.
 
 
         Returns:
@@ -1769,7 +1769,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case B530
+        options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020
         temperature_ctype = visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetDevTemp(vi_ctype, options_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1901,7 +1901,7 @@ class Session(_SessionBase):
         One or more of the referenced attributes are not in the Python API for this driver.
 
         Args:
-            resource_name (string): Caution:
+            resource_name (str): Caution:
                 All IVI names for the **Resource_Name**, such as logical names or
                 virtual names, are case-sensitive. If you use logical names, driver
                 session names, or virtual names in your program, you must make sure that
@@ -1943,7 +1943,7 @@ class Session(_SessionBase):
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
 
-            option_string (string): | Sets the initial value of certain attributes for the session. The
+            option_string (str): | Sets the initial value of certain attributes for the session. The
                   following table specifies the attribute name, attribute constant, and
                   default value for each attribute that you can use in this parameter:
 
@@ -1983,10 +1983,10 @@ class Session(_SessionBase):
                 all subsequent instrument driver function calls.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case B530
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case B530
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = visatype.ViSession()  # case S200
         error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2352,7 +2352,7 @@ class Session(_SessionBase):
         self_test_message_ctype = (visatype.ViChar * 256)()  # case B570
         error_code = self._library.niDMM_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+        return int(self_test_result_ctype.value), [int(self_test_message_ctype[i]) for i in range(256)]
 
 
 

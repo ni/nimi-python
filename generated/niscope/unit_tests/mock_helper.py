@@ -482,7 +482,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetAttributeViString", param='Value')
         if buf_size.value == 0:
             return len(self._defaults['GetAttributeViString']['Value'])
-        value.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
+        for i in range(len(self._defaults['GetAttributeViString']['Value'])):
+            value[i] = self._defaults['GetAttributeViString']['Value'][i]
         return self._defaults['GetAttributeViString']['return']
 
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
@@ -508,7 +509,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+        for i in range(len(self._defaults['GetError']['Description'])):
+            description[i] = self._defaults['GetError']['Description'][i]
         return self._defaults['GetError']['return']
 
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802

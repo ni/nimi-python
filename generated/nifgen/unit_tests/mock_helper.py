@@ -432,7 +432,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
+            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
         return self._defaults['GetAttributeViString']['return']
 
     def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
@@ -445,7 +446,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
         if error_description_buffer_size.value == 0:
             return len(self._defaults['GetError']['errorDescription'])
-        error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
+        for i in range(len(self._defaults['GetError']['errorDescription'])):
+            error_description[i] = self._defaults['GetError']['errorDescription'][i]
         return self._defaults['GetError']['return']
 
     def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
