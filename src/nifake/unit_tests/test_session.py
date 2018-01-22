@@ -1,3 +1,4 @@
+import array
 import datetime
 import matchers
 import math
@@ -32,6 +33,9 @@ class TestSession(object):
 
         self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
+        self.convert_iterable_to_ctypes_side_effect_count = 0
+        self.convert_iterable_to_ctypes_side_effect_items = []
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
@@ -39,6 +43,11 @@ class TestSession(object):
     def niFake_read_warning(self, vi, maximum_time, reading):  # noqa: N802
         reading.contents.value = self.reading
         return self.error_code_return
+
+    def convert_iterable_to_ctypes_side_effect(self, value, library_type=None):
+        ret_val = self.convert_iterable_to_ctypes_side_effect_items[self.convert_iterable_to_ctypes_side_effect_count]
+        self.convert_iterable_to_ctypes_side_effect_count += 1
+        return ret_val
 
     # Session management
 
@@ -272,6 +281,7 @@ class TestSession(object):
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
         self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
         self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
+
         with nifake.Session('dev1') as session:
             waveform = session.fetch_waveform(len(expected_waveform))
             assert isinstance(waveform[0], float)
@@ -310,9 +320,13 @@ class TestSession(object):
 
     def test_write_waveform(self):
         expected_waveform = [1.1, 2.2, 3.3, 4.4]
+        expected_array = array.array('d', expected_waveform)
         self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
         with nifake.Session('dev1') as session:
-            session.write_waveform(expected_waveform)
+            self.convert_iterable_to_ctypes_side_effect_items = [expected_waveform]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                session.write_waveform(expected_array)
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
 
     def test_write_waveform_numpy(self):
@@ -370,11 +384,14 @@ class TestSession(object):
         expected_output_array_of_fixed_length = [-6, -7, -8]
         output_array_size = len(expected_output_array)
         input_array_of_integers = [1, 2]
-        input_array_of_floats = [-1.0, -2.0]
+        input_array_of_floats = [4.2, -4.3]
         self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
         self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
         with nifake.Session('dev1') as session:
-            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
+            self.convert_iterable_to_ctypes_side_effect_items = [input_array_of_floats, input_array_of_integers]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
             assert output_array == output_array
             assert expected_output_array_of_fixed_length == output_array_of_fixed_length
             self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
