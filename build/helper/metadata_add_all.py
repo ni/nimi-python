@@ -68,7 +68,9 @@ def _add_ctypes_type(parameter, config):
     if custom_type is not None:
         module_name = custom_type['file_name'] + '.'
 
-    if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+    if parameter['type'] == 'ViString':
+        parameter['ctypes_type_library_call'] = 'ctypes.POINTER(ViChar)'
+    elif parameter['direction'] == 'out' or parameter['is_buffer'] is True:
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
