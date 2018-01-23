@@ -202,7 +202,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
                 definition = 'None  # case C050'
             elif ivi_dance_step == IviDanceStep.GET_DATA:
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '({0}.ViChar * {2}.value)()  # case C060'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
+                definition = '({0}.ViChar * {1}.value)()  # case C060'.format(module_name, size_parameter['ctypes_variable_name'])
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
 
@@ -212,6 +212,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
     if definition is not None:
         definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+
     return definitions
 
 
