@@ -5,7 +5,7 @@ from .parameter_usage_options import ParameterUsageOptions
 from enum import Enum
 import pprint
 
-pp = pprint.PrettyPrinter(indent=4)
+pp = pprint.PrettyPrinter(indent=4, width=200)
 
 _parameterUsageOptionsSnippet = {}
 
