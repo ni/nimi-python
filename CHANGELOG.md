@@ -40,7 +40,6 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
   * #### Added
   * #### Changed
-    * `nidmm.Session()` no longer takes id_query parameter
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -69,7 +68,6 @@ All notable changes to this project will be documented in this file.
     * Channel repeated capability
     * P2P repeated capability
   * #### Changed
-  * `niscope.Session()` no longer takes id_query parameter
   * #### Removed
 
 ## 0.6.0 - 2017-12-20

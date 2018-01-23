@@ -1,5 +1,7 @@
 # Useful functions for use in the metadata modules
 
+from .documentation_helper import add_notes_re_links
+from .documentation_helper import square_up_tables
 from .helper import camelcase_to_snakecase
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
@@ -328,6 +330,7 @@ def _add_enum_codegen_method(enums, config):
 
 
 def _add_enum_value_python_name(enum_info, config):
+    '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
     for v in enum_info['values']:
         v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
 
@@ -395,6 +398,7 @@ def add_all_enum_metadata(enums, config):
     _add_enum_codegen_method(enums, config)
     for e in enums:
         enums[e] = _add_enum_value_python_name(enums[e], config)
+        enums[e]['python_name'] = enums[e]['python_name'] if 'python_name' in enums[e] else e
 
     return enums
 
@@ -414,6 +418,10 @@ def add_all_metadata(functions, attributes, enums, config):
 
     enums = add_all_enum_metadata(enums, config)
     config['enums'] = enums
+
+    add_notes_re_links(config)
+
+    square_up_tables(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
     metadata_dir = os.path.join('bin', 'processed_metadata')
@@ -755,6 +763,7 @@ def test_add_enums_metadata_simple():
     expected = {
         'Color': {
             'codegen_method': 'no',
+            'python_name': 'Color',
             'values': [
                 {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
                 {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
@@ -765,4 +774,5 @@ def test_add_enums_metadata_simple():
     }
 
     _do_the_test_add_enums_metadata(enums, expected)
+
 

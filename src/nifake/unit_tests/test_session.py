@@ -56,8 +56,8 @@ class TestSession(object):
         errors_patcher.stop()
 
     def test_init_with_options_nondefault_and_close(self):
-        session = nifake.Session('FakeDevice', True, 'Some string')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(False), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
+        session = nifake.Session('FakeDevice', True, True, 'Some string')
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(True), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
@@ -1022,5 +1022,6 @@ class TestSession(object):
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
         assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
+
 
 

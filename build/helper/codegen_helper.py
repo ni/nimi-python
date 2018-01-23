@@ -177,116 +177,126 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = 'visatype'
 
     if parameter['is_buffer'] is True:
-        definition = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
         definition = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
 
-    return parameter['ctypes_variable_name'] + ' = ' + definition
+    return definitions
 
 
 def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
     '''These are the different cases for initializing the ctype variable for scalars:
 
-        1. Input session handle:                                                visatype.ViSession(self._vi)
-      0.0. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
-       10. Input enum:                                                          visatype.ViInt32(parameter_name.value)
-        9. Input scalar:                                                        visatype.ViInt32(parameter_name)
-        6. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
-        7. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
-      7.5. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
-        8. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
-       14. Output scalar or enum:                                               visatype.ViInt32()
-       15. Input uses converter                                                 timedelta_converter_seconds(timeout, visatype.ViReal64)
+        S110. Input session handle:                                                visatype.ViSession(self._vi)
+        S120. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
+        S130. Input enum:                                                          visatype.ViInt32(parameter_name.value)
+        S140. Input uses converter                                                 timedelta_converter_seconds(timeout, visatype.ViReal64)
+        S150. Input scalar:                                                        visatype.ViInt32(parameter_name)
+        S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
+        S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
+        S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
+        S190. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
+        S200. Output scalar or enum:                                               visatype.ViInt32()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is False
     assert parameter['numpy'] is False
     corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
 
+    definitions = []
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(self._{2})  # case 1'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif parameter['size']['mechanism'] == 'python-code':
-            definition = '{0}.{1}({2})  # case 0.0'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
-            definition = '{0}.{1}({2}.value)  # case 10'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}({2}.value)  # case S130'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            definition = '_converters.{0}({1}, {2})  # case 15'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
+            definition = '_converters.{0}({1}, {2})  # case S140'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
         elif corresponding_buffer_parameter is None:
-            definition = '{0}.{1}({2})  # case 9'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}({2})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameter['direction'] == 'in':
             # Parameter denotes the size of another (the "corresponding") parameter.
-            definition = '{0}.{1}(0 if {2} is None else len({2}))  # case 6'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+            definition = '{0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
         else:
             assert corresponding_buffer_parameter['direction'] == 'out'
             if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
                 if ivi_dance_step == IviDanceStep.QUERY_SIZE:
-                    definition = '{0}.{1}()  # case 7'.format(module_name, parameter['ctypes_type'])
+                    definition = '{0}.{1}()  # case S170'.format(module_name, parameter['ctypes_type'])
                 elif ivi_dance_step == IviDanceStep.GET_DATA:
-                    definition = '{0}.{1}(error_code)  # case 7.5'.format(module_name, parameter['ctypes_type'])
+                    definition = '{0}.{1}(error_code)  # case S180'.format(module_name, parameter['ctypes_type'])
                 else:
                     assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
             else:
                 assert corresponding_buffer_parameter['size']['mechanism'] != 'fixed-size', 'mechanism fixed-size makes no sense here! Check metadata'
-                definition = '{0}.{1}({2})  # case 8'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2})  # case S190'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
-        definition = '{0}.{1}()  # case 14'.format(module_name, parameter['ctypes_type'])
+        definition = '{0}.{1}()  # case S200'.format(module_name, parameter['ctypes_type'])
 
-    return definition
+    if definition is not None:
+        definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+    return definitions
 
 
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     '''These are the different cases for initializing the ctype variable for buffers:
 
-     13.5. Input/output numpy array:                                            numpy.ctypeslib.as_ctypes(waveform)
-        2. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
-        3. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
-        5. Input buffer (custom type):                                          (custom_struct * len(list))(*[custom_struct(l) for l in list])
-        4. Input buffer of simple types:                                        None if list is None else (visatype.ViInt32 * len(list))(*list)
-      0.4. Output buffer with mechanism python-code:                            (visatype.ViInt32 * (<custom python code>))()
-       11. Output buffer with mechanism fixed-size:                             visatype.ViInt32 * 256
-       12. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
-     12.5. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViInt32 * buffer_size_ctype.value)()
-       13. Output buffer with mechanism passed-in:                              (visatype.ViInt32 * buffer_size)()
+        B510. Input/output numpy array:                                            numpy.ctypeslib.as_ctypes(waveform)
+        B520. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        B530. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        B540. Input buffer (custom type):                                          (custom_struct * len(list))(*[custom_struct(l) for l in list])
+        B550. Input buffer of simple types:                                        None if list is None else (visatype.ViInt32 * len(list))(*list)
+        B560. Output buffer with mechanism python-code:                            (visatype.ViInt32 * (<custom python code>))()
+        B570. Output buffer with mechanism fixed-size:                             visatype.ViInt32 * 256
+        B580. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
+        B590. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViInt32 * buffer_size_ctype.value)()
+        B600. Output buffer with mechanism passed-in:                              (visatype.ViInt32 * buffer_size)()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is True
+    definitions = []
 
     if parameter['numpy'] is True and use_numpy_array is True:
-        definition = '{0}.ctypeslib.as_ctypes({1})  # case 13.5'.format(module_name, parameter['python_name'])
+        definition = '{0}.ctypeslib.as_ctypes({1})  # case B510'.format(module_name, parameter['python_name'])
     elif parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
-            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
+            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520'
         elif parameter['type'] == 'ViChar':
-            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case B530'.format(parameter['python_name'])
         elif custom_type is not None:
-            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case 5'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case 4'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case B550'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
         if parameter['size']['mechanism'] == 'python-code':
-            definition = '({0}.{1} * {2})()  # case 0.4'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            definition = '({0}.{1} * {2})()  # case B560'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
-            definition = '({0}.{1} * {2})()  # case 11'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            definition = '({0}.{1} * {2})()  # case B570'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['size']['mechanism'] == 'ivi-dance':
             if ivi_dance_step == IviDanceStep.QUERY_SIZE:
-                definition = 'None  # case 12'
+                definition = 'None  # case B580'
             elif ivi_dance_step == IviDanceStep.GET_DATA:
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '({0}.{1} * {2}.value)()  # case 12.5'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
+                definition = '({0}.{1} * {2}.value)()  # case B590'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
         elif parameter['size']['mechanism'] == 'passed-in':
             size_parameter = find_size_parameter(parameter, parameters)
-            definition = '({0}.{1} * {2})()  # case 13'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+            definition = '({0}.{1} * {2})()  # case B600'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
         else:
             assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
-    return definition
+    if definition is not None:
+        definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+    return definitions
 
 
 def get_dictionary_snippet(d, indent=4):
@@ -643,6 +653,96 @@ parameters_for_testing = [
         'python_api_converter_name': 'timedelta_converter_seconds',
         'python_api_converter_type': 'datetime.timedelta',
     },
+    {  # 15
+        'ctypes_type': 'ViChar',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'channel_list_ctype',
+        'direction': 'in',
+        'documentation': {
+            'description': 'The channel to configure. For more information, refer to `Channel String'
+        },
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': True,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'channel_list_ctype',
+        'name': 'channelList',
+        'numpy': False,
+        'original_type': 'ViChar[]',
+        'python_name': 'channel_list',
+        'python_name_with_default': 'channel_list',
+        'python_name_with_doc_default': 'channel_list',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViChar',
+        'use_in_python_api': True,
+    },
+    {  # 16
+        'ctypes_type': 'ViChar',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'a_string_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'An input string.'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_ctype',
+        'name': 'aString',
+        'numpy': False,
+        'python_name': 'a_string',
+        'python_name_with_default': 'a_string',
+        'python_name_with_doc_default': 'a_string',
+        'python_type': 'int',
+        'size': {'mechanism': 'len', 'value': 'a_string'},
+        'type': 'ViChar',
+        'use_in_python_api': True,
+    },
+    {  # 17
+        'ctypes_type': 'custom_struct',
+        'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
+        'ctypes_variable_name': 'array_in_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Array of custom type using python-code size mechanism'},
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'array_in_ctype',
+        'name': 'arrayOut',
+        'original_type': 'custom_struct[]',
+        'python_name': 'array_in',
+        'python_name_with_default': 'array_in',
+        'python_name_with_doc_default': 'array_in',
+        'python_type': 'CustomStruct',
+        'size': {'mechanism': 'len', 'value': 'array_in'},
+        'type': 'custom_struct',
+        'numpy': False,
+        'use_in_python_api': True,
+    },
+    {  # 18
+        'ctypes_type': 'ViInt16',
+        'ctypes_type_library_call': 'ViInt16',
+        'ctypes_variable_name': 'an_int_ctype',
+        'direction': 'out',
+        'documentation': {
+            'description': 'Indicates a ninja turtle',
+        },
+        'enum': None,
+        'is_buffer': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'an_int_ctype',
+        'name': 'anInt',
+        'python_name': 'an_int',
+        'python_name_with_default': 'an_int',
+        'python_name_with_doc_default': 'an_int',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 256},
+        'type': 'ViInt16',
+        'numpy': False,
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -691,54 +791,104 @@ def test_get_buffer_parameter_for_size_parameter():
     assert param == parameters_for_testing[5]
 
 
-def test_get_ctype_variable_declaration_snippet_case_1():
+def test_get_ctype_variable_declaration_snippet_case_s110():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "vi_ctype = visatype.ViSession(self._vi)  # case 1"
+    assert snippet == ["vi_ctype = visatype.ViSession(self._vi)  # case S110"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_0_0():
+def test_get_ctype_variable_declaration_snippet_case_s120():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[8], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "number_of_elements_python_code_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case 0.0"
+    assert snippet == ["number_of_elements_python_code_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case S120"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_10():
+def test_get_ctype_variable_declaration_snippet_case_s130():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[6], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "an_int_enum_ctype = visatype.ViInt16(an_int_enum.value)  # case 10"
+    assert snippet == ["an_int_enum_ctype = visatype.ViInt16(an_int_enum.value)  # case S130"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_9():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "input_ctype = visatype.ViInt16(input)  # case 9"
-
-
-def test_get_ctype_variable_declaration_snippet_case_6():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[11], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "input_array_size_ctype = visatype.ViInt32(0 if input_array is None else len(input_array))  # case 6"
-
-
-def test_get_ctype_variable_declaration_snippet_case_7():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
-    assert snippet == "string_size_ctype = visatype.ViInt32()  # case 7"
-
-
-def test_get_ctype_variable_declaration_snippet_case_7_5():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
-    assert snippet == "string_size_ctype = visatype.ViInt32(error_code)  # case 7.5"
-
-
-def test_get_ctype_variable_declaration_snippet_case_8():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 8"
-
-
-def test_get_ctype_variable_declaration_snippet_case_14():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "output_ctype = visatype.ViInt64()  # case 14"
-
-
-def test_get_ctype_variable_declaration_snippet_case_15():
+def test_get_ctype_variable_declaration_snippet_case_s140():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == "timeout_ctype = _converters.timedelta_converter_seconds(timeout, visatype.ViReal64)  # case 15"
+    assert snippet == ["timeout_ctype = _converters.timedelta_converter_seconds(timeout, visatype.ViReal64)  # case S140"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s150():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["input_ctype = visatype.ViInt16(input)  # case S150"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s160():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[11], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["input_array_size_ctype = visatype.ViInt32(0 if input_array is None else len(input_array))  # case S160"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s170():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["string_size_ctype = visatype.ViInt32()  # case S170"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s180():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == ["string_size_ctype = visatype.ViInt32(error_code)  # case S180"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s190():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case S190"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_s200():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["output_ctype = visatype.ViInt64()  # case S200"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b510():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=True)
+    assert snippet == ["output_ctype = numpy.ctypeslib.as_ctypes(output)  # case B510"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b520():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case B520"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b530():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case B530"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b540():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[17], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["array_in_ctype = (custom_struct.custom_struct * len(array_in))(*[custom_struct.custom_struct(c) for c in array_in])  # case B540"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b550():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["input_array_ctype = None if input_array is None else (visatype.ViReal64 * len(input_array))(*input_array)  # case B550"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b560():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[3], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["array_out_ctype = (custom_struct.custom_struct * self.get_array_size_for_python_code())()  # case B560"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b570():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["an_int_ctype = (visatype.ViInt16 * 256)()  # case B570"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b580():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_ctype = None  # case B580"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b590():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # case B590"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b600():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["output_ctype = (visatype.ViInt64 * number_of_elements)()  # case B600"]
 
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
