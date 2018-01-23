@@ -78,7 +78,11 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             field_name = field[0]
             setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           else:
+%               if p['type'] == 'ViString':
+        ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}'].encode('ascii')
+%               else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
+%               endif
 %           endif
 %       endif
 %    endfor
