@@ -152,7 +152,7 @@ class IviDanceStep(Enum):
 
 
 def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config, use_numpy_array=False):
-    '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
+    '''Returns array of python snippets that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     Logic for creating the appropriate snippet is split up in two helper functions. One for scalars and one for buffers.
     '''
@@ -170,11 +170,11 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = 'visatype'
 
     if parameter['is_buffer'] is True:
-        definition = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
-        definition = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
 
-    return definition
+    return definitions
 
 
 def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
@@ -190,12 +190,16 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
         S190. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
         S200. Output scalar or enum:                                               visatype.ViInt32()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is False
     assert parameter['numpy'] is False
     corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
 
+    definitions = []
+    definition = None
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
             definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -226,8 +230,9 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         assert parameter['direction'] == 'out'
         definition = '{0}.{1}()  # case S200'.format(module_name, parameter['ctypes_type'])
 
-    # Scalers only have one definition
-    return [parameter['ctypes_variable_name'] + ' = ' + definition]
+    if definition is not None:
+        definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+    return definitions
 
 
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
@@ -243,10 +248,13 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         B580. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
         B590. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViInt32 * buffer_size_ctype.value)()
         B600. Output buffer with mechanism passed-in:                              (visatype.ViInt32 * buffer_size)()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is True
     definitions = []
+    definition = None
 
     if parameter['numpy'] is True and use_numpy_array is True:
         definition = '_converters.convert_iterable_to_ctypes({0})  # case B510'.format(parameter['python_name'])
@@ -290,7 +298,8 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
-    definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+    if definition is not None:
+        definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
     return definitions
 
 

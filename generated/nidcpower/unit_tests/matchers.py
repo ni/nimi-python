@@ -60,10 +60,16 @@ class _BufferMatcher(object):
         self._expected_size_or_value = expected_size_or_value
 
     def __eq__(self, other):
-        # If we get a type of list then we will accept that instead of the actual type.
-        if not isinstance(other, self.expected_type) and not isinstance(other, list):
-            print("Unexpected type. Expected: {0} or {1}. Received: {2}".format(self.expected_type, list, type(other)))
-            return False
+        if not isinstance(other, self.expected_type):
+            # We try to "dereference" this in case it is a pointer and then do the check again. Only then saying they don't match
+            try:
+                other = other.contents
+            except AttributeError:
+                pass
+
+            if not isinstance(other, self.expected_type):
+                print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+                return False
         if self.expected_size != len(other):
             print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
             return False
@@ -96,8 +102,15 @@ class ViStringMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, ctypes.Array):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
-            return False
+            # We try to "dereference" this in case it is a pointer and then do the check again. Only then saying they don't match
+            try:
+                other = other.contents
+            except AttributeError:
+                pass
+
+            if not isinstance(other, ctypes.Array):
+                print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+                return False
         if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
             print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
             return False
