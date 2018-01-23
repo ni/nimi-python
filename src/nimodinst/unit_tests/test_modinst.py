@@ -39,7 +39,9 @@ class TestSession(object):
         if attribute_value_buffer_size.value == 0:
             # TODO(marcoskirsch): What about the byte for the NULL character? Issue #526
             return (len(self.string_vals_device_looping[self.iteration_device_looping]))
-        attribute_value.contents.value = self.string_vals_device_looping[self.iteration_device_looping].encode('ascii')
+        bytes_to_copy = self.string_vals_device_looping[self.iteration_device_looping].encode('ascii')
+        for i in range(0, len(bytes_to_copy)):
+            attribute_value[i] = bytes_to_copy[i]
         self.iteration_device_looping += 1
         return 0
 
