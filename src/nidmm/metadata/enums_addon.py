@@ -16,3 +16,4 @@ enums_additional_enums = {
     'DCBias': {},  # Delete because boolean values only
     'OffsetCompensatedOhms': {},  # Delete because boolean values only
 }
+

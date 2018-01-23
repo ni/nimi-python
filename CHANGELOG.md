@@ -224,32 +224,32 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 <!--
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 -->
 

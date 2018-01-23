@@ -1,7 +1,7 @@
 niswitch.Session properties
 ===========================
 
-.. py:currentmodule:: niswitch
+.. py:currentmodule:: niswitch.Session
 
 .. py:attribute:: analog_bus_sharing_enable
 

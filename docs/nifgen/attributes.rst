@@ -1,7 +1,7 @@
 nifgen.Session properties
 =========================
 
-.. py:currentmodule:: nifgen
+.. py:currentmodule:: nifgen.Session
 
 .. py:attribute:: all_marker_events_latched_status
 
