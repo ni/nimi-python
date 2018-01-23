@@ -256,7 +256,7 @@ class _SessionBase(object):
         error_code_ctype = visatype.ViStatus()  # case S200
         buffer_size_ctype = visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
-        error_code = self._library.niFake_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
+        error_code = self._library.niFake_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, ctypes.pointer(description_ctype))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
