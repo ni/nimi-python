@@ -138,7 +138,7 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:  # and parameter['type'] != 'ViString'
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and parameter['type'] != 'ViString':
         parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
