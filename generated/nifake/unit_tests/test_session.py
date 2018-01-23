@@ -327,7 +327,7 @@ class TestSession(object):
             self.convert_iterable_to_ctypes_side_effect_count = 0
             with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
                 session.write_waveform(expected_array)
-            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
+            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_array))
 
     def test_write_waveform_numpy(self):
         expected_waveform = numpy.array([1.1, 2.2, 3.3, 4.4], order='C')
