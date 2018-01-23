@@ -151,7 +151,7 @@ class IviDanceStep(Enum):
 
 
 def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config, use_numpy_array=False):
-    '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
+    '''Returns array of python snippets that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     Logic for creating the appropriate snippet is split up in two helper functions. One for scalars and one for buffers.
     '''
@@ -189,6 +189,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
         S190. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
         S200. Output scalar or enum:                                               visatype.ViInt32()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is False
@@ -244,6 +246,8 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         B580. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
         B590. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViInt32 * buffer_size_ctype.value)()
         B600. Output buffer with mechanism passed-in:                              (visatype.ViInt32 * buffer_size)()
+
+    Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
     assert parameter['is_buffer'] is True
