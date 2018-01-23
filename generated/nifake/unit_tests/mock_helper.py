@@ -232,7 +232,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        a_string.contents.value = self._defaults['GetAStringOfFixedMaximumSize']['aString']
+        a_string.contents.value = self._defaults['GetAStringOfFixedMaximumSize']['aString'].encode('ascii')
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
@@ -480,7 +480,7 @@ class SideEffectsHelper(object):
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        a_string.contents.value = self._defaults['ReturnANumberAndAString']['aString']
+        a_string.contents.value = self._defaults['ReturnANumberAndAString']['aString'].encode('ascii')
         return self._defaults['ReturnANumberAndAString']['return']
 
     def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
@@ -582,7 +582,7 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values

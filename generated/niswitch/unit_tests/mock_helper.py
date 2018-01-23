@@ -206,8 +206,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
-            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
+        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
@@ -217,8 +216,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
-        for i in range(len(self._defaults['GetChannelName']['channelNameBuffer'])):
-            channel_name_buffer[i] = self._defaults['GetChannelName']['channelNameBuffer'][i]
+        channel_name_buffer.contents.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -231,8 +229,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        for i in range(len(self._defaults['GetError']['Description'])):
-            description[i] = self._defaults['GetError']['Description'][i]
+        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -242,8 +239,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size.value == 0:
             return len(self._defaults['GetPath']['Path'])
-        for i in range(len(self._defaults['GetPath']['Path'])):
-            path[i] = self._defaults['GetPath']['Path'][i]
+        path.contents.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -261,8 +257,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size.value == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
-        for i in range(len(self._defaults['GetRelayName']['relayNameBuffer'])):
-            relay_name_buffer[i] = self._defaults['GetRelayName']['relayNameBuffer'][i]
+        relay_name_buffer.contents.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
@@ -361,12 +356,7 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        a = self._defaults['error_message']['errorMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
+        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
         return self._defaults['error_message']['return']
 
     def niSwitch_reset(self, vi):  # noqa: N802
@@ -382,12 +372,7 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

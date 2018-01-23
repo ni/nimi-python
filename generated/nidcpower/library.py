@@ -89,7 +89,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureApertureTime_cfunc is None:
                 self.niDCPower_ConfigureApertureTime_cfunc = self._library.niDCPower_ConfigureApertureTime
-                self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
 
@@ -97,7 +97,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc is None:
                 self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc(vi, input_terminal, edge)
 
@@ -105,7 +105,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc is None:
                 self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc(vi, input_terminal, edge)
 
@@ -113,7 +113,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc is None:
                 self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc(vi, input_terminal, edge)
 
@@ -121,7 +121,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc is None:
                 self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc(vi, input_terminal, edge)
 
@@ -129,7 +129,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc is None:
                 self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc(vi, input_terminal, edge)
 
@@ -169,7 +169,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_ExportSignal_cfunc is None:
                 self.niDCPower_ExportSignal_cfunc = self._library.niDCPower_ExportSignal
-                self.niDCPower_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ViString, ViString]  # noqa: F405
                 self.niDCPower_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
@@ -177,7 +177,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_FetchMultiple_cfunc is None:
                 self.niDCPower_FetchMultiple_cfunc = self._library.niDCPower_FetchMultiple
-                self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
 
@@ -185,7 +185,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetAttributeViBoolean_cfunc is None:
                 self.niDCPower_GetAttributeViBoolean_cfunc = self._library.niDCPower_GetAttributeViBoolean
-                self.niDCPower_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -193,7 +193,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetAttributeViInt32_cfunc is None:
                 self.niDCPower_GetAttributeViInt32_cfunc = self._library.niDCPower_GetAttributeViInt32
-                self.niDCPower_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -201,7 +201,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetAttributeViInt64_cfunc is None:
                 self.niDCPower_GetAttributeViInt64_cfunc = self._library.niDCPower_GetAttributeViInt64
-                self.niDCPower_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
+                self.niDCPower_GetAttributeViInt64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
                 self.niDCPower_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -209,7 +209,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetAttributeViReal64_cfunc is None:
                 self.niDCPower_GetAttributeViReal64_cfunc = self._library.niDCPower_GetAttributeViReal64
-                self.niDCPower_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -217,7 +217,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetAttributeViString_cfunc is None:
                 self.niDCPower_GetAttributeViString_cfunc = self._library.niDCPower_GetAttributeViString
-                self.niDCPower_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDCPower_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
@@ -225,7 +225,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetChannelName_cfunc is None:
                 self.niDCPower_GetChannelName_cfunc = self._library.niDCPower_GetChannelName
-                self.niDCPower_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDCPower_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetChannelName_cfunc(vi, index, buffer_size, channel_name)
 
@@ -233,7 +233,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_GetError_cfunc is None:
                 self.niDCPower_GetError_cfunc = self._library.niDCPower_GetError
-                self.niDCPower_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDCPower_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetError_cfunc(vi, code, buffer_size, description)
 
@@ -281,7 +281,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_InitializeWithChannels_cfunc is None:
                 self.niDCPower_InitializeWithChannels_cfunc = self._library.niDCPower_InitializeWithChannels
-                self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ViString, ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niDCPower_InitializeWithChannels_cfunc.argtypes = [ViString, ViString, ViBoolean, ViString, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDCPower_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_InitializeWithChannels_cfunc(resource_name, channels, reset, option_string, vi)
 
@@ -297,7 +297,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_Measure_cfunc is None:
                 self.niDCPower_Measure_cfunc = self._library.niDCPower_Measure
-                self.niDCPower_Measure_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_Measure_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Measure_cfunc(vi, channel_name, measurement_type, measurement)
 
@@ -305,7 +305,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_MeasureMultiple_cfunc is None:
                 self.niDCPower_MeasureMultiple_cfunc = self._library.niDCPower_MeasureMultiple
-                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
@@ -321,7 +321,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_QueryInCompliance_cfunc is None:
                 self.niDCPower_QueryInCompliance_cfunc = self._library.niDCPower_QueryInCompliance
-                self.niDCPower_QueryInCompliance_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_QueryInCompliance_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryInCompliance_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryInCompliance_cfunc(vi, channel_name, in_compliance)
 
@@ -329,7 +329,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_QueryMaxCurrentLimit_cfunc is None:
                 self.niDCPower_QueryMaxCurrentLimit_cfunc = self._library.niDCPower_QueryMaxCurrentLimit
-                self.niDCPower_QueryMaxCurrentLimit_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_QueryMaxCurrentLimit_cfunc.argtypes = [ViSession, ViString, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMaxCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxCurrentLimit_cfunc(vi, channel_name, voltage_level, max_current_limit)
 
@@ -337,7 +337,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_QueryMaxVoltageLevel_cfunc is None:
                 self.niDCPower_QueryMaxVoltageLevel_cfunc = self._library.niDCPower_QueryMaxVoltageLevel
-                self.niDCPower_QueryMaxVoltageLevel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_QueryMaxVoltageLevel_cfunc.argtypes = [ViSession, ViString, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMaxVoltageLevel_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMaxVoltageLevel_cfunc(vi, channel_name, current_limit, max_voltage_level)
 
@@ -345,7 +345,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_QueryMinCurrentLimit_cfunc is None:
                 self.niDCPower_QueryMinCurrentLimit_cfunc = self._library.niDCPower_QueryMinCurrentLimit
-                self.niDCPower_QueryMinCurrentLimit_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_QueryMinCurrentLimit_cfunc.argtypes = [ViSession, ViString, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_QueryMinCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryMinCurrentLimit_cfunc(vi, channel_name, voltage_level, min_current_limit)
 
@@ -353,7 +353,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_QueryOutputState_cfunc is None:
                 self.niDCPower_QueryOutputState_cfunc = self._library.niDCPower_QueryOutputState
-                self.niDCPower_QueryOutputState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_QueryOutputState_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDCPower_QueryOutputState_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_QueryOutputState_cfunc(vi, channel_name, output_state, in_state)
 
@@ -393,7 +393,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetAttributeViBoolean_cfunc is None:
                 self.niDCPower_SetAttributeViBoolean_cfunc = self._library.niDCPower_SetAttributeViBoolean
-                self.niDCPower_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
+                self.niDCPower_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
                 self.niDCPower_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -401,7 +401,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetAttributeViInt32_cfunc is None:
                 self.niDCPower_SetAttributeViInt32_cfunc = self._library.niDCPower_SetAttributeViInt32
-                self.niDCPower_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
+                self.niDCPower_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
                 self.niDCPower_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -409,7 +409,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetAttributeViInt64_cfunc is None:
                 self.niDCPower_SetAttributeViInt64_cfunc = self._library.niDCPower_SetAttributeViInt64
-                self.niDCPower_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
+                self.niDCPower_SetAttributeViInt64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt64]  # noqa: F405
                 self.niDCPower_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -417,7 +417,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetAttributeViReal64_cfunc is None:
                 self.niDCPower_SetAttributeViReal64_cfunc = self._library.niDCPower_SetAttributeViReal64
-                self.niDCPower_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
+                self.niDCPower_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
                 self.niDCPower_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -425,7 +425,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetAttributeViString_cfunc is None:
                 self.niDCPower_SetAttributeViString_cfunc = self._library.niDCPower_SetAttributeViString
-                self.niDCPower_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
                 self.niDCPower_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -433,7 +433,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetSequence_cfunc is None:
                 self.niDCPower_SetSequence_cfunc = self._library.niDCPower_SetSequence
-                self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
+                self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
 
@@ -457,7 +457,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_error_message_cfunc is None:
                 self.niDCPower_error_message_cfunc = self._library.niDCPower_error_message
-                self.niDCPower_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDCPower_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_error_message_cfunc(vi, error_code, error_message)
 
@@ -473,6 +473,6 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_self_test_cfunc is None:
                 self.niDCPower_self_test_cfunc = self._library.niDCPower_self_test
-                self.niDCPower_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDCPower_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_self_test_cfunc(vi, self_test_result, self_test_message)

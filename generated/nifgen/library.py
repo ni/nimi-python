@@ -357,7 +357,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetAttributeViString_cfunc is None:
                 self.niFgen_GetAttributeViString_cfunc = self._library.niFgen_GetAttributeViString
-                self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niFgen_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
 
@@ -365,7 +365,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetError_cfunc is None:
                 self.niFgen_GetError_cfunc = self._library.niFgen_GetError
-                self.niFgen_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niFgen_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
@@ -637,7 +637,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_error_message_cfunc is None:
                 self.niFgen_error_message_cfunc = self._library.niFgen_error_message
-                self.niFgen_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niFgen_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_error_message_cfunc(vi, error_code, error_message)
 
@@ -653,6 +653,6 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_self_test_cfunc is None:
                 self.niFgen_self_test_cfunc = self._library.niFgen_self_test
-                self.niFgen_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
                 self.niFgen_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_self_test_cfunc(vi, self_test_result, self_test_message)

@@ -298,8 +298,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        for i in range(len(self._defaults['GetAttributeViString']['attributeValue'])):
-            attribute_value[i] = self._defaults['GetAttributeViString']['attributeValue'][i]
+        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
@@ -309,8 +308,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelName'])
-        for i in range(len(self._defaults['GetChannelName']['channelName'])):
-            channel_name[i] = self._defaults['GetChannelName']['channelName'][i]
+        channel_name.contents.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -323,8 +321,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        for i in range(len(self._defaults['GetError']['Description'])):
-            description[i] = self._defaults['GetError']['Description'][i]
+        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
@@ -549,12 +546,7 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDCPower_error_message", param='errorMessage')
-        a = self._defaults['error_message']['errorMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
+        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
         return self._defaults['error_message']['return']
 
     def niDCPower_reset(self, vi):  # noqa: N802
@@ -570,12 +562,7 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDCPower_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

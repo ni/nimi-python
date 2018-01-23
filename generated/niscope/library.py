@@ -91,7 +91,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ActualNumWfms_cfunc is None:
                 self.niScope_ActualNumWfms_cfunc = self._library.niScope_ActualNumWfms
-                self.niScope_ActualNumWfms_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niScope_ActualNumWfms_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_ActualNumWfms_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ActualNumWfms_cfunc(vi, channel_list, num_wfms)
 
@@ -107,7 +107,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_CalSelfCalibrate_cfunc is None:
                 self.niScope_CalSelfCalibrate_cfunc = self._library.niScope_CalSelfCalibrate
-                self.niScope_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niScope_CalSelfCalibrate_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niScope_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_CalSelfCalibrate_cfunc(vi, channel_list, option)
 
@@ -115,7 +115,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ClearWaveformMeasurementStats_cfunc is None:
                 self.niScope_ClearWaveformMeasurementStats_cfunc = self._library.niScope_ClearWaveformMeasurementStats
-                self.niScope_ClearWaveformMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
+                self.niScope_ClearWaveformMeasurementStats_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
                 self.niScope_ClearWaveformMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ClearWaveformMeasurementStats_cfunc(vi, channel_list, clearable_measurement_function)
 
@@ -131,7 +131,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureChanCharacteristics_cfunc is None:
                 self.niScope_ConfigureChanCharacteristics_cfunc = self._library.niScope_ConfigureChanCharacteristics
-                self.niScope_ConfigureChanCharacteristics_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureChanCharacteristics_cfunc.argtypes = [ViSession, ViString, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureChanCharacteristics_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureChanCharacteristics_cfunc(vi, channel_list, input_impedance, max_input_frequency)
 
@@ -139,7 +139,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureEqualizationFilterCoefficients_cfunc is None:
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc = self._library.niScope_ConfigureEqualizationFilterCoefficients
-                self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_ConfigureEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureEqualizationFilterCoefficients_cfunc(vi, channel_list, number_of_coefficients, coefficients)
 
@@ -163,7 +163,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureTriggerDigital_cfunc is None:
                 self.niScope_ConfigureTriggerDigital_cfunc = self._library.niScope_ConfigureTriggerDigital
-                self.niScope_ConfigureTriggerDigital_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureTriggerDigital_cfunc.argtypes = [ViSession, ViString, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerDigital_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerDigital_cfunc(vi, trigger_source, slope, holdoff, delay)
 
@@ -171,7 +171,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureTriggerEdge_cfunc is None:
                 self.niScope_ConfigureTriggerEdge_cfunc = self._library.niScope_ConfigureTriggerEdge
-                self.niScope_ConfigureTriggerEdge_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureTriggerEdge_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerEdge_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerEdge_cfunc(vi, trigger_source, level, slope, trigger_coupling, holdoff, delay)
 
@@ -179,7 +179,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureTriggerHysteresis_cfunc is None:
                 self.niScope_ConfigureTriggerHysteresis_cfunc = self._library.niScope_ConfigureTriggerHysteresis
-                self.niScope_ConfigureTriggerHysteresis_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureTriggerHysteresis_cfunc.argtypes = [ViSession, ViString, ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerHysteresis_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerHysteresis_cfunc(vi, trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay)
 
@@ -203,7 +203,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureTriggerVideo_cfunc is None:
                 self.niScope_ConfigureTriggerVideo_cfunc = self._library.niScope_ConfigureTriggerVideo
-                self.niScope_ConfigureTriggerVideo_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViBoolean, ViInt32, ViInt32, ViInt32, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureTriggerVideo_cfunc.argtypes = [ViSession, ViString, ViBoolean, ViInt32, ViInt32, ViInt32, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerVideo_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerVideo_cfunc(vi, trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
 
@@ -211,7 +211,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureTriggerWindow_cfunc is None:
                 self.niScope_ConfigureTriggerWindow_cfunc = self._library.niScope_ConfigureTriggerWindow
-                self.niScope_ConfigureTriggerWindow_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niScope_ConfigureTriggerWindow_cfunc.argtypes = [ViSession, ViString, ViReal64, ViReal64, ViInt32, ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niScope_ConfigureTriggerWindow_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureTriggerWindow_cfunc(vi, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay)
 
@@ -219,7 +219,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ConfigureVertical_cfunc is None:
                 self.niScope_ConfigureVertical_cfunc = self._library.niScope_ConfigureVertical
-                self.niScope_ConfigureVertical_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64, ViInt32, ViReal64, ViBoolean]  # noqa: F405
+                self.niScope_ConfigureVertical_cfunc.argtypes = [ViSession, ViString, ViReal64, ViReal64, ViInt32, ViReal64, ViBoolean]  # noqa: F405
                 self.niScope_ConfigureVertical_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ConfigureVertical_cfunc(vi, channel_list, range, offset, coupling, probe_attenuation, enabled)
 
@@ -243,7 +243,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
                 self.niScope_Fetch_cfunc = self._library.niScope_Fetch
-                self.niScope_Fetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_Fetch_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -251,7 +251,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchBinary16_cfunc is None:
                 self.niScope_FetchBinary16_cfunc = self._library.niScope_FetchBinary16
-                self.niScope_FetchBinary16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchBinary16_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary16_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary16_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -259,7 +259,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchBinary32_cfunc is None:
                 self.niScope_FetchBinary32_cfunc = self._library.niScope_FetchBinary32
-                self.niScope_FetchBinary32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchBinary32_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary32_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -267,7 +267,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchBinary8_cfunc is None:
                 self.niScope_FetchBinary8_cfunc = self._library.niScope_FetchBinary8
-                self.niScope_FetchBinary8_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt8), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchBinary8_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViInt8), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary8_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchBinary8_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -275,7 +275,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchDispatcher_cfunc is None:
                 self.niScope_FetchDispatcher_cfunc = self._library.niScope_FetchDispatcher
-                self.niScope_FetchDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchDispatcher_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchDispatcher_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchDispatcher_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -283,7 +283,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchDouble_cfunc is None:
                 self.niScope_FetchDouble_cfunc = self._library.niScope_FetchDouble
-                self.niScope_FetchDouble_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FetchDouble_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchDouble_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchDouble_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -291,7 +291,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchMeasurement_cfunc is None:
                 self.niScope_FetchMeasurement_cfunc = self._library.niScope_FetchMeasurement
-                self.niScope_FetchMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_FetchMeasurement_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_FetchMeasurement_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchMeasurement_cfunc(vi, channel_list, timeout, scalar_meas_function, result)
 
@@ -299,7 +299,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_FetchMeasurementStats_cfunc is None:
                 self.niScope_FetchMeasurementStats_cfunc = self._library.niScope_FetchMeasurementStats
-                self.niScope_FetchMeasurementStats_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niScope_FetchMeasurementStats_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_FetchMeasurementStats_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchMeasurementStats_cfunc(vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats)
 
@@ -307,7 +307,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetAttributeViBoolean_cfunc is None:
                 self.niScope_GetAttributeViBoolean_cfunc = self._library.niScope_GetAttributeViBoolean
-                self.niScope_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niScope_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niScope_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
 
@@ -315,7 +315,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetAttributeViInt32_cfunc is None:
                 self.niScope_GetAttributeViInt32_cfunc = self._library.niScope_GetAttributeViInt32
-                self.niScope_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niScope_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niScope_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
 
@@ -323,7 +323,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetAttributeViReal64_cfunc is None:
                 self.niScope_GetAttributeViReal64_cfunc = self._library.niScope_GetAttributeViReal64
-                self.niScope_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
 
@@ -331,7 +331,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetAttributeViString_cfunc is None:
                 self.niScope_GetAttributeViString_cfunc = self._library.niScope_GetAttributeViString
-                self.niScope_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niScope_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViString_cfunc(vi, channel_list, attribute_id, buf_size, value)
 
@@ -339,7 +339,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetEqualizationFilterCoefficients_cfunc is None:
                 self.niScope_GetEqualizationFilterCoefficients_cfunc = self._library.niScope_GetEqualizationFilterCoefficients
-                self.niScope_GetEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_GetEqualizationFilterCoefficients_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_GetEqualizationFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetEqualizationFilterCoefficients_cfunc(vi, channel, number_of_coefficients, coefficients)
 
@@ -347,7 +347,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_GetError_cfunc is None:
                 self.niScope_GetError_cfunc = self._library.niScope_GetError
-                self.niScope_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
 
@@ -387,7 +387,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_Read_cfunc is None:
                 self.niScope_Read_cfunc = self._library.niScope_Read
-                self.niScope_Read_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_Read_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
@@ -395,7 +395,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_ReadMeasurement_cfunc is None:
                 self.niScope_ReadMeasurement_cfunc = self._library.niScope_ReadMeasurement
-                self.niScope_ReadMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niScope_ReadMeasurement_cfunc.argtypes = [ViSession, ViString, ViReal64, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niScope_ReadMeasurement_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ReadMeasurement_cfunc(vi, channel_list, timeout, scalar_meas_function, result)
 
@@ -427,7 +427,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_SetAttributeViBoolean_cfunc is None:
                 self.niScope_SetAttributeViBoolean_cfunc = self._library.niScope_SetAttributeViBoolean
-                self.niScope_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
+                self.niScope_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
                 self.niScope_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViBoolean_cfunc(vi, channel_list, attribute_id, value)
 
@@ -435,7 +435,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_SetAttributeViInt32_cfunc is None:
                 self.niScope_SetAttributeViInt32_cfunc = self._library.niScope_SetAttributeViInt32
-                self.niScope_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
+                self.niScope_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
                 self.niScope_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViInt32_cfunc(vi, channel_list, attribute_id, value)
 
@@ -443,7 +443,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_SetAttributeViReal64_cfunc is None:
                 self.niScope_SetAttributeViReal64_cfunc = self._library.niScope_SetAttributeViReal64
-                self.niScope_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
+                self.niScope_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
                 self.niScope_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViReal64_cfunc(vi, channel_list, attribute_id, value)
 
@@ -451,7 +451,7 @@ class Library(object):
         with self._func_lock:
             if self.niScope_SetAttributeViString_cfunc is None:
                 self.niScope_SetAttributeViString_cfunc = self._library.niScope_SetAttributeViString
-                self.niScope_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
                 self.niScope_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViString_cfunc(vi, channel_list, attribute_id, value)
 
@@ -475,6 +475,6 @@ class Library(object):
         with self._func_lock:
             if self.niScope_self_test_cfunc is None:
                 self.niScope_self_test_cfunc = self._library.niScope_self_test
-                self.niScope_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
                 self.niScope_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_self_test_cfunc(vi, self_test_result, self_test_message)

@@ -1582,7 +1582,7 @@ nidmm.Session methods
                 not return error code 1013.
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             This parameter contains the string returned from the instrument

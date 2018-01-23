@@ -248,7 +248,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetAttributeViString_cfunc is None:
                 self.niDMM_GetAttributeViString_cfunc = self._library.niDMM_GetAttributeViString
-                self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDMM_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
@@ -280,7 +280,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetError_cfunc is None:
                 self.niDMM_GetError_cfunc = self._library.niDMM_GetError
-                self.niDMM_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description)
 
@@ -432,7 +432,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_SetAttributeViString_cfunc is None:
                 self.niDMM_SetAttributeViString_cfunc = self._library.niDMM_SetAttributeViString
-                self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -448,7 +448,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_error_message_cfunc is None:
                 self.niDMM_error_message_cfunc = self._library.niDMM_error_message
-                self.niDMM_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDMM_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_error_message_cfunc(vi, error_code, error_message)
 
@@ -464,6 +464,6 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_self_test_cfunc is None:
                 self.niDMM_self_test_cfunc = self._library.niDMM_self_test
-                self.niDMM_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
                 self.niDMM_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_self_test_cfunc(vi, self_test_result, self_test_message)

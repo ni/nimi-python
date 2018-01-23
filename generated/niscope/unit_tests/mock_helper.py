@@ -482,8 +482,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetAttributeViString", param='Value')
         if buf_size.value == 0:
             return len(self._defaults['GetAttributeViString']['Value'])
-        for i in range(len(self._defaults['GetAttributeViString']['Value'])):
-            value[i] = self._defaults['GetAttributeViString']['Value'][i]
+        value.contents.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
@@ -509,8 +508,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        for i in range(len(self._defaults['GetError']['Description'])):
-            description[i] = self._defaults['GetError']['Description'][i]
+        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
@@ -623,12 +621,7 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

@@ -701,7 +701,7 @@ niswitch.Session methods
             
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Self-test response string from the switch device. You must pass a ViChar

@@ -479,7 +479,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param slope:
 
 
@@ -548,7 +548,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param trigger_coupling:
 
 
@@ -641,7 +641,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param trigger_coupling:
 
 
@@ -808,7 +808,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param signal_format:
 
 
@@ -937,7 +937,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param low_level:
 
 
@@ -1894,7 +1894,7 @@ niscope.Session methods
             
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test response string from the instrument. Refer to the

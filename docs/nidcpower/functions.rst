@@ -148,7 +148,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -199,7 +199,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -251,7 +251,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -302,7 +302,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -353,7 +353,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -696,7 +696,7 @@ nidcpower.Session methods
         +--------------+----------------------+
 
 
-    :type output_terminal: string
+    :type output_terminal: str
     :param signal_identifier:
 
 
@@ -705,7 +705,7 @@ nidcpower.Session methods
         
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
 
 .. py:method:: fetch_multiple(count, timeout=1.0)
 
@@ -1436,7 +1436,7 @@ nidcpower.Session methods
             +----------------+-------------------+
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test result message. The size of this array must be at

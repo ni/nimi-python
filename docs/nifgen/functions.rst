@@ -2359,7 +2359,7 @@ nifgen.Session methods
             +----------------+------------------+
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test response string from the instrument.
