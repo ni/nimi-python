@@ -159,7 +159,7 @@ class IviDanceStep(Enum):
 
 
 def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config, use_numpy_array=False):
-    '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
+    '''Returns array of python snippets that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     Logic for creating the appropriate snippet is split up in two helper functions. One for scalars and one for buffers.
     '''
@@ -179,7 +179,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     if parameter['is_buffer'] is True:
         definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
-        definition = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
 
     return definitions
 
