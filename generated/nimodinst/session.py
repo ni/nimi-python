@@ -218,7 +218,7 @@ class Session(object):
         _open_installed_devices_session. Call this function when you are
         finished using the session handle and do not use this handle again.
         '''
-        handle_ctype = visatype.ViSession(self._handle)  # case 1
+        handle_ctype = visatype.ViSession(self._handle)  # case S110
         error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -241,12 +241,12 @@ class Session(object):
         can then allocate an appropriately sized string character buffer and
         call this function again.
         '''
-        error_info_buffer_size_ctype = visatype.ViInt32()  # case 7
-        error_info_ctype = None  # case 12
+        error_info_buffer_size_ctype = visatype.ViInt32()  # case S170
+        error_info_ctype = None  # case B580
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
-        error_info_ctype = (visatype.ViChar * error_info_buffer_size_ctype.value)()  # case 12.5
+        error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
+        error_info_ctype = (visatype.ViChar * error_info_buffer_size_ctype.value)()  # case B590
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
@@ -266,6 +266,7 @@ class Session(object):
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
+
             attribute_id (int): The ID of the integer attribute you want to query. Valid Values Slot
                 Number--the slot (for example, in a PXI chassis) in which the device is
                 installed. This attribute can only be queried for PXI devices installed
@@ -279,14 +280,16 @@ class Session(object):
                 the form "PXI::::INSTR". Traditional NI-DAQ devices do not support the
                 chassis number, bus number, and socket number attributes.
 
+
         Returns:
             attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
                 the requested attribute.
+
         '''
-        handle_ctype = visatype.ViSession(self._handle)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 9
-        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt32()  # case 14
+        handle_ctype = visatype.ViSession(self._handle)  # case S110
+        index_ctype = visatype.ViInt32(index)  # case S150
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -312,22 +315,24 @@ class Session(object):
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
+
             attribute_id (int): The ID of the string attribute you want to query. Valid Values
-                DEVICE_NAME--the name of the device, which can be used
+                device_name--the name of the device, which can be used
                 to open an instrument driver session for that device
-                DEVICE_MODEL--the model of the device (for example, NI
-                PXI-5122) SERIAL_NUMBER--the serial number of the
+                device_model--the model of the device (for example, NI
+                PXI-5122) serial_number--the serial number of the
                 device
+
         '''
-        handle_ctype = visatype.ViSession(self._handle)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 9
-        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 9
-        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case 7
-        attribute_value_ctype = None  # case 12
+        handle_ctype = visatype.ViSession(self._handle)  # case S110
+        index_ctype = visatype.ViInt32(index)  # case S150
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case S150
+        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case S170
+        attribute_value_ctype = None  # case B580
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        attribute_value_buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
-        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case 12.5
+        attribute_value_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case B590
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -357,17 +362,20 @@ class Session(object):
                 you use the empty string for this parameter, NI-ModInst creates a list
                 of all Modular Instruments devices installed in the system.
 
+
         Returns:
             handle (int): A pointer to a ViSession variable that receives the value of the
                 NI-ModInst session handle. This value acts as a handle to the list of
                 installed devices and is used in other NI-ModInst functions.
+
             device_count (int): A pointer to an integer variable that receives the number of devices
                 found in the system that are supported by the driver specified in the
                 driver parameter.
+
         '''
-        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case 3
-        handle_ctype = visatype.ViSession()  # case 14
-        device_count_ctype = visatype.ViInt32()  # case 14
+        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case B530
+        handle_ctype = visatype.ViSession()  # case S200
+        device_count_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
