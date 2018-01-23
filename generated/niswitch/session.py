@@ -730,11 +730,11 @@ class _SessionBase(object):
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         array_size_ctype = visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -768,11 +768,11 @@ class _SessionBase(object):
         code_ctype = visatype.ViStatus()  # case S200
         buffer_size_ctype = visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, None if description_ctype is None else (ctypes.pointer(description_ctype)))
+        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, None if description_ctype is None else (ctypes.pointer(description_ctype)))
+        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
@@ -1065,7 +1065,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code_ctype = visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, None if error_message_ctype is None else (ctypes.pointer(error_message_ctype)))
+        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -1447,11 +1447,11 @@ class Session(_SessionBase):
         index_ctype = visatype.ViInt32(index)  # case S150
         buffer_size_ctype = visatype.ViInt32()  # case S170
         channel_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, None if channel_name_buffer_ctype is None else (ctypes.pointer(channel_name_buffer_ctype)))
+        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, None if channel_name_buffer_ctype is None else (ctypes.pointer(channel_name_buffer_ctype)))
+        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
 
@@ -1487,11 +1487,11 @@ class Session(_SessionBase):
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         buffer_size_ctype = visatype.ViInt32()  # case S170
         path_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, None if path_ctype is None else (ctypes.pointer(path_ctype)))
+        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, None if path_ctype is None else (ctypes.pointer(path_ctype)))
+        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
 
@@ -1538,11 +1538,11 @@ class Session(_SessionBase):
         index_ctype = visatype.ViInt32(index)  # case S150
         relay_name_buffer_size_ctype = visatype.ViInt32()  # case S170
         relay_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, None if relay_name_buffer_ctype is None else (ctypes.pointer(relay_name_buffer_ctype)))
+        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, None if relay_name_buffer_ctype is None else (ctypes.pointer(relay_name_buffer_ctype)))
+        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
 
@@ -2108,7 +2108,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         self_test_result_ctype = visatype.ViInt16()  # case S200
         self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), None if self_test_message_ctype is None else (ctypes.pointer(self_test_message_ctype)))
+        error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

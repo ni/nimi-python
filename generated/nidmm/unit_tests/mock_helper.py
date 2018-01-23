@@ -249,9 +249,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
         a = self._defaults['FetchMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(reading_array), len(a))):
             reading_array[i] = a[i]
         if self._defaults['FetchMultiPoint']['actualNumberOfPoints'] is None:
@@ -265,9 +262,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
         a = self._defaults['FetchWaveform']['waveformArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(waveform_array), len(a))):
             waveform_array[i] = a[i]
         if self._defaults['FetchWaveform']['actualNumberOfPoints'] is None:
@@ -317,7 +311,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -366,7 +360,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
@@ -450,9 +444,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
         a = self._defaults['ReadMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(reading_array), len(a))):
             reading_array[i] = a[i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
@@ -477,9 +468,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReadWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
         a = self._defaults['ReadWaveform']['waveformArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(waveform_array), len(a))):
             waveform_array[i] = a[i]
         if self._defaults['ReadWaveform']['actualNumberOfPoints'] is None:
@@ -532,7 +520,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
+        import sys
+        a = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
@@ -548,7 +541,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
+        import sys
+        a = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

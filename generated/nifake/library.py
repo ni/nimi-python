@@ -126,7 +126,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAStringOfFixedMaximumSize_cfunc is None:
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc = self._library.niFake_GetAStringOfFixedMaximumSize
-                self.niFake_GetAStringOfFixedMaximumSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_GetAStringOfFixedMaximumSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringOfFixedMaximumSize_cfunc(vi, a_string)
 
@@ -134,7 +134,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAnIviDanceString_cfunc is None:
                 self.niFake_GetAnIviDanceString_cfunc = self._library.niFake_GetAnIviDanceString
-                self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
 
@@ -174,7 +174,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAttributeViBoolean_cfunc is None:
                 self.niFake_GetAttributeViBoolean_cfunc = self._library.niFake_GetAttributeViBoolean
-                self.niFake_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFake_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -182,7 +182,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAttributeViInt32_cfunc is None:
                 self.niFake_GetAttributeViInt32_cfunc = self._library.niFake_GetAttributeViInt32
-                self.niFake_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFake_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -190,7 +190,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAttributeViInt64_cfunc is None:
                 self.niFake_GetAttributeViInt64_cfunc = self._library.niFake_GetAttributeViInt64
-                self.niFake_GetAttributeViInt64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
+                self.niFake_GetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt64)]  # noqa: F405
                 self.niFake_GetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -198,7 +198,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAttributeViReal64_cfunc is None:
                 self.niFake_GetAttributeViReal64_cfunc = self._library.niFake_GetAttributeViReal64
-                self.niFake_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -206,7 +206,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetAttributeViString_cfunc is None:
                 self.niFake_GetAttributeViString_cfunc = self._library.niFake_GetAttributeViString
-                self.niFake_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
 
@@ -246,7 +246,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetError_cfunc is None:
                 self.niFake_GetError_cfunc = self._library.niFake_GetError
-                self.niFake_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
 
@@ -262,7 +262,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_InitWithOptions_cfunc is None:
                 self.niFake_InitWithOptions_cfunc = self._library.niFake_InitWithOptions
-                self.niFake_InitWithOptions_cfunc.argtypes = [ViString, ViBoolean, ViBoolean, ViString, ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niFake_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niFake_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
@@ -294,7 +294,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_ParametersAreMultipleTypes_cfunc is None:
                 self.niFake_ParametersAreMultipleTypes_cfunc = self._library.niFake_ParametersAreMultipleTypes
-                self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ViInt32, ViString]  # noqa: F405
+                self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ParametersAreMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
 
@@ -318,7 +318,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_ReadFromChannel_cfunc is None:
                 self.niFake_ReadFromChannel_cfunc = self._library.niFake_ReadFromChannel
-                self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_ReadFromChannel_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
 
@@ -326,7 +326,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_ReturnANumberAndAString_cfunc is None:
                 self.niFake_ReturnANumberAndAString_cfunc = self._library.niFake_ReturnANumberAndAString
-                self.niFake_ReturnANumberAndAString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_ReturnANumberAndAString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ReturnANumberAndAString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnANumberAndAString_cfunc(vi, a_number, a_string)
 
@@ -334,7 +334,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_ReturnMultipleTypes_cfunc is None:
                 self.niFake_ReturnMultipleTypes_cfunc = self._library.niFake_ReturnMultipleTypes
-                self.niFake_ReturnMultipleTypes_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt64), ctypes.POINTER(ViInt16), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_ReturnMultipleTypes_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt64), ctypes.POINTER(ViInt16), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ReturnMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string)
 
@@ -342,7 +342,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetAttributeViBoolean_cfunc is None:
                 self.niFake_SetAttributeViBoolean_cfunc = self._library.niFake_SetAttributeViBoolean
-                self.niFake_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
+                self.niFake_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niFake_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -350,7 +350,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetAttributeViInt32_cfunc is None:
                 self.niFake_SetAttributeViInt32_cfunc = self._library.niFake_SetAttributeViInt32
-                self.niFake_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
+                self.niFake_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niFake_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -358,7 +358,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetAttributeViInt64_cfunc is None:
                 self.niFake_SetAttributeViInt64_cfunc = self._library.niFake_SetAttributeViInt64
-                self.niFake_SetAttributeViInt64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt64]  # noqa: F405
+                self.niFake_SetAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
                 self.niFake_SetAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -366,7 +366,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetAttributeViReal64_cfunc is None:
                 self.niFake_SetAttributeViReal64_cfunc = self._library.niFake_SetAttributeViReal64
-                self.niFake_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
+                self.niFake_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niFake_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -374,7 +374,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetAttributeViString_cfunc is None:
                 self.niFake_SetAttributeViString_cfunc = self._library.niFake_SetAttributeViString
-                self.niFake_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
+                self.niFake_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -398,7 +398,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_TwoInputFunction_cfunc is None:
                 self.niFake_TwoInputFunction_cfunc = self._library.niFake_TwoInputFunction
-                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession, ViReal64, ViString]  # noqa: F405
+                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession, ViReal64, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
 
@@ -430,6 +430,6 @@ class Library(object):
         with self._func_lock:
             if self.niFake_error_message_cfunc is None:
                 self.niFake_error_message_cfunc = self._library.niFake_error_message
-                self.niFake_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFake_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_error_message_cfunc(vi, error_code, error_message)

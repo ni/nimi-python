@@ -273,17 +273,11 @@ class SideEffectsHelper(object):
         if self._defaults['Fetch']['Wfm'] is None:
             raise MockFunctionCallError("niScope_Fetch", param='Wfm')
         a = self._defaults['Fetch']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['Fetch']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Fetch", param='wfmInfo')
         a = self._defaults['Fetch']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['Fetch']['return']
@@ -294,17 +288,11 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary16']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary16", param='Wfm')
         a = self._defaults['FetchBinary16']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['FetchBinary16']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary16", param='wfmInfo')
         a = self._defaults['FetchBinary16']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchBinary16']['return']
@@ -315,17 +303,11 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary32']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary32", param='Wfm')
         a = self._defaults['FetchBinary32']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['FetchBinary32']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary32", param='wfmInfo')
         a = self._defaults['FetchBinary32']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchBinary32']['return']
@@ -336,17 +318,11 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary8']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary8", param='Wfm')
         a = self._defaults['FetchBinary8']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['FetchBinary8']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary8", param='wfmInfo')
         a = self._defaults['FetchBinary8']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchBinary8']['return']
@@ -357,9 +333,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchDispatcher']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchDispatcher", param='wfmInfo')
         a = self._defaults['FetchDispatcher']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchDispatcher']['return']
@@ -370,17 +343,11 @@ class SideEffectsHelper(object):
         if self._defaults['FetchDouble']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchDouble", param='Wfm')
         a = self._defaults['FetchDouble']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['FetchDouble']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchDouble", param='wfmInfo')
         a = self._defaults['FetchDouble']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['FetchDouble']['return']
@@ -391,9 +358,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMeasurement']['Result'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurement", param='Result')
         a = self._defaults['FetchMeasurement']['Result']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(result), len(a))):
             result[i] = a[i]
         return self._defaults['FetchMeasurement']['return']
@@ -404,49 +368,31 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMeasurementStats']['Result'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Result')
         a = self._defaults['FetchMeasurementStats']['Result']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(result), len(a))):
             result[i] = a[i]
         if self._defaults['FetchMeasurementStats']['Mean'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Mean')
         a = self._defaults['FetchMeasurementStats']['Mean']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(mean), len(a))):
             mean[i] = a[i]
         if self._defaults['FetchMeasurementStats']['Stdev'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Stdev')
         a = self._defaults['FetchMeasurementStats']['Stdev']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(stdev), len(a))):
             stdev[i] = a[i]
         if self._defaults['FetchMeasurementStats']['Min'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Min')
         a = self._defaults['FetchMeasurementStats']['Min']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(min), len(a))):
             min[i] = a[i]
         if self._defaults['FetchMeasurementStats']['Max'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Max')
         a = self._defaults['FetchMeasurementStats']['Max']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(max), len(a))):
             max[i] = a[i]
         if self._defaults['FetchMeasurementStats']['numInStats'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='numInStats')
         a = self._defaults['FetchMeasurementStats']['numInStats']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(num_in_stats), len(a))):
             num_in_stats[i] = a[i]
         return self._defaults['FetchMeasurementStats']['return']
@@ -482,7 +428,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetAttributeViString", param='Value')
         if buf_size.value == 0:
             return len(self._defaults['GetAttributeViString']['Value'])
-        value.contents.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
+        value.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
@@ -491,9 +437,6 @@ class SideEffectsHelper(object):
         if self._defaults['GetEqualizationFilterCoefficients']['Coefficients'] is None:
             raise MockFunctionCallError("niScope_GetEqualizationFilterCoefficients", param='Coefficients')
         a = self._defaults['GetEqualizationFilterCoefficients']['Coefficients']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(coefficients), len(a))):
             coefficients[i] = a[i]
         return self._defaults['GetEqualizationFilterCoefficients']['return']
@@ -508,7 +451,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
@@ -540,17 +483,11 @@ class SideEffectsHelper(object):
         if self._defaults['Read']['Wfm'] is None:
             raise MockFunctionCallError("niScope_Read", param='Wfm')
         a = self._defaults['Read']['Wfm']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm), len(a))):
             wfm[i] = a[i]
         if self._defaults['Read']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Read", param='wfmInfo')
         a = self._defaults['Read']['wfmInfo']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(wfm_info), len(a))):
             wfm_info[i] = a[i]
         return self._defaults['Read']['return']
@@ -561,9 +498,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReadMeasurement']['Result'] is None:
             raise MockFunctionCallError("niScope_ReadMeasurement", param='Result')
         a = self._defaults['ReadMeasurement']['Result']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(result), len(a))):
             result[i] = a[i]
         return self._defaults['ReadMeasurement']['return']
@@ -621,7 +555,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
+        import sys
+        a = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

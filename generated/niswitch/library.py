@@ -70,7 +70,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_CanConnect_cfunc is None:
                 self.niSwitch_CanConnect_cfunc = self._library.niSwitch_CanConnect
-                self.niSwitch_CanConnect_cfunc.argtypes = [ViSession, ViString, ViString, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niSwitch_CanConnect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_CanConnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_CanConnect_cfunc(vi, channel1, channel2, path_capability)
 
@@ -86,7 +86,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_ConfigureScanList_cfunc is None:
                 self.niSwitch_ConfigureScanList_cfunc = self._library.niSwitch_ConfigureScanList
-                self.niSwitch_ConfigureScanList_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
+                self.niSwitch_ConfigureScanList_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niSwitch_ConfigureScanList_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ConfigureScanList_cfunc(vi, scanlist, scan_mode)
 
@@ -102,7 +102,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_Connect_cfunc is None:
                 self.niSwitch_Connect_cfunc = self._library.niSwitch_Connect
-                self.niSwitch_Connect_cfunc.argtypes = [ViSession, ViString, ViString]  # noqa: F405
+                self.niSwitch_Connect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_Connect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Connect_cfunc(vi, channel1, channel2)
 
@@ -110,7 +110,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_ConnectMultiple_cfunc is None:
                 self.niSwitch_ConnectMultiple_cfunc = self._library.niSwitch_ConnectMultiple
-                self.niSwitch_ConnectMultiple_cfunc.argtypes = [ViSession, ViString]  # noqa: F405
+                self.niSwitch_ConnectMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_ConnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_ConnectMultiple_cfunc(vi, connection_list)
 
@@ -126,7 +126,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_Disconnect_cfunc is None:
                 self.niSwitch_Disconnect_cfunc = self._library.niSwitch_Disconnect
-                self.niSwitch_Disconnect_cfunc.argtypes = [ViSession, ViString, ViString]  # noqa: F405
+                self.niSwitch_Disconnect_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_Disconnect_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_Disconnect_cfunc(vi, channel1, channel2)
 
@@ -142,7 +142,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_DisconnectMultiple_cfunc is None:
                 self.niSwitch_DisconnectMultiple_cfunc = self._library.niSwitch_DisconnectMultiple
-                self.niSwitch_DisconnectMultiple_cfunc.argtypes = [ViSession, ViString]  # noqa: F405
+                self.niSwitch_DisconnectMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_DisconnectMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_DisconnectMultiple_cfunc(vi, disconnection_list)
 
@@ -150,7 +150,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetAttributeViBoolean_cfunc is None:
                 self.niSwitch_GetAttributeViBoolean_cfunc = self._library.niSwitch_GetAttributeViBoolean
-                self.niSwitch_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niSwitch_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niSwitch_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -158,7 +158,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetAttributeViInt32_cfunc is None:
                 self.niSwitch_GetAttributeViInt32_cfunc = self._library.niSwitch_GetAttributeViInt32
-                self.niSwitch_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niSwitch_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -166,7 +166,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetAttributeViReal64_cfunc is None:
                 self.niSwitch_GetAttributeViReal64_cfunc = self._library.niSwitch_GetAttributeViReal64
-                self.niSwitch_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niSwitch_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niSwitch_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -174,7 +174,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetAttributeViString_cfunc is None:
                 self.niSwitch_GetAttributeViString_cfunc = self._library.niSwitch_GetAttributeViString
-                self.niSwitch_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
 
@@ -182,7 +182,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetChannelName_cfunc is None:
                 self.niSwitch_GetChannelName_cfunc = self._library.niSwitch_GetChannelName
-                self.niSwitch_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetChannelName_cfunc(vi, index, buffer_size, channel_name_buffer)
 
@@ -190,7 +190,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._library.niSwitch_GetError
-                self.niSwitch_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
 
@@ -198,7 +198,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetPath_cfunc is None:
                 self.niSwitch_GetPath_cfunc = self._library.niSwitch_GetPath
-                self.niSwitch_GetPath_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_GetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetPath_cfunc(vi, channel1, channel2, buffer_size, path)
 
@@ -206,7 +206,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetRelayCount_cfunc is None:
                 self.niSwitch_GetRelayCount_cfunc = self._library.niSwitch_GetRelayCount
-                self.niSwitch_GetRelayCount_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niSwitch_GetRelayCount_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetRelayCount_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayCount_cfunc(vi, relay_name, relay_count)
 
@@ -214,7 +214,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetRelayName_cfunc is None:
                 self.niSwitch_GetRelayName_cfunc = self._library.niSwitch_GetRelayName
-                self.niSwitch_GetRelayName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_GetRelayName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetRelayName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayName_cfunc(vi, index, relay_name_buffer_size, relay_name_buffer)
 
@@ -222,7 +222,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_GetRelayPosition_cfunc is None:
                 self.niSwitch_GetRelayPosition_cfunc = self._library.niSwitch_GetRelayPosition
-                self.niSwitch_GetRelayPosition_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niSwitch_GetRelayPosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSwitch_GetRelayPosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetRelayPosition_cfunc(vi, relay_name, relay_position)
 
@@ -230,7 +230,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_InitWithTopology_cfunc is None:
                 self.niSwitch_InitWithTopology_cfunc = self._library.niSwitch_InitWithTopology
-                self.niSwitch_InitWithTopology_cfunc.argtypes = [ViString, ViString, ViBoolean, ViBoolean, ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niSwitch_InitWithTopology_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niSwitch_InitWithTopology_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitWithTopology_cfunc(resource_name, topology, simulate, reset_device, vi)
 
@@ -246,7 +246,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_RelayControl_cfunc is None:
                 self.niSwitch_RelayControl_cfunc = self._library.niSwitch_RelayControl
-                self.niSwitch_RelayControl_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
+                self.niSwitch_RelayControl_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niSwitch_RelayControl_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RelayControl_cfunc(vi, relay_name, relay_action)
 
@@ -286,7 +286,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetAttributeViBoolean_cfunc is None:
                 self.niSwitch_SetAttributeViBoolean_cfunc = self._library.niSwitch_SetAttributeViBoolean
-                self.niSwitch_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
+                self.niSwitch_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niSwitch_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -294,7 +294,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetAttributeViInt32_cfunc is None:
                 self.niSwitch_SetAttributeViInt32_cfunc = self._library.niSwitch_SetAttributeViInt32
-                self.niSwitch_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
+                self.niSwitch_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niSwitch_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -302,7 +302,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetAttributeViReal64_cfunc is None:
                 self.niSwitch_SetAttributeViReal64_cfunc = self._library.niSwitch_SetAttributeViReal64
-                self.niSwitch_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
+                self.niSwitch_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niSwitch_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -310,7 +310,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetAttributeViString_cfunc is None:
                 self.niSwitch_SetAttributeViString_cfunc = self._library.niSwitch_SetAttributeViString
-                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
+                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -326,7 +326,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetPath_cfunc is None:
                 self.niSwitch_SetPath_cfunc = self._library.niSwitch_SetPath
-                self.niSwitch_SetPath_cfunc.argtypes = [ViSession, ViString]  # noqa: F405
+                self.niSwitch_SetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetPath_cfunc(vi, path_list)
 
@@ -358,7 +358,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_error_message_cfunc is None:
                 self.niSwitch_error_message_cfunc = self._library.niSwitch_error_message
-                self.niSwitch_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
 
@@ -374,6 +374,6 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_self_test_cfunc is None:
                 self.niSwitch_self_test_cfunc = self._library.niSwitch_self_test
-                self.niSwitch_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
+                self.niSwitch_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_self_test_cfunc(vi, self_test_result, self_test_message)

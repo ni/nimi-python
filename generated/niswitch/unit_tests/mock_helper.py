@@ -206,7 +206,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
@@ -216,7 +216,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
-        channel_name_buffer.contents.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
+        channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -229,7 +229,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
-        description.contents.value = self._defaults['GetError']['Description'].encode('ascii')
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -239,7 +239,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size.value == 0:
             return len(self._defaults['GetPath']['Path'])
-        path.contents.value = self._defaults['GetPath']['Path'].encode('ascii')
+        path.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -257,7 +257,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size.value == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
-        relay_name_buffer.contents.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
+        relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
@@ -356,7 +356,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
+        import sys
+        a = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     def niSwitch_reset(self, vi):  # noqa: N802
@@ -372,7 +377,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
+        import sys
+        a = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

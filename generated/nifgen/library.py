@@ -101,7 +101,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_AllocateNamedWaveform_cfunc is None:
                 self.niFgen_AllocateNamedWaveform_cfunc = self._library.niFgen_AllocateNamedWaveform
-                self.niFgen_AllocateNamedWaveform_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32]  # noqa: F405
+                self.niFgen_AllocateNamedWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_AllocateNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateNamedWaveform_cfunc(vi, channel_name, waveform_name, waveform_size)
 
@@ -109,7 +109,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_AllocateWaveform_cfunc is None:
                 self.niFgen_AllocateWaveform_cfunc = self._library.niFgen_AllocateWaveform
-                self.niFgen_AllocateWaveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_AllocateWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_AllocateWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateWaveform_cfunc(vi, channel_name, waveform_size, waveform_handle)
 
@@ -149,7 +149,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ClearUserStandardWaveform_cfunc is None:
                 self.niFgen_ClearUserStandardWaveform_cfunc = self._library.niFgen_ClearUserStandardWaveform
-                self.niFgen_ClearUserStandardWaveform_cfunc.argtypes = [ViSession, ViString]  # noqa: F405
+                self.niFgen_ClearUserStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_ClearUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ClearUserStandardWaveform_cfunc(vi, channel_name)
 
@@ -165,7 +165,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureArbSequence_cfunc is None:
                 self.niFgen_ConfigureArbSequence_cfunc = self._library.niFgen_ConfigureArbSequence
-                self.niFgen_ConfigureArbSequence_cfunc.argtypes = [ViSession, ViString, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niFgen_ConfigureArbSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureArbSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbSequence_cfunc(vi, channel_name, sequence_handle, gain, offset)
 
@@ -173,7 +173,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureArbWaveform_cfunc is None:
                 self.niFgen_ConfigureArbWaveform_cfunc = self._library.niFgen_ConfigureArbWaveform
-                self.niFgen_ConfigureArbWaveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ViReal64, ViReal64]  # noqa: F405
+                self.niFgen_ConfigureArbWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbWaveform_cfunc(vi, channel_name, waveform_handle, gain, offset)
 
@@ -181,7 +181,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc is None:
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc = self._library.niFgen_ConfigureCustomFIRFilterCoefficients
-                self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc(vi, channel_name, number_of_coefficients, coefficients_array)
 
@@ -189,7 +189,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc is None:
                 self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32]  # noqa: F405
+                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc(vi, trigger_id, source, edge)
 
@@ -197,7 +197,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc is None:
                 self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeStartTrigger
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ViString, ViInt32]  # noqa: F405
+                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc(vi, source, edge)
 
@@ -205,7 +205,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc is None:
                 self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalLevelScriptTrigger
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32]  # noqa: F405
+                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc(vi, trigger_id, source, trigger_when)
 
@@ -213,7 +213,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureFreqList_cfunc is None:
                 self.niFgen_ConfigureFreqList_cfunc = self._library.niFgen_ConfigureFreqList
-                self.niFgen_ConfigureFreqList_cfunc.argtypes = [ViSession, ViString, ViInt32, ViReal64, ViReal64, ViReal64]  # noqa: F405
+                self.niFgen_ConfigureFreqList_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureFreqList_cfunc(vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase)
 
@@ -221,7 +221,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ConfigureStandardWaveform_cfunc is None:
                 self.niFgen_ConfigureStandardWaveform_cfunc = self._library.niFgen_ConfigureStandardWaveform
-                self.niFgen_ConfigureStandardWaveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ViReal64, ViReal64, ViReal64, ViReal64]  # noqa: F405
+                self.niFgen_ConfigureStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureStandardWaveform_cfunc(vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase)
 
@@ -253,7 +253,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_CreateWaveformDispatcher_cfunc is None:
                 self.niFgen_CreateWaveformDispatcher_cfunc = self._library.niFgen_CreateWaveformDispatcher
-                self.niFgen_CreateWaveformDispatcher_cfunc.argtypes = [ViSession, ViString, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_CreateWaveformDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformDispatcher_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformDispatcher_cfunc(vi, channel_name, waveform_data_array, waveform_handle)
 
@@ -261,7 +261,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_CreateWaveformF64_cfunc is None:
                 self.niFgen_CreateWaveformF64_cfunc = self._library.niFgen_CreateWaveformF64
-                self.niFgen_CreateWaveformF64_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_CreateWaveformF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformF64_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
 
@@ -269,7 +269,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileF64_cfunc is None:
                 self.niFgen_CreateWaveformFromFileF64_cfunc = self._library.niFgen_CreateWaveformFromFileF64
-                self.niFgen_CreateWaveformFromFileF64_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_CreateWaveformFromFileF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformFromFileF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileF64_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
 
@@ -277,7 +277,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_CreateWaveformFromFileI16_cfunc is None:
                 self.niFgen_CreateWaveformFromFileI16_cfunc = self._library.niFgen_CreateWaveformFromFileI16
-                self.niFgen_CreateWaveformFromFileI16_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_CreateWaveformFromFileI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformFromFileI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileI16_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
 
@@ -285,7 +285,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_CreateWaveformI16_cfunc is None:
                 self.niFgen_CreateWaveformI16_cfunc = self._library.niFgen_CreateWaveformI16
-                self.niFgen_CreateWaveformI16_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_CreateWaveformI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformI16_cfunc(vi, channel_name, waveform_size, waveform_data_array, waveform_handle)
 
@@ -293,7 +293,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_DefineUserStandardWaveform_cfunc is None:
                 self.niFgen_DefineUserStandardWaveform_cfunc = self._library.niFgen_DefineUserStandardWaveform
-                self.niFgen_DefineUserStandardWaveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_DefineUserStandardWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_DefineUserStandardWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DefineUserStandardWaveform_cfunc(vi, channel_name, waveform_size, waveform_data_array)
 
@@ -301,7 +301,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_DeleteNamedWaveform_cfunc is None:
                 self.niFgen_DeleteNamedWaveform_cfunc = self._library.niFgen_DeleteNamedWaveform
-                self.niFgen_DeleteNamedWaveform_cfunc.argtypes = [ViSession, ViString, ViString]  # noqa: F405
+                self.niFgen_DeleteNamedWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_DeleteNamedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteNamedWaveform_cfunc(vi, channel_name, waveform_name)
 
@@ -309,7 +309,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_DeleteScript_cfunc is None:
                 self.niFgen_DeleteScript_cfunc = self._library.niFgen_DeleteScript
-                self.niFgen_DeleteScript_cfunc.argtypes = [ViSession, ViString, ViString]  # noqa: F405
+                self.niFgen_DeleteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_DeleteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_DeleteScript_cfunc(vi, channel_name, script_name)
 
@@ -325,7 +325,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_ExportSignal_cfunc is None:
                 self.niFgen_ExportSignal_cfunc = self._library.niFgen_ExportSignal
-                self.niFgen_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ViString, ViString]  # noqa: F405
+                self.niFgen_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
@@ -333,7 +333,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetAttributeViBoolean_cfunc is None:
                 self.niFgen_GetAttributeViBoolean_cfunc = self._library.niFgen_GetAttributeViBoolean
-                self.niFgen_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFgen_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -341,7 +341,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetAttributeViInt32_cfunc is None:
                 self.niFgen_GetAttributeViInt32_cfunc = self._library.niFgen_GetAttributeViInt32
-                self.niFgen_GetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_GetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -349,7 +349,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetAttributeViReal64_cfunc is None:
                 self.niFgen_GetAttributeViReal64_cfunc = self._library.niFgen_GetAttributeViReal64
-                self.niFgen_GetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -357,7 +357,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetAttributeViString_cfunc is None:
                 self.niFgen_GetAttributeViString_cfunc = self._library.niFgen_GetAttributeViString
-                self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
 
@@ -365,7 +365,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetError_cfunc is None:
                 self.niFgen_GetError_cfunc = self._library.niFgen_GetError
-                self.niFgen_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFgen_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
@@ -397,7 +397,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_GetFIRFilterCoefficients_cfunc is None:
                 self.niFgen_GetFIRFilterCoefficients_cfunc = self._library.niFgen_GetFIRFilterCoefficients
-                self.niFgen_GetFIRFilterCoefficients_cfunc.argtypes = [ViSession, ViString, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_GetFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetFIRFilterCoefficients_cfunc(vi, channel_name, array_size, coefficients_array, number_of_coefficients_read)
 
@@ -437,7 +437,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_InitializeWithChannels_cfunc is None:
                 self.niFgen_InitializeWithChannels_cfunc = self._library.niFgen_InitializeWithChannels
-                self.niFgen_InitializeWithChannels_cfunc.argtypes = [ViString, ViString, ViBoolean, ViString, ctypes.POINTER(ViSession)]  # noqa: F405
+                self.niFgen_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niFgen_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitializeWithChannels_cfunc(resource_name, channel_name, reset_device, option_string, vi)
 
@@ -517,7 +517,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SendSoftwareEdgeTrigger_cfunc is None:
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc = self._library.niFgen_SendSoftwareEdgeTrigger
-                self.niFgen_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32, ViString]  # noqa: F405
+                self.niFgen_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
 
@@ -525,7 +525,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetAttributeViBoolean_cfunc is None:
                 self.niFgen_SetAttributeViBoolean_cfunc = self._library.niFgen_SetAttributeViBoolean
-                self.niFgen_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ViString, ViAttr, ViBoolean]  # noqa: F405
+                self.niFgen_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
                 self.niFgen_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -533,7 +533,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetAttributeViInt32_cfunc is None:
                 self.niFgen_SetAttributeViInt32_cfunc = self._library.niFgen_SetAttributeViInt32
-                self.niFgen_SetAttributeViInt32_cfunc.argtypes = [ViSession, ViString, ViAttr, ViInt32]  # noqa: F405
+                self.niFgen_SetAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
                 self.niFgen_SetAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -541,7 +541,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetAttributeViReal64_cfunc is None:
                 self.niFgen_SetAttributeViReal64_cfunc = self._library.niFgen_SetAttributeViReal64
-                self.niFgen_SetAttributeViReal64_cfunc.argtypes = [ViSession, ViString, ViAttr, ViReal64]  # noqa: F405
+                self.niFgen_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niFgen_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -549,7 +549,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetAttributeViString_cfunc is None:
                 self.niFgen_SetAttributeViString_cfunc = self._library.niFgen_SetAttributeViString
-                self.niFgen_SetAttributeViString_cfunc.argtypes = [ViSession, ViString, ViAttr, ViString]  # noqa: F405
+                self.niFgen_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -557,7 +557,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetNamedWaveformNextWritePosition_cfunc is None:
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc = self._library.niFgen_SetNamedWaveformNextWritePosition
-                self.niFgen_SetNamedWaveformNextWritePosition_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ViInt32]  # noqa: F405
+                self.niFgen_SetNamedWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetNamedWaveformNextWritePosition_cfunc(vi, channel_name, waveform_name, relative_to, offset)
 
@@ -565,7 +565,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_SetWaveformNextWritePosition_cfunc is None:
                 self.niFgen_SetWaveformNextWritePosition_cfunc = self._library.niFgen_SetWaveformNextWritePosition
-                self.niFgen_SetWaveformNextWritePosition_cfunc.argtypes = [ViSession, ViString, ViInt32, ViInt32, ViInt32]  # noqa: F405
+                self.niFgen_SetWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetWaveformNextWritePosition_cfunc(vi, channel_name, waveform_handle, relative_to, offset)
 
@@ -581,7 +581,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteBinary16Waveform_cfunc is None:
                 self.niFgen_WriteBinary16Waveform_cfunc = self._library.niFgen_WriteBinary16Waveform
-                self.niFgen_WriteBinary16Waveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
+                self.niFgen_WriteBinary16Waveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFgen_WriteBinary16Waveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteBinary16Waveform_cfunc(vi, channel_name, waveform_handle, size, data)
 
@@ -589,7 +589,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformF64_cfunc is None:
                 self.niFgen_WriteNamedWaveformF64_cfunc = self._library.niFgen_WriteNamedWaveformF64
-                self.niFgen_WriteNamedWaveformF64_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_WriteNamedWaveformF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteNamedWaveformF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformF64_cfunc(vi, channel_name, waveform_name, size, data)
 
@@ -597,7 +597,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformI16_cfunc is None:
                 self.niFgen_WriteNamedWaveformI16_cfunc = self._library.niFgen_WriteNamedWaveformI16
-                self.niFgen_WriteNamedWaveformI16_cfunc.argtypes = [ViSession, ViString, ViString, ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
+                self.niFgen_WriteNamedWaveformI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFgen_WriteNamedWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformI16_cfunc(vi, channel_name, waveform_name, size, data)
 
@@ -605,7 +605,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteScript_cfunc is None:
                 self.niFgen_WriteScript_cfunc = self._library.niFgen_WriteScript
-                self.niFgen_WriteScript_cfunc.argtypes = [ViSession, ViString, ViString]  # noqa: F405
+                self.niFgen_WriteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_WriteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteScript_cfunc(vi, channel_name, script)
 
@@ -613,7 +613,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteWaveform_cfunc is None:
                 self.niFgen_WriteWaveform_cfunc = self._library.niFgen_WriteWaveform
-                self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ViString, ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
 
@@ -621,7 +621,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_WriteWaveformDispatcher_cfunc is None:
                 self.niFgen_WriteWaveformDispatcher_cfunc = self._library.niFgen_WriteWaveformDispatcher
-                self.niFgen_WriteWaveformDispatcher_cfunc.argtypes = [ViSession, ViString, ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_WriteWaveformDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveformDispatcher_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveformDispatcher_cfunc(vi, channel_name, waveform_name_or_handle, size, data)
 
@@ -637,7 +637,7 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_error_message_cfunc is None:
                 self.niFgen_error_message_cfunc = self._library.niFgen_error_message
-                self.niFgen_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFgen_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_error_message_cfunc(vi, error_code, error_message)
 
@@ -653,6 +653,6 @@ class Library(object):
         with self._func_lock:
             if self.niFgen_self_test_cfunc is None:
                 self.niFgen_self_test_cfunc = self._library.niFgen_self_test
-                self.niFgen_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViString)]  # noqa: F405
+                self.niFgen_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_self_test_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_self_test_cfunc(vi, self_test_result, self_test_message)

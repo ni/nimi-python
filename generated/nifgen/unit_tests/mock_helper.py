@@ -310,9 +310,6 @@ class SideEffectsHelper(object):
         if self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray'] is None:
             raise MockFunctionCallError("niFgen_CreateAdvancedArbSequence", param='coercedMarkersArray')
         a = self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(coerced_markers_array), len(a))):
             coerced_markers_array[i] = a[i]
         if self._defaults['CreateAdvancedArbSequence']['sequenceHandle'] is None:
@@ -432,7 +429,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
@@ -445,7 +442,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
         if error_description_buffer_size.value == 0:
             return len(self._defaults['GetError']['errorDescription'])
-        error_description.contents.value = self._defaults['GetError']['errorDescription'].encode('ascii')
+        error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
@@ -723,7 +720,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFgen_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
+        import sys
+        a = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     def niFgen_reset(self, vi):  # noqa: N802
@@ -739,7 +741,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niFgen_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage'].encode('ascii')
+        import sys
+        a = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

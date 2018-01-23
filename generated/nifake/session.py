@@ -235,11 +235,11 @@ class _SessionBase(object):
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
         buffer_size_ctype = visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
-        error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -256,11 +256,11 @@ class _SessionBase(object):
         error_code_ctype = visatype.ViStatus()  # case S200
         buffer_size_ctype = visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
-        error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, None if description_ctype is None else (ctypes.pointer(description_ctype)))
+        error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, None if description_ctype is None else (ctypes.pointer(description_ctype)))
+        error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
@@ -444,7 +444,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code_ctype = visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niFake_error_message(vi_ctype, error_code_ctype, None if error_message_ctype is None else (ctypes.pointer(error_message_ctype)))
+        error_code = self._library.niFake_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -668,7 +668,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         a_string_ctype = (visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niFake_GetAStringOfFixedMaximumSize(vi_ctype, None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_GetAStringOfFixedMaximumSize(vi_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
@@ -680,11 +680,11 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         buffer_size_ctype = visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
-        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
         a_string_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
@@ -1061,7 +1061,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         a_number_ctype = visatype.ViInt16()  # case S200
         a_string_ctype = (visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niFake_ReturnANumberAndAString(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)), None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_ReturnANumberAndAString(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
@@ -1113,11 +1113,11 @@ class Session(_SessionBase):
         an_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
         string_size_ctype = visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
-        error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         string_size_ctype = visatype.ViInt32(error_code)  # case S180
         a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # case C060
-        error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, None if a_string_ctype is None else (ctypes.pointer(a_string_ctype)))
+        error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
 

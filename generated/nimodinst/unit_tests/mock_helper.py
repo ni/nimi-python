@@ -48,7 +48,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
-        error_info.contents.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
+        error_info.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -66,7 +66,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size.value == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
-        attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
+        attribute_value.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
