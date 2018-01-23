@@ -120,7 +120,7 @@ def _add_buffer_info(parameter):
         parameter['is_buffer'] = True
 
     # We set all string types to ViString, and say it is NOT a buffer/array
-    if t == 'ViConstString' or t == 'ViRsrc' or (t == 'ViChar' and parameter['is_buffer']):
+    if t == 'ViConstString' or t == 'ViRsrc' or (parameter['type'] == 'ViChar' and parameter['is_buffer']):
         parameter['type'] = 'ViString'
         parameter['original_type'] = t
         parameter['is_buffer'] = False
