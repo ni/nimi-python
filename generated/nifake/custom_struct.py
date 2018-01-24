@@ -1,4 +1,3 @@
-import struct
 import ctypes
 
 from nifake import visatype
@@ -43,11 +42,5 @@ class CustomStruct(object):
 
     def __str__(self):
         return self.__repr__()
-
-    def get_struct_type(self):
-        return 'ld'
-
-    def get_struct(self):
-        return struct.pack(self.get_struct_type(), self.struct_int, self.struct_double)
 
 

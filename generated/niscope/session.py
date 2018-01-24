@@ -1713,7 +1713,7 @@ class _SessionBase(object):
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_into(self, num_samples, wfm, timeout=5.0):
         '''_fetch
@@ -2443,7 +2443,7 @@ class _SessionBase(object):
         result_ctype = _converters.convert_iterable_to_ctypes(result_array, (visatype.ViReal64 * result_size))  # case B560
         error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
+        return result_array
 
     def fetch_measurement_stats(self, scalar_meas_function, timeout=5.0):
         '''fetch_measurement_stats
@@ -2536,7 +2536,7 @@ class _SessionBase(object):
         num_in_stats_ctype = _converters.convert_iterable_to_ctypes(num_in_stats_array, (visatype.ViInt32 * num_in_stats_size))  # case B560
         error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())], [float(mean_ctype[i]) for i in range(self._actual_num_wfms())], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms())], [float(min_ctype[i]) for i in range(self._actual_num_wfms())], [float(max_ctype[i]) for i in range(self._actual_num_wfms())], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms())]
+        return result_array, mean_array, stdev_array, min_array, max_array, num_in_stats_array
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2728,10 +2728,12 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case S190
-        coefficients_ctype = (visatype.ViReal64 * number_of_coefficients)()  # case B600
+        coefficients_size = number_of_coefficients  # case B600
+        coefficients_array = array.array("d", [0] * coefficients_size)  # case B600
+        coefficients_ctype = _converters.convert_iterable_to_ctypes(coefficients_array, (visatype.ViReal64 * coefficients_size))  # case B600
         error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
+        return coefficients_array
 
     def _get_error(self):
         '''_get_error
@@ -2870,7 +2872,7 @@ class _SessionBase(object):
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def read_measurement(self, scalar_meas_function, timeout=5.0):
         '''read_measurement
@@ -2924,7 +2926,7 @@ class _SessionBase(object):
         result_ctype = _converters.convert_iterable_to_ctypes(result_array, (visatype.ViReal64 * result_size))  # case B560
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
+        return result_array
 
     def _set_attribute_vi_boolean(self, attribute_id, value):
         '''_set_attribute_vi_boolean

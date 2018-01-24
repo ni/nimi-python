@@ -285,7 +285,9 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             waveform = session.fetch_waveform(len(expected_waveform))
             assert isinstance(waveform[0], float)
-            assert waveform == expected_waveform
+            assert len(waveform) == len(expected_waveform)
+            for i in range(len(waveform)):
+                assert waveform[i] == expected_waveform[i]
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into(self):
@@ -321,10 +323,10 @@ class TestSession(object):
     def test_write_waveform(self):
         expected_waveform = [1.1, 2.2, 3.3, 4.4]
         expected_array = array.array('d', expected_waveform)
-        self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
         with nifake.Session('dev1') as session:
             self.convert_iterable_to_ctypes_side_effect_items = [expected_waveform]
             self.convert_iterable_to_ctypes_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
             with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
                 session.write_waveform(expected_array)
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_array))
@@ -371,8 +373,10 @@ class TestSession(object):
             assert isinstance(result_float, float)
             assert result_float_enum == float_enum_val
             assert isinstance(result_float_enum, nifake.FloatEnum)
-            assert result_array == array_val
-            assert isinstance(result_array, list)
+            assert len(result_array) == len(array_val)
+            for i in range(len(result_array)):
+                assert result_array[i] == array_val[i]
+            assert isinstance(result_array, array.array)
             assert isinstance(result_array[0], float)
             assert result_string == string_val
             assert isinstance(result_string, six.text_type)
@@ -380,25 +384,47 @@ class TestSession(object):
 
     def test_multiple_array_types(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
-        expected_output_array = [0.2, 0.4]
-        expected_output_array_of_fixed_length = [-6, -7, -8]
-        output_array_size = len(expected_output_array)
+        expected_output_array_list = [0.2, 0.4]
+        expected_output_array_of_fixed_length_list = [-6, -7, -8]
+
+        # Because we are mocking convert_iterable_to_ctypes we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function.
+        output_array = array.array('d', [0] * len(expected_output_array_list))
+        output_array_ctypes = nifake._converters.convert_iterable_to_ctypes(output_array, (nifake.visatype.ViReal64 * len(expected_output_array_list)))
+        output_array_of_fixed_length = array.array('d', [0] * len(expected_output_array_of_fixed_length_list))
+        output_array_of_fixed_length_ctypes = nifake._converters.convert_iterable_to_ctypes(output_array_of_fixed_length, (nifake.visatype.ViReal64 * len(expected_output_array_of_fixed_length_list)))
+
+        output_array_size = len(expected_output_array_list)
         input_array_of_integers = [1, 2]
         input_array_of_floats = [4.2, -4.3]
-        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
-        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
+        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array_list
+        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length_list
         with nifake.Session('dev1') as session:
-            self.convert_iterable_to_ctypes_side_effect_items = [input_array_of_floats, input_array_of_integers]
+            self.convert_iterable_to_ctypes_side_effect_items = [
+                output_array_ctypes,
+                output_array_of_fixed_length_ctypes,
+                input_array_of_floats,
+                input_array_of_integers,
+            ]
             self.convert_iterable_to_ctypes_side_effect_count = 0
             with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
-                output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
-            assert output_array == output_array
-            assert expected_output_array_of_fixed_length == output_array_of_fixed_length
+                # Because we have mocked away convert_iterable_to_ctypes, we ignore the return values here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
+
+            assert len(expected_output_array_list) == len(output_array)
+            for i in range(len(expected_output_array_list)):
+                assert expected_output_array_list[i] == output_array[i]
+
+            assert len(expected_output_array_of_fixed_length_list) == len(output_array_of_fixed_length)
+            for i in range(len(expected_output_array_of_fixed_length_list)):
+                assert expected_output_array_of_fixed_length_list[i] == output_array_of_fixed_length[i]
+
             self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
                 matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
                 matchers.ViInt32Matcher(output_array_size),
                 matchers.ViReal64BufferMatcher(output_array_size),
-                matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
+                matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length_list)),
                 matchers.ViInt32Matcher(len(input_array_of_integers)),
                 matchers.ViReal64BufferMatcher(input_array_of_floats),
                 matchers.ViInt16BufferMatcher(input_array_of_integers)
@@ -619,11 +645,14 @@ class TestSession(object):
                 assert e.description == test_error_desc
 
     def test_get_array_using_ivi_dance(self):
+        expected_array_list = [1.1, 2.2]
         self.patched_library.niFake_GetArrayUsingIVIDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIVIDance
-        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = [1.1, 2.2]
+        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = expected_array_list
         with nifake.Session('dev1') as session:
             result_array = session.get_array_using_ivi_dance()
-            assert result_array == [1.1, 2.2]
+            assert len(result_array) == len(expected_array_list)
+            for i in range(len(result_array)):
+                assert result_array[i] == expected_array_list[i]
 
     # Repeated Capabilities
 
@@ -1013,8 +1042,8 @@ class TestSession(object):
         assert matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(<class 'ctypes.c_long'>)"
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
-        assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
-        assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
+        assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2), custom_struct(data=None, struct_int=43, struct_double=4.3), custom_struct(data=None, struct_int=42, struct_double=4.3)])"
+        assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2))"
 
 
 

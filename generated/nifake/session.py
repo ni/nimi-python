@@ -586,11 +586,13 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case S190
-        waveform_data_ctype = (visatype.ViReal64 * number_of_samples)()  # case B600
+        waveform_data_size = number_of_samples  # case B600
+        waveform_data_array = array.array("d", [0] * waveform_data_size)  # case B600
+        waveform_data_ctype = _converters.convert_iterable_to_ctypes(waveform_data_array, (visatype.ViReal64 * waveform_data_size))  # case B600
         actual_number_of_samples_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_data_ctype[i]) for i in range(number_of_samples_ctype.value)]
+        return waveform_data_array
 
     def fetch_waveform_into(self, waveform_data):
         '''fetch_waveform
@@ -722,7 +724,7 @@ class Session(_SessionBase):
         array_out_ctype = _converters.convert_iterable_to_ctypes(array_out_array, (visatype.ViReal64 * array_out_size))  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+        return array_out_array
 
     def get_array_size_for_python_code(self):
         '''get_array_size_for_python_code
@@ -750,10 +752,12 @@ class Session(_SessionBase):
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = visatype.ViInt32(error_code)  # case S180
-        array_out_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # case B590
+        array_out_size = array_size_ctype.value  # case B590
+        array_out_array = array.array("d", [0] * array_out_size)  # case B590
+        array_out_ctype = _converters.convert_iterable_to_ctypes(array_out_array, (visatype.ViReal64 * array_out_size))  # case B590
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
+        return array_out_array
 
     def _get_cal_date_and_time(self, cal_type):
         '''_get_cal_date_and_time
@@ -947,8 +951,12 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         output_array_size_ctype = visatype.ViInt32(output_array_size)  # case S190
-        output_array_ctype = (visatype.ViReal64 * output_array_size)()  # case B600
-        output_array_of_fixed_length_ctype = (visatype.ViReal64 * 3)()  # case B570
+        output_array_size = output_array_size  # case B600
+        output_array_array = array.array("d", [0] * output_array_size)  # case B600
+        output_array_ctype = _converters.convert_iterable_to_ctypes(output_array_array, (visatype.ViReal64 * output_array_size))  # case B600
+        output_array_of_fixed_length_size = 3  # case B570
+        output_array_of_fixed_length_array = array.array("d", [0] * output_array_of_fixed_length_size)  # case B570
+        output_array_of_fixed_length_ctype = _converters.convert_iterable_to_ctypes(output_array_of_fixed_length_array, (visatype.ViReal64 * output_array_of_fixed_length_size))  # case B570
         input_array_sizes_ctype = visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
         input_array_of_floats_array = None if input_array_of_floats is None else (array.array("d", input_array_of_floats))  # case B550
         input_array_of_floats_ctype = None if input_array_of_floats is None else (_converters.convert_iterable_to_ctypes(input_array_of_floats_array, (visatype.ViReal64 * len(input_array_of_floats))))  # case B550
@@ -956,7 +964,7 @@ class Session(_SessionBase):
         input_array_of_integers_ctype = None if input_array_of_integers is None else (_converters.convert_iterable_to_ctypes(input_array_of_integers_array, (visatype.ViInt16 * len(input_array_of_integers))))  # case B550
         error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
+        return output_array_array, output_array_of_fixed_length_array
 
     def one_input_function(self, a_number):
         '''one_input_function
@@ -1116,7 +1124,9 @@ class Session(_SessionBase):
         a_float_ctype = visatype.ViReal64()  # case S200
         a_float_enum_ctype = visatype.ViReal64()  # case S200
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        an_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
+        an_array_size = array_size  # case B600
+        an_array_array = array.array("d", [0] * an_array_size)  # case B600
+        an_array_ctype = _converters.convert_iterable_to_ctypes(an_array_array, (visatype.ViReal64 * an_array_size))  # case B600
         string_size_ctype = visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
@@ -1125,7 +1135,7 @@ class Session(_SessionBase):
         a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # case C060
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
+        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), an_array_array, a_string_ctype.value.decode(self._encoding)
 
     def set_custom_type(self, cs):
         '''set_custom_type

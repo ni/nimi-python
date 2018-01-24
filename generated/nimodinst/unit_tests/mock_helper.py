@@ -49,13 +49,13 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
-        for i in range(len(self._defaults['GetExtendedErrorInfo']['errorInfo'])):
-            error_info[i] = self._defaults['GetExtendedErrorInfo']['errorInfo'][i]
+        error_info.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetInstalledDeviceAttributeViInt32']['return'] != 0:
             return self._defaults['GetInstalledDeviceAttributeViInt32']['return']
+        # attribute_value
         if self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue']
@@ -68,16 +68,17 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size.value == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
-        for i in range(len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])):
-            attribute_value[i] = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'][i]
+        attribute_value.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
         if self._defaults['OpenInstalledDevicesSession']['return'] != 0:
             return self._defaults['OpenInstalledDevicesSession']['return']
+        # handle
         if self._defaults['OpenInstalledDevicesSession']['handle'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='handle')
         handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
+        # device_count
         if self._defaults['OpenInstalledDevicesSession']['deviceCount'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='deviceCount')
         device_count.contents.value = self._defaults['OpenInstalledDevicesSession']['deviceCount']

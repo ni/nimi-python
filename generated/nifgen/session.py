@@ -2138,10 +2138,12 @@ class _SessionBase(object):
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = visatype.ViInt32(error_code)  # case S180
-        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # case B590
+        coefficients_array_size = array_size_ctype.value  # case B590
+        coefficients_array_array = array.array("d", [0] * coefficients_array_size)  # case B590
+        coefficients_array_ctype = _converters.convert_iterable_to_ctypes(coefficients_array_array, (visatype.ViReal64 * coefficients_array_size))  # case B590
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
+        return coefficients_array_array, int(number_of_coefficients_read_ctype.value)
 
     def _initialize_with_channels(self, resource_name, reset_device=False, option_string=""):
         '''_initialize_with_channels
@@ -3588,7 +3590,7 @@ class Session(_SessionBase):
         sequence_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
+        return coerced_markers_array_array, int(sequence_handle_ctype.value)
 
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
         '''create_arb_sequence
