@@ -67,6 +67,7 @@ class _BufferMatcher(object):
             except AttributeError:
                 pass
 
+            # Because of object lifetimes, we may need to mock the other instance and provide lists instead of the actual array
             if not isinstance(other, self.expected_type) and not isinstance(other, list):
                 print("Unexpected type. Expected: {0} or {1}. Received: {2}".format(self.expected_type, list, type(other)))
                 return False

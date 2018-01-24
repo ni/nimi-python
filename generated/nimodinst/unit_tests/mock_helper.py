@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -48,7 +49,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
-        error_info.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
+        for i in range(len(self._defaults['GetExtendedErrorInfo']['errorInfo'])):
+            error_info[i] = self._defaults['GetExtendedErrorInfo']['errorInfo'][i]
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -66,7 +68,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size.value == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
+        for i in range(len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])):
+            attribute_value[i] = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'][i]
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802

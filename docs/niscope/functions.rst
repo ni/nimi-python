@@ -479,7 +479,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param slope:
 
 
@@ -548,7 +548,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param trigger_coupling:
 
 
@@ -641,7 +641,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param trigger_coupling:
 
 
@@ -808,7 +808,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param signal_format:
 
 
@@ -937,7 +937,7 @@ niscope.Session methods
         
 
 
-    :type trigger_source: string
+    :type trigger_source: str
     :param low_level:
 
 
@@ -1180,7 +1180,7 @@ niscope.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type output_terminal: string
+    :type output_terminal: str
     :param signal_identifier:
 
 
@@ -1189,7 +1189,7 @@ niscope.Session methods
         
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
 
 .. py:method:: fetch(num_samples, timeout=5.0)
 
@@ -1894,7 +1894,7 @@ niscope.Session methods
             
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test response string from the instrument. Refer to the

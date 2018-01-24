@@ -9,7 +9,4 @@ commands.log
 .vscode/launch.json
 .vscode/settings.json
 
-tools/copy_to_nirvana.bat
-tools/run_remote_tests.bat
-tools/run_tests.bat
 
