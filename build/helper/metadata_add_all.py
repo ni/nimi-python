@@ -492,7 +492,6 @@ def _do_the_test_add_all_metadata(functions, expected):
     _compare_dicts(actual, expected)
 
 
-'''
 def test_add_all_metadata_simple():
     functions = {
         'MakeAFoo': {
@@ -577,6 +576,7 @@ def test_add_all_metadata_simple():
                     'numpy': False,
                     'python_type': 'int',
                     'is_buffer': False,
+                    'is_string': False,
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
@@ -593,7 +593,7 @@ def test_add_all_metadata_simple():
                 {
                     'ctypes_type': 'ViString',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViString',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
@@ -614,6 +614,7 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'channel_name_ctype',
                     'use_in_python_api': True,
                     'python_name_or_default_for_init': 'channel_name',
+                    'original_type': 'ViString',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -642,6 +643,7 @@ def test_add_all_metadata_simple():
                     'value': 1
                 },
                 'is_buffer': False,
+                'is_string': False,
                 'python_name_with_default': 'vi',
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
@@ -662,7 +664,7 @@ def test_add_all_metadata_simple():
                 'python_type': 'str',
                 'ctypes_variable_name': 'status_ctype',
                 'ctypes_type': 'ViString',
-                'ctypes_type_library_call': 'ViString',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
@@ -673,9 +675,10 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'None if status_ctype is None else (ctypes.pointer(status_ctype))',
+                'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
+                'original_type': 'ViString',
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
@@ -689,7 +692,6 @@ def test_add_all_metadata_simple():
     }
 
     _do_the_test_add_all_metadata(functions, expected)
-'''
 
 
 def _do_the_test_add_attributes_metadata(attributes, expected):
