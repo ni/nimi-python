@@ -13,6 +13,7 @@ driver_name = config['driver_name']
 functions = template_parameters['metadata'].functions
 functions = helper.filter_codegen_functions(functions)
 %>\
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -75,7 +76,6 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             field_name = field[0]
             setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           elif p['is_string']:
-        import sys
         a = self._defaults['${func_name}']['${p['name']}']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
