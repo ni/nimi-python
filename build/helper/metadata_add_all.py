@@ -109,33 +109,59 @@ def _add_is_error_handling(f):
     return f
 
 
-def _add_buffer_info(parameter):
-    '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
+def _add_buffer_info(parameter, config):
+    '''Adds buffer information to the parameter metadata
 
-    # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
-    # and is_buffer True
+    There are 4 different 'is_*' variables we will set
+        'is_string' - Used for any string type - see below for complete list
+        'is_list'   - Used for an array of custom types. We are not putting custom types into array.array or numpy.array
+        'is_array'  - Used for arrays of simple types
+        'is_buffer' - True when either 'is_list' or 'is_array' is True
+    '''
+
+    assert 'is_buffer' not in parameter or not parameter['is_buffer'], "if 'is_buffer' is in metadata then it must be set to False"
+    assert 'is_string' not in parameter, "'is_string' should not be set by metadata or in addons"
+    assert 'is_array' not in parameter, "'is_array' should not be set by metadata or in addons"
+    assert 'is_list' not in parameter, "'is_list' should not be set by metadata or in addons"
 
     is_string = False
-    is_buffer = False
+    is_array = False
+    is_list = False
     ot = parameter['type']
-    string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', 'ViChar[ ]', ]
 
     # We set all string types to ViString, and say it is NOT a buffer/array
+    string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
     if ot in string_types:
         parameter['type'] = 'ViString'
         parameter['original_type'] = ot
         is_string = True
-    elif (ot.find('[ ]') > 0) or (ot.find('[]') > 0):
-        assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
-        parameter['type'] = ot.replace('[ ]', '').replace('[]', '')
+    elif ot.find('[]') > 0:
+        parameter['type'] = ot.replace('[]', '')
         parameter['original_type'] = ot
-        is_buffer = True
+
+        # Now we need to determine if we are using lists or arrays. This will depend on if this is a custom type or not. We're not putting ustom types in arrays.
+        custom_type = False
+        for c in config['custom_types']:
+            if parameter['type'].lower() == c['ctypes_type'].lower():
+                custom_type = True
+
+        if custom_type or parameter['enum'] is not None or parameter['type'] == 'ViBoolean':
+            # Custom type, enums and booleans all need additional casting before being returned
+            is_list = True
+        else:
+            is_array = True
+
+    # If 'is_buffer' is in the parameter information and False, we also force 'is_list' and 'is_array' to False
+    is_list = parameter['is_buffer'] if 'is_buffer' in parameter else is_list
+    is_array = parameter['is_buffer'] if 'is_buffer' in parameter else is_array
 
     # Not populated, assume {'mechanism': 'fixed', 'value': 1}
     parameter['size'] = parameter['size'] if 'size' in parameter else {'mechanism': 'fixed', 'value': 1}
 
-    parameter['is_buffer'] = parameter['is_buffer'] if 'is_buffer' in parameter else is_buffer
+    parameter['is_array'] = parameter['is_array'] if 'is_array' in parameter else is_array
+    parameter['is_list'] = parameter['is_list'] if 'is_list' in parameter else is_list
     parameter['is_string'] = parameter['is_string'] if 'is_string' in parameter else is_string
+    parameter['is_buffer'] = parameter['is_buffer'] if 'is_buffer' in parameter else (is_array or is_list)
 
     assert parameter['is_buffer'] is False or parameter['is_string'] is False
 
@@ -144,7 +170,7 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and not parameter['is_string']:
+    if parameter['direction'] == 'out' and not parameter['is_buffer'] and not parameter['is_string']:
         parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
@@ -233,7 +259,7 @@ def _add_is_session_handle(parameter):
 
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
-    parameter['type'] = parameter['type'].replace(' ', '_')
+    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' ', '_')
 
 
 def _add_use_in_python_api(p, parameters):
@@ -258,9 +284,9 @@ def add_all_function_metadata(functions, config):
         _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
-            _add_buffer_info(p)
-            _add_use_in_python_api(p, functions[f]['parameters'])
             _fix_type(p)
+            _add_buffer_info(p, config)
+            _add_use_in_python_api(p, functions[f]['parameters'])
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
@@ -572,7 +598,9 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'int',
+                    'is_array': False,
                     'is_buffer': False,
+                    'is_list': False,
                     'is_string': False,
                     'name': 'vi',
                     'python_name': 'vi',
@@ -600,7 +628,9 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'str',
+                    'is_array': False,
                     'is_buffer': False,
+                    'is_list': False,
                     'is_string': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
@@ -639,7 +669,9 @@ def test_add_all_metadata_simple():
                     'mechanism': 'fixed',
                     'value': 1
                 },
+                'is_array': False,
                 'is_buffer': False,
+                'is_list': False,
                 'is_string': False,
                 'python_name_with_default': 'vi',
                 'python_name_with_doc_default': 'vi',
@@ -666,7 +698,9 @@ def test_add_all_metadata_simple():
                     'mechanism': 'fixed',
                     'value': 1
                 },
+                'is_array': False,
                 'is_buffer': False,
+                'is_list': False,
                 'is_string': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
