@@ -76,7 +76,7 @@ if attributes[attribute]['channel_based'] == 'True':
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['python_name']} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
-    ${attributes[attribute]['python_name']} = attributes.Attribute${attributes[attribute]['type']}(${attribute}, converter_to_driver=${attributes[attribute]['python_api_converter_name_to_driver']}, converter_from_driver=${attributes[attribute]['python_api_converter_name_from_driver']})
+    ${attributes[attribute]['python_name']} = attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''
