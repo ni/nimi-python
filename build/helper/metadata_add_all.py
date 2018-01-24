@@ -294,6 +294,12 @@ def _add_converter_defaults(a, attributes):
         attributes[a]['python_api_converter_name_from_driver'] = '_converters.' + attributes[a]['python_api_converter_name_from_driver']
 
 
+def _add_default_attribute_class(a, attributes):
+    '''Set 'attribute_class' if not set'''
+    if 'attribute_class' not in attributes[a]:
+        attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config)
@@ -302,6 +308,7 @@ def add_all_attribute_metadata(attributes, config):
         _add_attr_codegen_method(a, attributes)
         _add_python_name(a, attributes)
         _add_converter_defaults(a, attributes)
+        _add_default_attribute_class(a, attributes)
 
     return attributes
 
@@ -727,6 +734,7 @@ def test_add_attributes_metadata_simple():
             'python_name': 'read_write_bool',
             'resettable': 'No',
             'type': 'ViBoolean',
+            'attribute_class': 'AttributeViBoolean',
             'python_api_converter_name_to_driver': None,
             'python_api_converter_name_from_driver': None,
         },
