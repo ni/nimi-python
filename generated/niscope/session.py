@@ -34,16 +34,16 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085, converter_to_driver=None, converter_from_driver=None)
+    _5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085)
     '''
     When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
     '''
-    _5v_out_output_terminal = attributes.AttributeViString(1150129, converter_to_driver=None, converter_from_driver=None)
+    _5v_out_output_terminal = attributes.AttributeViString(1150129)
     '''
     Specifies the destination for the 5 Volt signal.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    absolute_sample_clock_offset = attributes.AttributeViReal64(1150374, converter_to_driver=None, converter_from_driver=None)
+    absolute_sample_clock_offset = attributes.AttributeViReal64(1150374)
     '''
     Gets or sets the absolute time offset of the sample clock relative to
     the reference clock in terms of seconds.
@@ -57,7 +57,7 @@ class _SessionBase(object):
     periods, .5 sample clock periods]. The default absolute sample clock
     offset is 0s.
     '''
-    accessory_gain = attributes.AttributeViReal64(1150279, converter_to_driver=None, converter_from_driver=None)
+    accessory_gain = attributes.AttributeViReal64(1150279)
     '''
     Returns the calibration gain for the current device configuration.
     **Related topics:**
@@ -77,7 +77,7 @@ class _SessionBase(object):
         session['0,1'].accessory_gain = var
         var = session['0,1'].accessory_gain
     '''
-    accessory_offset = attributes.AttributeViReal64(1150280, converter_to_driver=None, converter_from_driver=None)
+    accessory_offset = attributes.AttributeViReal64(1150280)
     '''
     Returns the calibration offset for the current device configuration.
     **Related topics:**
@@ -97,7 +97,7 @@ class _SessionBase(object):
         session['0,1'].accessory_offset = var
         var = session['0,1'].accessory_offset
     '''
-    acquisition_start_time = attributes.AttributeViReal64(1250109, converter_to_driver=None, converter_from_driver=None)
+    acquisition_start_time = attributes.AttributeViReal64(1250109)
     '''
     Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
     '''
@@ -105,7 +105,7 @@ class _SessionBase(object):
     '''
     Specifies how the digitizer acquires data and fills the waveform record.
     '''
-    acq_arm_source = attributes.AttributeViString(1150053, converter_to_driver=None, converter_from_driver=None)
+    acq_arm_source = attributes.AttributeViString(1150053)
     '''
     Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
     Valid Values:
@@ -122,23 +122,23 @@ class _SessionBase(object):
     NISCOPE_VAL_PFI_2         ('VAL_PFI_2')        - PFI 2
     NISCOPE_VAL_PXI_STAR      ('VAL_PXI_STAR')     - PXI Star Trigger
     '''
-    adv_trig_src = attributes.AttributeViString(1150094, converter_to_driver=None, converter_from_driver=None)
+    adv_trig_src = attributes.AttributeViString(1150094)
     '''
     Specifies the source the digitizer monitors for an advance trigger.   When the advance trigger is received, the digitizer begins acquiring pretrigger  samples.
     '''
-    allow_more_records_than_memory = attributes.AttributeViBoolean(1150068, converter_to_driver=None, converter_from_driver=None)
+    allow_more_records_than_memory = attributes.AttributeViBoolean(1150068)
     '''
     Indicates whether more records can be configured with niScope_ConfigureHorizontalTiming  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
     '''
-    arm_ref_trig_src = attributes.AttributeViString(1150095, converter_to_driver=None, converter_from_driver=None)
+    arm_ref_trig_src = attributes.AttributeViString(1150095)
     '''
     Specifies the source the digitizer monitors for an arm reference trigger.   When the arm reference trigger is received, the digitizer begins looking for a  reference (stop) trigger from the user-configured trigger source.
     '''
-    backlog = attributes.AttributeViReal64(1150084, converter_to_driver=None, converter_from_driver=None)
+    backlog = attributes.AttributeViReal64(1150084)
     '''
     Returns the number of samples (NISCOPE_ATTR_POINTS_DONE) that have been acquired but not fetched  for the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER.
     '''
-    bandpass_filter_enabled = attributes.AttributeViBoolean(1150318, converter_to_driver=None, converter_from_driver=None)
+    bandpass_filter_enabled = attributes.AttributeViBoolean(1150318)
     '''
     Enables the bandpass filter on the specificed channel.  The default value is FALSE.
 
@@ -151,20 +151,20 @@ class _SessionBase(object):
         session['0,1'].bandpass_filter_enabled = var
         var = session['0,1'].bandpass_filter_enabled
     '''
-    binary_sample_width = attributes.AttributeViInt32(1150005, converter_to_driver=None, converter_from_driver=None)
+    binary_sample_width = attributes.AttributeViInt32(1150005)
     '''
     Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to NISCOPE_ATTR_RESOLUTION.
     To configure the device to store samples with a lower resolution that the native, set this attribute to the desired binary width.
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
-    cache = attributes.AttributeViBoolean(1050004, converter_to_driver=None, converter_from_driver=None)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
     The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
     '''
-    channel_count = attributes.AttributeViInt32(1050203, converter_to_driver=None, converter_from_driver=None)
+    channel_count = attributes.AttributeViInt32(1050203)
     '''
     Indicates the number of channels that the specific instrument driver  supports.
     For channel-based properties, the IVI engine maintains a separate cache value for each channel.
@@ -198,23 +198,23 @@ class _SessionBase(object):
         session['0,1'].channel_terminal_configuration = var
         var = session['0,1'].channel_terminal_configuration
     '''
-    clock_sync_pulse_source = attributes.AttributeViString(1150007, converter_to_driver=None, converter_from_driver=None)
+    clock_sync_pulse_source = attributes.AttributeViString(1150007)
     '''
     For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
     '''
-    data_transfer_block_size = attributes.AttributeViInt32(1150316, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_block_size = attributes.AttributeViInt32(1150316)
     '''
     Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system.
     '''
-    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150321, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150321)
     '''
     This property specifies the maximum bandwidth that the device is allowed to consume.
     '''
-    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150322, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150322)
     '''
     This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
     '''
-    ddc_center_frequency = attributes.AttributeViReal64(1150303, converter_to_driver=None, converter_from_driver=None)
+    ddc_center_frequency = attributes.AttributeViReal64(1150303)
     '''
     The frequency at which the DDC block frequency translates the input data.
     Default Value: 10 MHz
@@ -236,7 +236,7 @@ class _SessionBase(object):
     Complex (1)
     Default Value: Complex
     '''
-    ddc_enabled = attributes.AttributeViBoolean(1150300, converter_to_driver=None, converter_from_driver=None)
+    ddc_enabled = attributes.AttributeViBoolean(1150300)
     '''
     Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
     Default Value: VI_FALSE
@@ -250,7 +250,7 @@ class _SessionBase(object):
         session['0,1'].ddc_enabled = var
         var = session['0,1'].ddc_enabled
     '''
-    ddc_frequency_translation_enabled = attributes.AttributeViBoolean(1150302, converter_to_driver=None, converter_from_driver=None)
+    ddc_frequency_translation_enabled = attributes.AttributeViBoolean(1150302)
     '''
     Enables/disables frequency translating the data around the user-selected center  frequency down to baseband.
     Default Value: VI_TRUE
@@ -264,7 +264,7 @@ class _SessionBase(object):
         session['0,1'].ddc_frequency_translation_enabled = var
         var = session['0,1'].ddc_frequency_translation_enabled
     '''
-    ddc_frequency_translation_phase_i = attributes.AttributeViReal64(1150305, converter_to_driver=None, converter_from_driver=None)
+    ddc_frequency_translation_phase_i = attributes.AttributeViReal64(1150305)
     '''
     The I center frequency phase in degrees at the first point of the acquisition.
     Default Value: 0
@@ -278,7 +278,7 @@ class _SessionBase(object):
         session['0,1'].ddc_frequency_translation_phase_i = var
         var = session['0,1'].ddc_frequency_translation_phase_i
     '''
-    ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306, converter_to_driver=None, converter_from_driver=None)
+    ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
     '''
     The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when NISCOPE_ATTR_DDC_DATA_PROCESSING_MODE is set to Complex.
     Default Value: 90
@@ -292,7 +292,7 @@ class _SessionBase(object):
         session['0,1'].ddc_frequency_translation_phase_q = var
         var = session['0,1'].ddc_frequency_translation_phase_q
     '''
-    ddc_q_source = attributes.AttributeViString(1150310, converter_to_driver=None, converter_from_driver=None)
+    ddc_q_source = attributes.AttributeViString(1150310)
     '''
     Indicates the channel that is the input of the Q path of the DDC.
     Default Value: The channel that the attribute is configured off of.
@@ -306,15 +306,15 @@ class _SessionBase(object):
         session['0,1'].ddc_q_source = var
         var = session['0,1'].ddc_q_source
     '''
-    device_number = attributes.AttributeViInt32(1150076, converter_to_driver=None, converter_from_driver=None)
+    device_number = attributes.AttributeViInt32(1150076)
     '''
     Indicates the device number associated with the current session.
     '''
-    device_temperature = attributes.AttributeViReal64(1150086, converter_to_driver=None, converter_from_driver=None)
+    device_temperature = attributes.AttributeViReal64(1150086)
     '''
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
     '''
-    digital_gain = attributes.AttributeViReal64(1150307, converter_to_driver=None, converter_from_driver=None)
+    digital_gain = attributes.AttributeViReal64(1150307)
     '''
     Applies gain to the specified channel in hardware before any onboard processing.
     Valid Values:
@@ -329,7 +329,7 @@ class _SessionBase(object):
         session['0,1'].digital_gain = var
         var = session['0,1'].digital_gain
     '''
-    digital_offset = attributes.AttributeViReal64(1150308, converter_to_driver=None, converter_from_driver=None)
+    digital_offset = attributes.AttributeViReal64(1150308)
     '''
     Applies offset to the specified channel in hardware before any onboard processing.
     Valid Values:
@@ -344,7 +344,7 @@ class _SessionBase(object):
         session['0,1'].digital_offset = var
         var = session['0,1'].digital_offset
     '''
-    dither_enabled = attributes.AttributeViBoolean(1150319, converter_to_driver=None, converter_from_driver=None)
+    dither_enabled = attributes.AttributeViBoolean(1150319)
     '''
     Enables or Disables the analog dither on the device.  The default value is FALSE.
     Using dither can improve the spectral performance of the device by reducing the effects of quantization.  However, adding dither increases the power level to the ADC, so you may need to either decrease the signal level or increase your vertical range.
@@ -358,13 +358,13 @@ class _SessionBase(object):
         session['0,1'].dither_enabled = var
         var = session['0,1'].dither_enabled
     '''
-    driver_setup = attributes.AttributeViString(1050007, converter_to_driver=None, converter_from_driver=None)
+    driver_setup = attributes.AttributeViString(1050007)
     '''
     This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  niScope_InitWithOptions, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this attribute returns an empty string.
     '''
-    enable_dc_restore = attributes.AttributeViBoolean(1150093, converter_to_driver=None, converter_from_driver=None)
+    enable_dc_restore = attributes.AttributeViBoolean(1150093)
     '''
     Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point.
     Valid Values:
@@ -387,17 +387,17 @@ class _SessionBase(object):
         session['0,1'].enable_time_interleaved_sampling = var
         var = session['0,1'].enable_time_interleaved_sampling
     '''
-    end_of_acquisition_event_output_terminal = attributes.AttributeViString(1150101, converter_to_driver=None, converter_from_driver=None)
+    end_of_acquisition_event_output_terminal = attributes.AttributeViString(1150101)
     '''
     Specifies the destination for the End of Acquisition Event.    When this event is asserted, the digitizer has completed sampling for all records.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    end_of_record_event_output_terminal = attributes.AttributeViString(1150099, converter_to_driver=None, converter_from_driver=None)
+    end_of_record_event_output_terminal = attributes.AttributeViString(1150099)
     '''
     Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    end_of_record_to_advance_trigger_holdoff = attributes.AttributeViReal64(1150366, converter_to_driver=None, converter_from_driver=None)
+    end_of_record_to_advance_trigger_holdoff = attributes.AttributeViReal64(1150366)
     '''
     End of Record to Advance Trigger Holdoff is the length of time (in
     seconds) that a device waits between the completion of one record and
@@ -407,7 +407,7 @@ class _SessionBase(object):
     accept an Advance Trigger, or trigger on the input signal..
     **Supported Devices**: NI 5185/5186
     '''
-    equalization_filter_enabled = attributes.AttributeViBoolean(1150313, converter_to_driver=None, converter_from_driver=None)
+    equalization_filter_enabled = attributes.AttributeViBoolean(1150313)
     '''
     Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside  of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients  should be between +1 and -1 in value.
 
@@ -420,7 +420,7 @@ class _SessionBase(object):
         session['0,1'].equalization_filter_enabled = var
         var = session['0,1'].equalization_filter_enabled
     '''
-    equalization_num_coefficients = attributes.AttributeViInt32(1150312, converter_to_driver=None, converter_from_driver=None)
+    equalization_num_coefficients = attributes.AttributeViInt32(1150312)
     '''
     Returns the number of coefficients that the FIR filter can accept.  This filter is designed  to compensate the input signal for artifacts introduced to the signal outside of the digitizer.   However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be  between +1 and -1 in value.
 
@@ -433,22 +433,22 @@ class _SessionBase(object):
         session['0,1'].equalization_num_coefficients = var
         var = session['0,1'].equalization_num_coefficients
     '''
-    exported_advance_trigger_output_terminal = attributes.AttributeViString(1150109, converter_to_driver=None, converter_from_driver=None)
+    exported_advance_trigger_output_terminal = attributes.AttributeViString(1150109)
     '''
     Specifies the destination to export the advance trigger.   When the advance trigger is received, the digitizer begins acquiring  samples for the Nth record.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    exported_ref_trigger_output_terminal = attributes.AttributeViString(1150098, converter_to_driver=None, converter_from_driver=None)
+    exported_ref_trigger_output_terminal = attributes.AttributeViString(1150098)
     '''
     Specifies the destination export for the reference (stop) trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    exported_start_trigger_output_terminal = attributes.AttributeViString(1150097, converter_to_driver=None, converter_from_driver=None)
+    exported_start_trigger_output_terminal = attributes.AttributeViString(1150097)
     '''
     Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    fetch_interleaved_data = attributes.AttributeViBoolean(1150072, converter_to_driver=None, converter_from_driver=None)
+    fetch_interleaved_data = attributes.AttributeViBoolean(1150072)
     '''
     Set to VI_TRUE to retrieve one array with alternating values on the NI 5620/5621.  For example, this attribute can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to VI_TRUE, the resulting array will be twice the size of the actual record length.
     '''
@@ -457,22 +457,22 @@ class _SessionBase(object):
     Enables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: VI_TRUE
     '''
-    fetch_meas_num_samples = attributes.AttributeViInt32(1150081, converter_to_driver=None, converter_from_driver=None)
+    fetch_meas_num_samples = attributes.AttributeViInt32(1150081)
     '''
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
     Default Value: -1
     '''
-    fetch_num_records = attributes.AttributeViInt32(1150080, converter_to_driver=None, converter_from_driver=None)
+    fetch_num_records = attributes.AttributeViInt32(1150080)
     '''
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
     '''
-    fetch_offset = attributes.AttributeViInt32(1150078, converter_to_driver=None, converter_from_driver=None)
+    fetch_offset = attributes.AttributeViInt32(1150078)
     '''
     Offset in samples to start fetching data within each record. The offset is applied relative to  NISCOPE_ATTR_FETCH_RELATIVE_TO.The offset can be positive or negative.
     Default Value: 0
     '''
-    fetch_record_number = attributes.AttributeViInt32(1150079, converter_to_driver=None, converter_from_driver=None)
+    fetch_record_number = attributes.AttributeViInt32(1150079)
     '''
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
@@ -496,21 +496,21 @@ class _SessionBase(object):
         session['0,1'].flex_fir_antialias_filter_type = var
         var = session['0,1'].flex_fir_antialias_filter_type
     '''
-    fpga_bitfile_path = attributes.AttributeViString(1150375, converter_to_driver=None, converter_from_driver=None)
+    fpga_bitfile_path = attributes.AttributeViString(1150375)
     '''
     Gets the absolute file path to the bitfile loaded on the FPGA.
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
-    fractional_resample_enabled = attributes.AttributeViBoolean(1150320, converter_to_driver=None, converter_from_driver=None)
+    fractional_resample_enabled = attributes.AttributeViBoolean(1150320)
     '''
     Enables the onboard signal processing block that resamples the input waveform to the user desired sample rate.  The default value is FALSE.
     '''
-    group_capabilities = attributes.AttributeViString(1050401, converter_to_driver=None, converter_from_driver=None)
+    group_capabilities = attributes.AttributeViString(1050401)
     '''
     A string that contains a comma-separated list of class extension groups that this driver implements.
     '''
-    high_pass_filter_frequency = attributes.AttributeViReal64(1150377, converter_to_driver=None, converter_from_driver=None)
+    high_pass_filter_frequency = attributes.AttributeViReal64(1150377)
     '''
     Specifies the frequency for the highpass filter in Hz. The device uses
     one of the valid values listed below. If an invalid value is specified,
@@ -524,40 +524,40 @@ class _SessionBase(object):
     '''
     Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
     '''
-    horz_min_num_pts = attributes.AttributeViInt32(1250009, converter_to_driver=None, converter_from_driver=None)
+    horz_min_num_pts = attributes.AttributeViInt32(1250009)
     '''
     Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. NISCOPE_ATTR_HORZ_RECORD_LENGTH returns the actual record length.
     Valid Values: 1 - available onboard memory
     '''
-    horz_num_records = attributes.AttributeViInt32(1150001, converter_to_driver=None, converter_from_driver=None)
+    horz_num_records = attributes.AttributeViInt32(1150001)
     '''
     Specifies the number of records to acquire. Can be used for multi-record acquisition  and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
     '''
-    horz_record_length = attributes.AttributeViInt32(1250008, converter_to_driver=None, converter_from_driver=None)
+    horz_record_length = attributes.AttributeViInt32(1250008)
     '''
     Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  NISCOPE_ATTR_HORZ_MIN_NUM_PTS.
     Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch functions. This attribute is only valid after a call to the one of the  Configure Horizontal functions.
     '''
-    horz_record_ref_position = attributes.AttributeViReal64(1250011, converter_to_driver=None, converter_from_driver=None)
+    horz_record_ref_position = attributes.AttributeViReal64(1250011)
     '''
     Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  NISCOPE_ATTR_TRIGGER_DELAY_TIME attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
-    horz_sample_rate = attributes.AttributeViReal64(1250010, converter_to_driver=None, converter_from_driver=None)
+    horz_sample_rate = attributes.AttributeViReal64(1250010)
     '''
     Returns the effective sample rate using the current configuration. The units are samples per second.  This attribute is only valid after a call to the one of the Configure Horizontal functions.
     Units: Hertz (Samples / Second)
     '''
-    horz_time_per_record = attributes.AttributeViReal64(1250007, converter_to_driver=None, converter_from_driver=None)
+    horz_time_per_record = attributes.AttributeViReal64(1250007)
     '''
     Specifies the length of time that corresponds to the record length.
     Units: Seconds
     '''
-    input_clock_source = attributes.AttributeViString(1150002, converter_to_driver=None, converter_from_driver=None)
+    input_clock_source = attributes.AttributeViString(1150002)
     '''
     Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock  for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source  of the board clock.
     '''
-    input_impedance = attributes.AttributeViReal64(1250103, converter_to_driver=None, converter_from_driver=None)
+    input_impedance = attributes.AttributeViReal64(1250103)
     '''
     Specifies the input impedance for the channel in Ohms.
 
@@ -570,23 +570,23 @@ class _SessionBase(object):
         session['0,1'].input_impedance = var
         var = session['0,1'].input_impedance
     '''
-    instrument_firmware_revision = attributes.AttributeViString(1050510, converter_to_driver=None, converter_from_driver=None)
+    instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
     A string that contains the firmware revision information  for the instrument you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511, converter_to_driver=None, converter_from_driver=None)
+    instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
     A string that contains the name of the instrument manufacturer.
     '''
-    instrument_model = attributes.AttributeViString(1050512, converter_to_driver=None, converter_from_driver=None)
+    instrument_model = attributes.AttributeViString(1050512)
     '''
     A string that contains the model number of the current instrument.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021, converter_to_driver=None, converter_from_driver=None)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     NI-SCOPE does not generate interchange warnings and therefore ignores this attribute.
     '''
-    interleaving_offset_correction_enabled = attributes.AttributeViBoolean(1150376, converter_to_driver=None, converter_from_driver=None)
+    interleaving_offset_correction_enabled = attributes.AttributeViBoolean(1150376)
     '''
     Enables the interleaving offset correction on the specified channel. The
     default value is TRUE.
@@ -596,20 +596,20 @@ class _SessionBase(object):
 
     Note: If disabled, warranted specifications are not guaranteed.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304, converter_to_driver=None, converter_from_driver=None)
+    io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
-    logical_name = attributes.AttributeViString(1050305, converter_to_driver=None, converter_from_driver=None)
+    logical_name = attributes.AttributeViString(1050305)
     '''
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
-    master_enable = attributes.AttributeViBoolean(1150008, converter_to_driver=None, converter_from_driver=None)
+    master_enable = attributes.AttributeViBoolean(1150008)
     '''
     Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
     '''
-    max_input_frequency = attributes.AttributeViReal64(1250006, converter_to_driver=None, converter_from_driver=None)
+    max_input_frequency = attributes.AttributeViReal64(1250006)
     '''
     Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
     Defined Values:
@@ -629,15 +629,15 @@ class _SessionBase(object):
         session['0,1'].max_input_frequency = var
         var = session['0,1'].max_input_frequency
     '''
-    max_real_time_sampling_rate = attributes.AttributeViReal64(1150073, converter_to_driver=None, converter_from_driver=None)
+    max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''
     Returns the maximum real time sample rate in Hz.
     '''
-    max_ris_rate = attributes.AttributeViReal64(1150074, converter_to_driver=None, converter_from_driver=None)
+    max_ris_rate = attributes.AttributeViReal64(1150074)
     '''
     Returns the maximum sample rate in RIS mode in Hz.
     '''
-    meas_array_gain = attributes.AttributeViReal64(1150043, converter_to_driver=None, converter_from_driver=None)
+    meas_array_gain = attributes.AttributeViReal64(1150043)
     '''
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
     Default: 1.0
@@ -651,7 +651,7 @@ class _SessionBase(object):
         session['0,1'].meas_array_gain = var
         var = session['0,1'].meas_array_gain
     '''
-    meas_array_offset = attributes.AttributeViReal64(1150044, converter_to_driver=None, converter_from_driver=None)
+    meas_array_offset = attributes.AttributeViReal64(1150044)
     '''
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
     Default: 0.0
@@ -665,7 +665,7 @@ class _SessionBase(object):
         session['0,1'].meas_array_offset = var
         var = session['0,1'].meas_array_offset
     '''
-    meas_chan_high_ref_level = attributes.AttributeViReal64(1150040, converter_to_driver=None, converter_from_driver=None)
+    meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
     '''
     Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
     Default: 90%
@@ -679,7 +679,7 @@ class _SessionBase(object):
         session['0,1'].meas_chan_high_ref_level = var
         var = session['0,1'].meas_chan_high_ref_level
     '''
-    meas_chan_low_ref_level = attributes.AttributeViReal64(1150038, converter_to_driver=None, converter_from_driver=None)
+    meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
     '''
     Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_LOW_REF if you use this attribute to set various channels to different values.
     Default: 10%
@@ -693,7 +693,7 @@ class _SessionBase(object):
         session['0,1'].meas_chan_low_ref_level = var
         var = session['0,1'].meas_chan_low_ref_level
     '''
-    meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039, converter_to_driver=None, converter_from_driver=None)
+    meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
     '''
     Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_MID_REF if you use this attribute to set various channels to different values.
     Default: 50%
@@ -707,7 +707,7 @@ class _SessionBase(object):
         session['0,1'].meas_chan_mid_ref_level = var
         var = session['0,1'].meas_chan_mid_ref_level
     '''
-    meas_filter_center_freq = attributes.AttributeViReal64(1150032, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_center_freq = attributes.AttributeViReal64(1150032)
     '''
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by NISCOPE_ATTR_MEAS_FILTER_WIDTH, where the cutoff frequencies are the center ± width.
     Default: 1.0e6 Hz
@@ -721,7 +721,7 @@ class _SessionBase(object):
         session['0,1'].meas_filter_center_freq = var
         var = session['0,1'].meas_filter_center_freq
     '''
-    meas_filter_cutoff_freq = attributes.AttributeViReal64(1150031, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_cutoff_freq = attributes.AttributeViReal64(1150031)
     '''
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
     Default: 1.0e6 Hz
@@ -735,22 +735,22 @@ class _SessionBase(object):
         session['0,1'].meas_filter_cutoff_freq = var
         var = session['0,1'].meas_filter_cutoff_freq
     '''
-    meas_filter_order = attributes.AttributeViInt32(1150036, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_order = attributes.AttributeViInt32(1150036)
     '''
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
     '''
-    meas_filter_ripple = attributes.AttributeViReal64(1150033, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_ripple = attributes.AttributeViReal64(1150033)
     '''
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
     '''
-    meas_filter_taps = attributes.AttributeViInt32(1150037, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_taps = attributes.AttributeViInt32(1150037)
     '''
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
     '''
-    meas_filter_transient_waveform_percent = attributes.AttributeViReal64(1150034, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_transient_waveform_percent = attributes.AttributeViReal64(1150034)
     '''
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
     Default: 20.0%
@@ -773,7 +773,7 @@ class _SessionBase(object):
     ·  NISCOPE_VAL_MEAS_BANDSTOP
     Default: NISCOPE_VAL_MEAS_LOWPASS
     '''
-    meas_filter_width = attributes.AttributeViReal64(1150041, converter_to_driver=None, converter_from_driver=None)
+    meas_filter_width = attributes.AttributeViReal64(1150041)
     '''
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ ± one-half width.
     Default: 1.0e3 Hz
@@ -799,7 +799,7 @@ class _SessionBase(object):
         session['0,1'].meas_fir_filter_window = var
         var = session['0,1'].meas_fir_filter_window
     '''
-    meas_hysteresis_percent = attributes.AttributeViReal64(1150019, converter_to_driver=None, converter_from_driver=None)
+    meas_hysteresis_percent = attributes.AttributeViReal64(1150019)
     '''
     Digital hysteresis that is used in several of the scalar waveform measurements. This attribute specifies the percentage of the full-scale vertical range for the hysteresis window size.
     Default: 2%
@@ -813,7 +813,7 @@ class _SessionBase(object):
         session['0,1'].meas_hysteresis_percent = var
         var = session['0,1'].meas_hysteresis_percent
     '''
-    meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030, converter_to_driver=None, converter_from_driver=None)
+    meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
     '''
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling niScope_FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
@@ -827,7 +827,7 @@ class _SessionBase(object):
         session['0,1'].meas_interpolation_sampling_factor = var
         var = session['0,1'].meas_interpolation_sampling_factor
     '''
-    meas_last_acq_histogram_size = attributes.AttributeViInt32(1150020, converter_to_driver=None, converter_from_driver=None)
+    meas_last_acq_histogram_size = attributes.AttributeViInt32(1150020)
     '''
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
     Default: 256
@@ -841,7 +841,7 @@ class _SessionBase(object):
         session['0,1'].meas_last_acq_histogram_size = var
         var = session['0,1'].meas_last_acq_histogram_size
     '''
-    meas_other_channel = attributes.AttributeViString(1150018, converter_to_driver=None, converter_from_driver=None)
+    meas_other_channel = attributes.AttributeViString(1150018)
     '''
     Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
@@ -872,7 +872,7 @@ class _SessionBase(object):
         session['0,1'].meas_percentage_method = var
         var = session['0,1'].meas_percentage_method
     '''
-    meas_polynomial_interpolation_order = attributes.AttributeViInt32(1150029, converter_to_driver=None, converter_from_driver=None)
+    meas_polynomial_interpolation_order = attributes.AttributeViInt32(1150029)
     '''
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
@@ -893,12 +893,12 @@ class _SessionBase(object):
         session['0,1'].meas_ref_level_units = var
         var = session['0,1'].meas_ref_level_units
     '''
-    meas_time_histogram_high_time = attributes.AttributeViReal64(1150028, converter_to_driver=None, converter_from_driver=None)
+    meas_time_histogram_high_time = attributes.AttributeViReal64(1150028)
     '''
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
     '''
-    meas_time_histogram_high_volts = attributes.AttributeViReal64(1150026, converter_to_driver=None, converter_from_driver=None)
+    meas_time_histogram_high_volts = attributes.AttributeViReal64(1150026)
     '''
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
     Default: 10.0 V
@@ -912,12 +912,12 @@ class _SessionBase(object):
         session['0,1'].meas_time_histogram_high_volts = var
         var = session['0,1'].meas_time_histogram_high_volts
     '''
-    meas_time_histogram_low_time = attributes.AttributeViReal64(1150027, converter_to_driver=None, converter_from_driver=None)
+    meas_time_histogram_low_time = attributes.AttributeViReal64(1150027)
     '''
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
     '''
-    meas_time_histogram_low_volts = attributes.AttributeViReal64(1150025, converter_to_driver=None, converter_from_driver=None)
+    meas_time_histogram_low_volts = attributes.AttributeViReal64(1150025)
     '''
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
     Default: -10.0 V
@@ -931,7 +931,7 @@ class _SessionBase(object):
         session['0,1'].meas_time_histogram_low_volts = var
         var = session['0,1'].meas_time_histogram_low_volts
     '''
-    meas_time_histogram_size = attributes.AttributeViInt32(1150024, converter_to_driver=None, converter_from_driver=None)
+    meas_time_histogram_size = attributes.AttributeViInt32(1150024)
     '''
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with niScope_ClearWaveformMeasurementStats.
     Default: 256
@@ -945,39 +945,39 @@ class _SessionBase(object):
         session['0,1'].meas_time_histogram_size = var
         var = session['0,1'].meas_time_histogram_size
     '''
-    meas_voltage_histogram_high_volts = attributes.AttributeViReal64(1150023, converter_to_driver=None, converter_from_driver=None)
+    meas_voltage_histogram_high_volts = attributes.AttributeViReal64(1150023)
     '''
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
     '''
-    meas_voltage_histogram_low_volts = attributes.AttributeViReal64(1150022, converter_to_driver=None, converter_from_driver=None)
+    meas_voltage_histogram_low_volts = attributes.AttributeViReal64(1150022)
     '''
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
     '''
-    meas_voltage_histogram_size = attributes.AttributeViInt32(1150021, converter_to_driver=None, converter_from_driver=None)
+    meas_voltage_histogram_size = attributes.AttributeViInt32(1150021)
     '''
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function niScope_ClearWaveformMeasurementStats.
     Default: 256
     '''
-    min_sample_rate = attributes.AttributeViReal64(1150009, converter_to_driver=None, converter_from_driver=None)
+    min_sample_rate = attributes.AttributeViReal64(1150009)
     '''
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
     The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in niScope_ConfigureAcquisition and not require more memory than the  onboard memory module allows.
     '''
-    mux_mode_register = attributes.AttributeViInt32(1151002, converter_to_driver=None, converter_from_driver=None)
-    onboard_memory_size = attributes.AttributeViInt32(1150069, converter_to_driver=None, converter_from_driver=None)
+    mux_mode_register = attributes.AttributeViInt32(1151002)
+    onboard_memory_size = attributes.AttributeViInt32(1150069)
     '''
     Returns the total combined amount of onboard memory for all channels in bytes.
     '''
-    oscillator_phase_dac_value = attributes.AttributeViInt32(1150105, converter_to_driver=None, converter_from_driver=None)
+    oscillator_phase_dac_value = attributes.AttributeViInt32(1150105)
     '''
     Gets or sets the binary phase DAC value that controls the delay added to the Phase Locked Loop (PLL) of the sample clock.
 
     Note: if this value is set, sample clock adjust and TClk will not be able to do any sub-sample adjustment of the timebase sample clock.
     '''
-    output_clock_source = attributes.AttributeViString(1150003, converter_to_driver=None, converter_from_driver=None)
+    output_clock_source = attributes.AttributeViString(1150003)
     '''
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
     '''
@@ -990,19 +990,19 @@ class _SessionBase(object):
     Disabled (2)
     Default Value: Warning
     '''
-    pll_lock_status = attributes.AttributeViBoolean(1151303, converter_to_driver=None, converter_from_driver=None)
+    pll_lock_status = attributes.AttributeViBoolean(1151303)
     '''
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
     '''
-    points_done = attributes.AttributeViReal64(1150082, converter_to_driver=None, converter_from_driver=None)
+    points_done = attributes.AttributeViReal64(1150082)
     '''
     Actual number of samples acquired in the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER from the NISCOPE_ATTR_FETCH_RELATIVE_TO and NISCOPE_ATTR_FETCH_OFFSET attributes.
     '''
-    poll_interval = attributes.AttributeViInt32(1150100, converter_to_driver=None, converter_from_driver=None)
+    poll_interval = attributes.AttributeViInt32(1150100)
     '''
     Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
     '''
-    probe_attenuation = attributes.AttributeViReal64(1250004, converter_to_driver=None, converter_from_driver=None)
+    probe_attenuation = attributes.AttributeViReal64(1250004)
     '''
     Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this attribute to 10.0.
     Valid Values:
@@ -1017,40 +1017,40 @@ class _SessionBase(object):
         session['0,1'].probe_attenuation = var
         var = session['0,1'].probe_attenuation
     '''
-    range_check = attributes.AttributeViBoolean(1050002, converter_to_driver=None, converter_from_driver=None)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
     The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
     '''
-    ready_for_advance_event_output_terminal = attributes.AttributeViString(1150112, converter_to_driver=None, converter_from_driver=None)
+    ready_for_advance_event_output_terminal = attributes.AttributeViString(1150112)
     '''
     Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    ready_for_ref_event_output_terminal = attributes.AttributeViString(1150111, converter_to_driver=None, converter_from_driver=None)
+    ready_for_ref_event_output_terminal = attributes.AttributeViString(1150111)
     '''
     Specifies the destination for the Ready for Reference Event.   When this event is asserted, the digitizer is ready to receive a reference trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    ready_for_start_event_output_terminal = attributes.AttributeViString(1150110, converter_to_driver=None, converter_from_driver=None)
+    ready_for_start_event_output_terminal = attributes.AttributeViString(1150110)
     '''
     Specifies the destination for the Ready for Start Event.   When this event is asserted, the digitizer is ready to receive a start trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    records_done = attributes.AttributeViInt32(1150083, converter_to_driver=None, converter_from_driver=None)
+    records_done = attributes.AttributeViInt32(1150083)
     '''
     Specifies the number of records that have been completely acquired.
     '''
-    record_arm_source = attributes.AttributeViString(1150065, converter_to_driver=None, converter_from_driver=None)
+    record_arm_source = attributes.AttributeViString(1150065)
     '''
     Specifies the record arm source.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006, converter_to_driver=None, converter_from_driver=None)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 attributes.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
     The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
     '''
-    ref_clk_rate = attributes.AttributeViReal64(1150090, converter_to_driver=None, converter_from_driver=None)
+    ref_clk_rate = attributes.AttributeViReal64(1150090)
     '''
     If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
@@ -1058,19 +1058,19 @@ class _SessionBase(object):
     '''
     Indicates which analog compare circuitry to use on the device.
     '''
-    ref_trigger_minimum_quiet_time = attributes.AttributeViReal64(1150315, converter_to_driver=None, converter_from_driver=None)
+    ref_trigger_minimum_quiet_time = attributes.AttributeViReal64(1150315)
     '''
     The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This attribute is useful for triggering at the beginning and not in the  middle of signal bursts.
     '''
-    ref_trig_tdc_enable = attributes.AttributeViBoolean(1150096, converter_to_driver=None, converter_from_driver=None)
+    ref_trig_tdc_enable = attributes.AttributeViBoolean(1150096)
     '''
     This attribute controls whether the TDC is used to compute an accurate trigger.
     '''
-    resolution = attributes.AttributeViInt32(1150102, converter_to_driver=None, converter_from_driver=None)
+    resolution = attributes.AttributeViInt32(1150102)
     '''
     Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to NISCOPE_ATTR_BINARY_SAMPLE_WIDTH.
     '''
-    ris_in_auto_setup_enable = attributes.AttributeViBoolean(1150106, converter_to_driver=None, converter_from_driver=None)
+    ris_in_auto_setup_enable = attributes.AttributeViBoolean(1150106)
     '''
     Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup.
     Valid Values:
@@ -1081,11 +1081,11 @@ class _SessionBase(object):
     '''
     Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of NISCOPE_ATTR_MAX_REAL_TIME_SAMPLING_RATE.
     '''
-    ris_num_averages = attributes.AttributeViInt32(1150070, converter_to_driver=None, converter_from_driver=None)
+    ris_num_averages = attributes.AttributeViInt32(1150070)
     '''
     The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
     '''
-    sample_clock_timebase_multiplier = attributes.AttributeViInt32(1150367, converter_to_driver=None, converter_from_driver=None)
+    sample_clock_timebase_multiplier = attributes.AttributeViInt32(1150367)
     '''
     If `Sample Clock Timebase
     Source <pniScope_SampleClockTimebaseSource.html>`__ is an external
@@ -1102,56 +1102,56 @@ class _SessionBase(object):
     **Related topics:**
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
     '''
-    sample_mode = attributes.AttributeViInt32(1250106, converter_to_driver=None, converter_from_driver=None)
+    sample_mode = attributes.AttributeViInt32(1250106)
     '''
     Indicates the sample mode the digitizer is currently using.
     '''
-    samp_clk_timebase_div = attributes.AttributeViInt32(1150089, converter_to_driver=None, converter_from_driver=None)
+    samp_clk_timebase_div = attributes.AttributeViInt32(1150089)
     '''
     If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
     '''
-    samp_clk_timebase_rate = attributes.AttributeViReal64(1150088, converter_to_driver=None, converter_from_driver=None)
+    samp_clk_timebase_rate = attributes.AttributeViReal64(1150088)
     '''
     If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
     '''
-    samp_clk_timebase_src = attributes.AttributeViString(1150087, converter_to_driver=None, converter_from_driver=None)
+    samp_clk_timebase_src = attributes.AttributeViString(1150087)
     '''
     Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  NISCOPE_ATTR_MIN_SAMPLE_RATE (for internal sources) or the NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV (for external sources).
     '''
-    serial_number = attributes.AttributeViString(1150104, converter_to_driver=None, converter_from_driver=None)
+    serial_number = attributes.AttributeViString(1150104)
     '''
     Returns the serial number of the device.
     '''
-    simulate = attributes.AttributeViBoolean(1050005, converter_to_driver=None, converter_from_driver=None)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
     The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
     '''
-    slave_trigger_delay = attributes.AttributeViReal64(1150046, converter_to_driver=None, converter_from_driver=None)
+    slave_trigger_delay = attributes.AttributeViReal64(1150046)
     '''
     Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
     The major version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
     The minor version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_revision = attributes.AttributeViString(1050551)
     '''
     A string that contains additional version information about this  instrument driver.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies this driver.
     '''
-    start_to_ref_trigger_holdoff = attributes.AttributeViReal64(1150103, converter_to_driver=None, converter_from_driver=None)
+    start_to_ref_trigger_holdoff = attributes.AttributeViReal64(1150103)
     '''
     Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
     Units: Seconds
@@ -1173,11 +1173,11 @@ class _SessionBase(object):
 
     Note: On the NI 5122/5622, only **Start Trigger** is valid for this property.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327, converter_to_driver=None, converter_from_driver=None)
+    supported_instrument_models = attributes.AttributeViString(1050327)
     '''
     A string that contains a comma-separated list of the instrument model numbers supported by this driver.
     '''
-    trigger_auto_triggered = attributes.AttributeViBoolean(1150278, converter_to_driver=None, converter_from_driver=None)
+    trigger_auto_triggered = attributes.AttributeViBoolean(1150278)
     '''
     Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered attribute to find out if the last acquisition was triggered.
     '''
@@ -1185,40 +1185,40 @@ class _SessionBase(object):
     '''
     Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     '''
-    trigger_delay_time = attributes.AttributeViReal64(1250015, converter_to_driver=None, converter_from_driver=None)
+    trigger_delay_time = attributes.AttributeViReal64(1250015)
     '''
     Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_from_pfi_delay = attributes.AttributeViReal64(1150052, converter_to_driver=None, converter_from_driver=None)
+    trigger_from_pfi_delay = attributes.AttributeViReal64(1150052)
     '''
     This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_from_rtsi_delay = attributes.AttributeViReal64(1150051, converter_to_driver=None, converter_from_driver=None)
+    trigger_from_rtsi_delay = attributes.AttributeViReal64(1150051)
     '''
     This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_from_star_delay = attributes.AttributeViReal64(1150050, converter_to_driver=None, converter_from_driver=None)
+    trigger_from_star_delay = attributes.AttributeViReal64(1150050)
     '''
     This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_holdoff = attributes.AttributeViReal64(1250016, converter_to_driver=None, converter_from_driver=None)
+    trigger_holdoff = attributes.AttributeViReal64(1250016)
     '''
     Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to niScope_ConfigureHorizontalTiming.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_hysteresis = attributes.AttributeViReal64(1150006, converter_to_driver=None, converter_from_driver=None)
+    trigger_hysteresis = attributes.AttributeViReal64(1150006)
     '''
     Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify  with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
     '''
-    trigger_impedance = attributes.AttributeViReal64(1150075, converter_to_driver=None, converter_from_driver=None)
+    trigger_impedance = attributes.AttributeViReal64(1150075)
     '''
     Specifies the input impedance for the external analog trigger channel in Ohms.
     Valid Values:
     50      - 50 ohms
     1000000 - 1 mega ohm
     '''
-    trigger_level = attributes.AttributeViReal64(1250017, converter_to_driver=None, converter_from_driver=None)
+    trigger_level = attributes.AttributeViReal64(1250017)
     '''
     Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     Valid Values:
@@ -1235,19 +1235,19 @@ class _SessionBase(object):
     '''
     Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     '''
-    trigger_source = attributes.AttributeViString(1250013, converter_to_driver=None, converter_from_driver=None)
+    trigger_source = attributes.AttributeViString(1250013)
     '''
     Specifies the source the digitizer monitors for the trigger event.
     '''
-    trigger_to_pfi_delay = attributes.AttributeViReal64(1150049, converter_to_driver=None, converter_from_driver=None)
+    trigger_to_pfi_delay = attributes.AttributeViReal64(1150049)
     '''
     This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_to_rtsi_delay = attributes.AttributeViReal64(1150048, converter_to_driver=None, converter_from_driver=None)
+    trigger_to_rtsi_delay = attributes.AttributeViReal64(1150048)
     '''
     This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_to_star_delay = attributes.AttributeViReal64(1150047, converter_to_driver=None, converter_from_driver=None)
+    trigger_to_star_delay = attributes.AttributeViReal64(1150047)
     '''
     This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
@@ -1255,7 +1255,7 @@ class _SessionBase(object):
     '''
     Specifies the type of trigger to use.
     '''
-    trigger_window_high_level = attributes.AttributeViReal64(1150014, converter_to_driver=None, converter_from_driver=None)
+    trigger_window_high_level = attributes.AttributeViReal64(1150014)
     '''
     Pass the upper voltage threshold you want the digitizer to use for  window triggering.
     The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL
@@ -1265,7 +1265,7 @@ class _SessionBase(object):
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
     '''
-    trigger_window_low_level = attributes.AttributeViReal64(1150013, converter_to_driver=None, converter_from_driver=None)
+    trigger_window_low_level = attributes.AttributeViReal64(1150013)
     '''
     Pass the lower voltage threshold you want the digitizer to use for  window triggering.
     The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
@@ -1284,7 +1284,7 @@ class _SessionBase(object):
     '''
     Specifies the condition in the video signal that causes the digitizer to trigger.
     '''
-    tv_trigger_line_number = attributes.AttributeViInt32(1250206, converter_to_driver=None, converter_from_driver=None)
+    tv_trigger_line_number = attributes.AttributeViInt32(1250206)
     '''
     Specifies the line on which to trigger, if NISCOPE_ATTR_TV_TRIGGER_EVENT is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
@@ -1318,7 +1318,7 @@ class _SessionBase(object):
         session['0,1'].vertical_coupling = var
         var = session['0,1'].vertical_coupling
     '''
-    vertical_offset = attributes.AttributeViReal64(1250002, converter_to_driver=None, converter_from_driver=None)
+    vertical_offset = attributes.AttributeViReal64(1250002)
     '''
     Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this attribute to 5.0 V.
 
@@ -1333,7 +1333,7 @@ class _SessionBase(object):
         session['0,1'].vertical_offset = var
         var = session['0,1'].vertical_offset
     '''
-    vertical_range = attributes.AttributeViReal64(1250001, converter_to_driver=None, converter_from_driver=None)
+    vertical_range = attributes.AttributeViReal64(1250001)
     '''
     Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this attribute to 10.0 V.
     Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced  up to the next valid range.

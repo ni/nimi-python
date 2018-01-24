@@ -32,19 +32,19 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    all_marker_events_latched_status = attributes.AttributeViInt32(1150349, converter_to_driver=None, converter_from_driver=None)
+    all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
     '''
     Returns a bit field of the latched status of all Marker Events.  Write 0 to this attribute to clear the latched status of all Marker Events.
     '''
-    all_marker_events_live_status = attributes.AttributeViInt32(1150344, converter_to_driver=None, converter_from_driver=None)
+    all_marker_events_live_status = attributes.AttributeViInt32(1150344)
     '''
     Returns a bit field of the live status of all Marker Events.
     '''
-    analog_data_mask = attributes.AttributeViInt32(1150234, converter_to_driver=None, converter_from_driver=None)
+    analog_data_mask = attributes.AttributeViInt32(1150234)
     '''
     Specifies the mask to apply to the analog output. The masked data is replaced with the data in NIFGEN_ATTR_ANALOG_STATIC_VALUE.
     '''
-    analog_filter_enabled = attributes.AttributeViBoolean(1150103, converter_to_driver=None, converter_from_driver=None)
+    analog_filter_enabled = attributes.AttributeViBoolean(1150103)
     '''
     Controls whether the signal generator applies to an analog filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
     '''
@@ -53,44 +53,44 @@ class _SessionBase(object):
     Specifies the analog signal path that should be used. The main path allows you to configure gain, offset, analog filter status, output impedance, and output enable. The main path has two amplifier options, high- and low-gain.
     The direct path presents a much smaller gain range, and you cannot adjust offset or the filter status. The direct path also provides a smaller output range but also lower distortion. NI-FGEN normally chooses the amplifier based on the user-specified gain.
     '''
-    analog_static_value = attributes.AttributeViInt32(1150235, converter_to_driver=None, converter_from_driver=None)
+    analog_static_value = attributes.AttributeViInt32(1150235)
     '''
     Specifies the static value that replaces data masked by NIFGEN_ATTR_ANALOG_DATA_MASK.
     '''
-    arb_gain = attributes.AttributeViReal64(1250202, converter_to_driver=None, converter_from_driver=None)
+    arb_gain = attributes.AttributeViReal64(1250202)
     '''
     Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to scale the arbitrary waveform to other ranges.
     For example, when you set this attribute to 2.0, the output signal ranges from -2.0 V to +2.0 V.
     Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
     '''
-    arb_marker_position = attributes.AttributeViInt32(1150327, converter_to_driver=None, converter_from_driver=None)
+    arb_marker_position = attributes.AttributeViInt32(1150327)
     '''
     Specifies the position for a marker to be asserted in the arbitrary waveform. This attribute defaults to -1 when no marker position is specified. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
     Use niFgen_ExportSignal to export the marker signal.
     '''
-    arb_offset = attributes.AttributeViReal64(1250203, converter_to_driver=None, converter_from_driver=None)
+    arb_offset = attributes.AttributeViReal64(1250203)
     '''
     Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to shift the arbitrary waveform range.
     For example, when you set this attribute to 1.0, the output signal ranges from 2.0 V to 0.0 V.
     Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
     Units: Volts
     '''
-    arb_repeat_count = attributes.AttributeViInt32(1150328, converter_to_driver=None, converter_from_driver=None)
+    arb_repeat_count = attributes.AttributeViInt32(1150328)
     '''
     Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to NIFGEN_VAL_SINGLE or NIFGEN_VAL_STEPPED. This attribute is ignored if the triggerMode parameter is set to NIFGEN_VAL_CONTINUOUS or NIFGEN_VAL_BURST. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
     When used during streaming, this attribute specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
-    arb_sample_rate = attributes.AttributeViReal64(1250204, converter_to_driver=None, converter_from_driver=None)
+    arb_sample_rate = attributes.AttributeViReal64(1250204)
     '''
     Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set  to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
     Units: Samples/s
     '''
-    arb_sequence_handle = attributes.AttributeViInt32(1250211, converter_to_driver=None, converter_from_driver=None)
+    arb_sequence_handle = attributes.AttributeViInt32(1250211)
     '''
     This channel-based attribute identifies which sequence the signal generator produces. You can create multiple sequences using niFgen_CreateArbSequence. niFgen_CreateArbSequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this attribute to the sequence handle.
     Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SEQ.
     '''
-    arb_waveform_handle = attributes.AttributeViInt32(1250201, converter_to_driver=None, converter_from_driver=None)
+    arb_waveform_handle = attributes.AttributeViInt32(1250201)
     '''
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:
     niFgen_CreateWaveformF64
@@ -101,7 +101,7 @@ class _SessionBase(object):
     These functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.
     Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
     '''
-    aux_power_enabled = attributes.AttributeViBoolean(1150411, converter_to_driver=None, converter_from_driver=None)
+    aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''
     Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
     '''
@@ -109,7 +109,7 @@ class _SessionBase(object):
     '''
     The bus type of the signal generator.
     '''
-    cache = attributes.AttributeViBoolean(1050004, converter_to_driver=None, converter_from_driver=None)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
     NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use niFgen_InitWithOptions to override the default value.
@@ -118,7 +118,7 @@ class _SessionBase(object):
     '''
     Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
     '''
-    channel_delay = attributes.AttributeViReal64(1150369, converter_to_driver=None, converter_from_driver=None)
+    channel_delay = attributes.AttributeViReal64(1150369)
     '''
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this attribute can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
@@ -127,15 +127,15 @@ class _SessionBase(object):
     Controls which clock mode is used for the signal generator.
     For signal generators that support it, this attribute allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
     '''
-    common_mode_offset = attributes.AttributeViReal64(1150366, converter_to_driver=None, converter_from_driver=None)
+    common_mode_offset = attributes.AttributeViReal64(1150366)
     '''
     Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This attribute applies only when you set the NIFGEN_ATTR_TERMINAL_CONFIGURATION attribute to NIFGEN_VAL_DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
     '''
-    data_marker_events_count = attributes.AttributeViInt32(1150273, converter_to_driver=None, converter_from_driver=None)
+    data_marker_events_count = attributes.AttributeViInt32(1150273)
     '''
     Returns the number of Data Marker Events supported by the device.
     '''
-    data_marker_event_data_bit_number = attributes.AttributeViInt32(1150337, converter_to_driver=None, converter_from_driver=None)
+    data_marker_event_data_bit_number = attributes.AttributeViInt32(1150337)
     '''
     Specifies the bit number to assign to the Data Marker Event.
     '''
@@ -143,25 +143,25 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Data marker event.
     '''
-    data_marker_event_output_terminal = attributes.AttributeViString(1150339, converter_to_driver=None, converter_from_driver=None)
+    data_marker_event_output_terminal = attributes.AttributeViString(1150339)
     '''
     Specifies the destination terminal for the Data Marker Event.
     '''
-    data_transfer_block_size = attributes.AttributeViInt32(1150241, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_block_size = attributes.AttributeViInt32(1150241)
     '''
     The number of samples at a time to download to onboard memory. Useful when the total data to be transferred to onboard memory is large.
     '''
-    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150373, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150373)
     '''
     Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this attribute. Set this attribute to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
     '''
-    data_transfer_maximum_in_flight_reads = attributes.AttributeViInt32(1150375, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_maximum_in_flight_reads = attributes.AttributeViInt32(1150375)
     '''
     Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue.
     When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this attribute is set to the highest value the signal generator supports.
     If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the NI signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
     '''
-    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150374, converter_to_driver=None, converter_from_driver=None)
+    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150374)
     '''
     Specifies the preferred size of the data field in a PCI Express read request packet. In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
     Recommended values for this attribute are powers of two between 64 and 512.
@@ -171,7 +171,7 @@ class _SessionBase(object):
     Note:
     :
     '''
-    digital_data_mask = attributes.AttributeViInt32(1150236, converter_to_driver=None, converter_from_driver=None)
+    digital_data_mask = attributes.AttributeViInt32(1150236)
     '''
     Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in NIFGEN_ATTR_DIGITAL_STATIC_VALUE.
     '''
@@ -179,7 +179,7 @@ class _SessionBase(object):
     '''
     Specifies the active edge for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
-    digital_edge_script_trigger_source = attributes.AttributeViString(1150291, converter_to_driver=None, converter_from_driver=None)
+    digital_edge_script_trigger_source = attributes.AttributeViString(1150291)
     '''
     Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
@@ -187,19 +187,19 @@ class _SessionBase(object):
     '''
     Specifies the active edge for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
     '''
-    digital_edge_start_trigger_source = attributes.AttributeViString(1150281, converter_to_driver=None, converter_from_driver=None)
+    digital_edge_start_trigger_source = attributes.AttributeViString(1150281)
     '''
     Specifies the source terminal for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
     '''
-    digital_filter_enabled = attributes.AttributeViBoolean(1150102, converter_to_driver=None, converter_from_driver=None)
+    digital_filter_enabled = attributes.AttributeViBoolean(1150102)
     '''
     Controls whether the signal generator applies a digital filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
     '''
-    digital_filter_interpolation_factor = attributes.AttributeViReal64(1150218, converter_to_driver=None, converter_from_driver=None)
+    digital_filter_interpolation_factor = attributes.AttributeViReal64(1150218)
     '''
     This attribute only affects the device when NIFGEN_ATTR_DIGITAL_FILTER_ENABLED is set to VI_TRUE. If you do not set this attribute directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
     '''
-    digital_gain = attributes.AttributeViReal64(1150254, converter_to_driver=None, converter_from_driver=None)
+    digital_gain = attributes.AttributeViReal64(1150254)
     '''
     Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
     Some signal generators support both digital gain and an analog gain (analog gain is specified with the NIFGEN_ATTR_FUNC_AMPLITUDE attribute or the NIFGEN_ATTR_ARB_GAIN attribute). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a function of analog gain, so only analog gain makes full use of the resolution of the DAC.
@@ -208,31 +208,31 @@ class _SessionBase(object):
     '''
     Specifies the active level for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
     '''
-    digital_level_script_trigger_source = attributes.AttributeViString(1150293, converter_to_driver=None, converter_from_driver=None)
+    digital_level_script_trigger_source = attributes.AttributeViString(1150293)
     '''
     Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
     '''
-    digital_pattern_enabled = attributes.AttributeViBoolean(1150101, converter_to_driver=None, converter_from_driver=None)
+    digital_pattern_enabled = attributes.AttributeViBoolean(1150101)
     '''
     Controls whether the signal generator generates a digital pattern of the output signal.
     '''
-    digital_static_value = attributes.AttributeViInt32(1150237, converter_to_driver=None, converter_from_driver=None)
+    digital_static_value = attributes.AttributeViInt32(1150237)
     '''
     Specifies the static value that replaces data masked by NIFGEN_ATTR_DIGITAL_DATA_MASK.
     '''
-    direct_dma_enabled = attributes.AttributeViBoolean(1150244, converter_to_driver=None, converter_from_driver=None)
+    direct_dma_enabled = attributes.AttributeViBoolean(1150244)
     '''
     Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform function calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
     '''
-    direct_dma_window_address = attributes.AttributeViInt32(1150274, converter_to_driver=None, converter_from_driver=None)
+    direct_dma_window_address = attributes.AttributeViInt32(1150274)
     '''
     Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
     '''
-    direct_dma_window_size = attributes.AttributeViInt32(1150245, converter_to_driver=None, converter_from_driver=None)
+    direct_dma_window_size = attributes.AttributeViInt32(1150245)
     '''
     Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
     '''
-    done_event_delay = attributes.AttributeViReal64(1150358, converter_to_driver=None, converter_from_driver=None)
+    done_event_delay = attributes.AttributeViReal64(1150358)
     '''
     Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  NIFGEN_ATTR_DONE_EVENT_DELAY attribute.
     '''
@@ -240,7 +240,7 @@ class _SessionBase(object):
     '''
     Specifies the units applied to the value of the NIFGEN_ATTR_DONE_EVENT_DELAY attribute. Valid units are seconds and sample clock periods.
     '''
-    done_event_latched_status = attributes.AttributeViBoolean(1150351, converter_to_driver=None, converter_from_driver=None)
+    done_event_latched_status = attributes.AttributeViBoolean(1150351)
     '''
     Returns the latched status of the specified Done Event.
     '''
@@ -252,7 +252,7 @@ class _SessionBase(object):
     '''
     Specifies the output behavior for the Done Event.
     '''
-    done_event_output_terminal = attributes.AttributeViString(1150315, converter_to_driver=None, converter_from_driver=None)
+    done_event_output_terminal = attributes.AttributeViString(1150315)
     '''
     Specifies the destination terminal for the Done Event.
     '''
@@ -260,7 +260,7 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Done Event.
     '''
-    done_event_pulse_width = attributes.AttributeViReal64(1150336, converter_to_driver=None, converter_from_driver=None)
+    done_event_pulse_width = attributes.AttributeViReal64(1150336)
     '''
     Specifies the pulse width for the Done Event.
     '''
@@ -268,80 +268,80 @@ class _SessionBase(object):
     '''
     Specifies the pulse width units for the Done Event.
     '''
-    driver_setup = attributes.AttributeViString(1050007, converter_to_driver=None, converter_from_driver=None)
+    driver_setup = attributes.AttributeViString(1050007)
     '''
     Specifies the driver setup portion of the option string that was passed into the niFgen_InitWithOptions function.
     '''
-    exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322, converter_to_driver=None, converter_from_driver=None)
+    exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''
     Specifies the terminal to which to export the Onboard Reference Clock.
     '''
-    exported_reference_clock_output_terminal = attributes.AttributeViString(1150321, converter_to_driver=None, converter_from_driver=None)
+    exported_reference_clock_output_terminal = attributes.AttributeViString(1150321)
     '''
     Specifies the terminal to which to export the Reference Clock.
     '''
-    exported_sample_clock_divisor = attributes.AttributeViInt32(1150219, converter_to_driver=None, converter_from_driver=None)
+    exported_sample_clock_divisor = attributes.AttributeViInt32(1150219)
     '''
     Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute.
     '''
-    exported_sample_clock_output_terminal = attributes.AttributeViString(1150320, converter_to_driver=None, converter_from_driver=None)
+    exported_sample_clock_output_terminal = attributes.AttributeViString(1150320)
     '''
     Specifies the terminal to which to export the Sample Clock.
     '''
-    exported_sample_clock_timebase_divisor = attributes.AttributeViInt32(1150230, converter_to_driver=None, converter_from_driver=None)
+    exported_sample_clock_timebase_divisor = attributes.AttributeViInt32(1150230)
     '''
     Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL attribute.
     '''
-    exported_sample_clock_timebase_output_terminal = attributes.AttributeViString(1150329, converter_to_driver=None, converter_from_driver=None)
+    exported_sample_clock_timebase_output_terminal = attributes.AttributeViString(1150329)
     '''
     Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR attribute,   the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL  attribute is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
     To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
 
     Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
-    exported_script_trigger_output_terminal = attributes.AttributeViString(1150295, converter_to_driver=None, converter_from_driver=None)
+    exported_script_trigger_output_terminal = attributes.AttributeViString(1150295)
     '''
     Specifies the output terminal for the exported Script trigger.
     Setting this attribute to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
     '''
-    exported_start_trigger_output_terminal = attributes.AttributeViString(1150283, converter_to_driver=None, converter_from_driver=None)
+    exported_start_trigger_output_terminal = attributes.AttributeViString(1150283)
     '''
     Specifies the destination terminal for exporting the Start trigger.
     '''
-    external_clock_delay_binary_value = attributes.AttributeViInt32(1150233, converter_to_driver=None, converter_from_driver=None)
+    external_clock_delay_binary_value = attributes.AttributeViInt32(1150233)
     '''
     Binary value of the external clock delay.
     '''
-    external_sample_clock_multiplier = attributes.AttributeViReal64(1150376, converter_to_driver=None, converter_from_driver=None)
+    external_sample_clock_multiplier = attributes.AttributeViReal64(1150376)
     '''
     Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this attribute to generate samples at a rate higher than your external clock rate.  When using this attribute, you do not need to explicitly set the external clock rate.
     '''
-    file_transfer_block_size = attributes.AttributeViInt32(1150240, converter_to_driver=None, converter_from_driver=None)
+    file_transfer_block_size = attributes.AttributeViInt32(1150240)
     '''
     The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File functions.
     '''
-    filter_correction_frequency = attributes.AttributeViReal64(1150104, converter_to_driver=None, converter_from_driver=None)
+    filter_correction_frequency = attributes.AttributeViReal64(1150104)
     '''
     Controls the filter correction frequency of the analog filter. This attribute corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this attribute to 0 Hz.
     '''
-    flatness_correction_enabled = attributes.AttributeViBoolean(1150323, converter_to_driver=None, converter_from_driver=None)
+    flatness_correction_enabled = attributes.AttributeViBoolean(1150323)
     '''
     When VI_TRUE, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
     This attribute should be set to VI_FALSE when performing Flatness Calibration.
     '''
-    fpga_bitfile_path = attributes.AttributeViString(1150412, converter_to_driver=None, converter_from_driver=None)
+    fpga_bitfile_path = attributes.AttributeViString(1150412)
     '''
     Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
-    freq_list_duration_quantum = attributes.AttributeViReal64(1150214, converter_to_driver=None, converter_from_driver=None)
+    freq_list_duration_quantum = attributes.AttributeViReal64(1150214)
     '''
     Returns the quantum of which all durations must be a multiple in a  frequency list.
     '''
-    freq_list_handle = attributes.AttributeViInt32(1150208, converter_to_driver=None, converter_from_driver=None)
+    freq_list_handle = attributes.AttributeViInt32(1150208)
     '''
     Sets which frequency list the signal generator  produces. Create a frequency list using niFgen_CreateFreqList.  niFgen_CreateFreqList returns a handle that you can  use to identify the list.
     '''
-    func_amplitude = attributes.AttributeViReal64(1250102, converter_to_driver=None, converter_from_driver=None)
+    func_amplitude = attributes.AttributeViReal64(1250102)
     '''
     Controls the amplitude of the standard waveform that the  signal generator produces. This value is the amplitude at the  output terminal.
     For example, to produce a waveform ranging from -5.00 V to +5.00 V, set  the amplitude to 10.00 V.
@@ -350,20 +350,20 @@ class _SessionBase(object):
 
     Note: This parameter does not affect signal generator behavior when you
     '''
-    func_buffer_size = attributes.AttributeViInt32(1150238, converter_to_driver=None, converter_from_driver=None)
+    func_buffer_size = attributes.AttributeViInt32(1150238)
     '''
     This attribute contains the number of samples used in the standard function waveform  buffer. This attribute is only valid on devices that implement standard function mode  in software, and is read-only for all other devices.
     implementation of Standard Function Mode on your device.
 
     Note: Refer to the Standard Function Mode topic for more information on the
     '''
-    func_dc_offset = attributes.AttributeViReal64(1250103, converter_to_driver=None, converter_from_driver=None)
+    func_dc_offset = attributes.AttributeViReal64(1250103)
     '''
     Controls the DC offset of the standard waveform that the  signal generator produces.  This value is the offset at the output  terminal. The value is the offset from ground to the center of the  waveform that you specify with the Waveform parameter.
     For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
     Units: volts
     '''
-    func_duty_cycle_high = attributes.AttributeViReal64(1250106, converter_to_driver=None, converter_from_driver=None)
+    func_duty_cycle_high = attributes.AttributeViReal64(1250106)
     '''
     Controls the duty cycle of the square wave the signal generator  produces. Specify this attribute as a percentage of  the time the square wave is high in a cycle.
     set the Waveform parameter to NIFGEN_VAL_WFM_SQUARE.
@@ -371,7 +371,7 @@ class _SessionBase(object):
 
     Note: This parameter only affects signal generator behavior when you
     '''
-    func_frequency = attributes.AttributeViReal64(1250104, converter_to_driver=None, converter_from_driver=None)
+    func_frequency = attributes.AttributeViReal64(1250104)
     '''
     Controls the frequency of the standard waveform that the  signal generator produces.
     Units: hertz
@@ -381,14 +381,14 @@ class _SessionBase(object):
     Note:
     :
     '''
-    func_max_buffer_size = attributes.AttributeViInt32(1150239, converter_to_driver=None, converter_from_driver=None)
+    func_max_buffer_size = attributes.AttributeViInt32(1150239)
     '''
     This attribute sets the maximum number of samples that can be used in the standard  function waveform buffer. Increasing this value may increase the quality of  the waveform. This attribute is only valid on devices that implement standard  function mode in software, and is read-only for all other devices.
     implementation of Standard Function Mode on your device.
 
     Note: Refer to the Standard Function Mode topic for more information on the
     '''
-    func_start_phase = attributes.AttributeViReal64(1250105, converter_to_driver=None, converter_from_driver=None)
+    func_start_phase = attributes.AttributeViReal64(1250105)
     '''
     Controls horizontal offset of the standard waveform the  signal generator produces. Specify this attribute in degrees of  one waveform cycle.
     A start phase of 180 degrees means output generation begins halfway  through the waveform. A start phase of 360 degrees offsets the output by  an entire waveform cycle, which is identical to a start phase of 0  degrees.
@@ -411,11 +411,11 @@ class _SessionBase(object):
     NIFGEN_VAL_WFM_USER      - User-defined waveform as defined with
     niFgen_DefineUserStandardWaveform
     '''
-    gain_dac_value = attributes.AttributeViInt32(1150223, converter_to_driver=None, converter_from_driver=None)
+    gain_dac_value = attributes.AttributeViInt32(1150223)
     '''
     Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    group_capabilities = attributes.AttributeViString(1050401, converter_to_driver=None, converter_from_driver=None)
+    group_capabilities = attributes.AttributeViString(1050401)
     '''
     Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
     '''
@@ -423,53 +423,53 @@ class _SessionBase(object):
     '''
     Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
     '''
-    idle_value = attributes.AttributeViInt32(1150378, converter_to_driver=None, converter_from_driver=None)
+    idle_value = attributes.AttributeViInt32(1150378)
     '''
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
-    id_query_response = attributes.AttributeViString(1150001, converter_to_driver=None, converter_from_driver=None)
-    instrument_firmware_revision = attributes.AttributeViString(1050510, converter_to_driver=None, converter_from_driver=None)
+    id_query_response = attributes.AttributeViString(1150001)
+    instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
     A string that contains the firmware revision information  for the device that you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511, converter_to_driver=None, converter_from_driver=None)
+    instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
     A string that contains the name of the device manufacturer you are currently  using.
     '''
-    instrument_model = attributes.AttributeViString(1050512, converter_to_driver=None, converter_from_driver=None)
+    instrument_model = attributes.AttributeViString(1050512)
     '''
     A string that contains the model number or name of the device that you  are currently using.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021, converter_to_driver=None, converter_from_driver=None)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niFgen_InitiateGeneration.
     Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call niFgen_GetNextInterchangeWarning to extract interchange warnings.   Call niFgen_ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304, converter_to_driver=None, converter_from_driver=None)
+    io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
     Indicates the resource descriptor that NI-FGEN uses to identify the physical device.
     If you initialize NI-FGEN with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
     If you initialize NI-FGEN with the resource  descriptor, this attribute contains that value.
     '''
-    load_impedance = attributes.AttributeViReal64(1150220, converter_to_driver=None, converter_from_driver=None)
+    load_impedance = attributes.AttributeViReal64(1150220)
     '''
     This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
     '''
-    logical_name = attributes.AttributeViString(1050305, converter_to_driver=None, converter_from_driver=None)
+    logical_name = attributes.AttributeViString(1050305)
     '''
     A string containing the logical name that you specified when opening the  current IVI session.
     You may pass a logical name to niFgen_init or  niFgen_InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
-    major_version = attributes.AttributeViInt32(1050503, converter_to_driver=None, converter_from_driver=None)
+    major_version = attributes.AttributeViInt32(1050503)
     '''
     Returns the major version number of NI-FGEN.
     '''
-    marker_events_count = attributes.AttributeViInt32(1150271, converter_to_driver=None, converter_from_driver=None)
+    marker_events_count = attributes.AttributeViInt32(1150271)
     '''
     Returns the number of markers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
     '''
-    marker_event_delay = attributes.AttributeViReal64(1150354, converter_to_driver=None, converter_from_driver=None)
+    marker_event_delay = attributes.AttributeViReal64(1150354)
     '''
     Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.
     '''
@@ -477,12 +477,12 @@ class _SessionBase(object):
     '''
     Specifies the units applied to the value of the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.  Valid units are seconds and sample clock periods.
     '''
-    marker_event_latched_status = attributes.AttributeViBoolean(1150350, converter_to_driver=None, converter_from_driver=None)
+    marker_event_latched_status = attributes.AttributeViBoolean(1150350)
     '''
     Specifies the latched status of the specified Marker Event.
     Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     '''
-    marker_event_live_status = attributes.AttributeViBoolean(1150345, converter_to_driver=None, converter_from_driver=None)
+    marker_event_live_status = attributes.AttributeViBoolean(1150345)
     '''
     Returns the live status of the specified Marker Event.
     '''
@@ -490,7 +490,7 @@ class _SessionBase(object):
     '''
     Specifies the output behavior for the Marker Event.
     '''
-    marker_event_output_terminal = attributes.AttributeViString(1150312, converter_to_driver=None, converter_from_driver=None)
+    marker_event_output_terminal = attributes.AttributeViString(1150312)
     '''
     Specifies the destination terminal for the Marker Event.
     '''
@@ -498,7 +498,7 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Marker Event.
     '''
-    marker_event_pulse_width = attributes.AttributeViReal64(1150340, converter_to_driver=None, converter_from_driver=None)
+    marker_event_pulse_width = attributes.AttributeViReal64(1150340)
     '''
     Specifies the pulse width for the Marker Event.
     '''
@@ -510,113 +510,113 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Marker Event.
     '''
-    max_freq_list_duration = attributes.AttributeViReal64(1150213, converter_to_driver=None, converter_from_driver=None)
+    max_freq_list_duration = attributes.AttributeViReal64(1150213)
     '''
     Returns the maximum duration of any one step in the frequency  list.
     '''
-    max_freq_list_length = attributes.AttributeViInt32(1150211, converter_to_driver=None, converter_from_driver=None)
+    max_freq_list_length = attributes.AttributeViInt32(1150211)
     '''
     Returns the maximum number of steps that can be in a frequency  list.
     '''
-    max_loop_count = attributes.AttributeViInt32(1250215, converter_to_driver=None, converter_from_driver=None)
+    max_loop_count = attributes.AttributeViInt32(1250215)
     '''
     Returns the maximum number of times that the signal generator can repeat a waveform in a sequence. Typically, this value is constant for the signal generator.
     '''
-    max_num_freq_lists = attributes.AttributeViInt32(1150209, converter_to_driver=None, converter_from_driver=None)
+    max_num_freq_lists = attributes.AttributeViInt32(1150209)
     '''
     Returns the maximum number of frequency lists the signal generator allows.
     '''
-    max_num_sequences = attributes.AttributeViInt32(1250212, converter_to_driver=None, converter_from_driver=None)
+    max_num_sequences = attributes.AttributeViInt32(1250212)
     '''
     Returns the maximum number of arbitrary sequences that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
-    max_num_waveforms = attributes.AttributeViInt32(1250205, converter_to_driver=None, converter_from_driver=None)
+    max_num_waveforms = attributes.AttributeViInt32(1250205)
     '''
     Returns the maximum number of arbitrary waveforms that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
-    max_sequence_length = attributes.AttributeViInt32(1250214, converter_to_driver=None, converter_from_driver=None)
+    max_sequence_length = attributes.AttributeViInt32(1250214)
     '''
     Returns the maximum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
-    max_waveform_size = attributes.AttributeViInt32(1250208, converter_to_driver=None, converter_from_driver=None)
+    max_waveform_size = attributes.AttributeViInt32(1250208)
     '''
     Returns the size, in samples, of the largest waveform that can be created. This attribute reflects the space currently available, taking into account previously allocated waveforms and instructions.
     '''
-    memory_size = attributes.AttributeViInt32(1150242, converter_to_driver=None, converter_from_driver=None)
+    memory_size = attributes.AttributeViInt32(1150242)
     '''
     The total amount of memory, in bytes, on the signal generator.
     '''
-    minor_version = attributes.AttributeViInt32(1050504, converter_to_driver=None, converter_from_driver=None)
+    minor_version = attributes.AttributeViInt32(1050504)
     '''
     Returns the minor version number of NI-FGEN.
     '''
-    min_freq_list_duration = attributes.AttributeViReal64(1150212, converter_to_driver=None, converter_from_driver=None)
+    min_freq_list_duration = attributes.AttributeViReal64(1150212)
     '''
     Returns the minimum number of steps that can be in a frequency  list.
     '''
-    min_freq_list_length = attributes.AttributeViInt32(1150210, converter_to_driver=None, converter_from_driver=None)
+    min_freq_list_length = attributes.AttributeViInt32(1150210)
     '''
     Returns the minimum number of frequency lists that the signal generator allows.
     '''
-    min_sequence_length = attributes.AttributeViInt32(1250213, converter_to_driver=None, converter_from_driver=None)
+    min_sequence_length = attributes.AttributeViInt32(1250213)
     '''
     Returns the minimum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
-    min_waveform_size = attributes.AttributeViInt32(1250207, converter_to_driver=None, converter_from_driver=None)
+    min_waveform_size = attributes.AttributeViInt32(1250207)
     '''
     Returns the minimum number of points that the signal generator allows in an arbitrary waveform. Typically, this value is constant for the signal generator.
     '''
-    module_revision = attributes.AttributeViString(1150390, converter_to_driver=None, converter_from_driver=None)
+    module_revision = attributes.AttributeViString(1150390)
     '''
     A string that contains the module revision  for the device that you are currently using.
     '''
-    num_channels = attributes.AttributeViInt32(1050203, converter_to_driver=None, converter_from_driver=None)
+    num_channels = attributes.AttributeViInt32(1050203)
     '''
     Indicates the number of channels that the specific instrument  driver supports.
     For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
-    offset_dac_value = attributes.AttributeViInt32(1150224, converter_to_driver=None, converter_from_driver=None)
+    offset_dac_value = attributes.AttributeViInt32(1150224)
     '''
     Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    oscillator_freq_dac_value = attributes.AttributeViInt32(1150225, converter_to_driver=None, converter_from_driver=None)
+    oscillator_freq_dac_value = attributes.AttributeViInt32(1150225)
     '''
     Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    oscillator_phase_dac_value = attributes.AttributeViInt32(1150232, converter_to_driver=None, converter_from_driver=None)
+    oscillator_phase_dac_value = attributes.AttributeViInt32(1150232)
     '''
     The value of the oscillator phase DAC.
     '''
-    osp_carrier_enabled = attributes.AttributeViBoolean(1150249, converter_to_driver=None, converter_from_driver=None)
+    osp_carrier_enabled = attributes.AttributeViBoolean(1150249)
     '''
     Enables or disables generation of the carrier.
     '''
-    osp_carrier_frequency = attributes.AttributeViReal64(1150250, converter_to_driver=None, converter_from_driver=None)
+    osp_carrier_frequency = attributes.AttributeViReal64(1150250)
     '''
     The frequency of the generated carrier.
     '''
-    osp_carrier_phase_i = attributes.AttributeViReal64(1150251, converter_to_driver=None, converter_from_driver=None)
+    osp_carrier_phase_i = attributes.AttributeViReal64(1150251)
     '''
     I Carrier Phase in degrees at the first point of the generation.
     '''
-    osp_carrier_phase_q = attributes.AttributeViReal64(1150252, converter_to_driver=None, converter_from_driver=None)
+    osp_carrier_phase_q = attributes.AttributeViReal64(1150252)
     '''
     Q Carrier Phase in degrees at the first point of the generation.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE  attribute is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
-    osp_cic_filter_enabled = attributes.AttributeViBoolean(1150257, converter_to_driver=None, converter_from_driver=None)
+    osp_cic_filter_enabled = attributes.AttributeViBoolean(1150257)
     '''
     Enables or disables the CIC filter.
     The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
     '''
-    osp_cic_filter_gain = attributes.AttributeViReal64(1150263, converter_to_driver=None, converter_from_driver=None)
+    osp_cic_filter_gain = attributes.AttributeViReal64(1150263)
     '''
     Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this attribute overrides the value set by NI-FGEN.
     '''
-    osp_cic_filter_interpolation = attributes.AttributeViReal64(1150258, converter_to_driver=None, converter_from_driver=None)
+    osp_cic_filter_interpolation = attributes.AttributeViReal64(1150258)
     '''
     Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
     '''
-    osp_compensate_for_filter_group_delay = attributes.AttributeViBoolean(1150389, converter_to_driver=None, converter_from_driver=None)
+    osp_compensate_for_filter_group_delay = attributes.AttributeViBoolean(1150389)
     '''
     Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
     '''
@@ -624,32 +624,32 @@ class _SessionBase(object):
     '''
     The way in which data is processed by the OSP block.
     '''
-    osp_enabled = attributes.AttributeViBoolean(1150246, converter_to_driver=None, converter_from_driver=None)
+    osp_enabled = attributes.AttributeViBoolean(1150246)
     '''
     Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related attributes are disabled and have no effect on the generated signal.
     '''
-    osp_fir_filter_enabled = attributes.AttributeViBoolean(1150255, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_enabled = attributes.AttributeViBoolean(1150255)
     '''
     Enables or disables the FIR filter.
     The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
     '''
-    osp_fir_filter_flat_passband = attributes.AttributeViReal64(1150261, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_flat_passband = attributes.AttributeViReal64(1150261)
     '''
     Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_FLAT.
     '''
-    osp_fir_filter_gaussian_bt = attributes.AttributeViReal64(1150262, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_gaussian_bt = attributes.AttributeViReal64(1150262)
     '''
     BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE attribute is set to  NIFGEN_VAL_OSP_GAUSSIAN.
     '''
-    osp_fir_filter_interpolation = attributes.AttributeViReal64(1150256, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_interpolation = attributes.AttributeViReal64(1150256)
     '''
     Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
     '''
-    osp_fir_filter_raised_cosine_alpha = attributes.AttributeViReal64(1150260, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_raised_cosine_alpha = attributes.AttributeViReal64(1150260)
     '''
     Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_RAISED_COSINE.
     '''
-    osp_fir_filter_root_raised_cosine_alpha = attributes.AttributeViReal64(1150259, converter_to_driver=None, converter_from_driver=None)
+    osp_fir_filter_root_raised_cosine_alpha = attributes.AttributeViReal64(1150259)
     '''
     Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_ROOT_RAISED_COSINE.
     '''
@@ -657,7 +657,7 @@ class _SessionBase(object):
     '''
     Pulse-shaping filter type for the FIR filter.
     '''
-    osp_frequency_shift = attributes.AttributeViReal64(1150371, converter_to_driver=None, converter_from_driver=None)
+    osp_frequency_shift = attributes.AttributeViReal64(1150371)
     '''
     Specifies the amount of frequency shift applied to the baseband signal.
     '''
@@ -670,32 +670,32 @@ class _SessionBase(object):
     Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
     You can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow  conditions whether or not the NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is  enabled. The device will continue to generate after an overflow whether or not the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is enabled.
     '''
-    osp_overflow_status = attributes.AttributeViInt32(1150269, converter_to_driver=None, converter_from_driver=None)
+    osp_overflow_status = attributes.AttributeViInt32(1150269)
     '''
     Returns a bit field of the overflow status in any stage of the OSP block.  This attribute is functional regardless of the value for the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute.
     Write 0 to this attribute to clear the current NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING value.
     '''
-    osp_pre_filter_gain_i = attributes.AttributeViReal64(1150264, converter_to_driver=None, converter_from_driver=None)
+    osp_pre_filter_gain_i = attributes.AttributeViReal64(1150264)
     '''
     Digital gain to apply to the I data stream before any filtering by the OSP block.
     '''
-    osp_pre_filter_gain_q = attributes.AttributeViReal64(1150265, converter_to_driver=None, converter_from_driver=None)
+    osp_pre_filter_gain_q = attributes.AttributeViReal64(1150265)
     '''
     Digital gain to apply to the Q data stream before any filtering by the OSP block.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute  is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
-    osp_pre_filter_offset_i = attributes.AttributeViReal64(1150266, converter_to_driver=None, converter_from_driver=None)
+    osp_pre_filter_offset_i = attributes.AttributeViReal64(1150266)
     '''
     Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.
     '''
-    osp_pre_filter_offset_q = attributes.AttributeViReal64(1150267, converter_to_driver=None, converter_from_driver=None)
+    osp_pre_filter_offset_q = attributes.AttributeViReal64(1150267)
     '''
     Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This attribute is used only when  the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
-    output_enabled = attributes.AttributeViBoolean(1250003, converter_to_driver=None, converter_from_driver=None)
+    output_enabled = attributes.AttributeViBoolean(1250003)
     '''
     This channel-based attribute specifies whether the signal that the signal generator produces appears at the output connector.
     '''
-    output_impedance = attributes.AttributeViReal64(1250004, converter_to_driver=None, converter_from_driver=None)
+    output_impedance = attributes.AttributeViReal64(1250004)
     '''
     This channel-based attribute specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
@@ -705,25 +705,25 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
     '''
-    p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410, converter_to_driver=None, converter_from_driver=None)
+    p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410)
     '''
     Specifies the Endpoint threshold for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to P2P Endpoint Fullness.
     '''
-    pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362, converter_to_driver=None, converter_from_driver=None)
+    pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362)
     '''
     Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
     This attribute is only valid for PCI and PXI SMC-based devices.
     This attribute is enabled (VI_TRUE) by default, and NI recommends leaving it enabled.
     '''
-    post_amplifier_attenuation = attributes.AttributeViReal64(1150229, converter_to_driver=None, converter_from_driver=None)
+    post_amplifier_attenuation = attributes.AttributeViReal64(1150229)
     '''
     Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
     '''
-    pre_amplifier_attenuation = attributes.AttributeViReal64(1150228, converter_to_driver=None, converter_from_driver=None)
+    pre_amplifier_attenuation = attributes.AttributeViReal64(1150228)
     '''
     Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
     '''
-    range_check = attributes.AttributeViBoolean(1050002, converter_to_driver=None, converter_from_driver=None)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
     Default Value: VI_TRUE
@@ -733,15 +733,15 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Ready for Start Event.
     '''
-    ready_for_start_event_live_status = attributes.AttributeViBoolean(1150348, converter_to_driver=None, converter_from_driver=None)
+    ready_for_start_event_live_status = attributes.AttributeViBoolean(1150348)
     '''
     Returns the live status of the specified Ready For Start Event.
     '''
-    ready_for_start_event_output_terminal = attributes.AttributeViString(1150310, converter_to_driver=None, converter_from_driver=None)
+    ready_for_start_event_output_terminal = attributes.AttributeViString(1150310)
     '''
     Specifies the destination terminal for the Ready for Start Event.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006, converter_to_driver=None, converter_from_driver=None)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call niFgen_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
     Default Value: VI_FALSE
@@ -755,11 +755,11 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
-    ref_clock_frequency = attributes.AttributeViReal64(1150107, converter_to_driver=None, converter_from_driver=None)
+    ref_clock_frequency = attributes.AttributeViReal64(1150107)
     '''
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
     '''
-    sample_clock_absolute_delay = attributes.AttributeViReal64(1150231, converter_to_driver=None, converter_from_driver=None)
+    sample_clock_absolute_delay = attributes.AttributeViReal64(1150231)
     '''
     Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
     can only be applied when an external sample clock is used.
@@ -773,7 +773,7 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
-    sample_clock_timebase_rate = attributes.AttributeViReal64(1150368, converter_to_driver=None, converter_from_driver=None)
+    sample_clock_timebase_rate = attributes.AttributeViReal64(1150368)
     '''
     Specifies the Sample clock timebase rate. This attribute applies only to external Sample clock timebases.
     To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
@@ -787,13 +787,13 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
-    script_to_generate = attributes.AttributeViString(1150270, converter_to_driver=None, converter_from_driver=None)
+    script_to_generate = attributes.AttributeViString(1150270)
     '''
     Specifies which script the generator produces. To configure the generator to run a particular script, set this attribute to the name of the script. Use niFgen_WriteScript to create multiple scripts. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
 
     Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
     '''
-    script_triggers_count = attributes.AttributeViInt32(1150272, converter_to_driver=None, converter_from_driver=None)
+    script_triggers_count = attributes.AttributeViInt32(1150272)
     '''
     Specifies the number of Script triggers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
     '''
@@ -801,37 +801,37 @@ class _SessionBase(object):
     '''
     Specifies the Script trigger type. Depending upon the value of this attribute, additional attributes may need to be configured to fully configure the trigger.
     '''
-    serial_number = attributes.AttributeViString(1150243, converter_to_driver=None, converter_from_driver=None)
+    serial_number = attributes.AttributeViString(1150243)
     '''
     The signal generator's serial number.
     '''
-    simulate = attributes.AttributeViBoolean(1050005, converter_to_driver=None, converter_from_driver=None)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  functions perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  functions return calculated values.
     Default Value: VI_FALSE
     Use niFgen_InitWithOptions to override default value.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
     Returns the major version number of the class specification with which NI-FGEN is compliant.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
     Returns the minor version number of the class specification with which NI-FGEN is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Returns a brief description of NI-FGEN.
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_revision = attributes.AttributeViString(1050551)
     '''
     A string that contains additional version information about  NI-FGEN.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = attributes.AttributeViReal64(1150356, converter_to_driver=None, converter_from_driver=None)
+    started_event_delay = attributes.AttributeViReal64(1150356)
     '''
     Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
     You can specify the units of the delay value by setting the NIFGEN_ATTR_STARTED_EVENT_DELAY attribute.
@@ -841,7 +841,7 @@ class _SessionBase(object):
     Specifies the units applied to the value of the NIFGEN_ATTR_STARTED_EVENT_DELAY
     attribute.  Valid units are seconds and sample clock periods.
     '''
-    started_event_latched_status = attributes.AttributeViBoolean(1150352, converter_to_driver=None, converter_from_driver=None)
+    started_event_latched_status = attributes.AttributeViBoolean(1150352)
     '''
     Specifies the latched status of the Started Event.
     '''
@@ -853,7 +853,7 @@ class _SessionBase(object):
     '''
     Specifies the output behavior for the Started Event.
     '''
-    started_event_output_terminal = attributes.AttributeViString(1150314, converter_to_driver=None, converter_from_driver=None)
+    started_event_output_terminal = attributes.AttributeViString(1150314)
     '''
     Specifies the destination terminal for the Started Event.
     '''
@@ -861,7 +861,7 @@ class _SessionBase(object):
     '''
     Specifies the output polarity of the Started Event.
     '''
-    started_event_pulse_width = attributes.AttributeViReal64(1150335, converter_to_driver=None, converter_from_driver=None)
+    started_event_pulse_width = attributes.AttributeViReal64(1150335)
     '''
     Specifies the pulse width for the Started Event.
     '''
@@ -873,27 +873,27 @@ class _SessionBase(object):
     '''
     Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this attribute.
     '''
-    streaming_space_available_in_waveform = attributes.AttributeViInt32(1150325, converter_to_driver=None, converter_from_driver=None)
+    streaming_space_available_in_waveform = attributes.AttributeViInt32(1150325)
     '''
     Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
     To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
     Used in conjunction with the NIFGEN_ATTR_STREAMING_WAVEFORM_HANDLE or NIFGEN_ATTR_STREAMING_WAVEFORM_NAME attributes.
     '''
-    streaming_waveform_handle = attributes.AttributeViInt32(1150324, converter_to_driver=None, converter_from_driver=None)
+    streaming_waveform_handle = attributes.AttributeViInt32(1150324)
     '''
     Specifies the waveform handle of the waveform used to continuously stream data during generation. This attribute defaults to -1 when no streaming waveform is specified.
     Used in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
-    streaming_waveform_name = attributes.AttributeViString(1150326, converter_to_driver=None, converter_from_driver=None)
+    streaming_waveform_name = attributes.AttributeViString(1150326)
     '''
     Specifies the name of the waveform used to continuously stream data during generation. This attribute defaults to // when no streaming waveform is specified.
     Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
-    streaming_write_timeout = attributes.AttributeViReal64(1150409, converter_to_driver=None, converter_from_driver=None)
+    streaming_write_timeout = attributes.AttributeViReal64(1150409)
     '''
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327, converter_to_driver=None, converter_from_driver=None)
+    supported_instrument_models = attributes.AttributeViString(1050327)
     '''
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  attribute contains a comma-separated list of supported device  models.
     '''
@@ -901,12 +901,12 @@ class _SessionBase(object):
     '''
     Specify the source of the synchronization signal that you want to use.
     '''
-    sync_duty_cycle_high = attributes.AttributeViReal64(1150105, converter_to_driver=None, converter_from_driver=None)
+    sync_duty_cycle_high = attributes.AttributeViReal64(1150105)
     '''
     Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this attribute as a  percentage of the time the square wave is high in each cycle.
     Units: Percentage of time the waveform is high
     '''
-    sync_out_output_terminal = attributes.AttributeViString(1150330, converter_to_driver=None, converter_from_driver=None)
+    sync_out_output_terminal = attributes.AttributeViString(1150330)
     '''
     Specifies the terminal to which to export the SYNC OUT signal. This attribute is not supported for all devices.
     '''
@@ -932,11 +932,11 @@ class _SessionBase(object):
     '''
     Specifies the behavior of the output while waiting for a script trigger or during a wait instruction.  The output can be configured to hold the last generated voltage before waiting or jump to the Wait Value.
     '''
-    wait_value = attributes.AttributeViInt32(1150380, converter_to_driver=None, converter_from_driver=None)
+    wait_value = attributes.AttributeViInt32(1150380)
     '''
     Specifies the value to generate while waiting.  The Wait Behavior must be configured to jump to this value.
     '''
-    waveform_quantum = attributes.AttributeViInt32(1250206, converter_to_driver=None, converter_from_driver=None)
+    waveform_quantum = attributes.AttributeViInt32(1250206)
     '''
     The size of each arbitrary waveform must be a multiple of a quantum value. This attribute returns the quantum value that the signal generator allows.
     For example, when this attribute returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.

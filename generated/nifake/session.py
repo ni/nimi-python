@@ -38,7 +38,7 @@ class _SessionBase(object):
     '''
     An attribute with an enum that is also a float
     '''
-    read_write_bool = attributes.AttributeViBoolean(1000000, converter_to_driver=None, converter_from_driver=None)
+    read_write_bool = attributes.AttributeViBoolean(1000000)
     '''
     An attribute of type bool with read/write access.
     '''
@@ -46,27 +46,27 @@ class _SessionBase(object):
     '''
     An attribute of type Color with read/write access.
     '''
-    read_write_double = attributes.AttributeViReal64(1000001, converter_to_driver=None, converter_from_driver=None)
+    read_write_double = attributes.AttributeViReal64(1000001)
     '''
     An attribute of type float with read/write access.
     '''
-    read_write_double_with_converter = attributes.AttributeViReal64(1000007, converter_to_driver=_converters.convert_timedelta_to_seconds, converter_from_driver=_converters.convert_seconds_to_timedelta)
+    read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
     '''
     Attribute in seconds
     '''
-    read_write_int64 = attributes.AttributeViInt64(1000006, converter_to_driver=None, converter_from_driver=None)
+    read_write_int64 = attributes.AttributeViInt64(1000006)
     '''
     An attribute of type 64-bit integer with read/write access.
     '''
-    read_write_integer = attributes.AttributeViInt32(1000004, converter_to_driver=None, converter_from_driver=None)
+    read_write_integer = attributes.AttributeViInt32(1000004)
     '''
     An attribute of type integer with read/write access.
     '''
-    read_write_integer_with_converter = attributes.AttributeViInt32(1000008, converter_to_driver=_converters.convert_timedelta_to_milliseconds, converter_from_driver=_converters.convert_milliseconds_to_timedelta)
+    read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
     '''
     Attribute in milliseconds
     '''
-    read_write_string = attributes.AttributeViString(1000002, converter_to_driver=None, converter_from_driver=None)
+    read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
     '''

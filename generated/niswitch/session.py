@@ -32,7 +32,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018, converter_to_driver=None, converter_from_driver=None)
+    analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
     '''
     Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  attribute to VI_TRUE for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  VI_FALSE, which disables sharing of the analog bus.
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
@@ -46,7 +46,7 @@ class _SessionBase(object):
         session['0,1'].analog_bus_sharing_enable = var
         var = session['0,1'].analog_bus_sharing_enable
     '''
-    bandwidth = attributes.AttributeViReal64(1250005, converter_to_driver=None, converter_from_driver=None)
+    bandwidth = attributes.AttributeViReal64(1250005)
     '''
     This channel-based attribute returns the bandwidth for the channel.
     The units are hertz.
@@ -60,25 +60,25 @@ class _SessionBase(object):
         session['0,1'].bandwidth = var
         var = session['0,1'].bandwidth
     '''
-    cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009, converter_to_driver=None, converter_from_driver=None)
+    cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
     '''
-    cabled_module_trigger_bus = attributes.AttributeViInt32(1150008, converter_to_driver=None, converter_from_driver=None)
+    cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
     '''
-    cache = attributes.AttributeViBoolean(1050004, converter_to_driver=None, converter_from_driver=None)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
     The instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.
     The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
-    channel_count = attributes.AttributeViInt32(1050203, converter_to_driver=None, converter_from_driver=None)
+    channel_count = attributes.AttributeViInt32(1050203)
     '''
     Indicates the number of channels that the specific instrument  driver supports.
     '''
-    characteristic_impedance = attributes.AttributeViReal64(1250016, converter_to_driver=None, converter_from_driver=None)
+    characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''
     This channel-based attribute returns the characteristic impedance for the  channel.
     The units are ohms.
@@ -92,53 +92,53 @@ class _SessionBase(object):
         session['0,1'].characteristic_impedance = var
         var = session['0,1'].characteristic_impedance
     '''
-    continuous_scan = attributes.AttributeViBoolean(1150002, converter_to_driver=None, converter_from_driver=None)
+    continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
     When a switch device is scanning, the swich can either stop scanning when  the end of the scan (VI_FALSE) or continue scanning from the top of the  scan list again (VI_TRUE).
     Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
     '''
-    digital_filter_enable = attributes.AttributeViBoolean(1150016, converter_to_driver=None, converter_from_driver=None)
+    digital_filter_enable = attributes.AttributeViBoolean(1150016)
     '''
     This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (VI_TRUE) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
     When Digital Filter is disabled (VI_FALSE), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
     '''
-    driver_setup = attributes.AttributeViString(1050007, converter_to_driver=None, converter_from_driver=None)
+    driver_setup = attributes.AttributeViString(1050007)
     '''
     This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  niSwitch_InitWithOptions function, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this attribute returns an empty string.
     '''
-    group_capabilities = attributes.AttributeViString(1050401, converter_to_driver=None, converter_from_driver=None)
+    group_capabilities = attributes.AttributeViString(1050401)
     '''
     A string that contains a comma-separated list of class-extention groups that  this driver implements.
     '''
     handshaking_initiation = attributes.AttributeEnum(attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
-    instrument_firmware_revision = attributes.AttributeViString(1050510, converter_to_driver=None, converter_from_driver=None)
+    instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
     A string that contains the firmware revision information  for the instrument you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511, converter_to_driver=None, converter_from_driver=None)
+    instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
     A string that contains the name of the instrument manufacturer you are currently  using.
     '''
-    instrument_model = attributes.AttributeViString(1050512, converter_to_driver=None, converter_from_driver=None)
+    instrument_model = attributes.AttributeViString(1050512)
     '''
     A string that contains the model number or name of the instrument that you  are currently using.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021, converter_to_driver=None, converter_from_driver=None)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niSwitch_Connect, niSwitch_SetPath and niSwitch_InitiateScan functions.
     The default value is VI_FALSE.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304, converter_to_driver=None, converter_from_driver=None)
+    io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
     Indicates the resource descriptor the driver  uses to identify the physical device.
     If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
     '''
-    is_configuration_channel = attributes.AttributeViBoolean(1250003, converter_to_driver=None, converter_from_driver=None)
+    is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
     This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the niSwitch_Connect function.  Configuration channels are not available  for external connections.
     Set this attribute to VI_TRUE to mark the channel as a configuration  channel.  Set this attribute to VI_FALSE to mark the channel as available  for external connections.
@@ -153,15 +153,15 @@ class _SessionBase(object):
         session['0,1'].is_configuration_channel = var
         var = session['0,1'].is_configuration_channel
     '''
-    is_debounced = attributes.AttributeViBoolean(1250002, converter_to_driver=None, converter_from_driver=None)
+    is_debounced = attributes.AttributeViBoolean(1250002)
     '''
     This attribute indicates whether the entire switch device has settled  since the last switching command.  A value of VI_TRUE indicates that all  signals going through the switch device are valid.
     '''
-    is_scanning = attributes.AttributeViBoolean(1250024, converter_to_driver=None, converter_from_driver=None)
+    is_scanning = attributes.AttributeViBoolean(1250024)
     '''
     If VI_TRUE, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If VI_FALSE, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
     '''
-    is_source_channel = attributes.AttributeViBoolean(1250001, converter_to_driver=None, converter_from_driver=None)
+    is_source_channel = attributes.AttributeViBoolean(1250001)
     '''
     This channel-based attribute specifies whether you want to identify the  channel as a source channel.  Typically, you set this attribute to VI_TRUE  when you attach the channel to a power supply, a function generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The niSwitch_Connect function  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
@@ -174,24 +174,24 @@ class _SessionBase(object):
         session['0,1'].is_source_channel = var
         var = session['0,1'].is_source_channel
     '''
-    is_waiting_for_trig = attributes.AttributeViBoolean(1150004, converter_to_driver=None, converter_from_driver=None)
+    is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
     In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
     '''
-    logical_name = attributes.AttributeViString(1050305, converter_to_driver=None, converter_from_driver=None)
+    logical_name = attributes.AttributeViString(1050305)
     '''
     A string containing the logical name you specified when opening the  current IVI session.
     You may pass a logical name to the niSwitch_init or  niSwitch_InitWithOptions functions.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
     '''
-    master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007, converter_to_driver=None, converter_from_driver=None)
+    master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
     '''
-    master_slave_trigger_bus = attributes.AttributeViInt32(1150006, converter_to_driver=None, converter_from_driver=None)
+    master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
     '''
-    max_ac_voltage = attributes.AttributeViReal64(1250007, converter_to_driver=None, converter_from_driver=None)
+    max_ac_voltage = attributes.AttributeViReal64(1250007)
     '''
     This channel-based attribute returns the maximum AC voltage the channel  can switch.
     The units are volts RMS.
@@ -205,7 +205,7 @@ class _SessionBase(object):
         session['0,1'].max_ac_voltage = var
         var = session['0,1'].max_ac_voltage
     '''
-    max_carry_ac_current = attributes.AttributeViReal64(1250011, converter_to_driver=None, converter_from_driver=None)
+    max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
     This channel-based attribute returns the maximum AC current the channel  can carry.
     The units are amperes RMS.
@@ -219,7 +219,7 @@ class _SessionBase(object):
         session['0,1'].max_carry_ac_current = var
         var = session['0,1'].max_carry_ac_current
     '''
-    max_carry_ac_power = attributes.AttributeViReal64(1250015, converter_to_driver=None, converter_from_driver=None)
+    max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
     This channel-based attribute returns the maximum AC power the channel can  carry.
     The units are volt-amperes.
@@ -233,7 +233,7 @@ class _SessionBase(object):
         session['0,1'].max_carry_ac_power = var
         var = session['0,1'].max_carry_ac_power
     '''
-    max_carry_dc_current = attributes.AttributeViReal64(1250010, converter_to_driver=None, converter_from_driver=None)
+    max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
     This channel-based attribute returns the maximum DC current the channel  can carry.
     The units are amperes.
@@ -247,7 +247,7 @@ class _SessionBase(object):
         session['0,1'].max_carry_dc_current = var
         var = session['0,1'].max_carry_dc_current
     '''
-    max_carry_dc_power = attributes.AttributeViReal64(1250014, converter_to_driver=None, converter_from_driver=None)
+    max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
     This channel-based attribute returns the maximum DC power the channel can  carry.
     The units are watts.
@@ -261,7 +261,7 @@ class _SessionBase(object):
         session['0,1'].max_carry_dc_power = var
         var = session['0,1'].max_carry_dc_power
     '''
-    max_dc_voltage = attributes.AttributeViReal64(1250006, converter_to_driver=None, converter_from_driver=None)
+    max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
     This channel-based attribute returns the maximum DC voltage the channel  can switch.
     The units are volts.
@@ -275,7 +275,7 @@ class _SessionBase(object):
         session['0,1'].max_dc_voltage = var
         var = session['0,1'].max_dc_voltage
     '''
-    max_switching_ac_current = attributes.AttributeViReal64(1250009, converter_to_driver=None, converter_from_driver=None)
+    max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
     This channel-based attribute returns the maximum AC current the channel  can switch.
     The units are amperes RMS.
@@ -289,7 +289,7 @@ class _SessionBase(object):
         session['0,1'].max_switching_ac_current = var
         var = session['0,1'].max_switching_ac_current
     '''
-    max_switching_ac_power = attributes.AttributeViReal64(1250013, converter_to_driver=None, converter_from_driver=None)
+    max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
     This channel-based attribute returns the maximum AC power the channel can  switch.
     The units are volt-amperes.
@@ -303,7 +303,7 @@ class _SessionBase(object):
         session['0,1'].max_switching_ac_power = var
         var = session['0,1'].max_switching_ac_power
     '''
-    max_switching_dc_current = attributes.AttributeViReal64(1250008, converter_to_driver=None, converter_from_driver=None)
+    max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
     This channel-based attribute returns the maximum DC current the channel  can switch.
     The units are amperes.
@@ -317,7 +317,7 @@ class _SessionBase(object):
         session['0,1'].max_switching_dc_current = var
         var = session['0,1'].max_switching_dc_current
     '''
-    max_switching_dc_power = attributes.AttributeViReal64(1250012, converter_to_driver=None, converter_from_driver=None)
+    max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
     This channel-based attribute returns the maximum DC power the channel can  switch.
     The units are watts.
@@ -331,35 +331,35 @@ class _SessionBase(object):
         session['0,1'].max_switching_dc_power = var
         var = session['0,1'].max_switching_dc_power
     '''
-    number_of_relays = attributes.AttributeViInt32(1150014, converter_to_driver=None, converter_from_driver=None)
+    number_of_relays = attributes.AttributeViInt32(1150014)
     '''
     This attribute returns the number of relays.
     '''
-    num_of_columns = attributes.AttributeViInt32(1250019, converter_to_driver=None, converter_from_driver=None)
+    num_of_columns = attributes.AttributeViInt32(1250019)
     '''
     This attribute returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
     The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
     '''
-    num_of_rows = attributes.AttributeViInt32(1250018, converter_to_driver=None, converter_from_driver=None)
+    num_of_rows = attributes.AttributeViInt32(1250018)
     '''
     This attribute returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
     The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
-    parsed_scan_list = attributes.AttributeViString(1150012, converter_to_driver=None, converter_from_driver=None)
+    parsed_scan_list = attributes.AttributeViString(1150012)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.
     '''
-    power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017, converter_to_driver=None, converter_from_driver=None)
+    power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
     '''
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
-    range_check = attributes.AttributeViBoolean(1050002, converter_to_driver=None, converter_from_driver=None)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
     The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006, converter_to_driver=None, converter_from_driver=None)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call niSwitch_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
     The default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to override this value.
@@ -369,14 +369,14 @@ class _SessionBase(object):
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64(1250025, converter_to_driver=None, converter_from_driver=None)
+    scan_delay = attributes.AttributeViReal64(1250025)
     '''
     This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
 
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
     '''
-    scan_list = attributes.AttributeViString(1250020, converter_to_driver=None, converter_from_driver=None)
+    scan_list = attributes.AttributeViString(1250020)
     '''
     This attribute contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The niSwitch_InitiateScan  function makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
@@ -396,11 +396,11 @@ class _SessionBase(object):
     If the value of this attribute is NISWITCH_VAL_NONE, the switch device  takes no action on existing paths.  If the value is  NISWITCH_VAL_BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is NISWITCH_VAL_BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
     Most switch devices support only one of the possible values.  In such  cases, this attribute serves as an indicator of the device's behavior.
     '''
-    serial_number = attributes.AttributeViString(1150015, converter_to_driver=None, converter_from_driver=None)
+    serial_number = attributes.AttributeViString(1150015)
     '''
     This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64(1250004, converter_to_driver=None, converter_from_driver=None)
+    settling_time = attributes.AttributeViReal64(1250004)
     '''
     This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -416,36 +416,36 @@ class _SessionBase(object):
         session['0,1'].settling_time = var
         var = session['0,1'].settling_time
     '''
-    simulate = attributes.AttributeViBoolean(1050005, converter_to_driver=None, converter_from_driver=None)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
     The default value is VI_FALSE.   Use the niSwitch_InitWithOptions  function to override this value.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
     The major version number of the IviSwtch class specification.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
     The minor version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string that contains a brief description of the specific  driver.
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_revision = attributes.AttributeViString(1050551)
     '''
     A string that contains additional version information about this  instrument driver.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513, converter_to_driver=None, converter_from_driver=None)
+    specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies this driver.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327, converter_to_driver=None, converter_from_driver=None)
+    supported_instrument_models = attributes.AttributeViString(1050327)
     '''
     Contains a comma-separated list of supported instrument models.
     '''
-    temperature = attributes.AttributeViReal64(1150019, converter_to_driver=None, converter_from_driver=None)
+    temperature = attributes.AttributeViReal64(1150019)
     '''
     This attribute returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
@@ -457,11 +457,11 @@ class _SessionBase(object):
     '''
     Determines the behavior of the trigger Input.
     '''
-    trigger_mode = attributes.AttributeViInt32(1150005, converter_to_driver=None, converter_from_driver=None)
+    trigger_mode = attributes.AttributeViInt32(1150005)
     '''
     This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput and/or niSwitch_RouteScanAdvancedOutput  functions instead.
     '''
-    wire_mode = attributes.AttributeViInt32(1250017, converter_to_driver=None, converter_from_driver=None)
+    wire_mode = attributes.AttributeViInt32(1250017)
     '''
     This attribute returns the wire mode of the switch device.
     This attribute affects the values of the NISWITCH_ATTR_NUM_OF_ROWS and  NISWITCH_ATTR_NUM_OF_COLUMNS attributes.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
