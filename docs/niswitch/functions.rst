@@ -36,7 +36,7 @@ niswitch.Session methods
         
 
 
-    :type channel1: string
+    :type channel1: str
     :param channel2:
 
 
@@ -48,7 +48,7 @@ niswitch.Session methods
         
 
 
-    :type channel2: string
+    :type channel2: str
 
     :rtype: :py:data:`niswitch.PathCapability`
     :return:
@@ -119,7 +119,7 @@ niswitch.Session methods
         
 
 
-    :type scanlist: string
+    :type scanlist: str
     :param scan_mode:
 
 
@@ -228,7 +228,7 @@ niswitch.Session methods
         
 
 
-    :type channel1: string
+    :type channel1: str
     :param channel2:
 
 
@@ -240,7 +240,7 @@ niswitch.Session methods
         
 
 
-    :type channel2: string
+    :type channel2: str
 
 .. py:method:: connect_multiple(connection_list)
 
@@ -283,7 +283,7 @@ niswitch.Session methods
         
 
 
-    :type connection_list: string
+    :type connection_list: str
 
 .. py:method:: disable()
 
@@ -317,7 +317,7 @@ niswitch.Session methods
         
 
 
-    :type channel1: string
+    :type channel1: str
     :param channel2:
 
 
@@ -329,7 +329,7 @@ niswitch.Session methods
         
 
 
-    :type channel2: string
+    :type channel2: str
 
 .. py:method:: disconnect_all()
 
@@ -366,7 +366,7 @@ niswitch.Session methods
         
 
 
-    :type disconnection_list: string
+    :type disconnection_list: str
 
 .. py:method:: get_channel_name(index)
 
@@ -419,7 +419,7 @@ niswitch.Session methods
         
 
 
-    :type channel1: string
+    :type channel1: str
     :param channel2:
 
 
@@ -431,7 +431,7 @@ niswitch.Session methods
         
 
 
-    :type channel2: string
+    :type channel2: str
 
 .. py:method:: get_relay_count(relay_name)
 
@@ -455,7 +455,7 @@ niswitch.Session methods
         
 
 
-    :type relay_name: string
+    :type relay_name: str
 
     :rtype: int
     :return:
@@ -508,7 +508,7 @@ niswitch.Session methods
         
 
 
-    :type relay_name: string
+    :type relay_name: str
 
     :rtype: :py:data:`niswitch.RelayPosition`
     :return:
@@ -546,7 +546,7 @@ niswitch.Session methods
         
 
 
-    :type relay_name: string
+    :type relay_name: str
     :param relay_action:
 
 
@@ -701,7 +701,7 @@ niswitch.Session methods
             
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Self-test response string from the switch device. You must pass a ViChar
@@ -769,7 +769,7 @@ niswitch.Session methods
         
 
 
-    :type path_list: string
+    :type path_list: str
 
 .. py:method:: wait_for_debounce(maximum_time_ms=5000)
 

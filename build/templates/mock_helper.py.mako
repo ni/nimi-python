@@ -13,6 +13,7 @@ driver_name = config['driver_name']
 functions = template_parameters['metadata'].functions
 functions = helper.filter_codegen_functions(functions)
 %>\
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -67,9 +68,6 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
 %       if p['is_buffer']:
         a = self._defaults['${func_name}']['${p['name']}']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(${p['python_name']}), len(a))):
             ${p['python_name']}[i] = a[i]
 %       else:
@@ -77,6 +75,12 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
             field_name = field[0]
             setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
+%           elif p['is_string']:
+        a = self._defaults['${func_name}']['${p['name']}']
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(${p['python_name']}), len(a))):
+            ${p['python_name']}[i] = a[i]
 %           else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %           endif
@@ -87,7 +91,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
         if ${ivi_dance_size_param['python_name']}.value == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
-%       if ivi_dance_param['type'] == 'ViChar':  # strings
+%       if ivi_dance_param['is_string']:  # strings
         ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
 %       else:  # arrays
         for i in range(len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])):
