@@ -68,7 +68,7 @@ def _add_ctypes_type(parameter, config):
     if custom_type is not None:
         module_name = custom_type['file_name'] + '.'
 
-    if parameter['type'] == 'ViString':
+    if parameter['is_string']:
         parameter['ctypes_type_library_call'] = 'ctypes.POINTER(ViChar)'
     elif parameter['direction'] == 'out' or parameter['is_buffer'] is True:
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
@@ -122,10 +122,11 @@ def _add_buffer_info(parameter):
         parameter['is_buffer'] = True
 
     # We set all string types to ViString, and say it is NOT a buffer/array
-    if t == 'ViConstString' or t == 'ViRsrc' or (parameter['type'] == 'ViChar' and parameter['is_buffer']):
+    if t == 'ViConstString' or t == 'ViRsrc' or t == 'ViString' or (parameter['type'] == 'ViChar' and parameter['is_buffer']):
         parameter['type'] = 'ViString'
         parameter['original_type'] = t
         parameter['is_buffer'] = False
+        parameter['is_string'] = True
 
     if 'size' not in parameter:
         # Not populated, assume {'mechanism': 'fixed', 'value': 1}
@@ -135,12 +136,18 @@ def _add_buffer_info(parameter):
         # Not populated, assume False
         parameter['is_buffer'] = False
 
+    if 'is_string' not in parameter:
+        # Not populated, assume False
+        parameter['is_string'] = False
+
+    assert parameter['is_buffer'] is False or parameter['is_string'] is False
+
     return parameter
 
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and parameter['type'] != 'ViString':
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and not parameter['is_string']:
         parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
@@ -597,6 +604,7 @@ def test_add_all_metadata_simple():
                     'numpy': False,
                     'python_type': 'str',
                     'is_buffer': False,
+                    'is_string': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
@@ -660,6 +668,7 @@ def test_add_all_metadata_simple():
                     'value': 1
                 },
                 'is_buffer': False,
+                'is_string': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
