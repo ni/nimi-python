@@ -91,7 +91,9 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
     else:
         return_type_snippet = module_name + output_parameter['python_type'] + '('
 
-    if output_parameter['is_buffer']:
+    if output_parameter['is_array']:
+        snippet = '{0}_array'.format(output_parameter['python_name'])
+    elif output_parameter['is_buffer']:
         if output_parameter['size']['mechanism'] == 'fixed':
             size = str(output_parameter['size']['value'])
         elif output_parameter['size']['mechanism'] == 'python-code':
@@ -279,7 +281,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     '''These are the different cases for initializing the ctype variable for buffers:
 
-        B510. Input/output numpy array:                                            numpy.ctypeslib.as_ctypes(waveform)
+        B510. Input/output numpy array:                                            _converters.convert_iterable_to_ctypes(waveform)
         B540. Input buffer (custom type):                                          (custom_struct * len(list))(*[custom_struct(l) for l in list])
         B550. Input buffer of simple types:                                        None if list is None else (_converters.convert_iterable_to_ctypes(array.array('d', list), (visatype.ViReal64 * len(list)))))
         B560. Output buffer with mechanism python-code:                            (visatype.ViInt32 * (<custom python code>))()
@@ -308,28 +310,61 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
         if parameter['size']['mechanism'] == 'python-code':
-            try:
+            if parameter['is_array']:
                 size_declaration = '{0}_size = {1}  # case B560'.format(parameter['python_name'], parameter['size']['value'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B560'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
-                definition = '_converters.convert_iterable_to_ctypes({1}_array, ({0}.{2} * {1}_size))  # case B560'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
-            except TypeError:  # must have been a custom type so need to get the array differently
+                definitions.append(ctypes_declaration)
+            elif parameter['is_list']:
                 definition = '({0}.{1} * {2})()  # case B560'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            else:
+                assert False, "Expected either 'is_array' or 'is_list' to be True. Both False."
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
-            definition = '({0}.{1} * {2})()  # case B570'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            if parameter['is_array']:
+                size_declaration = '{0}_size = {1}  # case B570'.format(parameter['python_name'], parameter['size']['value'])
+                array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B570'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definitions.append(size_declaration)
+                definitions.append(array_declaration)
+                definitions.append(ctypes_declaration)
+            elif parameter['is_list']:
+                definition = '({0}.{1} * {2})()  # case B570'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            else:
+                assert False, "Expected either 'is_array' or 'is_list' to be True. Both False."
         elif parameter['size']['mechanism'] == 'ivi-dance':
             if ivi_dance_step == IviDanceStep.QUERY_SIZE:
                 definition = 'None  # case B580'
             elif ivi_dance_step == IviDanceStep.GET_DATA:
                 size_parameter = find_size_parameter(parameter, parameters)
-                definition = '({0}.{1} * {2}.value)()  # case B590'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
+                if parameter['is_array']:
+                    size_declaration = '{0}_size = {1}.value  # case B590'.format(parameter['python_name'], size_parameter['ctypes_variable_name'])
+                    array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B590'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                    ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definitions.append(size_declaration)
+                    definitions.append(array_declaration)
+                    definitions.append(ctypes_declaration)
+                elif parameter['is_list']:
+                    definition = '({0}.{1} * {2}.value)()  # case B590'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
+                else:
+                    assert False, "Expected either 'is_array' or 'is_list' to be True. Both False."
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
         elif parameter['size']['mechanism'] == 'passed-in':
             size_parameter = find_size_parameter(parameter, parameters)
-            definition = '({0}.{1} * {2})()  # case B600'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+            if parameter['is_array']:
+                size_declaration = '{0}_size = {1}  # case B600'.format(parameter['python_name'], size_parameter['python_name'])
+                array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B600'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definitions.append(size_declaration)
+                definitions.append(array_declaration)
+                definitions.append(ctypes_declaration)
+            elif parameter['is_list']:
+                definition = '({0}.{1} * {2})()  # case B600'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
+            else:
+                assert False, "Expected either 'is_array' or 'is_list' to be True. Both False."
         else:
             assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
@@ -398,6 +433,9 @@ parameters_for_testing = [
         'enum': None,
         'is_buffer': False,
         'is_string': False,
+        'is_array': False,
+        'is_list': False,
+        'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
         'library_method_call_snippet': 'ctypes.pointer(output_ctype)',
@@ -419,6 +457,8 @@ parameters_for_testing = [
         'documentation': {'description': 'The error information formatted into a string.'},
         'enum': None,
         'is_buffer': False,
+        'is_array': False,
+        'is_list': False,
         'is_string': True,
         'is_repeated_capability': False,
         'is_session_handle': False,
@@ -440,7 +480,9 @@ parameters_for_testing = [
         'direction': 'out',
         'documentation': {'description': 'Array of custom type using python-code size mechanism'},
         'enum': None,
-        'is_buffer': True,
+        'is_buffer': False,
+        'is_array': False,
+        'is_list': True,
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
@@ -486,6 +528,8 @@ parameters_for_testing = [
         'documentation': {'description': 'Contains an array of enums, stored as 16 bit integers under the hood '},
         'enum': 'Turtle',
         'is_buffer': True,
+        'is_array': False,
+        'is_list': True,
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
@@ -533,6 +577,8 @@ parameters_for_testing = [
         'documentation': {'description': 'A big number on its way out.'},
         'enum': None,
         'is_buffer': True,
+        'is_array': True,
+        'is_list': False,
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
@@ -787,6 +833,8 @@ parameters_for_testing = [
         },
         'enum': None,
         'is_buffer': True,
+        'is_array': True,
+        'is_list': False,
         'is_string': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
@@ -821,7 +869,7 @@ def test_get_method_return_snippet_string():
 
 def test_get_method_return_snippet_custom_type():
     param = [parameters_for_testing[3]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]'
+    assert get_method_return_snippet(param, config_for_testing) == 'return custom_struct.CustomStruct(array_out_ctype)'
 
 
 def test_get_method_return_snippet_enum():
@@ -935,8 +983,9 @@ def test_get_ctype_variable_declaration_snippet_case_b550():
         'input_array_array = None if input_array is None else (array.array("d", input_array))  # case B550',
         'input_array_ctype = None if input_array is None else (_converters.convert_iterable_to_ctypes(input_array_array, (visatype.ViReal64 * len(input_array))))  # case B550',
     ]
-    for actual_line, expected_line in zip(actual, expected):
-        assert actual_line == expected_line
+    assert len(actual) == len(expected)
+    for i in range(max(len(actual), len(expected))):
+        assert actual[i] == expected[i]
 
 
 '''
@@ -947,13 +996,27 @@ def test_get_ctype_variable_declaration_snippet_case_b560():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b570():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["an_int_ctype = (visatype.ViInt16 * 256)()  # case B570"]
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    expected = [
+        'an_int_size = 256  # case B570',
+        'an_int_array = array.array("h", [0] * an_int_size)  # case B570',
+        'an_int_ctype = _converters.convert_iterable_to_ctypes(an_int_array, (visatype.ViInt16 * an_int_size))  # case B570',
+    ]
+    assert len(actual) == len(expected)
+    for i in range(max(len(actual), len(expected))):
+        assert actual[i] == expected[i]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b600():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["output_ctype = (visatype.ViInt64 * number_of_elements)()  # case B600"]
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    expected = [
+        'output_size = number_of_elements  # case B600',
+        'output_array = array.array("q", [0] * output_size)  # case B600',
+        'output_ctype = _converters.convert_iterable_to_ctypes(output_array, (visatype.ViInt64 * output_size))  # case B600',
+    ]
+    assert len(actual) == len(expected)
+    for i in range(max(len(actual), len(expected))):
+        assert actual[i] == expected[i]
 
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
