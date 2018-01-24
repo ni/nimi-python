@@ -64,12 +64,18 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         if self._defaults['${func_name}']['return'] != 0:
             return self._defaults['${func_name}']['return']
 %    for p in output_params:
+        # ${p['python_name']}
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
 %       if p['is_buffer']:
         a = self._defaults['${func_name}']['${p['name']}']
-        for i in range(min(len(${p['python_name']}), len(a))):
-            ${p['python_name']}[i] = a[i]
+<% param_name = p['python_name'] %>\
+        try:
+            ${param_name}_ref = ${param_name}.contents
+        except AttributeError:
+            ${param_name}_ref = ${param_name}
+        for i in range(min(len(${param_name}_ref), len(a))):
+            ${param_name}_ref[i] = a[i]
 %       else:
 %           if helper.find_custom_type(p, config) is not None:
         for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
@@ -79,8 +85,13 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         a = self._defaults['${func_name}']['${p['name']}']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
-        for i in range(min(len(${p['python_name']}), len(a))):
-            ${p['python_name']}[i] = a[i]
+<%
+param_name = p['python_name']
+if p['is_array']:
+    param_name += '.contents'
+%>\
+        for i in range(min(len(${param_name}), len(a))):
+            ${param_name}[i] = a[i]
 %           else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %           endif
@@ -94,8 +105,13 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %       if ivi_dance_param['is_string']:  # strings
         ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
 %       else:  # arrays
-        for i in range(len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])):
-            ${ivi_dance_param['python_name']}[i] = self._defaults['${func_name}']['${ivi_dance_param['name']}'][i]
+<% param_name = ivi_dance_param['python_name'] %>\
+        try:
+            ${param_name}_ref = ${param_name}.contents
+        except AttributeError:
+            ${param_name}_ref = ${param_name}
+        for i in range(len(self._defaults['${func_name}']['${ivi_dance_param["name"]}'])):
+            ${param_name}_ref[i] = self._defaults['${func_name}']['${ivi_dance_param["name"]}'][i]
 %       endif
 %    endif
         return self._defaults['${func_name}']['return']
