@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -223,7 +224,6 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        import sys
         a = self._defaults['GetAStringOfFixedMaximumSize']['aString']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
@@ -461,7 +461,6 @@ class SideEffectsHelper(object):
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        import sys
         a = self._defaults['ReturnANumberAndAString']['aString']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
@@ -565,7 +564,6 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        import sys
         a = self._defaults['error_message']['errorMessage']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')

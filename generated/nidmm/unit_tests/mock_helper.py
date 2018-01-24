@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -520,7 +521,6 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        import sys
         a = self._defaults['error_message']['errorMessage']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
@@ -541,7 +541,6 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
-        import sys
         a = self._defaults['self_test']['selfTestMessage']
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
