@@ -387,8 +387,9 @@ class TestSession(object):
         expected_output_array_list = [0.2, 0.4]
         expected_output_array_of_fixed_length_list = [-6, -7, -8]
 
-        # Because we are mocking convert_iterable_to_ctypes we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
-        # and have the mock return them. These are the ones that are actually filled in by the function.
+        # Because we are mocking convert_iterable_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_iterable_to_ctypes() before we start mocking to
+        # get the correct ctype
         output_array = array.array('d', [0] * len(expected_output_array_list))
         output_array_ctypes = nifake._converters.convert_iterable_to_ctypes(output_array, (nifake.visatype.ViReal64 * len(expected_output_array_list)))
         output_array_of_fixed_length = array.array('d', [0] * len(expected_output_array_of_fixed_length_list))
@@ -408,7 +409,7 @@ class TestSession(object):
             ]
             self.convert_iterable_to_ctypes_side_effect_count = 0
             with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
-                # Because we have mocked away convert_iterable_to_ctypes, we ignore the return values here and look at our already allocated arrays to make
+                # Because we have mocked away convert_iterable_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
                 # sure they are filled in correctly
                 session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
 
