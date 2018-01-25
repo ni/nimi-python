@@ -277,17 +277,29 @@ class TestSession(object):
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
     def test_fetch_waveform(self):
-        expected_waveform = [1.0, 0.1, 42, .42]
+        expected_waveform_list = [1.0, 0.1, 42, .42]
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
-        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
-        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
+        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform_list
+        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform_list)
+
+        # Because we are mocking convert_iterable_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_iterable_to_ctypes() before we start mocking to
+        # get the correct ctype
+        expected_waveform = array.array('d', [0] * len(expected_waveform_list))
+        expected_waveform_ctypes = nifake._converters.convert_iterable_to_ctypes(expected_waveform, (nifake.visatype.ViReal64 * len(expected_waveform_list)))
 
         with nifake.Session('dev1') as session:
-            waveform = session.fetch_waveform(len(expected_waveform))
-            assert isinstance(waveform[0], float)
-            assert len(waveform) == len(expected_waveform)
-            for i in range(len(waveform)):
-                assert waveform[i] == expected_waveform[i]
+            self.convert_iterable_to_ctypes_side_effect_items = [expected_waveform_ctypes]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                # Because we have mocked away convert_iterable_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                session.fetch_waveform(len(expected_waveform_list))
+            assert isinstance(expected_waveform[0], float)
+            assert len(expected_waveform) == len(expected_waveform_list)
+            for i in range(len(expected_waveform)):
+                assert expected_waveform[i] == expected_waveform_list[i]
             self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into(self):
@@ -346,7 +358,13 @@ class TestSession(object):
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
         float_enum_val = nifake.FloatEnum.SIX_POINT_FIVE
-        array_val = [0, 1, 2]
+        array_val_list = [0, 1, 2]
+        # Because we are mocking convert_iterable_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_iterable_to_ctypes() before we start mocking to
+        # get the correct ctype
+        array_val = array.array('d', [0] * len(array_val_list))
+        array_val_ctypes = nifake._converters.convert_iterable_to_ctypes(array_val, (nifake.visatype.ViReal64 * len(array_val_list)))
+
         array_size = len(array_val)
         string_val = 'Testing is fun?'
         self.side_effects_helper['ReturnMultipleTypes']['return'] = len(string_val)
@@ -356,11 +374,17 @@ class TestSession(object):
         self.side_effects_helper['ReturnMultipleTypes']['anIntEnum'] = enum_val.value
         self.side_effects_helper['ReturnMultipleTypes']['aFloat'] = float_val
         self.side_effects_helper['ReturnMultipleTypes']['aFloatEnum'] = float_enum_val.value
-        self.side_effects_helper['ReturnMultipleTypes']['anArray'] = array_val
+        self.side_effects_helper['ReturnMultipleTypes']['anArray'] = array_val_list
         self.side_effects_helper['ReturnMultipleTypes']['aString'] = string_val
         self.side_effects_helper['ReturnMultipleTypes']['return'] = 0
         with nifake.Session('dev1') as session:
-            result_boolean, result_int32, result_int64, result_enum, result_float, result_float_enum, result_array, result_string = session.return_multiple_types(array_size)
+            self.convert_iterable_to_ctypes_side_effect_items = [array_val_ctypes]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                # Because we have mocked away convert_iterable_to_ctypes(), we ignore the return value for the array here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                result_boolean, result_int32, result_int64, result_enum, result_float, result_float_enum, result_array, result_string = session.return_multiple_types(array_size)
             assert result_boolean == boolean_val
             assert isinstance(result_boolean, bool)
             assert result_int32 == int32_val
@@ -373,11 +397,11 @@ class TestSession(object):
             assert isinstance(result_float, float)
             assert result_float_enum == float_enum_val
             assert isinstance(result_float_enum, nifake.FloatEnum)
-            assert len(result_array) == len(array_val)
-            for i in range(len(result_array)):
-                assert result_array[i] == array_val[i]
-            assert isinstance(result_array, array.array)
-            assert isinstance(result_array[0], float)
+            assert len(array_val) == len(array_val_list)
+            for i in range(len(array_val)):
+                assert array_val[i] == array_val_list[i]
+            assert isinstance(array_val, array.array)
+            assert isinstance(array_val[0], float)
             assert result_string == string_val
             assert isinstance(result_string, six.text_type)
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
@@ -649,11 +673,24 @@ class TestSession(object):
         expected_array_list = [1.1, 2.2]
         self.patched_library.niFake_GetArrayUsingIVIDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIVIDance
         self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = expected_array_list
+
+        # Because we are mocking convert_iterable_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_iterable_to_ctypes() before we start mocking to
+        # get the correct ctype
+        expected_array = array.array('d', [0] * len(expected_array_list))
+        expected_array_ctypes = nifake._converters.convert_iterable_to_ctypes(expected_array, (nifake.visatype.ViReal64 * len(expected_array_list)))
+
         with nifake.Session('dev1') as session:
-            result_array = session.get_array_using_ivi_dance()
-            assert len(result_array) == len(expected_array_list)
-            for i in range(len(result_array)):
-                assert result_array[i] == expected_array_list[i]
+            self.convert_iterable_to_ctypes_side_effect_items = [expected_array_ctypes]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                # Because we have mocked away convert_iterable_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                session.get_array_using_ivi_dance()
+            assert len(expected_array) == len(expected_array_list)
+            for i in range(len(expected_array)):
+                assert expected_array[i] == expected_array_list[i]
 
     # Repeated Capabilities
 
@@ -991,15 +1028,27 @@ class TestSession(object):
         import nifake.visatype
         self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
         self.patched_library.niFake_GetArrayForPythonCodeDouble.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeDouble
-        array_out = [42.0, 43.0, 44.0]
-        array_out_ctype = (nifake.visatype.ViReal64 * len(array_out))(*array_out)
+        array_out_list = [42.0, 43.0, 44.0]
+
+        # Because we are mocking convert_iterable_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_iterable_to_ctypes() before we start mocking to
+        # get the correct ctype
+        array_out = array.array('d', [0] * len(array_out_list))
+        array_out_ctypes = nifake._converters.convert_iterable_to_ctypes(array_out, (nifake.visatype.ViReal64 * len(array_out_list)))
+
         self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(array_out)
-        self.side_effects_helper['GetArrayForPythonCodeDouble']['arrayOut'] = array_out_ctype
+        self.side_effects_helper['GetArrayForPythonCodeDouble']['arrayOut'] = array_out_list
         with nifake.Session('dev1') as session:
-            array_out_test = session.get_array_for_python_code_double()
-            assert len(array_out_test) == len(array_out)
-            for actual, expected in zip(array_out_test, array_out):
-                assert actual == expected
+            self.convert_iterable_to_ctypes_side_effect_items = [array_out_ctypes]
+            self.convert_iterable_to_ctypes_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session._converters.convert_iterable_to_ctypes', side_effect=self.convert_iterable_to_ctypes_side_effect):
+                # Because we have mocked away convert_iterable_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                session.get_array_for_python_code_double()
+            assert len(array_out_list) == len(array_out)
+            for i in range(len(array_out_list)):
+                assert array_out_list[i] == array_out[i]
 
     def test_get_array_using_python_code_custom_type(self):
         import nifake.visatype
