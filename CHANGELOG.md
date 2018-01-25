@@ -12,63 +12,63 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-    * Repeated capabilities are no longer accessed directly on the session object. Instead there is now a repeated capabilies object for each type of repeated capability that the driver supports. Some drivers do not use repeated capabilities so there is no change for them.
-    * The repeated capabilities object can take integers or strings, a single item or a list.
-    * The repeated capabilities object knows the proper prefix and will add it if needed.
-    * The following are all legal
-        ```python
-        import niscope
-        session = niscope.Session('PXI1Slot2')
+    * #### Added
+    * #### Changed
+        * Repeated capabilities are no longer accessed directly on the session object. Instead there is now a repeated capabilies object for each type of repeated capability that the driver supports. Some drivers do not use repeated capabilities so there is no change for them.
+        * The repeated capabilities object can take integers or strings, a single item or a list.
+        * The repeated capabilities object knows the proper prefix and will add it if needed.
+        * The following are all legal
+            ```python
+            import niscope
+            session = niscope.Session('PXI1Slot2')
 
-        # Channel repeated capabilities
-        session.channels['0'].channel_enabled = True
-        session.channels[0].channel_enabled = True
-        session.channels[[0, 1, 3]].channel_enabled = True
-        session.channels[range(8)].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
-        session.channels[:8].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
-        wfm = session.channels[[0, 1, 3]].fetch(5000)
+            # Channel repeated capabilities
+            session.channels['0'].channel_enabled = True
+            session.channels[0].channel_enabled = True
+            session.channels[[0, 1, 3]].channel_enabled = True
+            session.channels[range(8)].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
+            session.channels[:8].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
+            wfm = session.channels[[0, 1, 3]].fetch(5000)
 
-        # P2P repeated capabilities
-        i = session.p2p_streams['0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-        i = session.p2p_streams[0].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-        i = session.p2p_streams[[0, 1, 3]].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-        i = session.p2p_streams['FIFOEndpoint0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-        ```
-  * #### Removed
+            # P2P repeated capabilities
+            i = session.p2p_streams['0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+            i = session.p2p_streams[0].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+            i = session.p2p_streams[[0, 1, 3]].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+            i = session.p2p_streams['FIFOEndpoint0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
+            ```
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-    * Channel repeated capability
-  * #### Changed
-    * Metadata updated to NI-DCPower 17.6.1
-  * #### Removed
+    * #### Added
+        * Channel repeated capability
+    * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-    * Channel repeated capability
-    * P2P repeated capability
-    * Marker repeated capability
-    * Script Trigger repeated capability
-  * #### Changed
-  * #### Removed
+    * #### Added
+        * Channel repeated capability
+        * P2P repeated capability
+        * Marker repeated capability
+        * Script Trigger repeated capability
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-    * Channel repeated capability
-    * P2P repeated capability
-  * #### Changed
-  * #### Removed
+    * #### Added
+        * Channel repeated capability
+        * P2P repeated capability
+    * #### Changed
+    * #### Removed
 
 ## 0.6.0 - 2017-12-20
 * ### ALL
