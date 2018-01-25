@@ -68,7 +68,9 @@ def _add_ctypes_type(parameter, config):
     if custom_type is not None:
         module_name = custom_type['file_name'] + '.'
 
-    if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+    if parameter['is_string']:
+        parameter['ctypes_type_library_call'] = 'ctypes.POINTER(ViChar)'
+    elif parameter['direction'] == 'out' or parameter['is_buffer'] is True:
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
@@ -113,16 +115,18 @@ def _add_buffer_info(parameter):
     # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
     # and is_buffer True
     t = parameter['type']
-    if t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
-        parameter['type'] = 'ViChar'
-        parameter['original_type'] = t
-        parameter['is_buffer'] = True
-
     if (t.find('[ ]') > 0) or (t.find('[]') > 0):
         assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
         parameter['type'] = t.replace('[ ]', '').replace('[]', '')
         parameter['original_type'] = t
         parameter['is_buffer'] = True
+
+    # We set all string types to ViString, and say it is NOT a buffer/array
+    if t == 'ViConstString' or t == 'ViRsrc' or t == 'ViString' or (parameter['type'] == 'ViChar' and parameter['is_buffer']):
+        parameter['type'] = 'ViString'
+        parameter['original_type'] = t
+        parameter['is_buffer'] = False
+        parameter['is_string'] = True
 
     if 'size' not in parameter:
         # Not populated, assume {'mechanism': 'fixed', 'value': 1}
@@ -132,13 +136,19 @@ def _add_buffer_info(parameter):
         # Not populated, assume False
         parameter['is_buffer'] = False
 
+    if 'is_string' not in parameter:
+        # Not populated, assume False
+        parameter['is_string'] = False
+
+    assert parameter['is_buffer'] is False or parameter['is_string'] is False
+
     return parameter
 
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:
-        parameter['library_method_call_snippet'] = 'ctypes.pointer({0})'.format(parameter['ctypes_variable_name'])
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and not parameter['is_string']:
+        parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
 
@@ -587,6 +597,7 @@ def test_add_all_metadata_simple():
                     'numpy': False,
                     'python_type': 'int',
                     'is_buffer': False,
+                    'is_string': False,
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
@@ -601,7 +612,7 @@ def test_add_all_metadata_simple():
                     'python_name_or_default_for_init': 'vi',
                 },
                 {
-                    'ctypes_type': 'ViChar',
+                    'ctypes_type': 'ViString',
                     'ctypes_variable_name': 'channel_name_ctype',
                     'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                     'direction': 'in',
@@ -612,18 +623,19 @@ def test_add_all_metadata_simple():
                     'is_session_handle': False,
                     'enum': None,
                     'numpy': False,
-                    'python_type': 'int',
-                    'is_buffer': True,
+                    'python_type': 'str',
+                    'is_buffer': False,
+                    'is_string': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViChar',
-                    'original_type': 'ViString',
+                    'type': 'ViString',
                     'library_method_call_snippet': 'channel_name_ctype',
                     'use_in_python_api': True,
                     'python_name_or_default_for_init': 'channel_name',
+                    'original_type': 'ViString',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -652,6 +664,7 @@ def test_add_all_metadata_simple():
                     'value': 1
                 },
                 'is_buffer': False,
+                'is_string': False,
                 'python_name_with_default': 'vi',
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
@@ -664,21 +677,21 @@ def test_add_all_metadata_simple():
                 'enum': None,
                 'numpy': False,
                 'name': 'status',
-                'type': 'ViChar',
-                'original_type': 'ViString',
+                'type': 'ViString',
                 'documentation': {
                     'description': 'Return a device status'
                 },
                 'python_name': 'status',
-                'python_type': 'int',
+                'python_type': 'str',
                 'ctypes_variable_name': 'status_ctype',
-                'ctypes_type': 'ViChar',
+                'ctypes_type': 'ViString',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
                 },
-                'is_buffer': True,
+                'is_buffer': False,
+                'is_string': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
@@ -686,6 +699,7 @@ def test_add_all_metadata_simple():
                 'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
+                'original_type': 'ViString',
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
