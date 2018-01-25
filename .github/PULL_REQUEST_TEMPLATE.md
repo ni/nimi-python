@@ -4,7 +4,7 @@ TODO: Check the above box with an 'x' indicating you've read and followed [CONTR
 
 - [] I've updated [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md) if applicable.
 
-TODO: Check the above box with an 'x' if you've documented client facing changes in [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md). Strike through if this is not a relevant client facing change.
+TODO: Check the above box with an 'x' if considered if there were any and then documented client facing changes in [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md). Strike through if this is not a relevant client facing change.
 
 - [] I've added tests applicable for this pull request
 
