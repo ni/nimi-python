@@ -305,7 +305,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             declaration = '{2}_array = None if {2} is None else (array.array("{3}", {2}))  # case B550'.format(module_name, parameter['ctypes_type'], parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
             definitions.append(declaration)
-            definition = 'None if {1} is None else (_converters.convert_iterable_to_ctypes({1}_array, ({0}.{2} * len({1}))))  # case B550'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
+            definition = 'None if {1} is None else (_converters.convert_iterable_to_ctypes({1}_array, ({0}.{2})))  # case B550'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
@@ -313,7 +313,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['is_array']:
                 size_declaration = '{0}_size = {1}  # case B560'.format(parameter['python_name'], parameter['size']['value'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B560'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
                 definitions.append(ctypes_declaration)
@@ -326,7 +326,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['is_array']:
                 size_declaration = '{0}_size = {1}  # case B570'.format(parameter['python_name'], parameter['size']['value'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B570'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
                 definitions.append(ctypes_declaration)
@@ -342,7 +342,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 if parameter['is_array']:
                     size_declaration = '{0}_size = {1}.value  # case B590'.format(parameter['python_name'], size_parameter['ctypes_variable_name'])
                     array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B590'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                    ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                     definitions.append(size_declaration)
                     definitions.append(array_declaration)
                     definitions.append(ctypes_declaration)
@@ -357,7 +357,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['is_array']:
                 size_declaration = '{0}_size = {1}  # case B600'.format(parameter['python_name'], size_parameter['python_name'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B600'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3} * {2}_size))  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
                 definitions.append(ctypes_declaration)
@@ -981,7 +981,7 @@ def test_get_ctype_variable_declaration_snippet_case_b550():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
         'input_array_array = None if input_array is None else (array.array("d", input_array))  # case B550',
-        'input_array_ctype = None if input_array is None else (_converters.convert_iterable_to_ctypes(input_array_array, (visatype.ViReal64 * len(input_array))))  # case B550',
+        'input_array_ctype = None if input_array is None else (_converters.convert_iterable_to_ctypes(input_array_array, (visatype.ViReal64)))  # case B550',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
@@ -1000,7 +1000,7 @@ def test_get_ctype_variable_declaration_snippet_case_b570():
     expected = [
         'an_int_size = 256  # case B570',
         'an_int_array = array.array("h", [0] * an_int_size)  # case B570',
-        'an_int_ctype = _converters.convert_iterable_to_ctypes(an_int_array, (visatype.ViInt16 * an_int_size))  # case B570',
+        'an_int_ctype = _converters.convert_iterable_to_ctypes(an_int_array, (visatype.ViInt16))  # case B570',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
@@ -1012,7 +1012,7 @@ def test_get_ctype_variable_declaration_snippet_case_b600():
     expected = [
         'output_size = number_of_elements  # case B600',
         'output_array = array.array("q", [0] * output_size)  # case B600',
-        'output_ctype = _converters.convert_iterable_to_ctypes(output_array, (visatype.ViInt64 * output_size))  # case B600',
+        'output_ctype = _converters.convert_iterable_to_ctypes(output_array, (visatype.ViInt64))  # case B600',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
