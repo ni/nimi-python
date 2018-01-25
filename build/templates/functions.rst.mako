@@ -19,7 +19,7 @@
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 
-.. py:currentmodule:: ${module_name}
+.. py:currentmodule:: ${module_name}.Session
 
 % for item in sorted(doc_list):
 <%

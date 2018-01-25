@@ -9,7 +9,7 @@
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 
-.. py:currentmodule:: ${module_name}
+.. py:currentmodule:: ${module_name}.Session
 
 % for attr in helper.sorted_attrs(attributes):
 .. py:attribute:: ${attributes[attr]["python_name"]}
