@@ -916,7 +916,6 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
                 'type': 'ViChar[]',
                 'documentation': {
@@ -1012,9 +1011,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Returns the string.',
                 },
@@ -1041,9 +1039,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'String comes back here. Buffer must be 256 big.',
                 },
@@ -1079,9 +1076,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Contains a string. Buffer must be 256 bytes or larger.',
                 },
@@ -1307,9 +1303,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'anArray',
-                'type': 'ViBoolean',
+                'type': 'ViBoolean[]',
                 'documentation': {
                     'description': 'Contains an array of booleans',
                 },
@@ -1344,9 +1339,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'anArray',
-                'type': 'ViInt16',
+                'type': 'ViInt16[]',
                 'documentation': {
                     'description': 'Contains an array of enums, stored as 16 bit integers under the hood ',
                 },
@@ -1437,9 +1431,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'anArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'An array of measurement values.',
                     'note': 'The size must be at least arraySize.',
@@ -1457,9 +1450,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'An IVI dance string.',
                 },
@@ -1495,9 +1487,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'outputArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'Array that will be returned.',
                     'note': 'The size must be at least outputArraySize.',
@@ -1506,9 +1497,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'outputArrayOfFixedLength',
-                'type': 'ViReal64',
+                'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'An array of doubles with fixed size.',
                 },
@@ -1525,9 +1515,8 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'inputArrayOfFloats',
-                'type': 'ViReal64',
+                'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'Array of floats',
                 },
@@ -1535,9 +1524,8 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'inputArrayOfIntegers',
-                'type': 'ViInt16',
+                'type': 'ViInt16[]',
                 'documentation': {
                     'description': 'Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.',
                 },
@@ -1627,9 +1615,8 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'aString',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'An IVI dance string.',
                 },

@@ -1,19 +1,19 @@
 nidcpower.Session methods
 =========================
 
-.. py:currentmodule:: nidcpower
+.. py:currentmodule:: nidcpower.Session
 
-.. function:: abort()
+.. py:method:: abort()
 
     Transitions the NI-DCPower session from the Running state to the
     Committed state. If a sequence is running, it is stopped. Any
     configuration functions called after this function are not applied until
-    the :py:func:`nidcpower._initiate` function is called. If power output is enabled
-    when you call the :py:func:`nidcpower.abort` function, the output channels remain
+    the :py:meth:`nidcpower.Session._initiate` function is called. If power output is enabled
+    when you call the :py:meth:`nidcpower.Session.abort` function, the output channels remain
     in their current state and continue providing power.
 
-    Use the :py:func:`nidcpower.ConfigureOutputEnabled` function to disable power
-    output on a per channel basis. Use the :py:func:`nidcpower.reset` function to
+    Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled` function to disable power
+    output on a per channel basis. Use the :py:meth:`nidcpower.Session.reset` function to
     disable output on all channels.
 
     Refer to the `Programming
@@ -28,15 +28,17 @@ nidcpower.Session methods
 
     
 
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
-.. function:: commit()
+
+.. py:method:: commit()
 
     Applies previously configured settings to the device. Calling this
     function moves the NI-DCPower session from the Uncommitted state into
     the Committed state. After calling this function, modifying any
     attribute reverts the NI-DCPower session to the Uncommitted state. Use
-    the :py:func:`nidcpower._initiate` function to transition to the Running state.
+    the :py:meth:`nidcpower.Session._initiate` function to transition to the Running state.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -51,7 +53,7 @@ nidcpower.Session methods
 
 
 
-.. function:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+.. py:method:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
     Configures the aperture time on the specified channel(s).
 
@@ -103,16 +105,16 @@ nidcpower.Session methods
         Specifies the units for **apertureTime**.
         **Defined Values**:
 
-        +--------------------------------------------+------------------------------+
-        | NIDCPOWER\_VAL\_SECONDS (1028)             | Specifies seconds.           |
-        +--------------------------------------------+------------------------------+
-        | NIDCPOWER\_VAL\_POWER\_LINE\_CYCLES (1029) | Specifies Power Line Cycles. |
-        +--------------------------------------------+------------------------------+
+        +------------------------------------------------------------------+------------------------------+
+        | :py:data:`~nidcpower.ApertureTimeUnits.SECONDS` (1028)           | Specifies seconds.           |
+        +------------------------------------------------------------------+------------------------------+
+        | :py:data:`~nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES` (1029) | Specifies Power Line Cycles. |
+        +------------------------------------------------------------------+------------------------------+
 
 
     :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
-.. function:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
+.. py:method:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Measure trigger for digital edge triggering.
 
@@ -146,7 +148,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -154,16 +156,16 @@ nidcpower.Session methods
         rising or falling edge.
         **Defined Values:**
 
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-        +--------------------------------+----------------------------------------------------------------+
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
+        +--------------------------------------------------+----------------------------------------------------------------+
 
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
+.. py:method:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Pulse trigger for digital edge triggering.
 
@@ -197,7 +199,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -205,16 +207,16 @@ nidcpower.Session methods
         or falling edge.
         **Defined Values:**
 
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-        +--------------------------------+----------------------------------------------------------------+
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
+        +--------------------------------------------------+----------------------------------------------------------------+
 
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
+.. py:method:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Sequence Advance trigger for digital edge triggering.
 
@@ -249,7 +251,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -257,16 +259,16 @@ nidcpower.Session methods
         the rising or falling edge.
         **Defined Values:**
 
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-        +--------------------------------+----------------------------------------------------------------+
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
+        +--------------------------------------------------+----------------------------------------------------------------+
 
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
+.. py:method:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Source trigger for digital edge triggering.
 
@@ -300,7 +302,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -308,16 +310,16 @@ nidcpower.Session methods
         rising or falling edge.
         **Defined Values:**
 
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-        +--------------------------------+----------------------------------------------------------------+
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
+        +--------------------------------------------------+----------------------------------------------------------------+
 
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
+.. py:method:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Start trigger for digital edge triggering.
 
@@ -351,7 +353,7 @@ nidcpower.Session methods
         
 
 
-    :type input_terminal: string
+    :type input_terminal: str
     :param edge:
 
 
@@ -359,26 +361,26 @@ nidcpower.Session methods
         or falling edge.
         **Defined Values:**
 
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-        +--------------------------------+----------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-        +--------------------------------+----------------------------------------------------------------+
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+        +--------------------------------------------------+----------------------------------------------------------------+
+        | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
+        +--------------------------------------------------+----------------------------------------------------------------+
 
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: create_advanced_sequence(sequence_name, attribute_ids, set_as_active_sequence=True)
+.. py:method:: create_advanced_sequence(sequence_name, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
-    :py:func:`nidcpower.create_advanced_sequence_step` function to add steps to the
+    :py:meth:`nidcpower.Session.create_advanced_sequence_step` function to add steps to the
     active advanced sequence.
 
     **Support for this function**
 
     You must set the source mode to Sequence to use this function.
 
-    Using the :py:func:`nidcpower.set_sequence` function with Advanced Sequence
+    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
     functions is unsupported.
 
     Use this function in the Uncommitted or Committed programming states.
@@ -395,7 +397,7 @@ nidcpower.Session methods
     `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-    :py:func:`nidcpower.create_advanced_sequence_step`
+    :py:meth:`nidcpower.Session.create_advanced_sequence_step`
 
     
 
@@ -414,7 +416,7 @@ nidcpower.Session methods
         
 
 
-    :type sequence_name: string
+    :type sequence_name: str
     :param attribute_ids:
 
 
@@ -425,89 +427,89 @@ nidcpower.Session methods
         in advanced sequencing. An ✕ indicates that the attribute cannot be
         configured in advanced sequencing.
 
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | Attribute                                             | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
-        +=======================================================+===========+=========+=========+=========+=========+===================+===================+================+
-        | :py:data:`nidcpower.DC\_NOISE\_REJECTION`             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.APERTURE\_TIME`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.MEASURE\_RECORD\_LENGTH`          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.sense`                            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.OVP\_ENABLED`                     | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.OVP\_LIMIT`                       | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_BIAS\_DELAY`               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_OFF\_TIME`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_ON\_TIME`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.SOURCE\_DELAY`                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_COMPENSATION\_FREQUENCY` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_GAIN\_BANDWIDTH`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_POLE\_ZERO\_RATIO`       | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_COMPENSATION\_FREQUENCY` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_GAIN\_BANDWIDTH`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_POLE\_ZERO\_RATIO`       | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_LEVEL`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_LEVEL\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_LIMIT`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_LIMIT\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_LIMIT`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.CURRENT\_LIMIT\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_LEVEL`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.VOLTAGE\_LEVEL\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.OUTPUT\_ENABLED`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.OUTPUT\_FUNCTION`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.OUTPUT\_RESISTANCE`               | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LEVEL`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LIMIT`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_CURRENT\_LEVEL`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_CURRENT\_LEVEL\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LIMIT`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LEVEL`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_CURRENT\_LIMIT`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_CURRENT\_LIMIT\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | :py:data:`nidcpower.TRANSIENT\_RESPONSE`              | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | Attribute                                                   | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
+        +=============================================================+===========+=========+=========+=========+=========+===================+===================+================+
+        | :py:data:`nidcpower.Session.dc_noise_rejection`             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.aperture_time`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.measure_record_length`          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.sense`                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.ovp_enabled`                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.ovp_limit`                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_bias_delay`               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_off_time`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_on_time`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.source_delay`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_compensation_frequency` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_gain_bandwidth`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_pole_zero_ratio`        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_compensation_frequency` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_gain_bandwidth`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_pole_zero_ratio`        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_level`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_level_range`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_limit`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_limit_range`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_limit`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.current_limit_range`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_level`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.voltage_level_range`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.output_enabled`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.output_function`                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.output_resistance`              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_bias_current_level`       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_bias_voltage_limit`       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_current_level`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_current_level_range`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_voltage_limit`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_voltage_limit_range`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_bias_current_limit`       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_bias_voltage_level`       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_current_limit`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_current_limit_range`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_voltage_level`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.pulse_voltage_level_range`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.Session.transient_response`             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
 
     :type attribute_ids: list of int
@@ -521,11 +523,11 @@ nidcpower.Session methods
 
     :type set_as_active_sequence: bool
 
-.. function:: create_advanced_sequence_step(set_as_active_step=True)
+.. py:method:: create_advanced_sequence_step(set_as_active_step=True)
 
     Creates a new advanced sequence step in the advanced sequence specified
     by the Active advanced sequence. When you create an advanced sequence
-    step, each attribute you passed to the :py:func:`nidcpower.create_advanced_sequence`
+    step, each attribute you passed to the :py:meth:`nidcpower.Session.create_advanced_sequence`
     function is reset to its default value for that step unless otherwise
     specified.
 
@@ -533,7 +535,7 @@ nidcpower.Session methods
 
     You must set the source mode to Sequence to use this function.
 
-    Using the :py:func:`nidcpower.set_sequence` function with Advanced Sequence
+    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
     functions is unsupported.
 
     **Related Topics**:
@@ -544,7 +546,7 @@ nidcpower.Session methods
     `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-    :py:func:`nidcpower.create_advanced_sequence`
+    :py:meth:`nidcpower.Session.create_advanced_sequence`
 
     
 
@@ -565,7 +567,7 @@ nidcpower.Session methods
 
     :type set_as_active_step: bool
 
-.. function:: delete_advanced_sequence(sequence_name)
+.. py:method:: delete_advanced_sequence(sequence_name)
 
     Deletes a previously created advanced sequence and all the advanced
     sequence steps in the advanced sequence.
@@ -574,7 +576,7 @@ nidcpower.Session methods
 
     You must set the source mode to Sequence to use this function.
 
-    Using the :py:func:`nidcpower.set_sequence` function with Advanced Sequence
+    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
     functions is unsupported.
 
     **Related Topics**:
@@ -602,13 +604,13 @@ nidcpower.Session methods
         
 
 
-    :type sequence_name: string
+    :type sequence_name: str
 
-.. function:: disable()
+.. py:method:: disable()
 
-    This function performs the same actions as the :py:func:`nidcpower.reset`
+    This function performs the same actions as the :py:meth:`nidcpower.Session.reset`
     function, except that this function also immediately sets the
-    :py:data:`nidcpower.OUTPUT\_ENABLED` attribute to VI\_FALSE.
+    :py:data:`nidcpower.Session.output_enabled` attribute to VI\_FALSE.
 
     This function opens the output relay on devices that have an output
     relay.
@@ -617,10 +619,10 @@ nidcpower.Session methods
 
 
 
-.. function:: export_signal(signal, output_terminal, signal_identifier='""')
+.. py:method:: export_signal(signal, output_terminal, signal_identifier='""')
 
     Routes signals (triggers and events) to the output terminal you specify.
-    The route is created when the session is :py:func:`nidcpower.commit`.
+    The route is created when the session is :py:meth:`nidcpower.Session.commit`.
 
     **Related Topics:**
 
@@ -641,29 +643,29 @@ nidcpower.Session methods
         Specifies which trigger or event to export.
         **Defined Values:**
 
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_SOURCE\_COMPLETE\_EVENT (1030)              | Exports the Source Complete event.             |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_COMPLETE\_EVENT (1031)             | Exports the Measure Complete event.            |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ITERATION\_COMPLETE\_EVENT (1032) | Exports the Sequence Iteration Complete event. |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ENGINE\_DONE\_EVENT (1033)        | Exports the Sequence Engine Done event.        |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_PULSE\_COMPLETE\_EVENT (1051)               | Exports the Pulse Complete event.              |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_READY\_FOR\_PULSE\_TRIGGER\_EVENT (1052)    | Exports the Ready Pulse Trigger event.         |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_START\_TRIGGER (1034)                       | Exports the Start trigger.                     |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_SOURCE\_TRIGGER (1035)                      | Exports the Source trigger.                    |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_TRIGGER (1036)                     | Exports the Measure trigger.                   |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ADVANCE\_TRIGGER (1037)           | Exports the Sequence Advance trigger.          |
-        +-------------------------------------------------------------+------------------------------------------------+
-        | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053)                       | Exports the Pulse trigger.                     |
-        +-------------------------------------------------------------+------------------------------------------------+
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT` (1030)             | Exports the Source Complete event.             |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.MEASURE_COMPLETE_EVENT` (1031)            | Exports the Measure Complete event.            |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Exports the Sequence Iteration Complete event. |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Exports the Sequence Engine Done event.        |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.PULSE_COMPLETE_EVENT` (1051)              | Exports the Pulse Complete event.              |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Exports the Ready Pulse Trigger event.         |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.START_TRIGGER` (1034)                     | Exports the Start trigger.                     |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SOURCE_TRIGGER` (1035)                    | Exports the Source trigger.                    |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.MEASURE_TRIGGER` (1036)                   | Exports the Measure trigger.                   |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ADVANCE_TRIGGER` (1037)          | Exports the Sequence Advance trigger.          |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.PULSE_TRIGGER` (1053)                     | Exports the Pulse trigger.                     |
+        +-----------------------------------------------------------------------------+------------------------------------------------+
 
 
     :type signal: :py:data:`nidcpower.ExportSignal`
@@ -694,7 +696,7 @@ nidcpower.Session methods
         +--------------+----------------------+
 
 
-    :type output_terminal: string
+    :type output_terminal: str
     :param signal_identifier:
 
 
@@ -703,16 +705,16 @@ nidcpower.Session methods
         
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
 
-.. function:: fetch_multiple(count, timeout=1.0)
+.. py:method:: fetch_multiple(count, timeout=1.0)
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
     previously taken and are stored in the NI-DCPower buffer. This function
-    should not be used when the :py:data:`nidcpower.MEASURE\_WHEN` attribute is
-    set to NIDCPOWER\_VAL\_ON\_DEMAND. You must first call
-    :py:func:`nidcpower._initiate` before calling this function.
+    should not be used when the :py:data:`nidcpower.Session.measure_when` attribute is
+    set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
+    :py:meth:`nidcpower.Session._initiate` before calling this function.
 
     Refer to the `Acquiring
     Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
@@ -805,10 +807,10 @@ nidcpower.Session methods
 
 
 
-.. function:: get_channel_name(index)
+.. py:method:: get_channel_name(index)
 
     Retrieves the output **channelName** that corresponds to the requested
-    **index**. Use the :py:data:`nidcpower.CHANNEL\_COUNT` attribute to
+    **index**. Use the :py:data:`nidcpower.Session.channel_count` attribute to
     determine the upper bound of valid values for **index**.
 
     
@@ -835,7 +837,7 @@ nidcpower.Session methods
 
     :type index: int
 
-.. function:: get_ext_cal_last_date_and_time()
+.. py:method:: get_ext_cal_last_date_and_time()
 
     Returns the date and time of the last successful calibration. The time
     returned is 24-hour (military) local time; for example, if the device
@@ -892,7 +894,7 @@ nidcpower.Session methods
 
 
 
-.. function:: get_ext_cal_last_temp()
+.. py:method:: get_ext_cal_last_temp()
 
     Returns the onboard **temperature** of the device, in degrees Celsius,
     during the last successful external calibration.
@@ -912,7 +914,7 @@ nidcpower.Session methods
 
 
 
-.. function:: get_ext_cal_recommended_interval()
+.. py:method:: get_ext_cal_recommended_interval()
 
     Returns the recommended maximum interval, in **months**, between
     external calibrations.
@@ -932,7 +934,7 @@ nidcpower.Session methods
 
 
 
-.. function:: get_self_cal_last_date_and_time()
+.. py:method:: get_self_cal_last_date_and_time()
 
     Returns the date and time of the oldest successful self-calibration from
     among the channels in the session.
@@ -998,7 +1000,7 @@ nidcpower.Session methods
 
 
 
-.. function:: get_self_cal_last_temp()
+.. py:method:: get_self_cal_last_temp()
 
     Returns the onboard temperature of the device, in degrees Celsius,
     during the oldest successful self-calibration from among the channels in
@@ -1030,12 +1032,12 @@ nidcpower.Session methods
 
 
 
-.. function:: measure(measurement_type)
+.. py:method:: measure(measurement_type)
 
     Returns the measured value of either the voltage or current on the
     specified output channel. Each call to this function blocks other
     function calls until the hardware returns the **measurement**. To
-    measure multiple output channels, use the :py:func:`nidcpower.measure_multiple`
+    measure multiple output channels, use the :py:meth:`nidcpower.Session.measure_multiple`
     function.
 
     
@@ -1057,11 +1059,11 @@ nidcpower.Session methods
         Specifies whether a voltage or current value is measured.
         **Defined Values**:
 
-        +--------------------------------------+------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_VOLTAGE (1) | The device measures voltage. |
-        +--------------------------------------+------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_CURRENT (0) | The device measures current. |
-        +--------------------------------------+------------------------------+
+        +----------------------------------------------------+------------------------------+
+        | :py:data:`~nidcpower.MeasurementTypes.VOLTAGE` (1) | The device measures voltage. |
+        +----------------------------------------------------+------------------------------+
+        | :py:data:`~nidcpower.MeasurementTypes.CURRENT` (0) | The device measures current. |
+        +----------------------------------------------------+------------------------------+
 
 
     :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
@@ -1077,7 +1079,7 @@ nidcpower.Session methods
 
 
 
-.. function:: measure_multiple()
+.. py:method:: measure_multiple()
 
     Returns arrays of the measured voltage and current values on the
     specified output channel(s). Each call to this function blocks other
@@ -1125,23 +1127,23 @@ nidcpower.Session methods
 
 
 
-.. function:: query_in_compliance()
+.. py:method:: query_in_compliance()
 
     Queries the specified output device to determine if it is operating at
     the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
     The compliance limit is the current limit when the output function is
-    set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
+    set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`. If the output is operating at the
     compliance limit, the output reaches the current limit before the
-    desired voltage level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
-    function and the :py:func:`nidcpower.ConfigureCurrentLimit` function for more
+    desired voltage level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
+    function and the :py:meth:`nidcpower.Session.ConfigureCurrentLimit` function for more
     information about output function and current limit, respectively.
 
     The compliance limit is the voltage limit when the output function is
-    set to NIDCPOWER\_VAL\_DC\_CURRENT. If the output is operating at the
+    set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`. If the output is operating at the
     compliance limit, the output reaches the voltage limit before the
-    desired current level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
-    function and the :py:func:`nidcpower.ConfigureVoltageLimit` function for more
+    desired current level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
+    function and the :py:meth:`nidcpower.Session.ConfigureVoltageLimit` function for more
     information about output function and voltage limit, respectively.
 
     **Related Topics:**
@@ -1149,6 +1151,8 @@ nidcpower.Session methods
     `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
     
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1171,7 +1175,7 @@ nidcpower.Session methods
 
 
 
-.. function:: query_max_current_limit(voltage_level)
+.. py:method:: query_max_current_limit(voltage_level)
 
     Queries the maximum current limit on an output channel if the output
     channel is set to the specified **voltageLevel**.
@@ -1211,7 +1215,7 @@ nidcpower.Session methods
 
 
 
-.. function:: query_max_voltage_level(current_limit)
+.. py:method:: query_max_voltage_level(current_limit)
 
     Queries the maximum voltage level on an output channel if the output
     channel is set to the specified **currentLimit**.
@@ -1251,7 +1255,7 @@ nidcpower.Session methods
 
 
 
-.. function:: query_min_current_limit(voltage_level)
+.. py:method:: query_min_current_limit(voltage_level)
 
     Queries the minimum current limit on an output channel if the output
     channel is set to the specified **voltageLevel**.
@@ -1291,7 +1295,7 @@ nidcpower.Session methods
 
 
 
-.. function:: query_output_state(output_state)
+.. py:method:: query_output_state(output_state)
 
     Queries the specified output channel to determine if the output channel
     is currently in the state specified by **outputState**.
@@ -1319,11 +1323,11 @@ nidcpower.Session methods
         Specifies the output state of the output channel that is being queried.
         **Defined Values**:
 
-        +-----------------------------------------------+-------------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_OUTPUT\_CONSTANT\_VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
-        +-----------------------------------------------+-------------------------------------------------------------------+
-        | NIDCPOWER\_VAL\_OUTPUT\_CONSTANT\_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
-        +-----------------------------------------------+-------------------------------------------------------------------+
+        +------------------------------------------------+-------------------------------------------------------------------+
+        | :py:data:`~nidcpower.OutputStates.VOLTAGE` (0) | The device maintains a constant voltage by adjusting the current. |
+        +------------------------------------------------+-------------------------------------------------------------------+
+        | :py:data:`~nidcpower.OutputStates.CURRENT` (1) | The device maintains a constant current by adjusting the voltage. |
+        +------------------------------------------------+-------------------------------------------------------------------+
 
 
     :type output_state: :py:data:`nidcpower.OutputStates`
@@ -1339,7 +1343,7 @@ nidcpower.Session methods
 
 
 
-.. function:: read_current_temperature()
+.. py:method:: read_current_temperature()
 
     Returns the current onboard **temperature**, in degrees Celsius, of the
     device.
@@ -1358,7 +1362,7 @@ nidcpower.Session methods
 
 
 
-.. function:: reset()
+.. py:method:: reset()
 
     Resets the device to a known state. This function disables power
     generation, resets session attributes to their default values, commits
@@ -1371,7 +1375,7 @@ nidcpower.Session methods
 
 
 
-.. function:: reset_device()
+.. py:method:: reset_device()
 
     Resets the device to a known state. The function disables power
     generation, resets session attributes to their default values, clears
@@ -1391,13 +1395,13 @@ nidcpower.Session methods
 
 
 
-.. function:: reset_with_defaults()
+.. py:method:: reset_with_defaults()
 
     Resets the device to a known state. This function disables power
     generation, resets session attributes to their default values, commits
     the session attributes, and leaves the session in the
     `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
-    state. In addition to exhibiting the behavior of the :py:func:`nidcpower.reset`
+    state. In addition to exhibiting the behavior of the :py:meth:`nidcpower.Session.reset`
     function, this function can assign user-defined default values for
     configurable attributes from the IVI configuration.
 
@@ -1405,10 +1409,10 @@ nidcpower.Session methods
 
 
 
-.. function:: self_test()
+.. py:method:: self_test()
 
     Performs the device self-test routine and returns the test result(s).
-    Calling this function implicitly calls the :py:func:`nidcpower.reset` function.
+    Calling this function implicitly calls the :py:meth:`nidcpower.Session.reset` function.
 
     
 
@@ -1432,7 +1436,7 @@ nidcpower.Session methods
             +----------------+-------------------+
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test result message. The size of this array must be at
@@ -1442,7 +1446,7 @@ nidcpower.Session methods
 
 
 
-.. function:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
+.. py:method:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
 
     Asserts the specified trigger. This function can override an external
     edge trigger.
@@ -1466,22 +1470,22 @@ nidcpower.Session methods
         Specifies which trigger to assert.
         **Defined Values:**
 
-        +---------------------------------------------------+---------------------------------------+
-        | NIDCPOWER\_VAL\_START\_TRIGGER (1034)             | Asserts the Start trigger.            |
-        +---------------------------------------------------+---------------------------------------+
-        | NIDCPOWER\_VAL\_SOURCE\_TRIGGER (1035)            | Asserts the Source trigger.           |
-        +---------------------------------------------------+---------------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_TRIGGER (1036)           | Asserts the Measure trigger.          |
-        +---------------------------------------------------+---------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ADVANCE\_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
-        +---------------------------------------------------+---------------------------------------+
-        | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053              | Asserts the Pulse trigger.            |
-        +---------------------------------------------------+---------------------------------------+
+        +--------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.START_TRIGGER` (1034)            | Asserts the Start trigger.            |
+        +--------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SOURCE_TRIGGER` (1035)           | Asserts the Source trigger.           |
+        +--------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.MEASURE_TRIGGER` (1036)          | Asserts the Measure trigger.          |
+        +--------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ADVANCE_TRIGGER` (1037) | Asserts the Sequence Advance trigger. |
+        +--------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.PULSE_TRIGGER` (1053             | Asserts the Pulse trigger.            |
+        +--------------------------------------------------------------------+---------------------------------------+
 
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. function:: set_sequence(source_delays, values=None)
+.. py:method:: set_sequence(source_delays, values=None)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
@@ -1544,12 +1548,12 @@ nidcpower.Session methods
 
     :type values: list of float
 
-.. function:: wait_for_event(event_id, timeout=10.0)
+.. py:method:: wait_for_event(event_id, timeout=10.0)
 
     Waits until the device has generated the specified event.
 
     The session monitors whether each type of event has occurred at least
-    once since the last time this function or the :py:func:`nidcpower._initiate`
+    once since the last time this function or the :py:meth:`nidcpower.Session._initiate`
     function were called. If an event has only been generated once and you
     call this function successively, the function times out. Individual
     events must be generated between separate calls of this function.
@@ -1568,19 +1572,19 @@ nidcpower.Session methods
         Specifies which event to wait for.
         **Defined Values:**
 
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_SOURCE\_COMPLETE\_EVENT (1030)              | Waits for the Source Complete event.             |
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_MEASURE\_COMPLETE\_EVENT (1031)             | Waits for the Measure Complete event.            |
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ITERATION\_COMPLETE\_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_SEQUENCE\_ENGINE\_DONE\_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_PULSE\_COMPLETE\_EVENT (1051 )              | Waits for the Pulse Complete event.              |
-        +-------------------------------------------------------------+--------------------------------------------------+
-        | NIDCPOWER\_VAL\_READY\_FOR\_PULSE\_TRIGGER\_EVENT (1052)    | Waits for the Ready for Pulse Trigger event.     |
-        +-------------------------------------------------------------+--------------------------------------------------+
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT` (1030)             | Waits for the Source Complete event.             |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.MEASURE_COMPLETE_EVENT` (1031)            | Waits for the Measure Complete event.            |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Waits for the Sequence Iteration Complete event. |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Waits for the Sequence Engine Done event.        |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.PULSE_COMPLETE_EVENT` (1051 )             | Waits for the Pulse Complete event.              |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Waits for the Ready for Pulse Trigger event.     |
+        +-----------------------------------------------------------------------------+--------------------------------------------------+
 
 
     :type event_id: :py:data:`nidcpower.Event`
