@@ -1,7 +1,7 @@
 nidcpower.Session properties
 ============================
 
-.. py:currentmodule:: nidcpower
+.. py:currentmodule:: nidcpower.Session
 
 .. py:attribute:: active_advanced_sequence
 
