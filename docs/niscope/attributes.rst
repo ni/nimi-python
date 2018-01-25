@@ -1,7 +1,7 @@
 niscope.Session properties
 ==========================
 
-.. py:currentmodule:: niscope
+.. py:currentmodule:: niscope.Session
 
 .. py:attribute:: _5102_adjust_pretrigger_samples
 

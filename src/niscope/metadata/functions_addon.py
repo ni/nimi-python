@@ -488,10 +488,6 @@ functions_numpy = {
     'FetchDispatcher':                               { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
-# Don't need ID_Query in the python API since they don't do anything
-functions_remove_parameters_from_python = {
-    'InitWithOptions':                      { 'parameters': { 1: { 'use_in_python_api': False, }, }, },
-}
 
 # Converted parameters
 functions_converters = {

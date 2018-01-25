@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -170,9 +171,6 @@ class SideEffectsHelper(object):
         if self._defaults['BoolArrayOutputFunction']['anArray'] is None:
             raise MockFunctionCallError("niFake_BoolArrayOutputFunction", param='anArray')
         a = self._defaults['BoolArrayOutputFunction']['anArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(an_array), len(a))):
             an_array[i] = a[i]
         return self._defaults['BoolArrayOutputFunction']['return']
@@ -183,9 +181,6 @@ class SideEffectsHelper(object):
         if self._defaults['EnumArrayOutputFunction']['anArray'] is None:
             raise MockFunctionCallError("niFake_EnumArrayOutputFunction", param='anArray')
         a = self._defaults['EnumArrayOutputFunction']['anArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(an_array), len(a))):
             an_array[i] = a[i]
         return self._defaults['EnumArrayOutputFunction']['return']
@@ -201,9 +196,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchWaveform']['waveformData'] is None:
             raise MockFunctionCallError("niFake_FetchWaveform", param='waveformData')
         a = self._defaults['FetchWaveform']['waveformData']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(waveform_data), len(a))):
             waveform_data[i] = a[i]
         if self._defaults['FetchWaveform']['actualNumberOfSamples'] is None:
@@ -233,7 +225,6 @@ class SideEffectsHelper(object):
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
         a = self._defaults['GetAStringOfFixedMaximumSize']['aString']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(a_string), len(a))):
@@ -256,9 +247,6 @@ class SideEffectsHelper(object):
         if self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType", param='arrayOut')
         a = self._defaults['GetArrayForPythonCodeCustomType']['arrayOut']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(array_out), len(a))):
             array_out[i] = a[i]
         return self._defaults['GetArrayForPythonCodeCustomType']['return']
@@ -269,9 +257,6 @@ class SideEffectsHelper(object):
         if self._defaults['GetArrayForPythonCodeDouble']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayForPythonCodeDouble", param='arrayOut')
         a = self._defaults['GetArrayForPythonCodeDouble']['arrayOut']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(array_out), len(a))):
             array_out[i] = a[i]
         return self._defaults['GetArrayForPythonCodeDouble']['return']
@@ -373,9 +358,6 @@ class SideEffectsHelper(object):
         if self._defaults['GetCustomTypeArray']['cs'] is None:
             raise MockFunctionCallError("niFake_GetCustomTypeArray", param='cs')
         a = self._defaults['GetCustomTypeArray']['cs']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(cs), len(a))):
             cs[i] = a[i]
         return self._defaults['GetCustomTypeArray']['return']
@@ -431,17 +413,11 @@ class SideEffectsHelper(object):
         if self._defaults['MultipleArrayTypes']['outputArray'] is None:
             raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArray')
         a = self._defaults['MultipleArrayTypes']['outputArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(output_array), len(a))):
             output_array[i] = a[i]
         if self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] is None:
             raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArrayOfFixedLength')
         a = self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(output_array_of_fixed_length), len(a))):
             output_array_of_fixed_length[i] = a[i]
         return self._defaults['MultipleArrayTypes']['return']
@@ -486,7 +462,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
         a = self._defaults['ReturnANumberAndAString']['aString']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(a_string), len(a))):
@@ -517,9 +492,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReturnMultipleTypes']['anArray'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anArray')
         a = self._defaults['ReturnMultipleTypes']['anArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(an_array), len(a))):
             an_array[i] = a[i]
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
@@ -593,7 +565,6 @@ class SideEffectsHelper(object):
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
         a = self._defaults['error_message']['errorMessage']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(error_message), len(a))):

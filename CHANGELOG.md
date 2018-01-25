@@ -12,62 +12,62 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-    * `nidmm.Session()` no longer takes id_query parameter
-    * Option string can now be a python dictionary instead of a string. It will be converted as needed
-        * Valid options:
-            * RangeCheck (bool)
-            * QueryInstrStatus (bool)
-            * Cache (bool)
-            * Simulate (bool)
-            * RecordCoercions (bool)
-            * InterchangeCheck (bool)
-            * DriverSetup (dict)
-                * Key/Value pairs approporiate for desired behavior
-        ``` python
-        session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
-        ```
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `nidmm.Session()` no longer takes id_query parameter
+        * Option string can now be a python dictionary instead of a string. It will be converted as needed
+            * Valid options:
+                * RangeCheck (bool)
+                * QueryInstrStatus (bool)
+                * Cache (bool)
+                * Simulate (bool)
+                * RecordCoercions (bool)
+                * InterchangeCheck (bool)
+                * DriverSetup (dict)
+                    * Key/Value pairs approporiate for desired behavior
+                    ``` python
+                    session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
+                    ```
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-    * Metadata updated to NI-DCPower 17.6.1
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-      * `niscope.Session()` no longer takes id_query parameter
-      * Option string can now be a python dictionary instead of a string. It will be converted as needed
-          * Valid options:
-              * RangeCheck (bool)
-              * QueryInstrStatus (bool)
-              * Cache (bool)
-              * Simulate (bool)
-              * RecordCoercions (bool)
-              * InterchangeCheck (bool)
-              * DriverSetup (dict)
-                  * Key/Value pairs approporiate for desired behavior
-          ``` python
-          session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
-          ```
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `niscope.Session()` no longer takes id_query parameter
+        * Option string can now be a python dictionary instead of a string. It will be converted as needed
+            * Valid options:
+                * RangeCheck (bool)
+                * QueryInstrStatus (bool)
+                * Cache (bool)
+                * Simulate (bool)
+                * RecordCoercions (bool)
+                * InterchangeCheck (bool)
+                * DriverSetup (dict)
+                    * Key/Value pairs approporiate for desired behavior
+                    ``` python
+                    session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
+                    ```
+    * #### Removed
 
 ## 0.6.0 - 2017-12-20
 * ### ALL
@@ -236,32 +236,32 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 <!--
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 -->
 
