@@ -1477,10 +1477,6 @@ class _SessionBase(object):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
         self._encoding = 'windows-1251'
-        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
-
-    def __repr__(self):
-        return '{0}.{1}({2})'.format('nidcpower', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -1547,21 +1543,23 @@ class _SessionBase(object):
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
+
             units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
-                +----------------------------------------+------------------------------+
-                | NIDCPOWER_VAL_SECONDS (1028)           | Specifies seconds.           |
-                +----------------------------------------+------------------------------+
-                | NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
-                +----------------------------------------+------------------------------+
+                +--------------------------------------------+------------------------------+
+                | ApertureTimeUnits.SECONDS (1028)           | Specifies seconds.           |
+                +--------------------------------------------+------------------------------+
+                | ApertureTimeUnits.POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
+                +--------------------------------------------+------------------------------+
+
         '''
         if type(units) is not enums.ApertureTimeUnits:
             raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        aperture_time_ctype = visatype.ViReal64(aperture_time)  # case 9
-        units_ctype = visatype.ViInt32(units.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        aperture_time_ctype = visatype.ViReal64(aperture_time)  # case S150
+        units_ctype = visatype.ViInt32(units.value)  # case S130
         error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1572,8 +1570,8 @@ class _SessionBase(object):
         Returns an array of voltage measurements, an array of current
         measurements, and an array of compliance measurements that were
         previously taken and are stored in the NI-DCPower buffer. This function
-        should not be used when the MEASURE_WHEN attribute is
-        set to NIDCPOWER_VAL_ON_DEMAND. You must first call
+        should not be used when the measure_when attribute is
+        set to MeasureWhen.ON_DEMAND. You must first call
         _initiate before calling this function.
 
         Refer to the `Acquiring
@@ -1598,6 +1596,7 @@ class _SessionBase(object):
 
         Args:
             count (int): Specifies the number of measurements to fetch.
+
             timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -1607,26 +1606,31 @@ class _SessionBase(object):
                 triggers so that the timeout interval is long enough for your
                 application.
 
+
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
+
             current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
+
             in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
                 compliance at the time the measurement was taken. Ensure that sufficient
                 space has been allocated for the returned array.
+
             actual_count (int): Indicates the number of measured values actually retrieved from the
                 device.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
-        count_ctype = visatype.ViInt32(count)  # case 8
-        voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case 13
-        current_measurements_ctype = (visatype.ViReal64 * count)()  # case 13
-        in_compliance_ctype = (visatype.ViBoolean * count)()  # case 13
-        actual_count_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
+        count_ctype = visatype.ViInt32(count)  # case S190
+        voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
+        current_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
+        in_compliance_ctype = (visatype.ViBoolean * count)()  # case B600
+        actual_count_ctype = visatype.ViInt32()  # case S200
+        error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
@@ -1666,6 +1670,7 @@ class _SessionBase(object):
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
+
         Returns:
             attribute_value (bool): Returns the current value of the attribute. Passes the address of a
                 ViBoolean variable.
@@ -1673,12 +1678,13 @@ class _SessionBase(object):
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViBoolean()  # case 14
-        error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViBoolean()  # case S200
+        error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -1718,6 +1724,7 @@ class _SessionBase(object):
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
+
         Returns:
             attribute_value (int): Returns the current value of the attribute. Passes the address of a
                 ViInt32 variable.
@@ -1725,12 +1732,13 @@ class _SessionBase(object):
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViInt32()  # case S200
+        error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -1770,6 +1778,7 @@ class _SessionBase(object):
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
+
         Returns:
             attribute_value (int): Returns the current value of the attribute. Passes the address of a
                 ViReal64 variable.
@@ -1777,12 +1786,13 @@ class _SessionBase(object):
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt64()  # case 14
-        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViInt64()  # case S200
+        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -1822,6 +1832,7 @@ class _SessionBase(object):
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
+
         Returns:
             attribute_value (float): Returns the current value of the attribute. Passes the address of a
                 ViReal64 variable.
@@ -1829,12 +1840,13 @@ class _SessionBase(object):
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -1873,16 +1885,17 @@ class _SessionBase(object):
                    control to a manual input control. If the attribute in this ring
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        buffer_size_ctype = visatype.ViInt32()  # case 7
-        attribute_value_ctype = None  # case 12
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        buffer_size_ctype = visatype.ViInt32()  # case S170
+        attribute_value_ctype = None  # case C050
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
-        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -1891,7 +1904,7 @@ class _SessionBase(object):
         '''get_channel_name
 
         Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the CHANNEL_COUNT attribute to
+        **index**. Use the channel_count attribute to
         determine the upper bound of valid values for **index**.
 
         Tip:
@@ -1905,15 +1918,16 @@ class _SessionBase(object):
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 9
-        buffer_size_ctype = visatype.ViInt32()  # case 7
-        channel_name_ctype = None  # case 12
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        index_ctype = visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
-        channel_name_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
@@ -1936,18 +1950,22 @@ class _SessionBase(object):
           occurred since the user last called _get_error or
           ClearError.
 
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
+
         Returns:
             code (int): Returns the error code for the session or execution thread.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        code_ctype = visatype.ViStatus()  # case 14
-        buffer_size_ctype = visatype.ViInt32()  # case 7
-        description_ctype = None  # case 12
-        error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        code_ctype = visatype.ViStatus()  # case S200
+        buffer_size_ctype = visatype.ViInt32()  # case S170
+        description_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case 7.5
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case 12.5
-        error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
@@ -1972,23 +1990,25 @@ class _SessionBase(object):
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
-                +-----------------------------------+------------------------------+
-                | NIDCPOWER_VAL_MEASURE_VOLTAGE (1) | The device measures voltage. |
-                +-----------------------------------+------------------------------+
-                | NIDCPOWER_VAL_MEASURE_CURRENT (0) | The device measures current. |
-                +-----------------------------------+------------------------------+
+                +------------------------------+------------------------------+
+                | MeasurementTypes.VOLTAGE (1) | The device measures voltage. |
+                +------------------------------+------------------------------+
+                | MeasurementTypes.CURRENT (0) | The device measures current. |
+                +------------------------------+------------------------------+
+
 
         Returns:
             measurement (float): Returns the value of the measurement, either in volts for voltage or
                 amps for current.
+
         '''
         if type(measurement_type) is not enums.MeasurementTypes:
             raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        measurement_type_ctype = visatype.ViInt32(measurement_type.value)  # case 10
-        measurement_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, ctypes.pointer(measurement_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        measurement_type_ctype = visatype.ViInt32(measurement_type.value)  # case S130
+        measurement_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
@@ -2014,15 +2034,17 @@ class _SessionBase(object):
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
+
             current_measurements (list of float): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        voltage_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case 0.4
-        current_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case 0.4
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        voltage_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
+        current_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
@@ -2042,11 +2064,12 @@ class _SessionBase(object):
 
         Returns:
             number_of_channels (int):
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_channels_ctype = visatype.ViUInt32()  # case 14
-        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, ctypes.pointer(number_of_channels_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        number_of_channels_ctype = visatype.ViUInt32()  # case S200
+        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
 
@@ -2057,14 +2080,14 @@ class _SessionBase(object):
         the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
         The compliance limit is the current limit when the output function is
-        set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
+        set to OutputFunction.DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
         desired voltage level. Refer to the ConfigureOutputFunction
         function and the ConfigureCurrentLimit function for more
         information about output function and current limit, respectively.
 
         The compliance limit is the voltage limit when the output function is
-        set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
+        set to OutputFunction.DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
         desired current level. Refer to the ConfigureOutputFunction
         function and the ConfigureVoltageLimit function for more
@@ -2073,6 +2096,9 @@ class _SessionBase(object):
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
+
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2084,11 +2110,12 @@ class _SessionBase(object):
 
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        in_compliance_ctype = visatype.ViBoolean()  # case 14
-        error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, ctypes.pointer(in_compliance_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        in_compliance_ctype = visatype.ViBoolean()  # case S200
+        error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_compliance_ctype.value)
 
@@ -2110,15 +2137,17 @@ class _SessionBase(object):
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **maxCurrentLimit**.
 
+
         Returns:
             max_current_limit (float): Returns the maximum current limit that can be set with the specified
                 **voltageLevel**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        voltage_level_ctype = visatype.ViReal64(voltage_level)  # case 9
-        max_current_limit_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, ctypes.pointer(max_current_limit_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        voltage_level_ctype = visatype.ViReal64(voltage_level)  # case S150
+        max_current_limit_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_current_limit_ctype.value)
 
@@ -2140,15 +2169,17 @@ class _SessionBase(object):
             current_limit (float): Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
 
+
         Returns:
             max_voltage_level (float): Returns the maximum voltage level that can be set on an output channel
                 with the specified **currentLimit**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        current_limit_ctype = visatype.ViReal64(current_limit)  # case 9
-        max_voltage_level_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, ctypes.pointer(max_voltage_level_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        current_limit_ctype = visatype.ViReal64(current_limit)  # case S150
+        max_voltage_level_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_voltage_level_ctype.value)
 
@@ -2170,15 +2201,17 @@ class _SessionBase(object):
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **minCurrentLimit**.
 
+
         Returns:
             min_current_limit (float): Returns the minimum current limit that can be set on an output channel
                 with the specified **voltageLevel**.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        voltage_level_ctype = visatype.ViReal64(voltage_level)  # case 9
-        min_current_limit_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, ctypes.pointer(min_current_limit_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        voltage_level_ctype = visatype.ViReal64(voltage_level)  # case S150
+        min_current_limit_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(min_current_limit_ctype.value)
 
@@ -2204,23 +2237,25 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
-                +-------------------------------------------+-------------------------------------------------------------------+
-                | NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
-                +-------------------------------------------+-------------------------------------------------------------------+
-                | NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
-                +-------------------------------------------+-------------------------------------------------------------------+
+                +--------------------------+-------------------------------------------------------------------+
+                | OutputStates.VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
+                +--------------------------+-------------------------------------------------------------------+
+                | OutputStates.CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
+                +--------------------------+-------------------------------------------------------------------+
+
 
         Returns:
             in_state (bool): Returns whether the device output channel is in the specified output
                 state.
+
         '''
         if type(output_state) is not enums.OutputStates:
             raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        output_state_ctype = visatype.ViInt32(output_state.value)  # case 10
-        in_state_ctype = visatype.ViBoolean()  # case 14
-        error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, ctypes.pointer(in_state_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        output_state_ctype = visatype.ViInt32(output_state.value)  # case S130
+        in_state_ctype = visatype.ViBoolean()  # case S200
+        error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
 
@@ -2261,6 +2296,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
+
             attribute_value (bool): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
@@ -2270,11 +2306,12 @@ class _SessionBase(object):
                 Note:
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2316,6 +2353,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
+
             attribute_value (int): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
@@ -2325,11 +2363,12 @@ class _SessionBase(object):
                 Note:
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2371,6 +2410,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
+
             attribute_value (int): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
@@ -2380,11 +2420,12 @@ class _SessionBase(object):
                 Note:
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2426,6 +2467,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
+
             attribute_value (float): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
@@ -2435,11 +2477,12 @@ class _SessionBase(object):
                 Note:
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2481,7 +2524,8 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (string): Specifies the value to which you want to set the attribute. If the
+
+            attribute_value (str): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -2490,11 +2534,12 @@ class _SessionBase(object):
                 Note:
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 9
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2537,18 +2582,20 @@ class _SessionBase(object):
                 in the sequence.
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
+
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        values_ctype = None if values is None else (visatype.ViReal64 * len(values))(*values)  # case 4
-        source_delays_ctype = None if source_delays is None else (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
-        size_ctype = visatype.ViUInt32(0 if values is None else len(values))  # case 6
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        values_ctype = None if values is None else (visatype.ViReal64 * len(values))(*values)  # case B550
+        source_delays_ctype = None if source_delays is None else (visatype.ViReal64 * len(source_delays))(*source_delays)  # case B550
+        size_ctype = visatype.ViUInt32(0 if values is None else len(values))  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2563,14 +2610,16 @@ class _SessionBase(object):
             error_code (int): Specifies the **status** parameter that is returned from any of the
                 NI-DCPower functions.
 
+
         Returns:
-            error_message (string): Returns the user-readable message string that corresponds to the status
+            error_message (str): Returns the user-readable message string that corresponds to the status
                 code you specify.
                 You must pass a ViChar array with at least 256 bytes.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code_ctype = visatype.ViStatus(error_code)  # case 9
-        error_message_ctype = (visatype.ViChar * 256)()  # case 11
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = (visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
@@ -2582,10 +2631,6 @@ class _RepeatedCapability(_SessionBase):
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
         self._vi = vi
-        param_list = []
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
-        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
 
@@ -2596,12 +2641,6 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
-        param_list = []
-        param_list.append("resource_name=" + pp.pformat(resource_name))
-        param_list.append("channels=" + pp.pformat(channels))
-        param_list.append("reset=" + pp.pformat(reset))
-        param_list.append("option_string=" + pp.pformat(option_string))
-        self._param_list = ', '.join(param_list)
         self._is_frozen = True
 
     def __enter__(self):
@@ -2650,8 +2689,11 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2674,7 +2716,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2691,7 +2733,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (string): Specifies the input terminal for the digital edge Measure trigger.
+            input_terminal (str): Specifies the input terminal for the digital edge Measure trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -2705,21 +2747,23 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
             edge (enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +------------------------------+----------------------------------------------------------------+
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
+                +----------------------------+----------------------------------------------------------------+
+
         '''
         if type(edge) is not enums.DigitalEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+        edge_ctype = visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2736,7 +2780,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (string): Specifies the input terminal for the digital edge Pulse trigger.
+            input_terminal (str): Specifies the input terminal for the digital edge Pulse trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -2750,21 +2794,23 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
             edge (enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +------------------------------+----------------------------------------------------------------+
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
+                +----------------------------+----------------------------------------------------------------+
+
         '''
         if type(edge) is not enums.DigitalEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+        edge_ctype = visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2781,7 +2827,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (string): Specifies the input terminal for the digital edge Sequence Advance
+            input_terminal (str): Specifies the input terminal for the digital edge Sequence Advance
                 trigger.
 
                 You can specify any valid input terminal for this function. Valid
@@ -2796,21 +2842,23 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
             edge (enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
                 the rising or falling edge.
                 **Defined Values:**
 
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +------------------------------+----------------------------------------------------------------+
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
+                +----------------------------+----------------------------------------------------------------+
+
         '''
         if type(edge) is not enums.DigitalEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+        edge_ctype = visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2827,7 +2875,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (string): Specifies the input terminal for the digital edge Source trigger.
+            input_terminal (str): Specifies the input terminal for the digital edge Source trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -2841,21 +2889,23 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
             edge (enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +------------------------------+----------------------------------------------------------------+
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
+                +----------------------------+----------------------------------------------------------------+
+
         '''
         if type(edge) is not enums.DigitalEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+        edge_ctype = visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2872,7 +2922,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (string): Specifies the input terminal for the digital edge Start trigger.
+            input_terminal (str): Specifies the input terminal for the digital edge Start trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -2886,21 +2936,23 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
+
             edge (enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +------------------------------+----------------------------------------------------------------+
-                | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +------------------------------+----------------------------------------------------------------+
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
+                +----------------------------+----------------------------------------------------------------+
+                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
+                +----------------------------+----------------------------------------------------------------+
+
         '''
         if type(edge) is not enums.DigitalEdge:
             raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+        edge_ctype = visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2942,7 +2994,8 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (string): Specifies the name of the sequence to create.
+            sequence_name (str): Specifies the name of the sequence to create.
+
             attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
                 in an advanced sequence for each NI-DCPower device that supports
@@ -2953,93 +3006,95 @@ class Session(_SessionBase):
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
                 | Attribute                      | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
                 +================================+===========+=========+=========+=========+=========+===================+===================+================+
-                | DC_NOISE_REJECTION             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
+                | dc_noise_rejection             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | APERTURE_TIME                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | aperture_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | MEASURE_RECORD_LENGTH          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | measure_record_length          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
                 | sense                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | OVP_ENABLED                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+                | ovp_enabled                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | OVP_LIMIT                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+                | ovp_limit                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_BIAS_DELAY               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_bias_delay               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_OFF_TIME                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_off_time                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_ON_TIME                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_on_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | SOURCE_DELAY                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | source_delay                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_COMPENSATION_FREQUENCY | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | current_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_GAIN_BANDWIDTH         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | current_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_POLE_ZERO_RATIO        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | current_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_COMPENSATION_FREQUENCY | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | voltage_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_GAIN_BANDWIDTH         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | voltage_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_POLE_ZERO_RATIO        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                | voltage_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_LEVEL                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | current_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_LEVEL_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | current_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_LIMIT                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | voltage_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_LIMIT_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | voltage_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_LIMIT                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | current_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | CURRENT_LIMIT_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | current_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_LEVEL                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | voltage_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | VOLTAGE_LEVEL_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | voltage_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | OUTPUT_ENABLED                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | output_enabled                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | OUTPUT_FUNCTION                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | output_function                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | OUTPUT_RESISTANCE              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
+                | output_resistance              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_BIAS_CURRENT_LEVEL       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_bias_current_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_BIAS_VOLTAGE_LIMIT       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_bias_voltage_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_CURRENT_LEVEL            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_current_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_CURRENT_LEVEL_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_current_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_VOLTAGE_LIMIT            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_voltage_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_VOLTAGE_LIMIT_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_voltage_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_BIAS_CURRENT_LIMIT       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_bias_current_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_BIAS_VOLTAGE_LEVEL       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_bias_voltage_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_CURRENT_LIMIT            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_current_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_CURRENT_LIMIT_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_current_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_VOLTAGE_LEVEL            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_voltage_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | PULSE_VOLTAGE_LEVEL_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                | pulse_voltage_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | TRANSIENT_RESPONSE             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                | transient_response             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+
             set_as_active_sequence (bool): Specifies that this current sequence is active.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case 3
-        attribute_id_count_ctype = visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case 6
-        attribute_ids_ctype = None if attribute_ids is None else (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case 4
-        set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
+        attribute_id_count_ctype = visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
+        attribute_ids_ctype = None if attribute_ids is None else (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case B550
+        set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3078,9 +3133,10 @@ class Session(_SessionBase):
 
         Args:
             set_as_active_step (bool): Specifies that this current step in the active sequence is active.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        set_as_active_step_ctype = visatype.ViBoolean(set_as_active_step)  # case 9
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        set_as_active_step_ctype = visatype.ViBoolean(set_as_active_step)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequenceStep(vi_ctype, set_as_active_step_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3113,10 +3169,11 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (string): specifies the name of the sequence to delete.
+            sequence_name (str): specifies the name of the sequence to delete.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_DeleteAdvancedSequence(vi_ctype, sequence_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3126,12 +3183,12 @@ class Session(_SessionBase):
 
         This function performs the same actions as the reset
         function, except that this function also immediately sets the
-        OUTPUT_ENABLED attribute to VI_FALSE.
+        output_enabled attribute to VI_FALSE.
 
         This function opens the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3156,30 +3213,31 @@ class Session(_SessionBase):
             signal (enums.ExportSignal): Specifies which trigger or event to export.
                 **Defined Values:**
 
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)             | Exports the Source Complete event.             |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)            | Exports the Measure Complete event.            |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Exports the Sequence Iteration Complete event. |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)        | Exports the Sequence Engine Done event.        |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051)              | Exports the Pulse Complete event.              |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Exports the Ready Pulse Trigger event.         |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER (1034)                     | Exports the Start trigger.                     |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER (1035)                    | Exports the Source trigger.                    |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER (1036)                   | Exports the Measure trigger.                   |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037)          | Exports the Sequence Advance trigger.          |
-                +--------------------------------------------------------+------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053)                     | Exports the Pulse trigger.                     |
-                +--------------------------------------------------------+------------------------------------------------+
-            output_terminal (string): Specifies where to export the selected signal.
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.SOURCE_COMPLETE_EVENT (1030)             | Exports the Source Complete event.             |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.MEASURE_COMPLETE_EVENT (1031)            | Exports the Measure Complete event.            |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Exports the Sequence Iteration Complete event. |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.SEQUENCE_ENGINE_DONE_EVENT (1033)        | Exports the Sequence Engine Done event.        |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.PULSE_COMPLETE_EVENT (1051)              | Exports the Pulse Complete event.              |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Exports the Ready Pulse Trigger event.         |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.START_TRIGGER (1034)                     | Exports the Start trigger.                     |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.SOURCE_TRIGGER (1035)                    | Exports the Source trigger.                    |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.MEASURE_TRIGGER (1036)                   | Exports the Measure trigger.                   |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.SEQUENCE_ADVANCE_TRIGGER (1037)          | Exports the Sequence Advance trigger.          |
+                +-------------------------------------------------------+------------------------------------------------+
+                | ExportSignal.PULSE_TRIGGER (1053)                     | Exports the Pulse trigger.                     |
+                +-------------------------------------------------------+------------------------------------------------+
+
+            output_terminal (str): Specifies where to export the selected signal.
                 **Relative Terminals**:
 
                 +-------------+----------------------+
@@ -3201,14 +3259,16 @@ class Session(_SessionBase):
                 +-------------+----------------------+
                 | "PXI_Trig7" | PXI trigger line 7   |
                 +-------------+----------------------+
-            signal_identifier (string): Reserved for future use. Pass in an empty string for this parameter.
+
+            signal_identifier (str): Reserved for future use. Pass in an empty string for this parameter.
+
         '''
         if type(signal) is not enums.ExportSignal:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        signal_ctype = visatype.ViInt32(signal.value)  # case 10
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        signal_ctype = visatype.ViInt32(signal.value)  # case S130
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
+        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3223,19 +3283,24 @@ class Session(_SessionBase):
 
         Returns:
             year (int): Returns the **year** the device was last calibrated.
+
             month (int): Returns the **month** in which the device was last calibrated.
+
             day (int): Returns the **day** on which the device was last calibrated.
+
             hour (int): Returns the **hour** (in 24-hour time) in which the device was last
                 calibrated.
+
             minute (int): Returns the **minute** in which the device was last calibrated.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        year_ctype = visatype.ViInt32()  # case 14
-        month_ctype = visatype.ViInt32()  # case 14
-        day_ctype = visatype.ViInt32()  # case 14
-        hour_ctype = visatype.ViInt32()  # case 14
-        minute_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        year_ctype = visatype.ViInt32()  # case S200
+        month_ctype = visatype.ViInt32()  # case S200
+        day_ctype = visatype.ViInt32()  # case S200
+        hour_ctype = visatype.ViInt32()  # case S200
+        minute_ctype = visatype.ViInt32()  # case S200
+        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
@@ -3248,10 +3313,11 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the last successful external calibration.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        temperature_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -3264,10 +3330,11 @@ class Session(_SessionBase):
         Returns:
             months (int): Specifies the recommended maximum interval, in **months**, between
                 external calibrations.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        months_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        months_ctype = visatype.ViInt32()  # case S200
+        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
@@ -3278,6 +3345,7 @@ class Session(_SessionBase):
 
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
+
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
@@ -3302,6 +3370,7 @@ class Session(_SessionBase):
 
         Returns:
             month (datetime.datetime): Returns the date and time the device was last calibrated.
+
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
@@ -3326,19 +3395,24 @@ class Session(_SessionBase):
 
         Returns:
             year (int): Returns the **year** the device was last calibrated.
+
             month (int): Returns the **month** in which the device was last calibrated.
+
             day (int): Returns the **day** on which the device was last calibrated.
+
             hour (int): Returns the **hour** (in 24-hour time) in which the device was last
                 calibrated.
+
             minute (int): Returns the **minute** in which the device was last calibrated.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        year_ctype = visatype.ViInt32()  # case 14
-        month_ctype = visatype.ViInt32()  # case 14
-        day_ctype = visatype.ViInt32()  # case 14
-        hour_ctype = visatype.ViInt32()  # case 14
-        minute_ctype = visatype.ViInt32()  # case 14
-        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        year_ctype = visatype.ViInt32()  # case S200
+        month_ctype = visatype.ViInt32()  # case S200
+        day_ctype = visatype.ViInt32()  # case S200
+        hour_ctype = visatype.ViInt32()  # case S200
+        minute_ctype = visatype.ViInt32()  # case S200
+        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
@@ -3364,10 +3438,11 @@ class Session(_SessionBase):
         Returns:
             temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the oldest successful calibration.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        temperature_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -3380,7 +3455,7 @@ class Session(_SessionBase):
         state of the following session attributes:
 
         -  simulate
-        -  DRIVER_SETUP
+        -  driver_setup
 
         After calling this function, the session will be in the Uncommitted
         state. Refer to the `Programming
@@ -3404,11 +3479,12 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
-            resource_name (string): Specifies the **resourceName** assigned by Measurement & Automation
+            resource_name (str): Specifies the **resourceName** assigned by Measurement & Automation
                 Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
-            channels (string): Specifies which output channel(s) to include in a new session. Specify
+
+            channels (str): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -3418,9 +3494,11 @@ class Session(_SessionBase):
                 sequentially based on the order specified in this parameter. If you do
                 not specify any channels, by default all channels on the device are
                 included in the session.
+
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
-            option_string (string): Specifies the initial value of certain attributes for the session. The
+
+            option_string (str): Specifies the initial value of certain attributes for the session. The
                 syntax for **optionString** is a list of attributes with an assigned
                 value where 1 is VI_TRUE and 0 is VI_FALSE. For example:
 
@@ -3432,16 +3510,18 @@ class Session(_SessionBase):
                 For more information about simulating a device, refer to `Simulating a
                 Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 
+
         Returns:
             vi (int): Returns a session handle that you use to identify the device in all
                 subsequent NI-DCPower function calls.
+
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
-        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case 3
-        reset_ctype = visatype.ViBoolean(reset)  # case 9
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
-        vi_ctype = visatype.ViSession()  # case 14
-        error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
+        reset_ctype = visatype.ViBoolean(reset)  # case S150
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        vi_ctype = visatype.ViSession()  # case S200
+        error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -3461,7 +3541,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Initiate(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3474,10 +3554,11 @@ class Session(_SessionBase):
 
         Returns:
             temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        temperature_ctype = visatype.ViReal64()  # case 14
-        error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, ctypes.pointer(temperature_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = visatype.ViReal64()  # case S200
+        error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -3498,7 +3579,7 @@ class Session(_SessionBase):
         This will also open the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetDevice(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3514,7 +3595,7 @@ class Session(_SessionBase):
         function, this function can assign user-defined default values for
         configurable attributes from the IVI configuration.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3539,22 +3620,23 @@ class Session(_SessionBase):
             trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_START_TRIGGER (1034)            | Asserts the Start trigger.            |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
-                +-----------------------------------------------+---------------------------------------+
-                | NIDCPOWER_VAL_PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
-                +-----------------------------------------------+---------------------------------------+
+                +----------------------------------------------+---------------------------------------+
+                | ExportSignal.START_TRIGGER (1034)            | Asserts the Start trigger.            |
+                +----------------------------------------------+---------------------------------------+
+                | ExportSignal.SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
+                +----------------------------------------------+---------------------------------------+
+                | ExportSignal.MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
+                +----------------------------------------------+---------------------------------------+
+                | ExportSignal.SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
+                +----------------------------------------------+---------------------------------------+
+                | ExportSignal.PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
+                +----------------------------------------------+---------------------------------------+
+
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
             raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_ctype = visatype.ViInt32(trigger.value)  # case 10
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        trigger_ctype = visatype.ViInt32(trigger.value)  # case S130
         error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3579,19 +3661,20 @@ class Session(_SessionBase):
             event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
-                +--------------------------------------------------------+--------------------------------------------------+
-                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
-                +--------------------------------------------------------+--------------------------------------------------+
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
+                +-------------------------------------------------------+--------------------------------------------------+
+                | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
+                +-------------------------------------------------------+--------------------------------------------------+
+
             timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -3600,12 +3683,13 @@ class Session(_SessionBase):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
+
         '''
         if type(event_id) is not enums.Event:
             raise TypeError('Parameter mode must be of type ' + str(enums.Event))
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        event_id_ctype = visatype.ViInt32(event_id.value)  # case 10
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case 15
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        event_id_ctype = visatype.ViInt32(event_id.value)  # case S130
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3624,8 +3708,11 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced functions are not in the Python API for this driver.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3640,7 +3727,7 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
         more information about NI-DCPower software states.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3661,13 +3748,15 @@ class Session(_SessionBase):
                 +----------------+-------------------+
                 | 1              | Self test failed. |
                 +----------------+-------------------+
-            self_test_message (string): Returns the self-test result message. The size of this array must be at
+
+            self_test_message (str): Returns the self-test result message. The size of this array must be at
                 least 256 bytes.
+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        self_test_result_ctype = visatype.ViInt16()  # case 14
-        self_test_message_ctype = (visatype.ViChar * 256)()  # case 11
-        error_code = self._library.niDCPower_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = visatype.ViInt16()  # case S200
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

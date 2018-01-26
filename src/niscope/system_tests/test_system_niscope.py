@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture(scope='function')
 def session():
-    with niscope.Session('FakeDevice', True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -209,7 +209,7 @@ def test_configure_chan_characteristics(session):
 '''
 # TODO(frank): re-add after issue #650 is fixed.
 def test_filter_coefficients():
-    with niscope.Session('FakeDevice', True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
         try:
             filter_coefficients = [1.0, 0.0, 0.0]
@@ -262,7 +262,7 @@ def test_configure_trigger_software(session):
 '''
 # TODO(frank): re-add after issue #650 is fixed.
 def test_configure_trigger_video():
-    with niscope.Session('FakeDevice', True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
         session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
         assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event

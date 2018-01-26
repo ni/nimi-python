@@ -8,7 +8,7 @@ import time
 
 @pytest.fixture(scope='function')
 def session():
-    with nidmm.Session('FakeDevice', True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
+    with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -274,7 +274,7 @@ def test_fetch_waveform_error(session):
 
 
 def test_get_measurement_period():
-        with nidmm.Session('FakeDevice', True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI') as session:
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI') as session:
             session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
             measurement_period = session.get_measurement_period()
             expected_period = 0.0071333333333333335  # 0.0071333333333333335 is the time required for 4072 to take a DC_VOLT measurement with range 10V on Digits_resolution 5.5

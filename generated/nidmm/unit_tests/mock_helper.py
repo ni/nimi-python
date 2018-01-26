@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -252,9 +253,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
         a = self._defaults['FetchMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(reading_array), len(a))):
             reading_array[i] = a[i]
         if self._defaults['FetchMultiPoint']['actualNumberOfPoints'] is None:
@@ -268,9 +266,6 @@ class SideEffectsHelper(object):
         if self._defaults['FetchWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
         a = self._defaults['FetchWaveform']['waveformArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(waveform_array), len(a))):
             waveform_array[i] = a[i]
         if self._defaults['FetchWaveform']['actualNumberOfPoints'] is None:
@@ -461,9 +456,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
         a = self._defaults['ReadMultiPoint']['readingArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(reading_array), len(a))):
             reading_array[i] = a[i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
@@ -488,9 +480,6 @@ class SideEffectsHelper(object):
         if self._defaults['ReadWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
         a = self._defaults['ReadWaveform']['waveformArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(waveform_array), len(a))):
             waveform_array[i] = a[i]
         if self._defaults['ReadWaveform']['actualNumberOfPoints'] is None:
@@ -544,7 +533,6 @@ class SideEffectsHelper(object):
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
         a = self._defaults['error_message']['errorMessage']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(error_message), len(a))):
@@ -565,7 +553,6 @@ class SideEffectsHelper(object):
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
         a = self._defaults['self_test']['selfTestMessage']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(self_test_message), len(a))):

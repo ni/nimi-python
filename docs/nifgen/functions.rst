@@ -1,9 +1,9 @@
 nifgen.Session methods
 ======================
 
-.. py:currentmodule:: nifgen
+.. py:currentmodule:: nifgen.Session
 
-.. function:: abort()
+.. py:method:: abort()
 
     Aborts any previously initiated signal generation. Call the
     nifgen\_InitiateGeneration function to cause the signal generator to
@@ -13,7 +13,7 @@ nifgen.Session methods
 
 
 
-.. function:: allocate_named_waveform(waveform_name, waveform_size)
+.. py:method:: allocate_named_waveform(waveform_name, waveform_size)
 
     Specifies the size of a named waveform up front so that it can be
     allocated in onboard memory before loading the associated data. Data can
@@ -41,7 +41,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
     :param waveform_size:
 
 
@@ -54,7 +54,7 @@ nifgen.Session methods
 
     :type waveform_size: int
 
-.. function:: allocate_waveform(waveform_size)
+.. py:method:: allocate_waveform(waveform_size)
 
     Specifies the size of a waveform so that it can be allocated in onboard
     memory before loading the associated data. Data can then be loaded in
@@ -97,7 +97,7 @@ nifgen.Session methods
 
 
 
-.. function:: clear_arb_memory()
+.. py:method:: clear_arb_memory()
 
     Removes all previously created arbitrary waveforms, sequences, and
     scripts from the signal generator memory and invalidates all waveform
@@ -110,7 +110,7 @@ nifgen.Session methods
 
 
 
-.. function:: clear_arb_sequence(sequence_handle)
+.. py:method:: clear_arb_sequence(sequence_handle)
 
     Removes a previously created arbitrary sequence from the signal
     generator memory and invalidates the sequence handle.
@@ -131,17 +131,19 @@ nifgen.Session methods
         These functions return a handle that you use to identify the sequence.
 
         | **Defined Value**:
-        | NIFGEN\_VAL\_ALL\_SEQUENCES—Remove all sequences from the signal
+        | :py:data:`~nifgen.NIFGEN_VAL_ALL_SEQUENCES`—Remove all sequences from the signal
           generator
 
         **Default Value**: None
 
         
 
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     :type sequence_handle: int
 
-.. function:: clear_arb_waveform(waveform_handle)
+.. py:method:: clear_arb_waveform(waveform_handle)
 
     Removes a previously created arbitrary waveform from the signal
     generator memory and invalidates the waveform handle.
@@ -162,25 +164,29 @@ nifgen.Session methods
         You can create multiple arbitrary waveforms using one of the following
         niFgen Create Waveform functions:
 
-        -  :py:func:`nifgen._create_waveform_f64`
-        -  :py:func:`nifgen._create_waveform_i16`
-        -  :py:func:`nifgen.create_waveform_from_file_i16`
-        -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
+        -  :py:meth:`nifgen.Session._create_waveform_f64`
+        -  :py:meth:`nifgen.Session._create_waveform_i16`
+        -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+        -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+        -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
         **Defined Value**:
 
-        NIFGEN\_VAL\_ALL\_WAVEFORMS—Remove all waveforms from the signal
+        :py:data:`~nifgen.NIFGEN_VAL_ALL_WAVEFORMS`—Remove all waveforms from the signal
         generator.
 
         **Default Value**: None
 
         
 
+        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     :type waveform_handle: int
 
-.. function:: clear_freq_list(frequency_list_handle)
+.. py:method:: clear_freq_list(frequency_list_handle)
 
     Removes a previously created frequency list from the signal generator
     memory and invalidates the frequency list handle.
@@ -197,23 +203,25 @@ nifgen.Session methods
 
         Specifies the handle of the frequency list you want the signal generator
         to remove. You create multiple frequency lists using
-        :py:func:`nifgen.create_freq_list`. :py:func:`nifgen.create_freq_list` returns a handle that you
+        :py:meth:`nifgen.Session.create_freq_list`. :py:meth:`nifgen.Session.create_freq_list` returns a handle that you
         use to identify each list. Specify a value of -1 to clear all frequency
         lists.
 
         **Defined Value**
 
-        NIFGEN\_VAL\_ALL\_FLISTS—Remove all frequency lists from the signal
+        :py:data:`~nifgen.NIFGEN_VAL_ALL_FLISTS`—Remove all frequency lists from the signal
         generator.
 
         **Default Value**: None
 
         
 
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     :type frequency_list_handle: int
 
-.. function:: clear_user_standard_waveform()
+.. py:method:: clear_user_standard_waveform()
 
     Clears the user-defined waveform created by the
     nifgen\_DefineUserStandardWaveform function.
@@ -231,7 +239,7 @@ nifgen.Session methods
             session['0,1'].clear_user_standard_waveform()
 
 
-.. function:: commit()
+.. py:method:: commit()
 
     Causes a transition to the Committed state. This function verifies
     attribute values, reserves the device, and commits the attribute values
@@ -251,18 +259,18 @@ nifgen.Session methods
 
     -  Routes are committed, so signals are exported or imported.
     -  Any Reference Clock and external clock circuits are phase-locked.
-    -  A subsequent :py:func:`nifgen._initiate_generation` function can run faster
+    -  A subsequent :py:meth:`nifgen.Session._initiate_generation` function can run faster
        because the device is already configured.
 
     
 
 
 
-.. function:: configure_arb_sequence(sequence_handle, gain, offset)
+.. py:method:: configure_arb_sequence(sequence_handle, gain, offset)
 
     Configures the signal generator attributes that affect arbitrary
-    sequence generation. Sets the :py:data:`nifgen.ARB\_SEQUENCE\_HANDLE`,
-    :py:data:`nifgen.ARB\_GAIN`, and :py:data:`nifgen.ARB\_OFFSET` attributes.
+    sequence generation. Sets the :py:data:`nifgen.Session.arb_sequence_handle`,
+    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` attributes.
 
     
 
@@ -285,9 +293,9 @@ nifgen.Session methods
 
         Specifies the handle of the arbitrary sequence that you want the signal
         generator to produce. NI-FGEN sets the
-        :py:data:`nifgen.ARB\_SEQUENCE\_HANDLE` attribute to this value. You can
-        create an arbitrary sequence using the :py:func:`nifgen.create_arb_sequence` or
-        :py:func:`nifgen.create_advanced_arb_sequence` function. These functions return a
+        :py:data:`nifgen.Session.arb_sequence_handle` attribute to this value. You can
+        create an arbitrary sequence using the :py:meth:`nifgen.Session.create_arb_sequence` or
+        :py:meth:`nifgen.Session.create_advanced_arb_sequence` function. These functions return a
         handle that you use to identify the sequence.
 
         **Default Value**: None
@@ -323,7 +331,7 @@ nifgen.Session methods
         data. When you create arbitrary waveforms, you must first normalize the
         data points to a range of –1.00 to +1.00 V. You can use this parameter
         to shift the range of the arbitrary waveform. NI-FGEN sets the
-        :py:data:`nifgen.ARB\_OFFSET` attribute to this value.
+        :py:data:`nifgen.Session.arb_offset` attribute to this value.
 
         For example, to configure the output signal to range from 0.00 to 2.00 V
         instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -337,11 +345,11 @@ nifgen.Session methods
 
     :type offset: float
 
-.. function:: configure_arb_waveform(waveform_handle, gain, offset)
+.. py:method:: configure_arb_waveform(waveform_handle, gain, offset)
 
     Configures the attributes of the signal generator that affect arbitrary
-    waveform generation. Sets the :py:data:`nifgen.ARB\_WAVEFORM\_HANDLE`,
-    :py:data:`nifgen.ARB\_GAIN`, and :py:data:`nifgen.ARB\_OFFSET` attributes.
+    waveform generation. Sets the :py:data:`nifgen.Session.arb_waveform_handle`,
+    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` attributes.
 
     
 
@@ -364,21 +372,23 @@ nifgen.Session methods
 
         Specifies the handle of the arbitrary waveform you want the signal
         generator to produce. NI-FGEN sets the
-        :py:data:`nifgen.ARB\_WAVEFORM\_HANDLE` attribute to this value. You can
+        :py:data:`nifgen.Session.arb_waveform_handle` attribute to this value. You can
         create an arbitrary waveform using one of the following niFgen Create
         Waveform functions:
 
-        -  :py:func:`nifgen._create_waveform_f64`
-        -  :py:func:`nifgen._create_waveform_i16`
-        -  :py:func:`nifgen.create_waveform_from_file_i16`
-        -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
+        -  :py:meth:`nifgen.Session._create_waveform_f64`
+        -  :py:meth:`nifgen.Session._create_waveform_i16`
+        -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+        -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+        -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
         These functions return a handle that you use to identify the waveform.
 
         **Default Value**: None
 
         
+
+        .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     :type waveform_handle: int
@@ -409,7 +419,7 @@ nifgen.Session methods
         data. When you create arbitrary waveforms, you must first normalize the
         data points to a range of –1.00 to +1.00 V. You can use this parameter
         to shift the range of the arbitrary waveform. NI-FGEN sets the
-        :py:data:`nifgen.ARB\_OFFSET` attribute to this value.
+        :py:data:`nifgen.Session.arb_offset` attribute to this value.
 
         For example, to configure the output signal to range from 0.00 to 2.00 V
         instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -423,7 +433,7 @@ nifgen.Session methods
 
     :type offset: float
 
-.. function:: configure_custom_fir_filter_coefficients(coefficients_array)
+.. py:method:: configure_custom_fir_filter_coefficients(coefficients_array)
 
     Sets the FIR filter coefficients used by the onboard signal processing
     block. The values are coerced to the closest settings achievable by the
@@ -464,7 +474,7 @@ nifgen.Session methods
 
     :type coefficients_array: list of float
 
-.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+.. py:method:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
 
     Configures the specified Script Trigger for digital edge triggering.
 
@@ -492,7 +502,7 @@ nifgen.Session methods
         +------------------+------------------+
 
 
-    :type trigger_id: string
+    :type trigger_id: str
     :param source:
 
 
@@ -539,7 +549,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param edge:
 
 
@@ -547,18 +557,20 @@ nifgen.Session methods
 
         ****Defined Values****
 
-        ****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
+        ****Default Value**:** :py:data:`~nifgen.ScriptTriggerDigitalEdgeEdge.RISING`
 
-        +----------------------------+------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RISING\_EDGE  | Occurs when the signal transitions from low level to high level. |
-        +----------------------------+------------------------------------------------------------------+
-        | NIFGEN\_VAL\_FALLING\_EDGE | Occurs when the signal transitions from high level to low level. |
-        +----------------------------+------------------------------------------------------------------+
+        +---------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nifgen.ScriptTriggerDigitalEdgeEdge.RISING`  | Occurs when the signal transitions from low level to high level. |
+        +---------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nifgen.ScriptTriggerDigitalEdgeEdge.FALLING` | Occurs when the signal transitions from high level to low level. |
+        +---------------------------------------------------------+------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type edge: :py:data:`nifgen.ScriptTriggerDigitalEdgeEdge`
 
-.. function:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING)
+.. py:method:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING)
 
     Configures the Start Trigger for digital edge triggering.
 
@@ -612,7 +624,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param edge:
 
 
@@ -620,18 +632,20 @@ nifgen.Session methods
 
         ****Defined Values****
 
-        ****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
+        ****Default Value**:** :py:data:`~nifgen.StartTriggerDigitalEdgeEdge.RISING`
 
-        +----------------------------+------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RISING\_EDGE  | Occurs when the signal transitions from low level to high level. |
-        +----------------------------+------------------------------------------------------------------+
-        | NIFGEN\_VAL\_FALLING\_EDGE | Occurs when the signal transitions from high level to low level. |
-        +----------------------------+------------------------------------------------------------------+
+        +--------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nifgen.StartTriggerDigitalEdgeEdge.RISING`  | Occurs when the signal transitions from low level to high level. |
+        +--------------------------------------------------------+------------------------------------------------------------------+
+        | :py:data:`~nifgen.StartTriggerDigitalEdgeEdge.FALLING` | Occurs when the signal transitions from high level to low level. |
+        +--------------------------------------------------------+------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type edge: :py:data:`nifgen.StartTriggerDigitalEdgeEdge`
 
-.. function:: configure_digital_level_script_trigger(trigger_id, source, trigger_when)
+.. py:method:: configure_digital_level_script_trigger(trigger_id, source, trigger_when)
 
     Configures the specified Script Trigger for digital level triggering.
 
@@ -659,7 +673,7 @@ nifgen.Session methods
         +------------------+------------------+
 
 
-    :type trigger_id: string
+    :type trigger_id: str
     :param source:
 
 
@@ -706,7 +720,7 @@ nifgen.Session methods
         +--------------+-----------------------------------+
 
 
-    :type source: string
+    :type source: str
     :param trigger_when:
 
 
@@ -726,12 +740,12 @@ nifgen.Session methods
 
     :type trigger_when: :py:data:`nifgen.TriggerWhen`
 
-.. function:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+.. py:method:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
     Configures the attributes of the signal generator that affect frequency
-    list generation (the :py:data:`nifgen.FREQ\_LIST\_HANDLE`,
-    :py:data:`nifgen.FUNC\_AMPLITUDE`, :py:data:`nifgen.FUNC\_DC\_OFFSET`, and
-    :py:data:`nifgen.FUNC\_START\_PHASE` attributes).
+    list generation (the :py:data:`nifgen.Session.freq_list_handle`,
+    :py:data:`nifgen.Session.func_amplitude`, :py:data:`nifgen.Session.func_dc_offset`, and
+    :py:data:`nifgen.Session.func_start_phase` attributes).
 
     
 
@@ -753,9 +767,9 @@ nifgen.Session methods
 
 
         Specifies the handle of the frequency list that you want the signal
-        generator to produce. NI-FGEN sets the :py:data:`nifgen.FREQ\_LIST\_HANDLE`
+        generator to produce. NI-FGEN sets the :py:data:`nifgen.Session.freq_list_handle`
         attribute to this value. You can create a frequency list using the
-        :py:func:`nifgen.create_freq_list` function, which returns a handle that you use to
+        :py:meth:`nifgen.Session.create_freq_list` function, which returns a handle that you use to
         identify the list.
         **Default Value**: None
 
@@ -768,7 +782,7 @@ nifgen.Session methods
 
         Specifies the amplitude of the standard waveform that you want the
         signal generator to produce. This value is the amplitude at the output
-        terminal. NI-FGEN sets the :py:data:`nifgen.FUNC\_AMPLITUDE` attribute to
+        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` attribute to
         this value.
 
         For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -781,8 +795,8 @@ nifgen.Session methods
         
 
         .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
-            function to NIFGEN\_VAL\_WFM\_DC.
+            the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
+            function to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type amplitude: float
@@ -794,7 +808,7 @@ nifgen.Session methods
         center of the waveform you specify with the **waveform** parameter,
         observed at the output terminal. For example, to configure a waveform
         with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.FUNC\_DC\_OFFSET`
+        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
         attribute to this value.
 
         **Units**: volts
@@ -810,7 +824,7 @@ nifgen.Session methods
 
         Specifies the horizontal offset of the standard waveform you want the
         signal generator to produce. Specify this attribute in degrees of one
-        waveform cycle. NI-FGEN sets the :py:data:`nifgen.FUNC\_START\_PHASE`
+        waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
         attribute to this value. A start phase of 180 degrees means output
         generation begins halfway through the waveform. A start phase of 360
         degrees offsets the output by an entire waveform cycle, which is
@@ -823,27 +837,29 @@ nifgen.Session methods
         
 
         .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
+            the **waveform** parameter to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type start_phase: float
 
-.. function:: configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
+.. py:method:: configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
     Configures the following attributes of the signal generator that affect
     standard waveform generation:
 
-    -  :py:data:`nifgen.FUNC\_WAVEFORM`
-    -  :py:data:`nifgen.FUNC\_AMPLITUDE`
-    -  :py:data:`nifgen.FUNC\_DC\_OFFSET`
-    -  :py:data:`nifgen.FUNC\_FREQUENCY`
-    -  :py:data:`nifgen.FUNC\_START\_PHASE`
+    -  :py:data:`nifgen.Session.func_waveform`
+    -  :py:data:`nifgen.Session.func_amplitude`
+    -  :py:data:`nifgen.Session.func_dc_offset`
+    -  :py:data:`nifgen.Session.func_frequency`
+    -  :py:data:`nifgen.Session.func_start_phase`
 
     
 
-    .. note:: You must call the :py:func:`nifgen.ConfigureOutputMode` function with the
-        **outputMode** parameter set to NIFGEN\_VAL\_OUTPUT\_FUNC before calling
+    .. note:: You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` function with the
+        **outputMode** parameter set to :py:data:`~nifgen.OutputMode.FUNC` before calling
         this function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -860,30 +876,30 @@ nifgen.Session methods
 
 
         Specifies the standard waveform that you want the signal generator to
-        produce. NI-FGEN sets the :py:data:`nifgen.FUNC\_WAVEFORM` attribute to this
+        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` attribute to this
         value.
 
         ****Defined Values****
 
-        **Default Value**: NIFGEN\_VAL\_WFM\_SINE
+        **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_SINE       | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_SQUARE     | Specifies that the signal generator produces a square waveform.                                                                       |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_TRIANGLE   | Specifies that the signal generator produces a triangle waveform.                                                                     |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_RAMP\_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_RAMP\_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                                |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_DC         | Specifies that the signal generator produces a constant voltage.                                                                      |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_NOISE      | Specifies that the signal generator produces white noise.                                                                             |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_USER       | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                       |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                     |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                      |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                             |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
     :type waveform: :py:data:`nifgen.Waveform`
@@ -892,7 +908,7 @@ nifgen.Session methods
 
         Specifies the amplitude of the standard waveform that you want the
         signal generator to produce. This value is the amplitude at the output
-        terminal. NI-FGEN sets the :py:data:`nifgen.FUNC\_AMPLITUDE` attribute to
+        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` attribute to
         this value.
 
         For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -905,8 +921,8 @@ nifgen.Session methods
         
 
         .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
-            function to NIFGEN\_VAL\_WFM\_DC.
+            the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
+            function to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type amplitude: float
@@ -915,7 +931,7 @@ nifgen.Session methods
 
         | Specifies the frequency of the standard waveform that you want the
           signal generator to produce. NI-FGEN sets the
-          :py:data:`nifgen.FUNC\_FREQUENCY` attribute to this value.
+          :py:data:`nifgen.Session.func_frequency` attribute to this value.
 
         **Units**: hertz
 
@@ -924,8 +940,8 @@ nifgen.Session methods
         
 
         .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
-            function to NIFGEN\_VAL\_WFM\_DC.
+            the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
+            function to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type frequency: float
@@ -937,7 +953,7 @@ nifgen.Session methods
         center of the waveform you specify with the **waveform** parameter,
         observed at the output terminal. For example, to configure a waveform
         with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.FUNC\_DC\_OFFSET`
+        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
         attribute to this value.
 
         **Units**: volts
@@ -953,7 +969,7 @@ nifgen.Session methods
 
         Specifies the horizontal offset of the standard waveform that you want
         the signal generator to produce. Specify this parameter in degrees of
-        one waveform cycle. NI-FGEN sets the :py:data:`nifgen.FUNC\_START\_PHASE`
+        one waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
         attribute to this value. A start phase of 180 degrees means output
         generation begins halfway through the waveform. A start phase of 360
         degrees offsets the output by an entire waveform cycle, which is
@@ -966,21 +982,21 @@ nifgen.Session methods
         
 
         .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
+            the **waveform** parameter to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type start_phase: float
 
-.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
+.. py:method:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
     identifies the sequence. You pass this handle to the
-    :py:func:`nifgen.configure_arb_sequence` function to specify what arbitrary sequence
+    :py:meth:`nifgen.Session.configure_arb_sequence` function to specify what arbitrary sequence
     you want the signal generator to produce.
 
-    The :py:func:`nifgen.create_advanced_arb_sequence` function extends on the
-    :py:func:`nifgen.create_arb_sequence` function by adding the ability to set the
+    The :py:meth:`nifgen.Session.create_advanced_arb_sequence` function extends on the
+    :py:meth:`nifgen.Session.create_arb_sequence` function by adding the ability to set the
     number of samples in each sequence step and to set marker locations.
 
     An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -993,7 +1009,7 @@ nifgen.Session methods
     .. note:: The signal generator must not be in the Generating state when you call
         this function.
         You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
+        **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
         function.
 
 
@@ -1075,13 +1091,15 @@ nifgen.Session methods
         **coercedMarkersArray** parameter.
 
         If you do not want a marker generated for a particular sequence stage,
-        set this parameter to NIFGEN\_VAL\_NO\_MARKER.
+        set this parameter to :py:data:`~nifgen.NIFGEN_VAL_NO_MARKER`.
 
-        **Defined Value**: NIFGEN\_VAL\_NO\_MARKER
+        **Defined Value**: :py:data:`~nifgen.NIFGEN_VAL_NO_MARKER`
 
         **Default Value**: None
 
         
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type marker_location_array: list of int
@@ -1112,7 +1130,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_arb_sequence(waveform_handles_array, loop_counts_array)
+.. py:method:: create_arb_sequence(waveform_handles_array, loop_counts_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -1128,7 +1146,7 @@ nifgen.Session methods
     
 
     .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
+        **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
         function.
 
 
@@ -1189,7 +1207,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_freq_list(waveform, frequency_array, duration_array)
+.. py:method:: create_freq_list(waveform, frequency_array, duration_array)
 
     Creates a frequency list from an array of frequencies
     (**frequencyArray**) and an array of durations (**durationArray**). The
@@ -1215,30 +1233,30 @@ nifgen.Session methods
 
 
         Specifies the standard waveform that you want the signal generator to
-        produce. NI-FGEN sets the :py:data:`nifgen.FUNC\_WAVEFORM` attribute to this
+        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` attribute to this
         value.
 
         ****Defined Values****
 
-        **Default Value**: NIFGEN\_VAL\_WFM\_SINE
+        **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_SINE       | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_SQUARE     | Specifies that the signal generator produces a square waveform.                                                                       |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_TRIANGLE   | Specifies that the signal generator produces a triangle waveform.                                                                     |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_RAMP\_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_RAMP\_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                                |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_DC         | Specifies that the signal generator produces a constant voltage.                                                                      |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_NOISE      | Specifies that the signal generator produces white noise.                                                                             |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WFM\_USER       | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
-        +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                       |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                     |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                      |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                             |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
+        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
     :type waveform: :py:data:`nifgen.Waveform`
@@ -1289,7 +1307,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_from_file_f64(file_name, byte_order)
+.. py:method:: create_waveform_from_file_f64(file_name, byte_order)
 
     This function takes the floating point double (F64) data from the
     specified file and creates an onboard waveform for use in Arbitrary
@@ -1301,7 +1319,7 @@ nifgen.Session methods
     
 
     .. note:: The F64 data must be between –1.0 and +1.0 V. Use the
-        :py:data:`nifgen.DIGITAL\_GAIN` attribute to generate different voltage
+        :py:data:`nifgen.Session.digital_gain` attribute to generate different voltage
         outputs.
 
 
@@ -1323,7 +1341,7 @@ nifgen.Session methods
         
 
 
-    :type file_name: string
+    :type file_name: str
     :param byte_order:
 
 
@@ -1332,13 +1350,13 @@ nifgen.Session methods
         ****Defined Values****
 
         |
-        | ****Default Value**:** NIFGEN\_VAL\_LITTLE\_ENDIAN
+        | ****Default Value**:** :py:data:`~nifgen.ByteOrder.LITTLE`
 
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_LITTLE\_ENDIAN | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_BIG\_ENDIAN    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.ByteOrder.LITTLE` | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.ByteOrder.BIG`    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: Data written by most applications in Windows (including
             LabWindows™/CVI™) is in Little Endian format. Data written to a file
@@ -1360,7 +1378,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_from_file_i16(file_name, byte_order)
+.. py:method:: create_waveform_from_file_i16(file_name, byte_order)
 
     Takes the binary 16-bit signed integer (I16) data from the specified
     file and creates an onboard waveform for use in Arbitrary Waveform or
@@ -1372,7 +1390,7 @@ nifgen.Session methods
     
 
     .. note:: The I16 data (values between –32768 and +32767) is assumed to
-        represent –1 to +1 V. Use the :py:data:`nifgen.DIGITAL\_GAIN` attribute to
+        represent –1 to +1 V. Use the :py:data:`nifgen.Session.digital_gain` attribute to
         generate different voltage outputs.
 
 
@@ -1394,7 +1412,7 @@ nifgen.Session methods
         
 
 
-    :type file_name: string
+    :type file_name: str
     :param byte_order:
 
 
@@ -1403,13 +1421,13 @@ nifgen.Session methods
         ****Defined Values****
 
         |
-        | ****Default Value**:** NIFGEN\_VAL\_LITTLE\_ENDIAN
+        | ****Default Value**:** :py:data:`~nifgen.ByteOrder.LITTLE`
 
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_LITTLE\_ENDIAN | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_BIG\_ENDIAN    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-        +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.ByteOrder.LITTLE` | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.ByteOrder.BIG`    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
+        +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: Data written by most applications in Windows (including
             LabWindows™/CVI™) is in Little Endian format. Data written to a file
@@ -1431,7 +1449,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_numpy(waveform_data_array)
+.. py:method:: create_waveform_numpy(waveform_data_array)
 
     Creates an onboard waveform
     for use in Arbitrary Waveform output mode or Arbitrary Sequence output
@@ -1439,8 +1457,8 @@ nifgen.Session methods
 
     
 
-    .. note:: You must set :py:data:`nifgen.OUTPUT\_MODE` to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or
+        :py:data:`~nifgen.OutputMode.SEQ` before calling this function.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1473,24 +1491,24 @@ nifgen.Session methods
 
 
 
-.. function:: define_user_standard_waveform(waveform_data_array)
+.. py:method:: define_user_standard_waveform(waveform_data_array)
 
     Defines a user waveform for use in either Standard Function or Frequency
     List output mode.
 
     To select the waveform, set the **waveform** parameter to
-    NIFGEN\_VAL\_WFM\_USER with either the nifgen\_ConfigureStandardWaveform
+    :py:data:`~nifgen.Waveform.USER` with either the nifgen\_ConfigureStandardWaveform
     or the nifgen\_CreateFreqList function.
 
     The waveform data must be scaled between –1.0 and 1.0. Use the
-    **amplitude** parameter in the :py:func:`nifgen.configure_standard_waveform`
+    **amplitude** parameter in the :py:meth:`nifgen.Session.configure_standard_waveform`
     function to generate different output voltages.
 
     
 
     .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_FUNC or
-        NIFGEN\_VAL\_OUTPUT\_FREQ\_LIST before calling this function.
+        **outputMode** parameter to :py:data:`~nifgen.OutputMode.FUNC` or
+        :py:data:`~nifgen.OutputMode.FREQ_LIST` before calling this function.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1520,7 +1538,7 @@ nifgen.Session methods
 
     :type waveform_data_array: list of float
 
-.. function:: delete_named_waveform(waveform_name)
+.. py:method:: delete_named_waveform(waveform_name)
 
     Removes a previously created arbitrary waveform from the signal
     generator memory and invalidates the waveform handle.
@@ -1549,9 +1567,9 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
 
-.. function:: delete_script(script_name)
+.. py:method:: delete_script(script_name)
 
     Deletes the specified script from onboard memory.
 
@@ -1577,9 +1595,9 @@ nifgen.Session methods
         
 
 
-    :type script_name: string
+    :type script_name: str
 
-.. function:: disable()
+.. py:method:: disable()
 
     Places the instrument in a quiescent state where it has minimal or no
     impact on the system to which it is connected. The analog output and all
@@ -1589,20 +1607,22 @@ nifgen.Session methods
 
 
 
-.. function:: export_signal(signal, signal_identifier, output_terminal)
+.. py:method:: export_signal(signal, signal_identifier, output_terminal)
 
     Routes signals (clocks, triggers, and events) to the output terminal you
     specify.
 
     Any routes created within a session persist after the session closes to
     prevent signal glitching. To unconfigure signal routes created in
-    previous sessions, set **resetDevice** in the :py:func:`nifgen.init` function to
-    VI\_TRUE or use the :py:func:`nifgen.reset_device` function.
+    previous sessions, set **resetDevice** in the :py:meth:`nifgen.Session.init` function to
+    VI\_TRUE or use the :py:meth:`nifgen.Session.reset_device` function.
 
     If you export a signal with this function and commit the session, the
     signal is routed to the output terminal you specify.
 
     
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
 
@@ -1612,33 +1632,35 @@ nifgen.Session methods
         Specifies the source of the signal to route.
         ****Defined Values****
 
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_ONBOARD\_REFERENCE\_CLOCK | Onboard 10 MHz synchronization clock (PCI only)                                                                                                               |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SYNC\_OUT                 | SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.                                                              |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_START\_TRIGGER            | Start Trigger                                                                                                                                                 |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_MARKER\_EVENT             | Marker Event                                                                                                                                                  |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SAMPLE\_CLOCK\_TIMEBASE   | The clock from which the Sample Clock is derived                                                                                                              |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SYNCHRONIZATION           | Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SAMPLE\_CLOCK             | Sample Clock                                                                                                                                                  |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_REFERENCE\_CLOCK          | PLL Reference Clock                                                                                                                                           |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SCRIPT\_TRIGGER           | Script Trigger                                                                                                                                                |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_READY\_FOR\_START\_EVENT  | Ready For Start Event                                                                                                                                         |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_STARTED\_EVENT            | Started Event                                                                                                                                                 |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_DONE\_EVENT               | Done Event                                                                                                                                                    |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_DATA\_MARKER\_EVENT       | Data Marker Event                                                                                                                                             |
-        +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.ONBOARD_REFERENCE_CLOCK` | Onboard 10 MHz synchronization clock (PCI only)                                                                                                               |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.SYNC_OUT`                | SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.                                                              |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.START_TRIGGER`           | Start Trigger                                                                                                                                                 |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.MARKER_EVENT`            | Marker Event                                                                                                                                                  |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.SAMPLE_CLOCK_TIMEBASE`   | The clock from which the Sample Clock is derived                                                                                                              |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.SYNCHRONIZATION`         | Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.SAMPLE_CLOCK`            | Sample Clock                                                                                                                                                  |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.REFERENCE_CLOCK`         | PLL Reference Clock                                                                                                                                           |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.SCRIPT_TRIGGER`          | Script Trigger                                                                                                                                                |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.READY_FOR_START_EVENT`   | Ready For Start Event                                                                                                                                         |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.STARTED_EVENT`           | Started Event                                                                                                                                                 |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.DONE_EVENT`              | Done Event                                                                                                                                                    |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Signal.DATA_MARKER_EVENT`       | Data Marker Event                                                                                                                                             |
+        +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type signal: :py:data:`nifgen.Signal`
@@ -1648,38 +1670,38 @@ nifgen.Session methods
         Specifies which instance of the selected signal to export.
         ****Defined Values****
 
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "" (empty string)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "ScriptTrigger0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "ScriptTrigger1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "ScriptTrigger2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "ScriptTrigger3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "Marker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "Marker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "Marker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "Marker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "DataMarker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "DataMarker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "DataMarker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | "DataMarker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | \* These Data Marker values apply only to single-channel devices or to multichannel devices that are configured for single-channel operation. When using a device that is configured for multichannel operation, specify the channel number along with the signal identifier. For example, to export Data Marker 0 on channel 1 of a device configured for multichannel operation, use the value "1/ DataMarker0." If you do not specify a channel when using a device configured for multichannel generation, DataMarker0 generates on all channels. |
-        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "" (empty string)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Default (for non instance-based signals) |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "ScriptTrigger0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 0                         |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "ScriptTrigger1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 1                         |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "ScriptTrigger2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 2                         |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "ScriptTrigger3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 3                         |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "Marker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 0                                 |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "Marker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 1                                 |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "Marker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 2                                 |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "Marker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 3                                 |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "DataMarker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 0\*                          |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "DataMarker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 1\*                          |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "DataMarker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 2\*                          |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | "DataMarker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 3\*                          |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
+        | \* These Data Marker values apply only to single-channel devices or to multichannel devices that are configured for single-channel operation. When using a device that is configured for multichannel operation, specify the channel number along with the signal identifier. For example, to export Data Marker 0 on channel 1 of a device configured for multichannel operation, use the value "1/ DataMarker0." If you do not specify a channel when using a device configured for multichannel generation, DataMarker0 generates on all channels. |                                          |
+        +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
 
 
-    :type signal_identifier: string
+    :type signal_identifier: str
     :param output_terminal:
 
 
@@ -1724,9 +1746,9 @@ nifgen.Session methods
             Routes** tab in MAX.
 
 
-    :type output_terminal: string
+    :type output_terminal: str
 
-.. function:: get_ext_cal_last_date_and_time()
+.. py:method:: get_ext_cal_last_date_and_time()
 
     Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
@@ -1744,7 +1766,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_ext_cal_last_temp()
+.. py:method:: get_ext_cal_last_temp()
 
     Returns the temperature at the last successful external calibration. The
     temperature is returned in degrees Celsius.
@@ -1764,7 +1786,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_ext_cal_recommended_interval()
+.. py:method:: get_ext_cal_recommended_interval()
 
     Returns the recommended interval between external calibrations in
     months.
@@ -1784,7 +1806,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_fir_filter_coefficients()
+.. py:method:: get_fir_filter_coefficients()
 
     | Returns the FIR filter coefficients used by the onboard signal
       processing block. These coefficients are determined by NI-FGEN and
@@ -1794,11 +1816,11 @@ nifgen.Session methods
       nifgen\_ConfigureCustomFIRFilterCoefficients function coerced to the
       quantized values used by the device.
     | To use this function, first call an instance of the
-      :py:func:`nifgen.get_fir_filter_coefficients` function with the
+      :py:meth:`nifgen.Session.get_fir_filter_coefficients` function with the
       **coefficientsArray** parameter set to VI\_NULL. Calling the function
       in this state returns the current size of the **coefficientsArray** as
       the value of the **numberOfCoefficientsRead** parameter. Create an
-      array of this size, and call the :py:func:`nifgen.get_fir_filter_coefficients`
+      array of this size, and call the :py:meth:`nifgen.Session.get_fir_filter_coefficients`
       function a second time, passing the new array as the
       **coefficientsArray** parameter and the size as the **arraySize**
       parameter. This second function call populates the array with the FIR
@@ -1832,7 +1854,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_hardware_state()
+.. py:method:: get_hardware_state()
 
     Returns the current hardware state of the device and, if the device is
     in the hardware error state, the current hardware error.
@@ -1851,21 +1873,21 @@ nifgen.Session methods
 
             **Defined Values**
 
-            +-------------------------------------------+--------------------------------------------+
-            | NIFGEN\_VAL\_IDLE                         | The device is in the Idle state.           |
-            +-------------------------------------------+--------------------------------------------+
-            | NIFGEN\_VAL\_WAITING\_FOR\_START\_TRIGGER | The device is waiting for Start Trigger.   |
-            +-------------------------------------------+--------------------------------------------+
-            | NIFGEN\_VAL\_RUNNING                      | The device is in the Running state.        |
-            +-------------------------------------------+--------------------------------------------+
-            | NIFGEN\_VAL\_DONE                         | The generation has completed successfully. |
-            +-------------------------------------------+--------------------------------------------+
-            | NIFGEN\_VAL\_HARDWARE\_ERROR              | There is a hardware error.                 |
-            +-------------------------------------------+--------------------------------------------+
+            +------------------------------------------------------------+--------------------------------------------+
+            | :py:data:`~nifgen.HardwareState.IDLE`                      | The device is in the Idle state.           |
+            +------------------------------------------------------------+--------------------------------------------+
+            | :py:data:`~nifgen.HardwareState.WAITING_FOR_START_TRIGGER` | The device is waiting for Start Trigger.   |
+            +------------------------------------------------------------+--------------------------------------------+
+            | :py:data:`~nifgen.HardwareState.RUNNING`                   | The device is in the Running state.        |
+            +------------------------------------------------------------+--------------------------------------------+
+            | :py:data:`~nifgen.HardwareState.DONE`                      | The generation has completed successfully. |
+            +------------------------------------------------------------+--------------------------------------------+
+            | :py:data:`~nifgen.HardwareState.HARDWARE_ERROR`            | There is a hardware error.                 |
+            +------------------------------------------------------------+--------------------------------------------+
 
 
 
-.. function:: get_self_cal_last_date_and_time()
+.. py:method:: get_self_cal_last_date_and_time()
 
     Returns the date and time of the last successful self-calibration.
 
@@ -1893,7 +1915,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_self_cal_last_temp()
+.. py:method:: get_self_cal_last_temp()
 
     Returns the temperature at the last successful self-calibration. The
     temperature is returned in degrees Celsius.
@@ -1913,7 +1935,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_self_cal_supported()
+.. py:method:: get_self_cal_supported()
 
     Returns whether the device supports self–calibration.
 
@@ -1937,7 +1959,7 @@ nifgen.Session methods
 
 
 
-.. function:: is_done()
+.. py:method:: is_done()
 
     Determines whether the current generation is complete. This function
     sets the **done** parameter to VI\_TRUE if the session is in the Idle or
@@ -1966,12 +1988,12 @@ nifgen.Session methods
 
 
 
-.. function:: query_arb_seq_capabilities()
+.. py:method:: query_arb_seq_capabilities()
 
     Returns the attributes of the signal generator that are related to
-    creating arbitrary sequences (the :py:data:`nifgen.MAX\_NUM\_SEQUENCES`,
-    :py:data:`nifgen.MIN\_SEQUENCE\_LENGTH`,
-    :py:data:`nifgen.MAX\_SEQUENCE\_LENGTH`, and :py:data:`nifgen.MAX\_LOOP\_COUNT`
+    creating arbitrary sequences (the :py:data:`nifgen.Session.max_num_sequences`,
+    :py:data:`nifgen.Session.min_sequence_length`,
+    :py:data:`nifgen.Session.max_sequence_length`, and :py:data:`nifgen.Session.max_loop_count`
     attributes).
 
     
@@ -1987,7 +2009,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveform sequences that the
             signal generator allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_NUM\_SEQUENCES` attribute.
+            :py:data:`nifgen.Session.max_num_sequences` attribute.
 
             
 
@@ -1997,7 +2019,7 @@ nifgen.Session methods
 
             Returns the minimum number of arbitrary waveforms the signal generator
             allows in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MIN\_SEQUENCE\_LENGTH` attribute.
+            :py:data:`nifgen.Session.min_sequence_length` attribute.
 
             
 
@@ -2007,7 +2029,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveforms the signal generator
             allows in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_SEQUENCE\_LENGTH` attribute.
+            :py:data:`nifgen.Session.max_sequence_length` attribute.
 
             
 
@@ -2017,13 +2039,13 @@ nifgen.Session methods
 
             Returns the maximum number of times the signal generator can repeat an
             arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_LOOP\_COUNT` attribute.
+            :py:data:`nifgen.Session.max_loop_count` attribute.
 
             
 
 
 
-.. function:: query_arb_wfm_capabilities()
+.. py:method:: query_arb_wfm_capabilities()
 
     Returns the attributes of the signal generator that are related to
     creating arbitrary waveforms. These attributes are the maximum number of
@@ -2046,7 +2068,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveforms that the signal
             generator allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_NUM\_WAVEFORMS` attribute.
+            :py:data:`nifgen.Session.max_num_waveforms` attribute.
 
             
 
@@ -2057,7 +2079,7 @@ nifgen.Session methods
             The size (number of points) of each waveform must be a multiple of a
             constant quantum value. This parameter obtains the quantum value that
             the signal generator uses. NI-FGEN returns this value from the
-            :py:data:`nifgen.WAVEFORM\_QUANTUM` attribute.
+            :py:data:`nifgen.Session.waveform_quantum` attribute.
 
             For example, when this attribute returns a value of 8, all waveform
             sizes must be a multiple of 8.
@@ -2070,7 +2092,7 @@ nifgen.Session methods
 
             Returns the minimum number of points that the signal generator allows in
             a waveform. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MIN\_WAVEFORM\_SIZE` attribute.
+            :py:data:`nifgen.Session.min_waveform_size` attribute.
 
             
 
@@ -2080,22 +2102,22 @@ nifgen.Session methods
 
             Returns the maximum number of points that the signal generator allows in
             a waveform. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_WAVEFORM\_SIZE` attribute.
+            :py:data:`nifgen.Session.max_waveform_size` attribute.
 
             
 
 
 
-.. function:: query_freq_list_capabilities()
+.. py:method:: query_freq_list_capabilities()
 
     Returns the attributes of the signal generator that are related to
     creating frequency lists. These attributes are
-    :py:data:`nifgen.MAX\_NUM\_FREQ\_LISTS`,
-    :py:data:`nifgen.MIN\_FREQ\_LIST\_LENGTH`,
-    :py:data:`nifgen.MAX\_FREQ\_LIST\_LENGTH`,
-    :py:data:`nifgen.MIN\_FREQ\_LIST\_DURATION`,
-    :py:data:`nifgen.MAX\_FREQ\_LIST\_DURATION`, and
-    :py:data:`nifgen.FREQ\_LIST\_DURATION\_QUANTUM`.
+    :py:data:`nifgen.Session.max_num_freq_lists`,
+    :py:data:`nifgen.Session.min_freq_list_length`,
+    :py:data:`nifgen.Session.max_freq_list_length`,
+    :py:data:`nifgen.Session.min_freq_list_duration`,
+    :py:data:`nifgen.Session.max_freq_list_duration`, and
+    :py:data:`nifgen.Session.freq_list_duration_quantum`.
 
     
 
@@ -2110,7 +2132,7 @@ nifgen.Session methods
 
             Returns the maximum number of frequency lists that the signal generator
             allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_NUM\_FREQ\_LISTS` attribute.
+            :py:data:`nifgen.Session.max_num_freq_lists` attribute.
 
             
 
@@ -2120,7 +2142,7 @@ nifgen.Session methods
 
             Returns the minimum number of steps that the signal generator allows in
             a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MIN\_FREQ\_LIST\_LENGTH` attribute.
+            :py:data:`nifgen.Session.min_freq_list_length` attribute.
 
             
 
@@ -2130,7 +2152,7 @@ nifgen.Session methods
 
             Returns the maximum number of steps that the signal generator allows in
             a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_FREQ\_LIST\_LENGTH` attribute.
+            :py:data:`nifgen.Session.max_freq_list_length` attribute.
 
             
 
@@ -2140,7 +2162,7 @@ nifgen.Session methods
 
             Returns the minimum duration that the signal generator allows in a step
             of a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MIN\_FREQ\_LIST\_DURATION` attribute.
+            :py:data:`nifgen.Session.min_freq_list_duration` attribute.
 
             
 
@@ -2150,7 +2172,7 @@ nifgen.Session methods
 
             Returns the maximum duration that the signal generator allows in a step
             of a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.MAX\_FREQ\_LIST\_DURATION` attribute.
+            :py:data:`nifgen.Session.max_freq_list_duration` attribute.
 
             
 
@@ -2160,13 +2182,13 @@ nifgen.Session methods
 
             Returns the quantum of which all durations must be a multiple in a
             frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.FREQ\_LIST\_DURATION\_QUANTUM` attribute.
+            :py:data:`nifgen.Session.freq_list_duration_quantum` attribute.
 
             
 
 
 
-.. function:: read_current_temperature()
+.. py:method:: read_current_temperature()
 
     Reads the current onboard temperature of the device. The temperature is
     returned in degrees Celsius.
@@ -2186,7 +2208,7 @@ nifgen.Session methods
 
 
 
-.. function:: reset()
+.. py:method:: reset()
 
     Resets the instrument to a known state. This function aborts the
     generation, clears all routes, and resets session attributes to the
@@ -2200,7 +2222,7 @@ nifgen.Session methods
 
 
 
-.. function:: reset_device()
+.. py:method:: reset_device()
 
     Performs a hard reset on the device. Generation is stopped, all routes
     are released, external bidirectional terminals are tristated, FPGAs are
@@ -2211,7 +2233,7 @@ nifgen.Session methods
 
 
 
-.. function:: reset_with_defaults()
+.. py:method:: reset_with_defaults()
 
     Resets the instrument and reapplies initial user–specified settings from
     the logical name that was used to initialize the session. If the session
@@ -2222,7 +2244,7 @@ nifgen.Session methods
 
 
 
-.. function:: self_cal()
+.. py:method:: self_cal()
 
     Performs a full internal self-calibration on the device. If the
     calibration is successful, new calibration data and constants are stored
@@ -2232,14 +2254,14 @@ nifgen.Session methods
 
 
 
-.. function:: self_test()
+.. py:method:: self_test()
 
     Runs the instrument self-test routine and returns the test result(s).
 
     
 
     .. note:: When used on some signal generators, the device is reset after the
-        :py:func:`nifgen.self_test` function runs. If you use the :py:func:`nifgen.self_test`
+        :py:meth:`nifgen.Session.self_test` function runs. If you use the :py:meth:`nifgen.Session.self_test`
         function, your device may not be in its previously configured state
         after the function runs.
 
@@ -2264,7 +2286,7 @@ nifgen.Session methods
             +----------------+------------------+
 
 
-        self_test_message (string): 
+        self_test_message (str): 
 
 
             Returns the self-test response string from the instrument.
@@ -2275,7 +2297,7 @@ nifgen.Session methods
 
 
 
-.. function:: send_software_edge_trigger(trigger, trigger_id)
+.. py:method:: send_software_edge_trigger(trigger, trigger_id)
 
     Sends a command to trigger the signal generator. This VI can act as an
     override for an external edge trigger.
@@ -2294,21 +2316,21 @@ nifgen.Session methods
 
         ****Defined Values****
 
-        +-------------------------------+
-        | NIFGEN\_VAL\_DIVIDE\_DOWN     |
-        +-------------------------------+
-        | NIFGEN\_VAL\_HIGH\_RESOLUTION |
-        +-------------------------------+
-        | NIFGEN\_VAL\_AUTOMATIC        |
-        +-------------------------------+
+        +----------------------------------------------+
+        | :py:data:`~nifgen.ClockMode.DIVIDE_DOWN`     |
+        +----------------------------------------------+
+        | :py:data:`~nifgen.ClockMode.HIGH_RESOLUTION` |
+        +----------------------------------------------+
+        | :py:data:`~nifgen.ClockMode.AUTOMATIC`       |
+        +----------------------------------------------+
 
 
     :type trigger: :py:data:`nifgen.Trigger`
     :param trigger_id:
 
-    :type trigger_id: string
+    :type trigger_id: str
 
-.. function:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+.. py:method:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
     Sets the position in the waveform to which data is written at the next
     write. This function allows you to write to arbitrary locations within
@@ -2346,7 +2368,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_name: string
+    :type waveform_name: str
     :param relative_to:
 
 
@@ -2356,11 +2378,11 @@ nifgen.Session methods
 
         ****Defined Values****
 
-        +----------------------------------------------+-------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WAVEFORM\_POSITION\_START (0)   | Use the start of the waveform as the reference position.                |
-        +----------------------------------------------+-------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WAVEFORM\_POSITION\_CURRENT (1) | Use the current position within the waveform as the reference position. |
-        +----------------------------------------------+-------------------------------------------------------------------------+
+        +-------------------------------------------+-------------------------------------------------------------------------+
+        | :py:data:`~nifgen.RelativeTo.START` (0)   | Use the start of the waveform as the reference position.                |
+        +-------------------------------------------+-------------------------------------------------------------------------+
+        | :py:data:`~nifgen.RelativeTo.CURRENT` (1) | Use the current position within the waveform as the reference position. |
+        +-------------------------------------------+-------------------------------------------------------------------------+
 
 
     :type relative_to: :py:data:`nifgen.RelativeTo`
@@ -2375,7 +2397,7 @@ nifgen.Session methods
 
     :type offset: int
 
-.. function:: set_waveform_next_write_position(waveform_handle, relative_to, offset)
+.. py:method:: set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
     Sets the position in the waveform at which the next waveform data is
     written. This function allows you to write to arbitrary locations within
@@ -2424,11 +2446,11 @@ nifgen.Session methods
 
         ****Defined Values****
 
-        +----------------------------------------------+-------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WAVEFORM\_POSITION\_START (0)   | Use the start of the waveform as the reference position.                |
-        +----------------------------------------------+-------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_WAVEFORM\_POSITION\_CURRENT (1) | Use the current position within the waveform as the reference position. |
-        +----------------------------------------------+-------------------------------------------------------------------------+
+        +-------------------------------------------+-------------------------------------------------------------------------+
+        | :py:data:`~nifgen.RelativeTo.START` (0)   | Use the start of the waveform as the reference position.                |
+        +-------------------------------------------+-------------------------------------------------------------------------+
+        | :py:data:`~nifgen.RelativeTo.CURRENT` (1) | Use the current position within the waveform as the reference position. |
+        +-------------------------------------------+-------------------------------------------------------------------------+
 
 
     :type relative_to: :py:data:`nifgen.RelativeTo`
@@ -2443,7 +2465,7 @@ nifgen.Session methods
 
     :type offset: int
 
-.. function:: wait_until_done(max_time=10000)
+.. py:method:: wait_until_done(max_time=10000)
 
     Waits until the device is done generating or until the maximum time has
     expired.
@@ -2462,7 +2484,7 @@ nifgen.Session methods
 
     :type max_time: datetime.timedelta
 
-.. function:: write_script(script)
+.. py:method:: write_script(script)
 
     Writes a string containing one or more scripts that govern the
     generation of waveforms.
@@ -2491,9 +2513,9 @@ nifgen.Session methods
         
 
 
-    :type script: string
+    :type script: str
 
-.. function:: write_waveform(waveform_name_or_handle, data)
+.. py:method:: write_waveform(waveform_name_or_handle, data)
 
     Writes data to the waveform in onboard memory.
 
@@ -2518,7 +2540,7 @@ nifgen.Session methods
     :param waveform_name_or_handle:
 
 
-        The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:func:`nifgen.allocate_named_waveform` or :py:func:`nifgen.allocate_waveform`.
+        The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform` or :py:meth:`nifgen.Session.allocate_waveform`.
 
         
 

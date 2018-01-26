@@ -1,7 +1,7 @@
 nidmm.Session properties
 ========================
 
-.. py:currentmodule:: nidmm
+.. py:currentmodule:: nidmm.Session
 
 .. py:attribute:: ac_max_freq
 

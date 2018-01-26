@@ -1,4 +1,5 @@
 # This file was generated
+import sys  # noqa: F401   - Not all mock_helpers will need this
 
 
 class MockFunctionCallError(Exception):
@@ -316,9 +317,6 @@ class SideEffectsHelper(object):
         if self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray'] is None:
             raise MockFunctionCallError("niFgen_CreateAdvancedArbSequence", param='coercedMarkersArray')
         a = self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
         for i in range(min(len(coerced_markers_array), len(a))):
             coerced_markers_array[i] = a[i]
         if self._defaults['CreateAdvancedArbSequence']['sequenceHandle'] is None:
@@ -746,7 +744,6 @@ class SideEffectsHelper(object):
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFgen_error_message", param='errorMessage')
         a = self._defaults['error_message']['errorMessage']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(error_message), len(a))):
@@ -767,7 +764,6 @@ class SideEffectsHelper(object):
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niFgen_self_test", param='selfTestMessage')
         a = self._defaults['self_test']['selfTestMessage']
-        import sys
         if sys.version_info.major > 2 and type(a) is str:
             a = a.encode('ascii')
         for i in range(min(len(self_test_message), len(a))):
