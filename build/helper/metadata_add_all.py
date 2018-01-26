@@ -132,8 +132,6 @@ def _add_buffer_info(parameter, config):
     # We set all string types to ViString, and say it is NOT a buffer/array
     string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
     if ot in string_types:
-        parameter['type'] = 'ViString'
-        parameter['original_type'] = ot
         is_string = True
     elif ot.find('[]') > 0:
         parameter['type'] = ot.replace('[]', '')
@@ -652,7 +650,6 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'channel_name_ctype',
                     'use_in_python_api': True,
                     'python_name_or_default_for_init': 'channel_name',
-                    'original_type': 'ViString',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -720,7 +717,6 @@ def test_add_all_metadata_simple():
                 'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
-                'original_type': 'ViString',
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
