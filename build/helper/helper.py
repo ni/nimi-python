@@ -54,6 +54,7 @@ def get_python_type_for_api_type(api_type, config):
         'ViSession': 'int',
         'ViAttr': 'int',
         'ViChar': 'int',
+        'ViChar[]': 'str',
         'ViBoolean': 'bool',
         'ViRsrc': 'str',
     }
