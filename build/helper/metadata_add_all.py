@@ -305,7 +305,11 @@ def _add_converter_defaults(a, attributes):
 
 
 def _add_default_attribute_class(a, attributes):
-    '''Set 'attribute_class' if not set'''
+    '''Set 'attribute_class' if not set.
+
+    By default, the 'attribute_class' is only based on the 'type'.
+    It can be set in attributes_addon if we want to convert to/from a different datatype, such as datetime.timedelta
+    '''
     if 'attribute_class' not in attributes[a]:
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
 
