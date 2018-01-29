@@ -32,15 +32,14 @@ def convert_timedelta_to_microseconds(value, library_type):
 
 
 def convert_iterable_to_ctypes(value, library_type=None):
-    ctypes_type = None
     if isinstance(value, array.array):
         addr, _ = value.buffer_info()
-        ctypes_type = ctypes.cast(addr, ctypes.POINTER(library_type))
+        return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        ctypes_type = numpy.ctypeslib.as_ctypes(value)
+        return numpy.ctypeslib.as_ctypes(value)
 
-    return ctypes_type
+    return None
 
 
 # Tests
