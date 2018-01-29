@@ -74,6 +74,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             ${param_name}_ref = ${param_name}.contents
         except AttributeError:
             ${param_name}_ref = ${param_name}
+        assert len(${param_name}_ref) >= len(test_value)
         for i in range(len(test_value)):
             ${param_name}_ref[i] = test_value[i]
 %       else:
@@ -90,6 +91,7 @@ param_name = p['python_name']
 if p['is_array']:
     param_name += '.contents'
 %>\
+        assert len(${param_name}) >= len(test_value)
         for i in range(len(test_value)):
             ${param_name}[i] = test_value[i]
 %           else:
