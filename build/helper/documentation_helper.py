@@ -414,7 +414,7 @@ def format_type_for_rst_documentation(param, numpy, config):
         p_type = param['python_type']
 
     if param['is_string'] is True:
-        p_type = 'string'
+        p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
         p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
     elif param['is_list'] is True:
@@ -492,7 +492,7 @@ def _format_type_for_docstring(param, numpy, config):
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
     if param['is_string'] is True:
-        p_type = 'string'
+        p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
         p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
     elif param['is_list'] is True:
