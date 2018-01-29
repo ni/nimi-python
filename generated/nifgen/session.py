@@ -1230,7 +1230,7 @@ class _SessionBase(object):
             session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
-            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
+            coefficients_array (array.array("d")): Specifies the array of data the onboard signal processor uses for the
                 FIR filter coefficients. For the NI 5441, provide a symmetric array of
                 95 coefficients to this parameter. The array must have at least as many
                 elements as the value that you specify in the **numberOfCoefficients**
@@ -1478,7 +1478,7 @@ class _SessionBase(object):
             session['0,1'].create_waveform(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+            waveform_data_array (array.array("d")): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 
 
         Returns:
@@ -1520,7 +1520,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -1568,7 +1568,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_data_array (numpy array of float64): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -1749,7 +1749,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_i16(waveform_data_array)
 
         Args:
-            waveform_data_array (numpy array of int16): Specify the array of data that you want to use for the new arbitrary
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in the Waveform Size parameter.
                 You must normalize the data points in the array to be between -32768 and
@@ -1807,7 +1807,7 @@ class _SessionBase(object):
             session['0,1'].define_user_standard_waveform(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -2647,7 +2647,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
 
@@ -2703,7 +2703,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2751,7 +2751,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2797,7 +2797,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2881,7 +2881,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2930,7 +2930,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2972,7 +2972,7 @@ class _SessionBase(object):
         Args:
             waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
 
-            data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+            data (array.array("d")): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 
         '''
         use_named = isinstance(waveform_name_or_handle, str)
@@ -3500,7 +3500,7 @@ class Session(_SessionBase):
         function.
 
         Args:
-            waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
+            waveform_handles_array (array.array("l")): Specifies the array of waveform handles from which you want to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value that you specify in **sequenceLength**. Each
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
@@ -3517,7 +3517,7 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
-            loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
+            loop_counts_array (array.array("l")): Specifies the array of loop counts you want to use to create a new
                 arbitrary sequence. The array must have at least as many elements as the
                 value that you specify in the **sequenceLength** parameter. Each
                 **loopCountsArray** element corresponds to a **waveformHandlesArray**
@@ -3529,7 +3529,7 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
-            sample_counts_array (list of int): Specifies the array of sample counts that you want to use to create a
+            sample_counts_array (array.array("l")): Specifies the array of sample counts that you want to use to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value you specify in the **sequenceLength** parameter. Each
                 **sampleCountsArray** element corresponds to a **waveformHandlesArray**
@@ -3542,7 +3542,7 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
-            marker_location_array (list of int): Specifies the array of marker locations to where you want a marker to be
+            marker_location_array (array.array("l")): Specifies the array of marker locations to where you want a marker to be
                 generated in the sequence. The array must have at least as many elements
                 as the value you specify in the **sequenceLength** parameter. Each
                 **markerLocationArray** element corresponds to a
@@ -3564,7 +3564,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            coerced_markers_array (list of int): Returns an array of all given markers that are coerced (rounded) to the
+            coerced_markers_array (array.array("l")): Returns an array of all given markers that are coerced (rounded) to the
                 nearest marker quantum. Not all devices coerce markers.
 
                 **Default Value**: None
@@ -3612,7 +3612,7 @@ class Session(_SessionBase):
         function.
 
         Args:
-            waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
+            waveform_handles_array (array.array("l")): Specifies the array of waveform handles from which you want to create a
                 new arbitrary sequence. The array must have at least as many elements as
                 the value that you specify in **sequenceLength**. Each
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
@@ -3629,7 +3629,7 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
-            loop_counts_array (list of int): Specifies the array of loop counts you want to use to create a new
+            loop_counts_array (array.array("l")): Specifies the array of loop counts you want to use to create a new
                 arbitrary sequence. The array must have at least as many elements as the
                 value that you specify in the **sequenceLength** parameter. Each
                 **loopCountsArray** element corresponds to a **waveformHandlesArray**
@@ -3706,7 +3706,7 @@ class Session(_SessionBase):
                 | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
                 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
 
-            frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
+            frequency_array (array.array("d")): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
                 **frequencyListLength**. Each **frequencyArray** element has a
                 corresponding **durationArray** element that indicates how long that
@@ -3716,7 +3716,7 @@ class Session(_SessionBase):
 
                 **Default Value**: None
 
-            duration_array (list of float): Specifies the array of durations to form the frequency list. The array
+            duration_array (array.array("d")): Specifies the array of durations to form the frequency list. The array
                 must have at least as many elements as the value that you specify in
                 **frequencyListLength**. Each **durationArray** element has a
                 corresponding **frequencyArray** element and indicates how long in

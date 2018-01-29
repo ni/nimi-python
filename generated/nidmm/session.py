@@ -1532,7 +1532,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
@@ -1581,7 +1581,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (array.array("d")): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
@@ -1606,7 +1606,7 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
-            waveform_array (numpy array of float64): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
             maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
@@ -1625,7 +1625,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_array (numpy array of float64): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
@@ -2132,7 +2132,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
@@ -2227,7 +2227,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_array (list of float): An array of measurement values.
+            waveform_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you

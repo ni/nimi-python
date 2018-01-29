@@ -472,7 +472,7 @@ nifgen.Session methods
         
 
 
-    :type coefficients_array: list of float
+    :type coefficients_array: array.array("d")
 
 .. py:method:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
 
@@ -1037,7 +1037,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_handles_array: list of int
+    :type waveform_handles_array: array.array("l")
     :param loop_counts_array:
 
 
@@ -1056,7 +1056,7 @@ nifgen.Session methods
         
 
 
-    :type loop_counts_array: list of int
+    :type loop_counts_array: array.array("l")
     :param sample_counts_array:
 
 
@@ -1076,7 +1076,7 @@ nifgen.Session methods
         
 
 
-    :type sample_counts_array: list of int
+    :type sample_counts_array: array.array("l")
     :param marker_location_array:
 
 
@@ -1102,13 +1102,13 @@ nifgen.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type marker_location_array: list of int
+    :type marker_location_array: array.array("l")
 
     :rtype: tuple (coerced_markers_array, sequence_handle)
 
         WHERE
 
-        coerced_markers_array (list of int): 
+        coerced_markers_array (array.array("l")): 
 
 
             Returns an array of all given markers that are coerced (rounded) to the
@@ -1174,7 +1174,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_handles_array: list of int
+    :type waveform_handles_array: array.array("l")
     :param loop_counts_array:
 
 
@@ -1193,7 +1193,7 @@ nifgen.Session methods
         
 
 
-    :type loop_counts_array: list of int
+    :type loop_counts_array: array.array("l")
 
     :rtype: int
     :return:
@@ -1276,7 +1276,7 @@ nifgen.Session methods
         
 
 
-    :type frequency_array: list of float
+    :type frequency_array: array.array("d")
     :param duration_array:
 
 
@@ -1293,7 +1293,7 @@ nifgen.Session methods
         
 
 
-    :type duration_array: list of float
+    :type duration_array: array.array("d")
 
     :rtype: int
     :return:
@@ -1479,7 +1479,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_data_array: list of float
+    :type waveform_data_array: array.array("d")
 
     :rtype: int
     :return:
@@ -1536,7 +1536,7 @@ nifgen.Session methods
         
 
 
-    :type waveform_data_array: list of float
+    :type waveform_data_array: array.array("d")
 
 .. py:method:: delete_named_waveform(waveform_name)
 
@@ -2627,6 +2627,6 @@ nifgen.Session methods
         
 
 
-    :type data: list of float
+    :type data: array.array("d")
 
 

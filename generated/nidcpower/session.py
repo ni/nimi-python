@@ -1609,10 +1609,10 @@ class _SessionBase(object):
 
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
+            current_measurements (array.array("d")): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
             in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
@@ -2035,12 +2035,12 @@ class _SessionBase(object):
             session['0,1'].measure_multiple()
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
+            current_measurements (array.array("d")): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
@@ -2587,12 +2587,12 @@ class _SessionBase(object):
             session['0,1'].set_sequence(source_delays, values=None)
 
         Args:
-            source_delays (list of float): Specifies the source delay that follows the configuration of each value
+            source_delays (array.array("d")): Specifies the source delay that follows the configuration of each value
                 in the sequence.
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
 
-            values (list of float): Specifies the series of voltage levels or current levels, depending on
+            values (array.array("d")): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
@@ -3007,7 +3007,7 @@ class Session(_SessionBase):
         Args:
             sequence_name (str): Specifies the name of the sequence to create.
 
-            attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
+            attribute_ids (array.array("l")): Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
                 in an advanced sequence for each NI-DCPower device that supports
                 advanced sequencing. A ✓ indicates that the attribute can be configured

@@ -1552,7 +1552,7 @@ class _SessionBase(object):
             session['0,1'].configure_equalization_filter_coefficients(coefficients)
 
         Args:
-            coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
+            coefficients (array.array("d")): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
                 `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
@@ -1656,7 +1656,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1750,7 +1750,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1777,7 +1777,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy array of float64): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1798,7 +1798,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
+            wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
                 -  **relativeInitialX**—the time (in seconds) from the trigger to the
@@ -1875,7 +1875,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            wfm (numpy array of int16): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1902,7 +1902,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy array of int16): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1923,7 +1923,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
+            wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
                 -  **relativeInitialX**—the time (in seconds) from the trigger to the
@@ -2000,7 +2000,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            wfm (numpy array of int32): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2027,7 +2027,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy array of int32): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2048,7 +2048,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
+            wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
                 -  **relativeInitialX**—the time (in seconds) from the trigger to the
@@ -2125,7 +2125,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2152,7 +2152,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy array of int8): Returns an array whose length is the **numSamples** times number of
+            wfm (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2173,7 +2173,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            wfm_info (numpy array of WaveformInfo): Returns an array of structures with the following timing and scaling
+            wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
 
                 -  **relativeInitialX**—the time (in seconds) from the trigger to the
@@ -2248,7 +2248,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function throws an exception.
 
-            wfm (list of float): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
+            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
                 be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of
                 waveforms.
 
@@ -2354,7 +2354,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call _actual_num_wfms to determine the number of
                 waveforms.
 
@@ -2428,7 +2428,7 @@ class _SessionBase(object):
 
 
         Returns:
-            result (list of float): Contains an array of all measurements acquired; call
+            result (array.array("d")): Contains an array of all measurements acquired; call
                 _actual_num_wfms to determine the array length.
 
         '''
@@ -2492,21 +2492,21 @@ class _SessionBase(object):
 
 
         Returns:
-            result (list of float): Returns the resulting measurement
+            result (array.array("d")): Returns the resulting measurement
 
-            mean (list of float): Returns the mean scalar value, which is obtained by averaging each
+            mean (array.array("d")): Returns the mean scalar value, which is obtained by averaging each
                 fetch_measurement_stats call.
 
-            stdev (list of float): Returns the standard deviation of the most recent **numInStats**
+            stdev (array.array("d")): Returns the standard deviation of the most recent **numInStats**
                 measurements.
 
-            min (list of float): Returns the smallest scalar value acquired (the minimum of the
+            min (array.array("d")): Returns the smallest scalar value acquired (the minimum of the
                 **numInStats** measurements).
 
-            max (list of float): Returns the largest scalar value acquired (the maximum of the
+            max (array.array("d")): Returns the largest scalar value acquired (the maximum of the
                 **numInStats** measurements).
 
-            num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
+            num_in_stats (array.array("l")): Returns the number of times fetch_measurement_stats has been
                 called.
 
         '''
@@ -2718,7 +2718,7 @@ class _SessionBase(object):
 
 
         Returns:
-            coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
+            coefficients (array.array("d")): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
                 `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
@@ -2815,7 +2815,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2911,7 +2911,7 @@ class _SessionBase(object):
 
 
         Returns:
-            result (list of float): Contains an array of all measurements acquired. Call
+            result (array.array("d")): Contains an array of all measurements acquired. Call
                 _actual_num_wfms to determine the array length.
 
         '''

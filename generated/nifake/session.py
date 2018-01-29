@@ -587,7 +587,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_data (list of float): Samples fetched from the device. Array should be numberOfSamples big.
+            waveform_data (array.array("d")): Samples fetched from the device. Array should be numberOfSamples big.
 
             actual_number_of_samples (int): Number of samples actually fetched.
 
@@ -608,11 +608,11 @@ class Session(_SessionBase):
         Returns waveform data.
 
         Args:
-            waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+            waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
 
         Returns:
-            waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+            waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
             actual_number_of_samples (int): Number of samples actually fetched.
 
@@ -722,7 +722,7 @@ class Session(_SessionBase):
         This function returns an array for use in python-code size mechanism.
 
         Returns:
-            array_out (list of float): Array of double using puthon-code size mechanism
+            array_out (array.array("d")): Array of double using puthon-code size mechanism
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -944,17 +944,17 @@ class Session(_SessionBase):
         Args:
             output_array_size (int): Size of the array that will be returned.
 
-            input_array_of_floats (list of float): Array of floats
+            input_array_of_floats (array.array("d")): Array of floats
 
-            input_array_of_integers (list of int): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
+            input_array_of_integers (array.array("h")): Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.
 
 
         Returns:
-            output_array (list of float): Array that will be returned.
+            output_array (array.array("d")): Array that will be returned.
 
                 Note: The size must be at least outputArraySize.
 
-            output_array_of_fixed_length (list of float): An array of doubles with fixed size.
+            output_array_of_fixed_length (array.array("d")): An array of doubles with fixed size.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1119,7 +1119,7 @@ class Session(_SessionBase):
 
             a_float_enum (enums.FloatEnum): A float enum.
 
-            an_array (list of float): An array of measurement values.
+            an_array (array.array("d")): An array of measurement values.
 
                 Note: The size must be at least arraySize.
 
@@ -1222,7 +1222,7 @@ class Session(_SessionBase):
         Writes waveform to the driver
 
         Args:
-            waveform (list of float): Waveform data.
+            waveform (array.array("d")): Waveform data.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1239,7 +1239,7 @@ class Session(_SessionBase):
         Writes waveform to the driver
 
         Args:
-            waveform (numpy array of float64): Waveform data.
+            waveform (numpy.array(dtype=numpy.float64)): Waveform data.
 
         '''
         import numpy

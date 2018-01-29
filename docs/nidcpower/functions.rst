@@ -512,7 +512,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
 
-    :type attribute_ids: list of int
+    :type attribute_ids: array.array("l")
     :param set_as_active_sequence:
 
 
@@ -769,7 +769,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (list of float): 
+        voltage_measurements (array.array("d")): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -778,7 +778,7 @@ nidcpower.Session methods
             
 
 
-        current_measurements (list of float): 
+        current_measurements (array.array("d")): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
@@ -1104,7 +1104,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (list of float): 
+        voltage_measurements (array.array("d")): 
 
 
             Returns an array of voltage measurements. The measurements in the array
@@ -1115,7 +1115,7 @@ nidcpower.Session methods
             
 
 
-        current_measurements (list of float): 
+        current_measurements (array.array("d")): 
 
 
             Returns an array of current measurements. The measurements in the array
@@ -1532,7 +1532,7 @@ nidcpower.Session methods
         
 
 
-    :type source_delays: list of float
+    :type source_delays: array.array("d")
     :param values:
 
 
@@ -1546,7 +1546,7 @@ nidcpower.Session methods
         
 
 
-    :type values: list of float
+    :type values: array.array("d")
 
 .. py:method:: wait_for_event(event_id, timeout=10.0)
 
