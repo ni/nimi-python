@@ -88,7 +88,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             test_value = test_value.encode('ascii')
 <%
 param_name = p['python_name']
-if p['is_array']:
+if p['use_array']:
     param_name += '.contents'
 %>\
         assert len(${param_name}) >= len(test_value)

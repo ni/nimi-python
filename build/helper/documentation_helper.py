@@ -417,9 +417,9 @@ def format_type_for_rst_documentation(param, numpy, config):
         p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
         p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['is_list'] is True:
+    elif param['use_list'] is True:
         p_type = 'list of ' + p_type
-    elif param['is_array'] is True:
+    elif param['use_array'] is True:
         p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
@@ -495,9 +495,9 @@ def _format_type_for_docstring(param, numpy, config):
         p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
         p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['is_list'] is True:
+    elif param['use_list'] is True:
         p_type = 'list of ' + p_type
-    elif param['is_array'] is True:
+    elif param['use_array'] is True:
         p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
@@ -869,8 +869,8 @@ config = {
                     },
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
                     'is_repeated_capability': False,
@@ -905,8 +905,8 @@ wanted to choose.''',
                     },
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'turtle_type',
                     'python_name_with_doc_default': 'turtle_type',
                     'is_repeated_capability': False,
@@ -933,8 +933,8 @@ wanted to choose.''',
                     },
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'turtleId',
                     'python_name_with_doc_default': 'turtleId',
                     'is_repeated_capability': False,
@@ -973,8 +973,8 @@ wanted to choose.''',
                     'enum': None,
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': True,
                     'library_method_call_snippet': 'vi_ctype',
@@ -997,8 +997,8 @@ wanted to choose.''',
                     'enum': None,
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'number_of_samples_ctype',
@@ -1021,8 +1021,8 @@ wanted to choose.''',
                     'enum': None,
                     'is_buffer': True,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': True,
+                    'use_list': False,
+                    'use_array': True,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'waveform_data_ctype',
@@ -1047,8 +1047,8 @@ wanted to choose.''',
                     'enum': None,
                     'is_buffer': False,
                     'is_string': False,
-                    'is_list': False,
-                    'is_array': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'ctypes.pointer(actual_number_of_samples_ctype)',
