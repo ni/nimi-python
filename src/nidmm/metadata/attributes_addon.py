@@ -31,4 +31,13 @@ attributes_codegen_method = {
     1150031: { "codegen_method": "no" },  # SAMPLE_DELAY_MODE
 }
 
+attributes_converters = {
+    1150028: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1250005: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1250303: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+}
+
 

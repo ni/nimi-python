@@ -44,4 +44,9 @@ attributes_codegen_method = {
     1150408: { "codegen_method": "no" },  # P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS - P2P Attribute
 }
 
+attributes_converters = {
+    1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+}
+
 

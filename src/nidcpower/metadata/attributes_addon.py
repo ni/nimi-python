@@ -7,4 +7,16 @@ attributes_codegen_method = {
     1150020: { "enum": None           },  # POWER_LINE_FREQUENCY
 }
 
+attributes_converters = {
+    1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1150065: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1150093: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+    1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_api_converter_type': 'datetime.timedelta', },
+}
 
