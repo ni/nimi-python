@@ -251,13 +251,14 @@ class SideEffectsHelper(object):
         # reading_array
         if self._defaults['FetchMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
-        a = self._defaults['FetchMultiPoint']['readingArray']
+        test_value = self._defaults['FetchMultiPoint']['readingArray']
         try:
             reading_array_ref = reading_array.contents
         except AttributeError:
             reading_array_ref = reading_array
-        for i in range(min(len(reading_array_ref), len(a))):
-            reading_array_ref[i] = a[i]
+        assert len(reading_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            reading_array_ref[i] = test_value[i]
         # actual_number_of_points
         if self._defaults['FetchMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='actualNumberOfPoints')
@@ -270,13 +271,14 @@ class SideEffectsHelper(object):
         # waveform_array
         if self._defaults['FetchWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
-        a = self._defaults['FetchWaveform']['waveformArray']
+        test_value = self._defaults['FetchWaveform']['waveformArray']
         try:
             waveform_array_ref = waveform_array.contents
         except AttributeError:
             waveform_array_ref = waveform_array
-        for i in range(min(len(waveform_array_ref), len(a))):
-            waveform_array_ref[i] = a[i]
+        assert len(waveform_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            waveform_array_ref[i] = test_value[i]
         # actual_number_of_points
         if self._defaults['FetchWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='actualNumberOfPoints')
@@ -481,13 +483,14 @@ class SideEffectsHelper(object):
         # reading_array
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
-        a = self._defaults['ReadMultiPoint']['readingArray']
+        test_value = self._defaults['ReadMultiPoint']['readingArray']
         try:
             reading_array_ref = reading_array.contents
         except AttributeError:
             reading_array_ref = reading_array
-        for i in range(min(len(reading_array_ref), len(a))):
-            reading_array_ref[i] = a[i]
+        assert len(reading_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            reading_array_ref[i] = test_value[i]
         # actual_number_of_points
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='actualNumberOfPoints')
@@ -513,13 +516,14 @@ class SideEffectsHelper(object):
         # waveform_array
         if self._defaults['ReadWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
-        a = self._defaults['ReadWaveform']['waveformArray']
+        test_value = self._defaults['ReadWaveform']['waveformArray']
         try:
             waveform_array_ref = waveform_array.contents
         except AttributeError:
             waveform_array_ref = waveform_array
-        for i in range(min(len(waveform_array_ref), len(a))):
-            waveform_array_ref[i] = a[i]
+        assert len(waveform_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            waveform_array_ref[i] = test_value[i]
         # actual_number_of_points
         if self._defaults['ReadWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='actualNumberOfPoints')
@@ -572,11 +576,12 @@ class SideEffectsHelper(object):
         # error_message
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        a = self._defaults['error_message']['errorMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
+        test_value = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
         return self._defaults['error_message']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
@@ -594,11 +599,12 @@ class SideEffectsHelper(object):
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

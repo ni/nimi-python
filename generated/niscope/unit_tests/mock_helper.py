@@ -276,23 +276,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['Fetch']['Wfm'] is None:
             raise MockFunctionCallError("niScope_Fetch", param='Wfm')
-        a = self._defaults['Fetch']['Wfm']
+        test_value = self._defaults['Fetch']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['Fetch']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Fetch", param='wfmInfo')
-        a = self._defaults['Fetch']['wfmInfo']
+        test_value = self._defaults['Fetch']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['Fetch']['return']
 
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
@@ -301,23 +303,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['FetchBinary16']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary16", param='Wfm')
-        a = self._defaults['FetchBinary16']['Wfm']
+        test_value = self._defaults['FetchBinary16']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary16']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary16", param='wfmInfo')
-        a = self._defaults['FetchBinary16']['wfmInfo']
+        test_value = self._defaults['FetchBinary16']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary16']['return']
 
     def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
@@ -326,23 +330,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['FetchBinary32']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary32", param='Wfm')
-        a = self._defaults['FetchBinary32']['Wfm']
+        test_value = self._defaults['FetchBinary32']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary32']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary32", param='wfmInfo')
-        a = self._defaults['FetchBinary32']['wfmInfo']
+        test_value = self._defaults['FetchBinary32']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary32']['return']
 
     def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
@@ -351,23 +357,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['FetchBinary8']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchBinary8", param='Wfm')
-        a = self._defaults['FetchBinary8']['Wfm']
+        test_value = self._defaults['FetchBinary8']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary8']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary8", param='wfmInfo')
-        a = self._defaults['FetchBinary8']['wfmInfo']
+        test_value = self._defaults['FetchBinary8']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary8']['return']
 
     def niScope_FetchDispatcher(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
@@ -376,13 +384,14 @@ class SideEffectsHelper(object):
         # wfm_info
         if self._defaults['FetchDispatcher']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchDispatcher", param='wfmInfo')
-        a = self._defaults['FetchDispatcher']['wfmInfo']
+        test_value = self._defaults['FetchDispatcher']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchDispatcher']['return']
 
     def niScope_FetchDouble(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
@@ -391,23 +400,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['FetchDouble']['Wfm'] is None:
             raise MockFunctionCallError("niScope_FetchDouble", param='Wfm')
-        a = self._defaults['FetchDouble']['Wfm']
+        test_value = self._defaults['FetchDouble']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchDouble']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchDouble", param='wfmInfo')
-        a = self._defaults['FetchDouble']['wfmInfo']
+        test_value = self._defaults['FetchDouble']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchDouble']['return']
 
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
@@ -416,13 +427,14 @@ class SideEffectsHelper(object):
         # result
         if self._defaults['FetchMeasurement']['Result'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurement", param='Result')
-        a = self._defaults['FetchMeasurement']['Result']
+        test_value = self._defaults['FetchMeasurement']['Result']
         try:
             result_ref = result.contents
         except AttributeError:
             result_ref = result
-        for i in range(min(len(result_ref), len(a))):
-            result_ref[i] = a[i]
+        assert len(result_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            result_ref[i] = test_value[i]
         return self._defaults['FetchMeasurement']['return']
 
     def niScope_FetchMeasurementStats(self, vi, channel_list, timeout, scalar_meas_function, result, mean, stdev, min, max, num_in_stats):  # noqa: N802
@@ -431,63 +443,69 @@ class SideEffectsHelper(object):
         # result
         if self._defaults['FetchMeasurementStats']['Result'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Result')
-        a = self._defaults['FetchMeasurementStats']['Result']
+        test_value = self._defaults['FetchMeasurementStats']['Result']
         try:
             result_ref = result.contents
         except AttributeError:
             result_ref = result
-        for i in range(min(len(result_ref), len(a))):
-            result_ref[i] = a[i]
+        assert len(result_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            result_ref[i] = test_value[i]
         # mean
         if self._defaults['FetchMeasurementStats']['Mean'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Mean')
-        a = self._defaults['FetchMeasurementStats']['Mean']
+        test_value = self._defaults['FetchMeasurementStats']['Mean']
         try:
             mean_ref = mean.contents
         except AttributeError:
             mean_ref = mean
-        for i in range(min(len(mean_ref), len(a))):
-            mean_ref[i] = a[i]
+        assert len(mean_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            mean_ref[i] = test_value[i]
         # stdev
         if self._defaults['FetchMeasurementStats']['Stdev'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Stdev')
-        a = self._defaults['FetchMeasurementStats']['Stdev']
+        test_value = self._defaults['FetchMeasurementStats']['Stdev']
         try:
             stdev_ref = stdev.contents
         except AttributeError:
             stdev_ref = stdev
-        for i in range(min(len(stdev_ref), len(a))):
-            stdev_ref[i] = a[i]
+        assert len(stdev_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            stdev_ref[i] = test_value[i]
         # min
         if self._defaults['FetchMeasurementStats']['Min'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Min')
-        a = self._defaults['FetchMeasurementStats']['Min']
+        test_value = self._defaults['FetchMeasurementStats']['Min']
         try:
             min_ref = min.contents
         except AttributeError:
             min_ref = min
-        for i in range(min(len(min_ref), len(a))):
-            min_ref[i] = a[i]
+        assert len(min_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            min_ref[i] = test_value[i]
         # max
         if self._defaults['FetchMeasurementStats']['Max'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Max')
-        a = self._defaults['FetchMeasurementStats']['Max']
+        test_value = self._defaults['FetchMeasurementStats']['Max']
         try:
             max_ref = max.contents
         except AttributeError:
             max_ref = max
-        for i in range(min(len(max_ref), len(a))):
-            max_ref[i] = a[i]
+        assert len(max_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            max_ref[i] = test_value[i]
         # num_in_stats
         if self._defaults['FetchMeasurementStats']['numInStats'] is None:
             raise MockFunctionCallError("niScope_FetchMeasurementStats", param='numInStats')
-        a = self._defaults['FetchMeasurementStats']['numInStats']
+        test_value = self._defaults['FetchMeasurementStats']['numInStats']
         try:
             num_in_stats_ref = num_in_stats.contents
         except AttributeError:
             num_in_stats_ref = num_in_stats
-        for i in range(min(len(num_in_stats_ref), len(a))):
-            num_in_stats_ref[i] = a[i]
+        assert len(num_in_stats_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            num_in_stats_ref[i] = test_value[i]
         return self._defaults['FetchMeasurementStats']['return']
 
     def niScope_GetAttributeViBoolean(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -533,13 +551,14 @@ class SideEffectsHelper(object):
         # coefficients
         if self._defaults['GetEqualizationFilterCoefficients']['Coefficients'] is None:
             raise MockFunctionCallError("niScope_GetEqualizationFilterCoefficients", param='Coefficients')
-        a = self._defaults['GetEqualizationFilterCoefficients']['Coefficients']
+        test_value = self._defaults['GetEqualizationFilterCoefficients']['Coefficients']
         try:
             coefficients_ref = coefficients.contents
         except AttributeError:
             coefficients_ref = coefficients
-        for i in range(min(len(coefficients_ref), len(a))):
-            coefficients_ref[i] = a[i]
+        assert len(coefficients_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            coefficients_ref[i] = test_value[i]
         return self._defaults['GetEqualizationFilterCoefficients']['return']
 
     def niScope_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
@@ -586,23 +605,25 @@ class SideEffectsHelper(object):
         # wfm
         if self._defaults['Read']['Wfm'] is None:
             raise MockFunctionCallError("niScope_Read", param='Wfm')
-        a = self._defaults['Read']['Wfm']
+        test_value = self._defaults['Read']['Wfm']
         try:
             wfm_ref = wfm.contents
         except AttributeError:
             wfm_ref = wfm
-        for i in range(min(len(wfm_ref), len(a))):
-            wfm_ref[i] = a[i]
+        assert len(wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['Read']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Read", param='wfmInfo')
-        a = self._defaults['Read']['wfmInfo']
+        test_value = self._defaults['Read']['wfmInfo']
         try:
             wfm_info_ref = wfm_info.contents
         except AttributeError:
             wfm_info_ref = wfm_info
-        for i in range(min(len(wfm_info_ref), len(a))):
-            wfm_info_ref[i] = a[i]
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
         return self._defaults['Read']['return']
 
     def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
@@ -611,13 +632,14 @@ class SideEffectsHelper(object):
         # result
         if self._defaults['ReadMeasurement']['Result'] is None:
             raise MockFunctionCallError("niScope_ReadMeasurement", param='Result')
-        a = self._defaults['ReadMeasurement']['Result']
+        test_value = self._defaults['ReadMeasurement']['Result']
         try:
             result_ref = result.contents
         except AttributeError:
             result_ref = result
-        for i in range(min(len(result_ref), len(a))):
-            result_ref[i] = a[i]
+        assert len(result_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            result_ref[i] = test_value[i]
         return self._defaults['ReadMeasurement']['return']
 
     def niScope_ResetDevice(self, vi):  # noqa: N802
@@ -675,11 +697,12 @@ class SideEffectsHelper(object):
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
