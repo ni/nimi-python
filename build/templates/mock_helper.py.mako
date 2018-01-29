@@ -68,30 +68,30 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
 %       if p['is_buffer']:
-        a = self._defaults['${func_name}']['${p['name']}']
+        test_value = self._defaults['${func_name}']['${p['name']}']
 <% param_name = p['python_name'] %>\
         try:
             ${param_name}_ref = ${param_name}.contents
         except AttributeError:
             ${param_name}_ref = ${param_name}
-        for i in range(min(len(${param_name}_ref), len(a))):
-            ${param_name}_ref[i] = a[i]
+        for i in range(len(test_value)):
+            ${param_name}_ref[i] = test_value[i]
 %       else:
 %           if helper.find_custom_type(p, config) is not None:
         for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
             field_name = field[0]
             setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           elif p['is_string']:
-        a = self._defaults['${func_name}']['${p['name']}']
+        test_value = self._defaults['${func_name}']['${p['name']}']
         if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
+            test_value = test_value.encode('ascii')
 <%
 param_name = p['python_name']
 if p['is_array']:
     param_name += '.contents'
 %>\
-        for i in range(min(len(${param_name}), len(a))):
-            ${param_name}[i] = a[i]
+        for i in range(len(test_value)):
+            ${param_name}[i] = test_value[i]
 %           else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %           endif
