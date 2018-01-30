@@ -286,7 +286,7 @@ niscope.Session methods
         
 
 
-    :type coefficients: array.array("d")
+    :type coefficients: list of float
 
 .. py:method:: configure_horizontal_timing(min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime)
 
@@ -1245,7 +1245,7 @@ niscope.Session methods
 
         WHERE
 
-        wfm (array.array("d")): 
+        wfm (list of float): 
 
 
             Returns an array whose length is the **numSamples** times number of
@@ -1373,7 +1373,7 @@ niscope.Session methods
         
 
 
-    :type wfm: array.array("d")
+    :type wfm: list of float
     :param timeout:
 
 
@@ -1461,7 +1461,7 @@ niscope.Session methods
 
     :type timeout: float
 
-    :rtype: array.array("d")
+    :rtype: list of float
     :return:
 
 
@@ -1539,7 +1539,7 @@ niscope.Session methods
 
         WHERE
 
-        result (array.array("d")): 
+        result (list of float): 
 
 
             Returns the resulting measurement
@@ -1547,7 +1547,7 @@ niscope.Session methods
             
 
 
-        mean (array.array("d")): 
+        mean (list of float): 
 
 
             Returns the mean scalar value, which is obtained by averaging each
@@ -1556,7 +1556,7 @@ niscope.Session methods
             
 
 
-        stdev (array.array("d")): 
+        stdev (list of float): 
 
 
             Returns the standard deviation of the most recent **numInStats**
@@ -1565,7 +1565,7 @@ niscope.Session methods
             
 
 
-        min (array.array("d")): 
+        min (list of float): 
 
 
             Returns the smallest scalar value acquired (the minimum of the
@@ -1574,7 +1574,7 @@ niscope.Session methods
             
 
 
-        max (array.array("d")): 
+        max (list of float): 
 
 
             Returns the largest scalar value acquired (the maximum of the
@@ -1583,7 +1583,7 @@ niscope.Session methods
             
 
 
-        num_in_stats (array.array("l")): 
+        num_in_stats (list of int): 
 
 
             Returns the number of times :py:meth:`niscope.Session.fetch_measurement_stats` has been
@@ -1624,7 +1624,7 @@ niscope.Session methods
 
     :type number_of_coefficients: int
 
-    :rtype: array.array("d")
+    :rtype: list of float
     :return:
 
 
@@ -1713,7 +1713,7 @@ niscope.Session methods
 
         WHERE
 
-        wfm (array.array("d")): 
+        wfm (list of float): 
 
 
             Returns an array whose length is the **numSamples** times number of
@@ -1824,7 +1824,7 @@ niscope.Session methods
 
     :type timeout: float
 
-    :rtype: array.array("d")
+    :rtype: list of float
     :return:
 
 
