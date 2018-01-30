@@ -303,9 +303,14 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         if custom_type is not None:
             definition = '({0}.{1} * len({2}))(*[{0}.{1}(c) for c in {2}])  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            declaration = '{2}_array = None if {2} is None else (array.array("{3}", {2}))  # case B550'.format(module_name, parameter['ctypes_type'], parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-            definitions.append(declaration)
-            definition = 'None if {1} is None else (_converters.convert_iterable_to_ctypes({1}_array, ({0}.{2})))  # case B550'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
+            if parameter['use_array']:
+                declaration = '{2}_array = None if {2} is None else (array.array("{3}", {2}))  # case B550'.format(module_name, parameter['ctypes_type'], parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                definitions.append(declaration)
+                definition = 'None if {1} is None else (_converters.convert_iterable_to_ctypes({1}_array, ({0}.{2})))  # case B550'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
+            elif parameter['use_list']:
+                definition = 'None if {2} is None else ({0}.{1} * len({2}))(*{2})  # case B550'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            else:
+                assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     else:
         assert parameter['direction'] == 'out'
         assert 'size' in parameter, "Parameter {0} is output buffer but metadata doesn't define its 'size'".format(parameter['name'])
