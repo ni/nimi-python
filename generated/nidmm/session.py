@@ -1546,7 +1546,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = _converters.convert_iterable_to_ctypes(reading_array_array, (visatype.ViReal64))  # case B600
+        reading_array_ctype = _converters.convert_buffer_to_ctypes(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1592,7 +1592,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array_array, (visatype.ViReal64))  # case B600
+        waveform_array_ctype = _converters.convert_buffer_to_ctypes(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1644,7 +1644,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array)  # case B510
+        waveform_array_ctype = _converters.convert_buffer_to_ctypes(value=waveform_array)  # case B510
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2146,7 +2146,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = _converters.convert_iterable_to_ctypes(reading_array_array, (visatype.ViReal64))  # case B600
+        reading_array_ctype = _converters.convert_buffer_to_ctypes(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2241,7 +2241,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array_array, (visatype.ViReal64))  # case B600
+        waveform_array_ctype = _converters.convert_buffer_to_ctypes(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
