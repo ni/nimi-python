@@ -1493,6 +1493,13 @@ class _SessionBase(object):
                 return self._create_waveform_i16_numpy(waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
+        elif str(type(waveform_data_array)).find("'array.array'") != -1:
+            if waveform_data_array.typecode == 'd':
+                return self._create_waveform_f64(waveform_data_array)
+            elif waveform_data_array.typecode == 'h':
+                return self._create_waveform_i16(waveform_data_array)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._create_waveform_f64(waveform_data_array)
 
@@ -1519,7 +1526,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -1537,7 +1544,12 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case B550
+        if waveform_data_array is not None:  # case B550
+            if str(type(waveform_data_array)).find("'array.array'") != -1:  # case B550
+                waveform_data_array_array = waveform_data_array  # case B550
+            else:  # case B550
+                waveform_data_array_array = array.array("d", waveform_data_array)  # case B550
+        waveform_data_array_ctype = None if waveform_data_array is None else (_converters.convert_iterable_to_ctypes(waveform_data_array_array, (visatype.ViReal64)))  # case B550
         waveform_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2698,7 +2710,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2706,7 +2718,12 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case B550
+        if data is not None:  # case B550
+            if str(type(data)).find("'array.array'") != -1:  # case B550
+                data_array = data  # case B550
+            else:  # case B550
+                data_array = array.array("d", data)  # case B550
+        data_ctype = None if data is None else (_converters.convert_iterable_to_ctypes(data_array, (visatype.ViReal64)))  # case B550
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2875,7 +2892,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2883,7 +2900,12 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case B550
+        if data is not None:  # case B550
+            if str(type(data)).find("'array.array'") != -1:  # case B550
+                data_array = data  # case B550
+            else:  # case B550
+                data_array = array.array("d", data)  # case B550
+        data_ctype = None if data is None else (_converters.convert_iterable_to_ctypes(data_array, (visatype.ViReal64)))  # case B550
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2978,6 +3000,13 @@ class _SessionBase(object):
                 return self._write_named_waveform_i16_numpy(waveform_name_or_handle, data) if use_named else self._write_binary16_waveform_numpy(waveform_name_or_handle, data)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.dtype, numpy.float64, numpy.int16))
+        elif str(type(data)).find("'array.array'") != -1:
+            if data.typecode == 'd':
+                return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
+            elif data.typecode == 'h':
+                return self._write_named_waveform_i16(waveform_name_or_handle, data) if use_named else self._write_binary16_waveform(waveform_name_or_handle, data)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 

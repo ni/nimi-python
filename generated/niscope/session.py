@@ -1655,7 +1655,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -1706,11 +1706,13 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = visatype.ViReal64(timeout)  # case S150
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case B560
+        wfm_size = (num_samples * self._actual_num_wfms())  # case B560
+        wfm_array = array.array("d", [0] * wfm_size)  # case B560
+        wfm_ctype = _converters.convert_iterable_to_ctypes(wfm_array, (visatype.ViReal64))  # case B560
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_into(self, num_samples, wfm, timeout=5.0):
         '''_fetch
@@ -2245,7 +2247,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function throws an exception.
 
-            wfm (list of float): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
+            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
                 be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of
                 waveforms.
 
@@ -2796,7 +2798,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
+            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2847,11 +2849,13 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = visatype.ViReal64(timeout)  # case S150
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = (visatype.ViReal64 * (num_samples * self._actual_num_wfms()))()  # case B560
+        wfm_size = (num_samples * self._actual_num_wfms())  # case B560
+        wfm_array = array.array("d", [0] * wfm_size)  # case B560
+        wfm_ctype = _converters.convert_iterable_to_ctypes(wfm_array, (visatype.ViReal64))  # case B560
         wfm_info_ctype = (waveform_info.struct_niScope_wfmInfo * self._actual_num_wfms())()  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(wfm_ctype[i]) for i in range((num_samples * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def read_measurement(self, scalar_meas_function, timeout=5.0):
         '''read_measurement
@@ -2890,7 +2894,7 @@ class _SessionBase(object):
 
 
         Returns:
-            result (list of float): Contains an array of all measurements acquired. Call
+            result (array.array("d")): Contains an array of all measurements acquired. Call
                 _actual_num_wfms to determine the array length.
 
         '''
@@ -2900,10 +2904,12 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = visatype.ViReal64(timeout)  # case S150
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
-        result_ctype = (visatype.ViReal64 * self._actual_num_wfms())()  # case B560
+        result_size = self._actual_num_wfms()  # case B560
+        result_array = array.array("d", [0] * result_size)  # case B560
+        result_ctype = _converters.convert_iterable_to_ctypes(result_array, (visatype.ViReal64))  # case B560
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
+        return result_array
 
     def _set_attribute_vi_boolean(self, attribute_id, value):
         '''_set_attribute_vi_boolean

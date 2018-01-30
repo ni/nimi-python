@@ -767,7 +767,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (array.array("d")): 
 
 
             An array of measurement values.
@@ -834,7 +834,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (array.array("d")): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -1374,7 +1374,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (array.array("d")): 
 
 
             An array of measurement values.
@@ -1495,7 +1495,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (array.array("d")): 
 
 
             An array of measurement values.

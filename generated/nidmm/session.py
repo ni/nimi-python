@@ -1532,7 +1532,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
@@ -1544,11 +1544,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        reading_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
+        reading_array_size = array_size  # case B600
+        reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
+        reading_array_ctype = _converters.convert_iterable_to_ctypes(reading_array_array, (visatype.ViReal64))  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)]
+        return reading_array_array
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1579,7 +1581,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (array.array("d")): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
@@ -1588,11 +1590,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
+        waveform_array_size = array_size  # case B600
+        waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
+        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array_array, (visatype.ViReal64))  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
+        return waveform_array_array
 
     def fetch_waveform_into(self, waveform_array, maximum_time=-1):
         '''fetch_waveform
@@ -2128,7 +2132,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
@@ -2140,11 +2144,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        reading_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
+        reading_array_size = array_size  # case B600
+        reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
+        reading_array_ctype = _converters.convert_iterable_to_ctypes(reading_array_array, (visatype.ViReal64))  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)]
+        return reading_array_array
 
     def read_status(self):
         '''read_status
@@ -2221,7 +2227,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            waveform_array (list of float): An array of measurement values.
+            waveform_array (array.array("d")): An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
@@ -2233,11 +2239,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case B600
+        waveform_array_size = array_size  # case B600
+        waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
+        waveform_array_ctype = _converters.convert_iterable_to_ctypes(waveform_array_array, (visatype.ViReal64))  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)]
+        return waveform_array_array
 
     def reset_with_defaults(self):
         '''reset_with_defaults

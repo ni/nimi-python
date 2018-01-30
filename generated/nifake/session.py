@@ -1215,7 +1215,11 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
-        waveform_array = None if waveform is None else (array.array("d", waveform))  # case B550
+        if waveform is not None:  # case B550
+            if str(type(waveform)).find("'array.array'") != -1:  # case B550
+                waveform_array = waveform  # case B550
+            else:  # case B550
+                waveform_array = array.array("d", waveform)  # case B550
         waveform_ctype = None if waveform is None else (_converters.convert_iterable_to_ctypes(waveform_array, (visatype.ViReal64)))  # case B550
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

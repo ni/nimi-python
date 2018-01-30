@@ -1609,10 +1609,10 @@ class _SessionBase(object):
 
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
+            current_measurements (array.array("d")): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
             in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
@@ -1627,13 +1627,17 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = visatype.ViReal64(timeout)  # case S150
         count_ctype = visatype.ViInt32(count)  # case S190
-        voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
-        current_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
+        voltage_measurements_size = count  # case B600
+        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
+        voltage_measurements_ctype = _converters.convert_iterable_to_ctypes(voltage_measurements_array, (visatype.ViReal64))  # case B600
+        current_measurements_size = count  # case B600
+        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
+        current_measurements_ctype = _converters.convert_iterable_to_ctypes(current_measurements_array, (visatype.ViReal64))  # case B600
         in_compliance_ctype = (visatype.ViBoolean * count)()  # case B600
         actual_count_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+        return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean

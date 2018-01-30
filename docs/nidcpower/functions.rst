@@ -769,7 +769,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (list of float): 
+        voltage_measurements (array.array("d")): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -778,7 +778,7 @@ nidcpower.Session methods
             
 
 
-        current_measurements (list of float): 
+        current_measurements (array.array("d")): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
