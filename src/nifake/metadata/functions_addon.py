@@ -109,6 +109,12 @@ functions_numpy = {
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
+# Parameter that need to be array.array
+functions_array = {
+    'FetchWaveform':                        { 'parameters': { 2: { 'use_array': True, }, }, },
+    'WriteWaveform':                        { 'parameters': { 2: { 'use_array': True, }, }, },
+}
+
 # Functions not in original metadata.
 functions_additional_functions = {
     'GetLastCalDateAndTime': {
