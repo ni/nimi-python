@@ -318,10 +318,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 size_declaration = '{0}_size = {1}  # case B560'.format(parameter['python_name'], parameter['size']['value'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B560'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
-                definitions.append(ctypes_declaration)
+                definition = '_converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
             elif parameter['use_list']:
                 definition = '({0}.{1} * {2})()  # case B560'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             else:
@@ -331,10 +330,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 size_declaration = '{0}_size = {1}  # case B570'.format(parameter['python_name'], parameter['size']['value'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B570'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = '_converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
-                definitions.append(ctypes_declaration)
             elif parameter['use_list']:
                 definition = '({0}.{1} * {2})()  # case B570'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
             else:
@@ -347,10 +345,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 if parameter['use_array']:
                     size_declaration = '{0}_size = {1}.value  # case B590'.format(parameter['python_name'], size_parameter['ctypes_variable_name'])
                     array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B590'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                    ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definition = '_converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                     definitions.append(size_declaration)
                     definitions.append(array_declaration)
-                    definitions.append(ctypes_declaration)
                 elif parameter['use_list']:
                     definition = '({0}.{1} * {2}.value)()  # case B590'.format(module_name, parameter['ctypes_type'], size_parameter['ctypes_variable_name'])
                 else:
@@ -362,10 +359,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 size_declaration = '{0}_size = {1}  # case B600'.format(parameter['python_name'], size_parameter['python_name'])
                 array_declaration = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B600'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                ctypes_declaration = '{0} = _converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = '_converters.convert_iterable_to_ctypes({2}_array, ({1}.{3}))  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(size_declaration)
                 definitions.append(array_declaration)
-                definitions.append(ctypes_declaration)
             elif parameter['use_list']:
                 definition = '({0}.{1} * {2})()  # case B600'.format(module_name, parameter['ctypes_type'], size_parameter['python_name'])
             else:
@@ -373,8 +369,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
-    if definition is not None:
-        definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
+    definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
     return definitions
 
 
@@ -654,6 +649,8 @@ parameters_for_testing = [
         'enum': None,
         'is_buffer': True,
         'is_string': False,
+        'use_array': True,
+        'use_list': False,
         'is_repeated_capability': False,
         'is_session_handle': False,
         'library_method_call_snippet': 'input_array_ctype',
