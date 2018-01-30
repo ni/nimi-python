@@ -121,7 +121,6 @@ def _add_buffer_info(parameter, config):
 
     assert 'is_buffer' not in parameter or not parameter['is_buffer'], "if 'is_buffer' is in metadata then it must be set to False"
     assert 'is_string' not in parameter, "'is_string' should not be set by metadata or in addons"
-    assert 'use_array' not in parameter, "'use_array' should not be set by metadata or in addons"
     assert 'use_list' not in parameter, "'use_list' should not be set by metadata or in addons"
 
     is_string = False
@@ -137,14 +136,7 @@ def _add_buffer_info(parameter, config):
         parameter['type'] = oiginal_type.replace('[]', '')
         parameter['original_type'] = oiginal_type
 
-        # Now we need to determine if we are using lists or arrays. This will depend on if this is a custom type or not. We're not putting ustom types in arrays.
-        custom_type = False
-        for c in config['custom_types']:
-            if parameter['type'].lower() == c['ctypes_type'].lower():
-                custom_type = True
-
-        if custom_type or parameter['enum'] is not None or parameter['type'] == 'ViBoolean':
-            # Custom type, enums and booleans all need additional casting before being returned
+        if 'use_array' not in parameter or parameter['use_array'] is False:
             use_list = True
         else:
             use_array = True
@@ -153,7 +145,7 @@ def _add_buffer_info(parameter, config):
     use_list = parameter['is_buffer'] if 'is_buffer' in parameter else use_list
     use_array = parameter['is_buffer'] if 'is_buffer' in parameter else use_array
 
-    # Not populated, assume {'mechanism': 'fixed', 'value': 1}
+    # If not populated, assume {'mechanism': 'fixed', 'value': 1}
     parameter['size'] = parameter['size'] if 'size' in parameter else {'mechanism': 'fixed', 'value': 1}
 
     parameter['use_array'] = parameter['use_array'] if 'use_array' in parameter else use_array
