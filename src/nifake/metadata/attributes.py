@@ -100,4 +100,28 @@ attributes = {
             'description':'An attribute of type 64-bit integer with read/write access.',
         },
     },
+    1000007: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Double with Converter',
+        'name': 'READ_WRITE_DOUBLE_WITH_CONVERTER',
+        'resettable': 'No',
+        'type': 'ViReal64',
+        'documentation': {
+            'description': 'Attribute in seconds',
+        },
+    },
+    1000008: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Int with Converter',
+        'name': 'READ_WRITE_INTEGER_WITH_CONVERTER',
+        'resettable': 'No',
+        'type': 'ViInt32',
+        'documentation': {
+            'description': 'Attribute in milliseconds',
+        },
+    },
 }

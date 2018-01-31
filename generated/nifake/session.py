@@ -54,6 +54,11 @@ class _SessionBase(object):
 
     An attribute of type float with read/write access.
     '''
+    read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
+    '''Type: float
+
+    Attribute in seconds
+    '''
     read_write_int64 = attributes.AttributeViInt64(1000006)
     '''Type: int
 
@@ -63,6 +68,11 @@ class _SessionBase(object):
     '''Type: int
 
     An attribute of type integer with read/write access.
+    '''
+    read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
+    '''Type: int
+
+    Attribute in milliseconds
     '''
     read_write_string = attributes.AttributeViString(1000002)
     '''Type: str
