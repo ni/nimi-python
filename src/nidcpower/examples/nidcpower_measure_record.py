@@ -37,7 +37,7 @@ def example(argsv):
 
 
 def _main():
-    example(sys.argsv)
+    example(sys.argv)
 
 
 def test_example():
