@@ -304,6 +304,16 @@ def _add_python_name(a, attributes):
     attributes[a]['python_name'] = n
 
 
+def _add_default_attribute_class(a, attributes):
+    '''Set 'attribute_class' if not set.
+
+    By default, the 'attribute_class' is only based on the 'type'.
+    It can be set in attributes_addon if we want to convert to/from a different datatype, such as datetime.timedelta
+    '''
+    if 'attribute_class' not in attributes[a]:
+        attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config)
@@ -312,6 +322,7 @@ def add_all_attribute_metadata(attributes, config):
         _add_codegen_method(attributes[a])
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
+        _add_default_attribute_class(a, attributes)
 
     return attributes
 
@@ -740,7 +751,8 @@ def test_add_attributes_metadata_simple():
             'name': 'READ_WRITE_BOOL',
             'python_name': 'read_write_bool',
             'resettable': 'No',
-            'type': 'ViBoolean'
+            'type': 'ViBoolean',
+            'attribute_class': 'AttributeViBoolean',
         },
     }
 
