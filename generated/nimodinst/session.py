@@ -119,8 +119,9 @@ class _DeviceIterable(object):
         if self._current_index + 1 > self._count:
             raise StopIteration
         else:
+            dev = _Device(self._owner, self._current_index)
             self._current_index += 1
-            return _Device(self._owner, self._current_index)
+            return dev
 
     def next(self):
         return self.get_next()
