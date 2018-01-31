@@ -4,7 +4,7 @@ from itertools import groupby
 import os
 from psutil import Process
 
-LEAK_LIMIT = 10.0 * 1024.0  # 10 MB
+LEAK_LIMIT = 10.0 * 1024.0 * 1024.0  # 10 MB
 _proc = Process(os.getpid())
 START = 'START'
 END = 'END'
