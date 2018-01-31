@@ -9,7 +9,6 @@ def example():
             print("%d items" % len(session))
             print("{: >20} {: >15} {: >10}".format('Name', 'Model', 'S/N'))
         for d in session:
-            print('_index = {0}'.format(d._index))
             print("{: >20} {: >15} {: >10}".format(d.device_name, d.device_model, d.serial_number))
 
 
