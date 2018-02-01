@@ -9,7 +9,6 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -24,7 +23,6 @@ The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to ov
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -40,7 +38,6 @@ The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to ov
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -56,7 +53,6 @@ The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to ov
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -71,7 +67,6 @@ The default value is VI_FALSE.   Use the niSwitch_InitWithOptions  function to o
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -86,7 +81,6 @@ The default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to o
     1050007: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Driver Setup',
         'name': 'DRIVER_SETUP',
         'resettable': 'No',
@@ -102,7 +96,6 @@ If the user does not specify a Driver Setup string, this attribute returns an em
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -119,7 +112,6 @@ Interchangeability checking examines the attributes in a  capability group only 
     1050203: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
         'resettable': 'No',
@@ -133,7 +125,6 @@ Indicates the number of channels that the specific instrument  driver supports.
     1050302: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
@@ -147,7 +138,6 @@ A string that contains the prefix for the instrument driver.  The name of each  
     1050304: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
@@ -163,7 +153,6 @@ If you initialize the instrument driver with the resource  descriptor, this attr
     1050305: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
@@ -178,7 +167,6 @@ You may pass a logical name to the niSwitch_init or  niSwitch_InitWithOptions fu
     1050327: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
@@ -192,7 +180,6 @@ Contains a comma-separated list of supported instrument models.
     1050401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
@@ -206,7 +193,6 @@ A string that contains a comma-separated list of class-extention groups that  th
     1050510: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
@@ -220,7 +206,6 @@ A string that contains the firmware revision information  for the instrument you
     1050511: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
@@ -234,7 +219,6 @@ A string that contains the name of the instrument manufacturer you are currently
     1050512: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
@@ -248,7 +232,6 @@ A string that contains the model number or name of the instrument that you  are 
     1050513: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
@@ -262,7 +245,6 @@ A string that contains the name of the vendor that supplies this driver.
     1050514: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
@@ -276,7 +258,6 @@ A string that contains a brief description of the specific  driver.
     1050515: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
@@ -290,7 +271,6 @@ The major version number of the IviSwtch class specification.
     1050516: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
@@ -304,7 +284,6 @@ The minor version number of the class specification with which this driver is co
     1050551: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
@@ -318,7 +297,6 @@ A string that contains additional version information about this  instrument dri
     1150001: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Serial Number',
         'name': 'SERIAL_NUMBER_I32',
         'resettable': 'No',
@@ -330,7 +308,6 @@ A string that contains additional version information about this  instrument dri
     1150002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Continuous Scan',
         'name': 'CONTINUOUS_SCAN',
         'resettable': 'No',
@@ -345,7 +322,6 @@ Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Comp
     1150004: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Is Waiting for Trigger?',
         'name': 'IS_WAITING_FOR_TRIG',
         'resettable': 'No',
@@ -357,7 +333,6 @@ Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Comp
     1150005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Trigger Mode',
         'name': 'TRIGGER_MODE',
         'resettable': 'No',
@@ -371,7 +346,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Master Slave Trigger Bus',
         'name': 'MASTER_SLAVE_TRIGGER_BUS',
         'resettable': 'No',
@@ -385,7 +359,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Master Slave Scan Advanced Bus',
         'name': 'MASTER_SLAVE_SCAN_ADVANCED_BUS',
         'resettable': 'No',
@@ -399,7 +372,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150008: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Cabled Module Trigger Bus',
         'name': 'CABLED_MODULE_TRIGGER_BUS',
         'resettable': 'No',
@@ -413,7 +385,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150009: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Cabled Module Scan Advanced Bus',
         'name': 'CABLED_MODULE_SCAN_ADVANCED_BUS',
         'resettable': 'No',
@@ -449,7 +420,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150012: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete Attributes:Parsed Scan List',
         'name': 'PARSED_SCAN_LIST',
         'resettable': 'No',
@@ -473,7 +443,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150014: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Module Characteristics:Number of Relays',
         'name': 'NUMBER_OF_RELAYS',
         'resettable': 'No',
@@ -485,7 +454,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150015: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Module Characteristics:Serial Number',
         'name': 'SERIAL_NUMBER',
         'resettable': 'No',
@@ -497,7 +465,6 @@ This attribute has been deprecated and may be removed from a future release of  
     1150016: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Digital Filter Enable',
         'name': 'DIGITAL_FILTER_ENABLE',
         'resettable': 'No',
@@ -512,7 +479,6 @@ When Digital Filter is disabled (VI_FALSE), it is possible for the switch  modul
     1150017: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Module Characteristics:Power Down Latching Relays After Debounce',
         'name': 'POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE',
         'resettable': 'No',
@@ -527,7 +493,6 @@ When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to 
     1150018: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Channel Configuration:Analog Bus Sharing Enable',
         'name': 'ANALOG_BUS_SHARING_ENABLE',
         'resettable': 'No',
@@ -542,7 +507,6 @@ Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI 
     1150019: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Module Characteristics:Temperature',
         'name': 'TEMPERATURE',
         'resettable': 'No',
@@ -556,7 +520,6 @@ This attribute returns the temperature as read by the Switch module.     The uni
     1250001: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Channel Configuration:Is Source Channel',
         'name': 'IS_SOURCE_CHANNEL',
         'resettable': 'No',
@@ -568,7 +531,6 @@ This attribute returns the temperature as read by the Switch module.     The uni
     1250002: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Module Characteristics:Is Debounced',
         'name': 'IS_DEBOUNCED',
         'resettable': 'No',
@@ -582,7 +544,6 @@ This attribute indicates whether the entire switch device has settled  since the
     1250003: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Channel Configuration:Is Configuration Channel',
         'name': 'IS_CONFIGURATION_CHANNEL',
         'resettable': 'No',
@@ -598,7 +559,6 @@ After you identify a channel as a configuration channel, you cannot  use that ch
     1250004: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Settling Time',
         'name': 'SETTLING_TIME',
         'resettable': 'No',
@@ -614,7 +574,6 @@ the greater value of the settling time and the value you specify as the  scan de
     1250005: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Bandwidth',
         'name': 'BANDWIDTH',
         'resettable': 'No',
@@ -629,7 +588,6 @@ The units are hertz.
     1250006: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum DC Voltage',
         'name': 'MAX_DC_VOLTAGE',
         'resettable': 'No',
@@ -644,7 +602,6 @@ The units are volts.
     1250007: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum AC Voltage',
         'name': 'MAX_AC_VOLTAGE',
         'resettable': 'No',
@@ -659,7 +616,6 @@ The units are volts RMS.
     1250008: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching DC Current',
         'name': 'MAX_SWITCHING_DC_CURRENT',
         'resettable': 'No',
@@ -674,7 +630,6 @@ The units are amperes.
     1250009: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching AC Current',
         'name': 'MAX_SWITCHING_AC_CURRENT',
         'resettable': 'No',
@@ -689,7 +644,6 @@ The units are amperes RMS.
     1250010: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry DC Current',
         'name': 'MAX_CARRY_DC_CURRENT',
         'resettable': 'No',
@@ -704,7 +658,6 @@ The units are amperes.
     1250011: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry AC Current',
         'name': 'MAX_CARRY_AC_CURRENT',
         'resettable': 'No',
@@ -719,7 +672,6 @@ The units are amperes RMS.
     1250012: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching DC Power',
         'name': 'MAX_SWITCHING_DC_POWER',
         'resettable': 'No',
@@ -734,7 +686,6 @@ The units are watts.
     1250013: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching AC Power',
         'name': 'MAX_SWITCHING_AC_POWER',
         'resettable': 'No',
@@ -749,7 +700,6 @@ The units are volt-amperes.
     1250014: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry DC Power',
         'name': 'MAX_CARRY_DC_POWER',
         'resettable': 'No',
@@ -764,7 +714,6 @@ The units are watts.
     1250015: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry AC Power',
         'name': 'MAX_CARRY_AC_POWER',
         'resettable': 'No',
@@ -779,7 +728,6 @@ The units are volt-amperes.
     1250016: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Characteristic Impedance',
         'name': 'CHARACTERISTIC_IMPEDANCE',
         'resettable': 'No',
@@ -794,7 +742,6 @@ The units are ohms.
     1250017: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Module Characteristics:Wire mode',
         'name': 'WIRE_MODE',
         'resettable': 'No',
@@ -809,7 +756,6 @@ This attribute affects the values of the NISWITCH_ATTR_NUM_OF_ROWS and  NISWITCH
     1250018: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Matrix Configuration:Number of Rows',
         'name': 'NUM_OF_ROWS',
         'resettable': 'No',
@@ -824,7 +770,6 @@ The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  rows.  Fo
     1250019: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Matrix Configuration:Number of Columns',
         'name': 'NUM_OF_COLUMNS',
         'resettable': 'No',
@@ -839,7 +784,6 @@ The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  columns. 
     1250020: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Scan List',
         'name': 'SCAN_LIST',
         'resettable': 'No',
@@ -907,7 +851,6 @@ This attribute specifies the method you want to use to notify another  instrumen
     1250024: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Is Scanning',
         'name': 'IS_SCANNING',
         'resettable': 'No',
@@ -919,7 +862,6 @@ This attribute specifies the method you want to use to notify another  instrumen
     1250025: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Scanning Configuration:Scan Delay',
         'name': 'SCAN_DELAY',
         'resettable': 'No',

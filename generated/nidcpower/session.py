@@ -135,6 +135,42 @@ class _SessionBase(object):
     '''
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based attributes, the IVI engine maintains a separate  cache value for each channel.
     '''
+    compliance_limit_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
+    '''
+    Specifies whether compliance limits for current generation and voltage
+    generation for the device are applied symmetrically about 0 V and 0 A or
+    asymmetrically with respect to 0 V and 0 A.
+    When set to **Symmetric**, voltage limits and current limits are set
+    using a single property with a positive value. The resulting range is
+    bounded by this positive value and its opposite.
+    When set to **Asymmetric**, you must separately set a limit high and a
+    limit low using distinct properties.
+    Asymmetric limits must meet the following requirements:
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Symmetric
+    **Related Topics:**
+    `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    compliance_limit_symmetry.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    compliance_limit_symmetry.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].compliance_limit_symmetry = var
+        var = session['0,1'].compliance_limit_symmetry
+    '''
     current_compensation_frequency = attributes.AttributeViReal64(1150071)
     '''
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
@@ -226,7 +262,7 @@ class _SessionBase(object):
     current_limit = attributes.AttributeViReal64(1250005)
     '''
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to  NIDCPOWER_VAL_SYMMETRIC.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
     Valid Values: The valid values for this attribute are defined by the values to which  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.
 
@@ -257,6 +293,86 @@ class _SessionBase(object):
 
         session['0,1'].current_limit_autorange = var
         var = session['0,1'].current_limit_autorange
+    '''
+    current_limit_high = attributes.AttributeViReal64(1150187)
+    '''
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired voltage on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Voltage**.
+    You must also specify a `Current Limit
+    Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Current Limit
+    Range <pniDCPower_CurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    current_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].current_limit_high = var
+        var = session['0,1'].current_limit_high
+    '''
+    current_limit_low = attributes.AttributeViReal64(1150188)
+    '''
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired voltage on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Voltage**.
+    You must also specify a `Current Limit
+    High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [-`Current Limit
+    Range <pniDCPower_CurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    current_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].current_limit_low = var
+        var = session['0,1'].current_limit_low
     '''
     current_limit_range = attributes.AttributeViReal64(1150004)
     '''
@@ -630,11 +746,15 @@ class _SessionBase(object):
     When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
     NIDCPOWER_ATTR_VOLTAGE_LEVEL
     NIDCPOWER_ATTR_CURRENT_LIMIT
+    NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH
+    NIDCPOWER_ATTR_CURRENT_LIMIT_LOW
     NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE
     NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE
     When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_CURRENT is selected:
     NIDCPOWER_ATTR_CURRENT_LEVEL
     NIDCPOWER_ATTR_VOLTAGE_LIMIT
+    NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH
+    NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW
     NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE
     NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE
     Default Value: NIDCPOWER_VAL_DC_VOLTAGE
@@ -752,6 +872,92 @@ class _SessionBase(object):
         session['0,1'].pulse_bias_current_limit = var
         var = session['0,1'].pulse_bias_current_limit
     '''
+    pulse_bias_current_limit_high = attributes.AttributeViReal64(1150195)
+    '''
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Bias Current Limit
+    Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [0, `Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_bias_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_bias_current_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_bias_current_limit_high = var
+        var = session['0,1'].pulse_bias_current_limit_high
+    '''
+    pulse_bias_current_limit_low = attributes.AttributeViReal64(1150196)
+    '''
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Bias Current Limit
+    High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_bias_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_bias_current_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_bias_current_limit_low = var
+        var = session['0,1'].pulse_bias_current_limit_low
+    '''
     pulse_bias_delay = attributes.AttributeViReal64(1150092)
     '''
     Determines when, in seconds, the device generates the Pulse Complete event after generating the off level of a pulse.
@@ -802,6 +1008,92 @@ class _SessionBase(object):
 
         session['0,1'].pulse_bias_voltage_limit = var
         var = session['0,1'].pulse_bias_voltage_limit
+    '''
+    pulse_bias_voltage_limit_high = attributes.AttributeViReal64(1150191)
+    '''
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Bias Voltage Limit
+    Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [0, `Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_bias_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_bias_voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_bias_voltage_limit_high = var
+        var = session['0,1'].pulse_bias_voltage_limit_high
+    '''
+    pulse_bias_voltage_limit_low = attributes.AttributeViReal64(1150192)
+    '''
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *off* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Bias Voltage Limit
+    High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_bias_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_bias_voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_bias_voltage_limit_low = var
+        var = session['0,1'].pulse_bias_voltage_limit_low
     '''
     pulse_complete_event_output_terminal = attributes.AttributeViString(1150099)
     '''
@@ -865,7 +1157,7 @@ class _SessionBase(object):
     pulse_current_limit = attributes.AttributeViReal64(1150081)
     '''
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY  attribute is set to NIDCPOWER_VAL_SYMMETRIC.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
@@ -878,6 +1170,92 @@ class _SessionBase(object):
 
         session['0,1'].pulse_current_limit = var
         var = session['0,1'].pulse_current_limit
+    '''
+    pulse_current_limit_high = attributes.AttributeViReal64(1150193)
+    '''
+    Specifies the maximum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Current Limit
+    Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_current_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_current_limit_high = var
+        var = session['0,1'].pulse_current_limit_high
+    '''
+    pulse_current_limit_low = attributes.AttributeViReal64(1150194)
+    '''
+    Specifies the minimum current, in amps, that the output can produce when
+    generating the desired pulse voltage on the specified channel(s) during
+    the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Voltage**.
+    You must also specify a `Pulse Current Limit
+    High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Current Limit
+    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_current_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_current_limit_low = var
+        var = session['0,1'].pulse_current_limit_low
     '''
     pulse_current_limit_range = attributes.AttributeViReal64(1150085)
     '''
@@ -976,7 +1354,7 @@ class _SessionBase(object):
     pulse_voltage_limit = attributes.AttributeViReal64(1150087)
     '''
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute  is set to NIDCPOWER_VAL_SYMMETRIC.
     Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
@@ -989,6 +1367,92 @@ class _SessionBase(object):
 
         session['0,1'].pulse_voltage_limit = var
         var = session['0,1'].pulse_voltage_limit
+    '''
+    pulse_voltage_limit_high = attributes.AttributeViReal64(1150189)
+    '''
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Voltage Limit
+    Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_voltage_limit_high = var
+        var = session['0,1'].pulse_voltage_limit_high
+    '''
+    pulse_voltage_limit_low = attributes.AttributeViReal64(1150190)
+    '''
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired pulse current on the specified channel(s)
+    during the *on* phase of a pulse.
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Current**.
+    You must also specify a `Pulse Voltage Limit
+    High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
+    asymmetric range.
+    **Valid Values:** [-`Pulse Voltage Limit
+    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE or if the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to a
+    pulsing function.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    pulse_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    pulse_voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].pulse_voltage_limit_low = var
+        var = session['0,1'].pulse_voltage_limit_low
     '''
     pulse_voltage_limit_range = attributes.AttributeViReal64(1150091)
     '''
@@ -1405,7 +1869,7 @@ class _SessionBase(object):
     voltage_limit = attributes.AttributeViReal64(1150010)
     '''
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
+    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT  and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_SYMMETRIC.
     NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
     Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.
 
@@ -1436,6 +1900,86 @@ class _SessionBase(object):
 
         session['0,1'].voltage_limit_autorange = var
         var = session['0,1'].voltage_limit_autorange
+    '''
+    voltage_limit_high = attributes.AttributeViReal64(1150185)
+    '''
+    Specifies the maximum voltage, in volts, that the output can produce
+    when generating the desired current on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Current**.
+    You must also specify a `Voltage Limit
+    Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [0, `Voltage Limit
+    Range <pniDCPower_VoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    voltage_limit_high.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].voltage_limit_high = var
+        var = session['0,1'].voltage_limit_high
+    '''
+    voltage_limit_low = attributes.AttributeViReal64(1150186)
+    '''
+    Specifies the minimum voltage, in volts, that the output can produce
+    when generating the desired current on the specified channel(s).
+    This property is applicable only if the `Compliance Limit
+    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    **Asymmetric** and the `Output
+    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Current**.
+    You must also specify a `Voltage Limit
+    High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
+    range.
+    **Valid Values:** [-`Voltage Limit
+    Range <pniDCPower_VoltageLimitRange.html>`__, 0]
+    The range bounded by the limit high and limit low must include zero. The
+    limit high and limit low must be separated by at least 2% of the
+    selected limit range.
+    **Default Value:** Refer to `Supported Properties by
+    Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+    the default value by device.
+    **Related Topics:**
+    `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+    `Changing
+    Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+    `Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+
+    Note:
+    The limit may be extended beyond the selected limit range if the
+    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    set to TRUE.
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    voltage_limit_low.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].voltage_limit_low = var
+        var = session['0,1'].voltage_limit_low
     '''
     voltage_limit_range = attributes.AttributeViReal64(1150012)
     '''
@@ -2791,10 +3335,7 @@ class Session(_SessionBase):
             input_terminal (str): Specifies the input terminal for the digital edge Pulse trigger.
 
                 You can specify any valid input terminal for this function. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
+                terminals are listed in MAX under the **Device Routes** tab.
 
                 Input terminals can be specified in one of two ways. If the device is
                 named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
@@ -3708,6 +4249,11 @@ class Session(_SessionBase):
 
         Performs the device self-test routine and returns the test result(s).
         Calling this function implicitly calls the reset function.
+
+        When calling self_test with the PXIe-4162/4163, specify all
+        channels of your PXIe-4162/4163 with the channels input of
+        _initialize_with_channels. You cannot self test a subset of
+        PXIe-4162/4163 channels.
 
         Returns:
             self_test_result (int): Returns the value result from the device self-test.
