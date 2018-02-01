@@ -57,9 +57,8 @@ exact buffer size required.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorInfo',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': 'The character buffer into which the error information string is copied.',
 },
@@ -224,9 +223,8 @@ size required.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': 'The character buffer into which the attribute value string is copied.',
 },

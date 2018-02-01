@@ -728,7 +728,7 @@ Enums used in NI-FGEN
 
 .. py:data:: P2PAddressType
 
-    .. py:attribute:: nifgen.P2PAddressType.PHYSICAL
+    .. py:attribute:: P2PAddressType.PHYSICAL
 
 
 
@@ -738,7 +738,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.P2PAddressType.VIRTUAL
+    .. py:attribute:: P2PAddressType.VIRTUAL
 
 
 

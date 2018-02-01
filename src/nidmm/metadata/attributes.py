@@ -9,7 +9,6 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -24,7 +23,6 @@ The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  ove
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -40,7 +38,6 @@ The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  ove
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -52,7 +49,6 @@ The default value is VI_TRUE (1). Use the niDMM_InitWithOptions function to  ove
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -68,7 +64,6 @@ Simulate can only be set within the InitWithOptions function.  The attribute val
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -83,7 +78,6 @@ The default value is VI_FALSE (0). Use the niDMM_InitWithOptions function to  ov
     1050007: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Driver Setup',
         'name': 'DRIVER_SETUP',
         'resettable': 'No',
@@ -99,7 +93,6 @@ If the user does not specify a Driver Setup string, this attribute returns  an e
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -116,7 +109,6 @@ Interchangeability checking examines the attributes in a capability group  only 
     1050101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Error Info:Primary Error',
         'name': 'PRIMARY_ERROR',
         'resettable': 'No',
@@ -135,7 +127,6 @@ defined by IVI, VISA, class drivers, or specific drivers.
     1050102: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Error Info:Secondary Error',
         'name': 'SECONDARY_ERROR',
         'resettable': 'No',
@@ -152,7 +143,6 @@ indicates no additional information.
     1050103: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration',
         'name': 'ERROR_ELABORATION',
         'resettable': 'No',
@@ -167,7 +157,6 @@ primary error condition.
     1050203: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
         'resettable': 'No',
@@ -179,7 +168,6 @@ primary error condition.
     1050302: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
@@ -194,7 +182,6 @@ The prefix can be up to a maximum of eight characters.
     1050304: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
@@ -208,7 +195,6 @@ A string containing the resource descriptor of the instrument.
     1050305: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
@@ -222,7 +208,6 @@ A string containing the logical name of the instrument.
     1050327: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
@@ -236,7 +221,6 @@ A string containing the instrument models supported by the specific driver.
     1050401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities',
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
@@ -250,7 +234,6 @@ A string containing the capabilities and extension groups supported by the  spec
     1050501: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version',
         'name': 'ENGINE_MAJOR_VERSION',
         'resettable': 'No',
@@ -262,7 +245,6 @@ A string containing the capabilities and extension groups supported by the  spec
     1050502: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version',
         'name': 'ENGINE_MINOR_VERSION',
         'resettable': 'No',
@@ -274,7 +256,6 @@ A string containing the capabilities and extension groups supported by the  spec
     1050503: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Major Version',
         'name': 'SPECIFIC_DRIVER_MAJOR_VERSION',
         'resettable': 'No',
@@ -288,7 +269,6 @@ Returns the major version number of this instrument driver.
     1050504: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Minor Version',
         'name': 'SPECIFIC_DRIVER_MINOR_VERSION',
         'resettable': 'No',
@@ -302,7 +282,6 @@ The minor version number of this instrument driver.
     1050510: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
@@ -316,7 +295,6 @@ A string containing the instrument firmware revision number.
     1050511: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
@@ -330,7 +308,6 @@ A string containing the manufacturer of the instrument.
     1050512: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Model',
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
@@ -344,7 +321,6 @@ A string containing the instrument model.
     1050513: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
@@ -358,7 +334,6 @@ A string containing the vendor of the specific driver.
     1050514: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
@@ -372,7 +347,6 @@ A string containing a description of the specific driver.
     1050515: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
@@ -386,7 +360,6 @@ The major version number of the class specification for the specific driver.
     1050516: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
@@ -400,7 +373,6 @@ The minor version number of the class specification for the specific driver.
     1050551: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Version Info:Specific Driver Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
@@ -414,7 +386,6 @@ A string that contains additional version information about this specific  instr
     1050553: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Inherent IVI Attributes:Version Info:Engine Revision',
         'name': 'ENGINE_REVISION',
         'resettable': 'No',
@@ -429,7 +400,6 @@ engine.
     1150001: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Obsolete:Misc:IDQuery response',
         'name': 'ID_QUERY_RESPONSE',
         'resettable': 'No',
@@ -457,7 +427,6 @@ Specifies the polarity of the generated measurement complete signal.
     1150003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Shunt Value',
         'name': 'SHUNT_VALUE',
         'resettable': 'No',
@@ -500,7 +469,6 @@ Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niD
     1150018: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Acquisition:Waveform Rate',
         'name': 'WAVEFORM_RATE',
         'resettable': 'No',
@@ -512,7 +480,6 @@ Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  niD
     1150019: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Acquisition:Waveform Points',
         'name': 'WAVEFORM_POINTS',
         'resettable': 'No',
@@ -598,7 +565,6 @@ For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisi
     1150028: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Advanced:Settle Time',
         'name': 'SETTLE_TIME',
         'resettable': 'No',
@@ -628,7 +594,6 @@ The NI 4050 and NI 4060 are not supported.
     1150031: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Sample Delay Mode',
         'name': 'SAMPLE_DELAY_MODE',
         'resettable': 'No',
@@ -646,7 +611,6 @@ NIDMM_ATTR_SAMPLE_INTERVAL is used as a delay after ANY type of Sample  Trigger
     1150032: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Advanced:Number Of Averages',
         'name': 'NUMBER_OF_AVERAGES',
         'resettable': 'No',
@@ -661,7 +625,6 @@ The NI 4050 and NI 4060 are not supported.
     1150034: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Advanced:Latency',
         'name': 'LATENCY',
         'resettable': 'No',
@@ -675,7 +638,6 @@ Specifies the number of measurements transferred at a time from the  instrument 
     1150037: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Advanced:Buffer Size',
         'name': 'BUFFER_SIZE',
         'resettable': 'No',
@@ -689,7 +651,6 @@ Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) 
     1150044: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Auto Range Value',
         'name': 'FREQ_VOLTAGE_AUTORANGE',
         'resettable': 'No',
@@ -718,7 +679,6 @@ Changing the function or the range through this attribute or through niDMM_Confi
     1150046: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance',
         'name': 'SHORT_CABLE_COMP_REACTANCE',
         'resettable': 'No',
@@ -733,7 +693,6 @@ Changing the function or the range through this attribute or through niDMM_Confi
     1150047: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance',
         'name': 'SHORT_CABLE_COMP_RESISTANCE',
         'resettable': 'No',
@@ -748,7 +707,6 @@ Changing the function or the range through this attribute or through niDMM_Confi
     1150048: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance',
         'name': 'OPEN_CABLE_COMP_SUSCEPTANCE',
         'resettable': 'No',
@@ -763,7 +721,6 @@ Changing the function or the range through this attribute or through niDMM_Confi
     1150049: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance',
         'name': 'OPEN_CABLE_COMP_CONDUCTANCE',
         'resettable': 'No',
@@ -806,7 +763,6 @@ For the NI 4072 only, controls the available DC bias for capacitance measurement
     1150054: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Serial Number',
         'name': 'SERIAL_NUMBER',
         'resettable': 'No',
@@ -820,7 +776,6 @@ A string containing the serial number of the instrument. This attribute correspo
     1150055: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average',
         'name': 'LC_NUMBER_MEAS_TO_AVERAGE',
         'resettable': 'No',
@@ -834,7 +789,6 @@ For the NI 4072 only, specifies the number of LC measurements that are averaged 
     1150061: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Instrument Product ID',
         'name': 'INSTRUMENT_PRODUCT_ID',
         'resettable': 'No',
@@ -861,7 +815,6 @@ Refer to the NIDMM_ATTR_TEMP_RTD_TYPE topic in the NI Digital Multimeters Help f
     1150121: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A',
         'name': 'TEMP_RTD_A',
         'resettable': 'No',
@@ -875,7 +828,6 @@ Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the RTD Typ
     1150122: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B',
         'name': 'TEMP_RTD_B',
         'resettable': 'No',
@@ -889,7 +841,6 @@ Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the RTD Typ
     1150123: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C',
         'name': 'TEMP_RTD_C',
         'resettable': 'No',
@@ -918,7 +869,6 @@ Refer to the NIDMM_ATTR_TEMP_THERMISTOR_TYPE topic in the NI Digital Multimeters
     1150125: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor A',
         'name': 'TEMP_THERMISTOR_A',
         'resettable': 'No',
@@ -932,7 +882,6 @@ Specifies the Steinhart-Hart A coefficient for thermistor scaling when the Therm
     1150126: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor B',
         'name': 'TEMP_THERMISTOR_B',
         'resettable': 'No',
@@ -946,7 +895,6 @@ Specifies the Steinhart-Hart B coefficient for thermistor scaling when the Therm
     1150127: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermistor:Thermistor C',
         'name': 'TEMP_THERMISTOR_C',
         'resettable': 'No',
@@ -976,7 +924,6 @@ If you are setting this attribute directly, you must also set the NIDMM_ATTR_OPE
     1250002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Range',
         'name': 'RANGE',
         'resettable': 'No',
@@ -1028,7 +975,6 @@ To determine which values are supported by each device, refer to the LabWindows/
     1250005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Trigger:Trigger Delay',
         'name': 'TRIGGER_DELAY',
         'resettable': 'No',
@@ -1048,7 +994,6 @@ Default Value: NIDMM_VAL_AUTO_DELAY
     1250006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Min Frequency',
         'name': 'AC_MIN_FREQ',
         'resettable': 'No',
@@ -1063,7 +1008,6 @@ The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for th
     1250007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Max Frequency',
         'name': 'AC_MAX_FREQ',
         'resettable': 'No',
@@ -1078,7 +1022,6 @@ The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for th
     1250008: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Absolute Resolution',
         'name': 'RESOLUTION_ABSOLUTE',
         'resettable': 'No',
@@ -1093,7 +1036,6 @@ NI-DMM ignores this attribute for capacitance and inductance measurements on the
     1250101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Frequency Voltage Range',
         'name': 'FREQ_VOLTAGE_RANGE',
         'resettable': 'No',
@@ -1149,7 +1091,6 @@ Specifies the type of reference junction to be used in the reference junction co
     1250233: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction',
         'name': 'TEMP_TC_FIXED_REF_JUNC',
         'resettable': 'No',
@@ -1163,7 +1104,6 @@ Specifies the reference junction temperature when a fixed reference junction is 
     1250242: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance',
         'name': 'TEMP_RTD_RES',
         'resettable': 'No',
@@ -1177,7 +1117,6 @@ Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported
     1250301: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Sample Count',
         'name': 'SAMPLE_COUNT',
         'resettable': 'No',
@@ -1206,7 +1145,6 @@ To determine which values are supported by each device, refer to the LabWindows/
     1250303: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Sample Interval',
         'name': 'SAMPLE_INTERVAL',
         'resettable': 'No',
@@ -1224,7 +1162,6 @@ The NI 4050 is not supported.
     1250304: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Multi Point Acquisition:Trigger Count',
         'name': 'TRIGGER_COUNT',
         'resettable': 'No',
@@ -1257,7 +1194,6 @@ To determine which values are supported by each device, refer to the LabWindows/
     1250321: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Advanced:Aperture Time',
         'name': 'APERTURE_TIME',
         'resettable': 'No',
@@ -1289,7 +1225,6 @@ The NI 4060 does not support an aperture time set in seconds.
     1250331: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Configuration:Auto Range Value',
         'name': 'AUTO_RANGE_VALUE',
         'resettable': 'No',

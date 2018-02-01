@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
     * #### Added
     * #### Changed
+        * `nidmm.Session()` no longer takes id_query parameter
+        * Metadata updated to NI-DMM 17.5
     * #### Removed
 * ### NI-ModInst
     * #### Added

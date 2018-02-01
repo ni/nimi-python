@@ -57,7 +57,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: AddressType
 
-    .. py:attribute:: niscope.AddressType.PHYSICAL
+    .. py:attribute:: AddressType.PHYSICAL
 
 
 
@@ -67,7 +67,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.AddressType.VIRTUAL
+    .. py:attribute:: AddressType.VIRTUAL
 
 
 
@@ -80,7 +80,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: BoolEnableDisable
 
-    .. py:attribute:: niscope.BoolEnableDisable.DISABLED
+    .. py:attribute:: BoolEnableDisable.DISABLED
 
 
 
@@ -90,7 +90,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.BoolEnableDisable.ENABLED
+    .. py:attribute:: BoolEnableDisable.ENABLED
 
 
 
@@ -740,7 +740,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: NotificationType
 
-    .. py:attribute:: niscope.NotificationType.NEVER
+    .. py:attribute:: NotificationType.NEVER
 
 
 
@@ -750,7 +750,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.NotificationType.DONE
+    .. py:attribute:: NotificationType.DONE
 
 
 

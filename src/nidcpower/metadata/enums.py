@@ -49,6 +49,24 @@ enums = {
             },
         ],
     },
+    'ComplianceLimitSymmetry': {
+        'values': [
+            {
+                'name': 'SYMMETRIC',
+                'value': 0,
+'documentation': {
+'description': 'Compliance limits are specified symmetrically about 0.',
+},
+            },
+            {
+                'name': 'ASYMMETRIC',
+                'value': 1,
+'documentation': {
+'description': 'Compliance limits can be specified asymmetrically with respect to 0.',
+},
+            },
+        ],
+    },
     'CurrentLevelAutorange': {
         'values': [
             {
@@ -436,6 +454,24 @@ enums = {
                 'value': 1,
 'documentation': {
 'description': 'Autoranging is enabled.',
+},
+            },
+        ],
+    },
+    'tBoolean': {
+        'values': [
+            {
+                'name': 'FALSE',
+                'value': 0,
+'documentation': {
+'description': '',
+},
+            },
+            {
+                'name': 'TRUE',
+                'value': 1,
+'documentation': {
+'description': '',
 },
             },
         ],
