@@ -493,5 +493,6 @@ functions_numpy = {
 functions_converters = {
     'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                    'python_api_converter_type': 'dict', 
+                                                                   'python_name': 'options', }, }, },
 }
 
