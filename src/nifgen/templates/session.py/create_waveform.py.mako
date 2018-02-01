@@ -17,7 +17,7 @@
                 return self._create_waveform_i16_numpy(waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
-        elif str(type(waveform_data_array)).find("'array.array'") != -1:
+        elif isinstance(waveform_data_array, array.array):
             if waveform_data_array.typecode == 'd':
                 return self._create_waveform_f64(waveform_data_array)
             elif waveform_data_array.typecode == 'h':

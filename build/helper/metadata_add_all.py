@@ -112,11 +112,12 @@ def _add_is_error_handling(f):
 def _add_buffer_info(parameter, config):
     '''Adds buffer information to the parameter metadata
 
-    There are 4 different 'is_*' variables we will set
+    These are the pieces of information that will be added to metadata:
         'is_string' - Used for any string type - see below for complete list
         'use_list'  - Used for an array of custom types. We are not putting custom types into array.array or numpy.array
         'use_array' - Used for arrays of simple types
         'is_buffer' - True when either 'use_list' or 'use_array' is True
+        'size'      - set to default value of {'mechanism': 'fixed', 'value': 1} if it doesn't already exist
     '''
 
     assert 'is_buffer' not in parameter or not parameter['is_buffer'], "if 'is_buffer' is in metadata then it must be set to False"
@@ -126,15 +127,15 @@ def _add_buffer_info(parameter, config):
     is_string = False
     use_array = False
     use_list = False
-    oiginal_type = parameter['type']
+    original_type = parameter['type']
 
     # We set all string types to ViString, and say it is NOT a buffer/array
     string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
-    if oiginal_type in string_types:
+    if original_type in string_types:
         is_string = True
-    elif oiginal_type.find('[]') > 0:
-        parameter['type'] = oiginal_type.replace('[]', '')
-        parameter['original_type'] = oiginal_type
+    elif original_type.find('[]') > 0:
+        parameter['type'] = original_type.replace('[]', '')  # TODO(marcoskirsch) Don't change metadata, add new key
+        parameter['original_type'] = original_type
 
         if 'use_array' not in parameter or parameter['use_array'] is False:
             use_list = True
