@@ -3114,10 +3114,10 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options=""):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
         self._is_frozen = True
 
     def __enter__(self):
@@ -3892,7 +3892,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, options=""):
         '''_init_with_options
 
         Performs the following initialization actions:
@@ -3989,7 +3989,7 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            option_string (dict or str): | Specifies initialization commands. The following table lists the
+            options (dict or str): | Specifies initialization commands. The following table lists the
                   attributes and the name you use in the **optionString** to identify
                   the attribute.
 
@@ -4027,9 +4027,9 @@ class Session(_SessionBase):
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020
         vi_ctype = visatype.ViSession()  # case S200
-        error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, options_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 

@@ -316,13 +316,13 @@ class Library(object):
                 self.niDMM_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetSelfCalSupported_cfunc(vi, self_cal_supported)
 
-    def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
+    def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, options, vi):  # noqa: N802
         with self._func_lock:
             if self.niDMM_InitWithOptions_cfunc is None:
                 self.niDMM_InitWithOptions_cfunc = self._library.niDMM_InitWithOptions
                 self.niDMM_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niDMM_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
+        return self.niDMM_InitWithOptions_cfunc(resource_name, id_query, reset_device, options, vi)
 
     def niDMM_Initiate(self, vi):  # noqa: N802
         with self._func_lock:

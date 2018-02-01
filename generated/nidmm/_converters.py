@@ -27,7 +27,7 @@ def convert_timedelta_to_microseconds(value, library_type):
 
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
-def init_with_options_converter(value, encoding):
+def convert_init_with_options_dictionary(value, encoding):
     if type(value) is str:
         init_with_options_string = value
     else:
@@ -48,9 +48,11 @@ def init_with_options_converter(value, encoding):
         # First we validate that only allowed keys are in the incoming dictionary
         init_with_options = []
         for k in sorted(value.keys()):
-            assert k.lower() in good_keys
+            if k.lower() not in good_keys:
+                raise TypeError('Invalid key: {0}'.format(k))
             if good_keys[k.lower()] == 'DriverSetup':
-                assert isinstance(value[k], dict)
+                if not isinstance(value[k], dict):
+                    raise TypeError('DriverSetup must be a dictionary')
                 init_with_options.append('DriverSetup=' + (';'.join([key + ':' + value[k][key] for key in sorted(value[k])])))
             else:
                 init_with_options.append(good_keys[k.lower()] + ('=1' if value[k] is True else '=0'))
@@ -61,14 +63,14 @@ def init_with_options_converter(value, encoding):
 
 
 # Let's run some tests
-def test_init_with_options_converter():
-    assert init_with_options_converter('', 'ascii') == ''
-    assert init_with_options_converter('Simulate=1', 'ascii') == 'Simulate=1'
-    assert init_with_options_converter({'Simulate': True, }, 'ascii') == 'Simulate=1'
-    assert init_with_options_converter({'Simulate': False, }, 'ascii') == 'Simulate=0'
-    assert init_with_options_converter({'Simulate': True, 'Cache': False}, 'ascii') == 'Cache=0,Simulate=1'
-    assert init_with_options_converter({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
-    assert init_with_options_converter({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+def test_convert_init_with_options_dictionary():
+    assert convert_init_with_options_dictionary('', 'ascii') == ''
+    assert convert_init_with_options_dictionary('Simulate=1', 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': True, }, 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': False, }, 'ascii') == 'Simulate=0'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}, 'ascii') == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
 
 
 # Tests

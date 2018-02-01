@@ -455,7 +455,7 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
-    def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
+    def niScope_InitWithOptions(self, resource_name, id_query, reset_device, options, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
         if self._defaults['InitWithOptions']['vi'] is None:
