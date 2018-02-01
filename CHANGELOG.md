@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
                     ``` python
                     session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
                     ```
+        * Metadata updated to NI-DMM 17.5
     * #### Removed
 * ### NI-ModInst
     * #### Added

@@ -178,10 +178,8 @@ enums_additional_enums = {
             },          
         ],
     },
-}
-
-enums_codegen_method = {
-    'PowerlineFrequency': { "codegen_method": "no" }, # Enum metadata actually contains constants.
+    'PowerLineFrequency': {},  # Enum metadata actually contains constants.
+    'tBoolean': {},  # Enum just represents True/False
 }
 
 
