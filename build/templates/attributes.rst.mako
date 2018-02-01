@@ -24,7 +24,6 @@ table_contents = [
          ('Datatype', data_type),
          ('Permissions', a['access']),
          ('Channel Based', a['channel_based']),
-         ('Resettable', a['resettable']),
          ]
 table = helper.as_rest_table(table_contents)
 
