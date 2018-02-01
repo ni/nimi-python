@@ -8,6 +8,14 @@
 enums_codegen_method = {
 }
 
+enums_additional_enums = {
+    'BoolEnableDisable': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+    'BoolEnableDisableChan': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+    'BoolEnableDisableIQ': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+    'BoolEnableDisableRealtime': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+    'BoolEnableDisableTIS': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+}
+
 # We explicitly don't start with enums_ since we don't want this merged. These will replace the existing enums
 # Once NI Internal CAR #675174 is fixed, this can be removed along with the overwrite code in __init__.py
 # (TODO): Jaleel: Update dictionary_name after issue#624
