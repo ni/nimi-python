@@ -35,63 +35,6 @@ class AddressType(Enum):
     '''
 
 
-class BoolEnableDisable(Enum):
-    DISABLED = 0
-    '''
-    Disabled
-    '''
-    ENABLED = 1
-    '''
-    Enabled
-    '''
-
-
-class BoolEnableDisableChan(Enum):
-    DISABLED = 0
-    '''
-    Does not acquire a waveform for the channel.
-    '''
-    ENABLED = 1
-    '''
-    Acquires a waveform for the channel.
-    '''
-
-
-class BoolEnableDisableIQ(Enum):
-    DISABLED = 0
-    '''
-    A scalar fetch returns an array of waveforms in the following format:
-    III...QQQ...
-    '''
-    ENABLED = 1
-    '''
-    (Default) A scalar fetch returns an array of waveforms in the following
-    format: IQIQIQ...
-    '''
-
-
-class BoolEnableDisableRealtime(Enum):
-    DISABLED = 0
-    '''
-    Allow both real-time and equivalent-time measurements.
-    '''
-    ENABLED = 1
-    '''
-    Allow only real-time measurements.
-    '''
-
-
-class BoolEnableDisableTIS(Enum):
-    DISABLED = 0
-    '''
-    (Default) Use only this channel's ADC to acquire data for this channel.
-    '''
-    ENABLED = 1
-    '''
-    Use multiple interleaved ADCs to acquire data for this channel.
-    '''
-
-
 class ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004

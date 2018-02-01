@@ -32,8 +32,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -70,8 +68,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -94,8 +90,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -117,8 +111,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -144,8 +136,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -167,8 +157,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -206,8 +194,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -231,8 +217,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -255,8 +239,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -282,8 +264,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -305,8 +285,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -330,8 +308,6 @@ niswitch.Session properties
     +----------------+----------------------------------+
     | Channel Based  | False                            |
     +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -353,8 +329,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -378,8 +352,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -401,8 +373,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -429,8 +399,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -454,8 +422,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -494,8 +460,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -518,8 +482,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -541,8 +503,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -579,8 +539,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -602,8 +560,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -628,8 +584,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -652,8 +606,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -675,8 +627,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -714,8 +664,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -751,8 +699,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | True      |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -790,8 +736,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -827,8 +771,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | True      |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -866,8 +808,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -903,8 +843,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | True      |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -942,8 +880,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -979,8 +915,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | True      |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1018,8 +952,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1056,8 +988,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1079,8 +1009,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1105,8 +1033,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1130,8 +1056,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1153,8 +1077,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1179,8 +1101,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1203,8 +1123,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1229,8 +1147,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1253,8 +1169,6 @@ niswitch.Session properties
     +----------------+-------------------------------+
     | Channel Based  | False                         |
     +----------------+-------------------------------+
-    | Resettable     | No                            |
-    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1276,8 +1190,6 @@ niswitch.Session properties
     | Permissions    | read-write                      |
     +----------------+---------------------------------+
     | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | No                              |
     +----------------+---------------------------------+
 
     .. tip::
@@ -1305,8 +1217,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1340,8 +1250,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1366,8 +1274,6 @@ niswitch.Session properties
     +----------------+---------------------+
     | Channel Based  | False               |
     +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1389,8 +1295,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1430,8 +1334,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1455,8 +1357,6 @@ niswitch.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1478,8 +1378,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1503,8 +1401,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1526,8 +1422,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1551,8 +1445,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1574,8 +1466,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1599,8 +1489,6 @@ niswitch.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1622,8 +1510,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1647,8 +1533,6 @@ niswitch.Session properties
     +----------------+-------------------------+
     | Channel Based  | False                   |
     +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1671,8 +1555,6 @@ niswitch.Session properties
     +----------------+---------------------------------+
     | Channel Based  | False                           |
     +----------------+---------------------------------+
-    | Resettable     | No                              |
-    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1694,8 +1576,6 @@ niswitch.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1732,8 +1612,6 @@ niswitch.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | True      |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
