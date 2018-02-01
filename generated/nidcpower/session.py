@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nidcpower import attributes
@@ -12,6 +14,37 @@ from nidcpower import visatype
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+
+# Helper functions for creating ctypes needed for calling into the driver DLL
+def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+    if isinstance(value, array.array):
+        assert library_type is not None, 'library_type is required for array.array'
+        addr, _ = value.buffer_info()
+        return ctypes.cast(addr, ctypes.POINTER(library_type))
+    elif str(type(value)).find("'numpy.ndarray'") != -1:
+        import numpy
+        return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, list):
+        assert library_type is not None, 'library_type is required for list'
+        return (library_type * len(value))(*value)
+    else:
+        if library_type is not None and size is not None:
+            return (library_type * size)()
+        else:
+            return None
+
+
+def get_ctypes_and_array(value, array_type):
+    if value is not None:
+        if isinstance(value, array.array):
+            value_array = value
+        else:
+            value_array = array.array(array_type, value)
+    else:
+        value_array = None
+
+    return value_array
 
 
 class _Acquisition(object):
@@ -2151,10 +2184,10 @@ class _SessionBase(object):
 
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
+            current_measurements (array.array("d")): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
 
             in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
@@ -2169,13 +2202,18 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = visatype.ViReal64(timeout)  # case S150
         count_ctype = visatype.ViInt32(count)  # case S190
-        voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
-        current_measurements_ctype = (visatype.ViReal64 * count)()  # case B600
-        in_compliance_ctype = (visatype.ViBoolean * count)()  # case B600
+        voltage_measurements_size = count  # case B600
+        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=visatype.ViReal64)  # case B600
+        current_measurements_size = count  # case B600
+        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=visatype.ViReal64)  # case B600
+        in_compliance_size = count  # case B600
+        in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViBoolean, size=in_compliance_size)  # case B600
         actual_count_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+        return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2586,8 +2624,10 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
-        current_measurements_ctype = (visatype.ViReal64 * self._parse_channel_count())()  # case B560
+        voltage_measurements_size = self._parse_channel_count()  # case B560
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=voltage_measurements_size)  # case B560
+        current_measurements_size = self._parse_channel_count()  # case B560
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=current_measurements_size)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
@@ -3136,8 +3176,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        values_ctype = None if values is None else (visatype.ViReal64 * len(values))(*values)  # case B550
-        source_delays_ctype = None if source_delays is None else (visatype.ViReal64 * len(source_delays))(*source_delays)  # case B550
+        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=visatype.ViReal64)  # case B550
+        source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=visatype.ViReal64)  # case B550
         size_ctype = visatype.ViUInt32(0 if values is None else len(values))  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3633,7 +3673,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
         attribute_id_count_ctype = visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = None if attribute_ids is None else (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case B550
+        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=visatype.ViInt32)  # case B550
         set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

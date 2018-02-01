@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file was generated
+import array  # noqa: F401
 import ctypes
+import struct  # noqa: F401
 
 from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 from nifgen import attributes
@@ -12,6 +14,37 @@ from nifgen import visatype
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+
+# Helper functions for creating ctypes needed for calling into the driver DLL
+def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+    if isinstance(value, array.array):
+        assert library_type is not None, 'library_type is required for array.array'
+        addr, _ = value.buffer_info()
+        return ctypes.cast(addr, ctypes.POINTER(library_type))
+    elif str(type(value)).find("'numpy.ndarray'") != -1:
+        import numpy
+        return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, list):
+        assert library_type is not None, 'library_type is required for list'
+        return (library_type * len(value))(*value)
+    else:
+        if library_type is not None and size is not None:
+            return (library_type * size)()
+        else:
+            return None
+
+
+def get_ctypes_and_array(value, array_type):
+    if value is not None:
+        if isinstance(value, array.array):
+            value_array = value
+        else:
+            value_array = array.array(array_type, value)
+    else:
+        value_array = None
+
+    return value_array
 
 
 class _Generation(object):
@@ -1239,7 +1272,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case S160
-        coefficients_array_ctype = None if coefficients_array is None else (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case B550
+        coefficients_array_ctype = get_ctypes_pointer_for_buffer(value=coefficients_array, library_type=visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1491,6 +1524,13 @@ class _SessionBase(object):
                 return self._create_waveform_i16_numpy(waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.dtype, numpy.float64, numpy.int16))
+        elif isinstance(waveform_data_array, array.array):
+            if waveform_data_array.typecode == 'd':
+                return self._create_waveform_f64(waveform_data_array)
+            elif waveform_data_array.typecode == 'h':
+                return self._create_waveform_i16(waveform_data_array)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(waveform_data_array.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._create_waveform_f64(waveform_data_array)
 
@@ -1517,7 +1557,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -1535,7 +1575,8 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case B550
+        waveform_data_array_array = get_ctypes_and_array(value=waveform_data_array, array_type="d")  # case B550
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=visatype.ViReal64)  # case B550
         waveform_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1564,7 +1605,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
-            waveform_data_array (numpy array of float64): Specifies the array of data you want to use for the new arbitrary
+            waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in **waveformSize**.
 
@@ -1590,7 +1631,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = numpy.ctypeslib.as_ctypes(waveform_data_array)  # case B510
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
         waveform_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1745,7 +1786,7 @@ class _SessionBase(object):
             session['0,1']._create_waveform_i16(waveform_data_array)
 
         Args:
-            waveform_data_array (numpy array of int16): Specify the array of data that you want to use for the new arbitrary
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
                 waveform. The array must have at least as many elements as the value
                 that you specify in the Waveform Size parameter.
                 You must normalize the data points in the array to be between -32768 and
@@ -1769,7 +1810,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = numpy.ctypeslib.as_ctypes(waveform_data_array)  # case B510
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
         waveform_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1816,7 +1857,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = None if waveform_data_array is None else (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case B550
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2133,7 +2174,8 @@ class _SessionBase(object):
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = visatype.ViInt32(error_code)  # case S180
-        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # case B590
+        coefficients_array_size = array_size_ctype.value  # case B590
+        coefficients_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=coefficients_array_size)  # case B590
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
@@ -2640,7 +2682,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
 
@@ -2657,7 +2699,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case B510
+        data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2696,7 +2738,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2704,7 +2746,8 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case B550
+        data_array = get_ctypes_and_array(value=data, array_type="d")  # case B550
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2743,7 +2786,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2759,7 +2802,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case B510
+        data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2789,7 +2832,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            data (numpy array of int16): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2805,7 +2848,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case B510
+        data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2873,7 +2916,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (list of float): Specifies the array of data to load into the waveform. The array must
+            data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2881,7 +2924,8 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = None if data is None else (visatype.ViReal64 * len(data))(*data)  # case B550
+        data_array = get_ctypes_and_array(value=data, array_type="d")  # case B550
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2921,7 +2965,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
 
-            data (numpy array of float64): Specifies the array of data to load into the waveform. The array must
+            data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
 
         '''
@@ -2937,7 +2981,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
         size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
-        data_ctype = numpy.ctypeslib.as_ctypes(data)  # case B510
+        data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2976,6 +3020,13 @@ class _SessionBase(object):
                 return self._write_named_waveform_i16_numpy(waveform_name_or_handle, data) if use_named else self._write_binary16_waveform_numpy(waveform_name_or_handle, data)
             else:
                 raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.dtype, numpy.float64, numpy.int16))
+        elif isinstance(data, array.array):
+            if data.typecode == 'd':
+                return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
+            elif data.typecode == 'h':
+                return self._write_named_waveform_i16(waveform_name_or_handle, data) if use_named else self._write_binary16_waveform(waveform_name_or_handle, data)
+            else:
+                raise TypeError("Unsupported dtype. Is {0}, expected {1} or {2}".format(data.typecode, 'd (double)', 'h (16 bit int)'))
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 
@@ -3567,11 +3618,12 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case B550
-        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case B550
-        sample_counts_array_ctype = None if sample_counts_array is None else (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case B550
-        marker_location_array_ctype = None if marker_location_array is None else (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case B550
-        coerced_markers_array_ctype = (visatype.ViInt32 * (0 if marker_location_array is None else len(marker_location_array)))()  # case B560
+        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=visatype.ViInt32)  # case B550
+        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=visatype.ViInt32)  # case B550
+        sample_counts_array_ctype = get_ctypes_pointer_for_buffer(value=sample_counts_array, library_type=visatype.ViInt32)  # case B550
+        marker_location_array_ctype = get_ctypes_pointer_for_buffer(value=marker_location_array, library_type=visatype.ViInt32)  # case B550
+        coerced_markers_array_size = (0 if marker_location_array is None else len(marker_location_array))  # case B560
+        coerced_markers_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViInt32, size=coerced_markers_array_size)  # case B560
         sequence_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3635,8 +3687,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        waveform_handles_array_ctype = None if waveform_handles_array is None else (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case B550
-        loop_counts_array_ctype = None if loop_counts_array is None else (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case B550
+        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=visatype.ViInt32)  # case B550
+        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=visatype.ViInt32)  # case B550
         sequence_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3721,8 +3773,8 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         waveform_ctype = visatype.ViInt32(waveform.value)  # case S130
         frequency_list_length_ctype = visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
-        frequency_array_ctype = None if frequency_array is None else (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case B550
-        duration_array_ctype = None if duration_array is None else (visatype.ViReal64 * len(duration_array))(*duration_array)  # case B550
+        frequency_array_ctype = get_ctypes_pointer_for_buffer(value=frequency_array, library_type=visatype.ViReal64)  # case B550
+        duration_array_ctype = get_ctypes_pointer_for_buffer(value=duration_array, library_type=visatype.ViReal64)  # case B550
         frequency_list_handle_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, None if frequency_list_handle_ctype is None else (ctypes.pointer(frequency_list_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

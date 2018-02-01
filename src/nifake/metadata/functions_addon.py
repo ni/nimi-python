@@ -66,7 +66,7 @@ functions_default_value = {
     'InitWithOptions':                  { 'parameters': { 1: { 'default_value': False, },
                                                           2: { 'default_value': False, },
                                                           3: { 'default_value': '""', }, }, },
-    'MultipleArrayTypes':               { 'parameters': { 5: { 'default_value': None, }, }, },
+    'MultipleArrayTypes':               { 'parameters': { 6: { 'default_value': None, }, }, },
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 
@@ -107,6 +107,12 @@ functions_method_templates = {
 functions_numpy = {
     'FetchWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
     'WriteWaveform':                        { 'parameters': { 2: { 'numpy': True, }, }, },
+}
+
+# Parameter that need to be array.array
+functions_array = {
+    'FetchWaveform':                        { 'parameters': { 2: { 'use_array': True, }, }, },
+    'WriteWaveform':                        { 'parameters': { 2: { 'use_array': True, }, }, },
 }
 
 # Functions not in original metadata.
