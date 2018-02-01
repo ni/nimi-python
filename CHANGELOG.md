@@ -12,34 +12,37 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `nidmm.Session()` no longer takes id_query parameter
+        * Metadata updated to NI-DMM 17.5
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-    * Metadata updated to NI-DCPower 17.6.1
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+        * `niscope.Session()` no longer takes id_query parameter
+    * #### Removed
 
 ## 0.6.0 - 2017-12-20
 * ### ALL
@@ -208,32 +211,32 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 <!--
 ## [Unreleased]
 * ### ALL
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DMM
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-Switch
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-DCPower
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-FGEN
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
-  * #### Added
-  * #### Changed
-  * #### Removed
+    * #### Added
+    * #### Changed
+    * #### Removed
 -->
 
