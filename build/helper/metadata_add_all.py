@@ -266,7 +266,7 @@ def _add_use_in_python_api(p, parameters):
 
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    functions = merge_helper(functions, 'functions', config)
+    functions = merge_helper(functions, 'functions', config, use_re=True)
 
     for f in functions:
         _add_codegen_method(functions[f])
@@ -316,7 +316,7 @@ def _add_default_attribute_class(a, attributes):
 
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    attributes = merge_helper(attributes, 'attributes', config)
+    attributes = merge_helper(attributes, 'attributes', config, use_re=False)
 
     for a in attributes:
         _add_codegen_method(attributes[a])
@@ -420,7 +420,7 @@ def _add_enum_value_python_name(enum_info, config):
 
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    enums = merge_helper(enums, 'enums', config)
+    enums = merge_helper(enums, 'enums', config, use_re=False)
 
     # Workaround for NI Internal CAR #675174
     try:
