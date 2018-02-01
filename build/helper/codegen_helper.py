@@ -281,14 +281,14 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     '''These are the different cases for initializing the ctype variable for buffers:
 
-        B510. Input/output numpy array:                                            _converters.get_ctypes_pointer_for_buffer(value=waveform)
-        B540. Input buffer (custom type):                                          _converters.get_ctypes_pointer_for_buffer(value=[custom_struct(l) for l in list], library_type=custom_struct)
-        B550. Input buffer of simple types:                                        _converters.get_ctypes_pointer_for_buffer(value=array.array('d', list), library_type=visatype.ViReal64)
-        B560. Output buffer with mechanism python-code:                            _converters.get_ctypes_pointer_for_buffer(value=array.array('d'), library_type=ViInt32)
-        B570. Output buffer with mechanism fixed-size:                             _converters.get_ctypes_pointer_for_buffer(library_type=ViInt32, size=256)
+        B510. Input/output numpy array:                                            get_ctypes_pointer_for_buffer(value=waveform)
+        B540. Input buffer (custom type):                                          get_ctypes_pointer_for_buffer(value=[custom_struct(l) for l in list], library_type=custom_struct)
+        B550. Input buffer of simple types:                                        get_ctypes_pointer_for_buffer(value=array.array('d', list), library_type=visatype.ViReal64)
+        B560. Output buffer with mechanism python-code:                            get_ctypes_pointer_for_buffer(value=array.array('d'), library_type=ViInt32)
+        B570. Output buffer with mechanism fixed-size:                             get_ctypes_pointer_for_buffer(library_type=ViInt32, size=256)
         B580. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
-        B590. Output buffer with mechanism ivi-dance, GET_DATA:                    _converters.get_ctypes_pointer_for_buffer(value=array.array('d', [0] * buffer_size_ctype.value, library_type=ViInt32)
-        B600. Output buffer with mechanism passed-in:                              _converters.get_ctypes_pointer_for_buffer(value-array.array('d', [0] * buffer_size, library_type=ViInt32)
+        B590. Output buffer with mechanism ivi-dance, GET_DATA:                    get_ctypes_pointer_for_buffer(value=array.array('d', [0] * buffer_size_ctype.value, library_type=ViInt32)
+        B600. Output buffer with mechanism passed-in:                              get_ctypes_pointer_for_buffer(value-array.array('d', [0] * buffer_size, library_type=ViInt32)
 
     Return Value (list): each item in the list will be one line needed for the declaration of that parameter
 
@@ -300,18 +300,18 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
     definition = None
 
     if parameter['numpy'] is True and use_numpy_array is True:
-        definition = '_converters.get_ctypes_pointer_for_buffer(value={0})  # case B510'.format(parameter['python_name'])
+        definition = 'get_ctypes_pointer_for_buffer(value={0})  # case B510'.format(parameter['python_name'])
     elif parameter['direction'] == 'in':
         if custom_type is not None:
-            definition = '_converters.get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = 'get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                array_declaration = '{0}_array = _converters.get_ctypes_and_array(value={0}, array_type="{1}")  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                array_declaration = '{0}_array = get_ctypes_and_array(value={0}, array_type="{1}")  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(array_declaration)
-                definition = '_converters.get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
-                definition = '_converters.get_ctypes_pointer_for_buffer(value={0}, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={0}, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             else:
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     else:
@@ -323,9 +323,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B560'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(line2)
-                definition = '_converters.get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
             elif parameter['use_list']:
-                definition = '_converters.get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B560'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B560'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
         elif parameter['size']['mechanism'] == 'fixed':
@@ -335,9 +335,9 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B570'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(line2)
-                definition = '_converters.get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
             elif parameter['use_list']:
-                definition = '_converters.get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B570'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B570'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
         elif parameter['size']['mechanism'] == 'ivi-dance':
@@ -349,10 +349,10 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 definitions.append(line1)
                 if parameter['use_array']:
                     line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B590'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                    definition = '_converters.get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                     definitions.append(line2)
                 elif parameter['use_list']:
-                    definition = '_converters.get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B590'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                    definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B590'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
                 else:
                     assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
             else:
@@ -363,10 +363,10 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             definitions.append(line1)
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B600'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                definition = '_converters.get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(line2)
             elif parameter['use_list']:
-                definition = '_converters.get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B600'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B600'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
         else:
@@ -964,7 +964,7 @@ def test_get_ctype_variable_declaration_snippet_case_s200():
 
 def test_get_ctype_variable_declaration_snippet_case_b510():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=True)
-    assert snippet == ["output_ctype = _converters.get_ctypes_pointer_for_buffer(value=output)  # case B510"]
+    assert snippet == ["output_ctype = get_ctypes_pointer_for_buffer(value=output)  # case B510"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b520():
@@ -979,14 +979,14 @@ def test_get_ctype_variable_declaration_snippet_case_b530():
 
 def test_get_ctype_variable_declaration_snippet_case_b540():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[17], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["array_in_ctype = _converters.get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in array_in], library_type=custom_struct.custom_struct)  # case B540"]
+    assert snippet == ["array_in_ctype = get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in array_in], library_type=custom_struct.custom_struct)  # case B540"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b550():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
-        'input_array_array = _converters.get_ctypes_and_array(value=input_array, array_type="d")  # case B550',
-        'input_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=input_array_array, library_type=visatype.ViReal64)  # case B550',
+        'input_array_array = get_ctypes_and_array(value=input_array, array_type="d")  # case B550',
+        'input_array_ctype = get_ctypes_pointer_for_buffer(value=input_array_array, library_type=visatype.ViReal64)  # case B550',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
@@ -997,7 +997,7 @@ def test_get_ctype_variable_declaration_snippet_case_b560():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[3], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
         'array_out_size = self.get_array_size_for_python_code()  # case B560',
-        'array_out_ctype = _converters.get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560',
+        'array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
@@ -1009,7 +1009,7 @@ def test_get_ctype_variable_declaration_snippet_case_b570():
     expected = [
         'an_int_size = 256  # case B570',
         'an_int_array = array.array("h", [0] * an_int_size)  # case B570',
-        'an_int_ctype = _converters.get_ctypes_pointer_for_buffer(value=an_int_array, library_type=visatype.ViInt16)  # case B570',
+        'an_int_ctype = get_ctypes_pointer_for_buffer(value=an_int_array, library_type=visatype.ViInt16)  # case B570',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
@@ -1021,7 +1021,7 @@ def test_get_ctype_variable_declaration_snippet_case_b600():
     expected = [
         'output_size = number_of_elements  # case B600',
         'output_array = array.array("q", [0] * output_size)  # case B600',
-        'output_ctype = _converters.get_ctypes_pointer_for_buffer(value=output_array, library_type=visatype.ViInt64)  # case B600',
+        'output_ctype = get_ctypes_pointer_for_buffer(value=output_array, library_type=visatype.ViInt64)  # case B600',
     ]
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
