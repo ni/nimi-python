@@ -415,7 +415,6 @@ class TestSession(object):
                 matchers.ViInt16BufferMatcher(input_array_of_integers)
             )
 
-
     # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
     '''
     def test_multiple_array_types_none_input(self):
