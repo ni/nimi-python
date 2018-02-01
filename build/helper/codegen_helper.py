@@ -307,16 +307,8 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                lines = [
-                    'if {0} is not None:  # case B550'.format(parameter['python_name']),
-                    '    if isinstance({0}, array.array):  # case B550'.format(parameter['python_name']),
-                    '        {0}_array = {0}  # case B550'.format(parameter['python_name']),
-                    '    else:  # case B550',
-                    '        {0}_array = array.array("{1}", {0})  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type'])),
-                    'else:  # case B550',
-                    '    {0}_array = None  # case B550'.format(parameter['python_name']),
-                ]
-                definitions += lines
+                array_declaration = '{0}_array = _converters.get_ctypes_and_array(value={0}, array_type="{1}")  # case B550'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                definitions.append(array_declaration)
                 definition = '_converters.get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
                 definition = '_converters.get_ctypes_pointer_for_buffer(value={0}, library_type={1}.{2})  # case B550'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
@@ -993,13 +985,7 @@ def test_get_ctype_variable_declaration_snippet_case_b540():
 def test_get_ctype_variable_declaration_snippet_case_b550():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
-        'if input_array is not None:  # case B550',
-        '    if isinstance(input_array, array.array):  # case B550',
-        '        input_array_array = input_array  # case B550',
-        '    else:  # case B550',
-        '        input_array_array = array.array("d", input_array)  # case B550',
-        'else:  # case B550',
-        '    input_array_array = None  # case B550',
+        'input_array_array = _converters.get_ctypes_and_array(value=input_array, array_type="d")  # case B550',
         'input_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=input_array_array, library_type=visatype.ViReal64)  # case B550',
     ]
     assert len(actual) == len(expected)
