@@ -33,8 +33,8 @@ class TestSession(object):
 
         self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
-        self.convert_buffer_to_ctypes_side_effect_count = 0
-        self.convert_buffer_to_ctypes_side_effect_items = []
+        self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+        self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
@@ -44,9 +44,9 @@ class TestSession(object):
         reading.contents.value = self.reading
         return self.error_code_return
 
-    def convert_buffer_to_ctypes_side_effect(self, value, library_type=None):
-        ret_val = self.convert_buffer_to_ctypes_side_effect_items[self.convert_buffer_to_ctypes_side_effect_count]
-        self.convert_buffer_to_ctypes_side_effect_count += 1
+    def get_ctypes_pointer_for_buffer_side_effect(self, value, library_type=None):
+        ret_val = self.get_ctypes_pointer_for_buffer_side_effect_items[self.get_ctypes_pointer_for_buffer_side_effect_count]
+        self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val
 
     # Session management
@@ -282,18 +282,18 @@ class TestSession(object):
         self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform_list
         self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform_list)
 
-        # Because we are mocking convert_buffer_to_ctypes() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
-        # and have the mock return them. These are the ones that are actually filled in by the function. We call convert_buffer_to_ctypes() before we start mocking to
+        # Because we are mocking get_ctypes_pointer_for_buffer() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function. We call get_ctypes_pointer_for_buffer() before we start mocking to
         # get the correct ctype
         expected_waveform = array.array('d', [0] * len(expected_waveform_list))
-        expected_waveform_ctypes = nifake._converters.convert_buffer_to_ctypes(expected_waveform, (nifake.visatype.ViReal64 * len(expected_waveform_list)))
+        expected_waveform_ctypes = nifake._converters.get_ctypes_pointer_for_buffer(expected_waveform, (nifake.visatype.ViReal64 * len(expected_waveform_list)))
 
         with nifake.Session('dev1') as session:
-            self.convert_buffer_to_ctypes_side_effect_items = [expected_waveform_ctypes]
-            self.convert_buffer_to_ctypes_side_effect_count = 0
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform_ctypes]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
             self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
-            with patch('nifake.session._converters.convert_buffer_to_ctypes', side_effect=self.convert_buffer_to_ctypes_side_effect):
-                # Because we have mocked away convert_buffer_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
+            with patch('nifake.session._converters.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                # Because we have mocked away get_ctypes_pointer_for_buffer(), we ignore the return values here and look at our already allocated arrays to make
                 # sure they are filled in correctly
                 session.fetch_waveform(len(expected_waveform_list))
             assert isinstance(expected_waveform[0], float)
@@ -336,10 +336,10 @@ class TestSession(object):
         expected_waveform = [1.1, 2.2, 3.3, 4.4]
         expected_array = array.array('d', expected_waveform)
         with nifake.Session('dev1') as session:
-            self.convert_buffer_to_ctypes_side_effect_items = [expected_waveform]
-            self.convert_buffer_to_ctypes_side_effect_count = 0
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
             self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
-            with patch('nifake.session._converters.convert_buffer_to_ctypes', side_effect=self.convert_buffer_to_ctypes_side_effect):
+            with patch('nifake.session._converters.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
                 session.write_waveform(expected_array)
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_array))
 
@@ -414,47 +414,6 @@ class TestSession(object):
                 matchers.ViReal64BufferMatcher(input_array_of_floats),
                 matchers.ViInt16BufferMatcher(input_array_of_integers)
             )
-
-    '''
-    def test_multiple_array_types(self):
-        self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
-        expected_output_array_list = [0.2, 0.4]
-        expected_output_array_of_fixed_length_list = [-6, -7, -8]
-
-        output_array_size = len(expected_output_array_list)
-        input_array_of_integers = [1, 2]
-        input_array_of_floats = [4.2, -4.3]
-        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array_list
-        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length_list
-        with nifake.Session('dev1') as session:
-            self.convert_buffer_to_ctypes_side_effect_items = [
-                input_array_of_floats,
-                input_array_of_integers,
-            ]
-            self.convert_buffer_to_ctypes_side_effect_count = 0
-            with patch('nifake.session._converters.convert_buffer_to_ctypes', side_effect=self.convert_buffer_to_ctypes_side_effect):
-                # Because we have mocked away convert_buffer_to_ctypes(), we ignore the return values here and look at our already allocated arrays to make
-                # sure they are filled in correctly
-                output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
-
-            assert len(expected_output_array_list) == len(output_array)
-            for i in range(len(expected_output_array_list)):
-                assert expected_output_array_list[i] == output_array[i]
-
-            assert len(expected_output_array_of_fixed_length_list) == len(output_array_of_fixed_length)
-            for i in range(len(expected_output_array_of_fixed_length_list)):
-                assert expected_output_array_of_fixed_length_list[i] == output_array_of_fixed_length[i]
-
-            self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
-                matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
-                matchers.ViInt32Matcher(output_array_size),
-                matchers.ViReal64BufferMatcher(output_array_size),
-                matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length_list)),
-                matchers.ViInt32Matcher(len(input_array_of_integers)),
-                matchers.ViReal64BufferMatcher(input_array_of_floats),
-                matchers.ViInt16BufferMatcher(input_array_of_integers)
-            )
-    '''
 
     # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
     '''
