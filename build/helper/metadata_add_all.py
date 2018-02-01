@@ -21,11 +21,26 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
 
-def _add_name(function, name):
+# These functions can be used by any type, function, attribute or enum
+
+
+def _add_name(n, name):
     '''Adds a name' key/value pair to the function metadata'''
-    assert 'name' not in function, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
-    function['name'] = name
-    return function
+    assert 'name' not in n, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
+    n['name'] = name
+    return n
+
+
+def _add_codegen_method(n):
+    '''Add 'codegen_method' as public if it isn't already there'''
+    if 'codegen_method' not in n:
+        n['codegen_method'] = 'public'
+
+
+def _add_enum(n):
+    '''Add 'enum' as None if it isn't already there'''
+    if 'enum' not in n:
+        n['enum'] = None
 
 
 def _add_python_method_name(function, name):
@@ -110,36 +125,50 @@ def _add_is_error_handling(f):
     return f
 
 
-def _add_buffer_info(parameter):
-    '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
+def _add_buffer_info(parameter, config):
+    '''Adds buffer information to the parameter metadata
 
-    # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
-    # and is_buffer True
-    t = parameter['type']
-    if (t.find('[ ]') > 0) or (t.find('[]') > 0):
-        assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
-        parameter['type'] = t.replace('[ ]', '').replace('[]', '')
-        parameter['original_type'] = t
-        parameter['is_buffer'] = True
+    These are the pieces of information that will be added to metadata:
+        'is_string' - Used for any string type - see below for complete list
+        'use_list'  - Used for an array of custom types. We are not putting custom types into array.array or numpy.array
+        'use_array' - Used for arrays of simple types
+        'is_buffer' - True when either 'use_list' or 'use_array' is True
+        'size'      - set to default value of {'mechanism': 'fixed', 'value': 1} if it doesn't already exist
+    '''
+
+    assert 'is_buffer' not in parameter or not parameter['is_buffer'], "if 'is_buffer' is in metadata then it must be set to False"
+    assert 'is_string' not in parameter, "'is_string' should not be set by metadata or in addons"
+    assert 'use_list' not in parameter, "'use_list' should not be set by metadata or in addons"
+
+    is_string = False
+    use_array = False
+    use_list = False
+    original_type = parameter['type']
 
     # We set all string types to ViString, and say it is NOT a buffer/array
-    if t == 'ViConstString' or t == 'ViRsrc' or t == 'ViString' or (parameter['type'] == 'ViChar' and parameter['is_buffer']):
-        parameter['type'] = 'ViString'
-        parameter['original_type'] = t
-        parameter['is_buffer'] = False
-        parameter['is_string'] = True
+    string_types = ['ViConstString', 'ViRsrc', 'ViString', 'ViChar[]', ]
+    if original_type in string_types:
+        is_string = True
+    elif original_type.find('[]') > 0:
+        parameter['type'] = original_type.replace('[]', '')  # TODO(marcoskirsch) Don't change metadata, add new key
+        parameter['original_type'] = original_type
 
-    if 'size' not in parameter:
-        # Not populated, assume {'mechanism': 'fixed', 'value': 1}
-        parameter['size'] = {'mechanism': 'fixed', 'value': 1}
+        if 'use_array' not in parameter or parameter['use_array'] is False:
+            use_list = True
+        else:
+            use_array = True
 
-    if 'is_buffer' not in parameter:
-        # Not populated, assume False
-        parameter['is_buffer'] = False
+    # If 'is_buffer' is in the parameter information and False, we also force 'use_list' and 'use_array' to False
+    use_list = parameter['is_buffer'] if 'is_buffer' in parameter else use_list
+    use_array = parameter['is_buffer'] if 'is_buffer' in parameter else use_array
 
-    if 'is_string' not in parameter:
-        # Not populated, assume False
-        parameter['is_string'] = False
+    # If not populated, assume {'mechanism': 'fixed', 'value': 1}
+    parameter['size'] = parameter['size'] if 'size' in parameter else {'mechanism': 'fixed', 'value': 1}
+
+    parameter['use_array'] = parameter['use_array'] if 'use_array' in parameter else use_array
+    parameter['use_list'] = parameter['use_list'] if 'use_list' in parameter else use_list
+    parameter['is_string'] = parameter['is_string'] if 'is_string' in parameter else is_string
+    parameter['is_buffer'] = parameter['is_buffer'] if 'is_buffer' in parameter else (use_array or use_list)
 
     assert parameter['is_buffer'] is False or parameter['is_string'] is False
 
@@ -148,7 +177,7 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'out' and parameter['is_buffer'] is False and not parameter['is_string']:
+    if parameter['direction'] == 'out' and not parameter['is_buffer'] and not parameter['is_string']:
         parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
         parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
@@ -237,7 +266,7 @@ def _add_is_session_handle(parameter):
 
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
-    parameter['type'] = parameter['type'].replace(' ', '_')
+    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' ', '_')
 
 
 def _add_use_in_python_api(p, parameters):
@@ -252,7 +281,10 @@ def _add_use_in_python_api(p, parameters):
 
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    functions = merge_helper(functions, 'functions', config)
+    functions = merge_helper(functions, 'functions', config, use_re=True)
+
+    for f in functions:
+        _add_codegen_method(functions[f])
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -262,9 +294,10 @@ def add_all_function_metadata(functions, config):
         _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
-            _add_buffer_info(p)
-            _add_use_in_python_api(p, functions[f]['parameters'])
+            _add_enum(p)
             _fix_type(p)
+            _add_buffer_info(p, config)
+            _add_use_in_python_api(p, functions[f]['parameters'])
             _add_python_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
@@ -276,12 +309,6 @@ def add_all_function_metadata(functions, config):
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
     return functions
-
-
-def _add_attr_codegen_method(a, attributes):
-    '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
-    if 'codegen_method' not in attributes[a]:
-        attributes[a]['codegen_method'] = 'public'
 
 
 def _add_python_name(a, attributes):
@@ -304,10 +331,11 @@ def _add_default_attribute_class(a, attributes):
 
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    attributes = merge_helper(attributes, 'attributes', config)
+    attributes = merge_helper(attributes, 'attributes', config, use_re=False)
 
     for a in attributes:
-        _add_attr_codegen_method(a, attributes)
+        _add_codegen_method(attributes[a])
+        _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
         _add_default_attribute_class(a, attributes)
@@ -408,7 +436,7 @@ def _add_enum_value_python_name(enum_info, config):
 
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    enums = merge_helper(enums, 'enums', config)
+    enums = merge_helper(enums, 'enums', config, use_re=False)
 
     # Workaround for NI Internal CAR #675174
     try:
@@ -588,7 +616,9 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'int',
+                    'use_array': False,
                     'is_buffer': False,
+                    'use_list': False,
                     'is_string': False,
                     'name': 'vi',
                     'python_name': 'vi',
@@ -616,7 +646,9 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'str',
+                    'use_array': False,
                     'is_buffer': False,
+                    'use_list': False,
                     'is_string': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
@@ -627,7 +659,6 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'channel_name_ctype',
                     'use_in_python_api': True,
                     'python_name_or_default_for_init': 'channel_name',
-                    'original_type': 'ViString',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -655,7 +686,9 @@ def test_add_all_metadata_simple():
                     'mechanism': 'fixed',
                     'value': 1
                 },
+                'use_array': False,
                 'is_buffer': False,
+                'use_list': False,
                 'is_string': False,
                 'python_name_with_default': 'vi',
                 'python_name_with_doc_default': 'vi',
@@ -682,7 +715,9 @@ def test_add_all_metadata_simple():
                     'mechanism': 'fixed',
                     'value': 1
                 },
+                'use_array': False,
                 'is_buffer': False,
+                'use_list': False,
                 'is_string': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
@@ -691,7 +726,6 @@ def test_add_all_metadata_simple():
                 'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
-                'original_type': 'ViString',
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
@@ -704,7 +738,7 @@ def test_add_all_metadata_simple():
         }
     }
 
-    _do_the_test_add_all_metadata(functions, expected)
+    _do_the_test_add_all_metadata(functions=functions, expected=expected)
 
 
 def _do_the_test_add_attributes_metadata(attributes, expected):

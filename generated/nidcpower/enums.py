@@ -29,6 +29,17 @@ class AutoZero(Enum):
     '''
 
 
+class ComplianceLimitSymmetry(Enum):
+    SYMMETRIC = 0
+    '''
+    Compliance limits are specified symmetrically about 0.
+    '''
+    ASYMMETRIC = 1
+    '''
+    Compliance limits can be specified asymmetrically with respect to 0.
+    '''
+
+
 class DCNoiseRejection(Enum):
     SECOND_ORDER = 1043
     '''

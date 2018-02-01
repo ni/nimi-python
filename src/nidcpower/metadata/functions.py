@@ -6,15 +6,12 @@
 #  applied at build time
 
 
-
 functions = {
     'Abort': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -51,12 +48,10 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 },
     },
     'CalAdjustCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -68,7 +63,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -77,7 +71,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -89,7 +82,6 @@ at a time may be calibrated.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfMeasurements',
                 'type': 'ViUInt32',
 'documentation': {
@@ -101,7 +93,6 @@ Specifies the number of elements in **requestedOutputs** and
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'requestedOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -113,7 +104,6 @@ niDCPower\_ConfigureCurrentLimit function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measuredOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -143,12 +133,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustCurrentMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -160,7 +148,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -172,7 +159,6 @@ apply.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -184,7 +170,6 @@ at a time may be calibrated.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfMeasurements',
                 'type': 'ViUInt32',
 'documentation': {
@@ -196,7 +181,6 @@ Specifies the number of elements in **reportedOutputs** and
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'reportedOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -208,7 +192,6 @@ niDCPower\_Measure function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measuredOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -232,12 +215,10 @@ can only be called in an external calibration session.
 },
     },
     'CalAdjustInternalReference': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -249,12 +230,11 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'internalReference',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-Specifies the internal reference to be connected to the calibration pin.
+Specifies the internal reference to be adjusted.
 **Defined Values**:
 ''',
 'table_body': [['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_5V (1054)', 'Calibration pin connected to 5 V internal reference.'], ['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_100KOHM (1055)', 'Calibration pin connected to 100 kΩ internal reference.']],
@@ -262,7 +242,6 @@ Specifies the internal reference to be connected to the calibration pin.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'adjustedInternalReference',
                 'type': 'ViReal64',
 'documentation': {
@@ -289,12 +268,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustOutputResistance': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -306,7 +283,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -318,7 +294,6 @@ apply. Only one channel at a time can be calibrated.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfMeasurements',
                 'type': 'ViUInt32',
 'documentation': {
@@ -330,7 +305,6 @@ Specifies the number of elements in **requestedOutputs** and
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'requestedOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -342,7 +316,6 @@ niDCPower\_ConfigureOutputResistance function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measuredOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -371,12 +344,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustResidualCurrentOffset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -388,7 +359,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -429,12 +399,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustResidualVoltageOffset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -446,7 +414,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -487,12 +454,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustVoltageLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -504,7 +469,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -513,7 +477,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -525,7 +488,6 @@ at a time may be calibrated.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfMeasurements',
                 'type': 'ViUInt32',
 'documentation': {
@@ -537,7 +499,6 @@ Specifies the number of elements in **requestedOutputs** and
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'requestedOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -549,7 +510,6 @@ niDCPower\_ConfigureVoltageLevel function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measuredOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -579,12 +539,10 @@ for more information about supported devices.
 },
     },
     'CalAdjustVoltageMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -596,7 +554,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -605,7 +562,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -617,7 +573,6 @@ at a time may be calibrated.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfMeasurements',
                 'type': 'ViUInt32',
 'documentation': {
@@ -629,7 +584,6 @@ Specifies the number of elements in **reportedOutputs** and
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'reportedOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -641,7 +595,6 @@ niDCPower\_Measure function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measuredOutputs',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -667,12 +620,10 @@ session.
 },
     },
     'CalSelfCalibrate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -684,7 +635,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -713,6 +663,10 @@ NIDCPOWER\_VAL\_WRITE\_TO\_EEPROM. Refer to the
 NIDCPOWER\_ATTR\_SELF\_CALIBRATION\_PERSISTENCE attribute topic for more
 information about the settings for this attribute.
 
+When calling niDCPower\_CalSelfCalibrate with the PXIe-4162/4163,
+specify all channels of your PXIe-4162/4163 with the channelName input.
+You cannot self-calibrate a subset of PXIe-4162/4163 channels.
+
 Refer to the
 `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for
 more information about this function.
@@ -730,12 +684,10 @@ for more information about supported devices.
 },
     },
     'ChangeExtCalPassword': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -747,7 +699,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'oldPassword',
                 'type': 'ViChar[]',
 'documentation': {
@@ -756,7 +707,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'newPassword',
                 'type': 'ViChar[]',
 'documentation': {
@@ -777,12 +727,10 @@ close the session using the niDCPower\_CloseExtCal function with
 },
     },
     'ClearError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -812,12 +760,10 @@ niDCPower\_InitializeWithChannels function.
 },
     },
     'ClearInterchangeWarnings': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -833,12 +779,10 @@ niDCPower\_InitializeWithChannels function.
 },
     },
     'CloseExtCal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -850,7 +794,6 @@ obtained from the niDCPower\_InitExtCal function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Action',
                 'type': 'ViInt32',
 'documentation': {
@@ -874,12 +817,10 @@ on the appropriate use of this function.
 },
     },
     'Commit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -910,12 +851,10 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 },
     },
     'ConfigureApertureTime': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -927,7 +866,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -945,7 +883,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'apertureTime',
                 'type': 'ViReal64',
 'documentation': {
@@ -957,7 +894,6 @@ device in the *NI DC Power Supplies and SMUs Help* for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Units',
                 'type': 'ViInt32',
 'documentation': {
@@ -996,12 +932,10 @@ for more information about supported devices.
 },
     },
     'ConfigureAutoZero': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1013,7 +947,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1031,7 +964,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'autoZero',
                 'type': 'ViInt32',
 'documentation': {
@@ -1069,12 +1001,10 @@ for more information about supported devices.
 },
     },
     'ConfigureCurrentLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1086,7 +1016,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1104,7 +1033,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -1142,12 +1070,10 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 },
     },
     'ConfigureCurrentLevelRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1159,7 +1085,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1177,7 +1102,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1208,12 +1132,10 @@ automatic selection of the current level range.
 },
     },
     'ConfigureCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1225,7 +1147,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1243,7 +1164,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Behavior',
                 'type': 'ViInt32',
 'documentation': {
@@ -1257,7 +1177,6 @@ reached.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -1292,12 +1211,10 @@ function.
 },
     },
     'ConfigureCurrentLimitRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1309,7 +1226,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1327,7 +1243,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1358,12 +1273,10 @@ automatic selection of the current limit range.
 },
     },
     'ConfigureDigitalEdgeMeasureTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1375,7 +1288,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1399,7 +1311,6 @@ terminal on Dev1 to be /Dev2/SourceCompleteEvent.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Edge',
                 'type': 'ViInt32',
 'documentation': {
@@ -1423,12 +1334,10 @@ for more information about supported devices.
 },
     },
     'ConfigureDigitalEdgePulseTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1440,7 +1349,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1448,10 +1356,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies the input terminal for the digital edge Pulse trigger.
 
 You can specify any valid input terminal for this function. Valid
-terminals are listed in MAX under the **Device Routes** tab. For
-PXIe-4162/4163, refer to the Signal Routing topic for the device to
-determine which routes are available. This information is not available
-on a Device Routes tab in MAX.
+terminals are listed in MAX under the **Device Routes** tab.
 
 Input terminals can be specified in one of two ways. If the device is
 named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
@@ -1464,7 +1369,6 @@ terminal on Dev1 to be /Dev2/SourceCompleteEvent.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Edge',
                 'type': 'ViInt32',
 'documentation': {
@@ -1488,12 +1392,10 @@ for more information about supported devices.
 },
     },
     'ConfigureDigitalEdgeSequenceAdvanceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1505,7 +1407,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1530,7 +1431,6 @@ terminal on Dev1 to be /Dev2/SourceCompleteEvent.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Edge',
                 'type': 'ViInt32',
 'documentation': {
@@ -1554,12 +1454,10 @@ for more information about supported devices.
 },
     },
     'ConfigureDigitalEdgeSourceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1571,7 +1469,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1595,7 +1492,6 @@ terminal on Dev1 to be /Dev2/SourceCompleteEvent.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Edge',
                 'type': 'ViInt32',
 'documentation': {
@@ -1619,12 +1515,10 @@ for more information about supported devices.
 },
     },
     'ConfigureDigitalEdgeStartTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1636,7 +1530,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1660,7 +1553,6 @@ terminal on Dev1 to be /Dev2/SourceCompleteEvent.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Edge',
                 'type': 'ViInt32',
 'documentation': {
@@ -1684,12 +1576,10 @@ for more information about supported devices.
 },
     },
     'ConfigureOutputEnabled': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1701,7 +1591,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1719,7 +1608,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Enabled',
                 'type': 'ViBoolean',
 'documentation': {
@@ -1748,12 +1636,10 @@ niDCPower\_Initiate function.
 },
     },
     'ConfigureOutputFunction': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1765,7 +1651,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1783,7 +1668,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Function',
                 'type': 'ViInt32',
 'documentation': {
@@ -1855,12 +1739,10 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 },
     },
     'ConfigureOutputRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1872,7 +1754,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1890,7 +1771,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rangeType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1903,7 +1783,6 @@ Specifies the type of the range: voltage or current.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1935,12 +1814,10 @@ instead of theniDCPower\_ConfigureOutputRange function:
 },
     },
     'ConfigureOutputResistance': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1952,7 +1829,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1970,7 +1846,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Resistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -2024,12 +1899,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePowerLineFrequency': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2041,7 +1914,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'powerlineFrequency',
                 'type': 'ViReal64',
 'documentation': {
@@ -2082,12 +1954,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseBiasCurrentLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2099,7 +1969,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2117,7 +1986,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2159,12 +2027,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseBiasCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2176,7 +2042,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2194,7 +2059,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -2233,12 +2097,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseBiasVoltageLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2250,7 +2112,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2268,7 +2129,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2310,12 +2170,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseBiasVoltageLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2327,7 +2185,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2345,7 +2202,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -2384,12 +2240,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseCurrentLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2401,7 +2255,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2419,7 +2272,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2459,12 +2311,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseCurrentLevelRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2476,7 +2326,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2494,7 +2343,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2528,12 +2376,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2545,7 +2391,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2563,7 +2408,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -2601,12 +2445,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseCurrentLimitRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2618,7 +2460,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2636,7 +2477,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2670,12 +2510,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseVoltageLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2687,7 +2525,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2705,7 +2542,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2746,12 +2582,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseVoltageLevelRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2763,7 +2597,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2781,7 +2614,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2815,12 +2647,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseVoltageLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2832,7 +2662,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2850,7 +2679,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -2888,12 +2716,10 @@ for more information about supported devices.
 },
     },
     'ConfigurePulseVoltageLimitRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2905,7 +2731,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2923,7 +2748,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2959,12 +2783,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSense': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2976,7 +2798,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2994,7 +2815,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Sense',
                 'type': 'ViInt32',
 'documentation': {
@@ -3024,12 +2844,10 @@ Sense <REPLACE_DRIVER_SPECIFIC_URL_1(4112_localandremotesense)>`__
 },
     },
     'ConfigureSoftwareEdgeMeasureTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3055,12 +2873,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSoftwareEdgePulseTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3086,12 +2902,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSoftwareEdgeSequenceAdvanceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3117,12 +2931,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSoftwareEdgeSourceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3148,12 +2960,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSoftwareEdgeStartTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3179,12 +2989,10 @@ for more information about supported devices.
 },
     },
     'ConfigureSourceMode': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3196,7 +3004,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sourceMode',
                 'type': 'ViInt32',
 'documentation': {
@@ -3220,12 +3027,10 @@ about using this function.
 },
     },
     'ConfigureVoltageLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3237,7 +3042,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3255,7 +3059,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -3294,12 +3097,10 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_voltage)>`__
 },
     },
     'ConfigureVoltageLevelRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3311,7 +3112,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3329,7 +3129,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -3361,12 +3160,10 @@ automatic selection of the voltage level range.
 },
     },
     'ConfigureVoltageLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3378,7 +3175,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3396,7 +3192,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Limit',
                 'type': 'ViReal64',
 'documentation': {
@@ -3432,12 +3227,10 @@ nidcpower\_ConfigureOutputFunction to set the output function.
 },
     },
     'ConfigureVoltageLimitRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3449,7 +3242,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3467,7 +3259,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -3499,12 +3290,10 @@ automatic selection of the voltage limit range.
 },
     },
     'ConnectInternalReference': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3516,7 +3305,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'internalReference',
                 'type': 'ViInt32',
 'documentation': {
@@ -3545,12 +3333,10 @@ for more information about supported devices.
 },
     },
     'CreateAdvancedSequence': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3562,7 +3348,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sequenceName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3571,7 +3356,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeIdCount',
                 'type': 'ViInt32',
 'documentation': {
@@ -3580,7 +3364,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeIds',
                 'type': 'ViInt32[]',
 'documentation': {
@@ -3598,7 +3381,6 @@ configured in advanced sequencing.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'setAsActiveSequence',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3644,12 +3426,10 @@ for more information about supported devices.
 },
     },
     'CreateAdvancedSequenceStep': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3661,7 +3441,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'setAsActiveStep',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3703,12 +3482,10 @@ for more information about supported devices.
 },
     },
     'DeleteAdvancedSequence': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3720,7 +3497,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sequenceName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3757,12 +3533,10 @@ for more information about supported devices.
 },
     },
     'Disable': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3785,12 +3559,10 @@ relay.
 },
     },
     'DisablePulseTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3821,12 +3593,10 @@ for more information about supported devices.
 },
     },
     'DisableSequenceAdvanceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3854,12 +3624,10 @@ for more information about supported devices.
 },
     },
     'DisableSourceTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3887,12 +3655,10 @@ for more information about supported devices.
 },
     },
     'DisableStartTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3917,12 +3683,10 @@ for more information about supported devices.
 },
     },
     'ExportSignal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3934,7 +3698,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Signal',
                 'type': 'ViInt32',
 'documentation': {
@@ -3947,7 +3710,6 @@ Specifies which trigger or event to export.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'signalIdentifier',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3956,7 +3718,6 @@ Specifies which trigger or event to export.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'outputTerminal',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3986,12 +3747,10 @@ for more information about supported devices.
 },
     },
     'FetchMultiple': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4003,7 +3762,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4021,7 +3779,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -4039,7 +3796,6 @@ application.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Count',
                 'type': 'ViInt32',
 'documentation': {
@@ -4048,7 +3804,6 @@ application.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'voltageMeasurements',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4060,7 +3815,6 @@ has been allocated for the returned array.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'currentMeasurements',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4072,7 +3826,6 @@ has been allocated for the returned array.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'inCompliance',
                 'type': 'ViBoolean[]',
 'documentation': {
@@ -4085,7 +3838,6 @@ space has been allocated for the returned array.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualCount',
                 'type': 'ViInt32',
 'documentation': {
@@ -4120,12 +3872,10 @@ for more information about supported devices.
 },
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4137,7 +3887,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4155,7 +3904,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4184,7 +3932,6 @@ can use this control as follows.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4208,12 +3955,10 @@ it or by selecting it and then pressing **Enter**.
 },
     },
     'GetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4225,7 +3970,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4243,7 +3987,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4272,7 +4015,6 @@ can use this control as follows.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -4296,12 +4038,10 @@ it or by selecting it and then pressing **Enter**.
 },
     },
     'GetAttributeViInt64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4313,7 +4053,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4331,7 +4070,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4360,7 +4098,6 @@ can use this control as follows.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt64',
 'documentation': {
@@ -4384,12 +4121,10 @@ it or by selecting it and then pressing **Enter**.
 },
     },
     'GetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4401,7 +4136,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4419,7 +4153,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4448,7 +4181,6 @@ can use this control as follows.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -4472,12 +4204,10 @@ it or by selecting it and then pressing **Enter**.
 },
     },
     'GetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4489,7 +4219,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4507,7 +4236,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4536,7 +4264,6 @@ can use this control as follows.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -4560,12 +4287,10 @@ it or by selecting it and then pressing **Enter**.
 },
     },
     'GetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4577,7 +4302,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4595,7 +4319,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4624,7 +4347,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4646,7 +4368,6 @@ number for this attribute.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4680,12 +4401,10 @@ selecting it and then pressing .
 },
     },
     'GetCalUserDefinedInfo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4697,7 +4416,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Info',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4713,12 +4431,10 @@ EEPROM.
 },
     },
     'GetCalUserDefinedInfoMaxSize': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4730,7 +4446,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'infoSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4749,12 +4464,10 @@ user-defined information in the device onboard EEPROM.
 },
     },
     'GetChannelName': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4766,7 +4479,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
@@ -4778,7 +4490,6 @@ Specifies which output channel name to return. The index values begin at
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4797,7 +4508,6 @@ If you pass 0, you can pass VI\_NULL for **channelName**.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4814,12 +4524,10 @@ determine the upper bound of valid values for **index**.
 },
     },
     'GetError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4831,7 +4539,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Code',
                 'type': 'ViStatus',
 'documentation': {
@@ -4840,7 +4547,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'BufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4860,7 +4566,6 @@ If you pass 0 for this attribute, you can pass VI\_NULL for
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Description',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4901,12 +4606,10 @@ attribute.
 },
     },
     'GetExtCalLastDateAndTime': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4918,7 +4621,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Year',
                 'type': 'ViInt32',
 'documentation': {
@@ -4927,7 +4629,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'ViInt32',
 'documentation': {
@@ -4936,7 +4637,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Day',
                 'type': 'ViInt32',
 'documentation': {
@@ -4945,7 +4645,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Hour',
                 'type': 'ViInt32',
 'documentation': {
@@ -4957,7 +4656,6 @@ calibrated.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Minute',
                 'type': 'ViInt32',
 'documentation': {
@@ -4975,12 +4673,10 @@ for **minutes**.
 },
     },
     'GetExtCalLastTemp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4992,7 +4688,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
@@ -5011,12 +4706,10 @@ during the last successful external calibration.
 },
     },
     'GetExtCalRecommendedInterval': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5028,7 +4721,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Months',
                 'type': 'ViInt32',
 'documentation': {
@@ -5047,12 +4739,10 @@ external calibrations.
 },
     },
     'GetNextCoercionRecord': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5064,7 +4754,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5083,7 +4772,6 @@ If you pass 0, you can pass VI\_NULL for **coercionRecord**.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'coercionRecord',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5103,12 +4791,10 @@ specified.
 },
     },
     'GetNextInterchangeWarning': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5120,7 +4806,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5139,7 +4824,6 @@ If you pass 0, you can pass VI\_NULL for **interchangeWarning**.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'interchangeWarning',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5168,12 +4852,10 @@ of the device is in a state that you did not specify.
 },
     },
     'GetSelfCalLastDateAndTime': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5185,7 +4867,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Year',
                 'type': 'ViInt32',
 'documentation': {
@@ -5194,7 +4875,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'ViInt32',
 'documentation': {
@@ -5203,7 +4883,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Day',
                 'type': 'ViInt32',
 'documentation': {
@@ -5212,7 +4891,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Hour',
                 'type': 'ViInt32',
 'documentation': {
@@ -5224,7 +4902,6 @@ calibrated.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Minute',
                 'type': 'ViInt32',
 'documentation': {
@@ -5252,12 +4929,10 @@ for more information about supported devices.
 },
     },
     'GetSelfCalLastTemp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5269,7 +4944,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
@@ -5301,12 +4975,10 @@ for more information about supported devices.
 },
     },
     'InitExtCal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -5320,7 +4992,6 @@ IVI name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Password',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5333,7 +5004,6 @@ maximum of four alphanumeric characters.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5362,12 +5032,10 @@ model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__.
 },
     },
     'InitWithOptions': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -5381,7 +5049,6 @@ IVI name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5393,7 +5060,6 @@ valid instrument for NI-DCPower.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5405,7 +5071,6 @@ procedure.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'optionString',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5430,7 +5095,6 @@ Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5479,12 +5143,10 @@ information about the specific software states.
 },
     },
     'InitializeWithChannels': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -5498,7 +5160,6 @@ IVI name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channels',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5518,7 +5179,6 @@ included in the session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Reset',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5530,7 +5190,6 @@ procedure.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'optionString',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5551,7 +5210,6 @@ Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5596,12 +5254,10 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 },
     },
     'Initiate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5630,12 +5286,10 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 },
     },
     'LockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5647,7 +5301,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5737,12 +5390,10 @@ the end of the function.
 },
     },
     'Measure': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5754,7 +5405,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5767,7 +5417,6 @@ niDCPower\_MeasureMultiple function to measure multiple channels.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementType',
                 'type': 'ViInt32',
 'documentation': {
@@ -5780,7 +5429,6 @@ Specifies whether a voltage or current value is measured.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Measurement',
                 'type': 'ViReal64',
 'documentation': {
@@ -5802,12 +5450,10 @@ function.
 },
     },
     'MeasureMultiple': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5819,7 +5465,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5836,7 +5481,6 @@ the function uses all channels in the session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'voltageMeasurements',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -5850,7 +5494,6 @@ returned array.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'currentMeasurements',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -5874,12 +5517,10 @@ on the specified output channel(s).
 },
     },
     'QueryInCompliance': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5891,7 +5532,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5903,7 +5543,6 @@ queried for one channel at a time.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'inCompliance',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5937,12 +5576,10 @@ information about output function and voltage limit, respectively.
 },
     },
     'QueryMaxCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5954,7 +5591,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5966,7 +5602,6 @@ only be queried for one channel at a time.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'voltageLevel',
                 'type': 'ViReal64',
 'documentation': {
@@ -5978,7 +5613,6 @@ Specifies the voltage level to use when calculating the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'maxCurrentLimit',
                 'type': 'ViReal64',
 'documentation': {
@@ -5997,12 +5631,10 @@ channel is set to the specified **voltageLevel**.
 },
     },
     'QueryMaxVoltageLevel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6014,7 +5646,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6026,7 +5657,6 @@ only be queried for one channel at a time.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'currentLimit',
                 'type': 'ViReal64',
 'documentation': {
@@ -6038,7 +5668,6 @@ Specifies the current limit to use when calculating the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'maxVoltageLevel',
                 'type': 'ViReal64',
 'documentation': {
@@ -6057,12 +5686,10 @@ channel is set to the specified **currentLimit**.
 },
     },
     'QueryMinCurrentLimit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6074,7 +5701,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6086,7 +5712,6 @@ only be queried for one channel at a time.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'voltageLevel',
                 'type': 'ViReal64',
 'documentation': {
@@ -6098,7 +5723,6 @@ Specifies the voltage level to use when calculating the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'minCurrentLimit',
                 'type': 'ViReal64',
 'documentation': {
@@ -6117,12 +5741,10 @@ channel is set to the specified **voltageLevel**.
 },
     },
     'QueryOutputState': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6134,7 +5756,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6146,7 +5767,6 @@ queried for one channel at a time.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'outputState',
                 'type': 'ViInt32',
 'documentation': {
@@ -6159,7 +5779,6 @@ Specifies the output state of the output channel that is being queried.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'inState',
                 'type': 'ViBoolean',
 'documentation': {
@@ -6182,12 +5801,10 @@ is currently in the state specified by **outputState**.
 },
     },
     'ReadCurrentTemperature': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6199,7 +5816,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
@@ -6215,12 +5831,10 @@ device.
 },
     },
     'ResetDevice': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6250,12 +5864,10 @@ relay.
 },
     },
     'ResetInterchangeCheck': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6305,12 +5917,10 @@ an interchange check.
 },
     },
     'ResetWithDefaults': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6334,12 +5944,10 @@ configurable attributes from the IVI configuration.
 },
     },
     'SendSoftwareEdgeTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6351,7 +5959,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Trigger',
                 'type': 'ViInt32',
 'documentation': {
@@ -6381,12 +5988,10 @@ for more information about supported devices.
 },
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6398,7 +6003,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6416,7 +6020,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6447,7 +6050,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -6474,12 +6076,10 @@ settings of the device session.
 },
     },
     'SetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6491,7 +6091,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6509,7 +6108,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6540,7 +6138,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -6567,12 +6164,10 @@ settings of the device session.
 },
     },
     'SetAttributeViInt64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6584,7 +6179,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6602,7 +6196,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6633,7 +6226,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt64',
 'documentation': {
@@ -6660,12 +6252,10 @@ settings of the device session.
 },
     },
     'SetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6677,7 +6267,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6695,7 +6284,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6726,7 +6314,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -6753,12 +6340,10 @@ settings of the device session.
 },
     },
     'SetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6770,7 +6355,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6788,7 +6372,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6819,7 +6402,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -6846,12 +6428,10 @@ settings of the device session.
 },
     },
     'SetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6863,7 +6443,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6881,7 +6460,6 @@ performed sequentially based on the order specified in this parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6912,7 +6490,6 @@ can use this control as follows.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6939,12 +6516,10 @@ settings of the device session.
 },
     },
     'SetCalUserDefinedInfo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6956,7 +6531,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Info',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6980,12 +6554,10 @@ NIDCPOWER\_VAL\_COMMIT.
 },
     },
     'SetSequence': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6997,7 +6569,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7009,7 +6580,6 @@ You can only set a sequence for one channel at a time.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Values',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -7025,7 +6595,6 @@ range or current level range.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sourceDelays',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -7039,7 +6608,6 @@ The valid values are between 0 and 167 seconds.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Size',
                 'type': 'ViUInt32',
 'documentation': {
@@ -7077,12 +6645,10 @@ for more information about supported devices.
 },
     },
     'UnlockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7094,7 +6660,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7160,12 +6725,10 @@ information on session locks.
 },
     },
     'WaitForEvent': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7177,7 +6740,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'eventId',
                 'type': 'ViInt32',
 'documentation': {
@@ -7190,7 +6752,6 @@ Specifies which event to wait for.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -7225,12 +6786,10 @@ for more information about supported devices.
 },
     },
     'close': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7258,12 +6817,10 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 },
     },
     'error_message': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7275,7 +6832,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -7287,7 +6843,6 @@ NI-DCPower functions.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7307,12 +6862,10 @@ user-readable string.
 },
     },
     'init': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -7326,7 +6879,6 @@ IVI name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7340,7 +6892,6 @@ valid instrument for NI-DCPower.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7354,7 +6905,6 @@ procedure.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7392,12 +6942,10 @@ information about the specific software states.
 },
     },
     'reset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7420,12 +6968,10 @@ more information about NI-DCPower software states.
 },
     },
     'revision_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7437,7 +6983,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'instrumentDriverRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7446,7 +6991,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'firmwareRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7462,12 +7006,10 @@ size of this array must be at least 256 bytes.
 },
     },
     'self_test': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7479,7 +7021,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestResult',
                 'type': 'ViInt16',
 'documentation': {
@@ -7490,7 +7031,6 @@ niDCPower\_InitializeWithChannels function.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7505,6 +7045,11 @@ least 256 bytes.
 'description': '''
 Performs the device self-test routine and returns the test result(s).
 Calling this function implicitly calls the niDCPower\_reset function.
+
+When calling niDCPower\_self\_test with the PXIe-4162/4163, specify all
+channels of your PXIe-4162/4163 with the channels input of
+niDCPower\_InitializeWithChannels. You cannot self test a subset of
+PXIe-4162/4163 channels.
 ''',
 },
     },

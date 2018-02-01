@@ -55,6 +55,7 @@ class SideEffectsHelper(object):
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetInstalledDeviceAttributeViInt32']['return'] != 0:
             return self._defaults['GetInstalledDeviceAttributeViInt32']['return']
+        # attribute_value
         if self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue']
@@ -73,9 +74,11 @@ class SideEffectsHelper(object):
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
         if self._defaults['OpenInstalledDevicesSession']['return'] != 0:
             return self._defaults['OpenInstalledDevicesSession']['return']
+        # handle
         if self._defaults['OpenInstalledDevicesSession']['handle'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='handle')
         handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
+        # device_count
         if self._defaults['OpenInstalledDevicesSession']['deviceCount'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='deviceCount')
         device_count.contents.value = self._defaults['OpenInstalledDevicesSession']['deviceCount']

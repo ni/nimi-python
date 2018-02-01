@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
         * Removed these enums and disconnected them from the associated attribute
             * `DCBias` - `DC_BIAS`
             * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
+        * Metadata updated to NI-DMM 17.5
 * ### NI-ModInst
     * #### Added
     * #### Changed

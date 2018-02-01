@@ -183,6 +183,7 @@ enums_additional_enums = {
     'CurrentLevelAutorange': {},  # Delete because boolean values only
     'VoltageLevelAutorange': {},  # Delete because boolean values only
     'VoltageLimitAutorange': {},  # Delete because boolean values only
+    'tBoolean': {},  # Enum just represents True/False
 }
 
 
