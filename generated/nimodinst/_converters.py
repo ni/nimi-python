@@ -27,6 +27,7 @@ def convert_timedelta_to_microseconds(value, library_type):
     return _convert_timedelta(value, library_type, 1000000)
 
 
+# Helper functions for creating ctypes needed for calling into the driver DLL
 def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
@@ -43,6 +44,18 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return (library_type * size)()
         else:
             return None
+
+
+def get_ctypes_and_array(value, array_type):
+    if value is not None:
+        if isinstance(value, array.array):
+            value_array = value
+        else:
+            value_array = array.array(array_type, value)
+    else:
+        value_array = None
+
+    return value_array
 
 
 # Tests
