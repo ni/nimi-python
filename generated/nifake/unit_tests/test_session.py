@@ -1,4 +1,5 @@
 import array
+import ctypes
 import datetime
 import matchers
 import math
@@ -283,16 +284,15 @@ class TestSession(object):
         self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform_list)
 
         # Because we are mocking get_ctypes_pointer_for_buffer() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
-        # and have the mock return them. These are the ones that are actually filled in by the function. We call get_ctypes_pointer_for_buffer() before we start mocking to
-        # get the correct ctype
+        # and have the mock return them. These are the ones that are actually filled in by the function.
         expected_waveform = array.array('d', [0] * len(expected_waveform_list))
-        expected_waveform_ctypes = nifake._converters.get_ctypes_pointer_for_buffer(expected_waveform, (nifake.visatype.ViReal64 * len(expected_waveform_list)))
+        expected_waveform_ctypes = ctypes.cast(expected_waveform.buffer_info()[0], ctypes.POINTER(nifake.visatype.ViReal64 * len(expected_waveform_list)))
 
         with nifake.Session('dev1') as session:
             self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform_ctypes]
             self.get_ctypes_pointer_for_buffer_side_effect_count = 0
             self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
-            with patch('nifake.session._converters.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
                 # Because we have mocked away get_ctypes_pointer_for_buffer(), we ignore the return values here and look at our already allocated arrays to make
                 # sure they are filled in correctly
                 session.fetch_waveform(len(expected_waveform_list))
@@ -339,7 +339,7 @@ class TestSession(object):
             self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform]
             self.get_ctypes_pointer_for_buffer_side_effect_count = 0
             self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
-            with patch('nifake.session._converters.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
                 session.write_waveform(expected_array)
             self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_array))
 

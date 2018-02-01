@@ -16,6 +16,37 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 
+# Helper functions for creating ctypes needed for calling into the driver DLL
+def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+    if isinstance(value, array.array):
+        assert library_type is not None, 'library_type is required for array.array'
+        addr, _ = value.buffer_info()
+        return ctypes.cast(addr, ctypes.POINTER(library_type))
+    elif str(type(value)).find("'numpy.ndarray'") != -1:
+        import numpy
+        return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, list):
+        assert library_type is not None, 'library_type is required for list'
+        return (library_type * len(value))(*value)
+    else:
+        if library_type is not None and size is not None:
+            return (library_type * size)()
+        else:
+            return None
+
+
+def get_ctypes_and_array(value, array_type):
+    if value is not None:
+        if isinstance(value, array.array):
+            value_array = value
+        else:
+            value_array = array.array(array_type, value)
+    else:
+        value_array = None
+
+    return value_array
+
+
 class _Acquisition(object):
     def __init__(self, session):
         self._session = session
@@ -1546,7 +1577,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
+        reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1592,7 +1623,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
+        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1644,7 +1675,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
-        waveform_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
+        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2146,7 +2177,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
-        reading_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
+        reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2241,7 +2272,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
-        waveform_array_ctype = _converters.get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
+        waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
