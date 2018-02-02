@@ -9,11 +9,11 @@ enums_codegen_method = {
 }
 
 enums_additional_enums = {
-    'BoolEnableDisable': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
-    'BoolEnableDisableChan': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
-    'BoolEnableDisableIQ': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
-    'BoolEnableDisableRealtime': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
-    'BoolEnableDisableTIS': {},  # Just delete. Otherwise we have to make it so that it will generate valid code
+    'BoolEnableDisable': {},  # Delete because boolean values only
+    'BoolEnableDisableChan': {},  # Delete because boolean values only
+    'BoolEnableDisableIQ': {},  # Delete because boolean values only
+    'BoolEnableDisableRealtime': {},  # Delete because boolean values only
+    'BoolEnableDisableTIS': {},  # Delete because boolean values only
 }
 
 # We explicitly don't start with enums_ since we don't want this merged. These will replace the existing enums

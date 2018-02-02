@@ -299,15 +299,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`HandshakingInitiation` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.HandshakingInitiation |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1160,15 +1160,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | :py:data:`ScanAdvancedOutput` |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.ScanAdvancedOutput |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1182,15 +1182,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`ScanAdvancedPolarity` |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.ScanAdvancedPolarity |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1265,15 +1265,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`ScanMode` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.ScanMode |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1524,15 +1524,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | :py:data:`TriggerInput` |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.TriggerInput |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1546,15 +1546,15 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`TriggerInputPolarity` |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.TriggerInputPolarity |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

@@ -68,39 +68,48 @@ class _SessionBase(object):
     _is_frozen = False
 
     float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
-    '''
+    '''Type: enums.FloatEnum
+
     An attribute with an enum that is also a float
     '''
     read_write_bool = attributes.AttributeViBoolean(1000000)
-    '''
+    '''Type: bool
+
     An attribute of type bool with read/write access.
     '''
     read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
-    '''
+    '''Type: enums.Color
+
     An attribute of type Color with read/write access.
     '''
     read_write_double = attributes.AttributeViReal64(1000001)
-    '''
+    '''Type: float
+
     An attribute of type float with read/write access.
     '''
     read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''
+    '''Type: float
+
     Attribute in seconds
     '''
     read_write_int64 = attributes.AttributeViInt64(1000006)
-    '''
+    '''Type: int
+
     An attribute of type 64-bit integer with read/write access.
     '''
     read_write_integer = attributes.AttributeViInt32(1000004)
-    '''
+    '''Type: int
+
     An attribute of type integer with read/write access.
     '''
     read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''
+    '''Type: int
+
     Attribute in milliseconds
     '''
     read_write_string = attributes.AttributeViString(1000002)
-    '''
+    '''Type: str
+
     An attribute of type string with read/write access.
     '''
 

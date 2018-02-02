@@ -141,15 +141,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`ApertureTimeUnits` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | True                         |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.ApertureTimeUnits |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | True                    |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -178,15 +178,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`AutoZero` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | True                |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.AutoZero |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | True           |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -311,15 +311,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | :py:data:`ComplianceLimitSymmetry` |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | True                               |
-    +----------------+------------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.ComplianceLimitSymmetry |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | True                          |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -468,15 +468,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`CurrentLevelAutorange` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -588,15 +588,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`CurrentLimitAutorange` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -818,15 +818,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`DCNoiseRejection` |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.DCNoiseRejection |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -847,15 +847,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`DigitalEdge` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.DigitalEdge |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -903,15 +903,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`DigitalEdge` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.DigitalEdge |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -959,15 +959,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`DigitalEdge` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.DigitalEdge |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1016,15 +1016,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`DigitalEdge` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.DigitalEdge |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1073,15 +1073,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`DigitalEdge` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.DigitalEdge |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1596,15 +1596,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1740,15 +1740,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1764,15 +1764,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`MeasureWhen` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.MeasureWhen |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1803,15 +1803,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`OutputCapacitance` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | True                         |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.OutputCapacitance |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | True                    |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1934,15 +1934,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | :py:data:`OutputFunction` |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | True                      |
-    +----------------+---------------------------+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.OutputFunction |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | True                 |
+    +----------------+----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2122,15 +2122,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`PowerSource` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.PowerSource |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2144,15 +2144,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`PowerSourceInUse` |
-    +----------------+-----------------------------+
-    | Permissions    | read only                   |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.PowerSourceInUse |
+    +----------------+------------------------+
+    | Permissions    | read only              |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2650,15 +2650,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3070,15 +3070,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3461,15 +3461,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3627,15 +3627,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`SelfCalibrationPersistence` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | False                                 |
-    +----------------+---------------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.SelfCalibrationPersistence |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3664,15 +3664,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------+
-    | Characteristic | Value            |
-    +================+==================+
-    | Datatype       | :py:data:`Sense` |
-    +----------------+------------------+
-    | Permissions    | read-write       |
-    +----------------+------------------+
-    | Channel Based  | True             |
-    +----------------+------------------+
+    +----------------+-------------+
+    | Characteristic | Value       |
+    +================+=============+
+    | Datatype       | enums.Sense |
+    +----------------+-------------+
+    | Permissions    | read-write  |
+    +----------------+-------------+
+    | Channel Based  | True        |
+    +----------------+-------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3692,15 +3692,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3748,15 +3748,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3835,15 +3835,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4004,15 +4004,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Polarity` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Polarity |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4098,15 +4098,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | :py:data:`SourceMode` |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.SourceMode |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4126,15 +4126,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4286,15 +4286,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerType` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4347,15 +4347,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`TransientResponse` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | True                         |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.TransientResponse |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | True                    |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4504,15 +4504,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`VoltageLevelAutorange` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4624,15 +4624,15 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`VoltageLimitAutorange` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | True                             |
-    +----------------+----------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | True       |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
