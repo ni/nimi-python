@@ -106,17 +106,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | :py:data:`AnalogPath` |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | Yes                   |
-    +----------------+-----------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.AnalogPath |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | Yes              |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -362,17 +362,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | :py:data:`BusType` |
-    +----------------+--------------------+
-    | Permissions    | read only          |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+---------------+
+    | Characteristic | Value         |
+    +================+===============+
+    | Datatype       | enums.BusType |
+    +----------------+---------------+
+    | Permissions    | read only     |
+    +----------------+---------------+
+    | Channel Based  | False         |
+    +----------------+---------------+
+    | Resettable     | No            |
+    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -411,17 +411,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`CalADCInput` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | Yes                    |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.CalADCInput |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | Yes               |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -460,17 +460,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | :py:data:`ClockMode` |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | Yes                  |
-    +----------------+----------------------+
+    +----------------+-----------------+
+    | Characteristic | Value           |
+    +================+=================+
+    | Datatype       | enums.ClockMode |
+    +----------------+-----------------+
+    | Permissions    | read-write      |
+    +----------------+-----------------+
+    | Channel Based  | False           |
+    +----------------+-----------------+
+    | Resettable     | Yes             |
+    +----------------+-----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -556,17 +556,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------------+
-    | Characteristic | Value                                   |
-    +================+=========================================+
-    | Datatype       | :py:data:`DataMarkerEventLevelPolarity` |
-    +----------------+-----------------------------------------+
-    | Permissions    | read-write                              |
-    +----------------+-----------------------------------------+
-    | Channel Based  | False                                   |
-    +----------------+-----------------------------------------+
-    | Resettable     | Yes                                     |
-    +----------------+-----------------------------------------+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | enums.DataMarkerEventLevelPolarity |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | False                              |
+    +----------------+------------------------------------+
+    | Resettable     | Yes                                |
+    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -733,17 +733,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------------+
-    | Characteristic | Value                                   |
-    +================+=========================================+
-    | Datatype       | :py:data:`ScriptTriggerDigitalEdgeEdge` |
-    +----------------+-----------------------------------------+
-    | Permissions    | read-write                              |
-    +----------------+-----------------------------------------+
-    | Channel Based  | False                                   |
-    +----------------+-----------------------------------------+
-    | Resettable     | Yes                                     |
-    +----------------+-----------------------------------------+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | enums.ScriptTriggerDigitalEdgeEdge |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | False                              |
+    +----------------+------------------------------------+
+    | Resettable     | Yes                                |
+    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -781,17 +781,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | :py:data:`StartTriggerDigitalEdgeEdge` |
-    +----------------+----------------------------------------+
-    | Permissions    | read-write                             |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | Yes                                    |
-    +----------------+----------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | enums.StartTriggerDigitalEdgeEdge |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | False                             |
+    +----------------+-----------------------------------+
+    | Resettable     | Yes                               |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -902,17 +902,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------------------+
-    | Characteristic | Value                                           |
-    +================+=================================================+
-    | Datatype       | :py:data:`ScriptTriggerDigitalLevelActiveLevel` |
-    +----------------+-------------------------------------------------+
-    | Permissions    | read-write                                      |
-    +----------------+-------------------------------------------------+
-    | Channel Based  | False                                           |
-    +----------------+-------------------------------------------------+
-    | Resettable     | Yes                                             |
-    +----------------+-------------------------------------------------+
+    +----------------+--------------------------------------------+
+    | Characteristic | Value                                      |
+    +================+============================================+
+    | Datatype       | enums.ScriptTriggerDigitalLevelActiveLevel |
+    +----------------+--------------------------------------------+
+    | Permissions    | read-write                                 |
+    +----------------+--------------------------------------------+
+    | Channel Based  | False                                      |
+    +----------------+--------------------------------------------+
+    | Resettable     | Yes                                        |
+    +----------------+--------------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1094,17 +1094,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------+
-    | Characteristic | Value                          |
-    +================+================================+
-    | Datatype       | :py:data:`DoneEventDelayUnits` |
-    +----------------+--------------------------------+
-    | Permissions    | read-write                     |
-    +----------------+--------------------------------+
-    | Channel Based  | False                          |
-    +----------------+--------------------------------+
-    | Resettable     | Yes                            |
-    +----------------+--------------------------------+
+    +----------------+---------------------------+
+    | Characteristic | Value                     |
+    +================+===========================+
+    | Datatype       | enums.DoneEventDelayUnits |
+    +----------------+---------------------------+
+    | Permissions    | read-write                |
+    +----------------+---------------------------+
+    | Channel Based  | False                     |
+    +----------------+---------------------------+
+    | Resettable     | Yes                       |
+    +----------------+---------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1142,17 +1142,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`DoneEventActiveLevel` |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.DoneEventActiveLevel |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | Yes                        |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1166,17 +1166,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | :py:data:`DoneEventOutputBehavior` |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | False                              |
-    +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.DoneEventOutputBehavior |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | False                         |
+    +----------------+-------------------------------+
+    | Resettable     | Yes                           |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1214,17 +1214,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | :py:data:`DoneEventPulsePolarity` |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.DoneEventPulsePolarity |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | Yes                          |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1262,17 +1262,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------+
-    | Characteristic | Value                               |
-    +================+=====================================+
-    | Datatype       | :py:data:`DoneEventPulseWidthUnits` |
-    +----------------+-------------------------------------+
-    | Permissions    | read-write                          |
-    +----------------+-------------------------------------+
-    | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
-    +----------------+-------------------------------------+
+    +----------------+--------------------------------+
+    | Characteristic | Value                          |
+    +================+================================+
+    | Datatype       | enums.DoneEventPulseWidthUnits |
+    +----------------+--------------------------------+
+    | Permissions    | read-write                     |
+    +----------------+--------------------------------+
+    | Channel Based  | False                          |
+    +----------------+--------------------------------+
+    | Resettable     | Yes                            |
+    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1917,17 +1917,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`Waveform` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Waveform |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
+    | Resettable     | No             |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1989,17 +1989,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | :py:data:`IdleBehavior` |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | Yes                     |
-    +----------------+-------------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.IdleBehavior |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | Yes                |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2305,17 +2305,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`MarkerEventDelayUnits` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.MarkerEventDelayUnits |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | Yes                         |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2378,17 +2378,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | :py:data:`MarkerEventOutputBehavior` |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.MarkerEventOutputBehavior |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2426,17 +2426,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------+
-    | Characteristic | Value                               |
-    +================+=====================================+
-    | Datatype       | :py:data:`MarkerEventPulsePolarity` |
-    +----------------+-------------------------------------+
-    | Permissions    | read-write                          |
-    +----------------+-------------------------------------+
-    | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
-    +----------------+-------------------------------------+
+    +----------------+--------------------------------+
+    | Characteristic | Value                          |
+    +================+================================+
+    | Datatype       | enums.MarkerEventPulsePolarity |
+    +----------------+--------------------------------+
+    | Permissions    | read-write                     |
+    +----------------+--------------------------------+
+    | Channel Based  | False                          |
+    +----------------+--------------------------------+
+    | Resettable     | Yes                            |
+    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2474,17 +2474,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`MarkerEventPulseWidthUnits` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | False                                 |
-    +----------------+---------------------------------------+
-    | Resettable     | Yes                                   |
-    +----------------+---------------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.MarkerEventPulseWidthUnits |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | Yes                              |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2498,17 +2498,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------------+
-    | Characteristic | Value                                    |
-    +================+==========================================+
-    | Datatype       | :py:data:`MarkerEventToggleInitialState` |
-    +----------------+------------------------------------------+
-    | Permissions    | read-write                               |
-    +----------------+------------------------------------------+
-    | Channel Based  | False                                    |
-    +----------------+------------------------------------------+
-    | Resettable     | Yes                                      |
-    +----------------+------------------------------------------+
+    +----------------+-------------------------------------+
+    | Characteristic | Value                               |
+    +================+=====================================+
+    | Datatype       | enums.MarkerEventToggleInitialState |
+    +----------------+-------------------------------------+
+    | Permissions    | read-write                          |
+    +----------------+-------------------------------------+
+    | Channel Based  | False                               |
+    +----------------+-------------------------------------+
+    | Resettable     | Yes                                 |
+    +----------------+-------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3172,17 +3172,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | :py:data:`DataProcessingMode` |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
-    | Resettable     | Yes                           |
-    +----------------+-------------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.DataProcessingMode |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | Yes                      |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3365,17 +3365,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | :py:data:`FilterType` |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | Yes                   |
-    +----------------+-----------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.FilterType |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | Yes              |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3413,17 +3413,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | :py:data:`OSPMode` |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | Yes                |
-    +----------------+--------------------+
+    +----------------+---------------+
+    | Characteristic | Value         |
+    +================+===============+
+    | Datatype       | enums.OSPMode |
+    +----------------+---------------+
+    | Permissions    | read-write    |
+    +----------------+---------------+
+    | Channel Based  | False         |
+    +----------------+---------------+
+    | Resettable     | Yes           |
+    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3438,17 +3438,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | :py:data:`OSPOverflowErrorReporting` |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.OSPOverflowErrorReporting |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3635,17 +3635,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | :py:data:`OutputMode` |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.OutputMode |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | No               |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3783,17 +3783,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------------+
-    | Characteristic | Value                                    |
-    +================+==========================================+
-    | Datatype       | :py:data:`ReadyForStartEventActiveLevel` |
-    +----------------+------------------------------------------+
-    | Permissions    | read-write                               |
-    +----------------+------------------------------------------+
-    | Channel Based  | False                                    |
-    +----------------+------------------------------------------+
-    | Resettable     | Yes                                      |
-    +----------------+------------------------------------------+
+    +----------------+-------------------------------------+
+    | Characteristic | Value                               |
+    +================+=====================================+
+    | Datatype       | enums.ReadyForStartEventActiveLevel |
+    +----------------+-------------------------------------+
+    | Permissions    | read-write                          |
+    +----------------+-------------------------------------+
+    | Channel Based  | False                               |
+    +----------------+-------------------------------------+
+    | Resettable     | Yes                                 |
+    +----------------+-------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3887,17 +3887,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`ReferenceClockSource` |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.ReferenceClockSource |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | Yes                        |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3969,17 +3969,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`SampleClockSource` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.SampleClockSource |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | Yes                     |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4027,17 +4027,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | :py:data:`SampleClockTimebaseSource` |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.SampleClockTimebaseSource |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4103,17 +4103,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`ScriptTriggerType` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.ScriptTriggerType |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | Yes                     |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4323,17 +4323,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | :py:data:`StartedEventDelayUnits` |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.StartedEventDelayUnits |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | Yes                          |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4371,17 +4371,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | :py:data:`StartedEventActiveLevel` |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | False                              |
-    +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.StartedEventActiveLevel |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | False                         |
+    +----------------+-------------------------------+
+    | Resettable     | Yes                           |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4395,17 +4395,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`StartedEventOutputBehavior` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | False                                 |
-    +----------------+---------------------------------------+
-    | Resettable     | Yes                                   |
-    +----------------+---------------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.StartedEventOutputBehavior |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | Yes                              |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4443,17 +4443,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | :py:data:`StartedEventPulsePolarity` |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.StartedEventPulsePolarity |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4491,17 +4491,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | :py:data:`StartedEventPulseWidthUnits` |
-    +----------------+----------------------------------------+
-    | Permissions    | read-write                             |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | Yes                                    |
-    +----------------+----------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | enums.StartedEventPulseWidthUnits |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | False                             |
+    +----------------+-----------------------------------+
+    | Resettable     | Yes                               |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4515,17 +4515,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | :py:data:`StartTriggerType` |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | Yes                         |
-    +----------------+-----------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.StartTriggerType |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+    | Resettable     | Yes                    |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4663,17 +4663,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`SynchronizationSource` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.SynchronizationSource |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4736,17 +4736,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | :py:data:`TerminalConfiguration` |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.TerminalConfiguration |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | Yes                         |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4760,17 +4760,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | :py:data:`TriggerMode` |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerMode |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | No                |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4786,17 +4786,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | :py:data:`TriggerSource` |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | Yes                      |
-    +----------------+--------------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.TriggerSource |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | Yes                 |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4810,17 +4810,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`VideoWaveformType` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoWaveformType |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4834,17 +4834,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | :py:data:`WaitBehavior` |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | Yes                     |
-    +----------------+-------------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.WaitBehavior |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | Yes                |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

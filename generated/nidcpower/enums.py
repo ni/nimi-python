@@ -40,28 +40,6 @@ class ComplianceLimitSymmetry(Enum):
     '''
 
 
-class CurrentLevelAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
-    '''
-
-
-class CurrentLimitAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
-    '''
-
-
 class DCNoiseRejection(Enum):
     SECOND_ORDER = 1043
     '''
@@ -316,26 +294,4 @@ class TriggerType(Enum):
     SOFTWARE_EDGE = 1015
     '''
     The data operation starts when a software trigger occurs.
-    '''
-
-
-class VoltageLevelAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
-    '''
-
-
-class VoltageLimitAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
     '''

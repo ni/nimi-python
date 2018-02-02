@@ -36,8 +36,8 @@ def example(argsv):
 
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.source_delay = 0.1
-        session.voltage_level_autorange = nidcpower.VoltageLevelAutorange.ON
-        session.current_level_autorange = nidcpower.CurrentLevelAutorange.ON
+        session.voltage_level_autorange = True
+        session.current_level_autorange = True
         session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=attribute_ids)
         voltages = create_sweep(args.voltage_start, args.voltage_final, args.steps)
         currents = create_sweep(args.current_start, args.current_final, args.steps)

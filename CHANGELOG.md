@@ -19,8 +19,11 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
-        * Metadata updated to NI-DMM 17.5
     * #### Removed
+        * Removed these enums and disconnected them from the associated attribute
+            * `DCBias` - `DC_BIAS`
+            * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
+        * Metadata updated to NI-DMM 17.5
 * ### NI-ModInst
     * #### Added
     * #### Changed
@@ -34,6 +37,11 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
     * #### Removed
+        * Removed these enums and disconnected them from the associated attribute
+            * `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
+            * `CurrentLevelAutorange` - `CURRENT_LEVEL_AUTORANGE`
+            * `VoltageLevelAutorange` - `VOLTAGE_LEVEL_AUTORANGE`
+            * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 * ### NI-FGEN
     * #### Added
     * #### Changed
@@ -43,6 +51,12 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
     * #### Removed
+        * Removed these enums and disconnected them from the associated attribute
+            * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
+            * `BoolEnableDisableChan` - `CHANNEL_ENABLED`
+            * `BoolEnableDisableIQ` - `FETCH_INTERLEAVED_IQ_DATA`
+            * `BoolEnableDisableRealtime` - `HORZ_ENFORCE_REALTIME`
+            * `BoolEnableDisableTIS` - `ENABLE_TIME_INTERLEAVED_SAMPLING`
 
 ## 0.6.0 - 2017-12-20
 * ### ALL

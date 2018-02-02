@@ -202,29 +202,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: DCBias
-
-    .. py:attribute:: DCBias.OFF
-
-
-
-        NI-DMM programs the device not to use the DC bias
-
-        
-
-
-
-    .. py:attribute:: DCBias.ON
-
-
-
-        NI-DMM programs the device to use the DC bias
-
-        
-
-
-
-
 .. py:data:: DCNoiseRejection
 
     .. py:attribute:: DCNoiseRejection.AUTO
@@ -584,29 +561,6 @@ Enums used in NI-DMM
 
 
         Falling Edge
-
-        
-
-
-
-
-.. py:data:: OffsetCompensatedOhms
-
-    .. py:attribute:: OffsetCompensatedOhms.OFF
-
-
-
-        The DMM disables offset compensated ohms.
-
-        
-
-
-
-    .. py:attribute:: OffsetCompensatedOhms.ON
-
-
-
-        The DMM enables offset compensated ohms.
 
         
 
