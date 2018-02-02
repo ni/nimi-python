@@ -168,21 +168,33 @@ class SideEffectsHelper(object):
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['BoolArrayOutputFunction']['return'] != 0:
             return self._defaults['BoolArrayOutputFunction']['return']
+        # an_array
         if self._defaults['BoolArrayOutputFunction']['anArray'] is None:
             raise MockFunctionCallError("niFake_BoolArrayOutputFunction", param='anArray')
-        a = self._defaults['BoolArrayOutputFunction']['anArray']
-        for i in range(min(len(an_array), len(a))):
-            an_array[i] = a[i]
+        test_value = self._defaults['BoolArrayOutputFunction']['anArray']
+        try:
+            an_array_ref = an_array.contents
+        except AttributeError:
+            an_array_ref = an_array
+        assert len(an_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
 
     def niFake_EnumArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['EnumArrayOutputFunction']['return'] != 0:
             return self._defaults['EnumArrayOutputFunction']['return']
+        # an_array
         if self._defaults['EnumArrayOutputFunction']['anArray'] is None:
             raise MockFunctionCallError("niFake_EnumArrayOutputFunction", param='anArray')
-        a = self._defaults['EnumArrayOutputFunction']['anArray']
-        for i in range(min(len(an_array), len(a))):
-            an_array[i] = a[i]
+        test_value = self._defaults['EnumArrayOutputFunction']['anArray']
+        try:
+            an_array_ref = an_array.contents
+        except AttributeError:
+            an_array_ref = an_array
+        assert len(an_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            an_array_ref[i] = test_value[i]
         return self._defaults['EnumArrayOutputFunction']['return']
 
     def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
@@ -193,11 +205,18 @@ class SideEffectsHelper(object):
     def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
         if self._defaults['FetchWaveform']['return'] != 0:
             return self._defaults['FetchWaveform']['return']
+        # waveform_data
         if self._defaults['FetchWaveform']['waveformData'] is None:
             raise MockFunctionCallError("niFake_FetchWaveform", param='waveformData')
-        a = self._defaults['FetchWaveform']['waveformData']
-        for i in range(min(len(waveform_data), len(a))):
-            waveform_data[i] = a[i]
+        test_value = self._defaults['FetchWaveform']['waveformData']
+        try:
+            waveform_data_ref = waveform_data.contents
+        except AttributeError:
+            waveform_data_ref = waveform_data
+        assert len(waveform_data_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            waveform_data_ref[i] = test_value[i]
+        # actual_number_of_samples
         if self._defaults['FetchWaveform']['actualNumberOfSamples'] is None:
             raise MockFunctionCallError("niFake_FetchWaveform", param='actualNumberOfSamples')
         actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
@@ -206,6 +225,7 @@ class SideEffectsHelper(object):
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
             return self._defaults['GetABoolean']['return']
+        # a_boolean
         if self._defaults['GetABoolean']['aBoolean'] is None:
             raise MockFunctionCallError("niFake_GetABoolean", param='aBoolean')
         a_boolean.contents.value = self._defaults['GetABoolean']['aBoolean']
@@ -214,6 +234,7 @@ class SideEffectsHelper(object):
     def niFake_GetANumber(self, vi, a_number):  # noqa: N802
         if self._defaults['GetANumber']['return'] != 0:
             return self._defaults['GetANumber']['return']
+        # a_number
         if self._defaults['GetANumber']['aNumber'] is None:
             raise MockFunctionCallError("niFake_GetANumber", param='aNumber')
         a_number.contents.value = self._defaults['GetANumber']['aNumber']
@@ -222,13 +243,15 @@ class SideEffectsHelper(object):
     def niFake_GetAStringOfFixedMaximumSize(self, vi, a_string):  # noqa: N802
         if self._defaults['GetAStringOfFixedMaximumSize']['return'] != 0:
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
+        # a_string
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        a = self._defaults['GetAStringOfFixedMaximumSize']['aString']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(a_string), len(a))):
-            a_string[i] = a[i]
+        test_value = self._defaults['GetAStringOfFixedMaximumSize']['aString']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(a_string) >= len(test_value)
+        for i in range(len(test_value)):
+            a_string[i] = test_value[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
@@ -244,26 +267,39 @@ class SideEffectsHelper(object):
     def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         if self._defaults['GetArrayForPythonCodeCustomType']['return'] != 0:
             return self._defaults['GetArrayForPythonCodeCustomType']['return']
+        # array_out
         if self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType", param='arrayOut')
-        a = self._defaults['GetArrayForPythonCodeCustomType']['arrayOut']
-        for i in range(min(len(array_out), len(a))):
-            array_out[i] = a[i]
+        test_value = self._defaults['GetArrayForPythonCodeCustomType']['arrayOut']
+        try:
+            array_out_ref = array_out.contents
+        except AttributeError:
+            array_out_ref = array_out
+        assert len(array_out_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            array_out_ref[i] = test_value[i]
         return self._defaults['GetArrayForPythonCodeCustomType']['return']
 
     def niFake_GetArrayForPythonCodeDouble(self, vi, number_of_elements, array_out):  # noqa: N802
         if self._defaults['GetArrayForPythonCodeDouble']['return'] != 0:
             return self._defaults['GetArrayForPythonCodeDouble']['return']
+        # array_out
         if self._defaults['GetArrayForPythonCodeDouble']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayForPythonCodeDouble", param='arrayOut')
-        a = self._defaults['GetArrayForPythonCodeDouble']['arrayOut']
-        for i in range(min(len(array_out), len(a))):
-            array_out[i] = a[i]
+        test_value = self._defaults['GetArrayForPythonCodeDouble']['arrayOut']
+        try:
+            array_out_ref = array_out.contents
+        except AttributeError:
+            array_out_ref = array_out
+        assert len(array_out_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            array_out_ref[i] = test_value[i]
         return self._defaults['GetArrayForPythonCodeDouble']['return']
 
     def niFake_GetArraySizeForPythonCode(self, vi, size_out):  # noqa: N802
         if self._defaults['GetArraySizeForPythonCode']['return'] != 0:
             return self._defaults['GetArraySizeForPythonCode']['return']
+        # size_out
         if self._defaults['GetArraySizeForPythonCode']['sizeOut'] is None:
             raise MockFunctionCallError("niFake_GetArraySizeForPythonCode", param='sizeOut')
         size_out.contents.value = self._defaults['GetArraySizeForPythonCode']['sizeOut']
@@ -276,13 +312,18 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetArrayUsingIVIDance", param='arrayOut')
         if array_size.value == 0:
             return len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])
+        try:
+            array_out_ref = array_out.contents
+        except AttributeError:
+            array_out_ref = array_out
         for i in range(len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])):
-            array_out[i] = self._defaults['GetArrayUsingIVIDance']['arrayOut'][i]
+            array_out_ref[i] = self._defaults['GetArrayUsingIVIDance']['arrayOut'][i]
         return self._defaults['GetArrayUsingIVIDance']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
+        # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViBoolean", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
@@ -291,6 +332,7 @@ class SideEffectsHelper(object):
     def niFake_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViInt32']['return'] != 0:
             return self._defaults['GetAttributeViInt32']['return']
+        # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
@@ -299,6 +341,7 @@ class SideEffectsHelper(object):
     def niFake_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViInt64']['return'] != 0:
             return self._defaults['GetAttributeViInt64']['return']
+        # attribute_value
         if self._defaults['GetAttributeViInt64']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViInt64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
@@ -307,6 +350,7 @@ class SideEffectsHelper(object):
     def niFake_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
+        # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViReal64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
@@ -325,18 +369,23 @@ class SideEffectsHelper(object):
     def niFake_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
+        # month
         if self._defaults['GetCalDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Month')
         month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+        # day
         if self._defaults['GetCalDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Day')
         day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+        # year
         if self._defaults['GetCalDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Year')
         year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+        # hour
         if self._defaults['GetCalDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Hour')
         hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+        # minute
         if self._defaults['GetCalDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Minute')
         minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
@@ -345,6 +394,7 @@ class SideEffectsHelper(object):
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         if self._defaults['GetCustomType']['return'] != 0:
             return self._defaults['GetCustomType']['return']
+        # cs
         if self._defaults['GetCustomType']['cs'] is None:
             raise MockFunctionCallError("niFake_GetCustomType", param='cs')
         for field in self._defaults['GetCustomType']['cs']._fields_:
@@ -355,19 +405,27 @@ class SideEffectsHelper(object):
     def niFake_GetCustomTypeArray(self, vi, number_of_elements, cs):  # noqa: N802
         if self._defaults['GetCustomTypeArray']['return'] != 0:
             return self._defaults['GetCustomTypeArray']['return']
+        # cs
         if self._defaults['GetCustomTypeArray']['cs'] is None:
             raise MockFunctionCallError("niFake_GetCustomTypeArray", param='cs')
-        a = self._defaults['GetCustomTypeArray']['cs']
-        for i in range(min(len(cs), len(a))):
-            cs[i] = a[i]
+        test_value = self._defaults['GetCustomTypeArray']['cs']
+        try:
+            cs_ref = cs.contents
+        except AttributeError:
+            cs_ref = cs
+        assert len(cs_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            cs_ref[i] = test_value[i]
         return self._defaults['GetCustomTypeArray']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         if self._defaults['GetEnumValue']['return'] != 0:
             return self._defaults['GetEnumValue']['return']
+        # a_quantity
         if self._defaults['GetEnumValue']['aQuantity'] is None:
             raise MockFunctionCallError("niFake_GetEnumValue", param='aQuantity')
         a_quantity.contents.value = self._defaults['GetEnumValue']['aQuantity']
+        # a_turtle
         if self._defaults['GetEnumValue']['aTurtle'] is None:
             raise MockFunctionCallError("niFake_GetEnumValue", param='aTurtle')
         a_turtle.contents.value = self._defaults['GetEnumValue']['aTurtle']
@@ -376,6 +434,7 @@ class SideEffectsHelper(object):
     def niFake_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
+        # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niFake_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
@@ -389,6 +448,7 @@ class SideEffectsHelper(object):
     def niFake_GetLastCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
         if self._defaults['GetLastCalDateAndTime']['return'] != 0:
             return self._defaults['GetLastCalDateAndTime']['return']
+        # month
         if self._defaults['GetLastCalDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFake_GetLastCalDateAndTime", param='Month')
         month.contents.value = self._defaults['GetLastCalDateAndTime']['Month']
@@ -397,6 +457,7 @@ class SideEffectsHelper(object):
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
+        # vi
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niFake_InitWithOptions", param='vi')
         vi.contents.value = self._defaults['InitWithOptions']['vi']
@@ -410,16 +471,28 @@ class SideEffectsHelper(object):
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
             return self._defaults['MultipleArrayTypes']['return']
+        # output_array
         if self._defaults['MultipleArrayTypes']['outputArray'] is None:
             raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArray')
-        a = self._defaults['MultipleArrayTypes']['outputArray']
-        for i in range(min(len(output_array), len(a))):
-            output_array[i] = a[i]
+        test_value = self._defaults['MultipleArrayTypes']['outputArray']
+        try:
+            output_array_ref = output_array.contents
+        except AttributeError:
+            output_array_ref = output_array
+        assert len(output_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            output_array_ref[i] = test_value[i]
+        # output_array_of_fixed_length
         if self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] is None:
             raise MockFunctionCallError("niFake_MultipleArrayTypes", param='outputArrayOfFixedLength')
-        a = self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength']
-        for i in range(min(len(output_array_of_fixed_length), len(a))):
-            output_array_of_fixed_length[i] = a[i]
+        test_value = self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength']
+        try:
+            output_array_of_fixed_length_ref = output_array_of_fixed_length.contents
+        except AttributeError:
+            output_array_of_fixed_length_ref = output_array_of_fixed_length
+        assert len(output_array_of_fixed_length_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            output_array_of_fixed_length_ref[i] = test_value[i]
         return self._defaults['MultipleArrayTypes']['return']
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
@@ -440,6 +513,7 @@ class SideEffectsHelper(object):
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
+        # reading
         if self._defaults['Read']['reading'] is None:
             raise MockFunctionCallError("niFake_Read", param='reading')
         reading.contents.value = self._defaults['Read']['reading']
@@ -448,6 +522,7 @@ class SideEffectsHelper(object):
     def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
         if self._defaults['ReadFromChannel']['return'] != 0:
             return self._defaults['ReadFromChannel']['return']
+        # reading
         if self._defaults['ReadFromChannel']['reading'] is None:
             raise MockFunctionCallError("niFake_ReadFromChannel", param='reading')
         reading.contents.value = self._defaults['ReadFromChannel']['reading']
@@ -456,44 +531,59 @@ class SideEffectsHelper(object):
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['ReturnANumberAndAString']['return'] != 0:
             return self._defaults['ReturnANumberAndAString']['return']
+        # a_number
         if self._defaults['ReturnANumberAndAString']['aNumber'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aNumber')
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
+        # a_string
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        a = self._defaults['ReturnANumberAndAString']['aString']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(a_string), len(a))):
-            a_string[i] = a[i]
+        test_value = self._defaults['ReturnANumberAndAString']['aString']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(a_string) >= len(test_value)
+        for i in range(len(test_value)):
+            a_string[i] = test_value[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
     def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
         if self._defaults['ReturnMultipleTypes']['return'] != 0:
             return self._defaults['ReturnMultipleTypes']['return']
+        # a_boolean
         if self._defaults['ReturnMultipleTypes']['aBoolean'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aBoolean')
         a_boolean.contents.value = self._defaults['ReturnMultipleTypes']['aBoolean']
+        # an_int32
         if self._defaults['ReturnMultipleTypes']['anInt32'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt32')
         an_int32.contents.value = self._defaults['ReturnMultipleTypes']['anInt32']
+        # an_int64
         if self._defaults['ReturnMultipleTypes']['anInt64'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt64')
         an_int64.contents.value = self._defaults['ReturnMultipleTypes']['anInt64']
+        # an_int_enum
         if self._defaults['ReturnMultipleTypes']['anIntEnum'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anIntEnum')
         an_int_enum.contents.value = self._defaults['ReturnMultipleTypes']['anIntEnum']
+        # a_float
         if self._defaults['ReturnMultipleTypes']['aFloat'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloat')
         a_float.contents.value = self._defaults['ReturnMultipleTypes']['aFloat']
+        # a_float_enum
         if self._defaults['ReturnMultipleTypes']['aFloatEnum'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloatEnum')
         a_float_enum.contents.value = self._defaults['ReturnMultipleTypes']['aFloatEnum']
+        # an_array
         if self._defaults['ReturnMultipleTypes']['anArray'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anArray')
-        a = self._defaults['ReturnMultipleTypes']['anArray']
-        for i in range(min(len(an_array), len(a))):
-            an_array[i] = a[i]
+        test_value = self._defaults['ReturnMultipleTypes']['anArray']
+        try:
+            an_array_ref = an_array.contents
+        except AttributeError:
+            an_array_ref = an_array
+        assert len(an_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            an_array_ref[i] = test_value[i]
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
         if string_size.value == 0:
@@ -544,6 +634,7 @@ class SideEffectsHelper(object):
     def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
         if self._defaults['Use64BitNumber']['return'] != 0:
             return self._defaults['Use64BitNumber']['return']
+        # output
         if self._defaults['Use64BitNumber']['output'] is None:
             raise MockFunctionCallError("niFake_Use64BitNumber", param='output')
         output.contents.value = self._defaults['Use64BitNumber']['output']
@@ -562,13 +653,15 @@ class SideEffectsHelper(object):
     def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['error_message']['return'] != 0:
             return self._defaults['error_message']['return']
+        # error_message
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        a = self._defaults['error_message']['errorMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
+        test_value = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values

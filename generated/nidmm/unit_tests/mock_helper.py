@@ -239,6 +239,7 @@ class SideEffectsHelper(object):
     def niDMM_Fetch(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
             return self._defaults['Fetch']['return']
+        # reading
         if self._defaults['Fetch']['Reading'] is None:
             raise MockFunctionCallError("niDMM_Fetch", param='Reading')
         reading.contents.value = self._defaults['Fetch']['Reading']
@@ -247,11 +248,18 @@ class SideEffectsHelper(object):
     def niDMM_FetchMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         if self._defaults['FetchMultiPoint']['return'] != 0:
             return self._defaults['FetchMultiPoint']['return']
+        # reading_array
         if self._defaults['FetchMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
-        a = self._defaults['FetchMultiPoint']['readingArray']
-        for i in range(min(len(reading_array), len(a))):
-            reading_array[i] = a[i]
+        test_value = self._defaults['FetchMultiPoint']['readingArray']
+        try:
+            reading_array_ref = reading_array.contents
+        except AttributeError:
+            reading_array_ref = reading_array
+        assert len(reading_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            reading_array_ref[i] = test_value[i]
+        # actual_number_of_points
         if self._defaults['FetchMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['FetchMultiPoint']['actualNumberOfPoints']
@@ -260,11 +268,18 @@ class SideEffectsHelper(object):
     def niDMM_FetchWaveform(self, vi, maximum_time, array_size, waveform_array, actual_number_of_points):  # noqa: N802
         if self._defaults['FetchWaveform']['return'] != 0:
             return self._defaults['FetchWaveform']['return']
+        # waveform_array
         if self._defaults['FetchWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
-        a = self._defaults['FetchWaveform']['waveformArray']
-        for i in range(min(len(waveform_array), len(a))):
-            waveform_array[i] = a[i]
+        test_value = self._defaults['FetchWaveform']['waveformArray']
+        try:
+            waveform_array_ref = waveform_array.contents
+        except AttributeError:
+            waveform_array_ref = waveform_array
+        assert len(waveform_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            waveform_array_ref[i] = test_value[i]
+        # actual_number_of_points
         if self._defaults['FetchWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['FetchWaveform']['actualNumberOfPoints']
@@ -273,9 +288,11 @@ class SideEffectsHelper(object):
     def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):  # noqa: N802
         if self._defaults['GetApertureTimeInfo']['return'] != 0:
             return self._defaults['GetApertureTimeInfo']['return']
+        # aperture_time
         if self._defaults['GetApertureTimeInfo']['apertureTime'] is None:
             raise MockFunctionCallError("niDMM_GetApertureTimeInfo", param='apertureTime')
         aperture_time.contents.value = self._defaults['GetApertureTimeInfo']['apertureTime']
+        # aperture_time_units
         if self._defaults['GetApertureTimeInfo']['apertureTimeUnits'] is None:
             raise MockFunctionCallError("niDMM_GetApertureTimeInfo", param='apertureTimeUnits')
         aperture_time_units.contents.value = self._defaults['GetApertureTimeInfo']['apertureTimeUnits']
@@ -284,6 +301,7 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
+        # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViBoolean", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
@@ -292,6 +310,7 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViInt32']['return'] != 0:
             return self._defaults['GetAttributeViInt32']['return']
+        # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
@@ -300,6 +319,7 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
+        # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViReal64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
@@ -318,6 +338,7 @@ class SideEffectsHelper(object):
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
         if self._defaults['GetAutoRangeValue']['return'] != 0:
             return self._defaults['GetAutoRangeValue']['return']
+        # actual_range
         if self._defaults['GetAutoRangeValue']['actualRange'] is None:
             raise MockFunctionCallError("niDMM_GetAutoRangeValue", param='actualRange')
         actual_range.contents.value = self._defaults['GetAutoRangeValue']['actualRange']
@@ -326,18 +347,23 @@ class SideEffectsHelper(object):
     def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
+        # month
         if self._defaults['GetCalDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Month')
         month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+        # day
         if self._defaults['GetCalDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Day')
         day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+        # year
         if self._defaults['GetCalDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Year')
         year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+        # hour
         if self._defaults['GetCalDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Hour')
         hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+        # minute
         if self._defaults['GetCalDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='Minute')
         minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
@@ -346,6 +372,7 @@ class SideEffectsHelper(object):
     def niDMM_GetDevTemp(self, vi, options, temperature):  # noqa: N802
         if self._defaults['GetDevTemp']['return'] != 0:
             return self._defaults['GetDevTemp']['return']
+        # temperature
         if self._defaults['GetDevTemp']['Temperature'] is None:
             raise MockFunctionCallError("niDMM_GetDevTemp", param='Temperature')
         temperature.contents.value = self._defaults['GetDevTemp']['Temperature']
@@ -354,6 +381,7 @@ class SideEffectsHelper(object):
     def niDMM_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
+        # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
@@ -367,6 +395,7 @@ class SideEffectsHelper(object):
     def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
             return self._defaults['GetExtCalRecommendedInterval']['return']
+        # months
         if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
             raise MockFunctionCallError("niDMM_GetExtCalRecommendedInterval", param='Months')
         months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
@@ -375,6 +404,7 @@ class SideEffectsHelper(object):
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         if self._defaults['GetLastCalTemp']['return'] != 0:
             return self._defaults['GetLastCalTemp']['return']
+        # temperature
         if self._defaults['GetLastCalTemp']['Temperature'] is None:
             raise MockFunctionCallError("niDMM_GetLastCalTemp", param='Temperature')
         temperature.contents.value = self._defaults['GetLastCalTemp']['Temperature']
@@ -383,6 +413,7 @@ class SideEffectsHelper(object):
     def niDMM_GetMeasurementPeriod(self, vi, period):  # noqa: N802
         if self._defaults['GetMeasurementPeriod']['return'] != 0:
             return self._defaults['GetMeasurementPeriod']['return']
+        # period
         if self._defaults['GetMeasurementPeriod']['Period'] is None:
             raise MockFunctionCallError("niDMM_GetMeasurementPeriod", param='Period')
         period.contents.value = self._defaults['GetMeasurementPeriod']['Period']
@@ -391,6 +422,7 @@ class SideEffectsHelper(object):
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         if self._defaults['GetSelfCalSupported']['return'] != 0:
             return self._defaults['GetSelfCalSupported']['return']
+        # self_cal_supported
         if self._defaults['GetSelfCalSupported']['selfCalSupported'] is None:
             raise MockFunctionCallError("niDMM_GetSelfCalSupported", param='selfCalSupported')
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
@@ -399,6 +431,7 @@ class SideEffectsHelper(object):
     def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, options, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
+        # vi
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niDMM_InitWithOptions", param='vi')
         vi.contents.value = self._defaults['InitWithOptions']['vi']
@@ -412,9 +445,11 @@ class SideEffectsHelper(object):
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['PerformOpenCableComp']['return'] != 0:
             return self._defaults['PerformOpenCableComp']['return']
+        # conductance
         if self._defaults['PerformOpenCableComp']['Conductance'] is None:
             raise MockFunctionCallError("niDMM_PerformOpenCableComp", param='Conductance')
         conductance.contents.value = self._defaults['PerformOpenCableComp']['Conductance']
+        # susceptance
         if self._defaults['PerformOpenCableComp']['Susceptance'] is None:
             raise MockFunctionCallError("niDMM_PerformOpenCableComp", param='Susceptance')
         susceptance.contents.value = self._defaults['PerformOpenCableComp']['Susceptance']
@@ -423,9 +458,11 @@ class SideEffectsHelper(object):
     def niDMM_PerformShortCableComp(self, vi, resistance, reactance):  # noqa: N802
         if self._defaults['PerformShortCableComp']['return'] != 0:
             return self._defaults['PerformShortCableComp']['return']
+        # resistance
         if self._defaults['PerformShortCableComp']['Resistance'] is None:
             raise MockFunctionCallError("niDMM_PerformShortCableComp", param='Resistance')
         resistance.contents.value = self._defaults['PerformShortCableComp']['Resistance']
+        # reactance
         if self._defaults['PerformShortCableComp']['Reactance'] is None:
             raise MockFunctionCallError("niDMM_PerformShortCableComp", param='Reactance')
         reactance.contents.value = self._defaults['PerformShortCableComp']['Reactance']
@@ -434,6 +471,7 @@ class SideEffectsHelper(object):
     def niDMM_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
+        # reading
         if self._defaults['Read']['Reading'] is None:
             raise MockFunctionCallError("niDMM_Read", param='Reading')
         reading.contents.value = self._defaults['Read']['Reading']
@@ -442,11 +480,18 @@ class SideEffectsHelper(object):
     def niDMM_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         if self._defaults['ReadMultiPoint']['return'] != 0:
             return self._defaults['ReadMultiPoint']['return']
+        # reading_array
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
-        a = self._defaults['ReadMultiPoint']['readingArray']
-        for i in range(min(len(reading_array), len(a))):
-            reading_array[i] = a[i]
+        test_value = self._defaults['ReadMultiPoint']['readingArray']
+        try:
+            reading_array_ref = reading_array.contents
+        except AttributeError:
+            reading_array_ref = reading_array
+        assert len(reading_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            reading_array_ref[i] = test_value[i]
+        # actual_number_of_points
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
@@ -455,9 +500,11 @@ class SideEffectsHelper(object):
     def niDMM_ReadStatus(self, vi, acquisition_backlog, acquisition_status):  # noqa: N802
         if self._defaults['ReadStatus']['return'] != 0:
             return self._defaults['ReadStatus']['return']
+        # acquisition_backlog
         if self._defaults['ReadStatus']['acquisitionBacklog'] is None:
             raise MockFunctionCallError("niDMM_ReadStatus", param='acquisitionBacklog')
         acquisition_backlog.contents.value = self._defaults['ReadStatus']['acquisitionBacklog']
+        # acquisition_status
         if self._defaults['ReadStatus']['acquisitionStatus'] is None:
             raise MockFunctionCallError("niDMM_ReadStatus", param='acquisitionStatus')
         acquisition_status.contents.value = self._defaults['ReadStatus']['acquisitionStatus']
@@ -466,11 +513,18 @@ class SideEffectsHelper(object):
     def niDMM_ReadWaveform(self, vi, maximum_time, array_size, waveform_array, actual_number_of_points):  # noqa: N802
         if self._defaults['ReadWaveform']['return'] != 0:
             return self._defaults['ReadWaveform']['return']
+        # waveform_array
         if self._defaults['ReadWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
-        a = self._defaults['ReadWaveform']['waveformArray']
-        for i in range(min(len(waveform_array), len(a))):
-            waveform_array[i] = a[i]
+        test_value = self._defaults['ReadWaveform']['waveformArray']
+        try:
+            waveform_array_ref = waveform_array.contents
+        except AttributeError:
+            waveform_array_ref = waveform_array
+        assert len(waveform_array_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            waveform_array_ref[i] = test_value[i]
+        # actual_number_of_points
         if self._defaults['ReadWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadWaveform']['actualNumberOfPoints']
@@ -519,13 +573,15 @@ class SideEffectsHelper(object):
     def niDMM_error_message(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['error_message']['return'] != 0:
             return self._defaults['error_message']['return']
+        # error_message
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        a = self._defaults['error_message']['errorMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
+        test_value = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
         return self._defaults['error_message']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
@@ -536,16 +592,19 @@ class SideEffectsHelper(object):
     def niDMM_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
             return self._defaults['self_test']['return']
+        # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestResult')
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
-        a = self._defaults['self_test']['selfTestMessage']
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(self_test_message), len(a))):
-            self_test_message[i] = a[i]
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

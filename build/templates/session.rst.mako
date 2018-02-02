@@ -23,7 +23,7 @@ for attr in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
     else:
-        t = helper.get_python_type_for_api_type(attributes[attr]["type"], config)
+        t = attributes[attr]["python_type"]
 
     table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
 

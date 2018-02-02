@@ -138,4 +138,12 @@ functions_converters = {
                                                                    'python_name': 'options', }, }, },
 }
 
+# Parameter that need to be array.array
+functions_array = {
+    'ReadMultiPoint':                      { 'parameters': { 3: { 'use_array': True, }, }, },
+    'ReadWaveform':                        { 'parameters': { 3: { 'use_array': True, }, }, },
+    'FetchMultiPoint':                     { 'parameters': { 3: { 'use_array': True, }, }, },
+    'FetchWaveform':                       { 'parameters': { 3: { 'use_array': True, }, }, },
+}
+
 
