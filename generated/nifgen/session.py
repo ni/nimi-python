@@ -68,9 +68,9 @@ class _Channels(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         # First try it as a list
-        try:
+        if isinstance(repeated_capability, list):
             rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        except TypeError:
+        else:
             # Then try it as a slice
             try:
                 def ifnone(a, b):
@@ -80,7 +80,7 @@ class _Channels(object):
                 # Add prefix to each entry
                 rep_cap_list = ['' + str(r) for r in rep_cap_list]
             # Otherwise it must be a single item
-            except TypeError:
+            except (TypeError, AttributeError):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
 
         return _SessionBase(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
@@ -95,9 +95,9 @@ class _P2PStreams(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         # First try it as a list
-        try:
+        if isinstance(repeated_capability, list):
             rep_cap_list = [str(r) if str(r).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(r) for r in repeated_capability]
-        except TypeError:
+        else:
             # Then try it as a slice
             try:
                 def ifnone(a, b):
@@ -107,7 +107,7 @@ class _P2PStreams(object):
                 # Add prefix to each entry
                 rep_cap_list = ['FIFOEndpoint' + str(r) for r in rep_cap_list]
             # Otherwise it must be a single item
-            except TypeError:
+            except (TypeError, AttributeError):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('fifoendpoint') else 'FIFOEndpoint' + str(repeated_capability)]
 
         return _SessionBase(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
@@ -122,9 +122,9 @@ class _ScriptTriggers(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         # First try it as a list
-        try:
+        if isinstance(repeated_capability, list):
             rep_cap_list = [str(r) if str(r).lower().startswith('scripttrigger') else 'ScriptTrigger' + str(r) for r in repeated_capability]
-        except TypeError:
+        else:
             # Then try it as a slice
             try:
                 def ifnone(a, b):
@@ -134,7 +134,7 @@ class _ScriptTriggers(object):
                 # Add prefix to each entry
                 rep_cap_list = ['ScriptTrigger' + str(r) for r in rep_cap_list]
             # Otherwise it must be a single item
-            except TypeError:
+            except (TypeError, AttributeError):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('scripttrigger') else 'ScriptTrigger' + str(repeated_capability)]
 
         return _SessionBase(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
@@ -149,9 +149,9 @@ class _Markers(object):
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         # First try it as a list
-        try:
+        if isinstance(repeated_capability, list):
             rep_cap_list = [str(r) if str(r).lower().startswith('marker') else 'Marker' + str(r) for r in repeated_capability]
-        except TypeError:
+        else:
             # Then try it as a slice
             try:
                 def ifnone(a, b):
@@ -161,7 +161,7 @@ class _Markers(object):
                 # Add prefix to each entry
                 rep_cap_list = ['Marker' + str(r) for r in rep_cap_list]
             # Otherwise it must be a single item
-            except TypeError:
+            except (TypeError, AttributeError):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('marker') else 'Marker' + str(repeated_capability)]
 
         return _SessionBase(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
