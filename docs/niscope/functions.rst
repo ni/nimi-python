@@ -1373,7 +1373,7 @@ niscope.Session methods
         
 
 
-    :type wfm: list of float
+    :type wfm: array.array("d")
     :param timeout:
 
 
@@ -1713,7 +1713,7 @@ niscope.Session methods
 
         WHERE
 
-        wfm (list of float): 
+        wfm (array.array("d")): 
 
 
             Returns an array whose length is the **numSamples** times number of
@@ -1824,7 +1824,7 @@ niscope.Session methods
 
     :type timeout: float
 
-    :rtype: list of float
+    :rtype: array.array("d")
     :return:
 
 

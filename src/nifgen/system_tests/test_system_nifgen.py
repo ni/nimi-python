@@ -114,7 +114,7 @@ def test_create_waveform_wrong_type(session):
         try:
             session.create_waveform(data)
             assert False
-        except TypeError:
+        except (TypeError, ValueError):
             pass
 
 
@@ -325,7 +325,7 @@ def test_write_waveform_wrong_type(session):
         try:
             session.write_waveform(waveform_handle, data)
             assert False
-        except TypeError:
+        except (TypeError, ValueError):
             pass
 
 

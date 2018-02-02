@@ -6,15 +6,12 @@
 #  applied at build time
 
 
-
 functions = {
     'Abort': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -33,12 +30,10 @@ this function if the digitizer times out waiting for a trigger.
 },
     },
     'AcquisitionStatus': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -50,7 +45,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'acquisitionStatus',
                 'type': 'ViInt32',
 'documentation': {
@@ -76,12 +70,10 @@ output parameter.
 },
     },
     'ActualMeasWfmSize': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -93,7 +85,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arrayMeasFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -106,7 +97,6 @@ to perform.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'measWaveformSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -122,12 +112,10 @@ waveform.
 },
     },
     'ActualNumWfms': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -139,7 +127,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -151,7 +138,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numWfms',
                 'type': 'ViInt32',
 'documentation': {
@@ -171,12 +157,10 @@ channel list parsing for you.
 },
     },
     'ActualRecordLength': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -188,7 +172,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'recordLength',
                 'type': 'ViInt32',
 'documentation': {
@@ -211,12 +194,10 @@ points specified in any of the Configure Horizontal functions.
 },
     },
     'AddWaveformProcessing': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -228,7 +209,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -240,7 +220,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -267,12 +246,10 @@ processing is done before any other measurements.
 },
     },
     'AdjustSampleClockRelativeDelay': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -284,7 +261,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -305,12 +281,10 @@ delayed from the reference clock by the specified amount of time.
 },
     },
     'AutoSetup': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -342,12 +316,10 @@ The following settings are changed:
 },
     },
     'CalSelfCalibrate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -359,7 +331,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -371,7 +342,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Option',
                 'type': 'ViInt32',
 'documentation': {
@@ -402,12 +372,10 @@ NISCOPE\_VAL\_ACTION\_STORE and no errors occur.
 },
     },
     'CheckAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -419,7 +387,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -431,7 +398,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -440,7 +406,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViBoolean',
 'documentation': {
@@ -457,12 +422,10 @@ session.
 },
     },
     'CheckAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -474,7 +437,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -486,7 +448,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -495,7 +456,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt32',
 'documentation': {
@@ -512,12 +472,10 @@ session.
 },
     },
     'CheckAttributeViInt64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -529,7 +487,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -541,7 +498,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -550,7 +506,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt64',
 'documentation': {
@@ -567,12 +522,10 @@ session.
 },
     },
     'CheckAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -584,7 +537,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -596,7 +548,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -605,7 +556,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViReal64',
 'documentation': {
@@ -622,12 +572,10 @@ session.
 },
     },
     'CheckAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -639,7 +587,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -651,7 +598,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -660,7 +606,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViSession',
 'documentation': {
@@ -677,12 +622,10 @@ session.
 },
     },
     'CheckAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -694,7 +637,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -706,7 +648,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -715,7 +656,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViChar[]',
 'documentation': {
@@ -732,12 +672,10 @@ session.
 },
     },
     'ClearError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -762,12 +700,10 @@ Specification.
 },
     },
     'ClearInterchangeWarnings': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -787,12 +723,10 @@ Specification.
 },
     },
     'ClearWaveformMeasurementStats': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -804,7 +738,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -816,7 +749,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'clearableMeasurementFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -846,12 +778,10 @@ are also cleared with this function.
 },
     },
     'ClearWaveformProcessing': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -863,7 +793,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -886,12 +815,10 @@ processing is also done before any other measurements.
 },
     },
     'Commit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -912,12 +839,10 @@ Traditional NI-DAQ (Legacy) devices.
 },
     },
     'ConfigureAcquisition': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -929,7 +854,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'acquisitionType',
                 'type': 'ViInt32',
 'documentation': {
@@ -962,12 +886,10 @@ record.
 },
     },
     'ConfigureAcquisitionRecord': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -979,7 +901,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'timePerRecord',
                 'type': 'ViReal64',
 'documentation': {
@@ -992,7 +913,6 @@ Units: Seconds.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'minNumPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -1007,7 +927,6 @@ Valid Values: 1 – available onboard memory
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'acquisitionStartTime',
                 'type': 'ViReal64',
 'documentation': {
@@ -1029,12 +948,10 @@ acquisition subsystem.
 },
     },
     'ConfigureChanCharacteristics': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1046,7 +963,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1058,7 +974,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputImpedance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1070,7 +985,6 @@ NISCOPE\_ATTR\_INPUT\_IMPEDANCE to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maxInputFrequency',
                 'type': 'ViReal64',
 'documentation': {
@@ -1091,12 +1005,10 @@ the channel—the input impedance and the bandwidth.
 },
     },
     'ConfigureChannel': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1108,7 +1020,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1122,7 +1033,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1131,7 +1041,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Offset',
                 'type': 'ViReal64',
 'documentation': {
@@ -1144,7 +1053,6 @@ Default Value: 0
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Coupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -1172,7 +1080,6 @@ typically:
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'probeAttenuation',
                 'type': 'ViReal64',
 'documentation': {
@@ -1190,7 +1097,6 @@ For example, enter a value of 10 for a 10X probe.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Enabled',
                 'type': 'ViBoolean',
 'documentation': {
@@ -1220,12 +1126,10 @@ channel subsystem.
 },
     },
     'ConfigureClock': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1237,7 +1141,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputClockSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1250,7 +1153,6 @@ NISCOPE\_ATTR\_INPUT\_CLOCK\_SOURCE for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'outputClockSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1263,7 +1165,6 @@ NISCOPE\_ATTR\_OUTPUT\_CLOCK\_SOURCE for more information
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'clockSyncPulseSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1278,7 +1179,6 @@ NISCOPE\_ATTR\_CLOCK\_SYNC\_PULSE\_SOURCE for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'masterEnabled',
                 'type': 'ViBoolean',
 'documentation': {
@@ -1308,12 +1208,10 @@ more information.
 },
     },
     'ConfigureEdgeTriggerSource': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1325,7 +1223,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Source',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1337,7 +1234,6 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -1349,7 +1245,6 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Slope',
                 'type': 'ViInt32',
 'documentation': {
@@ -1384,12 +1279,10 @@ Specification.
 },
     },
     'ConfigureEqualizationFilterCoefficients': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1401,7 +1294,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1413,7 +1305,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfCoefficients',
                 'type': 'ViInt32',
 'documentation': {
@@ -1422,7 +1313,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Coefficients',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -1449,12 +1339,10 @@ Coefficient values should be between +1 and –1.
 },
     },
     'ConfigureHorizontalTiming': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1466,7 +1354,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'minSampleRate',
                 'type': 'ViReal64',
 'documentation': {
@@ -1478,7 +1365,6 @@ NISCOPE\_ATTR\_MIN\_SAMPLE\_RATE for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'minNumPts',
                 'type': 'ViInt32',
 'documentation': {
@@ -1493,7 +1379,6 @@ Valid Values: Greater than 1; limited by available memory
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'refPosition',
                 'type': 'ViReal64',
 'documentation': {
@@ -1505,7 +1390,6 @@ a percentage.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numRecords',
                 'type': 'ViInt32',
 'documentation': {
@@ -1514,7 +1398,6 @@ a percentage.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'enforceRealtime',
                 'type': 'ViBoolean',
 'documentation': {
@@ -1544,12 +1427,10 @@ multirecord acquisition in terms of minimum sample rate.
 },
     },
     'ConfigureRefLevels': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1561,7 +1442,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Low',
                 'type': 'ViReal64',
 'documentation': {
@@ -1580,7 +1460,6 @@ Default Value: 10.0
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Mid',
                 'type': 'ViReal64',
 'documentation': {
@@ -1599,7 +1478,6 @@ Default Value: 50.0
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'High',
                 'type': 'ViReal64',
 'documentation': {
@@ -1636,12 +1514,10 @@ negative, or duty cycle positive measurement.
 },
     },
     'ConfigureTVTriggerLineNumber': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1653,7 +1529,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'lineNumber',
                 'type': 'ViInt32',
 'documentation': {
@@ -1685,12 +1560,10 @@ calling this function.
 },
     },
     'ConfigureTVTriggerSource': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1702,7 +1575,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Source',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1719,7 +1591,6 @@ Defined Values
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'signalFormat',
                 'type': 'ViInt32',
 'documentation': {
@@ -1736,7 +1607,6 @@ Defined Values
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Event',
                 'type': 'ViInt32',
 'documentation': {
@@ -1759,7 +1629,6 @@ Defined Values
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Polarity',
                 'type': 'ViInt32',
 'documentation': {
@@ -1790,12 +1659,10 @@ Specification.
 },
     },
     'ConfigureTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1807,7 +1674,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1816,7 +1682,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -1848,12 +1713,10 @@ Specification.
 },
     },
     'ConfigureTriggerCoupling': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1865,7 +1728,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Coupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -1896,12 +1758,10 @@ Specification.
 },
     },
     'ConfigureTriggerDigital': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1913,7 +1773,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1925,7 +1784,6 @@ for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Slope',
                 'type': 'ViInt32',
 'documentation': {
@@ -1938,7 +1796,6 @@ information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -1951,7 +1808,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -1998,12 +1854,10 @@ Digital triggering is not supported in RIS mode.
 },
     },
     'ConfigureTriggerEdge': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2015,7 +1869,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2027,7 +1880,6 @@ for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2039,7 +1891,6 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Slope',
                 'type': 'ViInt32',
 'documentation': {
@@ -2052,7 +1903,6 @@ information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerCoupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2064,7 +1914,6 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -2077,7 +1926,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2114,12 +1962,10 @@ more information.
 },
     },
     'ConfigureTriggerHysteresis': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2131,7 +1977,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2143,7 +1988,6 @@ for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Level',
                 'type': 'ViReal64',
 'documentation': {
@@ -2155,7 +1999,6 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Hysteresis',
                 'type': 'ViReal64',
 'documentation': {
@@ -2170,7 +2013,6 @@ NISCOPE\_ATTR\_TRIGGER\_HYSTERESIS for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Slope',
                 'type': 'ViInt32',
 'documentation': {
@@ -2183,7 +2025,6 @@ information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerCoupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2195,7 +2036,6 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -2208,7 +2048,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2249,12 +2088,10 @@ more information.
 },
     },
     'ConfigureTriggerImmediate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2277,12 +2114,10 @@ Configure Trigger function, such as niScope\_ConfigureTriggerImmediate.
 },
     },
     'ConfigureTriggerOutput': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2294,7 +2129,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerEvent',
                 'type': 'ViInt32',
 'documentation': {
@@ -2303,7 +2137,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerOutput',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2345,12 +2178,10 @@ instead.
 },
     },
     'ConfigureTriggerSoftware': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2362,7 +2193,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -2375,7 +2205,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2414,12 +2243,10 @@ more information.
 },
     },
     'ConfigureTriggerVideo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2431,7 +2258,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2443,7 +2269,6 @@ for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'enableDcRestore',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2457,7 +2282,6 @@ NISCOPE\_ATTR\_ENABLE\_DC\_RESTORE for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'signalFormat',
                 'type': 'ViInt32',
 'documentation': {
@@ -2470,7 +2294,6 @@ information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Event',
                 'type': 'ViInt32',
 'documentation': {
@@ -2482,7 +2305,6 @@ specific or on the next coming line or field of the signal.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'lineNumber',
                 'type': 'ViInt32',
 'documentation': {
@@ -2499,7 +2321,6 @@ Default value: 1
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Polarity',
                 'type': 'ViInt32',
 'documentation': {
@@ -2508,7 +2329,6 @@ Default value: 1
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerCoupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2520,7 +2340,6 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -2533,7 +2352,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2572,12 +2390,10 @@ more information.
 },
     },
     'ConfigureTriggerWindow': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2589,7 +2405,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2601,7 +2416,6 @@ for defined values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'lowLevel',
                 'type': 'ViReal64',
 'documentation': {
@@ -2613,7 +2427,6 @@ triggering.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'highLevel',
                 'type': 'ViReal64',
 'documentation': {
@@ -2625,7 +2438,6 @@ triggering.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'windowMode',
                 'type': 'ViInt32',
 'documentation': {
@@ -2637,7 +2449,6 @@ or leaves a window.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerCoupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2649,7 +2460,6 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Holdoff',
                 'type': 'ViReal64',
 'documentation': {
@@ -2662,7 +2472,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Delay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2703,12 +2512,10 @@ more information.
 },
     },
     'ConfigureVertical': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2720,7 +2527,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2732,7 +2538,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2744,7 +2549,6 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Offset',
                 'type': 'ViReal64',
 'documentation': {
@@ -2756,7 +2560,6 @@ for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Coupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2768,7 +2571,6 @@ NISCOPE\_ATTR\_VERTICAL\_COUPLING for more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'probeAttenuation',
                 'type': 'ViReal64',
 'documentation': {
@@ -2780,7 +2582,6 @@ NISCOPE\_ATTR\_PROBE\_ATTENUATION for valid values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Enabled',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2800,12 +2601,10 @@ attenuation, and the channel.
 },
     },
     'Disable': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2824,12 +2623,10 @@ RTSI and PFI lines.
 },
     },
     'ExportSignal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2841,7 +2638,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Signal',
                 'type': 'ViInt32',
 'documentation': {
@@ -2855,7 +2651,6 @@ signal (clock, trigger, or event) to export.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'signalIdentifier',
                 'type': 'ViConstString',
 'documentation': {
@@ -2864,7 +2659,6 @@ signal (clock, trigger, or event) to export.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'outputTerminal',
                 'type': 'ViConstString',
 'documentation': {
@@ -2900,12 +2694,10 @@ NISCOPE\_VAL\_NONE.
 },
     },
     'Fetch': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2917,7 +2709,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2929,7 +2720,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -2942,7 +2732,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -2957,7 +2746,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -2984,7 +2772,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3039,12 +2826,10 @@ more information.
 },
     },
     'FetchArrayMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3056,7 +2841,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3068,7 +2852,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3081,7 +2864,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arrayMeasFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -3094,7 +2876,6 @@ to perform.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measWfmSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3113,7 +2894,6 @@ KnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'measWfm',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -3141,7 +2921,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3190,12 +2969,10 @@ more information.
 },
     },
     'FetchBinary16': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3207,7 +2984,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3219,7 +2995,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3232,7 +3007,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -3247,7 +3021,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViInt16[]',
 'documentation': {
@@ -3274,7 +3047,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3327,12 +3099,10 @@ more information.
 },
     },
     'FetchBinary32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3344,7 +3114,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3356,7 +3125,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3369,7 +3137,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -3384,7 +3151,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViInt32[]',
 'documentation': {
@@ -3411,7 +3177,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3464,12 +3229,10 @@ more information.
 },
     },
     'FetchBinary8': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3481,7 +3244,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3493,7 +3255,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3506,7 +3267,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -3521,7 +3281,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViInt8[]',
 'documentation': {
@@ -3548,7 +3307,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3601,12 +3359,10 @@ more information.
 },
     },
     'FetchComplex': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3618,7 +3374,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViConstString',
 'documentation': {
@@ -3630,7 +3385,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3643,7 +3397,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -3658,7 +3411,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'struct NIComplexNumber[]',
 'documentation': {
@@ -3671,7 +3423,6 @@ waveforms.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3713,12 +3464,10 @@ scaled waveforms.
 },
     },
     'FetchComplexBinary16': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3730,7 +3479,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViConstString',
 'documentation': {
@@ -3742,7 +3490,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3755,7 +3502,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -3770,7 +3516,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'struct NIComplexI16[]',
 'documentation': {
@@ -3783,7 +3528,6 @@ waveforms.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -3824,12 +3568,10 @@ one-dimensional array of complex binary 16-bit waveforms.
 },
     },
     'FetchMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3841,7 +3583,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3853,7 +3594,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3866,7 +3606,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scalarMeasFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -3879,7 +3618,6 @@ to be performed.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Result',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -3907,12 +3645,10 @@ differently.
 },
     },
     'FetchMeasurementStats': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3924,7 +3660,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3936,7 +3671,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -3949,7 +3683,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scalarMeasFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -3962,7 +3695,6 @@ to be performed on each fetched waveform.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Result',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -3971,7 +3703,6 @@ to be performed on each fetched waveform.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Mean',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -3983,7 +3714,6 @@ niScope\_FetchMeasurementStats call.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Stdev',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -3995,7 +3725,6 @@ measurements.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Min',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4007,7 +3736,6 @@ Returns the smallest scalar value acquired (the minimum of the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Max',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4019,7 +3747,6 @@ Returns the largest scalar value acquired (the maximum of the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numInStats',
                 'type': 'ViInt32[]',
 'documentation': {
@@ -4060,12 +3787,10 @@ differently.
 },
     },
     'FetchWaveform': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4077,7 +3802,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4091,7 +3815,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4100,7 +3823,6 @@ Default Value: "0"
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Waveform',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4117,7 +3839,6 @@ Units: volts
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -4129,7 +3850,6 @@ Indicates the actual number of points the function placed in the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'initialX',
                 'type': 'ViReal64',
 'documentation': {
@@ -4148,7 +3868,6 @@ time as the trigger, this parameter returns the value 0.0.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'xIncrement',
                 'type': 'ViReal64',
 'documentation': {
@@ -4186,12 +3905,10 @@ Specification.
 },
     },
     'FetchWaveformMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4203,7 +3920,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4217,7 +3933,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -4226,7 +3941,6 @@ Default Value: "0"
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Measurement',
                 'type': 'ViReal64',
 'documentation': {
@@ -4258,12 +3972,10 @@ waveform measurements on a specific channel.
 },
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4275,7 +3987,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4287,7 +3998,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4296,7 +4006,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4321,12 +4030,10 @@ function performs instrument I/O in the following cases:
 },
     },
     'GetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4338,7 +4045,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4350,7 +4056,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4359,7 +4064,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt32',
 'documentation': {
@@ -4381,12 +4085,10 @@ function performs instrument I/O in the following cases:
 },
     },
     'GetAttributeViInt64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4398,7 +4100,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4410,7 +4111,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4419,7 +4119,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt64',
 'documentation': {
@@ -4441,12 +4140,10 @@ function performs instrument I/O in the following cases:
 },
     },
     'GetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4458,7 +4155,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4470,7 +4166,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4479,7 +4174,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViReal64',
 'documentation': {
@@ -4504,12 +4198,10 @@ function performs instrument I/O in the following cases:
 },
     },
     'GetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4521,7 +4213,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4533,7 +4224,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4542,7 +4232,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViSession',
 'documentation': {
@@ -4567,12 +4256,10 @@ function performs instrument I/O in the following cases:
 },
     },
     'GetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4584,7 +4271,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4596,7 +4282,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4605,7 +4290,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4614,7 +4298,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4651,12 +4334,10 @@ you can pass 0 for the **bufSize** and VI\_NULL for the **value**.
 },
     },
     'GetChannelName': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4668,7 +4349,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
@@ -4677,7 +4357,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4699,7 +4378,6 @@ buffer regardless of the number of bytes in the value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'channelString',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4722,12 +4400,10 @@ Specification.
 },
     },
     'GetEqualizationFilterCoefficients': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4739,7 +4415,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4751,7 +4426,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numberOfCoefficients',
                 'type': 'ViInt32',
 'documentation': {
@@ -4760,7 +4434,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Coefficients',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4785,12 +4458,10 @@ Coefficient values should be between +1 and –1.
 },
     },
     'GetError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4802,7 +4473,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -4826,7 +4496,6 @@ If you pass 0, you can pass VI\_NULL for the **description** parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4838,7 +4507,6 @@ functions.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Description',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4868,12 +4536,10 @@ Specification.
 },
     },
     'GetErrorMessage': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4885,7 +4551,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -4897,7 +4562,6 @@ functions.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Buffer_Size',
                 'type': 'ViInt32',
 'documentation': {
@@ -4906,7 +4570,6 @@ functions.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4932,12 +4595,10 @@ that was returned in the first function call.
 },
     },
     'GetFrequencyResponse': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4949,7 +4610,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel',
                 'type': 'ViConstString',
 'documentation': {
@@ -4961,7 +4621,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4982,7 +4641,6 @@ values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'frequencies',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -4994,7 +4652,6 @@ response of the device.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'amplitudes',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -5006,7 +4663,6 @@ the device.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'phases',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -5018,7 +4674,6 @@ device.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numberOfFrequencies',
                 'type': 'ViInt32',
 'documentation': {
@@ -5035,12 +4690,10 @@ this function.
 },
     },
     'GetNextCoercionRecord': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5052,7 +4705,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5078,7 +4730,6 @@ parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Record',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5109,12 +4760,10 @@ Specification.
 },
     },
     'GetNextInterchangeWarning': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5126,7 +4775,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5151,7 +4799,6 @@ parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'interchangeWarning',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5189,12 +4836,10 @@ Specification.
 },
     },
     'GetNormalizationCoefficients': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5206,7 +4851,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViConstString',
 'documentation': {
@@ -5218,7 +4862,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5238,7 +4881,6 @@ the actual values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'coefficientInfo',
                 'type': 'void',
 'documentation': {
@@ -5250,7 +4892,6 @@ given channel.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numberOfCoefficientSets',
                 'type': 'ViInt32',
 'documentation': {
@@ -5273,12 +4914,10 @@ information about how to use this function.
 },
     },
     'GetScalingCoefficients': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5290,7 +4929,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViConstString',
 'documentation': {
@@ -5302,7 +4940,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -5322,7 +4959,6 @@ the actual values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'coefficientInfo',
                 'type': 'void',
 'documentation': {
@@ -5334,7 +4970,6 @@ given channel.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numberOfCoefficientSets',
                 'type': 'ViInt32',
 'documentation': {
@@ -5356,12 +4991,10 @@ information about how to use this function.
 },
     },
     'GetStreamEndpointHandle': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5373,7 +5006,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'streamName',
                 'type': 'ViConstString',
 'documentation': {
@@ -5386,7 +5018,6 @@ Help* for more information.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'writerHandle',
                 'type': 'ViUInt32',
 'documentation': {
@@ -5407,12 +5038,10 @@ peer-to-peer stream with a digitizer endpoint.
 },
     },
     'InitWithOptions': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -5457,7 +5086,6 @@ the session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5481,7 +5109,6 @@ device without performing an ID query.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5506,7 +5133,6 @@ for recommended programming practices.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'optionString',
                 'type': 'ViString',
 'documentation': {
@@ -5539,7 +5165,6 @@ Refer to the example niScope EX External Amplifier for more information.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5569,12 +5194,10 @@ Performs the following initialization actions:
 },
     },
     'InitiateAcquisition': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5596,12 +5219,10 @@ you enable with niScope\_ConfigureVertical.
 },
     },
     'IsDeviceReady': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -5649,7 +5270,6 @@ the session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5661,7 +5281,6 @@ return an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'deviceReady',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5680,12 +5299,10 @@ the device is still undergoing initialization.
 },
     },
     'IsInvalidWfmElement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5697,7 +5314,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'elementValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -5709,7 +5325,6 @@ fetch waveform functions.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'isInvalid',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5740,12 +5355,10 @@ Specification.
 },
     },
     'LockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5757,7 +5370,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5805,12 +5417,10 @@ niScope\_UnlockSession just once at the end of the function.
 },
     },
     'ProbeCompensationSignalStart': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5826,12 +5436,10 @@ particular instrument session.
 },
     },
     'ProbeCompensationSignalStop': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5847,12 +5455,10 @@ particular instrument session.
 },
     },
     'Read': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5864,7 +5470,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -5876,7 +5481,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -5889,7 +5493,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
 'documentation': {
@@ -5904,7 +5507,6 @@ period, the function returns an error.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -5931,7 +5533,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
 'documentation': {
@@ -5985,12 +5586,10 @@ more information.
 },
     },
     'ReadMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6002,7 +5601,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6014,7 +5612,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
 'documentation': {
@@ -6027,7 +5624,6 @@ parameter tells NI-SCOPE to fetch whatever is currently available. Using
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scalarMeasFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -6040,7 +5636,6 @@ to be performed
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Result',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -6071,12 +5666,10 @@ differently.
 },
     },
     'ReadWaveform': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6088,7 +5681,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6102,7 +5694,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -6111,7 +5702,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'MaxTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -6134,7 +5724,6 @@ Units: milliseconds
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Waveform',
                 'type': 'ViReal64[]',
 'documentation': {
@@ -6146,7 +5735,6 @@ Units: volts
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -6158,7 +5746,6 @@ Indicates the actual number of points the function placed in the
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'initialX',
                 'type': 'ViReal64',
 'documentation': {
@@ -6177,7 +5764,6 @@ time as the trigger, this parameter returns the value 0.0.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'xIncrement',
                 'type': 'ViReal64',
 'documentation': {
@@ -6207,12 +5793,10 @@ Specification.
 },
     },
     'ReadWaveformMeasurement': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6224,7 +5808,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Channel',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6238,7 +5821,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -6247,7 +5829,6 @@ Default Value: "0"
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maxTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -6266,7 +5847,6 @@ Units: milliseconds
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Measurement',
                 'type': 'ViReal64',
 'documentation': {
@@ -6304,12 +5884,10 @@ Specification.
 },
     },
     'ResetDevice': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6332,12 +5910,10 @@ state.
 },
     },
     'ResetInterchangeCheck': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6389,12 +5965,10 @@ Specification.
 },
     },
     'ResetWithDefaults': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6414,12 +5988,10 @@ Configuration Store.
 },
     },
     'SampleMode': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6431,7 +6003,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'sampleMode',
                 'type': 'ViInt32',
 'documentation': {
@@ -6447,12 +6018,10 @@ returns the value of the NISCOPE\_ATTR\_SAMPLE\_MODE attribute.
 },
     },
     'SampleRate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6464,7 +6033,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'sampleRate',
                 'type': 'ViReal64',
 'documentation': {
@@ -6487,12 +6055,10 @@ more information about sample rate coercion.
 },
     },
     'SendSWTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6515,12 +6081,10 @@ Specification. Consider using niScope\_SendSoftwareTriggerEdge instead.
 },
     },
     'SendSoftwareTriggerEdge': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6532,7 +6096,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'whichTrigger',
                 'type': 'ViInt32',
 'documentation': {
@@ -6562,12 +6125,10 @@ the corresponding trigger to the digitizer.
 },
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6579,7 +6140,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6591,7 +6151,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6600,7 +6159,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViBoolean',
 'documentation': {
@@ -6639,12 +6197,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6656,7 +6212,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6668,7 +6223,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6677,7 +6231,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt32',
 'documentation': {
@@ -6716,12 +6269,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViInt64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6733,7 +6284,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6745,7 +6295,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6754,7 +6303,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViInt64',
 'documentation': {
@@ -6793,12 +6341,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6810,7 +6356,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6822,7 +6367,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6831,7 +6375,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViReal64',
 'documentation': {
@@ -6870,12 +6413,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6887,7 +6428,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6899,7 +6439,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6908,7 +6447,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViSession',
 'documentation': {
@@ -6947,12 +6485,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -6964,7 +6500,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
 'documentation': {
@@ -6976,7 +6511,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -6985,7 +6519,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Value',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7026,12 +6559,10 @@ redundant instrument I/O.
 },
     },
     'UnlockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7043,7 +6574,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7069,12 +6599,10 @@ niScope\_LockSession.
 },
     },
     'close': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7097,12 +6625,10 @@ this function to perform the following actions:
 },
     },
     'errorHandler': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7114,7 +6640,6 @@ particular instrument session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViInt32',
 'documentation': {
@@ -7126,7 +6651,6 @@ functions.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorSource',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7144,7 +6668,6 @@ If you pass in NULL or an empty string, this parameter is ignored.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorDescription',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7168,12 +6691,10 @@ interpret errors after niScope\_init has failed.
 },
     },
     'error_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7185,7 +6706,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errCode',
                 'type': 'ViInt32',
 'documentation': {
@@ -7197,7 +6717,6 @@ Returns the error code for the session or execution thread. If you pass
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7221,12 +6740,10 @@ Specification.
 },
     },
     'init': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -7274,7 +6791,6 @@ the session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7298,7 +6814,6 @@ device without performing an ID query.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -7322,7 +6837,6 @@ for recommended programming practices.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7352,12 +6866,10 @@ Performs the following initialization actions:
 },
     },
     'reset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7377,12 +6889,10 @@ states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__
 },
     },
     'revision_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7394,7 +6904,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'driverRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7407,7 +6916,6 @@ IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes in length.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'firmwareRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -7427,12 +6935,10 @@ firmware.
 },
     },
     'self_test': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -7444,7 +6950,6 @@ particular instrument session.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestResult',
                 'type': 'ViInt16',
 'documentation': {
@@ -7461,7 +6966,6 @@ This control contains the value returned from the instrument self-test.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestMessage',
                 'type': 'ViChar[]',
 'documentation': {

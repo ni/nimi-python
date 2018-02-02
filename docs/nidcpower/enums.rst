@@ -63,46 +63,23 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: CurrentLevelAutorange
+.. py:data:: ComplianceLimitSymmetry
 
-    .. py:attribute:: CurrentLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
+    .. py:attribute:: ComplianceLimitSymmetry.SYMMETRIC
 
 
 
-    .. py:attribute:: CurrentLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
+        Compliance limits are specified symmetrically about 0.
 
         
 
 
 
-
-.. py:data:: CurrentLimitAutorange
-
-    .. py:attribute:: CurrentLimitAutorange.OFF
+    .. py:attribute:: ComplianceLimitSymmetry.ASYMMETRIC
 
 
 
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: CurrentLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
+        Compliance limits can be specified asymmetrically with respect to 0.
 
         
 
@@ -681,52 +658,6 @@ Enums used in NI-DCPower
 
 
         The data operation starts when a software trigger occurs.
-
-        
-
-
-
-
-.. py:data:: VoltageLevelAutorange
-
-    .. py:attribute:: VoltageLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: VoltageLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-
-.. py:data:: VoltageLimitAutorange
-
-    .. py:attribute:: VoltageLimitAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: VoltageLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
 
         
 

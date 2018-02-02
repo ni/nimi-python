@@ -400,9 +400,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Returns the value of the attribute.',
                 },
@@ -675,9 +674,8 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.',
                 },
@@ -725,9 +723,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'description',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'At least bufferSize big, string comes out here.',
                 },
@@ -772,9 +769,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'Error information formatted into a user-readable string.',
                 },
@@ -810,9 +806,8 @@ functions = {
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
                 'documentation': {
                     'description': 'The error information formatted into a string.',
                 },
