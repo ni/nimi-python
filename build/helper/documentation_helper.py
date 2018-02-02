@@ -6,6 +6,8 @@ from .documentation_snippets import enum_note_text
 from .documentation_snippets import func_note_text
 from .documentation_snippets import rep_cap_method_desc_docstring
 from .documentation_snippets import rep_cap_method_desc_rst
+from .helper import get_array_type_for_api_type
+from .helper import get_numpy_type_for_api_type
 from .parameter_usage_options import ParameterUsageOptions
 
 import pprint
@@ -419,14 +421,15 @@ def format_type_for_rst_documentation(param, numpy, config):
     else:
         p_type = param['python_type']
 
-    # We assume everything that is a buffer of ViChar is really a string (otherwise
-    # it would end up as 'list of int'
-    if param['type'] == 'ViChar' and param['is_buffer'] is True:
-        p_type = 'string'
+    if param['is_string'] is True:
+        p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy array of ' + p_type
-    elif param['is_buffer'] is True:
+        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+    elif param['use_list'] is True:
         p_type = 'list of ' + p_type
+    elif param['use_array'] is True:
+        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+
     return p_type
 
 
@@ -496,12 +499,15 @@ def _format_type_for_docstring(param, numpy, config):
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
-    if param['type'] == 'ViChar' and param['is_buffer'] is True:
-        p_type = 'string'
+    if param['is_string'] is True:
+        p_type = 'str'
     elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy array of ' + p_type
-    elif param['is_buffer'] is True:
+        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+    elif param['use_list'] is True:
         p_type = 'list of ' + p_type
+    elif param['use_array'] is True:
+        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+
     return p_type
 
 
@@ -870,6 +876,9 @@ config = {
                         'value': 1
                     },
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
                     'is_repeated_capability': False,
@@ -903,6 +912,9 @@ wanted to choose.''',
                         'value': 1
                     },
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'turtle_type',
                     'python_name_with_doc_default': 'turtle_type',
                     'is_repeated_capability': False,
@@ -928,6 +940,9 @@ wanted to choose.''',
                         'value': 1
                     },
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'python_name_with_default': 'turtleId',
                     'python_name_with_doc_default': 'turtleId',
                     'is_repeated_capability': False,
@@ -965,6 +980,9 @@ wanted to choose.''',
                     'documentation': {'description': 'Identifies a particular instrument session.'},
                     'enum': None,
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': True,
                     'library_method_call_snippet': 'vi_ctype',
@@ -986,6 +1004,9 @@ wanted to choose.''',
                     'documentation': {'description': 'Number of samples to return'},
                     'enum': None,
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'number_of_samples_ctype',
@@ -1007,6 +1028,9 @@ wanted to choose.''',
                     'documentation': {'description': 'Samples fetched from the device. Array should be numberOfSamples big.'},
                     'enum': None,
                     'is_buffer': True,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': True,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'waveform_data_ctype',
@@ -1030,6 +1054,9 @@ wanted to choose.''',
                     'documentation': {'description': 'Number of samples actually fetched.'},
                     'enum': None,
                     'is_buffer': False,
+                    'is_string': False,
+                    'use_list': False,
+                    'use_array': False,
                     'is_repeated_capability': False,
                     'is_session_handle': False,
                     'library_method_call_snippet': 'ctypes.pointer(actual_number_of_samples_ctype)',
@@ -1190,13 +1217,13 @@ def test_get_function_rst_numpy():
 
         Samples fetched from the device. Array should be numberOfSamples big.
 
-    :type waveform_data: numpy array of float64
+    :type waveform_data: numpy.array(dtype=numpy.float64)
 
     :rtype: tuple (waveform_data, actual_number_of_samples)
 
         WHERE
 
-        waveform_data (numpy array of float64):
+        waveform_data (numpy.array(dtype=numpy.float64)):
 
             Samples fetched from the device. Array should be numberOfSamples big.
 
@@ -1249,10 +1276,10 @@ def test_get_function_docstring_numpy():
     Args:
         number_of_samples (int): Number of samples to return
 
-        waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+        waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
     Returns:
-        waveform_data (numpy array of float64): Samples fetched from the device. Array should be numberOfSamples big.
+        waveform_data (numpy.array(dtype=numpy.float64)): Samples fetched from the device. Array should be numberOfSamples big.
 
         actual_number_of_samples (int): Number of samples actually fetched.
 '''

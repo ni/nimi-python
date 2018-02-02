@@ -6,15 +6,12 @@
 #  applied at build time
 
 
-
 functions = {
     'Abort': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -34,12 +31,10 @@ Idle state.
 },
     },
     'CalAdjustACFilter': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -51,7 +46,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
@@ -64,7 +58,6 @@ For valid modes, refer to the calibration procedure for your device.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -78,7 +71,6 @@ Auto-ranging is not supported for calibration operations.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Frequency',
                 'type': 'ViReal64',
 'documentation': {
@@ -87,7 +79,6 @@ Auto-ranging is not supported for calibration operations.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'expectedValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -108,12 +99,10 @@ function.
 },
     },
     'CalAdjustGain': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -125,7 +114,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
@@ -138,7 +126,6 @@ For valid modes, refer to the calibration procedure for your device.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -152,7 +139,6 @@ Auto-ranging is not supported for calibration operations.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputResistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -165,7 +151,6 @@ Specifies the **input\_resistance** that the device should use.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'expectedValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -186,12 +171,10 @@ function.
 },
     },
     'CalAdjustLC': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -203,7 +186,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Type',
                 'type': 'ViInt32',
 'documentation': {
@@ -224,12 +206,10 @@ function.
 },
     },
     'CalAdjustLinearization': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -241,7 +221,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Function',
                 'type': 'ViInt32',
 'documentation': {
@@ -255,7 +234,6 @@ Procedure*.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -270,7 +248,6 @@ Procedure*. Auto-ranging is not supported for calibration operations.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputResistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -283,7 +260,6 @@ Specifies the **input\_resistance** that the device should use.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'expectedValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -296,12 +272,10 @@ Specifies the **input\_resistance** that the device should use.
 },
     },
     'CalAdjustMisc': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -313,7 +287,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Type',
                 'type': 'ViInt32',
 'documentation': {
@@ -335,12 +308,10 @@ function.
 },
     },
     'CalAdjustOffset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -352,7 +323,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
@@ -365,7 +335,6 @@ For valid modes, refer to the calibration procedure for your device.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -379,7 +348,6 @@ Auto-ranging is not supported for calibration operations.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'inputResistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -404,12 +372,10 @@ function.
 },
     },
     'CheckAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -422,7 +388,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -438,7 +403,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -447,7 +411,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -463,12 +426,10 @@ attribute.
 },
     },
     'CheckAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -481,7 +442,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -497,7 +457,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -506,7 +465,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -522,12 +480,10 @@ attribute.
 },
     },
     'CheckAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -540,7 +496,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -556,7 +511,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -565,7 +519,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -581,12 +534,10 @@ attribute.
 },
     },
     'CheckAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -599,7 +550,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -615,7 +565,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -624,7 +573,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -640,12 +588,10 @@ attribute.
 },
     },
     'CheckAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -658,7 +604,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -674,7 +619,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -683,7 +627,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -699,12 +642,10 @@ attribute.
 },
     },
     'ClearError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -726,12 +667,10 @@ information only for the current execution thread.
 },
     },
     'ClearInterchangeWarnings': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -748,12 +687,10 @@ None.
 },
     },
     'CloseExtCal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -765,7 +702,6 @@ identifies a particular instrument calibration session.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Action',
                 'type': 'ViInt32',
 'documentation': {
@@ -788,12 +724,10 @@ function.
 },
     },
     'ConfigureACBandwidth': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -806,7 +740,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'acMinimumFrequencyHz',
                 'type': 'ViReal64',
 'documentation': {
@@ -824,7 +757,6 @@ NI 4050 and NI 4060.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'acMaximumFrequencyHz',
                 'type': 'ViReal64',
 'documentation': {
@@ -851,12 +783,10 @@ attributes, which the DMM uses for AC measurements.
 },
     },
     'ConfigureADCCalibration': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -869,7 +799,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'adcCalibration',
                 'type': 'ViInt32',
 'documentation': {
@@ -903,12 +832,10 @@ changes to the gain.
 },
     },
     'ConfigureAutoZeroMode': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -921,7 +848,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'autoZeroMode',
                 'type': 'ViInt32',
 'documentation': {
@@ -967,12 +893,10 @@ DMM does not compensate for zero reading offset.
 },
     },
     'ConfigureCableCompType': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -985,7 +909,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'cableCompType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1005,12 +928,10 @@ capacitance/inductance mode range.
 },
     },
     'ConfigureCurrentSource': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1023,7 +944,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'currentSource',
                 'type': 'ViReal64',
 'documentation': {
@@ -1044,12 +964,10 @@ The NI 4050 and NI 4060 are not supported. Configures the
 },
     },
     'ConfigureFixedRefJunction': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1062,7 +980,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'fixedReferenceJunction',
                 'type': 'ViReal64',
 'documentation': {
@@ -1083,12 +1000,10 @@ with a fixed reference junction type.
 },
     },
     'ConfigureFrequencyVoltageRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1101,7 +1016,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'voltageRange',
                 'type': 'ViReal64',
 'documentation': {
@@ -1131,12 +1045,10 @@ measurements.
 },
     },
     'ConfigureMeasCompleteDest': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1149,7 +1061,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measCompleteDestination',
                 'type': 'ViInt32',
 'documentation': {
@@ -1176,12 +1087,10 @@ more information.
 },
     },
     'ConfigureMeasCompleteSlope': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1194,7 +1103,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measCompleteSlope',
                 'type': 'ViInt32',
 'documentation': {
@@ -1214,12 +1122,10 @@ falling edge (negative) polarity.
 },
     },
     'ConfigureMeasurementAbsolute': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1232,7 +1138,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -1244,7 +1149,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1271,7 +1175,6 @@ trigger and sample trigger are set to IMMEDIATE.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resolutionAbsolute',
                 'type': 'ViReal64',
 'documentation': {
@@ -1300,12 +1203,10 @@ NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
 },
     },
     'ConfigureMeasurementDigits': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1318,7 +1219,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -1330,7 +1230,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -1357,7 +1256,6 @@ trigger and sample trigger are set to IMMEDIATE.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resolutionDigits',
                 'type': 'ViReal64',
 'documentation': {
@@ -1387,12 +1285,10 @@ NIDMM\_ATTR\_RESOLUTION\_DIGITS.
 },
     },
     'ConfigureMultiPoint': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1405,7 +1301,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerCount',
                 'type': 'ViInt32',
 'documentation': {
@@ -1418,7 +1313,6 @@ value. The default value is 1.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sampleCount',
                 'type': 'ViInt32',
 'documentation': {
@@ -1431,7 +1325,6 @@ NIDMM\_ATTR\_SAMPLE\_COUNT to this value. The default value is 1.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sampleTrigger',
                 'type': 'ViInt32',
 'documentation': {
@@ -1449,7 +1342,6 @@ Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sampleInterval',
                 'type': 'ViReal64',
 'documentation': {
@@ -1487,12 +1379,10 @@ Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 },
     },
     'ConfigureOffsetCompOhms': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1505,7 +1395,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'offsetCompOhms',
                 'type': 'ViInt32',
 'documentation': {
@@ -1531,12 +1420,10 @@ than 10 KΩ.
 },
     },
     'ConfigureOpenCableCompValues': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1549,7 +1436,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Conductance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1558,7 +1444,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Susceptance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1575,12 +1460,10 @@ NIDMM\_ATTR\_OPEN\_CABLE\_COMP\_SUSCEPTANCE attributes.
 },
     },
     'ConfigurePowerLineFrequency': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1593,7 +1476,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'powerLineFrequencyHz',
                 'type': 'ViReal64',
 'documentation': {
@@ -1609,12 +1491,10 @@ NI-DMM sets the Powerline Frequency property to this value.
 },
     },
     'ConfigureRTDCustom': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1627,7 +1507,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rtdA',
                 'type': 'ViReal64',
 'documentation': {
@@ -1640,7 +1519,6 @@ The default is 3.9083e-3 (Pt3851)
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rtdB',
                 'type': 'ViReal64',
 'documentation': {
@@ -1653,7 +1531,6 @@ The default is -5.775e-7 (Pt3851).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rtdC',
                 'type': 'ViReal64',
 'documentation': {
@@ -1670,12 +1547,10 @@ The default is -4.183e-12 (Pt3851).
 },
     },
     'ConfigureRTDType': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1688,7 +1563,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rtdType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1703,7 +1577,6 @@ NIDMM\_VAL\_TEMP\_RTD\_PT3851.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'rtdResistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1719,12 +1592,10 @@ set the RTD Resistance property. The default is 100 (Ω).
 },
     },
     'ConfigureSampleTriggerSlope': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1737,7 +1608,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'sampleTriggerSlope',
                 'type': 'ViInt32',
 'documentation': {
@@ -1759,12 +1629,10 @@ Sets the NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE to either rising edge
 },
     },
     'ConfigureShortCableCompValues': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1777,7 +1645,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Resistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1786,7 +1653,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Reactance',
                 'type': 'ViReal64',
 'documentation': {
@@ -1803,12 +1669,10 @@ NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_REACTANCE attributes.
 },
     },
     'ConfigureThermistorCustom': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1821,7 +1685,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'thermistorA',
                 'type': 'ViReal64',
 'documentation': {
@@ -1834,7 +1697,6 @@ function. The default is 1.0295e-3 (44006).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'thermistorB',
                 'type': 'ViReal64',
 'documentation': {
@@ -1847,7 +1709,6 @@ function. The default is 2.391e-4 (44006).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'thermistorC',
                 'type': 'ViReal64',
 'documentation': {
@@ -1864,12 +1725,10 @@ function. The default is 1.568e-7 (44006).
 },
     },
     'ConfigureThermistorType': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1882,7 +1741,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'thermistorType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1916,12 +1774,10 @@ NIDMM\_VAL\_TEMP\_THERMISTOR\_44006.
 },
     },
     'ConfigureThermocouple': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1934,7 +1790,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'thermocoupleType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1948,7 +1803,6 @@ default is NIDMM\_VAL\_TEMP\_TC\_J.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'referenceJunctionType',
                 'type': 'ViInt32',
 'documentation': {
@@ -1969,12 +1823,10 @@ chosen thermocouple.
 },
     },
     'ConfigureTransducerType': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1987,7 +1839,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'transducerType',
                 'type': 'ViInt32',
 'documentation': {
@@ -2005,12 +1856,10 @@ NIDMM\_VAL\_THERMOCOUPLE.
 },
     },
     'ConfigureTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2023,7 +1872,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSource',
                 'type': 'ViInt32',
 'documentation': {
@@ -2042,7 +1890,6 @@ Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerDelay',
                 'type': 'ViReal64',
 'documentation': {
@@ -2073,12 +1920,10 @@ information.
 },
     },
     'ConfigureTriggerSlope': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2091,7 +1936,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerSlope',
                 'type': 'ViInt32',
 'documentation': {
@@ -2113,12 +1957,10 @@ Sets the NIDMM\_ATTR\_TRIGGER\_SLOPE attribute to either rising edge
 },
     },
     'ConfigureWaveformAcquisition': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2131,7 +1973,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -2144,7 +1985,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2163,7 +2003,6 @@ Auto-ranging is not supported during waveform acquisitions.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Rate',
                 'type': 'ViReal64',
 'documentation': {
@@ -2179,7 +2018,6 @@ to the closest integer divisor of 1,800,000. The default value is
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -2205,12 +2043,10 @@ on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 },
     },
     'ConfigureWaveformCoupling': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2223,7 +2059,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformCoupling',
                 'type': 'ViInt32',
 'documentation': {
@@ -2244,12 +2079,10 @@ instrument coupling for voltage waveforms.
 },
     },
     'Control': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2262,7 +2095,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'controlAction',
                 'type': 'ViInt32',
 'documentation': {
@@ -2289,12 +2121,10 @@ function will make any unfetched data points unavailable.
 },
     },
     'Disable': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2315,12 +2145,10 @@ progress when this function is called, the measurement is aborted.
 },
     },
     'Fetch': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2333,7 +2161,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -2353,7 +2180,6 @@ automatically.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Reading',
                 'type': 'ViReal64',
 'documentation': {
@@ -2369,12 +2195,10 @@ niDMM\_Initiate before calling this function.
 },
     },
     'FetchMultiPoint': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2387,7 +2211,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -2407,7 +2230,6 @@ automatically.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -2424,7 +2246,6 @@ positive ViInt32. The default value is 1.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'readingArray',
                 'type': 'ViReal64[ ]',
 'documentation': {
@@ -2437,7 +2258,6 @@ specify for the **Array\_Size** parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualNumberOfPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -2456,12 +2276,10 @@ niDMM\_Initiate to initiate a measurement before calling this function.
 },
     },
     'FetchWaveform': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2474,7 +2292,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -2494,7 +2311,6 @@ automatically.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -2508,7 +2324,6 @@ parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'waveformArray',
                 'type': 'ViReal64[ ]',
 'documentation': {
@@ -2520,7 +2335,6 @@ data type.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualNumberOfPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -2537,12 +2351,10 @@ niDMM\_Initiate before calling this function.
 },
     },
     'FormatMeasAbsolute': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
 'documentation': {
@@ -2554,7 +2366,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
@@ -2563,7 +2374,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Resolution',
                 'type': 'ViReal64',
 'documentation': {
@@ -2572,7 +2382,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Measurement',
                 'type': 'ViReal64',
 'documentation': {
@@ -2581,7 +2390,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'modeString',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -2590,7 +2398,6 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'rangeString',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -2602,7 +2409,6 @@ string with the correct number of display digits.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'dataString',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -2623,12 +2429,10 @@ according to the **Measurement\_Function**, **Range**, and
 },
     },
     'GetApertureTimeInfo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2641,7 +2445,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'apertureTime',
                 'type': 'ViReal64',
 'documentation': {
@@ -2671,7 +2474,6 @@ the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'apertureTimeUnits',
                 'type': 'ViInt32',
 'documentation': {
@@ -2689,12 +2491,10 @@ attribute.
 },
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2707,7 +2507,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2723,7 +2522,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -2732,7 +2530,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2759,12 +2556,10 @@ instrument I/O in the following cases:
 },
     },
     'GetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2777,7 +2572,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2793,7 +2587,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -2802,7 +2595,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -2829,12 +2621,10 @@ instrument I/O in the following cases:
 },
     },
     'GetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2847,7 +2637,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2863,7 +2652,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -2872,7 +2660,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -2899,12 +2686,10 @@ instrument I/O in the following cases:
 },
     },
     'GetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2917,7 +2702,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2933,7 +2717,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -2942,7 +2725,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -2969,12 +2751,10 @@ instrument I/O in the following cases:
 },
     },
     'GetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2987,7 +2767,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3003,7 +2782,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3012,7 +2790,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3036,7 +2813,6 @@ you can pass VI\_NULL for the **Attribute\_Value** buffer parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3070,12 +2846,10 @@ instrument I/O in the following cases:
 },
     },
     'GetAutoRangeValue': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3088,7 +2862,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualRange',
                 'type': 'ViReal64',
 'documentation': {
@@ -3108,12 +2881,10 @@ Range is off.
 },
     },
     'GetCalCount': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3126,7 +2897,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calType',
                 'type': 'ViInt32',
 'documentation': {
@@ -3140,7 +2910,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Count',
                 'type': 'ViInt32',
 'documentation': {
@@ -3154,12 +2923,10 @@ self-calibration).
 },
     },
     'GetCalDateAndTime': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3172,7 +2939,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calType',
                 'type': 'ViInt32',
 'documentation': {
@@ -3186,7 +2952,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'ViInt32',
 'documentation': {
@@ -3195,7 +2960,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Day',
                 'type': 'ViInt32',
 'documentation': {
@@ -3204,7 +2968,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Year',
                 'type': 'ViInt32',
 'documentation': {
@@ -3213,7 +2976,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Hour',
                 'type': 'ViInt32',
 'documentation': {
@@ -3222,7 +2984,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Minute',
                 'type': 'ViInt32',
 'documentation': {
@@ -3236,12 +2997,10 @@ self-calibration).
 },
     },
     'GetCalUserDefinedInfo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3254,7 +3013,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3278,7 +3036,6 @@ of the number of bytes in the value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Info',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3296,12 +3053,10 @@ returned.
 },
     },
     'GetCalUserDefinedInfoMaxSize': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3314,7 +3069,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'infoSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3335,12 +3089,10 @@ niDMM\_SetCalUserDefinedInfo to store user-defined information.
 },
     },
     'GetChannelName': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3353,7 +3105,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
@@ -3362,7 +3113,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3386,7 +3136,6 @@ is None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'channelString',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3407,12 +3156,10 @@ Included for compliance with the *IviDmm Class Specification*.
 },
     },
     'GetDevTemp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3425,7 +3172,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Options',
                 'type': 'ViString',
 'documentation': {
@@ -3434,7 +3180,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
@@ -3448,12 +3193,10 @@ None.
 },
     },
     'GetError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3466,7 +3209,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -3479,7 +3221,6 @@ parameter.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3502,7 +3243,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Description',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3527,12 +3267,10 @@ the error information for the process.
 },
     },
     'GetErrorMessage': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3545,7 +3283,6 @@ VI\_NULL if you do not have a valid **vi**.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -3557,7 +3294,6 @@ user-readable string.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Buffer_Size',
                 'type': 'ViInt32',
 'documentation': {
@@ -3573,7 +3309,6 @@ needed for **Error\_Message**.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3595,12 +3330,10 @@ of 0 returns the size needed for the **Error\_Message**.
 },
     },
     'GetExtCalRecommendedInterval': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3613,7 +3346,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Months',
                 'type': 'ViInt32',
 'documentation': {
@@ -3633,12 +3365,10 @@ Returns the recommended interval between external recalibration in
 },
     },
     'GetLastCalTemp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3651,7 +3381,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calType',
                 'type': 'ViInt32',
 'documentation': {
@@ -3665,7 +3394,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
@@ -3679,12 +3407,10 @@ self-calibration).
 },
     },
     'GetMeasurementPeriod': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3697,7 +3423,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Period',
                 'type': 'ViReal64',
 'documentation': {
@@ -3724,12 +3449,10 @@ been called.
 },
     },
     'GetNextCoercionRecord': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3742,7 +3465,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3769,7 +3491,6 @@ The default value is None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'coercionRecord',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3797,12 +3518,10 @@ that list.
 },
     },
     'GetNextInterchangeWarning': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3815,7 +3534,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -3839,7 +3557,6 @@ value is None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'interchangeWarning',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3871,12 +3588,10 @@ you did not specify.
 },
     },
     'GetSelfCalSupported': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3889,7 +3604,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfCalSupported',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3909,12 +3623,10 @@ are using can perform self-calibration.
 },
     },
     'InitExtCal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViString',
 'documentation': {
@@ -3944,7 +3656,6 @@ name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calibrationPassword',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -3959,7 +3670,6 @@ termination character. "NI" is the factory-default password.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4008,12 +3718,10 @@ using this function.
 },
     },
     'InitWithOptions': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViString',
 'documentation': {
@@ -4043,7 +3751,6 @@ name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4058,7 +3765,6 @@ Defined Values:
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4072,7 +3778,6 @@ Defined Values:
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'optionString',
                 'type': 'ViString',
 'documentation': {
@@ -4099,7 +3804,6 @@ information.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4133,12 +3837,10 @@ This function completes the following tasks:
 },
     },
     'Initiate': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4161,12 +3863,10 @@ retrieve the measurement data.
 },
     },
     'IsOverRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4179,7 +3879,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -4192,7 +3891,6 @@ an IEEE-defined NaN (Not a Number) value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'isOverRange',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4212,12 +3910,10 @@ measurement or a value indicating that an overrange condition occurred.
 },
     },
     'IsUnderRange': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4230,7 +3926,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'measurementValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -4243,7 +3938,6 @@ an IEEE-defined NaN (Not a Number) value.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'isUnderRange',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4263,12 +3957,10 @@ measurement or a value indicating that an underrange condition occurred.
 },
     },
     'LockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4281,7 +3973,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4392,12 +4083,10 @@ niDMM\_UnlockSession just once at the end of the function.
 },
     },
     'PerformOpenCableComp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4410,7 +4099,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Conductance',
                 'type': 'ViReal64',
 'documentation': {
@@ -4422,7 +4110,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Susceptance',
                 'type': 'ViReal64',
 'documentation': {
@@ -4448,12 +4135,10 @@ NIDMM\_VAL\_INDUCTANCE (1006).
 },
     },
     'PerformShortCableComp': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4466,7 +4151,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Resistance',
                 'type': 'ViReal64',
 'documentation': {
@@ -4478,7 +4162,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Reactance',
                 'type': 'ViReal64',
 'documentation': {
@@ -4503,12 +4186,10 @@ NIDMM\_VAL\_INDUCTANCE (1006).
 },
     },
     'Read': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4521,7 +4202,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -4541,7 +4221,6 @@ automatically.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Reading',
                 'type': 'ViReal64',
 'documentation': {
@@ -4554,12 +4233,10 @@ automatically.
 },
     },
     'ReadMultiPoint': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4572,7 +4249,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -4592,7 +4268,6 @@ automatically.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4609,7 +4284,6 @@ positive ViInt32. The default value is 1.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'readingArray',
                 'type': 'ViReal64[ ]',
 'documentation': {
@@ -4622,7 +4296,6 @@ specify for the **Array\_Size** parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualNumberOfPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -4640,12 +4313,10 @@ niDMM\_ConfigureMultiPoint.
 },
     },
     'ReadStatus': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4658,7 +4329,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'acquisitionBacklog',
                 'type': 'ViInt32',
 'documentation': {
@@ -4678,7 +4348,6 @@ the devices.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'acquisitionStatus',
                 'type': 'ViInt16',
 'documentation': {
@@ -4700,12 +4369,10 @@ niDMM\_Fetch, niDMM\_FetchMultiPoint, or niDMM\_FetchWaveform.
 },
     },
     'ReadWaveform': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4718,7 +4385,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTime',
                 'type': 'ViInt32',
 'documentation': {
@@ -4738,7 +4404,6 @@ automatically.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -4752,7 +4417,6 @@ parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'waveformArray',
                 'type': 'ViReal64[ ]',
 'documentation': {
@@ -4765,7 +4429,6 @@ specify for the **Array\_Size** parameter.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'actualNumberOfPoints',
                 'type': 'ViInt32',
 'documentation': {
@@ -4784,12 +4447,10 @@ niDMM\_ConfigureWaveformAcquisition.
 },
     },
     'ResetInterchangeCheck': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4834,12 +4495,10 @@ warnings, you can call niDMM\_ClearInterchangeWarnings.
 },
     },
     'ResetWithDefaults': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4861,12 +4520,10 @@ values associated with a logical name are applied after setting the DMM.
 },
     },
     'RestoreLastExtCalConstants': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4893,12 +4550,10 @@ temperature drifts since the last external calibration.
 },
     },
     'SelfCal': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4923,12 +4578,10 @@ values after the call returns.
 },
     },
     'SendSoftwareTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4953,12 +4606,10 @@ and trigger the device. The NI 4050 and NI 4060 are not supported.
 },
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4971,7 +4622,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -4987,7 +4637,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -4996,7 +4645,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5035,12 +4683,10 @@ high-level functions without the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5053,7 +4699,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -5069,7 +4714,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -5078,7 +4722,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -5117,12 +4760,10 @@ high-level functions without the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5135,7 +4776,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -5151,7 +4791,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -5160,7 +4799,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -5199,12 +4837,10 @@ high-level functions without the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5217,7 +4853,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -5233,7 +4868,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -5242,7 +4876,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -5268,12 +4901,10 @@ instrument I/O in the following cases:
 },
     },
     'SetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5286,7 +4917,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -5302,7 +4932,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -5311,7 +4940,6 @@ The default value is " " (an empty string).
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5350,12 +4978,10 @@ high-level functions without the penalty of redundant instrument I/O.
 },
     },
     'SetCalPassword': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5368,7 +4994,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'oldPassword',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5381,7 +5006,6 @@ excluding the termination character.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'newPassword',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5408,12 +5032,10 @@ password in a secure location.
 },
     },
     'SetCalUserDefinedInfo': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5426,7 +5048,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Info',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5453,12 +5074,10 @@ truncates the remainder, and returns a warning.
 },
     },
     'UnlockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5471,7 +5090,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5566,12 +5184,10 @@ information on session locks.
 },
     },
     'close': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5588,12 +5204,10 @@ None.
 },
     },
     'error_message': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5606,7 +5220,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -5618,7 +5231,6 @@ indicating VI\_SUCCESS.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5634,12 +5246,10 @@ interprets it, and returns it as a user-readable string.
 },
     },
     'error_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5652,7 +5262,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -5665,7 +5274,6 @@ The default value is VI\_SUCCESS (0).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5684,12 +5292,10 @@ included for compliance with the *IviDmm Class Specification*.
 },
     },
     'init': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViString',
 'documentation': {
@@ -5719,7 +5325,6 @@ name.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5734,7 +5339,6 @@ Defined Values:
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -5748,7 +5352,6 @@ Defined Values:
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5782,12 +5385,10 @@ This function completes the following tasks:
 },
     },
     'reset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5808,12 +5409,10 @@ to the state necessary for the operation of the instrument driver.
 },
     },
     'revision_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5826,7 +5425,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'instrumentDriverRevision',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5839,7 +5437,6 @@ numbers.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'firmwareRevision',
                 'type': 'ViChar[ ]',
 'documentation': {
@@ -5859,12 +5456,10 @@ firmware.
 },
     },
     'self_test': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -5877,7 +5472,6 @@ None.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestResult',
                 'type': 'ViInt16',
 'documentation': {
@@ -5897,7 +5491,6 @@ not return error code 1013.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestMessage',
                 'type': 'ViChar[ ]',
 'documentation': {
