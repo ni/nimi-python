@@ -30,7 +30,7 @@ def pytest_terminal_summary(terminalreporter):
     grouped = groupby(consumed_ram_log, lambda entry: entry.nodeid)
     for nodeid, (start_entry, end_entry) in grouped:
         leaked = end_entry.consumed_ram - start_entry.consumed_ram
-        if leaked > LEAK_LIMIT:
+        if leaked > LEAK_LIMIT and nodeid.find('preload_driver') != -1:
             leaked_display = leaked / 1024.0 / 1024.0
             terminalreporter.write('LEAKED {0:8.2f}MB in {1}\n'.format(leaked_display, nodeid))
 
