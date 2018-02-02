@@ -9,7 +9,6 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -24,7 +23,6 @@ The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to ove
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -40,7 +38,6 @@ The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to ove
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -56,7 +53,6 @@ The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this va
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -71,7 +67,6 @@ The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to ov
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -102,7 +97,6 @@ If the user does not specify a Driver Setup string, this attribute returns an em
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -116,7 +110,6 @@ NI-SCOPE does not generate interchange warnings and therefore ignores this attri
     1050203: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
         'resettable': 'No',
@@ -131,7 +124,6 @@ For channel-based properties, the IVI engine maintains a separate cache value fo
     1050302: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
@@ -145,7 +137,6 @@ A string that contains the prefix for the instrument driver. The name of each us
     1050304: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
@@ -160,7 +151,6 @@ If you initialize the instrument driver with the resource descriptor, this attri
     1050305: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
@@ -174,7 +164,6 @@ A string containing the logical name you specified when opening the current IVI 
     1050327: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
@@ -188,7 +177,6 @@ A string that contains a comma-separated list of the instrument model numbers su
     1050401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
@@ -202,7 +190,6 @@ A string that contains a comma-separated list of class extension groups that thi
     1050510: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
@@ -216,7 +203,6 @@ A string that contains the firmware revision information  for the instrument you
     1050511: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
@@ -230,7 +216,6 @@ A string that contains the name of the instrument manufacturer.
     1050512: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
@@ -244,7 +229,6 @@ A string that contains the model number of the current instrument.
     1050513: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
@@ -258,7 +242,6 @@ A string that contains the name of the vendor that supplies this driver.
     1050514: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
@@ -272,7 +255,6 @@ A string that contains a brief description of the specific  driver
     1050515: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
@@ -286,7 +268,6 @@ The major version number of the class specification with which this driver is co
     1050516: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
@@ -300,7 +281,6 @@ The minor version number of the class specification with which this driver is co
     1050551: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
@@ -314,7 +294,6 @@ A string that contains additional version information about this  instrument dri
     1150001: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Number of Records',
         'name': 'HORZ_NUM_RECORDS',
         'resettable': 'No',
@@ -328,7 +307,6 @@ Specifies the number of records to acquire. Can be used for multi-record acquisi
     1150002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Reference (Input) Clock Source',
         'name': 'INPUT_CLOCK_SOURCE',
         'resettable': 'No',
@@ -342,7 +320,6 @@ Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz cloc
     1150003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Output Clock Source',
         'name': 'OUTPUT_CLOCK_SOURCE',
         'resettable': 'No',
@@ -370,7 +347,6 @@ Indicates whether the digitizer enforces real-time measurements  or allows equiv
     1150005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Acquisition:Binary Sample Width',
         'name': 'BINARY_SAMPLE_WIDTH',
         'resettable': 'No',
@@ -387,7 +363,6 @@ Valid Values: 8, 16, 32
     1150006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Hysteresis',
         'name': 'TRIGGER_HYSTERESIS',
         'resettable': 'No',
@@ -399,7 +374,6 @@ Valid Values: 8, 16, 32
     1150007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Clock Sync Pulse Source',
         'name': 'CLOCK_SYNC_PULSE_SOURCE',
         'resettable': 'No',
@@ -413,7 +387,6 @@ For the NI 5102, specifies the line on which the sample clock is sent or receive
     1150008: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Master Enable',
         'name': 'MASTER_ENABLE',
         'resettable': 'No',
@@ -427,7 +400,6 @@ Specifies whether you want the device to be a master or a slave. The master typi
     1150009: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Min Sample Rate',
         'name': 'MIN_SAMPLE_RATE',
         'resettable': 'Yes',
@@ -457,7 +429,6 @@ Specifies whether you want a trigger to occur when the signal enters or leaves t
     1150013: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Window:Low Level',
         'name': 'TRIGGER_WINDOW_LOW_LEVEL',
         'resettable': 'No',
@@ -478,7 +449,6 @@ Low Trigger Level < High Trigger Level
     1150014: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Window:High Level',
         'name': 'TRIGGER_WINDOW_HIGH_LEVEL',
         'resettable': 'No',
@@ -515,7 +485,6 @@ Default: NISCOPE_VAL_MEAS_PERCENTAGE
     1150018: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Other Channel',
         'name': 'MEAS_OTHER_CHANNEL',
         'resettable': 'No',
@@ -530,7 +499,6 @@ Default: '0'
     1150019: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Hysteresis Percent',
         'name': 'MEAS_HYSTERESIS_PERCENT',
         'resettable': 'No',
@@ -545,7 +513,6 @@ Default: 2%
     1150020: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Last Acq. Histogram Size',
         'name': 'MEAS_LAST_ACQ_HISTOGRAM_SIZE',
         'resettable': 'No',
@@ -560,7 +527,6 @@ Default: 256
     1150021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:Size',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_SIZE',
         'resettable': 'No',
@@ -575,7 +541,6 @@ Default: 256
     1150022: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:Low Volts',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_LOW_VOLTS',
         'resettable': 'No',
@@ -590,7 +555,6 @@ Default: -10.0 V
     1150023: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:High Volts',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_HIGH_VOLTS',
         'resettable': 'No',
@@ -605,7 +569,6 @@ Default: 10.0 V
     1150024: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Size',
         'name': 'MEAS_TIME_HISTOGRAM_SIZE',
         'resettable': 'No',
@@ -620,7 +583,6 @@ Default: 256
     1150025: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Low Volts',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_VOLTS',
         'resettable': 'No',
@@ -635,7 +597,6 @@ Default: -10.0 V
     1150026: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:High Volts',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_VOLTS',
         'resettable': 'No',
@@ -650,7 +611,6 @@ Default: 10.0 V
     1150027: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
         'resettable': 'No',
@@ -665,7 +625,6 @@ Default: -5.0e-4 seconds
     1150028: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
         'resettable': 'No',
@@ -680,7 +639,6 @@ Default: 5.0e-4 seconds
     1150029: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Interpolation:Polynomial Interpolation Order',
         'name': 'MEAS_POLYNOMIAL_INTERPOLATION_ORDER',
         'resettable': 'No',
@@ -695,7 +653,6 @@ Default: 1
     1150030: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Interpolation:Sampling Factor',
         'name': 'MEAS_INTERPOLATION_SAMPLING_FACTOR',
         'resettable': 'No',
@@ -710,7 +667,6 @@ Default: 2.0
     1150031: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Cutoff Frequency',
         'name': 'MEAS_FILTER_CUTOFF_FREQ',
         'resettable': 'No',
@@ -725,7 +681,6 @@ Default: 1.0e6 Hz
     1150032: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Center Frequency',
         'name': 'MEAS_FILTER_CENTER_FREQ',
         'resettable': 'No',
@@ -740,7 +695,6 @@ Default: 1.0e6 Hz
     1150033: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Ripple',
         'name': 'MEAS_FILTER_RIPPLE',
         'resettable': 'No',
@@ -755,7 +709,6 @@ Default: 0.1 dB
     1150034: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Percent Waveform Transient',
         'name': 'MEAS_FILTER_TRANSIENT_WAVEFORM_PERCENT',
         'resettable': 'No',
@@ -789,7 +742,6 @@ Default: NISCOPE_VAL_MEAS_LOWPASS
     1150036: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:IIR Order',
         'name': 'MEAS_FILTER_ORDER',
         'resettable': 'No',
@@ -804,7 +756,6 @@ Default: 2
     1150037: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:FIR Taps',
         'name': 'MEAS_FILTER_TAPS',
         'resettable': 'No',
@@ -819,7 +770,6 @@ Default: 25
     1150038: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Low Ref Level',
         'name': 'MEAS_CHAN_LOW_REF_LEVEL',
         'resettable': 'No',
@@ -834,7 +784,6 @@ Default: 10%
     1150039: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Mid Ref Level',
         'name': 'MEAS_CHAN_MID_REF_LEVEL',
         'resettable': 'No',
@@ -849,7 +798,6 @@ Default: 50%
     1150040: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based High Ref Level',
         'name': 'MEAS_CHAN_HIGH_REF_LEVEL',
         'resettable': 'No',
@@ -864,7 +812,6 @@ Default: 90%
     1150041: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Width',
         'name': 'MEAS_FILTER_WIDTH',
         'resettable': 'No',
@@ -901,7 +848,6 @@ Default: NISCOPE_VAL_NONE
     1150043: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Array Gain',
         'name': 'MEAS_ARRAY_GAIN',
         'resettable': 'No',
@@ -916,7 +862,6 @@ Default: 1.0
     1150044: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Waveform Measurement:Array Offset',
         'name': 'MEAS_ARRAY_OFFSET',
         'resettable': 'No',
@@ -949,7 +894,6 @@ Default: NISCOPE_VAL_MEAS_BASE_TOP
     1150046: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Slave Trigger Delay',
         'name': 'SLAVE_TRIGGER_DELAY',
         'resettable': 'No',
@@ -963,7 +907,6 @@ Specifies the delay for the trigger from the master to the slave in seconds.  Th
     1150047: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger to Star Delay',
         'name': 'TRIGGER_TO_STAR_DELAY',
         'resettable': 'No',
@@ -977,7 +920,6 @@ This is a factory-programmed value that specifies the delay for the trigger  to 
     1150048: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger to RTSI Delay',
         'name': 'TRIGGER_TO_RTSI_DELAY',
         'resettable': 'No',
@@ -991,7 +933,6 @@ This is a factory-programmed value that specifies the delay for the trigger  to 
     1150049: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger to PFI Delay',
         'name': 'TRIGGER_TO_PFI_DELAY',
         'resettable': 'No',
@@ -1005,7 +946,6 @@ This is a factory-programmed value that specifies the delay for the trigger  to 
     1150050: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger from Star Delay',
         'name': 'TRIGGER_FROM_STAR_DELAY',
         'resettable': 'No',
@@ -1019,7 +959,6 @@ This is a factory-programmed value that specifies the delay for PXI Star  Trigge
     1150051: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger from RTSI Delay',
         'name': 'TRIGGER_FROM_RTSI_DELAY',
         'resettable': 'No',
@@ -1033,7 +972,6 @@ This is a factory-programmed value that specifies the delay for the RTSI bus  to
     1150052: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Trigger Calibration Delay:Trigger from PFI Delay',
         'name': 'TRIGGER_FROM_PFI_DELAY',
         'resettable': 'No',
@@ -1047,7 +985,6 @@ This is a factory-programmed value that specifies the delay for the PFI lines  t
     1150053: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Source',
         'name': 'ACQ_ARM_SOURCE',
         'resettable': 'No',
@@ -1074,7 +1011,6 @@ NISCOPE_VAL_PXI_STAR      ('VAL_PXI_STAR')     - PXI Star Trigger
     1150065: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Record Arm Source',
         'name': 'RECORD_ARM_SOURCE',
         'resettable': 'No',
@@ -1088,7 +1024,6 @@ Specifies the record arm source.
     1150068: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Enable Records > Memory',
         'name': 'ALLOW_MORE_RECORDS_THAN_MEMORY',
         'resettable': 'No',
@@ -1102,7 +1037,6 @@ Indicates whether more records can be configured with niScope_ConfigureHorizonta
     1150069: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Memory Size',
         'name': 'ONBOARD_MEMORY_SIZE',
         'resettable': 'No',
@@ -1116,7 +1050,6 @@ Returns the total combined amount of onboard memory for all channels in bytes.
     1150070: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:RIS Num Avg',
         'name': 'RIS_NUM_AVERAGES',
         'resettable': 'No',
@@ -1144,7 +1077,6 @@ Specifies the algorithm for random-interleaved sampling, which is used if the sa
     1150072: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Fetch Interleaved Data',
         'name': 'FETCH_INTERLEAVED_DATA',
         'resettable': 'No',
@@ -1158,7 +1090,6 @@ Set to VI_TRUE to retrieve one array with alternating values on the NI 5620/5621
     1150073: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Maximum Real Time Sample Rate',
         'name': 'MAX_REAL_TIME_SAMPLING_RATE',
         'resettable': 'No',
@@ -1172,7 +1103,6 @@ Returns the maximum real time sample rate in Hz.
     1150074: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Maximum RIS Rate',
         'name': 'MAX_RIS_RATE',
         'resettable': 'No',
@@ -1186,7 +1116,6 @@ Returns the maximum sample rate in RIS mode in Hz.
     1150075: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Impedance',
         'name': 'TRIGGER_IMPEDANCE',
         'resettable': 'No',
@@ -1203,7 +1132,6 @@ Valid Values:
     1150076: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Device Number',
         'name': 'DEVICE_NUMBER',
         'resettable': 'No',
@@ -1230,7 +1158,6 @@ Default Value: NISCOPE_VAL_PRETRIGGER
     1150078: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Fetch Offset',
         'name': 'FETCH_OFFSET',
         'resettable': 'No',
@@ -1245,7 +1172,6 @@ Default Value: 0
     1150079: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Fetch Record Number',
         'name': 'FETCH_RECORD_NUMBER',
         'resettable': 'No',
@@ -1260,7 +1186,6 @@ Default Value: 0.
     1150080: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Fetch Number of Records',
         'name': 'FETCH_NUM_RECORDS',
         'resettable': 'No',
@@ -1275,7 +1200,6 @@ Default Value: -1
     1150081: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Fetch Meas Num Samples',
         'name': 'FETCH_MEAS_NUM_SAMPLES',
         'resettable': 'No',
@@ -1290,7 +1214,6 @@ Default Value: -1
     1150082: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Points Done',
         'name': 'POINTS_DONE',
         'resettable': 'No',
@@ -1304,7 +1227,6 @@ Actual number of samples acquired in the record specified by NISCOPE_ATTR_FETCH_
     1150083: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Records Done',
         'name': 'RECORDS_DONE',
         'resettable': 'No',
@@ -1318,7 +1240,6 @@ Specifies the number of records that have been completely acquired.
     1150084: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Fetch Backlog',
         'name': 'BACKLOG',
         'resettable': 'No',
@@ -1332,7 +1253,6 @@ Returns the number of samples (NISCOPE_ATTR_POINTS_DONE) that have been acquired
     1150085: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Advanced:5102 Adjust Pretrigger Samples',
         'name': '5102_ADJUST_PRETRIGGER_SAMPLES',
         'resettable': 'No',
@@ -1346,7 +1266,6 @@ When set to true and the digitizer is set to master, the number of pretrigger sa
     1150086: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device:Temperature',
         'name': 'DEVICE_TEMPERATURE',
         'resettable': 'No',
@@ -1360,7 +1279,6 @@ Returns the temperature of the device in degrees Celsius from the onboard sensor
     1150087: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Source',
         'name': 'SAMP_CLK_TIMEBASE_SRC',
         'resettable': 'No',
@@ -1374,7 +1292,6 @@ Specifies the source of the sample clock timebase, which is the timebase used to
     1150088: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Rate',
         'name': 'SAMP_CLK_TIMEBASE_RATE',
         'resettable': 'No',
@@ -1388,7 +1305,6 @@ If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the frequ
     1150089: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Divisor',
         'name': 'SAMP_CLK_TIMEBASE_DIV',
         'resettable': 'No',
@@ -1402,7 +1318,6 @@ If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the ratio
     1150090: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Reference Clock Rate',
         'name': 'REF_CLK_RATE',
         'resettable': 'No',
@@ -1416,7 +1331,6 @@ If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifi
     1150091: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Exported Sample Clock Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1428,7 +1342,6 @@ If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifi
     1150093: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Video:Enable DC Restore',
         'name': 'ENABLE_DC_RESTORE',
         'resettable': 'No',
@@ -1445,7 +1358,6 @@ VI_FALSE - Disable DC restore
     1150094: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Advance Trigger:Source',
         'name': 'ADV_TRIG_SRC',
         'resettable': 'No',
@@ -1459,7 +1371,6 @@ Specifies the source the digitizer monitors for an advance trigger.   When the a
     1150095: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Arm Reference Trigger:Source',
         'name': 'ARM_REF_TRIG_SRC',
         'resettable': 'No',
@@ -1473,7 +1384,6 @@ Specifies the source the digitizer monitors for an arm reference trigger.   When
     1150096: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Advanced:Enable TDC',
         'name': 'REF_TRIG_TDC_ENABLE',
         'resettable': 'No',
@@ -1487,7 +1397,6 @@ This attribute controls whether the TDC is used to compute an accurate trigger.
     1150097: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1502,7 +1411,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150098: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Output Terminal',
         'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1517,7 +1425,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150099: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:End of Record:Output Terminal',
         'name': 'END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1546,7 +1453,6 @@ Specifies the poll interval in milliseconds to use during RIS acquisitions to ch
     1150101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:End of Acquisition:Output Terminal',
         'name': 'END_OF_ACQUISITION_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1561,7 +1467,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150102: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Acquisition:Resolution',
         'name': 'RESOLUTION',
         'resettable': 'No',
@@ -1575,7 +1480,6 @@ Indicates the bit width of valid data (as opposed to padding bits) in the acquir
     1150103: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Triggering:Start To Ref Trigger Holdoff',
         'name': 'START_TO_REF_TRIGGER_HOLDOFF',
         'resettable': 'No',
@@ -1591,7 +1495,6 @@ Valid Values: 0.0 - 171.8
     1150104: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device:Serial Number',
         'name': 'SERIAL_NUMBER',
         'resettable': 'No',
@@ -1605,7 +1508,6 @@ Returns the serial number of the device.
     1150105: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Advanced:Oscillator Phase DAC Value',
         'name': 'OSCILLATOR_PHASE_DAC_VALUE',
         'resettable': 'No',
@@ -1618,7 +1520,6 @@ Returns the serial number of the device.
     1150106: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Acquisition:Advanced:Enable RIS in Auto Setup',
         'name': 'RIS_IN_AUTO_SETUP_ENABLE',
         'resettable': 'No',
@@ -1649,7 +1550,6 @@ Specifies the terminal configuration for the channel.
     1150109: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Advance Trigger:Output Terminal',
         'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1664,7 +1564,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150110: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Ready for Start:Output Terminal',
         'name': 'READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1679,7 +1578,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150111: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Ready for Reference:Output Terminal',
         'name': 'READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1694,7 +1592,6 @@ Consult your device documentation for a specific list of valid destinations.
     1150112: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:Ready for Advance:Output Terminal',
         'name': 'READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1726,7 +1623,6 @@ VI_FALSE (0) - Use only this channel's ADC to acquire data for this channel
     1150129: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Synchronization:5 Volt Power:Output Terminal',
         'name': '5V_OUT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1756,7 +1652,6 @@ Use this attribute to select from several types of filters to achieve desired fi
     1150278: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Auto Triggered',
         'name': 'TRIGGER_AUTO_TRIGGERED',
         'resettable': 'No',
@@ -1770,7 +1665,6 @@ Specifies if the last acquisition was auto triggered.   You can use the Auto Tri
     1150279: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device:Accessory:Gain',
         'name': 'ACCESSORY_GAIN',
         'resettable': 'No',
@@ -1791,7 +1685,6 @@ amplifier.
     1150280: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device:Accessory:Offset',
         'name': 'ACCESSORY_OFFSET',
         'resettable': 'No',
@@ -1812,7 +1705,6 @@ amplifier.
     1150300: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:DDC Enabled',
         'name': 'DDC_ENABLED',
         'resettable': 'No',
@@ -1827,7 +1719,6 @@ Default Value: VI_FALSE
     1150302: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Frequency Translation Enabled',
         'name': 'DDC_FREQUENCY_TRANSLATION_ENABLED',
         'resettable': 'No',
@@ -1842,7 +1733,6 @@ Default Value: VI_TRUE
     1150303: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Center Frequency',
         'name': 'DDC_CENTER_FREQUENCY',
         'resettable': 'No',
@@ -1875,7 +1765,6 @@ Default Value: Complex
     1150305: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase I',
         'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_I',
         'resettable': 'No',
@@ -1890,7 +1779,6 @@ Default Value: 0
     1150306: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase Q',
         'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_Q',
         'resettable': 'No',
@@ -1905,7 +1793,6 @@ Default Value: 90
     1150307: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:Digital Gain',
         'name': 'DIGITAL_GAIN',
         'resettable': 'No',
@@ -1921,7 +1808,6 @@ Valid Values:
     1150308: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:Digital Offset',
         'name': 'DIGITAL_OFFSET',
         'resettable': 'No',
@@ -1956,7 +1842,6 @@ Default Value: Warning
     1150310: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Q Source',
         'name': 'DDC_Q_SOURCE',
         'resettable': 'No',
@@ -1986,7 +1871,6 @@ Default Value: VI_TRUE
     1150312: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:Equalization:Equalization Num Coefficients',
         'name': 'EQUALIZATION_NUM_COEFFICIENTS',
         'resettable': 'No',
@@ -1998,7 +1882,6 @@ Default Value: VI_TRUE
     1150313: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:Equalization:Equalization Filter Enabled',
         'name': 'EQUALIZATION_FILTER_ENABLED',
         'resettable': 'No',
@@ -2024,7 +1907,6 @@ Indicates which analog compare circuitry to use on the device.
     1150315: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Onboard Signal Processing:Ref Trigger Min Quiet Time',
         'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
         'resettable': 'No',
@@ -2038,7 +1920,6 @@ The amount of time the trigger circuit must not detect a signal above the trigge
     1150316: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Data Transfer Block Size',
         'name': 'DATA_TRANSFER_BLOCK_SIZE',
         'resettable': 'No',
@@ -2052,7 +1933,6 @@ Specifies the maximum number of samples to transfer at one time from the device 
     1150318: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:Bandpass Filter Enabled',
         'name': 'BANDPASS_FILTER_ENABLED',
         'resettable': 'No',
@@ -2066,7 +1946,6 @@ Enables the bandpass filter on the specificed channel.  The default value is FAL
     1150319: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:Dither Enabled',
         'name': 'DITHER_ENABLED',
         'resettable': 'No',
@@ -2081,7 +1960,6 @@ Using dither can improve the spectral performance of the device by reducing the 
     1150320: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Onboard Signal Processing:Fractional Resample:Fractional Resample Enabled',
         'name': 'FRACTIONAL_RESAMPLE_ENABLED',
         'resettable': 'No',
@@ -2093,7 +1971,6 @@ Using dither can improve the spectral performance of the device by reducing the 
     1150321: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Advanced:Maximum Bandwidth',
         'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
         'resettable': 'No',
@@ -2107,7 +1984,6 @@ This property specifies the maximum bandwidth that the device is allowed to cons
     1150322: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Fetch:Advanced:Preferred Packet Size',
         'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
         'resettable': 'No',
@@ -2121,7 +1997,6 @@ This property specifies the size of (read request|memory write) data payload. Du
     1150328: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Available In Endpoint',
         'name': 'P2P_SAMPLES_AVAIL_IN_ENDPOINT',
         'resettable': 'No',
@@ -2136,7 +2011,6 @@ Returns the current number of samples available to stream from a peer-to-peer en
     1150329: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address',
         'name': 'P2P_DATA_TRANS_PERMISSION_ADDR',
         'resettable': 'No',
@@ -2170,7 +2044,6 @@ Default Value: Virtual
     1150331: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Address',
         'name': 'P2P_DESTINATION_WINDOW_ADDR',
         'resettable': 'No',
@@ -2205,7 +2078,6 @@ Default Value: Virtual
     1150333: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Size',
         'name': 'P2P_DESTINATION_WINDOW_SIZE',
         'resettable': 'No',
@@ -2240,7 +2112,6 @@ Default Value: Done
     1150335: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Address',
         'name': 'P2P_NOTIFY_MESSAGE_PUSH_ADDR',
         'resettable': 'No',
@@ -2274,7 +2145,6 @@ Default Value: Virtual
     1150337: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Value',
         'name': 'P2P_NOTIFY_MESSAGE_PUSH_VALUE',
         'resettable': 'No',
@@ -2303,7 +2173,6 @@ Default Value: VI_FALSE
     1150339: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Channels to Stream',
         'name': 'P2P_CHANNELS_TO_STREAM',
         'resettable': 'No',
@@ -2319,7 +2188,6 @@ Default Value: 0
     1150340: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Transferred',
         'name': 'P2P_SAMPLES_TRANSFERRED',
         'resettable': 'No',
@@ -2334,7 +2202,6 @@ Returns the number of samples transferred through the peer-to-peer endpoint sinc
     1150341: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Most Samples Available in Endpoint',
         'name': 'P2P_MOST_SAMPLES_AVAIL_IN_ENDPOINT',
         'resettable': 'No',
@@ -2349,7 +2216,6 @@ Returns the most number of samples available to stream from a peer-to-peer endpo
     1150342: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Endpoint Size',
         'name': 'P2P_ENDPOINT_SIZE',
         'resettable': 'No',
@@ -2380,7 +2246,6 @@ Default Value: VI_FALSE
     1150344: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Endpoint Overflow',
         'name': 'P2P_ENDPOINT_OVERFLOW',
         'resettable': 'No',
@@ -2395,7 +2260,6 @@ Returns TRUE if the endpoint FIFO has overflowed. Reset the endpoint to clear th
     1150345: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:FIFO Endpoint Count',
         'name': 'P2P_FIFO_ENDPOINT_COUNT',
         'resettable': 'No',
@@ -2426,7 +2290,6 @@ Default Value: VI_FALSE
     1150366: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:End of Record to Advance Trigger Holdoff',
         'name': 'END_OF_RECORD_TO_ADVANCE_TRIGGER_HOLDOFF',
         'resettable': 'No',
@@ -2446,7 +2309,6 @@ accept an Advance Trigger, or trigger on the input signal..
     1150367: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Multiplier',
         'name': 'SAMPLE_CLOCK_TIMEBASE_MULTIPLIER',
         'resettable': 'No',
@@ -2489,7 +2351,6 @@ default value is **Start Trigger**.
     1150374: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:Advanced:Absolute Sample Clock Offset',
         'name': 'ABSOLUTE_SAMPLE_CLOCK_OFFSET',
         'resettable': 'No',
@@ -2513,7 +2374,6 @@ offset is 0s.
     1150375: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device:FPGA Bitfile Path',
         'name': 'FPGA_BITFILE_PATH',
         'resettable': 'No',
@@ -2526,7 +2386,6 @@ offset is 0s.
     1150376: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:Interleaving Offset Correction Enabled',
         'name': 'INTERLEAVING_OFFSET_CORRECTION_ENABLED',
         'resettable': 'No',
@@ -2545,7 +2404,6 @@ Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
     1150377: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Vertical:Advanced:High Pass Filter Frequency',
         'name': 'HIGH_PASS_FILTER_FREQUENCY',
         'resettable': 'No',
@@ -2565,7 +2423,6 @@ no coercion occurs. The default value is 0.
     1150380: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Transferred Per Record',
         'name': 'SAMPLES_TRANSFERRED_PER_RECORD',
         'resettable': 'No',
@@ -2582,7 +2439,6 @@ Returns the number of samples transferred per record when you set the
     1151000: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:NCO Center Frequency',
         'name': 'DDC_NCO_FREQUENCY',
         'resettable': 'No',
@@ -2597,7 +2453,6 @@ Default Value: 15.0e6
     1151001: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Carrier Mixer:Phase Offset',
         'name': 'DDC_NCO_PHASE',
         'resettable': 'No',
@@ -2612,7 +2467,6 @@ Default Value: 0.0
     1151002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Mux Mode',
         'name': 'MUX_MODE_REGISTER',
         'resettable': 'No',
@@ -2624,7 +2478,6 @@ Default Value: 0.0
     1151003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable DDC',
         'name': 'DDC_ENABLE',
         'resettable': 'No',
@@ -2639,7 +2492,6 @@ Default Value: VI_TRUE
     1151010: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Decimation',
         'name': 'DDC_CIC_DECIMATION',
         'resettable': 'No',
@@ -2654,7 +2506,6 @@ Default Value: 4
     1151011: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):CIC Filter:Shift Gain',
         'name': 'DDC_CIC_SHIFT_GAIN',
         'resettable': 'No',
@@ -2669,7 +2520,6 @@ Default Value: 0
     1151020: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Enable',
         'name': 'DDC_DISCRIMINATOR_ENABLED',
         'resettable': 'No',
@@ -2684,7 +2534,6 @@ Default Value: VI_FALSE
     1151021: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Decimation',
         'name': 'DDC_DISCRIMINATOR_FIR_DECIMATION',
         'resettable': 'No',
@@ -2729,7 +2578,6 @@ Default Value: Even
     1151024: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Taps',
         'name': 'DDC_DISCRIMINATOR_FIR_NUM_TAPS',
         'resettable': 'No',
@@ -2746,7 +2594,6 @@ Default Value: 1
     1151025: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Delay',
         'name': 'DDC_DISCRIMINATOR_DELAY',
         'resettable': 'No',
@@ -2776,7 +2623,6 @@ Default Value: Phase
     1151027: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:Phase Multiplier',
         'name': 'DDC_DISCRIMINATOR_PHASE_MULTIPLIER',
         'resettable': 'No',
@@ -2791,7 +2637,6 @@ Default Value: 0
     1151030: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Decimation',
         'name': 'DDC_PFIR_DECIMATION',
         'resettable': 'No',
@@ -2842,7 +2687,6 @@ Default Value: Even
     1151033: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Taps',
         'name': 'DDC_PFIR_NUM_TAPS',
         'resettable': 'No',
@@ -2875,7 +2719,6 @@ Default Value: Real
     1151040: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Upper Gain Limit',
         'name': 'DDC_AGC_UPPER_GAIN_LIMIT',
         'resettable': 'No',
@@ -2890,7 +2733,6 @@ Default Value: 6.020600
     1151041: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Lower Gain Limit',
         'name': 'DDC_AGC_LOWER_GAIN_LIMIT',
         'resettable': 'No',
@@ -2905,7 +2747,6 @@ Default Value: 6.020600
     1151042: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Exponent',
         'name': 'DDC_AGC_LOOP_GAIN_0_EXPONENT',
         'resettable': 'No',
@@ -2920,7 +2761,6 @@ Default Value: 0
     1151043: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 0 Mantissa',
         'name': 'DDC_AGC_LOOP_GAIN_0_MANTISSA',
         'resettable': 'No',
@@ -2935,7 +2775,6 @@ Default Value: 0
     1151044: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Exponent',
         'name': 'DDC_AGC_LOOP_GAIN_1_EXPONENT',
         'resettable': 'No',
@@ -2950,7 +2789,6 @@ Default Value: 0
     1151045: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Loop Gain 1 Mantissa',
         'name': 'DDC_AGC_LOOP_GAIN_1_MANTISSA',
         'resettable': 'No',
@@ -2965,7 +2803,6 @@ Default Value: 0
     1151046: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Threshold',
         'name': 'DDC_AGC_THRESHOLD',
         'resettable': 'No',
@@ -2998,7 +2835,6 @@ Default Value: 0
     1151050: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Bypass',
         'name': 'DDC_HALFBAND_BYPASSED',
         'resettable': 'No',
@@ -3013,7 +2849,6 @@ Default Value: VI_TRUE
     1151051: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 1 Enable',
         'name': 'DDC_HALFBAND_1_ENABLED',
         'resettable': 'No',
@@ -3028,7 +2863,6 @@ Default Value: VI_TRUE
     1151052: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 2 Enable',
         'name': 'DDC_HALFBAND_2_ENABLED',
         'resettable': 'No',
@@ -3043,7 +2877,6 @@ Default Value: VI_FALSE
     1151053: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 3 Enable',
         'name': 'DDC_HALFBAND_3_ENABLED',
         'resettable': 'No',
@@ -3058,7 +2891,6 @@ Default Value: VI_FALSE
     1151054: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 4 Enable',
         'name': 'DDC_HALFBAND_4_ENABLED',
         'resettable': 'No',
@@ -3073,7 +2905,6 @@ Default Value: VI_FALSE
     1151055: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):HalfBand Filter:Filter 5 Enable',
         'name': 'DDC_HALFBAND_5_ENABLED',
         'resettable': 'No',
@@ -3126,7 +2957,6 @@ Default Value: Q Data
     1151072: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Test Mode Sin/Cos',
         'name': 'DDC_TEST_SINE_COSINE',
         'resettable': 'No',
@@ -3190,7 +3020,6 @@ Default Value: CLKIN
     1151120: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Accum. Load on Update',
         'name': 'DDC_TIMING_NCO_PHASE_ACCUM_LOAD',
         'resettable': 'No',
@@ -3205,7 +3034,6 @@ Default Value: VI_TRUE
     1151121: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Clear Phase Accum.',
         'name': 'DDC_TIMING_NCO_CLEAR_PHASE_ACCUM',
         'resettable': 'No',
@@ -3220,7 +3048,6 @@ Default Value: VI_FALSE
     1151122: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Enable Offset Freq.',
         'name': 'DDC_TIMING_NCO_ENABLE_OFFSET_FREQ',
         'resettable': 'No',
@@ -3255,7 +3082,6 @@ Default Value: 8 bits
     1151124: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Center Frequency',
         'name': 'DDC_TIMING_NCO_CENTER_FREQUENCY',
         'resettable': 'No',
@@ -3270,7 +3096,6 @@ N = (Fout / Fresampler) X 2^32
     1151125: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Phase Offset',
         'name': 'DDC_TIMING_NCO_PHASE_OFFSET',
         'resettable': 'No',
@@ -3301,7 +3126,6 @@ Valid Values:
     1151127: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Bypass',
         'name': 'DDC_RESAMPLER_BYPASS',
         'resettable': 'No',
@@ -3316,7 +3140,6 @@ Default Value: VI_TRUE
     1151128: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Output Pulse Delay',
         'name': 'DDC_RESAMPLER_OUTPUT_PULSE_DELAY',
         'resettable': 'No',
@@ -3331,7 +3154,6 @@ Default Value: 16
     1151129: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:NCO Divide',
         'name': 'DDC_NCO_DIVIDE',
         'resettable': 'No',
@@ -3346,7 +3168,6 @@ Default Value: 2
     1151130: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Reference Divide',
         'name': 'DDC_REFERENCE_DIVIDE',
         'resettable': 'No',
@@ -3361,7 +3182,6 @@ Default Value: 2
     1151300: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Enable Dither',
         'name': 'ENABLE_DITHER',
         'resettable': 'No',
@@ -3376,7 +3196,6 @@ Default Value: VI_FALSE
     1151301: {
         'access': 'read only',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Combined Decimation',
         'name': 'DDC_COMBINED_DECIMATION',
         'resettable': 'No',
@@ -3390,7 +3209,6 @@ Returns the combined DDC decimation.
     1151302: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Serial DAC Cal Voltage',
         'name': 'SERIAL_DAC_CAL_VOLTAGE',
         'resettable': 'No',
@@ -3404,7 +3222,6 @@ Voltage of the DAC that controls the oscillator, used for external calibration.
     1151303: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Clocking:PLL Lock Status',
         'name': 'PLL_LOCK_STATUS',
         'resettable': 'No',
@@ -3418,7 +3235,6 @@ If TRUE, the PLL has remained locked to the external reference clock since it wa
     1151304: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Acquisition:Delay before Initiate',
         'name': 'DELAY_BEFORE_INITIATE',
         'resettable': 'No',
@@ -3432,7 +3248,6 @@ Specifies the delay in seconds that is used by niScope_InitiateAcquisition to al
     1151305: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Address',
         'name': 'DDC_DIRECT_REGISTER_ADDRESS',
         'resettable': 'No',
@@ -3447,7 +3262,6 @@ Used for directly accessing the
     1151306: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:DDC Direct Register Data',
         'name': 'DDC_DIRECT_REGISTER_DATA',
         'resettable': 'No',
@@ -3463,7 +3277,6 @@ value is 0.
     1250001: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Vertical Range',
         'name': 'VERTICAL_RANGE',
         'resettable': 'No',
@@ -3478,7 +3291,6 @@ Refer to the NI High-Speed Digitizers Help for a list of supported vertical rang
     1250002: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Vertical Offset',
         'name': 'VERTICAL_OFFSET',
         'resettable': 'No',
@@ -3507,7 +3319,6 @@ Specifies how the digitizer couples the input signal for the channel.  When inpu
     1250004: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Probe Attenuation',
         'name': 'PROBE_ATTENUATION',
         'resettable': 'No',
@@ -3540,7 +3351,6 @@ VI_FALSE (0) - Don't acquire data on this channel
     1250006: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Maximum Input Frequency',
         'name': 'MAX_INPUT_FREQUENCY',
         'resettable': 'No',
@@ -3561,7 +3371,6 @@ NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
     1250007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Advanced:Time Per Record',
         'name': 'HORZ_TIME_PER_RECORD',
         'resettable': 'No',
@@ -3576,7 +3385,6 @@ Units: Seconds
     1250008: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Actual Record Length',
         'name': 'HORZ_RECORD_LENGTH',
         'resettable': 'No',
@@ -3591,7 +3399,6 @@ Allocate a ViReal64 array of this size or greater to pass as the WaveformArray p
     1250009: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Min Number of Points',
         'name': 'HORZ_MIN_NUM_PTS',
         'resettable': 'No',
@@ -3606,7 +3413,6 @@ Valid Values: 1 - available onboard memory
     1250010: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Actual Sample Rate',
         'name': 'HORZ_SAMPLE_RATE',
         'resettable': 'No',
@@ -3621,7 +3427,6 @@ Units: Hertz (Samples / Second)
     1250011: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Reference Position',
         'name': 'HORZ_RECORD_REF_POSITION',
         'resettable': 'No',
@@ -3650,7 +3455,6 @@ Specifies the type of trigger to use.
     1250013: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Source',
         'name': 'TRIGGER_SOURCE',
         'resettable': 'No',
@@ -3678,7 +3482,6 @@ Specifies how the digitizer couples the trigger source. This attribute affects i
     1250015: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Delay',
         'name': 'TRIGGER_DELAY_TIME',
         'resettable': 'No',
@@ -3693,7 +3496,6 @@ Valid Values: 0.0 - 171.8
     1250016: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Holdoff',
         'name': 'TRIGGER_HOLDOFF',
         'resettable': 'No',
@@ -3708,7 +3510,6 @@ Valid Values: 0.0 - 171.8
     1250017: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Level',
         'name': 'TRIGGER_LEVEL',
         'resettable': 'No',
@@ -3769,7 +3570,6 @@ Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
     1250103: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Vertical:Input Impedance',
         'name': 'INPUT_IMPEDANCE',
         'resettable': 'No',
@@ -3783,7 +3583,6 @@ Specifies the input impedance for the channel in Ohms.
     1250106: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Acquisition:Sample Mode',
         'name': 'SAMPLE_MODE',
         'resettable': 'No',
@@ -3797,7 +3596,6 @@ Indicates the sample mode the digitizer is currently using.
     1250109: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Horizontal:Advanced:Acquisition Start Time',
         'name': 'ACQUISITION_START_TIME',
         'resettable': 'No',
@@ -3853,7 +3651,6 @@ Specifies the condition in the video signal that causes the digitizer to trigger
     1250206: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggering:Trigger Video:Line Number',
         'name': 'TV_TRIGGER_LINE_NUMBER',
         'resettable': 'No',

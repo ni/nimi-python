@@ -29,25 +29,14 @@ class AutoZero(Enum):
     '''
 
 
-class CurrentLevelAutorange(Enum):
-    OFF = 0
+class ComplianceLimitSymmetry(Enum):
+    SYMMETRIC = 0
     '''
-    Autoranging is disabled.
+    Compliance limits are specified symmetrically about 0.
     '''
-    ON = 1
+    ASYMMETRIC = 1
     '''
-    Autoranging is enabled.
-    '''
-
-
-class CurrentLimitAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
+    Compliance limits can be specified asymmetrically with respect to 0.
     '''
 
 
@@ -305,26 +294,4 @@ class TriggerType(Enum):
     SOFTWARE_EDGE = 1015
     '''
     The data operation starts when a software trigger occurs.
-    '''
-
-
-class VoltageLevelAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
-    '''
-
-
-class VoltageLimitAutorange(Enum):
-    OFF = 0
-    '''
-    Autoranging is disabled.
-    '''
-    ON = 1
-    '''
-    Autoranging is enabled.
     '''
