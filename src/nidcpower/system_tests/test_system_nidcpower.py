@@ -14,6 +14,16 @@ def single_channel_session():
         yield simulated_session
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe'):
+        pass
+    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe'):
+        pass
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4139; BoardType:PXIe'):
+        pass
+
+
 def test_self_test():
     # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.

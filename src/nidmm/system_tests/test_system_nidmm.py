@@ -11,6 +11,14 @@ def session():
         yield simulated_session
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe'):
+        pass
+    with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI'):
+        pass
+
+
 # Basic usability tests
 def test_take_simple_measurement_works(session):
     session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
