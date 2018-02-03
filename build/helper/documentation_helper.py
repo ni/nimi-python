@@ -71,6 +71,9 @@ def _get_rst_table_snippet(node, d, config, indent=0, make_link=True):
     else:
         return ''
 
+    if len(table_body) == 0:
+        return ''
+
     header = False
     # If there is no body, then we ignore the header
     if 'table_header' in d:
