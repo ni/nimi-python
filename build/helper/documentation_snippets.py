@@ -39,7 +39,33 @@ enum_note_text = '''
 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 '''
 
+session_return_text = '''
+A session object representing the device.
+'''
 
+options_table_header = ['Attribute', 'Default']
+options_table_body = [
+    ['range_check', 'True'],
+    ['query_instrument_status', 'False'],
+    ['cache', 'True'],
+    ['simulate', 'False'],
+    ['record_value_coersions', 'False'],
+    ['driver_setup', '{}'],
+]
+
+options_text = '''
+Specifies the initial value of certain attributes for the session. The
+syntax for **options** is a dictionary of attributes with an assigned
+value. For example:
+
+{ 'simulate': False }
+
+You do not have to specify a value for all the attributes. If you do not
+specify a value for an attribute, the default value is used.
+
+Advanced Example:
+{ 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+'''
 
 
 

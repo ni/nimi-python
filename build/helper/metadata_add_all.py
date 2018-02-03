@@ -2,6 +2,10 @@
 
 from .documentation_helper import add_notes_re_links
 from .documentation_helper import square_up_tables
+from .documentation_snippets import options_table_body
+from .documentation_snippets import options_table_header
+from .documentation_snippets import options_text
+from .documentation_snippets import session_return_text
 from .helper import camelcase_to_snakecase
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
