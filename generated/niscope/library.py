@@ -351,13 +351,13 @@ class Library(object):
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
 
-    def niScope_InitWithOptions(self, resource_name, id_query, reset_device, options, vi):  # noqa: N802
+    def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_InitWithOptions_cfunc is None:
                 self.niScope_InitWithOptions_cfunc = self._library.niScope_InitWithOptions
                 self.niScope_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niScope_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_InitWithOptions_cfunc(resource_name, id_query, reset_device, options, vi)
+        return self.niScope_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
     def niScope_InitiateAcquisition(self, vi):  # noqa: N802
         with self._func_lock:

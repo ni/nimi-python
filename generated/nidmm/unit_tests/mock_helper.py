@@ -428,7 +428,7 @@ class SideEffectsHelper(object):
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
-    def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, options, vi):  # noqa: N802
+    def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
         # vi

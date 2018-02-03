@@ -989,8 +989,108 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+        '''An NI-DMM session to a National Instruments Digital Multimeter
+
+        This function completes the following tasks:
+
+        -  Creates a new IVI instrument driver session and, optionally, sets the
+           initial state of the following session attributes:
+           range_check, QUERY_INSTR_STATUS,
+           cache, simulate,
+           record_coercions.
+        -  Opens a session to the device you specify for the **Resource_Name**
+           parameter. If the **ID_Query** parameter is set to VI_TRUE, this
+           function queries the instrument ID and checks that it is valid for
+           this instrument driver.
+        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
+           resets the instrument to a known state. Sends initialization commands
+           to set the instrument to the state necessary for the operation of the
+           instrument driver.
+        -  Returns a ViSession handle that you use to identify the instrument in
+           all subsequent instrument driver function calls.
+
+        Note:
+        One or more of the referenced attributes are not in the Python API for this driver.
+
+        Args:
+            resource_name (str): Caution:
+                All IVI names for the **Resource_Name**, such as logical names or
+                virtual names, are case-sensitive. If you use logical names, driver
+                session names, or virtual names in your program, you must make sure that
+                the name you use matches the name in the IVI Configuration Store file
+                exactly, without any variations in the case of the characters in the
+                name.
+
+                | Contains the **resource_name** of the device to initialize. The
+                  **resource_name** is assigned in Measurement & Automation Explorer
+                  (MAX). Refer to `Related
+                  Documentation <related_documentation>`__
+                  for the *NI Digital Multimeters Getting Started Guide* for more
+                  information about configuring and testing the DMM in MAX.
+                | Valid Syntax:
+
+                -  NI-DAQmx name
+                -  DAQ::NI-DAQmx name[::INSTR]
+                -  DAQ::Traditional NI-DAQ device number[::INSTR]
+                -  IVI logical name
+
+            id_query (bool): Verifies that the device you initialize is one that the driver supports.
+                NI-DMM automatically performs this query, so setting this parameter is
+                not necessary.
+                Defined Values:
+
+                +-------------------+---+------------------+
+                | VI_TRUE (default) | 1 | Perform ID Query |
+                +-------------------+---+------------------+
+                | VI_FALSE          | 0 | Skip ID Query    |
+                +-------------------+---+------------------+
+
+            reset_device (bool): Specifies whether to reset the instrument during the initialization
+                procedure.
+                Defined Values:
+
+                +-------------------+---+--------------+
+                | VI_TRUE (default) | 1 | Reset Device |
+                +-------------------+---+--------------+
+                | VI_FALSE          | 0 | Don't Reset  |
+                +-------------------+---+--------------+
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (nidmm.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='')
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
         self._is_frozen = True
@@ -1994,7 +2094,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, options=""):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
         This function completes the following tasks:
@@ -2061,7 +2161,7 @@ class Session(_SessionBase):
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
 
-            options (str): | Sets the initial value of certain attributes for the session. The
+            option_string (str): | Sets the initial value of certain attributes for the session. The
                   following table specifies the attribute name, attribute constant, and
                   default value for each attribute that you can use in this parameter:
 
@@ -2104,9 +2204,9 @@ class Session(_SessionBase):
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
-        options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = visatype.ViSession()  # case S200
-        error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, options_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
