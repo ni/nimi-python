@@ -285,6 +285,32 @@ def _add_use_in_python_api(p, parameters):
         size_param['use_in_python_api'] = False
 
 
+def _setup_init_function(functions, config):
+    '''Copy the selected init function to a known name and update information about it for documentation purposes'''
+    try:
+        init_function = copy.deepcopy(functions[config['init_function']])
+        init_function['codegen_method'] = 'no'
+
+        # Change the init_function information for generating the docstring
+        # We are assuming the last parameter is vi out
+        for p in init_function['parameters']:
+            if p['name'] == 'vi':
+                p['documentation']['description'] = session_return_text
+                p['python_type'] = config['module_name'] + '.Session'
+                p['python_name'] = 'session'
+            elif p['python_name'] == 'option_string':
+                p['python_name'] = 'options'
+                p['python_name_with_default'] = 'options={}'
+                p['documentation']['description'] = options_text
+                p['documentation']['table_header'] = options_table_header
+                p['documentation']['table_body'] = options_table_body
+                # Additional options documentation may be added in metadata __init__ if it is driver specific
+
+        functions['_init_function'] = init_function
+    except KeyError:
+        pass
+
+
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     functions = merge_helper(functions, 'functions', config, use_re=True)
@@ -314,6 +340,9 @@ def add_all_function_metadata(functions, config):
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
+
+    _setup_init_function(functions, config)
+
     return functions
 
 
@@ -530,6 +559,7 @@ config_for_testing = {
         'metadata.enums_addon': {}
     },
     'custom_types': [],
+    'init_function': None,
 }
 
 
