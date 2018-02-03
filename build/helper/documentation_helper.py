@@ -506,13 +506,12 @@ def _format_type_for_docstring(param, numpy, config):
     return p_type
 
 
-def get_function_docstring(function, method_template, numpy, config, indent=0):
+def get_function_docstring(function, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
         function (dict): function dictionary
         config (dict): configuration dictoionary (from metadata)
-        method_template (dict): entry from function['methos_temlates'] that corresponds to specific entry we are processon
         numpy (boolean): Is the entry we are processing a numpy based method
         indent (int): default 0 - initial indentation
 
@@ -1231,8 +1230,7 @@ def test_get_function_rst_numpy():
 
 def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
-    method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
+    actual_function_docstring = get_function_docstring(function, numpy=False, config=config, indent=0)
     expected_function_docstring = '''Returns the **ID** of selected Turtle Type. See `NIFAKE help <fake_functional_overview>`__
 
 Note: The Turtle.RAPHAEL Turtles dont have an ID.
@@ -1264,8 +1262,7 @@ Returns:
 
 def test_get_function_docstring_numpy():
     function = config['functions']['FetchWaveform']
-    method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
+    actual_function_docstring = get_function_docstring(function, numpy=True, config=config, indent=0)
     expected_fuction_docstring = '''Returns waveform data.
 
     Args:
