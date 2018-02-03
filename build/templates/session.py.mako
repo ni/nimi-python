@@ -168,6 +168,10 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
+        '''${config['session_class_description']}
+
+        ${helper.get_function_docstring(init_function, False, config, indent=8)}
+        '''
         super(Session, self).__init__(repeated_capability='')
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
