@@ -110,7 +110,7 @@ if attributes[attribute]['channel_based'] == 'True':
 %   endif
 % endfor
 <%
-init_function = functions[config['init_function']]
+init_function = config['functions']['_init_function']
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 %>\
@@ -173,6 +173,11 @@ class Session(_SessionBase):
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
         super(Session, self).__init__(repeated_capability='')
+% for p in init_function['parameters']:
+%   if 'python_api_converter_name' in p:
+        ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
+%   endif
+% endfor
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
         self._is_frozen = True
