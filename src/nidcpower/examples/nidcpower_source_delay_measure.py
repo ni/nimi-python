@@ -23,7 +23,7 @@ def example(argsv):
 
     timeout = args.delay + 1.0
 
-    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, option_string=args.option_string) as session:
+    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, options=args.option_string) as session:
 
         # Configure the session.
         session.source_mode = nidcpower.SourceMode.SINGLE_POINT

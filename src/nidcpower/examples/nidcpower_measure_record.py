@@ -14,7 +14,7 @@ def example(argsv):
     parser.add_argument('-op', '--option_string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
 
-    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, option_string=args.option_string) as session:
+    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, options=args.option_string) as session:
 
         # Configure the session.
         session.measure_record_length = args.length

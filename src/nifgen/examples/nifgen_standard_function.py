@@ -19,7 +19,7 @@ def example(argsv):
     parser.add_argument('-op', '--option_string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
 
-    with nifgen.Session(resource_name=args.resource_name, option_string=args.option_string) as session:
+    with nifgen.Session(resource_name=args.resource_name, options=args.option_string) as session:
         session.output_mode = nifgen.OutputMode.FUNC
         session.configure_standard_waveform(waveform=nifgen.Waveform[args.waveform], amplitude=args.amplitude, frequency=args.frequency, dc_offset=args.offset, start_phase=args.phase)
         with session.initiate():

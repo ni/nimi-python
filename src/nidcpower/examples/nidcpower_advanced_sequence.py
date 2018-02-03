@@ -32,7 +32,7 @@ def example(argsv):
         1150009,  # current_level
     ]
 
-    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, option_string=args.option_string) as session:
+    with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, options=args.option_string) as session:
 
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.source_delay = 0.1

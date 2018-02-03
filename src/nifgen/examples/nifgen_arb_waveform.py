@@ -26,7 +26,7 @@ def example(argsv):
     args = parser.parse_args(argsv)
 
     waveform_data = create_waveform_data(args.samples)
-    with nifgen.Session(resource_name=args.resource_name, option_string=args.option_string) as session:
+    with nifgen.Session(resource_name=args.resource_name, options=args.option_string) as session:
         session.output_mode = nifgen.OutputMode.ARB
         waveform = session.create_waveform(waveform_data_array=waveform_data)
         session.configure_arb_waveform(waveform_handle=waveform, gain=args.gain, offset=args.offset)
