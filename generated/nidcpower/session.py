@@ -67,23 +67,9 @@ class _Channels(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        # First try it as a list
-        if isinstance(repeated_capability, list):
-            rep_cap_list = [str(r) if str(r).lower().startswith('') else '' + str(r) for r in repeated_capability]
-        else:
-            # Then try it as a slice
-            try:
-                def ifnone(a, b):
-                    return b if a is None else a
-                # Turn the slice into a list so we can iterate over it
-                rep_cap_list = list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))
-                # Add prefix to each entry
-                rep_cap_list = ['' + str(r) for r in rep_cap_list]
-            # Otherwise it must be a single item
-            except (TypeError, AttributeError):
-                rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith('') else '' + str(repeated_capability)]
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, '')
 
-        return _SessionBase(vi=self._vi, repeated_capability=','.join(rep_cap_list), library=self._library, encoding=self._encoding, freeze_it=True)
+        return _SessionBase(vi=self._vi, repeated_capability=rep_caps, library=self._library, encoding=self._encoding, freeze_it=True)
 
 
 class _SessionBase(object):
