@@ -14,24 +14,16 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Option string can now be a python dictionary instead of a string. It will be converted as needed
+            * Key/Value pairs approporiate for desired behavior
+                ``` python
+                session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
+                ```
     * #### Removed
 * ### NI-DMM
     * #### Added
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
-        * Option string can now be a python dictionary instead of a string. It will be converted as needed
-            * Valid options:
-                * RangeCheck (bool)
-                * QueryInstrStatus (bool)
-                * Cache (bool)
-                * Simulate (bool)
-                * RecordCoercions (bool)
-                * InterchangeCheck (bool)
-                * DriverSetup (dict)
-                    * Key/Value pairs approporiate for desired behavior
-                    ``` python
-                    session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
-                    ```
         * Metadata updated to NI-DMM 17.5
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
@@ -64,19 +56,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
-        * Option string can now be a python dictionary instead of a string. It will be converted as needed
-            * Valid options:
-                * RangeCheck (bool)
-                * QueryInstrStatus (bool)
-                * Cache (bool)
-                * Simulate (bool)
-                * RecordCoercions (bool)
-                * InterchangeCheck (bool)
-                * DriverSetup (dict)
-                    * Key/Value pairs approporiate for desired behavior
-                    ``` python
-                    session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
-                    ```
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
