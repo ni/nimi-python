@@ -104,6 +104,8 @@ def test_repeated_capabilies_list_channel():
     assert test_result == '0,1'
     test_result = convert_repeated_capabilities([0, 1])
     assert test_result == '0,1'
+    test_result = convert_repeated_capabilities([0, 1, '3'])
+    assert test_result == '0,1,3'
 
 
 def test_repeated_capabilies_list_prefix():
