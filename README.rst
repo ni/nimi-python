@@ -90,7 +90,9 @@ Repeated capabilities
 * The repeated capabilities object can take integers or strings, a single item or a list, or a slice.
 * The repeated capabilities object knows the proper prefix and will add it if needed.
 * The following are all legal
+
     .. code-block:: python
+
         import nifgen
         session = nifgen.Session('PXI1Slot2')
 
