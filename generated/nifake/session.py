@@ -61,15 +61,16 @@ class _Acquisition(object):
         self._session.abort()
 
 
-class _Channels(object):
-    def __init__(self, vi, library, encoding):
+class _RepeatedCapabilities(object):
+    def __init__(self, vi, library, encoding, prefix):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._prefix = prefix
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, '')
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
 
         return _SessionBase(vi=self._vi, repeated_capability=rep_caps, library=self._library, encoding=self._encoding, freeze_it=True)
 
@@ -527,7 +528,7 @@ class Session(_SessionBase):
         self._encoding = 'windows-1251'
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self.channels = _Channels(self._vi, self._library, self._encoding)
+        self.channels = _RepeatedCapabilities(self._vi, self._library, self._encoding, '')
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
