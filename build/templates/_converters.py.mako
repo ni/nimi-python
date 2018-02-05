@@ -31,9 +31,9 @@ def convert_timedelta_to_microseconds(value, library_type):
 
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
-def convert_init_with_options_dictionary(value, encoding):
-    if type(value) is str:
-        init_with_options_string = value
+def convert_init_with_options_dictionary(values, encoding):
+    if type(values) is str:
+        init_with_options_string = values
     else:
         good_keys = {
             'rangecheck': 'RangeCheck',
@@ -49,17 +49,19 @@ def convert_init_with_options_dictionary(value, encoding):
             'interchange_check': 'InterchangeCheck',
             'driver_setup': 'DriverSetup',
         }
-        # First we validate that only allowed keys are in the incoming dictionary
         init_with_options = []
-        for k in sorted(value.keys()):
-            if k.lower() not in good_keys:
-                raise TypeError('Invalid key: {0}'.format(k))
-            if good_keys[k.lower()] == 'DriverSetup':
-                if not isinstance(value[k], dict):
+        for k in sorted(values.keys()):
+            value = None
+            if k.lower() in good_keys and not good_keys[k.lower()] == 'DriverSetup':
+                value = good_keys[k.lower()] + ('=1' if values[k] is True else '=0')
+            elif k.lower() in good_keys and good_keys[k.lower()] == 'DriverSetup':
+                if not isinstance(values[k], dict):
                     raise TypeError('DriverSetup must be a dictionary')
-                init_with_options.append('DriverSetup=' + (';'.join([key + ':' + value[k][key] for key in sorted(value[k])])))
+                value = 'DriverSetup=' + (';'.join([key + ':' + values[k][key] for key in sorted(values[k])]))
             else:
-                init_with_options.append(good_keys[k.lower()] + ('=1' if value[k] is True else '=0'))
+                value = k + ('=1' if values[k] is True else '=0')
+
+            init_with_options.append(value)
 
         init_with_options_string = ','.join(init_with_options)
 
