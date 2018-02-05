@@ -83,6 +83,31 @@ The following is a basic example of using the **nidmm** module to open a session
         session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
         print("Measurement: " + str(session.read()))
 
+Repeated capabilities
+---------------------
+
+* Repeated capabilities are accessed using a repeated capabilies object for each type of repeated capability that the driver supports. Some drivers do not use repeated capabilities.
+* The repeated capabilities object can take integers or strings, a single item or a list, or a slice.
+* The repeated capabilities object knows the proper prefix and will add it if needed.
+* The following are all legal
+    .. code-block:: python
+        import nifgen
+        session = nifgen.Session('PXI1Slot2')
+
+        # Channel repeated capabilities
+        session.channels['0'].channel_enabled = True
+        session.channels[0].channel_enabled = True
+        session.channels[[0, 1, 3]].channel_enabled = True
+        session.channels[range(8)].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
+        session.channels[:8].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
+        wfm = session.channels[[0, 1, 3]].fetch(5000)
+
+        # P2P repeated capabilities
+        i = session.script_triggers['0'].SCRIPT_TRIGGERS_COUNT
+        i = session.script_triggers[0].SCRIPT_TRIGGERS_COUNT
+        i = session.script_triggers[[0, 1, 3]].SCRIPT_TRIGGERS_COUNT
+        i = session.script_triggers['ScriptTrigger0'].SCRIPT_TRIGGERS_COUNT
+
 Additional examples for each driver are located in src/<driver>/examples/ directory.
 
 .. _support-section:

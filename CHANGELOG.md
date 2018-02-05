@@ -14,28 +14,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
-        * Repeated capabilities are no longer accessed directly on the session object. Instead there is now a repeated capabilies object for each type of repeated capability that the driver supports. Some drivers do not use repeated capabilities so there is no change for them.
-        * The repeated capabilities object can take integers or strings, a single item or a list.
-        * The repeated capabilities object knows the proper prefix and will add it if needed.
-        * The following are all legal
-            ```python
-            import niscope
-            session = niscope.Session('PXI1Slot2')
-
-            # Channel repeated capabilities
-            session.channels['0'].channel_enabled = True
-            session.channels[0].channel_enabled = True
-            session.channels[[0, 1, 3]].channel_enabled = True
-            session.channels[range(8)].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
-            session.channels[:8].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
-            wfm = session.channels[[0, 1, 3]].fetch(5000)
-
-            # P2P repeated capabilities
-            i = session.p2p_streams['0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-            i = session.p2p_streams[0].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-            i = session.p2p_streams[[0, 1, 3]].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-            i = session.p2p_streams['FIFOEndpoint0'].P2P_SAMPLES_AVAIL_IN_ENDPOINT
-            ```
+        * Repeated capabilities are handled differently. See #737
     * #### Removed
 * ### NI-DMM
     * #### Added
