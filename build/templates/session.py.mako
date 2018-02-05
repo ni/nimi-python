@@ -86,21 +86,20 @@ class ${session_context_manager}(object):
 
 
 % endif
-% for rep_cap in config['repeated_capabilities']:
-class _${rep_cap['python_class_name']}(object):
-    def __init__(self, ${config['session_handle_parameter_name']}, library, encoding):
+class _RepeatedCapabilities(object):
+    def __init__(self, ${config['session_handle_parameter_name']}, library, encoding, prefix):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
+        self._prefix = prefix
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, '${rep_cap["prefix"].lower()}')
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
 
         return _SessionBase(${config['session_handle_parameter_name']}=self._${config['session_handle_parameter_name']}, repeated_capability=rep_caps, library=self._library, encoding=self._encoding, freeze_it=True)
 
 
-% endfor
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -196,7 +195,7 @@ class Session(_SessionBase):
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 % for rep_cap in config['repeated_capabilities']:
-        self.${rep_cap['python_name']} = _${rep_cap['python_class_name']}(self._${config['session_handle_parameter_name']}, self._library, self._encoding)
+        self.${rep_cap['python_name']} = _RepeatedCapabilities(self._${config['session_handle_parameter_name']}, self._library, self._encoding, '${rep_cap["prefix"]}')
 % endfor
         param_list = []
 %       for param in constructor_params:

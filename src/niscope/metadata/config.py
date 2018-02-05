@@ -26,8 +26,8 @@ config = {
         {'file_name': 'waveform_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'struct_niScope_wfmInfo', },
     ],
     'repeated_capabilities': [
-        {'python_name': 'channels', 'python_class_name': 'Channels', 'prefix': '', },
-        {'python_name': 'p2p_streams', 'python_class_name': 'P2PStreams', 'prefix': 'FIFOEndpoint', },
+        {'python_name': 'channels', 'prefix': '', },
+        {'python_name': 'p2p_streams', 'prefix': 'FIFOEndpoint', },
     ],
 }
 

@@ -24,10 +24,10 @@ config = {
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
     'repeated_capabilities': [
-        {'python_name': 'channels', 'python_class_name': 'Channels', 'prefix': '', },
-        {'python_name': 'p2p_streams', 'python_class_name': 'P2PStreams', 'prefix': 'FIFOEndpoint', },
-        {'python_name': 'script_triggers', 'python_class_name': 'ScriptTriggers', 'prefix': 'ScriptTrigger', },
-        {'python_name': 'markers', 'python_class_name': 'Markers', 'prefix': 'Marker', },
+        {'python_name': 'channels', 'prefix': '', },
+        {'python_name': 'p2p_streams', 'prefix': 'FIFOEndpoint', },
+        {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },
+        {'python_name': 'markers', 'prefix': 'Marker', },
     ],
 }
 

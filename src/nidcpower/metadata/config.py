@@ -24,7 +24,7 @@ config = {
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
     'repeated_capabilities': [
-        {'python_name': 'channels', 'python_class_name': 'Channels', 'prefix': '', },
+        {'python_name': 'channels', 'prefix': '', },
     ],
 }
 
