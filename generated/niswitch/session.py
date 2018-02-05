@@ -60,17 +60,15 @@ class _Scan(object):
 
 
 class _RepeatedCapabilities(object):
-    def __init__(self, vi, library, encoding, prefix):
-        self._vi = vi
-        self._library = library
-        self._encoding = encoding
+    def __init__(self, session, prefix):
+        self._session = session
         self._prefix = prefix
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
 
-        return _SessionBase(vi=self._vi, repeated_capability=rep_caps, library=self._library, encoding=self._encoding, freeze_it=True)
+        return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
 class _SessionBase(object):
@@ -587,7 +585,10 @@ class _SessionBase(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+
+        # Store the parameter list for later printing in __repr__
         self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -1189,15 +1190,22 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
+
+        # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
-        self.channels = _RepeatedCapabilities(self._vi, self._library, self._encoding, '')
+
+        # Instantiate any repeated capability objects
+        self.channels = _RepeatedCapabilities(self, '')
+
+        # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("topology=" + pp.pformat(topology))
         param_list.append("simulate=" + pp.pformat(simulate))
         param_list.append("reset_device=" + pp.pformat(reset_device))
         self._param_list = ', '.join(param_list)
+
         self._is_frozen = True
 
     def __enter__(self):
