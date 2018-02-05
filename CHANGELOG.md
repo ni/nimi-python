@@ -35,16 +35,17 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
-        * Channel repeated capability
+        * `channel` repeated capability
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
     * #### Removed
 * ### NI-FGEN
     * #### Added
-        * Channel repeated capability
-        * P2P repeated capability
-        * Marker repeated capability
-        * Script Trigger repeated capability
+        * Repeated capablilites:
+            * `channel` repeated capability
+            * `p2p_streams` repeated capability
+            * `markers` repeated capability
+            * `script_triggers` repeated capability
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
     * #### Removed
@@ -55,8 +56,9 @@ All notable changes to this project will be documented in this file.
             * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 * ### NI-SCOPE
     * #### Added
-        * Channel repeated capability
-        * P2P repeated capability
+        * Repeated capablilites:
+            * `channel` repeated capability
+            * `p2p_streams` repeated capability
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
     * #### Removed
