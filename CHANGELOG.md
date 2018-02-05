@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
-        * Repeated capabilities are handled differently. See #737
+        * Repeated capabilities are handled differently. See #737 for discussion
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -35,13 +35,13 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
-        * `channel` repeated capability
+        * `channel` repeated capability - See #737 for discussion
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
     * #### Removed
 * ### NI-FGEN
     * #### Added
-        * Repeated capablilites:
+        * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
             * `p2p_streams` repeated capability
             * `markers` repeated capability
@@ -56,7 +56,7 @@ All notable changes to this project will be documented in this file.
             * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 * ### NI-SCOPE
     * #### Added
-        * Repeated capablilites:
+        * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
             * `p2p_streams` repeated capability
     * #### Changed
