@@ -144,7 +144,10 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
+
+        # Store the parameter list for later printing in __repr__
         self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -192,16 +195,23 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
+
+        # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+
+        # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self._${config['session_handle_parameter_name']}, self._library, self._encoding, '${rep_cap["prefix"]}')
 % endfor
+
+        # Store the parameter list for later printing in __repr__
         param_list = []
 %       for param in constructor_params:
         param_list.append("${param['python_name']}=" + pp.pformat(${param['python_name']}))
 %       endfor
         self._param_list = ', '.join(param_list)
+
         self._is_frozen = True
 
     def __enter__(self):
