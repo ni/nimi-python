@@ -75,8 +75,8 @@ def main():
 
 
 def test_example():
-    options = {'similate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', '', options, 5.0, 20)
+    options = {'simulate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
+    example('PXI1Slot2', '0', options, 10, 1.0, 3.0, 100e-6, 300e-6)
 
 
 def test_main():

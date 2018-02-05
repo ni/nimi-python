@@ -57,8 +57,8 @@ def test_main():
 
 
 def test_example():
-    options = {'similate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', '', options, 1.0, 2.0, 0.5)
+    options = {'simulate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
+    example('PXI1Slot2', '0', options, 1.0, 2.0, 0.05)
 
 
 if __name__ == '__main__':
