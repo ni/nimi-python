@@ -184,10 +184,7 @@ nidcpower.Session methods
         Specifies the input terminal for the digital edge Pulse trigger.
 
         You can specify any valid input terminal for this function. Valid
-        terminals are listed in MAX under the **Device Routes** tab. For
-        PXIe-4162/4163, refer to the Signal Routing topic for the device to
-        determine which routes are available. This information is not available
-        on a Device Routes tab in MAX.
+        terminals are listed in MAX under the **Device Routes** tab.
 
         Input terminals can be specified in one of two ways. If the device is
         named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
@@ -769,7 +766,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (list of float): 
+        voltage_measurements (array.array("d")): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -778,7 +775,7 @@ nidcpower.Session methods
             
 
 
-        current_measurements (list of float): 
+        current_measurements (array.array("d")): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
@@ -1338,6 +1335,11 @@ nidcpower.Session methods
 
     Performs the device self-test routine and returns the test result(s).
     Calling this function implicitly calls the :py:meth:`nidcpower.Session.reset` function.
+
+    When calling :py:meth:`nidcpower.Session.self_test` with the PXIe-4162/4163, specify all
+    channels of your PXIe-4162/4163 with the channels input of
+    :py:meth:`nidcpower.Session._initialize_with_channels`. You cannot self test a subset of
+    PXIe-4162/4163 channels.
 
     
 

@@ -538,4 +538,15 @@ functions_numpy = {
     'FetchDispatcher':                               { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
+# Parameter that need to be array.array
+functions_array = {
+    'FetchBinary8':                                  { 'parameters': { 4: { 'use_array': True, }, }, },
+    'FetchBinary16':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
+    'FetchBinary32':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
+    'Fetch':                                         { 'parameters': { 4: { 'use_array': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+    'Read':                                          { 'parameters': { 4: { 'use_array': True, }, }, },
+    'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+}
+
 

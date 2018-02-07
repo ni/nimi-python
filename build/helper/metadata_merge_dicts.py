@@ -6,12 +6,12 @@ import re
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
-def merge_helper(metadata, metadata_type, config):
+def merge_helper(metadata, metadata_type, config, use_re):
     metadata_module = 'metadata.{0}_addon'.format(metadata_type)
     if 'modules' in config and metadata_module in config['modules']:
         for m in dir(config['modules'][metadata_module]):
             if m.startswith('{0}_'.format(metadata_type)):
-                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m))
+                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re)
             # We need to explicitly copy new entries
             if m == '{0}_additional_{0}'.format(metadata_type):
                 outof = config['modules'][metadata_module].__getattribute__(m)
@@ -30,7 +30,7 @@ def merge_helper(metadata, metadata_type, config):
     return metadata
 
 
-def merge_dicts(into, outof):
+def merge_dicts(into, outof, use_re):
     '''merge_dicts
 
     Recursively merges the contents of dictionary 'outof' into dictionary 'into'.
@@ -41,7 +41,7 @@ def merge_dicts(into, outof):
     for item in sorted(outof):
         if type(outof[item]) is dict:
             if item in into:
-                merge_dicts(into[item], outof[item])
+                merge_dicts(into[item], outof[item], use_re)
             elif type(into) is list:
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
@@ -51,17 +51,17 @@ def merge_dicts(into, outof):
                 if type(item) is str:
                     # Handle regex in addon
                     for item2 in into:
-                        if re.search(item, item2):
+                        if use_re is True and re.search(item, item2):
                             assert type(into[item2]) is dict
-                            merge_dicts(into[item2], outof[item])
+                            merge_dicts(into[item2], outof[item], use_re)
         else:
             into[item] = outof[item]
 
 
 # Unit Tests
-def _do_the_test_merge_dicts(a, b, expected):
+def _do_the_test_merge_dicts(a, b, expected, use_re):
     actual = a.copy()
-    merge_dicts(actual, b)
+    merge_dicts(actual, b, use_re)
     assert expected == actual, "\na = {0}\nb = {1}\nexpected = {2}\nactual = {3}".format(a, b, expected, actual)
 
 
@@ -69,56 +69,63 @@ def test_merge_dict_second_is_empty():
     a = {'a': 1, 'b': 2}
     b = {}
     expected = {'a': 1, 'b': 2}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_simple():
     a = {'a': 1, 'b': 2}
     b = {'c': 3}
     expected = {'a': 1, 'b': 2, 'c': 3}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_first_is_empty():
     a = {}
     b = {'a': 1, 'b': 2}
     expected = {'a': 1, 'b': 2}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_key_exists():
     a = {'a': 1, 'b': 2}
     b = {'b': 3, 'c': 4}
     expected = {'a': 1, 'b': 3, 'c': 4}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_recurse():
     a = {'a': 1, 'b': {'b1': 5, 'b2': 6}}
     b = {'b': {'b3': 7}, 'c': 4}
     expected = {'a': 1, 'b': {'b1': 5, 'b2': 6, 'b3': 7}, 'c': 4}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_replace_in_list():
     a = {'a': 1, 'b': {'b1': 5, 'b2': 6}, 'c': ['x', 'y', 'z']}
     b = {'b': {'b3': 7, 'b1': 8}, 'c': {0: 'r', 1: 's', 2: 't'}}
     expected = {'a': 1, 'b': {'b1': 8, 'b2': 6, 'b3': 7}, 'c': ['r', 's', 't']}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_replace_in_dict_and_list():
     a = {'a': 1, 'b': {'b1': 2, 'b2': 3}, 'c': ['x', 'y', 'z']}
     b = {'b': {'b3': 7, 'b1': 8}, 'c': {0: 'r', 1: 's', 2: 't'}}
     expected = {'a': 1, 'b': {'b1': 8, 'b2': 3, 'b3': 7}, 'c': ['r', 's', 't']}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_with_regex():
     a = {'aaa': {}, 'aaaa': {'x': 98}, 'aaaaa': {}, 'bbb': {'bbb1': 2, 'bbb2': 3}, 'ccc': ['x', 'y', 'z']}
     b = {'a+': {'z': 99}}
     expected = {'aaa': {'z': 99}, 'aaaa': {'x': 98, 'z': 99}, 'aaaaa': {'z': 99}, 'bbb': {'bbb1': 2, 'bbb2': 3}, 'ccc': ['x', 'y', 'z']}
-    _do_the_test_merge_dicts(a, b, expected)
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
+
+
+def test_merge_dict_with_regex_off():
+    a = {'aaa': {}, 'aaaa': {'x': 98}, 'aaaaa': {}, 'bbb': {'bbb1': 2, 'bbb2': 3}, 'ccc': ['x', 'y', 'z']}
+    b = {'aaa': {'z': 99}}
+    expected = {'aaa': {'z': 99}, 'aaaa': {'x': 98}, 'aaaaa': {}, 'bbb': {'bbb1': 2, 'bbb2': 3}, 'ccc': ['x', 'y', 'z']}
+    _do_the_test_merge_dicts(a, b, expected, use_re=False)
 
 
 

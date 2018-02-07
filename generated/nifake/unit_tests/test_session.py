@@ -1,3 +1,5 @@
+import array
+import ctypes
 import datetime
 import matchers
 import math
@@ -32,6 +34,9 @@ class TestSession(object):
 
         self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
+        self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+        self.get_ctypes_pointer_for_buffer_side_effect_items = []
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
@@ -39,6 +44,11 @@ class TestSession(object):
     def niFake_read_warning(self, vi, maximum_time, reading):  # noqa: N802
         reading.contents.value = self.reading
         return self.error_code_return
+
+    def get_ctypes_pointer_for_buffer_side_effect(self, value, library_type=None):
+        ret_val = self.get_ctypes_pointer_for_buffer_side_effect_items[self.get_ctypes_pointer_for_buffer_side_effect_count]
+        self.get_ctypes_pointer_for_buffer_side_effect_count += 1
+        return ret_val
 
     # Session management
 
@@ -268,15 +278,29 @@ class TestSession(object):
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
     def test_fetch_waveform(self):
-        expected_waveform = [1.0, 0.1, 42, .42]
+        expected_waveform_list = [1.0, 0.1, 42, .42]
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
-        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform
-        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform)
+        self.side_effects_helper['FetchWaveform']['waveformData'] = expected_waveform_list
+        self.side_effects_helper['FetchWaveform']['actualNumberOfSamples'] = len(expected_waveform_list)
+
+        # Because we are mocking get_ctypes_pointer_for_buffer() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function.
+        expected_waveform = array.array('d', [0] * len(expected_waveform_list))
+        expected_waveform_ctypes = ctypes.cast(expected_waveform.buffer_info()[0], ctypes.POINTER(nifake.visatype.ViReal64 * len(expected_waveform_list)))
+
         with nifake.Session('dev1') as session:
-            waveform = session.fetch_waveform(len(expected_waveform))
-            assert isinstance(waveform[0], float)
-            assert waveform == expected_waveform
-            self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform_ctypes]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                # Because we have mocked away get_ctypes_pointer_for_buffer(), we ignore the return values here and look at our already allocated arrays to make
+                # sure they are filled in correctly
+                session.fetch_waveform(len(expected_waveform_list))
+            assert isinstance(expected_waveform[0], float)
+            assert len(expected_waveform) == len(expected_waveform_list)
+            for i in range(len(expected_waveform)):
+                assert expected_waveform[i] == expected_waveform_list[i]
+        self.patched_library.niFake_FetchWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform), matchers.ViInt32PointerMatcher())
 
     def test_fetch_waveform_into(self):
         expected_waveform = [1.0, 0.1, 42, .42]
@@ -310,10 +334,14 @@ class TestSession(object):
 
     def test_write_waveform(self):
         expected_waveform = [1.1, 2.2, 3.3, 4.4]
-        self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+        expected_array = array.array('d', expected_waveform)
         with nifake.Session('dev1') as session:
-            session.write_waveform(expected_waveform)
-            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_waveform))
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_waveform]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            self.patched_library.niFake_WriteWaveform.side_effect = self.side_effects_helper.niFake_WriteWaveform
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.write_waveform(expected_array)
+            self.patched_library.niFake_WriteWaveform.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(expected_waveform)), matchers.ViReal64BufferMatcher(expected_array))
 
     def test_write_waveform_numpy(self):
         expected_waveform = numpy.array([1.1, 2.2, 3.3, 4.4], order='C')
@@ -374,7 +402,7 @@ class TestSession(object):
         self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
         self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
         with nifake.Session('dev1') as session:
-            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
+            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
             assert output_array == output_array
             assert expected_output_array_of_fixed_length == output_array_of_fixed_length
             self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
@@ -1034,8 +1062,8 @@ class TestSession(object):
         assert matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(<class 'ctypes.c_long'>)"
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
-        assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2, custom_struct(data=None, struct_int=43, struct_double=4.3, custom_struct(data=None, struct_int=42, struct_double=4.3])"
-        assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2)"
+        assert matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2))"
+        assert matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2), custom_struct(data=None, struct_int=43, struct_double=4.3), custom_struct(data=None, struct_int=42, struct_double=4.3)])"
 
 
 

@@ -112,6 +112,12 @@ functions_default_value = {
                                                                        2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
+# Parameter that need to be array.array
+functions_array = {
+    'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, }, 
+                                                              5: { 'use_array': True, }, }, },
+}
+
 # Functions not in original metadata.
 functions_additional_functions = {
     # What is this function? I've never seen it in niDCPower.h!

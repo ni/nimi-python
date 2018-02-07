@@ -9,7 +9,7 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -26,7 +26,7 @@ Default Value: VI_TRUE
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -44,7 +44,7 @@ Default Value: VI_TRUE
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -62,7 +62,7 @@ Default Value: VI_TRUE
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -77,7 +77,7 @@ Default Value: VI_FALSE
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -92,7 +92,6 @@ Default Value: The default value is VI_FALSE. Use the niDCPower_InitializeWithCh
     1050007: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Driver Setup',
         'name': 'DRIVER_SETUP',
         'resettable': 'No',
@@ -108,7 +107,7 @@ You can specify  driver-specific options through the DriverSetup keyword in the 
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -126,7 +125,6 @@ Default Value: VI_FALSE
     1050203: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Channel Count',
         'name': 'CHANNEL_COUNT',
         'resettable': 'No',
@@ -138,7 +136,6 @@ Default Value: VI_FALSE
     1050302: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
         'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
@@ -150,7 +147,6 @@ Default Value: VI_FALSE
     1050304: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
         'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
@@ -166,7 +162,6 @@ If you initialize NI-DCPower with the resource descriptor, this attribute contai
     1050305: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Logical Name',
         'name': 'LOGICAL_NAME',
         'resettable': 'No',
@@ -181,7 +176,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050327: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
         'resettable': 'No',
@@ -193,7 +187,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050401: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
         'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
@@ -205,7 +198,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050510: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
@@ -217,7 +209,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050511: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
         'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
@@ -229,7 +220,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050512: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
@@ -241,7 +231,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050513: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
         'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
@@ -253,7 +242,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050514: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
@@ -265,7 +253,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050515: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
@@ -277,7 +264,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050516: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
@@ -289,7 +275,6 @@ You can pass a logical name to the niDCPower_InitializeWithChannels function.  T
     1050551: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
@@ -330,7 +315,7 @@ is set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed o
     1150002: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Advanced:Auxiliary Power Source Available',
         'name': 'AUXILIARY_POWER_SOURCE_AVAILABLE',
         'resettable': 'No',
@@ -347,7 +332,6 @@ power source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attri
     1150003: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Measurement:Samples To Average',
         'name': 'SAMPLES_TO_AVERAGE',
         'resettable': 'No',
@@ -371,7 +355,6 @@ NI PXIe-4154—500
     1150004: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Voltage:Current Limit Range',
         'name': 'CURRENT_LIMIT_RANGE',
         'resettable': 'No',
@@ -390,7 +373,6 @@ For valid ranges, refer to the Ranges topic for your device in the NI DC Power S
     1150005: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Voltage:Voltage Level Range',
         'name': 'VOLTAGE_LEVEL_RANGE',
         'resettable': 'No',
@@ -409,7 +391,7 @@ For valid ranges, refer to the Ranges topic for your device in the NI DC Power S
     1150006: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Measurement:Advanced:Reset Average Before Measurement',
         'name': 'RESET_AVERAGE_BEFORE_MEASUREMENT',
         'resettable': 'No',
@@ -427,7 +409,7 @@ Default Value: VI_TRUE
     1150007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Source:Advanced:Overranging Enabled',
         'name': 'OVERRANGING_ENABLED',
         'resettable': 'No',
@@ -454,11 +436,15 @@ Configures the function to generate on the specified channel(s).
 When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
 NIDCPOWER_ATTR_VOLTAGE_LEVEL
 NIDCPOWER_ATTR_CURRENT_LIMIT
+NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH
+NIDCPOWER_ATTR_CURRENT_LIMIT_LOW
 NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE
 NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE
 When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_CURRENT is selected:
 NIDCPOWER_ATTR_CURRENT_LEVEL
 NIDCPOWER_ATTR_VOLTAGE_LIMIT
+NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH
+NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW
 NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE
 NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE
 Default Value: NIDCPOWER_VAL_DC_VOLTAGE
@@ -468,7 +454,6 @@ Default Value: NIDCPOWER_VAL_DC_VOLTAGE
     1150009: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Current:Current Level',
         'name': 'CURRENT_LEVEL',
         'resettable': 'No',
@@ -486,7 +471,6 @@ Valid Values: The valid values for this attribute are defined by the values to w
     1150010: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Current:Voltage Limit',
         'name': 'VOLTAGE_LIMIT',
         'resettable': 'No',
@@ -494,7 +478,7 @@ Valid Values: The valid values for this attribute are defined by the values to w
 'documentation': {
 'description': '''
 Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
+This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT  and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_SYMMETRIC.
 NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
 Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.
 ''',
@@ -504,7 +488,6 @@ Valid Values: The valid values for this attribute are defined by the values to w
     1150011: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Current:Current Level Range',
         'name': 'CURRENT_LEVEL_RANGE',
         'resettable': 'No',
@@ -523,7 +506,6 @@ For valid ranges, refer to the Ranges topic for your device in the NI DC Power S
     1150012: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Current:Voltage Limit Range',
         'name': 'VOLTAGE_LIMIT_RANGE',
         'resettable': 'No',
@@ -698,7 +680,6 @@ Default Value: NIDCPOWER_VAL_RISING
     1150023: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Start Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_START_TRIGGER_INPUT_TERMINAL',
         'resettable': 'No',
@@ -716,7 +697,6 @@ Input terminals can be specified in one of two ways. If the device is named Dev1
     1150024: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Start Trigger:Export Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -734,7 +714,6 @@ for information about supported devices.
     1150025: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Source:Advanced:Sequence Loop Count',
         'name': 'SEQUENCE_LOOP_COUNT',
         'resettable': 'No',
@@ -787,7 +766,6 @@ Default Value: NIDCPOWER_VAL_RISING
     1150028: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Sequence Advance Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_INPUT_TERMINAL',
         'resettable': 'No',
@@ -805,7 +783,6 @@ Input terminals can be specified in one of two ways. If the device is named Dev1
     1150029: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Sequence Advance Trigger:Export Output Terminal',
         'name': 'EXPORTED_SEQUENCE_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -857,7 +834,6 @@ Default Value: NIDCPOWER_VAL_RISING
     1150032: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Source Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SOURCE_TRIGGER_INPUT_TERMINAL',
         'resettable': 'No',
@@ -875,7 +851,6 @@ Input terminals can be specified in one of two ways. If the device is named Dev1
     1150033: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Source Trigger:Export Output Terminal',
         'name': 'EXPORTED_SOURCE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -928,7 +903,6 @@ Default Value: NIDCPOWER_VAL_RISING
     1150036: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Measure Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_MEASURE_TRIGGER_INPUT_TERMINAL',
         'resettable': 'No',
@@ -946,7 +920,6 @@ Input terminals can be specified in one of two ways. If the device is named Dev1
     1150037: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Measure Trigger:Export Output Terminal',
         'name': 'EXPORTED_MEASURE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -981,7 +954,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150039: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Sequence Iteration Complete Event:Pulse:Width',
         'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -1001,7 +973,6 @@ Default Value: The default value for PXI devices is 150 ns. The default value fo
     1150040: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Sequence Iteration Complete Event:Output Terminal',
         'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1035,7 +1006,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150042: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Source Complete Event:Pulse:Width',
         'name': 'SOURCE_COMPLETE_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -1055,7 +1025,6 @@ Default Value: The default value for PXI devices is 150 ns. The default value fo
     1150043: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Source Complete Event:Output Terminal',
         'name': 'SOURCE_COMPLETE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1089,7 +1058,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150045: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Measure Complete Event:Pulse:Width',
         'name': 'MEASURE_COMPLETE_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -1109,7 +1077,6 @@ Default Value: The default value for PXI devices is 150 ns. The default value  f
     1150046: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Measure Complete Event:Event Delay',
         'name': 'MEASURE_COMPLETE_EVENT_DELAY',
         'resettable': 'No',
@@ -1127,7 +1094,6 @@ Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 su
     1150047: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Measure Complete Event:Output Terminal',
         'name': 'MEASURE_COMPLETE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1161,7 +1127,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150049: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Sequence Engine Done Event:Pulse:Width',
         'name': 'SEQUENCE_ENGINE_DONE_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -1181,7 +1146,6 @@ Default Value: The default value for PXI devices is 150 ns. The default value fo
     1150050: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Sequence Engine Done Event:Output Terminal',
         'name': 'SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1198,7 +1162,6 @@ Output terminals can be specified in one of two ways. If the device is named Dev
     1150051: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Source Delay',
         'name': 'SOURCE_DELAY',
         'resettable': 'No',
@@ -1249,7 +1212,6 @@ Default Value: The default value for the NI PXI-4132 is NIDCPOWER_VAL_ON. The de
     1150056: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Measurement:Fetch Backlog',
         'name': 'FETCH_BACKLOG',
         'resettable': 'No',
@@ -1277,7 +1239,6 @@ Default Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_V
     1150058: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Measurement:Aperture Time',
         'name': 'APERTURE_TIME',
         'resettable': 'No',
@@ -1313,7 +1274,7 @@ Default Value: NIDCPOWER_VAL_SECONDS
     1150060: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Source:Output Connected',
         'name': 'OUTPUT_CONNECTED',
         'resettable': 'No',
@@ -1332,7 +1293,6 @@ Default Value: VI_TRUE
     1150061: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Output Resistance',
         'name': 'OUTPUT_RESISTANCE',
         'resettable': 'No',
@@ -1366,7 +1326,6 @@ Default Value: NIDCPOWER_VAL_NORMAL
     1150063: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Measurement:Measure Record Length',
         'name': 'MEASURE_RECORD_LENGTH',
         'resettable': 'No',
@@ -1386,7 +1345,7 @@ This attribute is not available in a session involving multiple channels.
     1150064: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Measurement:Measure Record Length Is Finite',
         'name': 'MEASURE_RECORD_LENGTH_IS_FINITE',
         'resettable': 'No',
@@ -1405,7 +1364,6 @@ This attribute is not available in a session involving multiple channels.
     1150065: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Measurement:Measure Record Delta Time',
         'name': 'MEASURE_RECORD_DELTA_TIME',
         'resettable': 'No',
@@ -1439,7 +1397,6 @@ Default Value: NIDCPOWER_VAL_NORMAL
     1150067: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Gain Bandwidth',
         'name': 'VOLTAGE_GAIN_BANDWIDTH',
         'resettable': 'No',
@@ -1456,7 +1413,6 @@ Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of th
     1150068: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Compensation Frequency',
         'name': 'VOLTAGE_COMPENSATION_FREQUENCY',
         'resettable': 'No',
@@ -1473,7 +1429,6 @@ Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of  t
     1150069: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Pole-Zero Ratio',
         'name': 'VOLTAGE_POLE_ZERO_RATIO',
         'resettable': 'No',
@@ -1490,7 +1445,6 @@ Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of th
     1150070: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Gain Bandwidth',
         'name': 'CURRENT_GAIN_BANDWIDTH',
         'resettable': 'No',
@@ -1507,7 +1461,6 @@ Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of th
     1150071: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Compensation Frequency',
         'name': 'CURRENT_COMPENSATION_FREQUENCY',
         'resettable': 'No',
@@ -1524,7 +1477,6 @@ Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of th
     1150072: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Pole-Zero Ratio',
         'name': 'CURRENT_POLE_ZERO_RATIO',
         'resettable': 'No',
@@ -1559,7 +1511,6 @@ Default Value: NIDCPOWER_VAL_KEEP_IN_MEMORY
     1150074: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Active Advanced Sequence',
         'name': 'ACTIVE_ADVANCED_SEQUENCE',
         'resettable': 'No',
@@ -1574,7 +1525,6 @@ Specifies the advanced sequence to configure or generate.
     1150075: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Active Advanced Sequence Step',
         'name': 'ACTIVE_ADVANCED_SEQUENCE_STEP',
         'resettable': 'No',
@@ -1589,7 +1539,6 @@ Specifies the advanced sequence step to configure.
     1150077: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Measurement:Advanced:Measure Buffer Size',
         'name': 'MEASURE_BUFFER_SIZE',
         'resettable': 'No',
@@ -1608,7 +1557,7 @@ Default Value: Varies by device. Refer to Supported Attributes by Device topic i
     1150078: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Source:Advanced:Sequence Loop Count Is Finite',
         'name': 'SEQUENCE_LOOP_COUNT_IS_FINITE',
         'resettable': 'No',
@@ -1626,7 +1575,6 @@ Default Value: VI_TRUE
     1150080: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level',
         'name': 'PULSE_VOLTAGE_LEVEL',
         'resettable': 'No',
@@ -1643,7 +1591,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150081: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit',
         'name': 'PULSE_CURRENT_LIMIT',
         'resettable': 'No',
@@ -1651,7 +1598,7 @@ Valid Values: The valid values for this attribute are defined by the values you 
 'documentation': {
 'description': '''
 Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY  attribute is set to NIDCPOWER_VAL_SYMMETRIC.
 Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
 ''',
 'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.',
@@ -1660,7 +1607,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150082: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Voltage Level',
         'name': 'PULSE_BIAS_VOLTAGE_LEVEL',
         'resettable': 'No',
@@ -1677,7 +1623,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150083: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit',
         'name': 'PULSE_BIAS_CURRENT_LIMIT',
         'resettable': 'No',
@@ -1694,7 +1639,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150084: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level Range',
         'name': 'PULSE_VOLTAGE_LEVEL_RANGE',
         'resettable': 'No',
@@ -1712,7 +1656,6 @@ For valid ranges, refer to the ranges topic for your device in the NI DC Power S
     1150085: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Range',
         'name': 'PULSE_CURRENT_LIMIT_RANGE',
         'resettable': 'No',
@@ -1730,7 +1673,6 @@ For valid ranges, refer to the ranges topic for your device in the NI DC Power S
     1150086: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Current Level',
         'name': 'PULSE_CURRENT_LEVEL',
         'resettable': 'No',
@@ -1747,7 +1689,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150087: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit',
         'name': 'PULSE_VOLTAGE_LIMIT',
         'resettable': 'No',
@@ -1755,7 +1696,7 @@ Valid Values: The valid values for this attribute are defined by the values you 
 'documentation': {
 'description': '''
 Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute  is set to NIDCPOWER_VAL_SYMMETRIC.
 Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
 ''',
 'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.',
@@ -1764,7 +1705,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150088: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Bias Current Level',
         'name': 'PULSE_BIAS_CURRENT_LEVEL',
         'resettable': 'No',
@@ -1781,7 +1721,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150089: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT',
         'resettable': 'No',
@@ -1798,7 +1737,6 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1150090: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Current Level Range',
         'name': 'PULSE_CURRENT_LEVEL_RANGE',
         'resettable': 'No',
@@ -1816,7 +1754,6 @@ For valid ranges, refer to the ranges topic for your device in the NI DC Power S
     1150091: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Range',
         'name': 'PULSE_VOLTAGE_LIMIT_RANGE',
         'resettable': 'No',
@@ -1834,7 +1771,6 @@ For valid ranges, refer to the ranges topic for your device in the NI DC Power S
     1150092: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Pulse Bias Delay',
         'name': 'PULSE_BIAS_DELAY',
         'resettable': 'No',
@@ -1851,7 +1787,6 @@ Default Value: 16.67 milliseconds
     1150093: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Pulse On Time',
         'name': 'PULSE_ON_TIME',
         'resettable': 'No',
@@ -1868,7 +1803,6 @@ Default Value: 34 milliseconds
     1150094: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:Advanced:Pulse Off Time',
         'name': 'PULSE_OFF_TIME',
         'resettable': 'No',
@@ -1917,7 +1851,6 @@ Default Value: NIDCPOWER_VAL_RISING
     1150097: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Pulse Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_PULSE_TRIGGER_INPUT_TERMINAL',
         'resettable': 'No',
@@ -1934,7 +1867,6 @@ Input terminals can be specified in one of two ways. If the device is named Dev1
     1150098: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Triggers:Pulse Trigger:Export Output Terminal',
         'name': 'EXPORTED_PULSE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1951,7 +1883,6 @@ Output terminals can be specified in one of two ways. If the device is named Dev
     1150099: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Pulse Complete Event:Output Terminal',
         'name': 'PULSE_COMPLETE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -1984,7 +1915,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150101: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Pulse Complete Event:Pulse:Width',
         'name': 'PULSE_COMPLETE_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -2002,7 +1932,6 @@ Default Value: The default value for PXI Express devices is 250 ns.
     1150102: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Ready For Pulse Trigger Event:Output Terminal',
         'name': 'READY_FOR_PULSE_TRIGGER_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
@@ -2034,7 +1963,6 @@ Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
     1150104: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Events:Ready For Pulse Trigger Event:Pulse:Width',
         'name': 'READY_FOR_PULSE_TRIGGER_EVENT_PULSE_WIDTH',
         'resettable': 'No',
@@ -2052,7 +1980,7 @@ Default Value: The default value for PXI Express devices is 250 ns
     1150105: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Advanced:Interlock Input Open',
         'name': 'INTERLOCK_INPUT_OPEN',
         'resettable': 'No',
@@ -2066,10 +1994,550 @@ about supported devices.
 'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information',
 },
     },
+    1150184: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'enum': 'ComplianceLimitSymmetry',
+        'lv_property': 'Source:Advanced:Compliance Limit Symmetry',
+        'name': 'COMPLIANCE_LIMIT_SYMMETRY',
+        'resettable': 'No',
+        'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies whether compliance limits for current generation and voltage
+generation for the device are applied symmetrically about 0 V and 0 A or
+asymmetrically with respect to 0 V and 0 A.
+When set to **Symmetric**, voltage limits and current limits are set
+using a single property with a positive value. The resulting range is
+bounded by this positive value and its opposite.
+When set to **Asymmetric**, you must separately set a limit high and a
+limit low using distinct properties.
+Asymmetric limits must meet the following requirements:
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Symmetric
+**Related Topics:**
+`Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+information about supported devices.
+''',
+},
+    },
+    1150185: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:DC Current:Voltage Limit High',
+        'name': 'VOLTAGE_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum voltage, in volts, that the output can produce
+when generating the desired current on the specified channel(s).
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+Current**.
+You must also specify a `Voltage Limit
+Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [0, `Voltage Limit
+Range <pniDCPower_VoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE.
+''',
+},
+    },
+    1150186: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:DC Current:Voltage Limit Low',
+        'name': 'VOLTAGE_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum voltage, in volts, that the output can produce
+when generating the desired current on the specified channel(s).
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+Current**.
+You must also specify a `Voltage Limit
+High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [-`Voltage Limit
+Range <pniDCPower_VoltageLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE.
+''',
+},
+    },
+    1150187: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:DC Voltage:Current Limit High',
+        'name': 'CURRENT_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum current, in amps, that the output can produce when
+generating the desired voltage on the specified channel(s).
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+Voltage**.
+You must also specify a `Current Limit
+Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [0, `Current Limit
+Range <pniDCPower_CurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE.
+''',
+},
+    },
+    1150188: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:DC Voltage:Current Limit Low',
+        'name': 'CURRENT_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum current, in amps, that the output can produce when
+generating the desired voltage on the specified channel(s).
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+Voltage**.
+You must also specify a `Current Limit
+High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [-`Current Limit
+Range <pniDCPower_CurrentLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE.
+''',
+},
+    },
+    1150189: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Current:Pulse Voltage Limit High',
+        'name': 'PULSE_VOLTAGE_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum voltage, in volts, that the output can produce
+when generating the desired pulse current on the specified channel(s)
+during the *on* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Current**.
+You must also specify a `Pulse Voltage Limit
+Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [0, `Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150190: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Low',
+        'name': 'PULSE_VOLTAGE_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum voltage, in volts, that the output can produce
+when generating the desired pulse current on the specified channel(s)
+during the *on* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Current**.
+You must also specify a `Pulse Voltage Limit
+High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [-`Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150191: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit High',
+        'name': 'PULSE_BIAS_VOLTAGE_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum voltage, in volts, that the output can produce
+when generating the desired pulse current on the specified channel(s)
+during the *off* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Current**.
+You must also specify a `Pulse Bias Voltage Limit
+Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [0, `Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150192: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit Low',
+        'name': 'PULSE_BIAS_VOLTAGE_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum voltage, in volts, that the output can produce
+when generating the desired pulse current on the specified channel(s)
+during the *off* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Current**.
+You must also specify a `Pulse Bias Voltage Limit
+High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [-`Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150193: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Voltage:Pulse Current Limit High',
+        'name': 'PULSE_CURRENT_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum current, in amps, that the output can produce when
+generating the desired pulse voltage on the specified channel(s) during
+the *on* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Voltage**.
+You must also specify a `Pulse Current Limit
+Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
+range.
+**Valid Values:** [0, `Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150194: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Low',
+        'name': 'PULSE_CURRENT_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum current, in amps, that the output can produce when
+generating the desired pulse voltage on the specified channel(s) during
+the *on* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Voltage**.
+You must also specify a `Pulse Current Limit
+High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [-`Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150195: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit High',
+        'name': 'PULSE_BIAS_CURRENT_LIMIT_HIGH',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the maximum current, in amps, that the output can produce when
+generating the desired pulse voltage on the specified channel(s) during
+the *off* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Voltage**.
+You must also specify a `Pulse Bias Current Limit
+Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [0, `Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
+    1150196: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit Low',
+        'name': 'PULSE_BIAS_CURRENT_LIMIT_LOW',
+        'resettable': 'No',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the minimum current, in amps, that the output can produce when
+generating the desired pulse voltage on the specified channel(s) during
+the *off* phase of a pulse.
+This property is applicable only if the `Compliance Limit
+Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+**Asymmetric** and the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+Voltage**.
+You must also specify a `Pulse Bias Current Limit
+High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
+asymmetric range.
+**Valid Values:** [-`Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+The range bounded by the limit high and limit low must include zero. The
+limit high and limit low must be separated by at least 2% of the
+selected limit range.
+**Default Value:** Refer to `Supported Properties by
+Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
+the default value by device.
+**Related Topics:**
+`Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
+`Changing
+Ranges <NI_DC_Power_Supplies_Help.chm::/changing_ranges.html>`__
+`Overranging <NI_DC_Power_Supplies_Help.chm::/overranging.html>`__
+''',
+'note': '''
+The limit may be extended beyond the selected limit range if the
+`Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+set to TRUE or if the `Output
+Function <pniDCPower_OutputFunction.html>`__ property is set to a
+pulsing function.
+''',
+},
+    },
     1250001: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Voltage:Voltage Level',
         'name': 'VOLTAGE_LEVEL',
         'resettable': 'No',
@@ -2087,7 +2555,7 @@ Valid Values: The valid values for this attribute are defined by the values you 
     1250002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Source:Advanced:OVP Enabled',
         'name': 'OVP_ENABLED',
         'resettable': 'No',
@@ -2105,7 +2573,6 @@ Default Value: VI_FALSE
     1250003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': None,
         'lv_property': 'Source:Advanced:OVP Limit',
         'name': 'OVP_LIMIT',
         'resettable': 'No',
@@ -2123,7 +2590,6 @@ Default Value: 210 V
     1250005: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
         'lv_property': 'Source:DC Voltage:Current Limit',
         'name': 'CURRENT_LIMIT',
         'resettable': 'No',
@@ -2131,7 +2597,7 @@ Default Value: 210 V
 'documentation': {
 'description': '''
 Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE.
+This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to  NIDCPOWER_VAL_SYMMETRIC.
 NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
 Valid Values: The valid values for this attribute are defined by the values to which  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.
 ''',
@@ -2141,7 +2607,7 @@ Valid Values: The valid values for this attribute are defined by the values to w
     1250006: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': None,
+        'enum': 'tBoolean',
         'lv_property': 'Source:Output Enabled',
         'name': 'OUTPUT_ENABLED',
         'resettable': 'No',

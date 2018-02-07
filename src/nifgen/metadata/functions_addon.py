@@ -364,3 +364,14 @@ functions_numpy = {
     'WriteNamedWaveformI16':        { 'parameters': { 4: { 'numpy': True, }, }, },
 }
 
+# Parameter that need to be array.array
+functions_array = {
+    'CreateWaveformF64':            { 'parameters': { 3: { 'use_array': True, }, }, },
+    'CreateWaveformI16':            { 'parameters': { 3: { 'use_array': True, }, }, },
+    'WriteWaveform':                { 'parameters': { 4: { 'use_array': True, }, }, },
+    'WriteNamedWaveform':           { 'parameters': { 4: { 'use_array': True, }, }, },
+    'WriteBinary16Waveform':        { 'parameters': { 4: { 'use_array': True, }, }, },
+    'WriteNamedWaveformI16':        { 'parameters': { 4: { 'use_array': True, }, }, },
+}
+
+

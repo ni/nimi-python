@@ -767,7 +767,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (array.array("d")): 
 
 
             An array of measurement values.
@@ -834,7 +834,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (array.array("d")): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -871,7 +871,7 @@ nidmm.Session methods
         
 
 
-    :type waveform_array: numpy array of float64
+    :type waveform_array: numpy.array(dtype=numpy.float64)
     :param maximum_time:
 
 
@@ -897,7 +897,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (numpy array of float64): 
+        waveform_array (numpy.array(dtype=numpy.float64)): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -1339,7 +1339,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (array.array("d")): 
 
 
             An array of measurement values.
@@ -1460,7 +1460,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (array.array("d")): 
 
 
             An array of measurement values.

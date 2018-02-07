@@ -6,15 +6,12 @@
 #  applied at build time
 
 
-
 functions = {
     'AbortScan': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -35,12 +32,10 @@ NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
 },
     },
     'CanConnect': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -53,7 +48,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel1',
                 'type': 'ViConstString',
 'documentation': {
@@ -67,7 +61,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel2',
                 'type': 'ViConstString',
 'documentation': {
@@ -81,7 +74,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'pathCapability',
                 'type': 'ViInt32',
 'documentation': {
@@ -120,12 +112,10 @@ returned.
 },
     },
     'CheckAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -138,7 +128,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -151,7 +140,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -179,7 +167,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -204,12 +191,10 @@ attribute.
 },
     },
     'CheckAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -222,7 +207,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -235,7 +219,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -263,7 +246,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -288,12 +270,10 @@ attribute.
 },
     },
     'CheckAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -306,7 +286,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -319,7 +298,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -347,7 +325,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -372,12 +349,10 @@ attribute.
 },
     },
     'CheckAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -390,7 +365,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -403,7 +377,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -431,7 +404,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -456,12 +428,10 @@ attribute.
 },
     },
     'CheckAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -474,7 +444,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -487,7 +456,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -515,7 +483,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[]',
 'documentation': {
@@ -540,12 +507,10 @@ attribute.
 },
     },
     'ClearError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -576,12 +541,10 @@ or niSwitch\_InitWithOptions fails.
 },
     },
     'ClearInterchangeWarnings': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -598,12 +561,10 @@ and used for all subsequent NI-SWITCH calls.
 },
     },
     'Commit': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -625,12 +586,10 @@ order or to control when expensive hardware operations are performed.
 },
     },
     'ConfigureScanList': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -643,7 +602,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Scanlist',
                 'type': 'ViConstString',
 'documentation': {
@@ -655,7 +613,6 @@ attribute. Default value: None
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scanMode',
                 'type': 'ViInt32',
 'documentation': {
@@ -684,12 +641,10 @@ function to start the scan.
 },
     },
     'ConfigureScanTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -702,7 +657,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scanDelay',
                 'type': 'ViReal64',
 'documentation': {
@@ -718,7 +672,6 @@ value in seconds. Default value: 0.0 s
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerInput',
                 'type': 'ViInt32',
 'documentation': {
@@ -735,7 +688,6 @@ of valid values.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scanAdvancedOutput',
                 'type': 'ViInt32',
 'documentation': {
@@ -764,12 +716,10 @@ the scan list.
 },
     },
     'Connect': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -782,7 +732,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel1',
                 'type': 'ViConstString',
 'documentation': {
@@ -796,7 +745,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel2',
                 'type': 'ViConstString',
 'documentation': {
@@ -833,12 +781,10 @@ CH2, then the path also exists between channels CH2 and CH1.
 },
     },
     'ConnectMultiple': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -851,7 +797,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'connectionList',
                 'type': 'ViConstString',
 'documentation': {
@@ -893,12 +838,10 @@ ch2, then the path also exists between channels ch1 and ch2.
 },
     },
     'Disable': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -919,12 +862,10 @@ disconnected and any scan in progress is aborted.
 },
     },
     'Disconnect': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -937,7 +878,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel1',
                 'type': 'ViConstString',
 'documentation': {
@@ -951,7 +891,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel2',
                 'type': 'ViConstString',
 'documentation': {
@@ -974,12 +913,10 @@ IVISWTCH\_ERROR\_NO\_SUCH\_PATH error.
 },
     },
     'DisconnectAll': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -999,12 +936,10 @@ NISWITCH\_WARN\_PATH\_REMAINS warning is returned.
 },
     },
     'DisconnectMultiple': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1017,7 +952,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'disconnectionList',
                 'type': 'ViConstString',
 'documentation': {
@@ -1044,12 +978,10 @@ error occurred.
 },
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1062,7 +994,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1075,7 +1006,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -1101,7 +1031,6 @@ constants by moving to the Attribute Value control and pressing .
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -1129,12 +1058,10 @@ invalid.
 },
     },
     'GetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1147,7 +1074,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1160,7 +1086,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -1186,7 +1111,6 @@ constants by moving to the Attribute Value control and pressing .
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -1214,12 +1138,10 @@ invalid.
 },
     },
     'GetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1232,7 +1154,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1245,7 +1166,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -1271,7 +1191,6 @@ constants by moving to the Attribute Value control and pressing .
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -1299,12 +1218,10 @@ invalid.
 },
     },
     'GetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1317,7 +1234,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1330,7 +1246,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -1356,7 +1271,6 @@ constants by moving to the Attribute Value control and pressing .
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -1384,12 +1298,10 @@ invalid.
 },
     },
     'GetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1402,7 +1314,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1415,7 +1326,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -1441,7 +1351,6 @@ constants by moving to the Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'arraySize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1462,7 +1371,6 @@ the Attribute Value buffer parameter. Default Value:512
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1511,12 +1419,10 @@ a negative number for the Array Size parameter.
 },
     },
     'GetChannelName': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1529,7 +1435,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
@@ -1541,7 +1446,6 @@ Value of Channel Count attribute.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1562,7 +1466,6 @@ Coercion Record buffer parameter. Default Value: None
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'channelNameBuffer',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1583,12 +1486,10 @@ attribute to determine the number of channels.
 },
     },
     'GetError': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1601,7 +1502,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Code',
                 'type': 'ViStatus',
 'documentation': {
@@ -1613,7 +1513,6 @@ Returns the error code for the session or execution thread. If you pass
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'BufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1634,7 +1533,6 @@ Description buffer parameter. Default Value: None
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Description',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1674,12 +1572,10 @@ since the user last called niSwitch\_GetError or niSwitch\_ClearError.
 },
     },
     'GetNextCoercionRecord': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1692,7 +1588,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1713,7 +1608,6 @@ Coercion Record buffer parameter. Default Value: None
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'coercionRecord',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1757,12 +1651,10 @@ remain for the session.
 },
     },
     'GetNextInterchangeWarning': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1775,7 +1667,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1796,7 +1687,6 @@ the Interchange Warning buffer parameter. Default Value: None
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'interchangeWarning',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1835,12 +1725,10 @@ of the instrument is in a state that you did not specify.
 },
     },
     'GetPath': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1853,7 +1741,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel1',
                 'type': 'ViConstString',
 'documentation': {
@@ -1867,7 +1754,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channel2',
                 'type': 'ViConstString',
 'documentation': {
@@ -1881,7 +1767,6 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -1902,7 +1787,6 @@ again.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Path',
                 'type': 'ViChar[]',
 'documentation': {
@@ -1932,12 +1816,10 @@ error is returned
 },
     },
     'GetRelayCount': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -1950,7 +1832,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'relayName',
                 'type': 'ViConstString',
 'documentation': {
@@ -1963,7 +1844,6 @@ relay names for the switch module.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'relayCount',
                 'type': 'ViInt32',
 'documentation': {
@@ -1982,12 +1862,10 @@ to determine if the switch module supports relay counting.
 },
     },
     'GetRelayName': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2000,7 +1878,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
@@ -2012,7 +1889,6 @@ Value of Channel Count attribute.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'relayNameBufferSize',
                 'type': 'ViInt32',
 'documentation': {
@@ -2033,7 +1909,6 @@ Coercion Record buffer parameter. Default Value: None
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'relayNameBuffer',
                 'type': 'ViChar[]',
 'documentation': {
@@ -2051,12 +1926,10 @@ attribute to determine the number of relays.
 },
     },
     'GetRelayPosition': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2069,7 +1942,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'relayName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2082,7 +1954,6 @@ relay names for the switch module.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'relayPosition',
                 'type': 'ViInt32',
 'documentation': {
@@ -2101,12 +1972,10 @@ parameter.
 },
     },
     'InitWithOptions': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -2127,7 +1996,6 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2143,7 +2011,6 @@ Currently unsupported.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2156,7 +2023,6 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'optionsString',
                 'type': 'ViConstString',
 'documentation': {
@@ -2204,7 +2070,6 @@ specify a topology, the device specified in resource name is simulated.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2240,12 +2105,10 @@ topology.
 },
     },
     'InitWithTopology': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -2266,7 +2129,6 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Topology',
                 'type': 'ViConstString',
 'documentation': {
@@ -2466,7 +2328,6 @@ NISWITCH\_TOPOLOGY\_2799\_2\_SPDT
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Simulate',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2479,7 +2340,6 @@ parameter. Valid Values: VI\_TRUE - simulate VI\_FALSE - Don't simulate
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2492,7 +2352,6 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2524,12 +2383,10 @@ and setting the simulate parameter to VI\_TRUE.
 },
     },
     'InitiateScan': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2555,12 +2412,10 @@ niSwitch\_AbortScan.
 },
     },
     'IsDebounced': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2573,7 +2428,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'isDebounced',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2592,12 +2446,10 @@ the NISWITCH\_ATTR\_IS\_DEBOUNCED attribute.
 },
     },
     'IsScanning': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2610,7 +2462,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'isScanning',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2627,12 +2478,10 @@ indicates that the switch device is idle.
 },
     },
     'LockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2645,7 +2494,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2707,12 +2555,10 @@ niSwitch\_UnlockSession just once at the end of the function.
 },
     },
     'RelayControl': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2725,7 +2571,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'relayName',
                 'type': 'ViConstString',
 'documentation': {
@@ -2738,7 +2583,6 @@ relay names for the switch module.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'relayAction',
                 'type': 'ViInt32',
 'documentation': {
@@ -2762,12 +2606,10 @@ supports individual relay control.
 },
     },
     'ResetInterchangeCheck': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2811,12 +2653,10 @@ niSwitch\_ClearInterchangeWarnings function.
 },
     },
     'ResetWithDefaults': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2838,12 +2678,10 @@ niSwitch\_reset.
 },
     },
     'RouteScanAdvancedOutput': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2856,7 +2694,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scanAdvancedOutputConnector',
                 'type': 'ViInt32',
 'documentation': {
@@ -2869,7 +2706,6 @@ value: NISWITCH\_VAL\_FRONTCONNECTOR
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'scanAdvancedOutputBusLine',
                 'type': 'ViInt32',
 'documentation': {
@@ -2885,7 +2721,6 @@ NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Invert',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2904,12 +2739,10 @@ to the front or rear connector.
 },
     },
     'RouteTriggerInput': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2922,7 +2755,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerInputConnector',
                 'type': 'ViInt32',
 'documentation': {
@@ -2936,7 +2768,6 @@ NISWITCH\_VAL\_FRONTCONNECTOR
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'triggerInputBusLine',
                 'type': 'ViInt32',
 'documentation': {
@@ -2951,7 +2782,6 @@ NISWITCH\_VAL\_TTL5 NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Invert',
                 'type': 'ViBoolean',
 'documentation': {
@@ -2971,12 +2801,10 @@ specify None for trigger bus line parameter.
 },
     },
     'Scan': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -2989,7 +2817,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Scanlist',
                 'type': 'ViConstString',
 'documentation': {
@@ -3033,7 +2860,6 @@ syntax, refer to the NI Switches Help. Default Value: None
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Initiation',
                 'type': 'ViInt16',
 'documentation': {
@@ -3078,12 +2904,10 @@ niSwitch\_ConfigureScanList and niSwitch\_InitiateScan.
 },
     },
     'SendSoftwareTrigger': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3107,12 +2931,10 @@ called.
 },
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3125,7 +2947,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3138,7 +2959,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3166,7 +2986,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3206,12 +3025,10 @@ the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViInt32': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3224,7 +3041,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3237,7 +3053,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3265,7 +3080,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViInt32',
 'documentation': {
@@ -3305,12 +3119,10 @@ redundant instrument I/O.
 },
     },
     'SetAttributeViReal64': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3323,7 +3135,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3336,7 +3147,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3364,7 +3174,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViReal64',
 'documentation': {
@@ -3404,12 +3213,10 @@ the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3422,7 +3229,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3435,7 +3241,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3463,7 +3268,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViSession',
 'documentation': {
@@ -3503,12 +3307,10 @@ the penalty of redundant instrument I/O.
 },
     },
     'SetAttributeViString': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3521,7 +3323,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
 'documentation': {
@@ -3534,7 +3335,6 @@ an empty string for this parameter. Default Value: ""
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeId',
                 'type': 'ViAttr',
 'documentation': {
@@ -3562,7 +3362,6 @@ Attribute Value control and pressing .
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'attributeValue',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3602,12 +3401,10 @@ the penalty of redundant instrument I/O.
 },
     },
     'SetContinuousScan': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3620,7 +3417,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'continuousScan',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3640,12 +3436,10 @@ after one pass through the scan list.
 },
     },
     'SetPath': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3658,7 +3452,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'pathList',
                 'type': 'ViConstString',
 'documentation': {
@@ -3683,12 +3476,10 @@ is not necessary, use niSwitch\_Connect.
 },
     },
     'UnlockSession': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3701,7 +3492,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'callerHasLock',
                 'type': 'ViBoolean',
 'documentation': {
@@ -3746,12 +3536,10 @@ additional information on session locks.
 },
     },
     'WaitForDebounce': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3764,7 +3552,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTimeMs',
                 'type': 'ViInt32',
 'documentation': {
@@ -3787,12 +3574,10 @@ NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error.
 },
     },
     'WaitForScanComplete': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3805,7 +3590,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'maximumTimeMs',
                 'type': 'ViInt32',
 'documentation': {
@@ -3829,12 +3613,10 @@ error.
 },
     },
     'close': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3857,12 +3639,10 @@ call niSwitch\_init or niSwitch\_InitWithOptions.
 },
     },
     'error_message': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3875,7 +3655,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViStatus',
 'documentation': {
@@ -3887,7 +3666,6 @@ Status code returned by any NI-SWITCH function. Default Value: 0
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3908,12 +3686,10 @@ error code description.
 },
     },
     'error_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -3926,7 +3702,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorCode',
                 'type': 'ViInt32',
 'documentation': {
@@ -3938,7 +3713,6 @@ does not have an error queue, so this function never returns any errors.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'errorMessage',
                 'type': 'ViChar[]',
 'documentation': {
@@ -3960,12 +3734,10 @@ never returns any errors.
 },
     },
     'init': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resourceName',
                 'type': 'ViRsrc',
 'documentation': {
@@ -3986,7 +3758,6 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'idQuery',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4002,7 +3773,6 @@ Currently unsupported.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'resetDevice',
                 'type': 'ViBoolean',
 'documentation': {
@@ -4015,7 +3785,6 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4042,12 +3811,10 @@ in the same process for the same resource with the same topology.
 },
     },
     'reset': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4068,12 +3835,10 @@ remain unchanged.
 },
     },
     'revision_query': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4086,7 +3851,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'instrumentDriverRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4098,7 +3862,6 @@ pass a ViChar array with at least 256 bytes.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'firmwareRevision',
                 'type': 'ViChar[]',
 'documentation': {
@@ -4111,12 +3874,10 @@ pass a ViChar array with at least 256 bytes.
 },
     },
     'self_test': {
-        'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -4129,7 +3890,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestResult',
                 'type': 'ViInt16',
 'documentation': {
@@ -4138,7 +3898,6 @@ and used for all subsequent NI-SWITCH calls.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'selfTestMessage',
                 'type': 'ViChar[]',
 'documentation': {

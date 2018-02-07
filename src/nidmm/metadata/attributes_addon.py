@@ -15,10 +15,6 @@ attributes_codegen_method = {
     1050321: { "codegen_method": "no" },  # VISA_RM_SESSION
     1050051: { "codegen_method": "no" },  # DEFER_UPDATE
     1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES
-    1250003: { "enum": None           },  # RESOLUTION
-    1250333: { "enum": None           },  # POWER_LINE_FREQUENCY
-    1150025: { "enum": None           },  # CURRENT_SOURCE
-    1150029: { "enum": None           },  # INPUT_RESISTANCE
     1150008: { "codegen_method": "no" },  # START_TRIGGER
     1150009: { "codegen_method": "no" },  # START_TRIG_SLOPE
     1150011: { "codegen_method": "no" },  # SAMPLE_TRIGGER_DELAY
@@ -40,4 +36,13 @@ attributes_converters = {
                'python_api_converter_type': 'datetime.timedelta', },
 }
 
+
+attributes_remove_enum = {
+    1250003: { "enum": None                         },  # RESOLUTION, Don't use enum since simple value will do
+    1250333: { "enum": None                         },  # POWER_LINE_FREQUENCY, Don't use enum since simple value will do
+    1150025: { "enum": None                         },  # CURRENT_SOURCE, Don't use enum since simple value will do
+    1150029: { "enum": None                         },  # INPUT_RESISTANCE, Don't use enum since simple value will do
+    1150053: { 'enum': None, 'python_type': 'bool', },  # DC_BIAS, Don't use the enum because a bool will do
+    1150023: { 'enum': None, 'python_type': 'bool', },  # OFFSET_COMP_OHMS, Don't use the enum because a bool will do
+}
 

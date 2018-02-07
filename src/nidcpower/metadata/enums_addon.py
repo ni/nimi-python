@@ -178,10 +178,12 @@ enums_additional_enums = {
             },          
         ],
     },
-}
-
-enums_codegen_method = {
-    'PowerlineFrequency': { "codegen_method": "no" }, # Enum metadata actually contains constants.
+    'PowerLineFrequency': {}, # Enum metadata actually contains constants.
+    'CurrentLimitAutorange': {},  # Delete because boolean values only
+    'CurrentLevelAutorange': {},  # Delete because boolean values only
+    'VoltageLevelAutorange': {},  # Delete because boolean values only
+    'VoltageLimitAutorange': {},  # Delete because boolean values only
+    'tBoolean': {},  # Enum just represents True/False
 }
 
 
