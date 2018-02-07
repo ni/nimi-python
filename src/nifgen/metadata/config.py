@@ -25,7 +25,6 @@ config = {
     'custom_types': [],
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
-        {'python_name': 'p2p_streams', 'prefix': 'FIFOEndpoint', },
         {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },
         {'python_name': 'markers', 'prefix': 'Marker', },
     ],

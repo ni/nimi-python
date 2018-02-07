@@ -27,7 +27,6 @@ config = {
     ],
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
-        {'python_name': 'p2p_streams', 'prefix': 'FIFOEndpoint', },
     ],
 }
 

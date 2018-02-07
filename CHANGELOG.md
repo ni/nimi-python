@@ -43,7 +43,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
-            * `p2p_streams` repeated capability
             * `markers` repeated capability
             * `script_triggers` repeated capability
     * #### Changed
@@ -58,7 +57,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
-            * `p2p_streams` repeated capability
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
     * #### Removed
