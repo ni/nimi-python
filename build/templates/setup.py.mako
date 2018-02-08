@@ -44,6 +44,7 @@ setup(
     packages=['${config['module_name']}'],
     install_requires=[
         'enum34;python_version<"3.4"',
+        'six',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
