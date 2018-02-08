@@ -1,24 +1,29 @@
 from nifgen import visatype
 
 import datetime
+import six
 
 
 def convert_repeated_capabilities(repeated_capability, prefix=''):
-    # First try it as a list
-    if isinstance(repeated_capability, list):
-        rep_cap_list = [str(r) if str(r).lower().startswith(prefix.lower()) else prefix + str(r) for r in repeated_capability]
+    # First look for a string
+    if isinstance(repeated_capability, six.text_type) or isinstance(repeated_capability, six.string_types):
+        rep_cap_list = [repeated_capability if repeated_capability.lower().startswith(prefix.lower()) else prefix + repeated_capability]
     else:
-        # Then try it as a slice
+        # if not a string, try it as an iterable
         try:
-            def ifnone(a, b):
-                return b if a is None else a
-            # Turn the slice into a list so we can iterate over it
-            rep_cap_list = list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))
-            # Now it is a list, so we call ourselves
-            return convert_repeated_capabilities(rep_cap_list, prefix)
-        # Otherwise it must be a single item
-        except (TypeError, AttributeError):
-            rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith(prefix.lower()) else prefix + str(repeated_capability)]
+            rep_cap_list = [str(r) if str(r).lower().startswith(prefix.lower()) else prefix + str(r) for r in repeated_capability]
+        except TypeError:
+            # If that doesn't work, then try it as a slice
+            try:
+                def ifnone(a, b):
+                    return b if a is None else a
+                # Turn the slice into a list so we can iterate over it
+                rep_cap_list = list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))
+                # Now it is a list, so we call ourselves
+                return convert_repeated_capabilities(rep_cap_list, prefix)
+            # Otherwise it must be a single item that is not a string
+            except (TypeError, AttributeError):
+                rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith(prefix.lower()) else prefix + str(repeated_capability)]
 
     return ','.join(rep_cap_list)
 
