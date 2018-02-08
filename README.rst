@@ -108,7 +108,6 @@ Repeated capabilities
         i = session.script_triggers['0'].script_triggers_count
         i = session.script_triggers[0].script_triggers_count
         i = session.script_triggers[[0, 1, 3]].script_triggers_count
-        i = session.script_triggers['ScriptTrigger0'].script_triggers_count
 
         session.close()
 
