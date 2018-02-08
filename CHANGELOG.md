@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
         * Option string can now be a python dictionary instead of a string. It will be converted as needed (Fix #661)
             * Key/Value pairs approporiate for desired behavior
                 ``` python
-                session = nidmm.Session('Dev1', False, {'Simulate': True, 'DriverSetup': {'Model': '4071', 'BoardType': 'PXI'}})
+                session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
                 ```
     * #### Removed
 * ### NI-DMM
