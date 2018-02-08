@@ -21,7 +21,7 @@ def example(argsv):
         session.configure_vertical(range=args.voltage, coupling=niscope.VerticalCoupling.AC)
         session.configure_horizontal_timing(min_sample_rate=50000000, min_num_pts=args.length, ref_position=50.0, num_records=1, enforce_realtime=True)
         with session.initiate():
-            wfm, wfm_infos = session[args.channels].fetch(num_samples=args.length)
+            wfm, wfm_infos = session.channels[args.channels].fetch(num_samples=args.length)
         print('Number of samples acquired: {:,}\n'.format(len(wfm)))
         for i in range(len(wfm_infos)):
             print('Waveform {0} information:'.format(i))
