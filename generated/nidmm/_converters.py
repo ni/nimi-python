@@ -14,8 +14,8 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
                 return b if a is None else a
             # Turn the slice into a list so we can iterate over it
             rep_cap_list = list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))
-            # Add prefix to each entry
-            rep_cap_list = [prefix + str(r) for r in rep_cap_list]
+            # Now it is a list, so we call ourselves
+            return convert_repeated_capabilities(rep_cap_list, prefix)
         # Otherwise it must be a single item
         except (TypeError, AttributeError):
             rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith(prefix.lower()) else prefix + str(repeated_capability)]

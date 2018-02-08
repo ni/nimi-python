@@ -1184,7 +1184,7 @@ class _SessionBase(object):
     For example, when this attribute returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
     '''
 
-    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
         self._library = library
@@ -3280,7 +3280,7 @@ class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
     def __init__(self, resource_name, reset_device=False, option_string=""):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -3290,7 +3290,6 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
-        self.p2p_streams = _RepeatedCapabilities(self, 'FIFOEndpoint')
         self.script_triggers = _RepeatedCapabilities(self, 'ScriptTrigger')
         self.markers = _RepeatedCapabilities(self, 'Marker')
 

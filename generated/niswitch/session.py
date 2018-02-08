@@ -580,7 +580,7 @@ class _SessionBase(object):
         var = session['0,1'].wire_mode
     '''
 
-    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
         self._library = library
@@ -1187,7 +1187,7 @@ class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 

@@ -125,7 +125,7 @@ class _SessionBase(object):
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
         self._library = library
@@ -524,7 +524,7 @@ class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 

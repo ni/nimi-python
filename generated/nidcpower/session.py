@@ -2201,7 +2201,7 @@ class _SessionBase(object):
         var = session['0,1'].voltage_pole_zero_ratio
     '''
 
-    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
         self._library = library
@@ -3373,7 +3373,7 @@ class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
     def __init__(self, resource_name, channels="", reset=False, option_string=""):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 

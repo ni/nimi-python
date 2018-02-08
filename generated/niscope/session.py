@@ -1566,7 +1566,7 @@ class _SessionBase(object):
         var = session['0,1'].vertical_range
     '''
 
-    def __init__(self, repeated_capability, vi=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._vi = vi
         self._library = library
@@ -3353,7 +3353,7 @@ class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -3363,7 +3363,6 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
-        self.p2p_streams = _RepeatedCapabilities(self, 'FIFOEndpoint')
 
         # Store the parameter list for later printing in __repr__
         param_list = []
