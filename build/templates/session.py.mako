@@ -137,7 +137,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
 
-    def __init__(self, repeated_capability, ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False):
+    def __init__(self, repeated_capability, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
@@ -190,7 +190,7 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
