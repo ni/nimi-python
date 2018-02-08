@@ -104,11 +104,13 @@ Repeated capabilities
         session.channels[:8].channel_enabled = True  # channels 0, 1, 2, 3, 4, 5, 6, 7
         wfm = session.channels[[0, 1, 3]].fetch(5000)
 
-        # P2P repeated capabilities
-        i = session.script_triggers['0'].SCRIPT_TRIGGERS_COUNT
-        i = session.script_triggers[0].SCRIPT_TRIGGERS_COUNT
-        i = session.script_triggers[[0, 1, 3]].SCRIPT_TRIGGERS_COUNT
-        i = session.script_triggers['ScriptTrigger0'].SCRIPT_TRIGGERS_COUNT
+        # ScriptTrigger repeated capabilities
+        i = session.script_triggers['0'].script_triggers_count
+        i = session.script_triggers[0].script_triggers_count
+        i = session.script_triggers[[0, 1, 3]].script_triggers_count
+        i = session.script_triggers['ScriptTrigger0'].script_triggers_count
+
+        session.close()
 
 Additional examples for each driver are located in src/<driver>/examples/ directory.
 
