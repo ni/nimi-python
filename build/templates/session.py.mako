@@ -86,6 +86,18 @@ class ${session_context_manager}(object):
 
 
 % endif
+class _RepeatedCapabilities(object):
+    def __init__(self, session, prefix):
+        self._session = session
+        self._prefix = prefix
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+
+        return _SessionBase(${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']}, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+
+
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -113,12 +125,22 @@ if attributes[attribute]['channel_based'] == 'True':
 init_function = config['functions']['_init_function']
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
+constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
 
-    def __init__(self, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
-        self._encoding = 'windows-1251'
+        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        self._library = library
+        self._encoding = encoding
+
+        # Store the parameter list for later printing in __repr__
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+        self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -155,15 +177,6 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 % endfor
 % endfor
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
-        self._is_frozen = True
-
-
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
@@ -172,14 +185,31 @@ class Session(_SessionBase):
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
-        super(Session, self).__init__(repeated_capability='')
+        super(Session, self).__init__(repeated_capability='', ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
 % for p in init_function['parameters']:
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
 %   endif
 % endfor
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
+
+        # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+
+        # Instantiate any repeated capability objects
+% for rep_cap in config['repeated_capabilities']:
+        self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
+% endfor
+
+        # Store the parameter list for later printing in __repr__
+        param_list = []
+%       for param in constructor_params:
+        param_list.append("${param['python_name']}=" + pp.pformat(${param['python_name']}))
+%       endfor
+        self._param_list = ', '.join(param_list)
+
         self._is_frozen = True
 
     def __enter__(self):
@@ -187,10 +217,6 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._${config['session_handle_parameter_name']}, repeated_capability)
 
     def initiate(self):
         return ${session_context_manager}(self)

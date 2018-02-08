@@ -511,7 +511,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session['100'].read_write_double = 5.0
+                session.channels['100'].read_write_double = 5.0
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code
@@ -658,14 +658,14 @@ class TestSession(object):
         self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
-            value = session['3'].read_from_channel(test_maximum_time)
+            value = session.channels['3'].read_from_channel(test_maximum_time)
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time_us), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_device_method_not_exist_on_repeated_capability_error(self):
         with nifake.Session('dev1') as session:
             try:
-                session['3'].simple_function()
+                session.channels['3'].simple_function()
                 assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
             except AttributeError:
                 pass
@@ -817,7 +817,7 @@ class TestSession(object):
         test_number = 100
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
-            attr_int = session['0,1'].read_write_integer
+            attr_int = session.channels[['0', '1']].read_write_integer
             assert(attr_int == test_number)
             self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1'), matchers.ViInt32Matcher(1000004), matchers.ViInt32PointerMatcher())
 
@@ -826,8 +826,8 @@ class TestSession(object):
         attribute_id = 1000001
         test_number = 0.001
         with nifake.Session('dev1') as session:
-            session['0-24'].read_write_double = test_number
-            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0-24'), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64Matcher(test_number))
+            session.channels[range(24)].read_write_double = test_number
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23'), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64Matcher(test_number))
 
     def test_get_attribute_int64(self):
         self.patched_library.niFake_GetAttributeViInt64.side_effect = self.side_effects_helper.niFake_GetAttributeViInt64
@@ -900,18 +900,18 @@ class TestSession(object):
     def test_add_properties_to_repeated_capability_error_set(self):
         with nifake.Session('dev1') as session:
             try:
-                session['0'].non_existent_property = 5
+                session.channels['0'].non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_SessionBase' object has no attribute 'non_existent_property'"
 
     def test_add_properties_to_repeated_capability_error_get(self):
         with nifake.Session('dev1') as session:
             try:
-                value = session['0'].non_existent_property  # noqa: F841
+                value = session.channels['0'].non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
-                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
+                assert str(e) == "'_SessionBase' object has no attribute 'non_existent_property'"
 
     def test_set_enum_attribute_int32_error(self):
         with nifake.Session('dev1') as session:
