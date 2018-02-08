@@ -126,7 +126,7 @@ def test_configure_arb_waveform(session):
 
 
 def test_disable(session):
-    channel = session['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     session.disable()
     assert channel.output_enabled is False

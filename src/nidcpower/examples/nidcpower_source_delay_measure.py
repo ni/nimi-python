@@ -38,10 +38,10 @@ def example(argsv):
 
         with session.initiate():
             print('Voltage 1:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
+            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=datetime.timedelta(seconds=timeout)))
             session.voltage_level = args.voltage2  # on-the-fly set
             print('Voltage 2:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
+            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=datetime.timedelta(seconds=timeout)))
             session.output_enabled = False
 
 

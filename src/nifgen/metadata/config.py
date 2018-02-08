@@ -23,5 +23,10 @@ config = {
     },
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
+    'repeated_capabilities': [
+        {'python_name': 'channels', 'prefix': '', },
+        {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },
+        {'python_name': 'markers', 'prefix': 'Marker', },
+    ],
 }
 

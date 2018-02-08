@@ -1,7 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [0.5.0](#060---2017-12-20)
+* [0.6.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
 * [0.3.0](#030---2017-10-13)
@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Repeated capabilities are handled differently. See #737 for discussion
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -31,6 +32,7 @@ All notable changes to this project will be documented in this file.
         * The following functions return a `datetime.datetime()` object representing the date and time
             * get_cal_date_and_time
     * #### Removed
+        * `nidmm.Session()` no longer takes id_query parameter
         * Removed these enums and disconnected them from the associated attribute
             * `DCBias` - `DC_BIAS`
             * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
@@ -49,6 +51,16 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
+        * `channel` repeated capability - See #737 for discussion
+    * #### Changed
+        * Metadata updated to NI-DCPower 17.6.1
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+        * Repeated capablilites - See #737 for discussion:
+            * `channel` repeated capability
+            * `markers` repeated capability
+            * `script_triggers` repeated capability
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
@@ -75,6 +87,8 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * Repeated capablilites - See #737 for discussion:
+            * `channel` repeated capability
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:

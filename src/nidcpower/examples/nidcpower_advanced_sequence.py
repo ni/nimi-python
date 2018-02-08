@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+import datetime
 import nidcpower
 import sys
 
@@ -35,7 +36,7 @@ def example(argsv):
     with nidcpower.Session(resource_name=args.resource_name, channels=args.channels, option_string=args.option_string) as session:
 
         session.source_mode = nidcpower.SourceMode.SEQUENCE
-        session.source_delay = 0.1
+        session.source_delay = datetime.timedelta(seconds=0.1)
         session.voltage_level_autorange = True
         session.current_level_autorange = True
         session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=attribute_ids)

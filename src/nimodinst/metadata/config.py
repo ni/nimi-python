@@ -17,5 +17,6 @@ config = {
         },
     },
     'custom_types': [],
+    'repeated_capabilities': [],
 }
 
