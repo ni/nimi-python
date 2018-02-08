@@ -36,7 +36,7 @@ def example(argsv):
             print(row_format.format('Number', 'Name', 'Is Configuration', 'Is Source'))
             for i in range(1, session.channel_count + 1):
                 channel_name = session.get_channel_name(index=i)
-                channel = session[channel_name]
+                channel = session.channels[channel_name]
                 print(row_format.format(i, channel_name, str(channel.is_configuration_channel), str(channel.is_source_channel)))
         if args.relay:
             print('Realy Info:')

@@ -14,6 +14,10 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] 
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name_with_default',
+}
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
@@ -21,6 +25,10 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DE
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'python_name_or_default_for_init',
 }
 _parameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
