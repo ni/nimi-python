@@ -1,36 +1,48 @@
 from enum import Enum
 
 
-class ParameterUsageOptions(Enum):
+class AutoNumber(Enum):
+    def __new__(cls):
+        value = len(cls.__members__) + 1
+        obj = object.__new__(cls)
+        obj._value_ = value
+        return obj
+
+
+class ParameterUsageOptions(AutoNumber):
     '''Different usage options for parameter lists.'''
 
-    SESSION_METHOD_DECLARATION = 1
-    '''For declaring a method in Session'''
-    SESSION_NUMPY_INTO_METHOD_DECLARATION = 2
+    SESSION_METHOD_DECLARATION = ()
+    '''For declaring a regular method in Session'''
+    SESSION_INIT_DECLARATION = ()
+    '''For declaring an init method in Session'''
+    SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
     '''For calling into a Session method that uses numpy arrays.'''
-    SESSION_METHOD_CALL = 3
-    '''For calling into a Session method.'''
-    DOCUMENTATION_SESSION_METHOD = 4
+    SESSION_METHOD_CALL = ()
+    '''For calling into a regular Session method.'''
+    SESSION_INIT_CALL = ()
+    '''For calling into an init Session method.'''
+    DOCUMENTATION_SESSION_METHOD = ()
     '''For documentation (rst) of Session methods'''
-    CTYPES_CALL = 5
+    CTYPES_CALL = ()
     '''For Library implementation calling into the DLL via ctypes'''
-    LIBRARY_METHOD_CALL = 6
+    LIBRARY_METHOD_CALL = ()
     '''For calling into a method in Library.'''
-    CTYPES_ARGTYPES = 7
+    CTYPES_ARGTYPES = ()
     '''For setting up the ctypes argument types'''
-    LIBRARY_METHOD_DECLARATION = 8
+    LIBRARY_METHOD_DECLARATION = ()
     '''For declaring a method in Library'''
-    INPUT_PARAMETERS = 9
+    INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
-    OUTPUT_PARAMETERS = 10
+    OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
-    IVI_DANCE_PARAMETER = 11
+    IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
-    NUMPY_PARAMETERS = 12
+    NUMPY_PARAMETERS = ()
     '''Get all buffer parameters that support numpy.array in the Python API'''
-    LEN_PARAMETER = 13
+    LEN_PARAMETER = ()
     '''Get the len parameter'''
-    INPUT_ENUM_PARAMETERS = 14
+    INPUT_ENUM_PARAMETERS = ()
     '''Get any input parameters whose type is enum'''
 
 
