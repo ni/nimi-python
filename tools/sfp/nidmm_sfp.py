@@ -1,6 +1,7 @@
 import math
 import nidmm
 import nimodinst
+import warnings
 import wx
 
 USE_WIT = True
@@ -117,7 +118,7 @@ class SFP(wx.Frame):
         # begin wxGlade: SFP.__init__
         kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwds)
-        self.SetSize((529, 346))
+        self.SetSize((500, 600))
 
         # Menu Bar
         self.menu_bar = wx.MenuBar()
@@ -126,9 +127,11 @@ class SFP(wx.Frame):
         self._devices = wx.ComboBox(self, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
         self._function = wx.ComboBox(self, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
         self._digits = wx.ComboBox(self, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
-        self._range = wx.SpinCtrlDouble(self, wx.ID_ANY, "1.0", min=0, max=1000)
+        self._range = wx.SpinCtrlDouble(self, wx.ID_ANY, "1", min=0, max=1000)
+        self.Bind(wx.EVT_SPINCTRLDOUBLE, self.OnConfigUpdate, self._range)
         self._range_display = wx.StaticText(self, wx.ID_ANY, "")
         self._reading_display = wx.StaticText(self, wx.ID_ANY, "")
+        self._status = wx.StaticText(self, wx.ID_ANY, "Good!")
 
         self.__set_properties()
         self.__do_layout()
@@ -138,7 +141,6 @@ class SFP(wx.Frame):
         self.Bind(wx.EVT_COMBOBOX, self.OnConfigUpdate, self._digits)
         self.Bind(wx.EVT_TEXT, self.OnConfigUpdate, self._digits)
         self.Bind(wx.EVT_TEXT_ENTER, self.OnConfigUpdate, self._digits)
-        self.Bind(wx.EVT_SPINCTRLDOUBLE, self.OnConfigUpdate, self._range)
         # end wxGlade
 
         self._session = None
@@ -188,14 +190,15 @@ class SFP(wx.Frame):
 
     def __set_properties(self):
         # begin wxGlade: SFP.__set_properties
-        self.SetTitle("NI-DMM Doft Front Panel")
-        self._range_display.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, ""))
-        self._reading_display.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, ""))
+        self.SetTitle("NI-DMM Simple Soft Front Panel")
+        self._range_display.SetFont(wx.Font(20, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, ""))
+        self._reading_display.SetFont(wx.Font(20, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, ""))
         # end wxGlade
 
     def __do_layout(self):
         # begin wxGlade: SFP.__do_layout
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
+        sizer_10 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, "Status"), wx.HORIZONTAL)
         sizer_5 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, "Results:"), wx.VERTICAL)
         sizer_7 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_6 = wx.BoxSizer(wx.HORIZONTAL)
@@ -207,11 +210,10 @@ class SFP(wx.Frame):
         label_1.SetFont(wx.Font(11, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, ""))
         sizer_3.Add(label_1, 0, 0, 0)
         sizer_3.Add(self._devices, 0, 0, 0)
-        sizer_1.Add(sizer_3, 1, wx.EXPAND, 0)
-        sizer_1.Add((20, 10), 0, 0, 0)
+        sizer_1.Add(sizer_3, 3, wx.EXPAND, 0)
         static_line_1 = wx.StaticLine(self, wx.ID_ANY)
-        sizer_1.Add(static_line_1, 0, wx.EXPAND, 0)
-        sizer_1.Add((20, 10), 0, 0, 0)
+        sizer_1.Add(static_line_1, 1, wx.EXPAND, 0)
+        sizer_1.Add((20, 20), 1, 0, 0)
         label_8 = wx.StaticText(self, wx.ID_ANY, "Function:")
         sizer_8.Add(label_8, 0, 0, 0)
         sizer_8.Add(self._function, 0, 0, 0)
@@ -224,10 +226,10 @@ class SFP(wx.Frame):
         label_10 = wx.StaticText(self, wx.ID_ANY, "Range:")
         sizer_9.Add(label_10, 0, 0, 0)
         sizer_9.Add(self._range, 0, 0, 0)
-        sizer_9.Add((0, 0), 0, 0, 0)
+        sizer_9.Add((20, 20), 0, 0, 0)
         sizer_2.Add(sizer_9, 1, wx.EXPAND, 0)
-        sizer_1.Add(sizer_2, 1, wx.EXPAND, 0)
-        sizer_1.Add((20, 20), 0, 0, 0)
+        sizer_1.Add(sizer_2, 15, wx.EXPAND, 0)
+        sizer_1.Add((20, 20), 1, 0, 0)
         label_6 = wx.StaticText(self, wx.ID_ANY, "Range:  ")
         sizer_6.Add(label_6, 20, 0, 0)
         sizer_6.Add(self._range_display, 30, 0, 0)
@@ -238,15 +240,21 @@ class SFP(wx.Frame):
         sizer_7.Add(self._reading_display, 30, 0, 0)
         sizer_7.Add((20, 20), 50, 0, 0)
         sizer_5.Add(sizer_7, 1, wx.EXPAND, 0)
-        sizer_1.Add(sizer_5, 1, wx.EXPAND, 0)
-        sizer_1.Add((20, 20), 10, 0, 0)
+        sizer_1.Add(sizer_5, 15, wx.EXPAND, 0)
+        sizer_1.Add((20, 20), 1, 0, 0)
+        sizer_10.Add(self._status, 100, 0, 0)
+        sizer_1.Add(sizer_10, 25, wx.EXPAND, 0)
         self.SetSizer(sizer_1)
         self.Layout()
         # end wxGlade
 
     def OnUpdate(self, event):  # noqa: N802
         points_ready, _ = self._session.read_status()
-        points = self._session.fetch_multi_point(points_ready)
+        with warnings.catch_warnings(record=True) as w:
+            points = self._session.fetch_multi_point(points_ready)
+            if len(w) > 0:  # that means we got a warning so we will put it in the status area
+                self._status.SetLabel(str(w[0].message))
+
         actual_range = self._session.range
         if len(points) > 0:
             mode_str, range_str, data_str = format_meas(points[-1], nidmm.Function[self._dev_function], actual_range, self._dev_digits)
@@ -264,20 +272,25 @@ class SFP(wx.Frame):
             current_range = 1.0
         current_digits = float(self._digits.GetStringSelection())
 
-        if current_dev_name != self._dev_name:
-            if self._session is not None:
-                self._session.close()
-            self._session = nidmm.Session(current_dev_name)
-            self._session.configure_multi_point(trigger_count=0, sample_count=0, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=-1)
+        try:
+            if current_dev_name != self._dev_name:
+                if self._session is not None:
+                    self._session.close()
+                self._session = nidmm.Session(current_dev_name)
+                self._session.configure_multi_point(trigger_count=0, sample_count=0, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=-1)
 
-        self._session.configure_measurement_digits(nidmm.Function[current_function], current_range, current_digits)
-        self._session._initiate()
+            self._session.configure_measurement_digits(nidmm.Function[current_function], current_range, current_digits)
+            self._session._initiate()
+        except nidmm.Error as e:
+            self._status.SetLabel(str(e))
+
         self._dev_name = current_dev_name
         self._dev_function = current_function
         self._dev_range = current_range
         self._dev_digits = current_digits
 
     def OnCloseWindow(self, event):  # noqa: N802
+        self._session.close()
         self.Destroy()
 
     def OnIdle(self, event):  # noqa: N802
