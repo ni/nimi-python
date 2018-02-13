@@ -456,7 +456,7 @@ class _SessionBase(object):
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
     This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
@@ -491,7 +491,7 @@ class _SessionBase(object):
 
     This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
     This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
