@@ -1187,6 +1187,240 @@ class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
+        '''An NI-SWITCH session to a National Instruments Switch Module
+
+        Returns a session handle used to identify the switch in all subsequent
+        instrument driver calls and sets the topology of the switch.
+        _init_with_topology creates a new IVI instrument driver session
+        for the switch specified in the resourceName parameter. The driver uses
+        the topology specified in the topology parameter and overrides the
+        topology specified in MAX. Note: When initializing an NI SwitchBlock
+        device with topology, you must specify the toplogy created when you
+        configured the device in MAX, using either
+        NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the
+        device. Refer to the Initializing with Toplogy for NI SwitchBlock
+        Devices topic in the NI Switches Help for information about determining
+        the topology string of an NI SwitchBlock device. By default, the switch
+        is reset to a known state. Enable simulation by specifying the topology
+        and setting the simulate parameter to VI_TRUE.
+
+        Args:
+            resource_name (str): Resource name of the switch module to initialize. Default value: None
+                Syntax: Optional fields are shown in square brackets ([]). Configured in
+                MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
+                NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
+                number]::device number TIP: IVI logical names are also valid for the
+                resource name. Default values for optional fields: chassis ID = 1 bus
+                number = 0 Example resource names: Resource Name Description SC1Mod3
+                NI-DAQmx module in chassis "SC1" slot 3 MySwitch NI-DAQmx module renamed
+                to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
+                SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
+                0, device number 16 PXI::16 PXI bus 0, device number 16
+
+            topology (str): Pass the topology name you want to use for the switch you specify with
+                Resource Name parameter. You can also pass
+                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
+                was configured for the device in MAX. Default Value:
+                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY Valid Values:
+                NISWITCH_TOPOLOGY_1127_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1127_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_1127_2_WIRE_4X8_MATRIX
+                NISWITCH_TOPOLOGY_1127_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_1127_INDEPENDENT
+                NISWITCH_TOPOLOGY_1128_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1128_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_1128_2_WIRE_4X8_MATRIX
+                NISWITCH_TOPOLOGY_1128_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_1128_INDEPENDENT
+                NISWITCH_TOPOLOGY_1129_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_8X16_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_4X32_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_QUAD_4X16_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_256X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_DUAL_128X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_8x32_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_OCTAL_32X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_QUAD_64X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_SIXTEEN_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_4X32_MATRIX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_1130_4_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1130_4_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_INDEPENDENT NISWITCH_TOPOLOGY_1160_16_SPDT
+                NISWITCH_TOPOLOGY_1161_8_SPDT
+                NISWITCH_TOPOLOGY_1163R_OCTAL_4X1_MUX
+                NISWITCH_TOPOLOGY_1166_16_DPDT NISWITCH_TOPOLOGY_1166_32_SPDT
+                NISWITCH_TOPOLOGY_1167_INDEPENDENT
+                NISWITCH_TOPOLOGY_1169_100_SPST NISWITCH_TOPOLOGY_1169_50_DPST
+                NISWITCH_TOPOLOGY_1175_1_WIRE_196X1_MUX
+                NISWITCH_TOPOLOGY_1175_2_WIRE_98X1_MUX
+                NISWITCH_TOPOLOGY_1175_2_WIRE_95X1_MUX
+                NISWITCH_TOPOLOGY_1190_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1191_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1192_8_SPDT NISWITCH_TOPOLOGY_1193_32X1_MUX
+                NISWITCH_TOPOLOGY_1193_16X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_1193_DUAL_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_QUAD_8X1_MUX
+                NISWITCH_TOPOLOGY_1193_QUAD_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_INDEPENDENT
+                NISWITCH_TOPOLOGY_1194_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1195_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_MUX
+                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_AMPLIFIED_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_AMPLIFIED_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_DUAL_12X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_QUAD_6X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_4X6_MATRIX
+                NISWITCH_TOPOLOGY_2501_4_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2503_1_WIRE_48X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_24X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_DUAL_12X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_QUAD_6X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_4X6_MATRIX
+                NISWITCH_TOPOLOGY_2503_4_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2510_INDEPENDENT
+                NISWITCH_TOPOLOGY_2512_INDEPENDENT
+                NISWITCH_TOPOLOGY_2514_INDEPENDENT
+                NISWITCH_TOPOLOGY_2515_INDEPENDENT NISWITCH_TOPOLOGY_2520_80_SPST
+                NISWITCH_TOPOLOGY_2521_40_DPST NISWITCH_TOPOLOGY_2522_53_SPDT
+                NISWITCH_TOPOLOGY_2523_26_DPDT
+                NISWITCH_TOPOLOGY_2524_1_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_DUAL_64X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_SIXTEEN_8X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_OCTAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_SIXTEEN_4X1_MUX
+                NISWITCH_TOPOLOGY_2526_1_WIRE_158X1_MUX
+                NISWITCH_TOPOLOGY_2526_2_WIRE_79X1_MUX
+                NISWITCH_TOPOLOGY_2527_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2527_1_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2527_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_2527_2_WIRE_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2527_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_2527_INDEPENDENT
+                NISWITCH_TOPOLOGY_2529_2_WIRE_DUAL_4X16_MATRIX
+                NISWITCH_TOPOLOGY_2529_2_WIRE_8X16_MATRIX
+                NISWITCH_TOPOLOGY_2529_2_WIRE_4X32_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_DUAL_64X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_4x32_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_8x16_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_4x16_MATRIX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_4_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_4_WIRE_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_INDEPENDENT
+                NISWITCH_TOPOLOGY_2531_1_WIRE_4X128_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_8X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2531_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_16X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_4X128_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_8X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_SIXTEEN_2X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_DUAL_4X32_MATRIX
+                NISWITCH_TOPOLOGY_2533_1_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2534_1_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2535_1_WIRE_4X136_MATRIX
+                NISWITCH_TOPOLOGY_2536_1_WIRE_8X68_MATRIX
+                NISWITCH_TOPOLOGY_2540_1_WIRE_8X9_MATRIX
+                NISWITCH_TOPOLOGY_2541_1_WIRE_8X12_MATRIX
+                NISWITCH_TOPOLOGY_2542_QUAD_2X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2543_DUAL_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2544_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2545_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2546_DUAL_4X1_MUX
+                NISWITCH_TOPOLOGY_2547_8X1_MUX NISWITCH_TOPOLOGY_2548_4_SPDT
+                NISWITCH_TOPOLOGY_2549_TERMINATED_2_SPDT
+                NISWITCH_TOPOLOGY_2554_4X1_MUX
+                NISWITCH_TOPOLOGY_2555_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2556_DUAL_4X1_MUX
+                NISWITCH_TOPOLOGY_2557_8X1_MUX NISWITCH_TOPOLOGY_2558_4_SPDT
+                NISWITCH_TOPOLOGY_2559_TERMINATED_2_SPDT
+                NISWITCH_TOPOLOGY_2564_16_SPST NISWITCH_TOPOLOGY_2564_8_DPST
+                NISWITCH_TOPOLOGY_2565_16_SPST NISWITCH_TOPOLOGY_2566_16_SPDT
+                NISWITCH_TOPOLOGY_2566_8_DPDT NISWITCH_TOPOLOGY_2567_INDEPENDENT
+                NISWITCH_TOPOLOGY_2568_15_DPST NISWITCH_TOPOLOGY_2568_31_SPST
+                NISWITCH_TOPOLOGY_2569_100_SPST NISWITCH_TOPOLOGY_2569_50_DPST
+                NISWITCH_TOPOLOGY_2570_20_DPDT NISWITCH_TOPOLOGY_2570_40_SPDT
+                NISWITCH_TOPOLOGY_2571_66_SPDT
+                NISWITCH_TOPOLOGY_2575_1_WIRE_196X1_MUX
+                NISWITCH_TOPOLOGY_2575_2_WIRE_98X1_MUX
+                NISWITCH_TOPOLOGY_2575_2_WIRE_95X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_OCTAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_SIXTEEN_4X1_MUX
+                NISWITCH_TOPOLOGY_2576_INDEPENDENT
+                NISWITCH_TOPOLOGY_2584_1_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2584_1_WIRE_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2584_2_WIRE_6X1_MUX
+                NISWITCH_TOPOLOGY_2584_INDEPENDENT
+                NISWITCH_TOPOLOGY_2585_1_WIRE_10X1_MUX
+                NISWITCH_TOPOLOGY_2586_10_SPST NISWITCH_TOPOLOGY_2586_5_DPST
+                NISWITCH_TOPOLOGY_2590_4X1_MUX NISWITCH_TOPOLOGY_2591_4X1_MUX
+                NISWITCH_TOPOLOGY_2593_16X1_MUX
+                NISWITCH_TOPOLOGY_2593_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2593_DUAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2593_DUAL_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2593_INDEPENDENT NISWITCH_TOPOLOGY_2594_4X1_MUX
+                NISWITCH_TOPOLOGY_2595_4X1_MUX
+                NISWITCH_TOPOLOGY_2596_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2597_6X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2598_DUAL_TRANSFER
+                NISWITCH_TOPOLOGY_2599_2_SPDT NISWITCH_TOPOLOGY_2720_INDEPENDENT
+                NISWITCH_TOPOLOGY_2722_INDEPENDENT
+                NISWITCH_TOPOLOGY_2725_INDEPENDENT
+                NISWITCH_TOPOLOGY_2727_INDEPENDENT
+                NISWITCH_TOPOLOGY_2737_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2738_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2739_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2746_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_2747_DUAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2748_16X1_MUX
+                NISWITCH_TOPOLOGY_2790_INDEPENDENT
+                NISWITCH_TOPOLOGY_2796_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
+                NISWITCH_TOPOLOGY_2799_2_SPDT
+
+            simulate (bool): Enables simulation of the switch module specified in the resource name
+                parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
+                (Default Value)
+
+            reset_device (bool): Specifies whether to reset the switch module during the initialization
+                process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
+                - Currently unsupported. The device will not reset.
+
+
+        Returns:
+            session (niswitch.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'

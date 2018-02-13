@@ -128,6 +128,12 @@ functions_default_value = {
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
 }
 
+# Converted parameters
+functions_converters = {
+    'InitializeWithChannels':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                   'python_api_converter_type': 'dict', }, }, },
+}
+
 # Functions not in original metadata.
 functions_additional_functions = {
     'CreateWaveformDispatcher': {

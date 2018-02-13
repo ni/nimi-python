@@ -523,14 +523,73 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+        '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
+
+        Creates a new IVI instrument driver session.
+
+        Args:
+            resource_name (str): Caution: This is just some string.
+
+                Contains the **resource_name** of the device to initialize.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+            id_query (bool): NI-FAKE is probably not needed.
+
+                +-------------------+---+------------------+
+                | VI_TRUE (default) | 1 | Perform ID Query |
+                +-------------------+---+------------------+
+                | VI_FALSE          | 0 | Skip ID Query    |
+                +-------------------+---+------------------+
+
+            reset_device (bool): Specifies whether to reset
+
+                +-------------------+---+--------------+
+                | VI_TRUE (default) | 1 | Reset Device |
+                +-------------------+---+--------------+
+                | VI_FALSE          | 0 | Don't Reset  |
+                +-------------------+---+--------------+
+
+
+        Returns:
+            session (nifake.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, options, id_query, reset_device)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -538,8 +597,8 @@ class Session(_SessionBase):
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("options=" + pp.pformat(options))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("option_string=" + pp.pformat(option_string))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
@@ -949,7 +1008,7 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.
@@ -958,6 +1017,8 @@ class Session(_SessionBase):
             resource_name (str): Caution: This is just some string.
 
                 Contains the **resource_name** of the device to initialize.
+
+            option_string (str): Some options
 
             id_query (bool): NI-FAKE is probably not needed.
 
@@ -974,8 +1035,6 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-
-            option_string (str): Some options
 
 
         Returns:

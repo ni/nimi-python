@@ -3372,14 +3372,99 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels="", reset=False, option_string=""):
+    def __init__(self, resource_name, channels="", reset=False, options={}):
+        '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
+
+        Creates and returns a new NI-DCPower session to the power supply or SMU
+        specified in **resource name** to be used in all subsequent NI-DCPower
+        function calls. With this function, you can optionally set the initial
+        state of the following session attributes:
+
+        -  simulate
+        -  driver_setup
+
+        After calling this function, the session will be in the Uncommitted
+        state. Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        details about specific software states.
+
+        To place the device in a known start-up state when creating a new
+        session, set **reset** to VI_TRUE. This action is equivalent to using
+        the reset function immediately after initializing the
+        session.
+
+        To open a session and leave the device in its existing configuration
+        without passing through a transitional output state, set **reset** to
+        VI_FALSE. Then configure the device as in the previous session,
+        changing only the desired settings, and then call the
+        _initiate function.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Args:
+            resource_name (str): Specifies the **resourceName** assigned by Measurement & Automation
+                Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
+                instrument's **resourceName**. **resourceName** can also be a logical
+                IVI name.
+
+            channels (str): Specifies which output channel(s) to include in a new session. Specify
+                multiple channels by using a channel list or a channel range. A channel
+                list is a comma (,) separated sequence of channel names (for example,
+                0,2 specifies channels 0 and 2). A channel range is a lower bound
+                channel followed by a hyphen (-) or colon (:) followed by an upper bound
+                channel (for example, 0-2 specifies channels 0, 1, and 2). In the
+                Running state, multiple output channel configurations are performed
+                sequentially based on the order specified in this parameter. If you do
+                not specify any channels, by default all channels on the device are
+                included in the session.
+
+            reset (bool): Specifies whether to reset the device during the initialization
+                procedure.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (nidcpower.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
+        self._vi = self._initialize_with_channels(resource_name, channels, reset, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3389,7 +3474,7 @@ class Session(_SessionBase):
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("channels=" + pp.pformat(channels))
         param_list.append("reset=" + pp.pformat(reset))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True

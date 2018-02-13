@@ -21,6 +21,8 @@ from build.helper.documentation_helper import get_rst_header_snippet  # noqa: F4
 from build.helper.documentation_helper import rep_cap_method_desc_rst  # noqa: F401
 from build.helper.documentation_helper import square_up_tables  # noqa: F401
 
+from build.helper.documentation_snippets import rep_cap_attr_desc  # noqa: F401
+
 from build.helper.helper import camelcase_to_snakecase  # noqa: F401
 from build.helper.helper import get_array_type_for_api_type  # noqa: F401
 from build.helper.helper import get_numpy_type_for_api_type  # noqa: F401
