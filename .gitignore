@@ -8,5 +8,7 @@ bin/
 commands.log
 .vscode/launch.json
 .vscode/settings.json
-
+tools/sfp/wxglade_out.py
+tools/sfp/#~wxg.autosave*
+tools/sfp/*.bak
 
