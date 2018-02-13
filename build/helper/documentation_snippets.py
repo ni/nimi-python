@@ -13,18 +13,18 @@ This property can use repeated capabilities (usually channels). If set or get di
 You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session instance, and calling set/get value on the result.:
 
-    session['0,1'].{0} = var
-    var = session['0,1'].{0}
+    session.channels['0,1'].{0} = var
+    var = session.channels['0,1'].{0}
 '''
 
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
 .. code:: python
 
-    session['0,1'].{1}({2})
+    session.channels['0,1'].{1}({2})
 '''
 
 rep_cap_method_desc_docstring = rep_cap_method_desc + '''
-    session['0,1'].{1}({2})
+    session.channels['0,1'].{1}({2})
 '''
 
 func_note_text = '''
