@@ -45,8 +45,8 @@ attributes_codegen_method = {
 }
 
 attributes_converters = {
-    1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },
+    1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_api_converter_type': 'datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT
 }
 
 
