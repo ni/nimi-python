@@ -726,6 +726,29 @@ Enums used in NI-FGEN
 
 
 
+.. py:data:: P2PAddressType
+
+    .. py:attribute:: P2PAddressType.PHYSICAL
+
+
+
+        Physical
+
+        
+
+
+
+    .. py:attribute:: P2PAddressType.VIRTUAL
+
+
+
+        Physical
+
+        
+
+
+
+
 .. py:data:: ReadyForStartEventActiveLevel
 
     .. py:attribute:: ReadyForStartEventActiveLevel.HIGH

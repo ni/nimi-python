@@ -24,6 +24,17 @@ class AcquisitionType(Enum):
     '''
 
 
+class AddressType(Enum):
+    PHYSICAL = 0
+    '''
+    Physical address.
+    '''
+    VIRTUAL = 1
+    '''
+    Virtual address.
+    '''
+
+
 class ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
@@ -204,6 +215,17 @@ class FlexFIRAntialiasFilterType(Enum):
     _8_TAP_HANNING = 3
     '''
     This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+    '''
+
+
+class NotificationType(Enum):
+    NEVER = 0
+    '''
+    Never send notification.
+    '''
+    DONE = 1
+    '''
+    Notify when digitizer acquisition is done.
     '''
 
 

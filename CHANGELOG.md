@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-FGEN
     * #### Added
+        * P2P Attributes added back
         * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
             * `markers` repeated capability
@@ -62,6 +63,7 @@ All notable changes to this project will be documented in this file.
             * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 * ### NI-SCOPE
     * #### Added
+        * P2P Attributes added back
         * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
     * #### Changed

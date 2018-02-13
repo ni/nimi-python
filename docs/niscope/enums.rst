@@ -55,6 +55,29 @@ Enums used in NI-SCOPE
 
 
 
+.. py:data:: AddressType
+
+    .. py:attribute:: AddressType.PHYSICAL
+
+
+
+        Physical address.
+
+        
+
+
+
+    .. py:attribute:: AddressType.VIRTUAL
+
+
+
+        Virtual address.
+
+        
+
+
+
+
 .. py:data:: ClearableMeasurement
 
     .. py:attribute:: ClearableMeasurement.ALL_MEASUREMENTS
@@ -592,6 +615,29 @@ Enums used in NI-SCOPE
 
 
         This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
+
+        
+
+
+
+
+.. py:data:: NotificationType
+
+    .. py:attribute:: NotificationType.NEVER
+
+
+
+        Never send notification.
+
+        
+
+
+
+    .. py:attribute:: NotificationType.DONE
+
+
+
+        Notify when digitizer acquisition is done.
 
         
 

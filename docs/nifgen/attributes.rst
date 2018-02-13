@@ -18,8 +18,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -41,8 +39,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -66,8 +62,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -89,8 +83,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -115,8 +107,6 @@ nifgen.Session properties
     +----------------+------------------+
     | Channel Based  | False            |
     +----------------+------------------+
-    | Resettable     | Yes              |
-    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -138,8 +128,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -165,8 +153,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -189,8 +175,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -217,8 +201,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -241,8 +223,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -267,8 +247,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -291,8 +269,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -323,8 +299,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -347,8 +321,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -370,8 +342,6 @@ nifgen.Session properties
     | Permissions    | read only     |
     +----------------+---------------+
     | Channel Based  | False         |
-    +----------------+---------------+
-    | Resettable     | No            |
     +----------------+---------------+
 
     .. tip::
@@ -396,8 +366,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -420,8 +388,6 @@ nifgen.Session properties
     +----------------+-------------------+
     | Channel Based  | False             |
     +----------------+-------------------+
-    | Resettable     | Yes               |
-    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -443,8 +409,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -469,8 +433,6 @@ nifgen.Session properties
     +----------------+-----------------+
     | Channel Based  | False           |
     +----------------+-----------------+
-    | Resettable     | Yes             |
-    +----------------+-----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -492,8 +454,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -517,8 +477,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -540,8 +498,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -565,8 +521,6 @@ nifgen.Session properties
     +----------------+------------------------------------+
     | Channel Based  | False                              |
     +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -588,8 +542,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -613,8 +565,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -636,8 +586,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -662,8 +610,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -694,8 +640,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -717,8 +661,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -742,8 +684,6 @@ nifgen.Session properties
     +----------------+------------------------------------+
     | Channel Based  | False                              |
     +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -765,8 +705,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -790,8 +728,6 @@ nifgen.Session properties
     +----------------+-----------------------------------+
     | Channel Based  | False                             |
     +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -813,8 +749,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -838,8 +772,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -861,8 +793,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -887,8 +817,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -910,8 +838,6 @@ nifgen.Session properties
     | Permissions    | read-write                                 |
     +----------------+--------------------------------------------+
     | Channel Based  | False                                      |
-    +----------------+--------------------------------------------+
-    | Resettable     | Yes                                        |
     +----------------+--------------------------------------------+
 
     .. tip::
@@ -935,8 +861,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -958,8 +882,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -983,8 +905,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1006,8 +926,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1031,8 +949,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1054,8 +970,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1079,8 +993,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1102,8 +1014,6 @@ nifgen.Session properties
     | Permissions    | read-write                |
     +----------------+---------------------------+
     | Channel Based  | False                     |
-    +----------------+---------------------------+
-    | Resettable     | Yes                       |
     +----------------+---------------------------+
 
     .. tip::
@@ -1127,8 +1037,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1150,8 +1058,6 @@ nifgen.Session properties
     | Permissions    | read-write                 |
     +----------------+----------------------------+
     | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | Yes                        |
     +----------------+----------------------------+
 
     .. tip::
@@ -1175,8 +1081,6 @@ nifgen.Session properties
     +----------------+-------------------------------+
     | Channel Based  | False                         |
     +----------------+-------------------------------+
-    | Resettable     | Yes                           |
-    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1198,8 +1102,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1223,8 +1125,6 @@ nifgen.Session properties
     +----------------+------------------------------+
     | Channel Based  | False                        |
     +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1246,8 +1146,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1271,8 +1169,6 @@ nifgen.Session properties
     +----------------+--------------------------------+
     | Channel Based  | False                          |
     +----------------+--------------------------------+
-    | Resettable     | Yes                            |
-    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1295,8 +1191,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  |         0 |
     +----------------+-----------+
-    | Resettable     |         0 |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1317,8 +1211,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1342,8 +1234,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1365,8 +1255,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1390,8 +1278,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1413,8 +1299,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1443,8 +1327,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1468,8 +1350,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1491,8 +1371,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1516,8 +1394,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1539,8 +1415,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1564,8 +1438,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1587,8 +1459,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1613,8 +1483,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1636,8 +1504,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1661,8 +1527,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1684,8 +1548,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1716,8 +1578,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1745,8 +1605,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1770,8 +1628,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1800,8 +1656,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1832,8 +1686,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1860,8 +1712,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1891,8 +1741,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1926,8 +1774,6 @@ nifgen.Session properties
     +----------------+----------------+
     | Channel Based  | False          |
     +----------------+----------------+
-    | Resettable     | No             |
-    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1949,8 +1795,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -1974,8 +1818,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1997,8 +1839,6 @@ nifgen.Session properties
     | Permissions    | read-write         |
     +----------------+--------------------+
     | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | Yes                |
     +----------------+--------------------+
 
     .. tip::
@@ -2022,8 +1862,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2046,8 +1884,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  |         0 |
     +----------------+-----------+
-    | Resettable     |         0 |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2068,8 +1904,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2093,8 +1927,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2116,8 +1948,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2143,8 +1973,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2169,8 +1997,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2192,8 +2018,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -2218,8 +2042,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2241,8 +2063,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2266,8 +2086,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2290,8 +2108,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2313,8 +2129,6 @@ nifgen.Session properties
     | Permissions    | read-write                  |
     +----------------+-----------------------------+
     | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | Yes                         |
     +----------------+-----------------------------+
 
     .. tip::
@@ -2339,8 +2153,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2362,8 +2174,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2387,8 +2197,6 @@ nifgen.Session properties
     +----------------+---------------------------------+
     | Channel Based  | False                           |
     +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2410,8 +2218,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -2435,8 +2241,6 @@ nifgen.Session properties
     +----------------+--------------------------------+
     | Channel Based  | False                          |
     +----------------+--------------------------------+
-    | Resettable     | Yes                            |
-    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2458,8 +2262,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -2483,8 +2285,6 @@ nifgen.Session properties
     +----------------+----------------------------------+
     | Channel Based  | False                            |
     +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2506,8 +2306,6 @@ nifgen.Session properties
     | Permissions    | read-write                          |
     +----------------+-------------------------------------+
     | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
     +----------------+-------------------------------------+
 
     .. tip::
@@ -2531,8 +2329,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2554,8 +2350,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2579,8 +2373,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2602,8 +2394,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2627,8 +2417,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2650,8 +2438,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2675,8 +2461,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2698,8 +2482,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2723,8 +2505,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2746,8 +2526,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2771,8 +2549,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2794,8 +2570,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2819,8 +2593,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2843,8 +2615,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2866,8 +2636,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2892,8 +2660,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2915,8 +2681,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -2940,8 +2704,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2963,8 +2725,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -2988,8 +2748,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3011,8 +2769,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3036,8 +2792,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3059,8 +2813,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3085,8 +2837,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3108,8 +2858,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3133,8 +2881,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3156,8 +2902,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3181,8 +2925,6 @@ nifgen.Session properties
     +----------------+--------------------------+
     | Channel Based  | False                    |
     +----------------+--------------------------+
-    | Resettable     | Yes                      |
-    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3204,8 +2946,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3230,8 +2970,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3253,8 +2991,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3278,8 +3014,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3301,8 +3035,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3326,8 +3058,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3349,8 +3079,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3374,8 +3102,6 @@ nifgen.Session properties
     +----------------+------------------+
     | Channel Based  | False            |
     +----------------+------------------+
-    | Resettable     | Yes              |
-    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3398,8 +3124,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3421,8 +3145,6 @@ nifgen.Session properties
     | Permissions    | read-write    |
     +----------------+---------------+
     | Channel Based  | False         |
-    +----------------+---------------+
-    | Resettable     | Yes           |
     +----------------+---------------+
 
     .. tip::
@@ -3447,8 +3169,6 @@ nifgen.Session properties
     +----------------+---------------------------------+
     | Channel Based  | False                           |
     +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3472,8 +3192,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3495,8 +3213,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3520,8 +3236,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3543,8 +3257,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3568,8 +3280,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3592,8 +3302,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3615,8 +3323,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3644,14 +3350,253 @@ nifgen.Session properties
     +----------------+------------------+
     | Channel Based  | False            |
     +----------------+------------------+
-    | Resettable     | No               |
-    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Output:Output Mode**
             - C Attribute: **NIFGEN_ATTR_OUTPUT_MODE**
+
+.. py:attribute:: p2p_data_transfer_permission_address
+
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | write only |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address**
+            - C Attribute: **NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_ADDRESS**
+
+.. py:attribute:: p2p_data_transfer_permission_address_type
+
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.P2PAddressType |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type**
+            - C Attribute: **NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_ADDRESS_TYPE**
+
+.. py:attribute:: p2p_data_transfer_permission_initial_credits
+
+    Specifies the initial amount of data, in samples per channel, that the writer peer is allowed to transfer over the bus  into the configured endpoint when the peer-to-peer data stream is enabled. If you do not set this property and the endpoint  is empty, credits equal to the full size of the endpoint are issued to the writer peer. If data has been written to the  endpoint using the niFgen_WriteP2PEndpointI16 function prior to enabling the stream, credits equal to the remaining space  available in the endpoint are issued to the writer peer. This attribute is coerced up by NI-FGEN to 8-byte boundaries.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Initial Credits**
+            - C Attribute: **NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS**
+
+.. py:attribute:: p2p_data_transfer_permission_interval
+
+    Specifies the interval, in samples per channel, at which the signal generator issues credits to allow the writer  peer to transfer data over the bus into the configured endpoint. Refer to the Flow Control topic in the NI Signal  Generators Help for more information. This attribute is coerced up by NI-FGEN to the nearest 128 byte boundary.  This attribute is endpoint based.
+    Default Value: 1,024 samples per channel
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Interval**
+            - C Attribute: **NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INTERVAL**
+
+.. py:attribute:: p2p_destination_channels
+
+    Specifies which channels will be written to by a peer-to-peer endpoint. If multiple channels are specified,  data is deinterleaved to each channel. The default value is an empty string, which means all configured channels.  Channels are configured using the niFgen_ConfigureChannels function. This attribute is endpoint based.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | str        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Destination Channels**
+            - C Attribute: **NIFGEN_ATTR_P2P_DESTINATION_CHANNELS**
+
+.. py:attribute:: p2p_done_notification_address
+
+    Specifies the signal generator address to which the writer peer sends the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_VALUE.  This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
+
+
+
+    .. note:: You can use this attribute only when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address**
+            - C Attribute: **NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS**
+
+.. py:attribute:: p2p_done_notification_address_type
+
+    Specifies the address type of the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS attribute. This attribute is endpoint based.  Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.P2PAddressType |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address Type**
+            - C Attribute: **NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS_TYPE**
+
+.. py:attribute:: p2p_done_notification_value
+
+    Specifies the value the writer peer should write to the address specified by the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS  attribute. This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Value**
+            - C Attribute: **NIFGEN_ATTR_P2P_DONE_NOTIFICATION_VALUE**
+
+.. py:attribute:: p2p_enabled
+
+    Specifies whether the signal generator reads data from the peer-to-peer endpoint, as opposed to  the typical method of reading it from the onboard memory. This attribute is endpoint based.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:P2P Enabled**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENABLED**
+
+.. py:attribute:: p2p_endpoint_count
+
+    Returns the number of peer-to-peer FIFO endpoints supported by the device.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Endpoint Count**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_COUNT**
 
 .. py:attribute:: p2p_endpoint_fullness_start_trigger_level
 
@@ -3668,14 +3613,179 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Triggers:Start:P2P Endpoint Fullness:Level**
             - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL**
+
+.. py:attribute:: p2p_endpoint_size
+
+    Returns the size, in samples per channel, of the peer-to-peer endpoint. This attribute is endpoint based.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Endpoint Size**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_SIZE**
+
+.. py:attribute:: p2p_endpoint_window_address
+
+    Specifies the signal generator address where endpoint data is sent by the writer peer. The type of this address is specified  by the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS_TYPE attribute. This attribute is endpoint based.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS**
+
+.. py:attribute:: p2p_endpoint_window_address_type
+
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.P2PAddressType |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address Type**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS_TYPE**
+
+.. py:attribute:: p2p_endpoint_window_size
+
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
+
+
+
+    .. note:: You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Size**
+            - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_SIZE**
+
+.. py:attribute:: p2p_manual_configuration_enabled
+
+    Enables/disables manual configuration for a peer-to-peer endpoint. Enabling this attribute disables  automatic NI-P2P stream manager flow control and Done Notifications.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Manual:Manual Configuration Enabled**
+            - C Attribute: **NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED**
+
+.. py:attribute:: p2p_most_space_available_in_endpoint
+
+    Returns the largest number of samples per channel available in the endpoint since this attribute was last read.  Use this attribute to determine how much endpoint space to use as a buffer against PCI Express bus traffic  latencies by reading the attribute and keeping track of the largest value returned. This attribute is endpoint based.
+    If you wish to minimize the latency for data to move through the endpoint and be generated by the signal generator,  use the NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS attribute to grant fewer initial credits than the  default of the entire endpoint size.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Most Space Available In Endpoint**
+            - C Attribute: **NIFGEN_ATTR_P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT**
+
+.. py:attribute:: p2p_space_available_in_endpoint
+
+    Returns the current space available in the endpoint in samples per channel. You can use this attribute when  priming the endpoint with initial data through the niFgen_WriteP2PEndpointI16 function to determine how many  samples you can write. You can also use this attribute to characterize the performance and measure the latency  of the peer-to-peer stream as data moves across the bus. This attribute is endpoint based.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Arbitrary Waveform:Peer-to-Peer:Space Available In Endpoint**
+            - C Attribute: **NIFGEN_ATTR_P2P_SPACE_AVAILABLE_IN_ENDPOINT**
 
 .. py:attribute:: pci_dma_optimizations_enabled
 
@@ -3693,8 +3803,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3718,8 +3826,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3741,8 +3847,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3768,8 +3872,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3791,8 +3893,6 @@ nifgen.Session properties
     | Permissions    | read-write                          |
     +----------------+-------------------------------------+
     | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
     +----------------+-------------------------------------+
 
     .. tip::
@@ -3816,8 +3916,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3839,8 +3937,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3865,8 +3961,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3896,8 +3990,6 @@ nifgen.Session properties
     +----------------+----------------------------+
     | Channel Based  | False                      |
     +----------------+----------------------------+
-    | Resettable     | Yes                        |
-    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3919,8 +4011,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -3949,8 +4039,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3977,8 +4065,6 @@ nifgen.Session properties
     | Permissions    | read-write              |
     +----------------+-------------------------+
     | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | Yes                     |
     +----------------+-------------------------+
 
     .. tip::
@@ -4007,8 +4093,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4036,8 +4120,6 @@ nifgen.Session properties
     +----------------+---------------------------------+
     | Channel Based  | False                           |
     +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4064,8 +4146,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4087,8 +4167,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4112,8 +4190,6 @@ nifgen.Session properties
     +----------------+-------------------------+
     | Channel Based  | False                   |
     +----------------+-------------------------+
-    | Resettable     | Yes                     |
-    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4135,8 +4211,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4162,8 +4236,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4185,8 +4257,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4210,8 +4280,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4233,8 +4301,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4258,8 +4324,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4281,8 +4345,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4307,8 +4369,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4332,8 +4392,6 @@ nifgen.Session properties
     +----------------+------------------------------+
     | Channel Based  | False                        |
     +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4355,8 +4413,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4380,8 +4436,6 @@ nifgen.Session properties
     +----------------+-------------------------------+
     | Channel Based  | False                         |
     +----------------+-------------------------------+
-    | Resettable     | Yes                           |
-    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4403,8 +4457,6 @@ nifgen.Session properties
     | Permissions    | read-write                       |
     +----------------+----------------------------------+
     | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
     +----------------+----------------------------------+
 
     .. tip::
@@ -4428,8 +4480,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4451,8 +4501,6 @@ nifgen.Session properties
     | Permissions    | read-write                      |
     +----------------+---------------------------------+
     | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
     +----------------+---------------------------------+
 
     .. tip::
@@ -4476,8 +4524,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4500,8 +4546,6 @@ nifgen.Session properties
     +----------------+-----------------------------------+
     | Channel Based  | False                             |
     +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4523,8 +4567,6 @@ nifgen.Session properties
     | Permissions    | read-write             |
     +----------------+------------------------+
     | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | Yes                    |
     +----------------+------------------------+
 
     .. tip::
@@ -4550,8 +4592,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4574,8 +4614,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -4600,8 +4638,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4623,8 +4659,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -4648,8 +4682,6 @@ nifgen.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4671,8 +4703,6 @@ nifgen.Session properties
     | Permissions    | read-write                  |
     +----------------+-----------------------------+
     | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
     +----------------+-----------------------------+
 
     .. tip::
@@ -4697,8 +4727,6 @@ nifgen.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4720,8 +4748,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -4745,8 +4771,6 @@ nifgen.Session properties
     +----------------+-----------------------------+
     | Channel Based  | False                       |
     +----------------+-----------------------------+
-    | Resettable     | Yes                         |
-    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4768,8 +4792,6 @@ nifgen.Session properties
     | Permissions    | read-write        |
     +----------------+-------------------+
     | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | No                |
     +----------------+-------------------+
 
     .. tip::
@@ -4795,8 +4817,6 @@ nifgen.Session properties
     +----------------+---------------------+
     | Channel Based  | False               |
     +----------------+---------------------+
-    | Resettable     | Yes                 |
-    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4818,8 +4838,6 @@ nifgen.Session properties
     | Permissions    | read-write              |
     +----------------+-------------------------+
     | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
     +----------------+-------------------------+
 
     .. tip::
@@ -4843,8 +4861,6 @@ nifgen.Session properties
     +----------------+--------------------+
     | Channel Based  | False              |
     +----------------+--------------------+
-    | Resettable     | Yes                |
-    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4866,8 +4882,6 @@ nifgen.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
     +----------------+------------+
 
     .. tip::
@@ -4891,8 +4905,6 @@ nifgen.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::

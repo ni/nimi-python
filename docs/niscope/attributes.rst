@@ -18,8 +18,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -42,8 +40,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -77,8 +73,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -121,8 +115,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -164,8 +156,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -188,8 +178,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -211,8 +199,6 @@ niscope.Session properties
     | Permissions    | read-write            |
     +----------------+-----------------------+
     | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
     +----------------+-----------------------+
 
     .. tip::
@@ -249,8 +235,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -272,8 +256,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -297,8 +279,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -321,8 +301,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -344,8 +322,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -382,8 +358,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -409,8 +383,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -435,8 +407,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -459,8 +429,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -500,8 +468,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -537,8 +503,6 @@ niscope.Session properties
     +----------------+-----------------------------+
     | Channel Based  | True                        |
     +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -560,8 +524,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -585,8 +547,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -609,8 +569,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -632,8 +590,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -671,8 +627,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -698,8 +652,6 @@ niscope.Session properties
     | Permissions    | read-write               |
     +----------------+--------------------------+
     | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
     +----------------+--------------------------+
 
     .. tip::
@@ -737,8 +689,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -774,8 +724,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -813,8 +761,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -850,8 +796,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -889,8 +833,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -913,8 +855,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -936,8 +876,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -976,8 +914,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1015,8 +951,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1053,8 +987,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1079,8 +1011,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  |         0 |
     +----------------+-----------+
-    | Resettable     |         0 |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1104,8 +1034,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1145,8 +1073,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1170,8 +1096,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1194,8 +1118,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1224,8 +1146,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1262,8 +1182,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1299,8 +1217,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | True      |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1323,8 +1239,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1349,8 +1263,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1374,8 +1286,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1397,8 +1307,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1423,8 +1331,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1447,8 +1353,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1473,8 +1377,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1497,8 +1399,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1523,8 +1423,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1547,8 +1445,6 @@ niscope.Session properties
     | Permissions    | read-write            |
     +----------------+-----------------------+
     | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
     +----------------+-----------------------+
 
     .. tip::
@@ -1586,8 +1482,6 @@ niscope.Session properties
     +----------------+----------------------------------+
     | Channel Based  | True                             |
     +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1614,8 +1508,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1638,8 +1530,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1661,8 +1551,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1692,8 +1580,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1715,8 +1601,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1741,8 +1625,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1764,8 +1646,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1790,8 +1670,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1814,8 +1692,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1840,8 +1716,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1865,8 +1739,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1888,8 +1760,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1926,8 +1796,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1949,8 +1817,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1974,8 +1840,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1998,8 +1862,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2021,8 +1883,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2054,8 +1914,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2079,8 +1937,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2103,8 +1959,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2126,8 +1980,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2171,8 +2023,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2195,8 +2045,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2218,8 +2066,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -2257,8 +2103,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2294,8 +2138,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2333,8 +2175,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2370,8 +2210,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2409,8 +2247,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2446,8 +2282,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2485,8 +2319,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2509,8 +2341,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2535,8 +2365,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2559,8 +2387,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2598,8 +2424,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2627,8 +2451,6 @@ niscope.Session properties
     +----------------+------------------+
     | Channel Based  | False            |
     +----------------+------------------+
-    | Resettable     | No               |
-    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2651,8 +2473,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2697,8 +2517,6 @@ niscope.Session properties
     +----------------+-----------------------+
     | Channel Based  | True                  |
     +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2734,8 +2552,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2773,8 +2589,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2811,8 +2625,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2848,8 +2660,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2890,8 +2700,6 @@ niscope.Session properties
     +----------------+------------------------+
     | Channel Based  | True                   |
     +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2914,8 +2722,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -2955,8 +2761,6 @@ niscope.Session properties
     +----------------+---------------------+
     | Channel Based  | True                |
     +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2979,8 +2783,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3018,8 +2820,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3042,8 +2842,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3081,8 +2879,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3119,8 +2915,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3143,8 +2937,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3169,8 +2961,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3193,8 +2983,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3220,8 +3008,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3244,8 +3030,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3267,8 +3051,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -3296,8 +3078,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3319,8 +3099,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3349,14 +3127,528 @@ niscope.Session properties
     +----------------+------------------------------+
     | Channel Based  | False                        |
     +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Onboard Signal Processing:OSP Overflow Error Reporting**
             - C Attribute: **NISCOPE_ATTR_OVERFLOW_ERROR_REPORTING**
+
+.. py:attribute:: p2p_advanced_attributes_enabled
+
+    Enables/disables the advanced attributes for a peer-to-peer endpoint. These attributes cannot be used if  an endpoint is being configured by NI-P2P, or a resource reservation error will occur.
+    Default Value: VI_FALSE
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Manual Configuration Enabled**
+            - C Attribute: **NISCOPE_ATTR_P2P_ADVANCED_ATTRIBUTES_ENABLED**
+
+.. py:attribute:: p2p_channels_to_stream
+
+    Specifies which channels are written to a peer-to-peer endpoint. If multiple channels are specified,  the channels are interleaved by sample.
+    Default Value: 0
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | str        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Channels to Stream**
+            - C Attribute: **NISCOPE_ATTR_P2P_CHANNELS_TO_STREAM**
+
+.. py:attribute:: p2p_data_trans_permission_addr
+
+    Returns the address of a hardware register used to grant permisison for the peer-to-peer endpoint to write  data to another peer.. The type of this address is determined by the  NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR_TYPE attribute. Permission is granted in bytes and the register  is additive.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address**
+            - C Attribute: **NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR**
+
+.. py:attribute:: p2p_data_trans_permission_addr_type
+
+    Specifies the type of address returned from the NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR attribute.
+    Valid Values:
+    Physical (0)
+    Virtual (1)
+    Default Value: Virtual
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.AddressType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type**
+            - C Attribute: **NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR_TYPE**
+
+.. py:attribute:: p2p_destination_window_addr
+
+    Specifies the destination for data written by the peer-to-peer endpoint. The type of this address is specified  by the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR_TYPE attribute.
+    Valid Values: A valid, non-NULL physical or virtual address.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Configuration:Destination Window Address**
+            - C Attribute: **NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR**
+
+.. py:attribute:: p2p_destination_window_addr_type
+
+    Specifies the type of the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR attribute.
+    Valid Values:
+    Physical (0)
+    Virtual (1)
+    Default Value: Virtual
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.AddressType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Configuration:Destination Window Address Type**
+            - C Attribute: **NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR_TYPE**
+
+.. py:attribute:: p2p_destination_window_size
+
+    Specifies the size, in bytes, of the destination window determined by the  NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS and the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS_TYPE  attributes.
+    Valid Values: Any non-NULL value.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Configuration:Destination Window Size**
+            - C Attribute: **NISCOPE_ATTR_P2P_DESTINATION_WINDOW_SIZE**
+
+.. py:attribute:: p2p_enabled
+
+    Specifies whether the digitizer writes data to the peer-to-peer endpoint.
+    Default Value: VI_FALSE
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:P2P Enabled**
+            - C Attribute: **NISCOPE_ATTR_P2P_ENABLED**
+
+.. py:attribute:: p2p_endpoint_overflow
+
+    Returns TRUE if the endpoint FIFO has overflowed. Reset the endpoint to clear the overflow condition.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | bool      |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Endpoint Overflow**
+            - C Attribute: **NISCOPE_ATTR_P2P_ENDPOINT_OVERFLOW**
+
+.. py:attribute:: p2p_endpoint_size
+
+    Returns the size in samples of the peer-to-peer endpoint.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Endpoint Size**
+            - C Attribute: **NISCOPE_ATTR_P2P_ENDPOINT_SIZE**
+
+.. py:attribute:: p2p_fifo_endpoint_count
+
+    Returns the number of FIFO-based peer-to-peer endpoints this device supports.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:FIFO Endpoint Count**
+            - C Attribute: **NISCOPE_ATTR_P2P_FIFO_ENDPOINT_COUNT**
+
+.. py:attribute:: p2p_most_samples_avail_in_endpoint
+
+    Returns the most number of samples available to stream from a peer-to-peer endpoint since the last  time this attribute was read.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Most Samples Available in Endpoint**
+            - C Attribute: **NISCOPE_ATTR_P2P_MOST_SAMPLES_AVAIL_IN_ENDPOINT**
+
+.. py:attribute:: p2p_notify_message_push_addr
+
+    Specifies the address to Push Message push Value to on the event specified by the  NISCOPE_ATTR_P2P_NOTIFY_PUSH_MESSAGE_ON attribute.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Notification:Message Push Address**
+            - C Attribute: **NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR**
+
+.. py:attribute:: p2p_notify_message_push_addr_type
+
+    Specifies the type of the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute.
+    Valid Values:
+    Physical (0)
+    Virtual (1)
+    Default Value: Virtual
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.AddressType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Notification:Message Push Address Type**
+            - C Attribute: **NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR_TYPE**
+
+.. py:attribute:: p2p_notify_message_push_value
+
+    Specifies the value to be pushed to the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute on the event specified  by the NISCOPE_ATTR_MESSAGE_PUSH_ON attribute.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | int        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Notification:Message Push Value**
+            - C Attribute: **NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_VALUE**
+
+.. py:attribute:: p2p_notify_push_message_on
+
+    Specifies the event to push the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_VALUE attribute to the  NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute. Setting this attribute to NISCOPE_VAL_NOTIFY_DONE pushes  the message when the acquisition has completed.
+    Valid Values:
+    Never (0)
+    Done (1)
+    Default Value: Done
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.NotificationType |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Manual:Notification:Push Message On**
+            - C Attribute: **NISCOPE_ATTR_P2P_NOTIFY_PUSH_MESSAGE_ON**
+
+.. py:attribute:: p2p_onboard_memory_enabled
+
+    Specifies whether the digitizer writes data to onboard memory when a peer-to-peer endpoint is enabled.
+    Default Value: VI_FALSE
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Onboard Memory Enabled**
+            - C Attribute: **NISCOPE_ATTR_P2P_ONBOARD_MEMORY_ENABLED**
+
+.. py:attribute:: p2p_samples_avail_in_endpoint
+
+    Returns the current number of samples available to stream from a peer-to-peer endpoint.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Samples Available In Endpoint**
+            - C Attribute: **NISCOPE_ATTR_P2P_SAMPLES_AVAIL_IN_ENDPOINT**
+
+.. py:attribute:: p2p_samples_transferred
+
+    Returns the number of samples transferred through the peer-to-peer endpoint since it was last reset.
+
+
+
+    .. note:: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Samples Transferred**
+            - C Attribute: **NISCOPE_ATTR_P2P_SAMPLES_TRANSFERRED**
 
 .. py:attribute:: pll_lock_status
 
@@ -3372,8 +3664,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -3397,8 +3687,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3420,8 +3708,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  |          0 |
-    +----------------+------------+
-    | Resettable     |          0 |
     +----------------+------------+
 
     .. tip::
@@ -3459,8 +3745,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3483,8 +3767,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3509,8 +3791,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3533,8 +3813,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3559,8 +3837,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3583,8 +3859,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3606,8 +3880,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3632,8 +3904,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3655,8 +3925,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3680,8 +3948,6 @@ niscope.Session properties
     +----------------+----------------------------------+
     | Channel Based  | False                            |
     +----------------+----------------------------------+
-    | Resettable     | No                               |
-    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3703,8 +3969,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3728,8 +3992,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3751,8 +4013,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -3779,8 +4039,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3802,8 +4060,6 @@ niscope.Session properties
     | Permissions    | read-write      |
     +----------------+-----------------+
     | Channel Based  | False           |
-    +----------------+-----------------+
-    | Resettable     | No              |
     +----------------+-----------------+
 
     .. tip::
@@ -3827,14 +4083,40 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Horizontal:RIS Num Avg**
             - C Attribute: **NISCOPE_ATTR_RIS_NUM_AVERAGES**
+
+.. py:attribute:: samples_transferred_per_record
+
+    Returns the number of samples transferred per record when you set the
+    `Stream Relative To <pniScope_P2PStreamRelativeTo.html>`__ property to
+    **Reference Trigger** or **Sync Trigger**.
+
+
+
+    .. note:: This property is only supported on NI 5160/5162 digitizers.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Peer-to-Peer:Samples Transferred Per Record**
+            - C Attribute: **NISCOPE_ATTR_SAMPLES_TRANSFERRED_PER_RECORD**
 
 .. py:attribute:: sample_clock_timebase_multiplier
 
@@ -3864,8 +4146,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3887,8 +4167,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -3912,8 +4190,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3935,8 +4211,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -3960,8 +4234,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3983,8 +4255,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4009,8 +4279,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4032,8 +4300,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -4057,8 +4323,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4080,8 +4344,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4105,8 +4367,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4129,8 +4389,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4152,8 +4410,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4192,8 +4448,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4221,8 +4475,6 @@ niscope.Session properties
     +----------------+-----------------------------+
     | Channel Based  | False                       |
     +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4244,8 +4496,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4269,8 +4519,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4292,8 +4540,6 @@ niscope.Session properties
     | Permissions    | read-write            |
     +----------------+-----------------------+
     | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
     +----------------+-----------------------+
 
     .. tip::
@@ -4318,8 +4564,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4341,8 +4585,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4366,8 +4608,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4389,8 +4629,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4415,8 +4653,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4438,8 +4674,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -4466,8 +4700,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4491,8 +4723,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -4519,8 +4749,6 @@ niscope.Session properties
     +----------------+-----------------------+
     | Channel Based  | False                 |
     +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4542,8 +4770,6 @@ niscope.Session properties
     | Permissions    | read-write         |
     +----------------+--------------------+
     | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
     +----------------+--------------------+
 
     .. tip::
@@ -4567,8 +4793,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4590,8 +4814,6 @@ niscope.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -4615,8 +4837,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4639,8 +4859,6 @@ niscope.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4662,8 +4880,6 @@ niscope.Session properties
     | Permissions    | read-write        |
     +----------------+-------------------+
     | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | No                |
     +----------------+-------------------+
 
     .. tip::
@@ -4692,8 +4908,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -4724,8 +4938,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4747,8 +4959,6 @@ niscope.Session properties
     | Permissions    | read-write              |
     +----------------+-------------------------+
     | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
     +----------------+-------------------------+
 
     .. tip::
@@ -4772,8 +4982,6 @@ niscope.Session properties
     +----------------+-------------------------+
     | Channel Based  | False                   |
     +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4796,8 +5004,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4819,8 +5025,6 @@ niscope.Session properties
     | Permissions    | read-write          |
     +----------------+---------------------+
     | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
     +----------------+---------------------+
 
     .. tip::
@@ -4857,8 +5061,6 @@ niscope.Session properties
     +----------------+-------------------------+
     | Channel Based  | True                    |
     +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4893,8 +5095,6 @@ niscope.Session properties
     | Permissions    | read-write             |
     +----------------+------------------------+
     | Channel Based  | True                   |
-    +----------------+------------------------+
-    | Resettable     | No                     |
     +----------------+------------------------+
 
     .. tip::
@@ -4933,8 +5133,6 @@ niscope.Session properties
     +----------------+------------+
     | Channel Based  | True       |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4970,8 +5168,6 @@ niscope.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::

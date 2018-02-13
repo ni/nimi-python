@@ -16,7 +16,6 @@ enums_additional_enums = {
     'BoolEnableDisableTIS': {},  # Delete because boolean values only
 }
 
-
 # We explicitly don't start with enums_ since we don't want this merged. These will replace the existing enums
 # Once NI Internal CAR #675174 is fixed, this can be removed along with the overwrite code in __init__.py
 # (TODO): Jaleel: Update dictionary_name after issue#624

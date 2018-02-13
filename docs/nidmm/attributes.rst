@@ -19,8 +19,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -44,8 +42,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -67,8 +63,6 @@ nidmm.Session properties
     | Permissions    | read-write           |
     +----------------+----------------------+
     | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
     +----------------+----------------------+
 
     .. tip::
@@ -95,8 +89,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -120,8 +112,6 @@ nidmm.Session properties
     +----------------+-------------------------+
     | Channel Based  | False                   |
     +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -143,8 +133,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -169,8 +157,6 @@ nidmm.Session properties
     +----------------+----------------+
     | Channel Based  | False          |
     +----------------+----------------+
-    | Resettable     | No             |
-    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -192,8 +178,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -218,8 +202,6 @@ nidmm.Session properties
     +----------------+-----------------------------+
     | Channel Based  | False                       |
     +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -242,8 +224,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -265,8 +245,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -291,8 +269,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -314,8 +290,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -339,8 +313,6 @@ nidmm.Session properties
     | Permissions    | read-write             |
     +----------------+------------------------+
     | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
     +----------------+------------------------+
 
     .. tip::
@@ -366,8 +338,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -390,8 +360,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -413,8 +381,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -440,8 +406,6 @@ nidmm.Session properties
     +----------------+----------------+
     | Channel Based  | False          |
     +----------------+----------------+
-    | Resettable     | No             |
-    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -463,8 +427,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -489,8 +451,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -512,8 +472,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -537,8 +495,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -561,8 +517,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -584,8 +538,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -612,8 +564,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -635,8 +585,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -660,8 +608,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -683,8 +629,6 @@ nidmm.Session properties
     | Permissions    | read-write               |
     +----------------+--------------------------+
     | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
     +----------------+--------------------------+
 
     .. tip::
@@ -708,8 +652,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -731,8 +673,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -758,8 +698,6 @@ nidmm.Session properties
     +----------------+-------------------------------+
     | Channel Based  | False                         |
     +----------------+-------------------------------+
-    | Resettable     | No                            |
-    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -781,8 +719,6 @@ nidmm.Session properties
     | Permissions    | read-write                        |
     +----------------+-----------------------------------+
     | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | No                                |
     +----------------+-----------------------------------+
 
     .. tip::
@@ -807,8 +743,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -830,8 +764,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -856,8 +788,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -881,8 +811,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -904,8 +832,6 @@ nidmm.Session properties
     | Permissions    | read-write          |
     +----------------+---------------------+
     | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
     +----------------+---------------------+
 
     .. tip::
@@ -929,8 +855,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -961,8 +885,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -985,8 +907,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1011,8 +931,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1035,8 +953,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1061,8 +977,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1084,8 +998,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1113,8 +1025,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1138,8 +1048,6 @@ nidmm.Session properties
     +----------------+---------------------+
     | Channel Based  | False               |
     +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1162,8 +1070,6 @@ nidmm.Session properties
     +----------------+-----------------------+
     | Channel Based  | False                 |
     +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1185,8 +1091,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1211,8 +1115,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1235,8 +1137,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1261,8 +1161,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1285,8 +1183,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1312,8 +1208,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1335,8 +1229,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1360,8 +1252,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1383,8 +1273,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1408,8 +1296,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1431,8 +1317,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1456,8 +1340,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1479,8 +1361,6 @@ nidmm.Session properties
     | Permissions    | read only |
     +----------------+-----------+
     | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
     +----------------+-----------+
 
     .. tip::
@@ -1504,8 +1384,6 @@ nidmm.Session properties
     +----------------+-----------+
     | Channel Based  | False     |
     +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1527,8 +1405,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1552,8 +1428,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1576,8 +1450,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1599,8 +1471,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1625,8 +1495,6 @@ nidmm.Session properties
     +----------------+---------------+
     | Channel Based  | False         |
     +----------------+---------------+
-    | Resettable     | No            |
-    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1648,8 +1516,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1673,8 +1539,6 @@ nidmm.Session properties
     +----------------+-----------------------------------------+
     | Channel Based  | False                                   |
     +----------------+-----------------------------------------+
-    | Resettable     | No                                      |
-    +----------------+-----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1696,8 +1560,6 @@ nidmm.Session properties
     | Permissions    | read-write             |
     +----------------+------------------------+
     | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
     +----------------+------------------------+
 
     .. tip::
@@ -1721,8 +1583,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1745,8 +1605,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1768,8 +1626,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1794,8 +1650,6 @@ nidmm.Session properties
     +----------------+----------------------+
     | Channel Based  | False                |
     +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1817,8 +1671,6 @@ nidmm.Session properties
     | Permissions    | read-write           |
     +----------------+----------------------+
     | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
     +----------------+----------------------+
 
     .. tip::
@@ -1844,8 +1696,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::
@@ -1875,8 +1725,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1898,8 +1746,6 @@ nidmm.Session properties
     | Permissions    | read-write         |
     +----------------+--------------------+
     | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
     +----------------+--------------------+
 
     .. tip::
@@ -1925,8 +1771,6 @@ nidmm.Session properties
     +----------------+---------------------+
     | Channel Based  | False               |
     +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1948,8 +1792,6 @@ nidmm.Session properties
     | Permissions    | read-write             |
     +----------------+------------------------+
     | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
     +----------------+------------------------+
 
     .. tip::
@@ -1973,8 +1815,6 @@ nidmm.Session properties
     +----------------+------------+
     | Channel Based  | False      |
     +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1996,8 +1836,6 @@ nidmm.Session properties
     | Permissions    | read-write |
     +----------------+------------+
     | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
     +----------------+------------+
 
     .. tip::

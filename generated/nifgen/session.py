@@ -897,10 +897,121 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
     '''
+    p2p_data_transfer_permission_address = attributes.AttributeViInt64(1150398)
+    '''Type: int
+
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_data_transfer_permission_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150399)
+    '''Type: enums.P2PAddressType
+
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_data_transfer_permission_initial_credits = attributes.AttributeViInt32(1150408)
+    '''Type: int
+
+    Specifies the initial amount of data, in samples per channel, that the writer peer is allowed to transfer over the bus  into the configured endpoint when the peer-to-peer data stream is enabled. If you do not set this property and the endpoint  is empty, credits equal to the full size of the endpoint are issued to the writer peer. If data has been written to the  endpoint using the niFgen_WriteP2PEndpointI16 function prior to enabling the stream, credits equal to the remaining space  available in the endpoint are issued to the writer peer. This attribute is coerced up by NI-FGEN to 8-byte boundaries.
+    '''
+    p2p_data_transfer_permission_interval = attributes.AttributeViInt32(1150400)
+    '''Type: int
+
+    Specifies the interval, in samples per channel, at which the signal generator issues credits to allow the writer  peer to transfer data over the bus into the configured endpoint. Refer to the Flow Control topic in the NI Signal  Generators Help for more information. This attribute is coerced up by NI-FGEN to the nearest 128 byte boundary.  This attribute is endpoint based.
+    Default Value: 1,024 samples per channel
+    '''
+    p2p_destination_channels = attributes.AttributeViString(1150392)
+    '''Type: str
+
+    Specifies which channels will be written to by a peer-to-peer endpoint. If multiple channels are specified,  data is deinterleaved to each channel. The default value is an empty string, which means all configured channels.  Channels are configured using the niFgen_ConfigureChannels function. This attribute is endpoint based.
+    '''
+    p2p_done_notification_address = attributes.AttributeViInt64(1150405)
+    '''Type: int
+
+    Specifies the signal generator address to which the writer peer sends the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_VALUE.  This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
+
+    Note:
+    You can use this attribute only when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_done_notification_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150406)
+    '''Type: enums.P2PAddressType
+
+    Specifies the address type of the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS attribute. This attribute is endpoint based.  Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_done_notification_value = attributes.AttributeViInt32(1150407)
+    '''Type: int
+
+    Specifies the value the writer peer should write to the address specified by the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS  attribute. This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_enabled = attributes.AttributeViBoolean(1150391)
+    '''Type: bool
+
+    Specifies whether the signal generator reads data from the peer-to-peer endpoint, as opposed to  the typical method of reading it from the onboard memory. This attribute is endpoint based.
+    '''
+    p2p_endpoint_count = attributes.AttributeViInt32(1150396)
+    '''Type: int
+
+    Returns the number of peer-to-peer FIFO endpoints supported by the device.
+    '''
     p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410)
     '''Type: int
 
     Specifies the Endpoint threshold for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to P2P Endpoint Fullness.
+    '''
+    p2p_endpoint_size = attributes.AttributeViInt32(1150393)
+    '''Type: int
+
+    Returns the size, in samples per channel, of the peer-to-peer endpoint. This attribute is endpoint based.
+    '''
+    p2p_endpoint_window_address = attributes.AttributeViInt64(1150401)
+    '''Type: int
+
+    Specifies the signal generator address where endpoint data is sent by the writer peer. The type of this address is specified  by the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS_TYPE attribute. This attribute is endpoint based.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_endpoint_window_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150402)
+    '''Type: enums.P2PAddressType
+
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_endpoint_window_size = attributes.AttributeViInt32(1150403)
+    '''Type: int
+
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
+
+    Note:
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
+    '''
+    p2p_manual_configuration_enabled = attributes.AttributeViBoolean(1150397)
+    '''Type: bool
+
+    Enables/disables manual configuration for a peer-to-peer endpoint. Enabling this attribute disables  automatic NI-P2P stream manager flow control and Done Notifications.
+    '''
+    p2p_most_space_available_in_endpoint = attributes.AttributeViInt32(1150395)
+    '''Type: int
+
+    Returns the largest number of samples per channel available in the endpoint since this attribute was last read.  Use this attribute to determine how much endpoint space to use as a buffer against PCI Express bus traffic  latencies by reading the attribute and keeping track of the largest value returned. This attribute is endpoint based.
+    If you wish to minimize the latency for data to move through the endpoint and be generated by the signal generator,  use the NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS attribute to grant fewer initial credits than the  default of the entire endpoint size.
+    '''
+    p2p_space_available_in_endpoint = attributes.AttributeViInt32(1150394)
+    '''Type: int
+
+    Returns the current space available in the endpoint in samples per channel. You can use this attribute when  priming the endpoint with initial data through the niFgen_WriteP2PEndpointI16 function to determine how many  samples you can write. You can also use this attribute to characterize the performance and measure the latency  of the peer-to-peer stream as data moves across the bus. This attribute is endpoint based.
     '''
     pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362)
     '''Type: bool
