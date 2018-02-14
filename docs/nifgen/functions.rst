@@ -30,7 +30,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].allocate_named_waveform(waveform_name, waveform_size)
+            session.channels['0,1'].allocate_named_waveform(waveform_name, waveform_size)
 
 
     :param waveform_name:
@@ -73,7 +73,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].allocate_waveform(waveform_size)
+            session.channels['0,1'].allocate_waveform(waveform_size)
 
 
     :param waveform_size:
@@ -236,7 +236,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].clear_user_standard_waveform()
+            session.channels['0,1'].clear_user_standard_waveform()
 
 
 .. py:method:: commit()
@@ -285,7 +285,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_arb_sequence(sequence_handle, gain, offset)
+            session.channels['0,1'].configure_arb_sequence(sequence_handle, gain, offset)
 
 
     :param sequence_handle:
@@ -364,7 +364,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_arb_waveform(waveform_handle, gain, offset)
+            session.channels['0,1'].configure_arb_waveform(waveform_handle, gain, offset)
 
 
     :param waveform_handle:
@@ -456,7 +456,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
+            session.channels['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
 
     :param coefficients_array:
@@ -760,7 +760,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+            session.channels['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
 
     :param frequency_list_handle:
@@ -869,7 +869,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
+            session.channels['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
 
     :param waveform:
@@ -1330,7 +1330,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_from_file_f64(file_name, byte_order)
+            session.channels['0,1'].create_waveform_from_file_f64(file_name, byte_order)
 
 
     :param file_name:
@@ -1401,7 +1401,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_from_file_i16(file_name, byte_order)
+            session.channels['0,1'].create_waveform_from_file_i16(file_name, byte_order)
 
 
     :param file_name:
@@ -1468,7 +1468,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform(waveform_data_array)
+            session.channels['0,1'].create_waveform(waveform_data_array)
 
 
     :param waveform_data_array:
@@ -1518,7 +1518,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].define_user_standard_waveform(waveform_data_array)
+            session.channels['0,1'].define_user_standard_waveform(waveform_data_array)
 
 
     :param waveform_data_array:
@@ -1556,7 +1556,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].delete_named_waveform(waveform_name)
+            session.channels['0,1'].delete_named_waveform(waveform_name)
 
 
     :param waveform_name:
@@ -1583,7 +1583,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].delete_script(script_name)
+            session.channels['0,1'].delete_script(script_name)
 
 
     :param script_name:
@@ -1878,7 +1878,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].get_fir_filter_coefficients()
+            session.channels['0,1'].get_fir_filter_coefficients()
 
 
     :rtype: int
@@ -2430,7 +2430,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+            session.channels['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
 
     :param waveform_name:
@@ -2497,7 +2497,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
+            session.channels['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
 
     :param waveform_handle:
@@ -2572,7 +2572,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_script(script)
+            session.channels['0,1'].write_script(script)
 
 
     :param script:
@@ -2607,7 +2607,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_waveform(waveform_name_or_handle, data)
+            session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
 
 
     :param waveform_name_or_handle:
