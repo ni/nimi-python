@@ -54,6 +54,59 @@ def convert_timedelta_to_microseconds(value, library_type):
     return _convert_timedelta(value, library_type, 1000000)
 
 
+# This converter is not called from the normal codegen path for function. Instead it is
+# call from init and is a special case. Also, it just returns a string rather than a ctype object
+def convert_init_with_options_dictionary(values, encoding):
+    if type(values) is str:
+        init_with_options_string = values
+    else:
+        good_keys = {
+            'rangecheck': 'RangeCheck',
+            'queryinstrstatus': 'QueryInstrStatus',
+            'cache': 'Cache',
+            'simulate': 'Simulate',
+            'recordcoercions': 'RecordCoercions',
+            'interchangecheck': 'InterchangeCheck',
+            'driversetup': 'DriverSetup',
+            'range_check': 'RangeCheck',
+            'query_instr_status': 'QueryInstrStatus',
+            'record_coercions': 'RecordCoercions',
+            'interchange_check': 'InterchangeCheck',
+            'driver_setup': 'DriverSetup',
+        }
+        init_with_options = []
+        for k in sorted(values.keys()):
+            value = None
+            if k.lower() in good_keys and not good_keys[k.lower()] == 'DriverSetup':
+                value = good_keys[k.lower()] + ('=1' if values[k] is True else '=0')
+            elif k.lower() in good_keys and good_keys[k.lower()] == 'DriverSetup':
+                if not isinstance(values[k], dict):
+                    raise TypeError('DriverSetup must be a dictionary')
+                value = 'DriverSetup=' + (';'.join([key + ':' + values[k][key] for key in sorted(values[k])]))
+            else:
+                value = k + ('=1' if values[k] is True else '=0')
+
+            init_with_options.append(value)
+
+        init_with_options_string = ','.join(init_with_options)
+
+    return init_with_options_string
+
+
+# Let's run some tests
+def test_convert_init_with_options_dictionary():
+    assert convert_init_with_options_dictionary('', 'ascii') == ''
+    assert convert_init_with_options_dictionary('Simulate=1', 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': True, }, 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': False, }, 'ascii') == 'Simulate=0'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}, 'ascii') == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+    assert convert_init_with_options_dictionary({'simulate': True, 'cache': False}, 'ascii') == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'simulate': True, 'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+
+
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
     test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), visatype.ViReal64)

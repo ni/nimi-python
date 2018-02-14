@@ -89,6 +89,12 @@ functions_remove_from_python_api = {
     'FetchMultiple':                { 'parameters': { 7: { 'use_in_python_api': False, }, }, },
 }
 
+# Converted parameters
+functions_converters = {
+    'InitializeWithChannels':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                   'python_api_converter_type': 'dict', }, }, },
+}
+
 # Default values for method parameters
 functions_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '""', },

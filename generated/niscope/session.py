@@ -3352,14 +3352,144 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+        '''An NI-SCOPE session to a National Instruments Digitizer.
+
+        Performs the following initialization actions:
+
+        -  Creates a new IVI instrument driver and optionally sets the initial
+           state of the following session properties: Range Check, Cache,
+           Simulate, Record Value Coercions
+        -  Opens a session to the specified device using the interface and
+           address you specify for the **resourceName**
+        -  Resets the digitizer to a known state if **resetDevice** is set to
+           VI_TRUE
+        -  Queries the instrument ID and verifies that it is valid for this
+           instrument driver if the **IDQuery** is set to VI_TRUE
+        -  Returns an instrument handle that you use to identify the instrument
+           in all subsequent instrument driver function calls
+
+        Args:
+            resource_name (str): Caution:
+                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
+                However, all IVI names, such as logical names, are case-sensitive. If
+                you use logical names, driver session names, or virtual names in your
+                program, you must make sure that the name you use matches the name in
+                the IVI Configuration Store file exactly, without any variations in the
+                case of the characters.
+
+                | Specifies the resource name of the device to initialize
+
+                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
+                the device number assigned by MAX, as shown in Example 1.
+
+                For NI-DAQmx devices, the syntax is just the device name specified in
+                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
+                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
+                right-clicking on the name in MAX and entering a new name.
+
+                An alternate syntax for NI-DAQmx devices consists of DAQ::NI-DAQmx
+                device name, as shown in Example 3. This naming convention allows for
+                the use of an NI-DAQmx device in an application that was originally
+                designed for a Traditional NI-DAQ device. For example, if the
+                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
+                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
+
+                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
+                exists with that same name, the NI-DAQmx device is matched first.
+
+                You can also pass in the name of an IVI logical name or an IVI virtual
+                name configured with the IVI Configuration utility, as shown in Example
+                5. A logical name identifies a particular virtual instrument. A virtual
+                name identifies a specific device and specifies the initial settings for
+                the session.
+
+                +---------+--------------------------------------+--------------------------------------------------+
+                | Example | Device Type                          | Syntax                                           |
+                +=========+======================================+==================================================+
+                | 1       | Traditional NI-DAQ device            | DAQ::1 (1 = device number)                       |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 2       | NI-DAQmx device                      | myDAQmxDevice (myDAQmxDevice = device name)      |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 3       | NI-DAQmx device                      | DAQ::myDAQmxDevice (myDAQmxDevice = device name) |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 4       | NI-DAQmx device                      | DAQ::2 (2 = device name)                         |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 5       | IVI logical name or IVI virtual name | myLogicalName (myLogicalName = name)             |
+                +---------+--------------------------------------+--------------------------------------------------+
+
+            id_query (bool): Specify whether to perform an ID query.
+
+                When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
+                device you initialize is a type that it supports.
+
+                When you set this parameter to VI_FALSE, the function initializes the
+                device without performing an ID query.
+
+                **Defined Values**
+
+                | VI_TRUE—Perform ID query
+                | VI_FALSE—Skip ID query
+
+                **Default Value**: VI_TRUE
+
+            reset_device (bool): Specify whether to reset the device during the initialization process.
+
+                Default Value: VI_TRUE
+
+                **Defined Values**
+
+                VI_TRUE (1)—Reset device
+
+                VI_FALSE (0)—Do not reset device
+
+                Note:
+                For the NI 5112, repeatedly resetting the device may cause excessive
+                wear on the electromechanical relays. Refer to `NI 5112
+                Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
+                for recommended programming practices.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (niscope.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3369,7 +3499,7 @@ class Session(_SessionBase):
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
@@ -4261,12 +4391,6 @@ class Session(_SessionBase):
                 Option String: DriverSetup = Accessory:Dev1
 
                 Refer to the example niScope EX External Amplifier for more information.
-
-                +---------+
-                | No Data |
-                +---------+
-                | No Data |
-                +---------+
 
 
         Returns:

@@ -126,6 +126,17 @@ functions_numpy = {
     'FetchWaveform':                        { 'parameters': { 3: { 'numpy': True, }, }, },
 }
 
+# Don't need ID_Query in the python API since they don't do anything
+functions_remove_parameters_from_python = {
+    'InitWithOptions':                      { 'parameters': { 1: { 'use_in_python_api': False, }, }, },
+}
+
+# Converted parameters
+functions_converters = {
+    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                   'python_api_converter_type': 'dict', }, }, },
+}
+
 # Parameter that need to be array.array
 functions_array = {
     'ReadMultiPoint':                      { 'parameters': { 3: { 'use_array': True, }, }, },
