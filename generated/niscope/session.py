@@ -123,8 +123,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     accessory_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].accessory_gain = var
-        var = session['0,1'].accessory_gain
+        session.channels['0,1'].accessory_gain = var
+        var = session.channels['0,1'].accessory_gain
     '''
     accessory_offset = attributes.AttributeViReal64(1150280)
     '''Type: float
@@ -144,8 +144,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     accessory_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].accessory_offset = var
-        var = session['0,1'].accessory_offset
+        session.channels['0,1'].accessory_offset = var
+        var = session.channels['0,1'].accessory_offset
     '''
     acquisition_start_time = attributes.AttributeViReal64TimeDeltaSeconds(1250109)
     '''Type: float
@@ -206,8 +206,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     bandpass_filter_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].bandpass_filter_enabled = var
-        var = session['0,1'].bandpass_filter_enabled
+        session.channels['0,1'].bandpass_filter_enabled = var
+        var = session.channels['0,1'].bandpass_filter_enabled
     '''
     binary_sample_width = attributes.AttributeViInt32(1150005)
     '''Type: int
@@ -244,8 +244,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     channel_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].channel_enabled = var
-        var = session['0,1'].channel_enabled
+        session.channels['0,1'].channel_enabled = var
+        var = session.channels['0,1'].channel_enabled
     '''
     channel_terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
     '''Type: enums.TerminalConfiguration
@@ -258,8 +258,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     channel_terminal_configuration.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].channel_terminal_configuration = var
-        var = session['0,1'].channel_terminal_configuration
+        session.channels['0,1'].channel_terminal_configuration = var
+        var = session.channels['0,1'].channel_terminal_configuration
     '''
     clock_sync_pulse_source = attributes.AttributeViString(1150007)
     '''Type: str
@@ -293,8 +293,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_center_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_center_frequency = var
-        var = session['0,1'].ddc_center_frequency
+        session.channels['0,1'].ddc_center_frequency = var
+        var = session.channels['0,1'].ddc_center_frequency
     '''
     ddc_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
     '''Type: enums.DataProcessingMode
@@ -317,8 +317,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_enabled = var
-        var = session['0,1'].ddc_enabled
+        session.channels['0,1'].ddc_enabled = var
+        var = session.channels['0,1'].ddc_enabled
     '''
     ddc_frequency_translation_enabled = attributes.AttributeViBoolean(1150302)
     '''Type: bool
@@ -332,8 +332,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_enabled = var
-        var = session['0,1'].ddc_frequency_translation_enabled
+        session.channels['0,1'].ddc_frequency_translation_enabled = var
+        var = session.channels['0,1'].ddc_frequency_translation_enabled
     '''
     ddc_frequency_translation_phase_i = attributes.AttributeViReal64(1150305)
     '''Type: float
@@ -347,8 +347,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_phase_i.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_phase_i = var
-        var = session['0,1'].ddc_frequency_translation_phase_i
+        session.channels['0,1'].ddc_frequency_translation_phase_i = var
+        var = session.channels['0,1'].ddc_frequency_translation_phase_i
     '''
     ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
     '''Type: float
@@ -362,8 +362,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_phase_q.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_phase_q = var
-        var = session['0,1'].ddc_frequency_translation_phase_q
+        session.channels['0,1'].ddc_frequency_translation_phase_q = var
+        var = session.channels['0,1'].ddc_frequency_translation_phase_q
     '''
     ddc_q_source = attributes.AttributeViString(1150310)
     '''Type: str
@@ -377,8 +377,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_q_source.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_q_source = var
-        var = session['0,1'].ddc_q_source
+        session.channels['0,1'].ddc_q_source = var
+        var = session.channels['0,1'].ddc_q_source
     '''
     device_number = attributes.AttributeViInt32(1150076)
     '''Type: int
@@ -403,8 +403,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     digital_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].digital_gain = var
-        var = session['0,1'].digital_gain
+        session.channels['0,1'].digital_gain = var
+        var = session.channels['0,1'].digital_gain
     '''
     digital_offset = attributes.AttributeViReal64(1150308)
     '''Type: float
@@ -419,8 +419,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     digital_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].digital_offset = var
-        var = session['0,1'].digital_offset
+        session.channels['0,1'].digital_offset = var
+        var = session.channels['0,1'].digital_offset
     '''
     dither_enabled = attributes.AttributeViBoolean(1150319)
     '''Type: bool
@@ -434,8 +434,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     dither_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].dither_enabled = var
-        var = session['0,1'].dither_enabled
+        session.channels['0,1'].dither_enabled = var
+        var = session.channels['0,1'].dither_enabled
     '''
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
@@ -466,8 +466,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     enable_time_interleaved_sampling.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].enable_time_interleaved_sampling = var
-        var = session['0,1'].enable_time_interleaved_sampling
+        session.channels['0,1'].enable_time_interleaved_sampling = var
+        var = session.channels['0,1'].enable_time_interleaved_sampling
     '''
     end_of_acquisition_event_output_terminal = attributes.AttributeViString(1150101)
     '''Type: str
@@ -503,8 +503,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     equalization_filter_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].equalization_filter_enabled = var
-        var = session['0,1'].equalization_filter_enabled
+        session.channels['0,1'].equalization_filter_enabled = var
+        var = session.channels['0,1'].equalization_filter_enabled
     '''
     equalization_num_coefficients = attributes.AttributeViInt32(1150312)
     '''Type: int
@@ -517,8 +517,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     equalization_num_coefficients.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].equalization_num_coefficients = var
-        var = session['0,1'].equalization_num_coefficients
+        session.channels['0,1'].equalization_num_coefficients = var
+        var = session.channels['0,1'].equalization_num_coefficients
     '''
     exported_advance_trigger_output_terminal = attributes.AttributeViString(1150109)
     '''Type: str
@@ -591,8 +591,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     flex_fir_antialias_filter_type.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].flex_fir_antialias_filter_type = var
-        var = session['0,1'].flex_fir_antialias_filter_type
+        session.channels['0,1'].flex_fir_antialias_filter_type = var
+        var = session.channels['0,1'].flex_fir_antialias_filter_type
     '''
     fpga_bitfile_path = attributes.AttributeViString(1150375)
     '''Type: str
@@ -678,8 +678,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     input_impedance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].input_impedance = var
-        var = session['0,1'].input_impedance
+        session.channels['0,1'].input_impedance = var
+        var = session.channels['0,1'].input_impedance
     '''
     instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''Type: str
@@ -746,8 +746,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_input_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_input_frequency = var
-        var = session['0,1'].max_input_frequency
+        session.channels['0,1'].max_input_frequency = var
+        var = session.channels['0,1'].max_input_frequency
     '''
     max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''Type: float
@@ -771,8 +771,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_array_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_array_gain = var
-        var = session['0,1'].meas_array_gain
+        session.channels['0,1'].meas_array_gain = var
+        var = session.channels['0,1'].meas_array_gain
     '''
     meas_array_offset = attributes.AttributeViReal64(1150044)
     '''Type: float
@@ -786,8 +786,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_array_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_array_offset = var
-        var = session['0,1'].meas_array_offset
+        session.channels['0,1'].meas_array_offset = var
+        var = session.channels['0,1'].meas_array_offset
     '''
     meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
     '''Type: float
@@ -801,8 +801,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_high_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_high_ref_level = var
-        var = session['0,1'].meas_chan_high_ref_level
+        session.channels['0,1'].meas_chan_high_ref_level = var
+        var = session.channels['0,1'].meas_chan_high_ref_level
     '''
     meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
     '''Type: float
@@ -816,8 +816,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_low_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_low_ref_level = var
-        var = session['0,1'].meas_chan_low_ref_level
+        session.channels['0,1'].meas_chan_low_ref_level = var
+        var = session.channels['0,1'].meas_chan_low_ref_level
     '''
     meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
     '''Type: float
@@ -831,8 +831,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_mid_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_mid_ref_level = var
-        var = session['0,1'].meas_chan_mid_ref_level
+        session.channels['0,1'].meas_chan_mid_ref_level = var
+        var = session.channels['0,1'].meas_chan_mid_ref_level
     '''
     meas_filter_center_freq = attributes.AttributeViReal64(1150032)
     '''Type: float
@@ -846,8 +846,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_center_freq.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_center_freq = var
-        var = session['0,1'].meas_filter_center_freq
+        session.channels['0,1'].meas_filter_center_freq = var
+        var = session.channels['0,1'].meas_filter_center_freq
     '''
     meas_filter_cutoff_freq = attributes.AttributeViReal64(1150031)
     '''Type: float
@@ -861,8 +861,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_cutoff_freq.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_cutoff_freq = var
-        var = session['0,1'].meas_filter_cutoff_freq
+        session.channels['0,1'].meas_filter_cutoff_freq = var
+        var = session.channels['0,1'].meas_filter_cutoff_freq
     '''
     meas_filter_order = attributes.AttributeViInt32(1150036)
     '''Type: int
@@ -894,8 +894,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_transient_waveform_percent.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_transient_waveform_percent = var
-        var = session['0,1'].meas_filter_transient_waveform_percent
+        session.channels['0,1'].meas_filter_transient_waveform_percent = var
+        var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
     meas_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
@@ -932,8 +932,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_fir_filter_window.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_fir_filter_window = var
-        var = session['0,1'].meas_fir_filter_window
+        session.channels['0,1'].meas_fir_filter_window = var
+        var = session.channels['0,1'].meas_fir_filter_window
     '''
     meas_hysteresis_percent = attributes.AttributeViReal64(1150019)
     '''Type: float
@@ -947,8 +947,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_hysteresis_percent.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_hysteresis_percent = var
-        var = session['0,1'].meas_hysteresis_percent
+        session.channels['0,1'].meas_hysteresis_percent = var
+        var = session.channels['0,1'].meas_hysteresis_percent
     '''
     meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
     '''Type: float
@@ -962,8 +962,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_interpolation_sampling_factor.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_interpolation_sampling_factor = var
-        var = session['0,1'].meas_interpolation_sampling_factor
+        session.channels['0,1'].meas_interpolation_sampling_factor = var
+        var = session.channels['0,1'].meas_interpolation_sampling_factor
     '''
     meas_last_acq_histogram_size = attributes.AttributeViInt32(1150020)
     '''Type: int
@@ -977,8 +977,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_last_acq_histogram_size.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_last_acq_histogram_size = var
-        var = session['0,1'].meas_last_acq_histogram_size
+        session.channels['0,1'].meas_last_acq_histogram_size = var
+        var = session.channels['0,1'].meas_last_acq_histogram_size
     '''
     meas_other_channel = attributes.AttributeViString(1150018)
     '''Type: str
@@ -992,8 +992,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_other_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_other_channel = var
-        var = session['0,1'].meas_other_channel
+        session.channels['0,1'].meas_other_channel = var
+        var = session.channels['0,1'].meas_other_channel
     '''
     meas_percentage_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
@@ -1010,8 +1010,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_percentage_method.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_percentage_method = var
-        var = session['0,1'].meas_percentage_method
+        session.channels['0,1'].meas_percentage_method = var
+        var = session.channels['0,1'].meas_percentage_method
     '''
     meas_polynomial_interpolation_order = attributes.AttributeViInt32(1150029)
     '''Type: int
@@ -1033,8 +1033,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_ref_level_units.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_ref_level_units = var
-        var = session['0,1'].meas_ref_level_units
+        session.channels['0,1'].meas_ref_level_units = var
+        var = session.channels['0,1'].meas_ref_level_units
     '''
     meas_time_histogram_high_time = attributes.AttributeViReal64(1150028)
     '''Type: float
@@ -1054,8 +1054,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_high_volts.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_high_volts = var
-        var = session['0,1'].meas_time_histogram_high_volts
+        session.channels['0,1'].meas_time_histogram_high_volts = var
+        var = session.channels['0,1'].meas_time_histogram_high_volts
     '''
     meas_time_histogram_low_time = attributes.AttributeViReal64(1150027)
     '''Type: float
@@ -1075,8 +1075,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_low_volts.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_low_volts = var
-        var = session['0,1'].meas_time_histogram_low_volts
+        session.channels['0,1'].meas_time_histogram_low_volts = var
+        var = session.channels['0,1'].meas_time_histogram_low_volts
     '''
     meas_time_histogram_size = attributes.AttributeViInt32(1150024)
     '''Type: int
@@ -1090,8 +1090,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_size.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_size = var
-        var = session['0,1'].meas_time_histogram_size
+        session.channels['0,1'].meas_time_histogram_size = var
+        var = session.channels['0,1'].meas_time_histogram_size
     '''
     meas_voltage_histogram_high_volts = attributes.AttributeViReal64(1150023)
     '''Type: float
@@ -1174,8 +1174,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     probe_attenuation.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].probe_attenuation = var
-        var = session['0,1'].probe_attenuation
+        session.channels['0,1'].probe_attenuation = var
+        var = session.channels['0,1'].probe_attenuation
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
@@ -1352,8 +1352,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     start_to_ref_trigger_holdoff.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].start_to_ref_trigger_holdoff = var
-        var = session['0,1'].start_to_ref_trigger_holdoff
+        session.channels['0,1'].start_to_ref_trigger_holdoff = var
+        var = session.channels['0,1'].start_to_ref_trigger_holdoff
     '''
     stream_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
     '''Type: enums.StreamingPositionType
@@ -1517,8 +1517,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     tv_trigger_signal_format.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].tv_trigger_signal_format = var
-        var = session['0,1'].tv_trigger_signal_format
+        session.channels['0,1'].tv_trigger_signal_format = var
+        var = session.channels['0,1'].tv_trigger_signal_format
     '''
     vertical_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
     '''Type: enums.VerticalCoupling
@@ -1531,8 +1531,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_coupling.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_coupling = var
-        var = session['0,1'].vertical_coupling
+        session.channels['0,1'].vertical_coupling = var
+        var = session.channels['0,1'].vertical_coupling
     '''
     vertical_offset = attributes.AttributeViReal64(1250002)
     '''Type: float
@@ -1547,8 +1547,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_offset = var
-        var = session['0,1'].vertical_offset
+        session.channels['0,1'].vertical_offset = var
+        var = session.channels['0,1'].vertical_offset
     '''
     vertical_range = attributes.AttributeViReal64(1250001)
     '''Type: float
@@ -1562,8 +1562,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_range = var
-        var = session['0,1'].vertical_range
+        session.channels['0,1'].vertical_range = var
+        var = session.channels['0,1'].vertical_range
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -1621,7 +1621,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._actual_num_wfms()
+            session.channels['0,1']._actual_num_wfms()
 
         Returns:
             num_wfms (int): Returns the number of records times the number of channels; if you are
@@ -1665,7 +1665,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1708,7 +1708,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -1739,7 +1739,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
+            session.channels['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
             input_impedance (float): The input impedance for the channel; NI-SCOPE sets
@@ -1774,7 +1774,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_equalization_filter_coefficients(coefficients)
+            session.channels['0,1'].configure_equalization_filter_coefficients(coefficients)
 
         Args:
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
@@ -1807,7 +1807,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+            session.channels['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
             range (float): Specifies the vertical range Refer to vertical_range for
@@ -1865,7 +1865,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1966,7 +1966,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2092,7 +2092,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2218,7 +2218,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2344,7 +2344,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2468,7 +2468,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2570,7 +2570,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2644,7 +2644,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2707,7 +2707,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2778,7 +2778,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2815,7 +2815,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2851,7 +2851,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2899,7 +2899,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2933,7 +2933,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
 
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
@@ -3021,7 +3021,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -3120,7 +3120,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -3182,7 +3182,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3231,7 +3231,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3280,7 +3280,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3331,7 +3331,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3352,14 +3352,144 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to a National Instruments Digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+        '''An NI-SCOPE session to a National Instruments Digitizer.
+
+        Performs the following initialization actions:
+
+        -  Creates a new IVI instrument driver and optionally sets the initial
+           state of the following session properties: Range Check, Cache,
+           Simulate, Record Value Coercions
+        -  Opens a session to the specified device using the interface and
+           address you specify for the **resourceName**
+        -  Resets the digitizer to a known state if **resetDevice** is set to
+           VI_TRUE
+        -  Queries the instrument ID and verifies that it is valid for this
+           instrument driver if the **IDQuery** is set to VI_TRUE
+        -  Returns an instrument handle that you use to identify the instrument
+           in all subsequent instrument driver function calls
+
+        Args:
+            resource_name (str): Caution:
+                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
+                However, all IVI names, such as logical names, are case-sensitive. If
+                you use logical names, driver session names, or virtual names in your
+                program, you must make sure that the name you use matches the name in
+                the IVI Configuration Store file exactly, without any variations in the
+                case of the characters.
+
+                | Specifies the resource name of the device to initialize
+
+                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
+                the device number assigned by MAX, as shown in Example 1.
+
+                For NI-DAQmx devices, the syntax is just the device name specified in
+                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
+                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
+                right-clicking on the name in MAX and entering a new name.
+
+                An alternate syntax for NI-DAQmx devices consists of DAQ::NI-DAQmx
+                device name, as shown in Example 3. This naming convention allows for
+                the use of an NI-DAQmx device in an application that was originally
+                designed for a Traditional NI-DAQ device. For example, if the
+                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
+                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
+
+                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
+                exists with that same name, the NI-DAQmx device is matched first.
+
+                You can also pass in the name of an IVI logical name or an IVI virtual
+                name configured with the IVI Configuration utility, as shown in Example
+                5. A logical name identifies a particular virtual instrument. A virtual
+                name identifies a specific device and specifies the initial settings for
+                the session.
+
+                +---------+--------------------------------------+--------------------------------------------------+
+                | Example | Device Type                          | Syntax                                           |
+                +=========+======================================+==================================================+
+                | 1       | Traditional NI-DAQ device            | DAQ::1 (1 = device number)                       |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 2       | NI-DAQmx device                      | myDAQmxDevice (myDAQmxDevice = device name)      |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 3       | NI-DAQmx device                      | DAQ::myDAQmxDevice (myDAQmxDevice = device name) |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 4       | NI-DAQmx device                      | DAQ::2 (2 = device name)                         |
+                +---------+--------------------------------------+--------------------------------------------------+
+                | 5       | IVI logical name or IVI virtual name | myLogicalName (myLogicalName = name)             |
+                +---------+--------------------------------------+--------------------------------------------------+
+
+            id_query (bool): Specify whether to perform an ID query.
+
+                When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
+                device you initialize is a type that it supports.
+
+                When you set this parameter to VI_FALSE, the function initializes the
+                device without performing an ID query.
+
+                **Defined Values**
+
+                | VI_TRUE—Perform ID query
+                | VI_FALSE—Skip ID query
+
+                **Default Value**: VI_TRUE
+
+            reset_device (bool): Specify whether to reset the device during the initialization process.
+
+                Default Value: VI_TRUE
+
+                **Defined Values**
+
+                VI_TRUE (1)—Reset device
+
+                VI_FALSE (0)—Do not reset device
+
+                Note:
+                For the NI 5112, repeatedly resetting the device may cause excessive
+                wear on the electromechanical relays. Refer to `NI 5112
+                Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
+                for recommended programming practices.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (niscope.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3369,7 +3499,7 @@ class Session(_SessionBase):
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
@@ -4261,12 +4391,6 @@ class Session(_SessionBase):
                 Option String: DriverSetup = Accessory:Dev1
 
                 Refer to the example niScope EX External Amplifier for more information.
-
-                +---------+
-                | No Data |
-                +---------+
-                | No Data |
-                +---------+
 
 
         Returns:

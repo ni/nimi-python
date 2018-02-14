@@ -86,7 +86,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+            session.channels['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
 
     :param aperture_time:
@@ -734,7 +734,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
 
     :param count:
@@ -820,7 +820,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].get_channel_name(index)
+            session.channels['0,1'].get_channel_name(index)
 
 
     :param index:
@@ -972,7 +972,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].measure(measurement_type)
+            session.channels['0,1'].measure(measurement_type)
 
 
     :param measurement_type:
@@ -1019,7 +1019,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].measure_multiple()
+            session.channels['0,1'].measure_multiple()
 
 
     :rtype: tuple (voltage_measurements, current_measurements)
@@ -1084,7 +1084,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_in_compliance()
+            session.channels['0,1'].query_in_compliance()
 
 
     :rtype: bool
@@ -1112,7 +1112,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_max_current_limit(voltage_level)
+            session.channels['0,1'].query_max_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1152,7 +1152,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_max_voltage_level(current_limit)
+            session.channels['0,1'].query_max_voltage_level(current_limit)
 
 
     :param current_limit:
@@ -1192,7 +1192,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_min_current_limit(voltage_level)
+            session.channels['0,1'].query_min_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1236,7 +1236,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_output_state(output_state)
+            session.channels['0,1'].query_output_state(output_state)
 
 
     :param output_state:
@@ -1445,7 +1445,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].set_sequence(source_delays, values=None)
+            session.channels['0,1'].set_sequence(source_delays, values=None)
 
 
     :param source_delays:

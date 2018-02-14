@@ -90,8 +90,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     active_advanced_sequence.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].active_advanced_sequence = var
-        var = session['0,1'].active_advanced_sequence
+        session.channels['0,1'].active_advanced_sequence = var
+        var = session.channels['0,1'].active_advanced_sequence
     '''
     active_advanced_sequence_step = attributes.AttributeViInt64(1150075)
     '''Type: int
@@ -106,8 +106,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     active_advanced_sequence_step.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].active_advanced_sequence_step = var
-        var = session['0,1'].active_advanced_sequence_step
+        session.channels['0,1'].active_advanced_sequence_step = var
+        var = session.channels['0,1'].active_advanced_sequence_step
     '''
     aperture_time = attributes.AttributeViReal64(1150058)
     '''Type: float
@@ -125,8 +125,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     aperture_time.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].aperture_time = var
-        var = session['0,1'].aperture_time
+        session.channels['0,1'].aperture_time = var
+        var = session.channels['0,1'].aperture_time
     '''
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
     '''Type: enums.ApertureTimeUnits
@@ -144,8 +144,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     aperture_time_units.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].aperture_time_units = var
-        var = session['0,1'].aperture_time_units
+        session.channels['0,1'].aperture_time_units = var
+        var = session.channels['0,1'].aperture_time_units
     '''
     auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1150055)
     '''Type: enums.AutoZero
@@ -160,8 +160,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     auto_zero.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].auto_zero = var
-        var = session['0,1'].auto_zero
+        session.channels['0,1'].auto_zero = var
+        var = session.channels['0,1'].auto_zero
     '''
     auxiliary_power_source_available = attributes.AttributeViBoolean(1150002)
     '''Type: bool
@@ -220,8 +220,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     compliance_limit_symmetry.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].compliance_limit_symmetry = var
-        var = session['0,1'].compliance_limit_symmetry
+        session.channels['0,1'].compliance_limit_symmetry = var
+        var = session.channels['0,1'].compliance_limit_symmetry
     '''
     current_compensation_frequency = attributes.AttributeViReal64(1150071)
     '''Type: float
@@ -238,8 +238,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_compensation_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_compensation_frequency = var
-        var = session['0,1'].current_compensation_frequency
+        session.channels['0,1'].current_compensation_frequency = var
+        var = session.channels['0,1'].current_compensation_frequency
     '''
     current_gain_bandwidth = attributes.AttributeViReal64(1150070)
     '''Type: float
@@ -256,8 +256,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_gain_bandwidth.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_gain_bandwidth = var
-        var = session['0,1'].current_gain_bandwidth
+        session.channels['0,1'].current_gain_bandwidth = var
+        var = session.channels['0,1'].current_gain_bandwidth
     '''
     current_level = attributes.AttributeViReal64(1150009)
     '''Type: float
@@ -275,8 +275,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_level = var
-        var = session['0,1'].current_level
+        session.channels['0,1'].current_level = var
+        var = session.channels['0,1'].current_level
     '''
     current_level_autorange = attributes.AttributeViInt32(1150017)
     '''Type: bool
@@ -293,8 +293,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_level_autorange.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_level_autorange = var
-        var = session['0,1'].current_level_autorange
+        session.channels['0,1'].current_level_autorange = var
+        var = session.channels['0,1'].current_level_autorange
     '''
     current_level_range = attributes.AttributeViReal64(1150011)
     '''Type: float
@@ -313,8 +313,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_level_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_level_range = var
-        var = session['0,1'].current_level_range
+        session.channels['0,1'].current_level_range = var
+        var = session.channels['0,1'].current_level_range
     '''
     current_limit = attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -332,8 +332,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_limit = var
-        var = session['0,1'].current_limit
+        session.channels['0,1'].current_limit = var
+        var = session.channels['0,1'].current_limit
     '''
     current_limit_autorange = attributes.AttributeViInt32(1150016)
     '''Type: bool
@@ -350,8 +350,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_limit_autorange.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_limit_autorange = var
-        var = session['0,1'].current_limit_autorange
+        session.channels['0,1'].current_limit_autorange = var
+        var = session.channels['0,1'].current_limit_autorange
     '''
     current_limit_high = attributes.AttributeViReal64(1150187)
     '''Type: float
@@ -391,8 +391,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_limit_high = var
-        var = session['0,1'].current_limit_high
+        session.channels['0,1'].current_limit_high = var
+        var = session.channels['0,1'].current_limit_high
     '''
     current_limit_low = attributes.AttributeViReal64(1150188)
     '''Type: float
@@ -432,8 +432,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_limit_low = var
-        var = session['0,1'].current_limit_low
+        session.channels['0,1'].current_limit_low = var
+        var = session.channels['0,1'].current_limit_low
     '''
     current_limit_range = attributes.AttributeViReal64(1150004)
     '''Type: float
@@ -452,8 +452,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_limit_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_limit_range = var
-        var = session['0,1'].current_limit_range
+        session.channels['0,1'].current_limit_range = var
+        var = session.channels['0,1'].current_limit_range
     '''
     current_pole_zero_ratio = attributes.AttributeViReal64(1150072)
     '''Type: float
@@ -470,8 +470,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     current_pole_zero_ratio.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].current_pole_zero_ratio = var
-        var = session['0,1'].current_pole_zero_ratio
+        session.channels['0,1'].current_pole_zero_ratio = var
+        var = session.channels['0,1'].current_pole_zero_ratio
     '''
     dc_noise_rejection = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
     '''Type: enums.DCNoiseRejection
@@ -800,8 +800,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     output_capacitance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].output_capacitance = var
-        var = session['0,1'].output_capacitance
+        session.channels['0,1'].output_capacitance = var
+        var = session.channels['0,1'].output_capacitance
     '''
     output_connected = attributes.AttributeViBoolean(1150060)
     '''Type: bool
@@ -820,8 +820,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     output_connected.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].output_connected = var
-        var = session['0,1'].output_connected
+        session.channels['0,1'].output_connected = var
+        var = session.channels['0,1'].output_connected
     '''
     output_enabled = attributes.AttributeViBoolean(1250006)
     '''Type: bool
@@ -839,8 +839,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     output_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].output_enabled = var
-        var = session['0,1'].output_enabled
+        session.channels['0,1'].output_enabled = var
+        var = session.channels['0,1'].output_enabled
     '''
     output_function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputFunction, 1150008)
     '''Type: enums.OutputFunction
@@ -868,8 +868,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     output_function.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].output_function = var
-        var = session['0,1'].output_function
+        session.channels['0,1'].output_function = var
+        var = session.channels['0,1'].output_function
     '''
     output_resistance = attributes.AttributeViReal64(1150061)
     '''Type: float
@@ -886,8 +886,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     output_resistance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].output_resistance = var
-        var = session['0,1'].output_resistance
+        session.channels['0,1'].output_resistance = var
+        var = session.channels['0,1'].output_resistance
     '''
     overranging_enabled = attributes.AttributeViBoolean(1150007)
     '''Type: bool
@@ -931,8 +931,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     power_line_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].power_line_frequency = var
-        var = session['0,1'].power_line_frequency
+        session.channels['0,1'].power_line_frequency = var
+        var = session.channels['0,1'].power_line_frequency
     '''
     power_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSource, 1150000)
     '''Type: enums.PowerSource
@@ -963,8 +963,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_current_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_current_level = var
-        var = session['0,1'].pulse_bias_current_level
+        session.channels['0,1'].pulse_bias_current_level = var
+        var = session.channels['0,1'].pulse_bias_current_level
     '''
     pulse_bias_current_limit = attributes.AttributeViReal64(1150083)
     '''Type: float
@@ -981,8 +981,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_current_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_current_limit = var
-        var = session['0,1'].pulse_bias_current_limit
+        session.channels['0,1'].pulse_bias_current_limit = var
+        var = session.channels['0,1'].pulse_bias_current_limit
     '''
     pulse_bias_current_limit_high = attributes.AttributeViReal64(1150195)
     '''Type: float
@@ -1025,8 +1025,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_current_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_current_limit_high = var
-        var = session['0,1'].pulse_bias_current_limit_high
+        session.channels['0,1'].pulse_bias_current_limit_high = var
+        var = session.channels['0,1'].pulse_bias_current_limit_high
     '''
     pulse_bias_current_limit_low = attributes.AttributeViReal64(1150196)
     '''Type: float
@@ -1069,8 +1069,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_current_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_current_limit_low = var
-        var = session['0,1'].pulse_bias_current_limit_low
+        session.channels['0,1'].pulse_bias_current_limit_low = var
+        var = session.channels['0,1'].pulse_bias_current_limit_low
     '''
     pulse_bias_delay = attributes.AttributeViReal64(1150092)
     '''Type: float
@@ -1087,8 +1087,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_delay.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_delay = var
-        var = session['0,1'].pulse_bias_delay
+        session.channels['0,1'].pulse_bias_delay = var
+        var = session.channels['0,1'].pulse_bias_delay
     '''
     pulse_bias_voltage_level = attributes.AttributeViReal64(1150082)
     '''Type: float
@@ -1105,8 +1105,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_voltage_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_voltage_level = var
-        var = session['0,1'].pulse_bias_voltage_level
+        session.channels['0,1'].pulse_bias_voltage_level = var
+        var = session.channels['0,1'].pulse_bias_voltage_level
     '''
     pulse_bias_voltage_limit = attributes.AttributeViReal64(1150089)
     '''Type: float
@@ -1123,8 +1123,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_voltage_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_voltage_limit = var
-        var = session['0,1'].pulse_bias_voltage_limit
+        session.channels['0,1'].pulse_bias_voltage_limit = var
+        var = session.channels['0,1'].pulse_bias_voltage_limit
     '''
     pulse_bias_voltage_limit_high = attributes.AttributeViReal64(1150191)
     '''Type: float
@@ -1167,8 +1167,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_voltage_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_voltage_limit_high = var
-        var = session['0,1'].pulse_bias_voltage_limit_high
+        session.channels['0,1'].pulse_bias_voltage_limit_high = var
+        var = session.channels['0,1'].pulse_bias_voltage_limit_high
     '''
     pulse_bias_voltage_limit_low = attributes.AttributeViReal64(1150192)
     '''Type: float
@@ -1211,8 +1211,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_bias_voltage_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_bias_voltage_limit_low = var
-        var = session['0,1'].pulse_bias_voltage_limit_low
+        session.channels['0,1'].pulse_bias_voltage_limit_low = var
+        var = session.channels['0,1'].pulse_bias_voltage_limit_low
     '''
     pulse_complete_event_output_terminal = attributes.AttributeViString(1150099)
     '''Type: str
@@ -1256,8 +1256,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_level = var
-        var = session['0,1'].pulse_current_level
+        session.channels['0,1'].pulse_current_level = var
+        var = session.channels['0,1'].pulse_current_level
     '''
     pulse_current_level_range = attributes.AttributeViReal64(1150090)
     '''Type: float
@@ -1275,8 +1275,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_level_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_level_range = var
-        var = session['0,1'].pulse_current_level_range
+        session.channels['0,1'].pulse_current_level_range = var
+        var = session.channels['0,1'].pulse_current_level_range
     '''
     pulse_current_limit = attributes.AttributeViReal64(1150081)
     '''Type: float
@@ -1293,8 +1293,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_limit = var
-        var = session['0,1'].pulse_current_limit
+        session.channels['0,1'].pulse_current_limit = var
+        var = session.channels['0,1'].pulse_current_limit
     '''
     pulse_current_limit_high = attributes.AttributeViReal64(1150193)
     '''Type: float
@@ -1337,8 +1337,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_limit_high = var
-        var = session['0,1'].pulse_current_limit_high
+        session.channels['0,1'].pulse_current_limit_high = var
+        var = session.channels['0,1'].pulse_current_limit_high
     '''
     pulse_current_limit_low = attributes.AttributeViReal64(1150194)
     '''Type: float
@@ -1381,8 +1381,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_limit_low = var
-        var = session['0,1'].pulse_current_limit_low
+        session.channels['0,1'].pulse_current_limit_low = var
+        var = session.channels['0,1'].pulse_current_limit_low
     '''
     pulse_current_limit_range = attributes.AttributeViReal64(1150085)
     '''Type: float
@@ -1400,8 +1400,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_current_limit_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_current_limit_range = var
-        var = session['0,1'].pulse_current_limit_range
+        session.channels['0,1'].pulse_current_limit_range = var
+        var = session.channels['0,1'].pulse_current_limit_range
     '''
     pulse_off_time = attributes.AttributeViReal64TimeDeltaSeconds(1150094)
     '''Type: float
@@ -1418,8 +1418,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_off_time.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_off_time = var
-        var = session['0,1'].pulse_off_time
+        session.channels['0,1'].pulse_off_time = var
+        var = session.channels['0,1'].pulse_off_time
     '''
     pulse_on_time = attributes.AttributeViReal64TimeDeltaSeconds(1150093)
     '''Type: float
@@ -1436,8 +1436,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_on_time.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_on_time = var
-        var = session['0,1'].pulse_on_time
+        session.channels['0,1'].pulse_on_time = var
+        var = session.channels['0,1'].pulse_on_time
     '''
     pulse_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150095)
     '''Type: enums.TriggerType
@@ -1462,8 +1462,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_level = var
-        var = session['0,1'].pulse_voltage_level
+        session.channels['0,1'].pulse_voltage_level = var
+        var = session.channels['0,1'].pulse_voltage_level
     '''
     pulse_voltage_level_range = attributes.AttributeViReal64(1150084)
     '''Type: float
@@ -1481,8 +1481,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_level_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_level_range = var
-        var = session['0,1'].pulse_voltage_level_range
+        session.channels['0,1'].pulse_voltage_level_range = var
+        var = session.channels['0,1'].pulse_voltage_level_range
     '''
     pulse_voltage_limit = attributes.AttributeViReal64(1150087)
     '''Type: float
@@ -1499,8 +1499,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_limit = var
-        var = session['0,1'].pulse_voltage_limit
+        session.channels['0,1'].pulse_voltage_limit = var
+        var = session.channels['0,1'].pulse_voltage_limit
     '''
     pulse_voltage_limit_high = attributes.AttributeViReal64(1150189)
     '''Type: float
@@ -1543,8 +1543,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_limit_high = var
-        var = session['0,1'].pulse_voltage_limit_high
+        session.channels['0,1'].pulse_voltage_limit_high = var
+        var = session.channels['0,1'].pulse_voltage_limit_high
     '''
     pulse_voltage_limit_low = attributes.AttributeViReal64(1150190)
     '''Type: float
@@ -1587,8 +1587,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_limit_low = var
-        var = session['0,1'].pulse_voltage_limit_low
+        session.channels['0,1'].pulse_voltage_limit_low = var
+        var = session.channels['0,1'].pulse_voltage_limit_low
     '''
     pulse_voltage_limit_range = attributes.AttributeViReal64(1150091)
     '''Type: float
@@ -1606,8 +1606,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     pulse_voltage_limit_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].pulse_voltage_limit_range = var
-        var = session['0,1'].pulse_voltage_limit_range
+        session.channels['0,1'].pulse_voltage_limit_range = var
+        var = session.channels['0,1'].pulse_voltage_limit_range
     '''
     query_instrument_status = attributes.AttributeViBoolean(1050003)
     '''Type: bool
@@ -1674,8 +1674,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     reset_average_before_measurement.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].reset_average_before_measurement = var
-        var = session['0,1'].reset_average_before_measurement
+        session.channels['0,1'].reset_average_before_measurement = var
+        var = session.channels['0,1'].reset_average_before_measurement
     '''
     samples_to_average = attributes.AttributeViInt32(1150003)
     '''Type: int
@@ -1698,8 +1698,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     samples_to_average.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].samples_to_average = var
-        var = session['0,1'].samples_to_average
+        session.channels['0,1'].samples_to_average = var
+        var = session.channels['0,1'].samples_to_average
     '''
     self_calibration_persistence = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
     '''Type: enums.SelfCalibrationPersistence
@@ -1724,8 +1724,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     sense.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].sense = var
-        var = session['0,1'].sense
+        session.channels['0,1'].sense = var
+        var = session.channels['0,1'].sense
     '''
     sequence_advance_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150026)
     '''Type: enums.TriggerType
@@ -1870,8 +1870,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     source_delay.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].source_delay = var
-        var = session['0,1'].source_delay
+        session.channels['0,1'].source_delay = var
+        var = session.channels['0,1'].source_delay
     '''
     source_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SourceMode, 1150054)
     '''Type: enums.SourceMode
@@ -1947,8 +1947,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     transient_response.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].transient_response = var
-        var = session['0,1'].transient_response
+        session.channels['0,1'].transient_response = var
+        var = session.channels['0,1'].transient_response
     '''
     voltage_compensation_frequency = attributes.AttributeViReal64(1150068)
     '''Type: float
@@ -1965,8 +1965,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_compensation_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_compensation_frequency = var
-        var = session['0,1'].voltage_compensation_frequency
+        session.channels['0,1'].voltage_compensation_frequency = var
+        var = session.channels['0,1'].voltage_compensation_frequency
     '''
     voltage_gain_bandwidth = attributes.AttributeViReal64(1150067)
     '''Type: float
@@ -1983,8 +1983,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_gain_bandwidth.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_gain_bandwidth = var
-        var = session['0,1'].voltage_gain_bandwidth
+        session.channels['0,1'].voltage_gain_bandwidth = var
+        var = session.channels['0,1'].voltage_gain_bandwidth
     '''
     voltage_level = attributes.AttributeViReal64(1250001)
     '''Type: float
@@ -2002,8 +2002,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_level = var
-        var = session['0,1'].voltage_level
+        session.channels['0,1'].voltage_level = var
+        var = session.channels['0,1'].voltage_level
     '''
     voltage_level_autorange = attributes.AttributeViInt32(1150015)
     '''Type: bool
@@ -2020,8 +2020,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_level_autorange.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_level_autorange = var
-        var = session['0,1'].voltage_level_autorange
+        session.channels['0,1'].voltage_level_autorange = var
+        var = session.channels['0,1'].voltage_level_autorange
     '''
     voltage_level_range = attributes.AttributeViReal64(1150005)
     '''Type: float
@@ -2040,8 +2040,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_level_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_level_range = var
-        var = session['0,1'].voltage_level_range
+        session.channels['0,1'].voltage_level_range = var
+        var = session.channels['0,1'].voltage_level_range
     '''
     voltage_limit = attributes.AttributeViReal64(1150010)
     '''Type: float
@@ -2059,8 +2059,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_limit.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_limit = var
-        var = session['0,1'].voltage_limit
+        session.channels['0,1'].voltage_limit = var
+        var = session.channels['0,1'].voltage_limit
     '''
     voltage_limit_autorange = attributes.AttributeViInt32(1150018)
     '''Type: bool
@@ -2077,8 +2077,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_limit_autorange.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_limit_autorange = var
-        var = session['0,1'].voltage_limit_autorange
+        session.channels['0,1'].voltage_limit_autorange = var
+        var = session.channels['0,1'].voltage_limit_autorange
     '''
     voltage_limit_high = attributes.AttributeViReal64(1150185)
     '''Type: float
@@ -2118,8 +2118,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_limit_high.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_limit_high = var
-        var = session['0,1'].voltage_limit_high
+        session.channels['0,1'].voltage_limit_high = var
+        var = session.channels['0,1'].voltage_limit_high
     '''
     voltage_limit_low = attributes.AttributeViReal64(1150186)
     '''Type: float
@@ -2159,8 +2159,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_limit_low.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_limit_low = var
-        var = session['0,1'].voltage_limit_low
+        session.channels['0,1'].voltage_limit_low = var
+        var = session.channels['0,1'].voltage_limit_low
     '''
     voltage_limit_range = attributes.AttributeViReal64(1150012)
     '''Type: float
@@ -2179,8 +2179,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_limit_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_limit_range = var
-        var = session['0,1'].voltage_limit_range
+        session.channels['0,1'].voltage_limit_range = var
+        var = session.channels['0,1'].voltage_limit_range
     '''
     voltage_pole_zero_ratio = attributes.AttributeViReal64(1150069)
     '''Type: float
@@ -2197,8 +2197,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     voltage_pole_zero_ratio.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].voltage_pole_zero_ratio = var
-        var = session['0,1'].voltage_pole_zero_ratio
+        session.channels['0,1'].voltage_pole_zero_ratio = var
+        var = session.channels['0,1'].voltage_pole_zero_ratio
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -2275,7 +2275,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+            session.channels['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
@@ -2329,7 +2329,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
         Args:
             count (int): Specifies the number of measurements to fetch.
@@ -2389,7 +2389,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2443,7 +2443,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2497,7 +2497,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2551,7 +2551,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2605,7 +2605,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2655,7 +2655,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_channel_name(index)
+            session.channels['0,1'].get_channel_name(index)
 
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
@@ -2726,7 +2726,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].measure(measurement_type)
+            session.channels['0,1'].measure(measurement_type)
 
         Args:
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
@@ -2769,7 +2769,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].measure_multiple()
+            session.channels['0,1'].measure_multiple()
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
@@ -2804,7 +2804,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._parse_channel_count()
+            session.channels['0,1']._parse_channel_count()
 
         Returns:
             number_of_channels (int):
@@ -2850,7 +2850,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_in_compliance()
+            session.channels['0,1'].query_in_compliance()
 
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
@@ -2875,7 +2875,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_max_current_limit(voltage_level)
+            session.channels['0,1'].query_max_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2907,7 +2907,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_max_voltage_level(current_limit)
+            session.channels['0,1'].query_max_voltage_level(current_limit)
 
         Args:
             current_limit (float): Specifies the current limit to use when calculating the
@@ -2939,7 +2939,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_min_current_limit(voltage_level)
+            session.channels['0,1'].query_min_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2975,7 +2975,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].query_output_state(output_state)
+            session.channels['0,1'].query_output_state(output_state)
 
         Args:
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
@@ -3016,7 +3016,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3073,7 +3073,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3130,7 +3130,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3187,7 +3187,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3244,7 +3244,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3319,7 +3319,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_sequence(source_delays, values=None)
+            session.channels['0,1'].set_sequence(source_delays, values=None)
 
         Args:
             source_delays (list of float): Specifies the source delay that follows the configuration of each value
@@ -3372,14 +3372,99 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels="", reset=False, option_string=""):
+    def __init__(self, resource_name, channels="", reset=False, options={}):
+        '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
+
+        Creates and returns a new NI-DCPower session to the power supply or SMU
+        specified in **resource name** to be used in all subsequent NI-DCPower
+        function calls. With this function, you can optionally set the initial
+        state of the following session attributes:
+
+        -  simulate
+        -  driver_setup
+
+        After calling this function, the session will be in the Uncommitted
+        state. Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        details about specific software states.
+
+        To place the device in a known start-up state when creating a new
+        session, set **reset** to VI_TRUE. This action is equivalent to using
+        the reset function immediately after initializing the
+        session.
+
+        To open a session and leave the device in its existing configuration
+        without passing through a transitional output state, set **reset** to
+        VI_FALSE. Then configure the device as in the previous session,
+        changing only the desired settings, and then call the
+        _initiate function.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Args:
+            resource_name (str): Specifies the **resourceName** assigned by Measurement & Automation
+                Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
+                instrument's **resourceName**. **resourceName** can also be a logical
+                IVI name.
+
+            channels (str): Specifies which output channel(s) to include in a new session. Specify
+                multiple channels by using a channel list or a channel range. A channel
+                list is a comma (,) separated sequence of channel names (for example,
+                0,2 specifies channels 0 and 2). A channel range is a lower bound
+                channel followed by a hyphen (-) or colon (:) followed by an upper bound
+                channel (for example, 0-2 specifies channels 0, 1, and 2). In the
+                Running state, multiple output channel configurations are performed
+                sequentially based on the order specified in this parameter. If you do
+                not specify any channels, by default all channels on the device are
+                included in the session.
+
+            reset (bool): Specifies whether to reset the device during the initialization
+                procedure.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (nidcpower.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
+        self._vi = self._initialize_with_channels(resource_name, channels, reset, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3389,7 +3474,7 @@ class Session(_SessionBase):
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("channels=" + pp.pformat(channels))
         param_list.append("reset=" + pp.pformat(reset))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True

@@ -1241,7 +1241,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].allocate_named_waveform(waveform_name, waveform_size)
+            session.channels['0,1'].allocate_named_waveform(waveform_name, waveform_size)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -1276,7 +1276,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].allocate_waveform(waveform_size)
+            session.channels['0,1'].allocate_waveform(waveform_size)
 
         Args:
             waveform_size (int): Specifies, in samples, the size of the waveform to allocate.
@@ -1307,7 +1307,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_user_standard_waveform()
+            session.channels['0,1'].clear_user_standard_waveform()
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1332,7 +1332,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_arb_sequence(sequence_handle, gain, offset)
+            session.channels['0,1'].configure_arb_sequence(sequence_handle, gain, offset)
 
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
@@ -1397,7 +1397,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_arb_waveform(waveform_handle, gain, offset)
+            session.channels['0,1'].configure_arb_waveform(waveform_handle, gain, offset)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform you want the signal
@@ -1476,7 +1476,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
+            session.channels['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
             coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
@@ -1513,7 +1513,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+            session.channels['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
@@ -1605,7 +1605,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
+            session.channels['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
@@ -1723,7 +1723,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform(waveform_data_array)
+            session.channels['0,1'].create_waveform(waveform_data_array)
 
         Args:
             waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
@@ -1772,7 +1772,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._create_waveform_f64(waveform_data_array)
+            session.channels['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
@@ -1820,7 +1820,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._create_waveform_f64(waveform_data_array)
+            session.channels['0,1']._create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
@@ -1876,7 +1876,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_from_file_f64(file_name, byte_order)
+            session.channels['0,1'].create_waveform_from_file_f64(file_name, byte_order)
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -1939,7 +1939,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_from_file_i16(file_name, byte_order)
+            session.channels['0,1'].create_waveform_from_file_i16(file_name, byte_order)
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -2001,7 +2001,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._create_waveform_i16(waveform_data_array)
+            session.channels['0,1']._create_waveform_i16(waveform_data_array)
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
@@ -2059,7 +2059,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].define_user_standard_waveform(waveform_data_array)
+            session.channels['0,1'].define_user_standard_waveform(waveform_data_array)
 
         Args:
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
@@ -2096,7 +2096,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].delete_named_waveform(waveform_name)
+            session.channels['0,1'].delete_named_waveform(waveform_name)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2120,7 +2120,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].delete_script(script_name)
+            session.channels['0,1'].delete_script(script_name)
 
         Args:
             script_name (str): Specifies the name of the script you want to delete. The script name
@@ -2154,7 +2154,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2191,7 +2191,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2230,7 +2230,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2287,7 +2287,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2377,7 +2377,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_fir_filter_coefficients()
+            session.channels['0,1'].get_fir_filter_coefficients()
 
         Returns:
             number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
@@ -2411,7 +2411,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
+            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
 
         Args:
             resource_name (str): Caution:
@@ -2573,7 +2573,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2628,7 +2628,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2683,7 +2683,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2738,7 +2738,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute.
@@ -2783,7 +2783,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+            session.channels['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2839,7 +2839,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
+            session.channels['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2894,7 +2894,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_binary16_waveform(waveform_handle, data)
+            session.channels['0,1']._write_binary16_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2951,7 +2951,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_named_waveform_f64(waveform_name, data)
+            session.channels['0,1']._write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2999,7 +2999,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_named_waveform_f64(waveform_name, data)
+            session.channels['0,1']._write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -3045,7 +3045,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_named_waveform_i16(waveform_name, data)
+            session.channels['0,1']._write_named_waveform_i16(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -3083,7 +3083,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_script(script)
+            session.channels['0,1'].write_script(script)
 
         Args:
             script (str): Contains the text of the script you want to use for your generation
@@ -3128,7 +3128,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_waveform(waveform_handle, data)
+            session.channels['0,1']._write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -3177,7 +3177,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1']._write_waveform(waveform_handle, data)
+            session.channels['0,1']._write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -3220,7 +3220,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_waveform(waveform_name_or_handle, data)
+            session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
 
         Args:
             waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
@@ -3279,14 +3279,125 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, reset_device=False, option_string=""):
+    def __init__(self, resource_name, reset_device=False, options={}):
+        '''An NI-FGEN session to a National Instruments Signal Generator.
+
+        Creates and returns a new NI-FGEN session to the specified channel of a
+        waveform generator that is used in all subsequent NI-FGEN function
+        calls.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
+
+        Args:
+            resource_name (str): Caution:
+                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
+                However, all IVI names, such as logical names, are case-sensitive. If
+                you use logical names, driver session names, or virtual names in your
+                program, you must ensure that the name you use matches the name in the
+                IVI Configuration Store file exactly, without any variations in the case
+                of the characters.
+
+                | Specifies the resource name of the device to initialize.
+
+                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
+                the device number assigned by MAX, as shown in Example 1.
+
+                For NI-DAQmx devices, the syntax is just the device name specified in
+                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
+                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
+                right-clicking on the name in MAX and entering a new name.
+
+                An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
+                device name*, as shown in Example 3. This naming convention allows for
+                the use of an NI-DAQmx device in an application that was originally
+                designed for a Traditional NI-DAQ device. For example, if the
+                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
+                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
+
+                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
+                exists with that same name, the NI-DAQmx device is matched first.
+
+                You can also pass in the name of an IVI logical name or an IVI virtual
+                name configured with the IVI Configuration utility, as shown in Example
+                5. A logical name identifies a particular virtual instrument. A virtual
+                name identifies a specific device and specifies the initial settings for
+                the session.
+
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | Example # | Device Type                          | Syntax                 | Variable                        |
+                +===========+======================================+========================+=================================+
+                | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+
+            reset_device (bool): Specifies whether you want to reset the device during the initialization
+                procedure. VI_TRUE specifies that the device is reset and performs the
+                same function as the nifgen_Reset function.
+
+                ****Defined Values****
+
+                **Default Value**: VI_FALSE
+
+                +----------+---------------------+
+                | VI_TRUE  | Reset device        |
+                +----------+---------------------+
+                | VI_FALSE | Do not reset device |
+                +----------+---------------------+
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (nifgen.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, reset_device, option_string)
+        self._vi = self._initialize_with_channels(resource_name, reset_device, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3297,7 +3408,7 @@ class Session(_SessionBase):
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True

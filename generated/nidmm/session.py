@@ -605,7 +605,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -644,7 +644,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -683,7 +683,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -725,7 +725,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -806,7 +806,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -857,7 +857,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -908,7 +908,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -959,7 +959,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -1001,14 +1001,114 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+        '''An NI-DMM session to a National Instruments Digital Multimeter
+
+        This function completes the following tasks:
+
+        -  Creates a new IVI instrument driver session and, optionally, sets the
+           initial state of the following session attributes:
+           range_check, QUERY_INSTR_STATUS,
+           cache, simulate,
+           record_coercions.
+        -  Opens a session to the device you specify for the **Resource_Name**
+           parameter. If the **ID_Query** parameter is set to VI_TRUE, this
+           function queries the instrument ID and checks that it is valid for
+           this instrument driver.
+        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
+           resets the instrument to a known state. Sends initialization commands
+           to set the instrument to the state necessary for the operation of the
+           instrument driver.
+        -  Returns a ViSession handle that you use to identify the instrument in
+           all subsequent instrument driver function calls.
+
+        Note:
+        One or more of the referenced attributes are not in the Python API for this driver.
+
+        Args:
+            resource_name (str): Caution:
+                All IVI names for the **Resource_Name**, such as logical names or
+                virtual names, are case-sensitive. If you use logical names, driver
+                session names, or virtual names in your program, you must make sure that
+                the name you use matches the name in the IVI Configuration Store file
+                exactly, without any variations in the case of the characters in the
+                name.
+
+                | Contains the **resource_name** of the device to initialize. The
+                  **resource_name** is assigned in Measurement & Automation Explorer
+                  (MAX). Refer to `Related
+                  Documentation <related_documentation>`__
+                  for the *NI Digital Multimeters Getting Started Guide* for more
+                  information about configuring and testing the DMM in MAX.
+                | Valid Syntax:
+
+                -  NI-DAQmx name
+                -  DAQ::NI-DAQmx name[::INSTR]
+                -  DAQ::Traditional NI-DAQ device number[::INSTR]
+                -  IVI logical name
+
+            id_query (bool): Verifies that the device you initialize is one that the driver supports.
+                NI-DMM automatically performs this query, so setting this parameter is
+                not necessary.
+                Defined Values:
+
+                +-------------------+---+------------------+
+                | VI_TRUE (default) | 1 | Perform ID Query |
+                +-------------------+---+------------------+
+                | VI_FALSE          | 0 | Skip ID Query    |
+                +-------------------+---+------------------+
+
+            reset_device (bool): Specifies whether to reset the instrument during the initialization
+                procedure.
+                Defined Values:
+
+                +-------------------+---+--------------+
+                | VI_TRUE (default) | 1 | Reset Device |
+                +-------------------+---+--------------+
+                | VI_FALSE          | 0 | Don't Reset  |
+                +-------------------+---+--------------+
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+
+        Returns:
+            session (nidmm.Session): A session object representing the device.
+
+        '''
         super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
         # Instantiate any repeated capability objects
 
@@ -1016,7 +1116,7 @@ class Session(_SessionBase):
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("option_string=" + pp.pformat(option_string))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True

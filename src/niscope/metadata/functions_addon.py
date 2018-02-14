@@ -233,6 +233,8 @@ functions_converters = {
                                                                    'python_api_converter_type': 'datetime.timedelta', }, }, },
     'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                   'python_api_converter_type': 'dict', }, }, },
 }
 
 # Functions not in original metadata.

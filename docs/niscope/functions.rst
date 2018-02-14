@@ -140,7 +140,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
 
     :param option:
@@ -182,7 +182,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
 
     :param clearable_measurement_function:
@@ -225,7 +225,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
+            session.channels['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
 
     :param input_impedance:
@@ -269,7 +269,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_equalization_filter_coefficients(coefficients)
+            session.channels['0,1'].configure_equalization_filter_coefficients(coefficients)
 
 
     :param coefficients:
@@ -1017,7 +1017,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+            session.channels['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
 
     :param range:
@@ -1215,7 +1215,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1319,7 +1319,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1435,7 +1435,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:
@@ -1509,7 +1509,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:
@@ -1611,7 +1611,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
 
 
     :param number_of_coefficients:
@@ -1681,7 +1681,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1798,7 +1798,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:

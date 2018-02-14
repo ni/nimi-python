@@ -66,7 +66,7 @@ class TestSession(object):
         errors_patcher.stop()
 
     def test_init_with_options_nondefault_and_close(self):
-        session = nifake.Session('FakeDevice', True, True, 'Some string')
+        session = nifake.Session('FakeDevice', 'Some string', True, True)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(True), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))

@@ -14,7 +14,12 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
-        * Repeated capabilities are handled differently. See #737 for discussion
+        * Option string can now be a python dictionary instead of a string. It will be converted as needed (Fix #661)
+            * Key/Value pairs approporiate for desired behavior
+                ``` python
+                session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+                ```
+        * Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -31,6 +36,7 @@ All notable changes to this project will be documented in this file.
             * read_waveform
         * The following functions return a `datetime.datetime()` object representing the date and time
             * get_cal_date_and_time
+        * Metadata updated to NI-DMM 17.5
     * #### Removed
         * `nidmm.Session()` no longer takes id_query parameter
         * Removed these enums and disconnected them from the associated attribute
