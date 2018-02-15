@@ -187,7 +187,7 @@ functions_default_value = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
-    'FetchDouble': {
+    'FancyFetch': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
@@ -222,6 +222,7 @@ functions_additional_functions = {
             {
                 'direction': 'in',
                 'enum': None,
+                'default_value': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
@@ -235,30 +236,72 @@ period, the function throws an exception.
                 },
             },
             {
-                'direction': 'out',
+                'direction': 'in',
+                'enum': 'FetchRelativeTo',
+                'default_value': None,
+                'name': 'fetchRelativeTo',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': '''
+Position to start fetching within one record.
+If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'default_value': None,
+                'name': 'fetchOffet',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': '''
+Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'default_value': None,
+                'name': 'fetchRecordNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': '''
+Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch.
+If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'default_value': None,
+                'name': 'fetchNumRecords',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': '''
+Number of records to fetch. Use -1 to fetch all configured records.
+If not set, use value of NISCOPE_ATTR_NUM_RECORDS
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': None,
                 'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]',
                 'default_value': None, 
                 'documentation': {
                     'description': '''
-Returns an array whose length is the **numSamples** times number of
+Optional array whose length is the **numSamples** times number of
 waveforms. Call niScope\_ActualNumWfms to determine the number of
 waveforms.
 
-NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-first. For example, with a channel list of 0,1, you would have the
-following index values:
-
-index 0 = record 0, channel 0
-
-index *x* = record 0, channel 1
-
-index 2\ *x* = record 1, channel 0
-
-index 3\ *x* = record 1, channel 1
-
-Where *x* = the record length
+If configured, this array will be used for the acquisition instead of
+creating one. This can be of type array.array or numpy.ndarray.
 ''',
                 },
             },
@@ -447,29 +490,29 @@ more information.
 
 # Override the 'python' name for some functions.
 functions_python_name = {
-    'FetchDispatcher':            { 'python_name': 'fetch',                           },
-    'FetchDouble':                { 'python_name': 'fetch',                           },
+    'FetchDispatcher':            { 'python_name': 'fetch', },
+    'FancyFetch':                 { 'python_name': 'fetch', },
 }
 
 functions_method_templates = {
     'FetchBinary8':                                  { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
     'FetchBinary16':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
     'FetchBinary32':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
     'Fetch':                { 'method_templates': [
         { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
     'FetchDispatcher':                               { 'method_templates': [
         { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_into', },
     ], },
-    'FetchDouble':                                   { 'method_templates': [
-        { 'session_filename': 'fetch_double', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    'FancyFetch':                                    { 'method_templates': [
+        { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
 }
 
