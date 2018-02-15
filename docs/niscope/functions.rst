@@ -140,7 +140,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
 
     :param option:
@@ -182,7 +182,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
 
     :param clearable_measurement_function:
@@ -225,7 +225,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
+            session.channels['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
 
     :param input_impedance:
@@ -269,7 +269,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_equalization_filter_coefficients(coefficients)
+            session.channels['0,1'].configure_equalization_filter_coefficients(coefficients)
 
 
     :param coefficients:
@@ -1017,7 +1017,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+            session.channels['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
 
     :param range:
@@ -1191,7 +1191,7 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(num_samples, timeout=5.0)
+.. py:method:: fetch(timeout=5.0, num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This function returns
@@ -1215,9 +1215,18 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session.channels['0,1'].fetch(timeout=5.0, num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
 
 
+    :param timeout:
+
+
+        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+
+        
+
+
+    :type timeout: float
     :param num_samples:
 
 
@@ -1231,45 +1240,63 @@ niscope.Session methods
 
 
     :type num_samples: int
-    :param timeout:
+    :param fetch_relative_to:
 
 
-        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+        Position to start fetching within one record.
+        If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
 
         
 
 
-    :type timeout: float
-
-    :rtype: tuple (wfm, wfm_info)
-
-        WHERE
-
-        wfm (list of float): 
+    :type fetch_relative_to: :py:data:`niscope.FetchRelativeTo`
+    :param fetch_offet:
 
 
-            Returns an array whose length is the **numSamples** times number of
-            waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of
-            waveforms.
+        Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+        If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
 
-            NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-            first. For example, with a channel list of 0,1, you would have the
-            following index values:
-
-            index 0 = record 0, channel 0
-
-            index *x* = record 0, channel 1
-
-            index 2\ *x* = record 1, channel 0
-
-            index 3\ *x* = record 1, channel 1
-
-            Where *x* = the record length
-
-            
+        
 
 
-        wfm_info (list of WaveformInfo): 
+    :type fetch_offet: int
+    :param fetch_record_number:
+
+
+        Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch.
+        If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+
+        
+
+
+    :type fetch_record_number: int
+    :param fetch_num_records:
+
+
+        Number of records to fetch. Use -1 to fetch all configured records.
+        If not set, use value of NISCOPE_ATTR_NUM_RECORDS
+
+        
+
+
+    :type fetch_num_records: int
+    :param wfm:
+
+
+        Optional array whose length is the **numSamples** times number of
+        waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of
+        waveforms.
+
+        If configured, this array will be used for the acquisition instead of
+        creating one. This can be of type array.array or numpy.ndarray.
+
+        
+
+
+    :type wfm: list of float
+
+    :rtype: list of WaveformInfo
+    :return:
 
 
             Returns an array of classed with the following timing and scaling information about each waveform:
@@ -1319,7 +1346,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session.channels['0,1'].fetch(num_samples, wfm, timeout=5.0)
 
 
     :param num_samples:
@@ -1435,7 +1462,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
 
 
     :param scalar_meas_function:
@@ -1509,7 +1536,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
 
 
     :param scalar_meas_function:
@@ -1611,7 +1638,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
 
 
     :param number_of_coefficients:
@@ -1681,7 +1708,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read(num_samples, timeout=5.0)
+            session.channels['0,1'].read(num_samples, timeout=5.0)
 
 
     :param num_samples:
@@ -1798,7 +1825,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
 
 
     :param scalar_meas_function:

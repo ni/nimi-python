@@ -40,12 +40,12 @@ class Library(object):
         self.niScope_ConfigureVertical_cfunc = None
         self.niScope_Disable_cfunc = None
         self.niScope_ExportSignal_cfunc = None
+        self.niScope_FancyFetch_cfunc = None
         self.niScope_Fetch_cfunc = None
         self.niScope_FetchBinary16_cfunc = None
         self.niScope_FetchBinary32_cfunc = None
         self.niScope_FetchBinary8_cfunc = None
         self.niScope_FetchDispatcher_cfunc = None
-        self.niScope_FetchDouble_cfunc = None
         self.niScope_FetchMeasurement_cfunc = None
         self.niScope_FetchMeasurementStats_cfunc = None
         self.niScope_GetAttributeViBoolean_cfunc = None
@@ -239,6 +239,14 @@ class Library(object):
                 self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
+    def niScope_FancyFetch(self, vi, channel_list, timeout, num_samples, fetch_relative_to, fetch_offet, fetch_record_number, fetch_num_records, wfm, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_FancyFetch_cfunc is None:
+                self.niScope_FancyFetch_cfunc = self._library.niScope_FancyFetch
+                self.niScope_FancyFetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ViInt32, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
+                self.niScope_FancyFetch_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_FancyFetch_cfunc(vi, channel_list, timeout, num_samples, fetch_relative_to, fetch_offet, fetch_record_number, fetch_num_records, wfm, wfm_info)
+
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
@@ -278,14 +286,6 @@ class Library(object):
                 self.niScope_FetchDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchDispatcher_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FetchDispatcher_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
-
-    def niScope_FetchDouble(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_FetchDouble_cfunc is None:
-                self.niScope_FetchDouble_cfunc = self._library.niScope_FetchDouble
-                self.niScope_FetchDouble_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
-                self.niScope_FetchDouble_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchDouble_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
 
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:
