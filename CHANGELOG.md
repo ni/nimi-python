@@ -66,6 +66,7 @@ All notable changes to this project will be documented in this file.
             * `channel` repeated capability
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
+        * `niscope.fetch()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info 
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
