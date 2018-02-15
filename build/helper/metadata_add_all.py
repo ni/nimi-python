@@ -190,7 +190,7 @@ def _add_library_method_call_snippet(parameter):
 def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
-        if 'enum' in parameter and parameter['enum'] is not None:
+        if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
             name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
         else:
             name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
@@ -213,7 +213,7 @@ def _add_default_value_name(parameter):
 def _add_default_value_name_for_docs(parameter, module_name):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
-        if 'enum' in parameter and parameter['enum'] is not None:
+        if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
             name = parameter['python_name'] + "=" + module_name + '.' + parameter['default_value']
         else:
             name = parameter['python_name'] + "=" + repr(parameter['default_value'])
