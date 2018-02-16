@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+import datetime
 
-from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifake import _converters
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -349,7 +349,7 @@ class _SessionBase(object):
             session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in microseconds.
 
 
         Returns:
@@ -1171,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:

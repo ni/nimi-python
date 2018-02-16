@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+import datetime
 
-from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nidcpower import _converters
 from nidcpower import attributes
 from nidcpower import enums
 from nidcpower import errors
@@ -2334,7 +2334,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4504,7 +4504,7 @@ class Session(_SessionBase):
                 | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +-------------------------------------------------------+--------------------------------------------------+
 
-            timeout (datetime.timedelta or float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 

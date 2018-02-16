@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+import datetime
 
-from niscope import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from niscope import _converters
 from niscope import attributes
 from niscope import enums
 from niscope import errors
@@ -1874,7 +1874,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -1996,7 +1996,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2122,7 +2122,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2248,7 +2248,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2374,7 +2374,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2651,7 +2651,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2714,7 +2714,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3030,7 +3030,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3127,7 +3127,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
 
-            timeout (datetime.timedelta or float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3793,11 +3793,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3850,11 +3850,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3921,11 +3921,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3987,11 +3987,11 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4057,11 +4057,11 @@ class Session(_SessionBase):
 
                 Default value: 1
 
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4131,11 +4131,11 @@ class Session(_SessionBase):
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
-            holdoff (datetime.timedelta or float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta or float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 

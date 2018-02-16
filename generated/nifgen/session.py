@@ -4,7 +4,7 @@ import array  # noqa: F401
 import ctypes
 import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
 
-from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifgen import _converters
 from nifgen import attributes
 from nifgen import enums
 from nifgen import errors
@@ -4736,7 +4736,7 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (datetime.timedelta or int): Specifies the timeout value in milliseconds.
+            max_time (datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
