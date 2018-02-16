@@ -1947,7 +1947,8 @@ class _SessionBase(object):
             wfm_to_use = wfm
             wfm_info = self.fetch_into(wfm_to_use, timeout)
 
-        # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3! Or use the _into version
+        # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+        # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
         if sys.version_info.major < 3:
             for i in range(len(wfm_info)):
                 if isinstance(wfm_to_use, array.array):
