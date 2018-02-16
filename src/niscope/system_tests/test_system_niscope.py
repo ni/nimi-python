@@ -61,7 +61,7 @@ def test_fetch_binary8_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(timeout=datetime.timedelta(seconds=5.0), wfm=wfm)
+        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -78,7 +78,7 @@ def test_fetch_binary16_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(timeout=datetime.timedelta(seconds=5.0), wfm=wfm)
+        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
@@ -112,7 +112,7 @@ def test_fetch_double_into(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(timeout=datetime.timedelta(seconds=5.0), wfm=wfm)
+        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
     for sample in wfm:
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
