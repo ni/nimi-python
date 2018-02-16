@@ -13,7 +13,7 @@ def print_fetched_measurements(voltage_measurements, current_measurements, in_co
 
 
 def example(resource_name, channels, options, voltage1, voltage2, delay):
-    timeout = delay + 1.0
+    timeout = datetime.timedelta(seconds=(delay + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, channels=channels, options=options) as session:
 
@@ -29,10 +29,10 @@ def example(resource_name, channels, options, voltage1, voltage2, delay):
 
         with session.initiate():
             print('Voltage 1:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=datetime.timedelta(seconds=timeout)))
+            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
             session.voltage_level = voltage2  # on-the-fly set
             print('Voltage 2:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=datetime.timedelta(seconds=timeout)))
+            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
             session.output_enabled = False
 
 
