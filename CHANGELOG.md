@@ -26,16 +26,16 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
         * The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
-            * configure_multi_point
-            * configure_trigger
-            * fetch
-            * fetch_multi_point
-            * fetch_waveform
-            * read
-            * read_multi_point
-            * read_waveform
+            * `configure_multi_point()`
+            * `configure_trigger()`
+            * `fetch()`
+            * `fetch_multi_point()`
+            * `fetch_waveform()`
+            * `read()`
+            * `read_multi_point()`
+            * `read_waveform()`
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * get_cal_date_and_time
+            * `get_cal_date_and_time()`
         * Metadata updated to NI-DMM 17.5
     * #### Removed
         * `nidmm.Session()` no longer takes id_query parameter
@@ -51,9 +51,9 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
-            * configure_scan_trigger
-            * wait_for_debounce
-            * wait_for_scan_complete
+            * `configure_scan_trigger()`
+            * `wait_for_debounce()`
+            * `wait_for_scan_complete()`
     * #### Removed
 * ### NI-DCPower
     * #### Added
@@ -70,11 +70,11 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-            * fetch_multiple
-            * wait_for_event
+            * `fetch_multiple()`
+            * `wait_for_event()`
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * get_ext_cal_last_date_and_time
-            * get_self_cal_last_date_and_time
+            * `get_ext_cal_last_date_and_time()`
+            * `get_self_cal_last_date_and_time()`
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
@@ -85,11 +85,11 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-            * adjust_sample_clock_relative_delay
-            * wait_until+done
+            * `adjust_sample_clock_relative_delay()`
+            * `wait_until+done()`
         * The following functions return a `datetime.datetime()` object representing the date and time
-            * get_ext_cal_last_date_and_time
-            * get_self_cal_last_date_and_time
+            * `get_ext_cal_last_date_and_time()`
+            * `get_self_cal_last_date_and_time()`
     * #### Removed
 * ### NI-SCOPE
     * #### Added
@@ -98,15 +98,15 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
-            * configure_trigger_digital
-            * configure_trigger_edge
-            * configure_trigger_hysteresis
-            * configure_trigger_software
-            * configure_trigger_video
-            * configure_trigger_window
-            * fetch
-            * fetch_measurement_stats
-            * read
+            * `configure_trigger_digital()`
+            * `configure_trigger_edge()`
+            * `configure_trigger_hysteresis()`
+            * `configure_trigger_software()`
+            * `configure_trigger_video()`
+            * `configure_trigger_window()`
+            * `fetch()`
+            * `fetch_measurement_stats()`
+            * `read()`
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
