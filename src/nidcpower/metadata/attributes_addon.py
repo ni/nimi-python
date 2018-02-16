@@ -6,15 +6,15 @@
 
 attributes_converters = {
     1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },  # MEASURE_COMPLETE_EVENT_DELAY
+               'python_type': 'datetime.timedelta', },  # MEASURE_COMPLETE_EVENT_DELAY
     1150065: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },  # MEASURE_RECORD_DELTA_TIME
+               'python_type': 'datetime.timedelta', },  # MEASURE_RECORD_DELTA_TIME
     1150093: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },  # PULSE_ON_TIME
+               'python_type': 'datetime.timedelta', },  # PULSE_ON_TIME
     1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },  # PULSE_OFF_TIME
+               'python_type': 'datetime.timedelta', },  # PULSE_OFF_TIME
     1150051: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },  # SOURCE_DELAY
+               'python_type': 'datetime.timedelta', },  # SOURCE_DELAY
 }
 
 attributes_enums = {

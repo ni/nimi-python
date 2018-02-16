@@ -215,11 +215,11 @@ functions_additional_functions = {
 # Converted parameters
 functions_converters = {
     'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'datetime.timedelta', }, }, },
     'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'datetime.timedelta', }, }, },
     'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'python_api_converter_type': 'dict', }, }, },
+                                                               'python_type': 'dict', }, }, },
 }
 
 

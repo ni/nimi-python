@@ -14,37 +14,37 @@ attributes_remove_enum = {
 
 attributes_converters = {
     1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # SLAVE_TRIGGER_DELAY
+               'python_type': 'datetime.timedelta', },  # SLAVE_TRIGGER_DELAY
     1150047: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_TO_STAR_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_TO_STAR_DELAY
     1150048: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_TO_RTSI_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_TO_RTSI_DELAY
     1150049: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_TO_PFI_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_TO_PFI_DELAY
     1150050: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_FROM_STAR_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_FROM_STAR_DELAY
     1150051: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_FROM_RTSI_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_FROM_RTSI_DELAY
     1150052: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_FROM_PFI_DELAY
+               'python_type': 'datetime.timedelta', },  # TRIGGER_FROM_PFI_DELAY
     1151304: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # DELAY_BEFORE_INITIATE
+               'python_type': 'datetime.timedelta', },  # DELAY_BEFORE_INITIATE
     1250015: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_DELAY_TIME
+               'python_type': 'datetime.timedelta', },  # TRIGGER_DELAY_TIME
     1150103: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # START_TO_REF_TRIGGER_HOLDOFF
+               'python_type': 'datetime.timedelta', },  # START_TO_REF_TRIGGER_HOLDOFF
     1150366: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # END_OF_RECORD_TO_ADVANCE_TRIGGER_HOLDOFF
+               'python_type': 'datetime.timedelta', },  # END_OF_RECORD_TO_ADVANCE_TRIGGER_HOLDOFF
     1250016: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # TRIGGER_HOLDOFF
+               'python_type': 'datetime.timedelta', },  # TRIGGER_HOLDOFF
     1150315: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # REF_TRIGGER_MINIMUM_QUIET_TIME
+               'python_type': 'datetime.timedelta', },  # REF_TRIGGER_MINIMUM_QUIET_TIME
     1150374: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # ABSOLUTE_SAMPLE_CLOCK_OFFSET
+               'python_type': 'datetime.timedelta', },  # ABSOLUTE_SAMPLE_CLOCK_OFFSET
     1250007: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # HORZ_TIME_PER_RECORD
+               'python_type': 'datetime.timedelta', },  # HORZ_TIME_PER_RECORD
     1250109: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # ACQUISITION_START_TIME
+               'python_type': 'datetime.timedelta', },  # ACQUISITION_START_TIME
 }
 
 # We are not code genning attributes that have been marked as obsolete prior to the initial
