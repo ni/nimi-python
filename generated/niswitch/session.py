@@ -1604,7 +1604,7 @@ class Session(_SessionBase):
                 scan_advanced_output topic in the NI Switches Help for
                 a list of valid values.
 
-            scan_delay (datetime.timedelta): The minimum length of time you want the switch device to wait after it
+            scan_delay (float): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
                 line. The driver uses this value to set the Scan Delay attribute. The
                 scan delay is in addition to the settling time.The driver uses this
@@ -2380,7 +2380,7 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (datetime.timedelta): Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (int): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
@@ -2402,7 +2402,7 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (datetime.timedelta): Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (int): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms

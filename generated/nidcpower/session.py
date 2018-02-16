@@ -700,7 +700,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_complete_event_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -740,7 +740,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     measure_record_delta_time = attributes.AttributeViReal64TimeDeltaSeconds(1150065)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this attribute after the desired measurement settings are committed.
     for information about supported devices.
@@ -1404,7 +1404,7 @@ class _SessionBase(object):
         var = session.channels['0,1'].pulse_current_limit_range
     '''
     pulse_off_time = attributes.AttributeViReal64TimeDeltaSeconds(1150094)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1422,7 +1422,7 @@ class _SessionBase(object):
         var = session.channels['0,1'].pulse_off_time
     '''
     pulse_on_time = attributes.AttributeViReal64TimeDeltaSeconds(1150093)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1854,7 +1854,7 @@ class _SessionBase(object):
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
     source_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.

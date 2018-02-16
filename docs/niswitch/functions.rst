@@ -190,7 +190,7 @@ niswitch.Session methods
         
 
 
-    :type scan_delay: datetime.timedelta
+    :type scan_delay: float
 
 .. py:method:: connect(channel1, channel2)
 
@@ -793,7 +793,7 @@ niswitch.Session methods
         
 
 
-    :type maximum_time_ms: datetime.timedelta
+    :type maximum_time_ms: int
 
 .. py:method:: wait_for_scan_complete(maximum_time_ms='datetime.timedelta(milliseconds=5000)')
 
@@ -818,6 +818,6 @@ niswitch.Session methods
         
 
 
-    :type maximum_time_ms: datetime.timedelta
+    :type maximum_time_ms: int
 
 

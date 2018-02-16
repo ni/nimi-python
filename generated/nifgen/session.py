@@ -1120,7 +1120,7 @@ class _SessionBase(object):
     Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
     streaming_write_timeout = attributes.AttributeViReal64TimeDeltaSeconds(1150409)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
