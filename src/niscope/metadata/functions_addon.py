@@ -273,13 +273,7 @@ functions_additional_functions = {
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-The maximum number of samples to fetch for each waveform. If the
-acquisition finishes with fewer points than requested, some devices
-return partial data if the acquisition finished, was aborted, or a
-timeout of 0 was used. If it fails to complete within the timeout
-period, the function throws an exception.
-''',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
                 },
             },
             {
@@ -288,25 +282,7 @@ period, the function throws an exception.
                 'type': 'ViReal64[]',
                 'default_value': None, 
                 'documentation': {
-                    'description': '''
-Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumWfms to determine the number of
-waveforms.
-
-NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-first. For example, with a channel list of 0,1, you would have the
-following index values:
-
-index 0 = record 0, channel 0
-
-index *x* = record 0, channel 1
-
-index 2\ *x* = record 1, channel 0
-
-index 3\ *x* = record 1, channel 1
-
-Where *x* = the record length
-''',
+                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.',
                 },
             },
             {
@@ -332,26 +308,19 @@ Where *x* = the record length
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.
-''',
+                    Call niScope\_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-Returns the waveform from a previously initiated acquisition that the
-digitizer acquires for the specified channel. This function returns
-scaled voltage waveforms.
+                Returns the waveform from a previously initiated acquisition that the
+                digitizer acquires for the specified channel. This function returns
+                scaled voltage waveforms.
 
-This function may return multiple waveforms depending on the number of
-channels, the acquisition type, and the number of records you specify.
-''',
-            'note': '''
-Some functionality, such as time stamping, is not supported in all
-digitizers. Refer to `Features Supported by
-Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-more information.
-''',
+                This function may return multiple waveforms depending on the number of
+                channels, the acquisition type, and the number of records you specify.''',
+            'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
     'FetchDispatcher': {
@@ -388,13 +357,7 @@ more information.
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-The maximum number of samples to fetch for each waveform. If the
-acquisition finishes with fewer points than requested, some devices
-return partial data if the acquisition finished, was aborted, or a
-timeout of 0 was used. If it fails to complete within the timeout
-period, the function throws an exception.
-''',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
                 },
             },
             {
@@ -403,39 +366,21 @@ period, the function throws an exception.
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
                     'description': '''
-numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
-be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of
-waveforms.
+                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
-NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-first. For example, with a channel list of 0,1, you would have the
-following index values:
+                        Types supported are
 
-index 0 = record 0, channel 0
+                        - `numpy.float64`
+                        - `numpy.int8`
+                        - `numpy.in16`
+                        - `numpy.int32`
 
-index *x* = record 0, channel 1
+                        Example:
 
-index 2\ *x* = record 1, channel 0
+                        .. code-block:: python
 
-index 3\ *x* = record 1, channel 1
-
-Where *x* = the record length
-
-Types supported are
-
-- `numpy.float64`
-- `numpy.int8`
-- `numpy.in16`
-- `numpy.int32`
-
-Example:
-
-.. code-block:: python
-
-    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
-
-''',
+                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
                 },
             },
             {
@@ -461,26 +406,19 @@ Example:
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.
-''',
+                    Call niScope\_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-Returns the waveform from a previously initiated acquisition that the
-digitizer acquires for the specified channel. This function returns
-scaled voltage waveforms.
+                Returns the waveform from a previously initiated acquisition that the
+                digitizer acquires for the specified channel. This function returns
+                scaled voltage waveforms.
 
-This function may return multiple waveforms depending on the number of
-channels, the acquisition type, and the number of records you specify.
-''',
-            'note': '''
-Some functionality, such as time stamping, is not supported in all
-digitizers. Refer to `Features Supported by
-Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-more information.
-''',
+                This function may return multiple waveforms depending on the number of
+                channels, the acquisition type, and the number of records you specify.''',
+            'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
 }

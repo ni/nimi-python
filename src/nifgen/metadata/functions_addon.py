@@ -174,15 +174,8 @@ functions_additional_functions = {
             },
         ],
         'documentation': {
-            'description': '''
-Creates an onboard waveform
-for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-mode.
-''',
-            'note': '''
-You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-''',
+            'description': 'Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.',
+            'note': 'You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.',
         },
     },
 
@@ -288,20 +281,9 @@ nifgen\_SetWaveformNextWritePosition function.''',
                 },
             },
         ],
-'documentation': {
-'description': '''
-Returns the date and time of the last successful self-calibration.
-
-All values are returned as separate parameters. Each parameter is
-returned as an integer, including the year, month, day, hour, minute,
-and second. For example, if the device is calibrated in September 2013,
-this function returns 9 for the **month** parameter and 2013 for the
-**year** parameter.
-
-The time returned is 24-hour (military) local time. For example, if the
-device was calibrated at 2:30 PM, this function returns 14 for the
-**hours** parameter and 30 for the **minutes** parameter.
-''',
+        'documentation': 
+        {
+            'description': 'Returns the date and time of the last successful self-calibration.',
         },
     },
 }
