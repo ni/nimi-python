@@ -1,4 +1,3 @@
-import datetime
 import math
 import niscope
 import numpy
