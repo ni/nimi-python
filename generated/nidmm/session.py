@@ -605,7 +605,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -644,7 +644,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -683,7 +683,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -725,7 +725,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -806,7 +806,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -857,7 +857,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -908,7 +908,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -959,7 +959,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
