@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+import datetime
 
 from nifgen import _converters
 from nifgen import attributes

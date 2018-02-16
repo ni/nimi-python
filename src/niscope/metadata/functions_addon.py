@@ -245,7 +245,6 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -254,7 +253,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
@@ -263,7 +261,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
@@ -273,7 +270,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
@@ -288,7 +284,6 @@ period, the function throws an exception.
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]',
                 'default_value': None, 
@@ -316,7 +311,6 @@ Where *x* = the record length
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
@@ -366,7 +360,6 @@ more information.
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -375,7 +368,6 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
@@ -384,7 +376,6 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
@@ -394,7 +385,6 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
@@ -409,7 +399,6 @@ period, the function throws an exception.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
@@ -451,7 +440,6 @@ Example:
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {

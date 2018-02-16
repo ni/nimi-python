@@ -148,19 +148,16 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformDataArray',
                 'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -169,7 +166,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'waveformHandle',
                 'type': 'ViInt32',
                 'documentation': {
@@ -196,19 +192,16 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformNameOrHandle',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -217,13 +210,11 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Size',
                 'type': 'ViInt32',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Data',
                 'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -252,7 +243,6 @@ nifgen\_SetWaveformNextWritePosition function.''',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -261,7 +251,6 @@ nifgen\_SetWaveformNextWritePosition function.''',
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {
@@ -284,7 +273,6 @@ nifgen\_SetWaveformNextWritePosition function.''',
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -293,7 +281,6 @@ nifgen\_SetWaveformNextWritePosition function.''',
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {

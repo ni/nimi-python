@@ -129,19 +129,16 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelsString',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numberOfChannels',
                 'type': 'ViUInt32',
             },
@@ -162,7 +159,6 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -171,7 +167,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {
@@ -194,7 +189,6 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -203,7 +197,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {

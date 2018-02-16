@@ -168,7 +168,6 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
@@ -181,7 +180,6 @@ None.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calType',
                 'type': 'ViInt32',
 'documentation': {
@@ -195,7 +193,6 @@ self-calibration).
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {
