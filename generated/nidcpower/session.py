@@ -4170,7 +4170,7 @@ class Session(_SessionBase):
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
-        Returns the date and time of the last successful calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for **hours** and 30 for **minutes**.
+        Returns the date and time of the last successful calibration.
 
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
@@ -4182,20 +4182,9 @@ class Session(_SessionBase):
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
-        Returns the date and time of the oldest successful self-calibration from
-        among the channels in the session.
+        Returns the date and time of the oldest successful self-calibration from among the channels in the session.
 
-        The time returned is 24-hour (military) local time; for example, if you
-        have a session using channels 1 and 2, and a self-calibration was
-        performed on channel 1 at 2:30 PM, and a self-calibration was performed
-        on channel 2 at 3:00 PM on the same day, this function returns 14 for
-        **hours** and 30 for **minutes**.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+        Note: This function is not supported on all devices.
 
         Returns:
             month (datetime.datetime): Returns the date and time the device was last calibrated.

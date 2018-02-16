@@ -2042,8 +2042,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (int): Specifies the type of calibration performed (external or
-                self-calibration).
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
                 +-----------------------------------+---+----------------------+
                 | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |

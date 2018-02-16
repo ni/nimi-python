@@ -1003,8 +1003,7 @@ nidmm.Session methods
     :param cal_type:
 
 
-        Specifies the type of calibration performed (external or
-        self-calibration).
+        Specifies the type of calibration performed (external or self-calibration).
 
         +-----------------------------------------------------+---+----------------------+
         | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |

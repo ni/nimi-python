@@ -1709,13 +1709,9 @@ class _SessionBase(object):
     def create_waveform(self, waveform_data_array):
         '''create_waveform
 
-        Creates an onboard waveform
-        for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-        mode.
+        Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
 
-        Note:
-        You must set output_mode to OutputMode.ARB or
-        OutputMode.SEQ before calling this function.
+        Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -4374,16 +4370,6 @@ class Session(_SessionBase):
         '''get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
-
-        All values are returned as separate parameters. Each parameter is
-        returned as an integer, including the year, month, day, hour, minute,
-        and second. For example, if the device is calibrated in September 2013,
-        this function returns 9 for the **month** parameter and 2013 for the
-        **year** parameter.
-
-        The time returned is 24-hour (military) local time. For example, if the
-        device was calibrated at 2:30 PM, this function returns 14 for the
-        **hours** parameter and 30 for the **minutes** parameter.
 
         Returns:
             month (datetime.datetime): Returns the date and time the device was last calibrated.
