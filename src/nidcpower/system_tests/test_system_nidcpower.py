@@ -1,3 +1,4 @@
+import datetime
 import nidcpower
 import pytest
 
@@ -50,12 +51,12 @@ def test_get_error(session):
 
 
 def test_get_self_cal_last_date_and_time(session):
-    year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
-    assert year == 1940
-    assert month == 3
-    assert day == 1
-    assert hour == 0
-    assert minute == 0
+    last_cal = session.get_self_cal_last_date_and_time()
+    assert last_cal.year == 1940
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
 
 
 def test_get_self_cal_last_temp(session):
@@ -224,7 +225,7 @@ def test_wait_for_event_default_timeout(single_channel_session):
 
 def test_wait_for_event_with_timeout(single_channel_session):
     with single_channel_session.initiate():
-        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, datetime.timedelta(seconds=0.5))
 
 
 def test_commit(single_channel_session):
@@ -294,12 +295,12 @@ def test_send_software_edge_trigger_error(session):
 
 def test_get_ext_cal_last_date_and_time(session):
     print(type(session))
-    year, month, day, hour, minute = session.get_ext_cal_last_date_and_time()
-    assert year == 1940
-    assert month == 3
-    assert day == 1
-    assert hour == 0
-    assert minute == 0
+    last_cal = session.get_ext_cal_last_date_and_time()
+    assert last_cal.year == 1940
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
 
 
 def test_get_ext_cal_last_temp(session):

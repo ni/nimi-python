@@ -1451,14 +1451,11 @@ nifgen.Session methods
 
 .. py:method:: create_waveform_numpy(waveform_data_array)
 
-    Creates an onboard waveform
-    for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-    mode.
+    Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
 
     
 
-    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or
-        :py:data:`~nifgen.OutputMode.SEQ` before calling this function.
+    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this function.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1750,55 +1747,17 @@ nifgen.Session methods
 
 .. py:method:: get_ext_cal_last_date_and_time()
 
-    Returns the date and time of the last successful external calibration.
-    The time returned is 24-hour (military) local time; for example, if the
-    device was calibrated at 2:30 PM, this function returns 14 for the
-    **hour** parameter and 30 for the **minute** parameter.
+    Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
     
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Specifies the year of the last successful calibration.
-
-            
-
-
-        month (int): 
-
-
-            Specifies the month of the last successful calibration.
-
-            
-
-
-        day (int): 
-
-
-            Specifies the day of the last successful calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Specifies the hour of the last successful calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Specifies the minute of the last successful calibration.
+            Indicates date and time of the last calibration.
 
             
 
@@ -1929,60 +1888,15 @@ nifgen.Session methods
 
     Returns the date and time of the last successful self-calibration.
 
-    All values are returned as separate parameters. Each parameter is
-    returned as an integer, including the year, month, day, hour, minute,
-    and second. For example, if the device is calibrated in September 2013,
-    this function returns 9 for the **month** parameter and 2013 for the
-    **year** parameter.
-
-    The time returned is 24-hour (military) local time. For example, if the
-    device was calibrated at 2:30 PM, this function returns 14 for the
-    **hours** parameter and 30 for the **minutes** parameter.
-
     
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Specifies the year of the last successful calibration.
-
-            
-
-
-        month (int): 
-
-
-            Specifies the month of the last successful calibration.
-
-            
-
-
-        day (int): 
-
-
-            Specifies the day of the last successful calibration.
-
-            
-
-
-        hour (int): 
-
-
-            Specifies the hour of the last successful calibration.
-
-            
-
-
-        minute (int): 
-
-
-            Specifies the minute of the last successful calibration.
+            Returns the date and time the device was last calibrated.
 
             
 
@@ -2555,7 +2469,7 @@ nifgen.Session methods
         
 
 
-    :type max_time: int
+    :type max_time: datetime.timedelta
 
 .. py:method:: write_script(script)
 
