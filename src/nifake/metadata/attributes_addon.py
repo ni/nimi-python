@@ -8,8 +8,9 @@ attributes_codegen_method = {
 
 attributes_converters = {
     1000007: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'python_api_converter_type': 'datetime.timedelta', },
+               'python_type': 'datetime.timedelta', },
     1000008: { 'attribute_class': 'AttributeViInt32TimeDeltaMilliseconds', 
-               'python_api_converter_type': 'datetime.timedelta', },
+               'python_type': 'datetime.timedelta', },
 }
+
 

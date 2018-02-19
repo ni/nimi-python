@@ -82,6 +82,12 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
+        self._defaults['GetLastExtCalLastDateAndTime'] = {}
+        self._defaults['GetLastExtCalLastDateAndTime']['return'] = 0
+        self._defaults['GetLastExtCalLastDateAndTime']['Month'] = None
+        self._defaults['GetLastSelfCalLastDateAndTime'] = {}
+        self._defaults['GetLastSelfCalLastDateAndTime']['return'] = 0
+        self._defaults['GetLastSelfCalLastDateAndTime']['Month'] = None
         self._defaults['GetSelfCalLastDateAndTime'] = {}
         self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
         self._defaults['GetSelfCalLastDateAndTime']['Year'] = None
@@ -383,6 +389,24 @@ class SideEffectsHelper(object):
         months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
 
+    def niDCPower_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
+        if self._defaults['GetLastExtCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetLastExtCalLastDateAndTime']['return']
+        # month
+        if self._defaults['GetLastExtCalLastDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niDCPower_GetLastExtCalLastDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['Month']
+        return self._defaults['GetLastExtCalLastDateAndTime']['return']
+
+    def niDCPower_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
+        if self._defaults['GetLastSelfCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetLastSelfCalLastDateAndTime']['return']
+        # month
+        if self._defaults['GetLastSelfCalLastDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niDCPower_GetLastSelfCalLastDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['Month']
+        return self._defaults['GetLastSelfCalLastDateAndTime']['return']
+
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
             return self._defaults['GetSelfCalLastDateAndTime']['return']
@@ -672,6 +696,10 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetExtCalLastTemp.return_value = 0
         mock_library.niDCPower_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval")
         mock_library.niDCPower_GetExtCalRecommendedInterval.return_value = 0
+        mock_library.niDCPower_GetLastExtCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetLastExtCalLastDateAndTime")
+        mock_library.niDCPower_GetLastExtCalLastDateAndTime.return_value = 0
+        mock_library.niDCPower_GetLastSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetLastSelfCalLastDateAndTime")
+        mock_library.niDCPower_GetLastSelfCalLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime")
         mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastTemp")

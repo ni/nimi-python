@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from niswitch import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from niswitch import _converters
 from niswitch import attributes
 from niswitch import enums
 from niswitch import errors
@@ -89,8 +89,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].analog_bus_sharing_enable = var
-        var = session['0,1'].analog_bus_sharing_enable
+        session.channels['0,1'].analog_bus_sharing_enable = var
+        var = session.channels['0,1'].analog_bus_sharing_enable
     '''
     bandwidth = attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -104,8 +104,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     bandwidth.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].bandwidth = var
-        var = session['0,1'].bandwidth
+        session.channels['0,1'].bandwidth = var
+        var = session.channels['0,1'].bandwidth
     '''
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''Type: int
@@ -141,8 +141,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     characteristic_impedance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].characteristic_impedance = var
-        var = session['0,1'].characteristic_impedance
+        session.channels['0,1'].characteristic_impedance = var
+        var = session.channels['0,1'].characteristic_impedance
     '''
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''Type: bool
@@ -212,8 +212,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     is_configuration_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].is_configuration_channel = var
-        var = session['0,1'].is_configuration_channel
+        session.channels['0,1'].is_configuration_channel = var
+        var = session.channels['0,1'].is_configuration_channel
     '''
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''Type: bool
@@ -236,8 +236,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     is_source_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].is_source_channel = var
-        var = session['0,1'].is_source_channel
+        session.channels['0,1'].is_source_channel = var
+        var = session.channels['0,1'].is_source_channel
     '''
     is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''Type: bool
@@ -272,8 +272,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_ac_voltage.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_ac_voltage = var
-        var = session['0,1'].max_ac_voltage
+        session.channels['0,1'].max_ac_voltage = var
+        var = session.channels['0,1'].max_ac_voltage
     '''
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''Type: float
@@ -287,8 +287,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_ac_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_ac_current = var
-        var = session['0,1'].max_carry_ac_current
+        session.channels['0,1'].max_carry_ac_current = var
+        var = session.channels['0,1'].max_carry_ac_current
     '''
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''Type: float
@@ -302,8 +302,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_ac_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_ac_power = var
-        var = session['0,1'].max_carry_ac_power
+        session.channels['0,1'].max_carry_ac_power = var
+        var = session.channels['0,1'].max_carry_ac_power
     '''
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''Type: float
@@ -317,8 +317,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_dc_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_dc_current = var
-        var = session['0,1'].max_carry_dc_current
+        session.channels['0,1'].max_carry_dc_current = var
+        var = session.channels['0,1'].max_carry_dc_current
     '''
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''Type: float
@@ -332,8 +332,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_dc_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_dc_power = var
-        var = session['0,1'].max_carry_dc_power
+        session.channels['0,1'].max_carry_dc_power = var
+        var = session.channels['0,1'].max_carry_dc_power
     '''
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''Type: float
@@ -347,8 +347,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_dc_voltage.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_dc_voltage = var
-        var = session['0,1'].max_dc_voltage
+        session.channels['0,1'].max_dc_voltage = var
+        var = session.channels['0,1'].max_dc_voltage
     '''
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''Type: float
@@ -362,8 +362,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_ac_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_ac_current = var
-        var = session['0,1'].max_switching_ac_current
+        session.channels['0,1'].max_switching_ac_current = var
+        var = session.channels['0,1'].max_switching_ac_current
     '''
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''Type: float
@@ -377,8 +377,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_ac_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_ac_power = var
-        var = session['0,1'].max_switching_ac_power
+        session.channels['0,1'].max_switching_ac_power = var
+        var = session.channels['0,1'].max_switching_ac_power
     '''
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''Type: float
@@ -392,8 +392,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_dc_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_dc_current = var
-        var = session['0,1'].max_switching_dc_current
+        session.channels['0,1'].max_switching_dc_current = var
+        var = session.channels['0,1'].max_switching_dc_current
     '''
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''Type: float
@@ -407,8 +407,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_dc_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_dc_power = var
-        var = session['0,1'].max_switching_dc_power
+        session.channels['0,1'].max_switching_dc_power = var
+        var = session.channels['0,1'].max_switching_dc_power
     '''
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''Type: int
@@ -456,7 +456,7 @@ class _SessionBase(object):
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
     This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
@@ -491,7 +491,7 @@ class _SessionBase(object):
 
     This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
     This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
@@ -505,8 +505,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     settling_time.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].settling_time = var
-        var = session['0,1'].settling_time
+        session.channels['0,1'].settling_time = var
+        var = session.channels['0,1'].settling_time
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -576,8 +576,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     wire_mode.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].wire_mode = var
-        var = session['0,1'].wire_mode
+        session.channels['0,1'].wire_mode = var
+        var = session.channels['0,1'].wire_mode
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -640,7 +640,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -695,7 +695,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -750,7 +750,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -817,7 +817,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -917,7 +917,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -984,7 +984,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1051,7 +1051,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1118,7 +1118,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1576,7 +1576,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1617,7 +1617,7 @@ class Session(_SessionBase):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case S150
+        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, visatype.ViReal64)  # case S140
         trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case S130
         scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
@@ -2371,7 +2371,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms=5000):
+    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2387,12 +2387,12 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms=5000):
+    def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2409,7 +2409,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

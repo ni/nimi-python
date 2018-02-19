@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nidmm import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nidmm import _converters
 from nidmm import attributes
 from nidmm import enums
 from nidmm import errors
@@ -332,8 +332,8 @@ class _SessionBase(object):
 
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
     '''
-    sample_interval = attributes.AttributeViReal64(1250303)
-    '''Type: float
+    sample_interval = attributes.AttributeViReal64TimeDeltaSeconds(1250303)
+    '''Type: datetime.timedelta
 
     Specifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the NIDMM_ATTR_SAMPLE_TRIGGER attribute is set to INTERVAL.
     On the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
@@ -357,8 +357,8 @@ class _SessionBase(object):
 
     A string containing the serial number of the instrument. This attribute corresponds  to the serial number label that is attached to most products.
     '''
-    settle_time = attributes.AttributeViReal64(1150028)
-    '''Type: float
+    settle_time = attributes.AttributeViReal64TimeDeltaSeconds(1150028)
+    '''Type: datetime.timedelta
 
     Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
@@ -503,8 +503,8 @@ class _SessionBase(object):
     The NI 4050 and NI 4060 support this attribute being set to 1.
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
     '''
-    trigger_delay = attributes.AttributeViReal64(1250005)
-    '''Type: float
+    trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250005)
+    '''Type: datetime.timedelta
 
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
     The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
@@ -605,7 +605,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -644,7 +644,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -683,7 +683,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -725,7 +725,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -806,7 +806,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -857,7 +857,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -908,7 +908,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -959,7 +959,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidmm.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -1317,7 +1317,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=-1):
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
         '''configure_multi_point
 
         Configures the attributes for multipoint measurements. These attributes
@@ -1371,7 +1371,7 @@ class Session(_SessionBase):
         trigger_count_ctype = visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = visatype.ViInt32(sample_count)  # case S150
         sample_trigger_ctype = visatype.ViInt32(sample_trigger.value)  # case S130
-        sample_interval_ctype = visatype.ViReal64(sample_interval)  # case S150
+        sample_interval_ctype = _converters.convert_timedelta_to_seconds(sample_interval, visatype.ViReal64)  # case S140
         error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1587,7 +1587,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger(self, trigger_source, trigger_delay=-1):
+    def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
         '''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
@@ -1627,7 +1627,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = visatype.ViInt32(trigger_source.value)  # case S130
-        trigger_delay_ctype = visatype.ViReal64(trigger_delay)  # case S150
+        trigger_delay_ctype = _converters.convert_timedelta_to_seconds(trigger_delay, visatype.ViReal64)  # case S140
         error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1699,7 +1699,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, maximum_time=-1):
+    def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch
 
         Returns the value from a previously initiated measurement. You must call
@@ -1726,13 +1726,13 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         reading_ctype = visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def fetch_multi_point(self, array_size, maximum_time=-1):
+    def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
@@ -1776,7 +1776,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -1786,7 +1786,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
-    def fetch_waveform(self, array_size, maximum_time=-1):
+    def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1822,7 +1822,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
@@ -1832,7 +1832,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array_array
 
-    def fetch_waveform_into(self, waveform_array, maximum_time=-1):
+    def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1876,7 +1876,7 @@ class Session(_SessionBase):
         array_size = len(waveform_array)
 
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = visatype.ViInt32()  # case S200
@@ -1947,8 +1947,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
 
-    def get_cal_date_and_time(self, cal_type):
-        '''get_cal_date_and_time
+    def _get_cal_date_and_time(self, cal_type):
+        '''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -2033,6 +2033,35 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
+
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
+
+        Returns the date and time of the last calibration performed.
+
+        Note: The NI 4050 and NI 4060 are not supported.
+
+        Args:
+            cal_type (int): Specifies the type of calibration performed (external or self-calibration).
+
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
+                +-----------------------------------+---+----------------------+
+
+                Note: The NI 4065 does not support self-calibration.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+
+        '''
+        month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
+        return datetime.datetime(year, month, day, hour, minute)
 
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
@@ -2301,7 +2330,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
-    def read(self, maximum_time=-1):
+    def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read
 
         Acquires a single measurement and returns the measured value.
@@ -2327,13 +2356,13 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         reading_ctype = visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
-    def read_multi_point(self, array_size, maximum_time=-1):
+    def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
@@ -2376,7 +2405,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -2430,7 +2459,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
-    def read_waveform(self, array_size, maximum_time=-1):
+    def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
@@ -2471,7 +2500,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = visatype.ViInt32(maximum_time)  # case S150
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, visatype.ViInt32)  # case S140
         array_size_ctype = visatype.ViInt32(array_size)  # case S190
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600

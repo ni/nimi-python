@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+import datetime
 import nidcpower
 import sys
 
@@ -12,7 +13,7 @@ def print_fetched_measurements(voltage_measurements, current_measurements, in_co
 
 
 def example(resource_name, channels, options, voltage1, voltage2, delay):
-    timeout = delay + 1.0
+    timeout = datetime.timedelta(seconds=(delay + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, channels=channels, options=options) as session:
 
@@ -22,7 +23,7 @@ def example(resource_name, channels, options, voltage1, voltage2, delay):
         session.current_limit = .06
         session.voltage_level_range = 5.0
         session.current_limit_range = .06
-        session.source_delay = delay
+        session.source_delay = datetime.timedelta(seconds=delay)
         session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
         session.voltage_level = voltage1
 

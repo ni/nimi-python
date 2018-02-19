@@ -10,8 +10,8 @@ functions_codegen_method = {
     '.etAttribute.+':           { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
-    'GetError':                 { 'codegen_method': 'private',  },
     'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetError':                 { 'codegen_method': 'private',  },
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
 }
@@ -72,11 +72,11 @@ functions_default_value = {
 # Converted parameters
 functions_converters = {
     'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'datetime.timedelta', }, }, },
     'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_microseconds', 
-                                                               'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'datetime.timedelta', }, }, },
     'InitWithOptions':                  { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'python_api_converter_type': 'dict', }, }, },
+                                                               'python_type': 'dict', }, }, },
 }
 
 # Manually provided Python names for methods, rather than deriving from original names.
@@ -121,13 +121,14 @@ functions_additional_functions = {
     'GetLastCalDateAndTime': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
+        'python_name': 'get_cal_date_and_time',
+        'real_datetime_call': 'GetCalDateAndTime',
         'method_templates': [
             { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -136,7 +137,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'calType',
                 'type': 'ViInt32',
                 'documentation': {
@@ -145,7 +145,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'Month',
                 'type': 'datetime.datetime',
                 'documentation': {

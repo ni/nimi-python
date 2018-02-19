@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from niscope import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from niscope import _converters
 from niscope import attributes
 from niscope import enums
 from niscope import errors
@@ -90,8 +90,8 @@ class _SessionBase(object):
     Specifies the destination for the 5 Volt signal.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    absolute_sample_clock_offset = attributes.AttributeViReal64(1150374)
-    '''Type: float
+    absolute_sample_clock_offset = attributes.AttributeViReal64TimeDeltaSeconds(1150374)
+    '''Type: datetime.timedelta
 
     Gets or sets the absolute time offset of the sample clock relative to
     the reference clock in terms of seconds.
@@ -123,8 +123,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     accessory_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].accessory_gain = var
-        var = session['0,1'].accessory_gain
+        session.channels['0,1'].accessory_gain = var
+        var = session.channels['0,1'].accessory_gain
     '''
     accessory_offset = attributes.AttributeViReal64(1150280)
     '''Type: float
@@ -144,11 +144,11 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     accessory_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].accessory_offset = var
-        var = session['0,1'].accessory_offset
+        session.channels['0,1'].accessory_offset = var
+        var = session.channels['0,1'].accessory_offset
     '''
-    acquisition_start_time = attributes.AttributeViReal64(1250109)
-    '''Type: float
+    acquisition_start_time = attributes.AttributeViReal64TimeDeltaSeconds(1250109)
+    '''Type: datetime.timedelta
 
     Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
     '''
@@ -206,8 +206,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     bandpass_filter_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].bandpass_filter_enabled = var
-        var = session['0,1'].bandpass_filter_enabled
+        session.channels['0,1'].bandpass_filter_enabled = var
+        var = session.channels['0,1'].bandpass_filter_enabled
     '''
     binary_sample_width = attributes.AttributeViInt32(1150005)
     '''Type: int
@@ -244,8 +244,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     channel_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].channel_enabled = var
-        var = session['0,1'].channel_enabled
+        session.channels['0,1'].channel_enabled = var
+        var = session.channels['0,1'].channel_enabled
     '''
     channel_terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
     '''Type: enums.TerminalConfiguration
@@ -258,8 +258,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     channel_terminal_configuration.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].channel_terminal_configuration = var
-        var = session['0,1'].channel_terminal_configuration
+        session.channels['0,1'].channel_terminal_configuration = var
+        var = session.channels['0,1'].channel_terminal_configuration
     '''
     clock_sync_pulse_source = attributes.AttributeViString(1150007)
     '''Type: str
@@ -293,8 +293,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_center_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_center_frequency = var
-        var = session['0,1'].ddc_center_frequency
+        session.channels['0,1'].ddc_center_frequency = var
+        var = session.channels['0,1'].ddc_center_frequency
     '''
     ddc_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
     '''Type: enums.DataProcessingMode
@@ -317,8 +317,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_enabled = var
-        var = session['0,1'].ddc_enabled
+        session.channels['0,1'].ddc_enabled = var
+        var = session.channels['0,1'].ddc_enabled
     '''
     ddc_frequency_translation_enabled = attributes.AttributeViBoolean(1150302)
     '''Type: bool
@@ -332,8 +332,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_enabled = var
-        var = session['0,1'].ddc_frequency_translation_enabled
+        session.channels['0,1'].ddc_frequency_translation_enabled = var
+        var = session.channels['0,1'].ddc_frequency_translation_enabled
     '''
     ddc_frequency_translation_phase_i = attributes.AttributeViReal64(1150305)
     '''Type: float
@@ -347,8 +347,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_phase_i.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_phase_i = var
-        var = session['0,1'].ddc_frequency_translation_phase_i
+        session.channels['0,1'].ddc_frequency_translation_phase_i = var
+        var = session.channels['0,1'].ddc_frequency_translation_phase_i
     '''
     ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
     '''Type: float
@@ -362,8 +362,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_frequency_translation_phase_q.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_frequency_translation_phase_q = var
-        var = session['0,1'].ddc_frequency_translation_phase_q
+        session.channels['0,1'].ddc_frequency_translation_phase_q = var
+        var = session.channels['0,1'].ddc_frequency_translation_phase_q
     '''
     ddc_q_source = attributes.AttributeViString(1150310)
     '''Type: str
@@ -377,8 +377,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     ddc_q_source.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].ddc_q_source = var
-        var = session['0,1'].ddc_q_source
+        session.channels['0,1'].ddc_q_source = var
+        var = session.channels['0,1'].ddc_q_source
     '''
     device_number = attributes.AttributeViInt32(1150076)
     '''Type: int
@@ -403,8 +403,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     digital_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].digital_gain = var
-        var = session['0,1'].digital_gain
+        session.channels['0,1'].digital_gain = var
+        var = session.channels['0,1'].digital_gain
     '''
     digital_offset = attributes.AttributeViReal64(1150308)
     '''Type: float
@@ -419,8 +419,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     digital_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].digital_offset = var
-        var = session['0,1'].digital_offset
+        session.channels['0,1'].digital_offset = var
+        var = session.channels['0,1'].digital_offset
     '''
     dither_enabled = attributes.AttributeViBoolean(1150319)
     '''Type: bool
@@ -434,8 +434,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     dither_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].dither_enabled = var
-        var = session['0,1'].dither_enabled
+        session.channels['0,1'].dither_enabled = var
+        var = session.channels['0,1'].dither_enabled
     '''
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
@@ -466,8 +466,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     enable_time_interleaved_sampling.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].enable_time_interleaved_sampling = var
-        var = session['0,1'].enable_time_interleaved_sampling
+        session.channels['0,1'].enable_time_interleaved_sampling = var
+        var = session.channels['0,1'].enable_time_interleaved_sampling
     '''
     end_of_acquisition_event_output_terminal = attributes.AttributeViString(1150101)
     '''Type: str
@@ -481,8 +481,8 @@ class _SessionBase(object):
     Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    end_of_record_to_advance_trigger_holdoff = attributes.AttributeViReal64(1150366)
-    '''Type: float
+    end_of_record_to_advance_trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1150366)
+    '''Type: datetime.timedelta
 
     End of Record to Advance Trigger Holdoff is the length of time (in
     seconds) that a device waits between the completion of one record and
@@ -503,8 +503,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     equalization_filter_enabled.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].equalization_filter_enabled = var
-        var = session['0,1'].equalization_filter_enabled
+        session.channels['0,1'].equalization_filter_enabled = var
+        var = session.channels['0,1'].equalization_filter_enabled
     '''
     equalization_num_coefficients = attributes.AttributeViInt32(1150312)
     '''Type: int
@@ -517,8 +517,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     equalization_num_coefficients.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].equalization_num_coefficients = var
-        var = session['0,1'].equalization_num_coefficients
+        session.channels['0,1'].equalization_num_coefficients = var
+        var = session.channels['0,1'].equalization_num_coefficients
     '''
     exported_advance_trigger_output_terminal = attributes.AttributeViString(1150109)
     '''Type: str
@@ -591,8 +591,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     flex_fir_antialias_filter_type.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].flex_fir_antialias_filter_type = var
-        var = session['0,1'].flex_fir_antialias_filter_type
+        session.channels['0,1'].flex_fir_antialias_filter_type = var
+        var = session.channels['0,1'].flex_fir_antialias_filter_type
     '''
     fpga_bitfile_path = attributes.AttributeViString(1150375)
     '''Type: str
@@ -656,8 +656,8 @@ class _SessionBase(object):
     Returns the effective sample rate using the current configuration. The units are samples per second.  This attribute is only valid after a call to the one of the Configure Horizontal functions.
     Units: Hertz (Samples / Second)
     '''
-    horz_time_per_record = attributes.AttributeViReal64(1250007)
-    '''Type: float
+    horz_time_per_record = attributes.AttributeViReal64TimeDeltaSeconds(1250007)
+    '''Type: datetime.timedelta
 
     Specifies the length of time that corresponds to the record length.
     Units: Seconds
@@ -678,8 +678,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     input_impedance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].input_impedance = var
-        var = session['0,1'].input_impedance
+        session.channels['0,1'].input_impedance = var
+        var = session.channels['0,1'].input_impedance
     '''
     instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''Type: str
@@ -746,8 +746,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_input_frequency.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_input_frequency = var
-        var = session['0,1'].max_input_frequency
+        session.channels['0,1'].max_input_frequency = var
+        var = session.channels['0,1'].max_input_frequency
     '''
     max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''Type: float
@@ -771,8 +771,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_array_gain.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_array_gain = var
-        var = session['0,1'].meas_array_gain
+        session.channels['0,1'].meas_array_gain = var
+        var = session.channels['0,1'].meas_array_gain
     '''
     meas_array_offset = attributes.AttributeViReal64(1150044)
     '''Type: float
@@ -786,8 +786,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_array_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_array_offset = var
-        var = session['0,1'].meas_array_offset
+        session.channels['0,1'].meas_array_offset = var
+        var = session.channels['0,1'].meas_array_offset
     '''
     meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
     '''Type: float
@@ -801,8 +801,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_high_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_high_ref_level = var
-        var = session['0,1'].meas_chan_high_ref_level
+        session.channels['0,1'].meas_chan_high_ref_level = var
+        var = session.channels['0,1'].meas_chan_high_ref_level
     '''
     meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
     '''Type: float
@@ -816,8 +816,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_low_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_low_ref_level = var
-        var = session['0,1'].meas_chan_low_ref_level
+        session.channels['0,1'].meas_chan_low_ref_level = var
+        var = session.channels['0,1'].meas_chan_low_ref_level
     '''
     meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
     '''Type: float
@@ -831,8 +831,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_chan_mid_ref_level.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_chan_mid_ref_level = var
-        var = session['0,1'].meas_chan_mid_ref_level
+        session.channels['0,1'].meas_chan_mid_ref_level = var
+        var = session.channels['0,1'].meas_chan_mid_ref_level
     '''
     meas_filter_center_freq = attributes.AttributeViReal64(1150032)
     '''Type: float
@@ -846,8 +846,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_center_freq.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_center_freq = var
-        var = session['0,1'].meas_filter_center_freq
+        session.channels['0,1'].meas_filter_center_freq = var
+        var = session.channels['0,1'].meas_filter_center_freq
     '''
     meas_filter_cutoff_freq = attributes.AttributeViReal64(1150031)
     '''Type: float
@@ -861,8 +861,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_cutoff_freq.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_cutoff_freq = var
-        var = session['0,1'].meas_filter_cutoff_freq
+        session.channels['0,1'].meas_filter_cutoff_freq = var
+        var = session.channels['0,1'].meas_filter_cutoff_freq
     '''
     meas_filter_order = attributes.AttributeViInt32(1150036)
     '''Type: int
@@ -894,8 +894,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_filter_transient_waveform_percent.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_filter_transient_waveform_percent = var
-        var = session['0,1'].meas_filter_transient_waveform_percent
+        session.channels['0,1'].meas_filter_transient_waveform_percent = var
+        var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
     meas_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
@@ -932,8 +932,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_fir_filter_window.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_fir_filter_window = var
-        var = session['0,1'].meas_fir_filter_window
+        session.channels['0,1'].meas_fir_filter_window = var
+        var = session.channels['0,1'].meas_fir_filter_window
     '''
     meas_hysteresis_percent = attributes.AttributeViReal64(1150019)
     '''Type: float
@@ -947,8 +947,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_hysteresis_percent.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_hysteresis_percent = var
-        var = session['0,1'].meas_hysteresis_percent
+        session.channels['0,1'].meas_hysteresis_percent = var
+        var = session.channels['0,1'].meas_hysteresis_percent
     '''
     meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
     '''Type: float
@@ -962,8 +962,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_interpolation_sampling_factor.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_interpolation_sampling_factor = var
-        var = session['0,1'].meas_interpolation_sampling_factor
+        session.channels['0,1'].meas_interpolation_sampling_factor = var
+        var = session.channels['0,1'].meas_interpolation_sampling_factor
     '''
     meas_last_acq_histogram_size = attributes.AttributeViInt32(1150020)
     '''Type: int
@@ -977,8 +977,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_last_acq_histogram_size.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_last_acq_histogram_size = var
-        var = session['0,1'].meas_last_acq_histogram_size
+        session.channels['0,1'].meas_last_acq_histogram_size = var
+        var = session.channels['0,1'].meas_last_acq_histogram_size
     '''
     meas_other_channel = attributes.AttributeViString(1150018)
     '''Type: str
@@ -992,8 +992,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_other_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_other_channel = var
-        var = session['0,1'].meas_other_channel
+        session.channels['0,1'].meas_other_channel = var
+        var = session.channels['0,1'].meas_other_channel
     '''
     meas_percentage_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
@@ -1010,8 +1010,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_percentage_method.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_percentage_method = var
-        var = session['0,1'].meas_percentage_method
+        session.channels['0,1'].meas_percentage_method = var
+        var = session.channels['0,1'].meas_percentage_method
     '''
     meas_polynomial_interpolation_order = attributes.AttributeViInt32(1150029)
     '''Type: int
@@ -1033,8 +1033,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_ref_level_units.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_ref_level_units = var
-        var = session['0,1'].meas_ref_level_units
+        session.channels['0,1'].meas_ref_level_units = var
+        var = session.channels['0,1'].meas_ref_level_units
     '''
     meas_time_histogram_high_time = attributes.AttributeViReal64(1150028)
     '''Type: float
@@ -1054,8 +1054,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_high_volts.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_high_volts = var
-        var = session['0,1'].meas_time_histogram_high_volts
+        session.channels['0,1'].meas_time_histogram_high_volts = var
+        var = session.channels['0,1'].meas_time_histogram_high_volts
     '''
     meas_time_histogram_low_time = attributes.AttributeViReal64(1150027)
     '''Type: float
@@ -1075,8 +1075,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_low_volts.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_low_volts = var
-        var = session['0,1'].meas_time_histogram_low_volts
+        session.channels['0,1'].meas_time_histogram_low_volts = var
+        var = session.channels['0,1'].meas_time_histogram_low_volts
     '''
     meas_time_histogram_size = attributes.AttributeViInt32(1150024)
     '''Type: int
@@ -1090,8 +1090,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     meas_time_histogram_size.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].meas_time_histogram_size = var
-        var = session['0,1'].meas_time_histogram_size
+        session.channels['0,1'].meas_time_histogram_size = var
+        var = session.channels['0,1'].meas_time_histogram_size
     '''
     meas_voltage_histogram_high_volts = attributes.AttributeViReal64(1150023)
     '''Type: float
@@ -1174,8 +1174,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     probe_attenuation.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].probe_attenuation = var
-        var = session['0,1'].probe_attenuation
+        session.channels['0,1'].probe_attenuation = var
+        var = session.channels['0,1'].probe_attenuation
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
@@ -1227,8 +1227,8 @@ class _SessionBase(object):
 
     Indicates which analog compare circuitry to use on the device.
     '''
-    ref_trigger_minimum_quiet_time = attributes.AttributeViReal64(1150315)
-    '''Type: float
+    ref_trigger_minimum_quiet_time = attributes.AttributeViReal64TimeDeltaSeconds(1150315)
+    '''Type: datetime.timedelta
 
     The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This attribute is useful for triggering at the beginning and not in the  middle of signal bursts.
     '''
@@ -1309,8 +1309,8 @@ class _SessionBase(object):
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
     The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
     '''
-    slave_trigger_delay = attributes.AttributeViReal64(1150046)
-    '''Type: float
+    slave_trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
+    '''Type: datetime.timedelta
 
     Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
     '''
@@ -1339,8 +1339,8 @@ class _SessionBase(object):
 
     A string that contains the name of the vendor that supplies this driver.
     '''
-    start_to_ref_trigger_holdoff = attributes.AttributeViReal64(1150103)
-    '''Type: float
+    start_to_ref_trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1150103)
+    '''Type: datetime.timedelta
 
     Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
     Units: Seconds
@@ -1352,8 +1352,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     start_to_ref_trigger_holdoff.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].start_to_ref_trigger_holdoff = var
-        var = session['0,1'].start_to_ref_trigger_holdoff
+        session.channels['0,1'].start_to_ref_trigger_holdoff = var
+        var = session.channels['0,1'].start_to_ref_trigger_holdoff
     '''
     stream_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
     '''Type: enums.StreamingPositionType
@@ -1378,29 +1378,29 @@ class _SessionBase(object):
 
     Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
     '''
-    trigger_delay_time = attributes.AttributeViReal64(1250015)
-    '''Type: float
+    trigger_delay_time = attributes.AttributeViReal64TimeDeltaSeconds(1250015)
+    '''Type: datetime.timedelta
 
     Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_from_pfi_delay = attributes.AttributeViReal64(1150052)
-    '''Type: float
+    trigger_from_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150052)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_from_rtsi_delay = attributes.AttributeViReal64(1150051)
-    '''Type: float
+    trigger_from_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_from_star_delay = attributes.AttributeViReal64(1150050)
-    '''Type: float
+    trigger_from_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150050)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_holdoff = attributes.AttributeViReal64(1250016)
-    '''Type: float
+    trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1250016)
+    '''Type: datetime.timedelta
 
     Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to niScope_ConfigureHorizontalTiming.
     Valid Values: 0.0 - 171.8
@@ -1443,18 +1443,18 @@ class _SessionBase(object):
 
     Specifies the source the digitizer monitors for the trigger event.
     '''
-    trigger_to_pfi_delay = attributes.AttributeViReal64(1150049)
-    '''Type: float
+    trigger_to_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150049)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_to_rtsi_delay = attributes.AttributeViReal64(1150048)
-    '''Type: float
+    trigger_to_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150048)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
-    trigger_to_star_delay = attributes.AttributeViReal64(1150047)
-    '''Type: float
+    trigger_to_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150047)
+    '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
     '''
@@ -1517,8 +1517,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     tv_trigger_signal_format.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].tv_trigger_signal_format = var
-        var = session['0,1'].tv_trigger_signal_format
+        session.channels['0,1'].tv_trigger_signal_format = var
+        var = session.channels['0,1'].tv_trigger_signal_format
     '''
     vertical_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
     '''Type: enums.VerticalCoupling
@@ -1531,8 +1531,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_coupling.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_coupling = var
-        var = session['0,1'].vertical_coupling
+        session.channels['0,1'].vertical_coupling = var
+        var = session.channels['0,1'].vertical_coupling
     '''
     vertical_offset = attributes.AttributeViReal64(1250002)
     '''Type: float
@@ -1547,8 +1547,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_offset.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_offset = var
-        var = session['0,1'].vertical_offset
+        session.channels['0,1'].vertical_offset = var
+        var = session.channels['0,1'].vertical_offset
     '''
     vertical_range = attributes.AttributeViReal64(1250001)
     '''Type: float
@@ -1562,8 +1562,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     vertical_range.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].vertical_range = var
-        var = session['0,1'].vertical_range
+        session.channels['0,1'].vertical_range = var
+        var = session.channels['0,1'].vertical_range
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -1621,7 +1621,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._actual_num_wfms()
+            session.channels['0,1']._actual_num_wfms()
 
         Returns:
             num_wfms (int): Returns the number of records times the number of channels; if you are
@@ -1665,7 +1665,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -1708,7 +1708,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -1739,7 +1739,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
+            session.channels['0,1'].configure_chan_characteristics(input_impedance, max_input_frequency)
 
         Args:
             input_impedance (float): The input impedance for the channel; NI-SCOPE sets
@@ -1774,7 +1774,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_equalization_filter_coefficients(coefficients)
+            session.channels['0,1'].configure_equalization_filter_coefficients(coefficients)
 
         Args:
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
@@ -1807,7 +1807,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+            session.channels['0,1'].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
         Args:
             range (float): Specifies the vertical range Refer to vertical_range for
@@ -1839,7 +1839,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _fetch(self, num_samples, timeout=5.0):
+    def _fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1865,7 +1865,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1874,7 +1874,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -1929,7 +1929,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_size = (num_samples * self._actual_num_wfms())  # case B560
         wfm_array = array.array("d", [0] * wfm_size)  # case B560
@@ -1940,7 +1940,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1966,7 +1966,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch(num_samples, timeout=5.0)
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -1996,7 +1996,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2059,7 +2059,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=float64, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2068,7 +2068,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary16_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary16_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2092,7 +2092,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary16(num_samples, timeout=5.0)
+            session.channels['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2122,7 +2122,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2185,7 +2185,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int16, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2194,7 +2194,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary32_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary32_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2218,7 +2218,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary32(num_samples, timeout=5.0)
+            session.channels['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2248,7 +2248,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2311,7 +2311,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int32, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2320,7 +2320,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary8_into(self, num_samples, wfm, timeout=5.0):
+    def _fetch_binary8_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2344,7 +2344,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._fetch_binary8(num_samples, timeout=5.0)
+            session.channels['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2374,7 +2374,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced functions are not in the Python API for this driver.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2437,7 +2437,7 @@ class _SessionBase(object):
             raise TypeError('wfm must be numpy.ndarray of dtype=int8, is ' + str(wfm.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2446,21 +2446,17 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, timeout=5.0):
+    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
-        digitizer acquires for the specified channel. This function returns
-        scaled voltage waveforms.
+                        digitizer acquires for the specified channel. This function returns
+                        scaled voltage waveforms.
 
-        This function may return multiple waveforms depending on the number of
-        channels, the acquisition type, and the number of records you specify.
+                        This function may return multiple waveforms depending on the number of
+                        channels, the acquisition type, and the number of records you specify.
 
-        Note:
-        Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+        Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2468,46 +2464,26 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the
-                acquisition finishes with fewer points than requested, some devices
-                return partial data if the acquisition finished, was aborted, or a
-                timeout of 0 was used. If it fails to complete within the timeout
-                period, the function throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
-            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
-                be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of
-                waveforms.
+            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
+                                        Types supported are
 
-                index 0 = record 0, channel 0
+                                        - `numpy.float64`
+                                        - `numpy.int8`
+                                        - `numpy.in16`
+                                        - `numpy.int32`
 
-                index *x* = record 0, channel 1
+                                        Example:
 
-                index 2\ *x* = record 1, channel 0
+                                        .. code-block:: python
 
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
-
-                Types supported are
-
-                - `numpy.float64`
-                - `numpy.int8`
-                - `numpy.in16`
-                - `numpy.int32`
-
-                Example:
-
-                .. code-block:: python
-
-                    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+                                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
 
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
@@ -2548,21 +2524,17 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
-    def fetch(self, num_samples, timeout=5.0):
+    def fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
-        digitizer acquires for the specified channel. This function returns
-        scaled voltage waveforms.
+                        digitizer acquires for the specified channel. This function returns
+                        scaled voltage waveforms.
 
-        This function may return multiple waveforms depending on the number of
-        channels, the acquisition type, and the number of records you specify.
+                        This function may return multiple waveforms depending on the number of
+                        channels, the acquisition type, and the number of records you specify.
 
-        Note:
-        Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+        Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2570,36 +2542,16 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch(num_samples, timeout=5.0)
+            session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the
-                acquisition finishes with fewer points than requested, some devices
-                return partial data if the acquisition finished, was aborted, or a
-                timeout of 0 was used. If it fails to complete within the timeout
-                period, the function throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of
-                waveforms. Call _actual_num_wfms to determine the number of
-                waveforms.
-
-                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-                first. For example, with a channel list of 0,1, you would have the
-                following index values:
-
-                index 0 = record 0, channel 0
-
-                index *x* = record 0, channel 1
-
-                index 2\ *x* = record 1, channel 0
-
-                index 3\ *x* = record 1, channel 1
-
-                Where *x* = the record length
+            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
@@ -2623,7 +2575,7 @@ class _SessionBase(object):
         '''
         return self._fetch(num_samples, timeout)
 
-    def fetch_measurement(self, scalar_meas_function, timeout=5.0):
+    def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
@@ -2644,14 +2596,14 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2665,7 +2617,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=result_size)  # case B560
@@ -2673,7 +2625,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_measurement_stats(self, scalar_meas_function, timeout=5.0):
+    def fetch_measurement_stats(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
@@ -2707,14 +2659,14 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2742,7 +2694,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=result_size)  # case B560
@@ -2778,7 +2730,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2815,7 +2767,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2851,7 +2803,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2899,7 +2851,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -2933,7 +2885,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
 
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.
@@ -2996,7 +2948,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def read(self, num_samples, timeout=5.0):
+    def read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
@@ -3021,7 +2973,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read(num_samples, timeout=5.0)
+            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -3030,7 +2982,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the function returns an error.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3085,7 +3037,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
         wfm_size = (num_samples * self._actual_num_wfms())  # case B560
         wfm_array = array.array("d", [0] * wfm_size)  # case B560
@@ -3096,7 +3048,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def read_measurement(self, scalar_meas_function, timeout=5.0):
+    def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
@@ -3120,14 +3072,14 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3141,7 +3093,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_array = array.array("d", [0] * result_size)  # case B560
@@ -3182,7 +3134,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3231,7 +3183,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3280,7 +3232,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3331,7 +3283,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of an attribute.
@@ -3752,7 +3704,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -3793,11 +3745,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3807,13 +3759,13 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = visatype.ViInt32(slope.value)  # case S130
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -3850,11 +3802,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3868,13 +3820,13 @@ class Session(_SessionBase):
         level_ctype = visatype.ViReal64(level)  # case S150
         slope_ctype = visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0):
+    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -3921,11 +3873,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -3940,8 +3892,8 @@ class Session(_SessionBase):
         hysteresis_ctype = visatype.ViReal64(hysteresis)  # case S150
         slope_ctype = visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3961,7 +3913,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_software(self, holdoff=0.0, delay=0.0):
+    def configure_trigger_software(self, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_software
 
         Configures common properties for software triggering.
@@ -3987,23 +3939,23 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=0.0, delay=0.0):
+    def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_video
 
         Configures the common properties for video triggering, including the
@@ -4057,11 +4009,11 @@ class Session(_SessionBase):
 
                 Default value: 1
 
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4082,13 +4034,13 @@ class Session(_SessionBase):
         line_number_ctype = visatype.ViInt32(line_number)  # case S150
         polarity_ctype = visatype.ViInt32(polarity.value)  # case S130
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=0.0, delay=0.0):
+    def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_window
 
         Configures common properties for analog window triggering. A window
@@ -4131,11 +4083,11 @@ class Session(_SessionBase):
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
-            holdoff (float): The length of time the digitizer waits after detecting a trigger before
+            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (float): How long the digitizer waits after receiving the trigger to start
+            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4150,8 +4102,8 @@ class Session(_SessionBase):
         high_level_ctype = visatype.ViReal64(high_level)  # case S150
         window_mode_ctype = visatype.ViInt32(window_mode.value)  # case S130
         trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = visatype.ViReal64(holdoff)  # case S150
-        delay_ctype = visatype.ViReal64(delay)  # case S150
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

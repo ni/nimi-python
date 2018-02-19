@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifake import _converters
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -179,7 +179,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -208,7 +208,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -237,7 +237,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -266,7 +266,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -295,7 +295,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -346,10 +346,10 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_from_channel(maximum_time)
+            session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (int): Specifies the **maximum_time** allowed in microseconds.
 
 
         Returns:
@@ -375,7 +375,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -402,7 +402,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -429,7 +429,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -456,7 +456,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -483,7 +483,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -990,8 +990,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def get_last_cal_date_and_time(self, cal_type):
-        '''get_last_cal_date_and_time
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -1003,8 +1003,6 @@ class Session(_SessionBase):
             month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
-        import datetime
-
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
@@ -1173,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (float): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:

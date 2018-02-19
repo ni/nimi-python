@@ -57,6 +57,8 @@ class Library(object):
         self.niFgen_GetExtCalRecommendedInterval_cfunc = None
         self.niFgen_GetFIRFilterCoefficients_cfunc = None
         self.niFgen_GetHardwareState_cfunc = None
+        self.niFgen_GetLastExtCalLastDateAndTime_cfunc = None
+        self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = None
         self.niFgen_GetSelfCalLastDateAndTime_cfunc = None
         self.niFgen_GetSelfCalLastTemp_cfunc = None
         self.niFgen_GetSelfCalSupported_cfunc = None
@@ -408,6 +410,22 @@ class Library(object):
                 self.niFgen_GetHardwareState_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetHardwareState_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetHardwareState_cfunc(vi, state)
+
+    def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetLastExtCalLastDateAndTime_cfunc is None:
+                self.niFgen_GetLastExtCalLastDateAndTime_cfunc = self._library.niFgen_GetLastExtCalLastDateAndTime
+                self.niFgen_GetLastExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(datetime.datetime)]  # noqa: F405
+                self.niFgen_GetLastExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetLastExtCalLastDateAndTime_cfunc(vi, month)
+
+    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetLastSelfCalLastDateAndTime_cfunc is None:
+                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = self._library.niFgen_GetLastSelfCalLastDateAndTime
+                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(datetime.datetime)]  # noqa: F405
+                self.niFgen_GetLastSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetLastSelfCalLastDateAndTime_cfunc(vi, month)
 
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
