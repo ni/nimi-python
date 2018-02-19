@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifake import _converters
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -61,6 +61,18 @@ class _Acquisition(object):
         self._session.abort()
 
 
+class _RepeatedCapabilities(object):
+    def __init__(self, session, prefix):
+        self._session = session
+        self._prefix = prefix
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+
+        return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+
+
 class _SessionBase(object):
     '''Base class for all NI-FAKE sessions.'''
 
@@ -113,10 +125,19 @@ class _SessionBase(object):
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
-        self._encoding = 'windows-1251'
+        self._vi = vi
+        self._library = library
+        self._encoding = encoding
+
+        # Store the parameter list for later printing in __repr__
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+        self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('nifake', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -158,7 +179,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -187,7 +208,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -216,7 +237,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -245,7 +266,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -274,7 +295,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -325,10 +346,10 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1'].read_from_channel(maximum_time)
+            session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (int): Specifies the **maximum_time** allowed in microseconds.
 
 
         Returns:
@@ -354,7 +375,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -381,7 +402,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -408,7 +429,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -435,7 +456,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -462,7 +483,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifake.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -499,22 +520,87 @@ class _SessionBase(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=""):
-        super(Session, self).__init__(repeated_capability='')
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+        '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
+
+        Creates a new IVI instrument driver session.
+
+        Args:
+            resource_name (str): Caution: This is just some string.
+
+                Contains the **resource_name** of the device to initialize.
+
+            options (str): Specifies the initial value of certain attributes for the session. The
+                syntax for **options** is a dictionary of attributes with an assigned
+                value. For example:
+
+                { 'simulate': False }
+
+                You do not have to specify a value for all the attributes. If you do not
+                specify a value for an attribute, the default value is used.
+
+                Advanced Example:
+                { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+                +-------------------------+---------+
+                | Attribute               | Default |
+                +=========================+=========+
+                | range_check             | True    |
+                +-------------------------+---------+
+                | query_instrument_status | False   |
+                +-------------------------+---------+
+                | cache                   | True    |
+                +-------------------------+---------+
+                | simulate                | False   |
+                +-------------------------+---------+
+                | record_value_coersions  | False   |
+                +-------------------------+---------+
+                | driver_setup            | {}      |
+                +-------------------------+---------+
+
+            id_query (bool): NI-FAKE is probably not needed.
+
+                +-------------------+---+------------------+
+                | VI_TRUE (default) | 1 | Perform ID Query |
+                +-------------------+---+------------------+
+                | VI_FALSE          | 0 | Skip ID Query    |
+                +-------------------+---+------------------+
+
+            reset_device (bool): Specifies whether to reset
+
+                +-------------------+---+--------------+
+                | VI_TRUE (default) | 1 | Reset Device |
+                +-------------------+---+--------------+
+                | VI_FALSE          | 0 | Don't Reset  |
+                +-------------------+---+--------------+
+
+
+        Returns:
+            session (nifake.Session): A session object representing the device.
+
+        '''
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
+
+        # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = self._init_with_options(resource_name, options, id_query, reset_device)
+
+        # Instantiate any repeated capability objects
+        self.channels = _RepeatedCapabilities(self, '')
+
+        # Store the parameter list for later printing in __repr__
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("options=" + pp.pformat(options))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        self._param_list = ', '.join(param_list)
+
         self._is_frozen = True
 
     def __enter__(self):
@@ -522,10 +608,6 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
 
     def initiate(self):
         return _Acquisition(self)
@@ -908,8 +990,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def get_last_cal_date_and_time(self, cal_type):
-        '''get_last_cal_date_and_time
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -921,12 +1003,10 @@ class Session(_SessionBase):
             month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
-        import datetime
-
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
+    def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.
@@ -935,6 +1015,8 @@ class Session(_SessionBase):
             resource_name (str): Caution: This is just some string.
 
                 Contains the **resource_name** of the device to initialize.
+
+            option_string (str): Some options
 
             id_query (bool): NI-FAKE is probably not needed.
 
@@ -951,8 +1033,6 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-
-            option_string (str): Some options
 
 
         Returns:
@@ -1091,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (float): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:

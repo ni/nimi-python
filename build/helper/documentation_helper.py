@@ -1,4 +1,3 @@
-
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
 from .documentation_snippets import attr_note_text
@@ -69,6 +68,9 @@ def _get_rst_table_snippet(node, d, config, indent=0, make_link=True):
     if 'table_body' in d:
         table_body = d['table_body']
     else:
+        return ''
+
+    if len(table_body) == 0:
         return ''
 
     header = False
@@ -408,8 +410,6 @@ def format_type_for_rst_documentation(param, numpy, config):
         p_type = param['numpy_type']
     elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
-    elif 'python_api_converter_type' in param:
-        p_type = param['python_api_converter_type']
     else:
         p_type = param['python_type']
 
@@ -484,8 +484,6 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
 def _format_type_for_docstring(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
-    elif 'python_api_converter_type' in param:
-        p_type = param['python_api_converter_type'] + ' or ' + param['python_type']
     else:
         p_type = param['python_type']
 
@@ -503,13 +501,12 @@ def _format_type_for_docstring(param, numpy, config):
     return p_type
 
 
-def get_function_docstring(function, method_template, numpy, config, indent=0):
+def get_function_docstring(function, numpy, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
         function (dict): function dictionary
         config (dict): configuration dictoionary (from metadata)
-        method_template (dict): entry from function['methos_temlates'] that corresponds to specific entry we are processon
         numpy (boolean): Is the entry we are processing a numpy based method
         indent (int): default 0 - initial indentation
 
@@ -1228,8 +1225,7 @@ def test_get_function_rst_numpy():
 
 def test_get_function_docstring_default():
     function = config['functions']['GetTurtleID']
-    method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=False, config=config, indent=0)
+    actual_function_docstring = get_function_docstring(function, numpy=False, config=config, indent=0)
     expected_function_docstring = '''Returns the **ID** of selected Turtle Type. See `NIFAKE help <fake_functional_overview>`__
 
 Note: The Turtle.RAPHAEL Turtles dont have an ID.
@@ -1261,8 +1257,7 @@ Returns:
 
 def test_get_function_docstring_numpy():
     function = config['functions']['FetchWaveform']
-    method_template = function['method_templates'][0]
-    actual_function_docstring = get_function_docstring(function, method_template=method_template, numpy=True, config=config, indent=0)
+    actual_function_docstring = get_function_docstring(function, numpy=True, config=config, indent=0)
     expected_fuction_docstring = '''Returns waveform data.
 
     Args:

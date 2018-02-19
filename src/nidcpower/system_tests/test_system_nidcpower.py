@@ -1,3 +1,4 @@
+import datetime
 import nidcpower
 import pytest
 
@@ -60,12 +61,12 @@ def test_get_error(session):
 
 
 def test_get_self_cal_last_date_and_time(session):
-    year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
-    assert year == 1940
-    assert month == 3
-    assert day == 1
-    assert hour == 0
-    assert minute == 0
+    last_cal = session.get_self_cal_last_date_and_time()
+    assert last_cal.year == 1940
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
 
 
 def test_get_self_cal_last_temp(session):
@@ -82,7 +83,7 @@ def test_reset_device():
     # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
     with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        channel = session['0']
+        channel = session.channels['0']
         default_output_function = channel.output_function
         assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
         channel.output_function = nidcpower.OutputFunction.DC_CURRENT
@@ -92,7 +93,7 @@ def test_reset_device():
 
 
 def test_reset_with_default(session):
-    channel = session['0']
+    channel = session.channels['0']
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
     channel.aperture_time_units == nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
     session.reset_with_defaults()
@@ -100,7 +101,7 @@ def test_reset_with_default(session):
 
 
 def test_reset(session):
-    channel = session['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     channel.output_enabled = False
     session.reset()
@@ -108,7 +109,7 @@ def test_reset(session):
 
 
 def test_disable(session):
-    channel = session['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     session.disable()
     assert channel.output_enabled is False
@@ -169,7 +170,7 @@ def test_measure_multiple(session):
         voltage_measurements, current_measurements = session.measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 12
         # now a subset of the channels
-        voltage_measurements, current_measurements = session['0-3'].measure_multiple()
+        voltage_measurements, current_measurements = session.channels[range(4)].measure_multiple()
         assert len(voltage_measurements) == len(current_measurements) == 4
 
 
@@ -234,7 +235,7 @@ def test_wait_for_event_default_timeout(single_channel_session):
 
 def test_wait_for_event_with_timeout(single_channel_session):
     with single_channel_session.initiate():
-        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, datetime.timedelta(seconds=0.5))
 
 
 def test_commit(single_channel_session):
@@ -304,12 +305,12 @@ def test_send_software_edge_trigger_error(session):
 
 def test_get_ext_cal_last_date_and_time(session):
     print(type(session))
-    year, month, day, hour, minute = session.get_ext_cal_last_date_and_time()
-    assert year == 1940
-    assert month == 3
-    assert day == 1
-    assert hour == 0
-    assert minute == 0
+    last_cal = session.get_ext_cal_last_date_and_time()
+    assert last_cal.year == 1940
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0
 
 
 def test_get_ext_cal_last_temp(session):
@@ -323,6 +324,6 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session['0'].active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session['0'].active_advanced_sequence_step
+    session.channels['0'].active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1

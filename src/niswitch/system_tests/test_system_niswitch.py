@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import datetime
 import niswitch
 import pytest
 
@@ -82,8 +83,8 @@ def test_vi_int32_attribute(session):
 
 
 def test_vi_real64_attribute(session):
-    session.settling_time = 0.1
-    assert session.settling_time == 0.1
+    session.settling_time = datetime.timedelta(seconds=0.1)
+    assert session.settling_time.total_seconds() == 0.1
 
 
 def test_enum_attribute():

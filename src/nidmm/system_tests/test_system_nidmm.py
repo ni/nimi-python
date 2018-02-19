@@ -1,3 +1,4 @@
+import datetime
 import math
 import nidmm
 import numpy
@@ -126,7 +127,7 @@ def test_method_read_status(session):
 
 def test_fetch_error_while_not_initiated(session):
     try:
-        session.fetch(1000)
+        session.fetch()
         assert False
     except nidmm.Error as e:
         assert e.code == -1074118641   # called fetch before calling Initiate or after calling Abort
@@ -171,12 +172,12 @@ def test_get_auto_range_value(session):
 
 
 def test_get_cal_date_time(session):
-    month, day, year, hour, minute = session.get_cal_date_and_time(0)
-    assert month == 3
-    assert day == 1
-    assert year == 1940
-    assert hour == 0
-    assert minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+    last_cal = session.get_cal_date_and_time(0)
+    assert last_cal.month == 3
+    assert last_cal.day == 1
+    assert last_cal.year == 1940
+    assert last_cal.hour == 0
+    assert last_cal.minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
 
 
 def test_get_last_cal_temperature(session):
@@ -274,7 +275,7 @@ def test_fetch_waveform_error(session):
     try:
         session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
         with session.initiate():
-            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=1)   # trying to fetch points more than configured
+            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=datetime.timedelta(milliseconds=1))   # trying to fetch points more than configured
             assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed

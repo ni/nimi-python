@@ -23,5 +23,8 @@ config = {
     },
     'init_function': 'InitWithTopology',
     'custom_types': [],
+    'repeated_capabilities': [
+        {'python_name': 'channels', 'prefix': '', },
+    ],
 }
 

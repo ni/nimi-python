@@ -13,6 +13,24 @@ import sys
 config['modules'] = sys.modules
 helper.add_all_metadata(functions, attributes, enums, config)
 
+if 'note' not in config['functions']['_init_function']['parameters'][3]:
+    config['functions']['_init_function']['parameters'][3]['note'] = []
+if not isinstance(config['functions']['_init_function']['parameters'][3]['note'], list):
+    config['functions']['_init_function']['parameters'][3]['note'] = [config['functions']['_init_function']['parameters'][3]['note']]
+
+config['functions']['_init_function']['parameters'][3]['note'].append(
+'''
++--------------+----------------------------------------------------------------------------------------------------------+
+| Device       | options driver_setup syntax                                                                              |
++==============+==========================================================================================================+
+| NI PXI-5404  | { 'driver_setup': { 'Model': '5404', 'BoardType': 'PXI' } }                                              |
++--------------+----------------------------------------------------------------------------------------------------------+
+| NI PCI-5411  | { 'driver_setup': { 'Model': '5411', 'BoardType': 'PCI', 'MemorySize': '8000000' } }                     |
++--------------+----------------------------------------------------------------------------------------------------------+
+| NI PXIe-5450 | { 'driver_setup': { 'Model': '5450', 'Channels': '0-1', 'BoardType': 'PXIe', 'MemorySize': '8000000' } } |
++--------------+----------------------------------------------------------------------------------------------------------+
+''')
+
 __version__ = config['module_version']
 
 

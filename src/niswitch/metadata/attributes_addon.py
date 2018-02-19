@@ -17,4 +17,11 @@ attributes_codegen_method = {
     1150001: { "codegen_method": "no" },  # SERIAL_NUMBER_I32
 }
 
+attributes_converters = {
+    1250004: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_api_converter_type': 'datetime.timedelta', },  # SETTLING_TIME
+    1250025: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_api_converter_type': 'datetime.timedelta', },  # SCAN_DELAY
+}
+
 

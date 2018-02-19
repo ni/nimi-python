@@ -13,6 +13,18 @@ import sys
 config['modules'] = sys.modules
 helper.add_all_metadata(functions, attributes, enums, config)
 
+if 'note' not in config['functions']['_init_function']['parameters'][3]:
+    config['functions']['_init_function']['parameters'][3]['note'] = []
+if not isinstance(config['functions']['_init_function']['parameters'][3]['note'], list):
+    config['functions']['_init_function']['parameters'][3]['note'] = [config['functions']['_init_function']['parameters'][3]['note']]
+
+config['functions']['_init_function']['parameters'][3]['note'].append(
+'''
+You can also use the option string to attach an accessory such as the NI 5900 to your digitizer session to allow the seamless use of the accessory: 
+
+Options: { 'driver_setup': { 'Accessory': 'Dev1' } }
+''')
+
 __version__ = config['module_version']
 
 

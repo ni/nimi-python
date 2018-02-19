@@ -63,6 +63,8 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
+    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -128,6 +130,16 @@ functions_default_value = {
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
 }
 
+# Converted parameters
+functions_converters = {
+    'AdjustSampleClockRelativeDelay':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                           'python_type': 'datetime.timedelta', }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                                           'python_type': 'datetime.timedelta', }, }, },
+    'InitializeWithChannels':                       { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                           'python_type': 'dict', }, }, },
+}
+
 # Functions not in original metadata.
 functions_additional_functions = {
     'CreateWaveformDispatcher': {
@@ -136,19 +148,16 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformDataArray',
                 'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -157,7 +166,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'waveformHandle',
                 'type': 'ViInt32',
                 'documentation': {
@@ -166,15 +174,8 @@ functions_additional_functions = {
             },
         ],
         'documentation': {
-            'description': '''
-Creates an onboard waveform
-for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-mode.
-''',
-            'note': '''
-You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-''',
+            'description': 'Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.',
+            'note': 'You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.',
         },
     },
 
@@ -184,19 +185,16 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelName',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'waveformNameOrHandle',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -205,13 +203,11 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Size',
                 'type': 'ViInt32',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Data',
                 'type': 'ViReal64[]',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
@@ -226,6 +222,68 @@ By default, subsequent calls to this function
 continue writing data from the position of the last sample written. You
 can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
 nifgen\_SetWaveformNextWritePosition function.''',
+        },
+    },
+    # Public function that wraps driver function but returns datetime object instead of individual items
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'real_datetime_call': 'GetExtCalLastDateAndTime',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.',
+        },
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_self_cal_last_date_and_time',
+        'real_datetime_call': 'GetSelfCalLastDateAndTime',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Returns the date and time the device was last calibrated.',
+                },
+            },
+        ],
+        'documentation': 
+        {
+            'description': 'Returns the date and time of the last successful self-calibration.',
         },
     },
 }

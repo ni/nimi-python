@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from niswitch import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from niswitch import _converters
 from niswitch import attributes
 from niswitch import enums
 from niswitch import errors
@@ -59,6 +59,18 @@ class _Scan(object):
         self._session.abort()
 
 
+class _RepeatedCapabilities(object):
+    def __init__(self, session, prefix):
+        self._session = session
+        self._prefix = prefix
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+
+        return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+
+
 class _SessionBase(object):
     '''Base class for all NI-SWITCH sessions.'''
 
@@ -77,8 +89,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].analog_bus_sharing_enable = var
-        var = session['0,1'].analog_bus_sharing_enable
+        session.channels['0,1'].analog_bus_sharing_enable = var
+        var = session.channels['0,1'].analog_bus_sharing_enable
     '''
     bandwidth = attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -92,8 +104,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     bandwidth.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].bandwidth = var
-        var = session['0,1'].bandwidth
+        session.channels['0,1'].bandwidth = var
+        var = session.channels['0,1'].bandwidth
     '''
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''Type: int
@@ -129,8 +141,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     characteristic_impedance.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].characteristic_impedance = var
-        var = session['0,1'].characteristic_impedance
+        session.channels['0,1'].characteristic_impedance = var
+        var = session.channels['0,1'].characteristic_impedance
     '''
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''Type: bool
@@ -200,8 +212,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     is_configuration_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].is_configuration_channel = var
-        var = session['0,1'].is_configuration_channel
+        session.channels['0,1'].is_configuration_channel = var
+        var = session.channels['0,1'].is_configuration_channel
     '''
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''Type: bool
@@ -224,8 +236,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     is_source_channel.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].is_source_channel = var
-        var = session['0,1'].is_source_channel
+        session.channels['0,1'].is_source_channel = var
+        var = session.channels['0,1'].is_source_channel
     '''
     is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''Type: bool
@@ -260,8 +272,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_ac_voltage.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_ac_voltage = var
-        var = session['0,1'].max_ac_voltage
+        session.channels['0,1'].max_ac_voltage = var
+        var = session.channels['0,1'].max_ac_voltage
     '''
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''Type: float
@@ -275,8 +287,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_ac_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_ac_current = var
-        var = session['0,1'].max_carry_ac_current
+        session.channels['0,1'].max_carry_ac_current = var
+        var = session.channels['0,1'].max_carry_ac_current
     '''
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''Type: float
@@ -290,8 +302,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_ac_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_ac_power = var
-        var = session['0,1'].max_carry_ac_power
+        session.channels['0,1'].max_carry_ac_power = var
+        var = session.channels['0,1'].max_carry_ac_power
     '''
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''Type: float
@@ -305,8 +317,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_dc_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_dc_current = var
-        var = session['0,1'].max_carry_dc_current
+        session.channels['0,1'].max_carry_dc_current = var
+        var = session.channels['0,1'].max_carry_dc_current
     '''
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''Type: float
@@ -320,8 +332,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_carry_dc_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_carry_dc_power = var
-        var = session['0,1'].max_carry_dc_power
+        session.channels['0,1'].max_carry_dc_power = var
+        var = session.channels['0,1'].max_carry_dc_power
     '''
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''Type: float
@@ -335,8 +347,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_dc_voltage.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_dc_voltage = var
-        var = session['0,1'].max_dc_voltage
+        session.channels['0,1'].max_dc_voltage = var
+        var = session.channels['0,1'].max_dc_voltage
     '''
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''Type: float
@@ -350,8 +362,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_ac_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_ac_current = var
-        var = session['0,1'].max_switching_ac_current
+        session.channels['0,1'].max_switching_ac_current = var
+        var = session.channels['0,1'].max_switching_ac_current
     '''
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''Type: float
@@ -365,8 +377,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_ac_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_ac_power = var
-        var = session['0,1'].max_switching_ac_power
+        session.channels['0,1'].max_switching_ac_power = var
+        var = session.channels['0,1'].max_switching_ac_power
     '''
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''Type: float
@@ -380,8 +392,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_dc_current.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_dc_current = var
-        var = session['0,1'].max_switching_dc_current
+        session.channels['0,1'].max_switching_dc_current = var
+        var = session.channels['0,1'].max_switching_dc_current
     '''
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''Type: float
@@ -395,8 +407,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     max_switching_dc_power.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].max_switching_dc_power = var
-        var = session['0,1'].max_switching_dc_power
+        session.channels['0,1'].max_switching_dc_power = var
+        var = session.channels['0,1'].max_switching_dc_power
     '''
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''Type: int
@@ -444,7 +456,7 @@ class _SessionBase(object):
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
     This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
@@ -479,7 +491,7 @@ class _SessionBase(object):
 
     This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
     This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
@@ -493,8 +505,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     settling_time.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].settling_time = var
-        var = session['0,1'].settling_time
+        session.channels['0,1'].settling_time = var
+        var = session.channels['0,1'].settling_time
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -564,14 +576,23 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     wire_mode.Session instance, and calling set/get value on the result.:
 
-        session['0,1'].wire_mode = var
-        var = session['0,1'].wire_mode
+        session.channels['0,1'].wire_mode = var
+        var = session.channels['0,1'].wire_mode
     '''
 
-    def __init__(self, repeated_capability):
-        self._library = library_singleton.get()
+    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
-        self._encoding = 'windows-1251'
+        self._vi = vi
+        self._library = library
+        self._encoding = encoding
+
+        # Store the parameter list for later printing in __repr__
+        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+
+        self._is_frozen = freeze_it
+
+    def __repr__(self):
+        return '{0}.{1}({2})'.format('niswitch', self.__class__.__name__, self._param_list)
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -619,7 +640,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -674,7 +695,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -729,7 +750,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -796,7 +817,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -896,7 +917,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -963,7 +984,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1030,7 +1051,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1097,7 +1118,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niswitch.Session instance, and calling this method on the result.:
 
-            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
@@ -1162,22 +1183,263 @@ class _SessionBase(object):
         return error_message_ctype.value.decode(self._encoding)
 
 
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
 class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        super(Session, self).__init__(repeated_capability='')
+        '''An NI-SWITCH session to a National Instruments Switch Module
+
+        Returns a session handle used to identify the switch in all subsequent
+        instrument driver calls and sets the topology of the switch.
+        _init_with_topology creates a new IVI instrument driver session
+        for the switch specified in the resourceName parameter. The driver uses
+        the topology specified in the topology parameter and overrides the
+        topology specified in MAX. Note: When initializing an NI SwitchBlock
+        device with topology, you must specify the toplogy created when you
+        configured the device in MAX, using either
+        NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the
+        device. Refer to the Initializing with Toplogy for NI SwitchBlock
+        Devices topic in the NI Switches Help for information about determining
+        the topology string of an NI SwitchBlock device. By default, the switch
+        is reset to a known state. Enable simulation by specifying the topology
+        and setting the simulate parameter to VI_TRUE.
+
+        Args:
+            resource_name (str): Resource name of the switch module to initialize. Default value: None
+                Syntax: Optional fields are shown in square brackets ([]). Configured in
+                MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
+                NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
+                number]::device number TIP: IVI logical names are also valid for the
+                resource name. Default values for optional fields: chassis ID = 1 bus
+                number = 0 Example resource names: Resource Name Description SC1Mod3
+                NI-DAQmx module in chassis "SC1" slot 3 MySwitch NI-DAQmx module renamed
+                to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
+                SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
+                0, device number 16 PXI::16 PXI bus 0, device number 16
+
+            topology (str): Pass the topology name you want to use for the switch you specify with
+                Resource Name parameter. You can also pass
+                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
+                was configured for the device in MAX. Default Value:
+                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY Valid Values:
+                NISWITCH_TOPOLOGY_1127_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1127_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_1127_2_WIRE_4X8_MATRIX
+                NISWITCH_TOPOLOGY_1127_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_1127_INDEPENDENT
+                NISWITCH_TOPOLOGY_1128_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1128_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_1128_2_WIRE_4X8_MATRIX
+                NISWITCH_TOPOLOGY_1128_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_1128_INDEPENDENT
+                NISWITCH_TOPOLOGY_1129_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_8X16_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_4X32_MATRIX
+                NISWITCH_TOPOLOGY_1129_2_WIRE_QUAD_4X16_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_256X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_DUAL_128X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_8x32_MATRIX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_OCTAL_32X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_QUAD_64X1_MUX
+                NISWITCH_TOPOLOGY_1130_1_WIRE_SIXTEEN_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_4X32_MATRIX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_2_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_1130_4_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_1130_4_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_1130_INDEPENDENT NISWITCH_TOPOLOGY_1160_16_SPDT
+                NISWITCH_TOPOLOGY_1161_8_SPDT
+                NISWITCH_TOPOLOGY_1163R_OCTAL_4X1_MUX
+                NISWITCH_TOPOLOGY_1166_16_DPDT NISWITCH_TOPOLOGY_1166_32_SPDT
+                NISWITCH_TOPOLOGY_1167_INDEPENDENT
+                NISWITCH_TOPOLOGY_1169_100_SPST NISWITCH_TOPOLOGY_1169_50_DPST
+                NISWITCH_TOPOLOGY_1175_1_WIRE_196X1_MUX
+                NISWITCH_TOPOLOGY_1175_2_WIRE_98X1_MUX
+                NISWITCH_TOPOLOGY_1175_2_WIRE_95X1_MUX
+                NISWITCH_TOPOLOGY_1190_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1191_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1192_8_SPDT NISWITCH_TOPOLOGY_1193_32X1_MUX
+                NISWITCH_TOPOLOGY_1193_16X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_1193_DUAL_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_QUAD_8X1_MUX
+                NISWITCH_TOPOLOGY_1193_QUAD_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_1193_INDEPENDENT
+                NISWITCH_TOPOLOGY_1194_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_1195_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_MUX
+                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_AMPLIFIED_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_AMPLIFIED_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_DUAL_12X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_QUAD_6X1_MUX
+                NISWITCH_TOPOLOGY_2501_2_WIRE_4X6_MATRIX
+                NISWITCH_TOPOLOGY_2501_4_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2503_1_WIRE_48X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_24X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_DUAL_12X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_QUAD_6X1_MUX
+                NISWITCH_TOPOLOGY_2503_2_WIRE_4X6_MATRIX
+                NISWITCH_TOPOLOGY_2503_4_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2510_INDEPENDENT
+                NISWITCH_TOPOLOGY_2512_INDEPENDENT
+                NISWITCH_TOPOLOGY_2514_INDEPENDENT
+                NISWITCH_TOPOLOGY_2515_INDEPENDENT NISWITCH_TOPOLOGY_2520_80_SPST
+                NISWITCH_TOPOLOGY_2521_40_DPST NISWITCH_TOPOLOGY_2522_53_SPDT
+                NISWITCH_TOPOLOGY_2523_26_DPDT
+                NISWITCH_TOPOLOGY_2524_1_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_DUAL_64X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2524_1_WIRE_SIXTEEN_8X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_OCTAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2525_2_WIRE_SIXTEEN_4X1_MUX
+                NISWITCH_TOPOLOGY_2526_1_WIRE_158X1_MUX
+                NISWITCH_TOPOLOGY_2526_2_WIRE_79X1_MUX
+                NISWITCH_TOPOLOGY_2527_1_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2527_1_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2527_2_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_2527_2_WIRE_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2527_4_WIRE_16X1_MUX
+                NISWITCH_TOPOLOGY_2527_INDEPENDENT
+                NISWITCH_TOPOLOGY_2529_2_WIRE_DUAL_4X16_MATRIX
+                NISWITCH_TOPOLOGY_2529_2_WIRE_8X16_MATRIX
+                NISWITCH_TOPOLOGY_2529_2_WIRE_4X32_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_128X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_DUAL_64X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_4x32_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_8x16_MATRIX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_OCTAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_1_WIRE_QUAD_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_4x16_MATRIX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_4_WIRE_32X1_MUX
+                NISWITCH_TOPOLOGY_2530_4_WIRE_DUAL_16X1_MUX
+                NISWITCH_TOPOLOGY_2530_INDEPENDENT
+                NISWITCH_TOPOLOGY_2531_1_WIRE_4X128_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_8X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2531_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2531_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_16X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_4X128_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_8X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_1_WIRE_SIXTEEN_2X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2532_2_WIRE_DUAL_4X32_MATRIX
+                NISWITCH_TOPOLOGY_2533_1_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2534_1_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2535_1_WIRE_4X136_MATRIX
+                NISWITCH_TOPOLOGY_2536_1_WIRE_8X68_MATRIX
+                NISWITCH_TOPOLOGY_2540_1_WIRE_8X9_MATRIX
+                NISWITCH_TOPOLOGY_2541_1_WIRE_8X12_MATRIX
+                NISWITCH_TOPOLOGY_2542_QUAD_2X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2543_DUAL_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2544_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2545_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2546_DUAL_4X1_MUX
+                NISWITCH_TOPOLOGY_2547_8X1_MUX NISWITCH_TOPOLOGY_2548_4_SPDT
+                NISWITCH_TOPOLOGY_2549_TERMINATED_2_SPDT
+                NISWITCH_TOPOLOGY_2554_4X1_MUX
+                NISWITCH_TOPOLOGY_2555_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2556_DUAL_4X1_MUX
+                NISWITCH_TOPOLOGY_2557_8X1_MUX NISWITCH_TOPOLOGY_2558_4_SPDT
+                NISWITCH_TOPOLOGY_2559_TERMINATED_2_SPDT
+                NISWITCH_TOPOLOGY_2564_16_SPST NISWITCH_TOPOLOGY_2564_8_DPST
+                NISWITCH_TOPOLOGY_2565_16_SPST NISWITCH_TOPOLOGY_2566_16_SPDT
+                NISWITCH_TOPOLOGY_2566_8_DPDT NISWITCH_TOPOLOGY_2567_INDEPENDENT
+                NISWITCH_TOPOLOGY_2568_15_DPST NISWITCH_TOPOLOGY_2568_31_SPST
+                NISWITCH_TOPOLOGY_2569_100_SPST NISWITCH_TOPOLOGY_2569_50_DPST
+                NISWITCH_TOPOLOGY_2570_20_DPDT NISWITCH_TOPOLOGY_2570_40_SPDT
+                NISWITCH_TOPOLOGY_2571_66_SPDT
+                NISWITCH_TOPOLOGY_2575_1_WIRE_196X1_MUX
+                NISWITCH_TOPOLOGY_2575_2_WIRE_98X1_MUX
+                NISWITCH_TOPOLOGY_2575_2_WIRE_95X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_64X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_DUAL_32X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_OCTAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_QUAD_16X1_MUX
+                NISWITCH_TOPOLOGY_2576_2_WIRE_SIXTEEN_4X1_MUX
+                NISWITCH_TOPOLOGY_2576_INDEPENDENT
+                NISWITCH_TOPOLOGY_2584_1_WIRE_12X1_MUX
+                NISWITCH_TOPOLOGY_2584_1_WIRE_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2584_2_WIRE_6X1_MUX
+                NISWITCH_TOPOLOGY_2584_INDEPENDENT
+                NISWITCH_TOPOLOGY_2585_1_WIRE_10X1_MUX
+                NISWITCH_TOPOLOGY_2586_10_SPST NISWITCH_TOPOLOGY_2586_5_DPST
+                NISWITCH_TOPOLOGY_2590_4X1_MUX NISWITCH_TOPOLOGY_2591_4X1_MUX
+                NISWITCH_TOPOLOGY_2593_16X1_MUX
+                NISWITCH_TOPOLOGY_2593_8X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2593_DUAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2593_DUAL_4X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2593_INDEPENDENT NISWITCH_TOPOLOGY_2594_4X1_MUX
+                NISWITCH_TOPOLOGY_2595_4X1_MUX
+                NISWITCH_TOPOLOGY_2596_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2597_6X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2598_DUAL_TRANSFER
+                NISWITCH_TOPOLOGY_2599_2_SPDT NISWITCH_TOPOLOGY_2720_INDEPENDENT
+                NISWITCH_TOPOLOGY_2722_INDEPENDENT
+                NISWITCH_TOPOLOGY_2725_INDEPENDENT
+                NISWITCH_TOPOLOGY_2727_INDEPENDENT
+                NISWITCH_TOPOLOGY_2737_2_WIRE_4X64_MATRIX
+                NISWITCH_TOPOLOGY_2738_2_WIRE_8X32_MATRIX
+                NISWITCH_TOPOLOGY_2739_2_WIRE_16X16_MATRIX
+                NISWITCH_TOPOLOGY_2746_QUAD_4X1_MUX
+                NISWITCH_TOPOLOGY_2747_DUAL_8X1_MUX
+                NISWITCH_TOPOLOGY_2748_16X1_MUX
+                NISWITCH_TOPOLOGY_2790_INDEPENDENT
+                NISWITCH_TOPOLOGY_2796_DUAL_6X1_MUX
+                NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
+                NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
+                NISWITCH_TOPOLOGY_2799_2_SPDT
+
+            simulate (bool): Enables simulation of the switch module specified in the resource name
+                parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
+                (Default Value)
+
+            reset_device (bool): Specifies whether to reset the switch module during the initialization
+                process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
+                - Currently unsupported. The device will not reset.
+
+
+        Returns:
+            session (niswitch.Session): A session object representing the device.
+
+        '''
+        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        self._library = library_singleton.get()
+        self._encoding = 'windows-1251'
+
+        # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_topology().
         self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
+
+        # Instantiate any repeated capability objects
+        self.channels = _RepeatedCapabilities(self, '')
+
+        # Store the parameter list for later printing in __repr__
+        param_list = []
+        param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("topology=" + pp.pformat(topology))
+        param_list.append("simulate=" + pp.pformat(simulate))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
+        self._param_list = ', '.join(param_list)
+
         self._is_frozen = True
 
     def __enter__(self):
@@ -1185,10 +1447,6 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
 
     def initiate(self):
         return _Scan(self)
@@ -1318,7 +1576,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1359,7 +1617,7 @@ class Session(_SessionBase):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case S150
+        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, visatype.ViReal64)  # case S140
         trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case S130
         scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
@@ -2113,7 +2371,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms=5000):
+    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2129,12 +2387,12 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms=5000):
+    def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2151,7 +2409,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -86,7 +86,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+            session.channels['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
 
     :param aperture_time:
@@ -704,7 +704,7 @@ nidcpower.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch_multiple(count, timeout=1.0)
+.. py:method:: fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
@@ -734,7 +734,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_multiple(count, timeout=1.0)
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
 
     :param count:
@@ -760,7 +760,7 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
 
@@ -820,7 +820,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].get_channel_name(index)
+            session.channels['0,1'].get_channel_name(index)
 
 
     :param index:
@@ -836,56 +836,17 @@ nidcpower.Session methods
 
 .. py:method:: get_ext_cal_last_date_and_time()
 
-    Returns the date and time of the last successful calibration. The time
-    returned is 24-hour (military) local time; for example, if the device
-    was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
-    for **minutes**.
+    Returns the date and time of the last successful calibration.
 
     
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Returns the **year** the device was last calibrated.
-
-            
-
-
-        month (int): 
-
-
-            Returns the **month** in which the device was last calibrated.
-
-            
-
-
-        day (int): 
-
-
-            Returns the **day** on which the device was last calibrated.
-
-            
-
-
-        hour (int): 
-
-
-            Returns the **hour** (in 24-hour time) in which the device was last
-            calibrated.
-
-            
-
-
-        minute (int): 
-
-
-            Returns the **minute** in which the device was last calibrated.
+            Indicates date and time of the last calibration.
 
             
 
@@ -933,65 +894,19 @@ nidcpower.Session methods
 
 .. py:method:: get_self_cal_last_date_and_time()
 
-    Returns the date and time of the oldest successful self-calibration from
-    among the channels in the session.
-
-    The time returned is 24-hour (military) local time; for example, if you
-    have a session using channels 1 and 2, and a self-calibration was
-    performed on channel 1 at 2:30 PM, and a self-calibration was performed
-    on channel 2 at 3:00 PM on the same day, this function returns 14 for
-    **hours** and 30 for **minutes**.
+    Returns the date and time of the oldest successful self-calibration from among the channels in the session.
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+    .. note:: This function is not supported on all devices.
 
 
 
-    :rtype: tuple (year, month, day, hour, minute)
-
-        WHERE
-
-        year (int): 
+    :rtype: datetime.datetime
+    :return:
 
 
-            Returns the **year** the device was last calibrated.
-
-            
-
-
-        month (int): 
-
-
-            Returns the **month** in which the device was last calibrated.
-
-            
-
-
-        day (int): 
-
-
-            Returns the **day** on which the device was last calibrated.
-
-            
-
-
-        hour (int): 
-
-
-            Returns the **hour** (in 24-hour time) in which the device was last
-            calibrated.
-
-            
-
-
-        minute (int): 
-
-
-            Returns the **minute** in which the device was last calibrated.
+            Returns the date and time the device was last calibrated.
 
             
 
@@ -1047,7 +962,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].measure(measurement_type)
+            session.channels['0,1'].measure(measurement_type)
 
 
     :param measurement_type:
@@ -1094,7 +1009,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].measure_multiple()
+            session.channels['0,1'].measure_multiple()
 
 
     :rtype: tuple (voltage_measurements, current_measurements)
@@ -1159,7 +1074,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_in_compliance()
+            session.channels['0,1'].query_in_compliance()
 
 
     :rtype: bool
@@ -1187,7 +1102,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_max_current_limit(voltage_level)
+            session.channels['0,1'].query_max_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1227,7 +1142,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_max_voltage_level(current_limit)
+            session.channels['0,1'].query_max_voltage_level(current_limit)
 
 
     :param current_limit:
@@ -1267,7 +1182,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_min_current_limit(voltage_level)
+            session.channels['0,1'].query_min_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1311,7 +1226,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].query_output_state(output_state)
+            session.channels['0,1'].query_output_state(output_state)
 
 
     :param output_state:
@@ -1520,7 +1435,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].set_sequence(source_delays, values=None)
+            session.channels['0,1'].set_sequence(source_delays, values=None)
 
 
     :param source_delays:
@@ -1550,7 +1465,7 @@ nidcpower.Session methods
 
     :type values: list of float
 
-.. py:method:: wait_for_event(event_id, timeout=10.0)
+.. py:method:: wait_for_event(event_id, timeout='datetime.timedelta(seconds=10.0)')
 
     Waits until the device has generated the specified event.
 
@@ -1604,6 +1519,6 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
 

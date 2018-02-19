@@ -1,3 +1,4 @@
+import datetime
 import nifgen
 import numpy
 import os
@@ -54,7 +55,7 @@ def test_method_get_self_cal_supported(session):
 def test_get_self_cal_last_date_and_time():
     try:
         with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
-            year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
+            session.get_self_cal_last_date_and_time()
             assert False
     except nifgen.Error as e:
         assert e.code == -1074118632  # This operation is not supported for simulated device
@@ -135,7 +136,7 @@ def test_configure_arb_waveform(session):
 
 
 def test_disable(session):
-    channel = session['0']
+    channel = session.channels['0']
     assert channel.output_enabled is True
     session.disable()
     assert channel.output_enabled is False
@@ -374,7 +375,7 @@ def test_write_waveform_from_file_f64(session):
 
 
 def test_wait_until_done(session):
-    session.wait_until_done(20)
+    session.wait_until_done(datetime.timedelta(milliseconds=20))
 
 
 def test_user_standard_waveform(session):
