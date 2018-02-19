@@ -100,7 +100,7 @@ class _SessionBase(object):
     An attribute of type float with read/write access.
     '''
     read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Attribute in seconds
     '''
@@ -115,7 +115,7 @@ class _SessionBase(object):
     An attribute of type integer with read/write access.
     '''
     read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''Type: int
+    '''Type: datetime.timedelta
 
     Attribute in milliseconds
     '''
@@ -349,7 +349,7 @@ class _SessionBase(object):
             session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in microseconds.
 
 
         Returns:
@@ -1171,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:
