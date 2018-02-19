@@ -28,48 +28,39 @@ $(DRIVER_DOCS_DIR)/functions.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mak
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/unit_tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/%.py: $(DRIVER_DIR)/custom_types/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(DOCS_DIR)/conf.py: $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(DOCS_DIR), $(METADATA_DIR))
-# Need to signal the top level makefile to run tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/unit_tests/*.py)
-UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
+UNIT_TEST_FILES := \
+                   $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY))) \
+		   $(UNIT_TEST_DIR)/conftest.py \
 
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/unit_tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
+$(UNIT_TEST_DIR)/conftest.py: $(TEMPLATE_DIR)/conftest.py
+	$(call trace_to_console, "Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
 clean:
 
 .PHONY: module unit_tests sdist wheel

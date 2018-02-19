@@ -11,6 +11,16 @@ def session():
         yield simulated_session
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe'):
+        pass
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI'):
+        pass
+    # with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI'):
+    #     pass
+
+
 def test_self_test(session):
     result, message = session.self_test()
     assert result == 0

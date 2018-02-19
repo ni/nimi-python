@@ -11,6 +11,14 @@ def session():
         yield simulated_session
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True):
+        pass
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False):
+        pass
+
+
 # Basic Use Case Tests
 def test_relayclose(session):
     relay_name = 'kr0c0'

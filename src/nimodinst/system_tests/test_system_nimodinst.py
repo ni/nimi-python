@@ -5,6 +5,12 @@ import re
 import six
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with nimodinst.Session(''):
+        pass
+
+
 def test_bad_device_family():
     with nimodinst.Session('FAKE') as session:
         assert len(session) == 0

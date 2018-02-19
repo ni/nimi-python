@@ -10,6 +10,16 @@ def session():
         yield simulated_session
 
 
+def test_preload_driver():
+    '''Preload all the driver runtimes we will need so leak checking won't see the load'''
+    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe'):
+        pass
+    # with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI'):
+    #     pass
+    # with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI'):
+    #     pass
+
+
 # Attribute tests
 def test_vi_boolean_attribute(session):
     session.allow_more_records_than_memory = False
