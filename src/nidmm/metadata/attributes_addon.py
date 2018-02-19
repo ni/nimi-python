@@ -27,6 +27,16 @@ attributes_codegen_method = {
     1150031: { "codegen_method": "no" },  # SAMPLE_DELAY_MODE
 }
 
+attributes_converters = {
+    1150028: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_type': 'datetime.timedelta', },  # SETTLE_TIME
+    1250005: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_type': 'datetime.timedelta', },  # TRIGGER_DELAY
+    1250303: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
+               'python_type': 'datetime.timedelta', },  # SAMPLE_INTERVAL
+}
+
+
 attributes_remove_enum = {
     1250003: { "enum": None                         },  # RESOLUTION, Don't use enum since simple value will do
     1250333: { "enum": None                         },  # POWER_LINE_FREQUENCY, Don't use enum since simple value will do
@@ -35,3 +45,4 @@ attributes_remove_enum = {
     1150053: { 'enum': None, 'python_type': 'bool', },  # DC_BIAS, Don't use the enum because a bool will do
     1150023: { 'enum': None, 'python_type': 'bool', },  # OFFSET_COMP_OHMS, Don't use the enum because a bool will do
 }
+

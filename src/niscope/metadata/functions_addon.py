@@ -147,22 +147,22 @@ functions_default_value = {
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '""', }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '"None"', }, }, },
-    'ConfigureTriggerWindow':                        { 'parameters': { 6: { 'default_value': 0.0, },
-                                                                       7: { 'default_value': 0.0, }, }, },
+    'ConfigureTriggerWindow':                        { 'parameters': { 6: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       7: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'ConfigureTriggerVideo':                         { 'parameters': { 2: { 'default_value': False, },
                                                                        5: { 'default_value': 1, },
-                                                                       8: { 'default_value': 0.0, },
-                                                                       9: { 'default_value': 0.0, }, }, },
-    'ConfigureTriggerSoftware':                      { 'parameters': { 1: { 'default_value': 0.0, },
-                                                                       2: { 'default_value': 0.0, }, }, },
-    'Read':                                          { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'Fetch':                                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchBinary8':                                  { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchBinary16':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchBinary32':                                 { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'ReadMeasurement':                               { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchMeasurement':                              { 'parameters': { 2: { 'default_value': 5.0, }, }, },
-    'FetchMeasurementStats':                         { 'parameters': { 2: { 'default_value': 5.0, }, }, },
+                                                                       8: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       9: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
+    'ConfigureTriggerSoftware':                      { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       2: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
+    'Read':                                          { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'Fetch':                                         { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'FetchBinary8':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'FetchBinary16':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'FetchBinary32':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'ReadMeasurement':                               { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'FetchMeasurement':                              { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
+    'FetchMeasurementStats':                         { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },
     'ConfigureVertical':                             { 'parameters': { 3: { 'default_value': 0.0, },
                                                                        5: { 'default_value': 1.0, },
                                                                        6: { 'default_value': True, }, }, },
@@ -172,17 +172,71 @@ functions_default_value = {
     'CalSelfCalibrate':                              { 'parameters': { 2: { 'default_value': 'Option.SELF_CALIBRATE_ALL_CHANNELS', }, }, },
     'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
     'ConfigureTriggerDigital':                       { 'parameters': { 2: { 'default_value': 'TriggerSlope.POSITIVE', },
-                                                                       3: { 'default_value': 0.0, },
-                                                                       4: { 'default_value': 0.0, }, }, },
+                                                                       3: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       4: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'ConfigureTriggerEdge':                          { 'parameters': { 2: { 'default_value': 0.0, },
                                                                        3: { 'default_value': 'TriggerSlope.POSITIVE', },
-                                                                       5: { 'default_value': 0.0, },
-                                                                       6: { 'default_value': 0.0, }, }, },
+                                                                       5: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       6: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'ConfigureTriggerHysteresis':                    { 'parameters': { 2: { 'default_value': 0.0, },
                                                                        3: { 'default_value': 0.05, },
                                                                        4: { 'default_value': 'TriggerSlope.POSITIVE', },
-                                                                       6: { 'default_value': 0.0, },
-                                                                       7: { 'default_value': 0.0, }, }, },
+                                                                       6: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
+                                                                       7: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
+}
+
+# Converted parameters
+functions_converters = {
+    'ConfigureTriggerDigital':              { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              4: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ConfigureTriggerEdge':                 { 'parameters': { 5: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ConfigureTriggerHysteresis':           { 'parameters': { 6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              7: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ConfigureTriggerSoftware':             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ConfigureTriggerVideo':                { 'parameters': { 8: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              9: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ConfigureTriggerWindow':               { 'parameters': { 6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', },
+                                                              7: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'Fetch':                                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchArrayMeasurement':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchBinary16':                        { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchBinary32':                        { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchBinary8':                         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchComplex':                         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchComplexBinary16':                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchMeasurement':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FetchMeasurementStats':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'FancyFetch':                           { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'Read':                                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
+    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                                   'python_type': 'dict', }, }, },
 }
 
 # Functions not in original metadata.
@@ -193,7 +247,6 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -202,7 +255,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
@@ -211,28 +263,20 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
-                'default_value': 5.0,
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'default_value': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-The maximum number of samples to fetch for each waveform. If the
-acquisition finishes with fewer points than requested, some devices
-return partial data if the acquisition finished, was aborted, or a
-timeout of 0 was used. If it fails to complete within the timeout
-period, the function throws an exception.
-''',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
                 },
             },
             {
@@ -242,72 +286,47 @@ period, the function throws an exception.
                 'name': 'fetchRelativeTo',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-Position to start fetching within one record.
-If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
-''',
+                    'description': 'Position to start fetching within one record. If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'default_value': None,
                 'name': 'fetchOffet',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
-If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
-''',
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'default_value': None,
                 'name': 'fetchRecordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch.
-If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
-''',
+                    'description': 'Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'default_value': None,
                 'name': 'fetchNumRecords',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-Number of records to fetch. Use -1 to fetch all configured records.
-If not set, use value of NISCOPE_ATTR_NUM_RECORDS
-''',
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS',
                 },
             },
             {
                 'direction': 'in',
-                'default_value': None,
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]',
                 'default_value': None, 
                 'documentation': {
-                    'description': '''
-Optional array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumWfms to determine the number of
-waveforms.
-
-If configured, this array will be used for the acquisition instead of
-creating one. This can be of type array.array or numpy.ndarray.
-''',
+                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.',
                 },
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
@@ -329,26 +348,19 @@ creating one. This can be of type array.array or numpy.ndarray.
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.
-''',
+                    Call niScope\_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-Returns the waveform from a previously initiated acquisition that the
-digitizer acquires for the specified channel. This function returns
-scaled voltage waveforms.
+                Returns the waveform from a previously initiated acquisition that the
+                digitizer acquires for the specified channel. This function returns
+                scaled voltage waveforms.
 
-This function may return multiple waveforms depending on the number of
-channels, the acquisition type, and the number of records you specify.
-''',
-            'note': '''
-Some functionality, such as time stamping, is not supported in all
-digitizers. Refer to `Features Supported by
-Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-more information.
-''',
+                This function may return multiple waveforms depending on the number of
+                channels, the acquisition type, and the number of records you specify.''',
+            'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
     'FetchDispatcher': {
@@ -357,7 +369,6 @@ more information.
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
@@ -366,7 +377,6 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
@@ -375,74 +385,46 @@ more information.
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Timeout',
                 'type': 'ViReal64',
-                'default_value': 5.0,
+                'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': '''
-The maximum number of samples to fetch for each waveform. If the
-acquisition finishes with fewer points than requested, some devices
-return partial data if the acquisition finished, was aborted, or a
-timeout of 0 was used. If it fails to complete within the timeout
-period, the function throws an exception.
-''',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
                 },
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'Wfm',
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
                     'description': '''
-numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
-be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of
-waveforms.
+                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
-NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-first. For example, with a channel list of 0,1, you would have the
-following index values:
+                        Types supported are
 
-index 0 = record 0, channel 0
+                        - `numpy.float64`
+                        - `numpy.int8`
+                        - `numpy.in16`
+                        - `numpy.int32`
 
-index *x* = record 0, channel 1
+                        Example:
 
-index 2\ *x* = record 1, channel 0
+                        .. code-block:: python
 
-index 3\ *x* = record 1, channel 1
-
-Where *x* = the record length
-
-Types supported are
-
-- `numpy.float64`
-- `numpy.int8`
-- `numpy.in16`
-- `numpy.int32`
-
-Example:
-
-.. code-block:: python
-
-    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
-
-''',
+                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
                 },
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
@@ -464,26 +446,19 @@ Example:
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.
-''',
+                    Call niScope\_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-Returns the waveform from a previously initiated acquisition that the
-digitizer acquires for the specified channel. This function returns
-scaled voltage waveforms.
+                Returns the waveform from a previously initiated acquisition that the
+                digitizer acquires for the specified channel. This function returns
+                scaled voltage waveforms.
 
-This function may return multiple waveforms depending on the number of
-channels, the acquisition type, and the number of records you specify.
-''',
-            'note': '''
-Some functionality, such as time stamping, is not supported in all
-digitizers. Refer to `Features Supported by
-Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-more information.
-''',
+                This function may return multiple waveforms depending on the number of
+                channels, the acquisition type, and the number of records you specify.''',
+            'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
 }
@@ -495,23 +470,23 @@ functions_python_name = {
 }
 
 functions_method_templates = {
-    'FetchBinary8':                                  { 'method_templates': [
+    'FetchBinary8':    { 'method_templates': [
         { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchBinary16':                                 { 'method_templates': [
+    'FetchBinary16':   { 'method_templates': [
         { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchBinary32':                                 { 'method_templates': [
+    'FetchBinary32':   { 'method_templates': [
         { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'Fetch':                { 'method_templates': [
+    'Fetch':           { 'method_templates': [
         { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
         { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchDispatcher':                               { 'method_templates': [
+    'FetchDispatcher': { 'method_templates': [
         { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_into', },
     ], },
-    'FancyFetch':                                    { 'method_templates': [
+    'FancyFetch':      { 'method_templates': [
         { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
 }
@@ -542,10 +517,4 @@ functions_array = {
     'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
 }
 
-
-# Converted parameters
-functions_converters = {
-    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                                   'python_api_converter_type': 'dict', }, }, },
-}
 

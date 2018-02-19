@@ -435,7 +435,7 @@ niscope.Session methods
 
     :type high: float
 
-.. py:method:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures the common properties of a digital trigger.
 
@@ -501,7 +501,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -512,9 +512,9 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
-.. py:method:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures common properties for analog edge triggering.
 
@@ -590,7 +590,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -601,9 +601,9 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
-.. py:method:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures common properties for analog hysteresis triggering. This kind
     of trigger specifies an additional value, specified in the
@@ -696,7 +696,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -707,7 +707,7 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
 .. py:method:: configure_trigger_immediate()
 
@@ -722,7 +722,7 @@ niscope.Session methods
 
 
 
-.. py:method:: configure_trigger_software(holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_software(holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures common properties for software triggering.
 
@@ -759,7 +759,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -770,9 +770,9 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
-.. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures the common properties for video triggering, including the
     signal format, TV event, line number, polarity, and enable DC restore. A
@@ -886,7 +886,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -897,9 +897,9 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
-.. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=0.0, delay=0.0)
+.. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff='datetime.timedelta(seconds=0.0)', delay='datetime.timedelta(seconds=0.0)')
 
     Configures common properties for analog window triggering. A window
     trigger occurs when a signal enters or leaves a window you specify with
@@ -988,7 +988,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float
+    :type holdoff: datetime.timedelta
     :param delay:
 
 
@@ -999,7 +999,7 @@ niscope.Session methods
         
 
 
-    :type delay: float
+    :type delay: datetime.timedelta
 
 .. py:method:: configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
@@ -1191,21 +1191,18 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(timeout=5.0, num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
+.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
 
     Returns the waveform from a previously initiated acquisition that the
-    digitizer acquires for the specified channel. This function returns
-    scaled voltage waveforms.
+                    digitizer acquires for the specified channel. This function returns
+                    scaled voltage waveforms.
 
-    This function may return multiple waveforms depending on the number of
-    channels, the acquisition type, and the number of records you specify.
+                    This function may return multiple waveforms depending on the number of
+                    channels, the acquisition type, and the number of records you specify.
 
     
 
-    .. note:: Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+    .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1215,7 +1212,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(timeout=5.0, num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
 
 
     :param timeout:
@@ -1226,15 +1223,11 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the
-        acquisition finishes with fewer points than requested, some devices
-        return partial data if the acquisition finished, was aborted, or a
-        timeout of 0 was used. If it fails to complete within the timeout
-        period, the function throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
         
 
@@ -1243,8 +1236,7 @@ niscope.Session methods
     :param fetch_relative_to:
 
 
-        Position to start fetching within one record.
-        If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
+        Position to start fetching within one record. If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
 
         
 
@@ -1253,8 +1245,7 @@ niscope.Session methods
     :param fetch_offet:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
-        If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
+        Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
 
         
 
@@ -1263,8 +1254,7 @@ niscope.Session methods
     :param fetch_record_number:
 
 
-        Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch.
-        If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+        Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
 
         
 
@@ -1273,8 +1263,7 @@ niscope.Session methods
     :param fetch_num_records:
 
 
-        Number of records to fetch. Use -1 to fetch all configured records.
-        If not set, use value of NISCOPE_ATTR_NUM_RECORDS
+        Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS
 
         
 
@@ -1283,12 +1272,7 @@ niscope.Session methods
     :param wfm:
 
 
-        Optional array whose length is the **numSamples** times number of
-        waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of
-        waveforms.
-
-        If configured, this array will be used for the acquisition instead of
-        creating one. This can be of type array.array or numpy.ndarray.
+        Returns an array whose length is the **numSamples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
 
         
 
@@ -1322,21 +1306,18 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_into(num_samples, wfm, timeout=5.0)
+.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
-    digitizer acquires for the specified channel. This function returns
-    scaled voltage waveforms.
+                    digitizer acquires for the specified channel. This function returns
+                    scaled voltage waveforms.
 
-    This function may return multiple waveforms depending on the number of
-    channels, the acquisition type, and the number of records you specify.
+                    This function may return multiple waveforms depending on the number of
+                    channels, the acquisition type, and the number of records you specify.
 
     
 
-    .. note:: Some functionality, such as time stamping, is not supported in all
-        digitizers. Refer to `Features Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+    .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1346,17 +1327,13 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout=5.0)
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the
-        acquisition finishes with fewer points than requested, some devices
-        return partial data if the acquisition finished, was aborted, or a
-        timeout of 0 was used. If it fails to complete within the timeout
-        period, the function throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
         
 
@@ -1365,37 +1342,21 @@ niscope.Session methods
     :param wfm:
 
 
-        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should
-        be **num_samples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of
-        waveforms.
+        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
 
-        NI-SCOPE returns this data sequentially, so all record 0 waveforms are
-        first. For example, with a channel list of 0,1, you would have the
-        following index values:
+                                Types supported are
 
-        index 0 = record 0, channel 0
+                                - `numpy.float64`
+                                - `numpy.int8`
+                                - `numpy.in16`
+                                - `numpy.int32`
 
-        index *x* = record 0, channel 1
+                                Example:
 
-        index 2\ *x* = record 1, channel 0
+                                .. code-block:: python
 
-        index 3\ *x* = record 1, channel 1
-
-        Where *x* = the record length
-
-        Types supported are
-
-        - `numpy.float64`
-        - `numpy.int8`
-        - `numpy.in16`
-        - `numpy.int32`
-
-        Example:
-
-        .. code-block:: python
-
-            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+                                    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                                    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
 
         
 
@@ -1438,7 +1399,7 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_measurement(scalar_meas_function, timeout=5.0)
+.. py:method:: fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
     Fetches a waveform from the digitizer and performs the specified
     waveform measurement. Refer to `Using Fetch
@@ -1462,7 +1423,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:
@@ -1486,7 +1447,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: list of float
     :return:
@@ -1499,7 +1460,7 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+.. py:method:: fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
     Obtains a waveform measurement and returns the measurement value. This
     function may return multiple statistical results depending on the number
@@ -1536,7 +1497,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:
@@ -1560,7 +1521,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
 
@@ -1681,7 +1642,7 @@ niscope.Session methods
 
 
 
-.. py:method:: read(num_samples, timeout=5.0)
+.. py:method:: read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
     Initiates an acquisition, waits for it to complete, and retrieves the
     data. The process is similar to calling :py:meth:`niscope.Session._initiate_acquisition`,
@@ -1708,7 +1669,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].read(num_samples, timeout=5.0)
+            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1734,7 +1695,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: tuple (wfm, wfm_info)
 
@@ -1798,7 +1759,7 @@ niscope.Session methods
 
 
 
-.. py:method:: read_measurement(scalar_meas_function, timeout=5.0)
+.. py:method:: read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
     Initiates an acquisition, waits for it to complete, and performs the
     specified waveform measurement for a single channel and record or for
@@ -1825,7 +1786,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].read_measurement(scalar_meas_function, timeout=5.0)
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param scalar_meas_function:
@@ -1849,7 +1810,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: datetime.timedelta
 
     :rtype: array.array("d")
     :return:

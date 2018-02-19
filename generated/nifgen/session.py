@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nifgen import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifgen import _converters
 from nifgen import attributes
 from nifgen import enums
 from nifgen import errors
@@ -1119,8 +1119,8 @@ class _SessionBase(object):
     Specifies the name of the waveform used to continuously stream data during generation. This attribute defaults to // when no streaming waveform is specified.
     Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
-    streaming_write_timeout = attributes.AttributeViReal64(1150409)
-    '''Type: float
+    streaming_write_timeout = attributes.AttributeViReal64TimeDeltaSeconds(1150409)
+    '''Type: datetime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
@@ -1709,13 +1709,9 @@ class _SessionBase(object):
     def create_waveform(self, waveform_data_array):
         '''create_waveform
 
-        Creates an onboard waveform
-        for use in Arbitrary Waveform output mode or Arbitrary Sequence output
-        mode.
+        Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
 
-        Note:
-        You must set output_mode to OutputMode.ARB or
-        OutputMode.SEQ before calling this function.
+        Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -4262,8 +4258,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
+    def _get_ext_cal_last_date_and_time(self):
+        '''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful external calibration.
         The time returned is 24-hour (military) local time; for example, if the
@@ -4358,8 +4354,32 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.HardwareState(state_ctype.value)
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+
+        '''
+        year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last successful self-calibration.
+
+        Returns:
+            month (datetime.datetime): Returns the date and time the device was last calibrated.
+
+        '''
+        year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
+    def _get_self_cal_last_date_and_time(self):
+        '''_get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
 
@@ -4702,11 +4722,11 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (int): Specifies the timeout value in milliseconds.
+            max_time (datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        max_time_ctype = visatype.ViInt32(max_time)  # case S150
+        max_time_ctype = _converters.convert_timedelta_to_milliseconds(max_time, visatype.ViInt32)  # case S140
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

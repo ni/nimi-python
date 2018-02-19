@@ -40,6 +40,8 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -89,12 +91,6 @@ functions_remove_from_python_api = {
     'FetchMultiple':                { 'parameters': { 7: { 'use_in_python_api': False, }, }, },
 }
 
-# Converted parameters
-functions_converters = {
-    'InitializeWithChannels':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                                   'python_api_converter_type': 'dict', }, }, },
-}
-
 # Default values for method parameters
 functions_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '""', },
@@ -111,9 +107,9 @@ functions_default_value = {
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
-    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
+    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
-                                                                       2: { 'default_value': 1.0, }, }, },
+                                                                       2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
 # Parameter that need to be array.array
@@ -133,19 +129,16 @@ functions_additional_functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'vi',
                 'type': 'ViSession',
             },
             {
                 'direction': 'in',
-                'enum': None,
                 'name': 'channelsString',
                 'type': 'ViConstString',
             },
             {
                 'direction': 'out',
-                'enum': None,
                 'name': 'numberOfChannels',
                 'type': 'ViUInt32',
             },
@@ -154,4 +147,79 @@ functions_additional_functions = {
             'description': 'Returns the number of channels.',
         },
     },
+    # Public function that wraps driver function but returns datetime object instead of individual items
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'real_datetime_call': 'GetExtCalLastDateAndTime',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last successful calibration.',
+        },
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_self_cal_last_date_and_time',
+        'real_datetime_call': 'GetSelfCalLastDateAndTime',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Returns the date and time the device was last calibrated.',
+                },
+            },
+        ],
+        'documentation': 
+        {
+            'description': 'Returns the date and time of the oldest successful self-calibration from among the channels in the session.',
+            'note': 'This function is not supported on all devices.',
+        },
+    },
 }
+
+# Converted parameters
+functions_converters = {
+    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_type': 'datetime.timedelta', }, }, },
+    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_type': 'datetime.timedelta', }, }, },
+    'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                               'python_type': 'dict', }, }, },
+}
+
+

@@ -4,6 +4,19 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 
+attributes_converters = {
+    1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_type': 'datetime.timedelta', },  # MEASURE_COMPLETE_EVENT_DELAY
+    1150065: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_type': 'datetime.timedelta', },  # MEASURE_RECORD_DELTA_TIME
+    1150093: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_type': 'datetime.timedelta', },  # PULSE_ON_TIME
+    1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_type': 'datetime.timedelta', },  # PULSE_OFF_TIME
+    1150051: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+               'python_type': 'datetime.timedelta', },  # SOURCE_DELAY
+}
+
 attributes_enums = {
     1150020: { "enum": None           },  # POWER_LINE_FREQUENCY, Don't use the enum because a bool will do
     1050002: { "enum": None           },  # RANGE_CHECK, Don't use the enum because a bool will do

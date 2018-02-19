@@ -49,6 +49,7 @@ functions_codegen_method = {
     'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'GetCalDateAndTime':               { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -101,16 +102,16 @@ functions_default_value = {
                                                    2: { 'default_value': False, },
                                                    3: { 'default_value': '""', }, }, },
     'ConfigureMultiPoint':       { 'parameters': { 3: { 'default_value': 'SampleTrigger.IMMEDIATE', },
-                                                   4: { 'default_value': -1, }, }, },
+                                                   4: { 'default_value': 'datetime.timedelta(seconds=-1)', }, }, },
     'ConfigureThermocouple':     { 'parameters': { 2: { 'default_value': 'ThermocoupleReferenceJunctionType.FIXED', }, }, },
-    'ConfigureTrigger':          { 'parameters': { 2: { 'default_value': -1, }, }, },
-    'Fetch':                     { 'parameters': { 1: { 'default_value': -1, }, }, },
-    'FetchMultiPoint':           { 'parameters': { 1: { 'default_value': -1, }, }, },
-    'FetchWaveform':             { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'ConfigureTrigger':          { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=-1)', }, }, },
+    'Fetch':                     { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
+    'FetchMultiPoint':           { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
+    'FetchWaveform':             { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
     'GetDevTemp':                { 'parameters': { 1: { 'default_value': '""', }, }, },
-    'Read':                      { 'parameters': { 1: { 'default_value': -1, }, }, },
-    'ReadMultiPoint':            { 'parameters': { 1: { 'default_value': -1, }, }, },
-    'ReadWaveform':              { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'Read':                      { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
+    'ReadMultiPoint':            { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
+    'ReadWaveform':              { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)', }, }, },
 }
 
 functions_method_template_filenames = {
@@ -133,8 +134,72 @@ functions_remove_parameters_from_python = {
 
 # Converted parameters
 functions_converters = {
-    'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                                   'python_api_converter_type': 'dict', }, }, },
+    'ConfigureMultiPoint':      { 'parameters': { 4: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'ConfigureTrigger':         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'Fetch':                    { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'FetchMultiPoint':          { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'FetchWaveform':            { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'Read':                     { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'ReadMultiPoint':           { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'ReadWaveform':             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+    'InitWithOptions':          { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                       'python_api_converter_type': 'dict', }, }, },
+}
+
+# Functions not in original metadata.
+functions_additional_functions = {
+    # Public function that wraps driver function but returns datetime object instead of individual items
+    'GetLastCalDateAndTime': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'python_name': 'get_cal_date_and_time',
+        'real_datetime_call': 'GetCalDateAndTime',
+        'method_templates': [
+            { 'session_filename': 'datetime_wrappers', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': 
+                {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM\_init or niDMM\_InitWithOptions. The default is None.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'calType',
+                'type': 'ViInt32',
+                'documentation': 
+                {
+                    'description': 'Specifies the type of calibration performed (external or self-calibration).',
+                    'note': 'The NI 4065 does not support self-calibration.',
+                    'table_body': [['NIDMM\\_VAL\\_INTERNAL\\_AREA (default)', '0', 'Self-Calibration'], ['NIDMM\\_VAL\\_EXTERNAL\\_AREA', '1', 'External Calibration']],
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Month',
+                'type': 'datetime.datetime',
+                'documentation': {
+                    'description': 'Indicates date and time of the last calibration.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the date and time of the last calibration performed.',
+            'note': 'The NI 4050 and NI 4060 are not supported.',
+        },
+    },
 }
 
 # Parameter that need to be array.array

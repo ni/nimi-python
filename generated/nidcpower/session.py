@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nidcpower import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nidcpower import _converters
 from nidcpower import attributes
 from nidcpower import enums
 from nidcpower import errors
@@ -699,8 +699,8 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
-    measure_complete_event_delay = attributes.AttributeViReal64(1150046)
-    '''Type: float
+    measure_complete_event_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
+    '''Type: datetime.timedelta
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -739,8 +739,8 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
-    measure_record_delta_time = attributes.AttributeViReal64(1150065)
-    '''Type: float
+    measure_record_delta_time = attributes.AttributeViReal64TimeDeltaSeconds(1150065)
+    '''Type: datetime.timedelta
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this attribute after the desired measurement settings are committed.
     for information about supported devices.
@@ -1403,8 +1403,8 @@ class _SessionBase(object):
         session.channels['0,1'].pulse_current_limit_range = var
         var = session.channels['0,1'].pulse_current_limit_range
     '''
-    pulse_off_time = attributes.AttributeViReal64(1150094)
-    '''Type: float
+    pulse_off_time = attributes.AttributeViReal64TimeDeltaSeconds(1150094)
+    '''Type: datetime.timedelta
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1421,8 +1421,8 @@ class _SessionBase(object):
         session.channels['0,1'].pulse_off_time = var
         var = session.channels['0,1'].pulse_off_time
     '''
-    pulse_on_time = attributes.AttributeViReal64(1150093)
-    '''Type: float
+    pulse_on_time = attributes.AttributeViReal64TimeDeltaSeconds(1150093)
+    '''Type: datetime.timedelta
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1853,8 +1853,8 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
     '''
-    source_delay = attributes.AttributeViReal64(1150051)
-    '''Type: float
+    source_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
+    '''Type: datetime.timedelta
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
@@ -2301,7 +2301,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, count, timeout=1.0):
+    def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -2329,12 +2329,12 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_multiple(count, timeout=1.0)
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -2361,7 +2361,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         count_ctype = visatype.ViInt32(count)  # case S190
         voltage_measurements_size = count  # case B600
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
@@ -4102,8 +4102,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
+    def _get_ext_cal_last_date_and_time(self):
+        '''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration. The time
         returned is 24-hour (military) local time; for example, if the device
@@ -4167,8 +4167,34 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful calibration.
+
+        Returns:
+            month (datetime.datetime): Indicates date and time of the last calibration.
+
+        '''
+        year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the oldest successful self-calibration from among the channels in the session.
+
+        Note: This function is not supported on all devices.
+
+        Returns:
+            month (datetime.datetime): Returns the date and time the device was last calibrated.
+
+        '''
+        year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
+        return datetime.datetime(year, month, day, hour, minute)
+
+    def _get_self_cal_last_date_and_time(self):
+        '''_get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from
         among the channels in the session.
@@ -4433,7 +4459,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_event(self, event_id, timeout=10.0):
+    def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
         '''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -4467,7 +4493,7 @@ class Session(_SessionBase):
                 | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +-------------------------------------------------------+--------------------------------------------------+
 
-            timeout (float): Specifies the maximum time allowed for this function to complete, in
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4481,7 +4507,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Event))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         event_id_ctype = visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
