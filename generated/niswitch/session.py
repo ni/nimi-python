@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from niswitch import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from niswitch import _converters
 from niswitch import attributes
 from niswitch import enums
 from niswitch import errors
@@ -456,7 +456,7 @@ class _SessionBase(object):
     This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
     This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
@@ -491,7 +491,7 @@ class _SessionBase(object):
 
     This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
     This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
@@ -1576,7 +1576,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1617,7 +1617,7 @@ class Session(_SessionBase):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case S150
+        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, visatype.ViReal64)  # case S140
         trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case S130
         scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
@@ -2371,7 +2371,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms=5000):
+    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2387,12 +2387,12 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms=5000):
+    def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2409,7 +2409,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -25,6 +25,17 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `nidmm.Session()` no longer takes id_query parameter
+        * The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
+            * `configure_multi_point()`
+            * `configure_trigger()`
+            * `fetch()`
+            * `fetch_multi_point()`
+            * `fetch_waveform()`
+            * `read()`
+            * `read_multi_point()`
+            * `read_waveform()`
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * `get_cal_date_and_time()`
         * Metadata updated to NI-DMM 17.5
     * #### Removed
         * `nidmm.Session()` no longer takes id_query parameter
@@ -39,6 +50,10 @@ All notable changes to this project will be documented in this file.
 * ### NI-Switch
     * #### Added
     * #### Changed
+        * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
+            * `configure_scan_trigger()`
+            * `wait_for_debounce()`
+            * `wait_for_scan_complete()`
     * #### Removed
 * ### NI-DCPower
     * #### Added
@@ -54,18 +69,44 @@ All notable changes to this project will be documented in this file.
             * `script_triggers` repeated capability
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
+        * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
+            * `fetch_multiple()`
+            * `wait_for_event()`
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * `get_ext_cal_last_date_and_time()`
+            * `get_self_cal_last_date_and_time()`
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
             * `CurrentLevelAutorange` - `CURRENT_LEVEL_AUTORANGE`
             * `VoltageLevelAutorange` - `VOLTAGE_LEVEL_AUTORANGE`
             * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+        * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
+            * `adjust_sample_clock_relative_delay()`
+            * `wait_until+done()`
+        * The following functions return a `datetime.datetime()` object representing the date and time
+            * `get_ext_cal_last_date_and_time()`
+            * `get_self_cal_last_date_and_time()`
+    * #### Removed
 * ### NI-SCOPE
     * #### Added
         * Repeated capablilites - See #737 for discussion:
             * `channel` repeated capability
     * #### Changed
         * `niscope.Session()` no longer takes id_query parameter
+        * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
+            * `configure_trigger_digital()`
+            * `configure_trigger_edge()`
+            * `configure_trigger_hysteresis()`
+            * `configure_trigger_software()`
+            * `configure_trigger_video()`
+            * `configure_trigger_window()`
+            * `fetch()`
+            * `fetch_measurement_stats()`
+            * `read()`
     * #### Removed
         * Removed these enums and disconnected them from the associated attribute
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`

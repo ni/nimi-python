@@ -23,9 +23,9 @@ ${encoding_tag}
 %>\
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from ${module_name} import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from ${module_name} import _converters
 from ${module_name} import attributes
 from ${module_name} import enums
 from ${module_name} import errors

@@ -2,9 +2,9 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import struct  # noqa: F401
+import datetime
 
-from nifake import _converters  # noqa: F401   TODO(texasaggie97) remove noqa once we are using converters everywhere
+from nifake import _converters
 from nifake import attributes
 from nifake import enums
 from nifake import errors
@@ -100,7 +100,7 @@ class _SessionBase(object):
     An attribute of type float with read/write access.
     '''
     read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''Type: float
+    '''Type: datetime.timedelta
 
     Attribute in seconds
     '''
@@ -115,7 +115,7 @@ class _SessionBase(object):
     An attribute of type integer with read/write access.
     '''
     read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''Type: int
+    '''Type: datetime.timedelta
 
     Attribute in milliseconds
     '''
@@ -349,7 +349,7 @@ class _SessionBase(object):
             session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta or int): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in microseconds.
 
 
         Returns:
@@ -990,8 +990,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def get_last_cal_date_and_time(self, cal_type):
-        '''get_last_cal_date_and_time
+    def get_cal_date_and_time(self, cal_type):
+        '''get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -1003,8 +1003,6 @@ class Session(_SessionBase):
             month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
-        import datetime
-
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
@@ -1173,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta or float): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in seconds.
 
 
         Returns:
