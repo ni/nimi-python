@@ -52,25 +52,37 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     with open(args.src_file, 'r') as content_file:
         contents = content_file.read()
 
-    dev_version_re = re.compile("'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
-    m = dev_version_re.search(contents)
+    module_dev_version_re = re.compile("'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
+    m = module_dev_version_re.search(contents)
     if m:
         if args.release:
             logging.info('Dev version found, updating {0}.dev{1} to {0}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-            contents = dev_version_re.sub("'{0}'".format(m.group(1), int(m.group(2)) + 1), contents)
+            contents = module_dev_version_re.sub("'{0}'".format(m.group(1), int(m.group(2)) + 1), contents)
         else:
             logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-            contents = dev_version_re.sub("'{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
-    else:
-        if args.release:
-            logging.error('Release set but devN not found!')
-            sys.exit(1)
+            contents = module_dev_version_re.sub("'{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
 
-    version_re = re.compile("'module_version': '(\d+\.\d+\.)(\d+)'")
-    m = version_re.search(contents)
+    release_dev_version_re = re.compile("release = '(\d+\.\d+\.\d+)\.dev(\d+)'")
+    m = release_dev_version_re.search(contents)
+    if m:
+        if args.release:
+            logging.info('Dev version found, updating {0}.dev{1} to {0}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
+            contents = release_dev_version_re.sub("'{0}'".format(m.group(1), int(m.group(2)) + 1), contents)
+        else:
+            logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
+            contents = release_dev_version_re.sub("'{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
+
+    module_version_re = re.compile("'module_version': '(\d+\.\d+\.)(\d+)'")
+    m = module_version_re.search(contents)
     if m and not args.release:
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-        contents = version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
+        contents = module_version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
+
+    release_version_re = re.compile("release = '(\d+\.\d+\.)(\d+)'")
+    m = release_version_re.search(contents)
+    if m and not args.release:
+        logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
+        contents = release_version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
 
     copyright_re = re.compile("copyright = '2017-(\d+), National Instruments'")
     m = copyright_re.search(contents)
