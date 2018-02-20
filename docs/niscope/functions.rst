@@ -1218,7 +1218,7 @@ niscope.Session methods
     :param timeout:
 
 
-        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+        The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
         
 
@@ -1254,7 +1254,7 @@ niscope.Session methods
     :param fetch_record_number:
 
 
-        Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+        Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
 
         
 
@@ -1299,6 +1299,8 @@ niscope.Session methods
                                     .. math::
 
                                         voltage = binary data * gain factor + offset
+
+                                - **wfm** waveform array whose length is the **numSamples**
 
                                 Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 

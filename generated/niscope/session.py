@@ -1860,7 +1860,7 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
 
         Args:
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+            timeout (datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
@@ -1868,7 +1868,7 @@ class _SessionBase(object):
 
             fetch_offet (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
 
-            fetch_record_number (int): Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+            fetch_record_number (int): Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
 
             fetch_num_records (int): Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS
 
@@ -1892,6 +1892,8 @@ class _SessionBase(object):
                                         .. math::
 
                                             voltage = binary data * gain factor + offset
+
+                                    - **wfm** waveform array whose length is the **numSamples**
 
                                     Call _actual_num_wfms to determine the size of this array.
 
@@ -1930,9 +1932,9 @@ class _SessionBase(object):
             wfm_to_use = wfm
             wfm_info = self.fetch_into(wfm_to_use, timeout)
 
-        # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-        # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
         if sys.version_info.major < 3:
+            # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+            # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
             for i in range(len(wfm_info)):
                 if isinstance(wfm_to_use, array.array):
                     typecode = wfm_to_use.typecode
@@ -1950,7 +1952,7 @@ class _SessionBase(object):
                 end = start + num_samples_to_use
                 wfm_info[i].wfm = array.array(typecode, wfm_to_use[start:end])
         else:
-            # In Python 3 we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
             mv = memoryview(wfm_to_use)
 
             for i in range(len(wfm_info)):
