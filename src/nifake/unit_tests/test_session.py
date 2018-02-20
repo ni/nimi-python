@@ -247,6 +247,16 @@ class TestSession(object):
             self.patched_library.niFake_Abort.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
+    def test_acquisition_no_context_manager(self):
+        self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
+        self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
+        with nifake.Session('dev1') as session:
+            session.initiate()
+            self.patched_library.niFake_Initiate.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            session.abort()
+            self.patched_library.niFake_Abort.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+
     def test_single_point_read_timedelta(self):
         test_maximum_time_ms = 100  # milliseconds
         test_maximum_time_s = .1    # seconds

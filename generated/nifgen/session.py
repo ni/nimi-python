@@ -50,9 +50,9 @@ def get_ctypes_and_array(value, array_type):
 class _Generation(object):
     def __init__(self, session):
         self._session = session
+        self._session._initiate_generation()
 
     def __enter__(self):
-        self._session._initiate_generation()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
