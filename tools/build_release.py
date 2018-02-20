@@ -67,29 +67,28 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config.py', '--release'] + passthrough_params)
         call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config.py', '--release'] + passthrough_params)
         call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py', '--release'] + passthrough_params)
-        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'docs/conf.py', '--release'] + passthrough_params)
 
-    logging.info('Clean and build')
-    logging.info(pp.pformat(tox_cmd + ['-e', 'clean']))
-    logging.info(pp.pformat(tox_cmd))
-    call(tox_cmd + ['-e', 'clean'])
-    call(tox_cmd)
+        logging.info('Clean and build')
+        logging.info(pp.pformat(tox_cmd + ['-e', 'clean']))
+        logging.info(pp.pformat(tox_cmd))
+        call(tox_cmd + ['-e', 'clean'])
+        call(tox_cmd)
 
-    if args.upload:
-        logging.info('Uploading to PyPI')
-        call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
+        if args.upload:
+            logging.info('Uploading to PyPI')
+            call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
 
-    logging.info('Updating versions for next dev release')
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py'] + passthrough_params)
-    call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'docs/conf.py'] + passthrough_params)
+    else:
+        logging.info('Updating versions for next dev release')
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config.py'] + passthrough_params)
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config.py'] + passthrough_params)
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config.py'] + passthrough_params)
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config.py'] + passthrough_params)
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config.py'] + passthrough_params)
+        call([python_cmd, 'tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py'] + passthrough_params)
 
-    logging.info('Rebuild to update generated files')
-    call(tox_cmd)
+        logging.info('Rebuild to update generated files')
+        call(tox_cmd)
 
 
 if __name__ == '__main__':

@@ -28,38 +28,30 @@ $(DRIVER_DOCS_DIR)/functions.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mak
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/unit_tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(MODULE_DIR)/%.py: $(DRIVER_DIR)/custom_types/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(DOCS_DIR)/conf.py: $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(DOCS_DIR), $(METADATA_DIR))
-# Need to signal the top level makefile to run tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
+
+$(DRIVER_DOCS_DIR)/%.inc: %.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/unit_tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
@@ -67,8 +59,6 @@ UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_C
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/unit_tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run unit tests again
-	$(_hide_cmds)$(call trigger_unit_tests)
 
 clean:
 
@@ -78,25 +68,44 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
+README := $(OUTPUT_DIR)/README.rst
+ifneq (nifake,$(DRIVER))
+  ROOT_README := $(ROOT_DIR)/README.rst
+endif
+
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
-$(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
+# If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
+ifeq (nifake,$(DRIVER))
+$(README):
 	$(call trace_to_console, "Copying",$@)
-	$(_hide_cmds)$(call log_command,cp $< $@)
+	$(_hide_cmds)$(call log_command,cp $(ROOT_DIR)/LICENSE $@)
+
+else
+# We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
+$(README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
+	$(call trace_to_console, "Creating",$@)
+	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+
+$(ROOT_README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*) $(wildcard $(DOCS_DIR)/*/status.inc)
+	$(call trace_to_console, "Creating",$@)
+	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+
+endif
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true

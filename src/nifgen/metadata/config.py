@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nifgen',
-    'module_version': '0.6.1.dev0',
+    'module_version': '0.8.0.dev0',
     'c_function_prefix': 'niFgen_',
     'driver_name': 'NI-FGEN',
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
@@ -23,6 +23,7 @@ config = {
     },
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
+    'last_tested_version': '17.1.0',
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
         {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },

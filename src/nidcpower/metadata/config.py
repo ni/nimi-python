@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nidcpower',
-    'module_version': '0.6.1.dev0',
+    'module_version': '0.8.0.dev0',
     'c_function_prefix': 'niDCPower_',
     'driver_name': 'NI-DCPower',
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
@@ -23,6 +23,7 @@ config = {
     },
     'init_function': 'InitializeWithChannels',
     'custom_types': [],
+    'last_tested_version': '17.6.0',
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],

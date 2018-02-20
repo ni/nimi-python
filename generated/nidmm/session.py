@@ -50,9 +50,9 @@ def get_ctypes_and_array(value, array_type):
 class _Acquisition(object):
     def __init__(self, session):
         self._session = session
+        self._session._initiate()
 
     def __enter__(self):
-        self._session._initiate()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
