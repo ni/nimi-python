@@ -1,7 +1,6 @@
 # !python
 
 import argparse
-from datetime import datetime
 import logging
 import pprint
 import re
