@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [0.7.0](#060---2018-02-20)
 * [0.6.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
@@ -10,21 +10,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 0.7.0 - 2018-02-20
 * ### ALL
-    * #### Added
     * #### Changed
-        * Option string can now be a python dictionary instead of a string. It will be converted as needed (Fix #661)
+        * Option string can now be a python dictionary instead of a string. It will be converted as needed (Fix [#661](https://github.com/ni/nimi-python/issues/661))
             * Key/Value pairs approporiate for desired behavior
                 ``` python
                 session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
                 ```
         * Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
-    * #### Removed
+        * All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
+        * All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
 * ### NI-DMM
-    * #### Added
     * #### Changed
-        * `nidmm.Session()` no longer takes id_query parameter
+        * `nidmm.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
         * The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
             * `configure_multi_point()`
             * `configure_trigger()`
@@ -38,35 +37,19 @@ All notable changes to this project will be documented in this file.
             * `get_cal_date_and_time()`
         * Metadata updated to NI-DMM 17.5
     * #### Removed
-        * `nidmm.Session()` no longer takes id_query parameter
-        * Removed these enums and disconnected them from the associated attribute
+        * `nidmm.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
+        * Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
             * `DCBias` - `DC_BIAS`
             * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
-        * Metadata updated to NI-DMM 17.5
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-Switch
-    * #### Added
     * #### Changed
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
             * `configure_scan_trigger()`
             * `wait_for_debounce()`
             * `wait_for_scan_complete()`
-    * #### Removed
 * ### NI-DCPower
     * #### Added
-        * `channel` repeated capability - See #737 for discussion
-    * #### Changed
-        * Metadata updated to NI-DCPower 17.6.1
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-        * Repeated capablilites - See #737 for discussion:
-            * `channel` repeated capability
-            * `markers` repeated capability
-            * `script_triggers` repeated capability
+        * `channel` repeated capability - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
     * #### Changed
         * Metadata updated to NI-DCPower 17.6.1
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
@@ -76,27 +59,29 @@ All notable changes to this project will be documented in this file.
             * `get_ext_cal_last_date_and_time()`
             * `get_self_cal_last_date_and_time()`
     * #### Removed
-        * Removed these enums and disconnected them from the associated attribute
+        * Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
             * `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
             * `CurrentLevelAutorange` - `CURRENT_LEVEL_AUTORANGE`
             * `VoltageLevelAutorange` - `VOLTAGE_LEVEL_AUTORANGE`
             * `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 * ### NI-FGEN
-    * #### Added
     * #### Changed
+        * Repeated capablilites - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion:
+            * `channel` repeated capability
+            * `markers` repeated capability
+            * `script_triggers` repeated capability
         * The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
             * `adjust_sample_clock_relative_delay()`
-            * `wait_until+done()`
+            * `wait_until_done()`
         * The following functions return a `datetime.datetime()` object representing the date and time
             * `get_ext_cal_last_date_and_time()`
             * `get_self_cal_last_date_and_time()`
-    * #### Removed
 * ### NI-SCOPE
     * #### Added
-        * Repeated capablilites - See #737 for discussion:
+        * Repeated capablilites - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion:
             * `channel` repeated capability
     * #### Changed
-        * `niscope.Session()` no longer takes id_query parameter
+        * `niscope.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
             * `configure_trigger_digital()`
             * `configure_trigger_edge()`
@@ -108,7 +93,7 @@ All notable changes to this project will be documented in this file.
             * `fetch_measurement_stats()`
             * `read()`
     * #### Removed
-        * Removed these enums and disconnected them from the associated attribute
+        * Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
             * `BoolEnableDisable` - `P2P_ENABLED`, `P2P_ADVANCED_ATTRIBUTES_ENABLED`, `P2P_ONBOARD_MEMORY_ENABLED`
             * `BoolEnableDisableChan` - `CHANNEL_ENABLED`
             * `BoolEnableDisableIQ` - `FETCH_INTERLEAVED_IQ_DATA`
