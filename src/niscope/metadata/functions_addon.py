@@ -267,7 +267,7 @@ functions_additional_functions = {
                 'type': 'ViReal64',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
-                    'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
+                    'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
                 },
             },
             {
@@ -304,7 +304,7 @@ functions_additional_functions = {
                 'name': 'fetchRecordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Zero-based index of the first record to fetch.  Use fetch__num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER',
+                    'description': 'Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER',
                 },
             },
             {
@@ -347,6 +347,8 @@ functions_additional_functions = {
                         .. math::
 
                             voltage = binary data * gain factor + offset
+
+                    - **wfm** waveform array whose length is the **numSamples**
 
                     Call niScope\_ActualNumWfms to determine the size of this array.''',
                 },
