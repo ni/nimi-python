@@ -37,7 +37,6 @@ All notable changes to this project will be documented in this file.
             * `get_cal_date_and_time()`
         * Metadata updated to NI-DMM 17.5
     * #### Removed
-        * `nidmm.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
         * Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
             * `DCBias` - `DC_BIAS`
             * `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
