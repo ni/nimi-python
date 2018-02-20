@@ -286,7 +286,7 @@ functions_additional_functions = {
                 'name': 'fetchRelativeTo',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Position to start fetching within one record. If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO',
+                    'description': 'Position to start fetching within one record. If not `None` sets NISCOPE_ATTR_FETCH_RELATIVE_TO, otherwise use the value of NISCOPE_ATTR_FETCH_RELATIVE_TO',
                 },
             },
             {
@@ -295,7 +295,7 @@ functions_additional_functions = {
                 'name': 'fetchOffet',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET',
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative. If not `None` sets NISCOPE_ATTR_FETCH_OFFSET, otherwise use the value of NISCOPE_ATTR_FETCH_OFFSET',
                 },
             },
             {
@@ -304,7 +304,7 @@ functions_additional_functions = {
                 'name': 'fetchRecordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER',
+                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch. If not `None` sets NISCOPE_ATTR_RECORD_NUMBER, otherwuse use the value of NISCOPE_ATTR_RECORD_NUMBER',
                 },
             },
             {
@@ -313,7 +313,7 @@ functions_additional_functions = {
                 'name': 'fetchNumRecords',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS',
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records. If not `None` sets NISCOPE_ATTR_NUM_RECORDS, otherwise use the value of NISCOPE_ATTR_NUM_RECORDS',
                 },
             },
             {
@@ -322,7 +322,7 @@ functions_additional_functions = {
                 'type': 'ViReal64[]',
                 'default_value': None, 
                 'documentation': {
-                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.',
+                    'description': 'Optional `numpy.ndarray`. If not `None` the array is passed into the driver. This is an advanced feature to improve performance. Call niScope\_ActualNumWfms to determine the number of waveforms.',
                 },
             },
             {
