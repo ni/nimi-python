@@ -44,9 +44,9 @@
             wfm_to_use = wfm
             wfm_info = self.fetch_into(wfm_to_use, timeout)
 
-        # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-        # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
         if sys.version_info.major < 3:
+            # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+            # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
             for i in range(len(wfm_info)):
                 if isinstance(wfm_to_use, array.array):
                     typecode = wfm_to_use.typecode
@@ -64,7 +64,7 @@
                 end = start + num_samples_to_use
                 wfm_info[i].wfm = array.array(typecode, wfm_to_use[start:end])
         else:
-            # In Python 3 we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
             mv = memoryview(wfm_to_use)
 
             for i in range(len(wfm_info)):
