@@ -83,7 +83,7 @@ nidcpower.Session properties
 
 .. py:attribute:: aperture_time
 
-    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the NIDCPOWER_ATTR_APERTURE_TIME_UNITS attribute.
+    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the :py:data:`nidcpower.Session.aperture_time_units` attribute.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure  your measurements and for information about valid values.
     Default Value: 0.01666666 seconds
@@ -125,10 +125,10 @@ nidcpower.Session properties
 
 .. py:attribute:: aperture_time_units
 
-    Specifies the units of the NIDCPOWER_ATTR_APERTURE_TIME attribute for the channel configuration.
+    Specifies the units of the :py:data:`nidcpower.Session.aperture_time` attribute for the channel configuration.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about  how to configure your measurements and for information about valid values.
-    Default Value: NIDCPOWER_VAL_SECONDS
+    Default Value: :py:data:`~nidcpower.ApertureTimeUnits.SECONDS`
 
 
 
@@ -169,7 +169,7 @@ nidcpower.Session properties
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
-    Default Value: The default value for the NI PXI-4132 is NIDCPOWER_VAL_ON. The default value for  all other devices is NIDCPOWER_VAL_OFF, which is the only supported value for these devices.
+    Default Value: The default value for the NI PXI-4132 is :py:data:`~nidcpower.AutoZero.ON`. The default value for  all other devices is :py:data:`~nidcpower.AutoZero.OFF`, which is the only supported value for these devices.
 
 
 
@@ -208,7 +208,7 @@ nidcpower.Session properties
 
     Indicates whether an auxiliary power source is connected to the device.
     A value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
-    power source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.
+    power source to generate power. Use the :py:data:`nidcpower.Session.power_source_in_use` attribute to retrieve this information.
 
 
 
@@ -239,7 +239,7 @@ nidcpower.Session properties
     Specifies whether to cache the value of attributes.
     When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
     NI-DCPower might always cache or never cache particular attributes regardless of the setting of this attribute.
-    Use the niDCPower_InitializeWithChannels function to override this value.
+    Use the :py:meth:`nidcpower.Session._initialize_with_channels` function to override this value.
     Default Value: VI_TRUE
 
     The following table lists the characteristics of this property.
@@ -349,7 +349,7 @@ nidcpower.Session properties
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the  :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 
@@ -390,7 +390,7 @@ nidcpower.Session properties
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This attribute takes effect when the channel is in Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the  :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 
@@ -430,9 +430,9 @@ nidcpower.Session properties
 .. py:attribute:: current_level
 
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is set.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
+    Valid Values: The valid values for this attribute are defined by the values to which the  :py:data:`nidcpower.Session.current_level_range` attribute is set.
 
 
 
@@ -472,10 +472,10 @@ nidcpower.Session properties
 .. py:attribute:: current_level_autorange
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.
-    Query the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this attribute to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_level_range` attribute. If you change the :py:data:`nidcpower.Session.current_level_autorange` attribute from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_level_range`  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.
+    Query the :py:data:`nidcpower.Session.current_level_range` attribute by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` function for  information about which range NI-DCPower automatically selects.
+    The :py:data:`nidcpower.Session.current_level_autorange` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+    Default Value: :py:data:`~nidcpower.AutoZero.OFF`
 
 
 
@@ -513,9 +513,9 @@ nidcpower.Session properties
 .. py:attribute:: current_level_range
 
     Specifies the current level range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current level can be set. Use the  NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.
-    The NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid value to which the current level can be set. Use the  :py:data:`nidcpower.Session.current_level_autorange` attribute to enable automatic selection of the current level range.
+    The :py:data:`nidcpower.Session.current_level_range` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is  set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -556,9 +556,9 @@ nidcpower.Session properties
 .. py:attribute:: current_limit
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to  NIDCPOWER_VAL_SYMMETRIC.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to  :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` attribute is set to  :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
+    Valid Values: The valid values for this attribute are defined by the values to which  :py:data:`nidcpower.Session.current_limit_range` attribute is set.
 
 
 
@@ -598,10 +598,10 @@ nidcpower.Session properties
 .. py:attribute:: current_limit_autorange
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute. If you change this attribute from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.
-    Query the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this attribute to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_limit_range` attribute. If you change this attribute from :py:data:`~nidcpower.AutoZero.ON` to  :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_limit_range` attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.
+    Query the :py:data:`nidcpower.Session.current_limit_range` attribute by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` function for  information about which range NI-DCPower automatically selects.
+    The :py:data:`nidcpower.Session.current_limit_autorange` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+    Default Value: :py:data:`~nidcpower.AutoZero.OFF`
 
 
 
@@ -641,15 +641,15 @@ nidcpower.Session properties
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
     Voltage**.
     You must also specify a `Current Limit
-    Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
+    Low <p:py:meth:`nidcpower.Session.CurrentLimitLow`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [0, `Current Limit
-    Range <pniDCPower_CurrentLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -665,7 +665,7 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
 
 
@@ -704,15 +704,15 @@ nidcpower.Session properties
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
     Voltage**.
     You must also specify a `Current Limit
-    High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
+    High <p:py:meth:`nidcpower.Session.CurrentLimitHigh`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Current Limit
-    Range <pniDCPower_CurrentLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -728,7 +728,7 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
 
 
@@ -765,9 +765,9 @@ nidcpower.Session properties
 .. py:attribute:: current_limit_range
 
     Specifies the current limit range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current limit can be set. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE  attribute to enable automatic selection of the current limit range.
-    The NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid value to which the current limit can be set. Use the :py:data:`nidcpower.Session.current_limit_autorange`  attribute to enable automatic selection of the current limit range.
+    The :py:data:`nidcpower.Session.current_limit_range` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -809,7 +809,7 @@ nidcpower.Session properties
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 
@@ -850,7 +850,7 @@ nidcpower.Session properties
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NORMAL
+    Default Value: :py:data:`~nidcpower.TransientResponse.NORMAL`
 
 
 
@@ -879,9 +879,9 @@ nidcpower.Session properties
 .. py:attribute:: digital_edge_measure_trigger_edge
 
     Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
-    NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    :py:data:`nidcpower.Session.source_trigger_type` attribute is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
 
 
 
@@ -909,7 +909,7 @@ nidcpower.Session properties
 
 .. py:attribute:: digital_edge_measure_trigger_input_terminal
 
-    Specifies the input terminal for the Measure trigger. This attribute is used only when the  NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Measure trigger. This attribute is used only when the  :py:data:`nidcpower.Session.measure_trigger_type` attribute is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
     for this attribute.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
@@ -941,7 +941,7 @@ nidcpower.Session properties
 .. py:attribute:: digital_edge_pulse_trigger_edge
 
     Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
 
 
 
@@ -969,7 +969,7 @@ nidcpower.Session properties
 
 .. py:attribute:: digital_edge_pulse_trigger_input_terminal
 
-    Specifies the input terminal for the Pulse trigger. This attribute is used only when the NIDCPOWER_ATTR_PULSE_TRIGGER_TYPE attribute is set to digital edge.
+    Specifies the input terminal for the Pulse trigger. This attribute is used only when the :py:data:`nidcpower.Session.pulse_trigger_type` attribute is set to digital edge.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -1001,7 +1001,7 @@ nidcpower.Session properties
 
     Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
 
 
 
@@ -1029,7 +1029,7 @@ nidcpower.Session properties
 
 .. py:attribute:: digital_edge_sequence_advance_trigger_input_terminal
 
-    Specifies the input terminal for the Sequence Advance trigger. Use this attribute only when the  NIDCPOWER_ATTR_SEQUENCE_ADVANCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Sequence Advance trigger. Use this attribute only when the  :py:data:`nidcpower.Session.sequence_advance_trigger_type` attribute is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the  input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
@@ -1062,7 +1062,7 @@ nidcpower.Session properties
 
     Specifies whether to configure the Source trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
 
 
 
@@ -1090,7 +1090,7 @@ nidcpower.Session properties
 
 .. py:attribute:: digital_edge_source_trigger_input_terminal
 
-    Specifies the input terminal for the Source trigger. Use this attribute only when the  NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Source trigger. Use this attribute only when the  :py:data:`nidcpower.Session.source_trigger_type` attribute is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
     for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
@@ -1123,7 +1123,7 @@ nidcpower.Session properties
 
     Specifies whether to configure the Start trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
 
 
 
@@ -1151,7 +1151,7 @@ nidcpower.Session properties
 
 .. py:attribute:: digital_edge_start_trigger_input_terminal
 
-    Specifies the input terminal for the Start trigger. Use this attribute only when the NIDCPOWER_ATTR_START_TRIGGER_TYPE  attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Start trigger. Use this attribute only when the :py:data:`nidcpower.Session.start_trigger_type`  attribute is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
     for information about supported devices.
     You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal  on Dev1 to be /Dev2/SourceCompleteEvent.
@@ -1183,8 +1183,8 @@ nidcpower.Session properties
 .. py:attribute:: driver_setup
 
     Indicates the Driver Setup string that you specified when initializing the driver.
-    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This attribute is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the niDCPower_InitializeWithChannels function or through the  IVI Configuration Utility.
-    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the niDCPower_InitializeWithChannels function. If you do not specify a Driver Setup string, this attribute returns an empty string.
+    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This attribute is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the :py:meth:`nidcpower.Session._initialize_with_channels` function or through the  IVI Configuration Utility.
+    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the :py:meth:`nidcpower.Session._initialize_with_channels` function. If you do not specify a Driver Setup string, this attribute returns an empty string.
 
     The following table lists the characteristics of this property.
 
@@ -1483,8 +1483,8 @@ nidcpower.Session properties
 .. py:attribute:: interchange_check
 
     Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower functions. VI_TRUE specifies that interchangeability checking is enabled.
-    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the niDCPower_GetNextInterchangeWarning function to retrieve  interchange warnings.
-    Call the niDCPower_GetNextInterchangeWarning function to clear the list of interchangeability warnings  without reading them.
+    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` function to retrieve  interchange warnings.
+    Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` function to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group only if you specify a value  for at least one attribute within that group. Interchangeability warnings can occur when an attribute  affects the behavior of the device and you have not set that attribute or when the attribute has been  invalidated since you set it.
     Default Value: VI_FALSE
 
@@ -1567,7 +1567,7 @@ nidcpower.Session properties
 .. py:attribute:: logical_name
 
     Contains the logical name you specified when opening the current IVI session.
-    You can pass a logical name to the niDCPower_InitializeWithChannels function.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a function section in the IVI Configuration file. The function section specifies a physical  device and initial user options.
+    You can pass a logical name to the :py:meth:`nidcpower.Session._initialize_with_channels` function.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a function section in the IVI Configuration file. The function section specifies a physical  device and initial user options.
 
     The following table lists the characteristics of this property.
 
@@ -1686,7 +1686,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -1777,7 +1777,7 @@ nidcpower.Session properties
 
 .. py:attribute:: measure_record_length
 
-    Specifies how many measurements compose a measure record. When this attribute is set to a value greater than 1, the  NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
+    Specifies how many measurements compose a measure record. When this attribute is set to a value greater than 1, the  :py:data:`nidcpower.Session.measure_when` attribute must be set to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or  :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`.
     for information about supported devices.
     Valid Values: 1 to 16,777,216
     Default Value: 1
@@ -1808,7 +1808,7 @@ nidcpower.Session properties
 
 .. py:attribute:: measure_record_length_is_finite
 
-    Specifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
+    Specifies whether to take continuous measurements. Call the :py:meth:`nidcpower.Session.abort` function to stop continuous measurements.  When this attribute is set to VI_FALSE and the :py:data:`nidcpower.Session.source_mode` attribute is set to  :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the :py:data:`nidcpower.Session.measure_when` attribute must be set to  :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE` or :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`. When this attribute is set to  VI_FALSE and the :py:data:`nidcpower.Session.source_mode` attribute is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the :py:data:`nidcpower.Session.measure_when`  attribute must be set to :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`.
     for information about supported devices.
     Default Value: VI_TRUE
 
@@ -1840,7 +1840,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_DIGITAL_EDGE
+    Default Value: :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`
 
 
 
@@ -1868,9 +1868,9 @@ nidcpower.Session properties
 
 .. py:attribute:: measure_when
 
-    Specifies when the measure unit should acquire measurements. Unless this attribute is configured to  NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.
+    Specifies when the measure unit should acquire measurements. Unless this attribute is configured to  :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`, the :py:data:`nidcpower.Session.measure_trigger_type` attribute is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is  NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple  function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.
+    Default Value: If the :py:data:`nidcpower.Session.source_mode` attribute is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the default value is  :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. This value supports only the :py:meth:`nidcpower.Session.measure` function and :py:meth:`nidcpower.Session.measure_multiple`  function. If the :py:data:`nidcpower.Session.source_mode` attribute is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the default value is  :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`. This value supports only the :py:meth:`nidcpower.Session.fetch_multiple` function.
 
     The following table lists the characteristics of this property.
 
@@ -1935,7 +1935,7 @@ nidcpower.Session properties
 
 .. py:attribute:: output_connected
 
-    Specifies whether the output relay is connected (closed) or disconnected (open). The NIDCPOWER_ATTR_OUTPUT_ENABLED  attribute does not change based on this attribute; they are independent of each other.
+    Specifies whether the output relay is connected (closed) or disconnected (open). The :py:data:`nidcpower.Session.output_enabled`  attribute does not change based on this attribute; they are independent of each other.
     about supported devices.
     Set this attribute to VI_FALSE to disconnect the output terminal from the output.
     to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the  output can cause premature wear on the relay.
@@ -1979,9 +1979,9 @@ nidcpower.Session properties
 .. py:attribute:: output_enabled
 
     Specifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).
-    Depending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output
-    the niDCPower_Initiate function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-    Default Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.
+    Depending on the value you specify for the :py:data:`nidcpower.Session.output_function` attribute, you also must set the  voltage level or current level in addition to  enabling the output
+    the :py:meth:`nidcpower.Session._initiate` function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    Default Value: The default value is VI_TRUE if you use the :py:meth:`nidcpower.Session._initialize_with_channels` function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.
 
 
 
@@ -2021,21 +2021,21 @@ nidcpower.Session properties
 .. py:attribute:: output_function
 
     Configures the function to generate on the specified channel(s).
-    When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
-    NIDCPOWER_ATTR_VOLTAGE_LEVEL
-    NIDCPOWER_ATTR_CURRENT_LIMIT
-    NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH
-    NIDCPOWER_ATTR_CURRENT_LIMIT_LOW
-    NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE
-    NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE
-    When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_CURRENT is selected:
-    NIDCPOWER_ATTR_CURRENT_LEVEL
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW
-    NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE
-    Default Value: NIDCPOWER_VAL_DC_VOLTAGE
+    When :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` is selected:
+    :py:data:`nidcpower.Session.voltage_level`
+    :py:data:`nidcpower.Session.current_limit`
+    :py:data:`nidcpower.Session.current_limit_high`
+    :py:data:`nidcpower.Session.current_limit_low`
+    :py:data:`nidcpower.Session.voltage_level_range`
+    :py:data:`nidcpower.Session.current_limit_range`
+    When :py:data:`~nidcpower.OutputFunction.DC_CURRENT` is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  :py:data:`~nidcpower.OutputFunction.DC_CURRENT` is selected:
+    :py:data:`nidcpower.Session.current_level`
+    :py:data:`nidcpower.Session.voltage_limit`
+    :py:data:`nidcpower.Session.voltage_limit_high`
+    :py:data:`nidcpower.Session.voltage_limit_low`
+    :py:data:`nidcpower.Session.current_level_range`
+    :py:data:`nidcpower.Session.voltage_limit_range`
+    Default Value: :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`
 
 
 
@@ -2072,7 +2072,7 @@ nidcpower.Session properties
 
 .. py:attribute:: output_resistance
 
-    Specifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is  available only when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
+    Specifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is  available only when you set the :py:data:`nidcpower.Session.output_function` attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
     Default Value: 0.0
 
@@ -2201,9 +2201,9 @@ nidcpower.Session properties
 
 .. py:attribute:: power_line_frequency
 
-    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  NIDCPOWER_ATTR_APERTURE_TIME attribute in power line cycles (PLCs).
+    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  :py:data:`nidcpower.Session.aperture_time` attribute in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
-    Default Value: NIDCPOWER_VAL_60_HERTZ
+    Default Value: :py:data:`~nidcpower.NIDCPOWER_VAL_60_HERTZ`
 
 
 
@@ -2243,8 +2243,8 @@ nidcpower.Session properties
 .. py:attribute:: power_source
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
-    Default Value: NIDCPOWER_VAL_AUTOMATIC
-    is set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_Initiate function.
+    Default Value: :py:data:`~nidcpower.PowerSource.AUTOMATIC`
+    is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session._initiate` function.
 
 
 
@@ -2297,8 +2297,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_bias_current_level
 
     Specifies the pulse bias current level, in amps, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_level_range` attribute.
 
 
 
@@ -2338,8 +2338,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_bias_current_limit
 
     Specifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE property.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_limit_range` property.
 
 
 
@@ -2382,15 +2382,15 @@ nidcpower.Session properties
     generating the desired pulse voltage on the specified channel(s) during
     the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Bias Current Limit
-    Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
+    Low <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitLow`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [0, `Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -2406,9 +2406,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -2448,15 +2448,15 @@ nidcpower.Session properties
     generating the desired pulse voltage on the specified channel(s) during
     the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Bias Current Limit
-    High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
+    High <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -2472,9 +2472,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -2552,8 +2552,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_bias_voltage_level
 
     Specifies the pulse bias voltage level, in volts, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_voltage_level_range` attribute.
 
 
 
@@ -2593,8 +2593,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_bias_voltage_limit
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_voltage_limit_range` attribute.
 
 
 
@@ -2637,15 +2637,15 @@ nidcpower.Session properties
     when generating the desired pulse current on the specified channel(s)
     during the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Bias Voltage Limit
-    Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
+    Low <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitLow`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [0, `Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -2661,9 +2661,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -2703,15 +2703,15 @@ nidcpower.Session properties
     when generating the desired pulse current on the specified channel(s)
     during the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Bias Voltage Limit
-    High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
+    High <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -2727,9 +2727,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -2796,7 +2796,7 @@ nidcpower.Session properties
 .. py:attribute:: pulse_complete_event_pulse_polarity
 
     Specifies the behavior of the Pulse Complete event.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -2856,8 +2856,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_current_level
 
     Specifies the pulse current level, in amps, that the device attempts to generate on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_level_range` attribute.
 
 
 
@@ -2898,7 +2898,7 @@ nidcpower.Session properties
 
     Specifies the pulse current level range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current level and pulse bias current level.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -2939,8 +2939,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_current_limit
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY  attribute is set to NIDCPOWER_VAL_SYMMETRIC.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry`  attribute is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_limit_range` attribute.
 
 
 
@@ -2983,15 +2983,15 @@ nidcpower.Session properties
     generating the desired pulse voltage on the specified channel(s) during
     the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Current Limit
-    Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
+    Low <p:py:meth:`nidcpower.Session.PulseCurrentLimitLow`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [0, `Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -3007,9 +3007,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -3049,15 +3049,15 @@ nidcpower.Session properties
     generating the desired pulse voltage on the specified channel(s) during
     the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Current Limit
-    High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
+    High <p:py:meth:`nidcpower.Session.PulseCurrentLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -3073,9 +3073,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -3113,7 +3113,7 @@ nidcpower.Session properties
 
     Specifies the pulse current limit range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -3236,7 +3236,7 @@ nidcpower.Session properties
 .. py:attribute:: pulse_trigger_type
 
     Specifies the behavior of the Pulse trigger.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
@@ -3265,8 +3265,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_voltage_level
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_limit_range` attribute.
 
 
 
@@ -3307,7 +3307,7 @@ nidcpower.Session properties
 
     Specifies the pulse voltage level range, in volts, for the specified channel(s).
     The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -3348,8 +3348,8 @@ nidcpower.Session properties
 .. py:attribute:: pulse_voltage_limit
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute  is set to NIDCPOWER_VAL_SYMMETRIC.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` attribute  is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_voltage_limit_range` attribute.
 
 
 
@@ -3392,15 +3392,15 @@ nidcpower.Session properties
     when generating the desired pulse current on the specified channel(s)
     during the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Voltage Limit
-    Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
+    Low <p:py:meth:`nidcpower.Session.PulseVoltageLimitLow`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [0, `Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -3416,9 +3416,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -3458,15 +3458,15 @@ nidcpower.Session properties
     when generating the desired pulse current on the specified channel(s)
     during the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Voltage Limit
-    High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
+    High <p:py:meth:`nidcpower.Session.PulseVoltageLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -3482,9 +3482,9 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE or if the `Output
-        Function <pniDCPower_OutputFunction.html>`__ property is set to a
+        Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
 
 
@@ -3522,12 +3522,12 @@ nidcpower.Session properties
 
     Specifies the pulse voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
 
-    .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3565,7 +3565,7 @@ nidcpower.Session properties
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular attributes regardless of the setting of this attribute.
-    Use the niDCPower_InitializeWithChannels function to override this value.
+    Use the :py:meth:`nidcpower.Session._initialize_with_channels` function to override this value.
     Default Value: VI_TRUE
 
     The following table lists the characteristics of this property.
@@ -3592,7 +3592,7 @@ nidcpower.Session properties
 
     Specifies whether to validate attribute values and function parameters.
     If this attribute is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower functions.  Range checking parameters is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable range checking and maximize performance.
-    Use the niDCPower_InitializeWithChannels function to override this value.
+    Use the :py:meth:`nidcpower.Session._initialize_with_channels` function to override this value.
     Default Value: VI_TRUE
 
     The following table lists the characteristics of this property.
@@ -3647,7 +3647,7 @@ nidcpower.Session properties
 .. py:attribute:: ready_for_pulse_trigger_event_pulse_polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -3706,8 +3706,8 @@ nidcpower.Session properties
 
 .. py:attribute:: record_coercions
 
-    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the niDCPower_GetNextCoercionRecord function to read and delete the earliest coercion record from the list.
-    Default Value: The default value is VI_FALSE. Use the niDCPower_InitializeWithChannels function to override this value.
+    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the :py:meth:`nidcpower.Session.GetNextCoercionRecord` function to read and delete the earliest coercion record from the list.
+    Default Value: The default value is VI_FALSE. Use the :py:meth:`nidcpower.Session._initialize_with_channels` function to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -3733,7 +3733,7 @@ nidcpower.Session properties
 
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (VI_TRUE) or  returns a measurement that has already begun or completed(VI_FALSE).
     for information about supported devices.
-    When you set the NIDCPOWER_ATTR_SAMPLES_TO_AVERAGE attribute in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the niDCPower_MeasureMultiple function. To  force a synchronization in the running state, set this attribute to VI_TRUE, and then run the niDCPower_MeasureMultiple  function, specifying all channels in the channel name parameter. You can set the  NIDCPOWER_ATTR_RESET_AVERAGE_BEFORE_MEASUREMENT attribute to VI_FALSE after the niDCPower_MeasureMultiple function  completes.
+    When you set the :py:data:`nidcpower.Session.samples_to_average` attribute in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session.measure_multiple` function. To  force a synchronization in the running state, set this attribute to VI_TRUE, and then run the :py:meth:`nidcpower.Session.measure_multiple`  function, specifying all channels in the channel name parameter. You can set the  :py:data:`nidcpower.Session.reset_average_before_measurement` attribute to VI_FALSE after the :py:meth:`nidcpower.Session.measure_multiple` function  completes.
     Default Value: VI_TRUE
 
 
@@ -3820,10 +3820,10 @@ nidcpower.Session properties
 
 .. py:attribute:: self_calibration_persistence
 
-    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.
-    This attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.
+    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the :py:meth:`nidcpower.Session.reset_device` function is called or the machine  is powered down.
+    This attribute affects the behavior of the :py:meth:`nidcpower.Session.CalSelfCalibrate` function. When set to  :py:data:`~nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY`, the values calculated by the :py:meth:`nidcpower.Session.CalSelfCalibrate` function are used in  the existing session, as well as in all further sessions until you call the :py:meth:`nidcpower.Session.reset_device` function  or restart the machine. When you set this property to :py:data:`~nidcpower.SelfCalibrationPersistence.WRITE_TO_EEPROM`, the values calculated  by the :py:meth:`nidcpower.Session.CalSelfCalibrate` function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the :py:meth:`nidcpower.Session.CalSelfCalibrate` function is made.
     about supported devices.
-    Default Value: NIDCPOWER_VAL_KEEP_IN_MEMORY
+    Default Value: :py:data:`~nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY`
 
 
 
@@ -3853,7 +3853,7 @@ nidcpower.Session properties
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
-    Default Value: The default value is NIDCPOWER_VAL_LOCAL if the device supports local sense.  Otherwise, the default and only supported value is NIDCPOWER_VAL_REMOTE.
+    Default Value: The default value is :py:data:`~nidcpower.Sense.LOCAL` if the device supports local sense.  Otherwise, the default and only supported value is :py:data:`~nidcpower.Sense.REMOTE`.
 
 
 
@@ -3892,7 +3892,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
@@ -3952,7 +3952,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -4045,7 +4045,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -4108,7 +4108,7 @@ nidcpower.Session properties
 
     Specifies the number of times a sequence is run after initiation.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.
-    for information about supported devices. When the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute  is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
+    for information about supported devices. When the :py:data:`nidcpower.Session.sequence_loop_count_is_finite` attribute  is set to VI_FALSE, the :py:data:`nidcpower.Session.sequence_loop_count` attribute is ignored.
     Valid Range: 1 to 134217727
     Default Value: 1
 
@@ -4140,7 +4140,7 @@ nidcpower.Session properties
 
     Specifies whether a sequence should repeat indefinitely.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.
-    NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE,  the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
+    :py:data:`nidcpower.Session.sequence_loop_count_is_finite` attribute is set to VI_FALSE,  the :py:data:`nidcpower.Session.sequence_loop_count` attribute is ignored.
     Default Value: VI_TRUE
 
 
@@ -4226,7 +4226,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: :py:data:`~nidcpower.Polarity.HIGH`
 
 
 
@@ -4287,7 +4287,7 @@ nidcpower.Session properties
 
 .. py:attribute:: source_delay
 
-    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
+    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  :py:data:`nidcpower.Session.measure_when` attribute is set to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
     Valid Values: 0 to 167 seconds
     Default Value: 0.01667 seconds
@@ -4330,7 +4330,7 @@ nidcpower.Session properties
 .. py:attribute:: source_mode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
-    Default value: NIDCPOWER_VAL_SINGLE_POINT
+    Default value: :py:data:`~nidcpower.SourceMode.SINGLE_POINT`
 
     The following table lists the characteristics of this property.
 
@@ -4356,7 +4356,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
@@ -4530,7 +4530,7 @@ nidcpower.Session properties
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: :py:data:`~nidcpower.TriggerType.NONE`
 
 
 
@@ -4584,7 +4584,7 @@ nidcpower.Session properties
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NORMAL
+    Default Value: :py:data:`~nidcpower.TransientResponse.NORMAL`
 
 
 
@@ -4625,7 +4625,7 @@ nidcpower.Session properties
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of  the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of  the :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 
@@ -4666,7 +4666,7 @@ nidcpower.Session properties
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This attribute takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the  :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 
@@ -4706,9 +4706,9 @@ nidcpower.Session properties
 .. py:attribute:: voltage_level
 
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
+    Valid Values: The valid values for this attribute are defined by the values you specify for the  :py:data:`nidcpower.Session.voltage_level_range` attribute.
 
 
 
@@ -4748,10 +4748,10 @@ nidcpower.Session properties
 .. py:attribute:: voltage_level_autorange
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.
-    Query the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this attribute to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_level_range` attribute. If you change the :py:data:`nidcpower.Session.voltage_level_autorange` attribute from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_level_range`  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.
+    Query the :py:data:`nidcpower.Session.voltage_level_range` attribute by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` function for  information about which range NI-DCPower automatically selects.
+    The :py:data:`nidcpower.Session.voltage_level_autorange` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+    Default Value: :py:data:`~nidcpower.AutoZero.OFF`
 
 
 
@@ -4789,9 +4789,9 @@ nidcpower.Session properties
 .. py:attribute:: voltage_level_range
 
     Specifies the voltage level range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE  attribute to enable automatic selection of the voltage level range.
-    The NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid values to which the voltage level can be set. Use the :py:data:`nidcpower.Session.voltage_level_autorange`  attribute to enable automatic selection of the voltage level range.
+    The :py:data:`nidcpower.Session.voltage_level_range` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is  set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -4832,9 +4832,9 @@ nidcpower.Session properties
 .. py:attribute:: voltage_limit
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT  and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_SYMMETRIC.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.
+    This attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`  and the :py:data:`nidcpower.Session.compliance_limit_symmetry` attribute is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
+    Valid Values: The valid values for this attribute are defined by the values to which the  :py:data:`nidcpower.Session.voltage_limit_range` attribute is set.
 
 
 
@@ -4874,10 +4874,10 @@ nidcpower.Session properties
 .. py:attribute:: voltage_limit_autorange
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this attribute is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.
-    Query the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function to find out  which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
+    If this attribute is set to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_limit_range` attribute. If you change the :py:data:`nidcpower.Session.voltage_limit_autorange` attribute from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_limit_range`  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.
+    Query the :py:data:`nidcpower.Session.voltage_limit_range` attribute by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` function to find out  which range NI-DCPower automatically selects.
+    The :py:data:`nidcpower.Session.voltage_limit_autorange` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+    Default Value: :py:data:`~nidcpower.AutoZero.OFF`
 
 
 
@@ -4917,15 +4917,15 @@ nidcpower.Session properties
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
     Current**.
     You must also specify a `Voltage Limit
-    Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
+    Low <p:py:meth:`nidcpower.Session.VoltageLimitLow`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [0, `Voltage Limit
-    Range <pniDCPower_VoltageLimitRange.html>`__]
+    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -4941,7 +4941,7 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
 
 
@@ -4980,15 +4980,15 @@ nidcpower.Session properties
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <p:py:meth:`nidcpower.Session.ComplianceLimitSymmetry`.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to **DC
     Current**.
     You must also specify a `Voltage Limit
-    High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
+    High <p:py:meth:`nidcpower.Session.VoltageLimitHigh`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Voltage Limit
-    Range <pniDCPower_VoltageLimitRange.html>`__, 0]
+    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, 0]
     The range bounded by the limit high and limit low must include zero. The
     limit high and limit low must be separated by at least 2% of the
     selected limit range.
@@ -5004,7 +5004,7 @@ nidcpower.Session properties
 
 
     .. note:: The limit may be extended beyond the selected limit range if the
-        `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+        `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
 
 
@@ -5041,9 +5041,9 @@ nidcpower.Session properties
 .. py:attribute:: voltage_limit_range
 
     Specifies the voltage limit range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE  attribute to enable automatic selection of the voltage limit range.
-    The NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid values to which the voltage limit can be set. Use the :py:data:`nidcpower.Session.voltage_limit_autorange`  attribute to enable automatic selection of the voltage limit range.
+    The :py:data:`nidcpower.Session.voltage_limit_range` attribute is applicable only if the :py:data:`nidcpower.Session.output_function` attribute is  set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+    :py:data:`nidcpower.Session.output_enabled` attribute for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
 
@@ -5085,7 +5085,7 @@ nidcpower.Session properties
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default value: Determined by the value of the :py:data:`~nidcpower.TransientResponse.NORMAL` setting of the  :py:data:`nidcpower.Session.transient_response` attribute.
 
 
 

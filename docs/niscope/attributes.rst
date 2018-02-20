@@ -175,7 +175,7 @@ niscope.Session properties
 
 .. py:attribute:: acquisition_start_time
 
-    Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
+    Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  :py:data:`niscope.Session.trigger_delay_time`).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  :py:data:`niscope.Session.horz_record_ref_position`).
 
     The following table lists the characteristics of this property.
 
@@ -225,18 +225,18 @@ niscope.Session properties
 
     Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
     Valid Values:
-    NISCOPE_VAL_IMMEDIATE     ('VAL_IMMEDIATE')    - Triggers immediately
-    NISCOPE_VAL_RTSI_0        ('VAL_RTSI_0')       - RTSI 0
-    NISCOPE_VAL_RTSI_1        ('VAL_RTSI_1')       - RTSI 1
-    NISCOPE_VAL_RTSI_2        ('VAL_RTSI_2')       - RTSI 2
-    NISCOPE_VAL_RTSI_3        ('VAL_RTSI_3')       - RTSI 3
-    NISCOPE_VAL_RTSI_4        ('VAL_RTSI_4')       - RTSI 4
-    NISCOPE_VAL_RTSI_5        ('VAL_RTSI_5')       - RTSI 5
-    NISCOPE_VAL_RTSI_6        ('VAL_RTSI_6')       - RTSI 6
-    NISCOPE_VAL_PFI_0         ('VAL_PFI_0')        - PFI 0
-    NISCOPE_VAL_PFI_1         ('VAL_PFI_1')        - PFI 1
-    NISCOPE_VAL_PFI_2         ('VAL_PFI_2')        - PFI 2
-    NISCOPE_VAL_PXI_STAR      ('VAL_PXI_STAR')     - PXI Star Trigger
+    :py:data:`~niscope.NISCOPE_VAL_IMMEDIATE`     ('VAL_IMMEDIATE')    - Triggers immediately
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_0`        ('VAL_RTSI_0')       - RTSI 0
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_1`        ('VAL_RTSI_1')       - RTSI 1
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_2`        ('VAL_RTSI_2')       - RTSI 2
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_3`        ('VAL_RTSI_3')       - RTSI 3
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_4`        ('VAL_RTSI_4')       - RTSI 4
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_5`        ('VAL_RTSI_5')       - RTSI 5
+    :py:data:`~niscope.NISCOPE_VAL_RTSI_6`        ('VAL_RTSI_6')       - RTSI 6
+    :py:data:`~niscope.NISCOPE_VAL_PFI_0`         ('VAL_PFI_0')        - PFI 0
+    :py:data:`~niscope.NISCOPE_VAL_PFI_1`         ('VAL_PFI_1')        - PFI 1
+    :py:data:`~niscope.NISCOPE_VAL_PFI_2`         ('VAL_PFI_2')        - PFI 2
+    :py:data:`~niscope.NISCOPE_VAL_PXI_STAR`      ('VAL_PXI_STAR')     - PXI Star Trigger
 
     The following table lists the characteristics of this property.
 
@@ -284,7 +284,7 @@ niscope.Session properties
 
 .. py:attribute:: allow_more_records_than_memory
 
-    Indicates whether more records can be configured with niScope_ConfigureHorizontalTiming  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
+    Indicates whether more records can be configured with :py:meth:`niscope.Session.configure_horizontal_timing`  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
 
     The following table lists the characteristics of this property.
 
@@ -332,7 +332,7 @@ niscope.Session properties
 
 .. py:attribute:: backlog
 
-    Returns the number of samples (NISCOPE_ATTR_POINTS_DONE) that have been acquired but not fetched  for the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER.
+    Returns the number of samples (:py:data:`niscope.Session.points_done`) that have been acquired but not fetched  for the record specified by :py:data:`niscope.Session.fetch_record_number`.
 
     The following table lists the characteristics of this property.
 
@@ -393,7 +393,7 @@ niscope.Session properties
 
 .. py:attribute:: binary_sample_width
 
-    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to NISCOPE_ATTR_RESOLUTION.
+    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to :py:data:`niscope.Session.resolution`.
     To configure the device to store samples with a lower resolution that the native, set this attribute to the desired binary width.
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
@@ -422,7 +422,7 @@ niscope.Session properties
 
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
+    The default value is VI_TRUE.   Use :py:meth:`niscope.Session._init_with_options`  to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -824,7 +824,7 @@ niscope.Session properties
 
 .. py:attribute:: ddc_frequency_translation_phase_q
 
-    The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when NISCOPE_ATTR_DDC_DATA_PROCESSING_MODE is set to Complex.
+    The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when :py:data:`niscope.Session.ddc_data_processing_mode` is set to Complex.
     Default Value: 90
 
 
@@ -1065,7 +1065,7 @@ niscope.Session properties
 .. py:attribute:: driver_setup
 
     This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  niScope_InitWithOptions, or through the IVI Configuration Utility.
+    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session._init_with_options`, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this attribute returns an empty string.
 
     The following table lists the characteristics of this property.
@@ -1409,7 +1409,7 @@ niscope.Session properties
 
 .. py:attribute:: fetch_interleaved_iq_data
 
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  :py:meth:`niscope.Session._fetch`() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: VI_TRUE
 
     The following table lists the characteristics of this property.
@@ -1484,7 +1484,7 @@ niscope.Session properties
 
 .. py:attribute:: fetch_offset
 
-    Offset in samples to start fetching data within each record. The offset is applied relative to  NISCOPE_ATTR_FETCH_RELATIVE_TO.The offset can be positive or negative.
+    Offset in samples to start fetching data within each record. The offset is applied relative to  :py:data:`niscope.Session.fetch_relative_to`.The offset can be positive or negative.
     Default Value: 0
 
     The following table lists the characteristics of this property.
@@ -1535,7 +1535,7 @@ niscope.Session properties
 .. py:attribute:: fetch_relative_to
 
     Position to start fetching within one record.
-    Default Value: NISCOPE_VAL_PRETRIGGER
+    Default Value: :py:data:`~niscope.FetchRelativeTo.PRETRIGGER`
 
     The following table lists the characteristics of this property.
 
@@ -1727,7 +1727,7 @@ niscope.Session properties
 
 .. py:attribute:: horz_min_num_pts
 
-    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. NISCOPE_ATTR_HORZ_RECORD_LENGTH returns the actual record length.
+    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. :py:data:`niscope.Session.horz_record_length` returns the actual record length.
     Valid Values: 1 - available onboard memory
 
     The following table lists the characteristics of this property.
@@ -1776,7 +1776,7 @@ niscope.Session properties
 
 .. py:attribute:: horz_record_length
 
-    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  NISCOPE_ATTR_HORZ_MIN_NUM_PTS.
+    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  :py:data:`niscope.Session.horz_min_num_pts`.
     Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch functions. This attribute is only valid after a call to the one of the  Configure Horizontal functions.
 
     The following table lists the characteristics of this property.
@@ -1801,7 +1801,7 @@ niscope.Session properties
 
 .. py:attribute:: horz_record_ref_position
 
-    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  NISCOPE_ATTR_TRIGGER_DELAY_TIME attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  :py:data:`niscope.Session.trigger_delay_time` attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
 
     The following table lists the characteristics of this property.
@@ -2066,7 +2066,7 @@ niscope.Session properties
 .. py:attribute:: io_resource_descriptor
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     The following table lists the characteristics of this property.
 
@@ -2090,7 +2090,7 @@ niscope.Session properties
 
 .. py:attribute:: logical_name
 
-    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     The following table lists the characteristics of this property.
 
@@ -2140,12 +2140,12 @@ niscope.Session properties
 
     Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
     Defined Values:
-    NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
-    NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
-    NISCOPE_VAL_20MHZ_BANDWIDTH (20000000.0)
-    NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
-    NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
-    NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
+    :py:data:`~niscope.NISCOPE_VAL_BANDWIDTH_FULL` (-1.0)
+    :py:data:`~niscope.NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT` (0.0)
+    :py:data:`~niscope.NISCOPE_VAL_20MHZ_BANDWIDTH` (20000000.0)
+    :py:data:`~niscope.NISCOPE_VAL_100MHZ_BANDWIDTH` (100000000.0)
+    :py:data:`~niscope.NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY` (20000000.0)
+    :py:data:`~niscope.NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY` (100000000.0)
 
 
 
@@ -2230,7 +2230,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_array_gain
 
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
+    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.NISCOPE_VAL_ARRAY_GAIN` for more information.
     Default: 1.0
 
 
@@ -2268,7 +2268,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_array_offset
 
-    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
+    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.NISCOPE_VAL_ARRAY_OFFSET` for more information.
     Default: 0.0
 
 
@@ -2306,7 +2306,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_chan_high_ref_level
 
-    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
+    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as :py:data:`niscope.Session.MEAS_HIGH_REF` if you use  this attribute to set various channels to different values.
     Default: 90%
 
 
@@ -2344,7 +2344,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_chan_low_ref_level
 
-    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_LOW_REF if you use this attribute to set various channels to different values.
+    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  :py:data:`niscope.Session.MEAS_LOW_REF` if you use this attribute to set various channels to different values.
     Default: 10%
 
 
@@ -2382,7 +2382,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_chan_mid_ref_level
 
-    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_MID_REF if you use this attribute to set various channels to different values.
+    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  :py:data:`niscope.Session.MEAS_MID_REF` if you use this attribute to set various channels to different values.
     Default: 50%
 
 
@@ -2420,7 +2420,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_filter_center_freq
 
-    The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by NISCOPE_ATTR_MEAS_FILTER_WIDTH, where the cutoff frequencies are the center ± width.
+    The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by :py:data:`niscope.Session.meas_filter_width`, where the cutoff frequencies are the center ± width.
     Default: 1.0e6 Hz
 
 
@@ -2610,11 +2610,11 @@ niscope.Session properties
 .. py:attribute:: meas_filter_type
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
-    ·  NISCOPE_VAL_MEAS_LOWPASS
-    ·  NISCOPE_VAL_MEAS_HIGHPASS
-    ·  NISCOPE_VAL_MEAS_BANDPASS
-    ·  NISCOPE_VAL_MEAS_BANDSTOP
-    Default: NISCOPE_VAL_MEAS_LOWPASS
+    ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_LOWPASS`
+    ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_HIGHPASS`
+    ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_BANDPASS`
+    ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_BANDSTOP`
+    Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_LOWPASS`
 
     The following table lists the characteristics of this property.
 
@@ -2638,7 +2638,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_filter_width
 
-    Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ ± one-half width.
+    Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at :py:data:`niscope.Session.meas_filter_center_freq` ± one-half width.
     Default: 1.0e3 Hz
 
     The following table lists the characteristics of this property.
@@ -2664,14 +2664,14 @@ niscope.Session properties
 .. py:attribute:: meas_fir_filter_window
 
     Specifies the FIR window type. The possible choices are:
-    NISCOPE_VAL_NONE
-    NISCOPE_VAL_HANNING_WINDOW
-    NISCOPE_VAL_HAMMING_WINDOW
-    NISCOPE_VAL_TRIANGLE_WINDOW
-    NISCOPE_VAL_FLAT_TOP_WINDOW
-    NISCOPE_VAL_BLACKMAN_WINDOW
+    :py:data:`~niscope.NISCOPE_VAL_NONE`
+    :py:data:`~niscope.NISCOPE_VAL_HANNING_WINDOW`
+    :py:data:`~niscope.NISCOPE_VAL_HAMMING_WINDOW`
+    :py:data:`~niscope.NISCOPE_VAL_TRIANGLE_WINDOW`
+    :py:data:`~niscope.NISCOPE_VAL_FLAT_TOP_WINDOW`
+    :py:data:`~niscope.NISCOPE_VAL_BLACKMAN_WINDOW`
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
-    Default: NISCOPE_VAL_NONE
+    Default: :py:data:`~niscope.NISCOPE_VAL_NONE`
 
 
 
@@ -2746,7 +2746,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_interpolation_sampling_factor
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling niScope_FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling :py:meth:`niscope.Session.FetchWaveformMeasurementArray` with the :py:data:`~niscope.NISCOPE_VAL_POLYNOMIAL_INTERPOLATION` measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
 
@@ -2822,7 +2822,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_other_channel
 
-    Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+    Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.NISCOPE_VAL_ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
 
 
@@ -2861,10 +2861,10 @@ niscope.Session properties
 .. py:attribute:: meas_percentage_method
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
-    NISCOPE_VAL_MEAS_LOW_HIGH
-    NISCOPE_VAL_MEAS_MIN_MAX
-    NISCOPE_VAL_MEAS_BASE_TOP
-    Default: NISCOPE_VAL_MEAS_BASE_TOP
+    :py:data:`~niscope.NISCOPE_VAL_MEAS_LOW_HIGH`
+    :py:data:`~niscope.NISCOPE_VAL_MEAS_MIN_MAX`
+    :py:data:`~niscope.NISCOPE_VAL_MEAS_BASE_TOP`
+    Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_BASE_TOP`
 
 
 
@@ -2927,9 +2927,9 @@ niscope.Session properties
 .. py:attribute:: meas_ref_level_units
 
     Specifies the units of the reference levels.
-    NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
-    NISCOPE_VAL_MEAS_PERCENTAGE--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.
-    Default: NISCOPE_VAL_MEAS_PERCENTAGE
+    :py:data:`~niscope.NISCOPE_VAL_MEAS_VOLTAGE`--Specifies that the reference levels are given in units of volts
+    :py:data:`~niscope.NISCOPE_VAL_MEAS_PERCENTAGE`--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.
+    Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_PERCENTAGE`
 
 
 
@@ -3092,7 +3092,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_time_histogram_size
 
-    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with niScope_ClearWaveformMeasurementStats.
+    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
     Default: 256
 
 
@@ -3180,7 +3180,7 @@ niscope.Session properties
 
 .. py:attribute:: meas_voltage_histogram_size
 
-    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function niScope_ClearWaveformMeasurementStats.
+    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function :py:meth:`niscope.Session.clear_waveform_measurement_stats`.
     Default: 256
 
     The following table lists the characteristics of this property.
@@ -3207,7 +3207,7 @@ niscope.Session properties
 
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
-    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in niScope_ConfigureAcquisition and not require more memory than the  onboard memory module allows.
+    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in :py:meth:`niscope.Session.ConfigureAcquisition` and not require more memory than the  onboard memory module allows.
 
     The following table lists the characteristics of this property.
 
@@ -3384,7 +3384,7 @@ niscope.Session properties
 
 .. py:attribute:: points_done
 
-    Actual number of samples acquired in the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER from the NISCOPE_ATTR_FETCH_RELATIVE_TO and NISCOPE_ATTR_FETCH_OFFSET attributes.
+    Actual number of samples acquired in the record specified by :py:data:`niscope.Session.fetch_record_number` from the :py:data:`niscope.Session.fetch_relative_to` and :py:data:`niscope.Session.fetch_offset` attributes.
 
     The following table lists the characteristics of this property.
 
@@ -3471,7 +3471,7 @@ niscope.Session properties
 .. py:attribute:: range_check
 
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
-    The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_TRUE.   Use the :py:meth:`niscope.Session._init_with_options`  function to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -3619,7 +3619,7 @@ niscope.Session properties
 .. py:attribute:: record_coercions
 
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 attributes.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_FALSE.   Use the :py:meth:`niscope.Session._init_with_options`  function to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -3643,7 +3643,7 @@ niscope.Session properties
 
 .. py:attribute:: ref_clk_rate
 
-    If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
+    If :py:data:`niscope.Session.input_clock_source` is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
 
     The following table lists the characteristics of this property.
 
@@ -3739,7 +3739,7 @@ niscope.Session properties
 
 .. py:attribute:: resolution
 
-    Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to NISCOPE_ATTR_BINARY_SAMPLE_WIDTH.
+    Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to :py:data:`niscope.Session.binary_sample_width`.
 
     The following table lists the characteristics of this property.
 
@@ -3790,7 +3790,7 @@ niscope.Session properties
 
 .. py:attribute:: ris_method
 
-    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of NISCOPE_ATTR_MAX_REAL_TIME_SAMPLING_RATE.
+    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of :py:data:`niscope.Session.max_real_time_sampling_rate`.
 
     The following table lists the characteristics of this property.
 
@@ -3839,9 +3839,9 @@ niscope.Session properties
 .. py:attribute:: sample_clock_timebase_multiplier
 
     If `Sample Clock Timebase
-    Source <pniScope_SampleClockTimebaseSource.html>`__ is an external
+    Source <p:py:meth:`niscope.Session.SampleClockTimebaseSource`.html>`__ is an external
     source, this property specifies the ratio between the `Sample Clock
-    Timebase Rate <pniScope_SampleClockTimebaseRate.html>`__ and the actual
+    Timebase Rate <p:py:meth:`niscope.Session.SampleClockTimebaseRate`.html>`__ and the actual
     sample rate, which can be higher. This property can be used in
     conjunction with the `Sample Clock Timebase Divisor
     Property <pniscope_SampleClockTimebaseDivisor.html>`__.
@@ -3899,7 +3899,7 @@ niscope.Session properties
 
 .. py:attribute:: samp_clk_timebase_div
 
-    If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
+    If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
 
     The following table lists the characteristics of this property.
 
@@ -3923,7 +3923,7 @@ niscope.Session properties
 
 .. py:attribute:: samp_clk_timebase_rate
 
-    If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
+    If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
 
     The following table lists the characteristics of this property.
 
@@ -3947,7 +3947,7 @@ niscope.Session properties
 
 .. py:attribute:: samp_clk_timebase_src
 
-    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  NISCOPE_ATTR_MIN_SAMPLE_RATE (for internal sources) or the NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV (for external sources).
+    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  :py:data:`niscope.Session.min_sample_rate` (for internal sources) or the :py:data:`niscope.Session.samp_clk_timebase_div` (for external sources).
 
     The following table lists the characteristics of this property.
 
@@ -3996,7 +3996,7 @@ niscope.Session properties
 .. py:attribute:: simulate
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
-    The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_FALSE.   Use the :py:meth:`niscope.Session._init_with_options`  function to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -4280,7 +4280,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_coupling
 
-    Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  :py:data:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
     The following table lists the characteristics of this property.
 
@@ -4329,7 +4329,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_from_pfi_delay
 
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4353,7 +4353,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_from_rtsi_delay
 
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4377,7 +4377,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_from_star_delay
 
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4401,7 +4401,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_holdoff
 
-    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to niScope_ConfigureHorizontalTiming.
+    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to :py:meth:`niscope.Session.configure_horizontal_timing`.
     Valid Values: 0.0 - 171.8
 
     The following table lists the characteristics of this property.
@@ -4477,9 +4477,9 @@ niscope.Session properties
 
 .. py:attribute:: trigger_level
 
-    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the :py:data:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
     Valid Values:
-    The values of the range and offset parameters in niScope_ConfigureVertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
+    The values of the range and offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
 
     The following table lists the characteristics of this property.
 
@@ -4530,7 +4530,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_slope
 
-    Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when :py:data:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
     The following table lists the characteristics of this property.
 
@@ -4578,7 +4578,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_to_pfi_delay
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4602,7 +4602,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_to_rtsi_delay
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4626,7 +4626,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_to_star_delay
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set :py:data:`niscope.Session.slave_trigger_delay`.
 
     The following table lists the characteristics of this property.
 
@@ -4675,9 +4675,9 @@ niscope.Session properties
 .. py:attribute:: trigger_window_high_level
 
     Pass the upper voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL
+    The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:data:`niscope.Session.trigger_window_low_level` and :py:data:`niscope.Session.trigger_window_high_level`
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
     High Trigger Level <= Vertical Range/2 + Vertical Offset
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
@@ -4705,10 +4705,10 @@ niscope.Session properties
 .. py:attribute:: trigger_window_low_level
 
     Pass the lower voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
+    The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:data:`niscope.Session.trigger_window_low_level` and :py:data:`niscope.Session.trigger_window_high_level`.
     Units: Volts
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
     Low Trigger Level <= Vertical Range/2 + Vertical Offset
     Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
     Low Trigger Level < High Trigger Level
@@ -4735,7 +4735,7 @@ niscope.Session properties
 
 .. py:attribute:: trigger_window_mode
 
-    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL, or NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
+    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  :py:data:`niscope.Session.trigger_window_low_level`, or :py:data:`niscope.Session.trigger_window_high_level`.
 
     The following table lists the characteristics of this property.
 
@@ -4783,7 +4783,7 @@ niscope.Session properties
 
 .. py:attribute:: tv_trigger_line_number
 
-    Specifies the line on which to trigger, if NISCOPE_ATTR_TV_TRIGGER_EVENT is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+    Specifies the line on which to trigger, if :py:data:`niscope.Session.tv_trigger_event` is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
 
     The following table lists the characteristics of this property.
 

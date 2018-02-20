@@ -92,13 +92,13 @@ nidmm.Session methods
         ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
         0.02 V.
 
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON`   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                                  |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_OFF`  | -2.0 | NI-DMM sets the Range to the current :py:data:`nidmm.Session.auto_range_value` and uses this range for all subsequent measurements until the measurement configuration is changed.                               |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.Session.auto_range_value` is stored and used for all subsequent measurements until the measurement configuration is changed. |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON``   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                                  |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_OFF``  | -2.0 | NI-DMM sets the Range to the current :py:data:`nidmm.Session.auto_range_value` and uses this range for all subsequent measurements until the measurement configuration is changed.                               |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE`` | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.Session.auto_range_value` is stored and used for all subsequent measurements until the measurement configuration is changed. |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
@@ -113,7 +113,7 @@ nidmm.Session methods
         Specifies the absolute resolution for the measurement. NI-DMM sets
         :py:data:`nidmm.Session.resolution_absolute` to this value. This parameter is
         ignored when the **Range** parameter is set to
-        :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE`
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON`` (-1.0) or :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE``
         (-3.0). The default is 0.001 V.
 
         
@@ -164,13 +164,13 @@ nidmm.Session methods
         ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
         0.02 V.
 
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON`   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                                  |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_OFF`  | -2.0 | NI-DMM sets the Range to the current :py:data:`nidmm.Session.auto_range_value` and uses this range for all subsequent measurements until the measurement configuration is changed.                               |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.Session.auto_range_value` is stored and used for all subsequent measurements until the measurement configuration is changed. |
-        +---------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON``   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                                  |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_OFF``  | -2.0 | NI-DMM sets the Range to the current :py:data:`nidmm.Session.auto_range_value` and uses this range for all subsequent measurements until the measurement configuration is changed.                               |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE`` | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.Session.auto_range_value` is stored and used for all subsequent measurements until the measurement configuration is changed. |
+        +---------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
@@ -186,8 +186,8 @@ nidmm.Session methods
         the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
         list of valid ranges. The driver sets :py:data:`nidmm.Session.resolution_digits`
         attribute to this value. This parameter is ignored when the **Range**
-        parameter is set to :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or
-        :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` (-3.0). The default is 5½.
+        parameter is set to :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON`` (-1.0) or
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE`` (-3.0). The default is 5½.
 
         
 
@@ -535,7 +535,7 @@ nidmm.Session methods
         Specifies the type of reference junction to be used in the reference
         junction compensation of a thermocouple measurement. NI-DMM uses this
         value to set the Reference Junction Type property. The only supported
-        value is :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`.
+        value is :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED``.
 
         
 
@@ -577,7 +577,7 @@ nidmm.Session methods
         Specifies the time that the DMM waits after it has received a trigger
         before taking a measurement. The driver sets the
         :py:data:`nidmm.Session.trigger_delay` attribute to this value. By default,
-        **trigger\_delay** is :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY` (-1), which means the DMM
+        **trigger\_delay** is :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY`` (-1), which means the DMM
         waits an appropriate settling time before taking the measurement. On the
         NI 4060, if you set **trigger\_delay** to 0, the DMM does not settle
         before taking the measurement. The NI 4065 and NI 4070/4071/4072 use the
@@ -586,7 +586,7 @@ nidmm.Session methods
         
 
         .. note:: When using the NI 4050, **Trigger\_Delay** must be set to
-            :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY` (-1).
+            :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY`` (-1).
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -695,7 +695,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -753,7 +753,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -820,7 +820,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -883,7 +883,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -1005,11 +1005,11 @@ nidmm.Session methods
 
         Specifies the type of calibration performed (external or self-calibration).
 
-        +-----------------------------------------------------+---+----------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |
-        +-----------------------------------------------------+---+----------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA`           | 1 | External Calibration |
-        +-----------------------------------------------------+---+----------------------+
+        +-----------------------------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA`` (default) | 0 | Self-Calibration     |
+        +-----------------------------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA``           | 1 | External Calibration |
+        +-----------------------------------------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
 
@@ -1096,11 +1096,11 @@ nidmm.Session methods
         Specifies the type of calibration performed (external or
         self-calibration).
 
-        +-----------------------------------------------------+---+----------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |
-        +-----------------------------------------------------+---+----------------------+
-        | :py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA`           | 1 | External Calibration |
-        +-----------------------------------------------------+---+----------------------+
+        +-----------------------------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA`` (default) | 0 | Self-Calibration     |
+        +-----------------------------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA``           | 1 | External Calibration |
+        +-----------------------------------------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
 
@@ -1267,7 +1267,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -1324,7 +1324,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -1445,7 +1445,7 @@ nidmm.Session methods
         acquisition to complete.
 
         The valid range is 0–86400000. The default value is
-        :py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO` (-1). The DMM calculates the timeout
+        :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TIME_LIMIT_AUTO`` (-1). The DMM calculates the timeout
         automatically.
 
         
@@ -1575,7 +1575,7 @@ nidmm.Session methods
     configured either the :py:data:`nidmm.Session.trigger_source` or
     :py:data:`nidmm.Session.sample_trigger` attributes. If the
     :py:data:`nidmm.Session.trigger_source` and/or :py:data:`nidmm.Session.sample_trigger`
-    attributes are set to :py:data:`~nidmm.NIDMM_VAL_EXTERNAL` or :py:data:`~nidmm.NIDMM_VAL_TTL` *n*, you
+    attributes are set to :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_EXTERNAL`` or :py:data:`~nidmm.:py:data:`~nidmm.NIDMM_VAL_TTL`` *n*, you
     can use this function to override the trigger source that you configured
     and trigger the device. The NI 4050 and NI 4060 are not supported.
 

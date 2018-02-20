@@ -150,7 +150,7 @@ class _SessionBase(object):
     acquisition_start_time = attributes.AttributeViReal64TimeDeltaSeconds(1250109)
     '''Type: datetime.timedelta
 
-    Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  NISCOPE_ATTR_TRIGGER_DELAY_TIME).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  NISCOPE_ATTR_HORZ_RECORD_REF_POSITION).
+    Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  trigger_delay_time).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  horz_record_ref_position).
     '''
     acquisition_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
     '''Type: enums.AcquisitionType
@@ -183,7 +183,7 @@ class _SessionBase(object):
     allow_more_records_than_memory = attributes.AttributeViBoolean(1150068)
     '''Type: bool
 
-    Indicates whether more records can be configured with niScope_ConfigureHorizontalTiming  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
+    Indicates whether more records can be configured with configure_horizontal_timing  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
     '''
     arm_ref_trig_src = attributes.AttributeViString(1150095)
     '''Type: str
@@ -193,7 +193,7 @@ class _SessionBase(object):
     backlog = attributes.AttributeViReal64(1150084)
     '''Type: float
 
-    Returns the number of samples (NISCOPE_ATTR_POINTS_DONE) that have been acquired but not fetched  for the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER.
+    Returns the number of samples (points_done) that have been acquired but not fetched  for the record specified by fetch_record_number.
     '''
     bandpass_filter_enabled = attributes.AttributeViBoolean(1150318)
     '''Type: bool
@@ -212,7 +212,7 @@ class _SessionBase(object):
     binary_sample_width = attributes.AttributeViInt32(1150005)
     '''Type: int
 
-    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to NISCOPE_ATTR_RESOLUTION.
+    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to resolution.
     To configure the device to store samples with a lower resolution that the native, set this attribute to the desired binary width.
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
@@ -222,7 +222,7 @@ class _SessionBase(object):
 
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use niScope_InitWithOptions  to override this value.
+    The default value is VI_TRUE.   Use _init_with_options  to override this value.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -353,7 +353,7 @@ class _SessionBase(object):
     ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
     '''Type: float
 
-    The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when NISCOPE_ATTR_DDC_DATA_PROCESSING_MODE is set to Complex.
+    The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when ddc_data_processing_mode is set to Complex.
     Default Value: 90
 
     Tip:
@@ -441,7 +441,7 @@ class _SessionBase(object):
     '''Type: str
 
     This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  niScope_InitWithOptions, or through the IVI Configuration Utility.
+    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  _init_with_options, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this attribute returns an empty string.
     '''
     enable_dc_restore = attributes.AttributeViBoolean(1150093)
@@ -546,7 +546,7 @@ class _SessionBase(object):
     fetch_interleaved_iq_data = attributes.AttributeViBoolean(1150311)
     '''Type: bool
 
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  _fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: VI_TRUE
     '''
     fetch_meas_num_samples = attributes.AttributeViInt32(1150081)
@@ -564,7 +564,7 @@ class _SessionBase(object):
     fetch_offset = attributes.AttributeViInt32(1150078)
     '''Type: int
 
-    Offset in samples to start fetching data within each record. The offset is applied relative to  NISCOPE_ATTR_FETCH_RELATIVE_TO.The offset can be positive or negative.
+    Offset in samples to start fetching data within each record. The offset is applied relative to  fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
     fetch_record_number = attributes.AttributeViInt32(1150079)
@@ -577,7 +577,7 @@ class _SessionBase(object):
     '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
-    Default Value: NISCOPE_VAL_PRETRIGGER
+    Default Value: FetchRelativeTo.PRETRIGGER
     '''
     flex_fir_antialias_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
     '''Type: enums.FlexFIRAntialiasFilterType
@@ -630,7 +630,7 @@ class _SessionBase(object):
     horz_min_num_pts = attributes.AttributeViInt32(1250009)
     '''Type: int
 
-    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. NISCOPE_ATTR_HORZ_RECORD_LENGTH returns the actual record length.
+    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. horz_record_length returns the actual record length.
     Valid Values: 1 - available onboard memory
     '''
     horz_num_records = attributes.AttributeViInt32(1150001)
@@ -641,13 +641,13 @@ class _SessionBase(object):
     horz_record_length = attributes.AttributeViInt32(1250008)
     '''Type: int
 
-    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  NISCOPE_ATTR_HORZ_MIN_NUM_PTS.
+    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  horz_min_num_pts.
     Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch functions. This attribute is only valid after a call to the one of the  Configure Horizontal functions.
     '''
     horz_record_ref_position = attributes.AttributeViReal64(1250011)
     '''Type: float
 
-    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  NISCOPE_ATTR_TRIGGER_DELAY_TIME attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  trigger_delay_time attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
     horz_sample_rate = attributes.AttributeViReal64(1250010)
@@ -716,12 +716,12 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
 
-    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
     master_enable = attributes.AttributeViBoolean(1150008)
     '''Type: bool
@@ -792,7 +792,7 @@ class _SessionBase(object):
     meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
     '''Type: float
 
-    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as NISCOPE_ATTR_MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
+    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
     Default: 90%
 
     Tip:
@@ -807,7 +807,7 @@ class _SessionBase(object):
     meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
     '''Type: float
 
-    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_LOW_REF if you use this attribute to set various channels to different values.
+    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_LOW_REF if you use this attribute to set various channels to different values.
     Default: 10%
 
     Tip:
@@ -822,7 +822,7 @@ class _SessionBase(object):
     meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
     '''Type: float
 
-    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  NISCOPE_ATTR_MEAS_MID_REF if you use this attribute to set various channels to different values.
+    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_MID_REF if you use this attribute to set various channels to different values.
     Default: 50%
 
     Tip:
@@ -837,7 +837,7 @@ class _SessionBase(object):
     meas_filter_center_freq = attributes.AttributeViReal64(1150032)
     '''Type: float
 
-    The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by NISCOPE_ATTR_MEAS_FILTER_WIDTH, where the cutoff frequencies are the center ± width.
+    The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
     Default: 1.0e6 Hz
 
     Tip:
@@ -910,7 +910,7 @@ class _SessionBase(object):
     meas_filter_width = attributes.AttributeViReal64(1150041)
     '''Type: float
 
-    Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at NISCOPE_ATTR_MEAS_FILTER_CENTER_FREQ ± one-half width.
+    Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
     '''
     meas_fir_filter_window = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
@@ -953,7 +953,7 @@ class _SessionBase(object):
     meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
     '''Type: float
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling niScope_FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
     Tip:
@@ -1081,7 +1081,7 @@ class _SessionBase(object):
     meas_time_histogram_size = attributes.AttributeViInt32(1150024)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with niScope_ClearWaveformMeasurementStats.
+    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
     Default: 256
 
     Tip:
@@ -1108,7 +1108,7 @@ class _SessionBase(object):
     meas_voltage_histogram_size = attributes.AttributeViInt32(1150021)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function niScope_ClearWaveformMeasurementStats.
+    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function clear_waveform_measurement_stats.
     Default: 256
     '''
     min_sample_rate = attributes.AttributeViReal64(1150009)
@@ -1116,7 +1116,7 @@ class _SessionBase(object):
 
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
-    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in niScope_ConfigureAcquisition and not require more memory than the  onboard memory module allows.
+    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in ConfigureAcquisition and not require more memory than the  onboard memory module allows.
     '''
     mux_mode_register = attributes.AttributeViInt32(1151002)
     onboard_memory_size = attributes.AttributeViInt32(1150069)
@@ -1154,7 +1154,7 @@ class _SessionBase(object):
     points_done = attributes.AttributeViReal64(1150082)
     '''Type: float
 
-    Actual number of samples acquired in the record specified by NISCOPE_ATTR_FETCH_RECORD_NUMBER from the NISCOPE_ATTR_FETCH_RELATIVE_TO and NISCOPE_ATTR_FETCH_OFFSET attributes.
+    Actual number of samples acquired in the record specified by fetch_record_number from the fetch_relative_to and fetch_offset attributes.
     '''
     poll_interval = attributes.AttributeViInt32(1150100)
     '''Type: int
@@ -1181,7 +1181,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
-    The default value is VI_TRUE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_TRUE.   Use the _init_with_options  function to override this value.
     '''
     ready_for_advance_event_output_terminal = attributes.AttributeViString(1150112)
     '''Type: str
@@ -1215,12 +1215,12 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 attributes.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_FALSE.   Use the _init_with_options  function to override this value.
     '''
     ref_clk_rate = attributes.AttributeViReal64(1150090)
     '''Type: float
 
-    If NISCOPE_ATTR_INPUT_CLOCK_SOURCE is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
+    If input_clock_source is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
     ref_trigger_detector_location = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
     '''Type: enums.RefTriggerDetectorLocation
@@ -1240,7 +1240,7 @@ class _SessionBase(object):
     resolution = attributes.AttributeViInt32(1150102)
     '''Type: int
 
-    Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to NISCOPE_ATTR_BINARY_SAMPLE_WIDTH.
+    Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to binary_sample_width.
     '''
     ris_in_auto_setup_enable = attributes.AttributeViBoolean(1150106)
     '''Type: bool
@@ -1253,7 +1253,7 @@ class _SessionBase(object):
     ris_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RISMethod, 1150071)
     '''Type: enums.RISMethod
 
-    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of NISCOPE_ATTR_MAX_REAL_TIME_SAMPLING_RATE.
+    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of max_real_time_sampling_rate.
     '''
     ris_num_averages = attributes.AttributeViInt32(1150070)
     '''Type: int
@@ -1264,9 +1264,9 @@ class _SessionBase(object):
     '''Type: int
 
     If `Sample Clock Timebase
-    Source <pniScope_SampleClockTimebaseSource.html>`__ is an external
+    Source <pSampleClockTimebaseSource.html>`__ is an external
     source, this property specifies the ratio between the `Sample Clock
-    Timebase Rate <pniScope_SampleClockTimebaseRate.html>`__ and the actual
+    Timebase Rate <pSampleClockTimebaseRate.html>`__ and the actual
     sample rate, which can be higher. This property can be used in
     conjunction with the `Sample Clock Timebase Divisor
     Property <pniscope_SampleClockTimebaseDivisor.html>`__.
@@ -1286,17 +1286,17 @@ class _SessionBase(object):
     samp_clk_timebase_div = attributes.AttributeViInt32(1150089)
     '''Type: int
 
-    If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
+    If samp_clk_timebase_src is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
     '''
     samp_clk_timebase_rate = attributes.AttributeViReal64(1150088)
     '''Type: float
 
-    If NISCOPE_ATTR_SAMP_CLK_TIMEBASE_SRC is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
+    If samp_clk_timebase_src is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
     '''
     samp_clk_timebase_src = attributes.AttributeViString(1150087)
     '''Type: str
 
-    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  NISCOPE_ATTR_MIN_SAMPLE_RATE (for internal sources) or the NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV (for external sources).
+    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  min_sample_rate (for internal sources) or the samp_clk_timebase_div (for external sources).
     '''
     serial_number = attributes.AttributeViString(1150104)
     '''Type: str
@@ -1307,7 +1307,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
-    The default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.
+    The default value is VI_FALSE.   Use the _init_with_options  function to override this value.
     '''
     slave_trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: datetime.timedelta
@@ -1376,7 +1376,7 @@ class _SessionBase(object):
     trigger_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
     '''Type: enums.TriggerCoupling
 
-    Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  NISCOPE_ATTR_TRIGGER_TYPE is set to NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_delay_time = attributes.AttributeViReal64TimeDeltaSeconds(1250015)
     '''Type: datetime.timedelta
@@ -1387,22 +1387,22 @@ class _SessionBase(object):
     trigger_from_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150052)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
     '''
     trigger_from_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
     '''
     trigger_from_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150050)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
     '''
     trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: datetime.timedelta
 
-    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to niScope_ConfigureHorizontalTiming.
+    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to configure_horizontal_timing.
     Valid Values: 0.0 - 171.8
     '''
     trigger_hysteresis = attributes.AttributeViReal64(1150006)
@@ -1421,9 +1421,9 @@ class _SessionBase(object):
     trigger_level = attributes.AttributeViReal64(1250017)
     '''Type: float
 
-    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     Valid Values:
-    The values of the range and offset parameters in niScope_ConfigureVertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
+    The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
     trigger_modifier = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
     '''Type: enums.TriggerModifier
@@ -1436,7 +1436,7 @@ class _SessionBase(object):
     trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
     '''Type: enums.TriggerSlope
 
-    Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when NISCOPE_ATTR_TRIGGER_TYPE is set to  NISCOPE_VAL_EDGE_TRIGGER, NISCOPE_VAL_HYSTERESIS_TRIGGER, or NISCOPE_VAL_WINDOW_TRIGGER.
+    Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_source = attributes.AttributeViString(1250013)
     '''Type: str
@@ -1446,17 +1446,17 @@ class _SessionBase(object):
     trigger_to_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150049)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
     '''
     trigger_to_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150048)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
     '''
     trigger_to_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150047)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set NISCOPE_ATTR_SLAVE_TRIGGER_DELAY.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
     trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1250012)
     '''Type: enums.TriggerType
@@ -1467,9 +1467,9 @@ class _SessionBase(object):
     '''Type: float
 
     Pass the upper voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL
+    The digitizer triggers when the trigger signal enters or leaves  the window you specify with trigger_window_low_level and trigger_window_high_level
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in  configure_vertical determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
     High Trigger Level <= Vertical Range/2 + Vertical Offset
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
@@ -1478,10 +1478,10 @@ class _SessionBase(object):
     '''Type: float
 
     Pass the lower voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL and NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
+    The digitizer triggers when the trigger signal enters or leaves  the window you specify with trigger_window_low_level and trigger_window_high_level.
     Units: Volts
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  niScope_ConfigureVertical determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in niScope_ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in  configure_vertical determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
     Low Trigger Level <= Vertical Range/2 + Vertical Offset
     Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
     Low Trigger Level < High Trigger Level
@@ -1489,7 +1489,7 @@ class _SessionBase(object):
     trigger_window_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
     '''Type: enums.TriggerWindowMode
 
-    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  NISCOPE_ATTR_TRIGGER_WINDOW_LOW_LEVEL, or NISCOPE_ATTR_TRIGGER_WINDOW_HIGH_LEVEL.
+    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  trigger_window_low_level, or trigger_window_high_level.
     '''
     tv_trigger_event = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
     '''Type: enums.VideoTriggerEvent
@@ -1499,7 +1499,7 @@ class _SessionBase(object):
     tv_trigger_line_number = attributes.AttributeViInt32(1250206)
     '''Type: int
 
-    Specifies the line on which to trigger, if NISCOPE_ATTR_TV_TRIGGER_EVENT is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+    Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
     tv_trigger_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
     '''Type: enums.VideoPolarity
@@ -1780,9 +1780,9 @@ class _SessionBase(object):
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
-                `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+                `equalization_num_coefficients <cviequalization_num_coefficients.html>`__
                 attribute. The
-                `equalization_filter_enabled <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
+                `equalization_filter_enabled <cviequalization_filter_enabled.html>`__
                 attribute must be set to TRUE to enable the filter.
 
         '''
@@ -2895,7 +2895,7 @@ class _SessionBase(object):
             coefficients (list of float): The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
-                `equalization_num_coefficients <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+                `equalization_num_coefficients <cviequalization_num_coefficients.html>`__
                 attribute.
 
         '''

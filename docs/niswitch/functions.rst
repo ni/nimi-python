@@ -55,22 +55,22 @@ niswitch.Session methods
 
 
             Indicates whether a path is valid. Possible values include:
-            ------------------------------------ :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` 1
-            :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` 2 :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` 3
-            :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` 5
-            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
-            :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` indicates that the driver can create the
-            path at this time. (2) :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` indicates that the
-            path already exists. (3) :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` indicates that
+            ------------------------------------ :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE`` 1
+            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS`` 2 :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED`` 3
+            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE`` 4 :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT`` 5
+            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE`` 6 Notes: (1)
+            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE`` indicates that the driver can create the
+            path at this time. (2) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS`` indicates that the
+            path already exists. (3) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED`` indicates that
             the instrument is not capable of creating a path between the channels
-            you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
+            you specify. (4) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE`` indicates that although
             the path is valid, the driver cannot create the path at this moment
             because the switch device is currently using one or more of the required
             channels to create another path. You must destroy the other path before
-            creating this one. (5) :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` indicates that
+            creating this one. (5) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT`` indicates that
             the instrument cannot create a path because both channels are connected
             to a different source channel. (6)
-            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
+            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE`` indicates that the driver cannot
             create a path between the two channels because one of the channels is a
             configuration channel and thus unavailable for external connections.
 
@@ -514,7 +514,7 @@ niswitch.Session methods
     :return:
 
 
-            Indicates whether the relay is open or closed. :py:data:`~niswitch.NISWITCH_VAL_OPEN` 10
+            Indicates whether the relay is open or closed. :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_OPEN`` 10
             NIWITCH\_VAL\_CLOSED 11
 
             
@@ -551,8 +551,8 @@ niswitch.Session methods
 
 
         Specifies whether to open or close a given relay. Default value: Relay
-        Close Defined values: :py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY`
-        :py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY` (Default Value)
+        Close Defined values: :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY``
+        :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY`` (Default Value)
 
         
 
@@ -658,9 +658,9 @@ niswitch.Session methods
     :param trigger_input_bus_line:
 
 
-        The trigger line to route the input trigger. Select :py:data:`~niswitch.NISWITCH_VAL_NONE`
+        The trigger line to route the input trigger. Select :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_NONE``
         to break an existing route. Default value: None Valid Values:
-        :py:data:`~niswitch.NISWITCH_VAL_NONE` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
+        :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_NONE`` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
         :py:data:`~niswitch.TriggerInput.TTL2` :py:data:`~niswitch.TriggerInput.TTL3` :py:data:`~niswitch.TriggerInput.TTL4`
         :py:data:`~niswitch.TriggerInput.TTL5` :py:data:`~niswitch.TriggerInput.TTL6` :py:data:`~niswitch.TriggerInput.TTL7`
 

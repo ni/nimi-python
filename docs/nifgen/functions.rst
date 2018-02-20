@@ -131,7 +131,7 @@ nifgen.Session methods
         These functions return a handle that you use to identify the sequence.
 
         | **Defined Value**:
-        | :py:data:`~nifgen.NIFGEN_VAL_ALL_SEQUENCES`—Remove all sequences from the signal
+        | :py:data:`~nifgen.:py:data:`~nifgen.NIFGEN_VAL_ALL_SEQUENCES``—Remove all sequences from the signal
           generator
 
         **Default Value**: None
@@ -172,7 +172,7 @@ nifgen.Session methods
 
         **Defined Value**:
 
-        :py:data:`~nifgen.NIFGEN_VAL_ALL_WAVEFORMS`—Remove all waveforms from the signal
+        :py:data:`~nifgen.:py:data:`~nifgen.NIFGEN_VAL_ALL_WAVEFORMS``—Remove all waveforms from the signal
         generator.
 
         **Default Value**: None
@@ -209,7 +209,7 @@ nifgen.Session methods
 
         **Defined Value**
 
-        :py:data:`~nifgen.NIFGEN_VAL_ALL_FLISTS`—Remove all frequency lists from the signal
+        :py:data:`~nifgen.:py:data:`~nifgen.NIFGEN_VAL_ALL_FLISTS``—Remove all frequency lists from the signal
         generator.
 
         **Default Value**: None
@@ -1091,9 +1091,9 @@ nifgen.Session methods
         **coercedMarkersArray** parameter.
 
         If you do not want a marker generated for a particular sequence stage,
-        set this parameter to :py:data:`~nifgen.NIFGEN_VAL_NO_MARKER`.
+        set this parameter to :py:data:`~nifgen.:py:data:`~nifgen.NIFGEN_VAL_NO_MARKER``.
 
-        **Defined Value**: :py:data:`~nifgen.NIFGEN_VAL_NO_MARKER`
+        **Defined Value**: :py:data:`~nifgen.:py:data:`~nifgen.NIFGEN_VAL_NO_MARKER``
 
         **Default Value**: None
 

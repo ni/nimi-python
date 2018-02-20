@@ -125,7 +125,7 @@ class MeasureWhen(Enum):
     '''
     ON_DEMAND = 1026
     '''
-    Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
+    Acquires a measurement when the measure function or measure_multiple function is called.
     '''
     ON_MEASURE_TRIGGER = 1027
     '''

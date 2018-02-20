@@ -184,23 +184,23 @@ class DoneEventPulseWidthUnits(Enum):
 class FilterType(Enum):
     FLAT = 0
     '''
-    Applies a flat filter to the data with the passband value specified  in the NIFGEN_ATTR_OSP_FIR_FILTER_FLAT_PASSBAND attribute.
+    Applies a flat filter to the data with the passband value specified  in the osp_fir_filter_flat_passband attribute.
     '''
     RAISED_COSINE = 1
     '''
-    Applies a raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_RAISED_COSINE_ALPHA attribute.
+    Applies a raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_raised_cosine_alpha attribute.
     '''
     ROOT_RAISED_COSINE = 2
     '''
-    Applies a root raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.
+    Applies a root raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_root_raised_cosine_alpha attribute.
     '''
     GAUSSIAN = 3
     '''
-    Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN_ATTR_OSP_FIR_FILTER_GAUSSIAN_BT attribute.
+    Applies a Gaussian filter to the data with the BT value specified in the  osp_fir_filter_gaussian_bt attribute.
     '''
     CUSTOM = 4
     '''
-    Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.
+    Applies a custom filter to the data. If FilterType.CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  configure_custom_fir_filter_coefficients function.
     '''
 
 
@@ -701,7 +701,7 @@ class TriggerSource(Enum):
     '''
     SOFTWARE_TRIG = 2
     '''
-    Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.
+    Software Trigger-The signal generator waits until you call SendSWTrigger.
     '''
     TTL0 = 111
     '''
@@ -871,5 +871,5 @@ class Waveform(Enum):
     '''
     USER = 102
     '''
-    User-defined waveform as defined by the niFgen_DefineUserStandardWaveform function.
+    User-defined waveform as defined by the define_user_standard_waveform function.
     '''

@@ -124,7 +124,7 @@ niscope.Session methods
     calibration constants take effect immediately for the duration of the
     session. However, they are not stored in the EEPROM until
     :py:meth:`niscope.Session.CalEnd` is called with **action** set to
-    :py:data:`~niscope.NISCOPE_VAL_ACTION_STORE` and no errors occur.
+    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_ACTION_STORE`` and no errors occur.
 
     
 
@@ -147,7 +147,7 @@ niscope.Session methods
 
 
         The calibration option. Use VI\_NULL for a normal self-calibration
-        operation or :py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION` to
+        operation or :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION`` to
         restore the previous calibration.
 
         
@@ -161,7 +161,7 @@ niscope.Session methods
 
     Clears the waveform stats on the channel and measurement you specify. If
     you want to clear all of the measurements, use
-    :py:data:`~niscope.NISCOPE_VAL_ALL_MEASUREMENTS` in the **clearableMeasurementFunction**
+    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_ALL_MEASUREMENTS`` in the **clearableMeasurementFunction**
     parameter.
 
     Every time a measurement is called, the statistics information is
@@ -278,9 +278,9 @@ niscope.Session methods
         The custom coefficients for the equalization FIR filter on the device.
         These coefficients should be between +1 and –1. You can obtain the
         number of coefficients from the
-        `:py:data:`niscope.Session.equalization_num_coefficients` <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+        `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
         attribute. The
-        `:py:data:`niscope.Session.equalization_filter_enabled` <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
+        `:py:data:`niscope.Session.equalization_filter_enabled` <cvi:py:data:`niscope.Session.equalization_filter_enabled`.html>`__
         attribute must be set to TRUE to enable the filter.
 
         
@@ -1096,7 +1096,7 @@ niscope.Session methods
 
     To unprogram a specific line on device, call this function with the
     signal you no longer want to export and set **outputTerminal** to
-    :py:data:`~niscope.NISCOPE_VAL_NONE`.
+    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_NONE``.
 
     
 
@@ -1149,33 +1149,33 @@ niscope.Session methods
 
         **Defined Values**
 
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_0`   | ("VAL\_RTSI\_0")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_1`   | ("VAL\_RTSI\_1")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_2`   | ("VAL\_RTSI\_2")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_3`   | ("VAL\_RTSI\_3")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_4`   | ("VAL\_RTSI\_4")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_5`   | ("VAL\_RTSI\_5")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_6`   | ("VAL\_RTSI\_6")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_7`   | ("VAL\_RTSI\_7")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PXI_STAR` | ("VAL\_PXI\_STAR") |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_0`    | ("VAL\_PFI\_0")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_1`    | ("VAL\_PFI\_1")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_2`    | ("VAL\_PFI\_2")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_CLK_OUT`  | ("VAL\_CLK\_OUT")  |
-        +------------------------------------------+--------------------+
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_0``   | ("VAL\_RTSI\_0")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_1``   | ("VAL\_RTSI\_1")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_2``   | ("VAL\_RTSI\_2")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_3``   | ("VAL\_RTSI\_3")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_4``   | ("VAL\_RTSI\_4")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_5``   | ("VAL\_RTSI\_5")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_6``   | ("VAL\_RTSI\_6")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_7``   | ("VAL\_RTSI\_7")   |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PXI_STAR`` | ("VAL\_PXI\_STAR") |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_0``    | ("VAL\_PFI\_0")    |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_1``    | ("VAL\_PFI\_1")    |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_2``    | ("VAL\_PFI\_2")    |
+        +--------------------------------------------------------------+--------------------+
+        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_CLK_OUT``  | ("VAL\_CLK\_OUT")  |
+        +--------------------------------------------------------------+--------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -1585,7 +1585,7 @@ niscope.Session methods
             The custom coefficients for the equalization FIR filter on the device.
             These coefficients should be between +1 and –1. You can obtain the
             number of coefficients from the
-            `:py:data:`niscope.Session.equalization_num_coefficients` <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+            `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
             attribute.
 
             

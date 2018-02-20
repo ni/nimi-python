@@ -153,7 +153,7 @@ class FetchRelativeTo(Enum):
     '''
     PRETRIGGER = 477
     '''
-    Fetches relative to the first pretrigger point requested with niScope_ConfigureHorizontalTiming.
+    Fetches relative to the first pretrigger point requested with configure_horizontal_timing.
     '''
     NOW = 481
     '''
@@ -444,11 +444,11 @@ class TriggerSlope(Enum):
 class TriggerType(Enum):
     EDGE = 1
     '''
-    Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with niScope_ConfigureTriggerEdge.
+    Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with configure_trigger_edge.
     '''
     TV = 5
     '''
-    Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.
+    Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with configure_trigger_video.
     '''
     IMMEDIATE = 6
     '''
@@ -456,19 +456,19 @@ class TriggerType(Enum):
     '''
     HYSTERESIS = 1001
     '''
-    Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with niScope_ConfigureTriggerHysteresis.
+    Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with configure_trigger_hysteresis.
     '''
     DIGITAL = 1002
     '''
-    Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with niScope_ConfigureTriggerDigital.
+    Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with configure_trigger_digital.
     '''
     WINDOW = 1003
     '''
-    Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with niScope_ConfigureTriggerWindow.
+    Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with configure_trigger_window.
     '''
     SOFTWARE = 1004
     '''
-    Configures the digitizer for software triggering.  A software trigger occurs when niScope_SendSoftwareTrigger is called.
+    Configures the digitizer for software triggering.  A software trigger occurs when SendSoftwareTrigger is called.
     '''
 
 

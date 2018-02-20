@@ -288,7 +288,7 @@ Enums used in NI-DCPower
 
 
 
-        Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
+        Acquires a measurement when the :py:meth:`nidcpower.Session.measure` function or :py:meth:`nidcpower.Session.measure_multiple` function is called.
 
         
 
