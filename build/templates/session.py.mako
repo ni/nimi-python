@@ -76,9 +76,9 @@ def get_ctypes_and_array(value, array_type):
 class ${session_context_manager}(object):
     def __init__(self, session):
         self._session = session
+        self._session.${session_context_manager_initiate}()
 
     def __enter__(self):
-        self._session.${session_context_manager_initiate}()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
