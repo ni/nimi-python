@@ -63,7 +63,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '0.7.0.dev0'
+release = '0.8.0.dev0'
 # The short X.Y version.
 version = release[:3]
 
