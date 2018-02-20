@@ -17,6 +17,7 @@ DRIVER_GENERATED_DIR := $(GENERATED_DIR)/$(DRIVER)
 
 DOCS_DIR := $(ROOT_DIR)/docs
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
+STATIC_DOCS_DIR := $(DOCS_DIR)/_static
 
 VERSION ?= 0.1
 WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
@@ -70,6 +71,8 @@ DEFAULT_RST_FILES_TO_GENERATE := \
     attributes.rst \
     functions.rst \
     examples.rst \
+    installation.inc \
+    status.inc \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
