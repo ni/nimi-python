@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 ## 0.7.0 - 2018-02-20
 * ### ALL
     * #### Changed
-        * Option string can now be a python dictionary instead of a string. It will be converted as needed (Fix [#661](https://github.com/ni/nimi-python/issues/661))
+        * Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
             * Key/Value pairs approporiate for desired behavior
                 ``` python
                 session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
