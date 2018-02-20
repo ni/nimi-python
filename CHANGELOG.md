@@ -1,5 +1,4 @@
 # Changelog
-* `niscope.fetch()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info 
 
 * [Unreleased](#unreleased)
 * [0.7.0](#060---2018-02-20)
@@ -40,6 +39,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
+        * `niscope.fetch()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info 
     * #### Removed
 
 ## 0.7.0 - 2018-02-20
