@@ -52,7 +52,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     with open(args.src_file, 'r') as content_file:
         contents = content_file.read()
 
-    dev_version_re = re.compile("'(\d+\.\d+\.\d+)\.dev(\d+)'")
+    dev_version_re = re.compile("'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
     m = dev_version_re.search(contents)
     if m:
         if args.release:
@@ -66,7 +66,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
             logging.error('Release set but devN not found!')
             sys.exit(1)
 
-    version_re = re.compile("'(\d+\.\d+\.)(\d+)'")
+    version_re = re.compile("'module_version': '(\d+\.\d+\.)(\d+)'")
     m = version_re.search(contents)
     if m:
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
