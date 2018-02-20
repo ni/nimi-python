@@ -386,9 +386,22 @@ def _fix_references(node, doc, cfg, make_link=False):
     if 'enum' in node:
         config['start_enum'] = node['enum']
 
+    # We may have slashes before the underscore (NISCOPE\_ATTR\_SOMETHING)
     attr_search_string = '{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
     func_search_string = '{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', ''))
     enum_search_string = '{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    attr_re = re.compile(attr_search_string)
+    func_re = re.compile(func_search_string)
+    enum_re = re.compile(enum_search_string)
+
+    doc = attr_re.sub(_replace_attribute_python_name, doc)
+    doc = func_re.sub(_replace_func_python_name, doc)
+    doc = enum_re.sub(_replace_enum_python_name, doc)
+
+    # Or we may not (NISCOPE_ATTR_SOMETHING)
+    attr_search_string = '{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
+    func_search_string = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    enum_search_string = '{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
     attr_re = re.compile(attr_search_string)
     func_re = re.compile(func_search_string)
     enum_re = re.compile(enum_search_string)
