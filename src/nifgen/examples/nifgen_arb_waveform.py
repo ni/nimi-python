@@ -38,7 +38,7 @@ def _main(argsv):
 
 
 def main():
-    _main(sys.argv)
+    _main(sys.argv[1:])
 
 
 def test_example():
