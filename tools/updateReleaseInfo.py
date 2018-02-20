@@ -68,7 +68,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     version_re = re.compile("'module_version': '(\d+\.\d+\.)(\d+)'")
     m = version_re.search(contents)
-    if m:
+    if m and not args.release:
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
         contents = version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
 
