@@ -1,6 +1,7 @@
 # Changelog
 * `niscope.fetch()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info 
 
+* [Unreleased](#unreleased)
 * [0.7.0](#060---2018-02-20)
 * [0.6.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
@@ -10,6 +11,36 @@
 * [0.1.0](#010---2017-09-01)
 
 All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
 
 ## 0.7.0 - 2018-02-20
 * ### ALL
