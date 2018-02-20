@@ -62,33 +62,11 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
             logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
             contents = module_dev_version_re.sub("'{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
 
-    release_dev_version_re = re.compile("release = '(\d+\.\d+\.\d+)\.dev(\d+)'")
-    m = release_dev_version_re.search(contents)
-    if m:
-        if args.release:
-            logging.info('Dev version found, updating {0}.dev{1} to {0}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-            contents = release_dev_version_re.sub("'{0}'".format(m.group(1), int(m.group(2)) + 1), contents)
-        else:
-            logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-            contents = release_dev_version_re.sub("'{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
-
     module_version_re = re.compile("'module_version': '(\d+\.\d+\.)(\d+)'")
     m = module_version_re.search(contents)
     if m and not args.release:
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
         contents = module_version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
-
-    release_version_re = re.compile("release = '(\d+\.\d+\.)(\d+)'")
-    m = release_version_re.search(contents)
-    if m and not args.release:
-        logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-        contents = release_version_re.sub("'{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
-
-    copyright_re = re.compile("copyright = '2017-(\d+), National Instruments'")
-    m = copyright_re.search(contents)
-    if m:
-        logging.info('Copyright year found, updating {0} to {1}'.format(int(m.group(1)), datetime.now().year))
-        contents = copyright_re.sub("copyright = '2017-{0}, National Instruments'".format(datetime.now().year), contents)
 
     with open(args.src_file, 'w') as content_file:
         content_file.write(contents)
