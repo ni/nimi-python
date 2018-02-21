@@ -101,6 +101,12 @@ class _SessionBase(object):
     On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
     On the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.
     On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1250322)
     '''Type: enums.ApertureTimeUnits
@@ -123,6 +129,9 @@ class _SessionBase(object):
     '''Type: int
 
     Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     cable_comp_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CableCompensationType, 1150045)
     '''Type: enums.CableCompensationType
@@ -219,6 +228,9 @@ class _SessionBase(object):
     The default value is VI_FALSE.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call GetNextInterchangeWarning  to extract interchange warnings.  Call ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
@@ -229,6 +241,9 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     lc_calculation_model = attributes.AttributeEnum(attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
     '''Type: enums.LCCalculationModel
@@ -302,6 +317,9 @@ class _SessionBase(object):
     NI-DMM sets the Range to the current auto_range_value and uses this range  for all subsequent measurements until the measurement configuration is changed.
     NIDMM_VAL_AUTO_RANGE_ONCE -3.0
     NI-DMM performs an Auto Range before acquiring the next measurement. The auto_range_value  is stored and used for all subsequent measurements until the measurement configuration is changed.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
@@ -314,6 +332,9 @@ class _SessionBase(object):
 
     Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
     The default value is VI_FALSE (0). Use the _init_with_options function to  override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     resolution_absolute = attributes.AttributeViReal64(1250008)
     '''Type: float
@@ -362,6 +383,9 @@ class _SessionBase(object):
 
     Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     short_cable_comp_reactance = attributes.AttributeViReal64(1150046)
     '''Type: float
@@ -463,6 +487,9 @@ class _SessionBase(object):
     '''Type: enums.ThermocoupleReferenceJunctionType
 
     Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     temp_tc_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
     '''Type: enums.ThermocoupleType
@@ -494,6 +521,9 @@ class _SessionBase(object):
     '''Type: enums.TransducerType
 
     Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     trigger_count = attributes.AttributeViInt32(1250304)
     '''Type: int
@@ -513,6 +543,9 @@ class _SessionBase(object):
     Use positive values to set the trigger delay in seconds.
     Valid Range: NIDMM_VAL_AUTO_DELAY (-1.0), 0.0-12.0 seconds (NI 4060 only)
     Default Value: NIDMM_VAL_AUTO_DELAY
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
     '''Type: enums.TriggerSlope
@@ -2044,16 +2077,13 @@ class Session(_SessionBase):
         Args:
             cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
+                +--------------------------------------+---+----------------------+
+                | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
+                +--------------------------------------+---+----------------------+
+                | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
+                +--------------------------------------+---+----------------------+
 
                 Note: The NI 4065 does not support self-calibration.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         Returns:
@@ -2546,7 +2576,7 @@ class Session(_SessionBase):
         configured either the trigger_source or
         sample_trigger attributes. If the
         trigger_source and/or sample_trigger
-        attributes are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL *n*, you
+        attributes are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL\ *n*, you
         can use this function to override the trigger source that you configured
         and trigger the device. The NI 4050 and NI 4060 are not supported.
 

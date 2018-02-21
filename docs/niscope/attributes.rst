@@ -238,6 +238,10 @@ niscope.Session properties
     :py:data:`~niscope.NISCOPE_VAL_PFI_2`         ('VAL_PFI_2')        - PFI 2
     :py:data:`~niscope.NISCOPE_VAL_PXI_STAR`      ('VAL_PXI_STAR')     - PXI Star Trigger
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2068,6 +2072,10 @@ niscope.Session properties
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -2091,6 +2099,10 @@ niscope.Session properties
 .. py:attribute:: logical_name
 
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -2148,6 +2160,8 @@ niscope.Session properties
     :py:data:`~niscope.NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY` (100000000.0)
 
 
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2235,6 +2249,8 @@ niscope.Session properties
 
 
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         meas_array_gain.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2272,6 +2288,8 @@ niscope.Session properties
     Default: 0.0
 
 
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2311,6 +2329,8 @@ niscope.Session properties
 
 
 
+    .. note:: One or more of the referenced attributes are not in the Python API for this driver.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         meas_chan_high_ref_level.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2349,6 +2369,8 @@ niscope.Session properties
 
 
 
+    .. note:: One or more of the referenced attributes are not in the Python API for this driver.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         meas_chan_low_ref_level.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2386,6 +2408,8 @@ niscope.Session properties
     Default: 50%
 
 
+
+    .. note:: One or more of the referenced attributes are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2616,6 +2640,10 @@ niscope.Session properties
     ·  :py:data:`~niscope.NISCOPE_VAL_MEAS_BANDSTOP`
     Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_LOWPASS`
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------------+
@@ -2674,6 +2702,8 @@ niscope.Session properties
     Default: :py:data:`~niscope.NISCOPE_VAL_NONE`
 
 
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2751,6 +2781,10 @@ niscope.Session properties
 
 
 
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         meas_interpolation_sampling_factor.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2827,6 +2861,8 @@ niscope.Session properties
 
 
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         meas_other_channel.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2867,6 +2903,8 @@ niscope.Session properties
     Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_BASE_TOP`
 
 
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2932,6 +2970,8 @@ niscope.Session properties
     Default: :py:data:`~niscope.NISCOPE_VAL_MEAS_PERCENTAGE`
 
 
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3208,6 +3248,10 @@ niscope.Session properties
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
     The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in :py:meth:`niscope.Session.ConfigureAcquisition` and not require more memory than the  onboard memory module allows.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -3852,6 +3896,10 @@ niscope.Session properties
     by device and current configuration.
     **Related topics:**
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -4682,6 +4730,10 @@ niscope.Session properties
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4712,6 +4764,10 @@ niscope.Session properties
     Low Trigger Level <= Vertical Range/2 + Vertical Offset
     Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
     Low Trigger Level < High Trigger Level
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 

@@ -7,7 +7,7 @@ niswitch.Session methods
 
     Aborts the scan in progress. Initiate a scan with
     :py:meth:`niswitch.Session._initiate_scan`. If the switch module is not scanning,
-    NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
+    NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
 
     
 
@@ -18,7 +18,7 @@ niswitch.Session methods
     Verifies that a path between channel 1 and channel 2 can be created. If
     a path is possible in the switch module, the availability of that path
     is returned given the existing connections. If the path is possible but
-    in use, a NISWITCH\_WARN\_IMPLICIT\_CONNECTION\_EXISTS warning is
+    in use, a NISWITCH_WARN_IMPLICIT_CONNECTION_EXISTS warning is
     returned.
 
     
@@ -55,22 +55,22 @@ niswitch.Session methods
 
 
             Indicates whether a path is valid. Possible values include:
-            ------------------------------------ :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE`` 1
-            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS`` 2 :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED`` 3
-            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE`` 4 :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT`` 5
-            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE`` 6 Notes: (1)
-            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE`` indicates that the driver can create the
-            path at this time. (2) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS`` indicates that the
-            path already exists. (3) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED`` indicates that
+            ------------------------------------ :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` 1
+            :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` 2 :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` 3
+            :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` 5
+            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
+            :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` indicates that the driver can create the
+            path at this time. (2) :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` indicates that the
+            path already exists. (3) :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` indicates that
             the instrument is not capable of creating a path between the channels
-            you specify. (4) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE`` indicates that although
+            you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
             the path is valid, the driver cannot create the path at this moment
             because the switch device is currently using one or more of the required
             channels to create another path. You must destroy the other path before
-            creating this one. (5) :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT`` indicates that
+            creating this one. (5) :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` indicates that
             the instrument cannot create a path because both channels are connected
             to a different source channel. (6)
-            :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE`` indicates that the driver cannot
+            :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
             create a path between the two channels because one of the channels is a
             configuration channel and thus unavailable for external connections.
 
@@ -198,17 +198,17 @@ niswitch.Session methods
     and uses the shortest path between the two channels. Refer to Immediate
     Operations for information about Channel Usage types. If a path is not
     available, the function returns one of the following errors: -
-    NISWITCH\_ERROR\_EXPLICIT\_CONNECTION\_EXISTS, if the two channels are
+    NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
     already explicitly connected by calling either the :py:meth:`niswitch.Session.connect` or
     :py:meth:`niswitch.Session.set_path` function. -
-    NISWITCH\_ERROR\_IS\_CONFIGURATION\_CHANNEL, if a channel is a
+    NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
     configuration channel. Error elaboration contains information about
     which of the two channels is a configuration channel. -
-    NISWITCH\_ERROR\_ATTEMPT\_TO\_CONNECT\_SOURCES, if both channels are
+    NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are
     connected to a different source. Error elaboration contains information
     about sources channel 1 and 2 connect to. -
-    NISWITCH\_ERROR\_CANNOT\_CONNECT\_TO\_ITSELF, if channels 1 and 2 are
-    one and the same channel. - NISWITCH\_ERROR\_PATH\_NOT\_FOUND, if the
+    NISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are
+    one and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the
     driver cannot find a path between the two channels. Note: Paths are
     bidirectional. For example, if a path exists between channels CH1 and
     CH2, then the path also exists between channels CH2 and CH1.
@@ -251,16 +251,16 @@ niswitch.Session methods
     information about channel usage types. In the event of an error,
     connecting stops at the point in the list where the error occurred. If a
     path is not available, the function returns one of the following errors:
-    - NISWITCH\_ERROR\_EXPLICIT\_CONNECTION\_EXISTS, if the two channels are
+    - NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
     already explicitly connected. -
-    NISWITCH\_ERROR\_IS\_CONFIGURATION\_CHANNEL, if a channel is a
+    NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
     configuration channel. Error elaboration contains information about
     which of the two channels is a configuration channel. -
-    NISWITCH\_ERROR\_ATTEMPT\_TO\_CONNECT\_SOURCES, if both channels are
+    NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are
     connected to a different source. Error elaboration contains information
     about sources channel 1 and 2 to connect. -
-    NISWITCH\_ERROR\_CANNOT\_CONNECT\_TO\_ITSELF, if channels 1 and 2 are
-    one and the same channel. - NISWITCH\_ERROR\_PATH\_NOT\_FOUND, if the
+    NISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are
+    one and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the
     driver cannot find a path between the two channels. Note: Paths are
     bidirectional. For example, if a path exists between channels ch1 and
     ch2, then the path also exists between channels ch1 and ch2.
@@ -300,7 +300,7 @@ niswitch.Session methods
     This function destroys the path between two channels that you create
     with the :py:meth:`niswitch.Session.connect` or :py:meth:`niswitch.Session.set_path` function. If a path is
     not connected or not available, the function returns the
-    IVISWTCH\_ERROR\_NO\_SUCH\_PATH error.
+    IVISWTCH_ERROR_NO_SUCH_PATH error.
 
     
 
@@ -334,7 +334,7 @@ niswitch.Session methods
 .. py:method:: disconnect_all()
 
     Breaks all existing paths. If the switch module cannot break all paths,
-    NISWITCH\_WARN\_PATH\_REMAINS warning is returned.
+    NISWITCH_WARN_PATH_REMAINS warning is returned.
 
     
 
@@ -514,8 +514,8 @@ niswitch.Session methods
     :return:
 
 
-            Indicates whether the relay is open or closed. :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_OPEN`` 10
-            NIWITCH\_VAL\_CLOSED 11
+            Indicates whether the relay is open or closed. :py:data:`~niswitch.NISWITCH_VAL_OPEN` 10
+            NIWITCH_VAL_CLOSED 11
 
             
 
@@ -551,8 +551,8 @@ niswitch.Session methods
 
 
         Specifies whether to open or close a given relay. Default value: Relay
-        Close Defined values: :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY``
-        :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY`` (Default Value)
+        Close Defined values: :py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY`
+        :py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY` (Default Value)
 
         
 
@@ -623,8 +623,8 @@ niswitch.Session methods
     :param invert:
 
 
-        If VI\_TRUE, inverts the input trigger signal from falling to rising or
-        vice versa. Default value: VI\_FALSE
+        If VI_TRUE, inverts the input trigger signal from falling to rising or
+        vice versa. Default value: VI_FALSE
 
         
 
@@ -658,9 +658,9 @@ niswitch.Session methods
     :param trigger_input_bus_line:
 
 
-        The trigger line to route the input trigger. Select :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_NONE``
+        The trigger line to route the input trigger. Select :py:data:`~niswitch.NISWITCH_VAL_NONE`
         to break an existing route. Default value: None Valid Values:
-        :py:data:`~niswitch.:py:data:`~niswitch.NISWITCH_VAL_NONE`` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
+        :py:data:`~niswitch.NISWITCH_VAL_NONE` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
         :py:data:`~niswitch.TriggerInput.TTL2` :py:data:`~niswitch.TriggerInput.TTL3` :py:data:`~niswitch.TriggerInput.TTL4`
         :py:data:`~niswitch.TriggerInput.TTL5` :py:data:`~niswitch.TriggerInput.TTL6` :py:data:`~niswitch.TriggerInput.TTL7`
 
@@ -673,8 +673,8 @@ niswitch.Session methods
     :param invert:
 
 
-        If VI\_TRUE, inverts the input trigger signal from falling to rising or
-        vice versa. Default value: VI\_FALSE
+        If VI_TRUE, inverts the input trigger signal from falling to rising or
+        vice versa. Default value: VI_FALSE
 
         
 
@@ -736,9 +736,9 @@ niswitch.Session methods
     :param continuous_scan:
 
 
-        If VI\_TRUE, loops continuously through the scan list during scanning.
-        If VI\_FALSE, the scan stops after one pass through the scan list.
-        Default value: VI\_FALSE
+        If VI_TRUE, loops continuously through the scan list during scanning.
+        If VI_FALSE, the scan stops after one pass through the scan list.
+        Default value: VI_FALSE
 
         
 
@@ -776,7 +776,7 @@ niswitch.Session methods
     Pauses until all created paths have settled. If the time you specify
     with the Maximum Time (ms) parameter elapsed before the switch paths
     have settled, this function returns the
-    NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error.
+    NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
     
 
@@ -800,7 +800,7 @@ niswitch.Session methods
     Pauses until the switch module stops scanning or the maximum time has
     elapsed and returns a timeout error. If the time you specify with the
     Maximum Time (ms) parameter elapsed before the scanning operation has
-    finished, this function returns the NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED
+    finished, this function returns the NISWITCH_ERROR_MAX_TIME_EXCEEDED
     error.
 
     
@@ -812,7 +812,7 @@ niswitch.Session methods
 
         Specifies the maximum length of time to wait for the switch module to
         stop scanning. If the specified time elapses before the scan ends,
-        NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error is returned. Default
+        NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
         Value:5000 ms
 
         

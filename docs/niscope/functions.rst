@@ -124,7 +124,7 @@ niscope.Session methods
     calibration constants take effect immediately for the duration of the
     session. However, they are not stored in the EEPROM until
     :py:meth:`niscope.Session.CalEnd` is called with **action** set to
-    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_ACTION_STORE`` and no errors occur.
+    :py:data:`~niscope.NISCOPE_VAL_ACTION_STORE` and no errors occur.
 
     
 
@@ -146,8 +146,8 @@ niscope.Session methods
     :param option:
 
 
-        The calibration option. Use VI\_NULL for a normal self-calibration
-        operation or :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION`` to
+        The calibration option. Use VI_NULL for a normal self-calibration
+        operation or :py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION` to
         restore the previous calibration.
 
         
@@ -161,7 +161,7 @@ niscope.Session methods
 
     Clears the waveform stats on the channel and measurement you specify. If
     you want to clear all of the measurements, use
-    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_ALL_MEASUREMENTS`` in the **clearableMeasurementFunction**
+    :py:data:`~niscope.NISCOPE_VAL_ALL_MEASUREMENTS` in the **clearableMeasurementFunction**
     parameter.
 
     Every time a measurement is called, the statistics information is
@@ -350,13 +350,13 @@ niscope.Session methods
         Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
         more information.
 
-        Default value: VI\_TRUE
+        Default value: VI_TRUE
 
         **Defined Values**
 
-        VI\_TRUE—Allow real-time acquisitions only
+        VI_TRUE—Allow real-time acquisitions only
 
-        VI\_FALSE—Allow real-time and equivalent-time acquisitions
+        VI_FALSE—Allow real-time and equivalent-time acquisitions
 
         
 
@@ -1096,7 +1096,7 @@ niscope.Session methods
 
     To unprogram a specific line on device, call this function with the
     signal you no longer want to export and set **outputTerminal** to
-    :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_NONE``.
+    :py:data:`~niscope.NISCOPE_VAL_NONE`.
 
     
 
@@ -1149,33 +1149,33 @@ niscope.Session methods
 
         **Defined Values**
 
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_0``   | ("VAL\_RTSI\_0")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_1``   | ("VAL\_RTSI\_1")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_2``   | ("VAL\_RTSI\_2")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_3``   | ("VAL\_RTSI\_3")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_4``   | ("VAL\_RTSI\_4")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_5``   | ("VAL\_RTSI\_5")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_6``   | ("VAL\_RTSI\_6")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_RTSI_7``   | ("VAL\_RTSI\_7")   |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PXI_STAR`` | ("VAL\_PXI\_STAR") |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_0``    | ("VAL\_PFI\_0")    |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_1``    | ("VAL\_PFI\_1")    |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_PFI_2``    | ("VAL\_PFI\_2")    |
-        +--------------------------------------------------------------+--------------------+
-        | :py:data:`~niscope.:py:data:`~niscope.NISCOPE_VAL_CLK_OUT``  | ("VAL\_CLK\_OUT")  |
-        +--------------------------------------------------------------+--------------------+
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_0`   | ("VAL_RTSI_0")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_1`   | ("VAL_RTSI_1")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_2`   | ("VAL_RTSI_2")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_3`   | ("VAL_RTSI_3")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_4`   | ("VAL_RTSI_4")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_5`   | ("VAL_RTSI_5")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_6`   | ("VAL_RTSI_6")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_7`   | ("VAL_RTSI_7")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PXI_STAR` | ("VAL_PXI_STAR") |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_0`    | ("VAL_PFI_0")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_1`    | ("VAL_PFI_1")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_2`    | ("VAL_PFI_2")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_CLK_OUT`  | ("VAL_CLK_OUT")  |
+        +------------------------------------------+------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -1241,7 +1241,7 @@ niscope.Session methods
         wfm (list of float): 
 
 
-            Returns an array whose length is the **numSamples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
+            Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
             
 
@@ -1266,7 +1266,7 @@ niscope.Session methods
 
                                         voltage = binary data * gain factor + offset
 
-                                Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
+                                Call niScope\_ActualNumWfms to determine the size of this array.
 
             
 
@@ -1308,7 +1308,7 @@ niscope.Session methods
     :param wfm:
 
 
-        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
+        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
                                 Types supported are
 
@@ -1359,7 +1359,7 @@ niscope.Session methods
 
                                         voltage = binary data * gain factor + offset
 
-                                Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
+                                Call niScope\_ActualNumWfms to determine the size of this array.
 
             
 
@@ -1853,7 +1853,7 @@ niscope.Session methods
 
             Returns the self-test response string from the instrument. Refer to the
             device-specific help topics for an explanation of the string contents;
-            you must pass a ViChar array at least IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes
+            you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
             in length.
 
             

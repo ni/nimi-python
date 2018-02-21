@@ -320,7 +320,7 @@ class _SessionBase(object):
         Returns the error information associated with the session.
 
         Returns:
-            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI\_NULL for this.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -349,7 +349,7 @@ class _SessionBase(object):
             session.channels['0,1'].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum\_time** allowed in microseconds.
 
 
         Returns:
@@ -531,7 +531,7 @@ class Session(_SessionBase):
         Args:
             resource_name (str): Caution: This is just some string.
 
-                Contains the **resource_name** of the device to initialize.
+                Contains the **resource\_name** of the device to initialize.
 
             options (str): Specifies the initial value of certain attributes for the session. The
                 syntax for **options** is a dictionary of attributes with an assigned
@@ -563,19 +563,19 @@ class Session(_SessionBase):
 
             id_query (bool): NI-FAKE is probably not needed.
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +--------------------+---+------------------+
+                | VI\_TRUE (default) | 1 | Perform ID Query |
+                +--------------------+---+------------------+
+                | VI\_FALSE          | 0 | Skip ID Query    |
+                +--------------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +--------------------+---+--------------+
+                | VI\_TRUE (default) | 1 | Reset Device |
+                +--------------------+---+--------------+
+                | VI\_FALSE          | 0 | Don't Reset  |
+                +--------------------+---+--------------+
 
 
         Returns:
@@ -1014,25 +1014,25 @@ class Session(_SessionBase):
         Args:
             resource_name (str): Caution: This is just some string.
 
-                Contains the **resource_name** of the device to initialize.
+                Contains the **resource\_name** of the device to initialize.
 
             option_string (str): Some options
 
             id_query (bool): NI-FAKE is probably not needed.
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +--------------------+---+------------------+
+                | VI\_TRUE (default) | 1 | Perform ID Query |
+                +--------------------+---+------------------+
+                | VI\_FALSE          | 0 | Skip ID Query    |
+                +--------------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +--------------------+---+--------------+
+                | VI\_TRUE (default) | 1 | Reset Device |
+                +--------------------+---+--------------+
+                | VI\_FALSE          | 0 | Don't Reset  |
+                +--------------------+---+--------------+
 
 
         Returns:
@@ -1171,7 +1171,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in seconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum\_time** allowed in seconds.
 
 
         Returns:

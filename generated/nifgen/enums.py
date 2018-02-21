@@ -387,7 +387,7 @@ class SampleClockSource(Enum):
     '''
     PXI_STAR_LINE = '"PXI_Star"'
     '''
-    Specifies that the PXI_STAR trigger line is used as the Sample Clock
+    Specifies that the PXI\_STAR trigger line is used as the Sample Clock
     source.
     '''
     PXI_TRIGGER_LINE_0RTSI_0 = '"PXI_Trig0"'

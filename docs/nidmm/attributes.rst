@@ -84,6 +84,12 @@ nidmm.Session properties
     On the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.
     On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -181,6 +187,10 @@ nidmm.Session properties
 .. py:attribute:: buffer_size
 
     Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to :py:data:`~nidmm.NIDMM_VAL_BUFFER_SIZE_AUTO` (-1), NI-DMM chooses the buffer size.
+
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     The following table lists the characteristics of this property.
 
@@ -601,6 +611,10 @@ nidmm.Session properties
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call :py:meth:`nidmm.Session.GetNextInterchangeWarning`  to extract interchange warnings.  Call :py:meth:`nidmm.Session.ClearInterchangeWarnings`  to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -648,6 +662,10 @@ nidmm.Session properties
 .. py:attribute:: latency
 
     Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to :py:data:`~nidmm.NIDMM_VAL_LATENCY_AUTO` (-1),  NI-DMM chooses the transfer size.
+
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     The following table lists the characteristics of this property.
 
@@ -950,6 +968,10 @@ nidmm.Session properties
     :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` -3.0
     NI-DMM performs an Auto Range before acquiring the next measurement. The :py:data:`nidmm.Session.auto_range_value`  is stored and used for all subsequent measurements until the measurement configuration is changed.
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -999,6 +1021,10 @@ nidmm.Session properties
 
     Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call :py:meth:`nidmm.Session.GetNextCoercionRecord` to extract  and delete the oldest coercion record from the list.
     The default value is VI_FALSE (0). Use the :py:meth:`nidmm.Session._init_with_options` function to  override this value.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1199,6 +1225,10 @@ nidmm.Session properties
 
     Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  :py:data:`~nidmm.NIDMM_VAL_SETTLE_TIME_AUTO` (-1).
     The NI 4050 and NI 4060 are not supported.
+
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     The following table lists the characteristics of this property.
 
@@ -1662,6 +1692,10 @@ nidmm.Session properties
 
     Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`, is fixed.
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------------------------------------+
@@ -1807,6 +1841,10 @@ nidmm.Session properties
 
     Specifies the type of device used to measure the temperature. The default value is :py:data:`~nidmm.NIDMM_VAL_4_THERMOCOUPLE`.
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+----------------------+
@@ -1863,6 +1901,10 @@ nidmm.Session properties
     Use positive values to set the trigger delay in seconds.
     Valid Range: :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY` (-1.0), 0.0-12.0 seconds (NI 4060 only)
     Default Value: :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY`
+
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     The following table lists the characteristics of this property.
 

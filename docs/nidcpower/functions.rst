@@ -139,9 +139,9 @@ nidcpower.Session methods
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -187,9 +187,9 @@ nidcpower.Session methods
         terminals are listed in MAX under the **Device Routes** tab.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -239,9 +239,9 @@ nidcpower.Session methods
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -290,9 +290,9 @@ nidcpower.Session methods
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -341,9 +341,9 @@ nidcpower.Session methods
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -607,7 +607,7 @@ nidcpower.Session methods
 
     This function performs the same actions as the :py:meth:`nidcpower.Session.reset`
     function, except that this function also immediately sets the
-    :py:data:`nidcpower.Session.output_enabled` attribute to VI\_FALSE.
+    :py:data:`nidcpower.Session.output_enabled` attribute to VI_FALSE.
 
     This function opens the output relay on devices that have an output
     relay.
@@ -672,25 +672,25 @@ nidcpower.Session methods
         Specifies where to export the selected signal.
         **Relative Terminals**:
 
-        +--------------+----------------------+
-        | ""           | Do not export signal |
-        +--------------+----------------------+
-        | "PXI\_Trig0" | PXI trigger line 0   |
-        +--------------+----------------------+
-        | "PXI\_Trig1" | PXI trigger line 1   |
-        +--------------+----------------------+
-        | "PXI\_Trig2" | PXI trigger line 2   |
-        +--------------+----------------------+
-        | "PXI\_Trig3" | PXI trigger line 3   |
-        +--------------+----------------------+
-        | "PXI\_Trig4" | PXI trigger line 4   |
-        +--------------+----------------------+
-        | "PXI\_Trig5" | PXI trigger line 5   |
-        +--------------+----------------------+
-        | "PXI\_Trig6" | PXI trigger line 6   |
-        +--------------+----------------------+
-        | "PXI\_Trig7" | PXI trigger line 7   |
-        +--------------+----------------------+
+        +-------------+----------------------+
+        | ""          | Do not export signal |
+        +-------------+----------------------+
+        | "PXI_Trig0" | PXI trigger line 0   |
+        +-------------+----------------------+
+        | "PXI_Trig1" | PXI trigger line 1   |
+        +-------------+----------------------+
+        | "PXI_Trig2" | PXI trigger line 2   |
+        +-------------+----------------------+
+        | "PXI_Trig3" | PXI trigger line 3   |
+        +-------------+----------------------+
+        | "PXI_Trig4" | PXI trigger line 4   |
+        +-------------+----------------------+
+        | "PXI_Trig5" | PXI trigger line 5   |
+        +-------------+----------------------+
+        | "PXI_Trig6" | PXI trigger line 6   |
+        +-------------+----------------------+
+        | "PXI_Trig7" | PXI trigger line 7   |
+        +-------------+----------------------+
 
 
     :type output_terminal: str

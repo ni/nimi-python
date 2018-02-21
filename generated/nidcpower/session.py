@@ -197,10 +197,8 @@ class _SessionBase(object):
     bounded by this positive value and its opposite.
     When set to **Asymmetric**, you must separately set a limit high and a
     limit low using distinct properties.
-    Asymmetric limits must meet the following requirements:
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    For asymmetric limits, the range bounded by the limit high and limit low
+    must include zero.
     **Default Value:** Symmetric
     **Related Topics:**
     `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
@@ -326,6 +324,9 @@ class _SessionBase(object):
 
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     current_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -366,11 +367,10 @@ class _SessionBase(object):
     You must also specify a `Current Limit
     Low <pCurrentLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Current Limit
+    **Valid Values:** [1% of `Current Limit
+    Range <pCurrentLimitRange.html>`__, `Current Limit
     Range <pCurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -384,6 +384,9 @@ class _SessionBase(object):
     The limit may be extended beyond the selected limit range if the
     `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -408,10 +411,9 @@ class _SessionBase(object):
     High <pCurrentLimitHigh.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Current Limit
-    Range <pCurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pCurrentLimitRange.html>`__, -1% of `Current Limit
+    Range <pCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -425,6 +427,9 @@ class _SessionBase(object):
     The limit may be extended beyond the selected limit range if the
     `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -665,6 +670,9 @@ class _SessionBase(object):
     Call the GetNextInterchangeWarning function to clear the list of interchangeability warnings  without reading them.
     Interchangeability checking examines the attributes in a capability group only if you specify a value  for at least one attribute within that group. Interchangeability warnings can occur when an attribute  affects the behavior of the device and you have not set that attribute or when the attribute has been  invalidated since you set it.
     Default Value: VI_FALSE
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     interlock_input_open = attributes.AttributeViBoolean(1150105)
     '''Type: bool
@@ -925,6 +933,9 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to the Supported Attributes by Device topic
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     power_line_frequency.Session object, then the set/get will use all repeated capabilities in the session.
@@ -998,11 +1009,10 @@ class _SessionBase(object):
     You must also specify a `Pulse Bias Current Limit
     Low <pPulseBiasCurrentLimitLow.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Current Limit
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__, `Pulse Current Limit
     Range <pPulseCurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1018,6 +1028,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1043,10 +1056,9 @@ class _SessionBase(object):
     High <pPulseBiasCurrentLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pPulseCurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+    Limit Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1062,6 +1074,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1140,11 +1155,10 @@ class _SessionBase(object):
     You must also specify a `Pulse Bias Voltage Limit
     Low <pPulseBiasVoltageLimitLow.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Voltage Limit
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
     Range <pPulseVoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1160,6 +1174,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1185,10 +1202,9 @@ class _SessionBase(object):
     High <pPulseBiasVoltageLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pPulseVoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+    Limit Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1204,6 +1220,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1287,6 +1306,9 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     pulse_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -1310,11 +1332,10 @@ class _SessionBase(object):
     You must also specify a `Pulse Current Limit
     Low <pPulseCurrentLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Current Limit
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__, `Pulse Current Limit
     Range <pPulseCurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1330,6 +1351,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1355,10 +1379,9 @@ class _SessionBase(object):
     High <pPulseCurrentLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pPulseCurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+    Limit Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1374,6 +1397,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1493,6 +1519,9 @@ class _SessionBase(object):
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     pulse_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -1516,11 +1545,10 @@ class _SessionBase(object):
     You must also specify a `Pulse Voltage Limit
     Low <pPulseVoltageLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Voltage Limit
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
     Range <pPulseVoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1536,6 +1564,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1561,10 +1592,9 @@ class _SessionBase(object):
     High <pPulseVoltageLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pPulseVoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+    Limit Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1580,6 +1610,9 @@ class _SessionBase(object):
     set to TRUE or if the `Output
     Function <pOutputFunction.html>`__ property is set to a
     pulsing function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1657,6 +1690,9 @@ class _SessionBase(object):
 
     Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the GetNextCoercionRecord function to read and delete the earliest coercion record from the list.
     Default Value: The default value is VI_FALSE. Use the _initialize_with_channels function to override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     reset_average_before_measurement = attributes.AttributeViBoolean(1150006)
     '''Type: bool
@@ -1710,6 +1746,9 @@ class _SessionBase(object):
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
     Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     sense = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
@@ -2053,6 +2092,9 @@ class _SessionBase(object):
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2093,11 +2135,10 @@ class _SessionBase(object):
     You must also specify a `Voltage Limit
     Low <pVoltageLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Voltage Limit
+    **Valid Values:** [1% of `Voltage Limit
+    Range <pVoltageLimitRange.html>`__, `Voltage Limit
     Range <pVoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2111,6 +2152,9 @@ class _SessionBase(object):
     The limit may be extended beyond the selected limit range if the
     `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2135,10 +2179,9 @@ class _SessionBase(object):
     High <pVoltageLimitHigh.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Voltage Limit
-    Range <pVoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pVoltageLimitRange.html>`__, -1% of `Voltage Limit
+    Range <pVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2152,6 +2195,9 @@ class _SessionBase(object):
     The limit may be extended beyond the selected limit range if the
     `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the

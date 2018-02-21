@@ -296,10 +296,8 @@ nidcpower.Session properties
     bounded by this positive value and its opposite.
     When set to **Asymmetric**, you must separately set a limit high and a
     limit low using distinct properties.
-    Asymmetric limits must meet the following requirements:
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    For asymmetric limits, the range bounded by the limit high and limit low
+    must include zero.
     **Default Value:** Symmetric
     **Related Topics:**
     `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
@@ -564,6 +562,8 @@ nidcpower.Session properties
 
     .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         current_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -648,11 +648,10 @@ nidcpower.Session properties
     You must also specify a `Current Limit
     Low <p:py:meth:`nidcpower.Session.CurrentLimitLow`.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Current Limit
+    **Valid Values:** [1% of `Current Limit
+    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, `Current Limit
     Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -667,6 +666,8 @@ nidcpower.Session properties
     .. note:: The limit may be extended beyond the selected limit range if the
         `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -712,10 +713,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.CurrentLimitHigh`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Current Limit
-    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__, -1% of `Current Limit
+    Range <p:py:meth:`nidcpower.Session.CurrentLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -730,6 +730,8 @@ nidcpower.Session properties
     .. note:: The limit may be extended beyond the selected limit range if the
         `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1488,6 +1490,10 @@ nidcpower.Session properties
     Interchangeability checking examines the attributes in a capability group only if you specify a value  for at least one attribute within that group. Interchangeability warnings can occur when an attribute  affects the behavior of the device and you have not set that attribute or when the attribute has been  invalidated since you set it.
     Default Value: VI_FALSE
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2209,6 +2215,8 @@ nidcpower.Session properties
 
     .. note:: This attribute is not supported by all devices. Refer to the Supported Attributes by Device topic
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         power_line_frequency.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2389,11 +2397,10 @@ nidcpower.Session properties
     You must also specify a `Pulse Bias Current Limit
     Low <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitLow`.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Current Limit
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, `Pulse Current Limit
     Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2410,6 +2417,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2456,10 +2465,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.PulseBiasCurrentLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, -1% of `Pulse Current
+    Limit Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2476,6 +2484,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2644,11 +2654,10 @@ nidcpower.Session properties
     You must also specify a `Pulse Bias Voltage Limit
     Low <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitLow`.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Voltage Limit
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, `Pulse Voltage Limit
     Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2665,6 +2674,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2711,10 +2722,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.PulseBiasVoltageLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, -1% of `Pulse Voltage
+    Limit Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2731,6 +2741,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2946,6 +2958,8 @@ nidcpower.Session properties
 
     .. note:: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         pulse_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -2990,11 +3004,10 @@ nidcpower.Session properties
     You must also specify a `Pulse Current Limit
     Low <p:py:meth:`nidcpower.Session.PulseCurrentLimitLow`.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Current Limit
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, `Pulse Current Limit
     Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -3011,6 +3024,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3057,10 +3072,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.PulseCurrentLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__, -1% of `Pulse Current
+    Limit Range <p:py:meth:`nidcpower.Session.PulseCurrentLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -3077,6 +3091,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3355,6 +3371,8 @@ nidcpower.Session properties
 
     .. note:: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         pulse_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -3399,11 +3417,10 @@ nidcpower.Session properties
     You must also specify a `Pulse Voltage Limit
     Low <p:py:meth:`nidcpower.Session.PulseVoltageLimitLow`.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Voltage Limit
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, `Pulse Voltage Limit
     Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -3420,6 +3437,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3466,10 +3485,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.PulseVoltageLimitHigh`.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__, -1% of `Pulse Voltage
+    Limit Range <p:py:meth:`nidcpower.Session.PulseVoltageLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -3486,6 +3504,8 @@ nidcpower.Session properties
         set to TRUE or if the `Output
         Function <p:py:meth:`nidcpower.Session.OutputFunction`.html>`__ property is set to a
         pulsing function.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -3709,6 +3729,10 @@ nidcpower.Session properties
     Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the :py:meth:`nidcpower.Session.GetNextCoercionRecord` function to read and delete the earliest coercion record from the list.
     Default Value: The default value is VI_FALSE. Use the :py:meth:`nidcpower.Session._initialize_with_channels` function to override this value.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3828,6 +3852,8 @@ nidcpower.Session properties
 
 
     .. note:: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -4840,6 +4866,8 @@ nidcpower.Session properties
 
     .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
 
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
         voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
@@ -4924,11 +4952,10 @@ nidcpower.Session properties
     You must also specify a `Voltage Limit
     Low <p:py:meth:`nidcpower.Session.VoltageLimitLow`.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Voltage Limit
+    **Valid Values:** [1% of `Voltage Limit
+    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, `Voltage Limit
     Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -4943,6 +4970,8 @@ nidcpower.Session properties
     .. note:: The limit may be extended beyond the selected limit range if the
         `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -4988,10 +5017,9 @@ nidcpower.Session properties
     High <p:py:meth:`nidcpower.Session.VoltageLimitHigh`.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Voltage Limit
-    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__, -1% of `Voltage Limit
+    Range <p:py:meth:`nidcpower.Session.VoltageLimitRange`.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -5006,6 +5034,8 @@ nidcpower.Session properties
     .. note:: The limit may be extended beyond the selected limit range if the
         `Overranging Enabled <p:py:meth:`nidcpower.Session.OverrangingEnabled`.html>`__ property is
         set to TRUE.
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the

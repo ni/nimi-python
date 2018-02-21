@@ -312,6 +312,10 @@ nifgen.Session properties
     These functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.
     Use this attribute only when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -384,6 +388,10 @@ nifgen.Session properties
 
     Specifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
     NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use :py:meth:`nifgen.Session.InitWithOptions` to override the default value.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1284,6 +1292,10 @@ nifgen.Session properties
 
     Specifies the driver setup portion of the option string that was passed into the :py:meth:`nifgen.Session.InitWithOptions` function.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -2132,6 +2144,10 @@ nifgen.Session properties
     Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call :py:meth:`nifgen.Session.GetNextInterchangeWarning` to extract interchange warnings.   Call :py:meth:`nifgen.Session.ClearInterchangeWarnings` to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2182,6 +2198,10 @@ nifgen.Session properties
 
     This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to :py:data:`~nifgen.NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE` (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
 
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2206,6 +2226,10 @@ nifgen.Session properties
 
     A string containing the logical name that you specified when opening the  current IVI session.
     You may pass a logical name to :py:meth:`nifgen.Session.init` or  :py:meth:`nifgen.Session.InitWithOptions`.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -3757,6 +3781,10 @@ nifgen.Session properties
     Default Value: VI_TRUE
     Use :py:meth:`nifgen.Session.InitWithOptions` to override the default value.
 
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3854,6 +3882,10 @@ nifgen.Session properties
     Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call :py:meth:`nifgen.Session.GetNextCoercionRecord` to extract and delete the oldest  coercion record from the list.
     Default Value: VI_FALSE
     Use :py:meth:`nifgen.Session.InitWithOptions` to override default value.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -4150,6 +4182,10 @@ nifgen.Session properties
     Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  functions perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  functions return calculated values.
     Default Value: VI_FALSE
     Use :py:meth:`nifgen.Session.InitWithOptions` to override default value.
+
+
+
+    .. note:: One or more of the referenced functions are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -4781,8 +4817,12 @@ nifgen.Session properties
 .. py:attribute:: trigger_source
 
     Controls which trigger source the signal generator uses.
-    After you call the :py:meth:`nifgen.Session._initiate_generation` function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the :py:data:`nifgen.Session.cycle_count` attribute.
+    After you call the :py:meth:`nifgen.Session._initiate_generation` function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the :py:data:`nifgen.Session.CYCLE_COUNT` attribute.
     This attribute is also the source for the trigger in the other trigger modes as specified by the :py:data:`nifgen.Session.trigger_mode` attribute.
+
+
+
+    .. note:: One or more of the referenced attributes are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 

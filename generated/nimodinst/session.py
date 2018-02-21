@@ -216,7 +216,7 @@ class Session(object):
         '''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
-        _open_installed_devices_session. Call this function when you are
+        niModInst\_OpenInstalledDevicesSession. Call this function when you are
         finished using the session handle and do not use this handle again.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case S110
@@ -258,7 +258,7 @@ class Session(object):
         Returns an integer attribute specified by the attributeID parameter for
         a device specified by the handle and index parameters. The handle
         parameter is expected to be a valid handle returned by
-        _open_installed_devices_session. It therefore acts as a handle to
+        niModInst\_OpenInstalledDevicesSession. It therefore acts as a handle to
         a list of installed devices. The index parameter specifies the device in
         the list for which you want the attribute.
 
@@ -266,7 +266,7 @@ class Session(object):
             index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
-                returned by _open_installed_devices_session.
+                returned by niModInst\_OpenInstalledDevicesSession.
 
             attribute_id (int): The ID of the integer attribute you want to query. Valid Values Slot
                 Number--the slot (for example, in a PXI chassis) in which the device is
@@ -301,7 +301,7 @@ class Session(object):
         Returns a string attribute specified by the attributeID parameter for a
         device specified by the handle and index parameters. The handle
         parameter is expected to be a valid handle returned by
-        _open_installed_devices_session. Therefore, it acts as a handle
+        niModInst\_OpenInstalledDevicesSession. Therefore, it acts as a handle
         to a list of installed devices. The index parameter specifies for which
         device in the list you want the attribute. To find out the length of the
         device name string before you allocate a buffer for it, simply call this
@@ -315,13 +315,13 @@ class Session(object):
             index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
-                returned by _open_installed_devices_session.
+                returned by niModInst\_OpenInstalledDevicesSession.
 
             attribute_id (int): The ID of the string attribute you want to query. Valid Values
-                device_name--the name of the device, which can be used
+                NIMODINST\_ATTR\_DEVICE\_NAME--the name of the device, which can be used
                 to open an instrument driver session for that device
-                device_model--the model of the device (for example, NI
-                PXI-5122) serial_number--the serial number of the
+                NIMODINST\_ATTR\_DEVICE\_MODEL--the model of the device (for example, NI
+                PXI-5122) NIMODINST\_ATTR\_SERIAL\_NUMBER--the serial number of the
                 device
 
         '''
@@ -353,7 +353,7 @@ class Session(object):
         function. If you remove devices from the system or rename them in
         Measurement & Automation Explorer (MAX), this handle may not refer to an
         accurate list of devices. You should destroy the handle using
-        _close_installed_devices_session and create a new handle using
+        niModInst\_CloseInstalledDevicesSession and create a new handle using
         this function.
 
         Args:

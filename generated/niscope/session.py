@@ -174,6 +174,9 @@ class _SessionBase(object):
     NISCOPE_VAL_PFI_1         ('VAL_PFI_1')        - PFI 1
     NISCOPE_VAL_PFI_2         ('VAL_PFI_2')        - PFI 2
     NISCOPE_VAL_PXI_STAR      ('VAL_PXI_STAR')     - PXI Star Trigger
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     adv_trig_src = attributes.AttributeViString(1150094)
     '''Type: str
@@ -717,11 +720,17 @@ class _SessionBase(object):
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     master_enable = attributes.AttributeViBoolean(1150008)
     '''Type: bool
@@ -739,6 +748,9 @@ class _SessionBase(object):
     NISCOPE_VAL_100MHZ_BANDWIDTH (100000000.0)
     NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY (20000000.0)
     NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY (100000000.0)
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -765,6 +777,9 @@ class _SessionBase(object):
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
     Default: 1.0
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     meas_array_gain.Session object, then the set/get will use all repeated capabilities in the session.
@@ -779,6 +794,9 @@ class _SessionBase(object):
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
     Default: 0.0
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -795,6 +813,9 @@ class _SessionBase(object):
     Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
     Default: 90%
 
+    Note:
+    One or more of the referenced attributes are not in the Python API for this driver.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     meas_chan_high_ref_level.Session object, then the set/get will use all repeated capabilities in the session.
@@ -810,6 +831,9 @@ class _SessionBase(object):
     Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_LOW_REF if you use this attribute to set various channels to different values.
     Default: 10%
 
+    Note:
+    One or more of the referenced attributes are not in the Python API for this driver.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     meas_chan_low_ref_level.Session object, then the set/get will use all repeated capabilities in the session.
@@ -824,6 +848,9 @@ class _SessionBase(object):
 
     Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_MID_REF if you use this attribute to set various channels to different values.
     Default: 50%
+
+    Note:
+    One or more of the referenced attributes are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -906,6 +933,9 @@ class _SessionBase(object):
     ·  NISCOPE_VAL_MEAS_BANDPASS
     ·  NISCOPE_VAL_MEAS_BANDSTOP
     Default: NISCOPE_VAL_MEAS_LOWPASS
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     meas_filter_width = attributes.AttributeViReal64(1150041)
     '''Type: float
@@ -925,6 +955,9 @@ class _SessionBase(object):
     NISCOPE_VAL_BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: NISCOPE_VAL_NONE
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -956,6 +989,12 @@ class _SessionBase(object):
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     meas_interpolation_sampling_factor.Session object, then the set/get will use all repeated capabilities in the session.
@@ -986,6 +1025,9 @@ class _SessionBase(object):
     Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
     meas_other_channel.Session object, then the set/get will use all repeated capabilities in the session.
@@ -1003,6 +1045,9 @@ class _SessionBase(object):
     NISCOPE_VAL_MEAS_MIN_MAX
     NISCOPE_VAL_MEAS_BASE_TOP
     Default: NISCOPE_VAL_MEAS_BASE_TOP
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1026,6 +1071,9 @@ class _SessionBase(object):
     NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
     NISCOPE_VAL_MEAS_PERCENTAGE--Percentage units, where the measurements voltage low and voltage high represent 0% and 100%, respectively.
     Default: NISCOPE_VAL_MEAS_PERCENTAGE
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1117,6 +1165,9 @@ class _SessionBase(object):
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
     The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in ConfigureAcquisition and not require more memory than the  onboard memory module allows.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     mux_mode_register = attributes.AttributeViInt32(1151002)
     onboard_memory_size = attributes.AttributeViInt32(1150069)
@@ -1277,6 +1328,9 @@ class _SessionBase(object):
     by device and current configuration.
     **Related topics:**
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     sample_mode = attributes.AttributeViInt32(1250106)
     '''Type: int
@@ -1473,6 +1527,9 @@ class _SessionBase(object):
     High Trigger Level <= Vertical Range/2 + Vertical Offset
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     trigger_window_low_level = attributes.AttributeViReal64(1150013)
     '''Type: float
@@ -1485,6 +1542,9 @@ class _SessionBase(object):
     Low Trigger Level <= Vertical Range/2 + Vertical Offset
     Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
     Low Trigger Level < High Trigger Level
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     trigger_window_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
     '''Type: enums.TriggerWindowMode
@@ -2469,7 +2529,7 @@ class _SessionBase(object):
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
-            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
                                         Types supported are
 
@@ -2506,7 +2566,7 @@ class _SessionBase(object):
 
                                             voltage = binary data * gain factor + offset
 
-                                    Call _actual_num_wfms to determine the size of this array.
+                                    Call niScope\_ActualNumWfms to determine the size of this array.
 
         '''
         import numpy
@@ -2551,7 +2611,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
 
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
@@ -2570,7 +2630,7 @@ class _SessionBase(object):
 
                                             voltage = binary data * gain factor + offset
 
-                                    Call _actual_num_wfms to determine the size of this array.
+                                    Call niScope\_ActualNumWfms to determine the size of this array.
 
         '''
         return self._fetch(num_samples, timeout)

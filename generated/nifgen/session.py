@@ -158,6 +158,9 @@ class _SessionBase(object):
     CreateWaveformFromFileHWS
     These functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.
     Use this attribute only when output_mode is set to OutputMode.ARB.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''Type: bool
@@ -174,6 +177,9 @@ class _SessionBase(object):
 
     Specifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
     NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use InitWithOptions to override the default value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
     '''Type: enums.CalADCInput
@@ -369,6 +375,9 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the driver setup portion of the option string that was passed into the InitWithOptions function.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''Type: str
@@ -575,6 +584,9 @@ class _SessionBase(object):
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  _initiate_generation.
     Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call GetNextInterchangeWarning to extract interchange warnings.   Call ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
@@ -587,12 +599,18 @@ class _SessionBase(object):
     '''Type: float
 
     This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name that you specified when opening the  current IVI session.
     You may pass a logical name to init or  InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     major_version = attributes.AttributeViInt32(1050503)
     '''Type: int
@@ -925,6 +943,9 @@ class _SessionBase(object):
     Specifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
     Default Value: VI_TRUE
     Use InitWithOptions to override the default value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     ready_for_start_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
     '''Type: enums.ReadyForStartEventActiveLevel
@@ -947,6 +968,9 @@ class _SessionBase(object):
     Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
     Default Value: VI_FALSE
     Use InitWithOptions to override default value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     reference_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
     '''Type: enums.ReferenceClockSource
@@ -1022,6 +1046,9 @@ class _SessionBase(object):
     Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  functions perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  functions return calculated values.
     Default Value: VI_FALSE
     Use InitWithOptions to override default value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -1159,8 +1186,11 @@ class _SessionBase(object):
     '''Type: enums.TriggerSource
 
     Controls which trigger source the signal generator uses.
-    After you call the _initiate_generation function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the cycle_count attribute.
+    After you call the _initiate_generation function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT attribute.
     This attribute is also the source for the trigger in the other trigger modes as specified by the trigger_mode attribute.
+
+    Note:
+    One or more of the referenced attributes are not in the Python API for this driver.
     '''
     video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
     '''Type: enums.VideoWaveformType
@@ -1711,7 +1741,7 @@ class _SessionBase(object):
 
         Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
 
-        Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this function.
+        Note: You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3207,8 +3237,8 @@ class _SessionBase(object):
 
         By default, subsequent calls to this function
         continue writing data from the position of the last sample written. You
-        can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
-        nifgen_SetWaveformNextWritePosition function.
+        can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
+        nifgen\_SetWaveformNextWritePosition function.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3219,7 +3249,7 @@ class _SessionBase(object):
             session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
 
         Args:
-            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen\_AllocateNamedWaveform or niFgen\_AllocateWaveform.
 
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 

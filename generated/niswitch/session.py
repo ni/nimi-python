@@ -123,6 +123,9 @@ class _SessionBase(object):
     Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
     The instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.
     The default value is VI_TRUE.   Use the InitWithOptions  function to override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -162,6 +165,9 @@ class _SessionBase(object):
     This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  InitWithOptions function, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this attribute returns an empty string.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
     '''Type: str
@@ -191,6 +197,9 @@ class _SessionBase(object):
     The default value is VI_FALSE.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call GetNextInterchangeWarning to extract interchange warnings.   Call the ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
     Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
@@ -249,6 +258,9 @@ class _SessionBase(object):
 
     A string containing the logical name you specified when opening the  current IVI session.
     You may pass a logical name to the init or  InitWithOptions functions.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''Type: int
@@ -443,12 +455,18 @@ class _SessionBase(object):
 
     Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
     The default value is VI_TRUE.   Use the InitWithOptions  function to override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
     Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
     The default value is VI_FALSE.   Use the  InitWithOptions function to override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
     '''Type: enums.ScanAdvancedOutput
@@ -485,6 +503,9 @@ class _SessionBase(object):
     This attribute specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this attribute specifies what happens to the  connection between CH1 and CH2.
     If the value of this attribute is ScanMode.NONE, the switch device  takes no action on existing paths.  If the value is  ScanMode.BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is ScanMode.BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
     Most switch devices support only one of the possible values.  In such  cases, this attribute serves as an indicator of the device's behavior.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     serial_number = attributes.AttributeViString(1150015)
     '''Type: str
@@ -513,6 +534,9 @@ class _SessionBase(object):
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
     The default value is VI_FALSE.   Use the InitWithOptions  function to override this value.
+
+    Note:
+    One or more of the referenced functions are not in the Python API for this driver.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
