@@ -17,7 +17,7 @@ functions = {
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -26,7 +26,7 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Aborts any previously initiated signal generation. Call the
-nifgen\_InitiateGeneration function to cause the signal generator to
+nifgen_InitiateGeneration function to cause the signal generator to
 produce a signal again.
 ''',
 },
@@ -41,7 +41,7 @@ produce a signal again.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -71,7 +71,7 @@ output relative to a fixed reference, such as the PLL Reference Clock.
 Adjustment time can be positive or negative, but it must be less than or
 equal to the Sample Clock period. The delay takes effect immediately
 after this function is called. To delay an external Sample Clock, use
-the NIFGEN\_ATTR\_SAMPLE\_CLOCK\_ABSOLUTE\_DELAY attribute.
+the NIFGEN_ATTR_SAMPLE_CLOCK_ABSOLUTE_DELAY attribute.
 ''',
 },
     },
@@ -85,7 +85,7 @@ the NIFGEN\_ATTR\_SAMPLE\_CLOCK\_ABSOLUTE\_DELAY attribute.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -143,7 +143,7 @@ Waveform functions.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -202,7 +202,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -271,7 +271,7 @@ them in the onboard EEPROM when the calibration session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -320,7 +320,7 @@ them in the onboard EEPROM when the calibration session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -394,7 +394,7 @@ committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -418,7 +418,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the direct path output impedance configuration. Refer to the
-nifgen\_Related\_Documentation for your device for information on what
+nifgen_Related_Documentation for your device for information on what
 configurations must be calibrated.
 ''',
 },
@@ -479,7 +479,7 @@ when the calibration session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -503,7 +503,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the analog path configuration of the device for this stage of
-calibration. Refer to the nifgen\_Related\_Documentation for your device
+calibration. Refer to the nifgen_Related_Documentation for your device
 for information on which configurations must be calibrated.
 ''',
 },
@@ -568,7 +568,7 @@ is committed, store them in the onboard EEPROM.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -592,7 +592,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the main path output impedance configuration. Refer to the
-nifgen\_Related\_Documentation for your device for information on what
+nifgen_Related_Documentation for your device for information on what
 configurations must be calibrated.
 ''',
 },
@@ -653,7 +653,7 @@ when the calibration session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -677,7 +677,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the postamplifier stage configuration. Refer to the
-nifgen\_Related\_Documentation for your device for information on what
+nifgen_Related_Documentation for your device for information on what
 configurations must be calibrated.
 ''',
 },
@@ -750,7 +750,7 @@ calibration session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -774,7 +774,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the preamplifier stage configuration. Refer to the
-nifgen\_Related\_Documentation for your device for information on what
+nifgen_Related_Documentation for your device for information on what
 configurations must be calibrated.
 ''',
 },
@@ -847,7 +847,7 @@ session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -871,7 +871,7 @@ Specifies the name of the channel being calibrated.
 'documentation': {
 'description': '''
 Specifies the preamplifier stage configuration. Refer to the
-nifgen\_Related\_Documentation for your device for information about
+nifgen_Related_Documentation for your device for information about
 what configurations must be calibrated.
 ''',
 },
@@ -933,7 +933,7 @@ session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -976,7 +976,7 @@ session is committed.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -1018,7 +1018,7 @@ calibration session. The password may be up to four characters long.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1031,7 +1031,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1075,7 +1075,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1088,7 +1088,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1132,7 +1132,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1145,7 +1145,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1189,7 +1189,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1202,7 +1202,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1246,7 +1246,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1259,7 +1259,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1303,7 +1303,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1316,7 +1316,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -1362,7 +1362,7 @@ settings of the instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1390,7 +1390,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1403,11 +1403,11 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the handle of the arbitrary sequence that you want the signal
 generator to remove. You can create an arbitrary sequence using the
-nifgen\_CreateArbSequence or nifgen\_CreateAdvancedArbSequence function.
+nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence function.
 These functions return a handle that you use to identify the sequence.
 
 | **Defined Value**:
-| NIFGEN\_VAL\_ALL\_SEQUENCES—Remove all sequences from the signal
+| NIFGEN_VAL_ALL_SEQUENCES—Remove all sequences from the signal
   generator
 
 **Default Value**: None
@@ -1436,7 +1436,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1453,15 +1453,15 @@ generator to remove.
 You can create multiple arbitrary waveforms using one of the following
 niFgen Create Waveform functions:
 
--  niFgen\_CreateWaveformF64
--  niFgen\_CreateWaveformI16
--  niFgen\_CreateWaveformFromFileI16
--  niFgen\_CreateWaveformFromFileF64
--  niFgen\_CreateWaveformFromFileHWS
+-  niFgen_CreateWaveformF64
+-  niFgen_CreateWaveformI16
+-  niFgen_CreateWaveformFromFileI16
+-  niFgen_CreateWaveformFromFileF64
+-  niFgen_CreateWaveformFromFileHWS
 
 **Defined Value**:
 
-NIFGEN\_VAL\_ALL\_WAVEFORMS—Remove all waveforms from the signal
+NIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal
 generator.
 
 **Default Value**: None
@@ -1490,7 +1490,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1499,18 +1499,18 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Clears the error information for the current execution thread and the
-IVI session you specify. If you pass VI\_NULL for the **vi** parameter,
+IVI session you specify. If you pass VI_NULL for the **vi** parameter,
 this function clears the error information only for the current
 execution thread.
 
-This function sets the error code to VI\_SUCCESS (0), and sets the error
+This function sets the error code to VI_SUCCESS (0), and sets the error
 description string to "" (empty string).
 
 The IVI Engine also maintains this error information separately for each
 thread. This feature is useful if you do not have a session handle to
-pass to the nifgen\_ClearError or the nifgen\_GetError function. This
-situation occurs when a call to the nifgen\_init or
-nifgen\_InitWithOptions function fails.
+pass to the nifgen_ClearError or the nifgen_GetError function. This
+situation occurs when a call to the nifgen_init or
+nifgen_InitWithOptions function fails.
 ''',
 },
     },
@@ -1524,7 +1524,7 @@ nifgen\_InitWithOptions function fails.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1537,13 +1537,13 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the handle of the frequency list you want the signal generator
 to remove. You create multiple frequency lists using
-niFgen\_CreateFreqList. niFgen\_CreateFreqList returns a handle that you
+niFgen_CreateFreqList. niFgen_CreateFreqList returns a handle that you
 use to identify each list. Specify a value of -1 to clear all frequency
 lists.
 
 **Defined Value**
 
-NIFGEN\_VAL\_ALL\_FLISTS—Remove all frequency lists from the signal
+NIFGEN_VAL_ALL_FLISTS—Remove all frequency lists from the signal
 generator.
 
 **Default Value**: None
@@ -1572,7 +1572,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1592,7 +1592,7 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1614,7 +1614,7 @@ waveform.
 'documentation': {
 'description': '''
 Clears the user-defined waveform created by the
-nifgen\_DefineUserStandardWaveform function.
+nifgen_DefineUserStandardWaveform function.
 ''',
 },
     },
@@ -1628,7 +1628,7 @@ nifgen\_DefineUserStandardWaveform function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -1643,9 +1643,9 @@ Specifies he action to perform upon closing.
 
 **Defined Values**
 
-**Default Value**: NIFGEN\_VAL\_EXT\_CAL\_ABORT
+**Default Value**: NIFGEN_VAL_EXT_CAL_ABORT
 ''',
-'table_body': [['NIFGEN\\_VAL\\_EXT\\_CAL\\_ABORT', 'No changes are made to the calibration constants and data in the EEPROM.'], ['NIFGEN\\_VAL\\_EXT\\_CAL\\_COMMIT', 'The new calibration constants and data determined during the external calibration session are stored in the onboard EEPROM.']],
+'table_body': [['NIFGEN_VAL_EXT_CAL_ABORT', 'No changes are made to the calibration constants and data in the EEPROM.'], ['NIFGEN_VAL_EXT_CAL_COMMIT', 'The new calibration constants and data determined during the external calibration session are stored in the onboard EEPROM.']],
 },
             },
         ],
@@ -1667,7 +1667,7 @@ temperature, in the onboard EEPROM.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1693,7 +1693,7 @@ has the following benefits:
 
 -  Routes are committed, so signals are exported or imported.
 -  Any Reference Clock and external clock circuits are phase-locked.
--  A subsequent niFgen\_InitiateGeneration function can run faster
+-  A subsequent niFgen_InitiateGeneration function can run faster
    because the device is already configured.
 ''',
 },
@@ -1708,7 +1708,7 @@ has the following benefits:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1734,7 +1734,7 @@ waveform.
 'description': '''
 Specifies the amplitude of the standard waveform that you want the
 signal generator to produce. This value is the amplitude at the output
-terminal. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_AMPLITUDE attribute to
+terminal. NI-FGEN sets the NIFGEN_ATTR_FUNC_AMPLITUDE attribute to
 this value.
 
 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -1746,8 +1746,8 @@ the amplitude to 10.00 V.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
-function to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter of the niFgen_ConfigureStandardWaveform
+function to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -1769,7 +1769,7 @@ signal generator to produce.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1795,9 +1795,9 @@ sequence.
 'description': '''
 Specifies the handle of the arbitrary sequence that you want the signal
 generator to produce. NI-FGEN sets the
-NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE attribute to this value. You can
-create an arbitrary sequence using the niFgen\_CreateArbSequence or
-niFgen\_CreateAdvancedArbSequence function. These functions return a
+NIFGEN_ATTR_ARB_SEQUENCE_HANDLE attribute to this value. You can
+create an arbitrary sequence using the niFgen_CreateArbSequence or
+niFgen_CreateAdvancedArbSequence function. These functions return a
 handle that you use to identify the sequence.
 
 **Default Value**: None
@@ -1835,7 +1835,7 @@ Specifies the value the signal generator adds to the arbitrary waveform
 data. When you create arbitrary waveforms, you must first normalize the
 data points to a range of –1.00 to +1.00 V. You can use this parameter
 to shift the range of the arbitrary waveform. NI-FGEN sets the
-NIFGEN\_ATTR\_ARB\_OFFSET attribute to this value.
+NIFGEN_ATTR_ARB_OFFSET attribute to this value.
 
 For example, to configure the output signal to range from 0.00 to 2.00 V
 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1850,8 +1850,8 @@ instead of –1.00 to 1.00 V, set the offset to 1.00.
 'documentation': {
 'description': '''
 Configures the signal generator attributes that affect arbitrary
-sequence generation. Sets the NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE,
-NIFGEN\_ATTR\_ARB\_GAIN, and NIFGEN\_ATTR\_ARB\_OFFSET attributes.
+sequence generation. Sets the NIFGEN_ATTR_ARB_SEQUENCE_HANDLE,
+NIFGEN_ATTR_ARB_GAIN, and NIFGEN_ATTR_ARB_OFFSET attributes.
 ''',
 'note': '''
 The signal generator must not be in the Generating state when you call
@@ -1869,7 +1869,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -1895,15 +1895,15 @@ waveform.
 'description': '''
 Specifies the handle of the arbitrary waveform you want the signal
 generator to produce. NI-FGEN sets the
-NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE attribute to this value. You can
+NIFGEN_ATTR_ARB_WAVEFORM_HANDLE attribute to this value. You can
 create an arbitrary waveform using one of the following niFgen Create
 Waveform functions:
 
--  niFgen\_CreateWaveformF64
--  niFgen\_CreateWaveformI16
--  niFgen\_CreateWaveformFromFileI16
--  niFgen\_CreateWaveformFromFileF64
--  niFgen\_CreateWaveformFromFileHWS
+-  niFgen_CreateWaveformF64
+-  niFgen_CreateWaveformI16
+-  niFgen_CreateWaveformFromFileI16
+-  niFgen_CreateWaveformFromFileF64
+-  niFgen_CreateWaveformFromFileHWS
 
 These functions return a handle that you use to identify the waveform.
 
@@ -1942,7 +1942,7 @@ Specifies the value the signal generator adds to the arbitrary waveform
 data. When you create arbitrary waveforms, you must first normalize the
 data points to a range of –1.00 to +1.00 V. You can use this parameter
 to shift the range of the arbitrary waveform. NI-FGEN sets the
-NIFGEN\_ATTR\_ARB\_OFFSET attribute to this value.
+NIFGEN_ATTR_ARB_OFFSET attribute to this value.
 
 For example, to configure the output signal to range from 0.00 to 2.00 V
 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1957,8 +1957,8 @@ instead of –1.00 to 1.00 V, set the offset to 1.00.
 'documentation': {
 'description': '''
 Configures the attributes of the signal generator that affect arbitrary
-waveform generation. Sets the NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE,
-NIFGEN\_ATTR\_ARB\_GAIN, and NIFGEN\_ATTR\_ARB\_OFFSET attributes.
+waveform generation. Sets the NIFGEN_ATTR_ARB_WAVEFORM_HANDLE,
+NIFGEN_ATTR_ARB_GAIN, and NIFGEN_ATTR_ARB_OFFSET attributes.
 ''',
 'note': '''
 The signal generator must not be in the Generating state when you call
@@ -1976,7 +1976,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2016,7 +2016,7 @@ attributes or writing data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2031,10 +2031,10 @@ Sets the clock mode of the signal generator.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_HIGH\_RESOLUTION (NI 5450, NI 5451),
-NIFGEN\_VAL\_DIVIDE\_DOWN (all other devices)
+**Default Value**: NIFGEN_VAL_HIGH_RESOLUTION (NI 5450, NI 5451),
+NIFGEN_VAL_DIVIDE_DOWN (all other devices)
 ''',
-'table_body': [['NIFGEN\\_VAL\\_DIVIDE\\_DOWN', '**Divide down sampling**—Sample rates are generated by dividing the source frequency.'], ['NIFGEN\\_VAL\\_HIGH\\_RESOLUTION', '**High resolution sampling**—Sample rate is generated by a high-resolution clock source.'], ['NIFGEN\\_VAL\\_AUTOMATIC', '**Automatic Selection**—NI-FGEN selects between the divide-down and high-resolution clocking modes.']],
+'table_body': [['NIFGEN_VAL_DIVIDE_DOWN', '**Divide down sampling**—Sample rates are generated by dividing the source frequency.'], ['NIFGEN_VAL_HIGH_RESOLUTION', '**High resolution sampling**—Sample rate is generated by a high-resolution clock source.'], ['NIFGEN_VAL_AUTOMATIC', '**Automatic Selection**—NI-FGEN selects between the divide-down and high-resolution clocking modes.']],
 },
             },
         ],
@@ -2045,11 +2045,11 @@ Selects the clock mode for the signal generator.
 Some signal generators allow you to switch the Sample Clock to
 High-Resolution or Automatic Sampling mode with this function.
 
-When you select NIFGEN\_VAL\_DIVIDE\_DOWN, NI-FGEN rounds the sample
+When you select NIFGEN_VAL_DIVIDE_DOWN, NI-FGEN rounds the sample
 rate to a frequency that can be achieved by dividing down the board
 clock (Sample Clock timebase). However, if you select
-NIFGEN\_VAL\_HIGH\_RESOLUTION, you can set the sample rate to any value.
-If you select NIFGEN\_VAL\_AUTOMATIC, NI-FGEN selects the clock mode
+NIFGEN_VAL_HIGH_RESOLUTION, you can set the sample rate to any value.
+If you select NIFGEN_VAL_AUTOMATIC, NI-FGEN selects the clock mode
 based on the sample rate, using divide-down sampling when possible.
 ''',
 'note': '''
@@ -2068,7 +2068,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2136,7 +2136,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2168,7 +2168,7 @@ Specifies which trigger source the signal generator uses.
 
 **Default Value**: "PFI0"
 ''',
-'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2181,9 +2181,9 @@ Specifies the edge to detect.
 
 ****Defined Values****
 
-****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
+****Default Value**:** NIFGEN_VAL_RISING_EDGE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_RISING\\_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN\\_VAL\\_FALLING\\_EDGE', 'Occurs when the signal transitions from high level to low level.']],
+'table_body': [['NIFGEN_VAL_RISING_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN_VAL_FALLING_EDGE', 'Occurs when the signal transitions from high level to low level.']],
 },
             },
         ],
@@ -2201,7 +2201,7 @@ Specifies the edge to detect.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2218,7 +2218,7 @@ Specifies which trigger source the signal generator uses.
 
 **Default Value**: "PFI0"
 ''',
-'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2231,9 +2231,9 @@ Specifies the edge to detect.
 
 ****Defined Values****
 
-****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
+****Default Value**:** NIFGEN_VAL_RISING_EDGE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_RISING\\_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN\\_VAL\\_FALLING\\_EDGE', 'Occurs when the signal transitions from high level to low level.']],
+'table_body': [['NIFGEN_VAL_RISING_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN_VAL_FALLING_EDGE', 'Occurs when the signal transitions from high level to low level.']],
 },
             },
         ],
@@ -2251,7 +2251,7 @@ Specifies the edge to detect.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2283,7 +2283,7 @@ Specifies which trigger source the signal generator uses.
 
 **Default Value**: "PFI0"
 ''',
-'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2317,7 +2317,7 @@ level.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2342,9 +2342,9 @@ list.
 'documentation': {
 'description': '''
 Specifies the handle of the frequency list that you want the signal
-generator to produce. NI-FGEN sets the NIFGEN\_ATTR\_FREQ\_LIST\_HANDLE
+generator to produce. NI-FGEN sets the NIFGEN_ATTR_FREQ_LIST_HANDLE
 attribute to this value. You can create a frequency list using the
-niFgen\_CreateFreqList function, which returns a handle that you use to
+niFgen_CreateFreqList function, which returns a handle that you use to
 identify the list.
 **Default Value**: None
 ''',
@@ -2358,7 +2358,7 @@ identify the list.
 'description': '''
 Specifies the amplitude of the standard waveform that you want the
 signal generator to produce. This value is the amplitude at the output
-terminal. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_AMPLITUDE attribute to
+terminal. NI-FGEN sets the NIFGEN_ATTR_FUNC_AMPLITUDE attribute to
 this value.
 
 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -2370,8 +2370,8 @@ the amplitude to 10.00 V.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
-function to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter of the niFgen_ConfigureStandardWaveform
+function to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -2386,7 +2386,7 @@ signal generator to produce. The value is the offset from ground to the
 center of the waveform you specify with the **waveform** parameter,
 observed at the output terminal. For example, to configure a waveform
 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-**dcOffset** to 5.00 V. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_DC\_OFFSET
+**dcOffset** to 5.00 V. NI-FGEN sets the NIFGEN_ATTR_FUNC_DC_OFFSET
 attribute to this value.
 
 **Units**: volts
@@ -2403,7 +2403,7 @@ attribute to this value.
 'description': '''
 Specifies the horizontal offset of the standard waveform you want the
 signal generator to produce. Specify this attribute in degrees of one
-waveform cycle. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_START\_PHASE
+waveform cycle. NI-FGEN sets the NIFGEN_ATTR_FUNC_START_PHASE
 attribute to this value. A start phase of 180 degrees means output
 generation begins halfway through the waveform. A start phase of 360
 degrees offsets the output by an entire waveform cycle, which is
@@ -2415,7 +2415,7 @@ identical to a start phase of 0 degrees.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -2423,9 +2423,9 @@ the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
 'documentation': {
 'description': '''
 Configures the attributes of the signal generator that affect frequency
-list generation (the NIFGEN\_ATTR\_FREQ\_LIST\_HANDLE,
-NIFGEN\_ATTR\_FUNC\_AMPLITUDE, NIFGEN\_ATTR\_FUNC\_DC\_OFFSET, and
-NIFGEN\_ATTR\_FUNC\_START\_PHASE attributes).
+list generation (the NIFGEN_ATTR_FREQ_LIST_HANDLE,
+NIFGEN_ATTR_FUNC_AMPLITUDE, NIFGEN_ATTR_FUNC_DC_OFFSET, and
+NIFGEN_ATTR_FUNC_START_PHASE attributes).
 ''',
 'note': '''
 The signal generator must not be in the Generating state when you call
@@ -2443,7 +2443,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2469,7 +2469,7 @@ waveform.
 'description': '''
 | Specifies the frequency of the standard waveform that you want the
   signal generator to produce. NI-FGEN sets the
-  NIFGEN\_ATTR\_FUNC\_FREQUENCY attribute to this value.
+  NIFGEN_ATTR_FUNC_FREQUENCY attribute to this value.
 
 **Units**: hertz
 
@@ -2477,8 +2477,8 @@ waveform.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
-function to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter of the niFgen_ConfigureStandardWaveform
+function to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -2500,7 +2500,7 @@ signal generator to produce.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2557,7 +2557,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2582,10 +2582,10 @@ mode.
 'documentation': {
 'description': '''
 Specifies the operation mode you want the signal generator to use.
-NI-FGEN sets the NIFGEN\_ATTR\_OPERATION\_MODE attribute to this value.
+NI-FGEN sets the NIFGEN_ATTR_OPERATION_MODE attribute to this value.
 NI-FGEN supports only one value.
 
-**Defined Value**: NIFGEN\_VAL\_OPERATE\_CONTINUOUS
+**Defined Value**: NIFGEN_VAL_OPERATE_CONTINUOUS
 ''',
 },
             },
@@ -2594,7 +2594,7 @@ NI-FGEN supports only one value.
 'description': '''
 Determines how the signal generator produces waveforms. NI signal
 generators support only Continuous operation mode. To control trigger
-mode, use the nifgen\_ConfigureTriggerMode function.
+mode, use the nifgen_ConfigureTriggerMode function.
 ''',
 },
     },
@@ -2608,7 +2608,7 @@ mode, use the nifgen\_ConfigureTriggerMode function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2632,13 +2632,13 @@ Specifies the channel name for which you want to enable the output.
 'documentation': {
 'description': '''
 Specifies whether you want to enable or disable the output. NI-FGEN uses
-this value to set the NIFGEN\_ATTR\_OUTPUT\_ENABLED attribute.
+this value to set the NIFGEN_ATTR_OUTPUT_ENABLED attribute.
 
 ****Defined Values****
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Enable the output.'], ['VI\\_FALSE', 'Disable the output.']],
+'table_body': [['VI_TRUE', 'Enable the output.'], ['VI_FALSE', 'Disable the output.']],
 },
             },
         ],
@@ -2659,7 +2659,7 @@ output connector.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2684,16 +2684,16 @@ impedance.
 'documentation': {
 'description': '''
 Specifies the impedance value that you want the signal generator to use.
-NI-FGEN sets the NIFGEN\_ATTR\_OUTPUT\_IMPEDANCE attribute to this
+NI-FGEN sets the NIFGEN_ATTR_OUTPUT_IMPEDANCE attribute to this
 value.
 
 **Units**: Ω (ohms)
 
 ****Defined Values****:
 
-**Default Value**: NIFGEN\_VAL\_50\_OHMS
+**Default Value**: NIFGEN_VAL_50_OHMS
 ''',
-'table_body': [['NIFGEN\\_VAL\\_50\\_OHMS', 'Specifies that 50 Ω of impedance is used'], ['NIFGEN\\_VAL\\_75\\_OHMS', 'Specifies that 75 Ω of impedance is used']],
+'table_body': [['NIFGEN_VAL_50_OHMS', 'Specifies that 50 Ω of impedance is used'], ['NIFGEN_VAL_75_OHMS', 'Specifies that 75 Ω of impedance is used']],
 },
             },
         ],
@@ -2711,7 +2711,7 @@ value.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2725,12 +2725,12 @@ functions and identifies a particular instrument session.
 Specifies the output mode that you want the signal generator to use. The
 value you specify determines which functions and attributes you can use
 to configure the waveform the signal generator produces.
-Refer to the NIFGEN\_ATTR\_OUTPUT\_MODE attribute for more information
+Refer to the NIFGEN_ATTR_OUTPUT_MODE attribute for more information
 about setting this parameter.
 ****Defined Values****
-**Default Value**: NIFGEN\_VAL\_OUTPUT\_FUNC
+**Default Value**: NIFGEN_VAL_OUTPUT_FUNC
 ''',
-'table_body': [['NIFGEN\\_VAL\\_OUTPUT\\_FUNC', '**Standard Function mode**—Generates standard function waveforms such as sine, square, triangle, and so on.'], ['NIFGEN\\_VAL\\_OUTPUT\\_FREQ\\_LIST', '**Frequency List mode**—Generates a standard function using a list of frequencies you define.'], ['NIFGEN\\_VAL\\_OUTPUT\\_ARB', '**Arbitrary waveform mode**—Generates waveforms from user-created/provided waveform arrays of numeric data.'], ['NIFGEN\\_VAL\\_OUTPUT\\_SEQ', '**Arbitrary sequence mode**—Generates downloaded waveforms in an order your specify.'], ['NIFGEN\\_VAL\\_OUTPUT\\_SCRIPT', '**Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.']],
+'table_body': [['NIFGEN_VAL_OUTPUT_FUNC', '**Standard Function mode**—Generates standard function waveforms such as sine, square, triangle, and so on.'], ['NIFGEN_VAL_OUTPUT_FREQ_LIST', '**Frequency List mode**—Generates a standard function using a list of frequencies you define.'], ['NIFGEN_VAL_OUTPUT_ARB', '**Arbitrary waveform mode**—Generates waveforms from user-created/provided waveform arrays of numeric data.'], ['NIFGEN_VAL_OUTPUT_SEQ', '**Arbitrary sequence mode**—Generates downloaded waveforms in an order your specify.'], ['NIFGEN_VAL_OUTPUT_SCRIPT', '**Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.']],
 },
             },
         ],
@@ -2757,7 +2757,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2801,7 +2801,7 @@ of data specified by this function to satisfy the trigger level.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2841,7 +2841,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2853,21 +2853,21 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Specifies the reference clock source that you want the signal generator
-to use. NI-FGEN sets the NIFGEN\_ATTR\_REF\_CLOCK\_SOURCE attribute to
+to use. NI-FGEN sets the NIFGEN_ATTR_REF_CLOCK_SOURCE attribute to
 this value.
 
 The signal generator derives the frequencies and sample rates that it
 uses to generate waveforms from the source you specify.
 
 For example, when you set this parameter to
-NIFGEN\_VAL\_REF\_CLOCK\_EXTERNAL, the signal generator uses the signal
+NIFGEN_VAL_REF_CLOCK_EXTERNAL, the signal generator uses the signal
 it receives at its external clock terminal as the reference clock.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_REF\_CLOCK\_INTERNAL
+**Default Value**: NIFGEN_VAL_REF_CLOCK_INTERNAL
 ''',
-'table_body': [['NIFGEN\\_VAL\\_REF\\_CLOCK\\_INTERNAL', 'Internal clock source'], ['NIFGEN\\_VAL\\_REF\\_CLOCK\\_EXTERNAL', 'External clock source'], ['NIFGEN\\_VAL\\_REF\\_CLOCK\\_RTSI\\_CLOCK', 'RTSI clock'], ['NIFGEN\\_VAL\\_REF\\_CLOCK\\_TTL7', 'TTL 7'], ['NIFGEN\\_VAL\\_PXI\\_CLK10', 'PXI 10 MHz clock'], ['NIFGEN\\_VAL\\_REF\\_IN', 'External clock source'], ['NIFGEN\\_VAL\\_RTSI\\_0', 'RTSI 0'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'RTSI 1'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'RTSI 2'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'RTSI 3'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'RTSI 4'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'RTSI 5'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'RTSI 6'], ['NIFGEN\\_VAL\\_RTSI\\_7', 'RTSI 7'], ['NIFGEN\\_VAL\\_CLK\\_IN', 'CLK IN front panel connector']],
+'table_body': [['NIFGEN_VAL_REF_CLOCK_INTERNAL', 'Internal clock source'], ['NIFGEN_VAL_REF_CLOCK_EXTERNAL', 'External clock source'], ['NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK', 'RTSI clock'], ['NIFGEN_VAL_REF_CLOCK_TTL7', 'TTL 7'], ['NIFGEN_VAL_PXI_CLK10', 'PXI 10 MHz clock'], ['NIFGEN_VAL_REF_IN', 'External clock source'], ['NIFGEN_VAL_RTSI_0', 'RTSI 0'], ['NIFGEN_VAL_RTSI_1', 'RTSI 1'], ['NIFGEN_VAL_RTSI_2', 'RTSI 2'], ['NIFGEN_VAL_RTSI_3', 'RTSI 3'], ['NIFGEN_VAL_RTSI_4', 'RTSI 4'], ['NIFGEN_VAL_RTSI_5', 'RTSI 5'], ['NIFGEN_VAL_RTSI_6', 'RTSI 6'], ['NIFGEN_VAL_RTSI_7', 'RTSI 7'], ['NIFGEN_VAL_CLK_IN', 'CLK IN front panel connector']],
 },
             },
         ],
@@ -2889,7 +2889,7 @@ rates when generating waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2915,7 +2915,7 @@ Clock sources. For a complete list of the Reference Clock sources
 available on your device, refer to the Routes topic for your device or
 the **Device Routes** tab in MAX.
 ''',
-'table_body': [['"None"', 'No Reference Clock'], ['"PXI\\_Clk"', '10 MHz backplane Reference Clock'], ['"ClkIn"', 'CLK IN front panel connector'], ['"OnboardReferenceClock"', 'Onboard Reference Clock'], ['"RTSI7"', 'RTSI line 7'], ['"RefIn"', 'REF IN front panel connector']],
+'table_body': [['"None"', 'No Reference Clock'], ['"PXI_Clk"', '10 MHz backplane Reference Clock'], ['"ClkIn"', 'CLK IN front panel connector'], ['"OnboardReferenceClock"', 'Onboard Reference Clock'], ['"RTSI7"', 'RTSI line 7'], ['"RefIn"', 'REF IN front panel connector']],
 },
             },
             {
@@ -2951,7 +2951,7 @@ Clock.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -2972,7 +2972,7 @@ Clock sources. For a complete list of the Sample Clock sources available
 on your device, refer to the Routes topic for your device or the
 **Device Routes** tab in MAX.
 ''',
-'table_body': [['"OnboardClock"', 'Onboard Clock'], ['"ClkIn"', 'CLK IN front panel connector'], ['"PXI\\_Star"', 'PXI star trigger line'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"DDC\\_ClkIn"', 'Sample Clock from DDC connector']],
+'table_body': [['"OnboardClock"', 'Onboard Clock'], ['"ClkIn"', 'CLK IN front panel connector'], ['"PXI_Star"', 'PXI star trigger line'], ['"PXI_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"DDC_ClkIn"', 'Sample Clock from DDC connector']],
 },
             },
         ],
@@ -2993,7 +2993,7 @@ generator.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3006,7 +3006,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the sample rate at which you want the signal generator to
 generate arbitrary waveforms. NI-FGEN sets the
-NIFGEN\_ATTR\_ARB\_SAMPLE\_RATE attribute to this value.
+NIFGEN_ATTR_ARB_SAMPLE_RATE attribute to this value.
 
 **Units**: Samples/s
 
@@ -3017,7 +3017,7 @@ NIFGEN\_ATTR\_ARB\_SAMPLE\_RATE attribute to this value.
         ],
 'documentation': {
 'description': '''
-Configures the NIFGEN\_ATTR\_ARB\_SAMPLE\_RATE attribute, which
+Configures the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute, which
 determines the rate at which the signal generator produces arbitrary
 waveforms. When you configure the signal generator to produce an
 arbitrary sequence, this value is the sample rate for all arbitrary
@@ -3039,7 +3039,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3074,7 +3074,7 @@ Specifies the Script Trigger used for triggering.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3094,7 +3094,7 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3119,14 +3119,14 @@ waveform.
 'documentation': {
 'description': '''
 Specifies the standard waveform that you want the signal generator to
-produce. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_WAVEFORM attribute to this
+produce. NI-FGEN sets the NIFGEN_ATTR_FUNC_WAVEFORM attribute to this
 value.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_WFM\_SINE
+**Default Value**: NIFGEN_VAL_WFM_SINE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_WFM\\_SINE', 'Specifies that the signal generator produces a sinusoid waveform.'], ['NIFGEN\\_VAL\\_WFM\\_SQUARE', 'Specifies that the signal generator produces a square waveform.'], ['NIFGEN\\_VAL\\_WFM\\_TRIANGLE', 'Specifies that the signal generator produces a triangle waveform.'], ['NIFGEN\\_VAL\\_WFM\\_RAMP\\_UP', 'Specifies that the signal generator produces a positive ramp waveform.'], ['NIFGEN\\_VAL\\_WFM\\_RAMP\\_DOWN', 'Specifies that the signal generator produces a negative ramp waveform.'], ['NIFGEN\\_VAL\\_WFM\\_DC', 'Specifies that the signal generator produces a constant voltage.'], ['NIFGEN\\_VAL\\_WFM\\_NOISE', 'Specifies that the signal generator produces white noise.'], ['NIFGEN\\_VAL\\_WFM\\_USER', 'Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\\_DefineUserStandardWaveform function.']],
+'table_body': [['NIFGEN_VAL_WFM_SINE', 'Specifies that the signal generator produces a sinusoid waveform.'], ['NIFGEN_VAL_WFM_SQUARE', 'Specifies that the signal generator produces a square waveform.'], ['NIFGEN_VAL_WFM_TRIANGLE', 'Specifies that the signal generator produces a triangle waveform.'], ['NIFGEN_VAL_WFM_RAMP_UP', 'Specifies that the signal generator produces a positive ramp waveform.'], ['NIFGEN_VAL_WFM_RAMP_DOWN', 'Specifies that the signal generator produces a negative ramp waveform.'], ['NIFGEN_VAL_WFM_DC', 'Specifies that the signal generator produces a constant voltage.'], ['NIFGEN_VAL_WFM_NOISE', 'Specifies that the signal generator produces white noise.'], ['NIFGEN_VAL_WFM_USER', 'Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function.']],
 },
             },
             {
@@ -3137,7 +3137,7 @@ value.
 'description': '''
 Specifies the amplitude of the standard waveform that you want the
 signal generator to produce. This value is the amplitude at the output
-terminal. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_AMPLITUDE attribute to
+terminal. NI-FGEN sets the NIFGEN_ATTR_FUNC_AMPLITUDE attribute to
 this value.
 
 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -3149,8 +3149,8 @@ the amplitude to 10.00 V.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
-function to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter of the niFgen_ConfigureStandardWaveform
+function to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -3165,7 +3165,7 @@ signal generator to produce. The value is the offset from ground to the
 center of the waveform you specify with the **waveform** parameter,
 observed at the output terminal. For example, to configure a waveform
 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-**dcOffset** to 5.00 V. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_DC\_OFFSET
+**dcOffset** to 5.00 V. NI-FGEN sets the NIFGEN_ATTR_FUNC_DC_OFFSET
 attribute to this value.
 
 **Units**: volts
@@ -3182,7 +3182,7 @@ attribute to this value.
 'description': '''
 | Specifies the frequency of the standard waveform that you want the
   signal generator to produce. NI-FGEN sets the
-  NIFGEN\_ATTR\_FUNC\_FREQUENCY attribute to this value.
+  NIFGEN_ATTR_FUNC_FREQUENCY attribute to this value.
 
 **Units**: hertz
 
@@ -3190,8 +3190,8 @@ attribute to this value.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
-function to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter of the niFgen_ConfigureStandardWaveform
+function to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -3203,7 +3203,7 @@ function to NIFGEN\_VAL\_WFM\_DC.
 'description': '''
 Specifies the horizontal offset of the standard waveform that you want
 the signal generator to produce. Specify this parameter in degrees of
-one waveform cycle. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_START\_PHASE
+one waveform cycle. NI-FGEN sets the NIFGEN_ATTR_FUNC_START_PHASE
 attribute to this value. A start phase of 180 degrees means output
 generation begins halfway through the waveform. A start phase of 360
 degrees offsets the output by an entire waveform cycle, which is
@@ -3215,7 +3215,7 @@ identical to a start phase of 0 degrees.
 ''',
 'note': '''
 This parameter does not affect signal generator behavior when you set
-the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
+the **waveform** parameter to NIFGEN_VAL_WFM_DC.
 ''',
 },
             },
@@ -3225,15 +3225,15 @@ the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
 Configures the following attributes of the signal generator that affect
 standard waveform generation:
 
--  NIFGEN\_ATTR\_FUNC\_WAVEFORM
--  NIFGEN\_ATTR\_FUNC\_AMPLITUDE
--  NIFGEN\_ATTR\_FUNC\_DC\_OFFSET
--  NIFGEN\_ATTR\_FUNC\_FREQUENCY
--  NIFGEN\_ATTR\_FUNC\_START\_PHASE
+-  NIFGEN_ATTR_FUNC_WAVEFORM
+-  NIFGEN_ATTR_FUNC_AMPLITUDE
+-  NIFGEN_ATTR_FUNC_DC_OFFSET
+-  NIFGEN_ATTR_FUNC_FREQUENCY
+-  NIFGEN_ATTR_FUNC_START_PHASE
 ''',
 'note': '''
-You must call the niFgen\_ConfigureOutputMode function with the
-**outputMode** parameter set to NIFGEN\_VAL\_OUTPUT\_FUNC before calling
+You must call the niFgen_ConfigureOutputMode function with the
+**outputMode** parameter set to NIFGEN_VAL_OUTPUT_FUNC before calling
 this function.
 ''',
 },
@@ -3248,7 +3248,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3276,9 +3276,9 @@ Specify the source of the synchronization signal you want to use.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_NONE
+**Default Value**: NIFGEN_VAL_NONE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_NONE', 'Specifies that no synchronization source is used.'], ['NIFGEN\\_VAL\\_RTSI\\_0', 'Specifies that RTSI 0 or PXI\\_Trig 0 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'Specifies that RTSI 1 or PXI\\_Trig 1 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'Specifies that RTSI 2 or PXI\\_Trig 2 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'Specifies that RTSI 3 or PXI\\_Trig 3 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'Specifies that RTSI 4 or PXI\\_Trig 4 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'Specifies that RTSI 5 or PXI\\_Trig 5 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'Specifies that RTSI 6 or PXI\\_Trig 6 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL0', 'Specifies that TTL 0 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL1', 'Specifies that TTL 1 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL2', 'Specifies that TTL 2 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL3', 'Specifies that TTL 3 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL4', 'Specifies that TTL 4 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL5', 'Specifies that TTL 5 is used as the synchronization source.'], ['NIFGEN\\_VAL\\_TTL6', 'Specifies that TTL 6 is used as the synchronization source.']],
+'table_body': [['NIFGEN_VAL_NONE', 'Specifies that no synchronization source is used.'], ['NIFGEN_VAL_RTSI_0', 'Specifies that RTSI 0 or PXI_Trig 0 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_1', 'Specifies that RTSI 1 or PXI_Trig 1 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_2', 'Specifies that RTSI 2 or PXI_Trig 2 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_3', 'Specifies that RTSI 3 or PXI_Trig 3 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_4', 'Specifies that RTSI 4 or PXI_Trig 4 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_5', 'Specifies that RTSI 5 or PXI_Trig 5 is used as the synchronization source.'], ['NIFGEN_VAL_RTSI_6', 'Specifies that RTSI 6 or PXI_Trig 6 is used as the synchronization source.'], ['NIFGEN_VAL_TTL0', 'Specifies that TTL 0 is used as the synchronization source.'], ['NIFGEN_VAL_TTL1', 'Specifies that TTL 1 is used as the synchronization source.'], ['NIFGEN_VAL_TTL2', 'Specifies that TTL 2 is used as the synchronization source.'], ['NIFGEN_VAL_TTL3', 'Specifies that TTL 3 is used as the synchronization source.'], ['NIFGEN_VAL_TTL4', 'Specifies that TTL 4 is used as the synchronization source.'], ['NIFGEN_VAL_TTL5', 'Specifies that TTL 5 is used as the synchronization source.'], ['NIFGEN_VAL_TTL6', 'Specifies that TTL 6 is used as the synchronization source.']],
 },
             },
         ],
@@ -3287,9 +3287,9 @@ Specify the source of the synchronization signal you want to use.
 Sets the signal generator to receive a synchronization signal to
 synchronize two or more NI 5401/5411/5431 signal generators. One signal
 generator should route a SYNC signal to a RTSI line by calling the
-nifgen\_ExportSignal function (use the nifgen\_RouteSignalOut function
+nifgen_ExportSignal function (use the nifgen_RouteSignalOut function
 for the NI 5404), and other signal generators should receive the signal
-by calling the niFgen\_ConfigureSynchronization function.
+by calling the niFgen_ConfigureSynchronization function.
 ''',
 'note': '''
 The signal generator must not be in the Generating state when you call
@@ -3309,7 +3309,7 @@ called for proper synchronization.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3337,9 +3337,9 @@ Specifies the trigger mode.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_CONTINUOUS
+**Default Value**: NIFGEN_VAL_CONTINUOUS
 ''',
-'table_body': [['NIFGEN\\_VAL\\_SINGLE', 'The waveform that you describe in the sequence list generates only once by going through the entire staging list. Only one trigger is required to start the waveform generation. You can use Single trigger mode in any output mode. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage.'], ['NIFGEN\\_VAL\\_CONTINUOUS', 'The waveform that you describe in the staging list generates infinitely by repeatedly cycling through the staging list. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage. After the last stage is completed, the waveform generation loops back to the start of the first stage and continues until it is stopped. Only one trigger is required to start the waveform generation.'], ['NIFGEN\\_VAL\\_STEPPED', 'After a Start Trigger is received, the waveform described by the first stage generates. Then, the device waits for the next trigger signal. On the next trigger, the waveform described by the second stage generates, and so on. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle.'], ['NIFGEN\\_VAL\\_BURST', 'After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list.']],
+'table_body': [['NIFGEN_VAL_SINGLE', 'The waveform that you describe in the sequence list generates only once by going through the entire staging list. Only one trigger is required to start the waveform generation. You can use Single trigger mode in any output mode. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage.'], ['NIFGEN_VAL_CONTINUOUS', 'The waveform that you describe in the staging list generates infinitely by repeatedly cycling through the staging list. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage. After the last stage is completed, the waveform generation loops back to the start of the first stage and continues until it is stopped. Only one trigger is required to start the waveform generation.'], ['NIFGEN_VAL_STEPPED', 'After a Start Trigger is received, the waveform described by the first stage generates. Then, the device waits for the next trigger signal. On the next trigger, the waveform described by the second stage generates, and so on. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle.'], ['NIFGEN_VAL_BURST', 'After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list.']],
 },
             },
         ],
@@ -3367,7 +3367,7 @@ trigger mode.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3395,9 +3395,9 @@ Controls which trigger source the signal generator uses.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_IMMEDIATE
+**Default Value**: NIFGEN_VAL_IMMEDIATE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_IMMEDIATE', 'Immediate'], ['NIFGEN\\_VAL\\_EXTERNAL', 'External (maps to PFI 0)'], ['NIFGEN\\_VAL\\_SOFTWARE\\_TRIG', 'Software trigger'], ['NIFGEN\\_VAL\\_PXI\\_STAR', 'PXI star'], ['NIFGEN\\_VAL\\_RTSI\\_0', 'RTSI 0 or PXI\\_Trig 0'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'RTSI 1 or PXI\\_Trig 1'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'RTSI 2 or PXI\\_Trig 2'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'RTSI 3 or PXI\\_Trig 3'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'RTSI 4 or PXI\\_Trig 4'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'RTSI 5 or PXI\\_Trig 5'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'RTSI 6 or PXI\\_Trig 6'], ['NIFGEN\\_VAL\\_RTSI\\_7', 'RTSI 7 or PXI\\_Trig 7'], ['NIFGEN\\_VAL\\_TTL0', 'TTL 0'], ['NIFGEN\\_VAL\\_TTL1', 'TTL 1'], ['NIFGEN\\_VAL\\_TTL2', 'TTL 2'], ['NIFGEN\\_VAL\\_TTL3', 'TTL 3'], ['NIFGEN\\_VAL\\_TTL4', 'TTL 4'], ['NIFGEN\\_VAL\\_TTL5', 'TTL 5'], ['NIFGEN\\_VAL\\_TTL6', 'TTL 6'], ['NIFGEN\\_VAL\\_PFI\\_0', 'PFI 0'], ['NIFGEN\\_VAL\\_PFI\\_1', 'PFI 1'], ['NIFGEN\\_VAL\\_PFI\\_2', 'PFI 2'], ['NIFGEN\\_VAL\\_PFI\\_3', 'PFI 3']],
+'table_body': [['NIFGEN_VAL_IMMEDIATE', 'Immediate'], ['NIFGEN_VAL_EXTERNAL', 'External (maps to PFI 0)'], ['NIFGEN_VAL_SOFTWARE_TRIG', 'Software trigger'], ['NIFGEN_VAL_PXI_STAR', 'PXI star'], ['NIFGEN_VAL_RTSI_0', 'RTSI 0 or PXI_Trig 0'], ['NIFGEN_VAL_RTSI_1', 'RTSI 1 or PXI_Trig 1'], ['NIFGEN_VAL_RTSI_2', 'RTSI 2 or PXI_Trig 2'], ['NIFGEN_VAL_RTSI_3', 'RTSI 3 or PXI_Trig 3'], ['NIFGEN_VAL_RTSI_4', 'RTSI 4 or PXI_Trig 4'], ['NIFGEN_VAL_RTSI_5', 'RTSI 5 or PXI_Trig 5'], ['NIFGEN_VAL_RTSI_6', 'RTSI 6 or PXI_Trig 6'], ['NIFGEN_VAL_RTSI_7', 'RTSI 7 or PXI_Trig 7'], ['NIFGEN_VAL_TTL0', 'TTL 0'], ['NIFGEN_VAL_TTL1', 'TTL 1'], ['NIFGEN_VAL_TTL2', 'TTL 2'], ['NIFGEN_VAL_TTL3', 'TTL 3'], ['NIFGEN_VAL_TTL4', 'TTL 4'], ['NIFGEN_VAL_TTL5', 'TTL 5'], ['NIFGEN_VAL_TTL6', 'TTL 6'], ['NIFGEN_VAL_PFI_0', 'PFI 0'], ['NIFGEN_VAL_PFI_1', 'PFI 1'], ['NIFGEN_VAL_PFI_2', 'PFI 2'], ['NIFGEN_VAL_PFI_3', 'PFI 3']],
 },
             },
         ],
@@ -3423,7 +3423,7 @@ call this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3438,9 +3438,9 @@ Specifies the update clock source.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_INTERNAL
+**Default Value**: NIFGEN_VAL_INTERNAL
 ''',
-'table_body': [['NIFGEN\\_VAL\\_INTERNAL', 'Internal clock source'], ['NIFGEN\\_VAL\\_EXTERNAL', 'External clock source'], ['NIFGEN\\_VAL\\_PXI\\_STAR', 'PXI star'], ['NIFGEN\\_VAL\\_RTSI\\_0', 'RTSI 0 or PXI\\_Trig 0'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'RTSI 1 or PXI\\_Trig 1'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'RTSI 2 or PXI\\_Trig 2'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'RTSI 3 or PXI\\_Trig 3'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'RTSI 4 or PXI\\_Trig 4'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'RTSI 5 or PXI\\_Trig 5'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'RTSI 6 or PXI\\_Trig 6'], ['NIFGEN\\_VAL\\_RTSI\\_7', 'RTSI 7 or PXI\\_Trig 7'], ['NIFGEN\\_VAL\\_CLK\\_IN', 'CLK IN front panel connector'], ['NIFGEN\\_VAL\\_DDC\\_CLK\\_IN', 'Digital Data & Control clock in']],
+'table_body': [['NIFGEN_VAL_INTERNAL', 'Internal clock source'], ['NIFGEN_VAL_EXTERNAL', 'External clock source'], ['NIFGEN_VAL_PXI_STAR', 'PXI star'], ['NIFGEN_VAL_RTSI_0', 'RTSI 0 or PXI_Trig 0'], ['NIFGEN_VAL_RTSI_1', 'RTSI 1 or PXI_Trig 1'], ['NIFGEN_VAL_RTSI_2', 'RTSI 2 or PXI_Trig 2'], ['NIFGEN_VAL_RTSI_3', 'RTSI 3 or PXI_Trig 3'], ['NIFGEN_VAL_RTSI_4', 'RTSI 4 or PXI_Trig 4'], ['NIFGEN_VAL_RTSI_5', 'RTSI 5 or PXI_Trig 5'], ['NIFGEN_VAL_RTSI_6', 'RTSI 6 or PXI_Trig 6'], ['NIFGEN_VAL_RTSI_7', 'RTSI 7 or PXI_Trig 7'], ['NIFGEN_VAL_CLK_IN', 'CLK IN front panel connector'], ['NIFGEN_VAL_DDC_CLK_IN', 'Digital Data & Control clock in']],
 },
             },
         ],
@@ -3461,7 +3461,7 @@ can be internal or external.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3477,7 +3477,7 @@ want to create. The value you pass must be between the minimum and
 maximum sequence lengths that the signal generator allows. You can
 obtain the minimum and maximum sequence lengths from
 **minimumSequenceLength** and **maximumSequenceLength** in the
-nifgen\_QueryArbSeqCapabilities function.
+nifgen_QueryArbSeqCapabilities function.
 
 **Default Value**: None
 ''',
@@ -3495,14 +3495,14 @@ the value that you specify in **sequenceLength**. Each
 **waveformHandlesArray** element has a corresponding **loopCountsArray**
 element that indicates how many times that waveform is repeated. You
 obtain waveform handles when you create arbitrary waveforms with the
-nifgen\_AllocateWaveform function or one of the following niFgen
+nifgen_AllocateWaveform function or one of the following niFgen
 CreateWaveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
 **Default Value**: None
 ''',
@@ -3522,7 +3522,7 @@ element and indicates how many times to repeat that waveform. Each
 element of the **loopCountsArray** must be less than or equal to the
 maximum number of loop counts that the signal generator allows. You can
 obtain the maximum loop count from **maximumLoopCount** in the
-nifgen\_QueryArbSeqCapabilities function.
+nifgen_QueryArbSeqCapabilities function.
 
 **Default Value**: None
 ''',
@@ -3542,7 +3542,7 @@ element and indicates the subset, in samples, of the given waveform to
 generate. Each element of the **sampleCountsArray** must be larger than
 the minimum waveform size, a multiple of the waveform quantum and no
 larger than the number of samples in the corresponding waveform. You can
-obtain these values by calling the nifgen\_QueryArbWfmCapabilities
+obtain these values by calling the nifgen_QueryArbWfmCapabilities
 function.
 
 **Default Value**: None
@@ -3566,9 +3566,9 @@ marker quantum and the coerced values are returned in the
 **coercedMarkersArray** parameter.
 
 If you do not want a marker generated for a particular sequence stage,
-set this parameter to NIFGEN\_VAL\_NO\_MARKER.
+set this parameter to NIFGEN_VAL_NO_MARKER.
 
-**Defined Value**: NIFGEN\_VAL\_NO\_MARKER
+**Defined Value**: NIFGEN_VAL_NO_MARKER
 
 **Default Value**: None
 ''',
@@ -3594,7 +3594,7 @@ nearest marker quantum. Not all devices coerce markers.
 'documentation': {
 'description': '''
 Returns the handle that identifies the new arbitrary sequence. You can
-pass this handle to nifgen\_ConfigureArbSequence to generate the
+pass this handle to nifgen_ConfigureArbSequence to generate the
 arbitrary sequence.
 ''',
 },
@@ -3605,11 +3605,11 @@ arbitrary sequence.
 Creates an arbitrary sequence from an array of waveform handles and an
 array of corresponding loop counts. This function returns a handle that
 identifies the sequence. You pass this handle to the
-niFgen\_ConfigureArbSequence function to specify what arbitrary sequence
+niFgen_ConfigureArbSequence function to specify what arbitrary sequence
 you want the signal generator to produce.
 
-The niFgen\_CreateAdvancedArbSequence function extends on the
-niFgen\_CreateArbSequence function by adding the ability to set the
+The niFgen_CreateAdvancedArbSequence function extends on the
+niFgen_CreateArbSequence function by adding the ability to set the
 number of samples in each sequence step and to set marker locations.
 
 An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3620,8 +3620,8 @@ repeat a specific waveform is called the loop count.
 'note': '''
 The signal generator must not be in the Generating state when you call
 this function.
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
 function.
 ''',
 },
@@ -3636,7 +3636,7 @@ function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3652,7 +3652,7 @@ want to create. The value you pass must be between the minimum and
 maximum sequence lengths that the signal generator allows. You can
 obtain the minimum and maximum sequence lengths from
 **minimumSequenceLength** and **maximumSequenceLength** in the
-nifgen\_QueryArbSeqCapabilities function.
+nifgen_QueryArbSeqCapabilities function.
 
 **Default Value**: None
 ''',
@@ -3670,14 +3670,14 @@ the value that you specify in **sequenceLength**. Each
 **waveformHandlesArray** element has a corresponding **loopCountsArray**
 element that indicates how many times that waveform is repeated. You
 obtain waveform handles when you create arbitrary waveforms with the
-nifgen\_AllocateWaveform function or one of the following niFgen
+nifgen_AllocateWaveform function or one of the following niFgen
 CreateWaveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
 **Default Value**: None
 ''',
@@ -3697,7 +3697,7 @@ element and indicates how many times to repeat that waveform. Each
 element of the **loopCountsArray** must be less than or equal to the
 maximum number of loop counts that the signal generator allows. You can
 obtain the maximum loop count from **maximumLoopCount** in the
-nifgen\_QueryArbSeqCapabilities function.
+nifgen_QueryArbSeqCapabilities function.
 
 **Default Value**: None
 ''',
@@ -3710,7 +3710,7 @@ nifgen\_QueryArbSeqCapabilities function.
 'documentation': {
 'description': '''
 Returns the handle that identifies the new arbitrary sequence. You can
-pass this handle to nifgen\_ConfigureArbSequence to generate the
+pass this handle to nifgen_ConfigureArbSequence to generate the
 arbitrary sequence.
 ''',
 },
@@ -3721,7 +3721,7 @@ arbitrary sequence.
 Creates an arbitrary sequence from an array of waveform handles and an
 array of corresponding loop counts. This function returns a handle that
 identifies the sequence. You pass this handle to the
-nifgen\_ConfigureArbSequence function to specify what arbitrary sequence
+nifgen_ConfigureArbSequence function to specify what arbitrary sequence
 you want the signal generator to produce.
 
 An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3730,8 +3730,8 @@ the waveform before proceeding to the next waveform. The number of times
 to repeat a specific waveform is called the loop count.
 ''',
 'note': '''
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this
 function.
 ''',
 },
@@ -3746,7 +3746,7 @@ function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3769,7 +3769,7 @@ functions and identifies a particular instrument session.
 | 
 | You can obtain these values from the **maximumWaveformSize**,
   **minimumWaveformSize**, and **waveformQuantum** parameters in the
-  nifgen\_QueryArbWfmCapabilities function.
+  nifgen_QueryArbWfmCapabilities function.
 | ****Default Value**:** None
 ''',
 },
@@ -3805,15 +3805,15 @@ when referring to this waveform.
         ],
 'documentation': {
 'description': '''
-[OBSOLETE] This function is obsolete. Use the nifgen\_CreateWaveformF64,
-nifgen\_CreateWaveformI16, or nifgen\_CreateWaveformComplexF64 function
+[OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformF64,
+nifgen_CreateWaveformI16, or nifgen_CreateWaveformComplexF64 function
 instead of this function.
 
 Creates an arbitrary waveform and returns a handle that identifies that
-waveform. You can pass this handle to the nifgen\_ConfigureArbWaveform
+waveform. You can pass this handle to the nifgen_ConfigureArbWaveform
 function to produce that waveform. You can also use the handles this
 function returns to specify a sequence of arbitrary waveforms with the
-nifgen\_CreateArbSequence function.
+nifgen_CreateArbSequence function.
 ''',
 'note': '''
 You must scale the data between –1.00 and +1.00. Use the **arbGain**
@@ -3831,7 +3831,7 @@ parameter to generate different output voltages.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3854,7 +3854,7 @@ functions and identifies a particular instrument session.
 | 
 | You can obtain these values from the **maximumWaveformSize**,
   **minimumWaveformSize**, and **waveformQuantum** parameters in
-  nifgen\_QueryArbWfmCapabilities.
+  nifgen_QueryArbWfmCapabilities.
 | ****Default Value**:** None
 ''',
 },
@@ -3890,18 +3890,18 @@ when referring to this waveform.
         ],
 'documentation': {
 'description': '''
-[OBSOLETE] This function is obsolete. Use the nifgen\_CreateWaveformI16
+[OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformI16
 function instead of this function.
 
 Creates an arbitrary waveform from binary data and returns a handle that
 identifies that waveform. You can pass this handle to the
-nifgen\_ConfigureArbWaveform function to produce that waveform. You can
+nifgen_ConfigureArbWaveform function to produce that waveform. You can
 also use the handles this function returns to specify a sequence of
-arbitrary waveforms with the nifgen\_CreateArbSequence function.
+arbitrary waveforms with the nifgen_CreateArbSequence function.
 ''',
 'note': '''
-You must set the output mode to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+You must set the output mode to NIFGEN_VAL_OUTPUT_ARB or
+NIFGEN_VAL_OUTPUT_SEQ before calling this function.
 ''',
 },
     },
@@ -3915,7 +3915,7 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -3927,14 +3927,14 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Specifies the standard waveform that you want the signal generator to
-produce. NI-FGEN sets the NIFGEN\_ATTR\_FUNC\_WAVEFORM attribute to this
+produce. NI-FGEN sets the NIFGEN_ATTR_FUNC_WAVEFORM attribute to this
 value.
 
 ****Defined Values****
 
-**Default Value**: NIFGEN\_VAL\_WFM\_SINE
+**Default Value**: NIFGEN_VAL_WFM_SINE
 ''',
-'table_body': [['NIFGEN\\_VAL\\_WFM\\_SINE', 'Specifies that the signal generator produces a sinusoid waveform.'], ['NIFGEN\\_VAL\\_WFM\\_SQUARE', 'Specifies that the signal generator produces a square waveform.'], ['NIFGEN\\_VAL\\_WFM\\_TRIANGLE', 'Specifies that the signal generator produces a triangle waveform.'], ['NIFGEN\\_VAL\\_WFM\\_RAMP\\_UP', 'Specifies that the signal generator produces a positive ramp waveform.'], ['NIFGEN\\_VAL\\_WFM\\_RAMP\\_DOWN', 'Specifies that the signal generator produces a negative ramp waveform.'], ['NIFGEN\\_VAL\\_WFM\\_DC', 'Specifies that the signal generator produces a constant voltage.'], ['NIFGEN\\_VAL\\_WFM\\_NOISE', 'Specifies that the signal generator produces white noise.'], ['NIFGEN\\_VAL\\_WFM\\_USER', 'Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\\_DefineUserStandardWaveform function.']],
+'table_body': [['NIFGEN_VAL_WFM_SINE', 'Specifies that the signal generator produces a sinusoid waveform.'], ['NIFGEN_VAL_WFM_SQUARE', 'Specifies that the signal generator produces a square waveform.'], ['NIFGEN_VAL_WFM_TRIANGLE', 'Specifies that the signal generator produces a triangle waveform.'], ['NIFGEN_VAL_WFM_RAMP_UP', 'Specifies that the signal generator produces a positive ramp waveform.'], ['NIFGEN_VAL_WFM_RAMP_DOWN', 'Specifies that the signal generator produces a negative ramp waveform.'], ['NIFGEN_VAL_WFM_DC', 'Specifies that the signal generator produces a constant voltage.'], ['NIFGEN_VAL_WFM_NOISE', 'Specifies that the signal generator produces white noise.'], ['NIFGEN_VAL_WFM_USER', 'Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function.']],
 },
             },
             {
@@ -3948,7 +3948,7 @@ The value must be between the minimum and maximum frequency list lengths
 that the signal generator allows. You can obtain the minimum and maximum
 frequency list lengths from the **minimumFrequencyListLength** and
 **maximumFrequencyListLength** parameters in the
-nifgen\_QueryFreqListCapabilities function.
+nifgen_QueryFreqListCapabilities function.
 
 **frequency** and **duration** must each be at least as long as this
 frequency list length.
@@ -4000,7 +4000,7 @@ seconds to generate the corresponding frequency.
 'documentation': {
 'description': '''
 Returns the handle that identifies the new frequency list. You can pass
-this handle to nifgen\_ConfigureFreqList to generate the arbitrary
+this handle to nifgen_ConfigureFreqList to generate the arbitrary
 sequence.
 ''',
 },
@@ -4013,7 +4013,7 @@ Creates a frequency list from an array of frequencies
 two arrays should have the same number of elements, and this value must
 also be the size of the **frequencyListLength**. The function returns a
 handle that identifies the frequency list (the **frequencyListHandle**).
-You can pass this handle to nifgen\_ConfigureFreqList to specify what
+You can pass this handle to nifgen_ConfigureFreqList to specify what
 frequency list you want the signal generator to produce.
 
 A frequency list consists of a list of frequencies and durations. The
@@ -4037,7 +4037,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4072,7 +4072,7 @@ The size must meet the following restrictions:
 
 You can obtain these values from the **maximumWaveformSize**,
 **minimumWaveformSize**, and **waveformQuantum** parameters of the
-niFgen\_QueryArbWfmCapabilities function.
+niFgen_QueryArbWfmCapabilities function.
 
 | 
 | **Default Value**: None
@@ -4111,19 +4111,19 @@ when referring to this waveform.
 'documentation': {
 'description': '''
 Creates an onboard waveform from complex double-precision floating-point
-(F64) data for use with the NIFGEN\_ATTR\_OUTPUT\_MODE attribute set to
+(F64) data for use with the NIFGEN_ATTR_OUTPUT_MODE attribute set to
 Arbitrary Waveform or Arbitrary Sequence output mode on devices with the
-NIFGEN\_ATTR\_OUTPUT\_ENABLED attribute set to VI\_TRUE and the
-NIFGEN\_ATTR\_OSP\_DATA\_PROCESSING\_MODE attribute set to
-NIFGEN\_VAL\_OSP\_COMPLEX. The **waveformHandle** returned by the
+NIFGEN_ATTR_OUTPUT_ENABLED attribute set to VI_TRUE and the
+NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute set to
+NIFGEN_VAL_OSP_COMPLEX. The **waveformHandle** returned by the
 function can be used later for setting the active waveform, changing the
 data in the waveform, building sequences of waveforms, or deleting the
 waveform when it is no longer needed.
 ''',
 'note': '''
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+NIFGEN_VAL_OUTPUT_SEQ before calling this function.
 ''',
 },
     },
@@ -4137,7 +4137,7 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4171,7 +4171,7 @@ Specifies the channel name for which you want to create the waveform.
 
 You can obtain these values from the **maximumWaveformSize**,
 **minimumWaveformSize**, and **waveformQuantum** parameters of the
-nifgen\_QueryArbWfmCapabilities function.
+nifgen_QueryArbWfmCapabilities function.
 
 | ****Default Value**:** None
 ''',
@@ -4215,9 +4215,9 @@ active waveform, changing the data in the waveform, building sequences
 of waveforms, or deleting the waveform when it is no longer needed.
 ''',
 'note': '''
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+NIFGEN_VAL_OUTPUT_SEQ before calling this function.
 ''',
 },
     },
@@ -4231,7 +4231,7 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4269,7 +4269,7 @@ Specifies the byte order of the data in the file.
 ****Defined Values****
 
 | 
-| ****Default Value**:** NIFGEN\_VAL\_LITTLE\_ENDIAN
+| ****Default Value**:** NIFGEN_VAL_LITTLE_ENDIAN
 ''',
 'note': '''
 Data written by most applications in Windows (including
@@ -4278,7 +4278,7 @@ from LabVIEW is in Big Endian format by default on all platforms. Big
 Endian and Little Endian refer to the way data is stored in memory,
 which can differ on different processors.
 ''',
-'table_body': [['NIFGEN\\_VAL\\_LITTLE\\_ENDIAN', 'Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance.'], ['NIFGEN\\_VAL\\_BIG\\_ENDIAN', 'Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.']],
+'table_body': [['NIFGEN_VAL_LITTLE_ENDIAN', 'Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance.'], ['NIFGEN_VAL_BIG_ENDIAN', 'Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.']],
 },
             },
             {
@@ -4304,7 +4304,7 @@ waveforms, or deleting the waveform when it is no longer needed.
 ''',
 'note': '''
 The F64 data must be between –1.0 and +1.0 V. Use the
-NIFGEN\_ATTR\_DIGITAL\_GAIN attribute to generate different voltage
+NIFGEN_ATTR_DIGITAL_GAIN attribute to generate different voltage
 outputs.
 ''',
 },
@@ -4319,7 +4319,7 @@ outputs.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4352,7 +4352,7 @@ Specifies the channel name for which you want to create the waveform.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-| If you set this parameter input to VI\_TRUE and if onboard signal
+| If you set this parameter input to VI_TRUE and if onboard signal
   processing (OSP) is enabled, the rate from the waveform is interpreted
   as the data rate, and FGEN sets the data rate attribute for you. In
   all other cases, it is interpreted as the sample rate, and FGEN sets
@@ -4361,9 +4361,9 @@ Specifies the channel name for which you want to create the waveform.
 ****Defined Values****
 
 | 
-| ****Default Value**:** VI\_TRUE
+| ****Default Value**:** VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Use rate from waveform.'], ['VI\\_FALSE', 'Do not use rate from waveform.']],
+'table_body': [['VI_TRUE', 'Use rate from waveform.'], ['VI_FALSE', 'Do not use rate from waveform.']],
 },
             },
             {
@@ -4372,16 +4372,16 @@ Specifies the channel name for which you want to create the waveform.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-| If this input is set to VI\_TRUE, NI-FGEN retrieves the gain and
+| If this input is set to VI_TRUE, NI-FGEN retrieves the gain and
   offset values from the specified HWS file and applies them to the
   NI-FGEN driver.
 
 ****Defined Values****
 
 | 
-| ****Default Value**:** VI\_TRUE
+| ****Default Value**:** VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Use gain and offset from waveform.'], ['VI\\_FALSE', 'Do not use gain and offset from waveform.']],
+'table_body': [['VI_TRUE', 'Use gain and offset from waveform.'], ['VI_FALSE', 'Do not use gain and offset from waveform.']],
 },
             },
             {
@@ -4407,17 +4407,17 @@ when referring to this waveform.
 | When the Analog Waveform Editor saves data in an HWS file, it also
   stores the rate, gain, and offset with the data. If the
   **useRateFromWaveform** and **useGain&OffsetFromWaveform;** parameters
-  are set to VI\_TRUE, this function also sets those properties.
+  are set to VI_TRUE, this function also sets those properties.
 
 |
 ''',
 'note': '''
 If you choose to have this function set the gain and offset properties
-for you, you should **not** use the niFgen\_ConfigureArbWaveform or
-niFgen\_ConfigureArbSequence functions, as they also set the gain and
+for you, you should **not** use the niFgen_ConfigureArbWaveform or
+niFgen_ConfigureArbSequence functions, as they also set the gain and
 offset, thereby overriding the values set by this function. Instead, use
-the NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE or
-NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE attributes.
+the NIFGEN_ATTR_ARB_WAVEFORM_HANDLE or
+NIFGEN_ATTR_ARB_SEQUENCE_HANDLE attributes.
 ''',
 },
     },
@@ -4431,7 +4431,7 @@ NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE attributes.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4467,7 +4467,7 @@ Specifies the byte order of the data in the file.
 ****Defined Values****
 
 | 
-| ****Default Value**:** NIFGEN\_VAL\_LITTLE\_ENDIAN
+| ****Default Value**:** NIFGEN_VAL_LITTLE_ENDIAN
 ''',
 'note': '''
 Data written by most applications in Windows (including
@@ -4476,7 +4476,7 @@ from LabVIEW is in Big Endian format by default on all platforms. Big
 Endian and Little Endian refer to the way data is stored in memory,
 which can differ on different processors.
 ''',
-'table_body': [['NIFGEN\\_VAL\\_LITTLE\\_ENDIAN', 'Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance.'], ['NIFGEN\\_VAL\\_BIG\\_ENDIAN', 'Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.']],
+'table_body': [['NIFGEN_VAL_LITTLE_ENDIAN', 'Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance.'], ['NIFGEN_VAL_BIG_ENDIAN', 'Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.']],
 },
             },
             {
@@ -4502,7 +4502,7 @@ waveform when it is no longer needed.
 ''',
 'note': '''
 The I16 data (values between –32768 and +32767) is assumed to
-represent –1 to +1 V. Use the NIFGEN\_ATTR\_DIGITAL\_GAIN attribute to
+represent –1 to +1 V. Use the NIFGEN_ATTR_DIGITAL_GAIN attribute to
 generate different voltage outputs.
 ''',
 },
@@ -4517,7 +4517,7 @@ generate different voltage outputs.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4551,7 +4551,7 @@ Specifies the channel name for which you want to create the waveform.
 
 You can obtain these values from the **maximumWaveformSize**,
 **minimumWaveformSize**, and **waveformQuantum** parameters of the
-nifgen\_QueryArbWfmCapabilities function.
+nifgen_QueryArbWfmCapabilities function.
 
 | 
 | ****Default Value**:** None
@@ -4594,9 +4594,9 @@ waveform, changing the data in the waveform, building sequences of
 waveforms, or deleting the waveform when it is no longer needed.
 ''',
 'note': '''
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_ARB or
-NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
+NIFGEN_VAL_OUTPUT_SEQ before calling this function.
 ''',
 },
     },
@@ -4610,7 +4610,7 @@ NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4663,17 +4663,17 @@ Defines a user waveform for use in either Standard Function or Frequency
 List output mode.
 
 To select the waveform, set the **waveform** parameter to
-NIFGEN\_VAL\_WFM\_USER with either the nifgen\_ConfigureStandardWaveform
-or the nifgen\_CreateFreqList function.
+NIFGEN_VAL_WFM_USER with either the nifgen_ConfigureStandardWaveform
+or the nifgen_CreateFreqList function.
 
 The waveform data must be scaled between –1.0 and 1.0. Use the
-**amplitude** parameter in the niFgen\_ConfigureStandardWaveform
+**amplitude** parameter in the niFgen_ConfigureStandardWaveform
 function to generate different output voltages.
 ''',
 'note': '''
-You must call the nifgen\_ConfigureOutputMode function to set the
-**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_FUNC or
-NIFGEN\_VAL\_OUTPUT\_FREQ\_LIST before calling this function.
+You must call the nifgen_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN_VAL_OUTPUT_FUNC or
+NIFGEN_VAL_OUTPUT_FREQ_LIST before calling this function.
 ''',
 },
     },
@@ -4687,7 +4687,7 @@ NIFGEN\_VAL\_OUTPUT\_FREQ\_LIST before calling this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4734,7 +4734,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4777,7 +4777,7 @@ appears in the text of the script following the script keyword.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4801,7 +4801,7 @@ exported signals are disabled.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4823,7 +4823,7 @@ filter.
 'documentation': {
 'description': '''
 Disables the analog filter. This function sets the
-NIFGEN\_ATTR\_ANALOG\_FILTER\_ENABLED attribute to VI\_FALSE. This
+NIFGEN_ATTR_ANALOG_FILTER_ENABLED attribute to VI_FALSE. This
 setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
 Script output modes. You also can use this setting in Standard Function
 and Frequency List output modes for user-defined waveforms.
@@ -4840,7 +4840,7 @@ and Frequency List output modes for user-defined waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4862,7 +4862,7 @@ filter.
 'documentation': {
 'description': '''
 Disables the digital filter. This function sets the
-NIFGEN\_ATTR\_DIGITAL\_FILTER\_ENABLED attribute to VI\_FALSE. This
+NIFGEN_ATTR_DIGITAL_FILTER_ENABLED attribute to VI_FALSE. This
 setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
 Script output modes. You also can use this setting in Standard Function
 and Frequency List output modes for user-defined waveforms.
@@ -4879,7 +4879,7 @@ and Frequency List output modes for user-defined waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4901,7 +4901,7 @@ output.
 'documentation': {
 'description': '''
 Disables digital pattern output on the signal generator. This function
-sets the NIFGEN\_ATTR\_DIGITAL\_PATTERN\_ENABLED attribute to VI\_FALSE.
+sets the NIFGEN_ATTR_DIGITAL_PATTERN_ENABLED attribute to VI_FALSE.
 ''',
 },
     },
@@ -4915,7 +4915,7 @@ sets the NIFGEN\_ATTR\_DIGITAL\_PATTERN\_ENABLED attribute to VI\_FALSE.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4950,7 +4950,7 @@ Specifies the Script Trigger used for triggering.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -4970,7 +4970,7 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5011,7 +5011,7 @@ set to the same value as the frequency of the standard waveform.
 'documentation': {
 'description': '''
 Configures the analog filter for the device. This function sets the
-NIFGEN\_ATTR\_ANALOG\_FILTER\_ENABLED attribute to VI\_TRUE. This
+NIFGEN_ATTR_ANALOG_FILTER_ENABLED attribute to VI_TRUE. This
 setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
 Script output modes. You also can use this setting in Standard Function
 and Frequency List output modes for user-defined waveforms.
@@ -5028,7 +5028,7 @@ and Frequency List output modes for user-defined waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5050,7 +5050,7 @@ filter.
 'documentation': {
 'description': '''
 Enables the digital filter by setting the
-NIFGEN\_ATTR\_DIGITAL\_FILTER\_ENABLED attribute to VI\_TRUE. This
+NIFGEN_ATTR_DIGITAL_FILTER_ENABLED attribute to VI_TRUE. This
 setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
 Script output modes. You also can use this setting in Standard Function
 and Frequency List output modes for user-defined waveforms.
@@ -5067,7 +5067,7 @@ and Frequency List output modes for user-defined waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5089,7 +5089,7 @@ pattern output.
 'documentation': {
 'description': '''
 Enables digital pattern output on the signal generator. This function
-sets the NIFGEN\_ATTR\_DIGITAL\_PATTERN\_ENABLED attribute to VI\_TRUE.
+sets the NIFGEN_ATTR_DIGITAL_PATTERN_ENABLED attribute to VI_TRUE.
 ''',
 },
     },
@@ -5103,13 +5103,13 @@ sets the NIFGEN\_ATTR\_DIGITAL\_PATTERN\_ENABLED attribute to VI\_TRUE.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init or the niFgen\_InitWithOptions functions and identifies a
+niFgen_init or the niFgen_InitWithOptions functions and identifies a
 particular instrument session.
 
-You can pass VI\_NULL for this parameter. Passing VI\_NULL is useful
+You can pass VI_NULL for this parameter. Passing VI_NULL is useful
 when one of the initialize functions fails.
 
-**Default Value**: VI\_NULL
+**Default Value**: VI_NULL
 ''',
 },
             },
@@ -5122,7 +5122,7 @@ when one of the initialize functions fails.
 Specifies the **status** parameter that is returned from any of the
 NI-FGEN functions.
 
-**Default Value**: 0 (VI\_SUCCESS)
+**Default Value**: 0 (VI_SUCCESS)
 ''',
 },
             },
@@ -5157,7 +5157,7 @@ user-readable string and returns any error elaborations.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5171,7 +5171,7 @@ functions and identifies a particular instrument session.
 Specifies the source of the signal to route.
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_ONBOARD\\_REFERENCE\\_CLOCK', 'Onboard 10 MHz synchronization clock (PCI only)'], ['NIFGEN\\_VAL\\_SYNC\\_OUT', 'SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.'], ['NIFGEN\\_VAL\\_START\\_TRIGGER', 'Start Trigger'], ['NIFGEN\\_VAL\\_MARKER\\_EVENT', 'Marker Event'], ['NIFGEN\\_VAL\\_SAMPLE\\_CLOCK\\_TIMEBASE', 'The clock from which the Sample Clock is derived'], ['NIFGEN\\_VAL\\_SYNCHRONIZATION', 'Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators.'], ['NIFGEN\\_VAL\\_SAMPLE\\_CLOCK', 'Sample Clock'], ['NIFGEN\\_VAL\\_REFERENCE\\_CLOCK', 'PLL Reference Clock'], ['NIFGEN\\_VAL\\_SCRIPT\\_TRIGGER', 'Script Trigger'], ['NIFGEN\\_VAL\\_READY\\_FOR\\_START\\_EVENT', 'Ready For Start Event'], ['NIFGEN\\_VAL\\_STARTED\\_EVENT', 'Started Event'], ['NIFGEN\\_VAL\\_DONE\\_EVENT', 'Done Event'], ['NIFGEN\\_VAL\\_DATA\\_MARKER\\_EVENT', 'Data Marker Event']],
+'table_body': [['NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK', 'Onboard 10 MHz synchronization clock (PCI only)'], ['NIFGEN_VAL_SYNC_OUT', 'SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.'], ['NIFGEN_VAL_START_TRIGGER', 'Start Trigger'], ['NIFGEN_VAL_MARKER_EVENT', 'Marker Event'], ['NIFGEN_VAL_SAMPLE_CLOCK_TIMEBASE', 'The clock from which the Sample Clock is derived'], ['NIFGEN_VAL_SYNCHRONIZATION', 'Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators.'], ['NIFGEN_VAL_SAMPLE_CLOCK', 'Sample Clock'], ['NIFGEN_VAL_REFERENCE_CLOCK', 'PLL Reference Clock'], ['NIFGEN_VAL_SCRIPT_TRIGGER', 'Script Trigger'], ['NIFGEN_VAL_READY_FOR_START_EVENT', 'Ready For Start Event'], ['NIFGEN_VAL_STARTED_EVENT', 'Started Event'], ['NIFGEN_VAL_DONE_EVENT', 'Done Event'], ['NIFGEN_VAL_DATA_MARKER_EVENT', 'Data Marker Event']],
 },
             },
             {
@@ -5201,7 +5201,7 @@ terminals. For a complete list of the output terminals available on your
 device, refer to the Routes topic for your device or the **Device
 Routes** tab in MAX.
 ''',
-'table_body': [['"" (empty string)', 'Do not export signal'], ['"PFI0"', 'PFI line 0'], ['"PFI1"', 'PFI line 1'], ['"PFI4"', 'PFI line 4'], ['"PFI5"', 'PFI line 5'], ['"PXI\\_Trig0"', 'PXI or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI or RTSI line 7'], ['"DDC\\_ClkOut"', 'Clock out from DDC connector'], ['"PXI\\_Star"', 'PXI star trigger line']],
+'table_body': [['"" (empty string)', 'Do not export signal'], ['"PFI0"', 'PFI line 0'], ['"PFI1"', 'PFI line 1'], ['"PFI4"', 'PFI line 4'], ['"PFI5"', 'PFI line 5'], ['"PXI_Trig0"', 'PXI or RTSI line 0'], ['"PXI_Trig1"', 'PXI or RTSI line 1'], ['"PXI_Trig2"', 'PXI or RTSI line 2'], ['"PXI_Trig3"', 'PXI or RTSI line 3'], ['"PXI_Trig4"', 'PXI or RTSI line 4'], ['"PXI_Trig5"', 'PXI or RTSI line 5'], ['"PXI_Trig6"', 'PXI or RTSI line 6'], ['"PXI_Trig7"', 'PXI or RTSI line 7'], ['"DDC_ClkOut"', 'Clock out from DDC connector'], ['"PXI_Star"', 'PXI star trigger line']],
 },
             },
         ],
@@ -5212,8 +5212,8 @@ specify.
 
 Any routes created within a session persist after the session closes to
 prevent signal glitching. To unconfigure signal routes created in
-previous sessions, set **resetDevice** in the niFgen\_init function to
-VI\_TRUE or use the niFgen\_ResetDevice function.
+previous sessions, set **resetDevice** in the niFgen_init function to
+VI_TRUE or use the niFgen_ResetDevice function.
 
 If you export a signal with this function and commit the session, the
 signal is routed to the output terminal you specify.
@@ -5230,7 +5230,7 @@ signal is routed to the output terminal you specify.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5243,7 +5243,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5294,7 +5294,7 @@ cases:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5307,7 +5307,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5356,7 +5356,7 @@ function performs instrument I/O in the following cases:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5369,7 +5369,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5418,7 +5418,7 @@ function performs instrument I/O in the following cases:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5431,7 +5431,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5482,7 +5482,7 @@ cases:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5495,7 +5495,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5546,7 +5546,7 @@ cases:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -5559,7 +5559,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -5593,7 +5593,7 @@ pass to get the entire value. For example, if the value is 123456 and
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the **attributeValue** buffer
+If you pass 0, you can pass VI_NULL for the **attributeValue** buffer
 parameter.
 ''',
 },
@@ -5616,7 +5616,7 @@ pass to get the entire value. For example, if the value is 123456 and
 **arraySize** is 4, the function places 123 into the buffer and returns
 7.
 
-If you specify 0 for the **arraySize** parameter, you can pass VI\_NULL
+If you specify 0 for the **arraySize** parameter, you can pass VI_NULL
 for this parameter.
 ''',
 },
@@ -5646,7 +5646,7 @@ size you must pass to get the entire value. For example, if the value is
 and returns 7.
 
 If you want to call this function just to get the required array size,
-you can pass 0 for **arraySize** and VI\_NULL for the **attributeValue**
+you can pass 0 for **arraySize** and VI_NULL for the **attributeValue**
 buffer.
 
 If you want the function to fill in the buffer regardless of the number
@@ -5665,7 +5665,7 @@ parameter.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -5686,7 +5686,7 @@ information string.
 'documentation': {
 'description': '''
 Retrieves user-defined information from the onboard EEPROM. Call the
-nifgen\_GetCalUserDefinedInfoMaxSize function to determine the number of
+nifgen_GetCalUserDefinedInfoMaxSize function to determine the number of
 characters that can be retrieved. The buffer you provide should be the
 size of the maximum number of characters stored plus one termination
 character.
@@ -5703,7 +5703,7 @@ character.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -5738,13 +5738,13 @@ EEPROM.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init or the nifgen\_InitWithOptions functions and identifies a
+niFgen_init or the nifgen_InitWithOptions functions and identifies a
 particular instrument session.
 
-You can pass VI\_NULL for this parameter. Passing VI\_NULL is useful
+You can pass VI_NULL for this parameter. Passing VI_NULL is useful
 when one of the initialize functions fail.
 
-**Default Value**: VI\_NULL
+**Default Value**: VI_NULL
 ''',
 },
             },
@@ -5756,13 +5756,13 @@ when one of the initialize functions fail.
 'description': '''
 The error code for the session or execution thread.
 
-A value of VI\_SUCCESS (0) indicates that no error occurred. A positive
+A value of VI_SUCCESS (0) indicates that no error occurred. A positive
 value indicates a warning. A negative value indicates an error.
 
-You can call nifgen\_error\_message to get a text description of the
+You can call nifgen_error_message to get a text description of the
 value.
 
-If you are not interested in this value, you can pass VI\_NULL.
+If you are not interested in this value, you can pass VI_NULL.
 ''',
 },
             },
@@ -5776,7 +5776,7 @@ Specifies the size of the **errorDescription** array.
 
 You can determine the array size needed to store the entire error
 description by setting this parameter to 0. The function then ignores
-the **errorDescription** buffer, which may be set to VI\_NULL, and gives
+the **errorDescription** buffer, which may be set to VI_NULL, and gives
 as its return value the required buffer size. You can then call the
 function a second time using the correct buffer size.
 ''',
@@ -5792,7 +5792,7 @@ The error description string for the session or execution thread. If the
 error code is nonzero, the description string can further describe the
 error or warning condition.
 
-If you are not interested in this value, you can pass VI\_NULL.
+If you are not interested in this value, you can pass VI_NULL.
 Otherwise, you must pass a ViChar array of a size specified with the
 **errorDescriptionBufferSize** parameter.
 ''',
@@ -5804,15 +5804,15 @@ Otherwise, you must pass a ViChar array of a size specified with the
 Returns the error information associated with an IVI session or with the
 current execution thread. If you specify a valid IVI session for the
 **vi** parameter, this function retrieves and then clears the error
-information for the session. If you pass VI\_NULL for the **vi**
+information for the session. If you pass VI_NULL for the **vi**
 parameter, this function retrieves and then clears the error information
 for the current execution thread.
 
 The IVI Engine also maintains this error information separately for each
 thread. This feature is useful if you do not have a session handle to
-pass to the niFgen\_GetError or nifgen\_ClearError functions. This
-situation occurs when a call to the nifgen\_init or
-nifgen\_InitWithOptions function fails.
+pass to the niFgen_GetError or nifgen_ClearError functions. This
+situation occurs when a call to the nifgen_init or
+nifgen_InitWithOptions function fails.
 ''',
 },
     },
@@ -5826,7 +5826,7 @@ nifgen\_InitWithOptions function fails.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -5891,7 +5891,7 @@ device was calibrated at 2:30 PM, this function returns 14 for the
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -5925,7 +5925,7 @@ temperature is returned in degrees Celsius.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -5959,7 +5959,7 @@ months.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6019,14 +6019,14 @@ want to read.
   based on the FIR filter type and corresponding attribute (Alpha,
   Passband, BT) unless you are using the custom filter. If you are using
   a custom filter, the coefficients returned are those set with the
-  nifgen\_ConfigureCustomFIRFilterCoefficients function coerced to the
+  nifgen_ConfigureCustomFIRFilterCoefficients function coerced to the
   quantized values used by the device.
 | To use this function, first call an instance of the
-  niFgen\_GetFIRFilterCoefficients function with the
-  **coefficientsArray** parameter set to VI\_NULL. Calling the function
+  niFgen_GetFIRFilterCoefficients function with the
+  **coefficientsArray** parameter set to VI_NULL. Calling the function
   in this state returns the current size of the **coefficientsArray** as
   the value of the **numberOfCoefficientsRead** parameter. Create an
-  array of this size, and call the niFgen\_GetFIRFilterCoefficients
+  array of this size, and call the niFgen_GetFIRFilterCoefficients
   function a second time, passing the new array as the
   **coefficientsArray** parameter and the size as the **arraySize**
   parameter. This second function call populates the array with the FIR
@@ -6048,7 +6048,7 @@ want to read.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6063,7 +6063,7 @@ Returns the hardware state of the signal generator.
 
 **Defined Values**
 ''',
-'table_body': [['NIFGEN\\_VAL\\_IDLE', 'The device is in the Idle state.'], ['NIFGEN\\_VAL\\_WAITING\\_FOR\\_START\\_TRIGGER', 'The device is waiting for Start Trigger.'], ['NIFGEN\\_VAL\\_RUNNING', 'The device is in the Running state.'], ['NIFGEN\\_VAL\\_DONE', 'The generation has completed successfully.'], ['NIFGEN\\_VAL\\_HARDWARE\\_ERROR', 'There is a hardware error.']],
+'table_body': [['NIFGEN_VAL_IDLE', 'The device is in the Idle state.'], ['NIFGEN_VAL_WAITING_FOR_START_TRIGGER', 'The device is waiting for Start Trigger.'], ['NIFGEN_VAL_RUNNING', 'The device is in the Running state.'], ['NIFGEN_VAL_DONE', 'The generation has completed successfully.'], ['NIFGEN_VAL_HARDWARE_ERROR', 'There is a hardware error.']],
 },
             },
         ],
@@ -6085,7 +6085,7 @@ in the hardware error state, the current hardware error.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6110,7 +6110,7 @@ returns 7.
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the **coercionRecord** buffer
+If you pass 0, you can pass VI_NULL for the **coercionRecord** buffer
 parameter.
 
 **Default Value**: None
@@ -6148,7 +6148,7 @@ Returns the coercion information associated with the IVI session. This
 function retrieves and clears the oldest instance in which the NI-FGEN
 coerced a value you specified to another value.
 
-If you set the NIFGEN\_ATTR\_RECORD\_COERCIONS attribute to VI\_TRUE,
+If you set the NIFGEN_ATTR_RECORD_COERCIONS attribute to VI_TRUE,
 NI-FGEN keeps a list of all coercions it makes on ViInt32 or ViReal64
 values that you pass to NI-FGEN functions. You use this function to
 retrieve information from that list.
@@ -6164,7 +6164,7 @@ to get the entire value. For example, if the value is 123456 and
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the **coercionRecord** buffer
+If you pass 0, you can pass VI_NULL for the **coercionRecord** buffer
 parameter.
 
 The function returns an empty string in the **coercionRecord** parameter
@@ -6182,7 +6182,7 @@ if no coercion records remain for the session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6207,7 +6207,7 @@ and returns 7.
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the **interchangeWarning**
+If you pass 0, you can pass VI_NULL for the **interchangeWarning**
 buffer parameter.
 
 **Default Value**: None
@@ -6249,7 +6249,7 @@ cause different behavior. Use this function to retrieve
 interchangeability warnings.
 
 NI-FGEN performs interchangeability checking when the
-NIFGEN\_ATTR\_INTERCHANGE\_CHECK attribute is set to VI\_TRUE.
+NIFGEN_ATTR_INTERCHANGE_CHECK attribute is set to VI_TRUE.
 
 The function returns an empty string in the **interchangeWarning**
 parameter if no interchangeability warnings remain for the session.
@@ -6270,7 +6270,7 @@ you did not specify.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -6342,7 +6342,7 @@ device was calibrated at 2:30 PM, this function returns 14 for the
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -6376,7 +6376,7 @@ temperature is returned in degrees Celsius.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitWithOptions function and identifies a
+nifgen_init or the nifgen_InitWithOptions function and identifies a
 particular instrument session.
 ''',
 },
@@ -6391,7 +6391,7 @@ Returns whether the device supports self-calibration.
 
 ****Defined Values****
 ''',
-'table_body': [['VI\\_TRUE', 'Self–calibration is supported.'], ['VI\\_FALSE', 'Self–calibration is not supported.']],
+'table_body': [['VI_TRUE', 'Self–calibration is supported.'], ['VI_FALSE', 'Self–calibration is not supported.']],
 },
             },
         ],
@@ -6409,7 +6409,7 @@ Returns whether the device supports self-calibration.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6523,7 +6523,7 @@ configure the device using normal attributes and functions. However,
 flags have been set that allow you to program an external calibration
 procedure using the special calibration attributes and functions. The
 NI 5401/5404/5411/5431 have different calibration functions. Refer to
-the nifgen\_Related\_Documentation for the signal generator for more
+the nifgen_Related_Documentation for the signal generator for more
 information.
 ''',
 },
@@ -6583,18 +6583,18 @@ the session.
 'description': '''
 Specifies whether you want NI-FGEN to perform an ID query.
 
-When you set this parameter to VI\_TRUE, NI-FGEN verifies that the
+When you set this parameter to VI_TRUE, NI-FGEN verifies that the
 device that you initialize is a type that it supports.
 
 Circumstances can arise where sending an ID query to the device is
-undesirable. When you set this parameter to VI\_FALSE, the function
+undesirable. When you set this parameter to VI_FALSE, the function
 initializes the device without performing an ID query.
 
 ****Defined Values****
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Perform ID query'], ['VI\\_FALSE', 'Skip ID query']],
+'table_body': [['VI_TRUE', 'Perform ID query'], ['VI_FALSE', 'Skip ID query']],
 },
             },
             {
@@ -6604,14 +6604,14 @@ initializes the device without performing an ID query.
 'documentation': {
 'description': '''
 Specifies whether you want to reset the device during the initialization
-procedure. VI\_TRUE specifies that the device is reset and performs the
-same function as the nifgen\_Reset function.
+procedure. VI_TRUE specifies that the device is reset and performs the
+same function as the nifgen_Reset function.
 
 ****Defined Values****
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Reset device'], ['VI\\_FALSE', 'Do not reset device']],
+'table_body': [['VI_TRUE', 'Reset device'], ['VI_FALSE', 'Do not reset device']],
 },
             },
             {
@@ -6656,7 +6656,7 @@ bytes*>
 
 **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
 ''',
-'table_body': [['RangeCheck', 'NIFGEN\\_ATTR\\_RANGE\\_CHECK', 'VI\\_TRUE, VI\\_FALSE'], ['QueryInstrStatus', 'NIFGEN\\_ATTR\\_QUERY\\_INSTRUMENT\\_STATUS', 'VI\\_TRUE, VI\\_FALSE'], ['Cache', 'NIFGEN\\_ATTR\\_CACHE', 'VI\\_TRUE, VI\\_FALSE'], ['Simulate', 'NIFGEN\\_ATTR\\_SIMULATE', 'VI\\_TRUE, VI\\_FALSE']],
+'table_body': [['RangeCheck', 'NIFGEN_ATTR_RANGE_CHECK', 'VI_TRUE, VI_FALSE'], ['QueryInstrStatus', 'NIFGEN_ATTR_QUERY_INSTRUMENT_STATUS', 'VI_TRUE, VI_FALSE'], ['Cache', 'NIFGEN_ATTR_CACHE', 'VI_TRUE, VI_FALSE'], ['Simulate', 'NIFGEN_ATTR_SIMULATE', 'VI_TRUE, VI_FALSE']],
 'table_header': ['Attribute Name', 'Attribute', 'Values'],
 },
             },
@@ -6678,14 +6678,14 @@ Performs the following initialization actions:
 
 -  Creates a new IVI instrument session and optionally sets the initial
    state of the following session attributes:
-   NIFGEN\_ATTR\_RANGE\_CHECK, NIFGEN\_ATTR\_QUERY\_INSTRUMENT\_STATUS,
-   NIFGEN\_ATTR\_CACHE, NIFGEN\_ATTR\_SIMULATE, and
-   NIFGEN\_ATTR\_RECORD\_COERCIONS.
+   NIFGEN_ATTR_RANGE_CHECK, NIFGEN_ATTR_QUERY_INSTRUMENT_STATUS,
+   NIFGEN_ATTR_CACHE, NIFGEN_ATTR_SIMULATE, and
+   NIFGEN_ATTR_RECORD_COERCIONS.
 -  Opens a session to the specified device using the interface and
    address that you specify for **resourceName**.
--  If **IDQuery** is set to VI\_TRUE, this function queries the device
+-  If **IDQuery** is set to VI_TRUE, this function queries the device
    ID and checks that it is valid for NI-FGEN.
--  If **resetDevice** is set to VI\_TRUE, this function resets the
+-  If **resetDevice** is set to VI_TRUE, this function resets the
    device to a known state.
 -  Sends initialization commands to set the instrument to the state
    necessary for NI-FGEN operation.
@@ -6704,7 +6704,7 @@ Performs the following initialization actions:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -6724,7 +6724,7 @@ session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -6748,7 +6748,7 @@ offset of the onboard ADC.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -6768,7 +6768,7 @@ session.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -6779,7 +6779,7 @@ session.
 Sets up the device to start the VCXO calibration.
 
 The session handle should be the handle returned by the
-nifgen\_InitExtCal function.
+nifgen_InitExtCal function.
 ''',
 },
     },
@@ -6849,14 +6849,14 @@ Specifies the channel that this VI uses.
 'documentation': {
 'description': '''
 Specifies whether you want to reset the device during the initialization
-procedure. VI\_TRUE specifies that the device is reset and performs the
-same function as the nifgen\_Reset function.
+procedure. VI_TRUE specifies that the device is reset and performs the
+same function as the nifgen_Reset function.
 
 ****Defined Values****
 
-**Default Value**: VI\_FALSE
+**Default Value**: VI_FALSE
 ''',
-'table_body': [['VI\\_TRUE', 'Reset device'], ['VI\\_FALSE', 'Do not reset device']],
+'table_body': [['VI_TRUE', 'Reset device'], ['VI_FALSE', 'Do not reset device']],
 },
             },
             {
@@ -6901,7 +6901,7 @@ bytes*>
 
 **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
 ''',
-'table_body': [['RangeCheck', 'NIFGEN\\_ATTR\\_RANGE\\_CHECK', 'VI\\_TRUE, VI\\_FALSE'], ['QueryInstrStatus', 'NIFGEN\\_ATTR\\_QUERY\\_INSTRUMENT\\_STATUS', 'VI\\_TRUE, VI\\_FALSE'], ['Cache', 'NIFGEN\\_ATTR\\_CACHE', 'VI\\_TRUE, VI\\_FALSE'], ['Simulate', 'NIFGEN\\_ATTR\\_SIMULATE', 'VI\\_TRUE, VI\\_FALSE']],
+'table_body': [['RangeCheck', 'NIFGEN_ATTR_RANGE_CHECK', 'VI_TRUE, VI_FALSE'], ['QueryInstrStatus', 'NIFGEN_ATTR_QUERY_INSTRUMENT_STATUS', 'VI_TRUE, VI_FALSE'], ['Cache', 'NIFGEN_ATTR_CACHE', 'VI_TRUE, VI_FALSE'], ['Simulate', 'NIFGEN_ATTR_SIMULATE', 'VI_TRUE, VI_FALSE']],
 'table_header': ['Attribute Name', 'Attribute', 'Values'],
 },
             },
@@ -6935,7 +6935,7 @@ calls.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6944,8 +6944,8 @@ functions and identifies a particular instrument session.
 'documentation': {
 'description': '''
 Initiates signal generation. If you want to abort signal generation,
-call the nifgen\_AbortGeneration function. After the signal generation
-is aborted, you can call the niFgen\_InitiateGeneration function to
+call the nifgen_AbortGeneration function. After the signal generation
+is aborted, you can call the niFgen_InitiateGeneration function to
 cause the signal generator to produce a signal again.
 ''',
 },
@@ -6960,7 +6960,7 @@ cause the signal generator to produce a signal again.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -6975,18 +6975,18 @@ Returns information about the completion of waveform generation.
 
 **Defined Values**
 ''',
-'table_body': [['VI\\_TRUE', 'Generation is complete.'], ['VI\\_FALSE', 'Generation is not complete.']],
+'table_body': [['VI_TRUE', 'Generation is complete.'], ['VI_FALSE', 'Generation is not complete.']],
 },
             },
         ],
 'documentation': {
 'description': '''
 Determines whether the current generation is complete. This function
-sets the **done** parameter to VI\_TRUE if the session is in the Idle or
+sets the **done** parameter to VI_TRUE if the session is in the Idle or
 Committed states.
 ''',
 'note': '''
-NI-FGEN only reports the **done** parameter as VI\_TRUE after the
+NI-FGEN only reports the **done** parameter as VI_TRUE after the
 current generation is complete in Single trigger mode.
 ''',
 },
@@ -7001,7 +7001,7 @@ current generation is complete in Single trigger mode.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7014,28 +7014,28 @@ functions and identifies a particular instrument session.
 'description': '''
 Keeps track of whether you obtained a lock and therefore need to unlock
 the session. Pass the address of a local ViBoolean variable. In the
-declaration of the local variable, initialize it to VI\_FALSE. Pass the
+declaration of the local variable, initialize it to VI_FALSE. Pass the
 address of the same local variable to any other calls you make to the
-niFgen\_LockSession function or the nifgen\_UnlockSession function in
+niFgen_LockSession function or the nifgen_UnlockSession function in
 the same function.
 
 This parameter serves as a convenience. If you do not want to use this
-parameter, pass VI\_NULL.
+parameter, pass VI_NULL.
 
-This parameter is an input/output parameter. The niFgen\_LockSession
-function and the niFgen\_UnlockSession function each inspect the current
+This parameter is an input/output parameter. The niFgen_LockSession
+function and the niFgen_UnlockSession function each inspect the current
 value and take the following actions:
 
--  If the value is VI\_TRUE, the niFgen\_LockSession function does not
-   lock the session again. If the value is VI\_FALSE, the
-   niFgen\_LockSession function obtains the lock and sets the value of
-   the parameter to VI\_TRUE.
--  If the value is VI\_FALSE, the niFgen\_UnlockSession function does
-   not attempt to unlock the session. If the value is VI\_TRUE, the
-   niFgen\_UnlockSession function releases the lock and sets the value
-   of the parameter to VI\_FALSE.
+-  If the value is VI_TRUE, the niFgen_LockSession function does not
+   lock the session again. If the value is VI_FALSE, the
+   niFgen_LockSession function obtains the lock and sets the value of
+   the parameter to VI_TRUE.
+-  If the value is VI_FALSE, the niFgen_UnlockSession function does
+   not attempt to unlock the session. If the value is VI_TRUE, the
+   niFgen_UnlockSession function releases the lock and sets the value
+   of the parameter to VI_FALSE.
 
-Thus, you can call the niFgen\_UnlockSession function at the end of your
+Thus, you can call the niFgen_UnlockSession function at the end of your
 function without worrying about whether you actually have the lock.
 
 Example:
@@ -7043,22 +7043,22 @@ Example:
 ViStatus TestFunc (ViSession vi, ViInt32 flags)
 {
 
-ViStatus error = VI\_SUCCESS;
-ViBoolean haveLock = VI\_FALSE;
-if (flags & BIT\_1)
+ViStatus error = VI_SUCCESS;
+ViBoolean haveLock = VI_FALSE;
+if (flags & BIT_1)
 {
 
-viCheckErr( niFgen\_LockSession(vi, &haveLock;));
+viCheckErr( niFgen_LockSession(vi, &haveLock;));
 viCheckErr( TakeAction1(vi));
-if (flags & BIT\_2)
+if (flags & BIT_2)
 {
 
- viCheckErr( niFgen\_UnlockSession(vi, &haveLock;));
+ viCheckErr( niFgen_UnlockSession(vi, &haveLock;));
 viCheckErr( TakeAction2(vi));
-viCheckErr( niFgen\_LockSession(vi, &haveLock;);
+viCheckErr( niFgen_LockSession(vi, &haveLock;);
 
 }
-if (flags & BIT\_3)
+if (flags & BIT_3)
 
  viCheckErr( TakeAction3(vi));
 
@@ -7073,7 +7073,7 @@ At this point, you cannot really be sure that
 you have the lock. Fortunately, the haveLock
 variable takes care of that for you.
 \*/
-niFgen\_UnlockSession(vi, &haveLock;);
+niFgen_UnlockSession(vi, &haveLock;);
 return error;
 
 | }
@@ -7090,27 +7090,27 @@ their locks on the instrument session.
 Other threads might have obtained a lock on this session in the
 following ways:
 
--  Your application called the niFgen\_LockSession function.
+-  Your application called the niFgen_LockSession function.
 -  A call to the NI-FGEN locked the session.
 -  A call to the IVI Engine locked the session.
 
-After your call to the niFgen\_LockSession function returns
+After your call to the niFgen_LockSession function returns
 successfully, no other threads can access the instrument session until
-you call the nifgen\_UnlockSession function.
+you call the nifgen_UnlockSession function.
 
-Use the niFgen\_LockSession function and the niFgen\_UnlockSession
+Use the niFgen_LockSession function and the niFgen_UnlockSession
 function around a sequence of calls to NI-FGEN functions if you require
 that the instrument retain its settings through the end of the sequence.
 
-You can safely make nested calls to the niFgen\_LockSession function
+You can safely make nested calls to the niFgen_LockSession function
 within the same thread. To completely unlock the session, you must
-balance each call to the niFgen\_LockSession function with a call to the
-niFgen\_UnlockSession function. If, however, you use the
-**callerHasLock** parameter in all calls to the niFgen\_LockSession
-function and the niFgen\_UnlockSession function within a function, the
+balance each call to the niFgen_LockSession function with a call to the
+niFgen_UnlockSession function. If, however, you use the
+**callerHasLock** parameter in all calls to the niFgen_LockSession
+function and the niFgen_UnlockSession function within a function, the
 IVI Engine locks the session only once within the function regardless of
-the number of calls you make to the niFgen\_LockSession function. This
-configuration allows you to call the niFgen\_UnlockSession function just
+the number of calls you make to the niFgen_LockSession function. This
+configuration allows you to call the niFgen_UnlockSession function just
 once at the end of the function.
 ''',
 },
@@ -7125,7 +7125,7 @@ once at the end of the function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7158,7 +7158,7 @@ documentation in the *NI Signal Generators Help* for more information.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7171,7 +7171,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Returns the maximum number of arbitrary waveform sequences that the
 signal generator allows. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_NUM\_SEQUENCES attribute.
+NIFGEN_ATTR_MAX_NUM_SEQUENCES attribute.
 ''',
 },
             },
@@ -7183,7 +7183,7 @@ NIFGEN\_ATTR\_MAX\_NUM\_SEQUENCES attribute.
 'description': '''
 Returns the minimum number of arbitrary waveforms the signal generator
 allows in a sequence. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MIN\_SEQUENCE\_LENGTH attribute.
+NIFGEN_ATTR_MIN_SEQUENCE_LENGTH attribute.
 ''',
 },
             },
@@ -7195,7 +7195,7 @@ NIFGEN\_ATTR\_MIN\_SEQUENCE\_LENGTH attribute.
 'description': '''
 Returns the maximum number of arbitrary waveforms the signal generator
 allows in a sequence. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_SEQUENCE\_LENGTH attribute.
+NIFGEN_ATTR_MAX_SEQUENCE_LENGTH attribute.
 ''',
 },
             },
@@ -7207,7 +7207,7 @@ NIFGEN\_ATTR\_MAX\_SEQUENCE\_LENGTH attribute.
 'description': '''
 Returns the maximum number of times the signal generator can repeat an
 arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_LOOP\_COUNT attribute.
+NIFGEN_ATTR_MAX_LOOP_COUNT attribute.
 ''',
 },
             },
@@ -7215,9 +7215,9 @@ NIFGEN\_ATTR\_MAX\_LOOP\_COUNT attribute.
 'documentation': {
 'description': '''
 Returns the attributes of the signal generator that are related to
-creating arbitrary sequences (the NIFGEN\_ATTR\_MAX\_NUM\_SEQUENCES,
-NIFGEN\_ATTR\_MIN\_SEQUENCE\_LENGTH,
-NIFGEN\_ATTR\_MAX\_SEQUENCE\_LENGTH, and NIFGEN\_ATTR\_MAX\_LOOP\_COUNT
+creating arbitrary sequences (the NIFGEN_ATTR_MAX_NUM_SEQUENCES,
+NIFGEN_ATTR_MIN_SEQUENCE_LENGTH,
+NIFGEN_ATTR_MAX_SEQUENCE_LENGTH, and NIFGEN_ATTR_MAX_LOOP_COUNT
 attributes).
 ''',
 },
@@ -7232,7 +7232,7 @@ attributes).
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7245,7 +7245,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Returns the maximum number of arbitrary waveforms that the signal
 generator allows. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_NUM\_WAVEFORMS attribute.
+NIFGEN_ATTR_MAX_NUM_WAVEFORMS attribute.
 ''',
 },
             },
@@ -7258,7 +7258,7 @@ NIFGEN\_ATTR\_MAX\_NUM\_WAVEFORMS attribute.
 The size (number of points) of each waveform must be a multiple of a
 constant quantum value. This parameter obtains the quantum value that
 the signal generator uses. NI-FGEN returns this value from the
-NIFGEN\_ATTR\_WAVEFORM\_QUANTUM attribute.
+NIFGEN_ATTR_WAVEFORM_QUANTUM attribute.
 
 For example, when this attribute returns a value of 8, all waveform
 sizes must be a multiple of 8.
@@ -7273,7 +7273,7 @@ sizes must be a multiple of 8.
 'description': '''
 Returns the minimum number of points that the signal generator allows in
 a waveform. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MIN\_WAVEFORM\_SIZE attribute.
+NIFGEN_ATTR_MIN_WAVEFORM_SIZE attribute.
 ''',
 },
             },
@@ -7285,7 +7285,7 @@ NIFGEN\_ATTR\_MIN\_WAVEFORM\_SIZE attribute.
 'description': '''
 Returns the maximum number of points that the signal generator allows in
 a waveform. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_WAVEFORM\_SIZE attribute.
+NIFGEN_ATTR_MAX_WAVEFORM_SIZE attribute.
 ''',
 },
             },
@@ -7299,7 +7299,7 @@ size.
 ''',
 'note': '''
 If you do not want to obtain the waveform quantum, pass a value of
-VI\_NULL for this parameter.
+VI_NULL for this parameter.
 ''',
 },
     },
@@ -7313,7 +7313,7 @@ VI\_NULL for this parameter.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7326,7 +7326,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Returns the maximum number of frequency lists that the signal generator
 allows. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_NUM\_FREQ\_LISTS attribute.
+NIFGEN_ATTR_MAX_NUM_FREQ_LISTS attribute.
 ''',
 },
             },
@@ -7338,7 +7338,7 @@ NIFGEN\_ATTR\_MAX\_NUM\_FREQ\_LISTS attribute.
 'description': '''
 Returns the minimum number of steps that the signal generator allows in
 a frequency list. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_LENGTH attribute.
+NIFGEN_ATTR_MIN_FREQ_LIST_LENGTH attribute.
 ''',
 },
             },
@@ -7350,7 +7350,7 @@ NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_LENGTH attribute.
 'description': '''
 Returns the maximum number of steps that the signal generator allows in
 a frequency list. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_LENGTH attribute.
+NIFGEN_ATTR_MAX_FREQ_LIST_LENGTH attribute.
 ''',
 },
             },
@@ -7362,7 +7362,7 @@ NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_LENGTH attribute.
 'description': '''
 Returns the minimum duration that the signal generator allows in a step
 of a frequency list. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_DURATION attribute.
+NIFGEN_ATTR_MIN_FREQ_LIST_DURATION attribute.
 ''',
 },
             },
@@ -7374,7 +7374,7 @@ NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_DURATION attribute.
 'description': '''
 Returns the maximum duration that the signal generator allows in a step
 of a frequency list. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_DURATION attribute.
+NIFGEN_ATTR_MAX_FREQ_LIST_DURATION attribute.
 ''',
 },
             },
@@ -7386,7 +7386,7 @@ NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_DURATION attribute.
 'description': '''
 Returns the quantum of which all durations must be a multiple in a
 frequency list. NI-FGEN obtains this value from the
-NIFGEN\_ATTR\_FREQ\_LIST\_DURATION\_QUANTUM attribute.
+NIFGEN_ATTR_FREQ_LIST_DURATION_QUANTUM attribute.
 ''',
 },
             },
@@ -7395,12 +7395,12 @@ NIFGEN\_ATTR\_FREQ\_LIST\_DURATION\_QUANTUM attribute.
 'description': '''
 Returns the attributes of the signal generator that are related to
 creating frequency lists. These attributes are
-NIFGEN\_ATTR\_MAX\_NUM\_FREQ\_LISTS,
-NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_LENGTH,
-NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_LENGTH,
-NIFGEN\_ATTR\_MIN\_FREQ\_LIST\_DURATION,
-NIFGEN\_ATTR\_MAX\_FREQ\_LIST\_DURATION, and
-NIFGEN\_ATTR\_FREQ\_LIST\_DURATION\_QUANTUM.
+NIFGEN_ATTR_MAX_NUM_FREQ_LISTS,
+NIFGEN_ATTR_MIN_FREQ_LIST_LENGTH,
+NIFGEN_ATTR_MAX_FREQ_LIST_LENGTH,
+NIFGEN_ATTR_MIN_FREQ_LIST_DURATION,
+NIFGEN_ATTR_MAX_FREQ_LIST_DURATION, and
+NIFGEN_ATTR_FREQ_LIST_DURATION_QUANTUM.
 ''',
 },
     },
@@ -7414,7 +7414,7 @@ NIFGEN\_ATTR\_FREQ\_LIST\_DURATION\_QUANTUM.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -7458,11 +7458,11 @@ calibration ADC.
 Takes one or more voltage measurements from the onboard calibration ADC
 and returns the value or the average value. The signal that the ADC
 actually measures can be specified using the
-NIFGEN\_ATTR\_CAL\_ADC\_INPUT attribute. The ADC has some inherent gain
+NIFGEN_ATTR_CAL_ADC_INPUT attribute. The ADC has some inherent gain
 and offset. These values can be determined during an external
 calibration session and stored in the calibration EEPROM.
 
-If the **returnCalibratedValue** parameter is VI\_TRUE, NI-FGEN adjusts
+If the **returnCalibratedValue** parameter is VI_TRUE, NI-FGEN adjusts
 the value that is returned to account for the gain and offset of the
 ADC. Otherwise, the raw voltage value reported by the ADC is returned.
 ''',
@@ -7478,7 +7478,7 @@ ADC. Otherwise, the raw voltage value reported by the ADC is returned.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -7512,7 +7512,7 @@ returned in degrees Celsius.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7525,7 +7525,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -7554,7 +7554,7 @@ channel-based, then pass VI\_NULL or an empty string ("").
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7579,7 +7579,7 @@ attributes are reset to their default states.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7611,14 +7611,14 @@ previously executed test modules.
 
 This function does not clear the interchangeability warnings from the
 list of previously recorded interchangeability warnings. If you want to
-guarantee that the nifgen\_GetNextInterchangeWarning function only
+guarantee that the nifgen_GetNextInterchangeWarning function only
 returns those interchangeability warnings that are generated after
 calling this function, you must clear the list of interchangeability
 warnings. You can clear the interchangeability warnings list by
-repeatedly calling the niFgen\_GetNextInterchangeWarning function until
+repeatedly calling the niFgen_GetNextInterchangeWarning function until
 no more interchangeability warnings are returned. If you are not
 interested in the content of those warnings, you can call the
-nifgen\_ClearInterchangeWarnings function.
+nifgen_ClearInterchangeWarnings function.
 ''',
 },
     },
@@ -7632,7 +7632,7 @@ nifgen\_ClearInterchangeWarnings function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7643,7 +7643,7 @@ functions and identifies a particular instrument session.
 Resets the instrument and reapplies initial user–specified settings from
 the logical name that was used to initialize the session. If the session
 was created without a logical name, this function is equivalent to the
-nifgen\_reset function.
+nifgen_reset function.
 ''',
 },
     },
@@ -7657,7 +7657,7 @@ nifgen\_reset function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -7683,7 +7683,7 @@ produced invalid calibration constants.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7710,7 +7710,7 @@ Various signals can be routed out the RTSI lines.
 
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_NONE', 'Nothing Sending this value clears the line.'], ['NIFGEN\\_VAL\\_MARKER', 'Marker Event'], ['NIFGEN\\_VAL\\_SYNC\\_OUT', 'SYNC signal This signal normally appears on the SYNC OUT front panel connector.'], ['NIFGEN\\_VAL\\_OUT\\_START\\_TRIGGER', 'Start Trigger The Start Trigger is normally generated at the start of the sequence. Call the nifgen\\_ConfigureTriggerSource function to receive this trigger.'], ['NIFGEN\\_VAL\\_BOARD\\_CLOCK', 'Signal generator board clock The signal generator board clock is 20 MHz for the NI PCI-5401/5411/5431. The NI PXI-5404 has a 20 MHz board clock, and the NI PXI-5421 has integer divisors of 100 MHz. The NI PXI-5401/5411/5431 does not support routing a Board Clock to RTSI lines or front panel connectors.'], ['NIFGEN\\_VAL\\_SYNCHRONIZATION', 'Synchronization strobe A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. Call the nifgen\\_ConfigureSynchronization function to receive the strobe.'], ['NIFGEN\\_VAL\\_SOFTWARE\\_TRIG', 'Software trigger'], ['NIFGEN\\_VAL\\_OUT\\_UPDATE', '—'], ['NIFGEN\\_VAL\\_REF\\_OUT', 'Reference Clock out front panel connector'], ['NIFGEN\\_VAL\\_PXI\\_CLK10', 'PXI 10 MHz backplane Reference Clock'], ['NIFGEN\\_VAL\\_PXI\\_STAR', 'PXI star trigger line'], ['NIFGEN\\_VAL\\_PFI\\_0', 'PFI 0'], ['NIFGEN\\_VAL\\_RTSI\\_0', 'RTSI 0 or PXI\\_Trig 0'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'RTSI 1 or PXI\\_Trig 1'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'RTSI 2 or PXI\\_Trig 2'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'RTSI 3 or PXI\\_Trig 3'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'RTSI 4 or PXI\\_Trig 4'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'RTSI 5 or PXI\\_Trig 5'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'RTSI 6 or PXI\\_Trig 6'], ['NIFGEN\\_VAL\\_RTSI\\_7', 'RTSI 7 or PXI\\_Trig 7'], ['NIFGEN\\_VAL\\_REF\\_CLOCK\\_RTSI\\_CLOCK', 'RTSI clock'], ['NIFGEN\\_VAL\\_ONBOARD\\_REFERENCE\\_CLOCK', 'Onboard Reference Clock'], ['NIFGEN\\_VAL\\_UPDATE\\_CLOCK', 'Sample Clock'], ['NIFGEN\\_VAL\\_PLL\\_REF\\_SOURCE', 'PLL Reference Clock']],
+'table_body': [['NIFGEN_VAL_NONE', 'Nothing Sending this value clears the line.'], ['NIFGEN_VAL_MARKER', 'Marker Event'], ['NIFGEN_VAL_SYNC_OUT', 'SYNC signal This signal normally appears on the SYNC OUT front panel connector.'], ['NIFGEN_VAL_OUT_START_TRIGGER', 'Start Trigger The Start Trigger is normally generated at the start of the sequence. Call the nifgen_ConfigureTriggerSource function to receive this trigger.'], ['NIFGEN_VAL_BOARD_CLOCK', 'Signal generator board clock The signal generator board clock is 20 MHz for the NI PCI-5401/5411/5431. The NI PXI-5404 has a 20 MHz board clock, and the NI PXI-5421 has integer divisors of 100 MHz. The NI PXI-5401/5411/5431 does not support routing a Board Clock to RTSI lines or front panel connectors.'], ['NIFGEN_VAL_SYNCHRONIZATION', 'Synchronization strobe A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. Call the nifgen_ConfigureSynchronization function to receive the strobe.'], ['NIFGEN_VAL_SOFTWARE_TRIG', 'Software trigger'], ['NIFGEN_VAL_OUT_UPDATE', '—'], ['NIFGEN_VAL_REF_OUT', 'Reference Clock out front panel connector'], ['NIFGEN_VAL_PXI_CLK10', 'PXI 10 MHz backplane Reference Clock'], ['NIFGEN_VAL_PXI_STAR', 'PXI star trigger line'], ['NIFGEN_VAL_PFI_0', 'PFI 0'], ['NIFGEN_VAL_RTSI_0', 'RTSI 0 or PXI_Trig 0'], ['NIFGEN_VAL_RTSI_1', 'RTSI 1 or PXI_Trig 1'], ['NIFGEN_VAL_RTSI_2', 'RTSI 2 or PXI_Trig 2'], ['NIFGEN_VAL_RTSI_3', 'RTSI 3 or PXI_Trig 3'], ['NIFGEN_VAL_RTSI_4', 'RTSI 4 or PXI_Trig 4'], ['NIFGEN_VAL_RTSI_5', 'RTSI 5 or PXI_Trig 5'], ['NIFGEN_VAL_RTSI_6', 'RTSI 6 or PXI_Trig 6'], ['NIFGEN_VAL_RTSI_7', 'RTSI 7 or PXI_Trig 7'], ['NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK', 'RTSI clock'], ['NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK', 'Onboard Reference Clock'], ['NIFGEN_VAL_UPDATE_CLOCK', 'Sample Clock'], ['NIFGEN_VAL_PLL_REF_SOURCE', 'PLL Reference Clock']],
 },
             },
             {
@@ -7723,7 +7723,7 @@ The possible RTSI lines to which you can route a signal.
 
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_RTSI\\_0', 'RTSI 0 or PXI\\_Trig 0'], ['NIFGEN\\_VAL\\_RTSI\\_1', 'RTSI 1 or PXI\\_Trig 1'], ['NIFGEN\\_VAL\\_RTSI\\_2', 'RTSI 2 or PXI\\_Trig 2'], ['NIFGEN\\_VAL\\_RTSI\\_3', 'RTSI 3 or PXI\\_Trig 3'], ['NIFGEN\\_VAL\\_RTSI\\_4', 'RTSI 4 or PXI\\_Trig 4'], ['NIFGEN\\_VAL\\_RTSI\\_5', 'RTSI 5 or PXI\\_Trig 5'], ['NIFGEN\\_VAL\\_RTSI\\_6', 'RTSI 6 or PXI\\_Trig 6'], ['NIFGEN\\_VAL\\_RTSI\\_7', 'RTSI 7 or PXI\\_Trig 7'], ['NIFGEN\\_VAL\\_REF\\_CLOCK\\_RTSI\\_CLOCK', 'RTSI clock'], ['NIFGEN\\_VAL\\_REF\\_OUT', 'Reference Clock out front panel connector'], ['NIFGEN\\_VAL\\_PFI\\_0', 'PFI 0'], ['NIFGEN\\_VAL\\_PFI\\_1', 'PFI 1'], ['NIFGEN\\_VAL\\_PFI\\_4', 'PFI 4'], ['NIFGEN\\_VAL\\_PFI\\_5', 'PFI 5'], ['NIFGEN\\_VAL\\_PXI\\_STAR', 'PXI star trigger line'], ['NIFGEN\\_VAL\\_PXI\\_CLK10', 'PXI 10 MHz backplane Reference Clock']],
+'table_body': [['NIFGEN_VAL_RTSI_0', 'RTSI 0 or PXI_Trig 0'], ['NIFGEN_VAL_RTSI_1', 'RTSI 1 or PXI_Trig 1'], ['NIFGEN_VAL_RTSI_2', 'RTSI 2 or PXI_Trig 2'], ['NIFGEN_VAL_RTSI_3', 'RTSI 3 or PXI_Trig 3'], ['NIFGEN_VAL_RTSI_4', 'RTSI 4 or PXI_Trig 4'], ['NIFGEN_VAL_RTSI_5', 'RTSI 5 or PXI_Trig 5'], ['NIFGEN_VAL_RTSI_6', 'RTSI 6 or PXI_Trig 6'], ['NIFGEN_VAL_RTSI_7', 'RTSI 7 or PXI_Trig 7'], ['NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK', 'RTSI clock'], ['NIFGEN_VAL_REF_OUT', 'Reference Clock out front panel connector'], ['NIFGEN_VAL_PFI_0', 'PFI 0'], ['NIFGEN_VAL_PFI_1', 'PFI 1'], ['NIFGEN_VAL_PFI_4', 'PFI 4'], ['NIFGEN_VAL_PFI_5', 'PFI 5'], ['NIFGEN_VAL_PXI_STAR', 'PXI star trigger line'], ['NIFGEN_VAL_PXI_CLK10', 'PXI 10 MHz backplane Reference Clock']],
 },
             },
         ],
@@ -7736,7 +7736,7 @@ front panel terminals.
 The signal generator must not be in the Generating state when you call
 this function.
 ''',
-'table_body': [[' ', 'You can clear a previously routed signal by routing NIFGEN\\_VAL\\_NONE to the destination terminal.']],
+'table_body': [[' ', 'You can clear a previously routed signal by routing NIFGEN_VAL_NONE to the destination terminal.']],
 },
     },
     'SelfCal': {
@@ -7749,7 +7749,7 @@ this function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init or the nifgen\_InitWithOptions functions and identifies a
+niFgen_init or the nifgen_InitWithOptions functions and identifies a
 particular instrument session.
 ''',
 },
@@ -7773,7 +7773,7 @@ in the onboard EEPROM.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7788,7 +7788,7 @@ Sets the clock mode of the signal generator.
 
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_DIVIDE\\_DOWN'], ['NIFGEN\\_VAL\\_HIGH\\_RESOLUTION'], ['NIFGEN\\_VAL\\_AUTOMATIC']],
+'table_body': [['NIFGEN_VAL_DIVIDE_DOWN'], ['NIFGEN_VAL_HIGH_RESOLUTION'], ['NIFGEN_VAL_AUTOMATIC']],
 },
             },
             {
@@ -7819,7 +7819,7 @@ NI 5401/5411/5431.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7844,7 +7844,7 @@ digital edge trigger.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7857,7 +7857,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or "" (empty string).
+channel-based, then pass VI_NULL or "" (empty string).
 
 **Default Value**: "" (empty string)
 ''',
@@ -7926,7 +7926,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -7939,7 +7939,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or "" (empty string).
+channel-based, then pass VI_NULL or "" (empty string).
 
 **Default Value**: "" (empty string)
 ''',
@@ -8008,7 +8008,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8021,7 +8021,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or "" (empty string).
+channel-based, then pass VI_NULL or "" (empty string).
 
 **Default Value**: "" (empty string)
 ''',
@@ -8090,7 +8090,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8103,7 +8103,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or "" (empty string).
+channel-based, then pass VI_NULL or "" (empty string).
 
 **Default Value**: "" (empty string)
 ''',
@@ -8172,7 +8172,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8185,7 +8185,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or an empty string ("").
+channel-based, then pass VI_NULL or an empty string ("").
 
 **Default Value**: "" (empty string)
 ''',
@@ -8254,7 +8254,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8267,7 +8267,7 @@ functions and identifies a particular instrument session.
 'description': '''
 Specifies the name of the channel on which to check the attribute value
 if the attribute is channel-based. If the attribute is not
-channel-based, then pass VI\_NULL or "" (empty string).
+channel-based, then pass VI_NULL or "" (empty string).
 
 **Default Value**: "" (empty string)
 ''',
@@ -8336,7 +8336,7 @@ high-level functions without the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_init or the nifgen\_InitExtCal function and identifies a
+nifgen_init or the nifgen_InitExtCal function and identifies a
 particular instrument session.
 ''',
 },
@@ -8353,7 +8353,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 Stores user-defined information in the onboard EEPROM. Call the
-nifgen\_GetCalUserDefinedInfoMaxSize function to determine the maximum
+nifgen_GetCalUserDefinedInfoMaxSize function to determine the maximum
 number of characters that can be stored.
 ''',
 },
@@ -8368,7 +8368,7 @@ number of characters that can be stored.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8405,7 +8405,7 @@ waveform.
 
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_WAVEFORM\\_POSITION\\_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN\\_VAL\\_WAVEFORM\\_POSITION\\_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
+'table_body': [['NIFGEN_VAL_WAVEFORM_POSITION_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
 },
             },
             {
@@ -8430,12 +8430,12 @@ writes to that waveform begin where the last write left off, unless this
 function is called again. The **waveformHandle** passed in must have
 been created with a call to one of the following functions:
 
--  nifgen\_AllocateWaveform
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_AllocateWaveform
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 ''',
 },
     },
@@ -8449,7 +8449,7 @@ been created with a call to one of the following functions:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8473,7 +8473,7 @@ Specifies the channel on which to the waveform data should be loaded.
 'documentation': {
 'description': '''
 Specifies the handle of the arbitrary waveform previously allocated with
-the nifgen\_AllocateWaveform function.
+the nifgen_AllocateWaveform function.
 ''',
 },
             },
@@ -8489,7 +8489,7 @@ waveform.
 
 ****Defined Values****
 ''',
-'table_body': [['NIFGEN\\_VAL\\_WAVEFORM\\_POSITION\\_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN\\_VAL\\_WAVEFORM\\_POSITION\\_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
+'table_body': [['NIFGEN_VAL_WAVEFORM_POSITION_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
 },
             },
             {
@@ -8512,14 +8512,14 @@ the waveform. These settings apply only to the next write to the
 waveform specified by the waveformHandle parameter. Subsequent writes to
 that waveform begin where the last write left off, unless this function
 is called again. The waveformHandle passed in must have been created by
-a call to the nifgen\_AllocateWaveform function or one of the following
+a call to the nifgen_AllocateWaveform function or one of the following
 niFgen CreateWaveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 ''',
 },
     },
@@ -8533,7 +8533,7 @@ niFgen CreateWaveform functions:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8548,28 +8548,28 @@ Keeps track of whether you obtain a lock and therefore need to unlock
 the session.
 
 This parameter serves as a convenience. If you do not want to use this
-parameter, pass VI\_NULL.
+parameter, pass VI_NULL.
 
 Pass the address of a local ViBoolean variable. In the declaration of
-the local variable, initialize it to VI\_FALSE. Pass the address of the
+the local variable, initialize it to VI_FALSE. Pass the address of the
 same local variable to any other calls you make to the
-niFgen\_LockSession function or the niFgen\_UnlockSession function in
+niFgen_LockSession function or the niFgen_UnlockSession function in
 the same function.
 
-The parameter is an input/output parameter. The niFgen\_LockSession
-function and the niFgen\_UnlockSession function each inspect the current
+The parameter is an input/output parameter. The niFgen_LockSession
+function and the niFgen_UnlockSession function each inspect the current
 value and take the following actions:
 
--  If the value is VI\_TRUE, the niFgen\_LockSession function does not
-   lock the session again. If the value is VI\_FALSE, the
-   niFgen\_LockSession function obtains the lock and sets the value of
-   the parameter to VI\_TRUE.
--  If the value is VI\_FALSE, the niFgen\_UnlockSession function does
-   not attempt to unlock the session. If the value is VI\_TRUE, the
-   niFgen\_UnlockSession function releases the lock and sets the value
-   of the parameter to VI\_FALSE.
+-  If the value is VI_TRUE, the niFgen_LockSession function does not
+   lock the session again. If the value is VI_FALSE, the
+   niFgen_LockSession function obtains the lock and sets the value of
+   the parameter to VI_TRUE.
+-  If the value is VI_FALSE, the niFgen_UnlockSession function does
+   not attempt to unlock the session. If the value is VI_TRUE, the
+   niFgen_UnlockSession function releases the lock and sets the value
+   of the parameter to VI_FALSE.
 
-Thus, you can, call the niFgen\_UnlockSession function at the end of
+Thus, you can, call the niFgen_UnlockSession function at the end of
 your function without worrying about whether you actually have the lock.
 
 Example:
@@ -8577,22 +8577,22 @@ Example:
 ViStatus TestFunc (ViSession vi, ViInt32 flags)
 {
 
-ViStatus error = VI\_SUCCESS;
-ViBoolean haveLock = VI\_FALSE;
-if (flags & BIT\_1)
+ViStatus error = VI_SUCCESS;
+ViBoolean haveLock = VI_FALSE;
+if (flags & BIT_1)
 {
 
-viCheckErr(niFgen\_LockSession(vi, &haveLock;));
+viCheckErr(niFgen_LockSession(vi, &haveLock;));
 viCheckErr( TakeAction1(vi));
-if (flags & BIT\_2)
+if (flags & BIT_2)
 {
 
-viCheckErr( niFgen\_UnlockSession(vi, &haveLock;));
+viCheckErr( niFgen_UnlockSession(vi, &haveLock;));
 viCheckErr( TakeAction2(vi));
-viCheckErr( niFgen\_LockSession(vi, &haveLock;);
+viCheckErr( niFgen_LockSession(vi, &haveLock;);
 
 }
-if (flags & BIT\_3)
+if (flags & BIT_3)
 
  viCheckErr( TakeAction3(vi));
 
@@ -8607,7 +8607,7 @@ At this point, you cannot really be sure that
 you have the lock. Fortunately, the haveLock
 variable takes care of that for you.
 \*/
-niFgen\_UnlockSession(vi, &haveLock;);
+niFgen_UnlockSession(vi, &haveLock;);
 return error;
 
 }
@@ -8618,7 +8618,7 @@ return error;
 'documentation': {
 'description': '''
 Releases a lock that you acquired on an instrument session using the
-nifgen\_LockSession function.
+nifgen_LockSession function.
 ''',
 },
     },
@@ -8632,7 +8632,7 @@ nifgen\_LockSession function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8663,7 +8663,7 @@ expired.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-nifgen\_InitExtCal function and identifies a particular instrument
+nifgen_InitExtCal function and identifies a particular instrument
 session.
 ''',
 },
@@ -8708,7 +8708,7 @@ Specifies the channel name for which you want to write the value.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8732,7 +8732,7 @@ Specifies the channel on which to the waveform data should be loaded.
 'documentation': {
 'description': '''
 Specifies the handle of the arbitrary waveform previously allocated with
-the nifgen\_AllocateWaveform function.
+the nifgen_AllocateWaveform function.
 ''',
 },
             },
@@ -8765,12 +8765,12 @@ is left-justified.
 'description': '''
 Writes binary data to the waveform in onboard memory. The waveform
 handle passed must have been created by a call to the
-nifgen\_AllocateWaveform or the nifgen\_CreateWaveformI16 function.
+nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.
 
-By default, the subsequent call to the niFgen\_WriteBinary16Waveform
+By default, the subsequent call to the niFgen_WriteBinary16Waveform
 function continues writing data from the position of the last sample
 written. You can set the write position and offset by calling the
-nifgen\_SetWaveformNextWritePosition function. If streaming is enabled,
+nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
 you can write more data than the allocated waveform size in onboard
 memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -8788,7 +8788,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8812,7 +8812,7 @@ Specifies channel on which to the waveform data should be loaded.
 'documentation': {
 'description': '''
 Specifies the handle of the arbitrary waveform previously allocated with
-the nifgen\_AllocateWaveform function.
+the nifgen_AllocateWaveform function.
 ''',
 },
             },
@@ -8845,12 +8845,12 @@ is left-justified.
 'description': '''
 Writes binary data to the waveform in onboard memory. The waveform
 handle passed in must have been created by a call to the
-nifgen\_AllocateWaveform or the nifgen\_CreateWaveformI16 function.
+nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.
 
 By default, the subsequent call to the
-niFgen\_WriteComplexBinary16Waveform function continues writing data
+niFgen_WriteComplexBinary16Waveform function continues writing data
 from the position of the last sample written. You can set the write
-position and offset by calling the nifgen\_SetWaveformNextWritePosition
+position and offset by calling the nifgen_SetWaveformNextWritePosition
 function. If streaming is enabled, you can write more data than the
 allocated waveform size in onboard memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -8868,7 +8868,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -8920,23 +8920,23 @@ have at least as many elements as the value in **size**.
 'documentation': {
 'description': '''
 Writes complex floating–point data to the named waveform in onboard
-memory on devices with the NIFGEN\_ATTR\_OSP\_ENABLED attribute set to
-VI\_TRUE and the NIFGEN\_ATTR\_OSP\_DATA\_PROCESSING\_MODE attribute set
-to NIFGEN\_VAL\_OSP\_COMPLEX. The waveform handle passed in must have
-been created by a call to the nifgen\_AllocateWaveform function or to
+memory on devices with the NIFGEN_ATTR_OSP_ENABLED attribute set to
+VI_TRUE and the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute set
+to NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have
+been created by a call to the nifgen_AllocateWaveform function or to
 one of the following niFgen Create Waveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
 By default, the subsequent call to the
-niFgen\_WriteNamedWaveformComplexF64 function continues writing data
+niFgen_WriteNamedWaveformComplexF64 function continues writing data
 from the position of the last sample written. You can set the write
 position and offset by calling the
-nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
+nifgen_SetNamedWaveformNextWritePosition function. If streaming is
 enabled, you can write more data than the allocated waveform size in
 onboard memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -8954,7 +8954,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9006,23 +9006,23 @@ have at least as many elements as the value in **size**.
 'documentation': {
 'description': '''
 Writes complex binary data to the named waveform in onboard memory on
-devices with the NIFGEN\_ATTR\_OSP\_ENABLED attribute set to VI\_TRUE
-and the NIFGEN\_ATTR\_OSP\_DATA\_PROCESSING\_MODE attribute set to
-NIFGEN\_VAL\_OSP\_COMPLEX. The waveform handle passed in must have been
-created by a call to the nifgen\_AllocateWaveform function or to one of
+devices with the NIFGEN_ATTR_OSP_ENABLED attribute set to VI_TRUE
+and the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute set to
+NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have been
+created by a call to the nifgen_AllocateWaveform function or to one of
 the following niFgen Create Waveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
 By default, the subsequent call to the
-niFgen\_WriteNamedWaveformComplexi16 function continues writing data
+niFgen_WriteNamedWaveformComplexi16 function continues writing data
 from the position of the last sample written. You can set the write
 position and offset by calling the
-nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
+nifgen_SetNamedWaveformNextWritePosition function. If streaming is
 enabled, you can write more data than the allocated waveform size in
 onboard memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -9040,7 +9040,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9093,19 +9093,19 @@ have at least as many elements as the value in **size**.
 'description': '''
 Writes floating-point data to the waveform in onboard memory. The
 waveform handle passed in must have been created by a call to the
-nifgen\_AllocateWaveform function or to one of the following niFgen
+nifgen_AllocateWaveform function or to one of the following niFgen
 Create Waveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
-By default, the subsequent call to the niFgen\_WriteNamedWaveformF64
+By default, the subsequent call to the niFgen_WriteNamedWaveformF64
 function continues writing data from the position of the last sample
 written. You can set the write position and offset by calling the
-nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
+nifgen_SetNamedWaveformNextWritePosition function. If streaming is
 enabled, you can write more data than the allocated waveform size in
 onboard memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -9123,7 +9123,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9176,10 +9176,10 @@ have at least as many elements as the value in **size**.
 'description': '''
 Writes binary data to the named waveform in onboard memory.
 
-By default, the subsequent call to the niFgen\_WriteNamedWaveformI16
+By default, the subsequent call to the niFgen_WriteNamedWaveformI16
 function continues writing data from the position of the last sample
 written. You can set the write position and offset by calling the
-nifgen\_SetNamedWaveformNextWritePosition function. If streaming is
+nifgen_SetNamedWaveformNextWritePosition function. If streaming is
 enabled, you can write more data than the allocated waveform size in
 onboard memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -9197,7 +9197,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9251,7 +9251,7 @@ avoid an underflow at start.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9299,7 +9299,7 @@ generation of waveforms.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9323,7 +9323,7 @@ The channel onto which the waveform data should be loaded.
 'documentation': {
 'description': '''
 Specifies the handle of the arbitrary waveform previously allocated with
-the nifgen\_AllocateWaveform function.
+the nifgen_AllocateWaveform function.
 ''',
 },
             },
@@ -9355,19 +9355,19 @@ have at least as many elements as the value in **size**.
 'description': '''
 Writes floating-point data to the waveform in onboard memory. The
 waveform handle passed in must have been created by a call to the
-nifgen\_AllocateWaveform function or one of the following niFgen
+nifgen_AllocateWaveform function or one of the following niFgen
 CreateWaveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
-By default, the subsequent call to the niFgen\_WriteWaveform function
+By default, the subsequent call to the niFgen_WriteWaveform function
 continues writing data from the position of the last sample written. You
 can set the write position and offset by calling the
-nifgen\_SetWaveformNextWritePosition function. If streaming is enabled,
+nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
 you can write more data than the allocated waveform size in onboard
 memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -9385,7 +9385,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9433,7 +9433,7 @@ The array must have at least as many elements as the value in the
 'documentation': {
 'description': '''
 Specifies the handle of the arbitrary waveform previously allocated with
-the niFgen\_AllocateWaveform function.
+the niFgen_AllocateWaveform function.
 ''',
 },
             },
@@ -9441,22 +9441,22 @@ the niFgen\_AllocateWaveform function.
 'documentation': {
 'description': '''
 Writes complex data to the waveform in onboard memory on devices with
-the NIFGEN\_ATTR\_OUTPUT\_ENABLED attribute set to VI\_TRUE and the
-NIFGEN\_ATTR\_OSP\_DATA\_PROCESSING\_MODE attribute set to
-NIFGEN\_VAL\_OSP\_COMPLEX. The waveform handle passed in must have been
-created by a call to the nifgen\_AllocateWaveform function or to one of
+the NIFGEN_ATTR_OUTPUT_ENABLED attribute set to VI_TRUE and the
+NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute set to
+NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have been
+created by a call to the nifgen_AllocateWaveform function or to one of
 the following niFgen Create Waveform functions:
 
--  nifgen\_CreateWaveformF64
--  nifgen\_CreateWaveformI16
--  nifgen\_CreateWaveformFromFileI16
--  nifgen\_CreateWaveformFromFileF64
--  nifgen\_CreateWaveformFromFileHWS
+-  nifgen_CreateWaveformF64
+-  nifgen_CreateWaveformI16
+-  nifgen_CreateWaveformFromFileI16
+-  nifgen_CreateWaveformFromFileF64
+-  nifgen_CreateWaveformFromFileHWS
 
-By default, the subsequent call to the niFgen\_WriteWaveformComplexF64
+By default, the subsequent call to the niFgen_WriteWaveformComplexF64
 function continues writing data from the position of the last sample
 written. You can set the write position and offset by calling the
-nifgen\_SetWaveformNextWritePosition function. If streaming is enabled,
+nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
 you can write more data than the allocated waveform size in onboard
 memory. Refer to the
 `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -9474,7 +9474,7 @@ information about streaming data.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9488,14 +9488,14 @@ Performs the following operations:
 -  Destroys the NI-FGEN session and all of its attributes.
 -  Deallocates any memory resources NI-FGEN uses.
 
-Not all signal routes established by calling the nifgen\_ExportSignal
-and nifgen\_RouteSignalOut functions are released when the NI-FGEN
+Not all signal routes established by calling the nifgen_ExportSignal
+and nifgen_RouteSignalOut functions are released when the NI-FGEN
 session is closed. The following table shows what happens to a signal
-route on your device when you call the niFgen\_close function.
+route on your device when you call the niFgen_close function.
 ''',
 'note': '''
-After calling niFgen\_close, you cannot use NI-FGEN again until you
-call the nifgen\_init or nifgen\_InitWithOptions functions.
+After calling niFgen_close, you cannot use NI-FGEN again until you
+call the nifgen_init or nifgen_InitWithOptions functions.
 ''',
 'table_body': [['Front Panel', 'Remain connected', 'Remain connected'], ['RTSI/PXI Backplane', 'Remain connected', 'Disconnected']],
 'table_header': ['Routes To', 'NI 5401/5411/5431', 'Other Devices'],
@@ -9511,13 +9511,13 @@ call the nifgen\_init or nifgen\_InitWithOptions functions.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init or the niFgen\_InitWithOptions functions and identifies a
+niFgen_init or the niFgen_InitWithOptions functions and identifies a
 particular instrument session.
 
-You can pass VI\_NULL for this parameter. Passing VI\_NULL is useful
+You can pass VI_NULL for this parameter. Passing VI_NULL is useful
 when one of the initialize functions fails.
 
-**Default Value**: VI\_NULL
+**Default Value**: VI_NULL
 ''',
 },
             },
@@ -9530,7 +9530,7 @@ when one of the initialize functions fails.
 Specifies the **status** parameter that is returned from any of the
 NI-FGEN functions.
 
-**Default Value**: 0 (VI\_SUCCESS)
+**Default Value**: 0 (VI_SUCCESS)
 ''',
 },
             },
@@ -9565,7 +9565,7 @@ user-readable string.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9651,18 +9651,18 @@ the session.
 'description': '''
 Specifies whether you want NI-FGEN to perform an ID query.
 
-When you set this parameter to VI\_TRUE, NI-FGEN verifies that the
+When you set this parameter to VI_TRUE, NI-FGEN verifies that the
 device that you initialize is supported.
 
 Circumstances can arise where sending an ID query to the device is
-undesirable. When you set this parameter to VI\_FALSE, the function
+undesirable. When you set this parameter to VI_FALSE, the function
 initializes the device without performing an ID query.
 
 ****Defined Values****
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Perform ID query'], ['VI\\_FALSE', 'Skip ID query']],
+'table_body': [['VI_TRUE', 'Perform ID query'], ['VI_FALSE', 'Skip ID query']],
 },
             },
             {
@@ -9672,14 +9672,14 @@ initializes the device without performing an ID query.
 'documentation': {
 'description': '''
 Specifies whether you want to reset the device during the initialization
-procedure. VI\_TRUE specifies that the device is reset and performs the
-same function as the nifgen\_Reset function.
+procedure. VI_TRUE specifies that the device is reset and performs the
+same function as the nifgen_Reset function.
 
 ****Defined Values****
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
-'table_body': [['VI\\_TRUE', 'Reset device'], ['VI\\_FALSE', 'Do not reset device']],
+'table_body': [['VI_TRUE', 'Reset device'], ['VI_FALSE', 'Do not reset device']],
 },
             },
             {
@@ -9701,9 +9701,9 @@ Performs the following initialization actions:
 -  Creates a new IVI instrument driver session.
 -  Opens a session to the specified device using the interface and
    address that you specify for the **resourceName** parameter.
--  If the **IDQuery** parameter is set to VI\_TRUE, this function
+-  If the **IDQuery** parameter is set to VI_TRUE, this function
    queries the device ID and checks that the ID is valid for NI-FGEN.
--  If the **resetDevice** parameter is set to VI\_TRUE, this function
+-  If the **resetDevice** parameter is set to VI_TRUE, this function
    resets the device to a known state.
 -  Sends initialization commands to set the device to the state
    necessary for the operation of NI-FGEN.
@@ -9722,7 +9722,7 @@ Performs the following initialization actions:
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9737,7 +9737,7 @@ properties or configure the device hardware to its default state.
 ''',
 'note': '''
 For the NI 5401/5404/5411/5431, this function exhibits the same
-behavior as the nifgen\_ResetDevice function.
+behavior as the nifgen_ResetDevice function.
 ''',
 },
     },
@@ -9751,7 +9751,7 @@ behavior as the nifgen\_ResetDevice function.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9796,7 +9796,7 @@ You must pass a ViChar array with at least 256 bytes.
 'documentation': {
 'description': '''
 Identifies your instrument session. **vi** is obtained from the
-niFgen\_init, nifgen\_InitWithOptions, or nifgen\_InitializeWithChannels
+niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels
 functions and identifies a particular instrument session.
 ''',
 },
@@ -9831,7 +9831,7 @@ You must pass a ViChar array with at least 256 bytes.
 'description': 'Runs the instrument self-test routine and returns the test result(s).',
 'note': '''
 When used on some signal generators, the device is reset after the
-niFgen\_self\_test function runs. If you use the niFgen\_self\_test
+niFgen_self_test function runs. If you use the niFgen_self_test
 function, your device may not be in its previously configured state
 after the function runs.
 ''',

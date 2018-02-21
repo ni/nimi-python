@@ -2879,12 +2879,11 @@ This attribute is also the source for the trigger in the other trigger modes as 
         'channel_based': False,
         'enum': None,
         'lv_property': '',
-        'name': 'CYCLE_COUNT',
+        'name': 'BURST_COUNT',
         'resettable': False,
         'type': 'ViInt32',
 'documentation': {
-'description': 'Specifies the number of cycles that you want the signal generator to produce after it receives a trigger./n For standard and arbitrary waveforms, a cycle is one period of the waveform./n An arbitrary sequence consists of multiple arbitrary waveforms in a sequence. Each waveform can be repeated a discrete number of times before the next waveform is produced. For arbitrary sequences, a cycle is one complete progression through the generation of all iterations of all waveforms in the sequence./n/n',
-'note': 'The NI 5411/5421 arbitrary waveform generators support only continuous generation./n',
+'description': 'The number of times to repeat each waveform in burst trigger mode.',
 },
     },
 }

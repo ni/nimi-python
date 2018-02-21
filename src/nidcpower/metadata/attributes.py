@@ -2012,10 +2012,8 @@ using a single property with a positive value. The resulting range is
 bounded by this positive value and its opposite.
 When set to **Asymmetric**, you must separately set a limit high and a
 limit low using distinct properties.
-Asymmetric limits must meet the following requirements:
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+For asymmetric limits, the range bounded by the limit high and limit low
+must include zero.
 **Default Value:** Symmetric
 **Related Topics:**
 `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
@@ -2050,11 +2048,10 @@ Current**.
 You must also specify a `Voltage Limit
 Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
 range.
-**Valid Values:** [0, `Voltage Limit
+**Valid Values:** [1% of `Voltage Limit
+Range <pniDCPower_VoltageLimitRange.html>`__, `Voltage Limit
 Range <pniDCPower_VoltageLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2091,10 +2088,9 @@ You must also specify a `Voltage Limit
 High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
 range.
 **Valid Values:** [-`Voltage Limit
-Range <pniDCPower_VoltageLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_VoltageLimitRange.html>`__, -1% of `Voltage Limit
+Range <pniDCPower_VoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2130,11 +2126,10 @@ Voltage**.
 You must also specify a `Current Limit
 Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
 range.
-**Valid Values:** [0, `Current Limit
+**Valid Values:** [1% of `Current Limit
+Range <pniDCPower_CurrentLimitRange.html>`__, `Current Limit
 Range <pniDCPower_CurrentLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2171,10 +2166,9 @@ You must also specify a `Current Limit
 High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
 range.
 **Valid Values:** [-`Current Limit
-Range <pniDCPower_CurrentLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_CurrentLimitRange.html>`__, -1% of `Current Limit
+Range <pniDCPower_CurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2211,11 +2205,10 @@ Current**.
 You must also specify a `Pulse Voltage Limit
 Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
 range.
-**Valid Values:** [0, `Pulse Voltage Limit
+**Valid Values:** [1% of `Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
 Range <pniDCPower_PulseVoltageLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2255,10 +2248,9 @@ You must also specify a `Pulse Voltage Limit
 High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
 asymmetric range.
 **Valid Values:** [-`Pulse Voltage Limit
-Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+Limit Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2297,11 +2289,10 @@ Current**.
 You must also specify a `Pulse Bias Voltage Limit
 Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
 asymmetric range.
-**Valid Values:** [0, `Pulse Voltage Limit
+**Valid Values:** [1% of `Pulse Voltage Limit
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
 Range <pniDCPower_PulseVoltageLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2341,10 +2332,9 @@ You must also specify a `Pulse Bias Voltage Limit
 High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
 asymmetric range.
 **Valid Values:** [-`Pulse Voltage Limit
-Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_PulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+Limit Range <pniDCPower_PulseVoltageLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2383,11 +2373,10 @@ Voltage**.
 You must also specify a `Pulse Current Limit
 Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
 range.
-**Valid Values:** [0, `Pulse Current Limit
+**Valid Values:** [1% of `Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, `Pulse Current Limit
 Range <pniDCPower_PulseCurrentLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2427,10 +2416,9 @@ You must also specify a `Pulse Current Limit
 High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
 asymmetric range.
 **Valid Values:** [-`Pulse Current Limit
-Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+Limit Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2469,11 +2457,10 @@ Voltage**.
 You must also specify a `Pulse Bias Current Limit
 Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
 asymmetric range.
-**Valid Values:** [0, `Pulse Current Limit
+**Valid Values:** [1% of `Pulse Current Limit
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, `Pulse Current Limit
 Range <pniDCPower_PulseCurrentLimitRange.html>`__]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
@@ -2513,10 +2500,9 @@ You must also specify a `Pulse Bias Current Limit
 High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
 asymmetric range.
 **Valid Values:** [-`Pulse Current Limit
-Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
-The range bounded by the limit high and limit low must include zero. The
-limit high and limit low must be separated by at least 2% of the
-selected limit range.
+Range <pniDCPower_PulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+Limit Range <pniDCPower_PulseCurrentLimitRange.html>`__]
+The range bounded by the limit high and limit low must include zero.
 **Default Value:** Refer to `Supported Properties by
 Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
 the default value by device.
