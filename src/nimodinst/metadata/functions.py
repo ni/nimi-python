@@ -20,7 +20,7 @@ functions = {
 'documentation': {
 'description': '''
 The NI-ModInst session handle created by
-niModInst\_OpenInstalledDevicesSession.
+niModInst_OpenInstalledDevicesSession.
 ''',
 },
             },
@@ -28,7 +28,7 @@ niModInst\_OpenInstalledDevicesSession.
 'documentation': {
 'description': '''
 Cleans up the NI-ModInst session created by a call to
-niModInst\_OpenInstalledDevicesSession. Call this function when you are
+niModInst_OpenInstalledDevicesSession. Call this function when you are
 finished using the session handle and do not use this handle again.
 ''',
 },
@@ -95,7 +95,7 @@ call this function again.
 'documentation': {
 'description': '''
 The NI-ModInst session handle created by
-niModInst\_OpenInstalledDevicesSession.
+niModInst_OpenInstalledDevicesSession.
 ''',
 },
             },
@@ -109,7 +109,7 @@ niModInst\_OpenInstalledDevicesSession.
 A zero-based index that specifies the device for which you want the
 attribute. This index parameter should be between 0 and (deviceCount -
 1), inclusive, where deviceCount is the number of installed devices
-returned by niModInst\_OpenInstalledDevicesSession.
+returned by niModInst_OpenInstalledDevicesSession.
 ''',
 },
             },
@@ -153,7 +153,7 @@ the requested attribute.
 Returns an integer attribute specified by the attributeID parameter for
 a device specified by the handle and index parameters. The handle
 parameter is expected to be a valid handle returned by
-niModInst\_OpenInstalledDevicesSession. It therefore acts as a handle to
+niModInst_OpenInstalledDevicesSession. It therefore acts as a handle to
 a list of installed devices. The index parameter specifies the device in
 the list for which you want the attribute.
 ''',
@@ -171,7 +171,7 @@ the list for which you want the attribute.
 'documentation': {
 'description': '''
 The NI-ModInst session handle created by
-niModInst\_OpenInstalledDevicesSession.
+niModInst_OpenInstalledDevicesSession.
 ''',
 },
             },
@@ -185,7 +185,7 @@ niModInst\_OpenInstalledDevicesSession.
 A zero-based index that specifies the device for which you want the
 attribute. This index parameter should be between 0 and (deviceCount -
 1), inclusive, where deviceCount is the number of installed devices
-returned by niModInst\_OpenInstalledDevicesSession.
+returned by niModInst_OpenInstalledDevicesSession.
 ''',
 },
             },
@@ -197,10 +197,10 @@ returned by niModInst\_OpenInstalledDevicesSession.
 'documentation': {
 'description': '''
 The ID of the string attribute you want to query. Valid Values
-NIMODINST\_ATTR\_DEVICE\_NAME--the name of the device, which can be used
+NIMODINST_ATTR_DEVICE_NAME--the name of the device, which can be used
 to open an instrument driver session for that device
-NIMODINST\_ATTR\_DEVICE\_MODEL--the model of the device (for example, NI
-PXI-5122) NIMODINST\_ATTR\_SERIAL\_NUMBER--the serial number of the
+NIMODINST_ATTR_DEVICE_MODEL--the model of the device (for example, NI
+PXI-5122) NIMODINST_ATTR_SERIAL_NUMBER--the serial number of the
 device
 ''',
 },
@@ -235,7 +235,7 @@ size required.
 Returns a string attribute specified by the attributeID parameter for a
 device specified by the handle and index parameters. The handle
 parameter is expected to be a valid handle returned by
-niModInst\_OpenInstalledDevicesSession. Therefore, it acts as a handle
+niModInst_OpenInstalledDevicesSession. Therefore, it acts as a handle
 to a list of installed devices. The index parameter specifies for which
 device in the list you want the attribute. To find out the length of the
 device name string before you allocate a buffer for it, simply call this
@@ -307,7 +307,7 @@ system state when the handle is created (that is, when you call this
 function. If you remove devices from the system or rename them in
 Measurement & Automation Explorer (MAX), this handle may not refer to an
 accurate list of devices. You should destroy the handle using
-niModInst\_CloseInstalledDevicesSession and create a new handle using
+niModInst_CloseInstalledDevicesSession and create a new handle using
 this function.
 ''',
 },

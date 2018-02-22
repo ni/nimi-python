@@ -21,7 +21,7 @@ functions = {
                 'type': 'ViString',
                 'documentation': {
                     'caution': 'This is just some string.',
-                    'description': 'Contains the **resource\_name** of the device to initialize.',
+                    'description': 'Contains the **resource_name** of the device to initialize.',
                 },
             },
             {
@@ -31,7 +31,7 @@ functions = {
                 'type': 'ViBoolean',
                 'documentation': {
                     'description': 'NI-FAKE is probably not needed.',
-                    'table_body': [['VI\\_TRUE (default)', '1', 'Perform ID Query'], ['VI\\_FALSE', '0', 'Skip ID Query']],
+                    'table_body': [['VI_TRUE (default)', '1', 'Perform ID Query'], ['VI_FALSE', '0', 'Skip ID Query']],
                 },
             },
             {
@@ -41,7 +41,7 @@ functions = {
                 'type': 'ViBoolean',
                 'documentation': {
                     'description': 'Specifies whether to reset',
-                    'table_body': [['VI\\_TRUE (default)', '1', 'Reset Device'], ['VI\\_FALSE', '0', "Don't Reset"]],
+                    'table_body': [['VI_TRUE (default)', '1', 'Reset Device'], ['VI_FALSE', '0', "Don't Reset"]],
                 },
             },
             {
@@ -708,7 +708,7 @@ functions = {
                 'name': 'errorCode',
                 'type': 'ViStatus',
                 'documentation': {
-                    'description': 'Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI\_NULL for this.',
+                    'description': 'Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.',
                 },
             },
             {
@@ -1141,7 +1141,7 @@ functions = {
                 'name': 'maximumTime',
                 'type': 'ViReal64',
                 'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in seconds.',
+                    'description': 'Specifies the **maximum_time** allowed in seconds.',
                 },
             },
             {
@@ -1227,7 +1227,7 @@ functions = {
                 'name': 'maximumTime',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Specifies the **maximum\_time** allowed in microseconds.',
+                    'description': 'Specifies the **maximum_time** allowed in microseconds.',
                 },
             },
             {

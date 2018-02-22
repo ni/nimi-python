@@ -175,7 +175,7 @@ functions_additional_functions = {
         ],
         'documentation': {
             'description': 'Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.',
-            'note': 'You must set NIFGEN\_ATTR\_OUTPUT\_MODE to NIFGEN\_VAL\_OUTPUT\_ARB or NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.',
+            'note': 'You must set NIFGEN_ATTR_OUTPUT_MODE to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ before calling this function.',
         },
     },
 
@@ -198,7 +198,7 @@ functions_additional_functions = {
                 'name': 'waveformNameOrHandle',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen\_AllocateNamedWaveform or niFgen\_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
                 },
             },
             {
@@ -220,8 +220,8 @@ functions_additional_functions = {
 
 By default, subsequent calls to this function
 continue writing data from the position of the last sample written. You
-can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
-nifgen\_SetWaveformNextWritePosition function.''',
+can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
+nifgen_SetWaveformNextWritePosition function.''',
         },
     },
     # Public function that wraps driver function but returns datetime object instead of individual items
@@ -239,7 +239,7 @@ nifgen\_SetWaveformNextWritePosition function.''',
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen_init or the nifgen_InitExtCal function and identifies a particular instrument session.',
                 },
             },
             {
@@ -269,7 +269,7 @@ nifgen\_SetWaveformNextWritePosition function.''',
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen\_init or the nifgen\_InitExtCal function and identifies a particular instrument session.',
+                    'description': 'Identifies your instrument session. **vi** is obtained from the nifgen_init or the nifgen_InitExtCal function and identifies a particular instrument session.',
                 },
             },
             {
