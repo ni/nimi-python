@@ -7,11 +7,11 @@ class HandshakingInitiation(Enum):
     MEASUREMENT_DEVICE = 0
     '''
     The `niSwitch Initiate
-    Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI does not
+    Scan <switchviref.chm::/Initiate_Scan.html>`__ VI does not
     return until the switch hardware is waiting for a trigger input. This
     ensures that if you initiate the measurement device after calling the
     `niSwitch Initiate
-    Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI , the switch
+    Scan <switchviref.chm::/Initiate_Scan.html>`__ VI , the switch
     is sure to receive the first measurement complete (MC) signal sent by
     the measurement device. The measurement device should be configured to
     first take a measurement, send MC, then wait for scanner advanced output
@@ -21,7 +21,7 @@ class HandshakingInitiation(Enum):
     SWITCH = 1
     '''
     The `niSwitch Initiate
-    Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI returns
+    Scan <switchviref.chm::/Initiate_Scan.html>`__ VI returns
     immediately after beginning scan list execution. It is assumed that the
     measurement device has already been configured and is waiting for the
     scanner advanced signal. The measurement should be configured to first
@@ -292,7 +292,7 @@ class TriggerInput(Enum):
     '''
     SOFTWARE_TRIG = 3
     '''
-    The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
+    The switch device waits until you call the send_software_trigger  method before processing the next entry in the scan list.
     '''
     TTL0 = 111
     '''

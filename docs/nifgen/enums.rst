@@ -407,7 +407,7 @@ Enums used in NI-FGEN
 
 
 
-        Applies a flat filter to the data with the passband value specified  in the NIFGEN_ATTR_OSP_FIR_FILTER_FLAT_PASSBAND attribute.
+        Applies a flat filter to the data with the passband value specified  in the :py:data:`nifgen.Session.osp_fir_filter_flat_passband` property.
 
         
 
@@ -417,7 +417,7 @@ Enums used in NI-FGEN
 
 
 
-        Applies a raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_RAISED_COSINE_ALPHA attribute.
+        Applies a raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_raised_cosine_alpha` property.
 
         
 
@@ -427,7 +427,7 @@ Enums used in NI-FGEN
 
 
 
-        Applies a root raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.
+        Applies a root raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_root_raised_cosine_alpha` property.
 
         
 
@@ -437,7 +437,7 @@ Enums used in NI-FGEN
 
 
 
-        Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN_ATTR_OSP_FIR_FILTER_GAUSSIAN_BT attribute.
+        Applies a Gaussian filter to the data with the BT value specified in the  :py:data:`nifgen.Session.osp_fir_filter_gaussian_bt` property.
 
         
 
@@ -447,7 +447,7 @@ Enums used in NI-FGEN
 
 
 
-        Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.
+        Applies a custom filter to the data. If :py:data:`~nifgen.FilterType.CUSTOM` is selected,  you must provide a set of FIR filter coefficients with the  :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method.
 
         
 
@@ -493,7 +493,7 @@ Enums used in NI-FGEN
 
 
 
-        While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.
+        While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
 
         
 
@@ -678,7 +678,7 @@ Enums used in NI-FGEN
 
 
 
-        Standard Function mode—  Generates standard function waveforms  such as sine, square, triangle, and so on.
+        Standard Method mode—  Generates standard method waveforms  such as sine, square, triangle, and so on.
 
         
 
@@ -708,7 +708,7 @@ Enums used in NI-FGEN
 
 
 
-        Frequency List mode—Generates a  standard function using a list of  frequencies you define.
+        Frequency List mode—Generates a  standard method using a list of  frequencies you define.
 
         
 
@@ -1560,7 +1560,7 @@ Enums used in NI-FGEN
 
 
 
-        Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.
+        Software Trigger-The signal generator waits until you call :py:meth:`nifgen.Session.SendSWTrigger`.
 
         
 
@@ -1887,7 +1887,7 @@ Enums used in NI-FGEN
 
 
 
-        While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.
+        While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
 
         
 
@@ -1970,7 +1970,7 @@ Enums used in NI-FGEN
 
 
 
-        User-defined waveform as defined by the niFgen_DefineUserStandardWaveform function.
+        User-defined waveform as defined by the :py:meth:`nifgen.Session.define_user_standard_waveform` method.
 
         
 

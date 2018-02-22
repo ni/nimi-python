@@ -239,13 +239,13 @@ class Library(object):
                 self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
-    def niScope_FancyFetch(self, vi, channel_list, timeout, num_samples, fetch_relative_to, fetch_offset, fetch_record_number, fetch_num_records, wfm_info):  # noqa: N802
+    def niScope_FancyFetch(self, vi, channel_list, timeout, num_samples, relative_to, offset, record_number, num_records, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FancyFetch_cfunc is None:
                 self.niScope_FancyFetch_cfunc = self._library.niScope_FancyFetch
                 self.niScope_FancyFetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt32, ViInt32, ViInt32, ViInt32, ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FancyFetch_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FancyFetch_cfunc(vi, channel_list, timeout, num_samples, fetch_relative_to, fetch_offset, fetch_record_number, fetch_num_records, wfm_info)
+        return self.niScope_FancyFetch_cfunc(vi, channel_list, timeout, num_samples, relative_to, offset, record_number, num_records, wfm_info)
 
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
         with self._func_lock:

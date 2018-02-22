@@ -17,7 +17,7 @@ functions = {
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -26,8 +26,8 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Aborts the scan in progress. Initiate a scan with
-niSwitch\_InitiateScan. If the switch module is not scanning,
-NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
+niSwitch_InitiateScan. If the switch module is not scanning,
+NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
 ''',
 },
     },
@@ -41,7 +41,7 @@ NISWITCH\_ERROR\_NO\_SCAN\_IN\_PROGRESS error is returned.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -79,22 +79,22 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 'documentation': {
 'description': '''
 Indicates whether a path is valid. Possible values include:
------------------------------------- NISWITCH\_VAL\_PATH\_AVAILABLE 1
-NISWITCH\_VAL\_PATH\_EXISTS 2 NISWITCH\_VAL\_PATH\_UNSUPPORTED 3
-NISWITCH\_VAL\_RSRC\_IN\_USE 4 NISWITCH\_VAL\_SOURCE\_CONFLICT 5
-NISWITCH\_VAL\_CHANNEL\_NOT\_AVAILABLE 6 Notes: (1)
-NISWITCH\_VAL\_PATH\_AVAILABLE indicates that the driver can create the
-path at this time. (2) NISWITCH\_VAL\_PATH\_EXISTS indicates that the
-path already exists. (3) NISWITCH\_VAL\_PATH\_UNSUPPORTED indicates that
+------------------------------------ NISWITCH_VAL_PATH_AVAILABLE 1
+NISWITCH_VAL_PATH_EXISTS 2 NISWITCH_VAL_PATH_UNSUPPORTED 3
+NISWITCH_VAL_RSRC_IN_USE 4 NISWITCH_VAL_SOURCE_CONFLICT 5
+NISWITCH_VAL_CHANNEL_NOT_AVAILABLE 6 Notes: (1)
+NISWITCH_VAL_PATH_AVAILABLE indicates that the driver can create the
+path at this time. (2) NISWITCH_VAL_PATH_EXISTS indicates that the
+path already exists. (3) NISWITCH_VAL_PATH_UNSUPPORTED indicates that
 the instrument is not capable of creating a path between the channels
-you specify. (4) NISWITCH\_VAL\_RSRC\_IN\_USE indicates that although
+you specify. (4) NISWITCH_VAL_RSRC_IN_USE indicates that although
 the path is valid, the driver cannot create the path at this moment
 because the switch device is currently using one or more of the required
 channels to create another path. You must destroy the other path before
-creating this one. (5) NISWITCH\_VAL\_SOURCE\_CONFLICT indicates that
+creating this one. (5) NISWITCH_VAL_SOURCE_CONFLICT indicates that
 the instrument cannot create a path because both channels are connected
 to a different source channel. (6)
-NISWITCH\_VAL\_CHANNEL\_NOT\_AVAILABLE indicates that the driver cannot
+NISWITCH_VAL_CHANNEL_NOT_AVAILABLE indicates that the driver cannot
 create a path between the two channels because one of the channels is a
 configuration channel and thus unavailable for external connections.
 ''',
@@ -106,7 +106,7 @@ configuration channel and thus unavailable for external connections.
 Verifies that a path between channel 1 and channel 2 can be created. If
 a path is possible in the switch module, the availability of that path
 is returned given the existing connections. If the path is possible but
-in use, a NISWITCH\_WARN\_IMPLICIT\_CONNECTION\_EXISTS warning is
+in use, a NISWITCH_WARN_IMPLICIT_CONNECTION_EXISTS warning is
 returned.
 ''',
 },
@@ -121,7 +121,7 @@ returned.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -133,7 +133,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -200,7 +200,7 @@ attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -212,7 +212,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -279,7 +279,7 @@ attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -291,7 +291,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -358,7 +358,7 @@ attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -370,7 +370,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -437,7 +437,7 @@ attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -449,7 +449,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -516,7 +516,7 @@ attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -526,17 +526,17 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 This function clears the error code and error description for the IVI
 session. If the user specifies a valid IVI session for the
-instrument\_handle parameter, this function clears the error information
-for the session. If the user passes VI\_NULL for the Vi parameter, this
+instrument_handle parameter, this function clears the error information
+for the session. If the user passes VI_NULL for the Vi parameter, this
 function clears the error information for the current execution thread.
 If the Vi parameter is an invalid session, the function does nothing and
 returns an error. The function clears the error code by setting it to
-VI\_SUCCESS, If the error description string is non-NULL, the function
+VI_SUCCESS, If the error description string is non-NULL, the function
 deallocates the error description string and sets the address to
-VI\_NULL. Maintaining the error information separately for each thread
+VI_NULL. Maintaining the error information separately for each thread
 is useful if the user does not have a session handle to pass to the
-niSwitch\_GetError function, which occurs when a call to niSwitch\_init
-or niSwitch\_InitWithOptions fails.
+niSwitch_GetError function, which occurs when a call to niSwitch_init
+or niSwitch_InitWithOptions fails.
 ''',
 },
     },
@@ -550,7 +550,7 @@ or niSwitch\_InitWithOptions fails.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -570,7 +570,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -579,8 +579,8 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Downloads the configured scan list and trigger settings to hardware.
-Calling niSwitch\_Commit optional as it is implicitly called during
-niSwitch\_InitiateScan. Use niSwitch\_Commit to arm triggers in a given
+Calling niSwitch_Commit optional as it is implicitly called during
+niSwitch_InitiateScan. Use niSwitch_Commit to arm triggers in a given
 order or to control when expensive hardware operations are performed.
 ''',
 },
@@ -595,7 +595,7 @@ order or to control when expensive hardware operations are performed.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -633,9 +633,9 @@ The scan list is comprised of a list of channel connections separated by
 semi-colons. For example, the following scan list will scan the first
 three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
 to Scan Lists for more information on scan list syntax To see the status
-of the scan, call either niSwitch\_IsScanning or
-niSwitch\_WaitForScanComplete. Use the niSwitch\_ConfigureScanTrigger
-function to configure the scan trigger. Use the niSwitch\_InitiateScan
+of the scan, call either niSwitch_IsScanning or
+niSwitch_WaitForScanComplete. Use the niSwitch_ConfigureScanTrigger
+function to configure the scan trigger. Use the niSwitch_InitiateScan
 function to start the scan.
 ''',
 },
@@ -650,7 +650,7 @@ function to start the scan.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -665,7 +665,7 @@ The minimum length of time you want the switch device to wait after it
 creates a path until it asserts a trigger on the scan advanced output
 line. The driver uses this value to set the Scan Delay attribute. The
 scan delay is in addition to the settling time.The driver uses this
-value to set the NISWITCH\_ATTR\_SCAN\_DELAY attribute. Express this
+value to set the NISWITCH_ATTR_SCAN_DELAY attribute. Express this
 value in seconds. Default value: 0.0 s
 ''',
 },
@@ -677,11 +677,11 @@ value in seconds. Default value: 0.0 s
 'documentation': {
 'description': '''
 Trigger source you want the switch module to use during scanning. The
-driver uses this value to set the NISWITCH\_ATTR\_TRIGGER\_INPUT
+driver uses this value to set the NISWITCH_ATTR_TRIGGER_INPUT
 attribute. The switch device waits for the trigger you specify when it
 encounters a semicolon in the scanlist. When the trigger occurs, the
 switch device advances to the next entry in the scanlist. Refer to the
-NISWITCH\_ATTR\_TRIGGER\_INPUT topic in the NI Switches Help for a list
+NISWITCH_ATTR_TRIGGER_INPUT topic in the NI Switches Help for a list
 of valid values.
 ''',
 },
@@ -693,11 +693,11 @@ of valid values.
 'documentation': {
 'description': '''
 Output destination of the scan advanced trigger signal. The driver uses
-this value to set the NISWITCH\_ATTR\_SCAN\_ADVANCED\_OUTPUT attribute.
+this value to set the NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT attribute.
 After the switch processes each entry in the scan list, it waits the
 length of time you specify in the Scan Delay parameter and then asserts
 a trigger on the line you specify with this parameter. Refer to the
-NISWITCH\_ATTR\_SCAN\_ADVANCED\_OUTPUT topic in the NI Switches Help for
+NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
 a list of valid values.
 ''',
 },
@@ -706,8 +706,8 @@ a list of valid values.
 'documentation': {
 'description': '''
 Configures the scan triggers for the scan list established with
-niSwitch\_ConfigureScanList. Refer to Devices Overview to determine if
-the switch module supports scanning. niSwitch\_ConfigureScanTrigger sets
+niSwitch_ConfigureScanList. Refer to Devices Overview to determine if
+the switch module supports scanning. niSwitch_ConfigureScanTrigger sets
 the location that the switch expects to receive an input trigger to
 advance through the scan list. This function also sets the location
 where it outputs a scan advanced signal after it completes an entry in
@@ -725,7 +725,7 @@ the scan list.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -763,17 +763,17 @@ Creates a path between channel 1 and channel 2. The driver calculates
 and uses the shortest path between the two channels. Refer to Immediate
 Operations for information about Channel Usage types. If a path is not
 available, the function returns one of the following errors: -
-NISWITCH\_ERROR\_EXPLICIT\_CONNECTION\_EXISTS, if the two channels are
-already explicitly connected by calling either the niSwitch\_Connect or
-niSwitch\_SetPath function. -
-NISWITCH\_ERROR\_IS\_CONFIGURATION\_CHANNEL, if a channel is a
+NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
+already explicitly connected by calling either the niSwitch_Connect or
+niSwitch_SetPath function. -
+NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
 configuration channel. Error elaboration contains information about
 which of the two channels is a configuration channel. -
-NISWITCH\_ERROR\_ATTEMPT\_TO\_CONNECT\_SOURCES, if both channels are
+NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are
 connected to a different source. Error elaboration contains information
 about sources channel 1 and 2 connect to. -
-NISWITCH\_ERROR\_CANNOT\_CONNECT\_TO\_ITSELF, if channels 1 and 2 are
-one and the same channel. - NISWITCH\_ERROR\_PATH\_NOT\_FOUND, if the
+NISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are
+one and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the
 driver cannot find a path between the two channels. Note: Paths are
 bidirectional. For example, if a path exists between channels CH1 and
 CH2, then the path also exists between channels CH2 and CH1.
@@ -790,7 +790,7 @@ CH2, then the path also exists between channels CH2 and CH1.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -821,16 +821,16 @@ the channels. Refer to Setting Source and Configuration Channels for
 information about channel usage types. In the event of an error,
 connecting stops at the point in the list where the error occurred. If a
 path is not available, the function returns one of the following errors:
-- NISWITCH\_ERROR\_EXPLICIT\_CONNECTION\_EXISTS, if the two channels are
+- NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
 already explicitly connected. -
-NISWITCH\_ERROR\_IS\_CONFIGURATION\_CHANNEL, if a channel is a
+NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
 configuration channel. Error elaboration contains information about
 which of the two channels is a configuration channel. -
-NISWITCH\_ERROR\_ATTEMPT\_TO\_CONNECT\_SOURCES, if both channels are
+NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES, if both channels are
 connected to a different source. Error elaboration contains information
 about sources channel 1 and 2 to connect. -
-NISWITCH\_ERROR\_CANNOT\_CONNECT\_TO\_ITSELF, if channels 1 and 2 are
-one and the same channel. - NISWITCH\_ERROR\_PATH\_NOT\_FOUND, if the
+NISWITCH_ERROR_CANNOT_CONNECT_TO_ITSELF, if channels 1 and 2 are
+one and the same channel. - NISWITCH_ERROR_PATH_NOT_FOUND, if the
 driver cannot find a path between the two channels. Note: Paths are
 bidirectional. For example, if a path exists between channels ch1 and
 ch2, then the path also exists between channels ch1 and ch2.
@@ -847,7 +847,7 @@ ch2, then the path also exists between channels ch1 and ch2.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -871,7 +871,7 @@ disconnected and any scan in progress is aborted.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -906,9 +906,9 @@ names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 'documentation': {
 'description': '''
 This function destroys the path between two channels that you create
-with the niSwitch\_Connect or niSwitch\_SetPath function. If a path is
+with the niSwitch_Connect or niSwitch_SetPath function. If a path is
 not connected or not available, the function returns the
-IVISWTCH\_ERROR\_NO\_SUCH\_PATH error.
+IVISWTCH_ERROR_NO_SUCH_PATH error.
 ''',
 },
     },
@@ -922,7 +922,7 @@ IVISWTCH\_ERROR\_NO\_SUCH\_PATH error.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -931,7 +931,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Breaks all existing paths. If the switch module cannot break all paths,
-NISWITCH\_WARN\_PATH\_REMAINS warning is returned.
+NISWITCH_WARN_PATH_REMAINS warning is returned.
 ''',
 },
     },
@@ -945,7 +945,7 @@ NISWITCH\_WARN\_PATH\_REMAINS warning is returned.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -987,7 +987,7 @@ error occurred.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -999,7 +999,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -1067,7 +1067,7 @@ invalid.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1079,7 +1079,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -1147,7 +1147,7 @@ invalid.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1159,7 +1159,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -1227,7 +1227,7 @@ invalid.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1239,7 +1239,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -1307,7 +1307,7 @@ invalid.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1319,7 +1319,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -1364,7 +1364,7 @@ returns the array size you must pass to get the entire value. For
 example, if the value is "123456" and the Array Size is 4, the function
 places "123" into the buffer and returns 7. If you pass a negative
 number, the function copies the value to the buffer regardless of the
-number of bytes in the value. If you pass 0, you can pass VI\_NULL for
+number of bytes in the value. If you pass 0, you can pass VI_NULL for
 the Attribute Value buffer parameter. Default Value:512
 ''',
 },
@@ -1384,7 +1384,7 @@ bytes into the buffer, places an ASCII NUL byte at the end of the
 buffer, and returns the array size you must pass to get the entire
 value. For example, if the value is "123456" and the Array Size is 4,
 the function places "123" into the buffer and returns 7. If you specify
-0 for the Array Size parameter, you can pass VI\_NULL for this
+0 for the Array Size parameter, you can pass VI_NULL for this
 parameter. From the function panel window, you can use this control as
 follows. - If the attribute currently showing in the Attribute ID ring
 control has constants as valid values, you can view a list of the
@@ -1412,7 +1412,7 @@ array size you must pass to get the entire value. For example, if the
 value is "123456" and the Array Size is 4, the function places "123"
 into the buffer and returns 7. If you want to call this function just to
 get the required array size, you can pass 0 for the Array Size and
-VI\_NULL for the Attribute Value buffer. If you want the function to
+VI_NULL for the Attribute Value buffer. If you want the function to
 fill in the buffer regardless of the number of bytes in the value, pass
 a negative number for the Array Size parameter.
 ''',
@@ -1428,7 +1428,7 @@ a negative number for the Array Size parameter.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1459,7 +1459,7 @@ buffer size you must pass to get the entire value. For example, if the
 value is "123456" and the Buffer Size is 4, the function places "123"
 into the buffer and returns 7. If you pass a negative number, the
 function copies the value to the buffer regardless of the number of
-bytes in the value. If you pass 0, you can pass VI\_NULL for the
+bytes in the value. If you pass 0, you can pass VI_NULL for the
 Coercion Record buffer parameter. Default Value: None
 ''',
 },
@@ -1479,7 +1479,7 @@ specify.
 'documentation': {
 'description': '''
 Returns the channel string that is in the channel table at the specified
-index. Use niSwitch\_GetChannelName in a For Loop to get a complete list
+index. Use niSwitch_GetChannelName in a For Loop to get a complete list
 of valid channel names for the switch module. Use the Channel Count
 attribute to determine the number of channels.
 ''',
@@ -1495,7 +1495,7 @@ attribute to determine the number of channels.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1507,7 +1507,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Returns the error code for the session or execution thread. If you pass
-0 for the Buffer Size, you can pass VI\_NULL for this parameter.
+0 for the Buffer Size, you can pass VI_NULL for this parameter.
 ''',
 },
             },
@@ -1520,13 +1520,13 @@ Returns the error code for the session or execution thread. If you pass
 Pass the number of bytes in the ViChar array you specify for the
 Description parameter. If the error description, including the
 terminating NUL byte, contains more bytes than you indicate in this
-parameter, the function copies buffer\_size - 1 bytes into the buffer,
+parameter, the function copies buffer_size - 1 bytes into the buffer,
 places an ASCII NUL byte at the end of the buffer, and returns the
 buffer size you must pass to get the entire value. For example, if the
 value is "123456" and the Buffer Size is 4, the function places "123"
 into the buffer and returns 7. If you pass a negative number, the
 function copies the value to the buffer regardless of the number of
-bytes in the value. If you pass 0, you can pass VI\_NULL for the
+bytes in the value. If you pass 0, you can pass VI_NULL for the
 Description buffer parameter. Default Value: None
 ''',
 },
@@ -1547,7 +1547,7 @@ the buffer, places an ASCII NUL byte at the end of the buffer, and
 returns the buffer size you must pass to get the entire value. For
 example, if the value is "123456" and the Buffer Size is 4, the function
 places "123" into the buffer and returns 7. If you pass 0 for the Buffer
-Size, you can pass VI\_NULL for this parameter.
+Size, you can pass VI_NULL for this parameter.
 ''',
 },
             },
@@ -1562,12 +1562,12 @@ the buffer size required to get the entire error description string and
 then call the function again with a sufficiently large buffer. If the
 user specifies a valid IVI session for the InstrumentHandle parameter,
 Get Error retrieves and then clears the error information for the
-session. If the user passes VI\_NULL for the InstrumentHandle parameter,
+session. If the user passes VI_NULL for the InstrumentHandle parameter,
 this function retrieves and then clears the error information for the
 current execution thread. If the InstrumentHandle parameter is an
 invalid session, the function does nothing and returns an error.
 Normally, the error information describes the first error that occurred
-since the user last called niSwitch\_GetError or niSwitch\_ClearError.
+since the user last called niSwitch_GetError or niSwitch_ClearError.
 ''',
 },
     },
@@ -1581,7 +1581,7 @@ since the user last called niSwitch\_GetError or niSwitch\_ClearError.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1601,7 +1601,7 @@ buffer size you must pass to get the entire value. For example, if the
 value is "123456" and the Buffer Size is 4, the function places "123"
 into the buffer and returns 7. If you pass a negative number, the
 function copies the value to the buffer regardless of the number of
-bytes in the value. If you pass 0, you can pass VI\_NULL for the
+bytes in the value. If you pass 0, you can pass VI_NULL for the
 Coercion Record buffer parameter. Default Value: None
 ''',
 },
@@ -1632,7 +1632,7 @@ empty string if no coercion records remain for the session.
 This function returns the coercion information associated with the IVI
 session. This function retrieves and clears the oldest instance in which
 the instrument driver coerced a value you specified to another value. If
-you set the NISWITCH\_ATTR\_RECORD\_COERCIONS attribute to VI\_TRUE, the
+you set the NISWITCH_ATTR_RECORD_COERCIONS attribute to VI_TRUE, the
 instrument driver keeps a list of all coercions it makes on ViInt32 or
 ViReal64 values you pass to instrument driver functions. You use this
 function to retrieve information from that list. If the next coercion
@@ -1644,7 +1644,7 @@ value. For example, if the value is "123456" and the Buffer Size is 4,
 the function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value. If you pass 0, you can pass
-VI\_NULL for the Coercion Record buffer parameter. The function returns
+VI_NULL for the Coercion Record buffer parameter. The function returns
 an empty string in the Coercion Record parameter if no coercion records
 remain for the session.
 ''',
@@ -1660,7 +1660,7 @@ remain for the session.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1680,7 +1680,7 @@ returns the buffer size you must pass to get the entire value. For
 example, if the value is "123456" and the Buffer Size is 4, the function
 places "123" into the buffer and returns 7. If you pass a negative
 number, the function copies the value to the buffer regardless of the
-number of bytes in the value. If you pass 0, you can pass VI\_NULL for
+number of bytes in the value. If you pass 0, you can pass VI_NULL for
 the Interchange Warning buffer parameter. Default Value: None
 ''',
 },
@@ -1715,8 +1715,8 @@ the class driver recorded an interchangeability warning.
 Interchangeability warnings indicate that using your application with a
 different instrument might cause different behavior. You use this
 function to retrieve interchangeability warnings. The driver performs
-interchangeability checking when the NISWITCH\_ATTR\_INTERCHANGE\_CHECK
-attribute is set to VI\_TRUE. The function returns an empty string in
+interchangeability checking when the NISWITCH_ATTR_INTERCHANGE_CHECK
+attribute is set to VI_TRUE. The function returns an empty string in
 the Interchange Warning parameter if no interchangeability warnings
 remain for the session. In general, the instrument driver generates
 interchangeability warnings when an attribute that affects the behavior
@@ -1734,7 +1734,7 @@ of the instrument is in a state that you did not specify.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1778,7 +1778,7 @@ parameter, the function copies Buffer Size - 1 bytes into the buffer,
 places an ASCII NULL byte at the end of the buffer, and returns the
 buffer size you must pass to get the entire value. For example, if the
 value is "R1->C1" and the Buffer Size is 4, the function places "R1-"
-into the buffer and returns 7. If you pass 0, you can pass VI\_NULL for
+into the buffer and returns 7. If you pass 0, you can pass VI_NULL for
 the Path parameter. This enables you to find out the path size and to
 allocate the buffer of the appropriate size before calling this function
 again.
@@ -1802,13 +1802,13 @@ returned paths: ch0->com0, com0->ab0
 'documentation': {
 'description': '''
 Returns a string that identifies the explicit path created with
-niSwitch\_Connect. Pass this string to niSwitch\_SetPath to establish
+niSwitch_Connect. Pass this string to niSwitch_SetPath to establish
 the exact same path in future connections. In some cases, multiple paths
-are available between two channels. When you call niSwitch\_Connect, the
-driver selects an available path. With niSwitch\_Connect, there is no
+are available between two channels. When you call niSwitch_Connect, the
+driver selects an available path. With niSwitch_Connect, there is no
 guarantee that the driver selected path will always be the same path
-through the switch module. niSwitch\_GetPath only returns those paths
-explicitly created by niSwitch Connect Channels or niSwitch\_SetPath.
+through the switch module. niSwitch_GetPath only returns those paths
+explicitly created by niSwitch Connect Channels or niSwitch_SetPath.
 For example, if you connect channels CH1 and CH3,and then channels CH2
 and CH3, an explicit path between channels CH1 and CH2 does not exist an
 error is returned
@@ -1825,7 +1825,7 @@ error is returned
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1855,7 +1855,7 @@ relay names for the switch module.
 'description': '''
 Returns the number of times the relay has changed from Closed to Open.
 Relay count is useful for tracking relay lifetime and usage. Call
-niSwitch\_WaitForDebounce before niSwitch\_GetRelayCount to ensure an
+niSwitch_WaitForDebounce before niSwitch_GetRelayCount to ensure an
 accurate count. Refer to the Relay Count topic in the NI Switches Help
 to determine if the switch module supports relay counting.
 ''',
@@ -1871,7 +1871,7 @@ to determine if the switch module supports relay counting.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1902,7 +1902,7 @@ buffer size you must pass to get the entire value. For example, if the
 value is "123456" and the Buffer Size is 4, the function places "123"
 into the buffer and returns 7. If you pass a negative number, the
 function copies the value to the buffer regardless of the number of
-bytes in the value. If you pass 0, you can pass VI\_NULL for the
+bytes in the value. If you pass 0, you can pass VI_NULL for the
 Coercion Record buffer parameter. Default Value: None
 ''',
 },
@@ -1919,7 +1919,7 @@ Coercion Record buffer parameter. Default Value: None
 'documentation': {
 'description': '''
 Returns the relay name string that is in the relay list at the specified
-index. Use niSwitch\_GetRelayName in a For Loop to get a complete list
+index. Use niSwitch_GetRelayName in a For Loop to get a complete list
 of valid relay names for the switch module. Use the Number of Relays
 attribute to determine the number of relays.
 ''',
@@ -1935,7 +1935,7 @@ attribute to determine the number of relays.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -1958,8 +1958,8 @@ relay names for the switch module.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-Indicates whether the relay is open or closed. NISWITCH\_VAL\_OPEN 10
-NIWITCH\_VAL\_CLOSED 11
+Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
+NIWITCH_VAL_CLOSED 11
 ''',
 },
             },
@@ -2003,8 +2003,8 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
 This parameter is ignored. Because NI-SWITCH supports multiple switch
 modules, it always queries the switch device to determine which device
 is installed. For this reason, this VI may return
-NISWITCH\_ERROR\_FAIL\_ID\_QUERY even if this parameter is set to
-VI\_FALSE. Valid Values: VI\_TRUE - (Default Value) VI\_FALSE -
+NISWITCH_ERROR_FAIL_ID_QUERY even if this parameter is set to
+VI_FALSE. Valid Values: VI_TRUE - (Default Value) VI_FALSE -
 Currently unsupported.
 ''',
 },
@@ -2016,7 +2016,7 @@ Currently unsupported.
 'documentation': {
 'description': '''
 Specifies whether to reset the switch module during the initialization
-process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
+process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
 - Currently unsupported. The device will not reset.
 ''',
 },
@@ -2030,10 +2030,10 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
 Sets initial values of certain attributes for the NI-SWITCH session.
 Default value: Simulate=0,RangeCheck=1,DriverSetup=topology:1127/2-Wire
 32x1 Mux The following table lists the attribute string names you can
-use: RangeCheck 1 NISWITCH\_ATTR\_RANGE\_CHECK QueryInstrStatus 1
-NISWITCH\_ATTR\_QUERY\_INSTRUMENT\_STATUS Cache 1 NISWITCH\_ATTR\_CACHE
-Simulate 0 NISWITCH\_ATTR\_SIMULATE RecordCoercions 0
-NISWITCH\_ATTR\_RECORD\_COERCIONS DriverSetup topology 1127/2-Wire 32x1
+use: RangeCheck 1 NISWITCH_ATTR_RANGE_CHECK QueryInstrStatus 1
+NISWITCH_ATTR_QUERY_INSTRUMENT_STATUS Cache 1 NISWITCH_ATTR_CACHE
+Simulate 0 NISWITCH_ATTR_SIMULATE RecordCoercions 0
+NISWITCH_ATTR_RECORD_COERCIONS DriverSetup topology 1127/2-Wire 32x1
 Mux The format of the option string is, "AttributeStringName=Value"
 where AttributeStringName is the string name of the attribute shown
 above and Value is the value to which the attribute will be set. To set
@@ -2075,7 +2075,7 @@ specify a topology, the device specified in resource name is simulated.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2085,7 +2085,7 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 Returns a session handle used to identify the switch module in all
 subsequent instrument driver calls and optionally sets the initial state
-of the session. niSwitch\_InitWithOptions creates a new IVI instrument
+of the session. niSwitch_InitWithOptions creates a new IVI instrument
 driver session for the switch module specified in the resource name
 parameter. If multiple topologies are valid for that device, the driver
 uses the default topology specified in MAX. The topology is also
@@ -2098,7 +2098,7 @@ for information about determining the topology string of an NI
 SwitchBlock device. By default, the switch module is reset to a known
 state. Enable simulation in the options string parameter. An error is
 returned if a session to the specified resource exists in another
-process. The same session is returned if niSwitch\_InitWithOptions is
+process. The same session is returned if niSwitch_InitWithOptions is
 called twice in the same process for the same resource with the same
 topology.
 ''',
@@ -2135,194 +2135,194 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
 'description': '''
 Pass the topology name you want to use for the switch you specify with
 Resource Name parameter. You can also pass
-NISWITCH\_TOPOLOGY\_CONFIGURED\_TOPOLOGY to use the last topology that
+NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
 was configured for the device in MAX. Default Value:
-NISWITCH\_TOPOLOGY\_CONFIGURED\_TOPOLOGY Valid Values:
-NISWITCH\_TOPOLOGY\_1127\_1\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_1127\_2\_WIRE\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_1127\_2\_WIRE\_4X8\_MATRIX
-NISWITCH\_TOPOLOGY\_1127\_4\_WIRE\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1127\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_1128\_1\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_1128\_2\_WIRE\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_1128\_2\_WIRE\_4X8\_MATRIX
-NISWITCH\_TOPOLOGY\_1128\_4\_WIRE\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1128\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_16X16\_MATRIX
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_DUAL\_8X16\_MATRIX
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_DUAL\_4X32\_MATRIX
-NISWITCH\_TOPOLOGY\_1129\_2\_WIRE\_QUAD\_4X16\_MATRIX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_256X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_DUAL\_128X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_8x32\_MATRIX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_OCTAL\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_QUAD\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_1\_WIRE\_SIXTEEN\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_2\_WIRE\_4X32\_MATRIX
-NISWITCH\_TOPOLOGY\_1130\_2\_WIRE\_128X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_2\_WIRE\_OCTAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_2\_WIRE\_QUAD\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_4\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_4\_WIRE\_QUAD\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1130\_INDEPENDENT NISWITCH\_TOPOLOGY\_1160\_16\_SPDT
-NISWITCH\_TOPOLOGY\_1161\_8\_SPDT
-NISWITCH\_TOPOLOGY\_1163R\_OCTAL\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_1166\_16\_DPDT NISWITCH\_TOPOLOGY\_1166\_32\_SPDT
-NISWITCH\_TOPOLOGY\_1167\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_1169\_100\_SPST NISWITCH\_TOPOLOGY\_1169\_50\_DPST
-NISWITCH\_TOPOLOGY\_1175\_1\_WIRE\_196X1\_MUX
-NISWITCH\_TOPOLOGY\_1175\_2\_WIRE\_98X1\_MUX
-NISWITCH\_TOPOLOGY\_1175\_2\_WIRE\_95X1\_MUX
-NISWITCH\_TOPOLOGY\_1190\_QUAD\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_1191\_QUAD\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_1192\_8\_SPDT NISWITCH\_TOPOLOGY\_1193\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_1193\_16X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_1193\_DUAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_1193\_DUAL\_8X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_1193\_QUAD\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_1193\_QUAD\_4X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_1193\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_1194\_QUAD\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_1195\_QUAD\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2501\_1\_WIRE\_48X1\_MUX
-NISWITCH\_TOPOLOGY\_2501\_1\_WIRE\_48X1\_AMPLIFIED\_MUX
-NISWITCH\_TOPOLOGY\_2501\_2\_WIRE\_24X1\_MUX
-NISWITCH\_TOPOLOGY\_2501\_2\_WIRE\_24X1\_AMPLIFIED\_MUX
-NISWITCH\_TOPOLOGY\_2501\_2\_WIRE\_DUAL\_12X1\_MUX
-NISWITCH\_TOPOLOGY\_2501\_2\_WIRE\_QUAD\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2501\_2\_WIRE\_4X6\_MATRIX
-NISWITCH\_TOPOLOGY\_2501\_4\_WIRE\_12X1\_MUX
-NISWITCH\_TOPOLOGY\_2503\_1\_WIRE\_48X1\_MUX
-NISWITCH\_TOPOLOGY\_2503\_2\_WIRE\_24X1\_MUX
-NISWITCH\_TOPOLOGY\_2503\_2\_WIRE\_DUAL\_12X1\_MUX
-NISWITCH\_TOPOLOGY\_2503\_2\_WIRE\_QUAD\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2503\_2\_WIRE\_4X6\_MATRIX
-NISWITCH\_TOPOLOGY\_2503\_4\_WIRE\_12X1\_MUX
-NISWITCH\_TOPOLOGY\_2510\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2512\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2514\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2515\_INDEPENDENT NISWITCH\_TOPOLOGY\_2520\_80\_SPST
-NISWITCH\_TOPOLOGY\_2521\_40\_DPST NISWITCH\_TOPOLOGY\_2522\_53\_SPDT
-NISWITCH\_TOPOLOGY\_2523\_26\_DPDT
-NISWITCH\_TOPOLOGY\_2524\_1\_WIRE\_128X1\_MUX
-NISWITCH\_TOPOLOGY\_2524\_1\_WIRE\_DUAL\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2524\_1\_WIRE\_QUAD\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2524\_1\_WIRE\_OCTAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2524\_1\_WIRE\_SIXTEEN\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_2525\_2\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2525\_2\_WIRE\_DUAL\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2525\_2\_WIRE\_QUAD\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2525\_2\_WIRE\_OCTAL\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_2525\_2\_WIRE\_SIXTEEN\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2526\_1\_WIRE\_158X1\_MUX
-NISWITCH\_TOPOLOGY\_2526\_2\_WIRE\_79X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_1\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_1\_WIRE\_DUAL\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_2\_WIRE\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_2\_WIRE\_DUAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_4\_WIRE\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2527\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2529\_2\_WIRE\_DUAL\_4X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2529\_2\_WIRE\_8X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2529\_2\_WIRE\_4X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_128X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_DUAL\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_4x32\_MATRIX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_8x16\_MATRIX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_OCTAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_1\_WIRE\_QUAD\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_2\_WIRE\_4x16\_MATRIX
-NISWITCH\_TOPOLOGY\_2530\_2\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_2\_WIRE\_DUAL\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_2\_WIRE\_QUAD\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_4\_WIRE\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_4\_WIRE\_DUAL\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2530\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2531\_1\_WIRE\_4X128\_MATRIX
-NISWITCH\_TOPOLOGY\_2531\_1\_WIRE\_8X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2531\_1\_WIRE\_DUAL\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2531\_1\_WIRE\_DUAL\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2531\_2\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2531\_2\_WIRE\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_16X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_4X128\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_8X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_DUAL\_16X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_DUAL\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_DUAL\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_1\_WIRE\_SIXTEEN\_2X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_2\_WIRE\_16X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_2\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_2\_WIRE\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2532\_2\_WIRE\_DUAL\_4X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2533\_1\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2534\_1\_WIRE\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2535\_1\_WIRE\_4X136\_MATRIX
-NISWITCH\_TOPOLOGY\_2536\_1\_WIRE\_8X68\_MATRIX
-NISWITCH\_TOPOLOGY\_2540\_1\_WIRE\_8X9\_MATRIX
-NISWITCH\_TOPOLOGY\_2541\_1\_WIRE\_8X12\_MATRIX
-NISWITCH\_TOPOLOGY\_2542\_QUAD\_2X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2543\_DUAL\_4X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2544\_8X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2545\_4X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2546\_DUAL\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2547\_8X1\_MUX NISWITCH\_TOPOLOGY\_2548\_4\_SPDT
-NISWITCH\_TOPOLOGY\_2549\_TERMINATED\_2\_SPDT
-NISWITCH\_TOPOLOGY\_2554\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2555\_4X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2556\_DUAL\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2557\_8X1\_MUX NISWITCH\_TOPOLOGY\_2558\_4\_SPDT
-NISWITCH\_TOPOLOGY\_2559\_TERMINATED\_2\_SPDT
-NISWITCH\_TOPOLOGY\_2564\_16\_SPST NISWITCH\_TOPOLOGY\_2564\_8\_DPST
-NISWITCH\_TOPOLOGY\_2565\_16\_SPST NISWITCH\_TOPOLOGY\_2566\_16\_SPDT
-NISWITCH\_TOPOLOGY\_2566\_8\_DPDT NISWITCH\_TOPOLOGY\_2567\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2568\_15\_DPST NISWITCH\_TOPOLOGY\_2568\_31\_SPST
-NISWITCH\_TOPOLOGY\_2569\_100\_SPST NISWITCH\_TOPOLOGY\_2569\_50\_DPST
-NISWITCH\_TOPOLOGY\_2570\_20\_DPDT NISWITCH\_TOPOLOGY\_2570\_40\_SPDT
-NISWITCH\_TOPOLOGY\_2571\_66\_SPDT
-NISWITCH\_TOPOLOGY\_2575\_1\_WIRE\_196X1\_MUX
-NISWITCH\_TOPOLOGY\_2575\_2\_WIRE\_98X1\_MUX
-NISWITCH\_TOPOLOGY\_2575\_2\_WIRE\_95X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_2\_WIRE\_64X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_2\_WIRE\_DUAL\_32X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_2\_WIRE\_OCTAL\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_2\_WIRE\_QUAD\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_2\_WIRE\_SIXTEEN\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2576\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2584\_1\_WIRE\_12X1\_MUX
-NISWITCH\_TOPOLOGY\_2584\_1\_WIRE\_DUAL\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2584\_2\_WIRE\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2584\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2585\_1\_WIRE\_10X1\_MUX
-NISWITCH\_TOPOLOGY\_2586\_10\_SPST NISWITCH\_TOPOLOGY\_2586\_5\_DPST
-NISWITCH\_TOPOLOGY\_2590\_4X1\_MUX NISWITCH\_TOPOLOGY\_2591\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2593\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2593\_8X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2593\_DUAL\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_2593\_DUAL\_4X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2593\_INDEPENDENT NISWITCH\_TOPOLOGY\_2594\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2595\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2596\_DUAL\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2597\_6X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2598\_DUAL\_TRANSFER
-NISWITCH\_TOPOLOGY\_2599\_2\_SPDT NISWITCH\_TOPOLOGY\_2720\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2722\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2725\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2727\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2737\_2\_WIRE\_4X64\_MATRIX
-NISWITCH\_TOPOLOGY\_2738\_2\_WIRE\_8X32\_MATRIX
-NISWITCH\_TOPOLOGY\_2739\_2\_WIRE\_16X16\_MATRIX
-NISWITCH\_TOPOLOGY\_2746\_QUAD\_4X1\_MUX
-NISWITCH\_TOPOLOGY\_2747\_DUAL\_8X1\_MUX
-NISWITCH\_TOPOLOGY\_2748\_16X1\_MUX
-NISWITCH\_TOPOLOGY\_2790\_INDEPENDENT
-NISWITCH\_TOPOLOGY\_2796\_DUAL\_6X1\_MUX
-NISWITCH\_TOPOLOGY\_2797\_6X1\_TERMINATED\_MUX
-NISWITCH\_TOPOLOGY\_2798\_DUAL\_TRANSFER
-NISWITCH\_TOPOLOGY\_2799\_2\_SPDT
+NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY Valid Values:
+NISWITCH_TOPOLOGY_1127_1_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_1127_2_WIRE_32X1_MUX
+NISWITCH_TOPOLOGY_1127_2_WIRE_4X8_MATRIX
+NISWITCH_TOPOLOGY_1127_4_WIRE_16X1_MUX
+NISWITCH_TOPOLOGY_1127_INDEPENDENT
+NISWITCH_TOPOLOGY_1128_1_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_1128_2_WIRE_32X1_MUX
+NISWITCH_TOPOLOGY_1128_2_WIRE_4X8_MATRIX
+NISWITCH_TOPOLOGY_1128_4_WIRE_16X1_MUX
+NISWITCH_TOPOLOGY_1128_INDEPENDENT
+NISWITCH_TOPOLOGY_1129_2_WIRE_16X16_MATRIX
+NISWITCH_TOPOLOGY_1129_2_WIRE_8X32_MATRIX
+NISWITCH_TOPOLOGY_1129_2_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_8X16_MATRIX
+NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_4X32_MATRIX
+NISWITCH_TOPOLOGY_1129_2_WIRE_QUAD_4X16_MATRIX
+NISWITCH_TOPOLOGY_1130_1_WIRE_256X1_MUX
+NISWITCH_TOPOLOGY_1130_1_WIRE_DUAL_128X1_MUX
+NISWITCH_TOPOLOGY_1130_1_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_1130_1_WIRE_8x32_MATRIX
+NISWITCH_TOPOLOGY_1130_1_WIRE_OCTAL_32X1_MUX
+NISWITCH_TOPOLOGY_1130_1_WIRE_QUAD_64X1_MUX
+NISWITCH_TOPOLOGY_1130_1_WIRE_SIXTEEN_16X1_MUX
+NISWITCH_TOPOLOGY_1130_2_WIRE_4X32_MATRIX
+NISWITCH_TOPOLOGY_1130_2_WIRE_128X1_MUX
+NISWITCH_TOPOLOGY_1130_2_WIRE_OCTAL_16X1_MUX
+NISWITCH_TOPOLOGY_1130_2_WIRE_QUAD_32X1_MUX
+NISWITCH_TOPOLOGY_1130_4_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_1130_4_WIRE_QUAD_16X1_MUX
+NISWITCH_TOPOLOGY_1130_INDEPENDENT NISWITCH_TOPOLOGY_1160_16_SPDT
+NISWITCH_TOPOLOGY_1161_8_SPDT
+NISWITCH_TOPOLOGY_1163R_OCTAL_4X1_MUX
+NISWITCH_TOPOLOGY_1166_16_DPDT NISWITCH_TOPOLOGY_1166_32_SPDT
+NISWITCH_TOPOLOGY_1167_INDEPENDENT
+NISWITCH_TOPOLOGY_1169_100_SPST NISWITCH_TOPOLOGY_1169_50_DPST
+NISWITCH_TOPOLOGY_1175_1_WIRE_196X1_MUX
+NISWITCH_TOPOLOGY_1175_2_WIRE_98X1_MUX
+NISWITCH_TOPOLOGY_1175_2_WIRE_95X1_MUX
+NISWITCH_TOPOLOGY_1190_QUAD_4X1_MUX
+NISWITCH_TOPOLOGY_1191_QUAD_4X1_MUX
+NISWITCH_TOPOLOGY_1192_8_SPDT NISWITCH_TOPOLOGY_1193_32X1_MUX
+NISWITCH_TOPOLOGY_1193_16X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_1193_DUAL_16X1_MUX
+NISWITCH_TOPOLOGY_1193_DUAL_8X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_1193_QUAD_8X1_MUX
+NISWITCH_TOPOLOGY_1193_QUAD_4X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_1193_INDEPENDENT
+NISWITCH_TOPOLOGY_1194_QUAD_4X1_MUX
+NISWITCH_TOPOLOGY_1195_QUAD_4X1_MUX
+NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_MUX
+NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_AMPLIFIED_MUX
+NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_MUX
+NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_AMPLIFIED_MUX
+NISWITCH_TOPOLOGY_2501_2_WIRE_DUAL_12X1_MUX
+NISWITCH_TOPOLOGY_2501_2_WIRE_QUAD_6X1_MUX
+NISWITCH_TOPOLOGY_2501_2_WIRE_4X6_MATRIX
+NISWITCH_TOPOLOGY_2501_4_WIRE_12X1_MUX
+NISWITCH_TOPOLOGY_2503_1_WIRE_48X1_MUX
+NISWITCH_TOPOLOGY_2503_2_WIRE_24X1_MUX
+NISWITCH_TOPOLOGY_2503_2_WIRE_DUAL_12X1_MUX
+NISWITCH_TOPOLOGY_2503_2_WIRE_QUAD_6X1_MUX
+NISWITCH_TOPOLOGY_2503_2_WIRE_4X6_MATRIX
+NISWITCH_TOPOLOGY_2503_4_WIRE_12X1_MUX
+NISWITCH_TOPOLOGY_2510_INDEPENDENT
+NISWITCH_TOPOLOGY_2512_INDEPENDENT
+NISWITCH_TOPOLOGY_2514_INDEPENDENT
+NISWITCH_TOPOLOGY_2515_INDEPENDENT NISWITCH_TOPOLOGY_2520_80_SPST
+NISWITCH_TOPOLOGY_2521_40_DPST NISWITCH_TOPOLOGY_2522_53_SPDT
+NISWITCH_TOPOLOGY_2523_26_DPDT
+NISWITCH_TOPOLOGY_2524_1_WIRE_128X1_MUX
+NISWITCH_TOPOLOGY_2524_1_WIRE_DUAL_64X1_MUX
+NISWITCH_TOPOLOGY_2524_1_WIRE_QUAD_32X1_MUX
+NISWITCH_TOPOLOGY_2524_1_WIRE_OCTAL_16X1_MUX
+NISWITCH_TOPOLOGY_2524_1_WIRE_SIXTEEN_8X1_MUX
+NISWITCH_TOPOLOGY_2525_2_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_2525_2_WIRE_DUAL_32X1_MUX
+NISWITCH_TOPOLOGY_2525_2_WIRE_QUAD_16X1_MUX
+NISWITCH_TOPOLOGY_2525_2_WIRE_OCTAL_8X1_MUX
+NISWITCH_TOPOLOGY_2525_2_WIRE_SIXTEEN_4X1_MUX
+NISWITCH_TOPOLOGY_2526_1_WIRE_158X1_MUX
+NISWITCH_TOPOLOGY_2526_2_WIRE_79X1_MUX
+NISWITCH_TOPOLOGY_2527_1_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_2527_1_WIRE_DUAL_32X1_MUX
+NISWITCH_TOPOLOGY_2527_2_WIRE_32X1_MUX
+NISWITCH_TOPOLOGY_2527_2_WIRE_DUAL_16X1_MUX
+NISWITCH_TOPOLOGY_2527_4_WIRE_16X1_MUX
+NISWITCH_TOPOLOGY_2527_INDEPENDENT
+NISWITCH_TOPOLOGY_2529_2_WIRE_DUAL_4X16_MATRIX
+NISWITCH_TOPOLOGY_2529_2_WIRE_8X16_MATRIX
+NISWITCH_TOPOLOGY_2529_2_WIRE_4X32_MATRIX
+NISWITCH_TOPOLOGY_2530_1_WIRE_128X1_MUX
+NISWITCH_TOPOLOGY_2530_1_WIRE_DUAL_64X1_MUX
+NISWITCH_TOPOLOGY_2530_1_WIRE_4x32_MATRIX
+NISWITCH_TOPOLOGY_2530_1_WIRE_8x16_MATRIX
+NISWITCH_TOPOLOGY_2530_1_WIRE_OCTAL_16X1_MUX
+NISWITCH_TOPOLOGY_2530_1_WIRE_QUAD_32X1_MUX
+NISWITCH_TOPOLOGY_2530_2_WIRE_4x16_MATRIX
+NISWITCH_TOPOLOGY_2530_2_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_2530_2_WIRE_DUAL_32X1_MUX
+NISWITCH_TOPOLOGY_2530_2_WIRE_QUAD_16X1_MUX
+NISWITCH_TOPOLOGY_2530_4_WIRE_32X1_MUX
+NISWITCH_TOPOLOGY_2530_4_WIRE_DUAL_16X1_MUX
+NISWITCH_TOPOLOGY_2530_INDEPENDENT
+NISWITCH_TOPOLOGY_2531_1_WIRE_4X128_MATRIX
+NISWITCH_TOPOLOGY_2531_1_WIRE_8X64_MATRIX
+NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_4X64_MATRIX
+NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_8X32_MATRIX
+NISWITCH_TOPOLOGY_2531_2_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_2531_2_WIRE_8X32_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_16X32_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_4X128_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_8X64_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_16X16_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_4X64_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_8X32_MATRIX
+NISWITCH_TOPOLOGY_2532_1_WIRE_SIXTEEN_2X16_MATRIX
+NISWITCH_TOPOLOGY_2532_2_WIRE_16X16_MATRIX
+NISWITCH_TOPOLOGY_2532_2_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_2532_2_WIRE_8X32_MATRIX
+NISWITCH_TOPOLOGY_2532_2_WIRE_DUAL_4X32_MATRIX
+NISWITCH_TOPOLOGY_2533_1_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_2534_1_WIRE_8X32_MATRIX
+NISWITCH_TOPOLOGY_2535_1_WIRE_4X136_MATRIX
+NISWITCH_TOPOLOGY_2536_1_WIRE_8X68_MATRIX
+NISWITCH_TOPOLOGY_2540_1_WIRE_8X9_MATRIX
+NISWITCH_TOPOLOGY_2541_1_WIRE_8X12_MATRIX
+NISWITCH_TOPOLOGY_2542_QUAD_2X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2543_DUAL_4X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2544_8X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2545_4X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2546_DUAL_4X1_MUX
+NISWITCH_TOPOLOGY_2547_8X1_MUX NISWITCH_TOPOLOGY_2548_4_SPDT
+NISWITCH_TOPOLOGY_2549_TERMINATED_2_SPDT
+NISWITCH_TOPOLOGY_2554_4X1_MUX
+NISWITCH_TOPOLOGY_2555_4X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2556_DUAL_4X1_MUX
+NISWITCH_TOPOLOGY_2557_8X1_MUX NISWITCH_TOPOLOGY_2558_4_SPDT
+NISWITCH_TOPOLOGY_2559_TERMINATED_2_SPDT
+NISWITCH_TOPOLOGY_2564_16_SPST NISWITCH_TOPOLOGY_2564_8_DPST
+NISWITCH_TOPOLOGY_2565_16_SPST NISWITCH_TOPOLOGY_2566_16_SPDT
+NISWITCH_TOPOLOGY_2566_8_DPDT NISWITCH_TOPOLOGY_2567_INDEPENDENT
+NISWITCH_TOPOLOGY_2568_15_DPST NISWITCH_TOPOLOGY_2568_31_SPST
+NISWITCH_TOPOLOGY_2569_100_SPST NISWITCH_TOPOLOGY_2569_50_DPST
+NISWITCH_TOPOLOGY_2570_20_DPDT NISWITCH_TOPOLOGY_2570_40_SPDT
+NISWITCH_TOPOLOGY_2571_66_SPDT
+NISWITCH_TOPOLOGY_2575_1_WIRE_196X1_MUX
+NISWITCH_TOPOLOGY_2575_2_WIRE_98X1_MUX
+NISWITCH_TOPOLOGY_2575_2_WIRE_95X1_MUX
+NISWITCH_TOPOLOGY_2576_2_WIRE_64X1_MUX
+NISWITCH_TOPOLOGY_2576_2_WIRE_DUAL_32X1_MUX
+NISWITCH_TOPOLOGY_2576_2_WIRE_OCTAL_8X1_MUX
+NISWITCH_TOPOLOGY_2576_2_WIRE_QUAD_16X1_MUX
+NISWITCH_TOPOLOGY_2576_2_WIRE_SIXTEEN_4X1_MUX
+NISWITCH_TOPOLOGY_2576_INDEPENDENT
+NISWITCH_TOPOLOGY_2584_1_WIRE_12X1_MUX
+NISWITCH_TOPOLOGY_2584_1_WIRE_DUAL_6X1_MUX
+NISWITCH_TOPOLOGY_2584_2_WIRE_6X1_MUX
+NISWITCH_TOPOLOGY_2584_INDEPENDENT
+NISWITCH_TOPOLOGY_2585_1_WIRE_10X1_MUX
+NISWITCH_TOPOLOGY_2586_10_SPST NISWITCH_TOPOLOGY_2586_5_DPST
+NISWITCH_TOPOLOGY_2590_4X1_MUX NISWITCH_TOPOLOGY_2591_4X1_MUX
+NISWITCH_TOPOLOGY_2593_16X1_MUX
+NISWITCH_TOPOLOGY_2593_8X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2593_DUAL_8X1_MUX
+NISWITCH_TOPOLOGY_2593_DUAL_4X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2593_INDEPENDENT NISWITCH_TOPOLOGY_2594_4X1_MUX
+NISWITCH_TOPOLOGY_2595_4X1_MUX
+NISWITCH_TOPOLOGY_2596_DUAL_6X1_MUX
+NISWITCH_TOPOLOGY_2597_6X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2598_DUAL_TRANSFER
+NISWITCH_TOPOLOGY_2599_2_SPDT NISWITCH_TOPOLOGY_2720_INDEPENDENT
+NISWITCH_TOPOLOGY_2722_INDEPENDENT
+NISWITCH_TOPOLOGY_2725_INDEPENDENT
+NISWITCH_TOPOLOGY_2727_INDEPENDENT
+NISWITCH_TOPOLOGY_2737_2_WIRE_4X64_MATRIX
+NISWITCH_TOPOLOGY_2738_2_WIRE_8X32_MATRIX
+NISWITCH_TOPOLOGY_2739_2_WIRE_16X16_MATRIX
+NISWITCH_TOPOLOGY_2746_QUAD_4X1_MUX
+NISWITCH_TOPOLOGY_2747_DUAL_8X1_MUX
+NISWITCH_TOPOLOGY_2748_16X1_MUX
+NISWITCH_TOPOLOGY_2790_INDEPENDENT
+NISWITCH_TOPOLOGY_2796_DUAL_6X1_MUX
+NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
+NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
+NISWITCH_TOPOLOGY_2799_2_SPDT
 ''',
 },
             },
@@ -2333,7 +2333,7 @@ NISWITCH\_TOPOLOGY\_2799\_2\_SPDT
 'documentation': {
 'description': '''
 Enables simulation of the switch module specified in the resource name
-parameter. Valid Values: VI\_TRUE - simulate VI\_FALSE - Don't simulate
+parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
 (Default Value)
 ''',
 },
@@ -2345,7 +2345,7 @@ parameter. Valid Values: VI\_TRUE - simulate VI\_FALSE - Don't simulate
 'documentation': {
 'description': '''
 Specifies whether to reset the switch module during the initialization
-process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
+process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
 - Currently unsupported. The device will not reset.
 ''',
 },
@@ -2357,7 +2357,7 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2367,18 +2367,18 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 Returns a session handle used to identify the switch in all subsequent
 instrument driver calls and sets the topology of the switch.
-niSwitch\_InitWithTopology creates a new IVI instrument driver session
+niSwitch_InitWithTopology creates a new IVI instrument driver session
 for the switch specified in the resourceName parameter. The driver uses
 the topology specified in the topology parameter and overrides the
 topology specified in MAX. Note: When initializing an NI SwitchBlock
 device with topology, you must specify the toplogy created when you
 configured the device in MAX, using either
-NISWITCH\_TOPOLOGY\_CONFIGURED\_TOPOLOGY or the toplogy string of the
+NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the
 device. Refer to the Initializing with Toplogy for NI SwitchBlock
 Devices topic in the NI Switches Help for information about determining
 the topology string of an NI SwitchBlock device. By default, the switch
 is reset to a known state. Enable simulation by specifying the topology
-and setting the simulate parameter to VI\_TRUE.
+and setting the simulate parameter to VI_TRUE.
 ''',
 },
     },
@@ -2392,7 +2392,7 @@ and setting the simulate parameter to VI\_TRUE.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2405,9 +2405,9 @@ initiates the scan. If niSwitch Commit was called earlier, niSwitch
 Initiate Scan only initiates the scan and returns immediately. Once the
 scanning operation begins, you cannot perform any other operation other
 than GetAttribute, AbortScan, or SendSoftwareTrigger. All other
-functions return NISWITCH\_ERROR\_SCAN\_IN\_PROGRESS. To stop the
+functions return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
 scanning operation, To stop the scanning operation, call
-niSwitch\_AbortScan.
+niSwitch_AbortScan.
 ''',
 },
     },
@@ -2421,7 +2421,7 @@ niSwitch\_AbortScan.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2432,7 +2432,7 @@ and used for all subsequent NI-SWITCH calls.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-VI\_TRUE indicates that all created paths have settled. VI\_FALSE
+VI_TRUE indicates that all created paths have settled. VI_FALSE
 indicates that all created paths have not settled.
 ''',
 },
@@ -2441,7 +2441,7 @@ indicates that all created paths have not settled.
 'documentation': {
 'description': '''
 Indicates if all created paths have settled by returning the value of
-the NISWITCH\_ATTR\_IS\_DEBOUNCED attribute.
+the NISWITCH_ATTR_IS_DEBOUNCED attribute.
 ''',
 },
     },
@@ -2455,7 +2455,7 @@ the NISWITCH\_ATTR\_IS\_DEBOUNCED attribute.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2466,8 +2466,8 @@ and used for all subsequent NI-SWITCH calls.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-The driver returns the value of NISWITCH\_ATTR\_IS\_SCANNING attribute.
-VI\_TRUE indicates that the switch device is scanning. VI\_FALSE
+The driver returns the value of NISWITCH_ATTR_IS_SCANNING attribute.
+VI_TRUE indicates that the switch device is scanning. VI_FALSE
 indicates that the switch device is idle.
 ''',
 },
@@ -2487,7 +2487,7 @@ indicates that the switch device is idle.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2499,32 +2499,32 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 This parameter serves as a convenience. If you do not want to use this
-parameter, pass VI\_NULL. Use this parameter in complex functions to
+parameter, pass VI_NULL. Use this parameter in complex functions to
 keep track of whether you obtain a lock and therefore need to unlock the
 session. Pass the address of a local ViBoolean variable. In the
-declaration of the local variable, initialize it to VI\_FALSE. Pass the
+declaration of the local variable, initialize it to VI_FALSE. Pass the
 address of the same local variable to any other calls you make to
-niSwitch\_LockSession or niSwitch\_UnlockSession in the same function.
-The parameter is an input/output parameter. niSwitch\_LockSession and
-niSwitch\_UnlockSession each inspect the current value and take the
-following actions: - If the value is VI\_TRUE, niSwitch\_LockSession
-does not lock the session again. If the value is VI\_FALSE,
-niSwitch\_LockSession obtains the lock and sets the value of the
-parameter to VI\_TRUE. - If the value is VI\_FALSE,
-niSwitch\_UnlockSession does not attempt to unlock the session. If the
-value is VI\_TRUE, niSwitch\_UnlockSession releases the lock and sets
-the value of the parameter to VI\_FALSE. Thus, you can, call
-niSwitch\_UnlockSession at the end of your function without worrying
+niSwitch_LockSession or niSwitch_UnlockSession in the same function.
+The parameter is an input/output parameter. niSwitch_LockSession and
+niSwitch_UnlockSession each inspect the current value and take the
+following actions: - If the value is VI_TRUE, niSwitch_LockSession
+does not lock the session again. If the value is VI_FALSE,
+niSwitch_LockSession obtains the lock and sets the value of the
+parameter to VI_TRUE. - If the value is VI_FALSE,
+niSwitch_UnlockSession does not attempt to unlock the session. If the
+value is VI_TRUE, niSwitch_UnlockSession releases the lock and sets
+the value of the parameter to VI_FALSE. Thus, you can, call
+niSwitch_UnlockSession at the end of your function without worrying
 about whether you actually have the lock. Example: ViStatus TestFunc
-(ViSession vi, ViInt32 flags) { ViStatus error = VI\_SUCCESS; ViBoolean
-haveLock = VI\_FALSE; if (flags & BIT\_1) { viCheckErr(
-niSwitch\_LockSession(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-(flags & BIT\_2) { viCheckErr( niSwitch\_UnlockSession(vi, &haveLock;));
-viCheckErr( TakeAction2(vi)); viCheckErr( niSwitch\_LockSession(vi,
-&haveLock;); } if (flags & BIT\_3) viCheckErr( TakeAction3(vi)); }
+(ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
+haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
+niSwitch_LockSession(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
+(flags & BIT_2) { viCheckErr( niSwitch_UnlockSession(vi, &haveLock;));
+viCheckErr( TakeAction2(vi)); viCheckErr( niSwitch_LockSession(vi,
+&haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
 Error: /\* At this point, you cannot really be sure that you have the
 lock. Fortunately, the haveLock variable takes care of that for you. \*/
-niSwitch\_UnlockSession(vi, &haveLock;); return error; }
+niSwitch_UnlockSession(vi, &haveLock;); return error; }
 ''',
 },
             },
@@ -2535,22 +2535,22 @@ This function obtains a multithread lock on the instrument session.
 Before it does so, it waits until all other execution threads have
 released their locks on the instrument session. Other threads might have
 obtained a lock on this session in the following ways: - The user's
-application called niSwitch\_LockSession. - A call to the instrument
+application called niSwitch_LockSession. - A call to the instrument
 driver locked the session. - A call to the IVI engine locked the
-session. After your call to niSwitch\_LockSession returns successfully,
+session. After your call to niSwitch_LockSession returns successfully,
 no other threads can access the instrument session until you call
-niSwitch\_UnlockSession. Use niSwitch\_LockSession and
-niSwitch\_UnlockSession around a sequence of calls to instrument driver
+niSwitch_UnlockSession. Use niSwitch_LockSession and
+niSwitch_UnlockSession around a sequence of calls to instrument driver
 functions if you require that the instrument retain its settings through
 the end of the sequence. You can safely make nested calls to
-niSwitch\_LockSession within the same thread. To completely unlock the
-session, you must balance each call to niSwitch\_LockSession with a call
-to niSwitch\_UnlockSession. If, however, you use the Caller Has Lock
-parameter in all calls to niSwitch\_LockSession and
-niSwitch\_UnlockSession within a function, the IVI Library locks the
+niSwitch_LockSession within the same thread. To completely unlock the
+session, you must balance each call to niSwitch_LockSession with a call
+to niSwitch_UnlockSession. If, however, you use the Caller Has Lock
+parameter in all calls to niSwitch_LockSession and
+niSwitch_UnlockSession within a function, the IVI Library locks the
 session only once within the function regardless of the number of calls
-you make to niSwitch\_LockSession. This allows you to call
-niSwitch\_UnlockSession just once at the end of the function.
+you make to niSwitch_LockSession. This allows you to call
+niSwitch_UnlockSession just once at the end of the function.
 ''',
 },
     },
@@ -2564,7 +2564,7 @@ niSwitch\_UnlockSession just once at the end of the function.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2588,8 +2588,8 @@ relay names for the switch module.
 'documentation': {
 'description': '''
 Specifies whether to open or close a given relay. Default value: Relay
-Close Defined values: NISWITCH\_VAL\_OPEN\_RELAY
-NISWITCH\_VAL\_CLOSE\_RELAY (Default Value)
+Close Defined values: NISWITCH_VAL_OPEN_RELAY
+NISWITCH_VAL_CLOSE_RELAY (Default Value)
 ''',
 },
             },
@@ -2615,7 +2615,7 @@ supports individual relay control.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2641,14 +2641,14 @@ whether the test module has dependencies on the operation of previously
 executed test modules. This function does not clear the
 interchangeability warnings from the list of previously recorded
 interchangeability warnings. If you want to guarantee that the
-niSwitch\_GetNextInterchangeWarning function only returns those
+niSwitch_GetNextInterchangeWarning function only returns those
 interchangeability warnings that are generated after calling this
 function, you must clear the list of interchangeability warnings. You
 can clear the interchangeability warnings list by repeatedly calling the
-niSwitch\_GetNextInterchangeWarning function until no more
+niSwitch_GetNextInterchangeWarning function until no more
 interchangeability warnings are returned. If you are not interested in
 the content of those warnings, you can call the
-niSwitch\_ClearInterchangeWarnings function.
+niSwitch_ClearInterchangeWarnings function.
 ''',
 },
     },
@@ -2662,7 +2662,7 @@ niSwitch\_ClearInterchangeWarnings function.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2673,7 +2673,7 @@ and used for all subsequent NI-SWITCH calls.
 Resets the switch module and applies initial user specified settings
 from the logical name used to initialize the session. If the session was
 created without a logical name, this function is equivalent to
-niSwitch\_reset.
+niSwitch_reset.
 ''',
 },
     },
@@ -2687,7 +2687,7 @@ niSwitch\_reset.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2699,8 +2699,8 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 The scan advanced trigger destination. Valid locations are the
-NISWITCH\_VAL\_FRONTCONNECTOR and NISWITCH\_VAL\_REARCONNECTOR. Default
-value: NISWITCH\_VAL\_FRONTCONNECTOR
+NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
+value: NISWITCH_VAL_FRONTCONNECTOR
 ''',
 },
             },
@@ -2711,11 +2711,11 @@ value: NISWITCH\_VAL\_FRONTCONNECTOR
 'documentation': {
 'description': '''
 The trigger line to route the scan advanced output trigger from the
-front or rear connector. Select NISWITCH\_VAL\_NONE to break an existing
-route. Default value: None Valid Values: NISWITCH\_VAL\_NONE
-NISWITCH\_VAL\_TTL0 NISWITCH\_VAL\_TTL1 NISWITCH\_VAL\_TTL2
-NISWITCH\_VAL\_TTL3 NISWITCH\_VAL\_TTL4 NISWITCH\_VAL\_TTL5
-NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
+front or rear connector. Select NISWITCH_VAL_NONE to break an existing
+route. Default value: None Valid Values: NISWITCH_VAL_NONE
+NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
+NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4 NISWITCH_VAL_TTL5
+NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
 ''',
 },
             },
@@ -2725,8 +2725,8 @@ NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If VI\_TRUE, inverts the input trigger signal from falling to rising or
-vice versa. Default value: VI\_FALSE
+If VI_TRUE, inverts the input trigger signal from falling to rising or
+vice versa. Default value: VI_FALSE
 ''',
 },
             },
@@ -2748,7 +2748,7 @@ to the front or rear connector.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2760,9 +2760,9 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 The location of the input trigger source on the switch module. Valid
-locations are the NISWITCH\_VAL\_FRONTCONNECTOR and
-NISWITCH\_VAL\_REARCONNECTOR. Default value:
-NISWITCH\_VAL\_FRONTCONNECTOR
+locations are the NISWITCH_VAL_FRONTCONNECTOR and
+NISWITCH_VAL_REARCONNECTOR. Default value:
+NISWITCH_VAL_FRONTCONNECTOR
 ''',
 },
             },
@@ -2772,11 +2772,11 @@ NISWITCH\_VAL\_FRONTCONNECTOR
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-The trigger line to route the input trigger. Select NISWITCH\_VAL\_NONE
+The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
 to break an existing route. Default value: None Valid Values:
-NISWITCH\_VAL\_NONE NISWITCH\_VAL\_TTL0 NISWITCH\_VAL\_TTL1
-NISWITCH\_VAL\_TTL2 NISWITCH\_VAL\_TTL3 NISWITCH\_VAL\_TTL4
-NISWITCH\_VAL\_TTL5 NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
+NISWITCH_VAL_NONE NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1
+NISWITCH_VAL_TTL2 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4
+NISWITCH_VAL_TTL5 NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
 ''',
 },
             },
@@ -2786,8 +2786,8 @@ NISWITCH\_VAL\_TTL5 NISWITCH\_VAL\_TTL6 NISWITCH\_VAL\_TTL7
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If VI\_TRUE, inverts the input trigger signal from falling to rising or
-vice versa. Default value: VI\_FALSE
+If VI_TRUE, inverts the input trigger signal from falling to rising or
+vice versa. Default value: VI_FALSE
 ''',
 },
             },
@@ -2810,7 +2810,7 @@ specify None for trigger bus line parameter.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2822,9 +2822,9 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Pass the scan list you want the instrument to use. The driver uses this
-value to set the NISWITCH\_ATTR\_SCAN\_LIST attribute. The scan list is
+value to set the NISWITCH_ATTR_SCAN_LIST attribute. The scan list is
 a string that specifies channel connections and trigger conditions for
-scanning. After you call the niSwitch\_InitiateScan function, the
+scanning. After you call the niSwitch_InitiateScan function, the
 instrument makes or breaks connections and waits for triggers according
 to the instructions in the scan list. The scan list is comprised of
 channel names that you separate with special characters. These special
@@ -2869,16 +2869,16 @@ measurement device will be initiating the scan trigger handshake. This
 parameter determines whether to wait for the scan to reach a trigger
 point before completing. If the Measurement Device will initiate the
 scan, set this parameter to
-NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED. This function will then
+NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED. This function will then
 wait until the switch is waiting for a trigger from the measurement
 device before completing. If the Switch will initiate the scan, set this
-parameter to NISWITCH\_VAL\_SWITCH\_INITIATED. This function will then
+parameter to NISWITCH_VAL_SWITCH_INITIATED. This function will then
 complete immediately after initating the scan. You should have already
 set up your DMM to wait for a trigger before calling this function with
-initiation set to NISWITCH\_VAL\_SWITCH\_INITIATED. Valid values:
-NISWITCH\_VAL\_SWITCH\_INITIATED - Switch Initiated
-NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED - Measurement device
-initiated Default value: NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED
+initiation set to NISWITCH_VAL_SWITCH_INITIATED. Valid values:
+NISWITCH_VAL_SWITCH_INITIATED - Switch Initiated
+NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED - Measurement device
+initiated Default value: NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED
 ''',
 },
             },
@@ -2893,13 +2893,13 @@ semicolons. For example, the following scan list would scan the first
 three channels of a multiplexer. Example: com0->ch0; com0->ch1;
 com0->ch2; For more information on scan list syntax, refer to the NI
 Switches Help. To see the status of the scan, you can call either
-niSwitch\_IsScanning or niSwitch\_WaitForScanComplete. Use the
-niSwitch\_ConfigureScanTrigger function to configure the scan trigger.
-Use the niSwitch\_AbortScan function to stop the scan if you are in
-continuous scan mode (Refer to niSwitch\_SetContinuousScan); otherwise
+niSwitch_IsScanning or niSwitch_WaitForScanComplete. Use the
+niSwitch_ConfigureScanTrigger function to configure the scan trigger.
+Use the niSwitch_AbortScan function to stop the scan if you are in
+continuous scan mode (Refer to niSwitch_SetContinuousScan); otherwise
 the scan halts automatically when the end of the scan list is reached.
 For reference, this operation is equivalent to calling
-niSwitch\_ConfigureScanList and niSwitch\_InitiateScan.
+niSwitch_ConfigureScanList and niSwitch_InitiateScan.
 ''',
 },
     },
@@ -2913,7 +2913,7 @@ niSwitch\_ConfigureScanList and niSwitch\_InitiateScan.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2922,10 +2922,10 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Sends a software trigger to the switch module specified in the NI-SWITCH
-session. When the trigger input is set to NISWITCH\_VAL\_SOFTWARE\_TRIG
-through either the niSwitch\_ConfigureScanTrigger or the
-NISWITCH\_ATTR\_TRIGGER\_INPUT attribute, the scan does not proceed from
-a semi-colon (wait for trigger) until niSwitch\_SendSoftwareTrigger is
+session. When the trigger input is set to NISWITCH_VAL_SOFTWARE_TRIG
+through either the niSwitch_ConfigureScanTrigger or the
+NISWITCH_ATTR_TRIGGER_INPUT attribute, the scan does not proceed from
+a semi-colon (wait for trigger) until niSwitch_SendSoftwareTrigger is
 called.
 ''',
 },
@@ -2940,7 +2940,7 @@ called.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -2952,7 +2952,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -3034,7 +3034,7 @@ the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3046,7 +3046,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -3128,7 +3128,7 @@ redundant instrument I/O.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3140,7 +3140,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -3222,7 +3222,7 @@ the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3234,7 +3234,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -3316,7 +3316,7 @@ the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3328,7 +3328,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Some attributes are unique per channel. For these, pass the name of the
-channel. Other attributes are unique per switch device. Pass VI\_NULL or
+channel. Other attributes are unique per switch device. Pass VI_NULL or
 an empty string for this parameter. Default Value: ""
 ''',
 },
@@ -3410,7 +3410,7 @@ the penalty of redundant instrument I/O.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3421,9 +3421,9 @@ and used for all subsequent NI-SWITCH calls.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-If VI\_TRUE, loops continuously through the scan list during scanning.
-If VI\_FALSE, the scan stops after one pass through the scan list.
-Default value: VI\_FALSE
+If VI_TRUE, loops continuously through the scan list during scanning.
+If VI_FALSE, the scan stops after one pass through the scan list.
+Default value: VI_FALSE
 ''',
 },
             },
@@ -3445,7 +3445,7 @@ after one pass through the scan list.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3461,7 +3461,7 @@ A string composed of comma-separated paths between channel 1 and channel
 Every other channel in the path are configuration channels. Example of a
 valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
 configuration channel. Default value: None Obtain the path list for a
-previously created path with niSwitch\_GetPath.
+previously created path with niSwitch_GetPath.
 ''',
 },
             },
@@ -3469,9 +3469,9 @@ previously created path with niSwitch\_GetPath.
 'documentation': {
 'description': '''
 Connects two channels by specifying an explicit path in the path list
-parameter. niSwitch\_SetPath is particularly useful where path
+parameter. niSwitch_SetPath is particularly useful where path
 repeatability is important, such as in calibrated signal paths. If this
-is not necessary, use niSwitch\_Connect.
+is not necessary, use niSwitch_Connect.
 ''',
 },
     },
@@ -3485,7 +3485,7 @@ is not necessary, use niSwitch\_Connect.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3497,32 +3497,32 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 This parameter serves as a convenience. If you do not want to use this
-parameter, pass VI\_NULL. Use this parameter in complex functions to
+parameter, pass VI_NULL. Use this parameter in complex functions to
 keep track of whether you obtain a lock and therefore need to unlock the
 session. Pass the address of a local ViBoolean variable. In the
-declaration of the local variable, initialize it to VI\_FALSE. Pass the
+declaration of the local variable, initialize it to VI_FALSE. Pass the
 address of the same local variable to any other calls you make to
-niSwitch\_LockSession or niSwitch\_UnlockSession in the same function.
-The parameter is an input/output parameter. niSwitch\_LockSession and
-niSwitch\_UnlockSession each inspect the current value and take the
-following actions: - If the value is VI\_TRUE, niSwitch\_LockSession
-does not lock the session again. If the value is VI\_FALSE,
-niSwitch\_LockSession obtains the lock and sets the value of the
-parameter to VI\_TRUE. - If the value is VI\_FALSE,
-niSwitch\_UnlockSession does not attempt to unlock the session. If the
-value is VI\_TRUE, niSwitch\_UnlockSession releases the lock and sets
-the value of the parameter to VI\_FALSE. Thus, you can, call
-niSwitch\_UnlockSession at the end of your function without worrying
+niSwitch_LockSession or niSwitch_UnlockSession in the same function.
+The parameter is an input/output parameter. niSwitch_LockSession and
+niSwitch_UnlockSession each inspect the current value and take the
+following actions: - If the value is VI_TRUE, niSwitch_LockSession
+does not lock the session again. If the value is VI_FALSE,
+niSwitch_LockSession obtains the lock and sets the value of the
+parameter to VI_TRUE. - If the value is VI_FALSE,
+niSwitch_UnlockSession does not attempt to unlock the session. If the
+value is VI_TRUE, niSwitch_UnlockSession releases the lock and sets
+the value of the parameter to VI_FALSE. Thus, you can, call
+niSwitch_UnlockSession at the end of your function without worrying
 about whether you actually have the lock. Example: ViStatus TestFunc
-(ViSession vi, ViInt32 flags) { ViStatus error = VI\_SUCCESS; ViBoolean
-haveLock = VI\_FALSE; if (flags & BIT\_1) { viCheckErr(
-niSwitch\_LockSession(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-(flags & BIT\_2) { viCheckErr( niSwitch\_UnlockSession(vi, &haveLock;));
-viCheckErr( TakeAction2(vi)); viCheckErr( niSwitch\_LockSession(vi,
-&haveLock;); } if (flags & BIT\_3) viCheckErr( TakeAction3(vi)); }
+(ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
+haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
+niSwitch_LockSession(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
+(flags & BIT_2) { viCheckErr( niSwitch_UnlockSession(vi, &haveLock;));
+viCheckErr( TakeAction2(vi)); viCheckErr( niSwitch_LockSession(vi,
+&haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
 Error: /\* At this point, you cannot really be sure that you have the
 lock. Fortunately, the haveLock variable takes care of that for you. \*/
-niSwitch\_UnlockSession(vi, &haveLock;); return error; }
+niSwitch_UnlockSession(vi, &haveLock;); return error; }
 ''',
 },
             },
@@ -3530,7 +3530,7 @@ niSwitch\_UnlockSession(vi, &haveLock;); return error; }
 'documentation': {
 'description': '''
 This function releases a lock that you acquired on an instrument session
-using niSwitch\_LockSession. Refer to niSwitch\_LockSession for
+using niSwitch_LockSession. Refer to niSwitch_LockSession for
 additional information on session locks.
 ''',
 },
@@ -3545,7 +3545,7 @@ additional information on session locks.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3569,7 +3569,7 @@ Default Value:5000 ms
 Pauses until all created paths have settled. If the time you specify
 with the Maximum Time (ms) parameter elapsed before the switch paths
 have settled, this function returns the
-NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error.
+NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 ''',
 },
     },
@@ -3583,7 +3583,7 @@ NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3596,7 +3596,7 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 Specifies the maximum length of time to wait for the switch module to
 stop scanning. If the specified time elapses before the scan ends,
-NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED error is returned. Default
+NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
 Value:5000 ms
 ''',
 },
@@ -3607,7 +3607,7 @@ Value:5000 ms
 Pauses until the switch module stops scanning or the maximum time has
 elapsed and returns a timeout error. If the time you specify with the
 Maximum Time (ms) parameter elapsed before the scanning operation has
-finished, this function returns the NISWITCH\_ERROR\_MAX\_TIME\_EXCEEDED
+finished, this function returns the NISWITCH_ERROR_MAX_TIME_EXCEEDED
 error.
 ''',
 },
@@ -3622,7 +3622,7 @@ error.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3632,9 +3632,9 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 Terminates the NI-SWITCH session and all of its attributes and
 deallocates any memory resources the driver uses. Notes: (1) You must
-unlock the session before calling niSwitch\_close. (2) After calling
-niSwitch\_close, you cannot use the instrument driver again until you
-call niSwitch\_init or niSwitch\_InitWithOptions.
+unlock the session before calling niSwitch_close. (2) After calling
+niSwitch_close, you cannot use the instrument driver again until you
+call niSwitch_init or niSwitch_InitWithOptions.
 ''',
 },
     },
@@ -3648,7 +3648,7 @@ call niSwitch\_init or niSwitch\_InitWithOptions.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3660,7 +3660,7 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Status code returned by any NI-SWITCH function. Default Value: 0
-(VI\_SUCCESS)
+(VI_SUCCESS)
 ''',
 },
             },
@@ -3680,7 +3680,7 @@ array with at least 256 bytes.
 'description': '''
 Converts an error code returned by NI-SWITCH into a user-readable
 string. Generally this information is supplied in error out of any
-NI-SWITCH VI. Use niSwitch\_error\_message for a static lookup of an
+NI-SWITCH VI. Use niSwitch_error_message for a static lookup of an
 error code description.
 ''',
 },
@@ -3695,7 +3695,7 @@ error code description.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3765,8 +3765,8 @@ SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
 This parameter is ignored. Because NI-SWITCH supports multiple switch
 modules, it always queries the switch device to determine which device
 is installed. For this reason, this VI may return
-NISWITCH\_ERROR\_FAIL\_ID\_QUERY even if this parameter is set to
-VI\_FALSE. Valid Values: VI\_TRUE - (Default Value) VI\_FALSE -
+NISWITCH_ERROR_FAIL_ID_QUERY even if this parameter is set to
+VI_FALSE. Valid Values: VI_TRUE - (Default Value) VI_FALSE -
 Currently unsupported.
 ''',
 },
@@ -3778,7 +3778,7 @@ Currently unsupported.
 'documentation': {
 'description': '''
 Specifies whether to reset the switch module during the initialization
-process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
+process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
 - Currently unsupported. The device will not reset.
 ''',
 },
@@ -3790,7 +3790,7 @@ process. Valid Values: VI\_TRUE - Reset Device (Default Value) VI\_FALSE
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3799,13 +3799,13 @@ and used for all subsequent NI-SWITCH calls.
 'documentation': {
 'description': '''
 Returns a session handle used to identify the switch module in all
-subsequent instrument driver calls. niSwitch\_init creates a new IVI
+subsequent instrument driver calls. niSwitch_init creates a new IVI
 instrument driver session for the switch module specified in the
 resource name parameter. If multiple topologies are valid for that
 device, the driver uses the default topology specified in MAX. By
 default, the switch module is reset to a known state. An error is
 returned if a session to the specified resource exists in another
-process. The same session is returned if niSwitch\_init is called twice
+process. The same session is returned if niSwitch_init is called twice
 in the same process for the same resource with the same topology.
 ''',
 },
@@ -3820,7 +3820,7 @@ in the same process for the same resource with the same topology.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3844,7 +3844,7 @@ remain unchanged.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },
@@ -3883,7 +3883,7 @@ pass a ViChar array with at least 256 bytes.
 'documentation': {
 'description': '''
 A particular NI-SWITCH session established with
-niSwitch\_InitWithTopology, niSwitch\_InitWithOptions, or niSwitch\_init
+niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init
 and used for all subsequent NI-SWITCH calls.
 ''',
 },

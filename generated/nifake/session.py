@@ -82,47 +82,47 @@ class _SessionBase(object):
     float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
     '''Type: enums.FloatEnum
 
-    An attribute with an enum that is also a float
+    An property with an enum that is also a float
     '''
     read_write_bool = attributes.AttributeViBoolean(1000000)
     '''Type: bool
 
-    An attribute of type bool with read/write access.
+    An property of type bool with read/write access.
     '''
     read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
     '''Type: enums.Color
 
-    An attribute of type Color with read/write access.
+    An property of type Color with read/write access.
     '''
     read_write_double = attributes.AttributeViReal64(1000001)
     '''Type: float
 
-    An attribute of type float with read/write access.
+    An property of type float with read/write access.
     '''
     read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
     '''Type: datetime.timedelta
 
-    Attribute in seconds
+    Property in seconds
     '''
     read_write_int64 = attributes.AttributeViInt64(1000006)
     '''Type: int
 
-    An attribute of type 64-bit integer with read/write access.
+    An property of type 64-bit integer with read/write access.
     '''
     read_write_integer = attributes.AttributeViInt32(1000004)
     '''Type: int
 
-    An attribute of type integer with read/write access.
+    An property of type integer with read/write access.
     '''
     read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
     '''Type: datetime.timedelta
 
-    Attribute in milliseconds
+    Property in milliseconds
     '''
     read_write_string = attributes.AttributeViString(1000002)
     '''Type: str
 
-    An attribute of type string with read/write access.
+    An property of type string with read/write access.
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -171,7 +171,7 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        Queries the value of a ViBoolean attribute.
+        Queries the value of a ViBoolean property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -182,11 +182,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (bool): Returns the value of the attribute.
+            attribute_value (bool): Returns the value of the property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -200,7 +200,7 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        Queries the value of a ViInt32 attribute.
+        Queries the value of a ViInt32 property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -211,11 +211,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (int): Returns the value of the attribute.
+            attribute_value (int): Returns the value of the property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -229,7 +229,7 @@ class _SessionBase(object):
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
 
-        Queries the value of a ViInt64 attribute.
+        Queries the value of a ViInt64 property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -240,11 +240,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (int): Returns the value of the attribute.
+            attribute_value (int): Returns the value of the property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -258,7 +258,7 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        Queries the value of a ViReal attribute.
+        Queries the value of a ViReal property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -269,11 +269,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (float): Returns the value of the attribute.
+            attribute_value (float): Returns the value of the property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -287,7 +287,7 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        Queries the value of a ViBoolean attribute.
+        Queries the value of a ViBoolean property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -298,7 +298,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -367,7 +367,7 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        This function sets the value of a ViBoolean attribute.
+        This method sets the value of a ViBoolean property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -378,9 +378,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (bool): Pass the value that you want to set the attribute to.
+            attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -394,7 +394,7 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        This function sets the value of a ViInt32 attribute.
+        This method sets the value of a ViInt32 property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -405,9 +405,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (int): Pass the value that you want to set the attribute to.
+            attribute_value (int): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -421,7 +421,7 @@ class _SessionBase(object):
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
 
-        This function sets the value of a ViInt64 attribute.
+        This method sets the value of a ViInt64 property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -432,9 +432,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (int): Pass the value that you want to set the attribute to.
+            attribute_value (int): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -448,7 +448,7 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        This function sets the value of a ViReal64 attribute.
+        This method sets the value of a ViReal64 property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -459,9 +459,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (float): Pass the value that you want to set the attribute to.
+            attribute_value (float): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -475,7 +475,7 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        This function sets the value of a ViString attribute.
+        This method sets the value of a ViString property.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -486,9 +486,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (str): Pass the value that you want to set the attribute to.
+            attribute_value (str): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -533,20 +533,20 @@ class Session(_SessionBase):
 
                 Contains the **resource_name** of the device to initialize.
 
-            options (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **options** is a dictionary of attributes with an assigned
+            options (str): Specifies the initial value of certain properties for the session. The
+                syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
                 { 'simulate': False }
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 
                 +-------------------------+---------+
-                | Attribute               | Default |
+                | Property                | Default |
                 +=========================+=========+
                 | range_check             | True    |
                 +-------------------------+---------+
@@ -563,19 +563,19 @@ class Session(_SessionBase):
 
             id_query (bool): NI-FAKE is probably not needed.
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +----------------+---+------------------+
+                | True (default) | 1 | Perform ID Query |
+                +----------------+---+------------------+
+                | False          | 0 | Skip ID Query    |
+                +----------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +----------------+---+--------------+
+                | True (default) | 1 | Reset Device |
+                +----------------+---+--------------+
+                | False          | 0 | Don't Reset  |
+                +----------------+---+--------------+
 
 
         Returns:
@@ -635,7 +635,7 @@ class Session(_SessionBase):
     def bool_array_output_function(self, number_of_elements):
         '''bool_array_output_function
 
-        This function returns an array of booleans.
+        This method returns an array of booleans.
 
         Args:
             number_of_elements (int): Number of elements in the array.
@@ -656,7 +656,7 @@ class Session(_SessionBase):
     def enum_array_output_function(self, number_of_elements):
         '''enum_array_output_function
 
-        This function returns an array of enums, stored as 16 bit integers under the hood.
+        This method returns an array of enums, stored as 16 bit integers under the hood.
 
         Args:
             number_of_elements (int): Number of elements in the array.
@@ -677,7 +677,7 @@ class Session(_SessionBase):
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
 
-        This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
+        This method takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
 
         Args:
             a_turtle (enums.Turtle): Indicates a ninja turtle
@@ -764,7 +764,7 @@ class Session(_SessionBase):
 
         Returns a boolean.
 
-        Note: This function rules!
+        Note: This method rules!
 
         Returns:
             a_boolean (bool): Contains a boolean.
@@ -781,7 +781,7 @@ class Session(_SessionBase):
 
         Returns a number.
 
-        Note: This function rules!
+        Note: This method rules!
 
         Returns:
             a_number (int): Contains a number.
@@ -827,7 +827,7 @@ class Session(_SessionBase):
     def get_array_for_python_code_custom_type(self):
         '''get_array_for_python_code_custom_type
 
-        This function returns an array for use in python-code size mechanism.
+        This method returns an array for use in python-code size mechanism.
 
         Returns:
             array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
@@ -844,7 +844,7 @@ class Session(_SessionBase):
     def get_array_for_python_code_double(self):
         '''get_array_for_python_code_double
 
-        This function returns an array for use in python-code size mechanism.
+        This method returns an array for use in python-code size mechanism.
 
         Returns:
             array_out (list of float): Array of double using puthon-code size mechanism
@@ -861,7 +861,7 @@ class Session(_SessionBase):
     def get_array_size_for_python_code(self):
         '''get_array_size_for_python_code
 
-        This function returns the size of the array for use in python-code size mechanism.
+        This method returns the size of the array for use in python-code size mechanism.
 
         Returns:
             size_out (int): Size of array
@@ -876,7 +876,7 @@ class Session(_SessionBase):
     def get_array_using_ivi_dance(self):
         '''get_array_using_ivi_dance
 
-        This function returns an array of float whose size is determined with the IVI dance.
+        This method returns an array of float whose size is determined with the IVI dance.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         array_size_ctype = visatype.ViInt32()  # case S170
@@ -925,7 +925,7 @@ class Session(_SessionBase):
     def get_custom_type(self):
         '''get_custom_type
 
-        This function returns a custom type.
+        This method returns a custom type.
 
         Returns:
             cs (CustomStruct): Set using custom type
@@ -940,7 +940,7 @@ class Session(_SessionBase):
     def get_custom_type_array(self, number_of_elements):
         '''get_custom_type_array
 
-        This function returns a custom type.
+        This method returns a custom type.
 
         Args:
             number_of_elements (int): Number of elements in the array.
@@ -1020,19 +1020,19 @@ class Session(_SessionBase):
 
             id_query (bool): NI-FAKE is probably not needed.
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +----------------+---+------------------+
+                | True (default) | 1 | Perform ID Query |
+                +----------------+---+------------------+
+                | False          | 0 | Skip ID Query    |
+                +----------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +----------------+---+--------------+
+                | True (default) | 1 | Reset Device |
+                +----------------+---+--------------+
+                | False          | 0 | Don't Reset  |
+                +----------------+---+--------------+
 
 
         Returns:
@@ -1095,7 +1095,7 @@ class Session(_SessionBase):
     def one_input_function(self, a_number):
         '''one_input_function
 
-        This function takes one parameter other than the session.
+        This method takes one parameter other than the session.
 
         Args:
             a_number (int): Contains a number
@@ -1158,7 +1158,7 @@ class Session(_SessionBase):
     def simple_function(self):
         '''simple_function
 
-        This function takes no parameters other than the session.
+        This method takes no parameters other than the session.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_PoorlyNamedSimpleFunction(vi_ctype)
@@ -1190,7 +1190,7 @@ class Session(_SessionBase):
 
         Returns a number and a string.
 
-        Note: This function rules!
+        Note: This method rules!
 
         Returns:
             a_number (int): Contains a number.
@@ -1265,7 +1265,7 @@ class Session(_SessionBase):
     def set_custom_type(self, cs):
         '''set_custom_type
 
-        This function takes a custom type.
+        This method takes a custom type.
 
         Args:
             cs (CustomStruct): Set using custom type
@@ -1280,7 +1280,7 @@ class Session(_SessionBase):
     def set_custom_type_array(self, cs):
         '''set_custom_type_array
 
-        This function takes an array of custom types.
+        This method takes an array of custom types.
 
         Args:
             cs (list of CustomStruct): Set using custom type
@@ -1296,7 +1296,7 @@ class Session(_SessionBase):
     def two_input_function(self, a_number, a_string):
         '''two_input_function
 
-        This function takes two parameters other than the session.
+        This method takes two parameters other than the session.
 
         Args:
             a_number (float): Contains a number
@@ -1316,7 +1316,7 @@ class Session(_SessionBase):
 
         Returns a number and a string.
 
-        Note: This function rules!
+        Note: This method rules!
 
         Args:
             input (int): A big number on its way in.

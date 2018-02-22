@@ -386,9 +386,9 @@ def _fix_references(node, doc, cfg, make_link=False):
     if 'enum' in node:
         config['start_enum'] = node['enum']
 
-    attr_search_string = '{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
-    func_search_string = '{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', ''))
-    enum_search_string = '{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper())
+    attr_search_string = '{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
+    func_search_string = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    enum_search_string = '{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
     attr_re = re.compile(attr_search_string)
     func_re = re.compile(func_search_string)
     enum_re = re.compile(enum_search_string)
@@ -403,12 +403,21 @@ def _fix_references(node, doc, cfg, make_link=False):
             config['url_key'] = url_key
             doc = url_re.sub(_replace_urls, doc)
 
-    if not make_link:
-        doc = doc.replace('\_', '_')
-
     # Clean up config
     del config['make_link']
     del config['start_enum']
+
+    # Several other standard replacements
+    doc = re.sub(r'\bVI_FALSE\b', 'False', doc)
+    doc = re.sub(r'\bVI_TRUE\b', 'True', doc)
+    doc = re.sub(r'\battribute\b', 'property', doc)
+    doc = re.sub(r'\battributes\b', 'properties', doc)
+    doc = re.sub(r'\bAttribute\b', 'Property', doc)
+    doc = re.sub(r'\bAttributes\b', 'Properties', doc)
+    doc = re.sub(r'\bfunction\b', 'method', doc)
+    doc = re.sub(r'\bfunctions\b', 'methods', doc)
+    doc = re.sub(r'\bFunction\b', 'Method', doc)
+    doc = re.sub(r'\bFunctions\b', 'Methods', doc)
 
     return doc
 
@@ -696,7 +705,7 @@ def square_up_tables(config):
 
 def _need_func_note(nd, config):
     '''Determine if we need the extra note about function names not matching anything in Python'''
-    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    func_re = re.compile('{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', '')))
     for m in func_re.finditer(nd):
         fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
@@ -709,7 +718,7 @@ def _need_func_note(nd, config):
 
 def _need_attr_note(nd, config):
     '''Determine if we need the extra note about attribute names not matching anything in Python'''
-    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    attr_re = re.compile('{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper()))
     for m in attr_re.finditer(nd):
         aname = m.group(1).replace('\\', '')
         attr = find_attribute_by_name(config['attributes'], aname)
@@ -721,7 +730,7 @@ def _need_attr_note(nd, config):
 
 def _need_enum_note(nd, config, start_enum=None):
     '''Determine if we need the extra note about enum names not matching anything in Python'''
-    enum_re = re.compile('{0}\\\\_VAL\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
+    enum_re = re.compile('{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper()))
     for m in enum_re.finditer(nd):
         ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
         enum, _ = find_enum_by_value(config['enums'], ename, start_enum=start_enum)
@@ -891,12 +900,12 @@ config = {
                     'documentation': {
                         'description': '''Specifies the type of Turtle type
 wanted to choose.''',
-                        'note': 'You wont be able to import NIFAKE\\_VAL\\_RAPHAEL',
+                        'note': 'You wont be able to import NIFAKE_VAL_RAPHAEL',
                         'table_body': [
-                            ['NIFAKE\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
-                            ['NIFAKE\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
-                            ['NIFAKE\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
-                            ['NIFAKE\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
+                            ['NIFAKE_VAL_LEONARDO (default)', '0', 'LEONARDO'],
+                            ['NIFAKE_VAL_DONATELLO', '1', 'DONATELLO'],
+                            ['NIFAKE_VAL_RAPHAEL', '2', 'RAPHAEL'],
+                            ['NIFAKE_VAL_MICHELANGELO', '3', 'MICHELANGELO']
                         ]
                     },
                     'python_name': 'turtle_type',
@@ -951,9 +960,9 @@ wanted to choose.''',
             'documentation': {
                 'description': 'Returns the **ID** of selected Turtle Type. See `NIFAKE help <REPLACE_DRIVER_SPECIFIC_URL_1(fake_functional_overview)>`__',
                 'note': [
-                    'The NIFAKE\\_VAL\\_RAPHAEL Turtles dont have an ID.',
-                    'DO NOT call niFake\\_FetchWaveform after calling this function.',
-                    'NIFAKE\\_ATTR\\_READ\\_WRITE\\_BOOL will have an incorrect value after this calling this function',
+                    'The NIFAKE_VAL_RAPHAEL Turtles dont have an ID.',
+                    'DO NOT call niFake_FetchWaveform after calling this function.',
+                    'NIFAKE_ATTR_READ_WRITE_BOOL will have an incorrect value after this calling this function',
                 ]
             },
             'name': 'GetTurtleID',
@@ -1166,9 +1175,9 @@ def test_get_function_rst_default():
 
     .. note:: The :py:data:`~nifake.Turtle.RAPHAEL` Turtles dont have an ID.
 
-    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this function.
+    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this method.
 
-    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this function
+    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
 
     :param turtle_type:
 
@@ -1238,9 +1247,9 @@ def test_get_function_docstring_default():
 
 Note: The Turtle.RAPHAEL Turtles dont have an ID.
 
-Note: DO NOT call fetch_waveform after calling this function.
+Note: DO NOT call fetch_waveform after calling this method.
 
-Note: read_write_bool will have an incorrect value after this calling this function
+Note: read_write_bool will have an incorrect value after this calling this method
 
 Args:
     turtle_type (Turtle): Specifies the type of Turtle type
@@ -1405,7 +1414,7 @@ def test_add_notes_re_links():
                     'name': 'vi',
                     'type': 'ViSession',
                     'documentation': {
-                        'description': 'Identifies a particular instrument session for niFake\_MakeAFoo using NIFAKE\_ATTR\_READ\_WRITE\_BOOL. You should use NIFAKE\_VAL\_BLUE',
+                        'description': 'Identifies a particular instrument session for niFake_MakeAFoo using NIFAKE_ATTR_READ_WRITE_BOOL. You should use NIFAKE_VAL_BLUE',
                     },
                 },
                 {
@@ -1414,7 +1423,7 @@ def test_add_notes_re_links():
                     'name': 'channelName',
                     'type': 'ViString',
                     'documentation': {
-                        'description': 'The channel to call this on. Similar to niFake\_TakeAFoo using NIFAKE\_ATTR\_NOT\_HERE. Use NIFAKE\_VAL\_PURPLE',
+                        'description': 'The channel to call this on. Similar to niFake_TakeAFoo using NIFAKE_ATTR_NOT_HERE. Use NIFAKE_VAL_PURPLE',
                     },
                 },
             ],

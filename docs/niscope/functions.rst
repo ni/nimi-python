@@ -6,7 +6,7 @@ niscope.Session methods
 .. py:method:: abort()
 
     Aborts an acquisition and returns the digitizer to the Idle state. Call
-    this function if the digitizer times out waiting for a trigger.
+    this method if the digitizer times out waiting for a trigger.
 
     
 
@@ -41,7 +41,7 @@ niscope.Session methods
 
 .. py:method:: auto_setup()
 
-    Automatically configures the instrument. When you call this function,
+    Automatically configures the instrument. When you call this method,
     the digitizer senses the input signal and automatically configures many
     of the instrument settings. If a signal is detected on a channel, the
     driver chooses the smallest available vertical range that is larger than
@@ -128,7 +128,7 @@ niscope.Session methods
 
     
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -146,7 +146,7 @@ niscope.Session methods
     :param option:
 
 
-        The calibration option. Use VI\_NULL for a normal self-calibration
+        The calibration option. Use VI_NULL for a normal self-calibration
         operation or :py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION` to
         restore the previous calibration.
 
@@ -168,7 +168,7 @@ niscope.Session methods
     updated, including the min, max, mean, standard deviation, and number of
     updates. This information is fetched with
     :py:meth:`niscope.Session.fetch_measurement_stats`. The multi-acquisition array measurements
-    are also cleared with this function.
+    are also cleared with this method.
 
     
 
@@ -202,8 +202,8 @@ niscope.Session methods
 .. py:method:: commit()
 
     Commits to hardware all the parameter settings associated with the task.
-    Use this function if you want a parameter change to be immediately
-    reflected in the hardware. This function is not supported for
+    Use this method if you want a parameter change to be immediately
+    reflected in the hardware. This method is not supported for
     Traditional NI-DAQ (Legacy) devices.
 
     
@@ -212,7 +212,7 @@ niscope.Session methods
 
 .. py:method:: configure_chan_characteristics(input_impedance, max_input_frequency)
 
-    Configures the attributes that control the electrical characteristics of
+    Configures the properties that control the electrical characteristics of
     the channel—the input impedance and the bandwidth.
 
     
@@ -278,10 +278,10 @@ niscope.Session methods
         The custom coefficients for the equalization FIR filter on the device.
         These coefficients should be between +1 and –1. You can obtain the
         number of coefficients from the
-        `:py:data:`niscope.Session.equalization_num_coefficients` <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
-        attribute. The
-        `:py:data:`niscope.Session.equalization_filter_enabled` <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
-        attribute must be set to TRUE to enable the filter.
+        `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
+        property. The
+        `:py:data:`niscope.Session.equalization_filter_enabled` <cvi:py:data:`niscope.Session.equalization_filter_enabled`.html>`__
+        property must be set to TRUE to enable the filter.
 
         
 
@@ -318,7 +318,7 @@ niscope.Session methods
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     :type min_num_pts: int
@@ -350,13 +350,13 @@ niscope.Session methods
         Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
         more information.
 
-        Default value: VI\_TRUE
+        Default value: True
 
         **Defined Values**
 
-        VI\_TRUE—Allow real-time acquisitions only
+        True—Allow real-time acquisitions only
 
-        VI\_FALSE—Allow real-time and equivalent-time acquisitions
+        False—Allow real-time and equivalent-time acquisitions
 
         
 
@@ -365,7 +365,7 @@ niscope.Session methods
 
 .. py:method:: configure_ref_levels(low=10.0, mid=50.0, high=90.0)
 
-    This function is included for compliance with the IviScope Class
+    This method is included for compliance with the IviScope Class
     Specification.
 
     Configures the reference levels for all channels of the digitizer. The
@@ -374,8 +374,8 @@ niscope.Session methods
     :py:data:`niscope.Session.meas_chan_low_ref_level`, and
     :py:data:`niscope.Session.meas_chan_mid_ref_level`
 
-    This function configures the reference levels for waveform measurements.
-    Call this function before calling :py:meth:`niscope.Session.fetch_measurement` to take a
+    This method configures the reference levels for waveform measurements.
+    Call this method before calling :py:meth:`niscope.Session.fetch_measurement` to take a
     rise time, fall time, width negative, width positive, duty cycle
     negative, or duty cycle positive measurement.
 
@@ -441,13 +441,13 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for the start
     trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
-    (Start Trigger Source) attribute. The default is immediate. Upon
+    (Start Trigger Source) property. The default is immediate. Upon
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -458,7 +458,7 @@ niscope.Session methods
 
         You can adjust the amount of pre-trigger and post-trigger samples using
         the reference position parameter on the
-        :py:meth:`niscope.Session.configure_horizontal_timing` function. The default is half of the
+        :py:meth:`niscope.Session.configure_horizontal_timing` method. The default is half of the
         record length.
 
         Some features are not supported by all digitizers. Refer to `Features
@@ -520,13 +520,13 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for the start
     trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
-    (Start Trigger Source) attribute. The default is immediate. Upon
+    (Start Trigger Source) property. The default is immediate. Upon
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -617,9 +617,9 @@ niscope.Session methods
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -716,7 +716,7 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for a trigger. You
     specify the type of trigger that the digitizer waits for with a
-    Configure Trigger function, such as :py:meth:`niscope.Session.configure_trigger_immediate`.
+    Configure Trigger method, such as :py:meth:`niscope.Session.configure_trigger_immediate`.
 
     
 
@@ -728,13 +728,13 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for the start
     trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
-    (Start Trigger Source) attribute. The default is immediate. Upon
+    (Start Trigger Source) property. The default is immediate. Upon
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -780,13 +780,13 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for the start
     trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
-    (Start Trigger Source) attribute. The default is immediate. Upon
+    (Start Trigger Source) property. The default is immediate. Upon
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -907,13 +907,13 @@ niscope.Session methods
 
     When you initiate an acquisition, the digitizer waits for the start
     trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
-    (Start Trigger Source) attribute. The default is immediate. Upon
+    (Start Trigger Source) property. The default is immediate. Upon
     receiving the start trigger the digitizer begins sampling pretrigger
     points. After the digitizer finishes sampling pretrigger points, the
     digitizer waits for a reference (stop) trigger that you specify with a
-    function such as this one. Upon receiving the reference trigger the
+    method such as this one. Upon receiving the reference trigger the
     digitizer finishes the acquisition after completing posttrigger
-    sampling. With each Configure Trigger function, you specify
+    sampling. With each Configure Trigger method, you specify
     configuration parameters such as the trigger source and the amount of
     trigger delay.
 
@@ -1003,7 +1003,7 @@ niscope.Session methods
 
 .. py:method:: configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
-    Configures the most commonly configured attributes of the digitizer
+    Configures the most commonly configured properties of the digitizer
     vertical subsystem, such as the range, offset, coupling, probe
     attenuation, and the channel.
 
@@ -1091,18 +1091,18 @@ niscope.Session methods
     In cases where multiple instances of a particular signal exist, use the
     **signalIdentifier** input to specify which instance to control. For
     normal signals, only one instance exists and you should leave this
-    parameter set to the empty string. You can call this function multiple
+    parameter set to the empty string. You can call this method multiple
     times and set each available line to a different signal.
 
-    To unprogram a specific line on device, call this function with the
+    To unprogram a specific line on device, call this method with the
     signal you no longer want to export and set **outputTerminal** to
     :py:data:`~niscope.NISCOPE_VAL_NONE`.
 
     
 
-    .. note:: This function replaces :py:meth:`niscope.Session.ConfigureTriggerOutput`.
+    .. note:: This method replaces :py:meth:`niscope.Session.ConfigureTriggerOutput`.
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -1149,33 +1149,33 @@ niscope.Session methods
 
         **Defined Values**
 
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_0`   | ("VAL\_RTSI\_0")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_1`   | ("VAL\_RTSI\_1")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_2`   | ("VAL\_RTSI\_2")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_3`   | ("VAL\_RTSI\_3")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_4`   | ("VAL\_RTSI\_4")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_5`   | ("VAL\_RTSI\_5")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_6`   | ("VAL\_RTSI\_6")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_RTSI_7`   | ("VAL\_RTSI\_7")   |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PXI_STAR` | ("VAL\_PXI\_STAR") |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_0`    | ("VAL\_PFI\_0")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_1`    | ("VAL\_PFI\_1")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_PFI_2`    | ("VAL\_PFI\_2")    |
-        +------------------------------------------+--------------------+
-        | :py:data:`~niscope.NISCOPE_VAL_CLK_OUT`  | ("VAL\_CLK\_OUT")  |
-        +------------------------------------------+--------------------+
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_0`   | ("VAL_RTSI_0")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_1`   | ("VAL_RTSI_1")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_2`   | ("VAL_RTSI_2")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_3`   | ("VAL_RTSI_3")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_4`   | ("VAL_RTSI_4")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_5`   | ("VAL_RTSI_5")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_6`   | ("VAL_RTSI_6")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_RTSI_7`   | ("VAL_RTSI_7")   |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PXI_STAR` | ("VAL_PXI_STAR") |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_0`    | ("VAL_PFI_0")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_1`    | ("VAL_PFI_1")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_PFI_2`    | ("VAL_PFI_2")    |
+        +------------------------------------------+------------------+
+        | :py:data:`~niscope.NISCOPE_VAL_CLK_OUT`  | ("VAL_CLK_OUT")  |
+        +------------------------------------------+------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -1191,13 +1191,13 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=1000, fetch_relative_to=niscope.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1)
+.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
 
     Returns the waveform from a previously initiated acquisition that the
-                    digitizer acquires for the specified channel. This function returns
+                    digitizer acquires for the specified channel. This method returns
                     scaled voltage waveforms.
 
-                    This function may return multiple waveforms depending on the number of
+                    This method may return multiple waveforms depending on the number of
                     channels, the acquisition type, and the number of records you specify.
 
     
@@ -1212,7 +1212,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=1000, fetch_relative_to=niscope.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
 
 
     :param timeout:
@@ -1227,13 +1227,13 @@ niscope.Session methods
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
         
 
 
     :type num_samples: int
-    :param fetch_relative_to:
+    :param relative_to:
 
 
         Position to start fetching within one record.
@@ -1241,26 +1241,28 @@ niscope.Session methods
         
 
 
-    :type fetch_relative_to: :py:data:`niscope.FetchRelativeTo`
-    :param fetch_offset:
+    :type relative_to: :py:data:`niscope.FetchRelativeTo`
+    :param offset:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.
-
-        
-
-
-    :type fetch_offset: int
-    :param fetch_record_number:
-
-
-        Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.
+        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
 
         
 
 
-    :type fetch_record_number: int
-    :param fetch_num_records:
+    :type offset: int
+    :param record_number:
+
+
+        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+
+        
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+    :type record_number: int
+    :param num_records:
 
 
         Number of records to fetch. Use -1 to fetch all configured records.
@@ -1268,7 +1270,7 @@ niscope.Session methods
         
 
 
-    :type fetch_num_records: int
+    :type num_records: int
 
     :rtype: list of WaveformInfo
     :return:
@@ -1302,10 +1304,10 @@ niscope.Session methods
 .. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
-                    digitizer acquires for the specified channel. This function returns
+                    digitizer acquires for the specified channel. This method returns
                     scaled voltage waveforms.
 
-                    This function may return multiple waveforms depending on the number of
+                    This method may return multiple waveforms depending on the number of
                     channels, the acquisition type, and the number of records you specify.
 
     
@@ -1326,7 +1328,7 @@ niscope.Session methods
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
         
 
@@ -1396,7 +1398,7 @@ niscope.Session methods
 
     Fetches a waveform from the digitizer and performs the specified
     waveform measurement. Refer to `Using Fetch
-    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
     more information.
 
     Many of the measurements use the low, mid, and high reference levels.
@@ -1456,22 +1458,22 @@ niscope.Session methods
 .. py:method:: fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
     Obtains a waveform measurement and returns the measurement value. This
-    function may return multiple statistical results depending on the number
+    method may return multiple statistical results depending on the number
     of channels, the acquisition type, and the number of records you
     specify.
 
     You specify a particular measurement type, such as rise time, frequency,
     or voltage peak-to-peak. The waveform on which the digitizer calculates
     the waveform measurement is from an acquisition that you previously
-    initiated. The statistics for the specified measurement function are
+    initiated. The statistics for the specified measurement method are
     returned, where the statistics are updated once every acquisition when
     the specified measurement is fetched by any of the Fetch Measurement
-    functions. If a Fetch Measurement function has not been called, this
-    function fetches the data on which to perform the measurement. The
+    methods. If a Fetch Measurement method has not been called, this
+    method fetches the data on which to perform the measurement. The
     statistics are cleared by calling
     :py:meth:`niscope.Session.clear_waveform_measurement_stats`. Refer to `Using Fetch
-    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-    more information on incorporating fetch functions in your application.
+    Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    more information on incorporating fetch methods in your application.
 
     Many of the measurements use the low, mid, and high reference levels.
     You configure the low, mid, and high references with
@@ -1612,8 +1614,8 @@ niscope.Session methods
             The custom coefficients for the equalization FIR filter on the device.
             These coefficients should be between +1 and –1. You can obtain the
             number of coefficients from the
-            `:py:data:`niscope.Session.equalization_num_coefficients` <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
-            attribute.
+            `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
+            property.
 
             
 
@@ -1644,7 +1646,7 @@ niscope.Session methods
     **channelList** before the acquisition; in the other method, you enable
     the channels with :py:meth:`niscope.Session.configure_vertical`.
 
-    This function may return multiple waveforms depending on the number of
+    This method may return multiple waveforms depending on the number of
     channels, the acquisition type, and the number of records you specify.
 
     
@@ -1672,7 +1674,7 @@ niscope.Session methods
         acquisition finishes with fewer points than requested, some devices
         return partial data if the acquisition finished, was aborted, or a
         timeout of 0 was used. If it fails to complete within the timeout
-        period, the function returns an error.
+        period, the method returns an error.
 
         
 
@@ -1717,7 +1719,7 @@ niscope.Session methods
 
             
 
-            .. note:: One or more of the referenced functions are not in the Python API for this driver.
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
         wfm_info (list of WaveformInfo): 
@@ -1759,7 +1761,7 @@ niscope.Session methods
     multiple channels and records.
 
     Refer to `Using Fetch
-    Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+    Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
     more information.
 
     Many of the measurements use the low, mid, and high reference levels.
@@ -1818,7 +1820,7 @@ niscope.Session methods
 
 .. py:method:: reset()
 
-    Stops the acquisition, releases routes, and all session attributes are
+    Stops the acquisition, releases routes, and all session properties are
     reset to their `default
     states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
 
@@ -1830,7 +1832,7 @@ niscope.Session methods
 
     Performs a hard reset of the device. Acquisition stops, all routes are
     released, RTSI and PFI lines are tristated, hardware is configured to
-    its default state, and all session attributes are reset to their default
+    its default state, and all session properties are reset to their default
     state.
 
     -  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__
@@ -1880,7 +1882,7 @@ niscope.Session methods
 
             Returns the self-test response string from the instrument. Refer to the
             device-specific help topics for an explanation of the string contents;
-            you must pass a ViChar array at least IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes
+            you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
             in length.
 
             
@@ -1889,12 +1891,12 @@ niscope.Session methods
 
 .. py:method:: send_software_trigger_edge(which_trigger)
 
-    Sends the selected trigger to the digitizer. Call this function if you
+    Sends the selected trigger to the digitizer. Call this method if you
     called :py:meth:`niscope.Session.configure_trigger_software` when you want the Reference
-    trigger to occur. You can also call this function to override a misused
+    trigger to occur. You can also call this method to override a misused
     edge, digital, or hysteresis trigger. If you have configured
     :py:data:`niscope.Session.acq_arm_source`, :py:data:`niscope.Session.arm_ref_trig_src`, or
-    :py:data:`niscope.Session.adv_trig_src`, call this function when you want to send
+    :py:data:`niscope.Session.adv_trig_src`, call this method when you want to send
     the corresponding trigger to the digitizer.
 
     

@@ -80,7 +80,7 @@ class _SessionBase(object):
     all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
     '''Type: int
 
-    Returns a bit field of the latched status of all Marker Events.  Write 0 to this attribute to clear the latched status of all Marker Events.
+    Returns a bit field of the latched status of all Marker Events.  Write 0 to this property to clear the latched status of all Marker Events.
     '''
     all_marker_events_live_status = attributes.AttributeViInt32(1150344)
     '''Type: int
@@ -90,12 +90,12 @@ class _SessionBase(object):
     analog_data_mask = attributes.AttributeViInt32(1150234)
     '''Type: int
 
-    Specifies the mask to apply to the analog output. The masked data is replaced with the data in NIFGEN_ATTR_ANALOG_STATIC_VALUE.
+    Specifies the mask to apply to the analog output. The masked data is replaced with the data in analog_static_value.
     '''
     analog_filter_enabled = attributes.AttributeViBoolean(1150103)
     '''Type: bool
 
-    Controls whether the signal generator applies to an analog filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
+    Controls whether the signal generator applies to an analog filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
     analog_path = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AnalogPath, 1150222)
     '''Type: enums.AnalogPath
@@ -106,63 +106,66 @@ class _SessionBase(object):
     analog_static_value = attributes.AttributeViInt32(1150235)
     '''Type: int
 
-    Specifies the static value that replaces data masked by NIFGEN_ATTR_ANALOG_DATA_MASK.
+    Specifies the static value that replaces data masked by analog_data_mask.
     '''
     arb_gain = attributes.AttributeViReal64(1250202)
     '''Type: float
 
-    Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to scale the arbitrary waveform to other ranges.
-    For example, when you set this attribute to 2.0, the output signal ranges from -2.0 V to +2.0 V.
-    Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
+    Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges.
+    For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
+    Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     '''
     arb_marker_position = attributes.AttributeViInt32(1150327)
     '''Type: int
 
-    Specifies the position for a marker to be asserted in the arbitrary waveform. This attribute defaults to -1 when no marker position is specified. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
-    Use niFgen_ExportSignal to export the marker signal.
+    Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when output_mode is set to OutputMode.ARB.
+    Use export_signal to export the marker signal.
     '''
     arb_offset = attributes.AttributeViReal64(1250203)
     '''Type: float
 
-    Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to shift the arbitrary waveform range.
-    For example, when you set this attribute to 1.0, the output signal ranges from 2.0 V to 0.0 V.
-    Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
+    Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to shift the arbitrary waveform range.
+    For example, when you set this property to 1.0, the output signal ranges from 2.0 V to 0.0 V.
+    Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     Units: Volts
     '''
     arb_repeat_count = attributes.AttributeViInt32(1150328)
     '''Type: int
 
-    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to NIFGEN_VAL_SINGLE or NIFGEN_VAL_STEPPED. This attribute is ignored if the triggerMode parameter is set to NIFGEN_VAL_CONTINUOUS or NIFGEN_VAL_BURST. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
-    When used during streaming, this attribute specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
+    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
+    When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
     arb_sample_rate = attributes.AttributeViReal64(1250204)
     '''Type: float
 
-    Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set  to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
+    Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this property when output_mode is set  to OutputMode.ARB or OutputMode.SEQ.
     Units: Samples/s
     '''
     arb_sequence_handle = attributes.AttributeViInt32(1250211)
     '''Type: int
 
-    This channel-based attribute identifies which sequence the signal generator produces. You can create multiple sequences using niFgen_CreateArbSequence. niFgen_CreateArbSequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this attribute to the sequence handle.
-    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SEQ.
+    This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using create_arb_sequence. create_arb_sequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
+    Use this property only when output_mode is set to OutputMode.SEQ.
     '''
     arb_waveform_handle = attributes.AttributeViInt32(1250201)
     '''Type: int
 
-    Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:
-    niFgen_CreateWaveformF64
-    niFgen_CreateWaveformI16
-    niFgen_CreateWaveformFromFileI16
-    niFgen_CreateWaveformFromFileF64
-    niFgen_CreateWaveformFromFileHWS
-    These functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.
-    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
+    Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
+    _create_waveform_f64
+    _create_waveform_i16
+    create_waveform_from_file_i16
+    create_waveform_from_file_f64
+    CreateWaveformFromFileHWS
+    These methods return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this property to the waveform handle.
+    Use this property only when output_mode is set to OutputMode.ARB.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''Type: bool
 
-    Controls the specified auxiliary power pin. Setting this attribute to TRUE energizes the auxiliary power when the session is committed. When this attribute is FALSE, the power pin of the connector outputs no power.
+    Controls the specified auxiliary power pin. Setting this property to TRUE energizes the auxiliary power when the session is committed. When this property is FALSE, the power pin of the connector outputs no power.
     '''
     bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
     '''Type: enums.BusType
@@ -172,8 +175,11 @@ class _SessionBase(object):
     cache = attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
-    Specifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
-    NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use niFgen_InitWithOptions to override the default value.
+    Specifies whether to cache the value of properties.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
+    NI-FGEN can choose to always cache or to never cache  particular properties regardless of the setting of this property.  Use InitWithOptions to override the default value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
     '''Type: enums.CalADCInput
@@ -183,18 +189,18 @@ class _SessionBase(object):
     channel_delay = attributes.AttributeViReal64(1150369)
     '''Type: float
 
-    Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this attribute can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
+    Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
     clock_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ClockMode, 1150110)
     '''Type: enums.ClockMode
 
     Controls which clock mode is used for the signal generator.
-    For signal generators that support it, this attribute allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
+    For signal generators that support it, this property allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
     '''
     common_mode_offset = attributes.AttributeViReal64(1150366)
     '''Type: float
 
-    Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This attribute applies only when you set the NIFGEN_ATTR_TERMINAL_CONFIGURATION attribute to NIFGEN_VAL_DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
+    Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the terminal_configuration property to TerminalConfiguration.DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
     '''
     data_marker_events_count = attributes.AttributeViInt32(1150273)
     '''Type: int
@@ -224,22 +230,22 @@ class _SessionBase(object):
     data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150373)
     '''Type: float
 
-    Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this attribute. Set this attribute to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
+    Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this property. Set this property to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
     '''
     data_transfer_maximum_in_flight_reads = attributes.AttributeViInt32(1150375)
     '''Type: int
 
     Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue.
-    When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this attribute is set to the highest value the signal generator supports.
+    When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this property is set to the highest value the signal generator supports.
     If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the NI signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
     '''
     data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150374)
     '''Type: int
 
     Specifies the preferred size of the data field in a PCI Express read request packet. In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
-    Recommended values for this attribute are powers of two between 64 and 512.
-    In some cases, the signal generator generates packets smaller than  the preferred size you set with this attribute.
-    You cannot change this attribute while the device is generating a waveform. If you want to change the device configuration, call the niFgen_AbortGeneration function or wait for the generation to complete.
+    Recommended values for this property are powers of two between 64 and 512.
+    In some cases, the signal generator generates packets smaller than  the preferred size you set with this property.
+    You cannot change this property while the device is generating a waveform. If you want to change the device configuration, call the abort method or wait for the generation to complete.
 
     Note:
     :
@@ -247,53 +253,53 @@ class _SessionBase(object):
     digital_data_mask = attributes.AttributeViInt32(1150236)
     '''Type: int
 
-    Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in NIFGEN_ATTR_DIGITAL_STATIC_VALUE.
+    Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in digital_static_value.
     '''
     digital_edge_script_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150292)
     '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
-    Specifies the active edge for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
+    Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
     '''
     digital_edge_script_trigger_source = attributes.AttributeViString(1150291)
     '''Type: str
 
-    Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
+    Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''Type: enums.StartTriggerDigitalEdgeEdge
 
-    Specifies the active edge for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
+    Specifies the active edge for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
     digital_edge_start_trigger_source = attributes.AttributeViString(1150281)
     '''Type: str
 
-    Specifies the source terminal for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
+    Specifies the source terminal for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
     digital_filter_enabled = attributes.AttributeViBoolean(1150102)
     '''Type: bool
 
-    Controls whether the signal generator applies a digital filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
+    Controls whether the signal generator applies a digital filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
     digital_filter_interpolation_factor = attributes.AttributeViReal64(1150218)
     '''Type: float
 
-    This attribute only affects the device when NIFGEN_ATTR_DIGITAL_FILTER_ENABLED is set to VI_TRUE. If you do not set this attribute directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
+    This property only affects the device when digital_filter_enabled is set to True. If you do not set this property directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
     '''
     digital_gain = attributes.AttributeViReal64(1150254)
     '''Type: float
 
     Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
-    Some signal generators support both digital gain and an analog gain (analog gain is specified with the NIFGEN_ATTR_FUNC_AMPLITUDE attribute or the NIFGEN_ATTR_ARB_GAIN attribute). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a function of analog gain, so only analog gain makes full use of the resolution of the DAC.
+    Some signal generators support both digital gain and an analog gain (analog gain is specified with the func_amplitude property or the arb_gain property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
     digital_level_script_trigger_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
     '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
 
-    Specifies the active level for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
+    Specifies the active level for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
     '''
     digital_level_script_trigger_source = attributes.AttributeViString(1150293)
     '''Type: str
 
-    Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
+    Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
     '''
     digital_pattern_enabled = attributes.AttributeViBoolean(1150101)
     '''Type: bool
@@ -303,12 +309,12 @@ class _SessionBase(object):
     digital_static_value = attributes.AttributeViInt32(1150237)
     '''Type: int
 
-    Specifies the static value that replaces data masked by NIFGEN_ATTR_DIGITAL_DATA_MASK.
+    Specifies the static value that replaces data masked by digital_data_mask.
     '''
     direct_dma_enabled = attributes.AttributeViBoolean(1150244)
     '''Type: bool
 
-    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform function calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
+    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
     '''
     direct_dma_window_address = attributes.AttributeViInt32(1150274)
     '''Type: int
@@ -323,12 +329,12 @@ class _SessionBase(object):
     done_event_delay = attributes.AttributeViReal64(1150358)
     '''Type: float
 
-    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  NIFGEN_ATTR_DONE_EVENT_DELAY attribute.
+    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
     '''
     done_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
     '''Type: enums.DoneEventDelayUnits
 
-    Specifies the units applied to the value of the NIFGEN_ATTR_DONE_EVENT_DELAY attribute. Valid units are seconds and sample clock periods.
+    Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
     '''
     done_event_latched_status = attributes.AttributeViBoolean(1150351)
     '''Type: bool
@@ -368,7 +374,10 @@ class _SessionBase(object):
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
 
-    Specifies the driver setup portion of the option string that was passed into the niFgen_InitWithOptions function.
+    Specifies the driver setup portion of the option string that was passed into the InitWithOptions method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''Type: str
@@ -383,7 +392,7 @@ class _SessionBase(object):
     exported_sample_clock_divisor = attributes.AttributeViInt32(1150219)
     '''Type: int
 
-    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute.
+    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the export_signal method or the  exported_sample_clock_output_terminal property.
     '''
     exported_sample_clock_output_terminal = attributes.AttributeViString(1150320)
     '''Type: str
@@ -393,21 +402,21 @@ class _SessionBase(object):
     exported_sample_clock_timebase_divisor = attributes.AttributeViInt32(1150230)
     '''Type: int
 
-    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL attribute.
+    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the export_signal method or the  exported_sample_clock_timebase_output_terminal property.
     '''
     exported_sample_clock_timebase_output_terminal = attributes.AttributeViString(1150329)
     '''Type: str
 
-    Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR attribute,   the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL  attribute is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
-    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the exported_sample_clock_timebase_divisor property,   the Sample clock exported with the exported_sample_clock_timebase_output_terminal  property is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
+    To change the device configuration, call abort or wait for the generation to complete.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute.
+    Note: The signal generator must not be in the Generating state when you change this property.
     '''
     exported_script_trigger_output_terminal = attributes.AttributeViString(1150295)
     '''Type: str
 
     Specifies the output terminal for the exported Script trigger.
-    Setting this attribute to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
+    Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
     '''
     exported_start_trigger_output_terminal = attributes.AttributeViString(1150283)
     '''Type: str
@@ -422,23 +431,23 @@ class _SessionBase(object):
     external_sample_clock_multiplier = attributes.AttributeViReal64(1150376)
     '''Type: float
 
-    Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this attribute to generate samples at a rate higher than your external clock rate.  When using this attribute, you do not need to explicitly set the external clock rate.
+    Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this property to generate samples at a rate higher than your external clock rate.  When using this property, you do not need to explicitly set the external clock rate.
     '''
     file_transfer_block_size = attributes.AttributeViInt32(1150240)
     '''Type: int
 
-    The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File functions.
+    The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File methods.
     '''
     filter_correction_frequency = attributes.AttributeViReal64(1150104)
     '''Type: float
 
-    Controls the filter correction frequency of the analog filter. This attribute corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this attribute to 0 Hz.
+    Controls the filter correction frequency of the analog filter. This property corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this property to 0 Hz.
     '''
     flatness_correction_enabled = attributes.AttributeViBoolean(1150323)
     '''Type: bool
 
-    When VI_TRUE, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
-    This attribute should be set to VI_FALSE when performing Flatness Calibration.
+    When True, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
+    This property should be set to False when performing Flatness Calibration.
     '''
     fpga_bitfile_path = attributes.AttributeViString(1150412)
     '''Type: str
@@ -453,14 +462,14 @@ class _SessionBase(object):
     freq_list_handle = attributes.AttributeViInt32(1150208)
     '''Type: int
 
-    Sets which frequency list the signal generator  produces. Create a frequency list using niFgen_CreateFreqList.  niFgen_CreateFreqList returns a handle that you can  use to identify the list.
+    Sets which frequency list the signal generator  produces. Create a frequency list using create_freq_list.  create_freq_list returns a handle that you can  use to identify the list.
     '''
     func_amplitude = attributes.AttributeViReal64(1250102)
     '''Type: float
 
     Controls the amplitude of the standard waveform that the  signal generator produces. This value is the amplitude at the  output terminal.
     For example, to produce a waveform ranging from -5.00 V to +5.00 V, set  the amplitude to 10.00 V.
-    set the Waveform parameter to NIFGEN_VAL_WFM_DC.
+    set the Waveform parameter to Waveform.DC.
     Units: Vpk-pk
 
     Note: This parameter does not affect signal generator behavior when you
@@ -468,10 +477,10 @@ class _SessionBase(object):
     func_buffer_size = attributes.AttributeViInt32(1150238)
     '''Type: int
 
-    This attribute contains the number of samples used in the standard function waveform  buffer. This attribute is only valid on devices that implement standard function mode  in software, and is read-only for all other devices.
-    implementation of Standard Function Mode on your device.
+    This property contains the number of samples used in the standard method waveform  buffer. This property is only valid on devices that implement standard method mode  in software, and is read-only for all other devices.
+    implementation of Standard Method Mode on your device.
 
-    Note: Refer to the Standard Function Mode topic for more information on the
+    Note: Refer to the Standard Method Mode topic for more information on the
     '''
     func_dc_offset = attributes.AttributeViReal64(1250103)
     '''Type: float
@@ -483,8 +492,8 @@ class _SessionBase(object):
     func_duty_cycle_high = attributes.AttributeViReal64(1250106)
     '''Type: float
 
-    Controls the duty cycle of the square wave the signal generator  produces. Specify this attribute as a percentage of  the time the square wave is high in a cycle.
-    set the Waveform parameter to NIFGEN_VAL_WFM_SQUARE.
+    Controls the duty cycle of the square wave the signal generator  produces. Specify this property as a percentage of  the time the square wave is high in a cycle.
+    set the Waveform parameter to Waveform.SQUARE.
     Units: Percentage of time the waveform is high
 
     Note: This parameter only affects signal generator behavior when you
@@ -494,8 +503,8 @@ class _SessionBase(object):
 
     Controls the frequency of the standard waveform that the  signal generator produces.
     Units: hertz
-    (1) This parameter does not affect signal generator behavior when you  set the Waveform parameter of the niFgen_ConfigureStandardWaveform function  to NIFGEN_VAL_WFM_DC.
-    (2) For NIFGEN_VAL_WFM_SINE, the range is between 0 MHz and 16 MHz, but the  range is between 0 MHz and 1 MHz for all other waveforms.
+    (1) This parameter does not affect signal generator behavior when you  set the Waveform parameter of the configure_standard_waveform method  to Waveform.DC.
+    (2) For Waveform.SINE, the range is between 0 MHz and 16 MHz, but the  range is between 0 MHz and 1 MHz for all other waveforms.
 
     Note:
     :
@@ -503,17 +512,17 @@ class _SessionBase(object):
     func_max_buffer_size = attributes.AttributeViInt32(1150239)
     '''Type: int
 
-    This attribute sets the maximum number of samples that can be used in the standard  function waveform buffer. Increasing this value may increase the quality of  the waveform. This attribute is only valid on devices that implement standard  function mode in software, and is read-only for all other devices.
-    implementation of Standard Function Mode on your device.
+    This property sets the maximum number of samples that can be used in the standard  method waveform buffer. Increasing this value may increase the quality of  the waveform. This property is only valid on devices that implement standard  method mode in software, and is read-only for all other devices.
+    implementation of Standard Method Mode on your device.
 
-    Note: Refer to the Standard Function Mode topic for more information on the
+    Note: Refer to the Standard Method Mode topic for more information on the
     '''
     func_start_phase = attributes.AttributeViReal64(1250105)
     '''Type: float
 
-    Controls horizontal offset of the standard waveform the  signal generator produces. Specify this attribute in degrees of  one waveform cycle.
+    Controls horizontal offset of the standard waveform the  signal generator produces. Specify this property in degrees of  one waveform cycle.
     A start phase of 180 degrees means output generation begins halfway  through the waveform. A start phase of 360 degrees offsets the output by  an entire waveform cycle, which is identical to a start phase of 0  degrees.
-    set the Waveform parameter to NIFGEN_VAL_WFM_DC.
+    set the Waveform parameter to Waveform.DC.
     Units: Degrees of one cycle
 
     Note: This parameter does not affect signal generator behavior when you
@@ -521,17 +530,17 @@ class _SessionBase(object):
     func_waveform = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Waveform, 1250101)
     '''Type: enums.Waveform
 
-    This channel-based attribute specifies which standard waveform the signal generator produces.
-    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to  NIFGEN_VAL_OUTPUT_FUNC.
-    NIFGEN_VAL_WFM_SINE      - Sinusoid waveform
-    NIFGEN_VAL_WFM_SQUARE    - Square waveform
-    NIFGEN_VAL_WFM_TRIANGLE  - Triangle waveform
-    NIFGEN_VAL_WFM_RAMP_UP   - Positive ramp waveform
-    NIFGEN_VAL_WFM_RAMP_DOWN - Negative ramp waveform
-    NIFGEN_VAL_WFM_DC        - Constant voltage
-    NIFGEN_VAL_WFM_NOISE     - White noise
-    NIFGEN_VAL_WFM_USER      - User-defined waveform as defined with
-    niFgen_DefineUserStandardWaveform
+    This channel-based property specifies which standard waveform the signal generator produces.
+    Use this property only when output_mode is set to  OutputMode.FUNC.
+    Waveform.SINE      - Sinusoid waveform
+    Waveform.SQUARE    - Square waveform
+    Waveform.TRIANGLE  - Triangle waveform
+    Waveform.RAMP_UP   - Positive ramp waveform
+    Waveform.RAMP_DOWN - Negative ramp waveform
+    Waveform.DC        - Constant voltage
+    Waveform.NOISE     - White noise
+    Waveform.USER      - User-defined waveform as defined with
+    define_user_standard_waveform
     '''
     gain_dac_value = attributes.AttributeViInt32(1150223)
     '''Type: int
@@ -572,27 +581,36 @@ class _SessionBase(object):
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niFgen_InitiateGeneration.
-    Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call niFgen_GetNextInterchangeWarning to extract interchange warnings.   Call niFgen_ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.
+    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  _initiate_generation.
+    Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call GetNextInterchangeWarning to extract interchange warnings.   Call ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
+    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group. Interchangeability warnings can  occur when an property affects the behavior of the device and you  have not set that property, or the property has been invalidated since you set it.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor that NI-FGEN uses to identify the physical device.
-    If you initialize NI-FGEN with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
-    If you initialize NI-FGEN with the resource  descriptor, this attribute contains that value.
+    If you initialize NI-FGEN with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
+    If you initialize NI-FGEN with the resource  descriptor, this property contains that value.
     '''
     load_impedance = attributes.AttributeViReal64(1150220)
     '''Type: float
 
-    This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
+    This channel-based property specifies the load impedance connected to the analog output of the channel. If you set this property to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name that you specified when opening the  current IVI session.
-    You may pass a logical name to niFgen_init or  niFgen_InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    You may pass a logical name to init or  InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     major_version = attributes.AttributeViInt32(1050503)
     '''Type: int
@@ -602,23 +620,23 @@ class _SessionBase(object):
     marker_events_count = attributes.AttributeViInt32(1150271)
     '''Type: int
 
-    Returns the number of markers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
+    Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
     marker_event_delay = attributes.AttributeViReal64(1150354)
     '''Type: float
 
-    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.
+    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
     '''
     marker_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
     '''Type: enums.MarkerEventDelayUnits
 
-    Specifies the units applied to the value of the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.  Valid units are seconds and sample clock periods.
+    Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
     '''
     marker_event_latched_status = attributes.AttributeViBoolean(1150350)
     '''Type: bool
 
     Specifies the latched status of the specified Marker Event.
-    Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
+    Write True to this property to clear the latched status of the Marker Event.
     '''
     marker_event_live_status = attributes.AttributeViBoolean(1150345)
     '''Type: bool
@@ -693,7 +711,7 @@ class _SessionBase(object):
     max_waveform_size = attributes.AttributeViInt32(1250208)
     '''Type: int
 
-    Returns the size, in samples, of the largest waveform that can be created. This attribute reflects the space currently available, taking into account previously allocated waveforms and instructions.
+    Returns the size, in samples, of the largest waveform that can be created. This property reflects the space currently available, taking into account previously allocated waveforms and instructions.
     '''
     memory_size = attributes.AttributeViInt32(1150242)
     '''Type: int
@@ -734,7 +752,7 @@ class _SessionBase(object):
     '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
-    For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
+    For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     offset_dac_value = attributes.AttributeViInt32(1150224)
     '''Type: int
@@ -769,23 +787,23 @@ class _SessionBase(object):
     osp_carrier_phase_q = attributes.AttributeViReal64(1150252)
     '''Type: float
 
-    Q Carrier Phase in degrees at the first point of the generation.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE  attribute is set to NIFGEN_VAL_OSP_COMPLEX.
+    Q Carrier Phase in degrees at the first point of the generation.  This property is only used when the osp_data_processing_mode  property is set to DataProcessingMode.COMPLEX.
     '''
     osp_cic_filter_enabled = attributes.AttributeViBoolean(1150257)
     '''Type: bool
 
     Enables or disables the CIC filter.
-    The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
+    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
     '''
     osp_cic_filter_gain = attributes.AttributeViReal64(1150263)
     '''Type: float
 
-    Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this attribute overrides the value set by NI-FGEN.
+    Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this property overrides the value set by NI-FGEN.
     '''
     osp_cic_filter_interpolation = attributes.AttributeViReal64(1150258)
     '''Type: float
 
-    Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
+    Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the osp_iq_rate property.
     '''
     osp_compensate_for_filter_group_delay = attributes.AttributeViBoolean(1150389)
     '''Type: bool
@@ -800,38 +818,38 @@ class _SessionBase(object):
     osp_enabled = attributes.AttributeViBoolean(1150246)
     '''Type: bool
 
-    Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related attributes are disabled and have no effect on the generated signal.
+    Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related properties are disabled and have no effect on the generated signal.
     '''
     osp_fir_filter_enabled = attributes.AttributeViBoolean(1150255)
     '''Type: bool
 
     Enables or disables the FIR filter.
-    The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
+    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
     '''
     osp_fir_filter_flat_passband = attributes.AttributeViReal64(1150261)
     '''Type: float
 
-    Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_FLAT.
+    Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This property is used only when the osp_fir_filter_type  property is set to FilterType.FLAT.
     '''
     osp_fir_filter_gaussian_bt = attributes.AttributeViReal64(1150262)
     '''Type: float
 
-    BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE attribute is set to  NIFGEN_VAL_OSP_GAUSSIAN.
+    BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the osp_fir_filter_type property is set to  FilterType.GAUSSIAN.
     '''
     osp_fir_filter_interpolation = attributes.AttributeViReal64(1150256)
     '''Type: float
 
-    Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
+    Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the osp_iq_rate property.
     '''
     osp_fir_filter_raised_cosine_alpha = attributes.AttributeViReal64(1150260)
     '''Type: float
 
-    Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_RAISED_COSINE.
+    Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the osp_fir_filter_type  property is set to FilterType.RAISED_COSINE.
     '''
     osp_fir_filter_root_raised_cosine_alpha = attributes.AttributeViReal64(1150259)
     '''Type: float
 
-    Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_ROOT_RAISED_COSINE.
+    Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This property is used only when the osp_fir_filter_type  property is set to FilterType.ROOT_RAISED_COSINE.
     '''
     osp_fir_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150253)
     '''Type: enums.FilterType
@@ -852,13 +870,13 @@ class _SessionBase(object):
     '''Type: enums.OSPOverflowErrorReporting
 
     Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
-    You can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow  conditions whether or not the NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is  enabled. The device will continue to generate after an overflow whether or not the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is enabled.
+    You can use the osp_overflow_status property to query for overflow  conditions whether or not the osp_overflow_error_reporting property is  enabled. The device will continue to generate after an overflow whether or not the  osp_overflow_error_reporting property is enabled.
     '''
     osp_overflow_status = attributes.AttributeViInt32(1150269)
     '''Type: int
 
-    Returns a bit field of the overflow status in any stage of the OSP block.  This attribute is functional regardless of the value for the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute.
-    Write 0 to this attribute to clear the current NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING value.
+    Returns a bit field of the overflow status in any stage of the OSP block.  This property is functional regardless of the value for the  osp_overflow_error_reporting property.
+    Write 0 to this property to clear the current osp_overflow_error_reporting value.
     '''
     osp_pre_filter_gain_i = attributes.AttributeViReal64(1150264)
     '''Type: float
@@ -868,7 +886,7 @@ class _SessionBase(object):
     osp_pre_filter_gain_q = attributes.AttributeViReal64(1150265)
     '''Type: float
 
-    Digital gain to apply to the Q data stream before any filtering by the OSP block.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute  is set to NIFGEN_VAL_OSP_COMPLEX.
+    Digital gain to apply to the Q data stream before any filtering by the OSP block.  This property is only used when the osp_data_processing_mode property  is set to DataProcessingMode.COMPLEX.
     '''
     osp_pre_filter_offset_i = attributes.AttributeViReal64(1150266)
     '''Type: float
@@ -878,36 +896,36 @@ class _SessionBase(object):
     osp_pre_filter_offset_q = attributes.AttributeViReal64(1150267)
     '''Type: float
 
-    Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This attribute is used only when  the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_COMPLEX.
+    Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This property is used only when  the osp_data_processing_mode property is set to DataProcessingMode.COMPLEX.
     '''
     output_enabled = attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
-    This channel-based attribute specifies whether the signal that the signal generator produces appears at the output connector.
+    This channel-based property specifies whether the signal that the signal generator produces appears at the output connector.
     '''
     output_impedance = attributes.AttributeViReal64(1250004)
     '''Type: float
 
-    This channel-based attribute specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
+    This channel-based property specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
     output_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputMode, 1250001)
     '''Type: enums.OutputMode
 
-    Sets which output mode the signal generator will use. The value you specify determines which functions and attributes you use to configure the waveform the signal generator produces.
+    Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
     p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410)
     '''Type: int
 
-    Specifies the Endpoint threshold for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to P2P Endpoint Fullness.
+    Specifies the Endpoint threshold for the Start trigger. This property is used only when start_trigger_type is set to P2P Endpoint Fullness.
     '''
     pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362)
     '''Type: bool
 
     Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
-    This attribute is only valid for PCI and PXI SMC-based devices.
-    This attribute is enabled (VI_TRUE) by default, and NI recommends leaving it enabled.
+    This property is only valid for PCI and PXI SMC-based devices.
+    This property is enabled (True) by default, and NI recommends leaving it enabled.
     '''
     post_amplifier_attenuation = attributes.AttributeViReal64(1150229)
     '''Type: float
@@ -922,9 +940,12 @@ class _SessionBase(object):
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
-    Specifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
-    Default Value: VI_TRUE
-    Use niFgen_InitWithOptions to override the default value.
+    Specifies whether to validate property values and method parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the methods. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
+    Default Value: True
+    Use InitWithOptions to override the default value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     ready_for_start_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
     '''Type: enums.ReadyForStartEventActiveLevel
@@ -944,18 +965,21 @@ class _SessionBase(object):
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
-    Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call niFgen_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
-    Default Value: VI_FALSE
-    Use niFgen_InitWithOptions to override default value.
+    Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   Call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
+    Default Value: False
+    Use InitWithOptions to override default value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     reference_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
     '''Type: enums.ReferenceClockSource
 
     Specifies the reference clock source used by the signal generator.
-    The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this attribute to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
-    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this property to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
+    To change the device configuration, call abort or wait for the generation to complete.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute.
+    Note: The signal generator must not be in the Generating state when you change this property.
     '''
     ref_clock_frequency = attributes.AttributeViReal64(1150107)
     '''Type: float
@@ -973,43 +997,43 @@ class _SessionBase(object):
     sample_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockSource, 1150112)
     '''Type: enums.SampleClockSource
 
-    Specifies the Sample clock source. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_DIVISOR  attribute, the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
-    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    Specifies the Sample clock source. If you specify a divisor with the exported_sample_clock_divisor  property, the Sample clock exported with the exported_sample_clock_output_terminal property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
+    To change the device configuration, call abort or wait for the generation to complete.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute.
+    Note: The signal generator must not be in the Generating state when you change this property.
     '''
     sample_clock_timebase_rate = attributes.AttributeViReal64(1150368)
     '''Type: float
 
-    Specifies the Sample clock timebase rate. This attribute applies only to external Sample clock timebases.
-    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    Specifies the Sample clock timebase rate. This property applies only to external Sample clock timebases.
+    To change the device configuration, call abort or wait for the generation to complete.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute.
+    Note: The signal generator must not be in the Generating state when you change this property.
     '''
     sample_clock_timebase_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
     '''Type: enums.SampleClockTimebaseSource
 
     Specifies the Sample Clock Timebase source.
-    To change the device configuration, call the niFgen_AbortGeneration function or wait for the generation to complete.
+    To change the device configuration, call the abort method or wait for the generation to complete.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute.
+    Note: The signal generator must not be in the Generating state when you change this property.
     '''
     script_to_generate = attributes.AttributeViString(1150270)
     '''Type: str
 
-    Specifies which script the generator produces. To configure the generator to run a particular script, set this attribute to the name of the script. Use niFgen_WriteScript to create multiple scripts. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
+    Specifies which script the generator produces. To configure the generator to run a particular script, set this property to the name of the script. Use write_script to create multiple scripts. Use this property when output_mode is set to OutputMode.SCRIPT.
 
-    Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
     script_triggers_count = attributes.AttributeViInt32(1150272)
     '''Type: int
 
-    Specifies the number of Script triggers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
+    Specifies the number of Script triggers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
     script_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerType, 1150290)
     '''Type: enums.ScriptTriggerType
 
-    Specifies the Script trigger type. Depending upon the value of this attribute, additional attributes may need to be configured to fully configure the trigger.
+    Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
     '''
     serial_number = attributes.AttributeViString(1150243)
     '''Type: str
@@ -1019,9 +1043,12 @@ class _SessionBase(object):
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  functions perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  functions return calculated values.
-    Default Value: VI_FALSE
-    Use niFgen_InitWithOptions to override default value.
+    Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  methods perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  methods return calculated values.
+    Default Value: False
+    Use InitWithOptions to override default value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -1052,13 +1079,13 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
-    You can specify the units of the delay value by setting the NIFGEN_ATTR_STARTED_EVENT_DELAY attribute.
+    You can specify the units of the delay value by setting the started_event_delay property.
     '''
     started_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
     '''Type: enums.StartedEventDelayUnits
 
-    Specifies the units applied to the value of the NIFGEN_ATTR_STARTED_EVENT_DELAY
-    attribute.  Valid units are seconds and sample clock periods.
+    Specifies the units applied to the value of the started_event_delay
+    property.  Valid units are seconds and sample clock periods.
     '''
     started_event_latched_status = attributes.AttributeViBoolean(1150352)
     '''Type: bool
@@ -1098,26 +1125,26 @@ class _SessionBase(object):
     start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType
 
-    Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this attribute.
+    Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this property.
     '''
     streaming_space_available_in_waveform = attributes.AttributeViInt32(1150325)
     '''Type: int
 
     Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
     To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
-    Used in conjunction with the NIFGEN_ATTR_STREAMING_WAVEFORM_HANDLE or NIFGEN_ATTR_STREAMING_WAVEFORM_NAME attributes.
+    Used in conjunction with the streaming_waveform_handle or streaming_waveform_name properties.
     '''
     streaming_waveform_handle = attributes.AttributeViInt32(1150324)
     '''Type: int
 
-    Specifies the waveform handle of the waveform used to continuously stream data during generation. This attribute defaults to -1 when no streaming waveform is specified.
-    Used in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
+    Specifies the waveform handle of the waveform used to continuously stream data during generation. This property defaults to -1 when no streaming waveform is specified.
+    Used in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_waveform_name = attributes.AttributeViString(1150326)
     '''Type: str
 
-    Specifies the name of the waveform used to continuously stream data during generation. This attribute defaults to // when no streaming waveform is specified.
-    Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
+    Specifies the name of the waveform used to continuously stream data during generation. This property defaults to // when no streaming waveform is specified.
+    Use in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_write_timeout = attributes.AttributeViReal64TimeDeltaSeconds(1150409)
     '''Type: datetime.timedelta
@@ -1127,7 +1154,7 @@ class _SessionBase(object):
     supported_instrument_models = attributes.AttributeViString(1050327)
     '''Type: str
 
-    Returns a model code of the device. For NI-FGEN versions that support more than one device, this  attribute contains a comma-separated list of supported device  models.
+    Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
     synchronization = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
     '''Type: enums.SynchronizationSource
@@ -1137,13 +1164,13 @@ class _SessionBase(object):
     sync_duty_cycle_high = attributes.AttributeViReal64(1150105)
     '''Type: float
 
-    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this attribute as a  percentage of the time the square wave is high in each cycle.
+    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
     Units: Percentage of time the waveform is high
     '''
     sync_out_output_terminal = attributes.AttributeViString(1150330)
     '''Type: str
 
-    Specifies the terminal to which to export the SYNC OUT signal. This attribute is not supported for all devices.
+    Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
     '''
     terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
     '''Type: enums.TerminalConfiguration
@@ -1159,13 +1186,16 @@ class _SessionBase(object):
     '''Type: enums.TriggerSource
 
     Controls which trigger source the signal generator uses.
-    After you call the niFgen_InitiateGeneration function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the NIFGEN_ATTR_CYCLE_COUNT attribute.
-    This attribute is also the source for the trigger in the other trigger modes as specified by the NIFGEN_ATTR_TRIGGER_MODE attribute.
+    After you call the _initiate_generation method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT property.
+    This property is also the source for the trigger in the other trigger modes as specified by the trigger_mode property.
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
     '''
     video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
     '''Type: enums.VideoWaveformType
 
-    Selects which waveform type that the NI 5431 generates. Setting this attribute ensures that the crystal is set to the proper frequency.
+    Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''Type: enums.WaitBehavior
@@ -1180,8 +1210,8 @@ class _SessionBase(object):
     waveform_quantum = attributes.AttributeViInt32(1250206)
     '''Type: int
 
-    The size of each arbitrary waveform must be a multiple of a quantum value. This attribute returns the quantum value that the signal generator allows.
-    For example, when this attribute returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
+    The size of each arbitrary waveform must be a multiple of a quantum value. This property returns the quantum value that the signal generator allows.
+    For example, when this property returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
     '''
 
     def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
@@ -1233,7 +1263,7 @@ class _SessionBase(object):
         Specifies the size of a named waveform up front so that it can be
         allocated in onboard memory before loading the associated data. Data can
         then be loaded in smaller blocks with the niFgen Write (Binary16)
-        Waveform functions.
+        Waveform methods.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1264,11 +1294,11 @@ class _SessionBase(object):
 
         Specifies the size of a waveform so that it can be allocated in onboard
         memory before loading the associated data. Data can then be loaded in
-        smaller blocks with the Write Binary 16 Waveform functions.
+        smaller blocks with the Write Binary 16 Waveform methods.
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1299,7 +1329,7 @@ class _SessionBase(object):
         '''clear_user_standard_waveform
 
         Clears the user-defined waveform created by the
-        nifgen_DefineUserStandardWaveform function.
+        nifgen_DefineUserStandardWaveform method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1318,13 +1348,13 @@ class _SessionBase(object):
     def configure_arb_sequence(self, sequence_handle, gain, offset):
         '''configure_arb_sequence
 
-        Configures the signal generator attributes that affect arbitrary
+        Configures the signal generator properties that affect arbitrary
         sequence generation. Sets the arb_sequence_handle,
-        arb_gain, and arb_offset attributes.
+        arb_gain, and arb_offset properties.
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1337,9 +1367,9 @@ class _SessionBase(object):
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to produce. NI-FGEN sets the
-                arb_sequence_handle attribute to this value. You can
+                arb_sequence_handle property to this value. You can
                 create an arbitrary sequence using the create_arb_sequence or
-                create_advanced_arb_sequence function. These functions return a
+                create_advanced_arb_sequence method. These methods return a
                 handle that you use to identify the sequence.
 
                 **Default Value**: None
@@ -1361,7 +1391,7 @@ class _SessionBase(object):
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                arb_offset attribute to this value.
+                arb_offset property to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1383,13 +1413,13 @@ class _SessionBase(object):
     def configure_arb_waveform(self, waveform_handle, gain, offset):
         '''configure_arb_waveform
 
-        Configures the attributes of the signal generator that affect arbitrary
+        Configures the properties of the signal generator that affect arbitrary
         waveform generation. Sets the arb_waveform_handle,
-        arb_gain, and arb_offset attributes.
+        arb_gain, and arb_offset properties.
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1402,9 +1432,9 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform you want the signal
                 generator to produce. NI-FGEN sets the
-                arb_waveform_handle attribute to this value. You can
+                arb_waveform_handle property to this value. You can
                 create an arbitrary waveform using one of the following niFgen Create
-                Waveform functions:
+                Waveform methods:
 
                 -  _create_waveform_f64
                 -  _create_waveform_i16
@@ -1412,12 +1442,12 @@ class _SessionBase(object):
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
 
-                These functions return a handle that you use to identify the waveform.
+                These methods return a handle that you use to identify the waveform.
 
                 **Default Value**: None
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             gain (float): Specifies the factor by which the signal generator scales the arbitrary
                 waveforms in the sequence. When you create an arbitrary waveform, you
@@ -1436,7 +1466,7 @@ class _SessionBase(object):
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                arb_offset attribute to this value.
+                arb_offset property to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -1464,11 +1494,11 @@ class _SessionBase(object):
 
         Refer to the *FIR Filter* topic for your device in the *NI Signal
         Generators Help* for more information about FIR filter coefficients.
-        This function is supported only for the NI 5441.
+        This method is supported only for the NI 5441.
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1483,7 +1513,7 @@ class _SessionBase(object):
                 FIR filter coefficients. For the NI 5441, provide a symmetric array of
                 95 coefficients to this parameter. The array must have at least as many
                 elements as the value that you specify in the **numberOfCoefficients**
-                parameter in this function.
+                parameter in this method.
                 The coefficients should range between –1.00 and +1.00.
 
         '''
@@ -1498,14 +1528,14 @@ class _SessionBase(object):
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         '''configure_freq_list
 
-        Configures the attributes of the signal generator that affect frequency
+        Configures the properties of the signal generator that affect frequency
         list generation (the freq_list_handle,
         func_amplitude, func_dc_offset, and
-        func_start_phase attributes).
+        func_start_phase properties).
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1518,14 +1548,14 @@ class _SessionBase(object):
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
                 generator to produce. NI-FGEN sets the freq_list_handle
-                attribute to this value. You can create a frequency list using the
-                create_freq_list function, which returns a handle that you use to
+                property to this value. You can create a frequency list using the
+                create_freq_list method, which returns a handle that you use to
                 identify the list.
                 **Default Value**: None
 
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the func_amplitude attribute to
+                terminal. NI-FGEN sets the func_amplitude property to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -1538,7 +1568,7 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to Waveform.DC.
+                method to Waveform.DC.
 
             dc_offset (float): Specifies the DC offset of the standard waveform that you want the
                 signal generator to produce. The value is the offset from ground to the
@@ -1546,16 +1576,16 @@ class _SessionBase(object):
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
                 **dcOffset** to 5.00 V. NI-FGEN sets the func_dc_offset
-                attribute to this value.
+                property to this value.
 
                 **Units**: volts
 
                 **Default Value**: None
 
             start_phase (float): Specifies the horizontal offset of the standard waveform you want the
-                signal generator to produce. Specify this attribute in degrees of one
+                signal generator to produce. Specify this property in degrees of one
                 waveform cycle. NI-FGEN sets the func_start_phase
-                attribute to this value. A start phase of 180 degrees means output
+                property to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
                 identical to a start phase of 0 degrees.
@@ -1582,7 +1612,7 @@ class _SessionBase(object):
     def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
         '''configure_standard_waveform
 
-        Configures the following attributes of the signal generator that affect
+        Configures the following properties of the signal generator that affect
         standard waveform generation:
 
         -  func_waveform
@@ -1592,12 +1622,12 @@ class _SessionBase(object):
         -  func_start_phase
 
         Note:
-        You must call the ConfigureOutputMode function with the
+        You must call the ConfigureOutputMode method with the
         **outputMode** parameter set to OutputMode.FUNC before calling
-        this function.
+        this method.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1609,34 +1639,34 @@ class _SessionBase(object):
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the func_waveform attribute to this
+                produce. NI-FGEN sets the func_waveform property to this
                 value.
 
                 ****Defined Values****
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                            |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the func_amplitude attribute to
+                terminal. NI-FGEN sets the func_amplitude property to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -1649,11 +1679,11 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to Waveform.DC.
+                method to Waveform.DC.
 
             frequency (float): | Specifies the frequency of the standard waveform that you want the
                   signal generator to produce. NI-FGEN sets the
-                  func_frequency attribute to this value.
+                  func_frequency property to this value.
 
                 **Units**: hertz
 
@@ -1662,7 +1692,7 @@ class _SessionBase(object):
                 Note:
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter of the configure_standard_waveform
-                function to Waveform.DC.
+                method to Waveform.DC.
 
             dc_offset (float): Specifies the DC offset of the standard waveform that you want the
                 signal generator to produce. The value is the offset from ground to the
@@ -1670,7 +1700,7 @@ class _SessionBase(object):
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
                 **dcOffset** to 5.00 V. NI-FGEN sets the func_dc_offset
-                attribute to this value.
+                property to this value.
 
                 **Units**: volts
 
@@ -1679,7 +1709,7 @@ class _SessionBase(object):
             start_phase (float): Specifies the horizontal offset of the standard waveform that you want
                 the signal generator to produce. Specify this parameter in degrees of
                 one waveform cycle. NI-FGEN sets the func_start_phase
-                attribute to this value. A start phase of 180 degrees means output
+                property to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
                 identical to a start phase of 0 degrees.
@@ -1711,7 +1741,7 @@ class _SessionBase(object):
 
         Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
 
-        Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this function.
+        Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1758,9 +1788,9 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
-        OutputMode.SEQ before calling this function.
+        OutputMode.SEQ before calling this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1806,9 +1836,9 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
-        OutputMode.SEQ before calling this function.
+        OutputMode.SEQ before calling this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1854,16 +1884,16 @@ class _SessionBase(object):
     def create_waveform_from_file_f64(self, file_name, byte_order):
         '''create_waveform_from_file_f64
 
-        This function takes the floating point double (F64) data from the
+        This method takes the floating point double (F64) data from the
         specified file and creates an onboard waveform for use in Arbitrary
         Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-        returned by this function can later be used for setting the active
+        returned by this method can later be used for setting the active
         waveform, changing the data in the waveform, building sequences of
         waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
         The F64 data must be between –1.0 and +1.0 V. Use the
-        digital_gain attribute to generate different voltage
+        digital_gain property to generate different voltage
         outputs.
 
         Tip:
@@ -1920,13 +1950,13 @@ class _SessionBase(object):
         Takes the binary 16-bit signed integer (I16) data from the specified
         file and creates an onboard waveform for use in Arbitrary Waveform or
         Arbitrary Sequence output mode. The **waveformHandle** returned by this
-        function can later be used for setting the active waveform, changing the
+        method can later be used for setting the active waveform, changing the
         data in the waveform, building sequences of waveforms, or deleting the
         waveform when it is no longer needed.
 
         Note:
         The I16 data (values between –32768 and +32767) is assumed to
-        represent –1 to +1 V. Use the digital_gain attribute to
+        represent –1 to +1 V. Use the digital_gain property to
         generate different voltage outputs.
 
         Tip:
@@ -1987,9 +2017,9 @@ class _SessionBase(object):
         waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
-        OutputMode.SEQ before calling this function.
+        OutputMode.SEQ before calling this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2033,21 +2063,21 @@ class _SessionBase(object):
     def define_user_standard_waveform(self, waveform_data_array):
         '''define_user_standard_waveform
 
-        Defines a user waveform for use in either Standard Function or Frequency
+        Defines a user waveform for use in either Standard Method or Frequency
         List output mode.
 
         To select the waveform, set the **waveform** parameter to
         Waveform.USER with either the nifgen_ConfigureStandardWaveform
-        or the nifgen_CreateFreqList function.
+        or the nifgen_CreateFreqList method.
 
         The waveform data must be scaled between –1.0 and 1.0. Use the
         **amplitude** parameter in the configure_standard_waveform
-        function to generate different output voltages.
+        method to generate different output voltages.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.FUNC or
-        OutputMode.FREQ_LIST before calling this function.
+        OutputMode.FREQ_LIST before calling this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2084,7 +2114,7 @@ class _SessionBase(object):
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2133,15 +2163,15 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        Queries the value of a ViBoolean attribute.
+        Queries the value of a ViBoolean property.
 
-        You can use this function to get the values of instrument-specific
-        attributes and inherent IVI attributes. If the attribute represents an
-        instrument state, this function performs instrument I/O in the following
+        You can use this method to get the values of instrument-specific
+        properties and inherent IVI properties. If the property represents an
+        instrument state, this method performs instrument I/O in the following
         cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2153,11 +2183,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
 
         Returns:
-            attribute_value (bool): Returns the current value of the attribute. Pass the address of a
+            attribute_value (bool): Returns the current value of the property. Pass the address of a
                 ViBoolean variable.
 
         '''
@@ -2172,13 +2202,13 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        Queries the value of a ViInt32 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
+        Queries the value of a ViInt32 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2190,11 +2220,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
 
         Returns:
-            attribute_value (int): Returns the current value of the attribute. Pass the address of a
+            attribute_value (int): Returns the current value of the property. Pass the address of a
                 ViInt32 variable.
 
         '''
@@ -2209,15 +2239,15 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        Queries the value of a ViReal64 attribute.
+        Queries the value of a ViReal64 property.
 
-        You can use this function to get the values of instrument-specific
-        attributes and inherent IVI attributes. If the attribute represents an
-        instrument state, this function performs instrument I/O in the following
+        You can use this method to get the values of instrument-specific
+        properties and inherent IVI properties. If the property represents an
+        instrument state, this method performs instrument I/O in the following
         cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2229,11 +2259,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
 
         Returns:
-            attribute_value (float): Returns the current value of the attribute. Pass the address of a
+            attribute_value (float): Returns the current value of the property. Pass the address of a
                 ViReal64 variable.
 
         '''
@@ -2248,32 +2278,32 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        Queries the value of a ViString attribute.
+        Queries the value of a ViString property.
 
-        You can use this function to get the values of instrument-specific
-        attributes and inherent IVI attributes. If the attribute represents an
-        instrument state, this function performs instrument I/O in the following
+        You can use this method to get the values of instrument-specific
+        properties and inherent IVI properties. If the property represents an
+        instrument state, this method performs instrument I/O in the following
         cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         You must provide a ViChar array to serve as a buffer for the value. You
         pass the number of bytes in the buffer as the **arraySize** parameter.
-        If the current value of the attribute, including the terminating NUL
+        If the current value of the property, including the terminating NUL
         byte, is larger than the size you indicate in the **arraySize**
-        parameter, the function copies **arraySize** – 1 bytes into the buffer,
+        parameter, the method copies **arraySize** – 1 bytes into the buffer,
         places an ASCII NUL byte at the end of the buffer, and returns the array
         size you must pass to get the entire value. For example, if the value is
-        123456 and **arraySize** is 4, the function places 123 into the buffer
+        123456 and **arraySize** is 4, the method places 123 into the buffer
         and returns 7.
 
-        If you want to call this function just to get the required array size,
+        If you want to call this method just to get the required array size,
         you can pass 0 for **arraySize** and VI_NULL for the **attributeValue**
         buffer.
 
-        If you want the function to fill in the buffer regardless of the number
+        If you want the method to fill in the buffer regardless of the number
         of bytes in the value, pass a negative number for the **arraySize**
         parameter.
 
@@ -2286,7 +2316,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2307,16 +2337,16 @@ class _SessionBase(object):
 
         Returns the error information associated with an IVI session or with the
         current execution thread. If you specify a valid IVI session for the
-        **vi** parameter, this function retrieves and then clears the error
+        **vi** parameter, this method retrieves and then clears the error
         information for the session. If you pass VI_NULL for the **vi**
-        parameter, this function retrieves and then clears the error information
+        parameter, this method retrieves and then clears the error information
         for the current execution thread.
 
         The IVI Engine also maintains this error information separately for each
         thread. This feature is useful if you do not have a session handle to
-        pass to the _get_error or nifgen_ClearError functions. This
+        pass to the _get_error or nifgen_ClearError methods. This
         situation occurs when a call to the nifgen_init or
-        nifgen_InitWithOptions function fails.
+        nifgen_InitWithOptions method fails.
 
         Returns:
             error_code (int): The error code for the session or execution thread.
@@ -2347,24 +2377,24 @@ class _SessionBase(object):
 
         | Returns the FIR filter coefficients used by the onboard signal
           processing block. These coefficients are determined by NI-FGEN and
-          based on the FIR filter type and corresponding attribute (Alpha,
+          based on the FIR filter type and corresponding property (Alpha,
           Passband, BT) unless you are using the custom filter. If you are using
           a custom filter, the coefficients returned are those set with the
-          nifgen_ConfigureCustomFIRFilterCoefficients function coerced to the
+          nifgen_ConfigureCustomFIRFilterCoefficients method coerced to the
           quantized values used by the device.
-        | To use this function, first call an instance of the
-          get_fir_filter_coefficients function with the
-          **coefficientsArray** parameter set to VI_NULL. Calling the function
+        | To use this method, first call an instance of the
+          get_fir_filter_coefficients method with the
+          **coefficientsArray** parameter set to VI_NULL. Calling the method
           in this state returns the current size of the **coefficientsArray** as
           the value of the **numberOfCoefficientsRead** parameter. Create an
           array of this size, and call the get_fir_filter_coefficients
-          function a second time, passing the new array as the
+          method a second time, passing the new array as the
           **coefficientsArray** parameter and the size as the **arraySize**
-          parameter. This second function call populates the array with the FIR
+          parameter. This second method call populates the array with the FIR
           filter coefficients.
         | Refer to the FIR Filter topic for your device in the *NI Signal
           Generators Help* for more information about FIR filter coefficients.
-          This function is supported only for the NI 5441.
+          This method is supported only for the NI 5441.
         | **Default Value**: None
 
         Tip:
@@ -2398,7 +2428,7 @@ class _SessionBase(object):
         '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
-        waveform generator that is used in all subsequent NI-FGEN function
+        waveform generator that is used in all subsequent NI-FGEN method
         calls.
 
         Tip:
@@ -2459,20 +2489,20 @@ class _SessionBase(object):
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
-                procedure. VI_TRUE specifies that the device is reset and performs the
-                same function as the nifgen_Reset function.
+                procedure. True specifies that the device is reset and performs the
+                same method as the nifgen_Reset method.
 
                 ****Defined Values****
 
-                **Default Value**: VI_FALSE
+                **Default Value**: False
 
-                +----------+---------------------+
-                | VI_TRUE  | Reset device        |
-                +----------+---------------------+
-                | VI_FALSE | Do not reset device |
-                +----------+---------------------+
+                +-------+---------------------+
+                | True  | Reset device        |
+                +-------+---------------------+
+                | False | Do not reset device |
+                +-------+---------------------+
 
-            option_string (str): Sets the initial value of certain session attributes.
+            option_string (str): Sets the initial value of certain session properties.
 
                 The syntax for **optionString** is
 
@@ -2480,18 +2510,18 @@ class _SessionBase(object):
 
                 where
 
-                *attributeName* is the name of the attribute and *value* is the value to
-                which the attribute is set
+                *attributeName* is the name of the property and *value* is the value to
+                which the property is set
 
-                To set multiple attributes, separate them with a comma.
+                To set multiple properties, separate them with a comma.
 
                 If you pass NULL or an empty string for this parameter, the session uses
-                the default values for these attributes. You can override the default
+                the default values for these properties. You can override the default
                 values by assigning a value explicitly in a string that you pass for
                 this parameter.
 
-                You do not have to specify all of the attributes and may leave any of
-                them out. However, if you do not specify one of the attributes, its
+                You do not have to specify all of the properties and may leave any of
+                them out. However, if you do not specify one of the properties, its
                 default value is used.
 
                 If simulation is enabled (Simulate=1), you may specify the device that
@@ -2504,26 +2534,26 @@ class _SessionBase(object):
 
                 **Syntax Examples**
 
-                **Attributes and **Defined Values****
+                **Properties and **Defined Values****
 
                 **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
 
-                +------------------+-------------------------+-------------------+
-                | Attribute Name   | Attribute               | Values            |
-                +==================+=========================+===================+
-                | RangeCheck       | range_check             | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | QueryInstrStatus | query_instrument_status | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Cache            | cache                   | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Simulate         | simulate                | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
+                +------------------+-------------------------+-------------+
+                | Property Name    | Property                | Values      |
+                +==================+=========================+=============+
+                | RangeCheck       | range_check             | True, False |
+                +------------------+-------------------------+-------------+
+                | QueryInstrStatus | query_instrument_status | True, False |
+                +------------------+-------------------------+-------------+
+                | Cache            | cache                   | True, False |
+                +------------------+-------------------------+-------------+
+                | Simulate         | simulate                | True, False |
+                +------------------+-------------------------+-------------+
 
 
         Returns:
             vi (int): Returns a session handle that you can use to identify the device in all
-                subsequent NI-FGEN function calls.
+                subsequent NI-FGEN method calls.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -2538,30 +2568,30 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        Sets the value of a ViBoolean attribute.
+        Sets the value of a ViBoolean property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
-        NI-FGEN contains high-level functions that set most of the instrument
-        attributes. NI recommends that you use the high-level driver functions
+        NI-FGEN contains high-level methods that set most of the instrument
+        properties. NI recommends that you use the high-level driver methods
         as much as possible. They handle order dependencies and multithread
         locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call.
 
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2572,9 +2602,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
-            attribute_value (bool): Specifies the value to which you want to set the attribute. **Default
+            attribute_value (bool): Specifies the value to which you want to set the property. **Default
                 Value**: None
 
                 Note:
@@ -2593,30 +2623,30 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        Sets the value of a ViInt32 attribute.
+        Sets the value of a ViInt32 property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
-        NI-FGEN contains high-level functions that set most of the instrument
-        attributes. NI recommends that you use the high-level driver functions
+        NI-FGEN contains high-level methods that set most of the instrument
+        properties. NI recommends that you use the high-level driver methods
         as much as possible. They handle order dependencies and multithread
         locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call.
 
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2627,9 +2657,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
-            attribute_value (int): Specifies the value to which you want to set the attribute. **Default
+            attribute_value (int): Specifies the value to which you want to set the property. **Default
                 Value**: None
 
                 Note:
@@ -2648,30 +2678,30 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        Sets the value of a ViReal64 attribute.
+        Sets the value of a ViReal64 property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
-        NI-FGEN contains high-level functions that set most of the instrument
-        attributes. NI recommends that you use the high-level driver functions
+        NI-FGEN contains high-level methods that set most of the instrument
+        properties. NI recommends that you use the high-level driver methods
         as much as possible. They handle order dependencies and multithread
         locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call.
 
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2682,9 +2712,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
-            attribute_value (float): Specifies the value to which you want to set the attribute. **Default
+            attribute_value (float): Specifies the value to which you want to set the property. **Default
                 Value**: None
 
                 Note:
@@ -2703,30 +2733,30 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        Sets the value of a ViString attribute.
+        Sets the value of a ViString property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
-        NI-FGEN contains high-level functions that set most of the instrument
-        attributes. NI recommends that you use the high-level driver functions
+        NI-FGEN contains high-level methods that set most of the instrument
+        properties. NI recommends that you use the high-level driver methods
         as much as possible. They handle order dependencies and multithread
         locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call.
 
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2737,9 +2767,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute.
+            attribute_id (int): Specifies the ID of an property.
 
-            attribute_value (str): Specifies the value to which you want to set the attribute. **Default
+            attribute_value (str): Specifies the value to which you want to set the property. **Default
                 Value**: None
 
                 Note:
@@ -2759,12 +2789,12 @@ class _SessionBase(object):
         '''set_named_waveform_next_write_position
 
         Sets the position in the waveform to which data is written at the next
-        write. This function allows you to write to arbitrary locations within
+        write. This method allows you to write to arbitrary locations within
         the waveform. These settings apply only to the next write to the
         waveform specified by the **waveformHandle** parameter. Subsequent
         writes to that waveform begin where the last write left off, unless this
-        function is called again. The **waveformHandle** passed in must have
-        been created with a call to one of the following functions:
+        method is called again. The **waveformHandle** passed in must have
+        been created with a call to one of the following methods:
 
         -  nifgen_AllocateWaveform
         -  nifgen_CreateWaveformF64
@@ -2815,13 +2845,13 @@ class _SessionBase(object):
         '''set_waveform_next_write_position
 
         Sets the position in the waveform at which the next waveform data is
-        written. This function allows you to write to arbitrary locations within
+        written. This method allows you to write to arbitrary locations within
         the waveform. These settings apply only to the next write to the
         waveform specified by the waveformHandle parameter. Subsequent writes to
-        that waveform begin where the last write left off, unless this function
+        that waveform begin where the last write left off, unless this method
         is called again. The waveformHandle passed in must have been created by
-        a call to the nifgen_AllocateWaveform function or one of the following
-        niFgen CreateWaveform functions:
+        a call to the nifgen_AllocateWaveform method or one of the following
+        niFgen CreateWaveform methods:
 
         -  nifgen_CreateWaveformF64
         -  nifgen_CreateWaveformI16
@@ -2839,7 +2869,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform function.
+                the nifgen_AllocateWaveform method.
 
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
@@ -2873,12 +2903,12 @@ class _SessionBase(object):
 
         Writes binary data to the waveform in onboard memory. The waveform
         handle passed must have been created by a call to the
-        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.
+        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 method.
 
         By default, the subsequent call to the _write_binary16_waveform
-        function continues writing data from the position of the last sample
+        method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
+        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2894,7 +2924,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform function.
+                the nifgen_AllocateWaveform method.
 
             data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
@@ -2923,8 +2953,8 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform function or to one of the following niFgen
-        Create Waveform functions:
+        nifgen_AllocateWaveform method or to one of the following niFgen
+        Create Waveform methods:
 
         -  nifgen_CreateWaveformF64
         -  nifgen_CreateWaveformI16
@@ -2933,9 +2963,9 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileHWS
 
         By default, the subsequent call to the _write_named_waveform_f64
-        function continues writing data from the position of the last sample
+        method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
+        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2971,8 +3001,8 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform function or to one of the following niFgen
-        Create Waveform functions:
+        nifgen_AllocateWaveform method or to one of the following niFgen
+        Create Waveform methods:
 
         -  nifgen_CreateWaveformF64
         -  nifgen_CreateWaveformI16
@@ -2981,9 +3011,9 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileHWS
 
         By default, the subsequent call to the _write_named_waveform_f64
-        function continues writing data from the position of the last sample
+        method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
+        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -3027,9 +3057,9 @@ class _SessionBase(object):
         Writes binary data to the named waveform in onboard memory.
 
         By default, the subsequent call to the _write_named_waveform_i16
-        function continues writing data from the position of the last sample
+        method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
+        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -3100,8 +3130,8 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform function or one of the following niFgen
-        CreateWaveform functions:
+        nifgen_AllocateWaveform method or one of the following niFgen
+        CreateWaveform methods:
 
         -  nifgen_CreateWaveformF64
         -  nifgen_CreateWaveformI16
@@ -3109,10 +3139,10 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform function
+        By default, the subsequent call to the _write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
+        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -3128,7 +3158,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform function.
+                the nifgen_AllocateWaveform method.
 
             data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -3149,8 +3179,8 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform function or one of the following niFgen
-        CreateWaveform functions:
+        nifgen_AllocateWaveform method or one of the following niFgen
+        CreateWaveform methods:
 
         -  nifgen_CreateWaveformF64
         -  nifgen_CreateWaveformI16
@@ -3158,10 +3188,10 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform function
+        By default, the subsequent call to the _write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
+        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -3177,7 +3207,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform function.
+                the nifgen_AllocateWaveform method.
 
             data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -3205,10 +3235,10 @@ class _SessionBase(object):
 
         Writes data to the waveform in onboard memory.
 
-        By default, subsequent calls to this function
+        By default, subsequent calls to this method
         continue writing data from the position of the last sample written. You
         can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
-        nifgen_SetWaveformNextWritePosition function.
+        nifgen_SetWaveformNextWritePosition method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3247,12 +3277,12 @@ class _SessionBase(object):
     def _error_message(self, error_code):
         '''_error_message
 
-        Converts a status code returned by an NI-FGEN function into a
+        Converts a status code returned by an NI-FGEN method into a
         user-readable string.
 
         Args:
             error_code (int): Specifies the **status** parameter that is returned from any of the
-                NI-FGEN functions.
+                NI-FGEN methods.
 
                 **Default Value**: 0 (VI_SUCCESS)
 
@@ -3279,7 +3309,7 @@ class Session(_SessionBase):
         '''An NI-FGEN session to a National Instruments Signal Generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
-        waveform generator that is used in all subsequent NI-FGEN function
+        waveform generator that is used in all subsequent NI-FGEN method
         calls.
 
         Tip:
@@ -3340,33 +3370,33 @@ class Session(_SessionBase):
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
-                procedure. VI_TRUE specifies that the device is reset and performs the
-                same function as the nifgen_Reset function.
+                procedure. True specifies that the device is reset and performs the
+                same method as the nifgen_Reset method.
 
                 ****Defined Values****
 
-                **Default Value**: VI_FALSE
+                **Default Value**: False
 
-                +----------+---------------------+
-                | VI_TRUE  | Reset device        |
-                +----------+---------------------+
-                | VI_FALSE | Do not reset device |
-                +----------+---------------------+
+                +-------+---------------------+
+                | True  | Reset device        |
+                +-------+---------------------+
+                | False | Do not reset device |
+                +-------+---------------------+
 
-            options (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **options** is a dictionary of attributes with an assigned
+            options (str): Specifies the initial value of certain properties for the session. The
+                syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
                 { 'simulate': False }
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 
                 +-------------------------+---------+
-                | Attribute               | Default |
+                | Property                | Default |
                 +=========================+=========+
                 | range_check             | True    |
                 +-------------------------+---------+
@@ -3432,7 +3462,7 @@ class Session(_SessionBase):
         '''abort
 
         Aborts any previously initiated signal generation. Call the
-        nifgen_InitiateGeneration function to cause the signal generator to
+        nifgen_InitiateGeneration method to cause the signal generator to
         produce a signal again.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -3449,7 +3479,7 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ClearArbMemory(vi_ctype)
@@ -3464,13 +3494,13 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to remove. You can create an arbitrary sequence using the
-                nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence function.
-                These functions return a handle that you use to identify the sequence.
+                nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence method.
+                These methods return a handle that you use to identify the sequence.
 
                 | **Defined Value**:
                 | NIFGEN_VAL_ALL_SEQUENCES—Remove all sequences from the signal
@@ -3496,14 +3526,14 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform that you want the signal
                 generator to remove.
 
                 You can create multiple arbitrary waveforms using one of the following
-                niFgen Create Waveform functions:
+                niFgen Create Waveform methods:
 
                 -  _create_waveform_f64
                 -  _create_waveform_i16
@@ -3519,7 +3549,7 @@ class Session(_SessionBase):
                 **Default Value**: None
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3539,7 +3569,7 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list you want the signal generator
@@ -3568,16 +3598,16 @@ class Session(_SessionBase):
     def commit(self):
         '''commit
 
-        Causes a transition to the Committed state. This function verifies
-        attribute values, reserves the device, and commits the attribute values
-        to the device. If the attribute values are all valid, NI-FGEN sets the
+        Causes a transition to the Committed state. This method verifies
+        property values, reserves the device, and commits the property values
+        to the device. If the property values are all valid, NI-FGEN sets the
         device hardware configuration to match the session configuration. This
-        function does not support the NI 5401/5404/5411/5431 signal generators.
+        method does not support the NI 5401/5404/5411/5431 signal generators.
 
         In the Committed state, you can load waveforms, scripts, and sequences
-        into memory. If any attributes are changed, NI-FGEN implicitly
+        into memory. If any properties are changed, NI-FGEN implicitly
         transitions back to the Idle state, where you can program all session
-        properties before applying them to the device. This function has no
+        properties before applying them to the device. This method has no
         effect if the device is already in the Committed or Generating state and
         returns a successful status value.
 
@@ -3586,7 +3616,7 @@ class Session(_SessionBase):
 
         -  Routes are committed, so signals are exported or imported.
         -  Any Reference Clock and external clock circuits are phase-locked.
-        -  A subsequent _initiate_generation function can run faster
+        -  A subsequent _initiate_generation method can run faster
            because the device is already configured.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -3849,13 +3879,13 @@ class Session(_SessionBase):
         '''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
-        array of corresponding loop counts. This function returns a handle that
+        array of corresponding loop counts. This method returns a handle that
         identifies the sequence. You pass this handle to the
-        configure_arb_sequence function to specify what arbitrary sequence
+        configure_arb_sequence method to specify what arbitrary sequence
         you want the signal generator to produce.
 
-        The create_advanced_arb_sequence function extends on the
-        create_arb_sequence function by adding the ability to set the
+        The create_advanced_arb_sequence method extends on the
+        create_arb_sequence method by adding the ability to set the
         number of samples in each sequence step and to set marker locations.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3865,10 +3895,10 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
-        You must call the nifgen_ConfigureOutputMode function to set the
+        this method.
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
-        function.
+        method.
 
         Args:
             waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
@@ -3877,8 +3907,8 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform function or one of the following niFgen
-                CreateWaveform functions:
+                nifgen_AllocateWaveform method or one of the following niFgen
+                CreateWaveform methods:
 
                 -  nifgen_CreateWaveformF64
                 -  nifgen_CreateWaveformI16
@@ -3896,7 +3926,7 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities function.
+                nifgen_QueryArbSeqCapabilities method.
 
                 **Default Value**: None
 
@@ -3909,7 +3939,7 @@ class Session(_SessionBase):
                 the minimum waveform size, a multiple of the waveform quantum and no
                 larger than the number of samples in the corresponding waveform. You can
                 obtain these values by calling the nifgen_QueryArbWfmCapabilities
-                function.
+                method.
 
                 **Default Value**: None
 
@@ -3962,9 +3992,9 @@ class Session(_SessionBase):
         '''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
-        array of corresponding loop counts. This function returns a handle that
+        array of corresponding loop counts. This method returns a handle that
         identifies the sequence. You pass this handle to the
-        nifgen_ConfigureArbSequence function to specify what arbitrary sequence
+        nifgen_ConfigureArbSequence method to specify what arbitrary sequence
         you want the signal generator to produce.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3973,9 +4003,9 @@ class Session(_SessionBase):
         to repeat a specific waveform is called the loop count.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
-        function.
+        method.
 
         Args:
             waveform_handles_array (list of int): Specifies the array of waveform handles from which you want to create a
@@ -3984,8 +4014,8 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform function or one of the following niFgen
-                CreateWaveform functions:
+                nifgen_AllocateWaveform method or one of the following niFgen
+                CreateWaveform methods:
 
                 -  nifgen_CreateWaveformF64
                 -  nifgen_CreateWaveformI16
@@ -4003,7 +4033,7 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities function.
+                nifgen_QueryArbSeqCapabilities method.
 
                 **Default Value**: None
 
@@ -4029,7 +4059,7 @@ class Session(_SessionBase):
         Creates a frequency list from an array of frequencies
         (**frequencyArray**) and an array of durations (**durationArray**). The
         two arrays should have the same number of elements, and this value must
-        also be the size of the **frequencyListLength**. The function returns a
+        also be the size of the **frequencyListLength**. The method returns a
         handle that identifies the frequency list (the **frequencyListHandle**).
         You can pass this handle to nifgen_ConfigureFreqList to specify what
         frequency list you want the signal generator to produce.
@@ -4041,34 +4071,34 @@ class Session(_SessionBase):
 
         Note:
         The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the func_waveform attribute to this
+                produce. NI-FGEN sets the func_waveform property to this
                 value.
 
                 ****Defined Values****
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                    |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                      |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                    |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                               |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                               |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                     |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                            |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform function. |
-                +--------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
+                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
             frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
@@ -4129,14 +4159,14 @@ class Session(_SessionBase):
 
         Any routes created within a session persist after the session closes to
         prevent signal glitching. To unconfigure signal routes created in
-        previous sessions, set **resetDevice** in the init function to
-        VI_TRUE or use the reset_device function.
+        previous sessions, set **resetDevice** in the init method to
+        True or use the reset_device method.
 
-        If you export a signal with this function and commit the session, the
+        If you export a signal with this method and commit the session, the
         signal is routed to the output terminal you specify.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             signal (enums.Signal): Specifies the source of the signal to route.
@@ -4263,7 +4293,7 @@ class Session(_SessionBase):
 
         Returns the date and time of the last successful external calibration.
         The time returned is 24-hour (military) local time; for example, if the
-        device was calibrated at 2:30 PM, this function returns 14 for the
+        device was calibrated at 2:30 PM, this method returns 14 for the
         **hour** parameter and 30 for the **minute** parameter.
 
         Returns:
@@ -4357,7 +4387,7 @@ class Session(_SessionBase):
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
-        Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
+        Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
         Returns:
             month (datetime.datetime): Indicates date and time of the last calibration.
@@ -4386,11 +4416,11 @@ class Session(_SessionBase):
         All values are returned as separate parameters. Each parameter is
         returned as an integer, including the year, month, day, hour, minute,
         and second. For example, if the device is calibrated in September 2013,
-        this function returns 9 for the **month** parameter and 2013 for the
+        this method returns 9 for the **month** parameter and 2013 for the
         **year** parameter.
 
         The time returned is 24-hour (military) local time. For example, if the
-        device was calibrated at 2:30 PM, this function returns 14 for the
+        device was calibrated at 2:30 PM, this method returns 14 for the
         **hours** parameter and 30 for the **minutes** parameter.
 
         Returns:
@@ -4442,11 +4472,11 @@ class Session(_SessionBase):
 
                 ****Defined Values****
 
-                +----------+------------------------------------+
-                | VI_TRUE  | Self–calibration is supported.     |
-                +----------+------------------------------------+
-                | VI_FALSE | Self–calibration is not supported. |
-                +----------+------------------------------------+
+                +-------+------------------------------------+
+                | True  | Self–calibration is supported.     |
+                +-------+------------------------------------+
+                | False | Self–calibration is not supported. |
+                +-------+------------------------------------+
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4459,8 +4489,8 @@ class Session(_SessionBase):
         '''_initiate_generation
 
         Initiates signal generation. If you want to abort signal generation,
-        call the nifgen_AbortGeneration function. After the signal generation
-        is aborted, you can call the _initiate_generation function to
+        call the nifgen_AbortGeneration method. After the signal generation
+        is aborted, you can call the _initiate_generation method to
         cause the signal generator to produce a signal again.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4471,12 +4501,12 @@ class Session(_SessionBase):
     def is_done(self):
         '''is_done
 
-        Determines whether the current generation is complete. This function
-        sets the **done** parameter to VI_TRUE if the session is in the Idle or
+        Determines whether the current generation is complete. This method
+        sets the **done** parameter to True if the session is in the Idle or
         Committed states.
 
         Note:
-        NI-FGEN only reports the **done** parameter as VI_TRUE after the
+        NI-FGEN only reports the **done** parameter as True after the
         current generation is complete in Single trigger mode.
 
         Returns:
@@ -4484,11 +4514,11 @@ class Session(_SessionBase):
 
                 **Defined Values**
 
-                +----------+-----------------------------+
-                | VI_TRUE  | Generation is complete.     |
-                +----------+-----------------------------+
-                | VI_FALSE | Generation is not complete. |
-                +----------+-----------------------------+
+                +-------+-----------------------------+
+                | True  | Generation is complete.     |
+                +-------+-----------------------------+
+                | False | Generation is not complete. |
+                +-------+-----------------------------+
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4500,28 +4530,28 @@ class Session(_SessionBase):
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
 
-        Returns the attributes of the signal generator that are related to
+        Returns the properties of the signal generator that are related to
         creating arbitrary sequences (the max_num_sequences,
         min_sequence_length,
         max_sequence_length, and max_loop_count
-        attributes).
+        properties).
 
         Returns:
             maximum_number_of_sequences (int): Returns the maximum number of arbitrary waveform sequences that the
                 signal generator allows. NI-FGEN obtains this value from the
-                max_num_sequences attribute.
+                max_num_sequences property.
 
             minimum_sequence_length (int): Returns the minimum number of arbitrary waveforms the signal generator
                 allows in a sequence. NI-FGEN obtains this value from the
-                min_sequence_length attribute.
+                min_sequence_length property.
 
             maximum_sequence_length (int): Returns the maximum number of arbitrary waveforms the signal generator
                 allows in a sequence. NI-FGEN obtains this value from the
-                max_sequence_length attribute.
+                max_sequence_length property.
 
             maximum_loop_count (int): Returns the maximum number of times the signal generator can repeat an
                 arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-                max_loop_count attribute.
+                max_loop_count property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4536,8 +4566,8 @@ class Session(_SessionBase):
     def query_arb_wfm_capabilities(self):
         '''query_arb_wfm_capabilities
 
-        Returns the attributes of the signal generator that are related to
-        creating arbitrary waveforms. These attributes are the maximum number of
+        Returns the properties of the signal generator that are related to
+        creating arbitrary waveforms. These properties are the maximum number of
         waveforms, waveform quantum, minimum waveform size, and maximum waveform
         size.
 
@@ -4548,23 +4578,23 @@ class Session(_SessionBase):
         Returns:
             maximum_number_of_waveforms (int): Returns the maximum number of arbitrary waveforms that the signal
                 generator allows. NI-FGEN obtains this value from the
-                max_num_waveforms attribute.
+                max_num_waveforms property.
 
             waveform_quantum (int): The size (number of points) of each waveform must be a multiple of a
                 constant quantum value. This parameter obtains the quantum value that
                 the signal generator uses. NI-FGEN returns this value from the
-                waveform_quantum attribute.
+                waveform_quantum property.
 
-                For example, when this attribute returns a value of 8, all waveform
+                For example, when this property returns a value of 8, all waveform
                 sizes must be a multiple of 8.
 
             minimum_waveform_size (int): Returns the minimum number of points that the signal generator allows in
                 a waveform. NI-FGEN obtains this value from the
-                min_waveform_size attribute.
+                min_waveform_size property.
 
             maximum_waveform_size (int): Returns the maximum number of points that the signal generator allows in
                 a waveform. NI-FGEN obtains this value from the
-                max_waveform_size attribute.
+                max_waveform_size property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4579,8 +4609,8 @@ class Session(_SessionBase):
     def query_freq_list_capabilities(self):
         '''query_freq_list_capabilities
 
-        Returns the attributes of the signal generator that are related to
-        creating frequency lists. These attributes are
+        Returns the properties of the signal generator that are related to
+        creating frequency lists. These properties are
         max_num_freq_lists,
         min_freq_list_length,
         max_freq_list_length,
@@ -4591,27 +4621,27 @@ class Session(_SessionBase):
         Returns:
             maximum_number_of_freq_lists (int): Returns the maximum number of frequency lists that the signal generator
                 allows. NI-FGEN obtains this value from the
-                max_num_freq_lists attribute.
+                max_num_freq_lists property.
 
             minimum_frequency_list_length (int): Returns the minimum number of steps that the signal generator allows in
                 a frequency list. NI-FGEN obtains this value from the
-                min_freq_list_length attribute.
+                min_freq_list_length property.
 
             maximum_frequency_list_length (int): Returns the maximum number of steps that the signal generator allows in
                 a frequency list. NI-FGEN obtains this value from the
-                max_freq_list_length attribute.
+                max_freq_list_length property.
 
             minimum_frequency_list_duration (float): Returns the minimum duration that the signal generator allows in a step
                 of a frequency list. NI-FGEN obtains this value from the
-                min_freq_list_duration attribute.
+                min_freq_list_duration property.
 
             maximum_frequency_list_duration (float): Returns the maximum duration that the signal generator allows in a step
                 of a frequency list. NI-FGEN obtains this value from the
-                max_freq_list_duration attribute.
+                max_freq_list_duration property.
 
             frequency_list_duration_quantum (float): Returns the quantum of which all durations must be a multiple in a
                 frequency list. NI-FGEN obtains this value from the
-                freq_list_duration_quantum attribute.
+                freq_list_duration_quantum property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4648,7 +4678,7 @@ class Session(_SessionBase):
         Performs a hard reset on the device. Generation is stopped, all routes
         are released, external bidirectional terminals are tristated, FPGAs are
         reset, hardware is configured to its default state, and all session
-        attributes are reset to their default states.
+        properties are reset to their default states.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetDevice(vi_ctype)
@@ -4660,8 +4690,8 @@ class Session(_SessionBase):
 
         Resets the instrument and reapplies initial user–specified settings from
         the logical name that was used to initialize the session. If the session
-        was created without a logical name, this function is equivalent to the
-        nifgen_reset function.
+        was created without a logical name, this method is equivalent to the
+        nifgen_reset method.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetWithDefaults(vi_ctype)
@@ -4737,13 +4767,13 @@ class Session(_SessionBase):
         Performs the following operations:
 
         -  Closes the instrument I/O session.
-        -  Destroys the NI-FGEN session and all of its attributes.
+        -  Destroys the NI-FGEN session and all of its properties.
         -  Deallocates any memory resources NI-FGEN uses.
 
         Not all signal routes established by calling the nifgen_ExportSignal
-        and nifgen_RouteSignalOut functions are released when the NI-FGEN
+        and nifgen_RouteSignalOut methods are released when the NI-FGEN
         session is closed. The following table shows what happens to a signal
-        route on your device when you call the _close function.
+        route on your device when you call the _close method.
 
         +--------------------+-------------------+------------------+
         | Routes To          | NI 5401/5411/5431 | Other Devices    |
@@ -4755,7 +4785,7 @@ class Session(_SessionBase):
 
         Note:
         After calling _close, you cannot use NI-FGEN again until you
-        call the nifgen_init or nifgen_InitWithOptions functions.
+        call the nifgen_init or nifgen_InitWithOptions methods.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_close(vi_ctype)
@@ -4765,14 +4795,14 @@ class Session(_SessionBase):
     def reset(self):
         '''reset
 
-        Resets the instrument to a known state. This function aborts the
-        generation, clears all routes, and resets session attributes to the
-        default values. This function does not, however, commit the session
+        Resets the instrument to a known state. This method aborts the
+        generation, clears all routes, and resets session properties to the
+        default values. This method does not, however, commit the session
         properties or configure the device hardware to its default state.
 
         Note:
-        For the NI 5401/5404/5411/5431, this function exhibits the same
-        behavior as the nifgen_ResetDevice function.
+        For the NI 5401/5404/5411/5431, this method exhibits the same
+        behavior as the nifgen_ResetDevice method.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_reset(vi_ctype)
@@ -4786,9 +4816,9 @@ class Session(_SessionBase):
 
         Note:
         When used on some signal generators, the device is reset after the
-        self_test function runs. If you use the self_test
-        function, your device may not be in its previously configured state
-        after the function runs.
+        self_test method runs. If you use the self_test
+        method, your device may not be in its previously configured state
+        after the method runs.
 
         Returns:
             self_test_result (int): Contains the value returned from the instrument self-test. A value of 0

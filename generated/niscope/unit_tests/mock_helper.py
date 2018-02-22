@@ -269,7 +269,7 @@ class SideEffectsHelper(object):
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
 
-    def niScope_FancyFetch(self, vi, channel_list, timeout, num_samples, fetch_relative_to, fetch_offset, fetch_record_number, fetch_num_records, wfm_info):  # noqa: N802
+    def niScope_FancyFetch(self, vi, channel_list, timeout, num_samples, relative_to, offset, record_number, num_records, wfm_info):  # noqa: N802
         if self._defaults['FancyFetch']['return'] != 0:
             return self._defaults['FancyFetch']['return']
         # wfm_info

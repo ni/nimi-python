@@ -162,7 +162,7 @@ functions_additional_functions = {
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.',
                 },
             },
             {
@@ -192,7 +192,7 @@ functions_additional_functions = {
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.',
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.',
                 },
             },
             {
