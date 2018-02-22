@@ -12,64 +12,28 @@
         '''
         import sys
 
-        if num_samples is None and wfm is None:
-            raise TypeError("Either 'num_samples' or 'wfm' must be set")
+        # Set attributes
+        self.fetch_relative_to = fetch_relative_to
+        self.fetch_offset = fetch_offset
+        self.fetch_record_number = fetch_record_number
+        self.fetch_num_records = fetch_num_records
 
-        # Check optional parameters
-        if fetch_relative_to is not None:
-            self.fetch_relative_to = fetch_relative_to
-        if fetch_offet is not None:
-            self.fetch_offet = fetch_offet
-        if fetch_record_number is not None:
-            self.fetch_record_number = fetch_record_number
-        if fetch_num_records is not None:
-            self.fetch_num_records = fetch_num_records
-
-        num_wfms = self._actual_num_wfms()
-
-        if num_samples is None:
-            num_samples_to_use = int(len(wfm) / num_wfms)
-        else:
-            num_samples_to_use = num_samples
-
-        total_wfm_size = num_samples_to_use * num_wfms
-
-        # If the waveform is not passed in, we will use the builtin python array with element type 'double'
-        if wfm is None:
-            wfm_to_use, wfm_info = self._fetch(num_samples, timeout)
-        else:
-            if len(wfm) < total_wfm_size:
-                raise TypeError('The size of the input array is too small for the acquisition. Needs to be {0}, was {1}'.format(total_wfm_size, len(wfm_to_use)))
-
-            wfm_to_use = wfm
-            wfm_info = self.fetch_into(wfm_to_use, timeout)
+        wfm, wfm_info = self._fetch(num_samples, timeout)
 
         if sys.version_info.major < 3:
             # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
             # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
             for i in range(len(wfm_info)):
-                if isinstance(wfm_to_use, array.array):
-                    typecode = wfm_to_use.typecode
-                else:
-                    import numpy
-                    # If we've made it this far we know the numpy type is one of these
-                    typecode = {
-                        numpy.dtype('int8'): 'b',
-                        numpy.dtype('int16'): 'h',
-                        numpy.dtype('int32'): 'l',
-                        numpy.dtype('float64'): 'd',
-                    }[wfm_to_use.dtype]
-
-                start = i * num_samples_to_use
-                end = start + num_samples_to_use
-                wfm_info[i].wfm = array.array(typecode, wfm_to_use[start:end])
+                start = i * num_samples
+                end = start + num_samples
+                wfm_info[i].wfm = array.array('d', wfm[start:end])
         else:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(wfm_to_use)
+            mv = memoryview(wfm)
 
             for i in range(len(wfm_info)):
-                start = i * num_samples_to_use
-                end = start + num_samples_to_use
+                start = i * num_samples
+                end = start + num_samples
                 wfm_info[i].wfm = mv[start:end]
 
         return wfm_info
