@@ -80,7 +80,7 @@ class _SessionBase(object):
     analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
     '''Type: bool
 
-    Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  attribute to VI_TRUE for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  VI_FALSE, which disables sharing of the analog bus.
+    Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
     Tip:
@@ -95,7 +95,7 @@ class _SessionBase(object):
     bandwidth = attributes.AttributeViReal64(1250005)
     '''Type: float
 
-    This channel-based attribute returns the bandwidth for the channel.
+    This channel-based property returns the bandwidth for the channel.
     The units are hertz.
 
     Tip:
@@ -110,22 +110,22 @@ class _SessionBase(object):
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''Type: int
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
     '''
     cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
     '''Type: int
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
-    Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
-    The instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use the InitWithOptions  function to override this value.
+    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
+    The instrument driver can choose always to cache or never to cache  particular properties regardless of the setting of this property.
+    The default value is True.   Use the InitWithOptions  method to override this value.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -135,7 +135,7 @@ class _SessionBase(object):
     characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''Type: float
 
-    This channel-based attribute returns the characteristic impedance for the  channel.
+    This channel-based property returns the characteristic impedance for the  channel.
     The units are ohms.
 
     Tip:
@@ -150,24 +150,24 @@ class _SessionBase(object):
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''Type: bool
 
-    When a switch device is scanning, the swich can either stop scanning when  the end of the scan (VI_FALSE) or continue scanning from the top of the  scan list again (VI_TRUE).
-    Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
+    When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
+    Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
     '''
     digital_filter_enable = attributes.AttributeViBoolean(1150016)
     '''Type: bool
 
-    This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (VI_TRUE) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
-    When Digital Filter is disabled (VI_FALSE), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
+    This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
+    When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
     '''
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
 
-    This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  InitWithOptions function, or through the IVI Configuration Utility.
-    If the user does not specify a Driver Setup string, this attribute returns an empty string.
+    This property indicates the Driver Setup string that the user  specified when initializing the driver.
+    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  InitWithOptions method, or through the IVI Configuration Utility.
+    If the user does not specify a Driver Setup string, this property returns an empty string.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
     '''Type: str
@@ -193,27 +193,27 @@ class _SessionBase(object):
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  connect, set_path and _initiate_scan functions.
-    The default value is VI_FALSE.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call GetNextInterchangeWarning to extract interchange warnings.   Call the ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
+    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  connect, set_path and _initiate_scan methods.
+    The default value is False.
+    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call GetNextInterchangeWarning to extract interchange warnings.   Call the ClearInterchangeWarnings method to clear the list  of interchangeability warnings without reading them.
+    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when an property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor the driver  uses to identify the physical device.
-    If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
+    If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource  descriptor, this property contains that value.
     '''
     is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
-    This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the connect function.  Configuration channels are not available  for external connections.
-    Set this attribute to VI_TRUE to mark the channel as a configuration  channel.  Set this attribute to VI_FALSE to mark the channel as available  for external connections.
-    After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The connect function  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
+    This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the connect method.  Configuration channels are not available  for external connections.
+    Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
+    After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The connect method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -227,17 +227,17 @@ class _SessionBase(object):
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''Type: bool
 
-    This attribute indicates whether the entire switch device has settled  since the last switching command.  A value of VI_TRUE indicates that all  signals going through the switch device are valid.
+    This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
     '''
     is_scanning = attributes.AttributeViBoolean(1250024)
     '''Type: bool
 
-    If VI_TRUE, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If VI_FALSE, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
+    If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
     '''
     is_source_channel = attributes.AttributeViBoolean(1250001)
     '''Type: bool
 
-    This channel-based attribute specifies whether you want to identify the  channel as a source channel.  Typically, you set this attribute to VI_TRUE  when you attach the channel to a power supply, a function generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect function  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
+    This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -257,25 +257,25 @@ class _SessionBase(object):
     '''Type: str
 
     A string containing the logical name you specified when opening the  current IVI session.
-    You may pass a logical name to the init or  InitWithOptions functions.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+    You may pass a logical name to the init or  InitWithOptions methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''Type: int
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
     '''
     master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
     '''Type: int
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
     max_ac_voltage = attributes.AttributeViReal64(1250007)
     '''Type: float
 
-    This channel-based attribute returns the maximum AC voltage the channel  can switch.
+    This channel-based property returns the maximum AC voltage the channel  can switch.
     The units are volts RMS.
 
     Tip:
@@ -290,7 +290,7 @@ class _SessionBase(object):
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''Type: float
 
-    This channel-based attribute returns the maximum AC current the channel  can carry.
+    This channel-based property returns the maximum AC current the channel  can carry.
     The units are amperes RMS.
 
     Tip:
@@ -305,7 +305,7 @@ class _SessionBase(object):
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''Type: float
 
-    This channel-based attribute returns the maximum AC power the channel can  carry.
+    This channel-based property returns the maximum AC power the channel can  carry.
     The units are volt-amperes.
 
     Tip:
@@ -320,7 +320,7 @@ class _SessionBase(object):
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''Type: float
 
-    This channel-based attribute returns the maximum DC current the channel  can carry.
+    This channel-based property returns the maximum DC current the channel  can carry.
     The units are amperes.
 
     Tip:
@@ -335,7 +335,7 @@ class _SessionBase(object):
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''Type: float
 
-    This channel-based attribute returns the maximum DC power the channel can  carry.
+    This channel-based property returns the maximum DC power the channel can  carry.
     The units are watts.
 
     Tip:
@@ -350,7 +350,7 @@ class _SessionBase(object):
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''Type: float
 
-    This channel-based attribute returns the maximum DC voltage the channel  can switch.
+    This channel-based property returns the maximum DC voltage the channel  can switch.
     The units are volts.
 
     Tip:
@@ -365,7 +365,7 @@ class _SessionBase(object):
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''Type: float
 
-    This channel-based attribute returns the maximum AC current the channel  can switch.
+    This channel-based property returns the maximum AC current the channel  can switch.
     The units are amperes RMS.
 
     Tip:
@@ -380,7 +380,7 @@ class _SessionBase(object):
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''Type: float
 
-    This channel-based attribute returns the maximum AC power the channel can  switch.
+    This channel-based property returns the maximum AC power the channel can  switch.
     The units are volt-amperes.
 
     Tip:
@@ -395,7 +395,7 @@ class _SessionBase(object):
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''Type: float
 
-    This channel-based attribute returns the maximum DC current the channel  can switch.
+    This channel-based property returns the maximum DC current the channel  can switch.
     The units are amperes.
 
     Tip:
@@ -410,7 +410,7 @@ class _SessionBase(object):
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''Type: float
 
-    This channel-based attribute returns the maximum DC power the channel can  switch.
+    This channel-based property returns the maximum DC power the channel can  switch.
     The units are watts.
 
     Tip:
@@ -425,59 +425,59 @@ class _SessionBase(object):
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''Type: int
 
-    This attribute returns the number of relays.
+    This property returns the number of relays.
     '''
     num_of_columns = attributes.AttributeViInt32(1250019)
     '''Type: int
 
-    This attribute returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
-    The wire_mode attribute affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
+    This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
+    The wire_mode property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
     '''
     num_of_rows = attributes.AttributeViInt32(1250018)
     '''Type: int
 
-    This attribute returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
-    The wire_mode attribute affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
+    This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
+    The wire_mode property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
     parsed_scan_list = attributes.AttributeViString(1150012)
     '''Type: str
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.
     '''
     power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
     '''Type: bool
 
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
-    When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
+    When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
-    Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
-    The default value is VI_TRUE.   Use the InitWithOptions  function to override this value.
+    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver methods.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
+    The default value is True.   Use the InitWithOptions  method to override this value.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
-    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
-    The default value is VI_FALSE.   Use the  InitWithOptions function to override this value.
+    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   You call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
+    The default value is False.   Use the  InitWithOptions method to override this value.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
     '''Type: enums.ScanAdvancedOutput
 
-    This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
+    This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
     scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
     scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
-    This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
+    This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
 
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
@@ -485,7 +485,7 @@ class _SessionBase(object):
     scan_list = attributes.AttributeViString(1250020)
     '''Type: str
 
-    This attribute contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The _initiate_scan  function makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The _initiate_scan  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
     To create a path between two channels, use the following character between  the two channel names:
     -> (a dash followed by a '>' sign)
@@ -500,9 +500,9 @@ class _SessionBase(object):
     scan_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanMode, 1250021)
     '''Type: enums.ScanMode
 
-    This attribute specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this attribute specifies what happens to the  connection between CH1 and CH2.
-    If the value of this attribute is ScanMode.NONE, the switch device  takes no action on existing paths.  If the value is  ScanMode.BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is ScanMode.BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
-    Most switch devices support only one of the possible values.  In such  cases, this attribute serves as an indicator of the device's behavior.
+    This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
+    If the value of this property is ScanMode.NONE, the switch device  takes no action on existing paths.  If the value is  ScanMode.BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is ScanMode.BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
+    Most switch devices support only one of the possible values.  In such  cases, this property serves as an indicator of the device's behavior.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -510,12 +510,12 @@ class _SessionBase(object):
     serial_number = attributes.AttributeViString(1150015)
     '''Type: str
 
-    This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
+    This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
     settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
-    This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
+    This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
 
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
@@ -532,11 +532,11 @@ class _SessionBase(object):
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
-    The default value is VI_FALSE.   Use the InitWithOptions  function to override this value.
+    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
+    The default value is False.   Use the InitWithOptions  method to override this value.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -571,12 +571,12 @@ class _SessionBase(object):
     temperature = attributes.AttributeViReal64(1150019)
     '''Type: float
 
-    This attribute returns the temperature as read by the Switch module.     The units are degrees Celsius.
+    This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
     trigger_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInput, 1250022)
     '''Type: enums.TriggerInput
 
-    This attribute specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
+    This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
     '''
     trigger_input_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
     '''Type: enums.TriggerInputPolarity
@@ -586,13 +586,13 @@ class _SessionBase(object):
     trigger_mode = attributes.AttributeViInt32(1150005)
     '''Type: int
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input and/or route_scan_advanced_output  functions instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input and/or route_scan_advanced_output  methods instead.
     '''
     wire_mode = attributes.AttributeViInt32(1250017)
     '''Type: int
 
-    This attribute returns the wire mode of the switch device.
-    This attribute affects the values of the num_of_rows and  num_of_columns attributes.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
+    This property returns the wire mode of the switch device.
+    This property affects the values of the num_of_rows and  num_of_columns properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -650,12 +650,12 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        This function queries the value of a ViBoolean attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
+        This method queries the value of a ViBoolean property. You can use
+        this method to get the values of instrument specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases: -
         State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
+        property. - State caching is enabled and the currently cached value is
         invalid.
 
         Tip:
@@ -667,29 +667,29 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
+                dialog box allows you to see all IVI properties or only the properties
+                of the ViInt32 type. If you choose to see all IVI properties, the data
+                types appear to the right of the property names in the list box. The
+                data types that are not consistent with this method are dim. If you
+                select an property data type that is dim, LabWindows/CVI transfers you
+                to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
+                change this ring control to a manual input box. - If the property in
                 this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
+                constants by moving to the Property Value control and pressing .
 
 
         Returns:
-            attribute_value (bool): Returns the current value of the attribute. Pass the address of a
-                ViBoolean variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
+            attribute_value (bool): Returns the current value of the property. Pass the address of a
+                ViBoolean variable. From the method panel window, you can use this
+                control as follows. - If the property currently showing in the
+                Property ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
 
@@ -705,12 +705,12 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        This function queries the value of a ViInt32 attribute. You can use this
-        function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
+        This method queries the value of a ViInt32 property. You can use this
+        method to get the values of instrument specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases: -
         State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
+        property. - State caching is enabled and the currently cached value is
         invalid.
 
         Tip:
@@ -722,29 +722,29 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
+                dialog box allows you to see all IVI properties or only the properties
+                of the ViInt32 type. If you choose to see all IVI properties, the data
+                types appear to the right of the property names in the list box. The
+                data types that are not consistent with this method are dim. If you
+                select an property data type that is dim, LabWindows/CVI transfers you
+                to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
+                change this ring control to a manual input box. - If the property in
                 this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
+                constants by moving to the Property Value control and pressing .
 
 
         Returns:
-            attribute_value (int): Returns the current value of the attribute. Pass the address of a
-                ViInt32 variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
+            attribute_value (int): Returns the current value of the property. Pass the address of a
+                ViInt32 variable. From the method panel window, you can use this
+                control as follows. - If the property currently showing in the
+                Property ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
 
@@ -760,12 +760,12 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        This function queries the value of a ViReal64 attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
+        This method queries the value of a ViReal64 property. You can use
+        this method to get the values of instrument specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases: -
         State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
+        property. - State caching is enabled and the currently cached value is
         invalid.
 
         Tip:
@@ -777,29 +777,29 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
+                dialog box allows you to see all IVI properties or only the properties
+                of the ViInt32 type. If you choose to see all IVI properties, the data
+                types appear to the right of the property names in the list box. The
+                data types that are not consistent with this method are dim. If you
+                select an property data type that is dim, LabWindows/CVI transfers you
+                to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
+                change this ring control to a manual input box. - If the property in
                 this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
+                constants by moving to the Property Value control and pressing .
 
 
         Returns:
-            attribute_value (float): Returns the current value of the attribute. Pass the address of a
-                ViReal64 variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
+            attribute_value (float): Returns the current value of the property. Pass the address of a
+                ViReal64 variable. From the method panel window, you can use this
+                control as follows. - If the property currently showing in the
+                Property ID ring control has constants as valid values, you can view a
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
 
@@ -815,23 +815,23 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        This function queries the value of a ViString attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
+        This method queries the value of a ViString property. You can use
+        this method to get the values of instrument specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases: -
         State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
+        property. - State caching is enabled and the currently cached value is
         invalid. You must provide a ViChar array to serve as a buffer for the
         value. You pass the number of bytes in the buffer as the Array Size
-        parameter. If the current value of the attribute, including the
+        parameter. If the current value of the property, including the
         terminating NULL byte, is larger than the size you indicate in the Array
-        Size parameter, the function copies Array Size-1 bytes into the buffer,
+        Size parameter, the method copies Array Size-1 bytes into the buffer,
         places an ASCII NULL byte at the end of the buffer, and returns the
         array size you must pass to get the entire value. For example, if the
-        value is "123456" and the Array Size is 4, the function places "123"
-        into the buffer and returns 7. If you want to call this function just to
+        value is "123456" and the Array Size is 4, the method places "123"
+        into the buffer and returns 7. If you want to call this method just to
         get the required array size, you can pass 0 for the Array Size and
-        VI_NULL for the Attribute Value buffer. If you want the function to
+        VI_NULL for the Property Value buffer. If you want the method to
         fill in the buffer regardless of the number of bytes in the value, pass
         a negative number for the Array Size parameter.
 
@@ -844,22 +844,22 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
+                dialog box allows you to see all IVI properties or only the properties
+                of the ViInt32 type. If you choose to see all IVI properties, the data
+                types appear to the right of the property names in the list box. The
+                data types that are not consistent with this method are dim. If you
+                select an property data type that is dim, LabWindows/CVI transfers you
+                to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
+                change this ring control to a manual input box. - If the property in
                 this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
+                constants by moving to the Property Value control and pressing .
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -878,23 +878,23 @@ class _SessionBase(object):
     def _get_error(self):
         '''_get_error
 
-        This function retrieves and then clears the IVI error information for
+        This method retrieves and then clears the IVI error information for
         the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the function does not clear the error
+        the buffer_size parameter is 0, the method does not clear the error
         information. By passing 0 for the buffer size, the caller can ascertain
         the buffer size required to get the entire error description string and
-        then call the function again with a sufficiently large buffer. If the
+        then call the method again with a sufficiently large buffer. If the
         user specifies a valid IVI session for the InstrumentHandle parameter,
         Get Error retrieves and then clears the error information for the
         session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this function retrieves and then clears the error information for the
+        this method retrieves and then clears the error information for the
         current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the function does nothing and returns an error.
+        invalid session, the method does nothing and returns an error.
         Normally, the error information describes the first error that occurred
         since the user last called _get_error or ClearError.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             code (int): Returns the error code for the session or execution thread. If you pass
@@ -916,23 +916,23 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        This function sets the value of a ViBoolean attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This method sets the value of a ViBoolean property. This is a
+        low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
+        the entire session or for the particular property. - State caching is
         enabled and the currently cached value is invalid or is different than
         the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
+        methods that set most of the instrument properties. It is best to use
+        the high-level driver methods as much as possible. They handle order
         dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
+        status checking only after setting all of the properties. In contrast,
+        when you set multiple properties using the SetAttribute methods, the
+        methods check the instrument status after each call. Also, when state
+        caching is enabled, the high-level methods that configure multiple
+        properties perform instrument I/O only for the properties whose value
+        you change. Thus, you can safely call the high-level methods without
         the penalty of redundant instrument I/O.
 
         Tip:
@@ -944,28 +944,28 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
+                or by selecting it and then pressing . Read-only properties appear dim
+                in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
+                all IVI properties or only the properties of the ViInt32 type. If you
+                choose to see all IVI properties, the data types appear to the right of
+                the property names in the list box. The data types that are not
+                consistent with this method are dim. If you select an property data
+                type that is dim, LabWindows/CVI transfers you to the method panel for
+                the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
+                a manual input box. - If the property in this ring control has
                 constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
+                Property Value control and pressing .
 
-            attribute_value (bool): Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
+            attribute_value (bool): Pass the value to which you want to set the property. From the method
+                panel window, you can use this control as follows. - If the property
+                currently showing in the Property ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
@@ -983,23 +983,23 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        This function sets the value of a ViInt32 attribute. This is a low-level
-        function that you can use to set the values of instrument-specific
-        attributes and inherent IVI attributes. If the attribute represents an
-        instrument state, this function performs instrument I/O in the following
+        This method sets the value of a ViInt32 property. This is a low-level
+        method that you can use to set the values of instrument-specific
+        properties and inherent IVI properties. If the property represents an
+        instrument state, this method performs instrument I/O in the following
         cases: - State caching is disabled for the entire session or for the
-        particular attribute. - State caching is enabled and the currently
+        particular property. - State caching is enabled and the currently
         cached value is invalid or is different than the value you specify. This
-        instrument driver contains high-level functions that set most of the
-        instrument attributes. It is best to use the high-level driver functions
+        instrument driver contains high-level methods that set most of the
+        instrument properties. It is best to use the high-level driver methods
         as much as possible. They handle order dependencies and multithread
         locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the SetAttribute functions, the functions check the
+        setting all of the properties. In contrast, when you set multiple
+        properties using the SetAttribute methods, the methods check the
         instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
         redundant instrument I/O.
 
         Tip:
@@ -1011,28 +1011,28 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
+                or by selecting it and then pressing . Read-only properties appear dim
+                in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
+                all IVI properties or only the properties of the ViInt32 type. If you
+                choose to see all IVI properties, the data types appear to the right of
+                the property names in the list box. The data types that are not
+                consistent with this method are dim. If you select an property data
+                type that is dim, LabWindows/CVI transfers you to the method panel for
+                the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
+                a manual input box. - If the property in this ring control has
                 constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
+                Property Value control and pressing .
 
-            attribute_value (int): Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
+            attribute_value (int): Pass the value to which you want to set the property. From the method
+                panel window, you can use this control as follows. - If the property
+                currently showing in the Property ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
@@ -1050,23 +1050,23 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        This function sets the value of a ViReal64 attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This method sets the value of a ViReal64 property. This is a
+        low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
+        the entire session or for the particular property. - State caching is
         enabled and the currently cached value is invalid or is different than
         the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
+        methods that set most of the instrument properties. It is best to use
+        the high-level driver methods as much as possible. They handle order
         dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
+        status checking only after setting all of the properties. In contrast,
+        when you set multiple properties using the SetAttribute methods, the
+        methods check the instrument status after each call. Also, when state
+        caching is enabled, the high-level methods that configure multiple
+        properties perform instrument I/O only for the properties whose value
+        you change. Thus, you can safely call the high-level methods without
         the penalty of redundant instrument I/O.
 
         Tip:
@@ -1078,28 +1078,28 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
+                or by selecting it and then pressing . Read-only properties appear dim
+                in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
+                all IVI properties or only the properties of the ViInt32 type. If you
+                choose to see all IVI properties, the data types appear to the right of
+                the property names in the list box. The data types that are not
+                consistent with this method are dim. If you select an property data
+                type that is dim, LabWindows/CVI transfers you to the method panel for
+                the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
+                a manual input box. - If the property in this ring control has
                 constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
+                Property Value control and pressing .
 
-            attribute_value (float): Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
+            attribute_value (float): Pass the value to which you want to set the property. From the method
+                panel window, you can use this control as follows. - If the property
+                currently showing in the Property ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
@@ -1117,23 +1117,23 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        This function sets the value of a ViString attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This method sets the value of a ViString property. This is a
+        low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
+        the entire session or for the particular property. - State caching is
         enabled and the currently cached value is invalid or is different than
         the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
+        methods that set most of the instrument properties. It is best to use
+        the high-level driver methods as much as possible. They handle order
         dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
+        status checking only after setting all of the properties. In contrast,
+        when you set multiple properties using the SetAttribute methods, the
+        methods check the instrument status after each call. Also, when state
+        caching is enabled, the high-level methods that configure multiple
+        properties perform instrument I/O only for the properties whose value
+        you change. Thus, you can safely call the high-level methods without
         the penalty of redundant instrument I/O.
 
         Tip:
@@ -1145,28 +1145,28 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
+                properties. Properties whose value cannot be set are dim. Help text is
+                shown for each property. Select an property by double-clicking on it
+                or by selecting it and then pressing . Read-only properties appear dim
+                in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
+                all IVI properties or only the properties of the ViInt32 type. If you
+                choose to see all IVI properties, the data types appear to the right of
+                the property names in the list box. The data types that are not
+                consistent with this method are dim. If you select an property data
+                type that is dim, LabWindows/CVI transfers you to the method panel for
+                the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
+                a manual input box. - If the property in this ring control has
                 constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
+                Property Value control and pressing .
 
-            attribute_value (str): Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
+            attribute_value (str): Pass the value to which you want to set the property. From the method
+                panel window, you can use this control as follows. - If the property
+                currently showing in the Property ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
                 control. Select a value by double-clicking on it or by selecting it and
                 then pressing . Note: Some of the values might not be valid depending on
@@ -1190,7 +1190,7 @@ class _SessionBase(object):
         error code description.
 
         Args:
-            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
+            error_code (int): Status code returned by any NI-SWITCH method. Default Value: 0
                 (VI_SUCCESS)
 
 
@@ -1226,7 +1226,7 @@ class Session(_SessionBase):
         Devices topic in the NI Switches Help for information about determining
         the topology string of an NI SwitchBlock device. By default, the switch
         is reset to a known state. Enable simulation by specifying the topology
-        and setting the simulate parameter to VI_TRUE.
+        and setting the simulate parameter to True.
 
         Args:
             resource_name (str): Resource name of the switch module to initialize. Default value: None
@@ -1433,11 +1433,11 @@ class Session(_SessionBase):
                 NISWITCH_TOPOLOGY_2799_2_SPDT
 
             simulate (bool): Enables simulation of the switch module specified in the resource name
-                parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
+                parameter. Valid Values: True - simulate False - Don't simulate
                 (Default Value)
 
             reset_device (bool): Specifies whether to reset the switch module during the initialization
-                process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
+                process. Valid Values: True - Reset Device (Default Value) False
                 - Currently unsupported. The device will not reset.
 
 
@@ -1575,18 +1575,18 @@ class Session(_SessionBase):
         to Scan Lists for more information on scan list syntax To see the status
         of the scan, call either IsScanning or
         wait_for_scan_complete. Use the configure_scan_trigger
-        function to configure the scan trigger. Use the _initiate_scan
-        function to start the scan.
+        method to configure the scan trigger. Use the _initiate_scan
+        method to start the scan.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             scanlist (str): The scan list to use. The driver uses this value to set the Scan List
-                attribute. Default value: None
+                property. Default value: None
 
             scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
-                scanning. The driver uses this value to set the Scan Mode attribute.
+                scanning. The driver uses this value to set the Scan Mode property.
                 Refer to scan modes for more information. Default value: Break Before
                 Make
 
@@ -1607,21 +1607,21 @@ class Session(_SessionBase):
         configure_scan_list. Refer to Devices Overview to determine if
         the switch module supports scanning. configure_scan_trigger sets
         the location that the switch expects to receive an input trigger to
-        advance through the scan list. This function also sets the location
+        advance through the scan list. This method also sets the location
         where it outputs a scan advanced signal after it completes an entry in
         the scan list.
 
         Args:
             trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
                 driver uses this value to set the trigger_input
-                attribute. The switch device waits for the trigger you specify when it
+                property. The switch device waits for the trigger you specify when it
                 encounters a semicolon in the scanlist. When the trigger occurs, the
                 switch device advances to the next entry in the scanlist. Refer to the
                 trigger_input topic in the NI Switches Help for a list
                 of valid values.
 
             scan_advanced_output (enums.ScanAdvancedOutput): Output destination of the scan advanced trigger signal. The driver uses
-                this value to set the scan_advanced_output attribute.
+                this value to set the scan_advanced_output property.
                 After the switch processes each entry in the scan list, it waits the
                 length of time you specify in the Scan Delay parameter and then asserts
                 a trigger on the line you specify with this parameter. Refer to the
@@ -1630,9 +1630,9 @@ class Session(_SessionBase):
 
             scan_delay (float): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
-                line. The driver uses this value to set the Scan Delay attribute. The
+                line. The driver uses this value to set the Scan Delay property. The
                 scan delay is in addition to the settling time.The driver uses this
-                value to set the scan_delay attribute. Express this
+                value to set the scan_delay property. Express this
                 value in seconds. Default value: 0.0 s
 
         '''
@@ -1654,10 +1654,10 @@ class Session(_SessionBase):
         Creates a path between channel 1 and channel 2. The driver calculates
         and uses the shortest path between the two channels. Refer to Immediate
         Operations for information about Channel Usage types. If a path is not
-        available, the function returns one of the following errors: -
+        available, the method returns one of the following errors: -
         NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
         already explicitly connected by calling either the connect or
-        set_path function. -
+        set_path method. -
         NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
         configuration channel. Error elaboration contains information about
         which of the two channels is a configuration channel. -
@@ -1698,7 +1698,7 @@ class Session(_SessionBase):
         the channels. Refer to Setting Source and Configuration Channels for
         information about channel usage types. In the event of an error,
         connecting stops at the point in the list where the error occurred. If a
-        path is not available, the function returns one of the following errors:
+        path is not available, the method returns one of the following errors:
         - NISWITCH_ERROR_EXPLICIT_CONNECTION_EXISTS, if the two channels are
         already explicitly connected. -
         NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL, if a channel is a
@@ -1744,9 +1744,9 @@ class Session(_SessionBase):
     def disconnect(self, channel1, channel2):
         '''disconnect
 
-        This function destroys the path between two channels that you create
-        with the connect or set_path function. If a path is
-        not connected or not available, the function returns the
+        This method destroys the path between two channels that you create
+        with the connect or set_path method. If a path is
+        not connected or not available, the method returns the
         IVISWTCH_ERROR_NO_SUCH_PATH error.
 
         Args:
@@ -1810,11 +1810,11 @@ class Session(_SessionBase):
         Returns the channel string that is in the channel table at the specified
         index. Use get_channel_name in a For Loop to get a complete list
         of valid channel names for the switch module. Use the Channel Count
-        attribute to determine the number of channels.
+        property to determine the number of channels.
 
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
-                Value of Channel Count attribute.
+                Value of Channel Count property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1901,11 +1901,11 @@ class Session(_SessionBase):
         Returns the relay name string that is in the relay list at the specified
         index. Use get_relay_name in a For Loop to get a complete list
         of valid relay names for the switch module. Use the Number of Relays
-        attribute to determine the number of relays.
+        property to determine the number of relays.
 
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
-                Value of Channel Count attribute.
+                Value of Channel Count property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1963,7 +1963,7 @@ class Session(_SessionBase):
         Devices topic in the NI Switches Help for information about determining
         the topology string of an NI SwitchBlock device. By default, the switch
         is reset to a known state. Enable simulation by specifying the topology
-        and setting the simulate parameter to VI_TRUE.
+        and setting the simulate parameter to True.
 
         Args:
             resource_name (str): Resource name of the switch module to initialize. Default value: None
@@ -2170,11 +2170,11 @@ class Session(_SessionBase):
                 NISWITCH_TOPOLOGY_2799_2_SPDT
 
             simulate (bool): Enables simulation of the switch module specified in the resource name
-                parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
+                parameter. Valid Values: True - simulate False - Don't simulate
                 (Default Value)
 
             reset_device (bool): Specifies whether to reset the switch module during the initialization
-                process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
+                process. Valid Values: True - Reset Device (Default Value) False
                 - Currently unsupported. The device will not reset.
 
 
@@ -2184,7 +2184,7 @@ class Session(_SessionBase):
                 and used for all subsequent NI-SWITCH calls.
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -2204,7 +2204,7 @@ class Session(_SessionBase):
         Initiate Scan only initiates the scan and returns immediately. Once the
         scanning operation begins, you cannot perform any other operation other
         than GetAttribute, AbortScan, or SendSoftwareTrigger. All other
-        functions return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
+        methods return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
         scanning operation, To stop the scanning operation, call
         abort.
         '''
@@ -2250,7 +2250,7 @@ class Session(_SessionBase):
 
         Resets the switch module and applies initial user specified settings
         from the logical name used to initialize the session. If the session was
-        created without a logical name, this function is equivalent to
+        created without a logical name, this method is equivalent to
         reset.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2282,8 +2282,8 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
-                vice versa. Default value: VI_FALSE
+            invert (bool): If True, inverts the input trigger signal from falling to rising or
+                vice versa. Default value: False
 
         '''
         if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
@@ -2302,7 +2302,7 @@ class Session(_SessionBase):
         '''route_trigger_input
 
         Routes the input trigger from the front or rear connector to a trigger
-        bus line (TTLx). To disconnect the route, call this function again and
+        bus line (TTLx). To disconnect the route, call this method again and
         specify None for trigger bus line parameter.
 
         Args:
@@ -2323,8 +2323,8 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
-                vice versa. Default value: VI_FALSE
+            invert (bool): If True, inverts the input trigger signal from falling to rising or
+                vice versa. Default value: False
 
         '''
         if type(trigger_input_connector) is not enums.TriggerInput:
@@ -2345,7 +2345,7 @@ class Session(_SessionBase):
         Sends a software trigger to the switch module specified in the NI-SWITCH
         session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
         through either the configure_scan_trigger or the
-        trigger_input attribute, the scan does not proceed from
+        trigger_input property, the scan does not proceed from
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
         '''
@@ -2361,9 +2361,9 @@ class Session(_SessionBase):
         after one pass through the scan list.
 
         Args:
-            continuous_scan (bool): If VI_TRUE, loops continuously through the scan list during scanning.
-                If VI_FALSE, the scan stops after one pass through the scan list.
-                Default value: VI_FALSE
+            continuous_scan (bool): If True, loops continuously through the scan list during scanning.
+                If False, the scan stops after one pass through the scan list.
+                Default value: False
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2400,7 +2400,7 @@ class Session(_SessionBase):
 
         Pauses until all created paths have settled. If the time you specify
         with the Maximum Time (ms) parameter elapsed before the switch paths
-        have settled, this function returns the
+        have settled, this method returns the
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
@@ -2422,7 +2422,7 @@ class Session(_SessionBase):
         Pauses until the switch module stops scanning or the maximum time has
         elapsed and returns a timeout error. If the time you specify with the
         Maximum Time (ms) parameter elapsed before the scanning operation has
-        finished, this function returns the NISWITCH_ERROR_MAX_TIME_EXCEEDED
+        finished, this method returns the NISWITCH_ERROR_MAX_TIME_EXCEEDED
         error.
 
         Args:
@@ -2441,14 +2441,14 @@ class Session(_SessionBase):
     def _close(self):
         '''_close
 
-        Terminates the NI-SWITCH session and all of its attributes and
+        Terminates the NI-SWITCH session and all of its properties and
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
         call init or InitWithOptions.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_close(vi_ctype)

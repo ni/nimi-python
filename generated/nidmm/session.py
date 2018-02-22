@@ -80,13 +80,13 @@ class _SessionBase(object):
     ac_max_freq = attributes.AttributeViReal64(1250007)
     '''Type: float
 
-    Specifies the maximum frequency component of the input signal for AC  measurements. This attribute is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This attribute affects the DMM only when you set the   function attribute to AC measurements.
+    Specifies the maximum frequency component of the input signal for AC  measurements. This property is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This property affects the DMM only when you set the   method property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     ac_min_freq = attributes.AttributeViReal64(1250006)
     '''Type: float
 
-    Specifies the minimum frequency component of the input signal for AC  measurements. This attribute affects the DMM only when you set the  function attribute to AC measurements.
+    Specifies the minimum frequency component of the input signal for AC  measurements. This property affects the DMM only when you set the  method property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     adc_calibration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ADCCalibration, 1150022)
@@ -97,13 +97,13 @@ class _SessionBase(object):
     aperture_time = attributes.AttributeViReal64(1250321)
     '''Type: float
 
-    Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by aperture_time_units. To  override the default aperture, set this attribute to the desired  aperture time after calling ConfigureMeasurement. To return to the  default, set this attribute to NIDMM_VAL_APERTURE_TIME_AUTO (-1).
+    Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by aperture_time_units. To  override the default aperture, set this property to the desired  aperture time after calling ConfigureMeasurement. To return to the  default, set this property to NIDMM_VAL_APERTURE_TIME_AUTO (-1).
     On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
     On the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.
     On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -117,7 +117,7 @@ class _SessionBase(object):
     auto_range_value = attributes.AttributeViReal64(1250331)
     '''Type: float
 
-    Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this attribute is set during a read operation.
+    Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this property is set during a read operation.
     '''
     auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1250332)
     '''Type: enums.AutoZero
@@ -137,17 +137,17 @@ class _SessionBase(object):
     '''Type: enums.CableCompensationType
 
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
-    Changing the function or the range through this attribute or through configure_measurement_digits  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
-    Specifies whether to cache the value of attributes. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular attributes regardless of the setting of this  attribute. The default value is VI_TRUE (1). Use the _init_with_options  function to override this value.
+    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the _init_with_options  method to override this value.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
 
-    Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
+    Indicates the number of channels that the specific instrument driver  supports. For each property for which the IVI_VAL_MULTI_CHANNEL flag  property is set, the IVI engine maintains a separate cache value for each  channel.
     '''
     current_source = attributes.AttributeViReal64(1150025)
     '''Type: float
@@ -169,14 +169,14 @@ class _SessionBase(object):
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
 
-    This attribute indicates the Driver Setup string that the user specified when  initializing the driver.
+    This property indicates the Driver Setup string that the user specified when  initializing the driver.
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
-    If the user does not specify a Driver Setup string, this attribute returns  an empty string.
+    If the user does not specify a Driver Setup string, this property returns  an empty string.
     '''
     freq_voltage_autorange = attributes.AttributeViReal64(1150044)
     '''Type: float
 
-    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  freq_voltage_range.
+    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  freq_voltage_range.
     '''
     freq_voltage_range = attributes.AttributeViReal64(1250101)
     '''Type: float
@@ -186,9 +186,9 @@ class _SessionBase(object):
     function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Function, 1250001)
     '''Type: enums.Function
 
-    Specifies the measurement function.
-    Refer to the function topic in  the NI Digital Multimeters Help for device-specific information.
-    If you are setting this attribute directly, you must also set the operation_mode attribute,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming attributes directly, you must set the operation_mode attribute before  setting other configuration attributes. If the operation_mode attribute is set to OperationMode.WAVEFORM,  the only valid function types are Function.WAVEFORM_VOLTAGE and Function.WAVEFORM_CURRENT. Set the  operation_mode attribute to OperationMode.IVIDMM to set all other function values.
+    Specifies the measurement method.
+    Refer to the method topic in  the NI Digital Multimeters Help for device-specific information.
+    If you are setting this property directly, you must also set the operation_mode property,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming properties directly, you must set the operation_mode property before  setting other configuration properties. If the operation_mode property is set to OperationMode.WAVEFORM,  the only valid method types are Method.WAVEFORM_VOLTAGE and Method.WAVEFORM_CURRENT. Set the  operation_mode property to OperationMode.IVIDMM to set all other method values.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
     '''Type: str
@@ -224,13 +224,13 @@ class _SessionBase(object):
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
-    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM functions.
-    The default value is VI_FALSE.
+    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
+    The default value is False.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call GetNextInterchangeWarning  to extract interchange warnings.  Call ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when an property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
@@ -287,29 +287,29 @@ class _SessionBase(object):
     '''Type: float
 
     For the NI 4072 only, specifies the active part (conductance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through configure_measurement_digits  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     open_cable_comp_susceptance = attributes.AttributeViReal64(1150048)
     '''Type: float
 
     For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through configure_measurement_digits  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     operation_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OperationMode, 1150014)
     '''Type: enums.OperationMode
 
-    Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  configure_measurement_digits, NI-DMM sets this attribute to OperationMode.IVIDMM.  When you call configure_waveform_acquisition, NI-DMM sets this attribute to OperationMode.WAVEFORM.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
+    Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  configure_measurement_digits, NI-DMM sets this property to OperationMode.IVIDMM.  When you call configure_waveform_acquisition, NI-DMM sets this property to OperationMode.WAVEFORM.  If you are programming properties directly, you must set this property before  setting other configuration properties.
     '''
     powerline_freq = attributes.AttributeViReal64(1250333)
     '''Type: float
 
-    Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the aperture_time  attribute in powerline cycles (PLCs).
-    After configuring powerline frequency, set the aperture_time_units attribute to PLCs.  When setting the aperture_time attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
+    Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the aperture_time  property in powerline cycles (PLCs).
+    After configuring powerline frequency, set the aperture_time_units property to PLCs.  When setting the aperture_time property, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
     '''
     range = attributes.AttributeViReal64(1250002)
     '''Type: float
 
-    Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the function attribute. For  example, if function is set to NIDMM_VAL_VOLTS, the units are  volts.
+    Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the method property. For  example, if method is set to NIDMM_VAL_VOLTS, the units are  volts.
     The NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.
     NIDMM_VAL_AUTO_RANGE_ON -1.0
     NI-DMM performs an Auto Range before acquiring the measurement.
@@ -324,29 +324,29 @@ class _SessionBase(object):
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
-    Specifies whether to validate attribute values and function parameters. If  enabled, the instrument driver validates the parameter values passed to  driver functions. Range checking parameters is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable range checking and maximize performance.
-    The default value is VI_TRUE (1). Use the _init_with_options function to  override this value.
+    Specifies whether to validate property values and method parameters. If  enabled, the instrument driver validates the parameter values passed to  driver methods. Range checking parameters is very useful for debugging.  After the user program is validated, this property can be set to False (0) to  disable range checking and maximize performance.
+    The default value is True (1). Use the _init_with_options method to  override this value.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
-    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
-    The default value is VI_FALSE (0). Use the _init_with_options function to  override this value.
+    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 properties. Call GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
+    The default value is False (0). Use the _init_with_options method to  override this value.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     resolution_absolute = attributes.AttributeViReal64(1250008)
     '''Type: float
 
-    Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
-    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average attribute.
+    Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
+    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
     resolution_digits = attributes.AttributeViReal64(1250003)
     '''Type: float
 
-    Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
-    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average attribute.
+    Specifies the measurement resolution in digits. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
+    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
     sample_count = attributes.AttributeViInt32(1250301)
     '''Type: int
@@ -356,9 +356,9 @@ class _SessionBase(object):
     sample_interval = attributes.AttributeViReal64TimeDeltaSeconds(1250303)
     '''Type: datetime.timedelta
 
-    Specifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the sample_trigger attribute is set to INTERVAL.
-    On the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
-    The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.
+    Specifies the amount of time in seconds the DMM waits between measurement cycles.  This property only applies when the sample_trigger property is set to INTERVAL.
+    On the NI 4060, the value for this property is used as the settling time.  When this property is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
+    The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.
     Only positive values are valid when setting the sample interval.
     The NI 4050 is not supported.
     '''
@@ -376,12 +376,12 @@ class _SessionBase(object):
     serial_number = attributes.AttributeViString(1150054)
     '''Type: str
 
-    A string containing the serial number of the instrument. This attribute corresponds  to the serial number label that is attached to most products.
+    A string containing the serial number of the instrument. This property corresponds  to the serial number label that is attached to most products.
     '''
     settle_time = attributes.AttributeViReal64TimeDeltaSeconds(1150028)
     '''Type: datetime.timedelta
 
-    Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
+    Specifies the settling time in seconds. To override the default settling time,  set this property. To return to the default, set this property to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
 
     Note:
@@ -391,26 +391,26 @@ class _SessionBase(object):
     '''Type: float
 
     For the NI 4072 only, represents the reactive part (reactance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through configure_measurement_digits  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     short_cable_comp_resistance = attributes.AttributeViReal64(1150047)
     '''Type: float
 
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through configure_measurement_digits  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     shunt_value = attributes.AttributeViReal64(1150003)
     '''Type: float
 
     For the NI 4050 only, specifies the shunt resistance value.
-    The NI 4050 requires an external shunt resistor for current measurements.  This attribute should be set to the value of shunt resistor.
+    The NI 4050 requires an external shunt resistor for current measurements.  This property should be set to the value of shunt resistor.
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver functions perform range checking and  call IVI Get and Set functions, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver functions return calculated values.
-    The default value is VI_FALSE (0). Use the _init_with_options function to  override this setting.
-    Simulate can only be set within the InitWithOptions function.  The attribute value cannot be changed outside of the function.
+    Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
+    The default value is False (0). Use the _init_with_options method to  override this setting.
+    Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -529,17 +529,17 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the number of triggers the DMM receives before returning to the  Idle state.
-    This attribute can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
-    The NI 4050 and NI 4060 support this attribute being set to 1.
+    This property can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
+    The NI 4050 and NI 4060 support this property being set to 1.
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
     '''
     trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250005)
     '''Type: datetime.timedelta
 
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
-    The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
-    On the NI 4060, if this attribute is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.
-    When using the NI 4050, this attribute must be set to AUTO DELAY (-1).
+    The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
+    On the NI 4060, if this property is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.
+    When using the NI 4050, this property must be set to AUTO DELAY (-1).
     Use positive values to set the trigger delay in seconds.
     Valid Range: NIDMM_VAL_AUTO_DELAY (-1.0), 0.0-12.0 seconds (NI 4060 only)
     Default Value: NIDMM_VAL_AUTO_DELAY
@@ -555,8 +555,8 @@ class _SessionBase(object):
     trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250004)
     '''Type: enums.TriggerSource
 
-    Specifies the trigger source. When _initiate is called, the DMM waits  for the trigger specified with this attribute. After it receives the trigger,  the DMM waits the length of time specified with the trigger_delay  attribute. The DMM then takes a measurement.
-    This attribute is not supported on the NI 4050.
+    Specifies the trigger source. When _initiate is called, the DMM waits  for the trigger specified with this property. After it receives the trigger,  the DMM waits the length of time specified with the trigger_delay  property. The DMM then takes a measurement.
+    This property is not supported on the NI 4050.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     waveform_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaveformCoupling, 1150027)
@@ -621,15 +621,15 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        Queries the value of a ViBoolean attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
+        Queries the value of a ViBoolean property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
@@ -641,11 +641,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (bool): Returns the current value of the attribute. Pass the address of a
+            attribute_value (bool): Returns the current value of the property. Pass the address of a
                 ViBoolean variable.
 
         '''
@@ -660,15 +660,15 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        Queries the value of a ViInt32 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
+        Queries the value of a ViInt32 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
@@ -680,11 +680,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (int): Returns the current value of the attribute. Pass the address of a
+            attribute_value (int): Returns the current value of the property. Pass the address of a
                 ViInt32 variable.
 
         '''
@@ -699,15 +699,15 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        Queries the value of a ViReal64 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
+        Queries the value of a ViReal64 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
@@ -719,11 +719,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
 
         Returns:
-            attribute_value (float): Returns the current value of the attribute. Pass the address of a
+            attribute_value (float): Returns the current value of the property. Pass the address of a
                 ViReal64 variable.
 
         '''
@@ -738,15 +738,15 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        Queries the value of a ViString attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
+        Queries the value of a ViString property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid.
            You must provide a ViChar array to serve as a buffer for the value.
            You pass the number of bytes in the buffer as the Array Size
@@ -761,7 +761,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -781,9 +781,9 @@ class _SessionBase(object):
         '''_get_error
 
         Returns the error information associated with the
-        **Instrument_Handle**. This function retrieves and then clears the
+        **Instrument_Handle**. This method retrieves and then clears the
         error information for the session. If you leave the
-        **Instrument_Handle** unwired, this function retrieves and then clears
+        **Instrument_Handle** unwired, this method retrieves and then clears
         the error information for the process.
 
         Returns:
@@ -807,31 +807,31 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        This function sets the value of a ViBoolean attribute.
+        This method sets the value of a ViBoolean property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid
            or is different than the value you specify.
 
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
+        This instrument driver contains high-level methods that set most of
+        the instrument properties. It is best to use the high-level driver
+        methods as much as possible. They handle order dependencies and
         multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
+        only after setting all of the properties.
 
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        In contrast, when you set multiple properties using the SetAttribute
+        methods, the methods check the instrument status after each call.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -842,9 +842,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (bool): Pass the value that you want to set the attribute to.
+            attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -858,31 +858,31 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        This function sets the value of a ViInt32 attribute.
+        This method sets the value of a ViInt32 property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid
            or is different than the value you specify.
 
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
+        This instrument driver contains high-level methods that set most of
+        the instrument properties. It is best to use the high-level driver
+        methods as much as possible. They handle order dependencies and
         multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
+        only after setting all of the properties.
 
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        In contrast, when you set multiple properties using the SetAttribute
+        methods, the methods check the instrument status after each call.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -893,9 +893,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (int): Pass the value that you want to set the attribute to.
+            attribute_value (int): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -909,31 +909,31 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        This function sets the value of a ViReal64 attribute.
+        This method sets the value of a ViReal64 property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid
            or is different than the value you specify.
 
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
+        This instrument driver contains high-level methods that set most of
+        the instrument properties. It is best to use the high-level driver
+        methods as much as possible. They handle order dependencies and
         multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
+        only after setting all of the properties.
 
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        In contrast, when you set multiple properties using the SetAttribute
+        methods, the methods check the instrument status after each call.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -944,9 +944,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (float): Pass the value that you want to set the attribute to.
+            attribute_value (float): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -960,31 +960,31 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        This function sets the value of a ViString attribute.
+        This method sets the value of a ViString property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties.
 
-        If the attribute represents an instrument state, this function performs
+        If the property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled, and the currently cached value is invalid
            or is different than the value you specify.
 
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
+        This instrument driver contains high-level methods that set most of
+        the instrument properties. It is best to use the high-level driver
+        methods as much as possible. They handle order dependencies and
         multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
+        only after setting all of the properties.
 
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
+        In contrast, when you set multiple properties using the SetAttribute
+        methods, the methods check the instrument status after each call.
+        Also, when state caching is enabled, the high-level methods that
+        configure multiple properties perform instrument I/O only for the
+        properties whose value you change. Thus, you can safely call the
+        high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -995,9 +995,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an property.
 
-            attribute_value (str): Pass the value that you want to set the attribute to.
+            attribute_value (str): Pass the value that you want to set the property to.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1011,7 +1011,7 @@ class _SessionBase(object):
     def _error_message(self, error_code):
         '''_error_message
 
-        Takes the **Error_Code** returned by the instrument driver functions,
+        Takes the **Error_Code** returned by the instrument driver methods,
         interprets it, and returns it as a user-readable string.
 
         Args:
@@ -1037,26 +1037,26 @@ class Session(_SessionBase):
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
         '''An NI-DMM session to a National Instruments Digital Multimeter
 
-        This function completes the following tasks:
+        This method completes the following tasks:
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
-           initial state of the following session attributes:
+           initial state of the following session properties:
            range_check, QUERY_INSTR_STATUS,
            cache, simulate,
            record_coercions.
         -  Opens a session to the device you specify for the **Resource_Name**
-           parameter. If the **ID_Query** parameter is set to VI_TRUE, this
-           function queries the instrument ID and checks that it is valid for
+           parameter. If the **ID_Query** parameter is set to True, this
+           method queries the instrument ID and checks that it is valid for
            this instrument driver.
-        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
+        -  If the **Reset_Device** parameter is set to True, this method
            resets the instrument to a known state. Sends initialization commands
            to set the instrument to the state necessary for the operation of the
            instrument driver.
         -  Returns a ViSession handle that you use to identify the instrument in
-           all subsequent instrument driver function calls.
+           all subsequent instrument driver method calls.
 
         Note:
-        One or more of the referenced attributes are not in the Python API for this driver.
+        One or more of the referenced properties are not in the Python API for this driver.
 
         Args:
             resource_name (str): Caution:
@@ -1085,36 +1085,36 @@ class Session(_SessionBase):
                 not necessary.
                 Defined Values:
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +----------------+---+------------------+
+                | True (default) | 1 | Perform ID Query |
+                +----------------+---+------------------+
+                | False          | 0 | Skip ID Query    |
+                +----------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset the instrument during the initialization
                 procedure.
                 Defined Values:
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +----------------+---+--------------+
+                | True (default) | 1 | Reset Device |
+                +----------------+---+--------------+
+                | False          | 0 | Don't Reset  |
+                +----------------+---+--------------+
 
-            options (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **options** is a dictionary of attributes with an assigned
+            options (str): Specifies the initial value of certain properties for the session. The
+                syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
                 { 'simulate': False }
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 
                 +-------------------------+---------+
-                | Attribute               | Default |
+                | Property                | Default |
                 +=========================+=========+
                 | range_check             | True    |
                 +-------------------------+---------+
@@ -1188,14 +1188,14 @@ class Session(_SessionBase):
         '''configure_ac_bandwidth
 
         Configures the ac_min_freq and ac_max_freq
-        attributes, which the DMM uses for AC measurements.
+        properties, which the DMM uses for AC measurements.
 
         Args:
             ac_minimum_frequency_hz (float): Specifies the minimum expected frequency component of the input signal
                 in hertz. This parameter affects the DMM only when you set the
-                function attribute to AC measurements. NI-DMM uses this
+                method property to AC measurements. NI-DMM uses this
                 parameter to calculate the proper aperture for the measurement.
-                The driver sets the ac_min_freq attribute to this value.
+                The driver sets the ac_min_freq property to this value.
                 The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
                 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
                 NI 4050 and NI 4060.
@@ -1206,8 +1206,8 @@ class Session(_SessionBase):
                 maximum frequency of the device.
 
                 This parameter affects the DMM only when you set the
-                function attribute to AC measurements. The driver sets the
-                ac_max_freq attribute to this value. The valid range is 1
+                method property to AC measurements. The driver sets the
+                ac_max_freq property to this value. The valid range is 1
                 Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
                 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
 
@@ -1222,20 +1222,20 @@ class Session(_SessionBase):
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
-        Configures the common attributes of the measurement. These attributes
-        include function, range, and
+        Configures the common properties of the measurement. These properties
+        include method, range, and
         resolution_absolute.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets function to this value.
+                The driver sets method to this value.
 
-            range (float): Specifies the **range** for the function specified in the
+            range (float): Specifies the **range** for the method specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
                 type in 100 Hz if you are measuring 101 Hz or higher.
-                For all other functions, you must supply a **range** that exceeds the
+                For all other methods, you must supply a **range** that exceeds the
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
                 **range**. Refer to the `Devices
@@ -1268,7 +1268,7 @@ class Session(_SessionBase):
                 NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
                 measurements, use the lc_number_meas_to_average
-                attribute.
+                property.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1287,20 +1287,20 @@ class Session(_SessionBase):
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
         '''configure_measurement_digits
 
-        Configures the common attributes of the measurement. These attributes
-        include function, range, and
+        Configures the common properties of the measurement. These properties
+        include method, range, and
         resolution_digits.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets function to this value.
+                The driver sets method to this value.
 
-            range (float): Specifies the range for the function specified in the
+            range (float): Specifies the range for the method specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
                 type in 100 Hz if you are measuring 101 Hz or higher.
-                For all other functions, you must supply a range that exceeds the value
+                For all other methods, you must supply a range that exceeds the value
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
                 Refer to the `Devices
@@ -1326,7 +1326,7 @@ class Session(_SessionBase):
             resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices Overview <devices>`__ for a
                 list of valid ranges. The driver sets resolution_digits
-                attribute to this value. This parameter is ignored when the **Range**
+                property to this value. This parameter is ignored when the **Range**
                 parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
                 NIDMM_VAL_AUTO_RANGE_ONCE (-3.0). The default is 5½.
 
@@ -1334,7 +1334,7 @@ class Session(_SessionBase):
                 NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
                 measurements, use the lc_number_meas_to_average
-                attribute.
+                property.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1353,7 +1353,7 @@ class Session(_SessionBase):
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
         '''configure_multi_point
 
-        Configures the attributes for multipoint measurements. These attributes
+        Configures the properties for multipoint measurements. These properties
         include trigger_count, sample_count,
         sample_trigger, and sample_interval.
 
@@ -1395,7 +1395,7 @@ class Session(_SessionBase):
                 (-1) ensures that the DMM settles for a recommended time. This is the
                 same as using an Immediate trigger.
 
-                Note: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
+                Note: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
         '''
         if type(sample_trigger) is not enums.SampleTrigger:
@@ -1414,7 +1414,7 @@ class Session(_SessionBase):
 
         For the NI 4082 and NI 4072 only, configures the
         open_cable_comp_conductance and
-        open_cable_comp_susceptance attributes.
+        open_cable_comp_susceptance properties.
 
         Args:
             conductance (float): Specifies the open cable compensation **conductance**.
@@ -1452,15 +1452,15 @@ class Session(_SessionBase):
 
         Args:
             rtd_a (float): Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the configure_rtd_type function.
+                Type parameter is set to Custom in the configure_rtd_type method.
                 The default is 3.9083e-3 (Pt3851)
 
             rtd_b (float): Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the configure_rtd_type function.
+                Type parameter is set to Custom in the configure_rtd_type method.
                 The default is -5.775e-7 (Pt3851).
 
             rtd_c (float): Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the configure_rtd_type function.
+                Type parameter is set to Custom in the configure_rtd_type method.
                 The default is -4.183e-12 (Pt3851).
 
         '''
@@ -1520,7 +1520,7 @@ class Session(_SessionBase):
 
         For the NI 4082 and NI 4072 only, configures the
         short_cable_comp_resistance and
-        short_cable_comp_reactance attributes.
+        short_cable_comp_reactance properties.
 
         Args:
             resistance (float): Specifies the short cable compensation **resistance**.
@@ -1543,24 +1543,24 @@ class Session(_SessionBase):
         Args:
             thermistor_a (float): Specifies the Steinhart-Hart A coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the ConfigureThermistorType
-                function. The default is 1.0295e-3 (44006).
+                method. The default is 1.0295e-3 (44006).
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             thermistor_b (float): Specifies the Steinhart-Hart B coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the ConfigureThermistorType
-                function. The default is 2.391e-4 (44006).
+                method. The default is 2.391e-4 (44006).
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             thermistor_c (float): Specifies the Steinhart-Hart C coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the ConfigureThermistorType
-                function. The default is 1.568e-7 (44006).
+                method. The default is 1.568e-7 (44006).
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1641,7 +1641,7 @@ class Session(_SessionBase):
 
             trigger_delay (float): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
-                trigger_delay attribute to this value. By default,
+                trigger_delay property to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
                 waits an appropriate settling time before taking the measurement. On the
                 NI 4060, if you set **trigger_delay** to 0, the DMM does not settle
@@ -1673,13 +1673,13 @@ class Session(_SessionBase):
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used in a waveform acquisition.
-                The driver sets function to this value.
+                The driver sets method to this value.
 
-                +-------------------------------------+------+------------------+
-                | Function.WAVEFORM_VOLTAGE (default) | 1003 | Voltage Waveform |
-                +-------------------------------------+------+------------------+
-                | Function.WAVEFORM_CURRENT           | 1004 | Current Waveform |
-                +-------------------------------------+------+------------------+
+                +-----------------------------------+------+------------------+
+                | Method.WAVEFORM_VOLTAGE (default) | 1003 | Voltage Waveform |
+                +-----------------------------------+------+------------------+
+                | Method.WAVEFORM_CURRENT           | 1004 | Current Waveform |
+                +-----------------------------------+------+------------------+
 
             range (float): Specifies the expected maximum amplitude of the input signal and sets
                 the **range** for the **Measurement_Function**. NI-DMM sets
@@ -1725,7 +1725,7 @@ class Session(_SessionBase):
 
         Places the instrument in a quiescent state where it has minimal or no
         impact on the system to which it is connected. If a measurement is in
-        progress when this function is called, the measurement is aborted.
+        progress when this method is called, the measurement is aborted.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Disable(vi_ctype)
@@ -1736,12 +1736,12 @@ class Session(_SessionBase):
         '''fetch
 
         Returns the value from a previously initiated measurement. You must call
-        _initiate before calling this function.
+        _initiate before calling this method.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -1772,7 +1772,7 @@ class Session(_SessionBase):
         measurement. The number of measurements the DMM makes is determined by
         the values you specify for the **Trigger_Count** and **Sample_Count**
         parameters of configure_multi_point. You must first call
-        _initiate to initiate a measurement before calling this function.
+        _initiate to initiate a measurement before calling this method.
 
         Args:
             array_size (int): Specifies the number of measurements to acquire. The maximum number of
@@ -1783,9 +1783,9 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -1824,7 +1824,7 @@ class Session(_SessionBase):
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
-        _initiate before calling this function.
+        _initiate before calling this method.
 
         Args:
             array_size (int): Specifies the number of waveform points to return. You specify the total
@@ -1832,9 +1832,9 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -1870,15 +1870,15 @@ class Session(_SessionBase):
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
-        _initiate before calling this function.
+        _initiate before calling this method.
 
         Args:
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -1925,9 +1925,9 @@ class Session(_SessionBase):
         Returns:
             aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
                 single measurement. This parameter does not include settling time.
-                Returns the value of the aperture_time attribute. The
-                units of this attribute depend on the value of the
-                aperture_time_units attribute.
+                Returns the value of the aperture_time property. The
+                units of this property depend on the value of the
+                aperture_time_units property.
                 On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
                 maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
                 within the minimum and maximum ranges is allowed on the
@@ -1946,7 +1946,7 @@ class Session(_SessionBase):
 
             aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
                 seconds. Returns the value of the aperture_time_units
-                attribute.
+                property.
 
                 +-------------------------------------+---+------------------+
                 | ApertureTimeUnits.SECONDS           | 0 | Seconds          |
@@ -1970,8 +1970,8 @@ class Session(_SessionBase):
 
         Returns:
             actual_range (float): Indicates the **actual_range** the DMM is using. Returns the value of
-                the auto_range_value attribute. The units of the returned
-                value depend on the function.
+                the auto_range_value property. The units of the returned
+                value depend on the method.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2077,13 +2077,16 @@ class Session(_SessionBase):
         Args:
             cal_type (int): Specifies the type of calibration performed (external or self-calibration).
 
-                +--------------------------------------+---+----------------------+
-                | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
-                +--------------------------------------+---+----------------------+
-                | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
-                +--------------------------------------+---+----------------------+
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
+                +-----------------------------------+---+----------------------+
+                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
+                +-----------------------------------+---+----------------------+
 
                 Note: The NI 4065 does not support self-calibration.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         Returns:
@@ -2132,15 +2135,15 @@ class Session(_SessionBase):
 
         Returns the measurement **Period**, which is the amount of time it takes
         to complete one measurement with the current configuration. Use this
-        function right before you begin acquiring data—after you have completely
-        configured the measurement and after all configuration functions have
+        method right before you begin acquiring data—after you have completely
+        configured the measurement and after all configuration methods have
         been called.
 
         Returns:
             period (float): Returns the number of seconds it takes to make one measurement.
 
                 The first measurement in a multipoint acquisition requires additional
-                settling time. This function does not include this additional time or
+                settling time. This method does not include this additional time or
                 any trigger_delay associated with the first measurement.
                 Time required for internal measurements, such as
                 auto_zero, is included.
@@ -2162,11 +2165,11 @@ class Session(_SessionBase):
             self_cal_supported (bool): Returns whether Self Cal is supported for the device specified by the
                 given session.
 
-                +----------+---+-------------------------------------------------------------+
-                | VI_TRUE  | 1 | The DMM that you are using can perform self-calibration.    |
-                +----------+---+-------------------------------------------------------------+
-                | VI_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
-                +----------+---+-------------------------------------------------------------+
+                +-------+---+-------------------------------------------------------------+
+                | True  | 1 | The DMM that you are using can perform self-calibration.    |
+                +-------+---+-------------------------------------------------------------+
+                | False | 0 | The DMM that you are using cannot perform self-calibration. |
+                +-------+---+-------------------------------------------------------------+
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2178,26 +2181,26 @@ class Session(_SessionBase):
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 
-        This function completes the following tasks:
+        This method completes the following tasks:
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
-           initial state of the following session attributes:
+           initial state of the following session properties:
            range_check, QUERY_INSTR_STATUS,
            cache, simulate,
            record_coercions.
         -  Opens a session to the device you specify for the **Resource_Name**
-           parameter. If the **ID_Query** parameter is set to VI_TRUE, this
-           function queries the instrument ID and checks that it is valid for
+           parameter. If the **ID_Query** parameter is set to True, this
+           method queries the instrument ID and checks that it is valid for
            this instrument driver.
-        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
+        -  If the **Reset_Device** parameter is set to True, this method
            resets the instrument to a known state. Sends initialization commands
            to set the instrument to the state necessary for the operation of the
            instrument driver.
         -  Returns a ViSession handle that you use to identify the instrument in
-           all subsequent instrument driver function calls.
+           all subsequent instrument driver method calls.
 
         Note:
-        One or more of the referenced attributes are not in the Python API for this driver.
+        One or more of the referenced properties are not in the Python API for this driver.
 
         Args:
             resource_name (str): Caution:
@@ -2226,33 +2229,33 @@ class Session(_SessionBase):
                 not necessary.
                 Defined Values:
 
-                +-------------------+---+------------------+
-                | VI_TRUE (default) | 1 | Perform ID Query |
-                +-------------------+---+------------------+
-                | VI_FALSE          | 0 | Skip ID Query    |
-                +-------------------+---+------------------+
+                +----------------+---+------------------+
+                | True (default) | 1 | Perform ID Query |
+                +----------------+---+------------------+
+                | False          | 0 | Skip ID Query    |
+                +----------------+---+------------------+
 
             reset_device (bool): Specifies whether to reset the instrument during the initialization
                 procedure.
                 Defined Values:
 
-                +-------------------+---+--------------+
-                | VI_TRUE (default) | 1 | Reset Device |
-                +-------------------+---+--------------+
-                | VI_FALSE          | 0 | Don't Reset  |
-                +-------------------+---+--------------+
+                +----------------+---+--------------+
+                | True (default) | 1 | Reset Device |
+                +----------------+---+--------------+
+                | False          | 0 | Don't Reset  |
+                +----------------+---+--------------+
 
-            option_string (str): | Sets the initial value of certain attributes for the session. The
-                  following table specifies the attribute name, attribute constant, and
-                  default value for each attribute that you can use in this parameter:
+            option_string (str): | Sets the initial value of certain properties for the session. The
+                  following table specifies the property name, property constant, and
+                  default value for each property that you can use in this parameter:
 
                 The format of this string is, "AttributeName=Value." To set multiple
-                attributes, separate their assignments with a comma.
+                properties, separate their assignments with a comma.
 
                 If you pass NULL or an empty string for this parameter, the session uses
-                the default values for the attributes. You can override the default
+                the default values for the properties. You can override the default
                 values by assigning a value explicitly in an **option_string**
-                parameter. You do not have to specify all of the attributes and may
+                parameter. You do not have to specify all of the properties and may
                 leave any of them out (those left out use the default value).
 
                 Refer to `Simulating NI Digital
@@ -2260,26 +2263,26 @@ class Session(_SessionBase):
                 information.
 
                 +------------------+--------------------+-------------------+----+
-                | Check            | range_check        | VI_TRUE           | 1  |
+                | Check            | range_check        | True              | 1  |
                 +------------------+--------------------+-------------------+----+
-                | QueryInstrStatus | QUERY_INSTR_STATUS | VI_FALSE          | 0  |
+                | QueryInstrStatus | QUERY_INSTR_STATUS | False             | 0  |
                 +------------------+--------------------+-------------------+----+
-                | Cache            | cache              | VI_TRUE           | 1  |
+                | Cache            | cache              | True              | 1  |
                 +------------------+--------------------+-------------------+----+
-                | Simulate         | simulate           | VI_FALSE          | 0  |
+                | Simulate         | simulate           | False             | 0  |
                 +------------------+--------------------+-------------------+----+
-                | RecordCoercions  | record_coercions   | VI_FALSE          | 0  |
+                | RecordCoercions  | record_coercions   | False             | 0  |
                 +------------------+--------------------+-------------------+----+
                 | DriverSetup      | driver_setup       | "" (empty string) | "" |
                 +------------------+--------------------+-------------------+----+
 
                 Note:
-                One or more of the referenced attributes are not in the Python API for this driver.
+                One or more of the referenced properties are not in the Python API for this driver.
 
 
         Returns:
             vi (int): Returns a ViSession handle that you use to identify the instrument in
-                all subsequent instrument driver function calls.
+                all subsequent instrument driver method calls.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -2294,7 +2297,7 @@ class Session(_SessionBase):
     def _initiate(self):
         '''_initiate
 
-        Initiates an acquisition. After you call this function, the DMM leaves
+        Initiates an acquisition. After you call this method, the DMM leaves
         the Idle state and enters the Wait-for-Trigger state. If trigger is set
         to Immediate mode, the DMM begins acquiring measurement data. Use
         fetch, fetch_multi_point, or fetch_waveform to
@@ -2311,12 +2314,12 @@ class Session(_SessionBase):
         For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
-        can use the return values of this function as inputs to
+        can use the return values of this method as inputs to
         configure_open_cable_comp_values.
 
-        This function returns an error if the value of the function
-        attribute is not set to Function.CAPACITANCE (1005) or
-        Function.INDUCTANCE (1006).
+        This method returns an error if the value of the method
+        property is not set to Method.CAPACITANCE (1005) or
+        Method.INDUCTANCE (1006).
 
         Returns:
             conductance (float): **conductance** is the measured value of open cable compensation
@@ -2339,11 +2342,11 @@ class Session(_SessionBase):
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
-        of this function as inputs to configure_short_cable_comp_values.
+        of this method as inputs to configure_short_cable_comp_values.
 
-        This function returns an error if the value of the function
-        attribute is not set to Function.CAPACITANCE (1005) or
-        Function.INDUCTANCE (1006).
+        This method returns an error if the value of the method
+        property is not set to Method.CAPACITANCE (1005) or
+        Method.INDUCTANCE (1006).
 
         Returns:
             resistance (float): **resistance** is the measured value of short cable compensation
@@ -2366,9 +2369,9 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -2409,9 +2412,9 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -2448,7 +2451,7 @@ class Session(_SessionBase):
     def read_status(self):
         '''read_status
 
-        Returns measurement backlog and acquisition status. Use this function to
+        Returns measurement backlog and acquisition status. Use this method to
         determine how many measurements are available before calling
         fetch, fetch_multi_point, or fetch_waveform.
 
@@ -2504,9 +2507,9 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
-                milliseconds. If the function does not complete within this time
-                interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+                milliseconds. If the method does not complete within this time
+                interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
                 received, or if the specified timeout is not long enough for the
                 acquisition to complete.
@@ -2560,8 +2563,8 @@ class Session(_SessionBase):
         self-calibration routine to maintain measurement accuracy.
 
         Note:
-        This function calls reset, and any configurations previous to
-        the call will be lost. All attributes will be set to their default
+        This method calls reset, and any configurations previous to
+        the call will be lost. All properties will be set to their default
         values after the call returns.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2572,12 +2575,12 @@ class Session(_SessionBase):
     def send_software_trigger(self):
         '''send_software_trigger
 
-        Sends a command to trigger the DMM. Call this function if you have
+        Sends a command to trigger the DMM. Call this method if you have
         configured either the trigger_source or
-        sample_trigger attributes. If the
+        sample_trigger properties. If the
         trigger_source and/or sample_trigger
-        attributes are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL\ *n*, you
-        can use this function to override the trigger source that you configured
+        properties are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL\ *n*, you
+        can use this method to override the trigger source that you configured
         and trigger the device. The NI 4050 and NI 4060 are not supported.
 
         Note:
@@ -2617,8 +2620,8 @@ class Session(_SessionBase):
         properly. Self-test does not calibrate the DMM.
 
         Note:
-        This function calls reset, and any configurations previous to
-        the call will be lost. All attributes will be set to their default
+        This method calls reset, and any configurations previous to
+        the call will be lost. All properties will be set to their default
         values after the call returns.
 
         Returns:

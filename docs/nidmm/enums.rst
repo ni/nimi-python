@@ -122,7 +122,7 @@ Enums used in NI-DMM
 
 
 
-        The drivers chooses the AutoZero setting based on the configured function  and resolution.
+        The drivers chooses the AutoZero setting based on the configured method  and resolution.
 
         
 
@@ -208,7 +208,7 @@ Enums used in NI-DMM
 
 
 
-        The driver chooses the DC noise rejection setting based on the configured  function and resolution.
+        The driver chooses the DC noise rejection setting based on the configured  method and resolution.
 
         
 
@@ -228,7 +228,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.
+        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing method.
 
         
 
@@ -238,7 +238,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.
+        NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing method.
 
         
 
@@ -404,7 +404,7 @@ Enums used in NI-DMM
 
 
 
-        NI-DMM chooses the algorithm based on function and range
+        NI-DMM chooses the algorithm based on method and range
 
         
 

@@ -15,7 +15,7 @@ nidmm.Session methods
 .. py:method:: configure_ac_bandwidth(ac_minimum_frequency_hz, ac_maximum_frequency_hz)
 
     Configures the :py:data:`nidmm.Session.ac_min_freq` and :py:data:`nidmm.Session.ac_max_freq`
-    attributes, which the DMM uses for AC measurements.
+    properties, which the DMM uses for AC measurements.
 
     
 
@@ -26,9 +26,9 @@ nidmm.Session methods
 
         Specifies the minimum expected frequency component of the input signal
         in hertz. This parameter affects the DMM only when you set the
-        :py:data:`nidmm.Session.function` attribute to AC measurements. NI-DMM uses this
+        :py:data:`nidmm.Session.method` property to AC measurements. NI-DMM uses this
         parameter to calculate the proper aperture for the measurement.
-        The driver sets the :py:data:`nidmm.Session.ac_min_freq` attribute to this value.
+        The driver sets the :py:data:`nidmm.Session.ac_min_freq` property to this value.
         The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
         4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
         NI 4050 and NI 4060.
@@ -46,8 +46,8 @@ nidmm.Session methods
         maximum frequency of the device.
 
         This parameter affects the DMM only when you set the
-        :py:data:`nidmm.Session.function` attribute to AC measurements. The driver sets the
-        :py:data:`nidmm.Session.ac_max_freq` attribute to this value. The valid range is 1
+        :py:data:`nidmm.Session.method` property to AC measurements. The driver sets the
+        :py:data:`nidmm.Session.ac_max_freq` property to this value. The valid range is 1
         Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
         Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
 
@@ -58,8 +58,8 @@ nidmm.Session methods
 
 .. py:method:: configure_measurement_absolute(measurement_function, range, resolution_absolute)
 
-    Configures the common attributes of the measurement. These attributes
-    include :py:data:`nidmm.Session.function`, :py:data:`nidmm.Session.range`, and
+    Configures the common properties of the measurement. These properties
+    include :py:data:`nidmm.Session.method`, :py:data:`nidmm.Session.range`, and
     :py:data:`nidmm.Session.resolution_absolute`.
 
     
@@ -70,7 +70,7 @@ nidmm.Session methods
 
 
         Specifies the **measurement_function** used to acquire the measurement.
-        The driver sets :py:data:`nidmm.Session.function` to this value.
+        The driver sets :py:data:`nidmm.Session.method` to this value.
 
         
 
@@ -79,12 +79,12 @@ nidmm.Session methods
     :param range:
 
 
-        Specifies the **range** for the function specified in the
+        Specifies the **range** for the method specified in the
         **Measurement_Function** parameter. When frequency is specified in the
         **Measurement_Function** parameter, you must supply the minimum
         frequency expected in the **range** parameter. For example, you must
         type in 100 Hz if you are measuring 101 Hz or higher.
-        For all other functions, you must supply a **range** that exceeds the
+        For all other methods, you must supply a **range** that exceeds the
         value that you are measuring. For example, you must type in 10 V if you
         are measuring 9 V. **range** values are coerced up to the closest input
         **range**. Refer to the `Devices
@@ -121,7 +121,7 @@ nidmm.Session methods
         .. note:: NI-DMM ignores this parameter for capacitance and inductance
             measurements on the NI 4072. To achieve better resolution for such
             measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average`
-            attribute.
+            property.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -130,8 +130,8 @@ nidmm.Session methods
 
 .. py:method:: configure_measurement_digits(measurement_function, range, resolution_digits)
 
-    Configures the common attributes of the measurement. These attributes
-    include :py:data:`nidmm.Session.function`, :py:data:`nidmm.Session.range`, and
+    Configures the common properties of the measurement. These properties
+    include :py:data:`nidmm.Session.method`, :py:data:`nidmm.Session.range`, and
     :py:data:`nidmm.Session.resolution_digits`.
 
     
@@ -142,7 +142,7 @@ nidmm.Session methods
 
 
         Specifies the **measurement_function** used to acquire the measurement.
-        The driver sets :py:data:`nidmm.Session.function` to this value.
+        The driver sets :py:data:`nidmm.Session.method` to this value.
 
         
 
@@ -151,12 +151,12 @@ nidmm.Session methods
     :param range:
 
 
-        Specifies the range for the function specified in the
+        Specifies the range for the method specified in the
         **Measurement_Function** parameter. When frequency is specified in the
         **Measurement_Function** parameter, you must supply the minimum
         frequency expected in the **range** parameter. For example, you must
         type in 100 Hz if you are measuring 101 Hz or higher.
-        For all other functions, you must supply a range that exceeds the value
+        For all other methods, you must supply a range that exceeds the value
         that you are measuring. For example, you must type in 10 V if you are
         measuring 9 V. range values are coerced up to the closest input range.
         Refer to the `Devices
@@ -185,7 +185,7 @@ nidmm.Session methods
         Specifies the resolution of the measurement in digits. The driver sets
         the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
         list of valid ranges. The driver sets :py:data:`nidmm.Session.resolution_digits`
-        attribute to this value. This parameter is ignored when the **Range**
+        property to this value. This parameter is ignored when the **Range**
         parameter is set to :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or
         :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` (-3.0). The default is 5½.
 
@@ -194,7 +194,7 @@ nidmm.Session methods
         .. note:: NI-DMM ignores this parameter for capacitance and inductance
             measurements on the NI 4072. To achieve better resolution for such
             measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average`
-            attribute.
+            property.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -203,7 +203,7 @@ nidmm.Session methods
 
 .. py:method:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval='datetime.timedelta(seconds=-1)')
 
-    Configures the attributes for multipoint measurements. These attributes
+    Configures the properties for multipoint measurements. These properties
     include :py:data:`nidmm.Session.trigger_count`, :py:data:`nidmm.Session.sample_count`,
     :py:data:`nidmm.Session.sample_trigger`, and :py:data:`nidmm.Session.sample_interval`.
 
@@ -273,7 +273,7 @@ nidmm.Session methods
 
         
 
-        .. note:: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
+        .. note:: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
 
     :type sample_interval: float
@@ -282,7 +282,7 @@ nidmm.Session methods
 
     For the NI 4082 and NI 4072 only, configures the
     :py:data:`nidmm.Session.open_cable_comp_conductance` and
-    :py:data:`nidmm.Session.open_cable_comp_susceptance` attributes.
+    :py:data:`nidmm.Session.open_cable_comp_susceptance` properties.
 
     
 
@@ -338,7 +338,7 @@ nidmm.Session methods
 
 
         Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` function.
+        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` method.
         The default is 3.9083e-3 (Pt3851)
 
         
@@ -349,7 +349,7 @@ nidmm.Session methods
 
 
         Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` function.
+        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` method.
         The default is -5.775e-7 (Pt3851).
 
         
@@ -360,7 +360,7 @@ nidmm.Session methods
 
 
         Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` function.
+        Type parameter is set to Custom in the :py:meth:`nidmm.Session.configure_rtd_type` method.
         The default is -4.183e-12 (Pt3851).
 
         
@@ -420,7 +420,7 @@ nidmm.Session methods
 
     For the NI 4082 and NI 4072 only, configures the
     :py:data:`nidmm.Session.short_cable_comp_resistance` and
-    :py:data:`nidmm.Session.short_cable_comp_reactance` attributes.
+    :py:data:`nidmm.Session.short_cable_comp_reactance` properties.
 
     
 
@@ -458,11 +458,11 @@ nidmm.Session methods
 
         Specifies the Steinhart-Hart A coefficient for thermistor scaling when
         Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
-        function. The default is 1.0295e-3 (44006).
+        method. The default is 1.0295e-3 (44006).
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     :type thermistor_a: float
@@ -471,11 +471,11 @@ nidmm.Session methods
 
         Specifies the Steinhart-Hart B coefficient for thermistor scaling when
         Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
-        function. The default is 2.391e-4 (44006).
+        method. The default is 2.391e-4 (44006).
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     :type thermistor_b: float
@@ -484,11 +484,11 @@ nidmm.Session methods
 
         Specifies the Steinhart-Hart C coefficient for thermistor scaling when
         Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
-        function. The default is 1.568e-7 (44006).
+        method. The default is 1.568e-7 (44006).
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     :type thermistor_c: float
@@ -576,7 +576,7 @@ nidmm.Session methods
 
         Specifies the time that the DMM waits after it has received a trigger
         before taking a measurement. The driver sets the
-        :py:data:`nidmm.Session.trigger_delay` attribute to this value. By default,
+        :py:data:`nidmm.Session.trigger_delay` property to this value. By default,
         **trigger_delay** is :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY` (-1), which means the DMM
         waits an appropriate settling time before taking the measurement. On the
         NI 4060, if you set **trigger_delay** to 0, the DMM does not settle
@@ -606,13 +606,13 @@ nidmm.Session methods
 
 
         Specifies the **measurement_function** used in a waveform acquisition.
-        The driver sets :py:data:`nidmm.Session.function` to this value.
+        The driver sets :py:data:`nidmm.Session.method` to this value.
 
-        +-------------------------------------------------------+------+------------------+
-        | :py:data:`~nidmm.Function.WAVEFORM_VOLTAGE` (default) | 1003 | Voltage Waveform |
-        +-------------------------------------------------------+------+------------------+
-        | :py:data:`~nidmm.Function.WAVEFORM_CURRENT`           | 1004 | Current Waveform |
-        +-------------------------------------------------------+------+------------------+
+        +-----------------------------------------------------+------+------------------+
+        | :py:data:`~nidmm.Method.WAVEFORM_VOLTAGE` (default) | 1003 | Voltage Waveform |
+        +-----------------------------------------------------+------+------------------+
+        | :py:data:`~nidmm.Method.WAVEFORM_CURRENT`           | 1004 | Current Waveform |
+        +-----------------------------------------------------+------+------------------+
 
 
     :type measurement_function: :py:data:`nidmm.Function`
@@ -669,7 +669,7 @@ nidmm.Session methods
 
     Places the instrument in a quiescent state where it has minimal or no
     impact on the system to which it is connected. If a measurement is in
-    progress when this function is called, the measurement is aborted.
+    progress when this method is called, the measurement is aborted.
 
     
 
@@ -678,7 +678,7 @@ nidmm.Session methods
 .. py:method:: fetch(maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Returns the value from a previously initiated measurement. You must call
-    :py:meth:`nidmm.Session._initiate` before calling this function.
+    :py:meth:`nidmm.Session._initiate` before calling this method.
 
     
 
@@ -687,9 +687,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -721,7 +721,7 @@ nidmm.Session methods
     measurement. The number of measurements the DMM makes is determined by
     the values you specify for the **Trigger_Count** and **Sample_Count**
     parameters of :py:meth:`nidmm.Session.configure_multi_point`. You must first call
-    :py:meth:`nidmm.Session._initiate` to initiate a measurement before calling this function.
+    :py:meth:`nidmm.Session._initiate` to initiate a measurement before calling this method.
 
     
 
@@ -745,9 +745,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -791,7 +791,7 @@ nidmm.Session methods
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
-    :py:meth:`nidmm.Session._initiate` before calling this function.
+    :py:meth:`nidmm.Session._initiate` before calling this method.
 
     
 
@@ -812,9 +812,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -856,7 +856,7 @@ nidmm.Session methods
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
-    :py:meth:`nidmm.Session._initiate` before calling this function.
+    :py:meth:`nidmm.Session._initiate` before calling this method.
 
     
 
@@ -875,9 +875,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -932,9 +932,9 @@ nidmm.Session methods
 
             Specifies the amount of time the DMM digitizes the input signal for a
             single measurement. This parameter does not include settling time.
-            Returns the value of the :py:data:`nidmm.Session.aperture_time` attribute. The
-            units of this attribute depend on the value of the
-            :py:data:`nidmm.Session.aperture_time_units` attribute.
+            Returns the value of the :py:data:`nidmm.Session.aperture_time` property. The
+            units of this property depend on the value of the
+            :py:data:`nidmm.Session.aperture_time_units` property.
             On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
             maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
             within the minimum and maximum ranges is allowed on the
@@ -959,7 +959,7 @@ nidmm.Session methods
 
             Indicates the units of aperture time as powerline cycles (PLCs) or
             seconds. Returns the value of the :py:data:`nidmm.Session.aperture_time_units`
-            attribute.
+            property.
 
             +-------------------------------------------------------+---+------------------+
             | :py:data:`~nidmm.ApertureTimeUnits.SECONDS`           | 0 | Seconds          |
@@ -983,8 +983,8 @@ nidmm.Session methods
 
 
             Indicates the **actual_range** the DMM is using. Returns the value of
-            the :py:data:`nidmm.Session.auto_range_value` attribute. The units of the returned
-            value depend on the function.
+            the :py:data:`nidmm.Session.auto_range_value` property. The units of the returned
+            value depend on the method.
 
             
 
@@ -1005,13 +1005,15 @@ nidmm.Session methods
 
         Specifies the type of calibration performed (external or self-calibration).
 
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
-        +--------------------------------------+---+----------------------+
+        +-----------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.NIDMM_VAL_INTERNAL_AREA` (default) | 0 | Self-Calibration     |
+        +-----------------------------------------------------+---+----------------------+
+        | :py:data:`~nidmm.NIDMM_VAL_EXTERNAL_AREA`           | 1 | External Calibration |
+        +-----------------------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type cal_type: int
@@ -1121,8 +1123,8 @@ nidmm.Session methods
 
     Returns the measurement **Period**, which is the amount of time it takes
     to complete one measurement with the current configuration. Use this
-    function right before you begin acquiring data—after you have completely
-    configured the measurement and after all configuration functions have
+    method right before you begin acquiring data—after you have completely
+    configured the measurement and after all configuration methods have
     been called.
 
     
@@ -1136,7 +1138,7 @@ nidmm.Session methods
             Returns the number of seconds it takes to make one measurement.
 
             The first measurement in a multipoint acquisition requires additional
-            settling time. This function does not include this additional time or
+            settling time. This method does not include this additional time or
             any :py:data:`nidmm.Session.trigger_delay` associated with the first measurement.
             Time required for internal measurements, such as
             :py:data:`nidmm.Session.auto_zero`, is included.
@@ -1161,11 +1163,11 @@ nidmm.Session methods
             Returns whether Self Cal is supported for the device specified by the
             given session.
 
-            +----------+---+-------------------------------------------------------------+
-            | VI_TRUE  | 1 | The DMM that you are using can perform self-calibration.    |
-            +----------+---+-------------------------------------------------------------+
-            | VI_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
-            +----------+---+-------------------------------------------------------------+
+            +-------+---+-------------------------------------------------------------+
+            | True  | 1 | The DMM that you are using can perform self-calibration.    |
+            +-------+---+-------------------------------------------------------------+
+            | False | 0 | The DMM that you are using cannot perform self-calibration. |
+            +-------+---+-------------------------------------------------------------+
 
 
 
@@ -1174,12 +1176,12 @@ nidmm.Session methods
     For the NI 4082 and NI 4072 only, performs the open cable compensation
     measurements for the current capacitance/inductance range, and returns
     open cable compensation **Conductance** and **Susceptance** values. You
-    can use the return values of this function as inputs to
+    can use the return values of this method as inputs to
     :py:meth:`nidmm.Session.configure_open_cable_comp_values`.
 
-    This function returns an error if the value of the :py:data:`nidmm.Session.function`
-    attribute is not set to :py:data:`~nidmm.Function.CAPACITANCE` (1005) or
-    :py:data:`~nidmm.Function.INDUCTANCE` (1006).
+    This method returns an error if the value of the :py:data:`nidmm.Session.method`
+    property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
+    :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
     
 
@@ -1213,11 +1215,11 @@ nidmm.Session methods
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
     **Resistance** and **Reactance** values. You can use the return values
-    of this function as inputs to :py:meth:`nidmm.Session.configure_short_cable_comp_values`.
+    of this method as inputs to :py:meth:`nidmm.Session.configure_short_cable_comp_values`.
 
-    This function returns an error if the value of the :py:data:`nidmm.Session.function`
-    attribute is not set to :py:data:`~nidmm.Function.CAPACITANCE` (1005) or
-    :py:data:`~nidmm.Function.INDUCTANCE` (1006).
+    This method returns an error if the value of the :py:data:`nidmm.Session.method`
+    property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
+    :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
     
 
@@ -1257,9 +1259,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -1314,9 +1316,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -1358,7 +1360,7 @@ nidmm.Session methods
 
 .. py:method:: read_status()
 
-    Returns measurement backlog and acquisition status. Use this function to
+    Returns measurement backlog and acquisition status. Use this method to
     determine how many measurements are available before calling
     :py:meth:`nidmm.Session.fetch`, :py:meth:`nidmm.Session.fetch_multi_point`, or :py:meth:`nidmm.Session.fetch_waveform`.
 
@@ -1435,9 +1437,9 @@ nidmm.Session methods
     :param maximum_time:
 
 
-        Specifies the **maximum_time** allowed for this function to complete in
-        milliseconds. If the function does not complete within this time
-        interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
+        Specifies the **maximum_time** allowed for this method to complete in
+        milliseconds. If the method does not complete within this time
+        interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
         error code. This may happen if an external trigger has not been
         received, or if the specified timeout is not long enough for the
         acquisition to complete.
@@ -1505,8 +1507,8 @@ nidmm.Session methods
 
     
 
-    .. note:: This function calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
-        the call will be lost. All attributes will be set to their default
+    .. note:: This method calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
+        the call will be lost. All properties will be set to their default
         values after the call returns.
 
 
@@ -1518,8 +1520,8 @@ nidmm.Session methods
 
     
 
-    .. note:: This function calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
-        the call will be lost. All attributes will be set to their default
+    .. note:: This method calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
+        the call will be lost. All properties will be set to their default
         values after the call returns.
 
 
@@ -1569,12 +1571,12 @@ nidmm.Session methods
 
 .. py:method:: send_software_trigger()
 
-    Sends a command to trigger the DMM. Call this function if you have
+    Sends a command to trigger the DMM. Call this method if you have
     configured either the :py:data:`nidmm.Session.trigger_source` or
-    :py:data:`nidmm.Session.sample_trigger` attributes. If the
+    :py:data:`nidmm.Session.sample_trigger` properties. If the
     :py:data:`nidmm.Session.trigger_source` and/or :py:data:`nidmm.Session.sample_trigger`
-    attributes are set to :py:data:`~nidmm.NIDMM_VAL_EXTERNAL` or :py:data:`~nidmm.NIDMM_VAL_TTL`\ *n*, you
-    can use this function to override the trigger source that you configured
+    properties are set to :py:data:`~nidmm.NIDMM_VAL_EXTERNAL` or :py:data:`~nidmm.NIDMM_VAL_TTL`\ *n*, you
+    can use this method to override the trigger source that you configured
     and trigger the device. The NI 4050 and NI 4060 are not supported.
 
     

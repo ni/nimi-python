@@ -288,7 +288,7 @@ Enums used in NI-DCPower
 
 
 
-        Acquires a measurement when the :py:meth:`nidcpower.Session.measure` function or :py:meth:`nidcpower.Session.measure_multiple` function is called.
+        Acquires a measurement when the :py:meth:`nidcpower.Session.measure` method or :py:meth:`nidcpower.Session.measure_multiple` method is called.
 
         
 
@@ -357,7 +357,7 @@ Enums used in NI-DCPower
 
 
 
-        Sets the output function to DC voltage.
+        Sets the output method to DC voltage.
 
         
 
@@ -367,7 +367,7 @@ Enums used in NI-DCPower
 
 
 
-        Sets the output function to DC current.
+        Sets the output method to DC current.
 
         
 
@@ -377,7 +377,7 @@ Enums used in NI-DCPower
 
 
 
-        Sets the output function to pulse voltage.
+        Sets the output method to pulse voltage.
 
         
 
@@ -387,7 +387,7 @@ Enums used in NI-DCPower
 
 
 
-        Sets the output function to pulse current.
+        Sets the output method to pulse current.
 
         
 

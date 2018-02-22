@@ -292,7 +292,7 @@ class TriggerInput(Enum):
     '''
     SOFTWARE_TRIG = 3
     '''
-    The switch device waits until you call the send_software_trigger  function before processing the next entry in the scan list.
+    The switch device waits until you call the send_software_trigger  method before processing the next entry in the scan list.
     '''
     TTL0 = 111
     '''

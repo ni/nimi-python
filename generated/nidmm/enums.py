@@ -55,7 +55,7 @@ class ApertureTimeUnits(Enum):
 class AutoZero(Enum):
     AUTO = -1
     '''
-    The drivers chooses the AutoZero setting based on the configured function  and resolution.
+    The drivers chooses the AutoZero setting based on the configured method  and resolution.
     '''
     OFF = 0
     '''
@@ -93,7 +93,7 @@ class CableCompensationType(Enum):
 class DCNoiseRejection(Enum):
     AUTO = -1
     '''
-    The driver chooses the DC noise rejection setting based on the configured  function and resolution.
+    The driver chooses the DC noise rejection setting based on the configured  method and resolution.
     '''
     NORMAL = 0
     '''
@@ -101,11 +101,11 @@ class DCNoiseRejection(Enum):
     '''
     SECOND_ORDER = 1
     '''
-    NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.
+    NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing method.
     '''
     HIGH_ORDER = 2
     '''
-    NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.
+    NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing method.
     '''
 
 
@@ -175,7 +175,7 @@ class Function(Enum):
 class LCCalculationModel(Enum):
     AUTO = -1
     '''
-    NI-DMM chooses the algorithm based on function and range
+    NI-DMM chooses the algorithm based on method and range
     '''
     SERIES = 0
     '''

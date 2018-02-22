@@ -635,7 +635,7 @@ Enums used in NI-SWITCH
 
 
 
-        The switch device waits until you call the :py:meth:`niswitch.Session.send_software_trigger`  function before processing the next entry in the scan list.
+        The switch device waits until you call the :py:meth:`niswitch.Session.send_software_trigger`  method before processing the next entry in the scan list.
 
         
 

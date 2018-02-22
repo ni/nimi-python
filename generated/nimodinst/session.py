@@ -46,7 +46,7 @@ class _Device(object):
         '''
         self.chassis_number = AttributeViInt32(owner, 11, index=index)
         '''
-        The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+        The number of the chassis in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
         '''
         self.device_model = AttributeViString(owner, 1, index=index)
         '''
@@ -70,7 +70,7 @@ class _Device(object):
         '''
         self.slot_number = AttributeViInt32(owner, 10, index=index)
         '''
-        The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+        The slot (for example, in a PXI chassis) in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
         '''
         self.socket_number = AttributeViInt32(owner, 13, index=index)
         '''
@@ -216,7 +216,7 @@ class Session(object):
         '''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
-        niModInst\_OpenInstalledDevicesSession. Call this function when you are
+        _open_installed_devices_session. Call this method when you are
         finished using the session handle and do not use this handle again.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case S110
@@ -228,19 +228,19 @@ class Session(object):
         '''_get_extended_error_info
 
         Returns detailed information about the last error that occurred in the
-        current thread during a call to one of the NI-ModInst functions. When
-        one of the other functions returns a negative value as its return value,
-        immediately call this function to get detailed information about the
+        current thread during a call to one of the NI-ModInst methods. When
+        one of the other methods returns a negative value as its return value,
+        immediately call this method to get detailed information about the
         error. Because error information is stored on a thread-by-thread basis,
-        be sure to call this function in the same thread that called the
-        function that returned an error. The extended error information is
+        be sure to call this method in the same thread that called the
+        method that returned an error. The extended error information is
         returned as a string. To find out the length of the error information
-        string before you allocate a buffer for it, call this function and pass
+        string before you allocate a buffer for it, call this method and pass
         0 as the errorInfoBufferSize parameter or NULL as the errorInfo
-        parameter. When you do this, the function returns the size of the buffer
+        parameter. When you do this, the method returns the size of the buffer
         required to hold the error information string as its return value. You
         can then allocate an appropriately sized string character buffer and
-        call this function again.
+        call this method again.
         '''
         error_info_buffer_size_ctype = visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
@@ -255,36 +255,36 @@ class Session(object):
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         '''_get_installed_device_attribute_vi_int32
 
-        Returns an integer attribute specified by the attributeID parameter for
+        Returns an integer property specified by the attributeID parameter for
         a device specified by the handle and index parameters. The handle
         parameter is expected to be a valid handle returned by
-        niModInst\_OpenInstalledDevicesSession. It therefore acts as a handle to
+        _open_installed_devices_session. It therefore acts as a handle to
         a list of installed devices. The index parameter specifies the device in
-        the list for which you want the attribute.
+        the list for which you want the property.
 
         Args:
             index (int): A zero-based index that specifies the device for which you want the
-                attribute. This index parameter should be between 0 and (deviceCount -
+                property. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
-                returned by niModInst\_OpenInstalledDevicesSession.
+                returned by _open_installed_devices_session.
 
-            attribute_id (int): The ID of the integer attribute you want to query. Valid Values Slot
+            attribute_id (int): The ID of the integer property you want to query. Valid Values Slot
                 Number--the slot (for example, in a PXI chassis) in which the device is
-                installed. This attribute can only be queried for PXI devices installed
+                installed. This property can only be queried for PXI devices installed
                 in a chassis that has been properly identified in MAX. Chassis
                 Number--the number of the chassis in which the device is installed. This
-                attribute can only be queried for PXI devices installed in a chassis
+                property can only be queried for PXI devices installed in a chassis
                 that has been properly identified in MAX. Bus Number--the bus on which
                 the device has been enumerated. Socket Number--the socket number on
                 which the device has been enumerated. Notes The bus number and socket
                 number can be used to form a VISA resource string for this device, of
                 the form "PXI::::INSTR". Traditional NI-DAQ devices do not support the
-                chassis number, bus number, and socket number attributes.
+                chassis number, bus number, and socket number properties.
 
 
         Returns:
             attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
-                the requested attribute.
+                the requested property.
 
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case S110
@@ -298,30 +298,30 @@ class Session(object):
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
         '''_get_installed_device_attribute_vi_string
 
-        Returns a string attribute specified by the attributeID parameter for a
+        Returns a string property specified by the attributeID parameter for a
         device specified by the handle and index parameters. The handle
         parameter is expected to be a valid handle returned by
-        niModInst\_OpenInstalledDevicesSession. Therefore, it acts as a handle
+        _open_installed_devices_session. Therefore, it acts as a handle
         to a list of installed devices. The index parameter specifies for which
-        device in the list you want the attribute. To find out the length of the
+        device in the list you want the property. To find out the length of the
         device name string before you allocate a buffer for it, simply call this
-        function and pass 0 as the attributeValueBufferSize parameter or NULL as
-        the attributeValue parameter. When you do this, the function returns the
-        size of the buffer required to hold the attribute value string as its
+        method and pass 0 as the attributeValueBufferSize parameter or NULL as
+        the attributeValue parameter. When you do this, the method returns the
+        size of the buffer required to hold the property value string as its
         return value. You can then allocate an appropriately sized character
-        buffer and call this function again.
+        buffer and call this method again.
 
         Args:
             index (int): A zero-based index that specifies the device for which you want the
-                attribute. This index parameter should be between 0 and (deviceCount -
+                property. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
-                returned by niModInst\_OpenInstalledDevicesSession.
+                returned by _open_installed_devices_session.
 
-            attribute_id (int): The ID of the string attribute you want to query. Valid Values
-                NIMODINST\_ATTR\_DEVICE\_NAME--the name of the device, which can be used
+            attribute_id (int): The ID of the string property you want to query. Valid Values
+                device_name--the name of the device, which can be used
                 to open an instrument driver session for that device
-                NIMODINST\_ATTR\_DEVICE\_MODEL--the model of the device (for example, NI
-                PXI-5122) NIMODINST\_ATTR\_SERIAL\_NUMBER--the serial number of the
+                device_model--the model of the device (for example, NI
+                PXI-5122) serial_number--the serial number of the
                 device
 
         '''
@@ -342,19 +342,19 @@ class Session(object):
         '''_open_installed_devices_session
 
         Creates a handle to a list of installed devices supported by the
-        specified driver. Call this function and pass in the name of a National
-        Instruments instrument driver, such as "NI-SCOPE". This function
+        specified driver. Call this method and pass in the name of a National
+        Instruments instrument driver, such as "NI-SCOPE". This method
         searches the system and constructs a list of all the installed devices
         that are supported by that driver, and then returns both a handle to
         this list and the number of devices found. The handle is used with other
-        functions to query for attributes such as device name and model, and to
+        methods to query for properties such as device name and model, and to
         safely discard the list when finished. Note This handle reflects the
         system state when the handle is created (that is, when you call this
-        function. If you remove devices from the system or rename them in
+        method. If you remove devices from the system or rename them in
         Measurement & Automation Explorer (MAX), this handle may not refer to an
         accurate list of devices. You should destroy the handle using
-        niModInst\_CloseInstalledDevicesSession and create a new handle using
-        this function.
+        _close_installed_devices_session and create a new handle using
+        this method.
 
         Args:
             driver (str): A string specifying the driver whose supported devices you want to find.
@@ -367,7 +367,7 @@ class Session(object):
         Returns:
             handle (int): A pointer to a ViSession variable that receives the value of the
                 NI-ModInst session handle. This value acts as a handle to the list of
-                installed devices and is used in other NI-ModInst functions.
+                installed devices and is used in other NI-ModInst methods.
 
             device_count (int): A pointer to an integer variable that receives the number of devices
                 found in the system that are supported by the driver specified in the

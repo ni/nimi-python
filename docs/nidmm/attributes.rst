@@ -5,7 +5,7 @@ nidmm.Session properties
 
 .. py:attribute:: ac_max_freq
 
-    Specifies the maximum frequency component of the input signal for AC  measurements. This attribute is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This attribute affects the DMM only when you set the   :py:data:`nidmm.Session.function` attribute to AC measurements.
+    Specifies the maximum frequency component of the input signal for AC  measurements. This property is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This property affects the DMM only when you set the   :py:data:`nidmm.Session.method` property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 
     The following table lists the characteristics of this property.
@@ -30,7 +30,7 @@ nidmm.Session properties
 
 .. py:attribute:: ac_min_freq
 
-    Specifies the minimum frequency component of the input signal for AC  measurements. This attribute affects the DMM only when you set the  :py:data:`nidmm.Session.function` attribute to AC measurements.
+    Specifies the minimum frequency component of the input signal for AC  measurements. This property affects the DMM only when you set the  :py:data:`nidmm.Session.method` property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 
     The following table lists the characteristics of this property.
@@ -79,14 +79,14 @@ nidmm.Session properties
 
 .. py:attribute:: aperture_time
 
-    Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by :py:data:`nidmm.Session.aperture_time_units`. To  override the default aperture, set this attribute to the desired  aperture time after calling :py:meth:`nidmm.Session.ConfigureMeasurement`. To return to the  default, set this attribute to :py:data:`~nidmm.NIDMM_VAL_APERTURE_TIME_AUTO` (-1).
+    Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by :py:data:`nidmm.Session.aperture_time_units`. To  override the default aperture, set this property to the desired  aperture time after calling :py:meth:`nidmm.Session.ConfigureMeasurement`. To return to the  default, set this property to :py:data:`~nidmm.NIDMM_VAL_APERTURE_TIME_AUTO` (-1).
     On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
     On the NI 4065 the minimum aperture time is 333 µs, and the maximum aperture time  is 78.2 s. If setting the number of averages directly, the total measurement time is  aperture time X the number of averages, which must be less than 72.8 s. The aperture  times allowed are 333 µs, 667 µs, or multiples of 1.11 ms-for example 1.11 ms, 2.22 ms,  3.33 ms, and so on. If you set an aperture time other than 333 µs, 667 µs, or multiples  of 1.11 ms, the value will be coerced up to the next supported aperture time.
     On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed are  1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50 Hz, the  PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
 
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -137,7 +137,7 @@ nidmm.Session properties
 
 .. py:attribute:: auto_range_value
 
-    Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this attribute is set during a read operation.
+    Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this property is set during a read operation.
 
     The following table lists the characteristics of this property.
 
@@ -215,7 +215,7 @@ nidmm.Session properties
 .. py:attribute:: cable_comp_type
 
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
-    Changing the function or the range through this attribute or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -239,7 +239,7 @@ nidmm.Session properties
 
 .. py:attribute:: cache
 
-    Specifies whether to cache the value of attributes. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular attributes regardless of the setting of this  attribute. The default value is VI_TRUE (1). Use the :py:meth:`nidmm.Session._init_with_options`  function to override this value.
+    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the :py:meth:`nidmm.Session._init_with_options`  method to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -263,7 +263,7 @@ nidmm.Session properties
 
 .. py:attribute:: channel_count
 
-    Indicates the number of channels that the specific instrument driver  supports. For each attribute for which the IVI_VAL_MULTI_CHANNEL flag  attribute is set, the IVI engine maintains a separate cache value for each  channel.
+    Indicates the number of channels that the specific instrument driver  supports. For each property for which the IVI_VAL_MULTI_CHANNEL flag  property is set, the IVI engine maintains a separate cache value for each  channel.
 
     The following table lists the characteristics of this property.
 
@@ -361,9 +361,9 @@ nidmm.Session properties
 
 .. py:attribute:: driver_setup
 
-    This attribute indicates the Driver Setup string that the user specified when  initializing the driver.
+    This property indicates the Driver Setup string that the user specified when  initializing the driver.
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
-    If the user does not specify a Driver Setup string, this attribute returns  an empty string.
+    If the user does not specify a Driver Setup string, this property returns  an empty string.
 
     The following table lists the characteristics of this property.
 
@@ -387,7 +387,7 @@ nidmm.Session properties
 
 .. py:attribute:: freq_voltage_autorange
 
-    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this attribute is the same as that of  :py:data:`nidmm.Session.freq_voltage_range`.
+    For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  :py:data:`nidmm.Session.freq_voltage_range`.
 
     The following table lists the characteristics of this property.
 
@@ -435,9 +435,9 @@ nidmm.Session properties
 
 .. py:attribute:: function
 
-    Specifies the measurement function.
-    Refer to the :py:data:`nidmm.Session.function` topic in  the NI Digital Multimeters Help for device-specific information.
-    If you are setting this attribute directly, you must also set the :py:data:`nidmm.Session.operation_mode` attribute,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming attributes directly, you must set the :py:data:`nidmm.Session.operation_mode` attribute before  setting other configuration attributes. If the :py:data:`nidmm.Session.operation_mode` attribute is set to :py:data:`~nidmm.OperationMode.WAVEFORM`,  the only valid function types are :py:data:`~nidmm.Function.WAVEFORM_VOLTAGE` and :py:data:`~nidmm.Function.WAVEFORM_CURRENT`. Set the  :py:data:`nidmm.Session.operation_mode` attribute to :py:data:`~nidmm.OperationMode.IVIDMM` to set all other function values.
+    Specifies the measurement method.
+    Refer to the :py:data:`nidmm.Session.method` topic in  the NI Digital Multimeters Help for device-specific information.
+    If you are setting this property directly, you must also set the :py:data:`nidmm.Session.operation_mode` property,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming properties directly, you must set the :py:data:`nidmm.Session.operation_mode` property before  setting other configuration properties. If the :py:data:`nidmm.Session.operation_mode` property is set to :py:data:`~nidmm.OperationMode.WAVEFORM`,  the only valid method types are :py:data:`~nidmm.Method.WAVEFORM_VOLTAGE` and :py:data:`~nidmm.Method.WAVEFORM_CURRENT`. Set the  :py:data:`nidmm.Session.operation_mode` property to :py:data:`~nidmm.OperationMode.IVIDMM` to set all other method values.
 
     The following table lists the characteristics of this property.
 
@@ -606,14 +606,14 @@ nidmm.Session properties
 
 .. py:attribute:: interchange_check
 
-    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM functions.
-    The default value is VI_FALSE.
+    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
+    The default value is False.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call :py:meth:`nidmm.Session.GetNextInterchangeWarning`  to extract interchange warnings.  Call :py:meth:`nidmm.Session.ClearInterchangeWarnings`  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the attributes in a capability group  only if you specify a value for at least one attribute within that group.   Interchangeability warnings can occur when an attribute affects the behavior  of the instrument and you have not set that attribute, or the attribute has  been invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when an property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
 
 
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -861,7 +861,7 @@ nidmm.Session properties
 .. py:attribute:: open_cable_comp_conductance
 
     For the NI 4072 only, specifies the active part (conductance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -886,7 +886,7 @@ nidmm.Session properties
 .. py:attribute:: open_cable_comp_susceptance
 
     For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -910,7 +910,7 @@ nidmm.Session properties
 
 .. py:attribute:: operation_mode
 
-    Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  :py:meth:`nidmm.Session.configure_measurement_digits`, NI-DMM sets this attribute to :py:data:`~nidmm.OperationMode.IVIDMM`.  When you call :py:meth:`nidmm.Session.configure_waveform_acquisition`, NI-DMM sets this attribute to :py:data:`~nidmm.OperationMode.WAVEFORM`.  If you are programming attributes directly, you must set this attribute before  setting other configuration attributes.
+    Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  :py:meth:`nidmm.Session.configure_measurement_digits`, NI-DMM sets this property to :py:data:`~nidmm.OperationMode.IVIDMM`.  When you call :py:meth:`nidmm.Session.configure_waveform_acquisition`, NI-DMM sets this property to :py:data:`~nidmm.OperationMode.WAVEFORM`.  If you are programming properties directly, you must set this property before  setting other configuration properties.
 
     The following table lists the characteristics of this property.
 
@@ -934,8 +934,8 @@ nidmm.Session properties
 
 .. py:attribute:: powerline_freq
 
-    Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the :py:data:`nidmm.Session.aperture_time`  attribute in powerline cycles (PLCs).
-    After configuring powerline frequency, set the :py:data:`nidmm.Session.aperture_time_units` attribute to PLCs.  When setting the :py:data:`nidmm.Session.aperture_time` attribute, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
+    Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the :py:data:`nidmm.Session.aperture_time`  property in powerline cycles (PLCs).
+    After configuring powerline frequency, set the :py:data:`nidmm.Session.aperture_time_units` property to PLCs.  When setting the :py:data:`nidmm.Session.aperture_time` property, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
 
     The following table lists the characteristics of this property.
 
@@ -959,7 +959,7 @@ nidmm.Session properties
 
 .. py:attribute:: range
 
-    Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the :py:data:`nidmm.Session.function` attribute. For  example, if :py:data:`nidmm.Session.function` is set to :py:data:`~nidmm.NIDMM_VAL_VOLTS`, the units are  volts.
+    Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the :py:data:`nidmm.Session.method` property. For  example, if :py:data:`nidmm.Session.method` is set to :py:data:`~nidmm.NIDMM_VAL_VOLTS`, the units are  volts.
     The NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.
     :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` -1.0
     NI-DMM performs an Auto Range before acquiring the measurement.
@@ -994,8 +994,8 @@ nidmm.Session properties
 
 .. py:attribute:: range_check
 
-    Specifies whether to validate attribute values and function parameters. If  enabled, the instrument driver validates the parameter values passed to  driver functions. Range checking parameters is very useful for debugging.  After the user program is validated, this attribute can be set to VI_FALSE (0) to  disable range checking and maximize performance.
-    The default value is VI_TRUE (1). Use the :py:meth:`nidmm.Session._init_with_options` function to  override this value.
+    Specifies whether to validate property values and method parameters. If  enabled, the instrument driver validates the parameter values passed to  driver methods. Range checking parameters is very useful for debugging.  After the user program is validated, this property can be set to False (0) to  disable range checking and maximize performance.
+    The default value is True (1). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this value.
 
     The following table lists the characteristics of this property.
 
@@ -1019,12 +1019,12 @@ nidmm.Session properties
 
 .. py:attribute:: record_coercions
 
-    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 attributes. Call :py:meth:`nidmm.Session.GetNextCoercionRecord` to extract  and delete the oldest coercion record from the list.
-    The default value is VI_FALSE (0). Use the :py:meth:`nidmm.Session._init_with_options` function to  override this value.
+    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 properties. Call :py:meth:`nidmm.Session.GetNextCoercionRecord` to extract  and delete the oldest coercion record from the list.
+    The default value is False (0). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this value.
 
 
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1048,8 +1048,8 @@ nidmm.Session properties
 
 .. py:attribute:: resolution_absolute
 
-    Specifies the measurement resolution in absolute units. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
-    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average` attribute.
+    Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
+    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average` property.
 
     The following table lists the characteristics of this property.
 
@@ -1073,8 +1073,8 @@ nidmm.Session properties
 
 .. py:attribute:: resolution_digits
 
-    Specifies the measurement resolution in digits. Setting this  attribute to higher values increases the measurement accuracy. Setting this  attribute to lower values increases the measurement speed.
-    NI-DMM ignores this attribute for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average` attribute.
+    Specifies the measurement resolution in digits. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
+    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the :py:data:`nidmm.Session.lc_number_meas_to_average` property.
 
     The following table lists the characteristics of this property.
 
@@ -1122,9 +1122,9 @@ nidmm.Session properties
 
 .. py:attribute:: sample_interval
 
-    Specifies the amount of time in seconds the DMM waits between measurement cycles.  This attribute only applies when the :py:data:`nidmm.Session.sample_trigger` attribute is set to INTERVAL.
-    On the NI 4060, the value for this attribute is used as the settling time.  When this attribute is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
-    The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.
+    Specifies the amount of time in seconds the DMM waits between measurement cycles.  This property only applies when the :py:data:`nidmm.Session.sample_trigger` property is set to INTERVAL.
+    On the NI 4060, the value for this property is used as the settling time.  When this property is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
+    The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional  delay. On the NI 4065 and NI 4070/4071/4072, the onboard timing resolution is 34.72 ns and  the valid range is 0-149 s.
     Only positive values are valid when setting the sample interval.
     The NI 4050 is not supported.
 
@@ -1199,7 +1199,7 @@ nidmm.Session properties
 
 .. py:attribute:: serial_number
 
-    A string containing the serial number of the instrument. This attribute corresponds  to the serial number label that is attached to most products.
+    A string containing the serial number of the instrument. This property corresponds  to the serial number label that is attached to most products.
 
     The following table lists the characteristics of this property.
 
@@ -1223,7 +1223,7 @@ nidmm.Session properties
 
 .. py:attribute:: settle_time
 
-    Specifies the settling time in seconds. To override the default settling time,  set this attribute. To return to the default, set this attribute to  :py:data:`~nidmm.NIDMM_VAL_SETTLE_TIME_AUTO` (-1).
+    Specifies the settling time in seconds. To override the default settling time,  set this property. To return to the default, set this property to  :py:data:`~nidmm.NIDMM_VAL_SETTLE_TIME_AUTO` (-1).
     The NI 4050 and NI 4060 are not supported.
 
 
@@ -1253,7 +1253,7 @@ nidmm.Session properties
 .. py:attribute:: short_cable_comp_reactance
 
     For the NI 4072 only, represents the reactive part (reactance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1278,7 +1278,7 @@ nidmm.Session properties
 .. py:attribute:: short_cable_comp_resistance
 
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
-    Changing the function or the range through this attribute or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this attribute to the default value.
+    Changing the method or the range through this property or through :py:meth:`nidmm.Session.configure_measurement_digits`  resets the value of this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1303,7 +1303,7 @@ nidmm.Session properties
 .. py:attribute:: shunt_value
 
     For the NI 4050 only, specifies the shunt resistance value.
-    The NI 4050 requires an external shunt resistor for current measurements.  This attribute should be set to the value of shunt resistor.
+    The NI 4050 requires an external shunt resistor for current measurements.  This property should be set to the value of shunt resistor.
 
     The following table lists the characteristics of this property.
 
@@ -1327,9 +1327,9 @@ nidmm.Session properties
 
 .. py:attribute:: simulate
 
-    Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver functions perform range checking and  call IVI Get and Set functions, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver functions return calculated values.
-    The default value is VI_FALSE (0). Use the :py:meth:`nidmm.Session._init_with_options` function to  override this setting.
-    Simulate can only be set within the InitWithOptions function.  The attribute value cannot be changed outside of the function.
+    Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
+    The default value is False (0). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this setting.
+    Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
 
     The following table lists the characteristics of this property.
 
@@ -1868,8 +1868,8 @@ nidmm.Session properties
 .. py:attribute:: trigger_count
 
     Specifies the number of triggers the DMM receives before returning to the  Idle state.
-    This attribute can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
-    The NI 4050 and NI 4060 support this attribute being set to 1.
+    This property can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
+    The NI 4050 and NI 4060 support this property being set to 1.
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
 
     The following table lists the characteristics of this property.
@@ -1895,9 +1895,9 @@ nidmm.Session properties
 .. py:attribute:: trigger_delay
 
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
-    The NI 4065 and NI 4070/4071/4072 use the value specified in this attribute as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
-    On the NI 4060, if this attribute is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.
-    When using the NI 4050, this attribute must be set to AUTO DELAY (-1).
+    The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
+    On the NI 4060, if this property is set to 0, the DMM does not settle before taking the measurement.  On the NI 4060, the valid range for AUTO DELAY (-1) is 0.0-12.0 seconds and the onboard timing resolution  is 100 ms.
+    When using the NI 4050, this property must be set to AUTO DELAY (-1).
     Use positive values to set the trigger delay in seconds.
     Valid Range: :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY` (-1.0), 0.0-12.0 seconds (NI 4060 only)
     Default Value: :py:data:`~nidmm.NIDMM_VAL_AUTO_DELAY`
@@ -1952,8 +1952,8 @@ nidmm.Session properties
 
 .. py:attribute:: trigger_source
 
-    Specifies the trigger source. When :py:meth:`nidmm.Session._initiate` is called, the DMM waits  for the trigger specified with this attribute. After it receives the trigger,  the DMM waits the length of time specified with the :py:data:`nidmm.Session.trigger_delay`  attribute. The DMM then takes a measurement.
-    This attribute is not supported on the NI 4050.
+    Specifies the trigger source. When :py:meth:`nidmm.Session._initiate` is called, the DMM waits  for the trigger specified with this property. After it receives the trigger,  the DMM waits the length of time specified with the :py:data:`nidmm.Session.trigger_delay`  property. The DMM then takes a measurement.
+    This property is not supported on the NI 4050.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
 
     The following table lists the characteristics of this property.

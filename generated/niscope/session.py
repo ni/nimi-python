@@ -186,7 +186,7 @@ class _SessionBase(object):
     allow_more_records_than_memory = attributes.AttributeViBoolean(1150068)
     '''Type: bool
 
-    Indicates whether more records can be configured with configure_horizontal_timing  than fit in the onboard memory. If this attribute is set to VI_TRUE, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch function  if you attempt to fetch a record that has been overwritten.
+    Indicates whether more records can be configured with configure_horizontal_timing  than fit in the onboard memory. If this property is set to True, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch method  if you attempt to fetch a record that has been overwritten.
     '''
     arm_ref_trig_src = attributes.AttributeViString(1150095)
     '''Type: str
@@ -215,17 +215,17 @@ class _SessionBase(object):
     binary_sample_width = attributes.AttributeViInt32(1150005)
     '''Type: int
 
-    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch function to use. Compare to resolution.
-    To configure the device to store samples with a lower resolution that the native, set this attribute to the desired binary width.
+    Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch method to use. Compare to resolution.
+    To configure the device to store samples with a lower resolution that the native, set this property to the desired binary width.
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
-    Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
-    The instrument driver can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use _init_with_options  to override this value.
+    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
+    The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
+    The default value is True.   Use _init_with_options  to override this value.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -238,8 +238,8 @@ class _SessionBase(object):
 
     Specifies whether the digitizer acquires a waveform for the channel.
     Valid Values:
-    VI_TRUE  (1) - Acquire data on this channel
-    VI_FALSE (0) - Don't acquire data on this channel
+    True  (1) - Acquire data on this channel
+    False (0) - Don't acquire data on this channel
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -312,7 +312,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
-    Default Value: VI_FALSE
+    Default Value: False
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -327,7 +327,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Enables/disables frequency translating the data around the user-selected center  frequency down to baseband.
-    Default Value: VI_TRUE
+    Default Value: True
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -356,7 +356,7 @@ class _SessionBase(object):
     ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
     '''Type: float
 
-    The Q center frequency phase in degrees at the first point of the acquisition.  Use this attribute only when ddc_data_processing_mode is set to Complex.
+    The Q center frequency phase in degrees at the first point of the acquisition.  Use this property only when ddc_data_processing_mode is set to Complex.
     Default Value: 90
 
     Tip:
@@ -372,7 +372,7 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the channel that is the input of the Q path of the DDC.
-    Default Value: The channel that the attribute is configured off of.
+    Default Value: The channel that the property is configured off of.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -443,25 +443,25 @@ class _SessionBase(object):
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
 
-    This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
+    This property indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  _init_with_options, or through the IVI Configuration Utility.
-    If the user does not specify a Driver Setup string, this attribute returns an empty string.
+    If the user does not specify a Driver Setup string, this property returns an empty string.
     '''
     enable_dc_restore = attributes.AttributeViBoolean(1150093)
     '''Type: bool
 
     Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point.
     Valid Values:
-    VI_TRUE - Enable DC restore
-    VI_FALSE - Disable DC restore
+    True - Enable DC restore
+    False - Disable DC restore
     '''
     enable_time_interleaved_sampling = attributes.AttributeViBoolean(1150128)
     '''Type: bool
 
     Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
     Valid Values:
-    VI_TRUE  (1) - Use multiple interleaved ADCs on this channel
-    VI_FALSE (0) - Use only this channel's ADC to acquire data for this channel
+    True  (1) - Use multiple interleaved ADCs on this channel
+    False (0) - Use only this channel's ADC to acquire data for this channel
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -544,13 +544,13 @@ class _SessionBase(object):
     fetch_interleaved_data = attributes.AttributeViBoolean(1150072)
     '''Type: bool
 
-    Set to VI_TRUE to retrieve one array with alternating values on the NI 5620/5621.  For example, this attribute can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to VI_TRUE, the resulting array will be twice the size of the actual record length.
+    Set to True to retrieve one array with alternating values on the NI 5620/5621.  For example, this property can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to True, the resulting array will be twice the size of the actual record length.
     '''
     fetch_interleaved_iq_data = attributes.AttributeViBoolean(1150311)
     '''Type: bool
 
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  _fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
-    Default Value: VI_TRUE
+    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  _fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+    Default Value: True
     '''
     fetch_meas_num_samples = attributes.AttributeViInt32(1150081)
     '''Type: int
@@ -586,7 +586,7 @@ class _SessionBase(object):
     '''Type: enums.FlexFIRAntialiasFilterType
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
-    Use this attribute to select from several types of filters to achieve desired filtering characteristics.
+    Use this property to select from several types of filters to achieve desired filtering characteristics.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -645,18 +645,18 @@ class _SessionBase(object):
     '''Type: int
 
     Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  horz_min_num_pts.
-    Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch functions. This attribute is only valid after a call to the one of the  Configure Horizontal functions.
+    Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch methods. This property is only valid after a call to the one of the  Configure Horizontal methods.
     '''
     horz_record_ref_position = attributes.AttributeViReal64(1250011)
     '''Type: float
 
-    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  trigger_delay_time attribute specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  trigger_delay_time property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
     horz_sample_rate = attributes.AttributeViReal64(1250010)
     '''Type: float
 
-    Returns the effective sample rate using the current configuration. The units are samples per second.  This attribute is only valid after a call to the one of the Configure Horizontal functions.
+    Returns the effective sample rate using the current configuration. The units are samples per second.  This property is only valid after a call to the one of the Configure Horizontal methods.
     Units: Hertz (Samples / Second)
     '''
     horz_time_per_record = attributes.AttributeViReal64TimeDeltaSeconds(1250007)
@@ -702,7 +702,7 @@ class _SessionBase(object):
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
-    NI-SCOPE does not generate interchange warnings and therefore ignores this attribute.
+    NI-SCOPE does not generate interchange warnings and therefore ignores this property.
     '''
     interleaving_offset_correction_enabled = attributes.AttributeViBoolean(1150376)
     '''Type: bool
@@ -718,11 +718,11 @@ class _SessionBase(object):
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
 
-    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this attribute contains that  value.You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
@@ -730,12 +730,12 @@ class _SessionBase(object):
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     master_enable = attributes.AttributeViBoolean(1150008)
     '''Type: bool
 
-    Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
+    Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this property to False.
     '''
     max_input_frequency = attributes.AttributeViReal64(1250006)
     '''Type: float
@@ -810,11 +810,11 @@ class _SessionBase(object):
     meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
     '''Type: float
 
-    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based attributes such as MEAS_HIGH_REF if you use  this attribute to set various channels to different values.
+    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based properties such as MEAS_HIGH_REF if you use  this property to set various channels to different values.
     Default: 90%
 
     Note:
-    One or more of the referenced attributes are not in the Python API for this driver.
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -828,11 +828,11 @@ class _SessionBase(object):
     meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
     '''Type: float
 
-    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_LOW_REF if you use this attribute to set various channels to different values.
+    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_LOW_REF if you use this property to set various channels to different values.
     Default: 10%
 
     Note:
-    One or more of the referenced attributes are not in the Python API for this driver.
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -846,11 +846,11 @@ class _SessionBase(object):
     meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
     '''Type: float
 
-    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based attributes such as  MEAS_MID_REF if you use this attribute to set various channels to different values.
+    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_MID_REF if you use this property to set various channels to different values.
     Default: 50%
 
     Note:
-    One or more of the referenced attributes are not in the Python API for this driver.
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -971,7 +971,7 @@ class _SessionBase(object):
     meas_hysteresis_percent = attributes.AttributeViReal64(1150019)
     '''Type: float
 
-    Digital hysteresis that is used in several of the scalar waveform measurements. This attribute specifies the percentage of the full-scale vertical range for the hysteresis window size.
+    Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
     Default: 2%
 
     Tip:
@@ -986,11 +986,11 @@ class _SessionBase(object):
     meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
     '''Type: float
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this attribute to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1156,7 +1156,7 @@ class _SessionBase(object):
     meas_voltage_histogram_size = attributes.AttributeViInt32(1150021)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the function clear_waveform_measurement_stats.
+    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
     Default: 256
     '''
     min_sample_rate = attributes.AttributeViReal64(1150009)
@@ -1167,7 +1167,7 @@ class _SessionBase(object):
     The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in ConfigureAcquisition and not require more memory than the  onboard memory module allows.
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     mux_mode_register = attributes.AttributeViInt32(1151002)
     onboard_memory_size = attributes.AttributeViInt32(1150069)
@@ -1205,7 +1205,7 @@ class _SessionBase(object):
     points_done = attributes.AttributeViReal64(1150082)
     '''Type: float
 
-    Actual number of samples acquired in the record specified by fetch_record_number from the fetch_relative_to and fetch_offset attributes.
+    Actual number of samples acquired in the record specified by fetch_record_number from the fetch_relative_to and fetch_offset properties.
     '''
     poll_interval = attributes.AttributeViInt32(1150100)
     '''Type: int
@@ -1215,7 +1215,7 @@ class _SessionBase(object):
     probe_attenuation = attributes.AttributeViReal64(1250004)
     '''Type: float
 
-    Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this attribute to 10.0.
+    Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this property to 10.0.
     Valid Values:
     Any positive real number. Typical values are 1, 10, and 100.
 
@@ -1231,8 +1231,8 @@ class _SessionBase(object):
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
-    Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver functions.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable range checking and maximize performance.
-    The default value is VI_TRUE.   Use the _init_with_options  function to override this value.
+    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
+    The default value is True.   Use the _init_with_options  method to override this value.
     '''
     ready_for_advance_event_output_terminal = attributes.AttributeViString(1150112)
     '''Type: str
@@ -1265,13 +1265,13 @@ class _SessionBase(object):
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
-    Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 attributes.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is VI_FALSE.   Use the _init_with_options  function to override this value.
+    Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
+    The default value is False.   Use the _init_with_options  method to override this value.
     '''
     ref_clk_rate = attributes.AttributeViReal64(1150090)
     '''Type: float
 
-    If input_clock_source is an external source, this attribute specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
+    If input_clock_source is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
     ref_trigger_detector_location = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
     '''Type: enums.RefTriggerDetectorLocation
@@ -1281,12 +1281,12 @@ class _SessionBase(object):
     ref_trigger_minimum_quiet_time = attributes.AttributeViReal64TimeDeltaSeconds(1150315)
     '''Type: datetime.timedelta
 
-    The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This attribute is useful for triggering at the beginning and not in the  middle of signal bursts.
+    The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This property is useful for triggering at the beginning and not in the  middle of signal bursts.
     '''
     ref_trig_tdc_enable = attributes.AttributeViBoolean(1150096)
     '''Type: bool
 
-    This attribute controls whether the TDC is used to compute an accurate trigger.
+    This property controls whether the TDC is used to compute an accurate trigger.
     '''
     resolution = attributes.AttributeViInt32(1150102)
     '''Type: int
@@ -1298,8 +1298,8 @@ class _SessionBase(object):
 
     Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup.
     Valid Values:
-    VI_TRUE  (1) - Use RIS sample rates in autosetup
-    VI_FALSE (0) - Do not use RIS sample rates in autosetup
+    True  (1) - Use RIS sample rates in autosetup
+    False (0) - Do not use RIS sample rates in autosetup
     '''
     ris_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RISMethod, 1150071)
     '''Type: enums.RISMethod
@@ -1330,7 +1330,7 @@ class _SessionBase(object):
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     sample_mode = attributes.AttributeViInt32(1250106)
     '''Type: int
@@ -1360,8 +1360,8 @@ class _SessionBase(object):
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
-    The default value is VI_FALSE.   Use the _init_with_options  function to override this value.
+    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
+    The default value is False.   Use the _init_with_options  method to override this value.
     '''
     slave_trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: datetime.timedelta
@@ -1425,12 +1425,12 @@ class _SessionBase(object):
     trigger_auto_triggered = attributes.AttributeViBoolean(1150278)
     '''Type: bool
 
-    Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered attribute to find out if the last acquisition was triggered.
+    Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered property to find out if the last acquisition was triggered.
     '''
     trigger_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
     '''Type: enums.TriggerCoupling
 
-    Specifies how the digitizer couples the trigger source. This attribute affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_delay_time = attributes.AttributeViReal64TimeDeltaSeconds(1250015)
     '''Type: datetime.timedelta
@@ -1441,22 +1441,22 @@ class _SessionBase(object):
     trigger_from_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150052)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
     '''
     trigger_from_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this attribute has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
     '''
     trigger_from_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150050)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this attribute  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this property  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
     '''
     trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: datetime.timedelta
 
-    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This attribute affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to configure_horizontal_timing.
+    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This property affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to configure_horizontal_timing.
     Valid Values: 0.0 - 171.8
     '''
     trigger_hysteresis = attributes.AttributeViReal64(1150006)
@@ -1475,7 +1475,7 @@ class _SessionBase(object):
     trigger_level = attributes.AttributeViReal64(1250017)
     '''Type: float
 
-    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This attribute affects instrument behavior only when the trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     Valid Values:
     The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
@@ -1490,7 +1490,7 @@ class _SessionBase(object):
     trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
     '''Type: enums.TriggerSlope
 
-    Specifies if a rising or a falling edge triggers the digitizer.  This attribute affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_source = attributes.AttributeViString(1250013)
     '''Type: str
@@ -1500,17 +1500,17 @@ class _SessionBase(object):
     trigger_to_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150049)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
     '''
     trigger_to_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150048)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this attribute has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
     '''
     trigger_to_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150047)
     '''Type: datetime.timedelta
 
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this attribute has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
+    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
     trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1250012)
     '''Type: enums.TriggerType
@@ -1529,7 +1529,7 @@ class _SessionBase(object):
     High Trigger Level > Low Trigger Level
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     trigger_window_low_level = attributes.AttributeViReal64(1150013)
     '''Type: float
@@ -1544,7 +1544,7 @@ class _SessionBase(object):
     Low Trigger Level < High Trigger Level
 
     Note:
-    One or more of the referenced functions are not in the Python API for this driver.
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     trigger_window_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
     '''Type: enums.TriggerWindowMode
@@ -1559,7 +1559,7 @@ class _SessionBase(object):
     tv_trigger_line_number = attributes.AttributeViInt32(1250206)
     '''Type: int
 
-    Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the attribute depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+    Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
     tv_trigger_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
     '''Type: enums.VideoPolarity
@@ -1597,9 +1597,9 @@ class _SessionBase(object):
     vertical_offset = attributes.AttributeViReal64(1250002)
     '''Type: float
 
-    Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this attribute to 5.0 V.
+    Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this property to 5.0 V.
 
-    Note: This attribute is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
+    Note: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1613,7 +1613,7 @@ class _SessionBase(object):
     vertical_range = attributes.AttributeViReal64(1250001)
     '''Type: float
 
-    Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this attribute to 10.0 V.
+    Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
     Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced  up to the next valid range.
 
     Tip:
@@ -1714,7 +1714,7 @@ class _SessionBase(object):
         NISCOPE_VAL_ACTION_STORE and no errors occur.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1757,7 +1757,7 @@ class _SessionBase(object):
         updated, including the min, max, mean, standard deviation, and number of
         updates. This information is fetched with
         fetch_measurement_stats. The multi-acquisition array measurements
-        are also cleared with this function.
+        are also cleared with this method.
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1790,7 +1790,7 @@ class _SessionBase(object):
     def configure_chan_characteristics(self, input_impedance, max_input_frequency):
         '''configure_chan_characteristics
 
-        Configures the attributes that control the electrical characteristics of
+        Configures the properties that control the electrical characteristics of
         the channel—the input impedance and the bandwidth.
 
         Tip:
@@ -1841,9 +1841,9 @@ class _SessionBase(object):
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
                 `equalization_num_coefficients <cviequalization_num_coefficients.html>`__
-                attribute. The
+                property. The
                 `equalization_filter_enabled <cviequalization_filter_enabled.html>`__
-                attribute must be set to TRUE to enable the filter.
+                property must be set to TRUE to enable the filter.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -1857,7 +1857,7 @@ class _SessionBase(object):
     def configure_vertical(self, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):
         '''configure_vertical
 
-        Configures the most commonly configured attributes of the digitizer
+        Configures the most commonly configured properties of the digitizer
         vertical subsystem, such as the range, offset, coupling, probe
         attenuation, and the channel.
 
@@ -1903,14 +1903,14 @@ class _SessionBase(object):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
-        digitizer acquires for the specified channel. This function returns
+        digitizer acquires for the specified channel. This method returns
         scaled voltage waveforms.
 
-        This function may return multiple waveforms depending on the number of
+        This method may return multiple waveforms depending on the number of
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this function. read
+        You can use read instead of this method. read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -1932,7 +1932,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -1959,7 +1959,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -2004,14 +2004,14 @@ class _SessionBase(object):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
-        digitizer acquires for the specified channel. This function returns
+        digitizer acquires for the specified channel. This method returns
         scaled voltage waveforms.
 
-        This function may return multiple waveforms depending on the number of
+        This method may return multiple waveforms depending on the number of
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this function. read
+        You can use read instead of this method. read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -2033,7 +2033,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             wfm (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
@@ -2054,7 +2054,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2081,7 +2081,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -2132,13 +2132,13 @@ class _SessionBase(object):
         '''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
-        binary 16-bit waveforms. This function may return multiple waveforms
+        binary 16-bit waveforms. This method may return multiple waveforms
         depending on the number of channels, the acquisition type, and the
         number of records you specify.
 
         Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information on using this function.
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on using this method.
 
         Note:
         Some functionality, such as time stamping, is not supported in all
@@ -2159,7 +2159,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             wfm (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
@@ -2180,7 +2180,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2207,7 +2207,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -2258,13 +2258,13 @@ class _SessionBase(object):
         '''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
-        binary 32-bit waveforms. This function may return multiple waveforms
+        binary 32-bit waveforms. This method may return multiple waveforms
         depending on the number of channels, the acquisition type, and the
         number of records you specify.
 
         Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information on using this function.
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on using this method.
 
         Note:
         Some functionality, such as time stamping, is not supported in all
@@ -2285,7 +2285,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             wfm (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
@@ -2306,7 +2306,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2333,7 +2333,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -2384,13 +2384,13 @@ class _SessionBase(object):
         '''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
-        binary 8-bit waveforms. This function may return multiple waveforms
+        binary 8-bit waveforms. This method may return multiple waveforms
         depending on the number of channels, the acquisition type, and the
         number of records you specify.
 
         Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information on using this function.
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on using this method.
 
         Note:
         Some functionality, such as time stamping, is not supported in all
@@ -2411,7 +2411,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             wfm (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
@@ -2432,7 +2432,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -2459,7 +2459,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (numpy.array(dtype=numpy.WaveformInfo)): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -2510,10 +2510,10 @@ class _SessionBase(object):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
-                        digitizer acquires for the specified channel. This function returns
+                        digitizer acquires for the specified channel. This method returns
                         scaled voltage waveforms.
 
-                        This function may return multiple waveforms depending on the number of
+                        This method may return multiple waveforms depending on the number of
                         channels, the acquisition type, and the number of records you specify.
 
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
@@ -2527,9 +2527,9 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
-            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
+            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
                                         Types supported are
 
@@ -2566,7 +2566,7 @@ class _SessionBase(object):
 
                                             voltage = binary data * gain factor + offset
 
-                                    Call niScope\_ActualNumWfms to determine the size of this array.
+                                    Call _actual_num_wfms to determine the size of this array.
 
         '''
         import numpy
@@ -2588,10 +2588,10 @@ class _SessionBase(object):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
-                        digitizer acquires for the specified channel. This function returns
+                        digitizer acquires for the specified channel. This method returns
                         scaled voltage waveforms.
 
-                        This function may return multiple waveforms depending on the number of
+                        This method may return multiple waveforms depending on the number of
                         channels, the acquisition type, and the number of records you specify.
 
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
@@ -2605,13 +2605,13 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
 
         Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
+            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
@@ -2630,7 +2630,7 @@ class _SessionBase(object):
 
                                             voltage = binary data * gain factor + offset
 
-                                    Call niScope\_ActualNumWfms to determine the size of this array.
+                                    Call _actual_num_wfms to determine the size of this array.
 
         '''
         return self._fetch(num_samples, timeout)
@@ -2640,7 +2640,7 @@ class _SessionBase(object):
 
         Fetches a waveform from the digitizer and performs the specified
         waveform measurement. Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
         more information.
 
         Many of the measurements use the low, mid, and high reference levels.
@@ -2689,22 +2689,22 @@ class _SessionBase(object):
         '''fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
-        function may return multiple statistical results depending on the number
+        method may return multiple statistical results depending on the number
         of channels, the acquisition type, and the number of records you
         specify.
 
         You specify a particular measurement type, such as rise time, frequency,
         or voltage peak-to-peak. The waveform on which the digitizer calculates
         the waveform measurement is from an acquisition that you previously
-        initiated. The statistics for the specified measurement function are
+        initiated. The statistics for the specified measurement method are
         returned, where the statistics are updated once every acquisition when
         the specified measurement is fetched by any of the Fetch Measurement
-        functions. If a Fetch Measurement function has not been called, this
-        function fetches the data on which to perform the measurement. The
+        methods. If a Fetch Measurement method has not been called, this
+        method fetches the data on which to perform the measurement. The
         statistics are cleared by calling
         clear_waveform_measurement_stats. Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
-        more information on incorporating fetch functions in your application.
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        more information on incorporating fetch methods in your application.
 
         Many of the measurements use the low, mid, and high reference levels.
         You configure the low, mid, and high references with
@@ -2775,13 +2775,13 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        Queries the value of a ViBoolean attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
+        Queries the value of a ViBoolean property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2793,11 +2793,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
 
         Returns:
-            value (bool): Returns the current value of the attribute; pass the address of a
+            value (bool): Returns the current value of the property; pass the address of a
                 ViBoolean variable.
 
         '''
@@ -2812,13 +2812,13 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        Queries the value of a ViInt32 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
+        Queries the value of a ViInt32 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2830,11 +2830,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
 
         Returns:
-            value (int): Returns the current value of the attribute.
+            value (int): Returns the current value of the property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2848,13 +2848,13 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        Queries the value of a ViReal64 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
+        Queries the value of a ViReal64 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
@@ -2866,11 +2866,11 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
 
         Returns:
-            value (float): Returns the current value of the attribute; pass the address of a
+            value (float): Returns the current value of the property; pass the address of a
                 ViReal64 variable.
 
         '''
@@ -2885,24 +2885,24 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        Queries the value of a ViString attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes. If the attribute represents an instrument state, this
-        function performs instrument I/O in the following cases:
+        Queries the value of a ViString property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid.
 
         You must provide a ViChar array to serve as a buffer for the value. You
         pass the number of bytes in the buffer as the **bufSize**. If the
-        current value of the attribute, including the terminating NUL byte, is
-        larger than the size you indicate in the **bufSize**, the function
+        current value of the property, including the terminating NUL byte, is
+        larger than the size you indicate in the **bufSize**, the method
         copies (**bufSize** – 1) bytes into the buffer, places an ASCII NUL byte
         at the end of the buffer, and returns the **bufSize** you must pass to
         get the entire value. For example, if the value is 123456 and the
-        **bufSize** is 4, the function places 123 into the buffer and returns 7.
-        If you want to call this function just to get the required buffer size,
+        **bufSize** is 4, the method places 123 into the buffer and returns 7.
+        If you want to call this method just to get the required buffer size,
         you can pass 0 for the **bufSize** and VI_NULL for the **value**.
 
         Tip:
@@ -2914,7 +2914,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2956,7 +2956,7 @@ class _SessionBase(object):
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
                 `equalization_num_coefficients <cviequalization_num_coefficients.html>`__
-                attribute.
+                property.
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -2973,10 +2973,10 @@ class _SessionBase(object):
 
         Reads an error code and message from the error queue. National
         Instruments digitizers do not contain an error queue. Errors are
-        reported as they occur. Therefore, this function does not detect errors.
+        reported as they occur. Therefore, this method does not detect errors.
 
         Note:
-        This function is included for compliance with the IviScope Class
+        This method is included for compliance with the IviScope Class
         Specification.
 
         Returns:
@@ -2984,13 +2984,13 @@ class _SessionBase(object):
                 Description parameter.
 
                 If the error description, including the terminating NULL byte, contains
-                more bytes than you indicate in this parameter, the function copies
+                more bytes than you indicate in this parameter, the method copies
                 **bufferSize** – 1 bytes into the buffer, places an ASCII NULL byte at
                 the end of the buffer, and returns the buffer size you must pass to get
                 the entire value. For example, if the value is "123456" and the Buffer
-                Size is 4, the function places "123" into the buffer and returns 7.
+                Size is 4, the method places "123" into the buffer and returns 7.
 
-                If you pass a negative number, the function copies the value to the
+                If you pass a negative number, the method copies the value to the
                 buffer regardless of the number of bytes in the value.
 
                 If you pass 0, you can pass VI_NULL for the **description** parameter.
@@ -3018,7 +3018,7 @@ class _SessionBase(object):
         **channelList** before the acquisition; in the other method, you enable
         the channels with configure_vertical.
 
-        This function may return multiple waveforms depending on the number of
+        This method may return multiple waveforms depending on the number of
         channels, the acquisition type, and the number of records you specify.
 
         Note:
@@ -3040,7 +3040,7 @@ class _SessionBase(object):
                 acquisition finishes with fewer points than requested, some devices
                 return partial data if the acquisition finished, was aborted, or a
                 timeout of 0 was used. If it fails to complete within the timeout
-                period, the function returns an error.
+                period, the method returns an error.
 
             timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
@@ -3067,7 +3067,7 @@ class _SessionBase(object):
                 Where *x* = the record length
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
                 information about each waveform:
@@ -3116,7 +3116,7 @@ class _SessionBase(object):
         multiple channels and records.
 
         Refer to `Using Fetch
-        Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
         more information.
 
         Many of the measurements use the low, mid, and high reference levels.
@@ -3165,27 +3165,27 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, value):
         '''_set_attribute_vi_boolean
 
-        Sets the value of a ViBoolean attribute. This is a low-level function
-        that you can use to set the values of instrument-specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases:
+        Sets the value of a ViBoolean property. This is a low-level method
+        that you can use to set the values of instrument-specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
         Note:
-        NI-SCOPE contains high-level functions that set most of the instrument
-        attributes. Use the high-level driver functions as much as possible
+        NI-SCOPE contains high-level methods that set most of the instrument
+        properties. Use the high-level driver methods as much as possible
         because they handle order dependencies and multithread locking for you.
-        In addition, the high-level functions perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the SetAttribute functions, the functions check the
+        In addition, the high-level methods perform status checking only after
+        setting all of the properties. In contrast, when you set multiple
+        properties using the SetAttribute methods, the methods check the
         instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
         redundant instrument I/O.
 
         Tip:
@@ -3197,9 +3197,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
-            value (bool): The value that you want to set the attribute to. Some values might not
+            value (bool): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
 
         '''
@@ -3214,27 +3214,27 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, value):
         '''_set_attribute_vi_int32
 
-        Sets the value of a ViInt32 attribute. This is a low-level function that
-        you can use to set the values of instrument-specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases:
+        Sets the value of a ViInt32 property. This is a low-level method that
+        you can use to set the values of instrument-specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
         Note:
-        NI-SCOPE contains high-level functions that set most of the instrument
-        attributes. Use the high-level functions as much as possible because
+        NI-SCOPE contains high-level methods that set most of the instrument
+        properties. Use the high-level methods as much as possible because
         they handle order dependencies and multithread locking for you. In
-        addition, high-level functions perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        addition, high-level methods perform status checking only after
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
         redundant instrument I/O.
 
         Tip:
@@ -3246,9 +3246,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
-            value (int): The value that you want to set the attribute. Some values might not be
+            value (int): The value that you want to set the property. Some values might not be
                 valid depending on the current settings of the instrument session.
 
         '''
@@ -3263,27 +3263,27 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, value):
         '''_set_attribute_vi_real64
 
-        Sets the value of a ViReal64 attribute. This is a low-level function
-        that you can use to set the values of instrument-specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases:
+        Sets the value of a ViReal64 property. This is a low-level method
+        that you can use to set the values of instrument-specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
         Note:
-        NI-SCOPE contains high-level functions that set most of the instrument
-        attributes. Use the high-level driver functions as much as possible
+        NI-SCOPE contains high-level methods that set most of the instrument
+        properties. Use the high-level driver methods as much as possible
         because they handle order dependencies and multithread locking for you.
-        In addition, the high-level functions perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the Set Attribute functions, the functions check the
+        In addition, the high-level methods perform status checking only after
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
         instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
         redundant instrument I/O.
 
         Tip:
@@ -3295,9 +3295,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
-            value (float): The value that you want to set the attribute to. Some values might not
+            value (float): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
 
         '''
@@ -3312,29 +3312,29 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, value):
         '''_set_attribute_vi_string
 
-        Sets the value of a ViString attribute.
+        Sets the value of a ViString property.
 
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
+        This is a low-level method that you can use to set the values of
+        instrument-specific properties and inherent IVI properties. If the
+        property represents an instrument state, this method performs
         instrument I/O in the following cases:
 
         -  State caching is disabled for the entire session or for the
-           particular attribute.
+           particular property.
         -  State caching is enabled and the currently cached value is invalid or
            is different than the value you specify.
 
         Note:
-        NI-SCOPE contains high-level functions that set most of the instrument
-        attributes. Use the high-level driver functions as much as possible
+        NI-SCOPE contains high-level methods that set most of the instrument
+        properties. Use the high-level driver methods as much as possible
         because they handle order dependencies and multithread locking for you.
-        In addition, the high-level functions perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the SetAttribute functions, the functions check the
+        In addition, the high-level methods perform status checking only after
+        setting all of the properties. In contrast, when you set multiple
+        properties using the SetAttribute methods, the methods check the
         instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
         redundant instrument I/O.
 
         Tip:
@@ -3346,9 +3346,9 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an attribute.
+            attribute_id (int): The ID of an property.
 
-            value (str): The value that you want to set the attribute to. Some values might not
+            value (str): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
 
         '''
@@ -3375,11 +3375,11 @@ class Session(_SessionBase):
         -  Opens a session to the specified device using the interface and
            address you specify for the **resourceName**
         -  Resets the digitizer to a known state if **resetDevice** is set to
-           VI_TRUE
+           True
         -  Queries the instrument ID and verifies that it is valid for this
-           instrument driver if the **IDQuery** is set to VI_TRUE
+           instrument driver if the **IDQuery** is set to True
         -  Returns an instrument handle that you use to identify the instrument
-           in all subsequent instrument driver function calls
+           in all subsequent instrument driver method calls
 
         Args:
             resource_name (str): Caution:
@@ -3432,28 +3432,28 @@ class Session(_SessionBase):
 
             id_query (bool): Specify whether to perform an ID query.
 
-                When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
+                When you set this parameter to True, NI-SCOPE verifies that the
                 device you initialize is a type that it supports.
 
-                When you set this parameter to VI_FALSE, the function initializes the
+                When you set this parameter to False, the method initializes the
                 device without performing an ID query.
 
                 **Defined Values**
 
-                | VI_TRUE—Perform ID query
-                | VI_FALSE—Skip ID query
+                | True—Perform ID query
+                | False—Skip ID query
 
-                **Default Value**: VI_TRUE
+                **Default Value**: True
 
             reset_device (bool): Specify whether to reset the device during the initialization process.
 
-                Default Value: VI_TRUE
+                Default Value: True
 
                 **Defined Values**
 
-                VI_TRUE (1)—Reset device
+                True (1)—Reset device
 
-                VI_FALSE (0)—Do not reset device
+                False (0)—Do not reset device
 
                 Note:
                 For the NI 5112, repeatedly resetting the device may cause excessive
@@ -3461,20 +3461,20 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            options (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **options** is a dictionary of attributes with an assigned
+            options (str): Specifies the initial value of certain properties for the session. The
+                syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
                 { 'simulate': False }
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 
                 +-------------------------+---------+
-                | Attribute               | Default |
+                | Property                | Default |
                 +=========================+=========+
                 | range_check             | True    |
                 +-------------------------+---------+
@@ -3539,7 +3539,7 @@ class Session(_SessionBase):
         '''abort
 
         Aborts an acquisition and returns the digitizer to the Idle state. Call
-        this function if the digitizer times out waiting for a trigger.
+        this method if the digitizer times out waiting for a trigger.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Abort(vi_ctype)
@@ -3573,7 +3573,7 @@ class Session(_SessionBase):
     def auto_setup(self):
         '''auto_setup
 
-        Automatically configures the instrument. When you call this function,
+        Automatically configures the instrument. When you call this method,
         the digitizer senses the input signal and automatically configures many
         of the instrument settings. If a signal is detected on a channel, the
         driver chooses the smallest available vertical range that is larger than
@@ -3649,8 +3649,8 @@ class Session(_SessionBase):
         '''commit
 
         Commits to hardware all the parameter settings associated with the task.
-        Use this function if you want a parameter change to be immediately
-        reflected in the hardware. This function is not supported for
+        Use this method if you want a parameter change to be immediately
+        reflected in the hardware. This method is not supported for
         Traditional NI-DAQ (Legacy) devices.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -3675,7 +3675,7 @@ class Session(_SessionBase):
                 Valid Values: Greater than 1; limited by available memory
 
                 Note:
-                One or more of the referenced functions are not in the Python API for this driver.
+                One or more of the referenced methods are not in the Python API for this driver.
 
             ref_position (float): The position of the Reference Event in the waveform record specified as
                 a percentage.
@@ -3688,13 +3688,13 @@ class Session(_SessionBase):
                 Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
                 more information.
 
-                Default value: VI_TRUE
+                Default value: True
 
                 **Defined Values**
 
-                VI_TRUE—Allow real-time acquisitions only
+                True—Allow real-time acquisitions only
 
-                VI_FALSE—Allow real-time and equivalent-time acquisitions
+                False—Allow real-time and equivalent-time acquisitions
 
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -3710,7 +3710,7 @@ class Session(_SessionBase):
     def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
         '''configure_ref_levels
 
-        This function is included for compliance with the IviScope Class
+        This method is included for compliance with the IviScope Class
         Specification.
 
         Configures the reference levels for all channels of the digitizer. The
@@ -3719,8 +3719,8 @@ class Session(_SessionBase):
         meas_chan_low_ref_level, and
         meas_chan_mid_ref_level
 
-        This function configures the reference levels for waveform measurements.
-        Call this function before calling fetch_measurement to take a
+        This method configures the reference levels for waveform measurements.
+        Call this method before calling fetch_measurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
 
@@ -3771,13 +3771,13 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the acq_arm_source
-        (Start Trigger Source) attribute. The default is immediate. Upon
+        (Start Trigger Source) property. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -3787,7 +3787,7 @@ class Session(_SessionBase):
 
         You can adjust the amount of pre-trigger and post-trigger samples using
         the reference position parameter on the
-        configure_horizontal_timing function. The default is half of the
+        configure_horizontal_timing method. The default is half of the
         record length.
 
         Some features are not supported by all digitizers. Refer to `Features
@@ -3832,13 +3832,13 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the acq_arm_source
-        (Start Trigger Source) attribute. The default is immediate. Upon
+        (Start Trigger Source) property. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -3901,9 +3901,9 @@ class Session(_SessionBase):
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -3966,7 +3966,7 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for a trigger. You
         specify the type of trigger that the digitizer waits for with a
-        Configure Trigger function, such as configure_trigger_immediate.
+        Configure Trigger method, such as configure_trigger_immediate.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ConfigureTriggerImmediate(vi_ctype)
@@ -3980,13 +3980,13 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the acq_arm_source
-        (Start Trigger Source) attribute. The default is immediate. Upon
+        (Start Trigger Source) property. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -4024,13 +4024,13 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the acq_arm_source
-        (Start Trigger Source) attribute. The default is immediate. Upon
+        (Start Trigger Source) property. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -4109,13 +4109,13 @@ class Session(_SessionBase):
 
         When you initiate an acquisition, the digitizer waits for the start
         trigger, which is configured through the acq_arm_source
-        (Start Trigger Source) attribute. The default is immediate. Upon
+        (Start Trigger Source) property. The default is immediate. Upon
         receiving the start trigger the digitizer begins sampling pretrigger
         points. After the digitizer finishes sampling pretrigger points, the
         digitizer waits for a reference (stop) trigger that you specify with a
-        function such as this one. Upon receiving the reference trigger the
+        method such as this one. Upon receiving the reference trigger the
         digitizer finishes the acquisition after completing posttrigger
-        sampling. With each Configure Trigger function, you specify
+        sampling. With each Configure Trigger method, you specify
         configuration parameters such as the trigger source and the amount of
         trigger delay.
 
@@ -4191,17 +4191,17 @@ class Session(_SessionBase):
         In cases where multiple instances of a particular signal exist, use the
         **signalIdentifier** input to specify which instance to control. For
         normal signals, only one instance exists and you should leave this
-        parameter set to the empty string. You can call this function multiple
+        parameter set to the empty string. You can call this method multiple
         times and set each available line to a different signal.
 
-        To unprogram a specific line on device, call this function with the
+        To unprogram a specific line on device, call this method with the
         signal you no longer want to export and set **outputTerminal** to
         NISCOPE_VAL_NONE.
 
-        Note: This function replaces ConfigureTriggerOutput.
+        Note: This method replaces ConfigureTriggerOutput.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4295,11 +4295,11 @@ class Session(_SessionBase):
         -  Opens a session to the specified device using the interface and
            address you specify for the **resourceName**
         -  Resets the digitizer to a known state if **resetDevice** is set to
-           VI_TRUE
+           True
         -  Queries the instrument ID and verifies that it is valid for this
-           instrument driver if the **IDQuery** is set to VI_TRUE
+           instrument driver if the **IDQuery** is set to True
         -  Returns an instrument handle that you use to identify the instrument
-           in all subsequent instrument driver function calls
+           in all subsequent instrument driver method calls
 
         Args:
             resource_name (str): Caution:
@@ -4352,28 +4352,28 @@ class Session(_SessionBase):
 
             id_query (bool): Specify whether to perform an ID query.
 
-                When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
+                When you set this parameter to True, NI-SCOPE verifies that the
                 device you initialize is a type that it supports.
 
-                When you set this parameter to VI_FALSE, the function initializes the
+                When you set this parameter to False, the method initializes the
                 device without performing an ID query.
 
                 **Defined Values**
 
-                | VI_TRUE—Perform ID query
-                | VI_FALSE—Skip ID query
+                | True—Perform ID query
+                | False—Skip ID query
 
-                **Default Value**: VI_TRUE
+                **Default Value**: True
 
             reset_device (bool): Specify whether to reset the device during the initialization process.
 
-                Default Value: VI_TRUE
+                Default Value: True
 
                 **Defined Values**
 
-                VI_TRUE (1)—Reset device
+                True (1)—Reset device
 
-                VI_FALSE (0)—Do not reset device
+                False (0)—Do not reset device
 
                 Note:
                 For the NI 5112, repeatedly resetting the device may cause excessive
@@ -4382,8 +4382,8 @@ class Session(_SessionBase):
                 for recommended programming practices.
 
             option_string (str): | Specifies initialization commands. The following table lists the
-                  attributes and the name you use in the **optionString** to identify
-                  the attribute.
+                  properties and the name you use in the **optionString** to identify
+                  the property.
 
                 Default Values: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
 
@@ -4407,7 +4407,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): Returns a session handle that you can use to identify the device in all
-                subsequent NI-SCOPE function calls.
+                subsequent NI-SCOPE method calls.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -4424,7 +4424,7 @@ class Session(_SessionBase):
 
         Initiates a waveform acquisition.
 
-        After calling this function, the digitizer leaves the Idle state and
+        After calling this method, the digitizer leaves the Idle state and
         waits for a trigger. The digitizer acquires a waveform for each channel
         you enable with configure_vertical.
         '''
@@ -4458,7 +4458,7 @@ class Session(_SessionBase):
 
         Performs a hard reset of the device. Acquisition stops, all routes are
         released, RTSI and PFI lines are tristated, hardware is configured to
-        its default state, and all session attributes are reset to their default
+        its default state, and all session properties are reset to their default
         state.
 
         -  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__
@@ -4483,12 +4483,12 @@ class Session(_SessionBase):
     def send_software_trigger_edge(self, which_trigger):
         '''send_software_trigger_edge
 
-        Sends the selected trigger to the digitizer. Call this function if you
+        Sends the selected trigger to the digitizer. Call this method if you
         called configure_trigger_software when you want the Reference
-        trigger to occur. You can also call this function to override a misused
+        trigger to occur. You can also call this method to override a misused
         edge, digital, or hysteresis trigger. If you have configured
         acq_arm_source, arm_ref_trig_src, or
-        adv_trig_src, call this function when you want to send
+        adv_trig_src, call this method when you want to send
         the corresponding trigger to the digitizer.
 
         Args:
@@ -4514,10 +4514,10 @@ class Session(_SessionBase):
         '''_close
 
         When you are finished using an instrument driver session, you must call
-        this function to perform the following actions:
+        this method to perform the following actions:
 
         -  Closes the instrument I/O session.
-        -  Destroys the IVI session and all of its attributes.
+        -  Destroys the IVI session and all of its properties.
         -  Deallocates any memory resources used by the IVI session.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4528,7 +4528,7 @@ class Session(_SessionBase):
     def reset(self):
         '''reset
 
-        Stops the acquisition, releases routes, and all session attributes are
+        Stops the acquisition, releases routes, and all session properties are
         reset to their `default
         states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
         '''

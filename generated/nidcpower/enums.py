@@ -125,7 +125,7 @@ class MeasureWhen(Enum):
     '''
     ON_DEMAND = 1026
     '''
-    Acquires a measurement when the measure function or measure_multiple function is called.
+    Acquires a measurement when the measure method or measure_multiple method is called.
     '''
     ON_MEASURE_TRIGGER = 1027
     '''
@@ -158,19 +158,19 @@ class OutputCapacitance(Enum):
 class OutputFunction(Enum):
     DC_VOLTAGE = 1006
     '''
-    Sets the output function to DC voltage.
+    Sets the output method to DC voltage.
     '''
     DC_CURRENT = 1007
     '''
-    Sets the output function to DC current.
+    Sets the output method to DC current.
     '''
     PULSE_VOLTAGE = 1049
     '''
-    Sets the output function to pulse voltage.
+    Sets the output method to pulse voltage.
     '''
     PULSE_CURRENT = 1050
     '''
-    Sets the output function to pulse current.
+    Sets the output method to pulse current.
     '''
 
 
