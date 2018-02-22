@@ -407,6 +407,18 @@ def _fix_references(node, doc, cfg, make_link=False):
     del config['make_link']
     del config['start_enum']
 
+    # Several other standard replacements
+    doc = doc.replace('VI_FALSE', 'False')
+    doc = doc.replace('VI_TRUE', 'True')
+    doc = doc.replace('attribute', 'property')
+    doc = doc.replace('attributes', 'properties')
+    doc = doc.replace('Attribute', 'Property')
+    doc = doc.replace('Attributes', 'Properties')
+    doc = doc.replace('function', 'method')
+    doc = doc.replace('functions', 'methods')
+    doc = doc.replace('Function', 'Method')
+    doc = doc.replace('Functions', 'Methods')
+
     return doc
 
 
