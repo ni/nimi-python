@@ -1191,7 +1191,7 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
+.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=1000, fetch_relative_to=niscope.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1)
 
     Returns the waveform from a previously initiated acquisition that the
                     digitizer acquires for the specified channel. This function returns
@@ -1212,7 +1212,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=1000, fetch_relative_to=niscope.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1)
 
 
     :param timeout:
@@ -1236,25 +1236,25 @@ niscope.Session methods
     :param fetch_relative_to:
 
 
-        Position to start fetching within one record. If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
+        Position to start fetching within one record.
 
         
 
 
     :type fetch_relative_to: :py:data:`niscope.FetchRelativeTo`
-    :param fetch_offet:
+    :param fetch_offset:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
+        Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.
 
         
 
 
-    :type fetch_offet: int
+    :type fetch_offset: int
     :param fetch_record_number:
 
 
-        Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+        Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.
 
         
 
@@ -1263,21 +1263,12 @@ niscope.Session methods
     :param fetch_num_records:
 
 
-        Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS
+        Number of records to fetch. Use -1 to fetch all configured records.
 
         
 
 
     :type fetch_num_records: int
-    :param wfm:
-
-
-        Returns an array whose length is the **numSamples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
-
-        
-
-
-    :type wfm: list of float
 
     :rtype: list of WaveformInfo
     :return:

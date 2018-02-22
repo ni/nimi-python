@@ -1839,7 +1839,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, timeout=datetime.timedelta(seconds=5.0), num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None):
+    def fetch(self, timeout=datetime.timedelta(seconds=5.0), num_samples=1000, fetch_relative_to=enums.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1857,22 +1857,20 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, fetch_relative_to=None, fetch_offet=None, fetch_record_number=None, fetch_num_records=None, wfm=None)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=1000, fetch_relative_to=niscope.FetchRelativeTo.PRETRIGGER, fetch_offset=0, fetch_record_number=0, fetch_num_records=-1)
 
         Args:
             timeout (datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.
 
-            fetch_relative_to (enums.FetchRelativeTo): Position to start fetching within one record. If not set, use value of NISCOPE_ATTR_FETCH_RELATIVE_TO
+            fetch_relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
-            fetch_offet (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative. If not set, use value of NISCOPE_ATTR_FETCH_OFFSET
+            fetch_offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.
 
-            fetch_record_number (int): Zero-based index of the first record to fetch.  Use fetch_num_records to set the number of records to fetch. If not set, use value of NISCOPE_ATTR_RECORD_NUMBER
+            fetch_record_number (int): Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.
 
-            fetch_num_records (int): Number of records to fetch. Use -1 to fetch all configured records. If not set, use value of NISCOPE_ATTR_NUM_RECORDS
-
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            fetch_num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
 
         Returns:
@@ -1900,64 +1898,32 @@ class _SessionBase(object):
         '''
         import sys
 
-        if num_samples is None and wfm is None:
-            raise TypeError("Either 'num_samples' or 'wfm' must be set")
+        # Set attributes
+        # We temporarily set the repeated capabilities to '' so we can set these (they are not channel based) and then set it back
+        temp_repeated_capability = self._repeated_capability
+        self._repeated_capability = ''
+        self.fetch_relative_to = fetch_relative_to
+        self.fetch_offset = fetch_offset
+        self.fetch_record_number = fetch_record_number
+        self.fetch_num_records = fetch_num_records
+        self._repeated_capability = temp_repeated_capability
 
-        # Check optional parameters
-        if fetch_relative_to is not None:
-            self.fetch_relative_to = fetch_relative_to
-        if fetch_offet is not None:
-            self.fetch_offet = fetch_offet
-        if fetch_record_number is not None:
-            self.fetch_record_number = fetch_record_number
-        if fetch_num_records is not None:
-            self.fetch_num_records = fetch_num_records
-
-        num_wfms = self._actual_num_wfms()
-
-        if num_samples is None:
-            num_samples_to_use = int(len(wfm) / num_wfms)
-        else:
-            num_samples_to_use = num_samples
-
-        total_wfm_size = num_samples_to_use * num_wfms
-
-        # If the waveform is not passed in, we will use the builtin python array with element type 'double'
-        if wfm is None:
-            wfm_to_use, wfm_info = self._fetch(num_samples, timeout)
-        else:
-            if len(wfm) < total_wfm_size:
-                raise TypeError('The size of the input array is too small for the acquisition. Needs to be {0}, was {1}'.format(total_wfm_size, len(wfm_to_use)))
-
-            wfm_to_use = wfm
-            wfm_info = self.fetch_into(wfm_to_use, timeout)
+        wfm, wfm_info = self._fetch(num_samples, timeout)
 
         if sys.version_info.major < 3:
             # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
             # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
             for i in range(len(wfm_info)):
-                if isinstance(wfm_to_use, array.array):
-                    typecode = wfm_to_use.typecode
-                else:
-                    import numpy
-                    # If we've made it this far we know the numpy type is one of these
-                    typecode = {
-                        numpy.dtype('int8'): 'b',
-                        numpy.dtype('int16'): 'h',
-                        numpy.dtype('int32'): 'l',
-                        numpy.dtype('float64'): 'd',
-                    }[wfm_to_use.dtype]
-
-                start = i * num_samples_to_use
-                end = start + num_samples_to_use
-                wfm_info[i].wfm = array.array(typecode, wfm_to_use[start:end])
+                start = i * num_samples
+                end = start + num_samples
+                wfm_info[i].wfm = array.array('d', wfm[start:end])
         else:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(wfm_to_use)
+            mv = memoryview(wfm)
 
             for i in range(len(wfm_info)):
-                start = i * num_samples_to_use
-                end = start + num_samples_to_use
+                start = i * num_samples
+                end = start + num_samples
                 wfm_info[i].wfm = mv[start:end]
 
         return wfm_info
