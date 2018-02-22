@@ -272,7 +272,7 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'default_value': 1000,
+                'default_value': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
@@ -283,7 +283,7 @@ functions_additional_functions = {
                 'direction': 'in',
                 'enum': 'FetchRelativeTo',
                 'default_value': 'FetchRelativeTo.PRETRIGGER',
-                'name': 'fetchRelativeTo',
+                'name': 'relativeTo',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Position to start fetching within one record.',
@@ -292,7 +292,7 @@ functions_additional_functions = {
             {
                 'direction': 'in',
                 'default_value': 0,
-                'name': 'fetchOffset',
+                'name': 'offset',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
@@ -301,7 +301,7 @@ functions_additional_functions = {
             {
                 'direction': 'in',
                 'default_value': 0,
-                'name': 'fetchRecordNumber',
+                'name': 'recordNumber',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
@@ -310,7 +310,7 @@ functions_additional_functions = {
             {
                 'direction': 'in',
                 'default_value': -1,
-                'name': 'fetchNumRecords',
+                'name': 'numRecords',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
