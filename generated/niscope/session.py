@@ -73,6 +73,21 @@ class _RepeatedCapabilities(object):
         return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
+# This is a very simple context manager we can use when we need to set/get attributes
+# or call functions from _SessionBase that require no channels. It is tied to the specific
+# implementation of _SessionBase and how repeated capabilities are handled.
+class _NoChannel(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        self._repeated_capability_cache = self._session._repeated_capability
+        self._session._repeated_capability = ''
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session._repeated_capability = self._repeated_capability_cache
+
+
 class _SessionBase(object):
     '''Base class for all NI-SCOPE sessions.'''
 
@@ -1962,16 +1977,13 @@ class _SessionBase(object):
         import sys
 
         # Set attributes
-        # We temporarily set the repeated capabilities to '' so we can set these (they are not channel based) and then set it back
-        temp_repeated_capability = self._repeated_capability
-        self._repeated_capability = ''
-        self.fetch_relative_to = relative_to
-        self.fetch_offset = offset
-        self.fetch_record_number = record_number
-        self.fetch_num_records = num_records
-        if num_samples is None:
-            num_samples = self.horz_record_length
-        self._repeated_capability = temp_repeated_capability
+        with _NoChannel(session=self):
+            self.fetch_relative_to = relative_to
+            self.fetch_offset = offset
+            self.fetch_record_number = record_number
+            self.fetch_num_records = num_records
+            if num_samples is None:
+                num_samples = self.horz_record_length
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 

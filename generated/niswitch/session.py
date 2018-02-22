@@ -71,6 +71,21 @@ class _RepeatedCapabilities(object):
         return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
+# This is a very simple context manager we can use when we need to set/get attributes
+# or call functions from _SessionBase that require no channels. It is tied to the specific
+# implementation of _SessionBase and how repeated capabilities are handled.
+class _NoChannel(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        self._repeated_capability_cache = self._session._repeated_capability
+        self._session._repeated_capability = ''
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session._repeated_capability = self._repeated_capability_cache
+
+
 class _SessionBase(object):
     '''Base class for all NI-SWITCH sessions.'''
 
