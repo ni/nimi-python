@@ -13,10 +13,14 @@
         import sys
 
         # Set attributes
+        # We temporarily set the repeated capabilities to '' so we can set these (they are not channel based) and then set it back
+        temp_repeated_capability = self._repeated_capability
+        self._repeated_capability = ''
         self.fetch_relative_to = fetch_relative_to
         self.fetch_offset = fetch_offset
         self.fetch_record_number = fetch_record_number
         self.fetch_num_records = fetch_num_records
+        self._repeated_capability = temp_repeated_capability
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
