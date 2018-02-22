@@ -17,7 +17,7 @@ functions = {
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -27,12 +27,12 @@ niDCPower\_InitializeWithChannels function.
 Transitions the NI-DCPower session from the Running state to the
 Committed state. If a sequence is running, it is stopped. Any
 configuration functions called after this function are not applied until
-the niDCPower\_Initiate function is called. If power output is enabled
-when you call the niDCPower\_Abort function, the output channels remain
+the niDCPower_Initiate function is called. If power output is enabled
+when you call the niDCPower_Abort function, the output channels remain
 in their current state and continue providing power.
 
-Use the niDCPower\_ConfigureOutputEnabled function to disable power
-output on a per channel basis. Use the niDCPower\_reset function to
+Use the niDCPower_ConfigureOutputEnabled function to disable power
+output on a per channel basis. Use the niDCPower_reset function to
 disable output on all channels.
 
 Refer to the `Programming
@@ -57,7 +57,7 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -98,7 +98,7 @@ Specifies the number of elements in **requestedOutputs** and
 'documentation': {
 'description': '''
 Specifies an array of the output values that were requested in the
-niDCPower\_ConfigureCurrentLimit function.
+niDCPower_ConfigureCurrentLimit function.
 ''',
 },
             },
@@ -142,7 +142,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -186,7 +186,7 @@ Specifies the number of elements in **reportedOutputs** and
 'documentation': {
 'description': '''
 Specifies an array of the output values that were returned by the
-niDCPower\_Measure function.
+niDCPower_Measure function.
 ''',
 },
             },
@@ -204,7 +204,7 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-Calibrates the current measurements returned by the niDCPower\_Measure
+Calibrates the current measurements returned by the niDCPower_Measure
 function for the specified output channel. This function calculates new
 calibration coefficients for the specified current measurement range
 based on the **reportedOutputs** and **measuredOutputs**. Refer to the
@@ -224,7 +224,7 @@ can only be called in an external calibration session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -237,7 +237,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies the internal reference to be adjusted.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_5V (1054)', 'Calibration pin connected to 5 V internal reference.'], ['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_100KOHM (1055)', 'Calibration pin connected to 100 kΩ internal reference.']],
+'table_body': [['NIDCPOWER_VAL_INTERNAL_REFERENCE_5V (1054)', 'Calibration pin connected to 5 V internal reference.'], ['NIDCPOWER_VAL_INTERNAL_REFERENCE_100KOHM (1055)', 'Calibration pin connected to 100 kΩ internal reference.']],
 },
             },
             {
@@ -277,7 +277,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -310,7 +310,7 @@ Specifies the number of elements in **requestedOutputs** and
 'documentation': {
 'description': '''
 Specifies an array of the output values that were requested in the
-niDCPower\_ConfigureOutputResistance function.
+niDCPower_ConfigureOutputResistance function.
 ''',
 },
             },
@@ -353,7 +353,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -408,7 +408,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -463,7 +463,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -504,7 +504,7 @@ Specifies the number of elements in **requestedOutputs** and
 'documentation': {
 'description': '''
 Specifies an array of the output values requested in the
-niDCPower\_ConfigureVoltageLevel function.
+niDCPower_ConfigureVoltageLevel function.
 ''',
 },
             },
@@ -548,7 +548,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -589,7 +589,7 @@ Specifies the number of elements in **reportedOutputs** and
 'documentation': {
 'description': '''
 Specifies an array of the output values that were returned by the
-niDCPower\_Measure function.
+niDCPower_Measure function.
 ''',
 },
             },
@@ -608,10 +608,10 @@ precision digital multimeter.
 'documentation': {
 'description': '''
 Calculates the calibration constants for the voltage measurements
-returned by the niDCPower\_Measure function for the specified output
+returned by the niDCPower_Measure function for the specified output
 channel. This function compares the array in **reportedOutputs** to the
 array in **measuredOutputs** and calculates the calibration constants
-for the voltage measurements returned by the niDCPower\_Measure
+for the voltage measurements returned by the niDCPower_Measure
 function. Refer to the calibration procedure for the device you are
 calibrating for detailed instructions on the appropriate use of this
 function. This function can only be called in an external calibration
@@ -629,7 +629,7 @@ session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -658,12 +658,12 @@ Performs a self-calibration upon the specified channel(s).
 This function disables the output, performs several internal
 calculations, and updates calibration values. The updated calibration
 values are written to the device hardware if the
-NIDCPOWER\_ATTR\_SELF\_CALIBRATION\_PERSISTENCE attribute is set to
-NIDCPOWER\_VAL\_WRITE\_TO\_EEPROM. Refer to the
-NIDCPOWER\_ATTR\_SELF\_CALIBRATION\_PERSISTENCE attribute topic for more
+NIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute is set to
+NIDCPOWER_VAL_WRITE_TO_EEPROM. Refer to the
+NIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute topic for more
 information about the settings for this attribute.
 
-When calling niDCPower\_CalSelfCalibrate with the PXIe-4162/4163,
+When calling niDCPower_CalSelfCalibrate with the PXIe-4162/4163,
 specify all channels of your PXIe-4162/4163 with the channelName input.
 You cannot self-calibrate a subset of PXIe-4162/4163 channels.
 
@@ -693,7 +693,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -721,8 +721,8 @@ calibration session. The **password** can be a maximum of four
 alphanumeric characters. If you call this function in a session,
 **password** is changed immediately. If you call this function in an
 external calibration session, **password** is changed only after you
-close the session using the niDCPower\_CloseExtCal function with
-**action** set to NIDCPOWER\_VAL\_COMMIT.
+close the session using the niDCPower_CloseExtCal function with
+**action** set to NIDCPOWER_VAL_COMMIT.
 ''',
 },
     },
@@ -736,7 +736,7 @@ close the session using the niDCPower\_CloseExtCal function with
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -746,16 +746,16 @@ niDCPower\_InitializeWithChannels function.
 | Clears the error code and error description for the IVI session. If
   the user specifies a valid IVI session for **vi**, this function
   clears the error information for the session. If the user passes
-  VI\_NULL for **vi**, this function clears the error information for
+  VI_NULL for **vi**, this function clears the error information for
   the current execution thread. If the ViSession parameter is an invalid
   session, the function does nothing and returns an error.
-| The function clears the error code by setting it to VI\_SUCCESS. If
+| The function clears the error code by setting it to VI_SUCCESS. If
   the error description string is non-NULL, the function de-allocates
-  the error description string and sets the address to VI\_NULL.
+  the error description string and sets the address to VI_NULL.
 | Maintaining the error information separately for each thread is useful
   if the user does not have a session handle to pass to the
-  niDCPower\_GetError function, which occurs when a call to
-  niDCPower\_InitializeWithChannels fails.
+  niDCPower_GetError function, which occurs when a call to
+  niDCPower_InitializeWithChannels fails.
 ''',
 },
     },
@@ -769,7 +769,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -788,7 +788,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Identifies a particular instrument calibration session. **vi** is
-obtained from the niDCPower\_InitExtCal function.
+obtained from the niDCPower_InitExtCal function.
 ''',
 },
             },
@@ -803,7 +803,7 @@ session is closed.
 
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_COMMIT (1002)', 'The new calibration constants are stored in the EEPROM.'], ['NIDCPOWER\\_VAL\\_CANCEL (1001)', 'The old calibration constants are kept, and the new ones are discarded.']],
+'table_body': [['NIDCPOWER_VAL_COMMIT (1002)', 'The new calibration constants are stored in the EEPROM.'], ['NIDCPOWER_VAL_CANCEL (1001)', 'The old calibration constants are kept, and the new ones are discarded.']],
 },
             },
         ],
@@ -826,7 +826,7 @@ on the appropriate use of this function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -837,7 +837,7 @@ Applies previously configured settings to the device. Calling this
 function moves the NI-DCPower session from the Uncommitted state into
 the Committed state. After calling this function, modifying any
 attribute reverts the NI-DCPower session to the Uncommitted state. Use
-the niDCPower\_Initiate function to transition to the Running state.
+the niDCPower_Initiate function to transition to the Running state.
 Refer to the `Programming
 States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -860,7 +860,7 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -901,7 +901,7 @@ device in the *NI DC Power Supplies and SMUs Help* for more information.
 Specifies the units for **apertureTime**.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_SECONDS (1028)', 'Specifies seconds.'], ['NIDCPOWER\\_VAL\\_POWER\\_LINE\\_CYCLES (1029)', 'Specifies Power Line Cycles.']],
+'table_body': [['NIDCPOWER_VAL_SECONDS (1028)', 'Specifies seconds.'], ['NIDCPOWER_VAL_POWER_LINE_CYCLES (1029)', 'Specifies Power Line Cycles.']],
 },
             },
         ],
@@ -941,7 +941,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -973,7 +973,7 @@ and Timing* topic and the *Auto Zero* topic for your device for more
 information about how to configure your measurements.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_OFF (0)', 'Disables auto-zero.'], ['NIDCPOWER\\_VAL\\_ONCE (1024)', 'Makes zero conversions following the first measurement after initiating the device. The device uses these zero conversions for the preceding measurement and future measurements until the device is reinitiated.'], ['NIDCPOWER\\_VAL\\_ON (1)', 'Makes zero conversions for every measurement.']],
+'table_body': [['NIDCPOWER_VAL_OFF (0)', 'Disables auto-zero.'], ['NIDCPOWER_VAL_ONCE (1024)', 'Makes zero conversions following the first measurement after initiating the device. The device uses these zero conversions for the preceding measurement and future measurements until the device is reinitiated.'], ['NIDCPOWER_VAL_ON (1)', 'Makes zero conversions for every measurement.']],
 },
             },
         ],
@@ -1010,7 +1010,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1041,7 +1041,7 @@ Specifies the current level, in amps, to generate for the specified
 channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the current level
-range that is configured using the niDCPower\_ConfigureCurrentlevelRange
+range that is configured using the niDCPower_ConfigureCurrentlevelRange
 function.
 ''',
 },
@@ -1052,15 +1052,15 @@ function.
 Configures the current level the device attempts to generate for the
 specified channel(s). The channel must be enabled for the specified
 current level to take effect. Refer to the
-niDCPower\_ConfigureOutputEnabled function for more information about
+niDCPower_ConfigureOutputEnabled function for more information about
 enabling the output channel.
 
 The current level setting is applicable only if the output function of
-the channel is set to NIDCPOWER\_VAL\_DC\_CURRENT. Use
-nidcpower\_ConfigureOutputFunction to set the output function. The
+the channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
+nidcpower_ConfigureOutputFunction to set the output function. The
 device actively regulates the current at the specified level unless
 doing so causes a voltage greater than the
-niDCPower\_ConfigureVoltageLimit across the channels' output terminals.
+niDCPower_ConfigureVoltageLimit across the channels' output terminals.
 
 **Related Topics:**
 
@@ -1079,7 +1079,7 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1117,12 +1117,12 @@ DC Power Supplies and SMUs Help*.
 'description': '''
 Configures the current level range for the specified channel(s). The
 configured range defines the valid values the current level can be set
-to using the niDCPower\_ConfigureCurrentLevel function. The current
+to using the niDCPower_ConfigureCurrentLevel function. The current
 level range setting is applicable only if the output function of the
-channel is set to NIDCPOWER\_VAL\_DC\_CURRENT. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
-Use the NIDCPOWER\_ATTR\_CURRENT\_LEVEL\_AUTORANGE attribute to enable
+Use the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable
 automatic selection of the current level range.
 
 **Related Topics:**
@@ -1141,7 +1141,7 @@ automatic selection of the current level range.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1172,7 +1172,7 @@ Specifies how the output should behave when the current limit is
 reached.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_CURRENT\\_REGULATE', 'Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached.']],
+'table_body': [['NIDCPOWER_VAL_CURRENT_REGULATE', 'Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached.']],
 },
             },
             {
@@ -1186,7 +1186,7 @@ limit is specified as a positive value, but symmetric positive and
 negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the current limit
-range that is configured using the niDCPower\_ConfigureCurrentlimitRange
+range that is configured using the niDCPower_ConfigureCurrentlimitRange
 function.
 ''',
 },
@@ -1196,13 +1196,13 @@ function.
 'description': '''
 | Configures the current limit for the specified channel(s). The channel
   must be enabled for the specified current limit to take effect. Refer
-  to the niDCPower\_ConfigureOutputEnabled function for more information
+  to the niDCPower_ConfigureOutputEnabled function for more information
   about enabling the output channel.
 | The current limit is the current that the output should not exceed
-  when generating the desired niDCPower\_ConfigureVoltageLevel. The
+  when generating the desired niDCPower_ConfigureVoltageLevel. The
   current limit setting is applicable only if the output function of the
-  channel is set to NIDCPOWER\_VAL\_DC\_VOLTAGE. Use
-  nidcpower\_ConfigureOutputFunction to set the output function.
+  channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+  nidcpower_ConfigureOutputFunction to set the output function.
 
 **Related Topics:**
 
@@ -1220,7 +1220,7 @@ function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1258,12 +1258,12 @@ DC Power Supplies and SMUs Help*.
 'description': '''
 Configures the current limit range for the specified channel(s).The
 configured range defines the valid values the current limit can be set
-to using the niDCPower\_ConfigureCurrentLimit function. The current
+to using the niDCPower_ConfigureCurrentLimit function. The current
 limit range setting is applicable only if the output function of the
-channel is set to NIDCPOWER\_VAL\_DC\_VOLTAGE. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
-Use the NIDCPOWER\_ATTR\_CURRENT\_LIMIT\_AUTORANGE attribute to enable
+Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute to enable
 automatic selection of the current limit range.
 
 **Related Topics:**
@@ -1282,7 +1282,7 @@ automatic selection of the current limit range.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1301,9 +1301,9 @@ determine which routes are available. This information is not available
 on a Device Routes tab in MAX.
 
 Input terminals can be specified in one of two ways. If the device is
-named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-shortened terminal name, PXI\_Trig0. The input terminal can also be a
+named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+shortened terminal name, PXI_Trig0. The input terminal can also be a
 terminal from another device. For example, you can set the input
 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 ''',
@@ -1319,7 +1319,7 @@ Specifies whether to configure the Measure trigger to assert on the
 rising or falling edge.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER\\_VAL\\_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
+'table_body': [['NIDCPOWER_VAL_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER_VAL_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
 },
             },
         ],
@@ -1343,7 +1343,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1359,9 +1359,9 @@ You can specify any valid input terminal for this function. Valid
 terminals are listed in MAX under the **Device Routes** tab.
 
 Input terminals can be specified in one of two ways. If the device is
-named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-shortened terminal name, PXI\_Trig0. The input terminal can also be a
+named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+shortened terminal name, PXI_Trig0. The input terminal can also be a
 terminal from another device. For example, you can set the input
 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 ''',
@@ -1377,7 +1377,7 @@ Specifies whether to configure the Pulse trigger to assert on the rising
 or falling edge.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER\\_VAL\\_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
+'table_body': [['NIDCPOWER_VAL_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER_VAL_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
 },
             },
         ],
@@ -1401,7 +1401,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1421,9 +1421,9 @@ determine which routes are available. This information is not available
 on a Device Routes tab in MAX.
 
 Input terminals can be specified in one of two ways. If the device is
-named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-shortened terminal name, PXI\_Trig0. The input terminal can also be a
+named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+shortened terminal name, PXI_Trig0. The input terminal can also be a
 terminal from another device. For example, you can set the input
 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 ''',
@@ -1439,7 +1439,7 @@ Specifies whether to configure the Sequence Advance trigger to assert on
 the rising or falling edge.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER\\_VAL\\_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
+'table_body': [['NIDCPOWER_VAL_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER_VAL_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
 },
             },
         ],
@@ -1463,7 +1463,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1482,9 +1482,9 @@ determine which routes are available. This information is not available
 on a Device Routes tab in MAX.
 
 Input terminals can be specified in one of two ways. If the device is
-named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-shortened terminal name, PXI\_Trig0. The input terminal can also be a
+named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+shortened terminal name, PXI_Trig0. The input terminal can also be a
 terminal from another device. For example, you can set the input
 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 ''',
@@ -1500,7 +1500,7 @@ Specifies whether to configure the Source trigger to assert on the
 rising or falling edge.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER\\_VAL\\_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
+'table_body': [['NIDCPOWER_VAL_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER_VAL_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
 },
             },
         ],
@@ -1524,7 +1524,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1543,9 +1543,9 @@ determine which routes are available. This information is not available
 on a Device Routes tab in MAX.
 
 Input terminals can be specified in one of two ways. If the device is
-named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-shortened terminal name, PXI\_Trig0. The input terminal can also be a
+named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+shortened terminal name, PXI_Trig0. The input terminal can also be a
 terminal from another device. For example, you can set the input
 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 ''',
@@ -1561,7 +1561,7 @@ Specifies whether to configure the Start trigger to assert on the rising
 or falling edge.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER\\_VAL\\_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
+'table_body': [['NIDCPOWER_VAL_RISING (1016)', 'Asserts the trigger on the rising edge of the digital signal.'], ['NIDCPOWER_VAL_FALLING (1017)', 'Asserts the trigger on the falling edge of the digital signal.']],
 },
             },
         ],
@@ -1585,7 +1585,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1615,7 +1615,7 @@ performed sequentially based on the order specified in this parameter.
 Specifies whether the output is enabled or disabled.
 **Defined Values**:
 ''',
-'table_body': [['VI\\_TRUE', 'Enables generation on the specified output channel(s).'], ['VI\\_FALSE', 'Disables generation on the specified output channel(s). This parameter has no effect on the output disconnect relay. To toggle the relay, use the NIDCPOWER\\_ATTR\\_OUTPUT\\_CONNECTED attribute.']],
+'table_body': [['VI_TRUE', 'Enables generation on the specified output channel(s).'], ['VI_FALSE', 'Disables generation on the specified output channel(s). This parameter has no effect on the output disconnect relay. To toggle the relay, use the NIDCPOWER_ATTR_OUTPUT_CONNECTED attribute.']],
 },
             },
         ],
@@ -1625,13 +1625,13 @@ Enables or disables generation on the specified channel(s). Depending on
 the selected output function, the voltage level, current level,or output
 resistance must be set in addition to enabling the output to generate
 the desired level. For more information about configuring the output
-level, refer to niDCPower\_ConfigureOutputFunction.
+level, refer to niDCPower_ConfigureOutputFunction.
 ''',
 'note': '''
 If the device is in the
 `Uncommitted <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#uncommitted')>`__
 state, enabling the output does not take effect until you call the
-niDCPower\_Initiate function.
+niDCPower_Initiate function.
 ''',
 },
     },
@@ -1645,7 +1645,7 @@ niDCPower\_Initiate function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1675,7 +1675,7 @@ performed sequentially based on the order specified in this parameter.
 Configures the function to generate for the specified channel(s).
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_DC\\_VOLTAGE (1006)', 'Sets the output function to DC voltage.'], ['NIDCPOWER\\_VAL\\_DC\\_CURRENT (1007)', 'Sets the output function to DC current.'], ['NIDCPOWER\\_VAL\\_PULSE\\_VOLTAGE (1049)', 'Sets the output function to pulse voltage.'], ['NIDCPOWER\\_VAL\\_PULSE\\_CURRENT (1050)', 'Sets the output function to pulse current.']],
+'table_body': [['NIDCPOWER_VAL_DC_VOLTAGE (1006)', 'Sets the output function to DC voltage.'], ['NIDCPOWER_VAL_DC_CURRENT (1007)', 'Sets the output function to DC current.'], ['NIDCPOWER_VAL_PULSE_VOLTAGE (1049)', 'Sets the output function to pulse voltage.'], ['NIDCPOWER_VAL_PULSE_CURRENT (1050)', 'Sets the output function to pulse current.']],
 },
             },
         ],
@@ -1684,49 +1684,49 @@ Configures the function to generate for the specified channel(s).
 Configures the function the device attempts to generate for the
 specified channel(s).
 
-When NIDCPOWER\_VAL\_DC\_VOLTAGE is selected, the device generates the
+When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the
 desired voltage level on the output as long as the output current is
 below the current limit. The following functions can be used to
-configure the channel when NIDCPOWER\_VAL\_DC\_VOLTAGE is selected:
+configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:
 
--  niDCPower\_ConfigureVoltageLevel
--  niDCPower\_ConfigureCurrentLimit
--  niDCPower\_ConfigureVoltageLevelRange
--  niDCPower\_ConfigureCurrentLimitRange
+-  niDCPower_ConfigureVoltageLevel
+-  niDCPower_ConfigureCurrentLimit
+-  niDCPower_ConfigureVoltageLevelRange
+-  niDCPower_ConfigureCurrentLimitRange
 
-When NIDCPOWER\_VAL\_DC\_CURRENT is selected, the device generates the
+When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the
 desired current level on the output as long as the output voltage is
 below the voltage limit. The following functions can be used to
-configure the channel when NIDCPOWER\_VAL\_DC\_CURRENT is selected:
+configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:
 
--  niDCPower\_ConfigureCurrentLevel
--  niDCPower\_ConfigureVoltageLimit
--  niDCPower\_ConfigureCurrentLevelRange
--  niDCPower\_ConfigureVoltageLimitRange
+-  niDCPower_ConfigureCurrentLevel
+-  niDCPower_ConfigureVoltageLimit
+-  niDCPower_ConfigureCurrentLevelRange
+-  niDCPower_ConfigureVoltageLimitRange
 
-When NIDCPOWER\_VAL\_PULSE\_VOLTAGE is selected, the device generates
+When NIDCPOWER_VAL_PULSE_VOLTAGE is selected, the device generates
 pulses at the desired voltage levels on the output as long as the output
 current is below the current limit. The following VIs can be used to
-configure the channel when NIDCPOWER\_VAL\_PULSE\_VOLTAGE is selected:
+configure the channel when NIDCPOWER_VAL_PULSE_VOLTAGE is selected:
 
--  niDCPower\_ConfigurePulseVoltageLevel
--  niDCPower\_ConfigurePulseBiasVoltageLevel
--  niDCPower\_ConfigurePulseCurrentLimit
--  niDCPower\_ConfigurePulseBiasCurrentLimit
--  niDCPower\_ConfigurePulseVoltageLevelRange
--  niDCPower\_ConfigurePulseCurrentLimitRange
+-  niDCPower_ConfigurePulseVoltageLevel
+-  niDCPower_ConfigurePulseBiasVoltageLevel
+-  niDCPower_ConfigurePulseCurrentLimit
+-  niDCPower_ConfigurePulseBiasCurrentLimit
+-  niDCPower_ConfigurePulseVoltageLevelRange
+-  niDCPower_ConfigurePulseCurrentLimitRange
 
-When NIDCPOWER\_VAL\_PULSE\_CURRENT is selected, the device generates
+When NIDCPOWER_VAL_PULSE_CURRENT is selected, the device generates
 pulses at the desired current levels on the output as long as the output
 voltage is below the voltage limit. The following VIs can be used to
-configure the channel when NIDCPOWER\_VAL\_PULSE\_CURRENT is selected:
+configure the channel when NIDCPOWER_VAL_PULSE_CURRENT is selected:
 
--  niDCPower\_ConfigurePulseCurrentLevel
--  niDCPower\_ConfigurePulseBiasCurrentLevel
--  niDCPower\_ConfigurePulseVoltageLimit
--  niDCPower\_ConfigurePulseBiasVoltageLimit
--  niDCPower\_ConfigurePulseCurrentLevelRange
--  niDCPower\_ConfigurePulseVoltageLimitRange
+-  niDCPower_ConfigurePulseCurrentLevel
+-  niDCPower_ConfigurePulseBiasCurrentLevel
+-  niDCPower_ConfigurePulseVoltageLimit
+-  niDCPower_ConfigurePulseBiasVoltageLimit
+-  niDCPower_ConfigurePulseCurrentLevelRange
+-  niDCPower_ConfigurePulseVoltageLimitRange
 
 **Related Topics:**
 
@@ -1748,7 +1748,7 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1778,7 +1778,7 @@ performed sequentially based on the order specified in this parameter.
 Specifies the type of the range: voltage or current.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_RANGE\\_CURRENT (0)', 'NI-DCPower configures the current range.'], ['NIDCPOWER\\_VAL\\_RANGE\\_VOLTAGE (1)', 'NI-DCPower configures the voltage range.']],
+'table_body': [['NIDCPOWER_VAL_RANGE_CURRENT (0)', 'NI-DCPower configures the current range.'], ['NIDCPOWER_VAL_RANGE_VOLTAGE (1)', 'NI-DCPower configures the voltage range.']],
 },
             },
             {
@@ -1800,16 +1800,16 @@ Configures either the voltage level range or the current limit range. If
 **range type** is Current, the current limit range is configured.
 
 This function does not configure any of the DC Current output function
-settings. Refer to the niDCPower\_ConfigureOutputFunction function for
+settings. Refer to the niDCPower_ConfigureOutputFunction function for
 more information.
 
 This is a deprecated function. You must use the following functions
-instead of theniDCPower\_ConfigureOutputRange function:
+instead of theniDCPower_ConfigureOutputRange function:
 
--  niDCPower\_ConfigureVoltageLevel
--  niDCPower\_ConfigureVoltageLimit
--  niDCPower\_ConfigureCurrentLevel
--  niDCPower\_ConfigureCurrentLimit
+-  niDCPower_ConfigureVoltageLevel
+-  niDCPower_ConfigureVoltageLimit
+-  niDCPower_ConfigureCurrentLevel
+-  niDCPower_ConfigureCurrentLimit
 ''',
 },
     },
@@ -1823,7 +1823,7 @@ instead of theniDCPower\_ConfigureOutputRange function:
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1871,18 +1871,18 @@ Configures the output resistance that the device attempts to generate
 for the specified channel or channels. The channel must be enabled for
 the specified output resistance to take effect.
 
-Refer to the nidcpower\_ConfigureOutputEnabled function for more
+Refer to the nidcpower_ConfigureOutputEnabled function for more
 information about enabling the output channel.
 
 For NI PXIe-4141/4143/4145 devices, output resistance is only supported
 if the output function of the channel is set to
-NIDCPOWER\_VAL\_DC\_VOLTAGE using the niDCPower\_ConfigureOutputFunction
+NIDCPOWER_VAL_DC_VOLTAGE using the niDCPower_ConfigureOutputFunction
 function.
 
 For PXIe-4135, NI PXIe-4137, and NI PXIe-4139 devices, output resistance
 is supported if the output function of the channel is set to
-NIDCPOWER\_VAL\_DC\_CURRENT or NIDCPOWER\_VAL\_DC\_VOLTAGE using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_DC_VOLTAGE using the
+niDCPower_ConfigureOutputFunction function.
 
 The device actively regulates the current and voltage to reach the
 specified output resistance, although in DC Voltage output mode, the
@@ -1908,7 +1908,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1920,13 +1920,13 @@ niDCPower\_InitializeWithChannels function.
 'description': '''
 Specifies the power line frequency in hertz for specified channel(s).
 NI-DCPower uses this value to select a timebase for the
-NIDCPOWER\_ATTR\_APERTURE\_TIME attribute. Refer to the *Measurement
+NIDCPOWER_ATTR_APERTURE_TIME attribute. Refer to the *Measurement
 Configuration and Timing* topic for your device for more information
 about how to configure your measurements.
 **Defined Values**:
 ''',
 'note': 'Set this parameter to the frequency of the AC power line.',
-'table_body': [['NIDCPOWER\\_VAL\\_50\\_HERTZ (50.0)', 'Specifies 50 Hz.'], ['NIDCPOWER\\_VAL\\_60\\_HERTZ (60.0)', 'Specifies 60 Hz.']],
+'table_body': [['NIDCPOWER_VAL_50_HERTZ (50.0)', 'Specifies 50 Hz.'], ['NIDCPOWER_VAL_60_HERTZ (60.0)', 'Specifies 60 Hz.']],
 },
             },
         ],
@@ -1934,7 +1934,7 @@ about how to configure your measurements.
 'description': '''
 Specifies the power line frequency for specified channel(s). NI-DCPower
 uses this value to select a timebase for setting the
-niDCPower\_ConfigureApertureTime function in power line cycles (PLCs).
+niDCPower_ConfigureApertureTime function in power line cycles (PLCs).
 
 Refer to the *Measurement Configuration and Timing* topic for your
 device in the *NI DC Power Supplies and SMUs Help* for more information
@@ -1963,7 +1963,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -1995,7 +1995,7 @@ channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 level range that is configured using the
-niDCPower\_ConfigurePulseCurrentlevelRange function.
+niDCPower_ConfigurePulseCurrentlevelRange function.
 ''',
 },
             },
@@ -2007,15 +2007,15 @@ generate for the specified channel(s) during the off phase of a pulse.
 The channel must be enabled for the specified current level to take
 effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse current level
 setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputFunction function.
 
 The device actively regulates the current at the specified level unless
 doing so causes a voltage drop greater than the
-NIDCPOWER\_ATTR\_PULSE\_BIAS\_VOLTAGE\_LIMIT across the channels' output
+NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT across the channels' output
 terminals.
 ''',
 'note': '''
@@ -2036,7 +2036,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2069,7 +2069,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 limit range that is configured using the
-niDCPower\_ConfigurePulseCurrentlimitRange function.
+niDCPower_ConfigurePulseCurrentlimitRange function.
 ''',
 },
             },
@@ -2080,13 +2080,13 @@ Configures the pulse bias current limit for the specified channel(s).
 The channel must be enabled for the specified current limit to take
 effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse bias current
 limit is the current that the output must not exceed when generating the
-desired NIDCPOWER\_ATTR\_pULSE\_bIAS\_vOLTAGE\_lEVEL. The pulse bias
+desired NIDCPOWER_ATTR_pULSE_bIAS_vOLTAGE_lEVEL. The pulse bias
 current limit setting is only applicable if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2106,7 +2106,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2138,7 +2138,7 @@ generation.
 **Valid Values**:
 The valid values for this parameter are defined by the pulse voltage
 level range that is selected using the
-niDCPower\_ConfigurePulseVoltagelevelRange function.
+niDCPower_ConfigurePulseVoltagelevelRange function.
 ''',
 },
             },
@@ -2150,15 +2150,15 @@ generate for the specified channel(s) during the off phase of a pulse.
 The channel must be enabled for the specified voltage level to take
 effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse bias voltage
 level setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 
 The device actively regulates the voltage at the specified level unless
 doing so causes a current greater than the
-NIDCPOWER\_ATTR\_PULSE\_BIAS\_CURRENT\_LIMIT through the channels'
+NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT through the channels'
 output terminals.
 ''',
 'note': '''
@@ -2179,7 +2179,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2212,7 +2212,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse voltage
 limit range that is configured using the
-niDCPower\_ConfigurePulseVoltagelimitRange function.
+niDCPower_ConfigurePulseVoltagelimitRange function.
 ''',
 },
             },
@@ -2223,13 +2223,13 @@ Configures the pulse bias voltage limit for the specified channel(s).
 The channel must be enabled for the specified voltage limit to take
 effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse bias voltage
 limit is the voltage that the output must not exceed when generating the
-desired NIDCPOWER\_ATTR\_PULSE\_bIAS\_cURRENT\_lEVEL. The pulse bias
+desired NIDCPOWER_ATTR_PULSE_bIAS_cURRENT_lEVEL. The pulse bias
 voltage limit setting is only applicable if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2249,7 +2249,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2280,7 +2280,7 @@ Specifies the pulse current level, in amps, on the specified channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 level range that is configured using the
-niDCPower\_ConfigurePulseCurrentlevelRange function.
+niDCPower_ConfigurePulseCurrentlevelRange function.
 ''',
 },
             },
@@ -2291,15 +2291,15 @@ Configures the pulse current level that the device attempts to generate
 for the specified channel(s) during the on phase of a pulse. The channel
 must be enabled for the specified current level to take effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse current level
 setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputEnabled function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputEnabled function.
 
 The device actively regulates the current at the specified level unless
 doing so causes a voltage drop greater than the
-NIDCPOWER\_ATTR\_PULSE\_VOLTAGE\_lIMIT across the channels' output
+NIDCPOWER_ATTR_PULSE_VOLTAGE_lIMIT across the channels' output
 terminals.
 ''',
 'note': '''
@@ -2320,7 +2320,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2361,11 +2361,11 @@ Configures the pulse current level range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
 pulse current level and pulse bias current level using the
-niDCPower\_ConfigurePulseCurrentLevel and
-niDCPower\_ConfigurePulseBiasCurrentLevel functions. The pulse current
+niDCPower_ConfigurePulseCurrentLevel and
+niDCPower_ConfigurePulseBiasCurrentLevel functions. The pulse current
 level range setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2385,7 +2385,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2418,7 +2418,7 @@ negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 limit range that is configured using the
-niDCPower\_ConfigurePulseCurrentlimitRange function.
+niDCPower_ConfigurePulseCurrentlimitRange function.
 ''',
 },
             },
@@ -2428,13 +2428,13 @@ niDCPower\_ConfigurePulseCurrentlimitRange function.
 Configures the pulse current limit for the specified channel(s). The
 channel must be enabled for the specified current limit to take effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse current limit
 is the current that the output must not exceed when generating the
-desired NIDCPOWER\_ATTR\_PULSE\_vOLTAGE\_lEVEL. The pulse current limit
+desired NIDCPOWER_ATTR_PULSE_vOLTAGE_lEVEL. The pulse current limit
 setting is only applicable if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2454,7 +2454,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2495,11 +2495,11 @@ Configures the pulse current limit range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
 pulse current limit and pulse bias current limit using the
-niDCPower\_ConfigurePulseCurrentLimit and
-niDCPower\_ConfigurePulseBiasCurrentLimit functions. The pulse current
+niDCPower_ConfigurePulseCurrentLimit and
+niDCPower_ConfigurePulseBiasCurrentLimit functions. The pulse current
 limit range setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2519,7 +2519,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2551,7 +2551,7 @@ generation.
 **Valid Values**:
 The valid values for this parameter are defined by the voltage level
 range that is selected using the
-niDCPower\_ConfigurePulseVoltagelevelRange function.
+niDCPower_ConfigurePulseVoltagelevelRange function.
 ''',
 },
             },
@@ -2562,15 +2562,15 @@ Configures the pulse voltage level that the device attempts to generate
 for the specified channel(s) during the on phase of a pulse. The channel
 must be enabled for the specified voltage level to take effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse voltage level
 setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 
 The device actively regulates the voltage at the specified level unless
 doing so causes a current greater than the
-NIDCPOWER\_ATTR\_PULSE\_cURRENT\_lIMIT through the channels' output
+NIDCPOWER_ATTR_PULSE_cURRENT_lIMIT through the channels' output
 terminals.
 ''',
 'note': '''
@@ -2591,7 +2591,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2632,11 +2632,11 @@ Configures the pulse voltage level range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
 pulse voltage level and pulse bias voltage level using the
-niDCPower\_ConfigurePulseVoltageLevel and
-niDCPower\_ConfigurePulseBiasVoltageLevel functions. The pulse voltage
+niDCPower_ConfigurePulseVoltageLevel and
+niDCPower_ConfigurePulseBiasVoltageLevel functions. The pulse voltage
 level range setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_VOLTAGE output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2656,7 +2656,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2689,7 +2689,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse voltage
 limit range that is configured using the
-niDCPower\_ConfigurePulseVoltagelimitRange function.
+niDCPower_ConfigurePulseVoltagelimitRange function.
 ''',
 },
             },
@@ -2699,13 +2699,13 @@ niDCPower\_ConfigurePulseVoltagelimitRange function.
 Configures the pulse voltage limit for the specified channel(s). The
 channel must be enabled for the specified voltage limit to take effect.
 
-Refer to the niDCPower\_ConfigureOutputEnabled function for more
+Refer to the niDCPower_ConfigureOutputEnabled function for more
 information about enabling the output channel. The pulse voltage limit
 is the voltage that the output must not exceed when generating the
-desired NIDCPOWER\_ATTR\_PULSE\_cURRENT\_lEVEL. The pulse voltage limit
+desired NIDCPOWER_ATTR_PULSE_cURRENT_lEVEL. The pulse voltage limit
 setting is only applicable if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputFunction function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -2725,7 +2725,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2766,11 +2766,11 @@ Configures the pulse voltage limit range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
 pulse voltage limit and pulse bias voltage limit using the
-niDCPower\_ConfigurePulseVoltageLimit and
-niDCPower\_ConfigurePulseBiasVoltageLimit functions. The pulse voltage
+niDCPower_ConfigurePulseVoltageLimit and
+niDCPower_ConfigurePulseBiasVoltageLimit functions. The pulse voltage
 limit range setting is applicable only if the channel is set to the
-NIDCPOWER\_VAL\_PULSE\_CURRENT output function using the
-niDCPower\_ConfigureOutputFunction function.
+NIDCPOWER_VAL_PULSE_CURRENT output function using the
+niDCPower_ConfigureOutputFunction function.
 
 .
 ''',
@@ -2792,7 +2792,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2822,7 +2822,7 @@ performed sequentially based on the order specified in this parameter.
 Specifies local or remote sensing on the specified channel(s).
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_LOCAL (1008)', 'Local sensing'], ['NIDCPOWER\\_VAL\\_REMOTE (1009)', 'Remote sensing']],
+'table_body': [['NIDCPOWER_VAL_LOCAL (1008)', 'Local sensing'], ['NIDCPOWER_VAL_REMOTE (1009)', 'Remote sensing']],
 },
             },
         ],
@@ -2853,7 +2853,7 @@ Sense <REPLACE_DRIVER_SPECIFIC_URL_1(4112_localandremotesense)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2861,7 +2861,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Configures the Measure trigger for software triggering. Use the
-niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
+niDCPower_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
 ''',
 'note': '''
@@ -2882,7 +2882,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2890,7 +2890,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Configures the Pulse trigger for software triggering. Use the
-niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
+niDCPower_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
 ''',
 'note': '''
@@ -2911,7 +2911,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2919,7 +2919,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Configures the Sequence Advance trigger for software triggering. Use the
-niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
+niDCPower_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
 ''',
 'note': '''
@@ -2940,7 +2940,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2948,7 +2948,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Configures the Source trigger for software triggering. Use the
-niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
+niDCPower_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
 ''',
 'note': '''
@@ -2969,7 +2969,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -2977,7 +2977,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Configures the Start trigger for software triggering. Use the
-niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
+niDCPower_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
 ''',
 'note': '''
@@ -2998,7 +2998,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3011,13 +3011,13 @@ niDCPower\_InitializeWithChannels function.
 Specifies the source mode for the NI-DCPower session.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_SINGLE\\_POINT (1020)', 'Applies a single source configuration.'], ['NIDCPOWER\\_VAL\\_SEQUENCE (1021)', 'Applies a list of voltage or current configurations sequentially.']],
+'table_body': [['NIDCPOWER_VAL_SINGLE_POINT (1020)', 'Applies a single source configuration.'], ['NIDCPOWER_VAL_SEQUENCE (1021)', 'Applies a list of voltage or current configurations sequentially.']],
 },
             },
         ],
 'documentation': {
 'description': '''
-Configures the NIDCPOWER\_ATTR\_SOURCE\_MODE attribute. Specifies
+Configures the NIDCPOWER_ATTR_SOURCE_MODE attribute. Specifies
 whether to run a single output point or a sequence. Refer to the `Single
 Point Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(singlept)>`__ and
 `Sequence Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__
@@ -3036,7 +3036,7 @@ about using this function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3067,7 +3067,7 @@ Specifies the voltage level, in volts, for the output channel
 generation.
 **Valid Values**:
 The valid values for this parameter are defined by the voltage level
-range that is selected using the niDCPower\_ConfigureVoltagelevelRange
+range that is selected using the niDCPower_ConfigureVoltagelevelRange
 function.
 ''',
 },
@@ -3078,16 +3078,16 @@ function.
 Configures the voltage level the device attempts to generate for the
 specified channel(s). The channel must be enabled for the specified
 voltage level to take effect. Refer to the
-niDCPower\_ConfigureOutputEnabled function for more information about
+niDCPower_ConfigureOutputEnabled function for more information about
 enabling the output channel.
 
 The voltage level setting is applicable only if the output function of
-the channel is set to NIDCPOWER\_VAL\_DC\_VOLTAGE. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+the channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
 The device actively regulates the voltage at the specified level unless
 doing so causes a current output greater than the
-NIDCPOWER\_ATTR\_CURRENT\_LIMIT across the channels' output terminals.
+NIDCPOWER_ATTR_CURRENT_LIMIT across the channels' output terminals.
 
 **Related Topics:**
 
@@ -3106,7 +3106,7 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_voltage)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3145,12 +3145,12 @@ DC Power Supplies and SMUs Help*.
 'description': '''
 Configures the voltage level range for the specified channel(s). The
 configured range defines the valid values the voltage level can be set
-to using the niDCPower\_ConfigureVoltageLevel function. The voltage
+to using the niDCPower_ConfigureVoltageLevel function. The voltage
 level range setting is applicable only if the output function of the
-channel is set to NIDCPOWER\_VAL\_DC\_VOLTAGE. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
-Use the NIDCPOWER\_ATTR\_VOLTAGE\_LEVEL\_AUTORANGE attribute to enable
+Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute to enable
 automatic selection of the voltage level range.
 
 **Related Topics:**
@@ -3169,7 +3169,7 @@ automatic selection of the voltage level range.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3201,7 +3201,7 @@ channel(s). The limit is specified as a positive value, but symmetric
 positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the voltage limit
-range that is configured using the niDCPower\_ConfigureVoltagelimitRange
+range that is configured using the niDCPower_ConfigureVoltagelimitRange
 function.
 ''',
 },
@@ -3211,14 +3211,14 @@ function.
 'description': '''
 Configures the voltage limit for the specified channel(s). The channel
 must be enabled for the specified voltage limit to take effect. Refer to
-the niDCPower\_ConfigureOutputEnabled function for more information
+the niDCPower_ConfigureOutputEnabled function for more information
 about enabling the output channel.
 
 The voltage limit is the voltage that the output should not exceed when
-generating the desired niDCPower\_ConfigureCurrentLevel. The voltage
+generating the desired niDCPower_ConfigureCurrentLevel. The voltage
 limit setting is applicable only if the output function of the channel
-is set to NIDCPOWER\_VAL\_DC\_CURRENT. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+is set to NIDCPOWER_VAL_DC_CURRENT. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
 **Related Topics:**
 
@@ -3236,7 +3236,7 @@ nidcpower\_ConfigureOutputFunction to set the output function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3275,12 +3275,12 @@ DC Power Supplies and SMUs Help*.
 'description': '''
 Configures the voltage limit range for the specified channel(s). The
 configured range defines the valid values the voltage limit can be set
-to using the niDCPower\_ConfigureVoltageLimit function. The voltage
+to using the niDCPower_ConfigureVoltageLimit function. The voltage
 limit range setting is applicable only if the output function of the
-channel is set to NIDCPOWER\_VAL\_DC\_CURRENT. Use
-nidcpower\_ConfigureOutputFunction to set the output function.
+channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
+nidcpower_ConfigureOutputFunction to set the output function.
 
-Use the NIDCPOWER\_ATTR\_VOLTAGE\_LIMIT\_AUTORANGE attribute to enable
+Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute to enable
 automatic selection of the voltage limit range.
 
 **Related Topics:**
@@ -3299,7 +3299,7 @@ automatic selection of the voltage limit range.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3312,7 +3312,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies the internal reference to be connected to the calibration pin.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_5V (1054)', 'Calibration pin connected to 5 V internal reference.'], ['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_100KOHM (1055)', 'Calibration pin connected to 100 kΩ internal reference.'], ['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_GROUND (1056)', 'Calibration pin connected to ground reference.'], ['NIDCPOWER\\_VAL\\_INTERNAL\\_REFERENCE\\_NONE (1057)', 'Calibration pin disconnected from internal reference.']],
+'table_body': [['NIDCPOWER_VAL_INTERNAL_REFERENCE_5V (1054)', 'Calibration pin connected to 5 V internal reference.'], ['NIDCPOWER_VAL_INTERNAL_REFERENCE_100KOHM (1055)', 'Calibration pin connected to 100 kΩ internal reference.'], ['NIDCPOWER_VAL_INTERNAL_REFERENCE_GROUND (1056)', 'Calibration pin connected to ground reference.'], ['NIDCPOWER_VAL_INTERNAL_REFERENCE_NONE (1057)', 'Calibration pin disconnected from internal reference.']],
 },
             },
         ],
@@ -3342,7 +3342,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3375,7 +3375,7 @@ advanced sequencing. A ✓ indicates that the attribute can be configured
 in advanced sequencing. An ✕ indicates that the attribute cannot be
 configured in advanced sequencing.
 ''',
-'table_body': [['NIDCPOWER\\_ATTR\\_DC\\_NOISE\\_REJECTION', '✓', '✕', '✓', '✕', '✓', '✕', '✕', '✓'], ['NIDCPOWER\\_ATTR\\_APERTURE\\_TIME', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_MEASURE\\_RECORD\\_LENGTH', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_SENSE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_OVP\\_ENABLED', '✓', '✓', '✓', '✕', '✕', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_OVP\\_LIMIT', '✓', '✓', '✓', '✕', '✕', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_BIAS\\_DELAY', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_OFF\\_TIME', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_ON\\_TIME', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_SOURCE\\_DELAY', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_COMPENSATION\\_FREQUENCY', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_GAIN\\_BANDWIDTH', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_POLE\\_ZERO\\_RATIO', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_COMPENSATION\\_FREQUENCY', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_GAIN\\_BANDWIDTH', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_POLE\\_ZERO\\_RATIO', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_LEVEL\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_LIMIT\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_CURRENT\\_LIMIT\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_VOLTAGE\\_LEVEL\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_OUTPUT\\_ENABLED', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_OUTPUT\\_FUNCTION', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER\\_ATTR\\_OUTPUT\\_RESISTANCE', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_BIAS\\_CURRENT\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_BIAS\\_VOLTAGE\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_CURRENT\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_CURRENT\\_LEVEL\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_VOLTAGE\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_VOLTAGE\\_LIMIT\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_BIAS\\_CURRENT\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_BIAS\\_VOLTAGE\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_CURRENT\\_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_CURRENT\\_LIMIT\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_VOLTAGE\\_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_PULSE\\_VOLTAGE\\_LEVEL\\_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER\\_ATTR\\_TRANSIENT\\_RESPONSE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓']],
+'table_body': [['NIDCPOWER_ATTR_DC_NOISE_REJECTION', '✓', '✕', '✓', '✕', '✓', '✕', '✕', '✓'], ['NIDCPOWER_ATTR_APERTURE_TIME', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_MEASURE_RECORD_LENGTH', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_SENSE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_OVP_ENABLED', '✓', '✓', '✓', '✕', '✕', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_OVP_LIMIT', '✓', '✓', '✓', '✕', '✕', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_BIAS_DELAY', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_OFF_TIME', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_ON_TIME', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_SOURCE_DELAY', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_COMPENSATION_FREQUENCY', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_GAIN_BANDWIDTH', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_POLE_ZERO_RATIO', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_COMPENSATION_FREQUENCY', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_GAIN_BANDWIDTH', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_POLE_ZERO_RATIO', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_LEVEL', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_LIMIT', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_LIMIT', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_LEVEL', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_OUTPUT_ENABLED', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_OUTPUT_FUNCTION', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓'], ['NIDCPOWER_ATTR_OUTPUT_RESISTANCE', '✓', '✕', '✓', '✕', '✓', '✕', '✓', '✕'], ['NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE', '✓', '✓', '✓', '✓', '✓', '✕', '✕', '✕'], ['NIDCPOWER_ATTR_TRANSIENT_RESPONSE', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓']],
 'table_header': ['Attribute', 'PXIe-4135', 'NI 4136', 'NI 4137', 'NI 4138', 'NI 4139', 'NI 4140/4142/4144', 'NI 4141/4143/4145', 'PXIe-4162/4163'],
 },
             },
@@ -3391,14 +3391,14 @@ configured in advanced sequencing.
 'documentation': {
 'description': '''
 Creates an empty advanced sequence. Call the
-niDCPower\_CreateAdvancedSequenceStep function to add steps to the
+niDCPower_CreateAdvancedSequenceStep function to add steps to the
 active advanced sequence.
 
 **Support for this function**
 
 You must set the source mode to Sequence to use this function.
 
-Using the niDCPower\_SetSequence function with Advanced Sequence
+Using the niDCPower_SetSequence function with Advanced Sequence
 functions is unsupported.
 
 Use this function in the Uncommitted or Committed programming states.
@@ -3415,7 +3415,7 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 `Programming
 States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-niDCPower\_CreateAdvancedSequenceStep
+niDCPower_CreateAdvancedSequenceStep
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -3435,7 +3435,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3452,7 +3452,7 @@ niDCPower\_InitializeWithChannels function.
 'description': '''
 Creates a new advanced sequence step in the advanced sequence specified
 by the Active advanced sequence. When you create an advanced sequence
-step, each attribute you passed to the niDCPower\_CreateAdvancedSequence
+step, each attribute you passed to the niDCPower_CreateAdvancedSequence
 function is reset to its default value for that step unless otherwise
 specified.
 
@@ -3460,7 +3460,7 @@ specified.
 
 You must set the source mode to Sequence to use this function.
 
-Using the niDCPower\_SetSequence function with Advanced Sequence
+Using the niDCPower_SetSequence function with Advanced Sequence
 functions is unsupported.
 
 **Related Topics**:
@@ -3471,7 +3471,7 @@ Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 `Programming
 States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-niDCPower\_CreateAdvancedSequence
+niDCPower_CreateAdvancedSequence
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
@@ -3491,7 +3491,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3513,7 +3513,7 @@ sequence steps in the advanced sequence.
 
 You must set the source mode to Sequence to use this function.
 
-Using the niDCPower\_SetSequence function with Advanced Sequence
+Using the niDCPower_SetSequence function with Advanced Sequence
 functions is unsupported.
 
 **Related Topics**:
@@ -3542,16 +3542,16 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
         ],
 'documentation': {
 'description': '''
-This function performs the same actions as the niDCPower\_reset
+This function performs the same actions as the niDCPower_reset
 function, except that this function also immediately sets the
-NIDCPOWER\_ATTR\_OUTPUT\_ENABLED attribute to VI\_FALSE.
+NIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.
 
 This function opens the output relay on devices that have an output
 relay.
@@ -3568,7 +3568,7 @@ relay.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3602,7 +3602,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3633,7 +3633,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3664,7 +3664,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3692,7 +3692,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3705,7 +3705,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies which trigger or event to export.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_SOURCE\\_COMPLETE\\_EVENT (1030)', 'Exports the Source Complete event.'], ['NIDCPOWER\\_VAL\\_MEASURE\\_COMPLETE\\_EVENT (1031)', 'Exports the Measure Complete event.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ITERATION\\_COMPLETE\\_EVENT (1032)', 'Exports the Sequence Iteration Complete event.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ENGINE\\_DONE\\_EVENT (1033)', 'Exports the Sequence Engine Done event.'], ['NIDCPOWER\\_VAL\\_PULSE\\_COMPLETE\\_EVENT (1051)', 'Exports the Pulse Complete event.'], ['NIDCPOWER\\_VAL\\_READY\\_FOR\\_PULSE\\_TRIGGER\\_EVENT (1052)', 'Exports the Ready Pulse Trigger event.'], ['NIDCPOWER\\_VAL\\_START\\_TRIGGER (1034)', 'Exports the Start trigger.'], ['NIDCPOWER\\_VAL\\_SOURCE\\_TRIGGER (1035)', 'Exports the Source trigger.'], ['NIDCPOWER\\_VAL\\_MEASURE\\_TRIGGER (1036)', 'Exports the Measure trigger.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ADVANCE\\_TRIGGER (1037)', 'Exports the Sequence Advance trigger.'], ['NIDCPOWER\\_VAL\\_PULSE\\_TRIGGER (1053)', 'Exports the Pulse trigger.']],
+'table_body': [['NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)', 'Exports the Source Complete event.'], ['NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)', 'Exports the Measure Complete event.'], ['NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032)', 'Exports the Sequence Iteration Complete event.'], ['NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)', 'Exports the Sequence Engine Done event.'], ['NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051)', 'Exports the Pulse Complete event.'], ['NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)', 'Exports the Ready Pulse Trigger event.'], ['NIDCPOWER_VAL_START_TRIGGER (1034)', 'Exports the Start trigger.'], ['NIDCPOWER_VAL_SOURCE_TRIGGER (1035)', 'Exports the Source trigger.'], ['NIDCPOWER_VAL_MEASURE_TRIGGER (1036)', 'Exports the Measure trigger.'], ['NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037)', 'Exports the Sequence Advance trigger.'], ['NIDCPOWER_VAL_PULSE_TRIGGER (1053)', 'Exports the Pulse trigger.']],
 },
             },
             {
@@ -3725,14 +3725,14 @@ Specifies which trigger or event to export.
 Specifies where to export the selected signal.
 **Relative Terminals**:
 ''',
-'table_body': [['""', 'Do not export signal'], ['"PXI\\_Trig0"', 'PXI trigger line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7']],
+'table_body': [['""', 'Do not export signal'], ['"PXI_Trig0"', 'PXI trigger line 0'], ['"PXI_Trig1"', 'PXI trigger line 1'], ['"PXI_Trig2"', 'PXI trigger line 2'], ['"PXI_Trig3"', 'PXI trigger line 3'], ['"PXI_Trig4"', 'PXI trigger line 4'], ['"PXI_Trig5"', 'PXI trigger line 5'], ['"PXI_Trig6"', 'PXI trigger line 6'], ['"PXI_Trig7"', 'PXI trigger line 7']],
 },
             },
         ],
 'documentation': {
 'description': '''
 Routes signals (triggers and events) to the output terminal you specify.
-The route is created when the session is niDCPower\_Commit.
+The route is created when the session is niDCPower_Commit.
 
 **Related Topics:**
 
@@ -3756,7 +3756,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3853,9 +3853,9 @@ device.
 Returns an array of voltage measurements, an array of current
 measurements, and an array of compliance measurements that were
 previously taken and are stored in the NI-DCPower buffer. This function
-should not be used when the NIDCPOWER\_ATTR\_MEASURE\_WHEN attribute is
-set to NIDCPOWER\_VAL\_ON\_DEMAND. You must first call
-niDCPower\_Initiate before calling this function.
+should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
+set to NIDCPOWER_VAL_ON_DEMAND. You must first call
+niDCPower_Initiate before calling this function.
 
 Refer to the `Acquiring
 Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
@@ -3881,7 +3881,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -3964,7 +3964,7 @@ it or by selecting it and then pressing **Enter**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4047,7 +4047,7 @@ it or by selecting it and then pressing **Enter**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4130,7 +4130,7 @@ it or by selecting it and then pressing **Enter**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4213,7 +4213,7 @@ it or by selecting it and then pressing **Enter**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4296,7 +4296,7 @@ it or by selecting it and then pressing **Enter**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4360,7 +4360,7 @@ the buffer, and returns the buffer size you must pass to get the entire
 value. For example, if the value is 123456 and the buffer size is 4, the
 function places 123 into the buffer and returns 7.
 To obtain the required buffer size, you can pass 0 for this attribute
-and VI\_NULL for **value**. If you want the function to fill in the
+and VI_NULL for **value**. If you want the function to fill in the
 buffer regardless of the number of bytes in the value, pass a negative
 number for this attribute.
 ''',
@@ -4382,7 +4382,7 @@ NUL byte at the end of the buffer, and returns the buffer size you must
 pass to get the entire value. For example, if the value is 123456 and
 the buffer size is 4, the function places 123 into the buffer and
 returns 7.
-If you specify 0 for **bufSize**, you can pass VI\_NULL for this
+If you specify 0 for **bufSize**, you can pass VI_NULL for this
 attribute.
 If the attribute currently showing in the attribute ring control has
 constants as valid values, you can view a list of the constants by
@@ -4410,7 +4410,7 @@ selecting it and then pressing .
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4440,7 +4440,7 @@ EEPROM.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4473,7 +4473,7 @@ user-defined information in the device onboard EEPROM.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4502,7 +4502,7 @@ NUL byte at the end of the buffer, and returns the buffer size you must
 pass to get the entire value. For example, if the value is 123456 and
 the buffer size is 4, the function places 123 into the buffer and
 returns 7.
-If you pass 0, you can pass VI\_NULL for **channelName**.
+If you pass 0, you can pass VI_NULL for **channelName**.
 ''',
 },
             },
@@ -4518,7 +4518,7 @@ If you pass 0, you can pass VI\_NULL for **channelName**.
 'documentation': {
 'description': '''
 Retrieves the output **channelName** that corresponds to the requested
-**index**. Use the NIDCPOWER\_ATTR\_CHANNEL\_COUNT attribute to
+**index**. Use the NIDCPOWER_ATTR_CHANNEL_COUNT attribute to
 determine the upper bound of valid values for **index**.
 ''',
 },
@@ -4533,7 +4533,7 @@ determine the upper bound of valid values for **index**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4559,7 +4559,7 @@ more bytes than you indicate in this attribute, the function copies
 end of the buffer, and returns the buffer size you must pass to get the
 entire value. For example, if the value is 123456 and the buffer size is
 4, the function places 123 into the buffer and returns 7.
-If you pass 0 for this attribute, you can pass VI\_NULL for
+If you pass 0 for this attribute, you can pass VI_NULL for
 **description**.
 ''',
 },
@@ -4580,7 +4580,7 @@ buffer, places an ASCII NUL byte at the end of the buffer, and returns
 the buffer size you must pass to get the entire value. For example, if
 the value is 123456 and the buffer size is 4, the function places 123
 into the buffer and returns 7.
-If you pass 0 for **bufferSize**, you can pass VI\_NULL for this
+If you pass 0 for **bufferSize**, you can pass VI_NULL for this
 attribute.
 ''',
 },
@@ -4596,12 +4596,12 @@ attribute.
   a sufficiently large buffer size.
 | If the user specifies a valid IVI session for **vi**, this function
   retrieves and then clears the error information for the session. If
-  the user passes VI\_NULL for **vi**, this function retrieves and then
+  the user passes VI_NULL for **vi**, this function retrieves and then
   clears the error information for the current execution thread. If
   **vi** is an invalid session, the function does nothing and returns an
   error. Normally, the error information describes the first error that
-  occurred since the user last called niDCPower\_GetError or
-  niDCPower\_ClearError.
+  occurred since the user last called niDCPower_GetError or
+  niDCPower_ClearError.
 ''',
 },
     },
@@ -4615,7 +4615,7 @@ attribute.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4682,7 +4682,7 @@ for **minutes**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4715,7 +4715,7 @@ during the last successful external calibration.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4748,7 +4748,7 @@ external calibrations.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4766,7 +4766,7 @@ places an ASCII NUL byte at the end of the buffer, and returns the
 buffer size you must pass to get the entire value. For example, if the
 value is 123456 and the buffer size is 4, the function places 123 into
 the buffer and returns 7.
-If you pass 0, you can pass VI\_NULL for **coercionRecord**.
+If you pass 0, you can pass VI_NULL for **coercionRecord**.
 ''',
 },
             },
@@ -4800,7 +4800,7 @@ specified.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4818,7 +4818,7 @@ into the buffer, places an ASCII NUL byte at the end of the buffer, and
 returns the buffer size you must pass to get the entire value. For
 example, if the value is 123456 and the buffer size is 4, the function
 places 123 into the buffer and returns 7.
-If you pass 0, you can pass VI\_NULL for **interchangeWarning**.
+If you pass 0, you can pass VI_NULL for **interchangeWarning**.
 ''',
 },
             },
@@ -4843,7 +4843,7 @@ warnings indicate that using your application with a different device
 may cause a different behavior.
 
 NI-DCPower performs interchangeability checking when the
-NIDCPOWER\_ATTR\_INTERCHANGE\_CHECK attribute is set to VI\_TRUE. This
+NIDCPOWER_ATTR_INTERCHANGE_CHECK attribute is set to VI_TRUE. This
 function returns an empty string in warning if no interchangeability
 warnings remain for the session. In general, NI-DCPower generates
 interchangeability warnings when an attribute that affects the behavior
@@ -4861,7 +4861,7 @@ of the device is in a state that you did not specify.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -4938,7 +4938,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5077,7 +5077,7 @@ procedure.
 'description': '''
 Specifies the initial value of certain attributes for the session. The
 syntax for **optionString** is a list of attributes with an assigned
-value where 1 is VI\_TRUE and 0 is VI\_FALSE. Each attribute/value
+value where 1 is VI_TRUE and 0 is VI_FALSE. Each attribute/value
 combination is delimited with a comma, as shown in the following
 example:
 
@@ -5107,7 +5107,7 @@ NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-This function is deprecated. Use niDCPower\_InitializeWithChannels
+This function is deprecated. Use niDCPower_InitializeWithChannels
 instead.
 
 Creates a new IVI instrument driver session to the device specified in
@@ -5116,25 +5116,25 @@ device in all subsequent NI-DCPower function calls. With this function,
 you can optionally set the initial state of the following session
 attributes:
 
--  NIDCPOWER\_ATTR\_SIMULATE
--  NIDCPOWER\_ATTR\_DRIVER\_SETUP
--  NIDCPOWER\_ATTR\_RANGE\_CHECK
--  NIDCPOWER\_ATTR\_QUERY\_INSTRUMENT\_STATUS
--  NIDCPOWER\_ATTR\_CACHE
--  NIDCPOWER\_ATTR\_RECORD\_COERCIONS
+-  NIDCPOWER_ATTR_SIMULATE
+-  NIDCPOWER_ATTR_DRIVER_SETUP
+-  NIDCPOWER_ATTR_RANGE_CHECK
+-  NIDCPOWER_ATTR_QUERY_INSTRUMENT_STATUS
+-  NIDCPOWER_ATTR_CACHE
+-  NIDCPOWER_ATTR_RECORD_COERCIONS
 
 This function also sends initialization commands to set the device to
 the state necessary for NI-DCPower to operate.
 
 To place the device in a known start-up state when creating a new
-session, set **resetDevice** to VI\_TRUE. This action is equivalent to
-using the niDCPower\_reset function.
+session, set **resetDevice** to VI_TRUE. This action is equivalent to
+using the niDCPower_reset function.
 
 To open a session and leave the device in its existing configuration
 without passing through a transitional output state, set **resetDevice**
-to VI\_FALSE, and immediately call the niDCPower\_Abort function. Then
+to VI_FALSE, and immediately call the niDCPower_Abort function. Then
 configure the device as in the previous session changing only the
-desired settings, and then call the niDCPower\_Initiate function.
+desired settings, and then call the niDCPower_Initiate function.
 
 Refer to the `deprecated programming state
 model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__ for
@@ -5196,7 +5196,7 @@ procedure.
 'description': '''
 Specifies the initial value of certain attributes for the session. The
 syntax for **optionString** is a list of attributes with an assigned
-value where 1 is VI\_TRUE and 0 is VI\_FALSE. For example:
+value where 1 is VI_TRUE and 0 is VI_FALSE. For example:
 
 "Simulate=0"
 
@@ -5227,8 +5227,8 @@ specified in **resource name** to be used in all subsequent NI-DCPower
 function calls. With this function, you can optionally set the initial
 state of the following session attributes:
 
--  NIDCPOWER\_ATTR\_SIMULATE
--  NIDCPOWER\_ATTR\_DRIVER\_SETUP
+-  NIDCPOWER_ATTR_SIMULATE
+-  NIDCPOWER_ATTR_DRIVER_SETUP
 
 After calling this function, the session will be in the Uncommitted
 state. Refer to the `Programming
@@ -5236,15 +5236,15 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
 details about specific software states.
 
 To place the device in a known start-up state when creating a new
-session, set **reset** to VI\_TRUE. This action is equivalent to using
-the niDCPower\_reset function immediately after initializing the
+session, set **reset** to VI_TRUE. This action is equivalent to using
+the niDCPower_reset function immediately after initializing the
 session.
 
 To open a session and leave the device in its existing configuration
 without passing through a transitional output state, set **reset** to
-VI\_FALSE. Then configure the device as in the previous session,
+VI_FALSE. Then configure the device as in the previous session,
 changing only the desired settings, and then call the
-niDCPower\_Initiate function.
+niDCPower_Initiate function.
 
 **Related Topics:**
 
@@ -5263,7 +5263,7 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5272,7 +5272,7 @@ niDCPower\_InitializeWithChannels function.
 'description': '''
 Starts generation or acquisition, causing the NI-DCPower session to
 leave the Uncommitted state or Committed state and enter the Running
-state. To return to the Committed state call the niDCPower\_Abort
+state. To return to the Committed state call the niDCPower_Abort
 function. Refer to the `Programming
 States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for information about the
@@ -5295,7 +5295,7 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5306,51 +5306,51 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 | This parameter is optional. If you do not want to use this parameter,
-  pass VI\_NULL.
+  pass VI_NULL.
 | Use this parameter in complex functions to keep track of whether you
   obtain a lock and therefore need to unlock the session. Pass the
   address of a local ViBoolean variable. In the declaration of the local
-  variable, initialize it to VI\_FALSE. Pass the address of the same
+  variable, initialize it to VI_FALSE. Pass the address of the same
   local variable to any other calls you make to the
-  niDCPower\_LockSession function or the niDCPower\_UnlockSession
+  niDCPower_LockSession function or the niDCPower_UnlockSession
   function in the same function.
-| The parameter is an input/output parameter. The niDCPower\_LockSession
-  and niDCPower\_UnlockSession functions each inspect the current value
+| The parameter is an input/output parameter. The niDCPower_LockSession
+  and niDCPower_UnlockSession functions each inspect the current value
   and take the following actions.
 
--  If the value is VI\_TRUE, the niDCPower\_LockSession function does
+-  If the value is VI_TRUE, the niDCPower_LockSession function does
    not lock the session again.
--  If the value is VI\_FALSE, the niDCPower\_LockSession function
-   obtains the lock and sets the value of the parameter to VI\_TRUE.
--  If the value is VI\_FALSE, the niDCPower\_UnlockSession function does
+-  If the value is VI_FALSE, the niDCPower_LockSession function
+   obtains the lock and sets the value of the parameter to VI_TRUE.
+-  If the value is VI_FALSE, the niDCPower_UnlockSession function does
    not attempt to unlock the session.
--  If the value is VI\_TRUE, the niDCPower\_UnlockSession function
-   releases the lock and sets the value of the parameter to VI\_FALSE.
+-  If the value is VI_TRUE, the niDCPower_UnlockSession function
+   releases the lock and sets the value of the parameter to VI_FALSE.
 
-| Thus, you can, call the niDCPower\_UnlockSession function at the end
+| Thus, you can, call the niDCPower_UnlockSession function at the end
   of your function without worrying about whether you actually have the
   lock, as shown in the following example.
 | ViStatus TestFunc (ViSession vi, ViInt32 flags)
   {
-  ViStatus error = VI\_SUCCESS;
-  ViBoolean haveLock = VI\_FALSE;
-  if (flags & BIT\_1)
+  ViStatus error = VI_SUCCESS;
+  ViBoolean haveLock = VI_FALSE;
+  if (flags & BIT_1)
   {
-  viCheckErr( niDCPower\_LockSession(vi, &haveLock;));
+  viCheckErr( niDCPower_LockSession(vi, &haveLock;));
   viCheckErr( TakeAction1(vi));
-  if (flags & BIT\_2)
+  if (flags & BIT_2)
   {
-  viCheckErr( niDCPower\_UnlockSession(vi, &haveLock;));
+  viCheckErr( niDCPower_UnlockSession(vi, &haveLock;));
   viCheckErr( TakeAction2(vi));
-  viCheckErr( niDCPower\_LockSession(vi, &haveLock;);
+  viCheckErr( niDCPower_LockSession(vi, &haveLock;);
   }
-  if (flags & BIT\_3)
+  if (flags & BIT_3)
   viCheckErr( TakeAction3(vi));
   }
   Error:
   /\*At this point, you cannot really be sure that you have the lock.
   Fortunately, the haveLock variable takes care of that for you.\*/
-  niDCPower\_UnlockSession(vi, &haveLock;);
+  niDCPower_UnlockSession(vi, &haveLock;);
   return error;
 | }
 ''',
@@ -5365,26 +5365,26 @@ niDCPower\_InitializeWithChannels function.
 | Other threads may have obtained a lock on this session for the
   following reasons:
 
--  The application called the niDCPower\_LockSession function.
+-  The application called the niDCPower_LockSession function.
 -  A call to NI-DCPower locked the session.
 -  A call to the IVI engine locked the session.
--  After a call to the niDCPower\_LockSession function returns
+-  After a call to the niDCPower_LockSession function returns
    successfully, no other threads can access the device session until
-   you call the niDCPower\_UnlockSession function.
--  Use the niDCPower\_LockSession function and the
-   niDCPower\_UnlockSession function around a sequence of calls to
+   you call the niDCPower_UnlockSession function.
+-  Use the niDCPower_LockSession function and the
+   niDCPower_UnlockSession function around a sequence of calls to
    instrument driver functions if you require that the device retain its
    settings through the end of the sequence.
 
-You can safely make nested calls to the niDCPower\_LockSession function
+You can safely make nested calls to the niDCPower_LockSession function
 within the same thread. To completely unlock the session, you must
-balance each call to the niDCPower\_LockSession function with a call to
-the niDCPower\_UnlockSession function. If, however, you use
-**Caller\_Has\_Lock** in all calls to the niDCPower\_LockSession and
-niDCPower\_UnlockSession function within a function, the IVI Library
+balance each call to the niDCPower_LockSession function with a call to
+the niDCPower_UnlockSession function. If, however, you use
+**Caller_Has_Lock** in all calls to the niDCPower_LockSession and
+niDCPower_UnlockSession function within a function, the IVI Library
 locks the session only once within the function regardless of the number
-of calls you make to the niDCPower\_LockSession function. This behavior
-allows you to call the niDCPower\_UnlockSession function just once at
+of calls you make to the niDCPower_LockSession function. This behavior
+allows you to call the niDCPower_UnlockSession function just once at
 the end of the function.
 ''',
 },
@@ -5399,7 +5399,7 @@ the end of the function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5410,8 +5410,8 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Specifies the output channel to measure. Only one measurement at a time
-may be made with the niDCPower\_Measure function. Use the
-niDCPower\_MeasureMultiple function to measure multiple channels.
+may be made with the niDCPower_Measure function. Use the
+niDCPower_MeasureMultiple function to measure multiple channels.
 ''',
 },
             },
@@ -5424,7 +5424,7 @@ niDCPower\_MeasureMultiple function to measure multiple channels.
 Specifies whether a voltage or current value is measured.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_MEASURE\\_VOLTAGE (1)', 'The device measures voltage.'], ['NIDCPOWER\\_VAL\\_MEASURE\\_CURRENT (0)', 'The device measures current.']],
+'table_body': [['NIDCPOWER_VAL_MEASURE_VOLTAGE (1)', 'The device measures voltage.'], ['NIDCPOWER_VAL_MEASURE_CURRENT (0)', 'The device measures current.']],
 },
             },
             {
@@ -5444,7 +5444,7 @@ amps for current.
 Returns the measured value of either the voltage or current on the
 specified output channel. Each call to this function blocks other
 function calls until the hardware returns the **measurement**. To
-measure multiple output channels, use the niDCPower\_MeasureMultiple
+measure multiple output channels, use the niDCPower_MeasureMultiple
 function.
 ''',
 },
@@ -5459,7 +5459,7 @@ function.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5526,7 +5526,7 @@ on the specified output channel(s).
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5556,17 +5556,17 @@ Queries the specified output device to determine if it is operating at
 the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
 The compliance limit is the current limit when the output function is
-set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
+set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
 compliance limit, the output reaches the current limit before the
-desired voltage level. Refer to the niDCPower\_ConfigureOutputFunction
-function and the niDCPower\_ConfigureCurrentLimit function for more
+desired voltage level. Refer to the niDCPower_ConfigureOutputFunction
+function and the niDCPower_ConfigureCurrentLimit function for more
 information about output function and current limit, respectively.
 
 The compliance limit is the voltage limit when the output function is
-set to NIDCPOWER\_VAL\_DC\_CURRENT. If the output is operating at the
+set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
 compliance limit, the output reaches the voltage limit before the
-desired current level. Refer to the niDCPower\_ConfigureOutputFunction
-function and the niDCPower\_ConfigureVoltageLimit function for more
+desired current level. Refer to the niDCPower_ConfigureOutputFunction
+function and the niDCPower_ConfigureVoltageLimit function for more
 information about output function and voltage limit, respectively.
 
 **Related Topics:**
@@ -5585,7 +5585,7 @@ information about output function and voltage limit, respectively.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5640,7 +5640,7 @@ channel is set to the specified **voltageLevel**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5695,7 +5695,7 @@ channel is set to the specified **currentLimit**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5750,7 +5750,7 @@ channel is set to the specified **voltageLevel**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5774,7 +5774,7 @@ queried for one channel at a time.
 Specifies the output state of the output channel that is being queried.
 **Defined Values**:
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_OUTPUT\\_CONSTANT\\_VOLTAGE (0)', 'The device maintains a constant voltage by adjusting the current.'], ['NIDCPOWER\\_VAL\\_OUTPUT\\_CONSTANT\\_CURRENT (1)', 'The device maintains a constant current by adjusting the voltage.']],
+'table_body': [['NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0)', 'The device maintains a constant voltage by adjusting the current.'], ['NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1)', 'The device maintains a constant current by adjusting the voltage.']],
 },
             },
             {
@@ -5810,7 +5810,7 @@ is currently in the state specified by **outputState**.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5840,7 +5840,7 @@ device.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5873,7 +5873,7 @@ relay.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5901,17 +5901,17 @@ test modules.
 
 This function does not clear the interchangeability warnings from the
 list of previously recorded interchangeability warnings. If you want to
-guarantee that the niDCPower\_GetNextInterchangeWarning function only
+guarantee that the niDCPower_GetNextInterchangeWarning function only
 returns those interchangeability warnings that are generated after
 calling this function, you must clear the list of interchangeability
 warnings. You can clear the interchangeability warnings list by
-repeatedly calling the niDCPower\_GetNextInterchangeWarning function
+repeatedly calling the niDCPower_GetNextInterchangeWarning function
 until no more interchangeability warnings are returned. If you are not
 interested in the content of those warnings, you can call the
-niDCPower\_ClearInterchangeWarnings function.
+niDCPower_ClearInterchangeWarnings function.
 ''',
 'note': '''
-niDCPower\_GetNextInterchangeWarning does not mark any attributes for
+niDCPower_GetNextInterchangeWarning does not mark any attributes for
 an interchange check.
 ''',
 },
@@ -5926,7 +5926,7 @@ an interchange check.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5937,7 +5937,7 @@ Resets the device to a known state. This function disables power
 generation, resets session attributes to their default values, commits
 the session attributes, and leaves the session in the
 `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
-state. In addition to exhibiting the behavior of the niDCPower\_reset
+state. In addition to exhibiting the behavior of the niDCPower_reset
 function, this function can assign user-defined default values for
 configurable attributes from the IVI configuration.
 ''',
@@ -5953,7 +5953,7 @@ configurable attributes from the IVI configuration.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -5966,7 +5966,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies which trigger to assert.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_START\\_TRIGGER (1034)', 'Asserts the Start trigger.'], ['NIDCPOWER\\_VAL\\_SOURCE\\_TRIGGER (1035)', 'Asserts the Source trigger.'], ['NIDCPOWER\\_VAL\\_MEASURE\\_TRIGGER (1036)', 'Asserts the Measure trigger.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ADVANCE\\_TRIGGER (1037)', 'Asserts the Sequence Advance trigger.'], ['NIDCPOWER\\_VAL\\_PULSE\\_TRIGGER (1053', 'Asserts the Pulse trigger.']],
+'table_body': [['NIDCPOWER_VAL_START_TRIGGER (1034)', 'Asserts the Start trigger.'], ['NIDCPOWER_VAL_SOURCE_TRIGGER (1035)', 'Asserts the Source trigger.'], ['NIDCPOWER_VAL_MEASURE_TRIGGER (1036)', 'Asserts the Measure trigger.'], ['NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037)', 'Asserts the Sequence Advance trigger.'], ['NIDCPOWER_VAL_PULSE_TRIGGER (1053', 'Asserts the Pulse trigger.']],
 },
             },
         ],
@@ -5997,7 +5997,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6085,7 +6085,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6173,7 +6173,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6261,7 +6261,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6349,7 +6349,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6437,7 +6437,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6525,7 +6525,7 @@ settings of the device session.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
+niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6548,8 +6548,8 @@ information.
 If you call this function in a session, **info** is immediately changed.
 If you call this function in an external calibration session, **info**
 is changed only after you close the session using the
-niDCPower\_CloseExtCal function with **action** set to
-NIDCPOWER\_VAL\_COMMIT.
+niDCPower_CloseExtCal function with **action** set to
+NIDCPOWER_VAL_COMMIT.
 ''',
 },
     },
@@ -6563,7 +6563,7 @@ NIDCPOWER\_VAL\_COMMIT.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6654,7 +6654,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6665,51 +6665,51 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 | This attribute is optional. If you do not want to use this attribute,
-  pass VI\_NULL.
+  pass VI_NULL.
 | Use this attribute in complex functions to keep track of whether you
   obtain a lock and therefore need to unlock the session.
 | Pass the address of a local ViBoolean variable. In the declaration of
-  the local variable, initialize it to VI\_FALSE. Pass the address of
+  the local variable, initialize it to VI_FALSE. Pass the address of
   the same local variable to any other calls you make to
-  niDCPower\_LockSession or niDCPower\_UnlockSessionin the same
+  niDCPower_LockSession or niDCPower_UnlockSessionin the same
   function.
-| The parameter is an input/output parameter. niDCPower\_LockSession and
-  niDCPower\_UnlockSessioneach inspect the current value and take the
+| The parameter is an input/output parameter. niDCPower_LockSession and
+  niDCPower_UnlockSessioneach inspect the current value and take the
   following actions.
 
--  If the value is VI\_TRUE, niDCPower\_LockSession does not lock the
+-  If the value is VI_TRUE, niDCPower_LockSession does not lock the
    session again.
--  If the value is VI\_FALSE, niDCPower\_LockSession obtains the lock
-   and sets the value of the parameter to VI\_TRUE.
--  If the value is VI\_FALSE, niDCPower\_UnlockSessiondoes not attempt
+-  If the value is VI_FALSE, niDCPower_LockSession obtains the lock
+   and sets the value of the parameter to VI_TRUE.
+-  If the value is VI_FALSE, niDCPower_UnlockSessiondoes not attempt
    to unlock the session.
--  If the value is VI\_TRUE, niDCPower\_UnlockSessionreleases the lock
-   and sets the value of the parameter to VI\_FALSE.
+-  If the value is VI_TRUE, niDCPower_UnlockSessionreleases the lock
+   and sets the value of the parameter to VI_FALSE.
 
-| Thus, you can, call niDCPower\_UnlockSession at the end of your
+| Thus, you can, call niDCPower_UnlockSession at the end of your
   function without worrying about whether you actually have the lock, as
   the following example shows.
 | ViStatus TestFunc (ViSession vi, ViInt32 flags)
   {
-  ViStatus error = VI\_SUCCESS;
-  ViBoolean haveLock = VI\_FALSE;
-  if (flags & BIT\_1)
+  ViStatus error = VI_SUCCESS;
+  ViBoolean haveLock = VI_FALSE;
+  if (flags & BIT_1)
   {
-  viCheckErr( niDCPower\_LockSession(vi, &haveLock;));
+  viCheckErr( niDCPower_LockSession(vi, &haveLock;));
   viCheckErr( TakeAction1(vi));
-  if (flags & BIT\_2)
+  if (flags & BIT_2)
   {
-  viCheckErr( niDCPower\_UnlockSession(vi, &haveLock;));
+  viCheckErr( niDCPower_UnlockSession(vi, &haveLock;));
   viCheckErr( TakeAction2(vi));
-  viCheckErr( niDCPower\_LockSession(vi, &haveLock;);
+  viCheckErr( niDCPower_LockSession(vi, &haveLock;);
   }
-  if (flags & BIT\_3)
+  if (flags & BIT_3)
   viCheckErr( TakeAction3(vi));
   }
   Error:
   /\*At this point, you cannot really be sure that you have the lock.
   Fortunately, the haveLock variable takes care of that for you.\*/
-  niDCPower\_UnlockSession(vi, &haveLock;);
+  niDCPower_UnlockSession(vi, &haveLock;);
   return error;
   }
 ''',
@@ -6719,7 +6719,7 @@ niDCPower\_InitializeWithChannels function.
 'documentation': {
 'description': '''
 Releases a lock that you acquired on an device session using
-niDCPower\_LockSession. Refer to niDCPower\_LockSession for additional
+niDCPower_LockSession. Refer to niDCPower_LockSession for additional
 information on session locks.
 ''',
 },
@@ -6734,7 +6734,7 @@ information on session locks.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6747,7 +6747,7 @@ niDCPower\_InitializeWithChannels function.
 Specifies which event to wait for.
 **Defined Values:**
 ''',
-'table_body': [['NIDCPOWER\\_VAL\\_SOURCE\\_COMPLETE\\_EVENT (1030)', 'Waits for the Source Complete event.'], ['NIDCPOWER\\_VAL\\_MEASURE\\_COMPLETE\\_EVENT (1031)', 'Waits for the Measure Complete event.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ITERATION\\_COMPLETE\\_EVENT (1032)', 'Waits for the Sequence Iteration Complete event.'], ['NIDCPOWER\\_VAL\\_SEQUENCE\\_ENGINE\\_DONE\\_EVENT (1033)', 'Waits for the Sequence Engine Done event.'], ['NIDCPOWER\\_VAL\\_PULSE\\_COMPLETE\\_EVENT (1051 )', 'Waits for the Pulse Complete event.'], ['NIDCPOWER\\_VAL\\_READY\\_FOR\\_PULSE\\_TRIGGER\\_EVENT (1052)', 'Waits for the Ready for Pulse Trigger event.']],
+'table_body': [['NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)', 'Waits for the Source Complete event.'], ['NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)', 'Waits for the Measure Complete event.'], ['NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032)', 'Waits for the Sequence Iteration Complete event.'], ['NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)', 'Waits for the Sequence Engine Done event.'], ['NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )', 'Waits for the Pulse Complete event.'], ['NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)', 'Waits for the Ready for Pulse Trigger event.']],
 },
             },
             {
@@ -6773,7 +6773,7 @@ application.
 Waits until the device has generated the specified event.
 
 The session monitors whether each type of event has occurred at least
-once since the last time this function or the niDCPower\_Initiate
+once since the last time this function or the niDCPower_Initiate
 function were called. If an event has only been generated once and you
 call this function successively, the function times out. Individual
 events must be generated between separate calls of this function.
@@ -6795,7 +6795,7 @@ for more information about supported devices.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6805,9 +6805,9 @@ niDCPower\_InitializeWithChannels function.
 Closes the session specified in **vi** and deallocates the resources
 that NI-DCPower reserves. If power output is enabled when you call this
 function, the output channels remain in their existing state and
-continue providing power. Use the niDCPower\_ConfigureOutputEnabled
+continue providing power. Use the niDCPower_ConfigureOutputEnabled
 function to disable power output on a per channel basis. Use the
-niDCPower\_reset function to disable power output on all channel(s).
+niDCPower_reset function to disable power output on all channel(s).
 
 **Related Topics:**
 
@@ -6826,7 +6826,7 @@ States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6887,7 +6887,7 @@ Specifies whether the device is queried to determine if the device is a
 valid instrument for NI-DCPower.
 **Defined Values**:
 ''',
-'table_body': [['VI\\_TRUE (1)', 'Perform ID query.'], ['VI\\_FALSE (0)', 'Do not perform ID query.']],
+'table_body': [['VI_TRUE (1)', 'Perform ID query.'], ['VI_FALSE (0)', 'Do not perform ID query.']],
 },
             },
             {
@@ -6900,7 +6900,7 @@ Specifies whether to reset the device during the initialization
 procedure.
 **Defined Values**:
 ''',
-'table_body': [['VI\\_TRUE (1)', 'Reset the device.'], ['VI\\_FALSE (0)', 'Do not reset the device.']],
+'table_body': [['VI_TRUE (1)', 'Reset the device.'], ['VI_FALSE (0)', 'Do not reset the device.']],
 },
             },
             {
@@ -6917,7 +6917,7 @@ subsequent NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-This function is deprecated. Use niDCPower\_InitializeWithChannels
+This function is deprecated. Use niDCPower_InitializeWithChannels
 instead.
 
 Creates a new IVI instrument driver session to the device specified in
@@ -6927,14 +6927,14 @@ sends initialization commands to set the device to the state necessary
 for the operation of NI-DCPower.
 
 To place the device in a known start-up state when creating a new
-session, set **resetDevice** to VI\_TRUE. This action is equivalent to
-using the niDCPower\_reset function.
+session, set **resetDevice** to VI_TRUE. This action is equivalent to
+using the niDCPower_reset function.
 
 To open a session and leave the device in its existing configuration
 without passing through a transitional output state, set **resetDevice**
-to VI\_FALSE, and immediately call the niDCPower\_Abort function. Then
+to VI_FALSE, and immediately call the niDCPower_Abort function. Then
 configure the device as in the previous session, changing only the
-desired settings, and then call the niDCPower\_Initiate function. Refer
+desired settings, and then call the niDCPower_Initiate function. Refer
 to the `deprecated programming state
 model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__ for
 information about the specific software states.
@@ -6951,7 +6951,7 @@ information about the specific software states.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -6977,7 +6977,7 @@ more information about NI-DCPower software states.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -7015,7 +7015,7 @@ size of this array must be at least 256 bytes.
 'documentation': {
 'description': '''
 Identifies a particular instrument session. **vi** is obtained from the
-niDCPower\_InitializeWithChannels function.
+niDCPower_InitializeWithChannels function.
 ''',
 },
             },
@@ -7044,11 +7044,11 @@ least 256 bytes.
 'documentation': {
 'description': '''
 Performs the device self-test routine and returns the test result(s).
-Calling this function implicitly calls the niDCPower\_reset function.
+Calling this function implicitly calls the niDCPower_reset function.
 
-When calling niDCPower\_self\_test with the PXIe-4162/4163, specify all
+When calling niDCPower_self_test with the PXIe-4162/4163, specify all
 channels of your PXIe-4162/4163 with the channels input of
-niDCPower\_InitializeWithChannels. You cannot self test a subset of
+niDCPower_InitializeWithChannels. You cannot self test a subset of
 PXIe-4162/4163 channels.
 ''',
 },

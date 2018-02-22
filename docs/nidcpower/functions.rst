@@ -7,13 +7,13 @@ nidcpower.Session methods
 
     Transitions the NI-DCPower session from the Running state to the
     Committed state. If a sequence is running, it is stopped. Any
-    configuration functions called after this function are not applied until
-    the :py:meth:`nidcpower.Session._initiate` function is called. If power output is enabled
-    when you call the :py:meth:`nidcpower.Session.abort` function, the output channels remain
+    configuration methods called after this method are not applied until
+    the :py:meth:`nidcpower.Session._initiate` method is called. If power output is enabled
+    when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
     in their current state and continue providing power.
 
-    Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled` function to disable power
-    output on a per channel basis. Use the :py:meth:`nidcpower.Session.reset` function to
+    Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled` method to disable power
+    output on a per channel basis. Use the :py:meth:`nidcpower.Session.reset` method to
     disable output on all channels.
 
     Refer to the `Programming
@@ -28,17 +28,17 @@ nidcpower.Session methods
 
     
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
 .. py:method:: commit()
 
     Applies previously configured settings to the device. Calling this
-    function moves the NI-DCPower session from the Uncommitted state into
-    the Committed state. After calling this function, modifying any
-    attribute reverts the NI-DCPower session to the Uncommitted state. Use
-    the :py:meth:`nidcpower.Session._initiate` function to transition to the Running state.
+    method moves the NI-DCPower session from the Uncommitted state into
+    the Committed state. After calling this method, modifying any
+    property reverts the NI-DCPower session to the Uncommitted state. Use
+    the :py:meth:`nidcpower.Session._initiate` method to transition to the Running state.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -73,8 +73,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -120,8 +120,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -132,16 +132,16 @@ nidcpower.Session methods
 
         Specifies the input terminal for the digital edge Measure trigger.
 
-        You can specify any valid input terminal for this function. Valid
+        You can specify any valid input terminal for this method. Valid
         terminals are listed in MAX under the **Device Routes** tab. For
         PXIe-4162/4163, refer to the Signal Routing topic for the device to
         determine which routes are available. This information is not available
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -171,8 +171,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -183,13 +183,13 @@ nidcpower.Session methods
 
         Specifies the input terminal for the digital edge Pulse trigger.
 
-        You can specify any valid input terminal for this function. Valid
+        You can specify any valid input terminal for this method. Valid
         terminals are listed in MAX under the **Device Routes** tab.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -219,8 +219,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -232,16 +232,16 @@ nidcpower.Session methods
         Specifies the input terminal for the digital edge Sequence Advance
         trigger.
 
-        You can specify any valid input terminal for this function. Valid
+        You can specify any valid input terminal for this method. Valid
         terminals are listed in MAX under the **Device Routes** tab. For
         PXIe-4162/4163, refer to the Signal Routing topic for the device to
         determine which routes are available. This information is not available
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -271,8 +271,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -283,16 +283,16 @@ nidcpower.Session methods
 
         Specifies the input terminal for the digital edge Source trigger.
 
-        You can specify any valid input terminal for this function. Valid
+        You can specify any valid input terminal for this method. Valid
         terminals are listed in MAX under the **Device Routes** tab. For
         PXIe-4162/4163, refer to the Signal Routing topic for the device to
         determine which routes are available. This information is not available
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -322,8 +322,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -334,16 +334,16 @@ nidcpower.Session methods
 
         Specifies the input terminal for the digital edge Start trigger.
 
-        You can specify any valid input terminal for this function. Valid
+        You can specify any valid input terminal for this method. Valid
         terminals are listed in MAX under the **Device Routes** tab. For
         PXIe-4162/4163, refer to the Signal Routing topic for the device to
         determine which routes are available. This information is not available
         on a Device Routes tab in MAX.
 
         Input terminals can be specified in one of two ways. If the device is
-        named Dev1 and your terminal is PXI\_Trig0, you can specify the terminal
-        with the fully qualified terminal name, /Dev1/PXI\_Trig0, or with the
-        shortened terminal name, PXI\_Trig0. The input terminal can also be a
+        named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
+        with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
+        shortened terminal name, PXI_Trig0. The input terminal can also be a
         terminal from another device. For example, you can set the input
         terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
@@ -370,17 +370,17 @@ nidcpower.Session methods
 .. py:method:: create_advanced_sequence(sequence_name, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
-    :py:meth:`nidcpower.Session.create_advanced_sequence_step` function to add steps to the
+    :py:meth:`nidcpower.Session.create_advanced_sequence_step` method to add steps to the
     active advanced sequence.
 
-    **Support for this function**
+    **Support for this method**
 
-    You must set the source mode to Sequence to use this function.
+    You must set the source mode to Sequence to use this method.
 
-    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
-    functions is unsupported.
+    Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+    methods is unsupported.
 
-    Use this function in the Uncommitted or Committed programming states.
+    Use this method in the Uncommitted or Committed programming states.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for more information about
@@ -398,8 +398,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -417,15 +417,15 @@ nidcpower.Session methods
     :param attribute_ids:
 
 
-        Specifies the attributes you reconfigure per step in the advanced
-        sequence. The following table lists which attributes can be configured
+        Specifies the properties you reconfigure per step in the advanced
+        sequence. The following table lists which properties can be configured
         in an advanced sequence for each NI-DCPower device that supports
-        advanced sequencing. A ✓ indicates that the attribute can be configured
-        in advanced sequencing. An ✕ indicates that the attribute cannot be
+        advanced sequencing. A ✓ indicates that the property can be configured
+        in advanced sequencing. An ✕ indicates that the property cannot be
         configured in advanced sequencing.
 
         +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | Attribute                                                   | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
+        | Property                                                    | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
         +=============================================================+===========+=========+=========+=========+=========+===================+===================+================+
         | :py:data:`nidcpower.Session.dc_noise_rejection`             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
         +-------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
@@ -524,16 +524,16 @@ nidcpower.Session methods
 
     Creates a new advanced sequence step in the advanced sequence specified
     by the Active advanced sequence. When you create an advanced sequence
-    step, each attribute you passed to the :py:meth:`nidcpower.Session.create_advanced_sequence`
-    function is reset to its default value for that step unless otherwise
+    step, each property you passed to the :py:meth:`nidcpower.Session.create_advanced_sequence`
+    method is reset to its default value for that step unless otherwise
     specified.
 
-    **Support for this Function**
+    **Support for this Method**
 
-    You must set the source mode to Sequence to use this function.
+    You must set the source mode to Sequence to use this method.
 
-    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
-    functions is unsupported.
+    Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+    methods is unsupported.
 
     **Related Topics**:
 
@@ -547,8 +547,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -569,12 +569,12 @@ nidcpower.Session methods
     Deletes a previously created advanced sequence and all the advanced
     sequence steps in the advanced sequence.
 
-    **Support for this Function**
+    **Support for this Method**
 
-    You must set the source mode to Sequence to use this function.
+    You must set the source mode to Sequence to use this method.
 
-    Using the :py:meth:`nidcpower.Session.set_sequence` function with Advanced Sequence
-    functions is unsupported.
+    Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+    methods is unsupported.
 
     **Related Topics**:
 
@@ -586,8 +586,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -605,11 +605,11 @@ nidcpower.Session methods
 
 .. py:method:: disable()
 
-    This function performs the same actions as the :py:meth:`nidcpower.Session.reset`
-    function, except that this function also immediately sets the
-    :py:data:`nidcpower.Session.output_enabled` attribute to VI\_FALSE.
+    This method performs the same actions as the :py:meth:`nidcpower.Session.reset`
+    method, except that this method also immediately sets the
+    :py:data:`nidcpower.Session.output_enabled` property to False.
 
-    This function opens the output relay on devices that have an output
+    This method opens the output relay on devices that have an output
     relay.
 
     
@@ -627,8 +627,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -672,25 +672,25 @@ nidcpower.Session methods
         Specifies where to export the selected signal.
         **Relative Terminals**:
 
-        +--------------+----------------------+
-        | ""           | Do not export signal |
-        +--------------+----------------------+
-        | "PXI\_Trig0" | PXI trigger line 0   |
-        +--------------+----------------------+
-        | "PXI\_Trig1" | PXI trigger line 1   |
-        +--------------+----------------------+
-        | "PXI\_Trig2" | PXI trigger line 2   |
-        +--------------+----------------------+
-        | "PXI\_Trig3" | PXI trigger line 3   |
-        +--------------+----------------------+
-        | "PXI\_Trig4" | PXI trigger line 4   |
-        +--------------+----------------------+
-        | "PXI\_Trig5" | PXI trigger line 5   |
-        +--------------+----------------------+
-        | "PXI\_Trig6" | PXI trigger line 6   |
-        +--------------+----------------------+
-        | "PXI\_Trig7" | PXI trigger line 7   |
-        +--------------+----------------------+
+        +-------------+----------------------+
+        | ""          | Do not export signal |
+        +-------------+----------------------+
+        | "PXI_Trig0" | PXI trigger line 0   |
+        +-------------+----------------------+
+        | "PXI_Trig1" | PXI trigger line 1   |
+        +-------------+----------------------+
+        | "PXI_Trig2" | PXI trigger line 2   |
+        +-------------+----------------------+
+        | "PXI_Trig3" | PXI trigger line 3   |
+        +-------------+----------------------+
+        | "PXI_Trig4" | PXI trigger line 4   |
+        +-------------+----------------------+
+        | "PXI_Trig5" | PXI trigger line 5   |
+        +-------------+----------------------+
+        | "PXI_Trig6" | PXI trigger line 6   |
+        +-------------+----------------------+
+        | "PXI_Trig7" | PXI trigger line 7   |
+        +-------------+----------------------+
 
 
     :type output_terminal: str
@@ -708,21 +708,21 @@ nidcpower.Session methods
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
-    previously taken and are stored in the NI-DCPower buffer. This function
-    should not be used when the :py:data:`nidcpower.Session.measure_when` attribute is
+    previously taken and are stored in the NI-DCPower buffer. This method
+    should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
-    :py:meth:`nidcpower.Session._initiate` before calling this function.
+    :py:meth:`nidcpower.Session._initiate` before calling this method.
 
     Refer to the `Acquiring
     Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
     and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
     the *NI DC Power Supplies and SMUs Help* for more information about
-    configuring this function.
+    configuring this method.
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -749,8 +749,8 @@ nidcpower.Session methods
     :param timeout:
 
 
-        Specifies the maximum time allowed for this function to complete, in
-        seconds. If the function does not complete within this time interval,
+        Specifies the maximum time allowed for this method to complete, in
+        seconds. If the method does not complete within this time interval,
         NI-DCPower returns an error.
 
         
@@ -807,7 +807,7 @@ nidcpower.Session methods
 .. py:method:: get_channel_name(index)
 
     Retrieves the output **channelName** that corresponds to the requested
-    **index**. Use the :py:data:`nidcpower.Session.channel_count` attribute to
+    **index**. Use the :py:data:`nidcpower.Session.channel_count` property to
     determine the upper bound of valid values for **index**.
 
     
@@ -898,7 +898,7 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices.
+    .. note:: This method is not supported on all devices.
 
 
 
@@ -921,13 +921,13 @@ nidcpower.Session methods
     For example, if you have a session using channels 1 and 2, and you
     perform a self-calibration on channel 1 with a device temperature of 25
     degrees Celsius at 2:00, and a self-calibration was performed on channel
-    2 at 27 degrees Celsius at 3:00 on the same day, this function returns
+    2 at 27 degrees Celsius at 3:00 on the same day, this method returns
     25 for the **temperature** parameter.
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -947,10 +947,10 @@ nidcpower.Session methods
 .. py:method:: measure(measurement_type)
 
     Returns the measured value of either the voltage or current on the
-    specified output channel. Each call to this function blocks other
-    function calls until the hardware returns the **measurement**. To
+    specified output channel. Each call to this method blocks other
+    method calls until the hardware returns the **measurement**. To
     measure multiple output channels, use the :py:meth:`nidcpower.Session.measure_multiple`
-    function.
+    method.
 
     
 
@@ -994,8 +994,8 @@ nidcpower.Session methods
 .. py:method:: measure_multiple()
 
     Returns arrays of the measured voltage and current values on the
-    specified output channel(s). Each call to this function blocks other
-    function calls until the measurements are returned from the device. The
+    specified output channel(s). Each call to this method blocks other
+    method calls until the measurements are returned from the device. The
     order of the measurements returned in the array corresponds to the order
     on the specified output channel(s).
 
@@ -1044,19 +1044,19 @@ nidcpower.Session methods
     Queries the specified output device to determine if it is operating at
     the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
-    The compliance limit is the current limit when the output function is
+    The compliance limit is the current limit when the output method is
     set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`. If the output is operating at the
     compliance limit, the output reaches the current limit before the
     desired voltage level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
-    function and the :py:meth:`nidcpower.Session.ConfigureCurrentLimit` function for more
-    information about output function and current limit, respectively.
+    method and the :py:meth:`nidcpower.Session.ConfigureCurrentLimit` method for more
+    information about output method and current limit, respectively.
 
-    The compliance limit is the voltage limit when the output function is
+    The compliance limit is the voltage limit when the output method is
     set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`. If the output is operating at the
     compliance limit, the output reaches the voltage limit before the
     desired current level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
-    function and the :py:meth:`nidcpower.Session.ConfigureVoltageLimit` function for more
-    information about output function and voltage limit, respectively.
+    method and the :py:meth:`nidcpower.Session.ConfigureVoltageLimit` method for more
+    information about output method and voltage limit, respectively.
 
     **Related Topics:**
 
@@ -1064,7 +1064,7 @@ nidcpower.Session methods
 
     
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1276,9 +1276,9 @@ nidcpower.Session methods
 
 .. py:method:: reset()
 
-    Resets the device to a known state. This function disables power
-    generation, resets session attributes to their default values, commits
-    the session attributes, and leaves the session in the Uncommitted state.
+    Resets the device to a known state. This method disables power
+    generation, resets session properties to their default values, commits
+    the session properties, and leaves the session in the Uncommitted state.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
     more information about NI-DCPower software states.
@@ -1289,12 +1289,12 @@ nidcpower.Session methods
 
 .. py:method:: reset_device()
 
-    Resets the device to a known state. The function disables power
-    generation, resets session attributes to their default values, clears
+    Resets the device to a known state. The method disables power
+    generation, resets session properties to their default values, clears
     errors such as overtemperature and unexpected loss of auxiliary power,
-    commits the session attributes, and leaves the session in the
-    Uncommitted state. This function also performs a hard reset on the
-    device and driver software. This function has the same functionality as
+    commits the session properties, and leaves the session in the
+    Uncommitted state. This method also performs a hard reset on the
+    device and driver software. This method has the same functionality as
     using reset in Measurement & Automation Explorer. Refer to the
     `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
@@ -1309,13 +1309,13 @@ nidcpower.Session methods
 
 .. py:method:: reset_with_defaults()
 
-    Resets the device to a known state. This function disables power
-    generation, resets session attributes to their default values, commits
-    the session attributes, and leaves the session in the
+    Resets the device to a known state. This method disables power
+    generation, resets session properties to their default values, commits
+    the session properties, and leaves the session in the
     `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
     state. In addition to exhibiting the behavior of the :py:meth:`nidcpower.Session.reset`
-    function, this function can assign user-defined default values for
-    configurable attributes from the IVI configuration.
+    method, this method can assign user-defined default values for
+    configurable properties from the IVI configuration.
 
     
 
@@ -1324,7 +1324,7 @@ nidcpower.Session methods
 .. py:method:: self_test()
 
     Performs the device self-test routine and returns the test result(s).
-    Calling this function implicitly calls the :py:meth:`nidcpower.Session.reset` function.
+    Calling this method implicitly calls the :py:meth:`nidcpower.Session.reset` method.
 
     When calling :py:meth:`nidcpower.Session.self_test` with the PXIe-4162/4163, specify all
     channels of your PXIe-4162/4163 with the channels input of
@@ -1365,7 +1365,7 @@ nidcpower.Session methods
 
 .. py:method:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
 
-    Asserts the specified trigger. This function can override an external
+    Asserts the specified trigger. This method can override an external
     edge trigger.
 
     **Related Topics:**
@@ -1374,8 +1374,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -1407,14 +1407,14 @@ nidcpower.Session methods
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
     `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
-    function to take effect.
+    method to take effect.
 
     Refer to the `Configuring the Source
     Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
     in the *NI DC Power Supplies and SMUs Help* for more information about
     how to configure your device.
 
-    Use this function in the Uncommitted or Committed programming states.
+    Use this method in the Uncommitted or Committed programming states.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for more information about
@@ -1422,8 +1422,8 @@ nidcpower.Session methods
 
     
 
-    .. note:: This function is not supported on all devices. Refer to `Supported
-        Functions by
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -1455,7 +1455,7 @@ nidcpower.Session methods
 
         Specifies the series of voltage levels or current levels, depending on
         the configured `output
-        function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
+        method <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
         **Valid values**:
         The valid values for this parameter are defined by the voltage level
         range or current level range.
@@ -1470,14 +1470,14 @@ nidcpower.Session methods
     Waits until the device has generated the specified event.
 
     The session monitors whether each type of event has occurred at least
-    once since the last time this function or the :py:meth:`nidcpower.Session._initiate`
-    function were called. If an event has only been generated once and you
-    call this function successively, the function times out. Individual
-    events must be generated between separate calls of this function.
+    once since the last time this method or the :py:meth:`nidcpower.Session._initiate`
+    method were called. If an event has only been generated once and you
+    call this method successively, the method times out. Individual
+    events must be generated between separate calls of this method.
 
     
 
-    .. note:: Refer to `Supported Functions by
+    .. note:: Refer to `Supported Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -1508,8 +1508,8 @@ nidcpower.Session methods
     :param timeout:
 
 
-        Specifies the maximum time allowed for this function to complete, in
-        seconds. If the function does not complete within this time interval,
+        Specifies the maximum time allowed for this method to complete, in
+        seconds. If the method does not complete within this time interval,
         NI-DCPower returns an error.
 
         

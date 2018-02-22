@@ -248,7 +248,7 @@ functions_additional_functions = {
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'The instrument handle you obtain from niScope\_init that identifies a particular instrument session.',
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.',
                 },
             },
             {
@@ -282,7 +282,7 @@ functions_additional_functions = {
                 'type': 'ViReal64[]',
                 'default_value': None, 
                 'documentation': {
-                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.',
+                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.',
                 },
             },
             {
@@ -308,7 +308,7 @@ functions_additional_functions = {
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.''',
+                    Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
@@ -332,7 +332,7 @@ functions_additional_functions = {
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
-                    'description': 'The instrument handle you obtain from niScope\_init that identifies a particular instrument session.',
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.',
                 },
             },
             {
@@ -366,7 +366,7 @@ functions_additional_functions = {
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
                     'description': '''
-                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope\_ActualNumWfms to determine the number of waveforms.
+                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
 
                         Types supported are
 
@@ -406,7 +406,7 @@ functions_additional_functions = {
 
                             voltage = binary data * gain factor + offset
 
-                    Call niScope\_ActualNumWfms to determine the size of this array.''',
+                    Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],

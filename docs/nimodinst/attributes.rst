@@ -28,7 +28,7 @@ nimodinst.Session properties
 
 .. py:attribute:: chassis_number
 
-    The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+    The number of the chassis in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
     The following table lists the characteristics of this property.
 
@@ -166,7 +166,7 @@ nimodinst.Session properties
 
 .. py:attribute:: slot_number
 
-    The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+    The slot (for example, in a PXI chassis) in which the device is installed. This property can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
     The following table lists the characteristics of this property.
 

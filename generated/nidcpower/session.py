@@ -82,7 +82,7 @@ class _SessionBase(object):
 
     Specifies the advanced sequence to configure or generate.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -98,7 +98,7 @@ class _SessionBase(object):
 
     Specifies the advanced sequence step to configure.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -112,12 +112,12 @@ class _SessionBase(object):
     aperture_time = attributes.AttributeViReal64(1150058)
     '''Type: float
 
-    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the NIDCPOWER_ATTR_APERTURE_TIME_UNITS attribute.
+    Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the aperture_time_units property.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about how to configure  your measurements and for information about valid values.
     Default Value: 0.01666666 seconds
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -131,12 +131,12 @@ class _SessionBase(object):
     aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
     '''Type: enums.ApertureTimeUnits
 
-    Specifies the units of the NIDCPOWER_ATTR_APERTURE_TIME attribute for the channel configuration.
+    Specifies the units of the aperture_time property for the channel configuration.
     for information about supported devices.
     Refer to the Aperture Time topic in the NI DC Power Supplies and SMUs Help for more information about  how to configure your measurements and for information about valid values.
-    Default Value: NIDCPOWER_VAL_SECONDS
+    Default Value: ApertureTimeUnits.SECONDS
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -152,7 +152,7 @@ class _SessionBase(object):
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
-    Default Value: The default value for the NI PXI-4132 is NIDCPOWER_VAL_ON. The default value for  all other devices is NIDCPOWER_VAL_OFF, which is the only supported value for these devices.
+    Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -167,24 +167,24 @@ class _SessionBase(object):
     '''Type: bool
 
     Indicates whether an auxiliary power source is connected to the device.
-    A value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
-    power source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.
+    A value of False may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
+    power source to generate power. Use the power_source_in_use property to retrieve this information.
 
-    Note: This attribute does not necessarily indicate if the device is using the auxiliary
+    Note: This property does not necessarily indicate if the device is using the auxiliary
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
-    Specifies whether to cache the value of attributes.
+    Specifies whether to cache the value of properties.
     When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
-    NI-DCPower might always cache or never cache particular attributes regardless of the setting of this attribute.
-    Use the niDCPower_InitializeWithChannels function to override this value.
-    Default Value: VI_TRUE
+    NI-DCPower might always cache or never cache particular properties regardless of the setting of this property.
+    Use the _initialize_with_channels method to override this value.
+    Default Value: True
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''Type: int
 
-    Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based attributes, the IVI engine maintains a separate  cache value for each channel.
+    Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based properties, the IVI engine maintains a separate  cache value for each channel.
     '''
     compliance_limit_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
     '''Type: enums.ComplianceLimitSymmetry
@@ -197,10 +197,8 @@ class _SessionBase(object):
     bounded by this positive value and its opposite.
     When set to **Asymmetric**, you must separately set a limit high and a
     limit low using distinct properties.
-    Asymmetric limits must meet the following requirements:
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    For asymmetric limits, the range bounded by the limit high and limit low
+    must include zero.
     **Default Value:** Symmetric
     **Related Topics:**
     `Compliance <NI_DC_Power_Supplies_Help.chm::/compliance.html>`__
@@ -228,9 +226,9 @@ class _SessionBase(object):
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -244,11 +242,11 @@ class _SessionBase(object):
     current_gain_bandwidth = attributes.AttributeViReal64(1150070)
     '''Type: float
 
-    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This attribute takes effect when the channel is in Constant Current mode.
+    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This property takes effect when the channel is in Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -263,9 +261,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is set.
+    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
+    output_enabled property for more information about enabling the output channel.
+    Valid Values: The valid values for this property are defined by the values to which the  current_level_range property is set.
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
@@ -282,10 +280,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.
-    Query the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+    Query the current_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
+    The current_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -300,9 +298,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current level range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current level can be set. Use the  NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.
-    The NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid value to which the current level can be set. Use the  current_level_autorange property to enable automatic selection of the current level range.
+    The current_level_range property is applicable only if the output_function property is  set to OutputFunction.DC_CURRENT.
+    output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
     Note: The channel must be enabled for the specified current level range to take effect. Refer to the
@@ -320,11 +318,14 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to  NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to  NIDCPOWER_VAL_SYMMETRIC.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.
+    This property is applicable only if the output_function property is set to  OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to  NIDCPOWER_VAL_SYMMETRIC.
+    output_enabled property for more information about enabling the output channel.
+    Valid Values: The valid values for this property are defined by the values to which  current_limit_range property is set.
 
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -339,10 +340,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute. If you change this attribute from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.
-    Query the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from AutoZero.ON to  AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+    Query the current_limit_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
+    The current_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -359,18 +360,17 @@ class _SessionBase(object):
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Method <pOutputFunction.html>`__ property is set to **DC
     Voltage**.
     You must also specify a `Current Limit
-    Low <pniDCPower_CurrentLimitLow.html>`__ to complete the asymmetric
+    Low <pCurrentLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Current Limit
-    Range <pniDCPower_CurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Current Limit
+    Range <pCurrentLimitRange.html>`__, `Current Limit
+    Range <pCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -382,8 +382,11 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -400,18 +403,17 @@ class _SessionBase(object):
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Method <pOutputFunction.html>`__ property is set to **DC
     Voltage**.
     You must also specify a `Current Limit
-    High <pniDCPower_CurrentLimitHigh.html>`__ to complete the asymmetric
+    High <pCurrentLimitHigh.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Current Limit
-    Range <pniDCPower_CurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pCurrentLimitRange.html>`__, -1% of `Current Limit
+    Range <pCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -423,8 +425,11 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -439,9 +444,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current limit range, in amps, for the specified channel(s).
-    The range defines the valid value to which the current limit can be set. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE  attribute to enable automatic selection of the current limit range.
-    The NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid value to which the current limit can be set. Use the current_limit_autorange  property to enable automatic selection of the current limit range.
+    The current_limit_range property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
@@ -460,9 +465,9 @@ class _SessionBase(object):
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Current mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -478,110 +483,110 @@ class _SessionBase(object):
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NORMAL
+    Default Value: TransientResponse.NORMAL
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_measure_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
     '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
-    NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: DigitalEdge.RISING
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_measure_trigger_input_terminal = attributes.AttributeViString(1150036)
     '''Type: str
 
-    Specifies the input terminal for the Measure trigger. This attribute is used only when the  NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
-    for this attribute.
-    You can specify any valid input terminal for this attribute. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.
+    Specifies the input terminal for the Measure trigger. This property is used only when the  measure_trigger_type property is set to TriggerType.DIGITAL_EDGE.
+    for this property.
+    You can specify any valid input terminal for this property. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_pulse_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
     '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: DigitalEdge.RISING
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     digital_edge_pulse_trigger_input_terminal = attributes.AttributeViString(1150097)
     '''Type: str
 
-    Specifies the input terminal for the Pulse trigger. This attribute is used only when the NIDCPOWER_ATTR_PULSE_TRIGGER_TYPE attribute is set to digital edge.
-    You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    Specifies the input terminal for the Pulse trigger. This property is used only when the pulse_trigger_type property is set to digital edge.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     digital_edge_sequence_advance_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
     '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: DigitalEdge.RISING
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_sequence_advance_trigger_input_terminal = attributes.AttributeViString(1150028)
     '''Type: str
 
-    Specifies the input terminal for the Sequence Advance trigger. Use this attribute only when the  NIDCPOWER_ATTR_SEQUENCE_ADVANCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Sequence Advance trigger. Use this property only when the  sequence_advance_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
-    You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the  input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
     '''
     digital_edge_source_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Source trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: DigitalEdge.RISING
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_source_trigger_input_terminal = attributes.AttributeViString(1150032)
     '''Type: str
 
-    Specifies the input terminal for the Source trigger. Use this attribute only when the  NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Source trigger. Use this property only when the  source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
-    You can specify any valid input terminal for this attribute. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
+    You can specify any valid input terminal for this property. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
     '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Start trigger to assert on the rising or falling edge.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_RISING
+    Default Value: DigitalEdge.RISING
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_start_trigger_input_terminal = attributes.AttributeViString(1150023)
     '''Type: str
 
-    Specifies the input terminal for the Start trigger. Use this attribute only when the NIDCPOWER_ATTR_START_TRIGGER_TYPE  attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.
+    Specifies the input terminal for the Start trigger. Use this property only when the start_trigger_type  property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
-    You can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.
+    You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal  on Dev1 to be /Dev2/SourceCompleteEvent.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     driver_setup = attributes.AttributeViString(1050007)
     '''Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
-    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This attribute is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the niDCPower_InitializeWithChannels function or through the  IVI Configuration Utility.
-    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the niDCPower_InitializeWithChannels function. If you do not specify a Driver Setup string, this attribute returns an empty string.
+    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the _initialize_with_channels method or through the  IVI Configuration Utility.
+    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the _initialize_with_channels method. If you do not specify a Driver Setup string, this property returns an empty string.
     '''
     exported_measure_trigger_output_terminal = attributes.AttributeViString(1150037)
     '''Type: str
@@ -591,7 +596,7 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     exported_pulse_trigger_output_terminal = attributes.AttributeViString(1150098)
     '''Type: str
@@ -600,7 +605,7 @@ class _SessionBase(object):
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     exported_sequence_advance_trigger_output_terminal = attributes.AttributeViString(1150029)
     '''Type: str
@@ -610,7 +615,7 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     exported_source_trigger_output_terminal = attributes.AttributeViString(1150033)
     '''Type: str
@@ -620,7 +625,7 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     exported_start_trigger_output_terminal = attributes.AttributeViString(1150024)
     '''Type: str
@@ -630,7 +635,7 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.
     for information about supported devices.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     fetch_backlog = attributes.AttributeViInt32(1150056)
     '''Type: int
@@ -660,11 +665,14 @@ class _SessionBase(object):
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
-    Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower functions. VI_TRUE specifies that interchangeability checking is enabled.
-    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the niDCPower_GetNextInterchangeWarning function to retrieve  interchange warnings.
-    Call the niDCPower_GetNextInterchangeWarning function to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the attributes in a capability group only if you specify a value  for at least one attribute within that group. Interchangeability warnings can occur when an attribute  affects the behavior of the device and you have not set that attribute or when the attribute has been  invalidated since you set it.
-    Default Value: VI_FALSE
+    Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
+    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the GetNextInterchangeWarning method to retrieve  interchange warnings.
+    Call the GetNextInterchangeWarning method to clear the list of interchangeability warnings  without reading them.
+    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when an property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
+    Default Value: False
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     interlock_input_open = attributes.AttributeViBoolean(1150105)
     '''Type: bool
@@ -673,20 +681,20 @@ class _SessionBase(object):
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about  the safety interlock circuit.
     about supported devices.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
-    If you initialize NI-DCPower with a logical name, this attribute contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize NI-DCPower with the resource descriptor, this attribute contains that value.
+    If you initialize NI-DCPower with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
+    If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''Type: str
 
     Contains the logical name you specified when opening the current IVI session.
-    You can pass a logical name to the niDCPower_InitializeWithChannels function.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a function section in the IVI Configuration file. The function section specifies a physical  device and initial user options.
+    You can pass a logical name to the _initialize_with_channels method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
     '''
     measure_buffer_size = attributes.AttributeViInt32(1150077)
     '''Type: int
@@ -695,9 +703,9 @@ class _SessionBase(object):
     The default value is the maximum number of samples that a device is capable of recording in one second.
     for information about supported devices.
     Valid Values: 1000 to 2147483647
-    Default Value: Varies by device. Refer to Supported Attributes by Device topic in  the NI DC Power Supplies and SMUs Help for more information about default values.
+    Default Value: Varies by device. Refer to Supported Properties by Device topic in  the NI DC Power Supplies and SMUs Help for more information about default values.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_complete_event_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: datetime.timedelta
@@ -707,7 +715,7 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_complete_event_output_terminal = attributes.AttributeViString(1150047)
     '''Type: str
@@ -716,16 +724,16 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150044)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_complete_event_pulse_width = attributes.AttributeViReal64(1150045)
     '''Type: float
@@ -737,53 +745,53 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6
     Default Value: The default value for PXI devices is 150 ns. The default value  for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_record_delta_time = attributes.AttributeViReal64TimeDeltaSeconds(1150065)
     '''Type: datetime.timedelta
 
-    Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this attribute after the desired measurement settings are committed.
+    Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this property after the desired measurement settings are committed.
     for information about supported devices.
     two measurements and the rest would differ.
 
-    Note: This attribute is not available when Auto Zero is configured to Once because the amount of time between the first
+    Note: This property is not available when Auto Zero is configured to Once because the amount of time between the first
     '''
     measure_record_length = attributes.AttributeViInt32(1150063)
     '''Type: int
 
-    Specifies how many measurements compose a measure record. When this attribute is set to a value greater than 1, the  NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
+    Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the  measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
     Valid Values: 1 to 16,777,216
     Default Value: 1
 
     Note:
-    This attribute is not available in a session involving multiple channels.
+    This property is not available in a session involving multiple channels.
     '''
     measure_record_length_is_finite = attributes.AttributeViBoolean(1150064)
     '''Type: bool
 
-    Specifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.
+    Specifies whether to take continuous measurements. Call the abort method to stop continuous measurements.  When this property is set to False and the source_mode property is set to  SourceMode.SINGLE_POINT, the measure_when property must be set to  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER. When this property is set to  False and the source_mode property is set to SourceMode.SEQUENCE, the measure_when  property must be set to MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
-    Default Value: VI_TRUE
+    Default Value: True
 
     Note:
-    This attribute is not available in a session involving multiple channels.
+    This property is not available in a session involving multiple channels.
     '''
     measure_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150034)
     '''Type: enums.TriggerType
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_DIGITAL_EDGE
+    Default Value: TriggerType.DIGITAL_EDGE
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_when = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
     '''Type: enums.MeasureWhen
 
-    Specifies when the measure unit should acquire measurements. Unless this attribute is configured to  NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.
+    Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is  NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple  function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.
+    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
     '''
     output_capacitance = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
     '''Type: enums.OutputCapacitance
@@ -792,7 +800,7 @@ class _SessionBase(object):
     for information about supported devices.
     Refer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more  information about capacitance.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -806,11 +814,11 @@ class _SessionBase(object):
     output_connected = attributes.AttributeViBoolean(1150060)
     '''Type: bool
 
-    Specifies whether the output relay is connected (closed) or disconnected (open). The NIDCPOWER_ATTR_OUTPUT_ENABLED  attribute does not change based on this attribute; they are independent of each other.
+    Specifies whether the output relay is connected (closed) or disconnected (open). The output_enabled  property does not change based on this property; they are independent of each other.
     about supported devices.
-    Set this attribute to VI_FALSE to disconnect the output terminal from the output.
+    Set this property to False to disconnect the output terminal from the output.
     to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the  output can cause premature wear on the relay.
-    Default Value: VI_TRUE
+    Default Value: True
 
     Note: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
@@ -826,10 +834,10 @@ class _SessionBase(object):
     output_enabled = attributes.AttributeViBoolean(1250006)
     '''Type: bool
 
-    Specifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).
-    Depending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the  voltage level or current level in addition to  enabling the output
-    the niDCPower_Initiate function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-    Default Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open  the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.
+    Specifies whether the output is enabled (True) or disabled (False).
+    Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
+    the _initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    Default Value: The default value is True if you use the _initialize_with_channels method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
@@ -845,22 +853,22 @@ class _SessionBase(object):
     output_function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputFunction, 1150008)
     '''Type: enums.OutputFunction
 
-    Configures the function to generate on the specified channel(s).
-    When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_VOLTAGE is selected:
-    NIDCPOWER_ATTR_VOLTAGE_LEVEL
-    NIDCPOWER_ATTR_CURRENT_LIMIT
-    NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH
-    NIDCPOWER_ATTR_CURRENT_LIMIT_LOW
-    NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE
-    NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE
-    When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following attributes to configure the channel when  NIDCPOWER_VAL_DC_CURRENT is selected:
-    NIDCPOWER_ATTR_CURRENT_LEVEL
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW
-    NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE
-    NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE
-    Default Value: NIDCPOWER_VAL_DC_VOLTAGE
+    Configures the method to generate on the specified channel(s).
+    When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following properties to configure the channel when  OutputFunction.DC_VOLTAGE is selected:
+    voltage_level
+    current_limit
+    current_limit_high
+    current_limit_low
+    voltage_level_range
+    current_limit_range
+    When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  OutputFunction.DC_CURRENT is selected:
+    current_level
+    voltage_limit
+    voltage_limit_high
+    voltage_limit_low
+    current_level_range
+    voltage_limit_range
+    Default Value: OutputFunction.DC_VOLTAGE
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -874,11 +882,11 @@ class _SessionBase(object):
     output_resistance = attributes.AttributeViReal64(1150061)
     '''Type: float
 
-    Specifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is  available only when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
+    Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is  available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
     Default Value: 0.0
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic for information
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -892,19 +900,19 @@ class _SessionBase(object):
     overranging_enabled = attributes.AttributeViBoolean(1150007)
     '''Type: bool
 
-    Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. VI_TRUE means that overranging is enabled.
+    Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. True means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
-    Default Value: VI_FALSE
+    Default Value: False
     '''
     ovp_enabled = attributes.AttributeViBoolean(1250002)
     '''Type: bool
 
-    Enables (VI_TRUE) or disables (VI_FALSE) overvoltage protection (OVP).
+    Enables (True) or disables (False) overvoltage protection (OVP).
     Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about  overvoltage protection.
     for information about supported devices.
-    Default Value: VI_FALSE
+    Default Value: False
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     ovp_limit = attributes.AttributeViReal64(1250003)
     '''Type: float
@@ -914,16 +922,19 @@ class _SessionBase(object):
     Valid Values: 2 V to 210 V
     Default Value: 210 V
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     power_line_frequency = attributes.AttributeViReal64(1150020)
     '''Type: float
 
-    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  NIDCPOWER_ATTR_APERTURE_TIME attribute in power line cycles (PLCs).
+    Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  aperture_time property in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
     Default Value: NIDCPOWER_VAL_60_HERTZ
 
-    Note: This attribute is not supported by all devices. Refer to the Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to the Supported Properties by Device topic
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -938,10 +949,10 @@ class _SessionBase(object):
     '''Type: enums.PowerSource
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
-    Default Value: NIDCPOWER_VAL_AUTOMATIC
-    is set to NIDCPOWER_VAL_AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this attribute, the power source selection only occurs after you call the  niDCPower_Initiate function.
+    Default Value: PowerSource.AUTOMATIC
+    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  _initiate method.
 
-    Note: Automatic selection is not persistent and occurs only at the time this attribute
+    Note: Automatic selection is not persistent and occurs only at the time this property
     '''
     power_source_in_use = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
     '''Type: enums.PowerSourceInUse
@@ -952,10 +963,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse bias current level, in amps, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -970,10 +981,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE property.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -991,18 +1002,17 @@ class _SessionBase(object):
     generating the desired pulse voltage on the specified channel(s) during
     the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Bias Current Limit
-    Low <pniDCPower_PulseBiasCurrentLimitLow.html>`__ to complete the
+    Low <pPulseBiasCurrentLimitLow.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__, `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1014,10 +1024,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1035,18 +1048,17 @@ class _SessionBase(object):
     generating the desired pulse voltage on the specified channel(s) during
     the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Bias Current Limit
-    High <pniDCPower_PulseBiasCurrentLimitHigh.html>`__ to complete the
+    High <pPulseBiasCurrentLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+    Limit Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1058,10 +1070,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1079,7 +1094,7 @@ class _SessionBase(object):
     Valid Values: 0 to 167 seconds
     Default Value: 16.67 milliseconds
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1094,10 +1109,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse bias voltage level, in volts, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_level_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1112,10 +1127,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1133,18 +1148,17 @@ class _SessionBase(object):
     when generating the desired pulse current on the specified channel(s)
     during the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Bias Voltage Limit
-    Low <pniDCPower_PulseBiasVoltageLimitLow.html>`__ to complete the
+    Low <pPulseBiasVoltageLimitLow.html>`__ to complete the
     asymmetric range.
-    **Valid Values:** [0, `Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1156,10 +1170,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1177,18 +1194,17 @@ class _SessionBase(object):
     when generating the desired pulse current on the specified channel(s)
     during the *off* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Bias Voltage Limit
-    High <pniDCPower_PulseBiasVoltageLimitHigh.html>`__ to complete the
+    High <pPulseBiasVoltageLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+    Limit Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1200,10 +1216,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1221,15 +1240,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
     Default Value:The default value for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     pulse_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150100)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Pulse Complete event.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     pulse_complete_event_pulse_width = attributes.AttributeViReal64(1150101)
     '''Type: float
@@ -1239,16 +1258,16 @@ class _SessionBase(object):
     The maximum event pulse width value for PXI Express devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     pulse_current_level = attributes.AttributeViReal64(1150086)
     '''Type: float
 
     Specifies the pulse current level, in amps, that the device attempts to generate on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_level_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1264,10 +1283,10 @@ class _SessionBase(object):
 
     Specifies the pulse current level range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current level and pulse bias current level.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1282,10 +1301,13 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY  attribute is set to NIDCPOWER_VAL_SYMMETRIC.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry  property is set to NIDCPOWER_VAL_SYMMETRIC.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1303,18 +1325,17 @@ class _SessionBase(object):
     generating the desired pulse voltage on the specified channel(s) during
     the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Current Limit
-    Low <pniDCPower_PulseCurrentLimitLow.html>`__ to complete the asymmetric
+    Low <pPulseCurrentLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__, `Pulse Current Limit
+    Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1326,10 +1347,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1347,18 +1371,17 @@ class _SessionBase(object):
     generating the desired pulse voltage on the specified channel(s) during
     the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Voltage**.
     You must also specify a `Pulse Current Limit
-    High <pniDCPower_PulseCurrentLimitHigh.html>`__ to complete the
+    High <pPulseCurrentLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Current Limit
-    Range <pniDCPower_PulseCurrentLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseCurrentLimitRange.html>`__, -1% of `Pulse Current
+    Limit Range <pPulseCurrentLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1370,10 +1393,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1389,10 +1415,10 @@ class _SessionBase(object):
 
     Specifies the pulse current limit range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1410,7 +1436,7 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1428,7 +1454,7 @@ class _SessionBase(object):
     Valid Values: 10 microseconds to 167 seconds
     Default Value: 34 milliseconds
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1443,18 +1469,18 @@ class _SessionBase(object):
     '''Type: enums.TriggerType
 
     Specifies the behavior of the Pulse trigger.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: TriggerType.NONE
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     pulse_voltage_level = attributes.AttributeViReal64(1150080)
     '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1470,10 +1496,10 @@ class _SessionBase(object):
 
     Specifies the pulse voltage level range, in volts, for the specified channel(s).
     The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1488,10 +1514,13 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute  is set to NIDCPOWER_VAL_SYMMETRIC.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property  is set to NIDCPOWER_VAL_SYMMETRIC.
+    Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1509,18 +1538,17 @@ class _SessionBase(object):
     when generating the desired pulse current on the specified channel(s)
     during the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Voltage Limit
-    Low <pniDCPower_PulseVoltageLimitLow.html>`__ to complete the asymmetric
+    Low <pPulseVoltageLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__, `Pulse Voltage Limit
+    Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1532,10 +1560,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1553,18 +1584,17 @@ class _SessionBase(object):
     when generating the desired pulse current on the specified channel(s)
     during the *on* phase of a pulse.
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **Pulse
+    Method <pOutputFunction.html>`__ property is set to **Pulse
     Current**.
     You must also specify a `Pulse Voltage Limit
-    High <pniDCPower_PulseVoltageLimitHigh.html>`__ to complete the
+    High <pPulseVoltageLimitHigh.html>`__ to complete the
     asymmetric range.
     **Valid Values:** [-`Pulse Voltage Limit
-    Range <pniDCPower_PulseVoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pPulseVoltageLimitRange.html>`__, -1% of `Pulse Voltage
+    Limit Range <pPulseVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -1576,10 +1606,13 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE or if the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to a
-    pulsing function.
+    Method <pOutputFunction.html>`__ property is set to a
+    pulsing method.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1595,10 +1628,10 @@ class _SessionBase(object):
 
     Specifies the pulse voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     For valid ranges, refer to the ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
-    Note: The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1613,18 +1646,18 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower queries the device status after each operation.
-    Querying the device status is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable status checking and maximize performance.
-    NI-DCPower ignores status checking for particular attributes regardless of the setting of this attribute.
-    Use the niDCPower_InitializeWithChannels function to override this value.
-    Default Value: VI_TRUE
+    Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
+    NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
+    Use the _initialize_with_channels method to override this value.
+    Default Value: True
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
-    Specifies whether to validate attribute values and function parameters.
-    If this attribute is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower functions.  Range checking parameters is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable range checking and maximize performance.
-    Use the niDCPower_InitializeWithChannels function to override this value.
-    Default Value: VI_TRUE
+    Specifies whether to validate property values and method parameters.
+    If this property is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower methods.  Range checking parameters is useful for debugging. After you validate your program, you can set this  property to False to disable range checking and maximize performance.
+    Use the _initialize_with_channels method to override this value.
+    Default Value: True
     '''
     ready_for_pulse_trigger_event_output_terminal = attributes.AttributeViString(1150102)
     '''Type: str
@@ -1632,15 +1665,15 @@ class _SessionBase(object):
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     ready_for_pulse_trigger_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150103)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     ready_for_pulse_trigger_event_pulse_width = attributes.AttributeViReal64(1150104)
     '''Type: float
@@ -1650,23 +1683,26 @@ class _SessionBase(object):
     The maximum event pulse width value for all devices is 1.6 microseconds.
     Default Value: The default value for PXI Express devices is 250 ns
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
-    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the niDCPower_GetNextCoercionRecord function to read and delete the earliest coercion record from the list.
-    Default Value: The default value is VI_FALSE. Use the niDCPower_InitializeWithChannels function to override this value.
+    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 properties.  Call the GetNextCoercionRecord method to read and delete the earliest coercion record from the list.
+    Default Value: The default value is False. Use the _initialize_with_channels method to override this value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     reset_average_before_measurement = attributes.AttributeViBoolean(1150006)
     '''Type: bool
 
-    Specifies whether the measurement returned from any measurement call starts with a new measurement call (VI_TRUE) or  returns a measurement that has already begun or completed(VI_FALSE).
+    Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or  returns a measurement that has already begun or completed(False).
     for information about supported devices.
-    When you set the NIDCPOWER_ATTR_SAMPLES_TO_AVERAGE attribute in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the niDCPower_MeasureMultiple function. To  force a synchronization in the running state, set this attribute to VI_TRUE, and then run the niDCPower_MeasureMultiple  function, specifying all channels in the channel name parameter. You can set the  NIDCPOWER_ATTR_RESET_AVERAGE_BEFORE_MEASUREMENT attribute to VI_FALSE after the niDCPower_MeasureMultiple function  completes.
-    Default Value: VI_TRUE
+    When you set the samples_to_average property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the measure_multiple method. To  force a synchronization in the running state, set this property to True, and then run the measure_multiple  method, specifying all channels in the channel name parameter. You can set the  reset_average_before_measurement property to False after the measure_multiple method  completes.
+    Default Value: True
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1681,7 +1717,7 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the number of samples to average when you take a measurement.
-    Increasing the number of samples to average decreases measurement noise but increases the time required to take  a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for  optional attribute settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for  information about improving noise immunity for those devices.
+    Increasing the number of samples to average decreases measurement noise but increases the time required to take  a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for  optional property settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for  information about improving noise immunity for those devices.
     Default Value:
     NI PXI-4110 or NI PXI-4130—10
     NI PXI-4132—1
@@ -1704,19 +1740,22 @@ class _SessionBase(object):
     self_calibration_persistence = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
     '''Type: enums.SelfCalibrationPersistence
 
-    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.
-    This attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.
+    Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the reset_device method is called or the machine  is powered down.
+    This property affects the behavior of the CalSelfCalibrate method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the CalSelfCalibrate method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the CalSelfCalibrate method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the CalSelfCalibrate method is made.
     about supported devices.
-    Default Value: NIDCPOWER_VAL_KEEP_IN_MEMORY
+    Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device for information
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     sense = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
-    Default Value: The default value is NIDCPOWER_VAL_LOCAL if the device supports local sense.  Otherwise, the default and only supported value is NIDCPOWER_VAL_REMOTE.
+    Default Value: The default value is Sense.LOCAL if the device supports local sense.  Otherwise, the default and only supported value is Sense.REMOTE.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1732,9 +1771,9 @@ class _SessionBase(object):
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: TriggerType.NONE
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_engine_done_event_output_terminal = attributes.AttributeViString(1150050)
     '''Type: str
@@ -1743,16 +1782,16 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_engine_done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150048)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_engine_done_event_pulse_width = attributes.AttributeViReal64(1150049)
     '''Type: float
@@ -1764,7 +1803,7 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_iteration_complete_event_output_terminal = attributes.AttributeViString(1150040)
     '''Type: str
@@ -1773,16 +1812,16 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_iteration_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150038)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_iteration_complete_event_pulse_width = attributes.AttributeViReal64(1150039)
     '''Type: float
@@ -1794,34 +1833,34 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
     '''
     sequence_loop_count = attributes.AttributeViInt32(1150025)
     '''Type: int
 
     Specifies the number of times a sequence is run after initiation.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.
-    for information about supported devices. When the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute  is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
+    for information about supported devices. When the sequence_loop_count_is_finite property  is set to False, the sequence_loop_count property is ignored.
     Valid Range: 1 to 134217727
     Default Value: 1
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     sequence_loop_count_is_finite = attributes.AttributeViBoolean(1150078)
     '''Type: bool
 
     Specifies whether a sequence should repeat indefinitely.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.
-    NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE,  the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.
-    Default Value: VI_TRUE
+    sequence_loop_count_is_finite property is set to False,  the sequence_loop_count property is ignored.
+    Default Value: True
 
-    Note: This attribute is not supported by all devices. When the
+    Note: This property is not supported by all devices. When the
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether to simulate NI-DCPower I/O operations. VI_TRUE specifies that operation is simulated.
-    Default Value: VI_FALSE
+    Specifies whether to simulate NI-DCPower I/O operations. True specifies that operation is simulated.
+    Default Value: False
     '''
     source_complete_event_output_terminal = attributes.AttributeViString(1150043)
     '''Type: str
@@ -1830,16 +1869,16 @@ class _SessionBase(object):
     for information about supported devices.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     source_complete_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Polarity, 1150041)
     '''Type: enums.Polarity
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_ACTIVE_HIGH
+    Default Value: Polarity.HIGH
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     source_complete_event_pulse_width = attributes.AttributeViReal64(1150042)
     '''Type: float
@@ -1851,18 +1890,18 @@ class _SessionBase(object):
     Valid Values: 1.5e-7 to 1.6e-6 seconds
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     source_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: datetime.timedelta
 
-    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
+    Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
     Valid Values: 0 to 167 seconds
     Default Value: 0.01667 seconds
 
     Note:
-    Refer to Supported Attributes by Device for information about supported devices.
+    Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1877,16 +1916,16 @@ class _SessionBase(object):
     '''Type: enums.SourceMode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
-    Default value: NIDCPOWER_VAL_SINGLE_POINT
+    Default value: SourceMode.SINGLE_POINT
     '''
     source_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1150030)
     '''Type: enums.TriggerType
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: TriggerType.NONE
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -1906,7 +1945,7 @@ class _SessionBase(object):
     specific_driver_prefix = attributes.AttributeViString(1050302)
     '''Type: str
 
-    Contains the prefix for NI-DCPower. The name of each user-callable  function in NI-DCPower begins with this prefix.
+    Contains the prefix for NI-DCPower. The name of each user-callable  method in NI-DCPower begins with this prefix.
     '''
     specific_driver_revision = attributes.AttributeViString(1050551)
     '''Type: str
@@ -1923,9 +1962,9 @@ class _SessionBase(object):
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NONE
+    Default Value: TriggerType.NONE
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     supported_instrument_models = attributes.AttributeViString(1050327)
     '''Type: str
@@ -1937,9 +1976,9 @@ class _SessionBase(object):
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.
-    Default Value: NIDCPOWER_VAL_NORMAL
+    Default Value: TransientResponse.NORMAL
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1955,9 +1994,9 @@ class _SessionBase(object):
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of  the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default value: Determined by the value of the TransientResponse.NORMAL setting of  the transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1971,11 +2010,11 @@ class _SessionBase(object):
     voltage_gain_bandwidth = attributes.AttributeViReal64(1150067)
     '''Type: float
 
-    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This attribute takes effect when the channel is in Constant Voltage mode.
+    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
-    Default Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1990,9 +2029,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values you specify for the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute.
+    This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
+    output_enabled property for more information about enabling the output channel.
+    Valid Values: The valid values for this property are defined by the values you specify for the  voltage_level_range property.
 
     Note: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
@@ -2009,10 +2048,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.
-    Query the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+    Query the voltage_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
+    The voltage_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2027,9 +2066,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage level range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE  attribute to enable automatic selection of the voltage level range.
-    The NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_VOLTAGE.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid values to which the voltage level can be set. Use the voltage_level_autorange  property to enable automatic selection of the voltage level range.
+    The voltage_level_range property is applicable only if the output_function property is  set to OutputFunction.DC_VOLTAGE.
+    output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
     Note: The channel must be enabled for the specified voltage level range to take effect. Refer to the
@@ -2047,11 +2086,14 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT  and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_SYMMETRIC.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
-    Valid Values: The valid values for this attribute are defined by the values to which the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.
+    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT  and the compliance_limit_symmetry property is set to NIDCPOWER_VAL_SYMMETRIC.
+    output_enabled property for more information about enabling the output channel.
+    Valid Values: The valid values for this property are defined by the values to which the  voltage_limit_range property is set.
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2066,10 +2108,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this attribute is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.
-    Query the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function to find out  which range NI-DCPower automatically selects.
-    The NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
+    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+    Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out  which range NI-DCPower automatically selects.
+    The voltage_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2086,18 +2128,17 @@ class _SessionBase(object):
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Method <pOutputFunction.html>`__ property is set to **DC
     Current**.
     You must also specify a `Voltage Limit
-    Low <pniDCPower_VoltageLimitLow.html>`__ to complete the asymmetric
+    Low <pVoltageLimitLow.html>`__ to complete the asymmetric
     range.
-    **Valid Values:** [0, `Voltage Limit
-    Range <pniDCPower_VoltageLimitRange.html>`__]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    **Valid Values:** [1% of `Voltage Limit
+    Range <pVoltageLimitRange.html>`__, `Voltage Limit
+    Range <pVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2109,8 +2150,11 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2127,18 +2171,17 @@ class _SessionBase(object):
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
     This property is applicable only if the `Compliance Limit
-    Symmetry <pniDCPower_ComplianceLimitSymmetry.html>`__ property is set to
+    Symmetry <pComplianceLimitSymmetry.html>`__ property is set to
     **Asymmetric** and the `Output
-    Function <pniDCPower_OutputFunction.html>`__ property is set to **DC
+    Method <pOutputFunction.html>`__ property is set to **DC
     Current**.
     You must also specify a `Voltage Limit
-    High <pniDCPower_VoltageLimitHigh.html>`__ to complete the asymmetric
+    High <pVoltageLimitHigh.html>`__ to complete the asymmetric
     range.
     **Valid Values:** [-`Voltage Limit
-    Range <pniDCPower_VoltageLimitRange.html>`__, 0]
-    The range bounded by the limit high and limit low must include zero. The
-    limit high and limit low must be separated by at least 2% of the
-    selected limit range.
+    Range <pVoltageLimitRange.html>`__, -1% of `Voltage Limit
+    Range <pVoltageLimitRange.html>`__]
+    The range bounded by the limit high and limit low must include zero.
     **Default Value:** Refer to `Supported Properties by
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
@@ -2150,8 +2193,11 @@ class _SessionBase(object):
 
     Note:
     The limit may be extended beyond the selected limit range if the
-    `Overranging Enabled <pniDCPower_OverrangingEnabled.html>`__ property is
+    `Overranging Enabled <pOverrangingEnabled.html>`__ property is
     set to TRUE.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2166,9 +2212,9 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage limit range, in volts, for the specified channel(s).
-    The range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE  attribute to enable automatic selection of the voltage limit range.
-    The NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is  set to NIDCPOWER_VAL_DC_CURRENT.
-    NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.
+    The range defines the valid values to which the voltage limit can be set. Use the voltage_limit_autorange  property to enable automatic selection of the voltage limit range.
+    The voltage_limit_range property is applicable only if the output_function property is  set to OutputFunction.DC_CURRENT.
+    output_enabled property for more information about enabling the output channel.
     For valid ranges, refer to the Ranges topic for your device in the NI DC Power Supplies and SMUs Help.
 
     Note: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
@@ -2187,9 +2233,9 @@ class _SessionBase(object):
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Voltage mode.
     for information about supported devices.
-    Default value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the  NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.
+    Default value: Determined by the value of the TransientResponse.NORMAL setting of the  transient_response property.
 
-    Note: This attribute is not supported by all devices. Refer to Supported Attributes by Device topic
+    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2264,8 +2310,8 @@ class _SessionBase(object):
         `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -2306,20 +2352,20 @@ class _SessionBase(object):
 
         Returns an array of voltage measurements, an array of current
         measurements, and an array of compliance measurements that were
-        previously taken and are stored in the NI-DCPower buffer. This function
-        should not be used when the measure_when attribute is
+        previously taken and are stored in the NI-DCPower buffer. This method
+        should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
-        _initiate before calling this function.
+        _initiate before calling this method.
 
         Refer to the `Acquiring
         Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
         and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
         the *NI DC Power Supplies and SMUs Help* for more information about
-        configuring this function.
+        configuring this method.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -2334,8 +2380,8 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
-                seconds. If the function does not complete within this time interval,
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+                seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
                 Note:
@@ -2379,9 +2425,9 @@ class _SessionBase(object):
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
-        | Queries the value of a ViBoolean attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
+        | Queries the value of a ViBoolean property.
+        | You can use this method to get the values of device-specific
+          properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2392,31 +2438,31 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
+                   of the available properties. Help text is shown for each property.
+                   Select an property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViBoolean. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViBoolean are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
+                   properties or only the properties of type ViBoolean. If you choose to
+                   see all IVI properties, the data types appear to the right of the
+                   property names in the list box. Properties with data types other
+                   than ViBoolean are dim. If you select an property data type that is
+                   dim, LabWindows/CVI transfers you to the method panel for the
+                   corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
 
         Returns:
-            attribute_value (bool): Returns the current value of the attribute. Passes the address of a
+            attribute_value (bool): Returns the current value of the property. Passes the address of a
                 ViBoolean variable.
-                If the attribute currently showing in the attribute ring control has
+                If the property currently showing in the property ring control has
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
@@ -2433,9 +2479,9 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        | Queries the value of a ViInt32 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
+        | Queries the value of a ViInt32 property.
+        | You can use this method to get the values of device-specific
+          properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2446,31 +2492,31 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
+                   of the available properties. Help text is shown for each property.
+                   Select an property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViInt32. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViInt32 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
+                   properties or only the properties of type ViInt32. If you choose to
+                   see all IVI properties, the data types appear to the right of the
+                   property names in the list box. Properties with data types other
+                   than ViInt32 are dim. If you select an property data type that is
+                   dim, LabWindows/CVI transfers you to the method panel for the
+                   corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
 
         Returns:
-            attribute_value (int): Returns the current value of the attribute. Passes the address of a
+            attribute_value (int): Returns the current value of the property. Passes the address of a
                 ViInt32 variable.
-                If the attribute currently showing in the attribute ring control has
+                If the property currently showing in the property ring control has
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
@@ -2487,9 +2533,9 @@ class _SessionBase(object):
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
 
-        | Queries the value of a ViInt64 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
+        | Queries the value of a ViInt64 property.
+        | You can use this method to get the values of device-specific
+          properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2500,31 +2546,31 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
+                   of the available properties. Help text is shown for each property.
+                   Select an property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViReal64. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViReal64 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
+                   properties or only the properties of type ViReal64. If you choose to
+                   see all IVI properties, the data types appear to the right of the
+                   property names in the list box. Properties with data types other
+                   than ViReal64 are dim. If you select an property data type that is
+                   dim, LabWindows/CVI transfers you to the method panel for the
+                   corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
 
         Returns:
-            attribute_value (int): Returns the current value of the attribute. Passes the address of a
+            attribute_value (int): Returns the current value of the property. Passes the address of a
                 ViReal64 variable.
-                If the attribute currently showing in the attribute ring control has
+                If the property currently showing in the property ring control has
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
@@ -2541,9 +2587,9 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        | Queries the value of a ViReal64 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
+        | Queries the value of a ViReal64 property.
+        | You can use this method to get the values of device-specific
+          properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2554,31 +2600,31 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
+                   of the available properties. Help text is shown for each property.
+                   Select an property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViReal64. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViReal64 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
+                   properties or only the properties of type ViReal64. If you choose to
+                   see all IVI properties, the data types appear to the right of the
+                   property names in the list box. Properties with data types other
+                   than ViReal64 are dim. If you select an property data type that is
+                   dim, LabWindows/CVI transfers you to the method panel for the
+                   corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
 
         Returns:
-            attribute_value (float): Returns the current value of the attribute. Passes the address of a
+            attribute_value (float): Returns the current value of the property. Passes the address of a
                 ViReal64 variable.
-                If the attribute currently showing in the attribute ring control has
+                If the property currently showing in the property ring control has
                 constants as valid values, you can view a list of the constants by
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
@@ -2595,9 +2641,9 @@ class _SessionBase(object):
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
-        | Queries the value of a ViString attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
+        | Queries the value of a ViString property.
+        | You can use this method to get the values of device-specific
+          properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2608,23 +2654,23 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press or the
+                -  In the method panel window, click on the control or press or the
                    spacebar to display a dialog box containing hierarchical list of the
-                   available attributes. Help text is shown for each attribute. Select
-                   an attribute by double-clicking on it or by selecting it and then
+                   available properties. Help text is shown for each property. Select
+                   an property by double-clicking on it or by selecting it and then
                    pressing .
                 -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViString. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViString are dimmed. If you select an attribute data type that
-                   is dimmed, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
+                   properties or only the properties of type ViString. If you choose to
+                   see all IVI properties, the data types appear to the right of the
+                   property names in the list box. Properties with data types other
+                   than ViString are dimmed. If you select an property data type that
+                   is dimmed, LabWindows/CVI transfers you to the method panel for the
+                   corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press to change this ring
-                   control to a manual input control. If the attribute in this ring
+                   control to a manual input control. If the property in this ring
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
 
@@ -2646,7 +2692,7 @@ class _SessionBase(object):
         '''get_channel_name
 
         Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count attribute to
+        **index**. Use the channel_count property to
         determine the upper bound of valid values for **index**.
 
         Tip:
@@ -2679,21 +2725,21 @@ class _SessionBase(object):
 
         | Retrieves and then clears the IVI error information for the session or
           the current execution thread unless **bufferSize** is 0, in which case
-          the function does not clear the error information. By passing 0 for
+          the method does not clear the error information. By passing 0 for
           the buffer size, you can ascertain the buffer size required to get the
-          entire error description string and then call the function again with
+          entire error description string and then call the method again with
           a sufficiently large buffer size.
-        | If the user specifies a valid IVI session for **vi**, this function
+        | If the user specifies a valid IVI session for **vi**, this method
           retrieves and then clears the error information for the session. If
-          the user passes VI_NULL for **vi**, this function retrieves and then
+          the user passes VI_NULL for **vi**, this method retrieves and then
           clears the error information for the current execution thread. If
-          **vi** is an invalid session, the function does nothing and returns an
+          **vi** is an invalid session, the method does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
           ClearError.
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
@@ -2715,10 +2761,10 @@ class _SessionBase(object):
         '''measure
 
         Returns the measured value of either the voltage or current on the
-        specified output channel. Each call to this function blocks other
-        function calls until the hardware returns the **measurement**. To
+        specified output channel. Each call to this method blocks other
+        method calls until the hardware returns the **measurement**. To
         measure multiple output channels, use the measure_multiple
-        function.
+        method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2758,8 +2804,8 @@ class _SessionBase(object):
         '''measure_multiple
 
         Returns arrays of the measured voltage and current values on the
-        specified output channel(s). Each call to this function blocks other
-        function calls until the measurements are returned from the device. The
+        specified output channel(s). Each call to this method blocks other
+        method calls until the measurements are returned from the device. The
         order of the measurements returned in the array corresponds to the order
         on the specified output channel(s).
 
@@ -2823,26 +2869,26 @@ class _SessionBase(object):
         Queries the specified output device to determine if it is operating at
         the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
-        The compliance limit is the current limit when the output function is
+        The compliance limit is the current limit when the output method is
         set to OutputFunction.DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
         desired voltage level. Refer to the ConfigureOutputFunction
-        function and the ConfigureCurrentLimit function for more
-        information about output function and current limit, respectively.
+        method and the ConfigureCurrentLimit method for more
+        information about output method and current limit, respectively.
 
-        The compliance limit is the voltage limit when the output function is
+        The compliance limit is the voltage limit when the output method is
         set to OutputFunction.DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
         desired current level. Refer to the ConfigureOutputFunction
-        function and the ConfigureVoltageLimit function for more
-        information about output function and voltage limit, respectively.
+        method and the ConfigureVoltageLimit method for more
+        information about output method and voltage limit, respectively.
 
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3006,9 +3052,9 @@ class _SessionBase(object):
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        | Sets the value of a ViBoolean attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
+        | Sets the value of a ViBoolean property.
+        | This is a low-level method that you can use to set the values of
+          device-specific properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3019,30 +3065,30 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
+                   of the available properties. Properties whose value cannot be set are
+                   dim. Help text is shown for each property. Select an property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViBoolean. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViBoolean are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
+                -  Read-only properties appear dim in the list box. If you select a
+                   read-only property, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI properties or only
+                   the properties of type ViBoolean. If you choose to see all IVI
+                   properties, the data types appear to the right of the property names
+                   in the list box. Properties with data types other than ViBoolean are
+                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
-            attribute_value (bool): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
+            attribute_value (bool): Specifies the value to which you want to set the property. If the
+                property currently showing in the property ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing **Enter**.
@@ -3063,9 +3109,9 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        | Sets the value of a ViInt32 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
+        | Sets the value of a ViInt32 property.
+        | This is a low-level method that you can use to set the values of
+          device-specific properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3076,30 +3122,30 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
+                   of the available properties. Properties whose value cannot be set are
+                   dim. Help text is shown for each property. Select an property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViInt32. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViInt32 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
+                -  Read-only properties appear dim in the list box. If you select a
+                   read-only property, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI properties or only
+                   the properties of type ViInt32. If you choose to see all IVI
+                   properties, the data types appear to the right of the property names
+                   in the list box. Properties with data types other than ViInt32 are
+                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
-            attribute_value (int): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
+            attribute_value (int): Specifies the value to which you want to set the property. If the
+                property currently showing in the property ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing **Enter**.
@@ -3120,9 +3166,9 @@ class _SessionBase(object):
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
 
-        | Sets the value of a ViInt64 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
+        | Sets the value of a ViInt64 property.
+        | This is a low-level method that you can use to set the values of
+          device-specific properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3133,30 +3179,30 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
+                   of the available properties. Properties whose value cannot be set are
+                   dim. Help text is shown for each property. Select an property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViReal64. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViReal64 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
+                -  Read-only properties appear dim in the list box. If you select a
+                   read-only property, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI properties or only
+                   the properties of type ViReal64. If you choose to see all IVI
+                   properties, the data types appear to the right of the property names
+                   in the list box. Properties with data types other than ViReal64 are
+                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
-            attribute_value (int): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
+            attribute_value (int): Specifies the value to which you want to set the property. If the
+                property currently showing in the property ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing **Enter**.
@@ -3177,9 +3223,9 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        | Sets the value of a ViReal64 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
+        | Sets the value of a ViReal64 property.
+        | This is a low-level method that you can use to set the values of
+          device-specific properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3190,30 +3236,30 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
+                   of the available properties. Properties whose value cannot be set are
+                   dim. Help text is shown for each property. Select an property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViReal64. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViReal64 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
+                -  Read-only properties appear dim in the list box. If you select a
+                   read-only property, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI properties or only
+                   the properties of type ViReal64. If you choose to see all IVI
+                   properties, the data types appear to the right of the property names
+                   in the list box. Properties with data types other than ViReal64 are
+                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
-            attribute_value (float): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
+            attribute_value (float): Specifies the value to which you want to set the property. If the
+                property currently showing in the property ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing **Enter**.
@@ -3234,9 +3280,9 @@ class _SessionBase(object):
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        | Sets the value of a ViString attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
+        | Sets the value of a ViString property.
+        | This is a low-level method that you can use to set the values of
+          device-specific properties and inherent IVI properties.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -3247,30 +3293,30 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an property. From the method panel window, you
                 can use this control as follows.
 
-                -  In the function panel window, click on the control or press **Enter**
+                -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
+                   of the available properties. Properties whose value cannot be set are
+                   dim. Help text is shown for each property. Select an property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViString. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViString are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
+                -  Read-only properties appear dim in the list box. If you select a
+                   read-only property, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI properties or only
+                   the properties of type ViString. If you choose to see all IVI
+                   properties, the data types appear to the right of the property names
+                   in the list box. Properties with data types other than ViString are
+                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
+                   change this ring control to a manual input box. If the property in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
 
-            attribute_value (str): Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
+            attribute_value (str): Specifies the value to which you want to set the property. If the
+                property currently showing in the property ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
                 selecting it and then pressing **Enter**.
@@ -3294,22 +3340,22 @@ class _SessionBase(object):
         Configures a series of voltage or current outputs and corresponding
         source delays. The source mode must be set to
         `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
-        function to take effect.
+        method to take effect.
 
         Refer to the `Configuring the Source
         Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
         in the *NI DC Power Supplies and SMUs Help* for more information about
         how to configure your device.
 
-        Use this function in the Uncommitted or Committed programming states.
+        Use this method in the Uncommitted or Committed programming states.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for more information about
         NI-DCPower programming states.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -3329,7 +3375,7 @@ class _SessionBase(object):
 
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
-                function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
+                method <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
@@ -3347,12 +3393,12 @@ class _SessionBase(object):
     def _error_message(self, error_code):
         '''_error_message
 
-        Converts a status code returned by an instrument driver function into a
+        Converts a status code returned by an instrument driver method into a
         user-readable string.
 
         Args:
             error_code (int): Specifies the **status** parameter that is returned from any of the
-                NI-DCPower functions.
+                NI-DCPower methods.
 
 
         Returns:
@@ -3377,27 +3423,27 @@ class Session(_SessionBase):
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
-        function calls. With this function, you can optionally set the initial
-        state of the following session attributes:
+        method calls. With this method, you can optionally set the initial
+        state of the following session properties:
 
         -  simulate
         -  driver_setup
 
-        After calling this function, the session will be in the Uncommitted
+        After calling this method, the session will be in the Uncommitted
         state. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
         details about specific software states.
 
         To place the device in a known start-up state when creating a new
-        session, set **reset** to VI_TRUE. This action is equivalent to using
-        the reset function immediately after initializing the
+        session, set **reset** to True. This action is equivalent to using
+        the reset method immediately after initializing the
         session.
 
         To open a session and leave the device in its existing configuration
         without passing through a transitional output state, set **reset** to
-        VI_FALSE. Then configure the device as in the previous session,
+        False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        _initiate function.
+        _initiate method.
 
         **Related Topics:**
 
@@ -3424,20 +3470,20 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            options (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **options** is a dictionary of attributes with an assigned
+            options (str): Specifies the initial value of certain properties for the session. The
+                syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
                 { 'simulate': False }
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 
                 +-------------------------+---------+
-                | Attribute               | Default |
+                | Property                | Default |
                 +=========================+=========+
                 | range_check             | True    |
                 +-------------------------+---------+
@@ -3503,13 +3549,13 @@ class Session(_SessionBase):
 
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
-        configuration functions called after this function are not applied until
-        the _initiate function is called. If power output is enabled
-        when you call the abort function, the output channels remain
+        configuration methods called after this method are not applied until
+        the _initiate method is called. If power output is enabled
+        when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
-        Use the ConfigureOutputEnabled function to disable power
-        output on a per channel basis. Use the reset function to
+        Use the ConfigureOutputEnabled method to disable power
+        output on a per channel basis. Use the reset method to
         disable output on all channels.
 
         Refer to the `Programming
@@ -3523,7 +3569,7 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
@@ -3534,10 +3580,10 @@ class Session(_SessionBase):
         '''commit
 
         Applies previously configured settings to the device. Calling this
-        function moves the NI-DCPower session from the Uncommitted state into
-        the Committed state. After calling this function, modifying any
-        attribute reverts the NI-DCPower session to the Uncommitted state. Use
-        the _initiate function to transition to the Running state.
+        method moves the NI-DCPower session from the Uncommitted state into
+        the Committed state. After calling this method, modifying any
+        property reverts the NI-DCPower session to the Uncommitted state. Use
+        the _initiate method to transition to the Running state.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -3559,15 +3605,15 @@ class Session(_SessionBase):
         Configures the Measure trigger for digital edge triggering.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
             input_terminal (str): Specifies the input terminal for the digital edge Measure trigger.
 
-                You can specify any valid input terminal for this function. Valid
+                You can specify any valid input terminal for this method. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
                 PXIe-4162/4163, refer to the Signal Routing topic for the device to
                 determine which routes are available. This information is not available
@@ -3606,15 +3652,15 @@ class Session(_SessionBase):
         Configures the Pulse trigger for digital edge triggering.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
             input_terminal (str): Specifies the input terminal for the digital edge Pulse trigger.
 
-                You can specify any valid input terminal for this function. Valid
+                You can specify any valid input terminal for this method. Valid
                 terminals are listed in MAX under the **Device Routes** tab.
 
                 Input terminals can be specified in one of two ways. If the device is
@@ -3650,8 +3696,8 @@ class Session(_SessionBase):
         Configures the Sequence Advance trigger for digital edge triggering.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -3659,7 +3705,7 @@ class Session(_SessionBase):
             input_terminal (str): Specifies the input terminal for the digital edge Sequence Advance
                 trigger.
 
-                You can specify any valid input terminal for this function. Valid
+                You can specify any valid input terminal for this method. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
                 PXIe-4162/4163, refer to the Signal Routing topic for the device to
                 determine which routes are available. This information is not available
@@ -3698,15 +3744,15 @@ class Session(_SessionBase):
         Configures the Source trigger for digital edge triggering.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
             input_terminal (str): Specifies the input terminal for the digital edge Source trigger.
 
-                You can specify any valid input terminal for this function. Valid
+                You can specify any valid input terminal for this method. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
                 PXIe-4162/4163, refer to the Signal Routing topic for the device to
                 determine which routes are available. This information is not available
@@ -3745,15 +3791,15 @@ class Session(_SessionBase):
         Configures the Start trigger for digital edge triggering.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
             input_terminal (str): Specifies the input terminal for the digital edge Start trigger.
 
-                You can specify any valid input terminal for this function. Valid
+                You can specify any valid input terminal for this method. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
                 PXIe-4162/4163, refer to the Signal Routing topic for the device to
                 determine which routes are available. This information is not available
@@ -3790,17 +3836,17 @@ class Session(_SessionBase):
         '''create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
-        create_advanced_sequence_step function to add steps to the
+        create_advanced_sequence_step method to add steps to the
         active advanced sequence.
 
-        **Support for this function**
+        **Support for this method**
 
-        You must set the source mode to Sequence to use this function.
+        You must set the source mode to Sequence to use this method.
 
-        Using the set_sequence function with Advanced Sequence
-        functions is unsupported.
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
 
-        Use this function in the Uncommitted or Committed programming states.
+        Use this method in the Uncommitted or Committed programming states.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for more information about
@@ -3817,23 +3863,23 @@ class Session(_SessionBase):
         create_advanced_sequence_step
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
             sequence_name (str): Specifies the name of the sequence to create.
 
-            attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
-                sequence. The following table lists which attributes can be configured
+            attribute_ids (list of int): Specifies the properties you reconfigure per step in the advanced
+                sequence. The following table lists which properties can be configured
                 in an advanced sequence for each NI-DCPower device that supports
-                advanced sequencing. A ✓ indicates that the attribute can be configured
-                in advanced sequencing. An ✕ indicates that the attribute cannot be
+                advanced sequencing. A ✓ indicates that the property can be configured
+                in advanced sequencing. An ✕ indicates that the property cannot be
                 configured in advanced sequencing.
 
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | Attribute                      | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
+                | Property                       | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
                 +================================+===========+=========+=========+=========+=========+===================+===================+================+
                 | dc_noise_rejection             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
@@ -3933,16 +3979,16 @@ class Session(_SessionBase):
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
-        step, each attribute you passed to the create_advanced_sequence
-        function is reset to its default value for that step unless otherwise
+        step, each property you passed to the create_advanced_sequence
+        method is reset to its default value for that step unless otherwise
         specified.
 
-        **Support for this Function**
+        **Support for this Method**
 
-        You must set the source mode to Sequence to use this function.
+        You must set the source mode to Sequence to use this method.
 
-        Using the set_sequence function with Advanced Sequence
-        functions is unsupported.
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
 
         **Related Topics**:
 
@@ -3955,8 +4001,8 @@ class Session(_SessionBase):
         create_advanced_sequence
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -3976,12 +4022,12 @@ class Session(_SessionBase):
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
 
-        **Support for this Function**
+        **Support for this Method**
 
-        You must set the source mode to Sequence to use this function.
+        You must set the source mode to Sequence to use this method.
 
-        Using the set_sequence function with Advanced Sequence
-        functions is unsupported.
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
 
         **Related Topics**:
 
@@ -3992,8 +4038,8 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4010,11 +4056,11 @@ class Session(_SessionBase):
     def disable(self):
         '''disable
 
-        This function performs the same actions as the reset
-        function, except that this function also immediately sets the
-        output_enabled attribute to VI_FALSE.
+        This method performs the same actions as the reset
+        method, except that this method also immediately sets the
+        output_enabled property to False.
 
-        This function opens the output relay on devices that have an output
+        This method opens the output relay on devices that have an output
         relay.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
@@ -4033,8 +4079,8 @@ class Session(_SessionBase):
         `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4107,7 +4153,7 @@ class Session(_SessionBase):
 
         Returns the date and time of the last successful calibration. The time
         returned is 24-hour (military) local time; for example, if the device
-        was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
+        was calibrated at 2:30 PM, this method returns 14 for **hours** and 30
         for **minutes**.
 
         Returns:
@@ -4184,7 +4230,7 @@ class Session(_SessionBase):
 
         Returns the date and time of the oldest successful self-calibration from among the channels in the session.
 
-        Note: This function is not supported on all devices.
+        Note: This method is not supported on all devices.
 
         Returns:
             month (datetime.datetime): Returns the date and time the device was last calibrated.
@@ -4202,12 +4248,12 @@ class Session(_SessionBase):
         The time returned is 24-hour (military) local time; for example, if you
         have a session using channels 1 and 2, and a self-calibration was
         performed on channel 1 at 2:30 PM, and a self-calibration was performed
-        on channel 2 at 3:00 PM on the same day, this function returns 14 for
+        on channel 2 at 3:00 PM on the same day, this method returns 14 for
         **hours** and 30 for **minutes**.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4244,12 +4290,12 @@ class Session(_SessionBase):
         For example, if you have a session using channels 1 and 2, and you
         perform a self-calibration on channel 1 with a device temperature of 25
         degrees Celsius at 2:00, and a self-calibration was performed on channel
-        2 at 27 degrees Celsius at 3:00 on the same day, this function returns
+        2 at 27 degrees Celsius at 3:00 on the same day, this method returns
         25 for the **temperature** parameter.
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4269,27 +4315,27 @@ class Session(_SessionBase):
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
-        function calls. With this function, you can optionally set the initial
-        state of the following session attributes:
+        method calls. With this method, you can optionally set the initial
+        state of the following session properties:
 
         -  simulate
         -  driver_setup
 
-        After calling this function, the session will be in the Uncommitted
+        After calling this method, the session will be in the Uncommitted
         state. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
         details about specific software states.
 
         To place the device in a known start-up state when creating a new
-        session, set **reset** to VI_TRUE. This action is equivalent to using
-        the reset function immediately after initializing the
+        session, set **reset** to True. This action is equivalent to using
+        the reset method immediately after initializing the
         session.
 
         To open a session and leave the device in its existing configuration
         without passing through a transitional output state, set **reset** to
-        VI_FALSE. Then configure the device as in the previous session,
+        False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        _initiate function.
+        _initiate method.
 
         **Related Topics:**
 
@@ -4316,14 +4362,14 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            option_string (str): Specifies the initial value of certain attributes for the session. The
-                syntax for **optionString** is a list of attributes with an assigned
-                value where 1 is VI_TRUE and 0 is VI_FALSE. For example:
+            option_string (str): Specifies the initial value of certain properties for the session. The
+                syntax for **optionString** is a list of properties with an assigned
+                value where 1 is True and 0 is False. For example:
 
                 "Simulate=0"
 
-                You do not have to specify a value for all the attributes. If you do not
-                specify a value for an attribute, the default value is used.
+                You do not have to specify a value for all the properties. If you do not
+                specify a value for an property, the default value is used.
 
                 For more information about simulating a device, refer to `Simulating a
                 Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
@@ -4331,7 +4377,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): Returns a session handle that you use to identify the device in all
-                subsequent NI-DCPower function calls.
+                subsequent NI-DCPower method calls.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -4349,7 +4395,7 @@ class Session(_SessionBase):
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
         state. To return to the Committed state call the abort
-        function. Refer to the `Programming
+        method. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for information about the
         specific NI-DCPower software states.
@@ -4383,12 +4429,12 @@ class Session(_SessionBase):
     def reset_device(self):
         '''reset_device
 
-        Resets the device to a known state. The function disables power
-        generation, resets session attributes to their default values, clears
+        Resets the device to a known state. The method disables power
+        generation, resets session properties to their default values, clears
         errors such as overtemperature and unexpected loss of auxiliary power,
-        commits the session attributes, and leaves the session in the
-        Uncommitted state. This function also performs a hard reset on the
-        device and driver software. This function has the same functionality as
+        commits the session properties, and leaves the session in the
+        Uncommitted state. This method also performs a hard reset on the
+        device and driver software. This method has the same functionality as
         using reset in Measurement & Automation Explorer. Refer to the
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
@@ -4405,13 +4451,13 @@ class Session(_SessionBase):
     def reset_with_defaults(self):
         '''reset_with_defaults
 
-        Resets the device to a known state. This function disables power
-        generation, resets session attributes to their default values, commits
-        the session attributes, and leaves the session in the
+        Resets the device to a known state. This method disables power
+        generation, resets session properties to their default values, commits
+        the session properties, and leaves the session in the
         `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
         state. In addition to exhibiting the behavior of the reset
-        function, this function can assign user-defined default values for
-        configurable attributes from the IVI configuration.
+        method, this method can assign user-defined default values for
+        configurable properties from the IVI configuration.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
@@ -4421,7 +4467,7 @@ class Session(_SessionBase):
     def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
         '''send_software_edge_trigger
 
-        Asserts the specified trigger. This function can override an external
+        Asserts the specified trigger. This method can override an external
         edge trigger.
 
         **Related Topics:**
@@ -4429,8 +4475,8 @@ class Session(_SessionBase):
         `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
         Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4465,13 +4511,13 @@ class Session(_SessionBase):
         Waits until the device has generated the specified event.
 
         The session monitors whether each type of event has occurred at least
-        once since the last time this function or the _initiate
-        function were called. If an event has only been generated once and you
-        call this function successively, the function times out. Individual
-        events must be generated between separate calls of this function.
+        once since the last time this method or the _initiate
+        method were called. If an event has only been generated once and you
+        call this method successively, the method times out. Individual
+        events must be generated between separate calls of this method.
 
         Note:
-        Refer to `Supported Functions by
+        Refer to `Supported Methods by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
@@ -4493,8 +4539,8 @@ class Session(_SessionBase):
                 | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +-------------------------------------------------------+--------------------------------------------------+
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this function to complete, in
-                seconds. If the function does not complete within this time interval,
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+                seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
                 Note:
@@ -4517,10 +4563,10 @@ class Session(_SessionBase):
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
-        function, the output channels remain in their existing state and
+        method, the output channels remain in their existing state and
         continue providing power. Use the ConfigureOutputEnabled
-        function to disable power output on a per channel basis. Use the
-        reset function to disable power output on all channel(s).
+        method to disable power output on a per channel basis. Use the
+        reset method to disable power output on all channel(s).
 
         **Related Topics:**
 
@@ -4528,7 +4574,7 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Note:
-        One or more of the referenced functions are not in the Python API for this driver.
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)
@@ -4538,9 +4584,9 @@ class Session(_SessionBase):
     def reset(self):
         '''reset
 
-        Resets the device to a known state. This function disables power
-        generation, resets session attributes to their default values, commits
-        the session attributes, and leaves the session in the Uncommitted state.
+        Resets the device to a known state. This method disables power
+        generation, resets session properties to their default values, commits
+        the session properties, and leaves the session in the Uncommitted state.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
         more information about NI-DCPower software states.
@@ -4554,7 +4600,7 @@ class Session(_SessionBase):
         '''self_test
 
         Performs the device self-test routine and returns the test result(s).
-        Calling this function implicitly calls the reset function.
+        Calling this method implicitly calls the reset method.
 
         When calling self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of

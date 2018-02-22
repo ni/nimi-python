@@ -6,7 +6,7 @@ nifgen.Session methods
 .. py:method:: abort()
 
     Aborts any previously initiated signal generation. Call the
-    nifgen\_InitiateGeneration function to cause the signal generator to
+    nifgen_InitiateGeneration method to cause the signal generator to
     produce a signal again.
 
     
@@ -18,7 +18,7 @@ nifgen.Session methods
     Specifies the size of a named waveform up front so that it can be
     allocated in onboard memory before loading the associated data. Data can
     then be loaded in smaller blocks with the niFgen Write (Binary16)
-    Waveform functions.
+    Waveform methods.
 
     
 
@@ -58,12 +58,12 @@ nifgen.Session methods
 
     Specifies the size of a waveform so that it can be allocated in onboard
     memory before loading the associated data. Data can then be loaded in
-    smaller blocks with the Write Binary 16 Waveform functions.
+    smaller blocks with the Write Binary 16 Waveform methods.
 
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -106,7 +106,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
 
 
@@ -118,7 +118,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
 
 
@@ -127,8 +127,8 @@ nifgen.Session methods
 
         Specifies the handle of the arbitrary sequence that you want the signal
         generator to remove. You can create an arbitrary sequence using the
-        nifgen\_CreateArbSequence or nifgen\_CreateAdvancedArbSequence function.
-        These functions return a handle that you use to identify the sequence.
+        nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence method.
+        These methods return a handle that you use to identify the sequence.
 
         | **Defined Value**:
         | :py:data:`~nifgen.NIFGEN_VAL_ALL_SEQUENCES`—Remove all sequences from the signal
@@ -151,7 +151,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
 
 
@@ -162,7 +162,7 @@ nifgen.Session methods
         generator to remove.
 
         You can create multiple arbitrary waveforms using one of the following
-        niFgen Create Waveform functions:
+        niFgen Create Waveform methods:
 
         -  :py:meth:`nifgen.Session._create_waveform_f64`
         -  :py:meth:`nifgen.Session._create_waveform_i16`
@@ -179,7 +179,7 @@ nifgen.Session methods
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -194,7 +194,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you
-        call this function.
+        call this method.
 
 
 
@@ -224,7 +224,7 @@ nifgen.Session methods
 .. py:method:: clear_user_standard_waveform()
 
     Clears the user-defined waveform created by the
-    nifgen\_DefineUserStandardWaveform function.
+    nifgen_DefineUserStandardWaveform method.
 
     
 
@@ -241,16 +241,16 @@ nifgen.Session methods
 
 .. py:method:: commit()
 
-    Causes a transition to the Committed state. This function verifies
-    attribute values, reserves the device, and commits the attribute values
-    to the device. If the attribute values are all valid, NI-FGEN sets the
+    Causes a transition to the Committed state. This method verifies
+    property values, reserves the device, and commits the property values
+    to the device. If the property values are all valid, NI-FGEN sets the
     device hardware configuration to match the session configuration. This
-    function does not support the NI 5401/5404/5411/5431 signal generators.
+    method does not support the NI 5401/5404/5411/5431 signal generators.
 
     In the Committed state, you can load waveforms, scripts, and sequences
-    into memory. If any attributes are changed, NI-FGEN implicitly
+    into memory. If any properties are changed, NI-FGEN implicitly
     transitions back to the Idle state, where you can program all session
-    properties before applying them to the device. This function has no
+    properties before applying them to the device. This method has no
     effect if the device is already in the Committed or Generating state and
     returns a successful status value.
 
@@ -259,7 +259,7 @@ nifgen.Session methods
 
     -  Routes are committed, so signals are exported or imported.
     -  Any Reference Clock and external clock circuits are phase-locked.
-    -  A subsequent :py:meth:`nifgen.Session._initiate_generation` function can run faster
+    -  A subsequent :py:meth:`nifgen.Session._initiate_generation` method can run faster
        because the device is already configured.
 
     
@@ -268,14 +268,14 @@ nifgen.Session methods
 
 .. py:method:: configure_arb_sequence(sequence_handle, gain, offset)
 
-    Configures the signal generator attributes that affect arbitrary
+    Configures the signal generator properties that affect arbitrary
     sequence generation. Sets the :py:data:`nifgen.Session.arb_sequence_handle`,
-    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` attributes.
+    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` properties.
 
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -293,9 +293,9 @@ nifgen.Session methods
 
         Specifies the handle of the arbitrary sequence that you want the signal
         generator to produce. NI-FGEN sets the
-        :py:data:`nifgen.Session.arb_sequence_handle` attribute to this value. You can
+        :py:data:`nifgen.Session.arb_sequence_handle` property to this value. You can
         create an arbitrary sequence using the :py:meth:`nifgen.Session.create_arb_sequence` or
-        :py:meth:`nifgen.Session.create_advanced_arb_sequence` function. These functions return a
+        :py:meth:`nifgen.Session.create_advanced_arb_sequence` method. These methods return a
         handle that you use to identify the sequence.
 
         **Default Value**: None
@@ -331,7 +331,7 @@ nifgen.Session methods
         data. When you create arbitrary waveforms, you must first normalize the
         data points to a range of –1.00 to +1.00 V. You can use this parameter
         to shift the range of the arbitrary waveform. NI-FGEN sets the
-        :py:data:`nifgen.Session.arb_offset` attribute to this value.
+        :py:data:`nifgen.Session.arb_offset` property to this value.
 
         For example, to configure the output signal to range from 0.00 to 2.00 V
         instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -347,14 +347,14 @@ nifgen.Session methods
 
 .. py:method:: configure_arb_waveform(waveform_handle, gain, offset)
 
-    Configures the attributes of the signal generator that affect arbitrary
+    Configures the properties of the signal generator that affect arbitrary
     waveform generation. Sets the :py:data:`nifgen.Session.arb_waveform_handle`,
-    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` attributes.
+    :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` properties.
 
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -372,9 +372,9 @@ nifgen.Session methods
 
         Specifies the handle of the arbitrary waveform you want the signal
         generator to produce. NI-FGEN sets the
-        :py:data:`nifgen.Session.arb_waveform_handle` attribute to this value. You can
+        :py:data:`nifgen.Session.arb_waveform_handle` property to this value. You can
         create an arbitrary waveform using one of the following niFgen Create
-        Waveform functions:
+        Waveform methods:
 
         -  :py:meth:`nifgen.Session._create_waveform_f64`
         -  :py:meth:`nifgen.Session._create_waveform_i16`
@@ -382,13 +382,13 @@ nifgen.Session methods
         -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
         -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
-        These functions return a handle that you use to identify the waveform.
+        These methods return a handle that you use to identify the waveform.
 
         **Default Value**: None
 
         
 
-        .. note:: One or more of the referenced functions are not in the Python API for this driver.
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     :type waveform_handle: int
@@ -419,7 +419,7 @@ nifgen.Session methods
         data. When you create arbitrary waveforms, you must first normalize the
         data points to a range of –1.00 to +1.00 V. You can use this parameter
         to shift the range of the arbitrary waveform. NI-FGEN sets the
-        :py:data:`nifgen.Session.arb_offset` attribute to this value.
+        :py:data:`nifgen.Session.arb_offset` property to this value.
 
         For example, to configure the output signal to range from 0.00 to 2.00 V
         instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -441,12 +441,12 @@ nifgen.Session methods
 
     Refer to the *FIR Filter* topic for your device in the *NI Signal
     Generators Help* for more information about FIR filter coefficients.
-    This function is supported only for the NI 5441.
+    This method is supported only for the NI 5441.
 
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -466,7 +466,7 @@ nifgen.Session methods
         FIR filter coefficients. For the NI 5441, provide a symmetric array of
         95 coefficients to this parameter. The array must have at least as many
         elements as the value that you specify in the **numberOfCoefficients**
-        parameter in this function.
+        parameter in this method.
         The coefficients should range between –1.00 and +1.00.
 
         
@@ -512,41 +512,41 @@ nifgen.Session methods
 
         **Default Value**: "PFI0"
 
-        +--------------+-----------------------------------+
-        | "PFI0"       | PFI 0                             |
-        +--------------+-----------------------------------+
-        | "PFI1"       | PFI 1                             |
-        +--------------+-----------------------------------+
-        | "PFI2"       | PFI 2                             |
-        +--------------+-----------------------------------+
-        | "PFI3"       | PFI 3                             |
-        +--------------+-----------------------------------+
-        | "PFI4"       | PFI 4                             |
-        +--------------+-----------------------------------+
-        | "PFI5"       | PFI 5                             |
-        +--------------+-----------------------------------+
-        | "PFI6"       | PFI 6                             |
-        +--------------+-----------------------------------+
-        | "PFI7"       | PFI 7                             |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig0" | PXI trigger line 0 or RTSI line 0 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig1" | PXI trigger line 1 or RTSI line 1 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig2" | PXI trigger line 2 or RTSI line 2 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig3" | PXI trigger line 3 or RTSI line 3 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig4" | PXI trigger line 4 or RTSI line 4 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig5" | PXI trigger line 5 or RTSI line 5 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig6" | PXI trigger line 6 or RTSI line 6 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig7" | PXI trigger line 7 or RTSI line 7 |
-        +--------------+-----------------------------------+
-        | "PXI\_Star"  | PXI star trigger line             |
-        +--------------+-----------------------------------+
+        +-------------+-----------------------------------+
+        | "PFI0"      | PFI 0                             |
+        +-------------+-----------------------------------+
+        | "PFI1"      | PFI 1                             |
+        +-------------+-----------------------------------+
+        | "PFI2"      | PFI 2                             |
+        +-------------+-----------------------------------+
+        | "PFI3"      | PFI 3                             |
+        +-------------+-----------------------------------+
+        | "PFI4"      | PFI 4                             |
+        +-------------+-----------------------------------+
+        | "PFI5"      | PFI 5                             |
+        +-------------+-----------------------------------+
+        | "PFI6"      | PFI 6                             |
+        +-------------+-----------------------------------+
+        | "PFI7"      | PFI 7                             |
+        +-------------+-----------------------------------+
+        | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+        +-------------+-----------------------------------+
+        | "PXI_Star"  | PXI star trigger line             |
+        +-------------+-----------------------------------+
 
 
     :type source: str
@@ -587,41 +587,41 @@ nifgen.Session methods
 
         **Default Value**: "PFI0"
 
-        +--------------+-----------------------------------+
-        | "PFI0"       | PFI 0                             |
-        +--------------+-----------------------------------+
-        | "PFI1"       | PFI 1                             |
-        +--------------+-----------------------------------+
-        | "PFI2"       | PFI 2                             |
-        +--------------+-----------------------------------+
-        | "PFI3"       | PFI 3                             |
-        +--------------+-----------------------------------+
-        | "PFI4"       | PFI 4                             |
-        +--------------+-----------------------------------+
-        | "PFI5"       | PFI 5                             |
-        +--------------+-----------------------------------+
-        | "PFI6"       | PFI 6                             |
-        +--------------+-----------------------------------+
-        | "PFI7"       | PFI 7                             |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig0" | PXI trigger line 0 or RTSI line 0 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig1" | PXI trigger line 1 or RTSI line 1 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig2" | PXI trigger line 2 or RTSI line 2 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig3" | PXI trigger line 3 or RTSI line 3 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig4" | PXI trigger line 4 or RTSI line 4 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig5" | PXI trigger line 5 or RTSI line 5 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig6" | PXI trigger line 6 or RTSI line 6 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig7" | PXI trigger line 7 or RTSI line 7 |
-        +--------------+-----------------------------------+
-        | "PXI\_Star"  | PXI star trigger line             |
-        +--------------+-----------------------------------+
+        +-------------+-----------------------------------+
+        | "PFI0"      | PFI 0                             |
+        +-------------+-----------------------------------+
+        | "PFI1"      | PFI 1                             |
+        +-------------+-----------------------------------+
+        | "PFI2"      | PFI 2                             |
+        +-------------+-----------------------------------+
+        | "PFI3"      | PFI 3                             |
+        +-------------+-----------------------------------+
+        | "PFI4"      | PFI 4                             |
+        +-------------+-----------------------------------+
+        | "PFI5"      | PFI 5                             |
+        +-------------+-----------------------------------+
+        | "PFI6"      | PFI 6                             |
+        +-------------+-----------------------------------+
+        | "PFI7"      | PFI 7                             |
+        +-------------+-----------------------------------+
+        | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+        +-------------+-----------------------------------+
+        | "PXI_Star"  | PXI star trigger line             |
+        +-------------+-----------------------------------+
 
 
     :type source: str
@@ -683,41 +683,41 @@ nifgen.Session methods
 
         **Default Value**: "PFI0"
 
-        +--------------+-----------------------------------+
-        | "PFI0"       | PFI 0                             |
-        +--------------+-----------------------------------+
-        | "PFI1"       | PFI 1                             |
-        +--------------+-----------------------------------+
-        | "PFI2"       | PFI 2                             |
-        +--------------+-----------------------------------+
-        | "PFI3"       | PFI 3                             |
-        +--------------+-----------------------------------+
-        | "PFI4"       | PFI 4                             |
-        +--------------+-----------------------------------+
-        | "PFI5"       | PFI 5                             |
-        +--------------+-----------------------------------+
-        | "PFI6"       | PFI 6                             |
-        +--------------+-----------------------------------+
-        | "PFI7"       | PFI 7                             |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig0" | PXI trigger line 0 or RTSI line 0 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig1" | PXI trigger line 1 or RTSI line 1 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig2" | PXI trigger line 2 or RTSI line 2 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig3" | PXI trigger line 3 or RTSI line 3 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig4" | PXI trigger line 4 or RTSI line 4 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig5" | PXI trigger line 5 or RTSI line 5 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig6" | PXI trigger line 6 or RTSI line 6 |
-        +--------------+-----------------------------------+
-        | "PXI\_Trig7" | PXI trigger line 7 or RTSI line 7 |
-        +--------------+-----------------------------------+
-        | "PXI\_Star"  | PXI star trigger line             |
-        +--------------+-----------------------------------+
+        +-------------+-----------------------------------+
+        | "PFI0"      | PFI 0                             |
+        +-------------+-----------------------------------+
+        | "PFI1"      | PFI 1                             |
+        +-------------+-----------------------------------+
+        | "PFI2"      | PFI 2                             |
+        +-------------+-----------------------------------+
+        | "PFI3"      | PFI 3                             |
+        +-------------+-----------------------------------+
+        | "PFI4"      | PFI 4                             |
+        +-------------+-----------------------------------+
+        | "PFI5"      | PFI 5                             |
+        +-------------+-----------------------------------+
+        | "PFI6"      | PFI 6                             |
+        +-------------+-----------------------------------+
+        | "PFI7"      | PFI 7                             |
+        +-------------+-----------------------------------+
+        | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+        +-------------+-----------------------------------+
+        | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+        +-------------+-----------------------------------+
+        | "PXI_Star"  | PXI star trigger line             |
+        +-------------+-----------------------------------+
 
 
     :type source: str
@@ -742,15 +742,15 @@ nifgen.Session methods
 
 .. py:method:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
-    Configures the attributes of the signal generator that affect frequency
+    Configures the properties of the signal generator that affect frequency
     list generation (the :py:data:`nifgen.Session.freq_list_handle`,
     :py:data:`nifgen.Session.func_amplitude`, :py:data:`nifgen.Session.func_dc_offset`, and
-    :py:data:`nifgen.Session.func_start_phase` attributes).
+    :py:data:`nifgen.Session.func_start_phase` properties).
 
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -768,8 +768,8 @@ nifgen.Session methods
 
         Specifies the handle of the frequency list that you want the signal
         generator to produce. NI-FGEN sets the :py:data:`nifgen.Session.freq_list_handle`
-        attribute to this value. You can create a frequency list using the
-        :py:meth:`nifgen.Session.create_freq_list` function, which returns a handle that you use to
+        property to this value. You can create a frequency list using the
+        :py:meth:`nifgen.Session.create_freq_list` method, which returns a handle that you use to
         identify the list.
         **Default Value**: None
 
@@ -782,7 +782,7 @@ nifgen.Session methods
 
         Specifies the amplitude of the standard waveform that you want the
         signal generator to produce. This value is the amplitude at the output
-        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` attribute to
+        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` property to
         this value.
 
         For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -796,7 +796,7 @@ nifgen.Session methods
 
         .. note:: This parameter does not affect signal generator behavior when you set
             the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
-            function to :py:data:`~nifgen.Waveform.DC`.
+            method to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type amplitude: float
@@ -809,7 +809,7 @@ nifgen.Session methods
         observed at the output terminal. For example, to configure a waveform
         with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
         **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
-        attribute to this value.
+        property to this value.
 
         **Units**: volts
 
@@ -823,9 +823,9 @@ nifgen.Session methods
 
 
         Specifies the horizontal offset of the standard waveform you want the
-        signal generator to produce. Specify this attribute in degrees of one
+        signal generator to produce. Specify this property in degrees of one
         waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
-        attribute to this value. A start phase of 180 degrees means output
+        property to this value. A start phase of 180 degrees means output
         generation begins halfway through the waveform. A start phase of 360
         degrees offsets the output by an entire waveform cycle, which is
         identical to a start phase of 0 degrees.
@@ -844,7 +844,7 @@ nifgen.Session methods
 
 .. py:method:: configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
-    Configures the following attributes of the signal generator that affect
+    Configures the following properties of the signal generator that affect
     standard waveform generation:
 
     -  :py:data:`nifgen.Session.func_waveform`
@@ -855,11 +855,11 @@ nifgen.Session methods
 
     
 
-    .. note:: You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` function with the
+    .. note:: You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` method with the
         **outputMode** parameter set to :py:data:`~nifgen.OutputMode.FUNC` before calling
-        this function.
+        this method.
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -876,30 +876,30 @@ nifgen.Session methods
 
 
         Specifies the standard waveform that you want the signal generator to
-        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` attribute to this
+        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` property to this
         value.
 
         ****Defined Values****
 
         **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                       |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                     |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                      |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                             |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                    |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                  |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                             |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                   |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                          |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 
     :type waveform: :py:data:`nifgen.Waveform`
@@ -908,7 +908,7 @@ nifgen.Session methods
 
         Specifies the amplitude of the standard waveform that you want the
         signal generator to produce. This value is the amplitude at the output
-        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` attribute to
+        terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` property to
         this value.
 
         For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -922,7 +922,7 @@ nifgen.Session methods
 
         .. note:: This parameter does not affect signal generator behavior when you set
             the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
-            function to :py:data:`~nifgen.Waveform.DC`.
+            method to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type amplitude: float
@@ -931,7 +931,7 @@ nifgen.Session methods
 
         | Specifies the frequency of the standard waveform that you want the
           signal generator to produce. NI-FGEN sets the
-          :py:data:`nifgen.Session.func_frequency` attribute to this value.
+          :py:data:`nifgen.Session.func_frequency` property to this value.
 
         **Units**: hertz
 
@@ -941,7 +941,7 @@ nifgen.Session methods
 
         .. note:: This parameter does not affect signal generator behavior when you set
             the **waveform** parameter of the :py:meth:`nifgen.Session.configure_standard_waveform`
-            function to :py:data:`~nifgen.Waveform.DC`.
+            method to :py:data:`~nifgen.Waveform.DC`.
 
 
     :type frequency: float
@@ -954,7 +954,7 @@ nifgen.Session methods
         observed at the output terminal. For example, to configure a waveform
         with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
         **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
-        attribute to this value.
+        property to this value.
 
         **Units**: volts
 
@@ -970,7 +970,7 @@ nifgen.Session methods
         Specifies the horizontal offset of the standard waveform that you want
         the signal generator to produce. Specify this parameter in degrees of
         one waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
-        attribute to this value. A start phase of 180 degrees means output
+        property to this value. A start phase of 180 degrees means output
         generation begins halfway through the waveform. A start phase of 360
         degrees offsets the output by an entire waveform cycle, which is
         identical to a start phase of 0 degrees.
@@ -990,13 +990,13 @@ nifgen.Session methods
 .. py:method:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
 
     Creates an arbitrary sequence from an array of waveform handles and an
-    array of corresponding loop counts. This function returns a handle that
+    array of corresponding loop counts. This method returns a handle that
     identifies the sequence. You pass this handle to the
-    :py:meth:`nifgen.Session.configure_arb_sequence` function to specify what arbitrary sequence
+    :py:meth:`nifgen.Session.configure_arb_sequence` method to specify what arbitrary sequence
     you want the signal generator to produce.
 
-    The :py:meth:`nifgen.Session.create_advanced_arb_sequence` function extends on the
-    :py:meth:`nifgen.Session.create_arb_sequence` function by adding the ability to set the
+    The :py:meth:`nifgen.Session.create_advanced_arb_sequence` method extends on the
+    :py:meth:`nifgen.Session.create_arb_sequence` method by adding the ability to set the
     number of samples in each sequence step and to set marker locations.
 
     An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -1007,10 +1007,10 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-        You must call the nifgen\_ConfigureOutputMode function to set the
+        this method.
+        You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
-        function.
+        method.
 
 
 
@@ -1023,14 +1023,14 @@ nifgen.Session methods
         **waveformHandlesArray** element has a corresponding **loopCountsArray**
         element that indicates how many times that waveform is repeated. You
         obtain waveform handles when you create arbitrary waveforms with the
-        nifgen\_AllocateWaveform function or one of the following niFgen
-        CreateWaveform functions:
+        nifgen_AllocateWaveform method or one of the following niFgen
+        CreateWaveform methods:
 
-        -  nifgen\_CreateWaveformF64
-        -  nifgen\_CreateWaveformI16
-        -  nifgen\_CreateWaveformFromFileI16
-        -  nifgen\_CreateWaveformFromFileF64
-        -  nifgen\_CreateWaveformFromFileHWS
+        -  nifgen_CreateWaveformF64
+        -  nifgen_CreateWaveformI16
+        -  nifgen_CreateWaveformFromFileI16
+        -  nifgen_CreateWaveformFromFileF64
+        -  nifgen_CreateWaveformFromFileHWS
 
         **Default Value**: None
 
@@ -1049,7 +1049,7 @@ nifgen.Session methods
         element of the **loopCountsArray** must be less than or equal to the
         maximum number of loop counts that the signal generator allows. You can
         obtain the maximum loop count from **maximumLoopCount** in the
-        nifgen\_QueryArbSeqCapabilities function.
+        nifgen_QueryArbSeqCapabilities method.
 
         **Default Value**: None
 
@@ -1068,8 +1068,8 @@ nifgen.Session methods
         generate. Each element of the **sampleCountsArray** must be larger than
         the minimum waveform size, a multiple of the waveform quantum and no
         larger than the number of samples in the corresponding waveform. You can
-        obtain these values by calling the nifgen\_QueryArbWfmCapabilities
-        function.
+        obtain these values by calling the nifgen_QueryArbWfmCapabilities
+        method.
 
         **Default Value**: None
 
@@ -1123,7 +1123,7 @@ nifgen.Session methods
 
 
             Returns the handle that identifies the new arbitrary sequence. You can
-            pass this handle to nifgen\_ConfigureArbSequence to generate the
+            pass this handle to nifgen_ConfigureArbSequence to generate the
             arbitrary sequence.
 
             
@@ -1133,9 +1133,9 @@ nifgen.Session methods
 .. py:method:: create_arb_sequence(waveform_handles_array, loop_counts_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
-    array of corresponding loop counts. This function returns a handle that
+    array of corresponding loop counts. This method returns a handle that
     identifies the sequence. You pass this handle to the
-    nifgen\_ConfigureArbSequence function to specify what arbitrary sequence
+    nifgen_ConfigureArbSequence method to specify what arbitrary sequence
     you want the signal generator to produce.
 
     An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -1145,9 +1145,9 @@ nifgen.Session methods
 
     
 
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
+    .. note:: You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
-        function.
+        method.
 
 
 
@@ -1160,14 +1160,14 @@ nifgen.Session methods
         **waveformHandlesArray** element has a corresponding **loopCountsArray**
         element that indicates how many times that waveform is repeated. You
         obtain waveform handles when you create arbitrary waveforms with the
-        nifgen\_AllocateWaveform function or one of the following niFgen
-        CreateWaveform functions:
+        nifgen_AllocateWaveform method or one of the following niFgen
+        CreateWaveform methods:
 
-        -  nifgen\_CreateWaveformF64
-        -  nifgen\_CreateWaveformI16
-        -  nifgen\_CreateWaveformFromFileI16
-        -  nifgen\_CreateWaveformFromFileF64
-        -  nifgen\_CreateWaveformFromFileHWS
+        -  nifgen_CreateWaveformF64
+        -  nifgen_CreateWaveformI16
+        -  nifgen_CreateWaveformFromFileI16
+        -  nifgen_CreateWaveformFromFileF64
+        -  nifgen_CreateWaveformFromFileHWS
 
         **Default Value**: None
 
@@ -1186,7 +1186,7 @@ nifgen.Session methods
         element of the **loopCountsArray** must be less than or equal to the
         maximum number of loop counts that the signal generator allows. You can
         obtain the maximum loop count from **maximumLoopCount** in the
-        nifgen\_QueryArbSeqCapabilities function.
+        nifgen_QueryArbSeqCapabilities method.
 
         **Default Value**: None
 
@@ -1200,7 +1200,7 @@ nifgen.Session methods
 
 
             Returns the handle that identifies the new arbitrary sequence. You can
-            pass this handle to nifgen\_ConfigureArbSequence to generate the
+            pass this handle to nifgen_ConfigureArbSequence to generate the
             arbitrary sequence.
 
             
@@ -1212,9 +1212,9 @@ nifgen.Session methods
     Creates a frequency list from an array of frequencies
     (**frequencyArray**) and an array of durations (**durationArray**). The
     two arrays should have the same number of elements, and this value must
-    also be the size of the **frequencyListLength**. The function returns a
+    also be the size of the **frequencyListLength**. The method returns a
     handle that identifies the frequency list (the **frequencyListHandle**).
-    You can pass this handle to nifgen\_ConfigureFreqList to specify what
+    You can pass this handle to nifgen_ConfigureFreqList to specify what
     frequency list you want the signal generator to produce.
 
     A frequency list consists of a list of frequencies and durations. The
@@ -1225,7 +1225,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
 
@@ -1233,30 +1233,30 @@ nifgen.Session methods
 
 
         Specifies the standard waveform that you want the signal generator to
-        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` attribute to this
+        produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` property to this
         value.
 
         ****Defined Values****
 
         **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                     |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                       |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                     |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                      |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                             |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen\_DefineUserStandardWaveform function. |
-        +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                    |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                  |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                             |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                   |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                          |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
+        +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 
     :type waveform: :py:data:`nifgen.Waveform`
@@ -1300,7 +1300,7 @@ nifgen.Session methods
 
 
             Returns the handle that identifies the new frequency list. You can pass
-            this handle to nifgen\_ConfigureFreqList to generate the arbitrary
+            this handle to nifgen_ConfigureFreqList to generate the arbitrary
             sequence.
 
             
@@ -1309,17 +1309,17 @@ nifgen.Session methods
 
 .. py:method:: create_waveform_from_file_f64(file_name, byte_order)
 
-    This function takes the floating point double (F64) data from the
+    This method takes the floating point double (F64) data from the
     specified file and creates an onboard waveform for use in Arbitrary
     Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-    returned by this function can later be used for setting the active
+    returned by this method can later be used for setting the active
     waveform, changing the data in the waveform, building sequences of
     waveforms, or deleting the waveform when it is no longer needed.
 
     
 
     .. note:: The F64 data must be between –1.0 and +1.0 V. Use the
-        :py:data:`nifgen.Session.digital_gain` attribute to generate different voltage
+        :py:data:`nifgen.Session.digital_gain` property to generate different voltage
         outputs.
 
 
@@ -1383,14 +1383,14 @@ nifgen.Session methods
     Takes the binary 16-bit signed integer (I16) data from the specified
     file and creates an onboard waveform for use in Arbitrary Waveform or
     Arbitrary Sequence output mode. The **waveformHandle** returned by this
-    function can later be used for setting the active waveform, changing the
+    method can later be used for setting the active waveform, changing the
     data in the waveform, building sequences of waveforms, or deleting the
     waveform when it is no longer needed.
 
     
 
     .. note:: The I16 data (values between –32768 and +32767) is assumed to
-        represent –1 to +1 V. Use the :py:data:`nifgen.Session.digital_gain` attribute to
+        represent –1 to +1 V. Use the :py:data:`nifgen.Session.digital_gain` property to
         generate different voltage outputs.
 
 
@@ -1455,7 +1455,7 @@ nifgen.Session methods
 
     
 
-    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this function.
+    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1490,22 +1490,22 @@ nifgen.Session methods
 
 .. py:method:: define_user_standard_waveform(waveform_data_array)
 
-    Defines a user waveform for use in either Standard Function or Frequency
+    Defines a user waveform for use in either Standard Method or Frequency
     List output mode.
 
     To select the waveform, set the **waveform** parameter to
-    :py:data:`~nifgen.Waveform.USER` with either the nifgen\_ConfigureStandardWaveform
-    or the nifgen\_CreateFreqList function.
+    :py:data:`~nifgen.Waveform.USER` with either the nifgen_ConfigureStandardWaveform
+    or the nifgen_CreateFreqList method.
 
     The waveform data must be scaled between –1.0 and 1.0. Use the
     **amplitude** parameter in the :py:meth:`nifgen.Session.configure_standard_waveform`
-    function to generate different output voltages.
+    method to generate different output voltages.
 
     
 
-    .. note:: You must call the nifgen\_ConfigureOutputMode function to set the
+    .. note:: You must call the nifgen_ConfigureOutputMode method to set the
         **outputMode** parameter to :py:data:`~nifgen.OutputMode.FUNC` or
-        :py:data:`~nifgen.OutputMode.FREQ_LIST` before calling this function.
+        :py:data:`~nifgen.OutputMode.FREQ_LIST` before calling this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1543,7 +1543,7 @@ nifgen.Session methods
     
 
     .. note:: The signal generator must not be in the Generating state when you call
-        this function.
+        this method.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -1611,15 +1611,15 @@ nifgen.Session methods
 
     Any routes created within a session persist after the session closes to
     prevent signal glitching. To unconfigure signal routes created in
-    previous sessions, set **resetDevice** in the :py:meth:`nifgen.Session.init` function to
-    VI\_TRUE or use the :py:meth:`nifgen.Session.reset_device` function.
+    previous sessions, set **resetDevice** in the :py:meth:`nifgen.Session.init` method to
+    True or use the :py:meth:`nifgen.Session.reset_device` method.
 
-    If you export a signal with this function and commit the session, the
+    If you export a signal with this method and commit the session, the
     signal is routed to the output terminal you specify.
 
     
 
-    .. note:: One or more of the referenced functions are not in the Python API for this driver.
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1716,25 +1716,25 @@ nifgen.Session methods
         +-------------------+------------------------------+
         | "PFI5"            | PFI line 5                   |
         +-------------------+------------------------------+
-        | "PXI\_Trig0"      | PXI or RTSI line 0           |
+        | "PXI_Trig0"       | PXI or RTSI line 0           |
         +-------------------+------------------------------+
-        | "PXI\_Trig1"      | PXI or RTSI line 1           |
+        | "PXI_Trig1"       | PXI or RTSI line 1           |
         +-------------------+------------------------------+
-        | "PXI\_Trig2"      | PXI or RTSI line 2           |
+        | "PXI_Trig2"       | PXI or RTSI line 2           |
         +-------------------+------------------------------+
-        | "PXI\_Trig3"      | PXI or RTSI line 3           |
+        | "PXI_Trig3"       | PXI or RTSI line 3           |
         +-------------------+------------------------------+
-        | "PXI\_Trig4"      | PXI or RTSI line 4           |
+        | "PXI_Trig4"       | PXI or RTSI line 4           |
         +-------------------+------------------------------+
-        | "PXI\_Trig5"      | PXI or RTSI line 5           |
+        | "PXI_Trig5"       | PXI or RTSI line 5           |
         +-------------------+------------------------------+
-        | "PXI\_Trig6"      | PXI or RTSI line 6           |
+        | "PXI_Trig6"       | PXI or RTSI line 6           |
         +-------------------+------------------------------+
-        | "PXI\_Trig7"      | PXI or RTSI line 7           |
+        | "PXI_Trig7"       | PXI or RTSI line 7           |
         +-------------------+------------------------------+
-        | "DDC\_ClkOut"     | Clock out from DDC connector |
+        | "DDC_ClkOut"      | Clock out from DDC connector |
         +-------------------+------------------------------+
-        | "PXI\_Star"       | PXI star trigger line        |
+        | "PXI_Star"        | PXI star trigger line        |
         +-------------------+------------------------------+
 
         .. note:: The following **Defined Values** are examples of possible output
@@ -1747,7 +1747,7 @@ nifgen.Session methods
 
 .. py:method:: get_ext_cal_last_date_and_time()
 
-    Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.
+    Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
     
 
@@ -1807,24 +1807,24 @@ nifgen.Session methods
 
     | Returns the FIR filter coefficients used by the onboard signal
       processing block. These coefficients are determined by NI-FGEN and
-      based on the FIR filter type and corresponding attribute (Alpha,
+      based on the FIR filter type and corresponding property (Alpha,
       Passband, BT) unless you are using the custom filter. If you are using
       a custom filter, the coefficients returned are those set with the
-      nifgen\_ConfigureCustomFIRFilterCoefficients function coerced to the
+      nifgen_ConfigureCustomFIRFilterCoefficients method coerced to the
       quantized values used by the device.
-    | To use this function, first call an instance of the
-      :py:meth:`nifgen.Session.get_fir_filter_coefficients` function with the
-      **coefficientsArray** parameter set to VI\_NULL. Calling the function
+    | To use this method, first call an instance of the
+      :py:meth:`nifgen.Session.get_fir_filter_coefficients` method with the
+      **coefficientsArray** parameter set to VI_NULL. Calling the method
       in this state returns the current size of the **coefficientsArray** as
       the value of the **numberOfCoefficientsRead** parameter. Create an
       array of this size, and call the :py:meth:`nifgen.Session.get_fir_filter_coefficients`
-      function a second time, passing the new array as the
+      method a second time, passing the new array as the
       **coefficientsArray** parameter and the size as the **arraySize**
-      parameter. This second function call populates the array with the FIR
+      parameter. This second method call populates the array with the FIR
       filter coefficients.
     | Refer to the FIR Filter topic for your device in the *NI Signal
       Generators Help* for more information about FIR filter coefficients.
-      This function is supported only for the NI 5441.
+      This method is supported only for the NI 5441.
     | **Default Value**: None
 
     
@@ -1938,23 +1938,23 @@ nifgen.Session methods
 
             ****Defined Values****
 
-            +-----------+------------------------------------+
-            | VI\_TRUE  | Self–calibration is supported.     |
-            +-----------+------------------------------------+
-            | VI\_FALSE | Self–calibration is not supported. |
-            +-----------+------------------------------------+
+            +-------+------------------------------------+
+            | True  | Self–calibration is supported.     |
+            +-------+------------------------------------+
+            | False | Self–calibration is not supported. |
+            +-------+------------------------------------+
 
 
 
 .. py:method:: is_done()
 
-    Determines whether the current generation is complete. This function
-    sets the **done** parameter to VI\_TRUE if the session is in the Idle or
+    Determines whether the current generation is complete. This method
+    sets the **done** parameter to True if the session is in the Idle or
     Committed states.
 
     
 
-    .. note:: NI-FGEN only reports the **done** parameter as VI\_TRUE after the
+    .. note:: NI-FGEN only reports the **done** parameter as True after the
         current generation is complete in Single trigger mode.
 
 
@@ -1967,21 +1967,21 @@ nifgen.Session methods
 
             **Defined Values**
 
-            +-----------+-----------------------------+
-            | VI\_TRUE  | Generation is complete.     |
-            +-----------+-----------------------------+
-            | VI\_FALSE | Generation is not complete. |
-            +-----------+-----------------------------+
+            +-------+-----------------------------+
+            | True  | Generation is complete.     |
+            +-------+-----------------------------+
+            | False | Generation is not complete. |
+            +-------+-----------------------------+
 
 
 
 .. py:method:: query_arb_seq_capabilities()
 
-    Returns the attributes of the signal generator that are related to
+    Returns the properties of the signal generator that are related to
     creating arbitrary sequences (the :py:data:`nifgen.Session.max_num_sequences`,
     :py:data:`nifgen.Session.min_sequence_length`,
     :py:data:`nifgen.Session.max_sequence_length`, and :py:data:`nifgen.Session.max_loop_count`
-    attributes).
+    properties).
 
     
 
@@ -1996,7 +1996,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveform sequences that the
             signal generator allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_num_sequences` attribute.
+            :py:data:`nifgen.Session.max_num_sequences` property.
 
             
 
@@ -2006,7 +2006,7 @@ nifgen.Session methods
 
             Returns the minimum number of arbitrary waveforms the signal generator
             allows in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.min_sequence_length` attribute.
+            :py:data:`nifgen.Session.min_sequence_length` property.
 
             
 
@@ -2016,7 +2016,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveforms the signal generator
             allows in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_sequence_length` attribute.
+            :py:data:`nifgen.Session.max_sequence_length` property.
 
             
 
@@ -2026,7 +2026,7 @@ nifgen.Session methods
 
             Returns the maximum number of times the signal generator can repeat an
             arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_loop_count` attribute.
+            :py:data:`nifgen.Session.max_loop_count` property.
 
             
 
@@ -2034,15 +2034,15 @@ nifgen.Session methods
 
 .. py:method:: query_arb_wfm_capabilities()
 
-    Returns the attributes of the signal generator that are related to
-    creating arbitrary waveforms. These attributes are the maximum number of
+    Returns the properties of the signal generator that are related to
+    creating arbitrary waveforms. These properties are the maximum number of
     waveforms, waveform quantum, minimum waveform size, and maximum waveform
     size.
 
     
 
     .. note:: If you do not want to obtain the waveform quantum, pass a value of
-        VI\_NULL for this parameter.
+        VI_NULL for this parameter.
 
 
 
@@ -2055,7 +2055,7 @@ nifgen.Session methods
 
             Returns the maximum number of arbitrary waveforms that the signal
             generator allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_num_waveforms` attribute.
+            :py:data:`nifgen.Session.max_num_waveforms` property.
 
             
 
@@ -2066,9 +2066,9 @@ nifgen.Session methods
             The size (number of points) of each waveform must be a multiple of a
             constant quantum value. This parameter obtains the quantum value that
             the signal generator uses. NI-FGEN returns this value from the
-            :py:data:`nifgen.Session.waveform_quantum` attribute.
+            :py:data:`nifgen.Session.waveform_quantum` property.
 
-            For example, when this attribute returns a value of 8, all waveform
+            For example, when this property returns a value of 8, all waveform
             sizes must be a multiple of 8.
 
             
@@ -2079,7 +2079,7 @@ nifgen.Session methods
 
             Returns the minimum number of points that the signal generator allows in
             a waveform. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.min_waveform_size` attribute.
+            :py:data:`nifgen.Session.min_waveform_size` property.
 
             
 
@@ -2089,7 +2089,7 @@ nifgen.Session methods
 
             Returns the maximum number of points that the signal generator allows in
             a waveform. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_waveform_size` attribute.
+            :py:data:`nifgen.Session.max_waveform_size` property.
 
             
 
@@ -2097,8 +2097,8 @@ nifgen.Session methods
 
 .. py:method:: query_freq_list_capabilities()
 
-    Returns the attributes of the signal generator that are related to
-    creating frequency lists. These attributes are
+    Returns the properties of the signal generator that are related to
+    creating frequency lists. These properties are
     :py:data:`nifgen.Session.max_num_freq_lists`,
     :py:data:`nifgen.Session.min_freq_list_length`,
     :py:data:`nifgen.Session.max_freq_list_length`,
@@ -2119,7 +2119,7 @@ nifgen.Session methods
 
             Returns the maximum number of frequency lists that the signal generator
             allows. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_num_freq_lists` attribute.
+            :py:data:`nifgen.Session.max_num_freq_lists` property.
 
             
 
@@ -2129,7 +2129,7 @@ nifgen.Session methods
 
             Returns the minimum number of steps that the signal generator allows in
             a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.min_freq_list_length` attribute.
+            :py:data:`nifgen.Session.min_freq_list_length` property.
 
             
 
@@ -2139,7 +2139,7 @@ nifgen.Session methods
 
             Returns the maximum number of steps that the signal generator allows in
             a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_freq_list_length` attribute.
+            :py:data:`nifgen.Session.max_freq_list_length` property.
 
             
 
@@ -2149,7 +2149,7 @@ nifgen.Session methods
 
             Returns the minimum duration that the signal generator allows in a step
             of a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.min_freq_list_duration` attribute.
+            :py:data:`nifgen.Session.min_freq_list_duration` property.
 
             
 
@@ -2159,7 +2159,7 @@ nifgen.Session methods
 
             Returns the maximum duration that the signal generator allows in a step
             of a frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.max_freq_list_duration` attribute.
+            :py:data:`nifgen.Session.max_freq_list_duration` property.
 
             
 
@@ -2169,7 +2169,7 @@ nifgen.Session methods
 
             Returns the quantum of which all durations must be a multiple in a
             frequency list. NI-FGEN obtains this value from the
-            :py:data:`nifgen.Session.freq_list_duration_quantum` attribute.
+            :py:data:`nifgen.Session.freq_list_duration_quantum` property.
 
             
 
@@ -2197,15 +2197,15 @@ nifgen.Session methods
 
 .. py:method:: reset()
 
-    Resets the instrument to a known state. This function aborts the
-    generation, clears all routes, and resets session attributes to the
-    default values. This function does not, however, commit the session
+    Resets the instrument to a known state. This method aborts the
+    generation, clears all routes, and resets session properties to the
+    default values. This method does not, however, commit the session
     properties or configure the device hardware to its default state.
 
     
 
-    .. note:: For the NI 5401/5404/5411/5431, this function exhibits the same
-        behavior as the nifgen\_ResetDevice function.
+    .. note:: For the NI 5401/5404/5411/5431, this method exhibits the same
+        behavior as the nifgen_ResetDevice method.
 
 
 
@@ -2214,7 +2214,7 @@ nifgen.Session methods
     Performs a hard reset on the device. Generation is stopped, all routes
     are released, external bidirectional terminals are tristated, FPGAs are
     reset, hardware is configured to its default state, and all session
-    attributes are reset to their default states.
+    properties are reset to their default states.
 
     
 
@@ -2224,8 +2224,8 @@ nifgen.Session methods
 
     Resets the instrument and reapplies initial user–specified settings from
     the logical name that was used to initialize the session. If the session
-    was created without a logical name, this function is equivalent to the
-    nifgen\_reset function.
+    was created without a logical name, this method is equivalent to the
+    nifgen_reset method.
 
     
 
@@ -2248,9 +2248,9 @@ nifgen.Session methods
     
 
     .. note:: When used on some signal generators, the device is reset after the
-        :py:meth:`nifgen.Session.self_test` function runs. If you use the :py:meth:`nifgen.Session.self_test`
-        function, your device may not be in its previously configured state
-        after the function runs.
+        :py:meth:`nifgen.Session.self_test` method runs. If you use the :py:meth:`nifgen.Session.self_test`
+        method, your device may not be in its previously configured state
+        after the method runs.
 
 
 
@@ -2320,19 +2320,19 @@ nifgen.Session methods
 .. py:method:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
     Sets the position in the waveform to which data is written at the next
-    write. This function allows you to write to arbitrary locations within
+    write. This method allows you to write to arbitrary locations within
     the waveform. These settings apply only to the next write to the
     waveform specified by the **waveformHandle** parameter. Subsequent
     writes to that waveform begin where the last write left off, unless this
-    function is called again. The **waveformHandle** passed in must have
-    been created with a call to one of the following functions:
+    method is called again. The **waveformHandle** passed in must have
+    been created with a call to one of the following methods:
 
-    -  nifgen\_AllocateWaveform
-    -  nifgen\_CreateWaveformF64
-    -  nifgen\_CreateWaveformI16
-    -  nifgen\_CreateWaveformFromFileI16
-    -  nifgen\_CreateWaveformFromFileF64
-    -  nifgen\_CreateWaveformFromFileHWS
+    -  nifgen_AllocateWaveform
+    -  nifgen_CreateWaveformF64
+    -  nifgen_CreateWaveformI16
+    -  nifgen_CreateWaveformFromFileI16
+    -  nifgen_CreateWaveformFromFileF64
+    -  nifgen_CreateWaveformFromFileHWS
 
     
 
@@ -2387,19 +2387,19 @@ nifgen.Session methods
 .. py:method:: set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
     Sets the position in the waveform at which the next waveform data is
-    written. This function allows you to write to arbitrary locations within
+    written. This method allows you to write to arbitrary locations within
     the waveform. These settings apply only to the next write to the
     waveform specified by the waveformHandle parameter. Subsequent writes to
-    that waveform begin where the last write left off, unless this function
+    that waveform begin where the last write left off, unless this method
     is called again. The waveformHandle passed in must have been created by
-    a call to the nifgen\_AllocateWaveform function or one of the following
-    niFgen CreateWaveform functions:
+    a call to the nifgen_AllocateWaveform method or one of the following
+    niFgen CreateWaveform methods:
 
-    -  nifgen\_CreateWaveformF64
-    -  nifgen\_CreateWaveformI16
-    -  nifgen\_CreateWaveformFromFileI16
-    -  nifgen\_CreateWaveformFromFileF64
-    -  nifgen\_CreateWaveformFromFileHWS
+    -  nifgen_CreateWaveformF64
+    -  nifgen_CreateWaveformI16
+    -  nifgen_CreateWaveformFromFileI16
+    -  nifgen_CreateWaveformFromFileF64
+    -  nifgen_CreateWaveformFromFileHWS
 
     
 
@@ -2418,7 +2418,7 @@ nifgen.Session methods
 
 
         Specifies the handle of the arbitrary waveform previously allocated with
-        the nifgen\_AllocateWaveform function.
+        the nifgen_AllocateWaveform method.
 
         
 
@@ -2506,10 +2506,10 @@ nifgen.Session methods
 
     Writes data to the waveform in onboard memory.
 
-    By default, subsequent calls to this function
+    By default, subsequent calls to this method
     continue writing data from the position of the last sample written. You
-    can set the write position and offset by calling the nifgen\_SetNamedWaveformNextWritePosition
-    nifgen\_SetWaveformNextWritePosition function.
+    can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
+    nifgen_SetWaveformNextWritePosition method.
 
     
 

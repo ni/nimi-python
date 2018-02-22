@@ -16,7 +16,7 @@ functions = {
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -38,7 +38,7 @@ this function if the digitizer times out waiting for a trigger.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -53,11 +53,11 @@ Returns whether the acquisition is complete, in progress, or unknown.
 
 **Defined Values**
 
-NISCOPE\_VAL\_ACQ\_COMPLETE
+NISCOPE_VAL_ACQ_COMPLETE
 
-NISCOPE\_VAL\_ACQ\_IN\_PROGRESS
+NISCOPE_VAL_ACQ_IN_PROGRESS
 
-NISCOPE\_VAL\_ACQ\_STATUS\_UNKNOWN
+NISCOPE_VAL_ACQ_STATUS_UNKNOWN
 ''',
 },
             },
@@ -78,7 +78,7 @@ output parameter.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -120,7 +120,7 @@ waveform.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -165,7 +165,7 @@ channel list parsing for you.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -178,7 +178,7 @@ particular instrument session.
 'description': '''
 Returns the actual number of points the digitizer acquires for each
 channel; NI-SCOPE returns the value held in the
-NISCOPE\_ATTR\_HORZ\_RECORD\_LENGTH attribute.
+NISCOPE_ATTR_HORZ_RECORD_LENGTH attribute.
 ''',
 },
             },
@@ -202,7 +202,7 @@ points specified in any of the Configure Horizontal functions.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -237,7 +237,7 @@ Adds one measurement to the list of processing steps that are completed
 before the measurement. The processing is added on a per channel basis,
 and the processing measurements are completed in the same order they are
 registered. All measurement library parameters—the attributes starting
-with NISCOPE\_ATTR\_MEAS—are cached at the time of registering the
+with NISCOPE_ATTR_MEAS—are cached at the time of registering the
 processing, and this set of parameters is used during the processing
 step. The processing measurements are streamed, so the result of the
 first processing step is used as the input for the next step. The
@@ -254,7 +254,7 @@ processing is done before any other measurements.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -266,7 +266,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -289,7 +289,7 @@ delayed from the reference clock by the specified amount of time.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -324,7 +324,7 @@ The following settings are changed:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -346,8 +346,8 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-The calibration option. Use VI\_NULL for a normal self-calibration
-operation or NISCOPE\_VAL\_CAL\_RESTORE\_EXTERNAL\_CALIBRATION to
+The calibration option. Use VI_NULL for a normal self-calibration
+operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
 restore the previous calibration.
 ''',
 },
@@ -366,8 +366,8 @@ immediately stored in the self-calibration area of the EEPROM. If the
 self-calibration is performed in an external calibration session, the
 calibration constants take effect immediately for the duration of the
 session. However, they are not stored in the EEPROM until
-niScope\_CalEnd is called with **action** set to
-NISCOPE\_VAL\_ACTION\_STORE and no errors occur.
+niScope_CalEnd is called with **action** set to
+NISCOPE_VAL_ACTION_STORE and no errors occur.
 ''',
 },
     },
@@ -380,7 +380,7 @@ NISCOPE\_VAL\_ACTION\_STORE and no errors occur.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -430,7 +430,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -480,7 +480,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -530,7 +530,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -580,7 +580,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -630,7 +630,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -680,7 +680,7 @@ session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -689,7 +689,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 Clears the error information for the current execution thread and the
-IVI session you specify. If you pass VI\_NULL for the Instrument Handle
+IVI session you specify. If you pass VI_NULL for the Instrument Handle
 parameter, this function clears the error information only for the
 current execution thread.
 ''',
@@ -708,7 +708,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -731,7 +731,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -766,13 +766,13 @@ to clear the stats for.
 'description': '''
 Clears the waveform stats on the channel and measurement you specify. If
 you want to clear all of the measurements, use
-NISCOPE\_VAL\_ALL\_MEASUREMENTS in the **clearableMeasurementFunction**
+NISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**
 parameter.
 
 Every time a measurement is called, the statistics information is
 updated, including the min, max, mean, standard deviation, and number of
 updates. This information is fetched with
-niScope\_FetchMeasurementStats. The multi-acquisition array measurements
+niScope_FetchMeasurementStats. The multi-acquisition array measurements
 are also cleared with this function.
 ''',
 },
@@ -786,7 +786,7 @@ are also cleared with this function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -806,7 +806,7 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
 'documentation': {
 'description': '''
 Clears the list of processing steps assigned to the given channel. The
-processing is added using the niScope\_AddWaveformProcessing function,
+processing is added using the niScope_AddWaveformProcessing function,
 where the processing steps are completed in the same order in which they
 are registered. The processing measurements are streamed, so the result
 of the first processing step is used as the input for the next step. The
@@ -823,7 +823,7 @@ processing is also done before any other measurements.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -847,7 +847,7 @@ Traditional NI-DAQ (Legacy) devices.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -859,21 +859,21 @@ particular instrument session.
 'documentation': {
 'description': '''
 Specifies the manner in which the digitizer acquires data and fills the
-waveform record; NI-SCOPE sets NISCOPE\_ATTR\_ACQUISITION\_TYPE to this
+waveform record; NI-SCOPE sets NISCOPE_ATTR_ACQUISITION_TYPE to this
 value.
 
 **Defined Values**
 
-NISCOPE\_VAL\_NORMAL
+NISCOPE_VAL_NORMAL
 
-NISCOPE\_VAL\_FLEXRES
+NISCOPE_VAL_FLEXRES
 
-NISCOPE\_VAL\_DDC
+NISCOPE_VAL_DDC
 ''',
 'note': '''
-NISCOPE\_VAL\_DDC applies to the NI 5620/5621 only. To use DDC mode in
-the NI 5142/5622, leave **acquisitionType** set to NISCOPE\_VAL\_NORMAL
-and set NISCOPE\_ATTR\_DDC\_ENABLED to True.
+NISCOPE_VAL_DDC applies to the NI 5620/5621 only. To use DDC mode in
+the NI 5142/5622, leave **acquisitionType** set to NISCOPE_VAL_NORMAL
+and set NISCOPE_ATTR_DDC_ENABLED to True.
 ''',
 },
             },
@@ -894,7 +894,7 @@ record.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -918,7 +918,7 @@ Units: Seconds.
 'documentation': {
 'description': '''
 Pass the minimum number of points you require in the record for each
-channel. Call niScope\_ActualRecordLength to obtain the actual record
+channel. Call niScope_ActualRecordLength to obtain the actual record
 length used.
 
 Valid Values: 1 – available onboard memory
@@ -956,7 +956,7 @@ acquisition subsystem.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -979,7 +979,7 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
 'documentation': {
 'description': '''
 The input impedance for the channel; NI-SCOPE sets
-NISCOPE\_ATTR\_INPUT\_IMPEDANCE to this value.
+NISCOPE_ATTR_INPUT_IMPEDANCE to this value.
 ''',
 },
             },
@@ -990,7 +990,7 @@ NISCOPE\_ATTR\_INPUT\_IMPEDANCE to this value.
 'documentation': {
 'description': '''
 The bandwidth for the channel; NI-SCOPE sets
-NISCOPE\_ATTR\_MAX\_INPUT\_FREQUENCY to this value. Pass 0 for this
+NISCOPE_ATTR_MAX_INPUT_FREQUENCY to this value. Pass 0 for this
 value to use the hardware default bandwidth. Pass –1 for this value to
 achieve full bandwidth.
 ''',
@@ -1013,7 +1013,7 @@ the channel—the input impedance and the bandwidth.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1062,11 +1062,11 @@ channel.
 
 Defined Values
 
-NISCOPE\_VAL\_AC (0)
+NISCOPE_VAL_AC (0)
 
-NISCOPE\_VAL\_DC (1)
+NISCOPE_VAL_DC (1)
 
-NISCOPE\_VAL\_GND (2)
+NISCOPE_VAL_GND (2)
 
 A certain amount of delay is required for the coupling capacitor to
 charge after changing vertical coupling from DC to AC. This delay is
@@ -1102,15 +1102,15 @@ For example, enter a value of 10 for a 10X probe.
 'documentation': {
 'description': '''
 Specify whether to enable the digitizer to acquire data for the channel
-when you call niScope\_InitiateAcquisition or niScope\_ReadWaveform.
+when you call niScope_InitiateAcquisition or niScope_ReadWaveform.
 
 | Default Value:
-| NISCOPE\_VAL\_TRUE (1)
+| NISCOPE_VAL_TRUE (1)
 
 Defined Values
 
-| NISCOPE\_VAL\_TRUE (1)—Acquire data on this channel
-| NISCOPE\_VAL\_FALSE (0)—Do not acquire data on this channel
+| NISCOPE_VAL_TRUE (1)—Acquire data on this channel
+| NISCOPE_VAL_FALSE (0)—Do not acquire data on this channel
 ''',
 },
             },
@@ -1134,7 +1134,7 @@ channel subsystem.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1147,7 +1147,7 @@ particular instrument session.
 'description': '''
 Specifies the input source for the reference clock to which the 100 MHz
 sample clock is phase-locked. Refer to
-NISCOPE\_ATTR\_INPUT\_CLOCK\_SOURCE for more information.
+NISCOPE_ATTR_INPUT_CLOCK_SOURCE for more information.
 ''',
 },
             },
@@ -1159,7 +1159,7 @@ NISCOPE\_ATTR\_INPUT\_CLOCK\_SOURCE for more information.
 'description': '''
 Specifies the output source for the reference clock to which another
 scope's sample clock can be phased-locked. Refer to
-NISCOPE\_ATTR\_OUTPUT\_CLOCK\_SOURCE for more information
+NISCOPE_ATTR_OUTPUT_CLOCK_SOURCE for more information
 ''',
 },
             },
@@ -1173,7 +1173,7 @@ For the NI 5102, specifies the line on which the sample clock is sent or
 received. For the NI 5112/5620/5621/5911, specifies the line on which
 the one time sync pulse is sent or received. This line should be the
 same for all devices to be synchronized. Refer to
-NISCOPE\_ATTR\_CLOCK\_SYNC\_PULSE\_SOURCE for more information.
+NISCOPE_ATTR_CLOCK_SYNC_PULSE_SOURCE for more information.
 ''',
 },
             },
@@ -1186,9 +1186,9 @@ NISCOPE\_ATTR\_CLOCK\_SYNC\_PULSE\_SOURCE for more information.
 Specifies whether you want the device to be a master or a slave. The
 master device is typically the originator of the trigger signal and
 clock sync pulse. For a standalone device, set this attribute to
-VI\_FALSE.
+VI_FALSE.
 
-Refer to NISCOPE\_ATTR\_MASTER\_ENABLE for more information.
+Refer to NISCOPE_ATTR_MASTER_ENABLE for more information.
 ''',
 },
             },
@@ -1216,7 +1216,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1228,7 +1228,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 The voltage threshold for the trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
+NISCOPE_ATTR_TRIGGER_LEVEL for more information.
 ''',
 },
             },
@@ -1239,7 +1239,7 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
 'documentation': {
 'description': '''
 The voltage threshold for the trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
+NISCOPE_ATTR_TRIGGER_LEVEL for more information.
 ''',
 },
             },
@@ -1250,7 +1250,7 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
 'documentation': {
 'description': '''
 Specifies whether you want a rising edge or a falling edge to trigger
-the digitizer. Refer to NISCOPE\_ATTR\_TRIGGER\_SLOPE for more
+the digitizer. Refer to NISCOPE_ATTR_TRIGGER_SLOPE for more
 information.
 ''',
 },
@@ -1264,7 +1264,7 @@ voltage threshold specified with the level parameter and has the slope
 specified with the slope parameter.
 
 This function affects instrument behavior only if the triggerType is
-NISCOPE\_VAL\_EDGE. Set the trigger type and trigger coupling before
+NISCOPE_VAL_EDGE. Set the trigger type and trigger coupling before
 calling this function.
 
 If the trigger source is one of the analog input channels, you must
@@ -1287,7 +1287,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1320,9 +1320,9 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
 The custom coefficients for the equalization FIR filter on the device.
 These coefficients should be between +1 and –1. You can obtain the
 number of coefficients from the
-`NISCOPE\_ATTR\_EQUALIZATION\_NUM\_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+`NISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
 attribute. The
-`NISCOPE\_ATTR\_EQUALIZATION\_FILTER\_ENABLED <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
+`NISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
 attribute must be set to TRUE to enable the filter.
 ''',
 },
@@ -1347,7 +1347,7 @@ Coefficient values should be between +1 and –1.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1359,7 +1359,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 The sampling rate for the acquisition. Refer to
-NISCOPE\_ATTR\_MIN\_SAMPLE\_RATE for more information.
+NISCOPE_ATTR_MIN_SAMPLE_RATE for more information.
 ''',
 },
             },
@@ -1370,7 +1370,7 @@ NISCOPE\_ATTR\_MIN\_SAMPLE\_RATE for more information.
 'documentation': {
 'description': '''
 The minimum number of points you need in the record for each channel;
-call niScope\_ActualRecordLength to obtain the actual record length
+call niScope_ActualRecordLength to obtain the actual record length
 used.
 
 Valid Values: Greater than 1; limited by available memory
@@ -1408,13 +1408,13 @@ RIS—refer to `Features Supported by
 Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
 more information.
 
-Default value: VI\_TRUE
+Default value: VI_TRUE
 
 **Defined Values**
 
-VI\_TRUE—Allow real-time acquisitions only
+VI_TRUE—Allow real-time acquisitions only
 
-VI\_FALSE—Allow real-time and equivalent-time acquisitions
+VI_FALSE—Allow real-time and equivalent-time acquisitions
 ''',
 },
             },
@@ -1435,7 +1435,7 @@ multirecord acquisition in terms of minimum sample rate.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1450,7 +1450,7 @@ Pass the low reference you want the digitizer to use for waveform
 measurements.
 
 Units: Either a percentage or voltage based on
-NISCOPE\_ATTR\_MEAS\_REF\_LEVEL\_UNITS. A percentage is calculated with
+NISCOPE_ATTR_MEAS_REF_LEVEL_UNITS. A percentage is calculated with
 the voltage low and voltage high measurements representing 0% and 100%,
 respectively.
 
@@ -1468,7 +1468,7 @@ Pass the mid reference you want the digitizer to use for waveform
 measurements.
 
 Units: Either a percentage or voltage based on
-NISCOPE\_ATTR\_MEAS\_REF\_LEVEL\_UNITS. A percentage is calculated with
+NISCOPE_ATTR_MEAS_REF_LEVEL_UNITS. A percentage is calculated with
 the voltage low and voltage high measurements representing 0% and 100%,
 respectively.
 
@@ -1486,7 +1486,7 @@ Pass the high reference you want the digitizer to use for waveform
 measurements.
 
 Units: Either a percentage or voltage based on
-NISCOPE\_ATTR\_MEAS\_REF\_LEVEL\_UNITS. A percentage is calculated with
+NISCOPE_ATTR_MEAS_REF_LEVEL_UNITS. A percentage is calculated with
 the voltage low and voltage high measurements representing 0% and 100%,
 respectively.
 
@@ -1502,12 +1502,12 @@ Specification.
 
 Configures the reference levels for all channels of the digitizer. The
 levels may be set on a per channel basis by setting
-NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL,
-NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL, and
-NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL
+NISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL,
+NISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL, and
+NISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL
 
 This function configures the reference levels for waveform measurements.
-Call this function before calling niScope\_FetchMeasurement to take a
+Call this function before calling niScope_FetchMeasurement to take a
 rise time, fall time, width negative, width positive, duty cycle
 negative, or duty cycle positive measurement.
 ''',
@@ -1522,7 +1522,7 @@ negative, or duty cycle positive measurement.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1552,9 +1552,9 @@ Configures the TV line upon which the instrument triggers. The line
 number is absolute and not relative to the field of the TV signal.
 
 This function affects instrument behavior only if the trigger type is
-set to NISCOPE\_VAL\_TV\_TRIGGER and the TV trigger event is set to
-NISCOPE\_VAL\_TV\_EVENT\_LINE\_NUMBER. Call
-niScope\_ConfigureTVTriggerSource to set the TV trigger event before
+set to NISCOPE_VAL_TV_TRIGGER and the TV trigger event is set to
+NISCOPE_VAL_TV_EVENT_LINE_NUMBER. Call
+niScope_ConfigureTVTriggerSource to set the TV trigger event before
 calling this function.
 ''',
 },
@@ -1568,7 +1568,7 @@ calling this function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1585,7 +1585,7 @@ Defined Values
 
 | "0"—Channel 0
 | "1"—Channel 1
-| NISCOPE\_VAL\_EXTERNAL—Analog External Trigger Input
+| NISCOPE_VAL_EXTERNAL—Analog External Trigger Input
 ''',
 },
             },
@@ -1599,9 +1599,9 @@ Specifies the Video/TV signal format.
 
 Defined Values
 
-| NISCOPE\_VAL\_NTSC (1)
-| NISCOPE\_VAL\_PAL (2)
-| NISCOPE\_VAL\_SECAM (3)
+| NISCOPE_VAL_NTSC (1)
+| NISCOPE_VAL_PAL (2)
+| NISCOPE_VAL_SECAM (3)
 ''',
 },
             },
@@ -1615,13 +1615,13 @@ Video/TV event to trigger off of.
 
 Defined Values
 
-| NISCOPE\_VAL\_TV\_EVENT\_FIELD1 (1)—trigger on field 1 of the signal
-| NISCOPE\_VAL\_TV\_EVENT\_FIELD2 (2)—trigger on field 2 of the signal
-| NISCOPE\_VAL\_TV\_EVENT\_ANY\_FIELD (3)—trigger on the first field
+| NISCOPE_VAL_TV_EVENT_FIELD1 (1)—trigger on field 1 of the signal
+| NISCOPE_VAL_TV_EVENT_FIELD2 (2)—trigger on field 2 of the signal
+| NISCOPE_VAL_TV_EVENT_ANY_FIELD (3)—trigger on the first field
   acquired
-| NISCOPE\_VAL\_TV\_EVENT\_ANY\_LINE (4)—trigger on the first line
+| NISCOPE_VAL_TV_EVENT_ANY_LINE (4)—trigger on the first line
   acquired
-| NISCOPE\_VAL\_TV\_EVENT\_LINE\_NUMBER (5)—trigger on a specific line
+| NISCOPE_VAL_TV_EVENT_LINE_NUMBER (5)—trigger on a specific line
   of a video signal. Valid values vary depending on the signal format
   configured.
 ''',
@@ -1637,8 +1637,8 @@ Defined Values
 
 Defined Values
 
-| NISCOPE\_VAL\_TV\_POSITIVE (1)
-| NISCOPE\_VAL\_TV\_NEGATIVE (2)
+| NISCOPE_VAL_TV_POSITIVE (1)
+| NISCOPE_VAL_TV_NEGATIVE (2)
 ''',
 },
             },
@@ -1649,7 +1649,7 @@ Configures the instrument for TV triggering. It configures the TV signal
 format, the event, and the signal polarity.
 
 This function affects instrument behavior only if the trigger type is
-NISCOPE\_VAL\_TV\_TRIGGER. Set the trigger type and trigger coupling
+NISCOPE_VAL_TV_TRIGGER. Set the trigger type and trigger coupling
 before calling this function.
 ''',
 'note': '''
@@ -1667,7 +1667,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1688,7 +1688,7 @@ particular instrument session.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -1697,7 +1697,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'description': '''
 Configures the common attributes of the trigger subsystem.
 
-When you use niScope\_ReadWaveform, the instrument waits for a trigger.
+When you use niScope_ReadWaveform, the instrument waits for a trigger.
 You specify the type of trigger for which the instrument waits with the
 Trigger Type parameter.
 
@@ -1721,7 +1721,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1736,15 +1736,15 @@ Specify how you want the instrument to couple the trigger signal.
 
 Defined Values
 
- NISCOPE\_VAL\_AC (0)
+ NISCOPE_VAL_AC (0)
 
- NISCOPE\_VAL\_DC (1)
+ NISCOPE_VAL_DC (1)
 
-NISCOPE\_VAL\_HF\_REJECT (2)
+NISCOPE_VAL_HF_REJECT (2)
 
-NISCOPE\_VAL\_LF\_REJECT (3)
+NISCOPE_VAL_LF_REJECT (3)
 
-NISCOPE\_VAL\_AC\_PLUS\_HF\_REJECT (1001)
+NISCOPE_VAL_AC_PLUS_HF_REJECT (1001)
 ''',
 },
             },
@@ -1766,7 +1766,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1777,7 +1777,7 @@ particular instrument session.
                 'type': 'ViChar[]',
 'documentation': {
 'description': '''
-Specifies the trigger source. Refer to NISCOPE\_ATTR\_TRIGGER\_SOURCE
+Specifies the trigger source. Refer to NISCOPE_ATTR_TRIGGER_SOURCE
 for defined values.
 ''',
 },
@@ -1789,7 +1789,7 @@ for defined values.
 'documentation': {
 'description': '''
 Specifies whether you want a rising edge or a falling edge to trigger
-the digitizer. Refer to NISCOPE\_ATTR\_TRIGGER\_SLOPE for more
+the digitizer. Refer to NISCOPE_ATTR_TRIGGER_SLOPE for more
 information.
 ''',
 },
@@ -1802,7 +1802,7 @@ information.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -1813,7 +1813,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -1824,7 +1824,7 @@ information.
 Configures the common properties of a digital trigger.
 
 When you initiate an acquisition, the digitizer waits for the start
-trigger, which is configured through the NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE
+trigger, which is configured through the NISCOPE_ATTR_ACQ_ARM_SOURCE
 (Start Trigger Source) attribute. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
@@ -1841,7 +1841,7 @@ started by using the Advance Trigger Source. The default is immediate.
 
 You can adjust the amount of pre-trigger and post-trigger samples using
 the reference position parameter on the
-niScope\_ConfigureHorizontalTiming function. The default is half of the
+niScope_ConfigureHorizontalTiming function. The default is half of the
 record length.
 
 Some features are not supported by all digitizers. Refer to `Features
@@ -1862,7 +1862,7 @@ Digital triggering is not supported in RIS mode.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1873,7 +1873,7 @@ particular instrument session.
                 'type': 'ViChar[]',
 'documentation': {
 'description': '''
-Specifies the trigger source. Refer to NISCOPE\_ATTR\_TRIGGER\_SOURCE
+Specifies the trigger source. Refer to NISCOPE_ATTR_TRIGGER_SOURCE
 for defined values.
 ''',
 },
@@ -1885,7 +1885,7 @@ for defined values.
 'documentation': {
 'description': '''
 The voltage threshold for the trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
+NISCOPE_ATTR_TRIGGER_LEVEL for more information.
 ''',
 },
             },
@@ -1896,7 +1896,7 @@ NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
 'documentation': {
 'description': '''
 Specifies whether you want a rising edge or a falling edge to trigger
-the digitizer. Refer to NISCOPE\_ATTR\_TRIGGER\_SLOPE for more
+the digitizer. Refer to NISCOPE_ATTR_TRIGGER_SLOPE for more
 information.
 ''',
 },
@@ -1908,7 +1908,7 @@ information.
 'documentation': {
 'description': '''
 Applies coupling and filtering options to the trigger signal. Refer to
-NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
+NISCOPE_ATTR_TRIGGER_COUPLING for more information.
 ''',
 },
             },
@@ -1920,7 +1920,7 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -1931,7 +1931,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -1942,7 +1942,7 @@ information.
 Configures common properties for analog edge triggering.
 
 When you initiate an acquisition, the digitizer waits for the start
-trigger, which is configured through the NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE
+trigger, which is configured through the NISCOPE_ATTR_ACQ_ARM_SOURCE
 (Start Trigger Source) attribute. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
@@ -1970,7 +1970,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -1981,7 +1981,7 @@ particular instrument session.
                 'type': 'ViChar[]',
 'documentation': {
 'description': '''
-Specifies the trigger source. Refer to NISCOPE\_ATTR\_TRIGGER\_SOURCE
+Specifies the trigger source. Refer to NISCOPE_ATTR_TRIGGER_SOURCE
 for defined values.
 ''',
 },
@@ -1993,7 +1993,7 @@ for defined values.
 'documentation': {
 'description': '''
 The voltage threshold for the trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_LEVEL for more information.
+NISCOPE_ATTR_TRIGGER_LEVEL for more information.
 ''',
 },
             },
@@ -2007,7 +2007,7 @@ The size of the hysteresis window on either side of the **level** in
 volts; the digitizer triggers when the trigger signal passes through the
 hysteresis value you specify with this parameter, has the slope you
 specify with **slope**, and passes through the **level**. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HYSTERESIS for defined values.
+NISCOPE_ATTR_TRIGGER_HYSTERESIS for defined values.
 ''',
 },
             },
@@ -2018,7 +2018,7 @@ NISCOPE\_ATTR\_TRIGGER\_HYSTERESIS for defined values.
 'documentation': {
 'description': '''
 Specifies whether you want a rising edge or a falling edge to trigger
-the digitizer. Refer to NISCOPE\_ATTR\_TRIGGER\_SLOPE for more
+the digitizer. Refer to NISCOPE_ATTR_TRIGGER_SLOPE for more
 information.
 ''',
 },
@@ -2030,7 +2030,7 @@ information.
 'documentation': {
 'description': '''
 Applies coupling and filtering options to the trigger signal. Refer to
-NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
+NISCOPE_ATTR_TRIGGER_COUPLING for more information.
 ''',
 },
             },
@@ -2042,7 +2042,7 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -2053,7 +2053,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -2069,7 +2069,7 @@ that keeps noise from triggering an acquisition.
 
 When you initiate an acquisition, the digitizer waits for the start
 trigger, which is configured through the
-NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE. The default is immediate. Upon
+NISCOPE_ATTR_ACQ_ARM_SOURCE. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
 digitizer waits for a reference (stop) trigger that you specify with a
@@ -2096,7 +2096,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2109,7 +2109,7 @@ triggering means the digitizer triggers itself.
 
 When you initiate an acquisition, the digitizer waits for a trigger. You
 specify the type of trigger that the digitizer waits for with a
-Configure Trigger function, such as niScope\_ConfigureTriggerImmediate.
+Configure Trigger function, such as niScope_ConfigureTriggerImmediate.
 ''',
 },
     },
@@ -2122,7 +2122,7 @@ Configure Trigger function, such as niScope\_ConfigureTriggerImmediate.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2146,11 +2146,11 @@ generated.
 
 **Valid Values**
 
-| NISCOPE\_VAL\_NO\_EVENT
-| NISCOPE\_VAL\_STOP\_TRIGGER\_EVENT
-| NISCOPE\_VAL\_START\_TRIGGER\_EVENT
-| NISCOPE\_VAL\_END\_OF\_ACQUISITION\_EVENT
-| NISCOPE\_VAL\_END\_OF\_RECORD\_EVENT
+| NISCOPE_VAL_NO_EVENT
+| NISCOPE_VAL_STOP_TRIGGER_EVENT
+| NISCOPE_VAL_START_TRIGGER_EVENT
+| NISCOPE_VAL_END_OF_ACQUISITION_EVENT
+| NISCOPE_VAL_END_OF_RECORD_EVENT
 ''',
 },
             },
@@ -2162,17 +2162,17 @@ digitizers can detect when configured for digital triggering.
 
 For Traditional NI-DAQ devices, exported signals are still present in
 the route after the session is closed. You must clear the route before
-closing the session, or call niScope\_reset.
+closing the session, or call niScope_reset.
 
 To clear the route, call this function again and route
-NISCOPE\_VAL\_NONE to the line that you had exported. For example, if
+NISCOPE_VAL_NONE to the line that you had exported. For example, if
 you originally called this function with the trigger event
-NISCOPE\_VAL\_STOP\_TRIGGER\_EVENT routed to the trigger output
-NISCOPE\_VAL\_RTSI\_0, you would call this function again with
-NISCOPE\_VAL\_NONE routed to NISCOPE\_VAL\_RTSI\_0 to clear the route.
+NISCOPE_VAL_STOP_TRIGGER_EVENT routed to the trigger output
+NISCOPE_VAL_RTSI_0, you would call this function again with
+NISCOPE_VAL_NONE routed to NISCOPE_VAL_RTSI_0 to clear the route.
 ''',
 'note': '''
-This function is obsolete. Consider using niScope\_ExportSignal
+This function is obsolete. Consider using niScope_ExportSignal
 instead.
 ''',
 },
@@ -2186,7 +2186,7 @@ instead.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2199,7 +2199,7 @@ particular instrument session.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -2210,7 +2210,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -2221,7 +2221,7 @@ information.
 Configures common properties for software triggering.
 
 When you initiate an acquisition, the digitizer waits for the start
-trigger, which is configured through the NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE
+trigger, which is configured through the NISCOPE_ATTR_ACQ_ARM_SOURCE
 (Start Trigger Source) attribute. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
@@ -2232,7 +2232,7 @@ sampling. With each Configure Trigger function, you specify
 configuration parameters such as the trigger source and the amount of
 trigger delay.
 
-To trigger the acquisition, use niScope\_SendSoftwareTriggerEdge.
+To trigger the acquisition, use niScope_SendSoftwareTriggerEdge.
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -2251,7 +2251,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2262,7 +2262,7 @@ particular instrument session.
                 'type': 'ViChar[]',
 'documentation': {
 'description': '''
-Specifies the trigger source. Refer to NISCOPE\_ATTR\_TRIGGER\_SOURCE
+Specifies the trigger source. Refer to NISCOPE_ATTR_TRIGGER_SOURCE
 for defined values.
 ''',
 },
@@ -2276,7 +2276,7 @@ for defined values.
 Offsets each video line so the clamping level (the portion of the video
 line between the end of the color burst and the beginning of the active
 image) is moved to zero volt. Refer to
-NISCOPE\_ATTR\_ENABLE\_DC\_RESTORE for defined values.
+NISCOPE_ATTR_ENABLE_DC_RESTORE for defined values.
 ''',
 },
             },
@@ -2287,7 +2287,7 @@ NISCOPE\_ATTR\_ENABLE\_DC\_RESTORE for defined values.
 'documentation': {
 'description': '''
 Specifies the type of video signal sync the digitizer should look for.
-Refer to NISCOPE\_ATTR\_TV\_TRIGGER\_SIGNAL\_FORMAT for more
+Refer to NISCOPE_ATTR_TV_TRIGGER_SIGNAL_FORMAT for more
 information.
 ''',
 },
@@ -2313,7 +2313,7 @@ Selects the line number to trigger on. The line number range covers an
 entire frame and is referenced as shown on `Vertical Blanking and
 Synchronization
 Signal <REPLACE_DRIVER_SPECIFIC_URL_1(gray_scale_image)>`__. Refer to
-NISCOPE\_ATTR\_TV\_TRIGGER\_LINE\_NUMBER for more information.
+NISCOPE_ATTR_TV_TRIGGER_LINE_NUMBER for more information.
 
 Default value: 1
 ''',
@@ -2334,7 +2334,7 @@ Default value: 1
 'documentation': {
 'description': '''
 Applies coupling and filtering options to the trigger signal. Refer to
-NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
+NISCOPE_ATTR_TRIGGER_COUPLING for more information.
 ''',
 },
             },
@@ -2346,7 +2346,7 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -2357,7 +2357,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -2370,7 +2370,7 @@ signal format, TV event, line number, polarity, and enable DC restore. A
 video trigger occurs when the digitizer finds a valid video signal sync.
 
 When you initiate an acquisition, the digitizer waits for the start
-trigger, which is configured through the NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE
+trigger, which is configured through the NISCOPE_ATTR_ACQ_ARM_SOURCE
 (Start Trigger Source) attribute. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
@@ -2398,7 +2398,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2409,7 +2409,7 @@ particular instrument session.
                 'type': 'ViChar[]',
 'documentation': {
 'description': '''
-Specifies the trigger source. Refer to NISCOPE\_ATTR\_TRIGGER\_SOURCE
+Specifies the trigger source. Refer to NISCOPE_ATTR_TRIGGER_SOURCE
 for defined values.
 ''',
 },
@@ -2454,7 +2454,7 @@ or leaves a window.
 'documentation': {
 'description': '''
 Applies coupling and filtering options to the trigger signal. Refer to
-NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
+NISCOPE_ATTR_TRIGGER_COUPLING for more information.
 ''',
 },
             },
@@ -2466,7 +2466,7 @@ NISCOPE\_ATTR\_TRIGGER\_COUPLING for more information.
 'description': '''
 The length of time the digitizer waits after detecting a trigger before
 enabling NI-SCOPE to detect another trigger. Refer to
-NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
+NISCOPE_ATTR_TRIGGER_HOLDOFF for more information.
 ''',
 },
             },
@@ -2477,7 +2477,7 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
 'documentation': {
 'description': '''
 How long the digitizer waits after receiving the trigger to start
-acquiring data. Refer to NISCOPE\_ATTR\_TRIGGER\_DELAY\_TIME for more
+acquiring data. Refer to NISCOPE_ATTR_TRIGGER_DELAY_TIME for more
 information.
 ''',
 },
@@ -2490,7 +2490,7 @@ trigger occurs when a signal enters or leaves a window you specify with
 the **high level** or **low level** parameters.
 
 When you initiate an acquisition, the digitizer waits for the start
-trigger, which is configured through the NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE
+trigger, which is configured through the NISCOPE_ATTR_ACQ_ARM_SOURCE
 (Start Trigger Source) attribute. The default is immediate. Upon
 receiving the start trigger the digitizer begins sampling pretrigger
 points. After the digitizer finishes sampling pretrigger points, the
@@ -2501,7 +2501,7 @@ sampling. With each Configure Trigger function, you specify
 configuration parameters such as the trigger source and the amount of
 trigger delay.
 
-To trigger the acquisition, use niScope\_SendSoftwareTriggerEdge.
+To trigger the acquisition, use niScope_SendSoftwareTriggerEdge.
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -2520,7 +2520,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2542,7 +2542,7 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the vertical range Refer to NISCOPE\_ATTR\_VERTICAL\_RANGE for
+Specifies the vertical range Refer to NISCOPE_ATTR_VERTICAL_RANGE for
 more information.
 ''',
 },
@@ -2553,7 +2553,7 @@ more information.
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
-Specifies the vertical offset. Refer to NISCOPE\_ATTR\_VERTICAL\_OFFSET
+Specifies the vertical offset. Refer to NISCOPE_ATTR_VERTICAL_OFFSET
 for more information.
 ''',
 },
@@ -2565,7 +2565,7 @@ for more information.
 'documentation': {
 'description': '''
 Specifies how to couple the input signal. Refer to
-NISCOPE\_ATTR\_VERTICAL\_COUPLING for more information.
+NISCOPE_ATTR_VERTICAL_COUPLING for more information.
 ''',
 },
             },
@@ -2576,7 +2576,7 @@ NISCOPE\_ATTR\_VERTICAL\_COUPLING for more information.
 'documentation': {
 'description': '''
 Specifies the probe attenuation. Refer to
-NISCOPE\_ATTR\_PROBE\_ATTENUATION for valid values.
+NISCOPE_ATTR_PROBE_ATTENUATION for valid values.
 ''',
 },
             },
@@ -2587,7 +2587,7 @@ NISCOPE\_ATTR\_PROBE\_ATTENUATION for valid values.
 'documentation': {
 'description': '''
 Specifies whether the channel is enabled for acquisition. Refer to
-NISCOPE\_ATTR\_CHANNEL\_ENABLED for more information.
+NISCOPE_ATTR_CHANNEL_ENABLED for more information.
 ''',
 },
             },
@@ -2609,7 +2609,7 @@ attenuation, and the channel.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2631,7 +2631,7 @@ RTSI and PFI lines.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2646,7 +2646,7 @@ signal (clock, trigger, or event) to export.
 
 **Defined Values**
 ''',
-'table_body': [['NISCOPE\\_VAL\\_REF\\_TRIGGER', '(1)', 'Generate a pulse when detecting the Stop/Reference trigger.'], ['NISCOPE\\_VAL\\_START\\_TRIGGER', '(2)', 'Generate a pulse when detecting a Start trigger.'], ['NISCOPE\\_VAL\\_END\\_OF\\_ACQUISITION\\_EVENT', '(3)', 'Generate a pulse when the acquisition finishes.'], ['NISCOPE\\_VAL\\_END\\_OF\\_RECORD\\_EVENT', '(4)', 'Generate a pulse at the end of the record.'], ['NISCOPE\\_VAL\\_ADVANCE\\_TRIGGER', '(5)', 'Generate a pulse when detecting an Advance trigger.'], ['NISCOPE\\_VAL\\_READY\\_FOR\\_ADVANCE\\_EVENT', '(6)', 'Asserts when the digitizer is ready to advance to the next record.'], ['NISCOPE\\_VAL\\_READY\\_FOR\\_START\\_EVENT', '(7)', 'Asserts when the digitizer is initiated and ready to accept a Start trigger and begin sampling.'], ['NISCOPE\\_VAL\\_READY\\_FOR\\_REF\\_EVENT', '(10)', 'Asserts when the digitizer is ready to accept a Reference trigger.'], ['NISCOPE\\_VAL\\_REF\\_CLOCK', '(100)', 'Export the Reference clock for the digitizer to the specified terminal.'], ['NISCOPE\\_VAL\\_SAMPLE\\_CLOCK', '(101)', 'Export the Sample clock for the digitizer to the specified terminal.'], ['NISCOPE\\_VAL\\_5V\\_OUT', '(13)', 'Exports a 5 V power supply.']],
+'table_body': [['NISCOPE_VAL_REF_TRIGGER', '(1)', 'Generate a pulse when detecting the Stop/Reference trigger.'], ['NISCOPE_VAL_START_TRIGGER', '(2)', 'Generate a pulse when detecting a Start trigger.'], ['NISCOPE_VAL_END_OF_ACQUISITION_EVENT', '(3)', 'Generate a pulse when the acquisition finishes.'], ['NISCOPE_VAL_END_OF_RECORD_EVENT', '(4)', 'Generate a pulse at the end of the record.'], ['NISCOPE_VAL_ADVANCE_TRIGGER', '(5)', 'Generate a pulse when detecting an Advance trigger.'], ['NISCOPE_VAL_READY_FOR_ADVANCE_EVENT', '(6)', 'Asserts when the digitizer is ready to advance to the next record.'], ['NISCOPE_VAL_READY_FOR_START_EVENT', '(7)', 'Asserts when the digitizer is initiated and ready to accept a Start trigger and begin sampling.'], ['NISCOPE_VAL_READY_FOR_REF_EVENT', '(10)', 'Asserts when the digitizer is ready to accept a Reference trigger.'], ['NISCOPE_VAL_REF_CLOCK', '(100)', 'Export the Reference clock for the digitizer to the specified terminal.'], ['NISCOPE_VAL_SAMPLE_CLOCK', '(101)', 'Export the Sample clock for the digitizer to the specified terminal.'], ['NISCOPE_VAL_5V_OUT', '(13)', 'Exports a 5 V power supply.']],
 },
             },
             {
@@ -2668,7 +2668,7 @@ generated.
 
 **Defined Values**
 ''',
-'table_body': [['NISCOPE\\_VAL\\_RTSI\\_0', '("VAL\\_RTSI\\_0")'], ['NISCOPE\\_VAL\\_RTSI\\_1', '("VAL\\_RTSI\\_1")'], ['NISCOPE\\_VAL\\_RTSI\\_2', '("VAL\\_RTSI\\_2")'], ['NISCOPE\\_VAL\\_RTSI\\_3', '("VAL\\_RTSI\\_3")'], ['NISCOPE\\_VAL\\_RTSI\\_4', '("VAL\\_RTSI\\_4")'], ['NISCOPE\\_VAL\\_RTSI\\_5', '("VAL\\_RTSI\\_5")'], ['NISCOPE\\_VAL\\_RTSI\\_6', '("VAL\\_RTSI\\_6")'], ['NISCOPE\\_VAL\\_RTSI\\_7', '("VAL\\_RTSI\\_7")'], ['NISCOPE\\_VAL\\_PXI\\_STAR', '("VAL\\_PXI\\_STAR")'], ['NISCOPE\\_VAL\\_PFI\\_0', '("VAL\\_PFI\\_0")'], ['NISCOPE\\_VAL\\_PFI\\_1', '("VAL\\_PFI\\_1")'], ['NISCOPE\\_VAL\\_PFI\\_2', '("VAL\\_PFI\\_2")'], ['NISCOPE\\_VAL\\_CLK\\_OUT', '("VAL\\_CLK\\_OUT")']],
+'table_body': [['NISCOPE_VAL_RTSI_0', '("VAL_RTSI_0")'], ['NISCOPE_VAL_RTSI_1', '("VAL_RTSI_1")'], ['NISCOPE_VAL_RTSI_2', '("VAL_RTSI_2")'], ['NISCOPE_VAL_RTSI_3', '("VAL_RTSI_3")'], ['NISCOPE_VAL_RTSI_4', '("VAL_RTSI_4")'], ['NISCOPE_VAL_RTSI_5', '("VAL_RTSI_5")'], ['NISCOPE_VAL_RTSI_6', '("VAL_RTSI_6")'], ['NISCOPE_VAL_RTSI_7', '("VAL_RTSI_7")'], ['NISCOPE_VAL_PXI_STAR', '("VAL_PXI_STAR")'], ['NISCOPE_VAL_PFI_0', '("VAL_PFI_0")'], ['NISCOPE_VAL_PFI_1', '("VAL_PFI_1")'], ['NISCOPE_VAL_PFI_2', '("VAL_PFI_2")'], ['NISCOPE_VAL_CLK_OUT', '("VAL_CLK_OUT")']],
 },
             },
         ],
@@ -2688,9 +2688,9 @@ times and set each available line to a different signal.
 
 To unprogram a specific line on device, call this function with the
 signal you no longer want to export and set **outputTerminal** to
-NISCOPE\_VAL\_NONE.
+NISCOPE_VAL_NONE.
 ''',
-'note': 'This function replaces niScope\_ConfigureTriggerOutput.',
+'note': 'This function replaces niScope_ConfigureTriggerOutput.',
 },
     },
     'Fetch': {
@@ -2702,7 +2702,7 @@ NISCOPE\_VAL\_NONE.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2751,7 +2751,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -2799,7 +2799,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -2814,7 +2814,7 @@ This function may return multiple waveforms depending on the number of
 channels, the acquisition type, and the number of records you specify.
 ''',
 'note': '''
-You can use niScope\_Read instead of this function. niScope\_Read
+You can use niScope_Read instead of this function. niScope_Read
 starts an acquisition on all enabled channels, waits for the acquisition
 to complete, and returns the waveform for the specified channel.
 
@@ -2834,7 +2834,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -2881,11 +2881,11 @@ to perform.
 'documentation': {
 'description': '''
 The maximum number of samples returned in the measurement waveform array
-for each waveform measurement. Use niScope\_ActualMeasWfmSize to
+for each waveform measurement. Use niScope_ActualMeasWfmSize to
 determine the number of available samples.
 ''',
 'note': '''
-Use the attribute NISCOPE\_ATTR\_FETCH\_MEAS\_NUM\_SAMPLES to set the
+Use the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the
 number of samples to fetch when performing a measurement. For more
 information about when to use this attribute, refer to the `NI
 KnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.
@@ -2899,8 +2899,8 @@ KnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.
 'documentation': {
 'description': '''
 Returns an array whose length is the number of waveforms times
-**measWfmSize**; call niScope\_ActualNumWfms to determine the number of
-waveforms; call niScope\_ActualMeasWfmSize to determine the size of each
+**measWfmSize**; call niScope_ActualNumWfms to determine the number of
+waveforms; call niScope_ActualMeasWfmSize to determine the size of each
 waveform.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -2948,7 +2948,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -2977,7 +2977,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3026,7 +3026,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -3074,7 +3074,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -3107,7 +3107,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3156,7 +3156,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -3204,7 +3204,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -3237,7 +3237,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3286,7 +3286,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -3334,7 +3334,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -3367,7 +3367,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3416,7 +3416,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 ''',
 },
@@ -3450,7 +3450,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -3472,7 +3472,7 @@ scaled waveforms.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3521,7 +3521,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 ''',
 },
@@ -3555,7 +3555,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -3576,7 +3576,7 @@ one-dimensional array of complex binary 16-bit waveforms.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3623,7 +3623,7 @@ to be performed.
 'documentation': {
 'description': '''
 Contains an array of all measurements acquired; call
-niScope\_ActualNumWfms to determine the array length.
+niScope_ActualNumWfms to determine the array length.
 ''',
 },
             },
@@ -3637,9 +3637,9 @@ more information.
 
 Many of the measurements use the low, mid, and high reference levels.
 You configure the low, mid, and high references by using
-NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL,
-NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL, and
-NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL to set each channel
+NISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,
+NISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and
+NISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel
 differently.
 ''',
 },
@@ -3653,7 +3653,7 @@ differently.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3708,7 +3708,7 @@ to be performed on each fetched waveform.
 'documentation': {
 'description': '''
 Returns the mean scalar value, which is obtained by averaging each
-niScope\_FetchMeasurementStats call.
+niScope_FetchMeasurementStats call.
 ''',
 },
             },
@@ -3751,7 +3751,7 @@ Returns the largest scalar value acquired (the maximum of the
                 'type': 'ViInt32[]',
 'documentation': {
 'description': '''
-Returns the number of times niScope\_FetchMeasurementStats has been
+Returns the number of times niScope_FetchMeasurementStats has been
 called.
 ''',
 },
@@ -3773,15 +3773,15 @@ the specified measurement is fetched by any of the Fetch Measurement
 functions. If a Fetch Measurement function has not been called, this
 function fetches the data on which to perform the measurement. The
 statistics are cleared by calling
-niScope\_ClearWaveformMeasurementStats. Refer to `Using Fetch
+niScope_ClearWaveformMeasurementStats. Refer to `Using Fetch
 Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
 more information on incorporating fetch functions in your application.
 
 Many of the measurements use the low, mid, and high reference levels.
 You configure the low, mid, and high references with
-NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL,
-NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL, and
-NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL to set each channel
+NISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,
+NISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and
+NISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel
 differently.
 ''',
 },
@@ -3795,7 +3795,7 @@ differently.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3884,15 +3884,15 @@ Units: seconds
 Returns the waveform from a previously initiated acquisition that the
 digitizer acquires for the channel you specify.
 
-niScope\_InitiateAcquisition starts an acquisition on the channels that
-you enable with niScope\_ConfigureVertical. The digitizer acquires
+niScope_InitiateAcquisition starts an acquisition on the channels that
+you enable with niScope_ConfigureVertical. The digitizer acquires
 waveforms for the enabled channels concurrently. You use
-niScope\_AcquisitionStatus to determine when the acquisition is
+niScope_AcquisitionStatus to determine when the acquisition is
 complete. You must call this function separately for each enabled
 channel to obtain the waveforms.
 
-You can call niScope\_ReadWaveform instead of
-niScope\_InitiateAcquisition. niScope\_ReadWaveform starts an
+You can call niScope_ReadWaveform instead of
+niScope_InitiateAcquisition. niScope_ReadWaveform starts an
 acquisition on all enabled channels, waits for the acquisition to
 complete, and returns the waveform for the channel you specify. Call
 this function to obtain the waveforms for each of the remaining
@@ -3913,7 +3913,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -3954,16 +3954,16 @@ Configure the appropriate reference levels before calling this function.
 You can configure the low, mid, and high references by setting the
 following attributes:
 
-| NISCOPE\_ATTR\_MEAS\_HIGH\_REF
-| NISCOPE\_ATTR\_MEAS\_LOW\_REF
-| NISCOPE\_ATTR\_MEAS\_MID\_REF
+| NISCOPE_ATTR_MEAS_HIGH_REF
+| NISCOPE_ATTR_MEAS_LOW_REF
+| NISCOPE_ATTR_MEAS_MID_REF
 ''',
 'note': '''
 This function is included for compliance with the IviScope Class
 Specification.
 
-You can use niScope\_ReadWaveformMeasurement instead of this function.
-niScope\_ReadWaveformMeasurement starts an acquisition on all enabled
+You can use niScope_ReadWaveformMeasurement instead of this function.
+niScope_ReadWaveformMeasurement starts an acquisition on all enabled
 channels, waits for the acquisition to complete, obtains a waveform
 measurement on the specified channel, and returns the waveform for the
 specified channel. Call this function separately to obtain any other
@@ -3980,7 +3980,7 @@ waveform measurements on a specific channel.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4038,7 +4038,7 @@ function performs instrument I/O in the following cases:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4093,7 +4093,7 @@ function performs instrument I/O in the following cases:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4148,7 +4148,7 @@ function performs instrument I/O in the following cases:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4206,7 +4206,7 @@ function performs instrument I/O in the following cases:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4264,7 +4264,7 @@ function performs instrument I/O in the following cases:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4329,7 +4329,7 @@ at the end of the buffer, and returns the **bufSize** you must pass to
 get the entire value. For example, if the value is 123456 and the
 **bufSize** is 4, the function places 123 into the buffer and returns 7.
 If you want to call this function just to get the required buffer size,
-you can pass 0 for the **bufSize** and VI\_NULL for the **value**.
+you can pass 0 for the **bufSize** and VI_NULL for the **value**.
 ''',
 },
     },
@@ -4342,7 +4342,7 @@ you can pass 0 for the **bufSize** and VI\_NULL for the **value**.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4408,7 +4408,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4441,7 +4441,7 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
 The custom coefficients for the equalization FIR filter on the device.
 These coefficients should be between +1 and –1. You can obtain the
 number of coefficients from the
-`NISCOPE\_ATTR\_EQUALIZATION\_NUM\_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
+`NISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
 attribute.
 ''',
 },
@@ -4466,7 +4466,7 @@ Coefficient values should be between +1 and –1.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4490,7 +4490,7 @@ Size is 4, the function places "123" into the buffer and returns 7.
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the **description** parameter.
+If you pass 0, you can pass VI_NULL for the **description** parameter.
 ''',
 },
             },
@@ -4517,7 +4517,7 @@ If there is no description, the function returns an empty string. The
 buffer must contain at least as many elements as the value you specify
 with the Buffer Size parameter.
 
-If you pass 0 for the **bufferSize**, you can pass VI\_NULL for this
+If you pass 0 for the **bufferSize**, you can pass VI_NULL for this
 parameter.
 ''',
 },
@@ -4544,7 +4544,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4583,7 +4583,7 @@ should be at least as large as the buffer size.
 'documentation': {
 'description': '''
 Returns the error code from an NI-SCOPE function as a user-readable
-string. Use VI\_NULL as the default instrument handle.
+string. Use VI_NULL as the default instrument handle.
 
 You must call this function twice. For the first call, set
 **bufferSize** to 0 to prevent the function from populating the error
@@ -4603,7 +4603,7 @@ that was returned in the first function call.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4629,12 +4629,12 @@ The array size for the frequencies, amplitudes, and phases arrays that
 you pass in to the other parameters.
 
 To determine the sizes of the buffers to allocate for the frequencies,
-amplitudes, and phases arrays, pass a value of 0 to the **buffer\_size**
+amplitudes, and phases arrays, pass a value of 0 to the **buffer_size**
 parameter and a value of NULL to the **frequencies** parameter. In this
 case, the value returned by the **numberOfFrequencies** parameter is the
 size of the arrays necessary to hold the frequencies, amplitudes, and
 phases. Allocate three arrays of this size, then call this function
-again (with correct **buffer\_size** parameter) to retrieve the actual
+again (with correct **buffer_size** parameter) to retrieve the actual
 values.
 ''',
 },
@@ -4698,7 +4698,7 @@ this function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4723,7 +4723,7 @@ returns 7.
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the Description buffer
+If you pass 0, you can pass VI_NULL for the Description buffer
 parameter.
 ''',
 },
@@ -4748,7 +4748,7 @@ Returns the coercion information associated with the IVI session. This
 function retrieves and clears the oldest instance in which the
 instrument driver coerced a value you specified to another value.
 
-If you set NISCOPE\_ATTR\_RECORD\_COERCIONS to VI\_TRUE, NI-SCOPE keeps
+If you set NISCOPE_ATTR_RECORD_COERCIONS to VI_TRUE, NI-SCOPE keeps
 a list of all coercions it makes on ViInt32 or ViReal64 values that you
 pass to instrument driver functions. Use this function to retrieve
 information from that list.
@@ -4768,7 +4768,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4792,7 +4792,7 @@ Size is 4, the function places "123" into the buffer and returns 7.
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value.
 
-If you pass 0, you can pass VI\_NULL for the Description buffer
+If you pass 0, you can pass VI_NULL for the Description buffer
 parameter.
 ''',
 },
@@ -4821,7 +4821,7 @@ cause different behavior.
 
 Use this function to retrieve interchangeability warnings. The driver
 performs interchangeability checking when
-NISCOPE\_ATTR\_INTERCHANGE\_CHECK is set to VI\_TRUE. The function
+NISCOPE_ATTR_INTERCHANGE_CHECK is set to VI_TRUE. The function
 returns an empty string in the **interchangeWarning** parameter if no
 interchangeability warnings remain for the session.
 
@@ -4844,7 +4844,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4873,7 +4873,7 @@ pass a value of 0 to the **buffersize** parameter and a value of NULL to
 the **coefficientInfo** parameter. In this case, the return value of the
 **numberOfCoefficientSets** parameter is the size of the array necessary
 to hold the coefficient structures. Allocate an array of
-niScope\_coefficientInfo structures of this size, then call this
+niScope_coefficientInfo structures of this size, then call this
 function again (with the correct **bufferSize** parameter) to retrieve
 the actual values.
 ''',
@@ -4922,7 +4922,7 @@ information about how to use this function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -4951,7 +4951,7 @@ pass a value of 0 to the **buffersize** parameter and a value of NULL to
 the **coefficientInfo** parameter. In this case, the return value of the
 **numberOfCoefficientSets** parameter is the size of the array necessary
 to hold the coefficient structures. Allocate an array of
-niScope\_coefficientInfo structures of this size, then call this
+niScope_coefficientInfo structures of this size, then call this
 function again (with the correct **bufferSize** parameter) to retrieve
 the actual values.
 ''',
@@ -4999,7 +4999,7 @@ information about how to use this function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5092,18 +5092,18 @@ the session.
 'description': '''
 Specify whether to perform an ID query.
 
-When you set this parameter to VI\_TRUE, NI-SCOPE verifies that the
+When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
 device you initialize is a type that it supports.
 
-When you set this parameter to VI\_FALSE, the function initializes the
+When you set this parameter to VI_FALSE, the function initializes the
 device without performing an ID query.
 
 **Defined Values**
 
-| VI\_TRUE—Perform ID query
-| VI\_FALSE—Skip ID query
+| VI_TRUE—Perform ID query
+| VI_FALSE—Skip ID query
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
 },
             },
@@ -5115,13 +5115,13 @@ device without performing an ID query.
 'description': '''
 Specify whether to reset the device during the initialization process.
 
-Default Value: VI\_TRUE
+Default Value: VI_TRUE
 
 **Defined Values**
 
-VI\_TRUE (1)—Reset device
+VI_TRUE (1)—Reset device
 
-VI\_FALSE (0)—Do not reset device
+VI_FALSE (0)—Do not reset device
 ''',
 'note': '''
 For the NI 5112, repeatedly resetting the device may cause excessive
@@ -5185,9 +5185,9 @@ Performs the following initialization actions:
 -  Opens a session to the specified device using the interface and
    address you specify for the **resourceName**
 -  Resets the digitizer to a known state if **resetDevice** is set to
-   VI\_TRUE
+   VI_TRUE
 -  Queries the instrument ID and verifies that it is valid for this
-   instrument driver if the **IDQuery** is set to VI\_TRUE
+   instrument driver if the **IDQuery** is set to VI_TRUE
 -  Returns an instrument handle that you use to identify the instrument
    in all subsequent instrument driver function calls
 ''',
@@ -5202,7 +5202,7 @@ Performs the following initialization actions:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5214,7 +5214,7 @@ Initiates a waveform acquisition.
 
 After calling this function, the digitizer leaves the Idle state and
 waits for a trigger. The digitizer acquires a waveform for each channel
-you enable with niScope\_ConfigureVertical.
+you enable with niScope_ConfigureVertical.
 ''',
 },
     },
@@ -5307,7 +5307,7 @@ the device is still undergoing initialization.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5334,9 +5334,9 @@ indicating that the digitizer could not sample a voltage.
 
 Return values:
 
-| VI\_TRUE—The element value indicates that the instrument could not
+| VI_TRUE—The element value indicates that the instrument could not
   sample the voltage.
-| VI\_FALSE—The element value is a valid voltage.
+| VI_FALSE—The element value is a valid voltage.
 ''',
 },
             },
@@ -5363,7 +5363,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5375,14 +5375,14 @@ particular instrument session.
 'documentation': {
 'description': '''
 This parameter serves as a convenience. If you do not want to use this
-parameter, pass VI\_NULL.
+parameter, pass VI_NULL.
 
 Use this parameter in complex functions to keep track of whether you
 have obtained a lock and therefore need to unlock the session. Pass the
 address of a local ViBoolean variable. In the declaration of the local
-variable, initialize it to VI\_FALSE. Pass the address of the same local
-variable to any other calls you make to niScope\_LockSession or
-niScope\_UnlockSession in the same function.
+variable, initialize it to VI_FALSE. Pass the address of the same local
+variable to any other calls you make to niScope_LockSession or
+niScope_UnlockSession in the same function.
 ''',
 },
             },
@@ -5394,25 +5394,25 @@ it waits until all other execution threads have released their locks on
 the instrument session. Other threads might have obtained a lock on this
 session in the following ways:
 
--  Your application called niScope\_LockSession
+-  Your application called niScope_LockSession
 -  A call to the instrument driver locked the session
 -  A call to the IVI engine locked the session
 
-After your call to niScope\_LockSession returns successfully, no other
+After your call to niScope_LockSession returns successfully, no other
 threads can access the instrument session until you call
-niScope\_UnlockSession. Use niScope\_LockSession and
-niScope\_UnlockSession around a sequence of calls to instrument driver
+niScope_UnlockSession. Use niScope_LockSession and
+niScope_UnlockSession around a sequence of calls to instrument driver
 functions if you require that the instrument retain its settings through
 the end of the sequence.
 
-You can safely make nested calls to niScope\_LockSession within the same
+You can safely make nested calls to niScope_LockSession within the same
 thread. To completely unlock the session, you must balance each call to
-niScope\_LockSession with a call to niScope\_UnlockSession. If, however,
-you use the **callerHasLock** in all calls to niScope\_LockSession and
-niScope\_UnlockSession within a function, the IVI Library locks the
+niScope_LockSession with a call to niScope_UnlockSession. If, however,
+you use the **callerHasLock** in all calls to niScope_LockSession and
+niScope_UnlockSession within a function, the IVI Library locks the
 session only once within the function regardless of the number of calls
-you make to niScope\_LockSession. This allows you to call
-niScope\_UnlockSession just once at the end of the function.
+you make to niScope_LockSession. This allows you to call
+niScope_UnlockSession just once at the end of the function.
 ''',
 },
     },
@@ -5425,7 +5425,7 @@ niScope\_UnlockSession just once at the end of the function.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5444,7 +5444,7 @@ particular instrument session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5463,7 +5463,7 @@ particular instrument session.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5512,7 +5512,7 @@ period, the function returns an error.
 'documentation': {
 'description': '''
 Returns an array whose length is the **numSamples** times number of
-waveforms. Call niScope\_ActualNumwfms to determine the number of
+waveforms. Call niScope_ActualNumwfms to determine the number of
 waveforms.
 
 NI-SCOPE returns this data sequentially, so all record 0 waveforms are
@@ -5560,7 +5560,7 @@ voltage = binary data × gain factor + offset
 
 voltage = binary data × gain factor + offset
 
-Call niScope\_ActualNumWfms to determine the size of this array.
+Call niScope_ActualNumWfms to determine the size of this array.
 ''',
 },
             },
@@ -5568,11 +5568,11 @@ Call niScope\_ActualNumWfms to determine the size of this array.
 'documentation': {
 'description': '''
 Initiates an acquisition, waits for it to complete, and retrieves the
-data. The process is similar to calling niScope\_InitiateAcquisition,
-niScope\_AcquisitionStatus, and niScope\_Fetch. The only difference is
-that with niScope\_Read, you enable all channels specified with
+data. The process is similar to calling niScope_InitiateAcquisition,
+niScope_AcquisitionStatus, and niScope_Fetch. The only difference is
+that with niScope_Read, you enable all channels specified with
 **channelList** before the acquisition; in the other method, you enable
-the channels with niScope\_ConfigureVertical.
+the channels with niScope_ConfigureVertical.
 
 This function may return multiple waveforms depending on the number of
 channels, the acquisition type, and the number of records you specify.
@@ -5594,7 +5594,7 @@ more information.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5641,7 +5641,7 @@ to be performed
 'documentation': {
 'description': '''
 Contains an array of all measurements acquired. Call
-niScope\_ActualNumWfms to determine the array length.
+niScope_ActualNumWfms to determine the array length.
 ''',
 },
             },
@@ -5658,9 +5658,9 @@ more information.
 
 Many of the measurements use the low, mid, and high reference levels.
 You configure the low, mid, and high references by using
-NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL,
-NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL, and
-NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL to set each channel
+NISCOPE_ATTR_MEAS_CHAN_LOW_REF_LEVEL,
+NISCOPE_ATTR_MEAS_CHAN_MID_REF_LEVEL, and
+NISCOPE_ATTR_MEAS_CHAN_HIGH_REF_LEVEL to set each channel
 differently.
 ''',
 },
@@ -5674,7 +5674,7 @@ differently.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5710,15 +5710,15 @@ Pass the maximum length of time in which to allow the read waveform
 operation to complete.
 
 If the operation does not complete within this time interval, the
-function returns the NISCOPE\_ERROR\_MAX\_TIME\_EXCEEDED error code.
-When this occurs, you can call niScope\_Abort to cancel the read
+function returns the NISCOPE_ERROR_MAX_TIME_EXCEEDED error code.
+When this occurs, you can call niScope_Abort to cancel the read
 waveform operation and return the digitizer to the idle state.
 
 Units: milliseconds
 
 | Other Defined Values
-| NISCOPE\_VAL\_MAX\_TIME\_NONE
-| NISCOPE\_VAL\_MAX\_TIME\_INFINITE
+| NISCOPE_VAL_MAX_TIME_NONE
+| NISCOPE_VAL_MAX_TIME_INFINITE
 ''',
 },
             },
@@ -5778,12 +5778,12 @@ Units: seconds
 'documentation': {
 'description': '''
 Initiates an acquisition on the channels that you enable with
-niScope\_ConfigureVertical. This function then waits for the acquisition
+niScope_ConfigureVertical. This function then waits for the acquisition
 to complete and returns the waveform for the channel you specify. Call
-niScope\_FetchWaveform to obtain the waveforms for each of the remaining
+niScope_FetchWaveform to obtain the waveforms for each of the remaining
 enabled channels without initiating another acquisition.
 
-Use niScope\_ActualRecordLength to determine the required size for the
+Use niScope_ActualRecordLength to determine the required size for the
 **waveform** array.
 ''',
 'note': '''
@@ -5801,7 +5801,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5837,8 +5837,8 @@ Pass the maximum length of time in which to allow the read waveform
 operation to complete.
 
 If the operation does not complete within this time interval, the
-function returns the NISCOPE\_ERROR\_MAX\_TIME\_EXCEEDED error code.
-When this occurs, you can call niScope\_Abort to cancel the read
+function returns the NISCOPE_ERROR_MAX_TIME_EXCEEDED error code.
+When this occurs, you can call niScope_Abort to cancel the read
 waveform operation and return the digitizer to the idle state.
 
 Units: milliseconds
@@ -5860,22 +5860,22 @@ Initiates a new waveform acquisition and returns a specified waveform
 measurement from a specific channel.
 
 This function initiates an acquisition on the channels that you enable
-with the niScope\_ConfigureVertical function. It then waits for the
+with the niScope_ConfigureVertical function. It then waits for the
 acquisition to complete, obtains a waveform measurement on the channel
 you specify, and returns the measurement value. You specify a particular
 measurement type, such as rise time, frequency, or voltage peak-to-peak.
 
-You can call the niScope\_FetchWaveformMeasurement function separately
+You can call the niScope_FetchWaveformMeasurement function separately
 to obtain any other waveform measurement on a specific channel without
 initiating another acquisition.
 
 You must configure the appropriate reference levels before calling this
 function. Configure the low, mid, and high references by calling
-niScope\_ConfigureRefLevels or by setting the following attributes:
+niScope_ConfigureRefLevels or by setting the following attributes:
 
-| NISCOPE\_ATTR\_MEAS\_HIGH\_REF
-| NISCOPE\_ATTR\_MEAS\_LOW\_REF
-| NISCOPE\_ATTR\_MEAS\_MID\_REF
+| NISCOPE_ATTR_MEAS_HIGH_REF
+| NISCOPE_ATTR_MEAS_LOW_REF
+| NISCOPE_ATTR_MEAS_MID_REF
 ''',
 'note': '''
 This function is included for compliance with the IviScope Class
@@ -5892,7 +5892,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5918,7 +5918,7 @@ state.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5949,14 +5949,14 @@ module completely configures the state of each instrument it uses.
 
 This function does not clear the interchangeability warnings from the
 list of previously recorded interchangeability warnings. If you want to
-guarantee that niScope\_GetNextInterchangeWarning only returns those
+guarantee that niScope_GetNextInterchangeWarning only returns those
 interchangeability warnings that are generated after calling this
 function, you must clear the list of interchangeability warnings.
 
 You can clear the interchangeability warnings list by repeatedly calling
-niScope\_GetNextInterchangeWarning until no more interchangeability
+niScope_GetNextInterchangeWarning until no more interchangeability
 warnings are returned. If you are not interested in the content of those
-warnings, you can call niScope\_ClearInterchangeWarnings.
+warnings, you can call niScope_ClearInterchangeWarnings.
 ''',
 'note': '''
 This function is included for compliance with the IviScope Class
@@ -5973,7 +5973,7 @@ Specification.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -5996,7 +5996,7 @@ Configuration Store.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6008,7 +6008,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 Returns the sample mode the digitizer is currently using; NI-SCOPE
-returns the value of the NISCOPE\_ATTR\_SAMPLE\_MODE attribute.
+returns the value of the NISCOPE_ATTR_SAMPLE_MODE attribute.
 ''',
 },
             },
@@ -6026,7 +6026,7 @@ returns the value of the NISCOPE\_ATTR\_SAMPLE\_MODE attribute.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6039,7 +6039,7 @@ particular instrument session.
 'description': '''
 Returns the effective sample rate of the acquired waveform the digitizer
 acquires for each channel; the driver returns the value held in the
-NISCOPE\_ATTR\_HORZ\_SAMPLE\_RATE attribute.
+NISCOPE_ATTR_HORZ_SAMPLE_RATE attribute.
 ''',
 },
             },
@@ -6063,7 +6063,7 @@ more information about sample rate coercion.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6072,11 +6072,11 @@ particular instrument session.
 'documentation': {
 'description': '''
 Sends a command to trigger the digitizer. Call this function after you
-call niScope\_ConfigureTriggerSoftware.
+call niScope_ConfigureTriggerSoftware.
 ''',
 'note': '''
 This function is included for compliance with the IviScope Class
-Specification. Consider using niScope\_SendSoftwareTriggerEdge instead.
+Specification. Consider using niScope_SendSoftwareTriggerEdge instead.
 ''',
 },
     },
@@ -6089,7 +6089,7 @@ Specification. Consider using niScope\_SendSoftwareTriggerEdge instead.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6104,10 +6104,10 @@ Specifies the type of trigger to send to the digitizer.
 
 **Defined Values**
 
-| NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_START (0L)
-|  NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ARM\_REFERENCE (1L)
-| NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_REFERENCE (2L)
-| NISCOPE\_VAL\_SOFTWARE\_TRIGGER\_ADVANCE (3L)
+| NISCOPE_VAL_SOFTWARE_TRIGGER_START (0L)
+|  NISCOPE_VAL_SOFTWARE_TRIGGER_ARM_REFERENCE (1L)
+| NISCOPE_VAL_SOFTWARE_TRIGGER_REFERENCE (2L)
+| NISCOPE_VAL_SOFTWARE_TRIGGER_ADVANCE (3L)
 ''',
 },
             },
@@ -6115,11 +6115,11 @@ Specifies the type of trigger to send to the digitizer.
 'documentation': {
 'description': '''
 Sends the selected trigger to the digitizer. Call this function if you
-called niScope\_ConfigureTriggerSoftware when you want the Reference
+called niScope_ConfigureTriggerSoftware when you want the Reference
 trigger to occur. You can also call this function to override a misused
 edge, digital, or hysteresis trigger. If you have configured
-NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE, NISCOPE\_ATTR\_ARM\_REF\_TRIG\_SRC, or
-NISCOPE\_ATTR\_ADV\_TRIG\_SRC, call this function when you want to send
+NISCOPE_ATTR_ACQ_ARM_SOURCE, NISCOPE_ATTR_ARM_REF_TRIG_SRC, or
+NISCOPE_ATTR_ADV_TRIG_SRC, call this function when you want to send
 the corresponding trigger to the digitizer.
 ''',
 },
@@ -6133,7 +6133,7 @@ the corresponding trigger to the digitizer.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6205,7 +6205,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6277,7 +6277,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6349,7 +6349,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6421,7 +6421,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6493,7 +6493,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6567,7 +6567,7 @@ redundant instrument I/O.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6579,14 +6579,14 @@ particular instrument session.
 'documentation': {
 'description': '''
 This parameter serves as a convenience; if you do not want to use this
-parameter, pass VI\_NULL.
+parameter, pass VI_NULL.
 
 Use this parameter in complex functions to keep track of whether you
 have obtained a lock and therefore need to unlock the session; pass the
 address of a local ViBoolean variable; in the declaration of the local
-variable, initialize it to VI\_FALSE; pass the address of the same local
-variable to any other calls you make to niScope\_LockSession or
-niScope\_UnlockSession in the same function.
+variable, initialize it to VI_FALSE; pass the address of the same local
+variable to any other calls you make to niScope_LockSession or
+niScope_UnlockSession in the same function.
 ''',
 },
             },
@@ -6594,7 +6594,7 @@ niScope\_UnlockSession in the same function.
 'documentation': {
 'description': '''
 Releases a lock that you acquired on an instrument session using
-niScope\_LockSession.
+niScope_LockSession.
 ''',
 },
     },
@@ -6607,7 +6607,7 @@ niScope\_LockSession.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6633,7 +6633,7 @@ this function to perform the following actions:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6656,7 +6656,7 @@ functions.
 'documentation': {
 'description': '''
 Specifies the function in which the error occurred. You can pass in a
-string no longer than MAX\_FUNCTION\_NAME\_SIZE. If you pass in a valid
+string no longer than MAX_FUNCTION_NAME_SIZE. If you pass in a valid
 string, this source is included in the **errorDescription** string. For
 example:
 
@@ -6673,7 +6673,7 @@ If you pass in NULL or an empty string, this parameter is ignored.
 'documentation': {
 'description': '''
 Returns the interpreted error code as a user readable message string;
-you must pass a ViChar array at least MAX\_ERROR\_DESCRIPTION bytes in
+you must pass a ViChar array at least MAX_ERROR_DESCRIPTION bytes in
 length.
 ''',
 },
@@ -6685,8 +6685,8 @@ Takes the error code returned by NI-SCOPE functions and returns the
 interpretation as a user-readable string.
 ''',
 'note': '''
-You can pass VI\_NULL as the instrument handle, which is useful to
-interpret errors after niScope\_init has failed.
+You can pass VI_NULL as the instrument handle, which is useful to
+interpret errors after niScope_init has failed.
 ''',
 },
     },
@@ -6699,7 +6699,7 @@ interpret errors after niScope\_init has failed.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6711,7 +6711,7 @@ particular instrument session.
 'documentation': {
 'description': '''
 Returns the error code for the session or execution thread. If you pass
-0 for the Buffer Size, you can pass VI\_NULL for this parameter.
+0 for the Buffer Size, you can pass VI_NULL for this parameter.
 ''',
 },
             },
@@ -6797,18 +6797,18 @@ the session.
 'description': '''
 Specify whether to perform an ID query.
 
-When you set this parameter to VI\_TRUE, NI-SCOPE verifies that the
+When you set this parameter to VI_TRUE, NI-SCOPE verifies that the
 device you initialize is a type that it supports.
 
-When you set this parameter to VI\_FALSE, the function initializes the
+When you set this parameter to VI_FALSE, the function initializes the
 device without performing an ID query.
 
 **Defined Values**
 
-| VI\_TRUE—Perform ID query
-| VI\_FALSE—Skip ID query
+| VI_TRUE—Perform ID query
+| VI_FALSE—Skip ID query
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
 },
             },
@@ -6822,10 +6822,10 @@ Specify whether to reset the device during the initialization process.
 
 **Defined Values**
 
-| VI\_TRUE—Reset device
-| VI\_FALSE—Do not reset device
+| VI_TRUE—Reset device
+| VI_FALSE—Do not reset device
 
-**Default Value**: VI\_TRUE
+**Default Value**: VI_TRUE
 ''',
 'note': '''
 For the NI 5112, repeatedly resetting the device may cause excessive
@@ -6855,9 +6855,9 @@ Performs the following initialization actions:
 -  Opens a session to the specific driver using the interface and
    address you specify in the **resourceName**
 -  Queries the instrument ID and checks that it is valid for NI-SCOPE,
-   if the **IDQuery** is set to VI\_TRUE
+   if the **IDQuery** is set to VI_TRUE
 -  Resets the digitizer to a known state, if **resetDevice** is set to
-   VI\_TRUE
+   VI_TRUE
 -  Sends initialization commands to set the instrument to the state
    necessary for the operation of the instrument driver
 -  Returns an instrument handle that you use to identify the instrument
@@ -6874,7 +6874,7 @@ Performs the following initialization actions:
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6897,7 +6897,7 @@ states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6910,7 +6910,7 @@ particular instrument session.
 'description': '''
 Returns the instrument driver software revision numbers in the form of a
 string; you must pass a ViChar array at least
-IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes in length.
+IVI_MAX_MESSAGE_BUF_SIZE bytes in length.
 ''',
 },
             },
@@ -6922,7 +6922,7 @@ IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes in length.
 'description': '''
 Returns the instrument firmware revision numbers in the form of a
 string; you must pass a ViChar array at least
-IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes in length.
+IVI_MAX_MESSAGE_BUF_SIZE bytes in length.
 ''',
 },
             },
@@ -6943,7 +6943,7 @@ firmware.
                 'type': 'ViSession',
 'documentation': {
 'description': '''
-The instrument handle you obtain from niScope\_init that identifies a
+The instrument handle you obtain from niScope_init that identifies a
 particular instrument session.
 ''',
 },
@@ -6972,7 +6972,7 @@ This control contains the value returned from the instrument self-test.
 'description': '''
 Returns the self-test response string from the instrument. Refer to the
 device-specific help topics for an explanation of the string contents;
-you must pass a ViChar array at least IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes
+you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
 in length.
 ''',
 },

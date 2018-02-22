@@ -5,7 +5,7 @@ niswitch.Session properties
 
 .. py:attribute:: analog_bus_sharing_enable
 
-    Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  attribute to VI_TRUE for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  VI_FALSE, which disables sharing of the analog bus.
+    Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
 
@@ -43,7 +43,7 @@ niswitch.Session properties
 
 .. py:attribute:: bandwidth
 
-    This channel-based attribute returns the bandwidth for the channel.
+    This channel-based property returns the bandwidth for the channel.
     The units are hertz.
 
 
@@ -81,7 +81,7 @@ niswitch.Session properties
 
 .. py:attribute:: cabled_module_scan_advanced_bus
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_scan_advanced_output` method instead.
 
     The following table lists the characteristics of this property.
 
@@ -105,7 +105,7 @@ niswitch.Session properties
 
 .. py:attribute:: cabled_module_trigger_bus
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` method instead.
 
     The following table lists the characteristics of this property.
 
@@ -129,9 +129,13 @@ niswitch.Session properties
 
 .. py:attribute:: cache
 
-    Specifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
-    The instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.
-    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
+    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
+    The instrument driver can choose always to cache or never to cache  particular properties regardless of the setting of this property.
+    The default value is True.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -179,7 +183,7 @@ niswitch.Session properties
 
 .. py:attribute:: characteristic_impedance
 
-    This channel-based attribute returns the characteristic impedance for the  channel.
+    This channel-based property returns the characteristic impedance for the  channel.
     The units are ohms.
 
 
@@ -217,8 +221,8 @@ niswitch.Session properties
 
 .. py:attribute:: continuous_scan
 
-    When a switch device is scanning, the swich can either stop scanning when  the end of the scan (VI_FALSE) or continue scanning from the top of the  scan list again (VI_TRUE).
-    Notice that if you set the scan to continuous (VI_TRUE), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
+    When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
+    Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
 
     The following table lists the characteristics of this property.
 
@@ -242,8 +246,8 @@ niswitch.Session properties
 
 .. py:attribute:: digital_filter_enable
 
-    This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (VI_TRUE) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
-    When Digital Filter is disabled (VI_FALSE), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
+    This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
+    When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
 
     The following table lists the characteristics of this property.
 
@@ -267,9 +271,13 @@ niswitch.Session properties
 
 .. py:attribute:: driver_setup
 
-    This attribute indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  niSwitch_InitWithOptions function, or through the IVI Configuration Utility.
-    If the user does not specify a Driver Setup string, this attribute returns an empty string.
+    This property indicates the Driver Setup string that the user  specified when initializing the driver.
+    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.InitWithOptions` method, or through the IVI Configuration Utility.
+    If the user does not specify a Driver Setup string, this property returns an empty string.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -413,10 +421,14 @@ niswitch.Session properties
 
 .. py:attribute:: interchange_check
 
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niSwitch_Connect, niSwitch_SetPath and niSwitch_InitiateScan functions.
-    The default value is VI_FALSE.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.
+    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  :py:meth:`niswitch.Session.connect`, :py:meth:`niswitch.Session.set_path` and :py:meth:`niswitch.Session._initiate_scan` methods.
+    The default value is False.
+    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call :py:meth:`niswitch.Session.GetNextInterchangeWarning` to extract interchange warnings.   Call the :py:meth:`niswitch.Session.ClearInterchangeWarnings` method to clear the list  of interchangeability warnings without reading them.
+    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when an property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -441,8 +453,8 @@ niswitch.Session properties
 .. py:attribute:: io_resource_descriptor
 
     Indicates the resource descriptor the driver  uses to identify the physical device.
-    If you initialize the driver with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource  descriptor, this attribute contains that value.
+    If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource  descriptor, this property contains that value.
 
     The following table lists the characteristics of this property.
 
@@ -466,9 +478,9 @@ niswitch.Session properties
 
 .. py:attribute:: is_configuration_channel
 
-    This channel-based attribute specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the niSwitch_Connect function.  Configuration channels are not available  for external connections.
-    Set this attribute to VI_TRUE to mark the channel as a configuration  channel.  Set this attribute to VI_FALSE to mark the channel as available  for external connections.
-    After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The niSwitch_Connect function  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
+    This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the :py:meth:`niswitch.Session.connect` method.  Configuration channels are not available  for external connections.
+    Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
+    After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
 
 
@@ -505,7 +517,7 @@ niswitch.Session properties
 
 .. py:attribute:: is_debounced
 
-    This attribute indicates whether the entire switch device has settled  since the last switching command.  A value of VI_TRUE indicates that all  signals going through the switch device are valid.
+    This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
 
     The following table lists the characteristics of this property.
 
@@ -529,7 +541,7 @@ niswitch.Session properties
 
 .. py:attribute:: is_scanning
 
-    If VI_TRUE, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If VI_FALSE, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
+    If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
 
     The following table lists the characteristics of this property.
 
@@ -553,7 +565,7 @@ niswitch.Session properties
 
 .. py:attribute:: is_source_channel
 
-    This channel-based attribute specifies whether you want to identify the  channel as a source channel.  Typically, you set this attribute to VI_TRUE  when you attach the channel to a power supply, a function generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The niSwitch_Connect function  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
+    This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
 
 
@@ -615,7 +627,11 @@ niswitch.Session properties
 .. py:attribute:: logical_name
 
     A string containing the logical name you specified when opening the  current IVI session.
-    You may pass a logical name to the niSwitch_init or  niSwitch_InitWithOptions functions.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+    You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.InitWithOptions` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -639,7 +655,7 @@ niswitch.Session properties
 
 .. py:attribute:: master_slave_scan_advanced_bus
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_scan_advanced_output` method instead.
 
     The following table lists the characteristics of this property.
 
@@ -663,7 +679,7 @@ niswitch.Session properties
 
 .. py:attribute:: master_slave_trigger_bus
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` method instead.
 
     The following table lists the characteristics of this property.
 
@@ -687,7 +703,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_ac_voltage
 
-    This channel-based attribute returns the maximum AC voltage the channel  can switch.
+    This channel-based property returns the maximum AC voltage the channel  can switch.
     The units are volts RMS.
 
 
@@ -725,7 +741,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_carry_ac_current
 
-    This channel-based attribute returns the maximum AC current the channel  can carry.
+    This channel-based property returns the maximum AC current the channel  can carry.
     The units are amperes RMS.
 
 
@@ -763,7 +779,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_carry_ac_power
 
-    This channel-based attribute returns the maximum AC power the channel can  carry.
+    This channel-based property returns the maximum AC power the channel can  carry.
     The units are volt-amperes.
 
 
@@ -801,7 +817,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_carry_dc_current
 
-    This channel-based attribute returns the maximum DC current the channel  can carry.
+    This channel-based property returns the maximum DC current the channel  can carry.
     The units are amperes.
 
 
@@ -839,7 +855,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_carry_dc_power
 
-    This channel-based attribute returns the maximum DC power the channel can  carry.
+    This channel-based property returns the maximum DC power the channel can  carry.
     The units are watts.
 
 
@@ -877,7 +893,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_dc_voltage
 
-    This channel-based attribute returns the maximum DC voltage the channel  can switch.
+    This channel-based property returns the maximum DC voltage the channel  can switch.
     The units are volts.
 
 
@@ -915,7 +931,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_switching_ac_current
 
-    This channel-based attribute returns the maximum AC current the channel  can switch.
+    This channel-based property returns the maximum AC current the channel  can switch.
     The units are amperes RMS.
 
 
@@ -953,7 +969,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_switching_ac_power
 
-    This channel-based attribute returns the maximum AC power the channel can  switch.
+    This channel-based property returns the maximum AC power the channel can  switch.
     The units are volt-amperes.
 
 
@@ -991,7 +1007,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_switching_dc_current
 
-    This channel-based attribute returns the maximum DC current the channel  can switch.
+    This channel-based property returns the maximum DC current the channel  can switch.
     The units are amperes.
 
 
@@ -1029,7 +1045,7 @@ niswitch.Session properties
 
 .. py:attribute:: max_switching_dc_power
 
-    This channel-based attribute returns the maximum DC power the channel can  switch.
+    This channel-based property returns the maximum DC power the channel can  switch.
     The units are watts.
 
 
@@ -1067,7 +1083,7 @@ niswitch.Session properties
 
 .. py:attribute:: number_of_relays
 
-    This attribute returns the number of relays.
+    This property returns the number of relays.
 
     The following table lists the characteristics of this property.
 
@@ -1091,8 +1107,8 @@ niswitch.Session properties
 
 .. py:attribute:: num_of_columns
 
-    This attribute returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
-    The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
+    This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
+    The :py:data:`niswitch.Session.wire_mode` property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
 
     The following table lists the characteristics of this property.
 
@@ -1116,8 +1132,8 @@ niswitch.Session properties
 
 .. py:attribute:: num_of_rows
 
-    This attribute returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
-    The NISWITCH_ATTR_WIRE_MODE attribute affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
+    This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
+    The :py:data:`niswitch.Session.wire_mode` property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
 
     The following table lists the characteristics of this property.
 
@@ -1141,7 +1157,7 @@ niswitch.Session properties
 
 .. py:attribute:: parsed_scan_list
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.
 
     The following table lists the characteristics of this property.
 
@@ -1166,7 +1182,7 @@ niswitch.Session properties
 .. py:attribute:: power_down_latching_relays_after_debounce
 
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
-    When Power Down Latching Relays After Debounce is enabled (VI_TRUE),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
+    When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
 
     The following table lists the characteristics of this property.
 
@@ -1190,8 +1206,12 @@ niswitch.Session properties
 
 .. py:attribute:: range_check
 
-    Specifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
-    The default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.
+    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver methods.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
+    The default value is True.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1215,8 +1235,12 @@ niswitch.Session properties
 
 .. py:attribute:: record_coercions
 
-    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call niSwitch_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
-    The default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to override this value.
+    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   You call :py:meth:`niswitch.Session.GetNextCoercionRecord` to extract and delete the oldest  coercion record from the list.
+    The default value is False.   Use the  :py:meth:`niswitch.Session.InitWithOptions` method to override this value.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1240,7 +1264,7 @@ niswitch.Session properties
 
 .. py:attribute:: scan_advanced_output
 
-    This attribute specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
+    This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
 
     The following table lists the characteristics of this property.
 
@@ -1288,7 +1312,7 @@ niswitch.Session properties
 
 .. py:attribute:: scan_delay
 
-    This attribute specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
+    This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
 
 
@@ -1317,7 +1341,7 @@ niswitch.Session properties
 
 .. py:attribute:: scan_list
 
-    This attribute contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The niSwitch_InitiateScan  function makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The :py:meth:`niswitch.Session._initiate_scan`  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
     To create a path between two channels, use the following character between  the two channel names:
     -> (a dash followed by a '>' sign)
@@ -1351,9 +1375,13 @@ niswitch.Session properties
 
 .. py:attribute:: scan_mode
 
-    This attribute specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this attribute specifies what happens to the  connection between CH1 and CH2.
-    If the value of this attribute is NISWITCH_VAL_NONE, the switch device  takes no action on existing paths.  If the value is  NISWITCH_VAL_BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is NISWITCH_VAL_BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
-    Most switch devices support only one of the possible values.  In such  cases, this attribute serves as an indicator of the device's behavior.
+    This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
+    If the value of this property is :py:data:`~niswitch.ScanMode.NONE`, the switch device  takes no action on existing paths.  If the value is  :py:data:`~niswitch.ScanMode.BREAK_BEFORE_MAKE`, the switch device breaks conflicting paths  before making new ones.  If the value is :py:data:`~niswitch.ScanMode.BREAK_AFTER_MAKE`,  the switch device breaks conflicting paths after making new ones.
+    Most switch devices support only one of the possible values.  In such  cases, this property serves as an indicator of the device's behavior.
+
+
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     The following table lists the characteristics of this property.
 
@@ -1377,7 +1405,7 @@ niswitch.Session properties
 
 .. py:attribute:: serial_number
 
-    This read-only attribute returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
+    This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
 
     The following table lists the characteristics of this property.
 
@@ -1401,7 +1429,7 @@ niswitch.Session properties
 
 .. py:attribute:: settling_time
 
-    This channel-based attribute returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
+    This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
 
 
@@ -1441,8 +1469,12 @@ niswitch.Session properties
 
 .. py:attribute:: simulate
 
-    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.
-    The default value is VI_FALSE.   Use the niSwitch_InitWithOptions  function to override this value.
+    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
+    The default value is False.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1610,7 +1642,7 @@ niswitch.Session properties
 
 .. py:attribute:: temperature
 
-    This attribute returns the temperature as read by the Switch module.     The units are degrees Celsius.
+    This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
 
     The following table lists the characteristics of this property.
 
@@ -1634,7 +1666,7 @@ niswitch.Session properties
 
 .. py:attribute:: trigger_input
 
-    This attribute specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
+    This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
 
     The following table lists the characteristics of this property.
 
@@ -1682,7 +1714,7 @@ niswitch.Session properties
 
 .. py:attribute:: trigger_mode
 
-    This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput and/or niSwitch_RouteScanAdvancedOutput  functions instead.
+    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` and/or :py:meth:`niswitch.Session.route_scan_advanced_output`  methods instead.
 
     The following table lists the characteristics of this property.
 
@@ -1706,8 +1738,8 @@ niswitch.Session properties
 
 .. py:attribute:: wire_mode
 
-    This attribute returns the wire mode of the switch device.
-    This attribute affects the values of the NISWITCH_ATTR_NUM_OF_ROWS and  NISWITCH_ATTR_NUM_OF_COLUMNS attributes.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
+    This property returns the wire mode of the switch device.
+    This property affects the values of the :py:data:`niswitch.Session.num_of_rows` and  :py:data:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
 
 
