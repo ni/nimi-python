@@ -408,16 +408,16 @@ def _fix_references(node, doc, cfg, make_link=False):
     del config['start_enum']
 
     # Several other standard replacements
-    doc = doc.replace('VI_FALSE', 'False')
-    doc = doc.replace('VI_TRUE', 'True')
-    doc = doc.replace('attribute', 'property')
-    doc = doc.replace('attributes', 'properties')
-    doc = doc.replace('Attribute', 'Property')
-    doc = doc.replace('Attributes', 'Properties')
-    doc = doc.replace('function', 'method')
-    doc = doc.replace('functions', 'methods')
-    doc = doc.replace('Function', 'Method')
-    doc = doc.replace('Functions', 'Methods')
+    doc = re.sub(r'\bVI_FALSE\b', 'False', doc)
+    doc = re.sub(r'\bVI_TRUE\b', 'True', doc)
+    doc = re.sub(r'\battribute\b', 'property', doc)
+    doc = re.sub(r'\battributes\b', 'properties', doc)
+    doc = re.sub(r'\bAttribute\b', 'Property', doc)
+    doc = re.sub(r'\bAttributes\b', 'Properties', doc)
+    doc = re.sub(r'\bfunction\b', 'method', doc)
+    doc = re.sub(r'\bfunctions\b', 'methods', doc)
+    doc = re.sub(r'\bFunction\b', 'Method', doc)
+    doc = re.sub(r'\bFunctions\b', 'Methods', doc)
 
     return doc
 
@@ -1175,9 +1175,9 @@ def test_get_function_rst_default():
 
     .. note:: The :py:data:`~nifake.Turtle.RAPHAEL` Turtles dont have an ID.
 
-    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this function.
+    .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this method.
 
-    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this function
+    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
 
     :param turtle_type:
 
@@ -1247,9 +1247,9 @@ def test_get_function_docstring_default():
 
 Note: The Turtle.RAPHAEL Turtles dont have an ID.
 
-Note: DO NOT call fetch_waveform after calling this function.
+Note: DO NOT call fetch_waveform after calling this method.
 
-Note: read_write_bool will have an incorrect value after this calling this function
+Note: read_write_bool will have an incorrect value after this calling this method
 
 Args:
     turtle_type (Turtle): Specifies the type of Turtle type
