@@ -1461,7 +1461,7 @@ niscope.Session properties
             - LabVIEW Property: **Fetch:Fetch Meas Num Samples**
             - C Attribute: **NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES**
 
-.. py:attribute:: fetch_num_records
+.. py:attribute:: _fetch_num_records
 
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
@@ -1486,7 +1486,7 @@ niscope.Session properties
             - LabVIEW Property: **Fetch:Fetch Number of Records**
             - C Attribute: **NISCOPE_ATTR_FETCH_NUM_RECORDS**
 
-.. py:attribute:: fetch_offset
+.. py:attribute:: _fetch_offset
 
     Offset in samples to start fetching data within each record. The offset is applied relative to  :py:data:`niscope.Session.fetch_relative_to`.The offset can be positive or negative.
     Default Value: 0
@@ -1511,7 +1511,7 @@ niscope.Session properties
             - LabVIEW Property: **Fetch:Fetch Offset**
             - C Attribute: **NISCOPE_ATTR_FETCH_OFFSET**
 
-.. py:attribute:: fetch_record_number
+.. py:attribute:: _fetch_record_number
 
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
@@ -1536,7 +1536,7 @@ niscope.Session properties
             - LabVIEW Property: **Fetch:Fetch Record Number**
             - C Attribute: **NISCOPE_ATTR_FETCH_RECORD_NUMBER**
 
-.. py:attribute:: fetch_relative_to
+.. py:attribute:: _fetch_relative_to
 
     Position to start fetching within one record.
     Default Value: :py:data:`~niscope.FetchRelativeTo.PRETRIGGER`

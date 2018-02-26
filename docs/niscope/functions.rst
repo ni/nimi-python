@@ -1301,7 +1301,7 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
 
     Returns the waveform from a previously initiated acquisition that the
                     digitizer acquires for the specified channel. This method returns
@@ -1322,7 +1322,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
 
 
     :param num_samples:
@@ -1356,7 +1356,7 @@ niscope.Session methods
         
 
 
-    :type wfm: array.array("d")
+    :type wfm: list of float
     :param timeout:
 
 
@@ -1366,6 +1366,44 @@ niscope.Session methods
 
 
     :type timeout: float
+    :param relative_to:
+
+
+        Position to start fetching within one record.
+
+        
+
+
+    :type relative_to: array.array("l")
+    :param offset:
+
+
+        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+
+        
+
+
+    :type offset: int
+    :param record_number:
+
+
+        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+
+        
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+    :type record_number: int
+    :param num_records:
+
+
+        Number of records to fetch. Use -1 to fetch all configured records.
+
+        
+
+
+    :type num_records: int
 
     :rtype: list of WaveformInfo
     :return:

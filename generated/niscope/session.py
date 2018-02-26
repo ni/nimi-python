@@ -573,25 +573,25 @@ class _SessionBase(object):
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
     Default Value: -1
     '''
-    fetch_num_records = attributes.AttributeViInt32(1150080)
+    _fetch_num_records = attributes.AttributeViInt32(1150080)
     '''Type: int
 
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
     '''
-    fetch_offset = attributes.AttributeViInt32(1150078)
+    _fetch_offset = attributes.AttributeViInt32(1150078)
     '''Type: int
 
     Offset in samples to start fetching data within each record. The offset is applied relative to  fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
-    fetch_record_number = attributes.AttributeViInt32(1150079)
+    _fetch_record_number = attributes.AttributeViInt32(1150079)
     '''Type: int
 
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
     '''
-    fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
+    _fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
     '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
@@ -1976,12 +1976,12 @@ class _SessionBase(object):
         '''
         import sys
 
-        # Set attributes
+        # Set the fetch attributes
         with _NoChannel(session=self):
-            self.fetch_relative_to = relative_to
-            self.fetch_offset = offset
-            self.fetch_record_number = record_number
-            self.fetch_num_records = num_records
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = num_records
             if num_samples is None:
                 num_samples = self.horz_record_length
 
@@ -2612,7 +2612,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0), relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2630,12 +2630,12 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
-            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            wfm (list of float): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
                                         Types supported are
 
@@ -2652,6 +2652,17 @@ class _SessionBase(object):
                                             wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
 
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+
+            relative_to (array.array("l")): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
 
         Returns:
@@ -2676,6 +2687,13 @@ class _SessionBase(object):
 
         '''
         import numpy
+
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = num_records
 
         num_samples = int(len(wfm) / self._actual_num_wfms())
 
