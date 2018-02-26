@@ -349,6 +349,9 @@ def add_all_function_metadata(functions, config):
 def _add_python_name(a, attributes):
     '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
     n = attributes[a]['name'].lower()
+    if attributes[a]['codegen_method'] == 'private':
+        n = '_' + n
+
     if attributes[a]['name'][0].isdigit():
         n = '_' + n
     attributes[a]['python_name'] = n
