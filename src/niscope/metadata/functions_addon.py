@@ -395,6 +395,43 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'FetchRelativeTo',
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Position to start fetching within one record.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'offset',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'recordNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': -1,
+                'name': 'numRecords',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
+                },
+            },
+            {
+                'direction': 'in',
                 'name': 'Wfm',
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
