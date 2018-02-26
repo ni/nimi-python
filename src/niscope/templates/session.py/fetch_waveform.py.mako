@@ -12,6 +12,13 @@
         '''
         import numpy
 
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = num_records
+
         num_samples = int(len(wfm) / self._actual_num_wfms())
 
         if wfm.dtype == numpy.float64:
