@@ -139,13 +139,13 @@ def test_self_test(session):
 
 
 def test_reset(session):
-    deault_fetch_relative_to = session.fetch_relative_to
+    deault_fetch_relative_to = session._fetch_relative_to
     assert deault_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
-    session.fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
-    non_default_acqusition_type = session.fetch_relative_to
+    session._fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
+    non_default_acqusition_type = session._fetch_relative_to
     assert non_default_acqusition_type == niscope.FetchRelativeTo.READ_POINTER
     session.reset()
-    assert session.fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
+    assert session._fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
 
 
 def test_reset_device(session):
