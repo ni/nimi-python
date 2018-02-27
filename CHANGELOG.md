@@ -39,7 +39,12 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * `niscope.fetch()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info 
+        * `niscope.fetch()` and `niscope.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * Following properties are now private (added as parameters to fetch calls):
+            * `fetch_relative_to`
+            * `fetch_offset`
+            * `fetch_record_number`
+            * `fetch_num_records`
     * #### Removed
 
 ## 0.7.0 - 2018-02-20
