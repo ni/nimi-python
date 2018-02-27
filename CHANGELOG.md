@@ -112,7 +112,7 @@ All notable changes to this project will be documented in this file.
         * Repeated capablilites - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion:
             * `channel` repeated capability
     * #### Changed
-        * `niscope.Session()` no longer takes id_query parameter
+        * `niscope.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
         * The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
             * `configure_trigger_digital()`
             * `configure_trigger_edge()`
