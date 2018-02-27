@@ -308,7 +308,7 @@ def filter_codegen_attributes(attributes):
 
 def filter_codegen_attributes_public_only(attributes):
     '''Returns attribute metadata only for those attributes to be included in codegen'''
-    return {k: v for k, v in attributes.items() if v['codegen_method'] == 'yes'}
+    return {k: v for k, v in attributes.items() if v['codegen_method'] == 'public'}
 
 
 def filter_codegen_enums(enums):
