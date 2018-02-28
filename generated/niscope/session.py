@@ -1914,7 +1914,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, timeout=datetime.timedelta(seconds=5.0), num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1):
+    def fetch(self, timeout=datetime.timedelta(seconds=5.0), num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1932,7 +1932,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
         Args:
             timeout (datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
@@ -1981,7 +1981,7 @@ class _SessionBase(object):
             self._fetch_relative_to = relative_to
             self._fetch_offset = offset
             self._fetch_record_number = record_number
-            self._fetch_num_records = num_records
+            self._fetch_num_records = -1 if num_records is None else num_records
             if num_samples is None:
                 num_samples = self.horz_record_length
 
@@ -2612,7 +2612,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0), relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1):
+    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0), relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2630,7 +2630,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
@@ -2693,7 +2693,7 @@ class _SessionBase(object):
             self._fetch_relative_to = relative_to
             self._fetch_offset = offset
             self._fetch_record_number = record_number
-            self._fetch_num_records = num_records
+            self._fetch_num_records =  -1 if num_records is None else num_records
 
         num_samples = int(len(wfm) / self._actual_num_wfms())
 

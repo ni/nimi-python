@@ -1191,7 +1191,7 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+.. py:method:: fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
     Returns the waveform from a previously initiated acquisition that the
                     digitizer acquires for the specified channel. This method returns
@@ -1212,7 +1212,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+            session.channels['0,1'].fetch(timeout='datetime.timedelta(seconds=5.0)', num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
 
     :param timeout:
@@ -1301,7 +1301,7 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
     Returns the waveform from a previously initiated acquisition that the
                     digitizer acquires for the specified channel. This method returns
@@ -1322,7 +1322,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=-1)
+            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)', relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None)
 
 
     :param num_samples:
