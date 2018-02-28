@@ -309,7 +309,7 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'default_value': -1,
+                'default_value': None,
                 'name': 'numRecords',
                 'type': 'ViInt32',
                 'documentation': {
@@ -423,7 +423,7 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'default_value': -1,
+                'default_value': None,
                 'name': 'numRecords',
                 'type': 'ViInt32',
                 'documentation': {

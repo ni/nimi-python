@@ -17,7 +17,7 @@
             self._fetch_relative_to = relative_to
             self._fetch_offset = offset
             self._fetch_record_number = record_number
-            self._fetch_num_records = num_records
+            self._fetch_num_records = -1 if num_records is None else num_records
             if num_samples is None:
                 num_samples = self.horz_record_length
 
