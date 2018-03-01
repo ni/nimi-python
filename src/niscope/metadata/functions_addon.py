@@ -229,6 +229,8 @@ functions_converters = {
                                                                    'python_type': 'datetime.timedelta', }, }, },
     'FetchMeasurementStats':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'datetime.timedelta', }, }, },
+    'FancyFetch':                           { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
     'Read':                                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'datetime.timedelta', }, }, },
     'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
@@ -239,7 +241,7 @@ functions_converters = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
-    'FetchDouble': {
+    'FancyFetch': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
         'parameters': [
@@ -261,15 +263,7 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'name': 'Timeout',
-                'type': 'ViReal64',
-                'default_value': 'datetime.timedelta(seconds=5.0)',
-                'documentation': {
-                    'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
-                },
-            },
-            {
-                'direction': 'in',
+                'default_value': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
@@ -277,12 +271,49 @@ functions_additional_functions = {
                 },
             },
             {
-                'direction': 'out',
-                'name': 'Wfm',
-                'type': 'ViReal64[]',
-                'default_value': None, 
+                'direction': 'in',
+                'enum': 'FetchRelativeTo',
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Returns an array whose length is the **numSamples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.',
+                    'description': 'Position to start fetching within one record.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'offset',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'recordNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': None,
+                'name': 'numRecords',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
+                'documentation': {
+                    'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
                 },
             },
             {
@@ -291,36 +322,38 @@ functions_additional_functions = {
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-                    Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classed with the following timing and scaling information about each waveform:
 
-                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                    -  **x_increment** the time between points in the acquired waveform in seconds
-                    -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+-  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+-  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+-  **x_increment** the time between points in the acquired waveform in seconds
+-  **actual_samples** the actual number of samples fetched and placed in the waveform array
+-  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+-  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    Call niScope_ActualNumWfms to determine the size of this array.''',
+- **wfm** waveform array whose length is the **numSamples**
+
+Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-                Returns the waveform from a previously initiated acquisition that the
-                digitizer acquires for the specified channel. This function returns
-                scaled voltage waveforms.
+Returns the waveform from a previously initiated acquisition that the
+digitizer acquires for the specified channel. This function returns
+scaled voltage waveforms.
 
-                This function may return multiple waveforms depending on the number of
-                channels, the acquisition type, and the number of records you specify.''',
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.''',
             'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
@@ -346,6 +379,66 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
+                'name': 'Wfm',
+                'type': 'ViReal64[]', # Type doesn't really matter for this function
+                'documentation': {
+                    'description': '''
+numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
+
+Types supported are
+
+- `numpy.float64`
+- `numpy.int8`
+- `numpy.in16`
+- `numpy.int32`
+
+Example:
+
+.. code-block:: python
+
+    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'FetchRelativeTo',
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Position to start fetching within one record.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'offset',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'recordNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': None,
+                'name': 'numRecords',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
+                },
+            },
+            {
+                'direction': 'in',
                 'name': 'Timeout',
                 'type': 'ViReal64',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
@@ -354,72 +447,41 @@ functions_additional_functions = {
                 },
             },
             {
-                'direction': 'in',
-                'name': 'numSamples',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
-                },
-            },
-            {
-                'direction': 'in',
-                'name': 'Wfm',
-                'type': 'ViReal64[]', # Type doesn't really matter for this function
-                'documentation': {
-                    'description': '''
-                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
-
-                        Types supported are
-
-                        - `numpy.float64`
-                        - `numpy.int8`
-                        - `numpy.in16`
-                        - `numpy.int32`
-
-                        Example:
-
-                        .. code-block:: python
-
-                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
-                },
-            },
-            {
                 'direction': 'out',
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-                    Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classed with the following timing and scaling information about each waveform:
 
-                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                    -  **x_increment** the time between points in the acquired waveform in seconds
-                    -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+-  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+-  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+-  **x_increment** the time between points in the acquired waveform in seconds
+-  **actual_samples** the actual number of samples fetched and placed in the waveform array
+-  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+-  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    Call niScope_ActualNumWfms to determine the size of this array.''',
+Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-                Returns the waveform from a previously initiated acquisition that the
-                digitizer acquires for the specified channel. This function returns
-                scaled voltage waveforms.
+Returns the waveform from a previously initiated acquisition that the
+digitizer acquires for the specified channel. This function returns
+scaled voltage waveforms.
 
-                This function may return multiple waveforms depending on the number of
-                channels, the acquisition type, and the number of records you specify.''',
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.''',
             'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
@@ -427,37 +489,30 @@ functions_additional_functions = {
 
 # Override the 'python' name for some functions.
 functions_python_name = {
-    'FetchDispatcher':            { 'python_name': 'fetch',                           },
-    'FetchDouble':                { 'python_name': 'fetch',                           },
+    'FetchDispatcher':            { 'python_name': 'fetch', },
+    'FancyFetch':                 { 'python_name': 'fetch', },
 }
 
 functions_method_templates = {
-    'FetchBinary8':                                  { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+    'FetchBinary8':    { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchBinary16':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+    'FetchBinary16':   { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchBinary32':                                 { 'method_templates': [
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+    'FetchBinary32':   { 'method_templates': [
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'Fetch':                { 'method_templates': [
+    'Fetch':           { 'method_templates': [
         { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
-        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into', },
+        { 'session_filename': 'numpy_read_method', 'method_python_name_suffix': '_into_numpy', },
     ], },
-    'FetchDispatcher':                               { 'method_templates': [
+    'FetchDispatcher': { 'method_templates': [
         { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_into', },
     ], },
-    'FetchDouble':                                   { 'method_templates': [
-        { 'session_filename': 'fetch_double', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    'FancyFetch':      { 'method_templates': [
+        { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
-}
-
-# We don't want the size parameter to be used in the public api for fetch
-# We do not hide them for the other _into functions since we want to be able
-#  to calculate the size in the dispatcher function
-functions_into_size_params = {
-    'FetchDispatcher':                               { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
 }
 
 functions_numpy = {
@@ -465,7 +520,7 @@ functions_numpy = {
     'FetchBinary16':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'FetchBinary32':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'Fetch':                                         { 'parameters': { 4: { 'numpy': True, }, }, },
-    'FetchDispatcher':                               { 'parameters': { 4: { 'numpy': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
 # Parameter that need to be array.array
@@ -474,7 +529,7 @@ functions_array = {
     'FetchBinary16':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
     'FetchBinary32':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
     'Fetch':                                         { 'parameters': { 4: { 'use_array': True, }, }, },
-    'FetchDispatcher':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 2: { 'use_array': True, }, }, },
     'Read':                                          { 'parameters': { 4: { 'use_array': True, }, }, },
     'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
 }

@@ -73,6 +73,21 @@ class _RepeatedCapabilities(object):
         return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
+# This is a very simple context manager we can use when we need to set/get attributes
+# or call functions from _SessionBase that require no channels. It is tied to the specific
+# implementation of _SessionBase and how repeated capabilities are handled.
+class _NoChannel(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        self._repeated_capability_cache = self._session._repeated_capability
+        self._session._repeated_capability = ''
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session._repeated_capability = self._repeated_capability_cache
+
+
 class _SessionBase(object):
     '''Base class for all NI-SCOPE sessions.'''
 
@@ -558,25 +573,25 @@ class _SessionBase(object):
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
     Default Value: -1
     '''
-    fetch_num_records = attributes.AttributeViInt32(1150080)
+    _fetch_num_records = attributes.AttributeViInt32(1150080)
     '''Type: int
 
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
     '''
-    fetch_offset = attributes.AttributeViInt32(1150078)
+    _fetch_offset = attributes.AttributeViInt32(1150078)
     '''Type: int
 
     Offset in samples to start fetching data within each record. The offset is applied relative to  fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
-    fetch_record_number = attributes.AttributeViInt32(1150079)
+    _fetch_record_number = attributes.AttributeViInt32(1150079)
     '''Type: int
 
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
     '''
-    fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
+    _fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
     '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
@@ -1899,6 +1914,96 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def fetch(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
+        '''fetch
+
+        Returns the waveform from a previously initiated acquisition that the
+        digitizer acquires for the specified channel. This method returns
+        scaled voltage waveforms.
+
+        This method may return multiple waveforms depending on the number of
+        channels, the acquisition type, and the number of records you specify.
+
+        Note: Some functionality, such as time stamping, is not supported in all digitizers.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
+
+        Args:
+            num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
+
+            timeout (float): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+
+
+        Returns:
+            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
+
+                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                -  **x_increment** the time between points in the acquired waveform in seconds
+                -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+
+                    .. math::
+
+                        voltage = binary data * gain factor + offset
+
+                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+
+                    .. math::
+
+                        voltage = binary data * gain factor + offset
+
+                - **wfm** waveform array whose length is the **numSamples**
+
+                Call _actual_num_wfms to determine the size of this array.
+
+        '''
+        import sys
+
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = -1 if num_records is None else num_records
+            if num_samples is None:
+                num_samples = self.horz_record_length
+
+        wfm, wfm_info = self._fetch(num_samples, timeout)
+
+        if sys.version_info.major >= 3:
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            mv = memoryview(wfm)
+
+        for i in range(len(wfm_info)):
+            start = i * num_samples
+            end = start + num_samples
+            if sys.version_info.major >= 3:
+                wfm_info[i].wfm = mv[start:end]
+            else:
+                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
+                wfm_info[i].wfm = array.array('d', wfm[start:end])
+
+        return wfm_info
+
     def _fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
@@ -2000,7 +2105,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2128,7 +2233,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary16_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary16_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2254,7 +2359,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary32_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary32_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2380,7 +2485,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary8_into(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary8_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2506,15 +2611,15 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def fetch_into(self, wfm, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
-                        digitizer acquires for the specified channel. This method returns
-                        scaled voltage waveforms.
+        digitizer acquires for the specified channel. This method returns
+        scaled voltage waveforms.
 
-                        This method may return multiple waveforms depending on the number of
-                        channels, the acquisition type, and the number of records you specify.
+        This method may return multiple waveforms depending on the number of
+        channels, the acquisition type, and the number of records you specify.
 
         Note: Some functionality, such as time stamping, is not supported in all digitizers.
 
@@ -2524,26 +2629,35 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
-
             wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
-                                        Types supported are
+                Types supported are
 
-                                        - `numpy.float64`
-                                        - `numpy.int8`
-                                        - `numpy.in16`
-                                        - `numpy.int32`
+                - `numpy.float64`
+                - `numpy.int8`
+                - `numpy.in16`
+                - `numpy.int32`
 
-                                        Example:
+                Example:
 
-                                        .. code-block:: python
+                .. code-block:: python
 
-                                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+                    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
             timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
@@ -2551,89 +2665,46 @@ class _SessionBase(object):
         Returns:
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
-                                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                    -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                -  **x_increment** the time between points in the acquired waveform in seconds
+                -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                                        .. math::
+                    .. math::
 
-                                            voltage = binary data * gain factor + offset
+                        voltage = binary data * gain factor + offset
 
-                                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                                        .. math::
+                    .. math::
 
-                                            voltage = binary data * gain factor + offset
+                        voltage = binary data * gain factor + offset
 
-                                    Call _actual_num_wfms to determine the size of this array.
+                Call _actual_num_wfms to determine the size of this array.
 
         '''
         import numpy
 
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = -1 if num_records is None else num_records
+
         num_samples = int(len(wfm) / self._actual_num_wfms())
 
         if wfm.dtype == numpy.float64:
-            return self._fetch_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            return self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            return self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            return self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            return self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
-
-    def fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
-        '''fetch
-
-        Returns the waveform from a previously initiated acquisition that the
-                        digitizer acquires for the specified channel. This method returns
-                        scaled voltage waveforms.
-
-                        This method may return multiple waveforms depending on the number of
-                        channels, the acquisition type, and the number of records you specify.
-
-        Note: Some functionality, such as time stamping, is not supported in all digitizers.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
-
-        Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
-
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
-
-
-        Returns:
-            wfm (list of float): Returns an array whose length is the **numSamples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
-
-            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
-
-                                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                    -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
-
-                                        .. math::
-
-                                            voltage = binary data * gain factor + offset
-
-                                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-                                        .. math::
-
-                                            voltage = binary data * gain factor + offset
-
-                                    Call _actual_num_wfms to determine the size of this array.
-
-        '''
-        return self._fetch(num_samples, timeout)
 
     def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement

@@ -150,6 +150,10 @@ attributes_codegen_method = {
     1150345: { "codegen_method": "no" },  # P2P_FIFO_ENDPOINT_COUNT - P2P Attribute
     1150354: { "codegen_method": "no" },  # P2P_ONBOARD_MEMORY_ENABLED - P2P Attribute
     1150380: { "codegen_method": "no" },  # SAMPLES_TRANSFERRED_PER_RECORD - P2P Attribute
+    1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
+    1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
+    1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
+    1150080: { "codegen_method": "private" },  # FETCH_NUM_RECORDS - Fetch attribute
 }
 
 

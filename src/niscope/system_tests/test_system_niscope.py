@@ -44,9 +44,24 @@ def test_fetch(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm, wfm_infos = session.channels[test_channels].fetch(test_record_length)
-    assert len(wfm) == test_num_channels * test_record_length
+        wfm_infos = session.channels[test_channels].fetch(num_samples=test_record_length)
     assert len(wfm_infos) == test_num_channels
+    for i in range(len(wfm_infos)):
+        assert len(wfm_infos[i].wfm) == test_record_length
+
+
+def test_fetch_defaults(session):
+    test_voltage = 1.0
+    test_record_length = 2000
+    test_channels = range(2)
+    test_num_channels = 2
+    session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    with session.initiate():
+        wfm_infos = session.channels[test_channels].fetch()
+    assert len(wfm_infos) == test_num_channels
+    for i in range(len(wfm_infos)):
+        assert len(wfm_infos[i].wfm) == test_record_length
 
 
 def test_fetch_binary8_into(session):
@@ -124,13 +139,13 @@ def test_self_test(session):
 
 
 def test_reset(session):
-    deault_fetch_relative_to = session.fetch_relative_to
+    deault_fetch_relative_to = session._fetch_relative_to
     assert deault_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
-    session.fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
-    non_default_acqusition_type = session.fetch_relative_to
+    session._fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
+    non_default_acqusition_type = session._fetch_relative_to
     assert non_default_acqusition_type == niscope.FetchRelativeTo.READ_POINTER
     session.reset()
-    assert session.fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
+    assert session._fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
 
 
 def test_reset_device(session):
@@ -189,14 +204,14 @@ def test_fetch_read_measurement(session):
     active_channel = session.channels['0']
     read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
     expected_measurement = 10000
-    in_range = abs(read_measurement - expected_measurement) <= max(1e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
+    in_range = abs(read_measurement - expected_measurement) <= max(2e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(read_measurement, expected_measurement)
     fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
-    in_range = abs(fetch_measurement - expected_measurement) <= max(1e-02 * max(abs(fetch_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
+    in_range = abs(fetch_measurement - expected_measurement) <= max(2e-02 * max(abs(fetch_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(fetch_measurement, expected_measurement)
     measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
-    in_range = abs(measurement_stats - expected_measurement) <= max(1e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True
+    in_range = abs(measurement_stats - expected_measurement) <= max(2e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(measurement_stats, expected_measurement)
 
 
 def test_configure_chan_characteristics(session):

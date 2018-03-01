@@ -5,7 +5,7 @@
     module_name = config['module_name']
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = helper.filter_codegen_attributes(config['attributes'])
+    attributes = helper.filter_codegen_attributes_public_only(config['attributes'])
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 
