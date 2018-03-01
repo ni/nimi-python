@@ -1191,14 +1191,14 @@ niscope.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+.. py:method:: fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
-                    digitizer acquires for the specified channel. This method returns
-                    scaled voltage waveforms.
+    digitizer acquires for the specified channel. This method returns
+    scaled voltage waveforms.
 
-                    This method may return multiple waveforms depending on the number of
-                    channels, the acquisition type, and the number of records you specify.
+    This method may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
 
     
 
@@ -1212,7 +1212,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
 
     :param num_samples:
@@ -1223,63 +1223,92 @@ niscope.Session methods
         
 
 
-    :type num_samples: int
+    :type num_samples: datetime.timedelta
+    :param relative_to:
+
+
+        Position to start fetching within one record.
+
+        
+
+
+    :type relative_to: :py:data:`niscope.FetchRelativeTo`
+    :param offset:
+
+
+        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+
+        
+
+
+    :type offset: int
+    :param record_number:
+
+
+        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+
+        
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+    :type record_number: int
+    :param num_records:
+
+
+        Number of records to fetch. Use -1 to fetch all configured records.
+
+        
+
+
+    :type num_records: int
     :param timeout:
 
 
-        The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+        The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
         
 
 
     :type timeout: float
 
-    :rtype: tuple (wfm, wfm_info)
-
-        WHERE
-
-        wfm (list of float): 
-
-
-            Returns an array whose length is the **numSamples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
-
-            
-
-
-        wfm_info (list of WaveformInfo): 
+    :rtype: list of WaveformInfo
+    :return:
 
 
             Returns an array of classed with the following timing and scaling information about each waveform:
 
-                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+            -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+            -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+            -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+            -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                                    .. math::
+                .. math::
 
-                                        voltage = binary data * gain factor + offset
+                    voltage = binary data * gain factor + offset
 
-                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+            -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                                    .. math::
+                .. math::
 
-                                        voltage = binary data * gain factor + offset
+                    voltage = binary data * gain factor + offset
 
-                                Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
+            - **wfm** waveform array whose length is the **numSamples**
+
+            Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 
             
 
 
 
-.. py:method:: fetch_into(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+.. py:method:: fetch_into(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
-                    digitizer acquires for the specified channel. This method returns
-                    scaled voltage waveforms.
+    digitizer acquires for the specified channel. This method returns
+    scaled voltage waveforms.
 
-                    This method may return multiple waveforms depending on the number of
-                    channels, the acquisition type, and the number of records you specify.
+    This method may return multiple waveforms depending on the number of
+    channels, the acquisition type, and the number of records you specify.
 
     
 
@@ -1293,41 +1322,70 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(num_samples, wfm, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
 
-    :param num_samples:
-
-
-        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
-
-        
-
-
-    :type num_samples: int
     :param wfm:
 
 
         numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
 
-                                Types supported are
+        Types supported are
 
-                                - `numpy.float64`
-                                - `numpy.int8`
-                                - `numpy.in16`
-                                - `numpy.int32`
+        - `numpy.float64`
+        - `numpy.int8`
+        - `numpy.in16`
+        - `numpy.int32`
 
-                                Example:
+        Example:
 
-                                .. code-block:: python
+        .. code-block:: python
 
-                                    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                                    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
 
         
 
 
     :type wfm: array.array("d")
+    :param relative_to:
+
+
+        Position to start fetching within one record.
+
+        
+
+
+    :type relative_to: :py:data:`niscope.FetchRelativeTo`
+    :param offset:
+
+
+        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+
+        
+
+
+    :type offset: int
+    :param record_number:
+
+
+        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+
+        
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+    :type record_number: int
+    :param num_records:
+
+
+        Number of records to fetch. Use -1 to fetch all configured records.
+
+        
+
+
+    :type num_records: int
     :param timeout:
 
 
@@ -1344,22 +1402,22 @@ niscope.Session methods
 
             Returns an array of classed with the following timing and scaling information about each waveform:
 
-                                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+            -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+            -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+            -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+            -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                                    .. math::
+                .. math::
 
-                                        voltage = binary data * gain factor + offset
+                    voltage = binary data * gain factor + offset
 
-                                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+            -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                                    .. math::
+                .. math::
 
-                                        voltage = binary data * gain factor + offset
+                    voltage = binary data * gain factor + offset
 
-                                Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
+            Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 
             
 
