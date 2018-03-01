@@ -23,21 +23,19 @@
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
-        if sys.version_info.major < 3:
-            # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-            # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-            for i in range(len(wfm_info)):
-                start = i * num_samples
-                end = start + num_samples
-                wfm_info[i].wfm = array.array('d', wfm[start:end])
-        else:
+        if sys.version_info.major >= 3:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
             mv = memoryview(wfm)
 
-            for i in range(len(wfm_info)):
-                start = i * num_samples
-                end = start + num_samples
+        for i in range(len(wfm_info)):
+            start = i * num_samples
+            end = start + num_samples
+            if sys.version_info.major >= 3:
                 wfm_info[i].wfm = mv[start:end]
+            else:
+                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
+                wfm_info[i].wfm = array.array('d', wfm[start:end])
 
         return wfm_info
 
