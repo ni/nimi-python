@@ -1294,7 +1294,7 @@ niscope.Session methods
 
                     voltage = binary data * gain factor + offset
 
-            - **wfm** waveform array whose length is the **numSamples**
+            -  **wfm** waveform array whose length is the **numSamples**
 
             Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 
@@ -1418,6 +1418,10 @@ niscope.Session methods
                 .. math::
 
                     voltage = binary data * gain factor + offset
+
+            -  **wfm** waveform array whose length is the **numSamples**
+
+                .. note:: **wfm** is not added when using Python 2
 
             Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 
