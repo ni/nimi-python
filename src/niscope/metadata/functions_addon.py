@@ -340,7 +340,7 @@ Returns an array of classed with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **wfm** waveform array whose length is the **numSamples**
+-  **wfm** waveform array whose length is the **numSamples**
 
 Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
@@ -469,6 +469,10 @@ Returns an array of classed with the following timing and scaling information ab
     .. math::
 
         voltage = binary data * gain factor + offset
+
+-  **wfm** waveform array whose length is the **numSamples**
+
+    .. note:: **wfm** is not added when using Python 2
 
 Call niScope_ActualNumWfms to determine the size of this array.''',
                 },

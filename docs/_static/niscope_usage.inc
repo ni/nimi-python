@@ -93,7 +93,7 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
         - etc.
 
 
-.. note:: Unlike the normal `fetch()` the waveform_infos objects do not include the waveform for that record. Instead, samples are in the waveform passed into the function using the following layout:
+.. note:: When using Python 2, the waveform_infos objects do not include the waveform for that record. Instead, samples are in the waveform passed into the function using the following layout:
 
     - index 0 = record 0, channel 0
     - index *x* = record 0, channel 1
