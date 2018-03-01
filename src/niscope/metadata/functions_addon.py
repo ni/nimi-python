@@ -263,15 +263,6 @@ functions_additional_functions = {
             },
             {
                 'direction': 'in',
-                'name': 'Timeout',
-                'type': 'ViReal64',
-                'default_value': 'datetime.timedelta(seconds=5.0)',
-                'documentation': {
-                    'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
-                },
-            },
-            {
-                'direction': 'in',
                 'default_value': None,
                 'name': 'numSamples',
                 'type': 'ViInt32',
@@ -317,42 +308,51 @@ functions_additional_functions = {
                 },
             },
             {
+                'direction': 'in',
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
+                'documentation': {
+                    'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
+                },
+            },
+            {
                 'direction': 'out',
                 'name': 'wfmInfo',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-                    Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classed with the following timing and scaling information about each waveform:
 
-                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                    -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+-  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+-  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+-  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+-  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+-  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    - **wfm** waveform array whose length is the **numSamples**
+- **wfm** waveform array whose length is the **numSamples**
 
-                    Call niScope_ActualNumWfms to determine the size of this array.''',
+Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-                Returns the waveform from a previously initiated acquisition that the
-                digitizer acquires for the specified channel. This function returns
-                scaled voltage waveforms.
+Returns the waveform from a previously initiated acquisition that the
+digitizer acquires for the specified channel. This function returns
+scaled voltage waveforms.
 
-                This function may return multiple waveforms depending on the number of
-                channels, the acquisition type, and the number of records you specify.''',
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.''',
             'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
@@ -374,15 +374,6 @@ functions_additional_functions = {
                 'type': 'ViChar[]',
                 'documentation': {
                     'description': 'The channel to configure.',
-                },
-            },
-            {
-                'direction': 'in',
-                'name': 'Timeout',
-                'type': 'ViReal64',
-                'default_value': 'datetime.timedelta(seconds=5.0)',
-                'documentation': {
-                    'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
             },
             {
@@ -436,21 +427,30 @@ functions_additional_functions = {
                 'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
                     'description': '''
-                        numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
+numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
 
-                        Types supported are
+Types supported are
 
-                        - `numpy.float64`
-                        - `numpy.int8`
-                        - `numpy.in16`
-                        - `numpy.int32`
+- `numpy.float64`
+- `numpy.int8`
+- `numpy.in16`
+- `numpy.int32`
 
-                        Example:
+Example:
 
-                        .. code-block:: python
+.. code-block:: python
 
-                            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
+    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
+                'documentation': {
+                    'description': 'The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.',
                 },
             },
             {
@@ -459,35 +459,35 @@ functions_additional_functions = {
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-                    Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classed with the following timing and scaling information about each waveform:
 
-                    -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                    -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                    -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                    -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+-  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
+-  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+-  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+-  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+-  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
 
-                        .. math::
+    .. math::
 
-                            voltage = binary data * gain factor + offset
+        voltage = binary data * gain factor + offset
 
-                    Call niScope_ActualNumWfms to determine the size of this array.''',
+Call niScope_ActualNumWfms to determine the size of this array.''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-                Returns the waveform from a previously initiated acquisition that the
-                digitizer acquires for the specified channel. This function returns
-                scaled voltage waveforms.
+Returns the waveform from a previously initiated acquisition that the
+digitizer acquires for the specified channel. This function returns
+scaled voltage waveforms.
 
-                This function may return multiple waveforms depending on the number of
-                channels, the acquisition type, and the number of records you specify.''',
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.''',
             'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
