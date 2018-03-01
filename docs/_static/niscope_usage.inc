@@ -44,7 +44,7 @@ The waveform returned from `fetch <http://nimi-python.readthedocs.io/en/master/n
         - etc.
 
 
-If you need more performance, need to work with `SciPy <https://www.scipy.org/>`_, or are concerned about memory usage, you can use the `fetch_into()` method instead of `fetch()`. This
+If you need more performance or need to work with `SciPy <https://www.scipy.org/>`_, you can use the `fetch_into()` method instead of `fetch()`. This
 method takes an already allocated `numpy <http://www.numpy.org/>`_ array and puts the acquired samples in it. Data types supported:
 
     - `numpy.float64`
