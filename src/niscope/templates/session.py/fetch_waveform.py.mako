@@ -11,6 +11,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import numpy
+        import sys
 
         # Set the fetch attributes
         with _NoChannel(session=self):
@@ -22,13 +23,23 @@
         num_samples = int(len(wfm) / self._actual_num_wfms())
 
         if wfm.dtype == numpy.float64:
-            return self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+
+        if sys.version_info.major >= 3:
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            mv = memoryview(wfm)
+            for i in range(len(wfm_infos)):
+                start = i * num_samples
+                end = start + num_samples
+                wfm_infos[i].wfm = mv[start:end]
+
+        return wfm_infos
 
