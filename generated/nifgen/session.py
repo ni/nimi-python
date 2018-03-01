@@ -66,9 +66,9 @@ class _RepeatedCapabilities(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+        rep_caps, rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
 
-        return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(vi=self._session._vi, repeated_capability=rep_caps, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -1229,14 +1229,21 @@ class _SessionBase(object):
     For example, when this property returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
     '''
 
-    def __init__(self, repeated_capability, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability, repeated_capability_list, vi, library, encoding, freeze_it=False):
         self._repeated_capability = repeated_capability
+        self._repeated_capability_list = repeated_capability_list
         self._vi = vi
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
-        self._param_list = "repeated_capability=" + pp.pformat(repeated_capability)
+        param_list = []
+        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
+        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
+        param_list.append("vi=" + pp.pformat(vi))
+        param_list.append("library=" + pp.pformat(library))
+        param_list.append("encoding=" + pp.pformat(encoding))
+        self._param_list = ', '.join(param_list)
 
         self._is_frozen = freeze_it
 
@@ -3431,7 +3438,7 @@ class Session(_SessionBase):
             session (nifgen.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability='', vi=None, library=None, encoding=None, freeze_it=False)
+        super(Session, self).__init__(repeated_capability='', repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = library_singleton.get()
         self._encoding = 'windows-1251'
