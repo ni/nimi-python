@@ -378,10 +378,25 @@ channels, the acquisition type, and the number of records you specify.''',
             },
             {
                 'direction': 'in',
-                'name': 'numSamples',
-                'type': 'ViInt32',
+                'name': 'Wfm',
+                'type': 'ViReal64[]', # Type doesn't really matter for this function
                 'documentation': {
-                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
+                    'description': '''
+numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
+
+Types supported are
+
+- `numpy.float64`
+- `numpy.int8`
+- `numpy.in16`
+- `numpy.int32`
+
+Example:
+
+.. code-block:: python
+
+    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
                 },
             },
             {
@@ -419,29 +434,6 @@ channels, the acquisition type, and the number of records you specify.''',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
-                },
-            },
-            {
-                'direction': 'in',
-                'name': 'Wfm',
-                'type': 'ViReal64[]', # Type doesn't really matter for this function
-                'documentation': {
-                    'description': '''
-numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call niScope_ActualNumWfms to determine the number of waveforms.
-
-Types supported are
-
-- `numpy.float64`
-- `numpy.int8`
-- `numpy.in16`
-- `numpy.int32`
-
-Example:
-
-.. code-block:: python
-
-    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
                 },
             },
             {
@@ -533,7 +525,7 @@ functions_numpy = {
     'FetchBinary16':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'FetchBinary32':                                 { 'parameters': { 4: { 'numpy': True, }, }, },
     'Fetch':                                         { 'parameters': { 4: { 'numpy': True, }, }, },
-    'FetchDispatcher':                               { 'parameters': { 4: { 'numpy': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 2: { 'numpy': True, }, }, },
 }
 
 # Parameter that need to be array.array
@@ -542,7 +534,7 @@ functions_array = {
     'FetchBinary16':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
     'FetchBinary32':                                 { 'parameters': { 4: { 'use_array': True, }, }, },
     'Fetch':                                         { 'parameters': { 4: { 'use_array': True, }, }, },
-    'FetchDispatcher':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+    'FetchDispatcher':                               { 'parameters': { 2: { 'use_array': True, }, }, },
     'Read':                                          { 'parameters': { 4: { 'use_array': True, }, }, },
     'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
 }
