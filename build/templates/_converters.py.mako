@@ -11,9 +11,12 @@ import six
 def _string_to_list(string, prefix):
     '''Convert a string to a list of repeated capabilities numbers I.e. no prefix
 
+    This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
+
     '0,1,3' becomes [0, 1, 3]
     '0-2' becomes [0, 1, 2]
     'ScriptTrigger0,ScriptTrigger1' becomes [0,1]
+    '0,1,5-8,2' becomes [0, 1, 5, 6, 7, 8, 2]
     '''
     channels = string.replace(prefix, '').split(',')
     channels_list = []
