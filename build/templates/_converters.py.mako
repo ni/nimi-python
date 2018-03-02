@@ -8,7 +8,7 @@ import datetime
 import six
 
 
-def _string_to_list(string, prefix):
+def _repeated_capability_string_to_list(string, prefix):
     '''Convert a string to a list of repeated capabilities numbers I.e. no prefix
 
     This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
@@ -59,7 +59,7 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith(prefix.lower()) else prefix + str(repeated_capability)]
 
     rep_cap = ','.join(rep_cap_list)
-    return rep_cap, _string_to_list(rep_cap, prefix)
+    return rep_cap, _repeated_capability_string_to_list(rep_cap, prefix)
 
 
 def _convert_timedelta(value, library_type, scaling):
