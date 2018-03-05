@@ -274,6 +274,8 @@ def test_string_to_list_channel():
     test_result = _repeated_capability_string_to_list('0, 3-7', '')
     assert test_result == ['0', '3', '4', '5', '6', '7']
     test_result = _repeated_capability_string_to_list('0, 3:7', '')
+    assert test_result == ['0', '3', '4', '5', '6', '7']
+    test_result = _repeated_capability_string_to_list('2-0', '')
     assert test_result == ['2', '1', '0']
     test_result = _repeated_capability_string_to_list('2-0, 4', '')
     assert test_result == ['2', '1', '0', '4']
@@ -287,6 +289,8 @@ def test_string_to_list_prefix():
     test_result = _repeated_capability_string_to_list('ScriptTrigger0-ScriptTrigger2', 'ScriptTrigger')
     assert test_result == ['0', '1', '2']
     test_result = _repeated_capability_string_to_list('ScriptTrigger0, ScriptTrigger3-ScriptTrigger7', 'ScriptTrigger')
+    assert test_result == ['0', '3', '4', '5', '6', '7']
+    test_result = _repeated_capability_string_to_list('ScriptTrigger0, ScriptTrigger3:ScriptTrigger7', 'ScriptTrigger')
     assert test_result == ['0', '3', '4', '5', '6', '7']
     test_result = _repeated_capability_string_to_list('ScriptTrigger2-ScriptTrigger0', 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
