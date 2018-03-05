@@ -92,3 +92,48 @@ class WaveformInfo(object):
             pass
         return string_representation
 
+
+class Waveforms(list):
+    def __init__(self, waveforms):
+        # waveforms should be a list of lists, where each row is a channel
+        self._waveforms = waveforms
+        self._lookup = {}
+        print('len(waveforms) == {0}'.format(len(waveforms)))
+        row_len = len(self._waveforms[0])
+        print('len(waveforms[0]) == {0}'.format(len(waveforms[0])))
+        i = 0
+        for chan_wfm in self._waveforms:
+            # All rows should be the same length
+            assert row_len == len(chan_wfm), 'Channel rows have different lengths.'
+            chan_name = chan_wfm[0].channel
+            self._lookup[chan_name] = {}
+            j = 0
+            for wfm in chan_wfm:
+                # All wfm_info in a row should have the same channel name
+                assert chan_name == wfm.channel, 'All wfms in channel row should have same channel name'
+                self._lookup[wfm.channel][wfm.record] = (i, j)
+                j += 1
+            i += 1
+
+    def lookup(self, channel, record):
+        i, j = self._lookup[channel][record]
+        return self._waveforms[i][j]
+
+    def __len__(self):
+        return len(self._waveforms)
+
+    def __getitem__(self, index):
+        return self._waveforms[index]
+
+    def __repr__(self):
+        return '{0}(waveforms={1})'.format(self.__class__.__name__, self._waveforms)
+
+    def __str__(self):
+        # all rows have been verified to be the same length
+        string_representation = '{0} with size [{1}][{2}]\n'.format(self.__class__.__name__, len(self._waveforms), len(self._waveforms[0]))
+        for i in range(len(self._waveforms)):
+            for j in range(len(self._waveforms[i])):
+                string_representation += 'Record at [{0}][{1}]\n'.format(i, j)
+                string_representation += self._waveforms[i][j].__str__() + '\n'
+
+
