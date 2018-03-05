@@ -265,31 +265,31 @@ def test_repeated_capabilies_slice_prefix():
 
 
 def test_string_to_list_channel():
-    test_result = _string_to_list('0,1 ', '')
+    test_result = _repeated_capability_string_to_list('0,1 ', '')
     assert test_result == ['0', '1']
-    test_result = _string_to_list('1, 0', '')
+    test_result = _repeated_capability_string_to_list('1, 0', '')
     assert test_result == ['1', '0']
-    test_result = _string_to_list('0-2', '')
+    test_result = _repeated_capability_string_to_list('0-2', '')
     assert test_result == ['0', '1', '2']
-    test_result = _string_to_list('0, 3-7', '')
+    test_result = _repeated_capability_string_to_list('0, 3-7', '')
     assert test_result == ['0', '3', '4', '5', '6', '7']
-    test_result = _string_to_list('2-0', '')
+    test_result = _repeated_capability_string_to_list('0, 3:7', '')
     assert test_result == ['2', '1', '0']
-    test_result = _string_to_list('2-0, 4', '')
+    test_result = _repeated_capability_string_to_list('2-0, 4', '')
     assert test_result == ['2', '1', '0', '4']
 
 
 def test_string_to_list_prefix():
-    test_result = _string_to_list('ScriptTrigger0,ScriptTrigger1 ', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger0,ScriptTrigger1 ', 'ScriptTrigger')
     assert test_result == ['0', '1']
-    test_result = _string_to_list('ScriptTrigger1, ScriptTrigger0', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger1, ScriptTrigger0', 'ScriptTrigger')
     assert test_result == ['1', '0']
-    test_result = _string_to_list('ScriptTrigger0-ScriptTrigger2', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger0-ScriptTrigger2', 'ScriptTrigger')
     assert test_result == ['0', '1', '2']
-    test_result = _string_to_list('ScriptTrigger0, ScriptTrigger3-ScriptTrigger7', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger0, ScriptTrigger3-ScriptTrigger7', 'ScriptTrigger')
     assert test_result == ['0', '3', '4', '5', '6', '7']
-    test_result = _string_to_list('ScriptTrigger2-ScriptTrigger0', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger2-ScriptTrigger0', 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
-    test_result = _string_to_list('ScriptTrigger2-ScriptTrigger0, ScriptTrigger4', 'ScriptTrigger')
+    test_result = _repeated_capability_string_to_list('ScriptTrigger2-ScriptTrigger0, ScriptTrigger4', 'ScriptTrigger')
     assert test_result == ['2', '1', '0', '4']
 
