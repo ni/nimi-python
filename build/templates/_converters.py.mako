@@ -8,7 +8,53 @@ import datetime
 import six
 
 
+def _repeated_capability_string_to_list(string, prefix):
+    '''Convert a string to a list of repeated capabilities numbers I.e. no prefix
+
+    This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
+
+    '0,1,3' becomes [0, 1, 3]
+    '0-2' becomes [0, 1, 2]
+    'ScriptTrigger0,ScriptTrigger1' becomes [0,1]
+    '0,1,5-8,2' becomes [0, 1, 5, 6, 7, 8, 2]
+    '''
+    # We remove any prefix and change ':' to '-'
+    channels = string.replace(prefix, '').replace(':', '-').split(',')
+    channels_list = []
+    for c in channels:
+        c = c.strip()
+        cs = c.split('-')
+        if len(cs) > 1:
+            assert len(cs) == 2, "Only one '-' allowed. {0}".format(c)
+            start = cs[0]
+            end = cs[1]
+            if int(end) < int(start):
+                for i in range(int(start), int(end) - 1, -1):
+                    channels_list.append(str(i))
+            else:
+                for i in range(int(start), int(end) + 1):
+                    channels_list.append(str(i))
+        else:
+            channels_list.append(c)
+
+    return channels_list
+
+
 def convert_repeated_capabilities(repeated_capability, prefix=''):
+    '''Convert a repeated capabilities object to a comma delimited list
+
+    Args:
+        repeated_capability (str, list of str, list of int) - 
+            str - single string that follows driver repeated capabilities format
+            list of str - each string must follow driver repeated capabilities format such that when joined with a comma is valid.
+                May or may not have prefix on each one. If not, the prefix will be added
+            list of int - list of str will be created by prefix + int
+        prefix (str) - common prefix for all strings
+
+    Returns:
+        rep_cap (str) - string containing comma delimited list
+        rep_cal_list (list of str) - list of each repeated capability item with ranges expanded
+    '''
     # First look for a string
     if isinstance(repeated_capability, six.text_type) or isinstance(repeated_capability, six.string_types):
         rep_cap_list = [repeated_capability if repeated_capability.lower().startswith(prefix.lower()) else prefix + repeated_capability]
@@ -29,7 +75,8 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
             except (TypeError, AttributeError):
                 rep_cap_list = [str(repeated_capability) if str(repeated_capability).lower().startswith(prefix.lower()) else prefix + str(repeated_capability)]
 
-    return ','.join(rep_cap_list)
+    rep_cap = ','.join(rep_cap_list)
+    return rep_cap, _repeated_capability_string_to_list(rep_cap, prefix)
 
 
 def _convert_timedelta(value, library_type, scaling):
@@ -164,55 +211,85 @@ def test_convert_timedelta_to_microseconds_int():
 
 # Tests - repeated capabilities
 def test_repeated_capabilies_string_channel():
-    test_result = convert_repeated_capabilities('0')
+    test_result, _ = convert_repeated_capabilities('0')
     assert test_result == '0'
-    test_result = convert_repeated_capabilities('0,1')
+    test_result, _ = convert_repeated_capabilities('0,1')
     assert test_result == '0,1'
 
 
 def test_repeated_capabilies_string_prefix():
-    test_result = convert_repeated_capabilities('0', prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities('0', prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0'
 
 
 def test_repeated_capabilies_list_channel():
-    test_result = convert_repeated_capabilities(['0'])
+    test_result, _ = convert_repeated_capabilities(['0'])
     assert test_result == '0'
-    test_result = convert_repeated_capabilities(['0,1'])
+    test_result, _ = convert_repeated_capabilities(['0,1'])
     assert test_result == '0,1'
-    test_result = convert_repeated_capabilities(['0', '1'])
+    test_result, _ = convert_repeated_capabilities(['0', '1'])
     assert test_result == '0,1'
-    test_result = convert_repeated_capabilities([0, 1])
+    test_result, _ = convert_repeated_capabilities([0, 1])
     assert test_result == '0,1'
-    test_result = convert_repeated_capabilities([0, 1, '3'])
+    test_result, _ = convert_repeated_capabilities([0, 1, '3'])
     assert test_result == '0,1,3'
 
 
 def test_repeated_capabilies_list_prefix():
-    test_result = convert_repeated_capabilities(['ScriptTrigger0,ScriptTrigger1'], prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(['ScriptTrigger0,ScriptTrigger1'], prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0,ScriptTrigger1'
-    test_result = convert_repeated_capabilities(['0'], prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(['0'], prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0'
-    test_result = convert_repeated_capabilities(['0', '1'], prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(['0', '1'], prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0,ScriptTrigger1'
-    test_result = convert_repeated_capabilities([0, 1], prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities([0, 1], prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0,ScriptTrigger1'
 
 
 def test_repeated_capabilies_slice_channel():
-    test_result = convert_repeated_capabilities(slice(0, 1))
+    test_result, _ = convert_repeated_capabilities(slice(0, 1))
     assert test_result == '0'
-    test_result = convert_repeated_capabilities(slice(0, 2))
+    test_result, _ = convert_repeated_capabilities(slice(0, 2))
     assert test_result == '0,1'
-    test_result = convert_repeated_capabilities(slice(None, 2))
+    test_result, _ = convert_repeated_capabilities(slice(None, 2))
     assert test_result == '0,1'
 
 
 def test_repeated_capabilies_slice_prefix():
-    test_result = convert_repeated_capabilities(slice(0, 1), prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(slice(0, 1), prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0'
-    test_result = convert_repeated_capabilities(slice(0, 2), prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(slice(0, 2), prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0,ScriptTrigger1'
-    test_result = convert_repeated_capabilities(slice(None, 2), prefix='ScriptTrigger')
+    test_result, _ = convert_repeated_capabilities(slice(None, 2), prefix='ScriptTrigger')
     assert test_result == 'ScriptTrigger0,ScriptTrigger1'
+
+
+def test_string_to_list_channel():
+    test_result = _string_to_list('0,1 ', '')
+    assert test_result == ['0', '1']
+    test_result = _string_to_list('1, 0', '')
+    assert test_result == ['1', '0']
+    test_result = _string_to_list('0-2', '')
+    assert test_result == ['0', '1', '2']
+    test_result = _string_to_list('0, 3-7', '')
+    assert test_result == ['0', '3', '4', '5', '6', '7']
+    test_result = _string_to_list('2-0', '')
+    assert test_result == ['2', '1', '0']
+    test_result = _string_to_list('2-0, 4', '')
+    assert test_result == ['2', '1', '0', '4']
+
+
+def test_string_to_list_prefix():
+    test_result = _string_to_list('ScriptTrigger0,ScriptTrigger1 ', 'ScriptTrigger')
+    assert test_result == ['0', '1']
+    test_result = _string_to_list('ScriptTrigger1, ScriptTrigger0', 'ScriptTrigger')
+    assert test_result == ['1', '0']
+    test_result = _string_to_list('ScriptTrigger0-ScriptTrigger2', 'ScriptTrigger')
+    assert test_result == ['0', '1', '2']
+    test_result = _string_to_list('ScriptTrigger0, ScriptTrigger3-ScriptTrigger7', 'ScriptTrigger')
+    assert test_result == ['0', '3', '4', '5', '6', '7']
+    test_result = _string_to_list('ScriptTrigger2-ScriptTrigger0', 'ScriptTrigger')
+    assert test_result == ['2', '1', '0']
+    test_result = _string_to_list('ScriptTrigger2-ScriptTrigger0, ScriptTrigger4', 'ScriptTrigger')
+    assert test_result == ['2', '1', '0', '4']
 
