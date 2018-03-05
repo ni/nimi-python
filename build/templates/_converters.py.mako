@@ -18,7 +18,8 @@ def _repeated_capability_string_to_list(string, prefix):
     'ScriptTrigger0,ScriptTrigger1' becomes [0,1]
     '0,1,5-8,2' becomes [0, 1, 5, 6, 7, 8, 2]
     '''
-    channels = string.replace(prefix, '').split(',')
+    # We remove any prefix and change ':' to '-'
+    channels = string.replace(prefix, '').replace(':', '-').split(',')
     channels_list = []
     for c in channels:
         c = c.strip()
