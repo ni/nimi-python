@@ -38,6 +38,20 @@ def _repeated_capability_string_to_list(string, prefix):
 
 
 def convert_repeated_capabilities(repeated_capability, prefix=''):
+    '''Convert a repeated capabilities object to a comma delimited list
+
+    Args:
+        repeated_capability (str, list of str, list of int) - 
+            str - single string that follows driver repeated capabilities format
+            list of str - each string must follow driver repeated capabilities format such that when joined with a comma is valid.
+                May or may not have prefix on each one. If not, the prefix will be added
+            list of int - list of str will be created by prefix + int
+        prefix (str) - common prefix for all strings
+
+    Returns:
+        rep_cap (str) - string containing comma delimited list
+        rep_cal_list (list of str) - list of each repeated capability item with ranges expanded
+    '''
     # First look for a string
     if isinstance(repeated_capability, six.text_type) or isinstance(repeated_capability, six.string_types):
         rep_cap_list = [repeated_capability if repeated_capability.lower().startswith(prefix.lower()) else prefix + repeated_capability]
