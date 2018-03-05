@@ -23,9 +23,11 @@ def _repeated_capability_string_to_list(string, prefix):
     channels_list = []
     for c in channels:
         c = c.strip()
-        if len(c.split('-')) > 1:
-            assert len(c.split('-')) == 2, "Only one '-' allowed. {0}".format(c)
-            start, end = c.split('-')
+        cs = c.split('-')
+        if len(cs) > 1:
+            assert len(cs) == 2, "Only one '-' allowed. {0}".format(c)
+            start = cs[0]
+            end = cs[1]
             if int(end) < int(start):
                 for i in range(int(start), int(end) - 1, -1):
                     channels_list.append(str(i))
