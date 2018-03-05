@@ -1963,7 +1963,8 @@ class _SessionBase(object):
 
                 -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                -  **x_increment** the time between points in the acquired waveform in seconds
+                -  **actual_samples** the actual number of samples fetched and placed in the waveform array
                 -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
@@ -1976,7 +1977,7 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
-                - **wfm** waveform array whose length is the **numSamples**
+                -  **wfm** waveform array whose length is the **numSamples**
 
                 Call _actual_num_wfms to determine the size of this array.
 
@@ -2673,7 +2674,8 @@ class _SessionBase(object):
 
                 -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+                -  **x_increment** the time between points in the acquired waveform in seconds
+                -  **actual_samples** the actual number of samples fetched and placed in the waveform array
                 -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
@@ -2686,10 +2688,15 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
+                -  **wfm** waveform array whose length is the **numSamples**
+
+                    .. note:: **wfm** is not added when using Python 2
+
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
         import numpy
+        import sys
 
         # Set the fetch attributes
         with _NoChannel(session=self):
@@ -2701,15 +2708,25 @@ class _SessionBase(object):
         num_samples = int(len(wfm) / self._actual_num_wfms())
 
         if wfm.dtype == numpy.float64:
-            return self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+            wfm_infos = self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+
+        if sys.version_info.major >= 3:
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            mv = memoryview(wfm)
+            for i in range(len(wfm_infos)):
+                start = i * num_samples
+                end = start + num_samples
+                wfm_infos[i].wfm = mv[start:end]
+
+        return wfm_infos
 
     def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement
