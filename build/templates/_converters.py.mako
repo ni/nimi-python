@@ -44,7 +44,7 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
     Args:
-        repeated_capability (str, list of str, list of int) - 
+        repeated_capability (str, list of str, list of int) -
             str - single string that follows driver repeated capabilities format
             list of str - each string must follow driver repeated capabilities format such that when joined with a comma is valid.
                 May or may not have prefix on each one. If not, the prefix will be added
