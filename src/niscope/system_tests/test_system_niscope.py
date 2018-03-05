@@ -42,13 +42,15 @@ def test_fetch(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
+    test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch(num_samples=test_record_length)
-    assert len(wfm_infos) == test_num_channels
-    for i in range(len(wfm_infos)):
-        assert len(wfm_infos[i][0].wfm) == test_record_length
+        waveforms = session.channels[test_channels].fetch(num_samples=test_record_length, num_records=test_num_records)
+    assert len(waveforms) == test_num_channels
+    for i in range(test_num_channels):
+        for j in range(test_num_records):
+            assert len(waveforms[i][j].wfm) == test_record_length
 
 
 def test_fetch_defaults(session):
@@ -60,7 +62,6 @@ def test_fetch_defaults(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch()
-    print(type(waveforms))
     assert len(waveforms) == test_num_channels
     for i in range(len(waveforms)):
         assert len(waveforms[i][0].wfm) == test_record_length
@@ -86,7 +87,7 @@ def test_fetch_binary8_into(session):
     if sys.version_info.major >= 3:
         # Only python 3 will have the record memory view in the wfm_info
         for i in range(len(wfm_infos)):
-            record_wfm = wfm_infos[i][0].wfm
+            record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
@@ -112,7 +113,7 @@ def test_fetch_binary16_into(session):
     if sys.version_info.major >= 3:
         # Only python 3 will have the record memory view in the wfm_info
         for i in range(len(wfm_infos)):
-            record_wfm = wfm_infos[i][0].wfm
+            record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
@@ -138,7 +139,7 @@ def test_fetch_binary32_into(session):
     if sys.version_info.major >= 3:
         # Only python 3 will have the record memory view in the wfm_info
         for i in range(len(wfm_infos)):
-            record_wfm = wfm_infos[i][0].wfm
+            record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
@@ -164,7 +165,7 @@ def test_fetch_double_into(session):
     if sys.version_info.major >= 3:
         # Only python 3 will have the record memory view in the wfm_info
         for i in range(len(wfm_infos)):
-            record_wfm = wfm_infos[i][0].wfm
+            record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
