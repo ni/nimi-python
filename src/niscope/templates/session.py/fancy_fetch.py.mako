@@ -45,12 +45,9 @@
         # Should this raise instead? If this asserts, is it the users fault?
         assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
-        print('len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}, actual_num_records == {2}'.format(lwfm_i, lrcl, actual_num_records))
-        print('offset == {0}, offset + actual_num_records = {1}'.format(offset, offset + actual_num_records))
         i = 0
         for chan in self._repeated_capability_list:
             for rec in range(offset, offset + actual_num_records):
-                print('i == {0}'.format(i))
                 wfm_info[i].channel = chan
                 wfm_info[i].record = rec
                 i += 1
