@@ -348,13 +348,15 @@ def add_all_function_metadata(functions, config):
 
 def _add_python_name(a, attributes):
     '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
-    n = attributes[a]['name'].lower()
-    if attributes[a]['codegen_method'] == 'private':
-        n = '_' + n
+    if 'python_name' not in attributes[a]:
+        n = attributes[a]['name'].lower()
+        if attributes[a]['codegen_method'] == 'private':
+            n = '_' + n
 
-    if attributes[a]['name'][0].isdigit():
-        n = '_' + n
-    attributes[a]['python_name'] = n
+        attributes[a]['python_name'] = n
+
+    if attributes[a]['python_name'][0].isdigit():
+        attributes[a]['python_name'] = '_' + attributes[a]['python_name']
 
 
 def _add_default_attribute_class(a, attributes):
@@ -421,7 +423,8 @@ def _add_enum_codegen_method(enums, config):
 def _add_enum_value_python_name(enum_info, config):
     '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
     for v in enum_info['values']:
-        v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+        if 'python_name' not in v:
+            v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
 
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
