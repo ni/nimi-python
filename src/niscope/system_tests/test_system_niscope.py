@@ -47,10 +47,9 @@ def test_fetch(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch(num_samples=test_record_length, num_records=test_num_records)
-    assert len(waveforms) == test_num_channels
-    for i in range(test_num_channels):
-        for j in range(test_num_records):
-            assert len(waveforms[i][j].wfm) == test_record_length
+    assert len(waveforms) == test_num_channels * test_num_records
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].wfm) == test_record_length
 
 
 def test_fetch_defaults(session):
@@ -64,7 +63,7 @@ def test_fetch_defaults(session):
         waveforms = session.channels[test_channels].fetch()
     assert len(waveforms) == test_num_channels
     for i in range(len(waveforms)):
-        assert len(waveforms[i][0].wfm) == test_record_length
+        assert len(waveforms[i].wfm) == test_record_length
 
 
 def test_fetch_binary8_into(session):
