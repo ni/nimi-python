@@ -74,10 +74,11 @@ class WaveformInfo(object):
     def __str__(self):
         row_format_g = '{:<20}: {:,.6g}'
         row_format_d = '{:<20}: {:,}'
+        row_format_s = '{:<20}: {:}'
         string_representation = ''
         try:
-            string_representation += row_format_g.format('channel', len(self.channel))
-            string_representation += row_format_g.format('record', len(self.record))
+            string_representation += row_format_s.format('channel', self.channel)
+            string_representation += row_format_d.format('record', self.record)
         except AttributeError:
             pass
         string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x) + '\n'
