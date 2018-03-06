@@ -32,6 +32,7 @@
             # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
             # since the length of the wfm will tell us that information
             end = start + wfm_info[i].actual_samples
+            del wfm_info[i].actual_samples
             if sys.version_info.major >= 3:
                 wfm_info[i].wfm = mv[start:end]
             else:
