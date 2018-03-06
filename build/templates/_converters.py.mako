@@ -8,7 +8,7 @@ import datetime
 import six
 
 
-def _repeated_capability_string_to_list(string, prefix):
+def _repeated_capability_string_to_list(channels, prefix):
     '''Convert a string to a list of repeated capabilities numbers I.e. no prefix
 
     This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
@@ -18,11 +18,10 @@ def _repeated_capability_string_to_list(string, prefix):
     'ScriptTrigger0,ScriptTrigger1' becomes [0,1]
     '0,1,5-8,2' becomes [0, 1, 5, 6, 7, 8, 2]
     '''
-    # We remove any prefix and change ':' to '-'
-    channels = string.replace(prefix, '').replace(':', '-').split(',')
     channels_list = []
     for c in channels:
-        c = c.strip()
+        # We remove any prefix and change ':' to '-'
+        c = c.strip().replace(prefix, '').replace(':', '-')
         cs = c.split('-')
         if len(cs) > 1:
             assert len(cs) == 2, "Only one '-' allowed. {0}".format(c)
