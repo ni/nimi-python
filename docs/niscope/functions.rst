@@ -1136,8 +1136,10 @@ niscope.Session methods
         +----------------------------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
         | :py:data:`~niscope.ExportableSignals.SAMPLE_CLOCK`             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
         +----------------------------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-        | :py:data:`~niscope.ExportableSignals._5V_OUT`                  | (13)  | Exports a 5 V power supply.                                                                     |
+        | :py:data:`~niscope.NISCOPE_VAL_5V_OUT`                         | (13)  | Exports a 5 V power supply.                                                                     |
         +----------------------------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type signal: :py:data:`niscope.ExportableSignals`

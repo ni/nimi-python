@@ -94,12 +94,12 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085)
+    adjust_pretrigger_samples_5102 = attributes.AttributeViBoolean(1150085)
     '''Type: bool
 
     When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
     '''
-    _5v_out_output_terminal = attributes.AttributeViString(1150129)
+    five_v_out_output_terminal = attributes.AttributeViString(1150129)
     '''Type: str
 
     Specifies the destination for the 5 Volt signal.
@@ -4301,8 +4301,11 @@ class Session(_SessionBase):
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
                 | ExportableSignals.SAMPLE_CLOCK             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | ExportableSignals._5V_OUT                  | (13)  | Exports a 5 V power supply.                                                                     |
+                | NISCOPE_VAL_5V_OUT                         | (13)  | Exports a 5 V power supply.                                                                     |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             output_terminal (str): Identifies the hardware signal line on which the digital pulse is
                 generated.
