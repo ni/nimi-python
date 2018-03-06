@@ -37,7 +37,6 @@
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
                 wfm_info[i].wfm = array.array('d', wfm[start:end])
 
-        waveforms = []
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
         # Should this raise instead? If this asserts, is it the users fault?
@@ -47,14 +46,11 @@
         print('offset == {0}, offset + actual_num_records = {1}'.format(offset, offset + actual_num_records))
         i = 0
         for chan in self._repeated_capability_list:
-            channel_waveforms = []
             for rec in range(offset, offset + actual_num_records):
                 print('i == {0}'.format(i))
                 wfm_info[i].channel = chan
                 wfm_info[i].record = rec
-                channel_waveforms.append(wfm_info[i])
                 i += 1
-            waveforms.append(channel_waveforms)
 
-        return waveform_info.Waveforms(waveforms)
+        return wfm_info
 
