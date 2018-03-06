@@ -2459,7 +2459,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
+            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string="")
 
         Args:
             resource_name (str): Caution:
@@ -3340,7 +3340,7 @@ class Session(_SessionBase):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='""')
+            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string="")
 
         Args:
             resource_name (str): Caution:
