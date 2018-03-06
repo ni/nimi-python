@@ -327,7 +327,6 @@ Returns an array of classed with the following timing and scaling information ab
 -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
 -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
 -  **x_increment** the time between points in the acquired waveform in seconds
--  **actual_samples** the actual number of samples fetched and placed in the waveform array
 -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
     .. math::
@@ -341,8 +340,10 @@ Returns an array of classed with the following timing and scaling information ab
         voltage = binary data * gain factor + offset
 
 -  **wfm** waveform array whose length is the **numSamples**
+-  **channel** channel name this waveform was asquire from
+-  **record** record number of this waveform
 
-Call niScope_ActualNumWfms to determine the size of this array.''',
+''',
                 },
             },
         ],
@@ -458,6 +459,9 @@ Returns an array of classed with the following timing and scaling information ab
 -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
 -  **x_increment** the time between points in the acquired waveform in seconds
 -  **actual_samples** the actual number of samples fetched and placed in the waveform array
+
+    .. note:: Only available in Python 2
+
 -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
 
     .. math::
@@ -474,7 +478,9 @@ Returns an array of classed with the following timing and scaling information ab
 
     .. note:: **wfm** is not added when using Python 2
 
-Call niScope_ActualNumWfms to determine the size of this array.''',
+-  **channel** channel name this waveform was asquire from
+-  **record** record number of this waveform
+''',
                 },
             },
         ],
