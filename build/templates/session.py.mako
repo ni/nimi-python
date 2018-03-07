@@ -93,9 +93,9 @@ class _RepeatedCapabilities(object):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps, rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
 
-        return _SessionBase(${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']}, repeated_capability=rep_caps, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']}, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -143,16 +143,15 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
 
-    def __init__(self, repeated_capability, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
-        self._repeated_capability = repeated_capability
+    def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
+        self._repeated_capability = ','.join(repeated_capability_list)
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("repeated_capability=" + pp.pformat(repeated_capability))
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
         param_list.append("library=" + pp.pformat(library))
@@ -207,7 +206,7 @@ class Session(_SessionBase):
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
-        super(Session, self).__init__(repeated_capability='', repeated_capability_list=[], ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
+        super(Session, self).__init__(repeated_capability_list=[], ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
 % for p in init_function['parameters']:
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
