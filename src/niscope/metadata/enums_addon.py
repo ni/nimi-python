@@ -525,7 +525,8 @@ replacement_enums = {
                 'value': 101,
             },
             {
-                'name': 'NISCOPE_VAL_FIVE_V_OUT',
+                'name': 'NISCOPE_VAL_5V_OUT',
+                'python_name': 'FIVE_V_OUT',
                 'value': 13,
             },
         ],
