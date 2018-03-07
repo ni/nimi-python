@@ -1278,24 +1278,24 @@ niscope.Session methods
 
             Returns an array of classed with the following timing and scaling information about each waveform:
 
-            -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-            -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-            -  **x_increment** the time between points in the acquired waveform in seconds
-            -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+            -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+            -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+            -  **x_increment** (float) the time between points in the acquired waveform in seconds
+            -  **channel** (str) channel name this waveform was asquire from
+            -  **record** (int) record number of this waveform
+            -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                 .. math::
 
                     voltage = binary data * gain factor + offset
 
-            -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+            -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
 
                 .. math::
 
                     voltage = binary data * gain factor + offset
 
-            -  **wfm** waveform array whose length is the **numSamples**
-            -  **channel** channel name this waveform was asquire from
-            -  **record** record number of this waveform
+            - **wfm** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
             
 
@@ -1402,31 +1402,24 @@ niscope.Session methods
 
             Returns an array of classed with the following timing and scaling information about each waveform:
 
-            -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-            -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-            -  **x_increment** the time between points in the acquired waveform in seconds
-            -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-
-                .. note:: Only available in Python 2
-
-            -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+            -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+            -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+            -  **x_increment** (float) the time between points in the acquired waveform in seconds
+            -  **channel** (str) channel name this waveform was asquire from
+            -  **record** (int) record number of this waveform
+            -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                 .. math::
 
                     voltage = binary data * gain factor + offset
 
-            -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+            -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
 
                 .. math::
 
                     voltage = binary data * gain factor + offset
 
-            -  **wfm** waveform array whose length is the **numSamples**
-
-                .. note:: **wfm** is not added when using Python 2
-
-            -  **channel** channel name this waveform was asquire from
-            -  **record** record number of this waveform
+            - **wfm** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
             
 
