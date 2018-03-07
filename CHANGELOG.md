@@ -39,7 +39,10 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * `Session.fetch()` and `Session.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * `Session.fetch()` and `Session.fetch_into()` updated
+            * now takes additional parameters for associated attributes 
+            * add resulting record as part of the waveform info
+            * Channel name and record number added to waveform info
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
