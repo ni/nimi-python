@@ -4301,11 +4301,8 @@ class Session(_SessionBase):
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
                 | ExportableSignals.SAMPLE_CLOCK             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | NISCOPE_VAL_5V_OUT                         | (13)  | Exports a 5 V power supply.                                                                     |
+                | ExportableSignals.FIVE_V_OUT               | (13)  | Exports a 5 V power supply.                                                                     |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             output_terminal (str): Identifies the hardware signal line on which the digital pulse is
                 generated.
