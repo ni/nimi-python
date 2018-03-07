@@ -8,7 +8,7 @@ import datetime
 import six
 
 
-def _repeated_capability_string_to_list(channels, prefix):
+def _repeated_capability_string_to_list(repeated_capability, prefix):
     '''Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
 
     This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
@@ -18,26 +18,26 @@ def _repeated_capability_string_to_list(channels, prefix):
     '0:2' becomes [0, 1, 2]
     '0,1,2' not allowed
     '''
-    assert ',' not in channels
-    channels_list = []
-    for c in channels:
+    assert ',' not in repeated_capability
+    repeated_capability_list = []
+    for r in repeated_capability:
         # We remove any prefix and change ':' to '-'
-        c = c.strip().replace(prefix, '').replace(':', '-')
-        cs = c.split('-')
-        if len(cs) > 1:
-            assert len(cs) == 2, "Only one '-' allowed. {0}".format(c)
-            start = cs[0]
-            end = cs[1]
+        r = r.strip().replace(prefix, '').replace(':', '-')
+        rc = r.split('-')
+        if len(rc) > 1:
+            assert len(rc) == 2, "Only one '-' allowed. {0}".format(r)
+            start = rc[0]
+            end = rc[1]
             if int(end) < int(start):
                 for i in range(int(start), int(end) - 1, -1):
-                    channels_list.append(str(i))
+                    repeated_capability_list.append(str(i))
             else:
                 for i in range(int(start), int(end) + 1):
-                    channels_list.append(str(i))
+                    repeated_capability_list.append(str(i))
         else:
-            channels_list.append(c)
+            repeated_capability_list.append(c)
 
-    return channels_list
+    return repeated_capability_list
 
 
 def convert_repeated_capabilities(repeated_capability, prefix=''):
