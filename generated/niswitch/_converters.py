@@ -4,7 +4,7 @@ import datetime
 import six
 
 
-def _repeated_capability_string_to_list(channels, prefix):
+def _repeated_capability_string_to_list(repeated_capability, prefix):
     '''Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
 
     This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
@@ -14,26 +14,26 @@ def _repeated_capability_string_to_list(channels, prefix):
     '0:2' becomes [0, 1, 2]
     '0,1,2' not allowed
     '''
-    assert ',' not in channels
-    channels_list = []
-    for c in channels:
+    assert ',' not in repeated_capability
+    repeated_capability_list = []
+    for r in repeated_capability:
         # We remove any prefix and change ':' to '-'
-        c = c.strip().replace(prefix, '').replace(':', '-')
-        cs = c.split('-')
-        if len(cs) > 1:
-            assert len(cs) == 2, "Only one '-' allowed. {0}".format(c)
-            start = cs[0]
-            end = cs[1]
+        r = r.strip().replace(prefix, '').replace(':', '-')
+        rc = r.split('-')
+        if len(rc) > 1:
+            assert len(rc) == 2, "Only one '-' allowed. {0}".format(r)
+            start = rc[0]
+            end = rc[1]
             if int(end) < int(start):
                 for i in range(int(start), int(end) - 1, -1):
-                    channels_list.append(str(i))
+                    repeated_capability_list.append(str(i))
             else:
                 for i in range(int(start), int(end) + 1):
-                    channels_list.append(str(i))
+                    repeated_capability_list.append(str(i))
         else:
-            channels_list.append(c)
+            repeated_capability_list.append(r)
 
-    return channels_list
+    return repeated_capability_list
 
 
 def convert_repeated_capabilities(repeated_capability, prefix=''):
@@ -53,16 +53,19 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     rep_cap_list = []
     if isinstance(repeated_capability, tuple):
         # If we recieved a tuple, then call ourselves with each item
+        # print('Case #1')
         for r in repeated_capability:
             rep_cap_list += convert_repeated_capabilities(r, prefix)
 
     elif isinstance(repeated_capability, six.text_type) or isinstance(repeated_capability, six.string_types):
         # Look for a string. Remove any prefix and split on ','
+        # print('Case #2')
         rep_cap_list = repeated_capability.replace(prefix, '').split(',')
 
     else:
         try:
             # Try as an iterable, call ourselves with each item
+            # print('Case #3')
             for r in repeated_capability:
                 rep_cap_list += convert_repeated_capabilities(r, prefix)
 
@@ -72,10 +75,12 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
                 def ifnone(a, b):
                     return b if a is None else a
                 # Turn the slice into a list so we can iterate over it
+                # print('Case #4')
                 rep_cap_list = [str(r) for r in list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))]
 
             except (TypeError, AttributeError):
                 # Otherwise it must be a single item that is not a string
+                # print('Case #5')
                 rep_cap_list = [str(repeated_capability).replace(prefix, '')]
 
     rep_cap_list = [prefix + r for r in _repeated_capability_string_to_list(rep_cap_list, prefix)]

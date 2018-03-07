@@ -35,7 +35,7 @@ def _repeated_capability_string_to_list(repeated_capability, prefix):
                 for i in range(int(start), int(end) + 1):
                     repeated_capability_list.append(str(i))
         else:
-            repeated_capability_list.append(c)
+            repeated_capability_list.append(r)
 
     return repeated_capability_list
 
@@ -57,16 +57,19 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     rep_cap_list = []
     if isinstance(repeated_capability, tuple):
         # If we recieved a tuple, then call ourselves with each item
+        # print('Case #1')
         for r in repeated_capability:
             rep_cap_list += convert_repeated_capabilities(r, prefix)
 
     elif isinstance(repeated_capability, six.text_type) or isinstance(repeated_capability, six.string_types):
         # Look for a string. Remove any prefix and split on ','
+        # print('Case #2')
         rep_cap_list = repeated_capability.replace(prefix, '').split(',')
 
     else:
         try:
             # Try as an iterable, call ourselves with each item
+            # print('Case #3')
             for r in repeated_capability:
                 rep_cap_list += convert_repeated_capabilities(r, prefix)
 
@@ -76,10 +79,12 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
                 def ifnone(a, b):
                     return b if a is None else a
                 # Turn the slice into a list so we can iterate over it
+                # print('Case #4')
                 rep_cap_list = [str(r) for r in list(range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1)))]
 
             except (TypeError, AttributeError):
                 # Otherwise it must be a single item that is not a string
+                # print('Case #5')
                 rep_cap_list = [str(repeated_capability).replace(prefix, '')]
 
     rep_cap_list = [prefix + r for r in _repeated_capability_string_to_list(rep_cap_list, prefix)]
