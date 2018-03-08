@@ -18,7 +18,7 @@ def _repeated_capability_string_to_list(repeated_capability, prefix):
     '0:2' becomes [0, 1, 2]
     '0,1,2' not allowed
     '''
-    assert ',' not in repeated_capability
+    assert ',' not in repeated_capability, "',' should have been handled at a higher level"
     repeated_capability_list = []
     for r in repeated_capability:
         # We remove any prefix and change ':' to '-'
