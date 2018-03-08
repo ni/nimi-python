@@ -2,6 +2,7 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
 %>\
+from ${module_name} import errors
 from ${module_name} import visatype
 
 import datetime
@@ -25,7 +26,8 @@ def _repeated_capability_string_to_list(repeated_capability, prefix):
         r = r.strip().replace(prefix, '').replace(':', '-')
         rc = r.split('-')
         if len(rc) > 1:
-            assert len(rc) == 2, "Only one '-' allowed. {0}".format(r)
+            if len(rc) > 2:
+                raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
             start = rc[0]
             end = rc[1]
             if int(end) < int(start):
