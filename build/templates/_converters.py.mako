@@ -290,6 +290,43 @@ def test_repeated_capabilies_slice_channel():
     assert test_result_list == ['0', '1']
 
 
+def test_repeated_capabilies_mixed_channel():
+    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
+    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
+    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'])
+    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
+
+
+def test_repeated_capabilies_mixed_prefix():
+    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
+    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'], prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
+
+
+def test_invalid_repeated_capabilies():
+    try:
+        convert_repeated_capabilities('6-8-10')
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities(['5', '6-8-10'])
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities(('5', '6-8-10'))
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities('5,6-8-10')
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+
+
 def test_repeated_capabilies_slice_prefix():
     test_result_list = convert_repeated_capabilities(slice(0, 1), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0']
