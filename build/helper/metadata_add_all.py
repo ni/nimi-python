@@ -216,7 +216,7 @@ def _add_default_value_name_for_docs(parameter, module_name):
         if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
             name = parameter['python_name'] + "=" + module_name + '.' + parameter['default_value']
         else:
-            name = parameter['python_name'] + "=" + str(parameter['default_value'])
+            name = parameter['python_name'] + "=" + repr(parameter['default_value'])
 
     else:
         name = parameter['python_name']
