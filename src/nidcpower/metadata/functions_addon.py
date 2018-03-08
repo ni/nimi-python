@@ -42,6 +42,7 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -108,8 +109,7 @@ functions_default_value = {
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
-    'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
-                                                                       2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
+    'FetchMultiple':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
     'FancyFetchMultiple':                            { 'parameters': { 3: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
