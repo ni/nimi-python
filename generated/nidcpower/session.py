@@ -2396,7 +2396,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
         Args:
             count (int): Specifies the number of measurements to fetch.

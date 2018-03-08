@@ -616,7 +616,7 @@ nidcpower.Session methods
 
 
 
-.. py:method:: export_signal(signal, output_terminal, signal_identifier="")
+.. py:method:: export_signal(signal, output_terminal, signal_identifier='""')
 
     Routes signals (triggers and events) to the output terminal you specify.
     The route is created when the session is :py:meth:`nidcpower.Session.commit`.
@@ -704,7 +704,7 @@ nidcpower.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+.. py:method:: fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
@@ -734,7 +734,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
 
     :param count:
@@ -1465,7 +1465,7 @@ nidcpower.Session methods
 
     :type values: list of float
 
-.. py:method:: wait_for_event(event_id, timeout=datetime.timedelta(seconds=10.0))
+.. py:method:: wait_for_event(event_id, timeout='datetime.timedelta(seconds=10.0)')
 
     Waits until the device has generated the specified event.
 

@@ -1938,7 +1938,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
@@ -2050,7 +2050,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2151,7 +2151,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2277,7 +2277,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary16(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2403,7 +2403,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary32(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2529,7 +2529,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary8(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2649,7 +2649,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
@@ -2772,7 +2772,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2835,7 +2835,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -3149,7 +3149,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -3248,7 +3248,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar

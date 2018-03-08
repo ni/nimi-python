@@ -201,7 +201,7 @@ nidmm.Session methods
 
     :type resolution_digits: float
 
-.. py:method:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1))
+.. py:method:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval='datetime.timedelta(seconds=-1)')
 
     Configures the properties for multipoint measurements. These properties
     include :py:data:`nidmm.Session.trigger_count`, :py:data:`nidmm.Session.sample_count`,
@@ -544,7 +544,7 @@ nidmm.Session methods
 
     :type reference_junction_type: :py:data:`nidmm.ThermocoupleReferenceJunctionType`
 
-.. py:method:: configure_trigger(trigger_source, trigger_delay=datetime.timedelta(seconds=-1))
+.. py:method:: configure_trigger(trigger_source, trigger_delay='datetime.timedelta(seconds=-1)')
 
     Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
     `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__ and `Using
@@ -675,7 +675,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: fetch(maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: fetch(maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Returns the value from a previously initiated measurement. You must call
     :py:meth:`nidmm.Session._initiate` before calling this method.
@@ -715,7 +715,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: fetch_multi_point(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: fetch_multi_point(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
@@ -787,7 +787,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: fetch_waveform(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: fetch_waveform(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -852,7 +852,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: fetch_waveform_into(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: fetch_waveform_into(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -1028,7 +1028,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: get_dev_temp(options="")
+.. py:method:: get_dev_temp(options='""')
 
     Returns the current **Temperature** of the device.
 
@@ -1248,7 +1248,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: read(maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: read(maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Acquires a single measurement and returns the measured value.
 
@@ -1287,7 +1287,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: read_multi_point(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: read_multi_point(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
@@ -1410,7 +1410,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: read_waveform(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+.. py:method:: read_waveform(array_size, maximum_time='datetime.timedelta(milliseconds=-1)')
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
