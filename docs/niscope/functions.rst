@@ -1293,7 +1293,7 @@ niscope.Session methods
 
                     voltage = binary data * gain factor + offset
 
-            - **wfm** waveform array whose length is the **numSamples**
+            - **waveform** waveform array whose length is the **numSamples**
 
             Call :py:meth:`niscope.Session._actual_num_wfms` to determine the size of this array.
 
@@ -1301,7 +1301,7 @@ niscope.Session methods
 
 
 
-.. py:method:: fetch_into(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
+.. py:method:: fetch_into(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
     Returns the waveform from a previously initiated acquisition that the
     digitizer acquires for the specified channel. This method returns
@@ -1322,10 +1322,10 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
 
 
-    :param wfm:
+    :param waveform:
 
 
         numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call :py:meth:`niscope.Session._actual_num_wfms` to determine the number of waveforms.
@@ -1341,13 +1341,13 @@ niscope.Session methods
 
         .. code-block:: python
 
-            wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-            wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+            waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+            wfm_info = session['0,1'].fetch_into(num_samples, waveform, timeout=5.0)
 
         
 
 
-    :type wfm: array.array("d")
+    :type waveform: array.array("d")
     :param relative_to:
 
 
@@ -1721,11 +1721,11 @@ niscope.Session methods
 
     :type timeout: datetime.timedelta
 
-    :rtype: tuple (wfm, wfm_info)
+    :rtype: tuple (waveform, wfm_info)
 
         WHERE
 
-        wfm (array.array("d")): 
+        waveform (array.array("d")): 
 
 
             Returns an array whose length is the **numSamples** times number of

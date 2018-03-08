@@ -64,19 +64,19 @@ class SideEffectsHelper(object):
         self._defaults['FancyFetch']['wfmInfo'] = None
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
-        self._defaults['Fetch']['Wfm'] = None
+        self._defaults['Fetch']['Waveform'] = None
         self._defaults['Fetch']['wfmInfo'] = None
         self._defaults['FetchBinary16'] = {}
         self._defaults['FetchBinary16']['return'] = 0
-        self._defaults['FetchBinary16']['Wfm'] = None
+        self._defaults['FetchBinary16']['Waveform'] = None
         self._defaults['FetchBinary16']['wfmInfo'] = None
         self._defaults['FetchBinary32'] = {}
         self._defaults['FetchBinary32']['return'] = 0
-        self._defaults['FetchBinary32']['Wfm'] = None
+        self._defaults['FetchBinary32']['Waveform'] = None
         self._defaults['FetchBinary32']['wfmInfo'] = None
         self._defaults['FetchBinary8'] = {}
         self._defaults['FetchBinary8']['return'] = 0
-        self._defaults['FetchBinary8']['Wfm'] = None
+        self._defaults['FetchBinary8']['Waveform'] = None
         self._defaults['FetchBinary8']['wfmInfo'] = None
         self._defaults['FetchDispatcher'] = {}
         self._defaults['FetchDispatcher']['return'] = 0
@@ -122,7 +122,7 @@ class SideEffectsHelper(object):
         self._defaults['ProbeCompensationSignalStop']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
-        self._defaults['Read']['Wfm'] = None
+        self._defaults['Read']['Waveform'] = None
         self._defaults['Read']['wfmInfo'] = None
         self._defaults['ReadMeasurement'] = {}
         self._defaults['ReadMeasurement']['return'] = 0
@@ -285,20 +285,20 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['FancyFetch']['return']
 
-    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
             return self._defaults['Fetch']['return']
-        # wfm
-        if self._defaults['Fetch']['Wfm'] is None:
-            raise MockFunctionCallError("niScope_Fetch", param='Wfm')
-        test_value = self._defaults['Fetch']['Wfm']
+        # waveform
+        if self._defaults['Fetch']['Waveform'] is None:
+            raise MockFunctionCallError("niScope_Fetch", param='Waveform')
+        test_value = self._defaults['Fetch']['Waveform']
         try:
-            wfm_ref = wfm.contents
+            waveform_ref = waveform.contents
         except AttributeError:
-            wfm_ref = wfm
-        assert len(wfm_ref) >= len(test_value)
+            waveform_ref = waveform
+        assert len(waveform_ref) >= len(test_value)
         for i in range(len(test_value)):
-            wfm_ref[i] = test_value[i]
+            waveform_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['Fetch']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Fetch", param='wfmInfo')
@@ -312,20 +312,20 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['Fetch']['return']
 
-    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary16']['return'] != 0:
             return self._defaults['FetchBinary16']['return']
-        # wfm
-        if self._defaults['FetchBinary16']['Wfm'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary16", param='Wfm')
-        test_value = self._defaults['FetchBinary16']['Wfm']
+        # waveform
+        if self._defaults['FetchBinary16']['Waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary16", param='Waveform')
+        test_value = self._defaults['FetchBinary16']['Waveform']
         try:
-            wfm_ref = wfm.contents
+            waveform_ref = waveform.contents
         except AttributeError:
-            wfm_ref = wfm
-        assert len(wfm_ref) >= len(test_value)
+            waveform_ref = waveform
+        assert len(waveform_ref) >= len(test_value)
         for i in range(len(test_value)):
-            wfm_ref[i] = test_value[i]
+            waveform_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary16']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary16", param='wfmInfo')
@@ -339,20 +339,20 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary16']['return']
 
-    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary32']['return'] != 0:
             return self._defaults['FetchBinary32']['return']
-        # wfm
-        if self._defaults['FetchBinary32']['Wfm'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary32", param='Wfm')
-        test_value = self._defaults['FetchBinary32']['Wfm']
+        # waveform
+        if self._defaults['FetchBinary32']['Waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary32", param='Waveform')
+        test_value = self._defaults['FetchBinary32']['Waveform']
         try:
-            wfm_ref = wfm.contents
+            waveform_ref = waveform.contents
         except AttributeError:
-            wfm_ref = wfm
-        assert len(wfm_ref) >= len(test_value)
+            waveform_ref = waveform
+        assert len(waveform_ref) >= len(test_value)
         for i in range(len(test_value)):
-            wfm_ref[i] = test_value[i]
+            waveform_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary32']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary32", param='wfmInfo')
@@ -366,20 +366,20 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary32']['return']
 
-    def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary8']['return'] != 0:
             return self._defaults['FetchBinary8']['return']
-        # wfm
-        if self._defaults['FetchBinary8']['Wfm'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary8", param='Wfm')
-        test_value = self._defaults['FetchBinary8']['Wfm']
+        # waveform
+        if self._defaults['FetchBinary8']['Waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary8", param='Waveform')
+        test_value = self._defaults['FetchBinary8']['Waveform']
         try:
-            wfm_ref = wfm.contents
+            waveform_ref = waveform.contents
         except AttributeError:
-            wfm_ref = wfm
-        assert len(wfm_ref) >= len(test_value)
+            waveform_ref = waveform
+        assert len(waveform_ref) >= len(test_value)
         for i in range(len(test_value)):
-            wfm_ref[i] = test_value[i]
+            waveform_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['FetchBinary8']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_FetchBinary8", param='wfmInfo')
@@ -393,7 +393,7 @@ class SideEffectsHelper(object):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary8']['return']
 
-    def niScope_FetchDispatcher(self, vi, channel_list, wfm, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
+    def niScope_FetchDispatcher(self, vi, channel_list, waveform, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
         if self._defaults['FetchDispatcher']['return'] != 0:
             return self._defaults['FetchDispatcher']['return']
         # wfm_info
@@ -587,20 +587,20 @@ class SideEffectsHelper(object):
             return self._defaults['ProbeCompensationSignalStop']['return']
         return self._defaults['ProbeCompensationSignalStop']['return']
 
-    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
-        # wfm
-        if self._defaults['Read']['Wfm'] is None:
-            raise MockFunctionCallError("niScope_Read", param='Wfm')
-        test_value = self._defaults['Read']['Wfm']
+        # waveform
+        if self._defaults['Read']['Waveform'] is None:
+            raise MockFunctionCallError("niScope_Read", param='Waveform')
+        test_value = self._defaults['Read']['Waveform']
         try:
-            wfm_ref = wfm.contents
+            waveform_ref = waveform.contents
         except AttributeError:
-            wfm_ref = wfm
-        assert len(wfm_ref) >= len(test_value)
+            waveform_ref = waveform
+        assert len(waveform_ref) >= len(test_value)
         for i in range(len(test_value)):
-            wfm_ref[i] = test_value[i]
+            waveform_ref[i] = test_value[i]
         # wfm_info
         if self._defaults['Read']['wfmInfo'] is None:
             raise MockFunctionCallError("niScope_Read", param='wfmInfo')
