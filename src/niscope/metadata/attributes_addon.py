@@ -12,6 +12,7 @@ attributes_remove_enum = {
     1150128: { 'enum': None, 'python_type': 'bool', }, # ENABLE_TIME_INTERLEAVED_SAMPLING, Don't use the enum because a bool will do
 }
 
+# Override names that can't be directly converted from C names into valid Python names
 attributes_override_values = {
     1150085: { 'python_name': 'ADJUST_PRETRIGGER_SAMPLES_5102'.lower(), },
     1150129: { 'python_name': 'FIVE_V_OUT_OUTPUT_TERMINAL'.lower(), },

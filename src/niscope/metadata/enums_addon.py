@@ -16,8 +16,9 @@ enums_additional_enums = {
     'BoolEnableDisableTIS': {},  # Delete because boolean values only
 }
 
+# Override names that can't be directly converted from C names into valid Python names
 enums_override_values = {
-    'FlexFIRAntialiasFilterType': { 'values': {  # Write out number
+    'FlexFIRAntialiasFilterType': { 'values': {
         0: { 'python_name': 'FOURTYEIGHT_TAP_STANDARD', },
         1: { 'python_name': 'FOURTYEIGHT_TAP_HANNING', },
         2: { 'python_name': 'SIXTEEN_TAP_HANNING', },
