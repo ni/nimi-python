@@ -1,27 +1,28 @@
+from nifgen import errors
 from nifgen import visatype
 
 import datetime
 import six
 
 
+# This parsing functions duplicates the parsing in the driver, so if changes are made there, they will need to be replicated here.
 def _repeated_capability_string_to_list(repeated_capability, prefix):
     '''Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
-
-    This duplicates parsing in the driver, so if changes are made there, they will need to be replicated here.
 
     '0' becomes [0]
     '0-2' becomes [0, 1, 2]
     '0:2' becomes [0, 1, 2]
     '0,1,2' not allowed
     '''
-    assert ',' not in repeated_capability
+    assert ',' not in repeated_capability, "',' should have been handled at a higher level"
     repeated_capability_list = []
     for r in repeated_capability:
         # We remove any prefix and change ':' to '-'
         r = r.strip().replace(prefix, '').replace(':', '-')
         rc = r.split('-')
         if len(rc) > 1:
-            assert len(rc) == 2, "Only one '-' allowed. {0}".format(r)
+            if len(rc) > 2:
+                raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
             start = rc[0]
             end = rc[1]
             if int(end) < int(start):
@@ -283,6 +284,43 @@ def test_repeated_capabilies_slice_channel():
     assert test_result_list == ['0', '1']
     test_result_list = convert_repeated_capabilities(slice(None, 2))
     assert test_result_list == ['0', '1']
+
+
+def test_repeated_capabilies_mixed_channel():
+    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
+    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
+    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'])
+    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
+
+
+def test_repeated_capabilies_mixed_prefix():
+    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
+    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'], prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
+
+
+def test_invalid_repeated_capabilies():
+    try:
+        convert_repeated_capabilities('6-8-10')
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities(['5', '6-8-10'])
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities(('5', '6-8-10'))
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities('5,6-8-10')
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
 
 
 def test_repeated_capabilies_slice_prefix():
