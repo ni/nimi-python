@@ -22,9 +22,9 @@ All notable changes to this project will be documented in this file.
         * Enum values that start with an underscore + digit have been renamed
             * `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
             * `Function._4_WIRE_RES` --> `Function.FOUR_WIRE_RES`
-            * `ThermistorType._44004` --> `ThermistorType._44004`
-            * `ThermistorType._44006` --> `ThermistorType._44006`
-            * `ThermistorType._44007` --> `ThermistorType._44007`
+            * `ThermistorType._44004` --> `ThermistorType.THERMISTOR_44004`
+            * `ThermistorType._44006` --> `ThermistorType.THERMISTOR_44006`
+            * `ThermistorType._44007` --> `ThermistorType.THERMISTOR_44007`
             * `TransducerType._2_WIRE_RTD` --> `TransducerType.TWO_WIRE_RTD`
             * `TransducerType._4_WIRE_RTD` --> `TransducerType.FOUR_WIRE_RTD`
     * #### Removed
