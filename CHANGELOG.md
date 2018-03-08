@@ -40,9 +40,11 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `Session.fetch()` and `Session.fetch_into()` updated
-            * now takes additional parameters for associated attributes 
-            * add resulting record as part of the waveform info
+            * Takes additional parameters that modify fetch behavior
+            * Add resulting record as part of the waveform info
             * Channel name and record number added to waveform info
+            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch) 
+                and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
