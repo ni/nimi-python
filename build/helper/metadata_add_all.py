@@ -355,8 +355,7 @@ def _add_python_name(a, attributes):
 
         attributes[a]['python_name'] = n
 
-    if attributes[a]['python_name'][0].isdigit():
-        attributes[a]['python_name'] = '_' + attributes[a]['python_name']
+    assert not attributes[a]['python_name'][0].isdigit()
 
 
 def _add_default_attribute_class(a, attributes):
@@ -467,10 +466,9 @@ def _add_enum_value_python_name(enum_info, config):
             v['suffix'] = suffix
             v['python_name'] = v['python_name'].replace(suffix, '')
 
-    # We need to check again to see if we need a leading '_' due to the first character of the name being a number
+    # We need to check again to see if we have any values that start with a digit
     for v in enum_info['values']:
-        if v['python_name'][0].isdigit():
-            v['python_name'] = '_' + v['python_name']
+        assert not v['python_name'][0].isdigit()
 
     return enum_info
 
