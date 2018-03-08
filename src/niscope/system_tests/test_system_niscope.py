@@ -83,13 +83,19 @@ def test_fetch_binary8_into(session):
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
 
-    if sys.version_info.major >= 3:
-        # Only python 3 will have the record memory view in the wfm_info
-        for i in range(len(wfm_infos)):
+    for i in range(len(wfm_infos)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
             record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
+        else:
+            try:
+                wfm_infos[i].wfm
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_binary16_into(session):
@@ -109,13 +115,19 @@ def test_fetch_binary16_into(session):
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
 
-    if sys.version_info.major >= 3:
-        # Only python 3 will have the record memory view in the wfm_info
-        for i in range(len(wfm_infos)):
+    for i in range(len(wfm_infos)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
             record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
+        else:
+            try:
+                wfm_infos[i].wfm
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_binary32_into(session):
@@ -135,13 +147,19 @@ def test_fetch_binary32_into(session):
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
 
-    if sys.version_info.major >= 3:
-        # Only python 3 will have the record memory view in the wfm_info
-        for i in range(len(wfm_infos)):
+    for i in range(len(wfm_infos)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
             record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
+        else:
+            try:
+                wfm_infos[i].wfm
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_double_into(session):
@@ -161,13 +179,19 @@ def test_fetch_double_into(session):
         assert not math.isnan(sample)
     assert len(wfm_infos) == test_num_channels
 
-    if sys.version_info.major >= 3:
-        # Only python 3 will have the record memory view in the wfm_info
-        for i in range(len(wfm_infos)):
+    for i in range(len(wfm_infos)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
             record_wfm = wfm_infos[i].wfm
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == wfm[i * test_record_length + j]
+        else:
+            try:
+                wfm_infos[i].wfm
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_self_test(session):
