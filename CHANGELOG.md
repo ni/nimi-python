@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `Session.fetch()` and `Session.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
