@@ -63,7 +63,7 @@ class DriverNotInstalledError(Exception):
     '''An error due to using this module without the driver runtime installed.'''
 
     def __init__(self):
-        super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
+        super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime could not be loaded. Make sure it is installed and its bitness matches that of your Python interpreter. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
 class InvalidRepeatedCapabilityError(Exception):
