@@ -721,10 +721,7 @@ nidcpower.Session methods
 
     
 
-    .. note:: This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+    .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -749,56 +746,20 @@ nidcpower.Session methods
     :param timeout:
 
 
-        Specifies the maximum time allowed for this method to complete, in
-        seconds. If the method does not complete within this time interval,
-        NI-DCPower returns an error.
+        Specifies the maximum time allowed for this method to complete, in seconds. If the method does not complete within this time interval, NI-DCPower returns an error.
 
         
 
-        .. note:: When setting the timeout interval, ensure you take into account any
-            triggers so that the timeout interval is long enough for your
-            application.
+        .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
 
     :type timeout: datetime.timedelta
 
-    :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
-
-        WHERE
-
-        voltage_measurements (array.array("d")): 
+    :rtype: list of float
+    :return:
 
 
-            Returns an array of voltage measurements. Ensure that sufficient space
-            has been allocated for the returned array.
-
-            
-
-
-        current_measurements (array.array("d")): 
-
-
-            Returns an array of current measurements. Ensure that sufficient space
-            has been allocated for the returned array.
-
-            
-
-
-        in_compliance (list of bool): 
-
-
-            Returns an array of Boolean values indicating whether the output was in
-            compliance at the time the measurement was taken. Ensure that sufficient
-            space has been allocated for the returned array.
-
-            
-
-
-        actual_count (int): 
-
-
-            Indicates the number of measured values actually retrieved from the
-            device.
+            Returns an array of named tuples.
 
             
 

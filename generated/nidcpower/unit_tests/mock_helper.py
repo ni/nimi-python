@@ -41,6 +41,9 @@ class SideEffectsHelper(object):
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
+        self._defaults['FancyFetchMultiple'] = {}
+        self._defaults['FancyFetchMultiple']['return'] = 0
+        self._defaults['FancyFetchMultiple']['measurements'] = None
         self._defaults['FetchMultiple'] = {}
         self._defaults['FetchMultiple']['return'] = 0
         self._defaults['FetchMultiple']['voltageMeasurements'] = None
@@ -233,6 +236,22 @@ class SideEffectsHelper(object):
         if self._defaults['ExportSignal']['return'] != 0:
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
+
+    def niDCPower_FancyFetchMultiple(self, vi, channel_name, count, timeout, measurements):  # noqa: N802
+        if self._defaults['FancyFetchMultiple']['return'] != 0:
+            return self._defaults['FancyFetchMultiple']['return']
+        # measurements
+        if self._defaults['FancyFetchMultiple']['measurements'] is None:
+            raise MockFunctionCallError("niDCPower_FancyFetchMultiple", param='measurements')
+        test_value = self._defaults['FancyFetchMultiple']['measurements']
+        try:
+            measurements_ref = measurements.contents
+        except AttributeError:
+            measurements_ref = measurements
+        assert len(measurements_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            measurements_ref[i] = test_value[i]
+        return self._defaults['FancyFetchMultiple']['return']
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         if self._defaults['FetchMultiple']['return'] != 0:
@@ -674,6 +693,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Disable.return_value = 0
         mock_library.niDCPower_ExportSignal.side_effect = MockFunctionCallError("niDCPower_ExportSignal")
         mock_library.niDCPower_ExportSignal.return_value = 0
+        mock_library.niDCPower_FancyFetchMultiple.side_effect = MockFunctionCallError("niDCPower_FancyFetchMultiple")
+        mock_library.niDCPower_FancyFetchMultiple.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")

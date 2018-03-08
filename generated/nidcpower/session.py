@@ -806,7 +806,7 @@ class _SessionBase(object):
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
+    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the _fetch_multiple method.
     '''
     output_capacitance = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
     '''Type: enums.OutputCapacitance
@@ -2378,6 +2378,55 @@ class _SessionBase(object):
         the *NI DC Power Supplies and SMUs Help* for more information about
         configuring this method.
 
+        Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
+
+        Args:
+            count (int): Specifies the number of measurements to fetch.
+
+            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in seconds. If the method does not complete within this time interval, NI-DCPower returns an error.
+
+                Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
+
+
+        Returns:
+            measurements (list of float): Returns an array of named tuples.
+
+        '''
+        import collections
+        Measurements = collections.namedtuple('Measurements', ['voltage', 'current', 'in_compliance'])
+
+        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+
+        measurements = []
+        for i in range(count):
+            measurements.append(Measurements(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
+
+        return measurements
+
+    def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
+        '''_fetch_multiple
+
+        Returns an array of voltage measurements, an array of current
+        measurements, and an array of compliance measurements that were
+        previously taken and are stored in the NI-DCPower buffer. This method
+        should not be used when the measure_when property is
+        set to MeasureWhen.ON_DEMAND. You must first call
+        _initiate before calling this method.
+
+        Refer to the `Acquiring
+        Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
+        and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        configuring this method.
+
         Note:
         This method is not supported on all devices. Refer to `Supported
         Methods by
@@ -2390,7 +2439,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
+            session.channels['0,1']._fetch_multiple(count, timeout='datetime.timedelta(seconds=1.0)')
 
         Args:
             count (int): Specifies the number of measurements to fetch.
