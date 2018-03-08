@@ -95,7 +95,7 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
 
                 voltage = binary data * gain factor + offset
 
-        - **wfm** (array of float) floating point array of samples. Length will be of the actual samples acquired
+        - **wfm** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
 
             .. note::
 
