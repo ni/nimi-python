@@ -14,8 +14,8 @@ attributes_remove_enum = {
 
 # Override names that can't be directly converted from C names into valid Python names
 attributes_override_values = {
-    1150085: { 'python_name': 'ADJUST_PRETRIGGER_SAMPLES_5102'.lower(), },
-    1150129: { 'python_name': 'FIVE_V_OUT_OUTPUT_TERMINAL'.lower(), },
+    1150085: { 'python_name': 'adjust_pretrigger_samples_5102', },
+    1150129: { 'python_name': 'five_v_out_output_terminal', },
 }
 
 attributes_converters = {
