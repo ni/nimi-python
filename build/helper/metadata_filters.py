@@ -301,6 +301,11 @@ def filter_codegen_functions(functions):
     return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
 
 
+def filter_library_functions(functions):
+    '''Returns function metadata only for those functions to be included in codegen'''
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no' and v['codegen_method'] != 'api'}
+
+
 def filter_codegen_attributes(attributes):
     '''Returns attribute metadata only for those attributes to be included in codegen'''
     return {k: v for k, v in attributes.items() if v['codegen_method'] != 'no'}
