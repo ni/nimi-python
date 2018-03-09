@@ -37,7 +37,6 @@ class Library(object):
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
         self.niFgen_CreateArbSequence_cfunc = None
         self.niFgen_CreateFreqList_cfunc = None
-        self.niFgen_CreateWaveformDispatcher_cfunc = None
         self.niFgen_CreateWaveformF64_cfunc = None
         self.niFgen_CreateWaveformFromFileF64_cfunc = None
         self.niFgen_CreateWaveformFromFileI16_cfunc = None
@@ -250,14 +249,6 @@ class Library(object):
                 self.niFgen_CreateFreqList_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateFreqList_cfunc(vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle)
-
-    def niFgen_CreateWaveformDispatcher(self, vi, channel_name, waveform_data_array, waveform_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CreateWaveformDispatcher_cfunc is None:
-                self.niFgen_CreateWaveformDispatcher_cfunc = self._library.niFgen_CreateWaveformDispatcher
-                self.niFgen_CreateWaveformDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_CreateWaveformDispatcher_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CreateWaveformDispatcher_cfunc(vi, channel_name, waveform_data_array, waveform_handle)
 
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:

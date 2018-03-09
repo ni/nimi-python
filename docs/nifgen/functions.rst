@@ -1449,45 +1449,6 @@ nifgen.Session methods
 
 
 
-.. py:method:: create_waveform_numpy(waveform_data_array)
-
-    Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.
-
-    
-
-    .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this method.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session.channels['0,1'].create_waveform(waveform_data_array)
-
-
-    :param waveform_data_array:
-
-
-        Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
-
-        
-
-
-    :type waveform_data_array: list of float
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used in other methods when referring to this waveform.
-
-            
-
-
-
 .. py:method:: define_user_standard_waveform(waveform_data_array)
 
     Defines a user waveform for use in either Standard Method or Frequency

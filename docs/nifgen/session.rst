@@ -458,8 +458,6 @@ nifgen.Session
    +-----------------------------------------------------+
    | :py:func:`create_waveform_from_file_i16`            |
    +-----------------------------------------------------+
-   | :py:func:`create_waveform_numpy`                    |
-   +-----------------------------------------------------+
    | :py:func:`define_user_standard_waveform`            |
    +-----------------------------------------------------+
    | :py:func:`delete_named_waveform`                    |
