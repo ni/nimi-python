@@ -287,7 +287,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: Function._2_WIRE_RES
+    .. py:attribute:: Function.TWO_WIRE_RES
 
 
 
@@ -297,7 +297,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: Function._4_WIRE_RES
+    .. py:attribute:: Function.FOUR_WIRE_RES
 
 
 
@@ -852,7 +852,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: ThermistorType._44004
+    .. py:attribute:: ThermistorType.THERMISTOR_44004
 
 
 
@@ -862,7 +862,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: ThermistorType._44006
+    .. py:attribute:: ThermistorType.THERMISTOR_44006
 
 
 
@@ -872,7 +872,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: ThermistorType._44007
+    .. py:attribute:: ThermistorType.THERMISTOR_44007
 
 
 
@@ -1002,7 +1002,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: TransducerType._2_WIRE_RTD
+    .. py:attribute:: TransducerType.TWO_WIRE_RTD
 
 
 
@@ -1012,7 +1012,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: TransducerType._4_WIRE_RTD
+    .. py:attribute:: TransducerType.FOUR_WIRE_RTD
 
 
 

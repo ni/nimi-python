@@ -19,6 +19,14 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
     * #### Added
     * #### Changed
+        * Enum values that start with an underscore + digit have been renamed
+            * `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
+            * `Function._4_WIRE_RES` --> `Function.FOUR_WIRE_RES`
+            * `ThermistorType._44004` --> `ThermistorType.THERMISTOR_44004`
+            * `ThermistorType._44006` --> `ThermistorType.THERMISTOR_44006`
+            * `ThermistorType._44007` --> `ThermistorType.THERMISTOR_44007`
+            * `TransducerType._2_WIRE_RTD` --> `TransducerType.TWO_WIRE_RTD`
+            * `TransducerType._4_WIRE_RTD` --> `TransducerType.FOUR_WIRE_RTD`
     * #### Removed
 * ### NI-ModInst
     * #### Added
@@ -40,6 +48,27 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `Session.fetch()` and `Session.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * Enum values and attribute names that start with an underscore + digit have been renamed
+            * `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`
+            * `Session._5v_out_output_terminal` --> `Session.five_v_out_output_terminal`
+            * `ExportableSignals._5V_OUT` --> `ExportableSignals.FIVE_V_OUT`
+            * `FlexFIRAntialiasFilterType._48_TAP_STANDARD` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_STANDARD`
+            * `FlexFIRAntialiasFilterType._48_TAP_HANNING` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_HANNING`
+            * `FlexFIRAntialiasFilterType._16_TAP_HANNING` --> `FlexFIRAntialiasFilterType.SIXTEEN_TAP_HANNING`
+            * `FlexFIRAntialiasFilterType._8_TAP_HANNING` --> `FlexFIRAntialiasFilterType.EIGHT_TAP_HANNING`
+            * `VideoSignalFormat._480I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_59_94_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._480I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_60_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._480P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_59_94_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._480P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_60_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._576I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_576I_50_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._576P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_576P_50_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._720P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_50_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._720P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_59_94_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._720P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_60_FRAMES_PER_SECOND`
+            * `VideoSignalFormat._1080I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_50_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
+            * `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`

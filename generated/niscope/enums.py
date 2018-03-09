@@ -116,7 +116,7 @@ class ExportableSignals(Enum):
     READY_FOR_REF_EVENT = 10
     REF_CLOCK = 100
     SAMPLE_CLOCK = 101
-    _5V_OUT = 13
+    FIVE_V_OUT = 13
 
 
 class FIRFilterWindow(Enum):
@@ -189,19 +189,19 @@ class FilterType(Enum):
 
 
 class FlexFIRAntialiasFilterType(Enum):
-    _48_TAP_STANDARD = 0
+    FOURTYEIGHT_TAP_STANDARD = 0
     '''
     This filter is optimized for alias protection and frequency-domain flatness
     '''
-    _48_TAP_HANNING = 1
+    FOURTYEIGHT_TAP_HANNING = 1
     '''
     This filter is optimized for the lowest possible bandwidth for a 48 tap filter and maximizes the SNR
     '''
-    _16_TAP_HANNING = 2
+    SIXTEEN_TAP_HANNING = 2
     '''
     This filter is optimized for the lowest possible bandwidth for a 16 tap filter and maximizes the SNR
     '''
-    _8_TAP_HANNING = 3
+    EIGHT_TAP_HANNING = 3
     '''
     This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
     '''
@@ -526,55 +526,55 @@ class VideoSignalFormat(Enum):
     '''
     M-PAL signal format supports line numbers from 1 to 525
     '''
-    _480I_59_94_FIELDS_PER_SECOND = 1010
+    VIDEO_480I_59_94_FIELDS_PER_SECOND = 1010
     '''
     480 lines, interlaced, 59.94 fields per second
     '''
-    _480I_60_FIELDS_PER_SECOND = 1011
+    VIDEO_480I_60_FIELDS_PER_SECOND = 1011
     '''
     480 lines, interlaced, 60 fields per second
     '''
-    _480P_59_94_FRAMES_PER_SECOND = 1015
+    VIDEO_480P_59_94_FRAMES_PER_SECOND = 1015
     '''
     480 lines, progressive, 59.94 frames per second
     '''
-    _480P_60_FRAMES_PER_SECOND = 1016
+    VIDEO_480P_60_FRAMES_PER_SECOND = 1016
     '''
     480 lines, progressive,60 frames per second
     '''
-    _576I_50_FIELDS_PER_SECOND = 1020
+    VIDEO_576I_50_FIELDS_PER_SECOND = 1020
     '''
     576 lines, interlaced, 50 fields per second
     '''
-    _576P_50_FRAMES_PER_SECOND = 1025
+    VIDEO_576P_50_FRAMES_PER_SECOND = 1025
     '''
     576 lines, progressive, 50 frames per second
     '''
-    _720P_50_FRAMES_PER_SECOND = 1031
+    VIDEO_720P_50_FRAMES_PER_SECOND = 1031
     '''
     720 lines, progressive, 50 frames per second
     '''
-    _720P_59_94_FRAMES_PER_SECOND = 1032
+    VIDEO_720P_59_94_FRAMES_PER_SECOND = 1032
     '''
     720 lines, progressive, 59.94 frames per second
     '''
-    _720P_60_FRAMES_PER_SECOND = 1033
+    VIDEO_720P_60_FRAMES_PER_SECOND = 1033
     '''
     720 lines, progressive, 60 frames per second
     '''
-    _1080I_50_FIELDS_PER_SECOND = 1040
+    VIDEO_1080I_50_FIELDS_PER_SECOND = 1040
     '''
     1,080 lines, interlaced, 50 fields per second
     '''
-    _1080I_59_94_FIELDS_PER_SECOND = 1041
+    VIDEO_1080I_59_94_FIELDS_PER_SECOND = 1041
     '''
     1,080 lines, interlaced, 59.94 fields per second
     '''
-    _1080I_60_FIELDS_PER_SECOND = 1042
+    VIDEO_1080I_60_FIELDS_PER_SECOND = 1042
     '''
     1,080 lines, interlaced, 60 fields per second
     '''
-    _1080P_24_FRAMES_PER_SECOND = 1045
+    VIDEO_1080P_24_FRAMES_PER_SECOND = 1045
     '''
     1,080 lines, progressive, 24 frames per second
     '''
