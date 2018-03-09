@@ -247,45 +247,45 @@ class Library(object):
                 self.niScope_FancyFetch_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_FancyFetch_cfunc(vi, channel_list, num_samples, relative_to, offset, record_number, num_records, timeout, wfm_info)
 
-    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
                 self.niScope_Fetch_cfunc = self._library.niScope_Fetch
                 self.niScope_Fetch_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Fetch_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+        return self.niScope_Fetch_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary16_cfunc is None:
                 self.niScope_FetchBinary16_cfunc = self._library.niScope_FetchBinary16
                 self.niScope_FetchBinary16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt16), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary16_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchBinary16_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+        return self.niScope_FetchBinary16_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary32(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary32_cfunc is None:
                 self.niScope_FetchBinary32_cfunc = self._library.niScope_FetchBinary32
                 self.niScope_FetchBinary32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary32_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchBinary32_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+        return self.niScope_FetchBinary32_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_FetchBinary8(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchBinary8_cfunc is None:
                 self.niScope_FetchBinary8_cfunc = self._library.niScope_FetchBinary8
                 self.niScope_FetchBinary8_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViInt8), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchBinary8_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchBinary8_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+        return self.niScope_FetchBinary8_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
-    def niScope_FetchDispatcher(self, vi, channel_list, wfm, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
+    def niScope_FetchDispatcher(self, vi, channel_list, waveform, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_FetchDispatcher_cfunc is None:
                 self.niScope_FetchDispatcher_cfunc = self._library.niScope_FetchDispatcher
                 self.niScope_FetchDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ViInt32, ViInt32, ViInt32, ViInt32, ViReal64, ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_FetchDispatcher_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_FetchDispatcher_cfunc(vi, channel_list, wfm, relative_to, offset, record_number, num_records, timeout, wfm_info)
+        return self.niScope_FetchDispatcher_cfunc(vi, channel_list, waveform, relative_to, offset, record_number, num_records, timeout, wfm_info)
 
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:
@@ -383,13 +383,13 @@ class Library(object):
                 self.niScope_ProbeCompensationSignalStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ProbeCompensationSignalStop_cfunc(vi)
 
-    def niScope_Read(self, vi, channel_list, timeout, num_samples, wfm, wfm_info):  # noqa: N802
+    def niScope_Read(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Read_cfunc is None:
                 self.niScope_Read_cfunc = self._library.niScope_Read
                 self.niScope_Read_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(waveform_info.struct_niScope_wfmInfo)]  # noqa: F405
                 self.niScope_Read_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, wfm, wfm_info)
+        return self.niScope_Read_cfunc(vi, channel_list, timeout, num_samples, waveform, wfm_info)
 
     def niScope_ReadMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         with self._func_lock:

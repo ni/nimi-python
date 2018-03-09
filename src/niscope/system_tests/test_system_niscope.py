@@ -31,9 +31,9 @@ def test_read(session):
     test_num_channels = 2
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    wfm, wfm_infos = session.channels[test_channels].read(test_record_length)
-    assert len(wfm) == test_num_channels * test_record_length
-    assert len(wfm_infos) == test_num_channels
+    waveform, waveforms = session.channels[test_channels].read(test_record_length)
+    assert len(waveform) == test_num_channels * test_record_length
+    assert len(waveforms) == test_num_channels
 
 
 def test_fetch(session):
@@ -44,10 +44,10 @@ def test_fetch(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch(num_samples=test_record_length)
-    assert len(wfm_infos) == test_num_channels
-    for i in range(len(wfm_infos)):
-        assert len(wfm_infos[i].wfm) == test_record_length
+        waveforms = session.channels[test_channels].fetch(num_samples=test_record_length)
+    assert len(waveforms) == test_num_channels
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].waveform) == test_record_length
 
 
 def test_fetch_defaults(session):
@@ -58,10 +58,10 @@ def test_fetch_defaults(session):
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch()
-    assert len(wfm_infos) == test_num_channels
-    for i in range(len(wfm_infos)):
-        assert len(wfm_infos[i].wfm) == test_record_length
+        waveforms = session.channels[test_channels].fetch()
+    assert len(waveforms) == test_num_channels
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].waveform) == test_record_length
 
 
 def test_fetch_binary8_into(session):
@@ -69,16 +69,16 @@ def test_fetch_binary8_into(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
-    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
+    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int8)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    wfm.fill(float('nan'))
+    waveform.fill(float('nan'))
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
-    for sample in wfm:
+        waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+    for sample in waveform:
         assert not math.isnan(sample)
-    assert len(wfm_infos) == test_num_channels
+    assert len(waveforms) == test_num_channels
 
 
 def test_fetch_binary16_into(session):
@@ -86,16 +86,16 @@ def test_fetch_binary16_into(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
-    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
+    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int16)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    wfm.fill(float('nan'))
+    waveform.fill(float('nan'))
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
-    for sample in wfm:
+        waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+    for sample in waveform:
         assert not math.isnan(sample)
-    assert len(wfm_infos) == test_num_channels
+    assert len(waveforms) == test_num_channels
 
 
 def test_fetch_binary32_into(session):
@@ -103,16 +103,16 @@ def test_fetch_binary32_into(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
-    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
+    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.int32)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    wfm.fill(float('nan'))
+    waveform.fill(float('nan'))
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
-    for sample in wfm:
+        waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+    for sample in waveform:
         assert not math.isnan(sample)
-    assert len(wfm_infos) == test_num_channels
+    assert len(waveforms) == test_num_channels
 
 
 def test_fetch_double_into(session):
@@ -120,16 +120,16 @@ def test_fetch_double_into(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
-    wfm = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
+    waveform = numpy.ndarray(test_num_channels * test_record_length, dtype=numpy.float64)
     # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-    wfm.fill(float('nan'))
+    waveform.fill(float('nan'))
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
-        wfm_infos = session.channels[test_channels].fetch_into(wfm=wfm)
-    for sample in wfm:
+        waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+    for sample in waveform:
         assert not math.isnan(sample)
-    assert len(wfm_infos) == test_num_channels
+    assert len(waveforms) == test_num_channels
 
 
 def test_self_test(session):
