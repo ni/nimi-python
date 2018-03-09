@@ -202,6 +202,7 @@ performed sequentially based on the order specified in this parameter.
                 'direction': 'out',
                 'name': 'measurements',
                 'type': 'ViReal64[]',
+                'python_type': 'named tuple',
                 'documentation': {
                     'description': 'Returns an array of named tuples.',
                 },
