@@ -341,7 +341,7 @@ Returns an array of classed with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **wfm** (array of float) floating point array of samples. Length will be of the actual samples acquired
+- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
 ''',
                 },
             },
@@ -396,8 +396,8 @@ Example:
 
 .. code-block:: python
 
-    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)''',
+    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+    wfm_info = session['0,1'].fetch_into(num_samples, waveform, timeout=5.0)''',
                 },
             },
             {
@@ -471,7 +471,7 @@ Returns an array of classed with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **wfm** (array of float) floating point array of samples. Length will be of the actual samples acquired
+- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
 ''',
                 },
             },
@@ -493,6 +493,17 @@ channels, the acquisition type, and the number of records you specify.''',
 functions_python_name = {
     'FetchDispatcher':            { 'python_name': 'fetch', },
     'FancyFetch':                 { 'python_name': 'fetch', },
+}
+
+# Set parameter name to Waveform instead of Wfm, even for private functions (for consistency)
+functions_parameter_names = {
+    'FetchBinary8':               { 'parameters': { 4: { 'name': 'Waveform', }, }, },
+    'FetchBinary8':               { 'parameters': { 4: { 'name': 'Waveform', }, }, },
+    'FetchBinary16':              { 'parameters': { 4: { 'name': 'Waveform', }, }, },
+    'FetchBinary32':              { 'parameters': { 4: { 'name': 'Waveform', }, }, },
+    'Fetch':                      { 'parameters': { 4: { 'name': 'Waveform', }, }, },
+    'FetchDispatcher':            { 'parameters': { 2: { 'name': 'Waveform', }, }, },
+    'Read':                       { 'parameters': { 4: { 'name': 'Waveform', }, }, },
 }
 
 functions_method_templates = {
