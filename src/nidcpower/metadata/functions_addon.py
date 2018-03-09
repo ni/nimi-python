@@ -194,7 +194,7 @@ performed sequentially based on the order specified in this parameter.
                 'name': 'Timeout',
                 'type': 'ViReal64',
                 'documentation': {
-                    'description': 'Specifies the maximum time allowed for this function to complete, in seconds. If the function does not complete within this time interval, NI-DCPower returns an error.',
+                    'description': 'Specifies the maximum time allowed for this function to complete. If the function does not complete within this time interval, NI-DCPower returns an error.',
                     'note': 'When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.',
                 },
             },
