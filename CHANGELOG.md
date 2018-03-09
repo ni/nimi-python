@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
     * #### Added
     * #### Changed
-        * `Session.fetch_multiple()` now returns named tuple instead of multiple arrays. See [documentation](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple)
+        * `Session.fetch_multiple()` now returns array of named tuples instead of multiple arrays. See [documentation](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple)
     * #### Removed
 * ### NI-FGEN
     * #### Added
