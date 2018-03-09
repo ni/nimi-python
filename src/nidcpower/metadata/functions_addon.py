@@ -183,6 +183,7 @@ performed sequentially based on the order specified in this parameter.
             {
                 'direction': 'in',
                 'name': 'Count',
+                'default_value': None,
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Specifies the number of measurements to fetch.',
