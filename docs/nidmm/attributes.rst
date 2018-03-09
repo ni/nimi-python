@@ -1814,7 +1814,7 @@ nidmm.Session properties
 
 .. py:attribute:: temp_thermistor_type
 
-    Specifies the type of thermistor used to measure the temperature. The default value is  :py:data:`~nidmm.ThermistorType._44006`.
+    Specifies the type of thermistor used to measure the temperature. The default value is  :py:data:`~nidmm.ThermistorType.THERMISTOR_44006`.
     Refer to the :py:data:`nidmm.Session.temp_thermistor_type` topic in the NI Digital Multimeters Help for additional information about defined values.
 
     The following table lists the characteristics of this property.

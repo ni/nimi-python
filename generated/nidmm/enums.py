@@ -126,11 +126,11 @@ class Function(Enum):
     '''
     AC Current
     '''
-    _2_WIRE_RES = 5
+    TWO_WIRE_RES = 5
     '''
     2-Wire Resistance
     '''
-    _4_WIRE_RES = 101
+    FOUR_WIRE_RES = 101
     '''
     4-Wire Resistance
     '''
@@ -367,15 +367,15 @@ class ThermistorType(Enum):
     '''
     Custom
     '''
-    _44004 = 1
+    THERMISTOR_44004 = 1
     '''
     44004
     '''
-    _44006 = 2
+    THERMISTOR_44006 = 2
     '''
     44006
     '''
-    _44007 = 3
+    THERMISTOR_44007 = 3
     '''
     44007
     '''
@@ -433,11 +433,11 @@ class TransducerType(Enum):
     '''
     Thermistor
     '''
-    _2_WIRE_RTD = 3
+    TWO_WIRE_RTD = 3
     '''
     2-wire RTD
     '''
-    _4_WIRE_RTD = 4
+    FOUR_WIRE_RTD = 4
     '''
     4-wire RTD
     '''

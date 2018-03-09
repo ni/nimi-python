@@ -529,7 +529,7 @@ class _SessionBase(object):
     temp_thermistor_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermistorType, 1150124)
     '''Type: enums.ThermistorType
 
-    Specifies the type of thermistor used to measure the temperature. The default value is  ThermistorType._44006.
+    Specifies the type of thermistor used to measure the temperature. The default value is  ThermistorType.THERMISTOR_44006.
     Refer to the temp_thermistor_type topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
     temp_transducer_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TransducerType, 1250201)

@@ -16,6 +16,15 @@ enums_additional_enums = {
     'BoolEnableDisableTIS': {},  # Delete because boolean values only
 }
 
+# Override names that can't be directly converted from C names into valid Python names
+enums_override_values = {
+    'FlexFIRAntialiasFilterType': { 'values': {
+        0: { 'python_name': 'FOURTYEIGHT_TAP_STANDARD', },
+        1: { 'python_name': 'FOURTYEIGHT_TAP_HANNING', },
+        2: { 'python_name': 'SIXTEEN_TAP_HANNING', },
+        3: { 'python_name': 'EIGHT_TAP_HANNING', },
+    }, },
+}
 
 # We explicitly don't start with enums_ since we don't want this merged. These will replace the existing enums
 # Once NI Internal CAR #675174 is fixed, this can be removed along with the overwrite code in __init__.py
@@ -52,91 +61,91 @@ replacement_enums = {
                 },
             },
             {
-                'name': 'NISCOPE_VAL_480I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_480I_59_94_FIELDS_PER_SECOND',
                 'value': 1010,
                 'documentation': {
                     'description': '480 lines, interlaced, 59.94 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_480I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_480I_60_FIELDS_PER_SECOND',
                 'value': 1011,
                 'documentation': {
                     'description': '480 lines, interlaced, 60 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_480P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_480P_59_94_FRAMES_PER_SECOND',
                 'value': 1015,
                 'documentation': {
                     'description': '480 lines, progressive, 59.94 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_480P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_480P_60_FRAMES_PER_SECOND',
                 'value': 1016,
                 'documentation': {
                     'description': '480 lines, progressive,60 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_576I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_576I_50_FIELDS_PER_SECOND',
                 'value': 1020,
                 'documentation': {
                     'description': '576 lines, interlaced, 50 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_576P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_576P_50_FRAMES_PER_SECOND',
                 'value': 1025,
                 'documentation': {
                     'description': '576 lines, progressive, 50 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_720P_50_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_720P_50_FRAMES_PER_SECOND',
                 'value': 1031,
                 'documentation': {
                     'description': '720 lines, progressive, 50 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_720P_59_94_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_720P_59_94_FRAMES_PER_SECOND',
                 'value': 1032,
                 'documentation': {
                     'description': '720 lines, progressive, 59.94 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_720P_60_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_720P_60_FRAMES_PER_SECOND',
                 'value': 1033,
                 'documentation': {
                     'description': '720 lines, progressive, 60 frames per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_1080I_50_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_1080I_50_FIELDS_PER_SECOND',
                 'value': 1040,
                 'documentation': {
                     'description': '1,080 lines, interlaced, 50 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_1080I_59_94_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_1080I_59_94_FIELDS_PER_SECOND',
                 'value': 1041,
                 'documentation': {
                     'description': '1,080 lines, interlaced, 59.94 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_1080I_60_FIELDS_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_1080I_60_FIELDS_PER_SECOND',
                 'value': 1042,
                 'documentation': {
                     'description': '1,080 lines, interlaced, 60 fields per second',
                 },
             },
             {
-                'name': 'NISCOPE_VAL_1080P_24_FRAMES_PER_SECOND',
+                'name': 'NISCOPE_VAL_VIDEO_1080P_24_FRAMES_PER_SECOND',
                 'value': 1045,
                 'documentation': {
                     'description': '1,080 lines, progressive, 24 frames per second',
@@ -518,6 +527,7 @@ replacement_enums = {
             },
             {
                 'name': 'NISCOPE_VAL_5V_OUT',
+                'python_name': 'FIVE_V_OUT',
                 'value': 13,
             },
         ],

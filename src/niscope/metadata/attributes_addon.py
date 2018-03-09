@@ -12,6 +12,12 @@ attributes_remove_enum = {
     1150128: { 'enum': None, 'python_type': 'bool', }, # ENABLE_TIME_INTERLEAVED_SAMPLING, Don't use the enum because a bool will do
 }
 
+# Override names that can't be directly converted from C names into valid Python names
+attributes_override_values = {
+    1150085: { 'python_name': 'adjust_pretrigger_samples_5102', },
+    1150129: { 'python_name': 'five_v_out_output_terminal', },
+}
+
 attributes_converters = {
     1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'python_type': 'datetime.timedelta', },  # SLAVE_TRIGGER_DELAY
