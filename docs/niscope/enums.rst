@@ -391,7 +391,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: ExportableSignals._5V_OUT
+    .. py:attribute:: ExportableSignals.FIVE_V_OUT
 
 
 
@@ -557,7 +557,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: FlexFIRAntialiasFilterType
 
-    .. py:attribute:: FlexFIRAntialiasFilterType._48_TAP_STANDARD
+    .. py:attribute:: FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_STANDARD
 
 
 
@@ -567,7 +567,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: FlexFIRAntialiasFilterType._48_TAP_HANNING
+    .. py:attribute:: FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_HANNING
 
 
 
@@ -577,7 +577,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: FlexFIRAntialiasFilterType._16_TAP_HANNING
+    .. py:attribute:: FlexFIRAntialiasFilterType.SIXTEEN_TAP_HANNING
 
 
 
@@ -587,7 +587,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: FlexFIRAntialiasFilterType._8_TAP_HANNING
+    .. py:attribute:: FlexFIRAntialiasFilterType.EIGHT_TAP_HANNING
 
 
 
@@ -1404,7 +1404,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._480I_59_94_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_480I_59_94_FIELDS_PER_SECOND
 
 
 
@@ -1414,7 +1414,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._480I_60_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_480I_60_FIELDS_PER_SECOND
 
 
 
@@ -1424,7 +1424,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._480P_59_94_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_480P_59_94_FRAMES_PER_SECOND
 
 
 
@@ -1434,7 +1434,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._480P_60_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_480P_60_FRAMES_PER_SECOND
 
 
 
@@ -1444,7 +1444,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._576I_50_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_576I_50_FIELDS_PER_SECOND
 
 
 
@@ -1454,7 +1454,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._576P_50_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_576P_50_FRAMES_PER_SECOND
 
 
 
@@ -1464,7 +1464,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._720P_50_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_720P_50_FRAMES_PER_SECOND
 
 
 
@@ -1474,7 +1474,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._720P_59_94_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_720P_59_94_FRAMES_PER_SECOND
 
 
 
@@ -1484,7 +1484,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._720P_60_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_720P_60_FRAMES_PER_SECOND
 
 
 
@@ -1494,7 +1494,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._1080I_50_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_1080I_50_FIELDS_PER_SECOND
 
 
 
@@ -1504,7 +1504,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND
 
 
 
@@ -1514,7 +1514,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._1080I_60_FIELDS_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND
 
 
 
@@ -1524,7 +1524,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: VideoSignalFormat._1080P_24_FRAMES_PER_SECOND
+    .. py:attribute:: VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND
 
 
 

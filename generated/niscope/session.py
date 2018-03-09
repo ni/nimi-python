@@ -94,12 +94,12 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085)
+    adjust_pretrigger_samples_5102 = attributes.AttributeViBoolean(1150085)
     '''Type: bool
 
     When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
     '''
-    _5v_out_output_terminal = attributes.AttributeViString(1150129)
+    five_v_out_output_terminal = attributes.AttributeViString(1150129)
     '''Type: str
 
     Specifies the destination for the 5 Volt signal.
@@ -1938,7 +1938,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
@@ -1975,7 +1975,7 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
-                - **wfm** waveform array whose length is the **numSamples**
+                - **waveform** waveform array whose length is the **numSamples**
 
                 Call _actual_num_wfms to determine the size of this array.
 
@@ -2001,11 +2001,11 @@ class _SessionBase(object):
             start = i * num_samples
             end = start + num_samples
             if sys.version_info.major >= 3:
-                wfm_info[i].wfm = mv[start:end]
+                wfm_info[i].waveform = mv[start:end]
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].wfm = array.array('d', wfm[start:end])
+                wfm_info[i].waveform = array.array('d', wfm[start:end])
 
         return wfm_info
 
@@ -2035,7 +2035,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2050,7 +2050,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
+            waveform (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2101,16 +2101,16 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_size = (num_samples * self._actual_num_wfms())  # case B560
-        wfm_array = array.array("d", [0] * wfm_size)  # case B560
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm_array, library_type=visatype.ViReal64)  # case B560
+        waveform_size = (num_samples * self._actual_num_wfms())  # case B560
+        waveform_array = array.array("d", [0] * waveform_size)  # case B560
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2136,7 +2136,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2145,7 +2145,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            wfm (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2172,7 +2172,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.float64)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2221,24 +2221,24 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(wfm) is not numpy.ndarray:
-            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
-        if numpy.isfortran(wfm) is True:
-            raise TypeError('wfm must be in C-order')
-        if wfm.dtype is not numpy.dtype('float64'):
-            raise TypeError('wfm must be numpy.ndarray of dtype=float64, is ' + str(wfm.dtype))
+        if type(waveform) is not numpy.ndarray:
+            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
+        if numpy.isfortran(waveform) is True:
+            raise TypeError('waveform must be in C-order')
+        if waveform.dtype is not numpy.dtype('float64'):
+            raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary16_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2262,7 +2262,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary16(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary16(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2271,7 +2271,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            wfm (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2298,7 +2298,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int16)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2347,24 +2347,24 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(wfm) is not numpy.ndarray:
-            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
-        if numpy.isfortran(wfm) is True:
-            raise TypeError('wfm must be in C-order')
-        if wfm.dtype is not numpy.dtype('int16'):
-            raise TypeError('wfm must be numpy.ndarray of dtype=int16, is ' + str(wfm.dtype))
+        if type(waveform) is not numpy.ndarray:
+            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
+        if numpy.isfortran(waveform) is True:
+            raise TypeError('waveform must be in C-order')
+        if waveform.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_FetchBinary16(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_FetchBinary16(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary32_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary32
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2388,7 +2388,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary32(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary32(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2397,7 +2397,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            wfm (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2424,7 +2424,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int32)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2473,24 +2473,24 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(wfm) is not numpy.ndarray:
-            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
-        if numpy.isfortran(wfm) is True:
-            raise TypeError('wfm must be in C-order')
-        if wfm.dtype is not numpy.dtype('int32'):
-            raise TypeError('wfm must be numpy.ndarray of dtype=int32, is ' + str(wfm.dtype))
+        if type(waveform) is not numpy.ndarray:
+            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
+        if numpy.isfortran(waveform) is True:
+            raise TypeError('waveform must be in C-order')
+        if waveform.dtype is not numpy.dtype('int32'):
+            raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_FetchBinary32(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_FetchBinary32(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def _fetch_binary8_into_numpy(self, num_samples, wfm, timeout=datetime.timedelta(seconds=5.0)):
+    def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary8
 
         Retrieves data from a previously initiated acquisition and returns
@@ -2514,7 +2514,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_binary8(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1']._fetch_binary8(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -2523,7 +2523,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            wfm (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2550,7 +2550,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
+            waveform (numpy.array(dtype=numpy.int8)): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -2599,24 +2599,24 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(wfm) is not numpy.ndarray:
-            raise TypeError('wfm must be {0}, is {1}'.format(numpy.ndarray, type(wfm)))
-        if numpy.isfortran(wfm) is True:
-            raise TypeError('wfm must be in C-order')
-        if wfm.dtype is not numpy.dtype('int8'):
-            raise TypeError('wfm must be numpy.ndarray of dtype=int8, is ' + str(wfm.dtype))
+        if type(waveform) is not numpy.ndarray:
+            raise TypeError('waveform must be {0}, is {1}'.format(numpy.ndarray, type(waveform)))
+        if numpy.isfortran(waveform) is True:
+            raise TypeError('waveform must be in C-order')
+        if waveform.dtype is not numpy.dtype('int8'):
+            raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
         vi_ctype = visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm)  # case B510
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_FetchBinary8(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_FetchBinary8(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, wfm, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
+    def fetch_into(self, waveform, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2634,10 +2634,10 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch(wfm, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            wfm (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            waveform (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
                 Types supported are
 
@@ -2650,8 +2650,8 @@ class _SessionBase(object):
 
                 .. code-block:: python
 
-                    wfm = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                    wfm_info = session['0,1'].fetch_into(num_samples, wfms, timeout=5.0)
+                    waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
+                    wfm_info = session['0,1'].fetch_into(num_samples, waveform, timeout=5.0)
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
@@ -2697,18 +2697,18 @@ class _SessionBase(object):
             self._fetch_record_number = record_number
             self._fetch_num_records = -1 if num_records is None else num_records
 
-        num_samples = int(len(wfm) / self._actual_num_wfms())
+        num_samples = int(len(waveform) / self._actual_num_wfms())
 
-        if wfm.dtype == numpy.float64:
-            return self._fetch_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
-        elif wfm.dtype == numpy.int8:
-            return self._fetch_binary8_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
-        elif wfm.dtype == numpy.int16:
-            return self._fetch_binary16_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
-        elif wfm.dtype == numpy.int32:
-            return self._fetch_binary32_into_numpy(num_samples=num_samples, wfm=wfm, timeout=timeout)
+        if waveform.dtype == numpy.float64:
+            return self._fetch_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+        elif waveform.dtype == numpy.int8:
+            return self._fetch_binary8_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+        elif waveform.dtype == numpy.int16:
+            return self._fetch_binary16_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+        elif waveform.dtype == numpy.int32:
+            return self._fetch_binary32_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         else:
-            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(wfm.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
     def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement
@@ -2731,7 +2731,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -2794,7 +2794,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -3108,7 +3108,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read(num_samples, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
@@ -3123,7 +3123,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm (array.array("d")): Returns an array whose length is the **numSamples** times number of
+            waveform (array.array("d")): Returns an array whose length is the **numSamples** times number of
                 waveforms. Call ActualNumwfms to determine the number of
                 waveforms.
 
@@ -3174,14 +3174,14 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
         num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
-        wfm_size = (num_samples * self._actual_num_wfms())  # case B560
-        wfm_array = array.array("d", [0] * wfm_size)  # case B560
-        wfm_ctype = get_ctypes_pointer_for_buffer(value=wfm_array, library_type=visatype.ViReal64)  # case B560
+        waveform_size = (num_samples * self._actual_num_wfms())  # case B560
+        waveform_array = array.array("d", [0] * waveform_size)  # case B560
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
-        error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, wfm_ctype, wfm_info_ctype)
+        error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return wfm_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''read_measurement
@@ -3207,7 +3207,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read_measurement(scalar_meas_function, timeout='datetime.timedelta(seconds=5.0)')
+            session.channels['0,1'].read_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -4307,7 +4307,7 @@ class Session(_SessionBase):
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
                 | ExportableSignals.SAMPLE_CLOCK             | (101) | Export the Sample clock for the digitizer to the specified terminal.                            |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
-                | ExportableSignals._5V_OUT                  | (13)  | Exports a 5 V power supply.                                                                     |
+                | ExportableSignals.FIVE_V_OUT               | (13)  | Exports a 5 V power supply.                                                                     |
                 +--------------------------------------------+-------+-------------------------------------------------------------------------------------------------+
 
             output_terminal (str): Identifies the hardware signal line on which the digital pulse is

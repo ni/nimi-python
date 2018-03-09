@@ -17,3 +17,20 @@ enums_additional_enums = {
     'OffsetCompensatedOhms': {},  # Delete because boolean values only
 }
 
+# Override names that can't be directly converted from C names into valid Python names
+enums_override_values = {
+    'Function': { 'values': {
+        4: { 'python_name': 'TWO_WIRE_RES', },
+        5: { 'python_name': 'FOUR_WIRE_RES', },
+    }, },
+    'ThermistorType': { 'values': {
+        1: { 'python_name': 'TEMP_THERMISTOR_THERMISTOR_44004', },
+        2: { 'python_name': 'TEMP_THERMISTOR_THERMISTOR_44006', },
+        3: { 'python_name': 'TEMP_THERMISTOR_THERMISTOR_44007', },
+    }, },
+    'TransducerType': { 'values': {
+        2: { 'python_name': 'TWO_WIRE_RTD', },
+        3: { 'python_name': 'FOUR_WIRE_RTD', },
+    }, },
+}
+
