@@ -491,6 +491,7 @@ functions_python_name = {
     'FancyFetch':                 { 'python_name': 'fetch', },
 }
 
+# Set parameter name to Waveform instead of Wfm, even for private functions (for consistency)
 functions_parameter_names = {
     'FetchBinary8':               { 'parameters': { 4: { 'name': 'Waveform', }, }, },
     'FetchBinary8':               { 'parameters': { 4: { 'name': 'Waveform', }, }, },
