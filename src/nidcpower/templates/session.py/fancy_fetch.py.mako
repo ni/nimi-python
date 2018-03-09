@@ -11,7 +11,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import collections
-        Measurements = collections.namedtuple('Measurements', ['voltage', 'current', 'in_compliance'])
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
