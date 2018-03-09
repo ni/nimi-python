@@ -12,12 +12,14 @@
         '''
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+        if count is None:
+            count = self.fetch_backlog
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
         measurements = []
         for i in range(count):
-            measurements.append(Measurements(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
+            measurements.append(Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
 
         return measurements
 
