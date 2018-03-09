@@ -704,20 +704,19 @@ nidcpower.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+.. py:method:: fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
 
-    Returns an array of voltage measurements, an array of current
-    measurements, and an array of compliance measurements that were
+    Returns an array of named tuples that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
     :py:meth:`nidcpower.Session._initiate` before calling this method.
 
-    Refer to the `Acquiring
-    Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
-    and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
-    the *NI DC Power Supplies and SMUs Help* for more information about
-    configuring this method.
+    Fields in named tuple:
+
+    - **voltage** (float)
+    - **current** (float)
+    - **in_compliance** (bool)
 
     
 
@@ -731,7 +730,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1'].fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
 
 
     :param count:
@@ -746,7 +745,7 @@ nidcpower.Session methods
     :param timeout:
 
 
-        Specifies the maximum time allowed for this method to complete, in seconds. If the method does not complete within this time interval, NI-DCPower returns an error.
+        Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
         
 
@@ -755,11 +754,15 @@ nidcpower.Session methods
 
     :type timeout: datetime.timedelta
 
-    :rtype: list of float
+    :rtype: list of named tuple
     :return:
 
 
-            Returns an array of named tuples.
+            Returns an array of named tuples. Fields:
+
+            - **voltage** (float)
+            - **current** (float)
+            - **in_compliance** (bool)
 
             
 
