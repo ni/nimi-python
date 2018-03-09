@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Forwards to _fetch() with a nicer interface'''
+    '''Forwards to _fetch_multiple() with a nicer interface'''
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
