@@ -143,7 +143,7 @@ functions_converters = {
 # Functions not in original metadata.
 functions_additional_functions = {
     'CreateWaveformDispatcher': {
-        'codegen_method': 'public',
+        'codegen_method': 'api',
         'returns': 'ViStatus',
         'parameters': [
             {

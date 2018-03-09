@@ -158,7 +158,7 @@ functions_converters = {
 functions_additional_functions = {
     # Public function that wraps driver function but returns datetime object instead of individual items
     'GetLastCalDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'api',
         'returns': 'ViStatus',
         'python_name': 'get_cal_date_and_time',
         'real_datetime_call': 'GetCalDateAndTime',
