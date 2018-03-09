@@ -204,24 +204,30 @@ performed sequentially based on the order specified in this parameter.
                 'type': 'ViReal64[]',
                 'python_type': 'named tuple',
                 'documentation': {
-                    'description': 'Returns an array of named tuples.',
+                    'description': '''
+Returns an array of named tuples. Fields:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool)
+''',
                 },
             },
         ],
         'documentation': {
             'description': '''
-Returns an array of voltage measurements, an array of current
-measurements, and an array of compliance measurements that were
+Returns an array of named tuples that were
 previously taken and are stored in the NI-DCPower buffer. This function
 should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
 set to NIDCPOWER_VAL_ON_DEMAND. You must first call
 niDCPower_Initiate before calling this function.
 
-Refer to the `Acquiring
-Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
-and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
-the *NI DC Power Supplies and SMUs Help* for more information about
-configuring this function.
+Fields in named tuple:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool)
+
 ''',
             'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.',
         },
