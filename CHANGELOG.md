@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `Session.fetch()` and `Session.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
         * Enum values and attribute names that start with an underscore + digit have been renamed
             * `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`
             * `Session._5v_out_output_terminal` --> `Session.five_v_out_output_terminal`
