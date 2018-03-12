@@ -9,7 +9,7 @@ import datetime
 import six
 
 
-# This parsing functions duplicates the parsing in the driver, so if changes are made there, they will need to be replicated here.
+# These parsing functions duplicate the parsing in the driver, so if changes are made there, they will need to be replicated here.
 def _repeated_capability_string_to_list(repeated_capability, prefix):
     '''Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
 
