@@ -202,10 +202,10 @@ performed sequentially based on the order specified in this parameter.
                 'direction': 'out',
                 'name': 'measurements',
                 'type': 'ViReal64[]',
-                'python_type': 'named tuple',
+                'python_type': 'Measurement',
                 'documentation': {
                     'description': '''
-Returns an array of named tuples. Fields:
+List of named tuples with fields:
 
 - **voltage** (float)
 - **current** (float)
@@ -216,13 +216,13 @@ Returns an array of named tuples. Fields:
         ],
         'documentation': {
             'description': '''
-Returns an array of named tuples that were
+Returns an list of named tuples (Measurement) that were
 previously taken and are stored in the NI-DCPower buffer. This function
 should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
 set to NIDCPOWER_VAL_ON_DEMAND. You must first call
 niDCPower_Initiate before calling this function.
 
-Fields in named tuple:
+Fields in Measurement:
 
 - **voltage** (float)
 - **current** (float)
