@@ -302,7 +302,7 @@ def filter_codegen_functions(functions):
 
 
 def filter_library_functions(functions):
-    '''Returns function metadata only for those functions to be included in codegen'''
+    '''Returns function metadata only for those functions to included the library layer (library.py and mock_helper.py)'''
     return {k: v for k, v in functions.items() if v['codegen_method'] != 'no' and v['codegen_method'] != 'python-only'}
 
 
