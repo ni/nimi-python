@@ -706,13 +706,13 @@ nidcpower.Session methods
 
 .. py:method:: fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
 
-    Returns an array of named tuples that were
+    Returns an list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
     :py:meth:`nidcpower.Session._initiate` before calling this method.
 
-    Fields in named tuple:
+    Fields in Measurement:
 
     - **voltage** (float)
     - **current** (float)
@@ -754,11 +754,11 @@ nidcpower.Session methods
 
     :type timeout: datetime.timedelta
 
-    :rtype: list of named tuple
+    :rtype: list of Measurement
     :return:
 
 
-            Returns an array of named tuples. Fields:
+            List of named tuples with fields:
 
             - **voltage** (float)
             - **current** (float)
