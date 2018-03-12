@@ -11,7 +11,7 @@
 
     doc_list = {}
     for fname in sorted(functions):
-        if functions[fname]['codegen_method'] == 'public':
+        if functions[fname]['codegen_method'] == 'public' or functions[fname]['codegen_method'] == 'python-only':
             for method_template in functions[fname]['method_templates']:
                 name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
                 doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
