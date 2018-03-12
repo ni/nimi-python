@@ -834,6 +834,24 @@ nidcpower.Session methods
 
     :type index: int
 
+.. py:method:: get_ext_cal_last_date_and_time()
+
+    Returns the date and time of the last successful calibration.
+
+    
+
+
+
+    :rtype: datetime.datetime
+    :return:
+
+
+            Indicates date and time of the last calibration.
+
+            
+
+
+
 .. py:method:: get_ext_cal_last_temp()
 
     Returns the onboard **temperature** of the device, in degrees Celsius,
@@ -869,6 +887,26 @@ nidcpower.Session methods
 
             Specifies the recommended maximum interval, in **months**, between
             external calibrations.
+
+            
+
+
+
+.. py:method:: get_self_cal_last_date_and_time()
+
+    Returns the date and time of the oldest successful self-calibration from among the channels in the session.
+
+    
+
+    .. note:: This method is not supported on all devices.
+
+
+
+    :rtype: datetime.datetime
+    :return:
+
+
+            Returns the date and time the device was last calibrated.
 
             
 
