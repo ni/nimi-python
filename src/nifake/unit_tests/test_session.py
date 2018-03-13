@@ -682,13 +682,7 @@ class TestSession(object):
 
     def test_repeated_capabilities_list(self):
         with nifake.Session('dev1') as session:
-            assert session.channels['0']._repeated_capability_list == ['0']
             assert session.channels['r0']._repeated_capability_list == ['r0']
-            assert session.channels['0,1']._repeated_capability_list == ['0', '1']
-            assert session.channels['0-2']._repeated_capability_list == ['0', '1', '2']
-            assert session.channels['2-0']._repeated_capability_list == ['2', '1', '0']
-            assert session.channels[[0, 1]]._repeated_capability_list == ['0', '1']
-            assert session.channels[[4, 0, 2]]._repeated_capability_list == ['4', '0', '2']
 
     # Attributes
 
