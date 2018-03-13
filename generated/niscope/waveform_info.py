@@ -74,10 +74,20 @@ class WaveformInfo(object):
     def __str__(self):
         row_format_g = '{:<20}: {:,.6g}'
         row_format_d = '{:<20}: {:,}'
-        string_representation = row_format_g.format('Absolute X0', self.absolute_initial_x) + '\n'
+        row_format_s = '{:<20}: {:}'
+        string_representation = ''
+        try:
+            string_representation += row_format_s.format('channel', self.channel)
+            string_representation += row_format_d.format('record', self.record)
+        except AttributeError:
+            pass
+        string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x) + '\n'
         string_representation += row_format_g.format('Relative X0', self.relative_initial_x) + '\n'
         string_representation += row_format_g.format('dt', self.x_increment) + '\n'
-        string_representation += row_format_d.format('actual samples', self.actual_samples) + '\n'
+        try:
+            string_representation += row_format_d.format('actual samples', self.actual_samples) + '\n'
+        except AttributeError:
+            pass
         string_representation += row_format_g.format('offset', self.offset) + '\n'
         string_representation += row_format_g.format('gain', self.gain)
         try:
@@ -85,4 +95,6 @@ class WaveformInfo(object):
         except AttributeError:
             pass
         return string_representation
+
+
 

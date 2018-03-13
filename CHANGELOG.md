@@ -48,7 +48,12 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * `Session.fetch()` and `Session.fetch_into()` now takes additional parameters for associated attributes and add resulting record as part of the waveform info
+        * `Session.fetch()` and `Session.fetch_into()` updated
+            * Takes additional parameters that modify fetch behavior
+            * Add resulting record as part of the waveform info
+            * Channel name and record number added to waveform info
+            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch) 
+                and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
         * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
         * Enum values and attribute names that start with an underscore + digit have been renamed
             * `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`

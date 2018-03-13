@@ -2,6 +2,7 @@ import math
 import niscope
 import numpy
 import pytest
+import sys
 
 
 @pytest.fixture(scope='function')
@@ -41,11 +42,12 @@ def test_fetch(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
+    test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
     with session.initiate():
-        waveforms = session.channels[test_channels].fetch(num_samples=test_record_length)
-    assert len(waveforms) == test_num_channels
+        waveforms = session.channels[test_channels].fetch(num_samples=test_record_length, num_records=test_num_records)
+    assert len(waveforms) == test_num_channels * test_num_records
     for i in range(len(waveforms)):
         assert len(waveforms[i].waveform) == test_record_length
 
@@ -76,9 +78,24 @@ def test_fetch_binary8_into(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+
     for sample in waveform:
         assert not math.isnan(sample)
     assert len(waveforms) == test_num_channels
+
+    for i in range(len(waveforms)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
+            record_wfm = waveforms[i].waveform
+            assert len(record_wfm) == test_record_length
+            for j in range(len(record_wfm)):
+                assert record_wfm[j] == waveform[i * test_record_length + j]
+        else:
+            try:
+                waveforms[i].wfm
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_binary16_into(session):
@@ -93,9 +110,24 @@ def test_fetch_binary16_into(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+
     for sample in waveform:
         assert not math.isnan(sample)
     assert len(waveforms) == test_num_channels
+
+    for i in range(len(waveforms)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
+            record_wfm = waveforms[i].waveform
+            assert len(record_wfm) == test_record_length
+            for j in range(len(record_wfm)):
+                assert record_wfm[j] == waveform[i * test_record_length + j]
+        else:
+            try:
+                waveforms[i].waveform
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_binary32_into(session):
@@ -110,9 +142,24 @@ def test_fetch_binary32_into(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+
     for sample in waveform:
         assert not math.isnan(sample)
     assert len(waveforms) == test_num_channels
+
+    for i in range(len(waveforms)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
+            record_wfm = waveforms[i].waveform
+            assert len(record_wfm) == test_record_length
+            for j in range(len(record_wfm)):
+                assert record_wfm[j] == waveform[i * test_record_length + j]
+        else:
+            try:
+                waveforms[i].waveform
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_fetch_double_into(session):
@@ -127,9 +174,24 @@ def test_fetch_double_into(session):
     session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
     with session.initiate():
         waveforms = session.channels[test_channels].fetch_into(waveform=waveform)
+
     for sample in waveform:
         assert not math.isnan(sample)
     assert len(waveforms) == test_num_channels
+
+    for i in range(len(waveforms)):
+        if sys.version_info.major >= 3:
+            # Only python 3 will have the record memory view in the wfm_info
+            record_wfm = waveforms[i].waveform
+            assert len(record_wfm) == test_record_length
+            for j in range(len(record_wfm)):
+                assert record_wfm[j] == waveform[i * test_record_length + j]
+        else:
+            try:
+                waveforms[i].waveform
+                assert False
+            except AttributeError:
+                pass
 
 
 def test_self_test(session):

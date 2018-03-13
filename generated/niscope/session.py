@@ -1960,24 +1960,24 @@ class _SessionBase(object):
         Returns:
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
-                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+                -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+                -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                -  **x_increment** (float) the time between points in the acquired waveform in seconds
+                -  **channel** (str) channel name this waveform was asquire from
+                -  **record** (int) record number of this waveform
+                -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
 
                         voltage = binary data * gain factor + offset
 
-                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+                -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
 
                         voltage = binary data * gain factor + offset
 
-                - **waveform** waveform array whose length is the **numSamples**
-
-                Call _actual_num_wfms to determine the size of this array.
+                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
         import sys
@@ -1999,13 +1999,28 @@ class _SessionBase(object):
 
         for i in range(len(wfm_info)):
             start = i * num_samples
-            end = start + num_samples
+            # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
+            # since the length of the wfm will tell us that information
+            end = start + wfm_info[i].actual_samples
+            del wfm_info[i].actual_samples
             if sys.version_info.major >= 3:
                 wfm_info[i].waveform = mv[start:end]
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
                 wfm_info[i].waveform = array.array('d', wfm[start:end])
+
+        lwfm_i = len(wfm_info)
+        lrcl = len(self._repeated_capability_list)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
+        actual_num_records = int(lwfm_i / lrcl)
+        i = 0
+        for chan in self._repeated_capability_list:
+            for rec in range(offset, offset + actual_num_records):
+                wfm_info[i].channel = chan
+                wfm_info[i].record = rec
+                i += 1
 
         return wfm_info
 
@@ -2670,25 +2685,28 @@ class _SessionBase(object):
         Returns:
             wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
-                -  **relative_initial_x** the time (in seconds) from the trigger to the first sample in the fetched waveform
-                -  **absolute_initial_x** timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-                -  **x_increment** the time between points in the acquired waveform in seconds -  **actual_samples** the actual number of samples fetched and placed in the waveform array
-                -  **gain** the gain factor of the given channel; useful for scaling binary data with the following formula:
+                -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+                -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                -  **x_increment** (float) the time between points in the acquired waveform in seconds
+                -  **channel** (str) channel name this waveform was asquire from
+                -  **record** (int) record number of this waveform
+                -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
 
                         voltage = binary data * gain factor + offset
 
-                -  **offset** the offset factor of the given channel; useful for scaling binary data with the following formula:
+                -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
 
                     .. math::
 
                         voltage = binary data * gain factor + offset
 
-                Call _actual_num_wfms to determine the size of this array.
+                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
         import numpy
+        import sys
 
         # Set the fetch attributes
         with _NoChannel(session=self):
@@ -2700,15 +2718,39 @@ class _SessionBase(object):
         num_samples = int(len(waveform) / self._actual_num_wfms())
 
         if waveform.dtype == numpy.float64:
-            return self._fetch_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+            wfm_info = self._fetch_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         elif waveform.dtype == numpy.int8:
-            return self._fetch_binary8_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+            wfm_info = self._fetch_binary8_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         elif waveform.dtype == numpy.int16:
-            return self._fetch_binary16_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+            wfm_info = self._fetch_binary16_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         elif waveform.dtype == numpy.int32:
-            return self._fetch_binary32_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
+            wfm_info = self._fetch_binary32_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+
+        if sys.version_info.major >= 3:
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            mv = memoryview(waveform)
+
+        i = 0
+        lwfm_i = len(wfm_info)
+        lrcl = len(self._repeated_capability_list)
+        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_infos) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
+        actual_num_records = int(lwfm_i / lrcl)
+        for chan in self._repeated_capability_list:
+            for rec in range(offset, offset + actual_num_records):
+                wfm_info[i].channel = chan
+                wfm_info[i].record = rec
+
+                if sys.version_info.major >= 3:
+                    start = i * num_samples
+                    end = start + wfm_info[i].actual_samples
+                    del wfm_info[i].actual_samples
+                    wfm_info[i].waveform = mv[start:end]
+
+                i += 1
+
+        return wfm_info
 
     def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch_measurement
