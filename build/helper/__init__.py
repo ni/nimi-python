@@ -40,6 +40,7 @@ from build.helper.metadata_filters import filter_ivi_dance_parameter  # noqa: F4
 from build.helper.metadata_filters import filter_len_parameter  # noqa: F401
 from build.helper.metadata_filters import filter_library_functions  # noqa: F401
 from build.helper.metadata_filters import filter_parameters  # noqa: F401
+from build.helper.metadata_filters import filter_public_functions  # noqa: F401
 
 from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_size_parameter  # noqa: F401
