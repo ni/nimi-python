@@ -3,7 +3,7 @@
 
     config        = template_parameters['metadata'].config
     attributes    = helper.filter_codegen_attributes(config['attributes'])
-    functions     = helper.filter_codegen_functions(config['functions'])
+    functions     = helper.filter_public_functions(config['functions'])
     module_name   = config['module_name']
     driver_name   = config['driver_name']
     c_function_prefix = config['c_function_prefix']
@@ -36,10 +36,9 @@ table = helper.as_rest_table(table_contents)
 <%
 function_names = []
 for f in sorted(functions):
-    if functions[f]['codegen_method'] == 'public':
-        name = functions[f]['python_name']
-        for method_template in functions[f]['method_templates']:
-            function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
+    name = functions[f]['python_name']
+    for method_template in functions[f]['method_templates']:
+        function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
 
 table_contents = []
 table_contents.append(['Method name'])
