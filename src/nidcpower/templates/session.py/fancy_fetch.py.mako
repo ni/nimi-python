@@ -12,8 +12,6 @@
         '''
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
-        if count is None:
-            count = self.fetch_backlog
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
