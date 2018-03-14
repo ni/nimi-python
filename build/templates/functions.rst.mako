@@ -7,14 +7,13 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = template_parameters['metadata'].functions
-    functions = helper.filter_codegen_functions(functions)
+    functions = helper.filter_public_functions(functions)
 
     doc_list = {}
     for fname in sorted(functions):
-        if functions[fname]['codegen_method'] == 'public':
-            for method_template in functions[fname]['method_templates']:
-                name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
-                doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
+        for method_template in functions[fname]['method_templates']:
+            name =  functions[fname]['python_name'] + method_template['method_python_name_suffix']
+            doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}

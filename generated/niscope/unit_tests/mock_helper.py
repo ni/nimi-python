@@ -59,9 +59,6 @@ class SideEffectsHelper(object):
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
-        self._defaults['FancyFetch'] = {}
-        self._defaults['FancyFetch']['return'] = 0
-        self._defaults['FancyFetch']['wfmInfo'] = None
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Waveform'] = None
@@ -78,9 +75,6 @@ class SideEffectsHelper(object):
         self._defaults['FetchBinary8']['return'] = 0
         self._defaults['FetchBinary8']['Waveform'] = None
         self._defaults['FetchBinary8']['wfmInfo'] = None
-        self._defaults['FetchDispatcher'] = {}
-        self._defaults['FetchDispatcher']['return'] = 0
-        self._defaults['FetchDispatcher']['wfmInfo'] = None
         self._defaults['FetchMeasurement'] = {}
         self._defaults['FetchMeasurement']['return'] = 0
         self._defaults['FetchMeasurement']['Result'] = None
@@ -269,22 +263,6 @@ class SideEffectsHelper(object):
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
 
-    def niScope_FancyFetch(self, vi, channel_list, num_samples, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
-        if self._defaults['FancyFetch']['return'] != 0:
-            return self._defaults['FancyFetch']['return']
-        # wfm_info
-        if self._defaults['FancyFetch']['wfmInfo'] is None:
-            raise MockFunctionCallError("niScope_FancyFetch", param='wfmInfo')
-        test_value = self._defaults['FancyFetch']['wfmInfo']
-        try:
-            wfm_info_ref = wfm_info.contents
-        except AttributeError:
-            wfm_info_ref = wfm_info
-        assert len(wfm_info_ref) >= len(test_value)
-        for i in range(len(test_value)):
-            wfm_info_ref[i] = test_value[i]
-        return self._defaults['FancyFetch']['return']
-
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
             return self._defaults['Fetch']['return']
@@ -392,22 +370,6 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['FetchBinary8']['return']
-
-    def niScope_FetchDispatcher(self, vi, channel_list, waveform, relative_to, offset, record_number, num_records, timeout, wfm_info):  # noqa: N802
-        if self._defaults['FetchDispatcher']['return'] != 0:
-            return self._defaults['FetchDispatcher']['return']
-        # wfm_info
-        if self._defaults['FetchDispatcher']['wfmInfo'] is None:
-            raise MockFunctionCallError("niScope_FetchDispatcher", param='wfmInfo')
-        test_value = self._defaults['FetchDispatcher']['wfmInfo']
-        try:
-            wfm_info_ref = wfm_info.contents
-        except AttributeError:
-            wfm_info_ref = wfm_info
-        assert len(wfm_info_ref) >= len(test_value)
-        for i in range(len(test_value)):
-            wfm_info_ref[i] = test_value[i]
-        return self._defaults['FetchDispatcher']['return']
 
     def niScope_FetchMeasurement(self, vi, channel_list, timeout, scalar_meas_function, result):  # noqa: N802
         if self._defaults['FetchMeasurement']['return'] != 0:
@@ -737,8 +699,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_Disable.return_value = 0
         mock_library.niScope_ExportSignal.side_effect = MockFunctionCallError("niScope_ExportSignal")
         mock_library.niScope_ExportSignal.return_value = 0
-        mock_library.niScope_FancyFetch.side_effect = MockFunctionCallError("niScope_FancyFetch")
-        mock_library.niScope_FancyFetch.return_value = 0
         mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
         mock_library.niScope_Fetch.return_value = 0
         mock_library.niScope_FetchBinary16.side_effect = MockFunctionCallError("niScope_FetchBinary16")
@@ -747,8 +707,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_FetchBinary32.return_value = 0
         mock_library.niScope_FetchBinary8.side_effect = MockFunctionCallError("niScope_FetchBinary8")
         mock_library.niScope_FetchBinary8.return_value = 0
-        mock_library.niScope_FetchDispatcher.side_effect = MockFunctionCallError("niScope_FetchDispatcher")
-        mock_library.niScope_FetchDispatcher.return_value = 0
         mock_library.niScope_FetchMeasurement.side_effect = MockFunctionCallError("niScope_FetchMeasurement")
         mock_library.niScope_FetchMeasurement.return_value = 0
         mock_library.niScope_FetchMeasurementStats.side_effect = MockFunctionCallError("niScope_FetchMeasurementStats")

@@ -242,7 +242,7 @@ functions_converters = {
 # Functions not in original metadata.
 functions_additional_functions = {
     'FancyFetch': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
@@ -358,7 +358,7 @@ channels, the acquisition type, and the number of records you specify.''',
         },
     },
     'FetchDispatcher': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {

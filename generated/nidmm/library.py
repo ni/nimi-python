@@ -45,7 +45,6 @@ class Library(object):
         self.niDMM_GetDevTemp_cfunc = None
         self.niDMM_GetError_cfunc = None
         self.niDMM_GetExtCalRecommendedInterval_cfunc = None
-        self.niDMM_GetLastCalDateAndTime_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
         self.niDMM_GetMeasurementPeriod_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
@@ -292,14 +291,6 @@ class Library(object):
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetExtCalRecommendedInterval_cfunc(vi, months)
-
-    def niDMM_GetLastCalDateAndTime(self, vi, cal_type, month):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetLastCalDateAndTime_cfunc is None:
-                self.niDMM_GetLastCalDateAndTime_cfunc = self._library.niDMM_GetLastCalDateAndTime
-                self.niDMM_GetLastCalDateAndTime_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(datetime.datetime)]  # noqa: F405
-                self.niDMM_GetLastCalDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_GetLastCalDateAndTime_cfunc(vi, cal_type, month)
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         with self._func_lock:
