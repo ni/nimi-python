@@ -51,19 +51,19 @@ TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
 all: $(TARGETS)
 
 DEFAULT_PY_FILES_TO_GENERATE := \
-    attributes.py \
-    enums.py \
-    library.py \
-    library_singleton.py \
+    _attributes.py \
+    _enums.py \
+    _library.py \
+    _library_singleton.py \
     session.py \
-    errors.py \
-    unit_tests/mock_helper.py \
-    unit_tests/matchers.py \
+    _errors.py \
+    unit_tests/_mock_helper.py \
+    unit_tests/_matchers.py \
     __init__.py \
     _converters.py \
 
 DEFAULT_PY_FILES_TO_COPY := \
-    visatype.py \
+    _visatype.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
     session.rst \

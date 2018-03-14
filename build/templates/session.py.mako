@@ -25,15 +25,15 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from ${module_name} import _converters
-from ${module_name} import attributes
-from ${module_name} import enums
-from ${module_name} import errors
-from ${module_name} import library_singleton
-from ${module_name} import visatype
+import ${module_name}._attributes as _attributes
+import ${module_name}._converters as _converters
+import ${module_name}._enums as _enums
+import ${module_name}._errors as _errors
+import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._visatype as _visatype
 % for c in config['custom_types']:
 
-from ${module_name} import ${c['file_name']}  # noqa: F401
+import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
 # Used for __repr__
@@ -125,9 +125,9 @@ if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, _enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
-    ${attributes[attribute]['python_name']} = attributes.${attributes[attribute]['attribute_class']}(${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''Type: ${attributes[attribute]['python_type']}
@@ -176,7 +176,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         try:
             _, error_string = self._get_error()
             return error_string
-        except errors.Error:
+        except _errors.Error:
             pass
 
         try:
@@ -187,7 +187,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except errors.Error:
+        except _errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
@@ -212,7 +212,7 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
 %   endif
 % endfor
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
@@ -245,7 +245,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except _errors.Error as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0

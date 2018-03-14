@@ -33,6 +33,6 @@
 %   endfor
 % endfor
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters, config, use_numpy_array=True)}
 

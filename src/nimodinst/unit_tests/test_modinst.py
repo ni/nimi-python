@@ -1,5 +1,6 @@
-import matchers
-import mock_helper
+import _matchers
+import _mock_helper
+
 import nimodinst
 import warnings
 
@@ -10,12 +11,12 @@ SESSION_NUM_FOR_TEST = 42
 
 class TestSession(object):
     def setup_method(self, method):
-        self.patched_library_patcher = patch('nimodinst.library.Library', autospec=True)
+        self.patched_library_patcher = patch('nimodinst._library.Library', autospec=True)
         self.patched_library = self.patched_library_patcher.start()
-        self.patched_library_singleton_get = patch('nimodinst.session.library_singleton.get', return_value=self.patched_library)
+        self.patched_library_singleton_get = patch('nimodinst.session._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
-        self.side_effects_helper = mock_helper.SideEffectsHelper()
+        self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
         self.patched_library.niModInst_OpenInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_OpenInstalledDevicesSession
         self.disallow_close = self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect
@@ -55,20 +56,20 @@ class TestSession(object):
 
     def test_open_and_close(self):
         session = nimodinst.Session('')
-        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
+        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_close(self):
         session = nimodinst.Session('')
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
-            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_iterating_for(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2

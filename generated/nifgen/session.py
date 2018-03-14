@@ -4,12 +4,12 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from nifgen import _converters
-from nifgen import attributes
-from nifgen import enums
-from nifgen import errors
-from nifgen import library_singleton
-from nifgen import visatype
+import nifgen._attributes as _attributes
+import nifgen._converters as _converters
+import nifgen._enums as _enums
+import nifgen._errors as _errors
+import nifgen._library_singleton as _library_singleton
+import nifgen._visatype as _visatype
 
 # Used for __repr__
 import pprint
@@ -92,51 +92,51 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
+    all_marker_events_latched_status = _attributes.AttributeViInt32(1150349)
     '''Type: int
 
     Returns a bit field of the latched status of all Marker Events.  Write 0 to this property to clear the latched status of all Marker Events.
     '''
-    all_marker_events_live_status = attributes.AttributeViInt32(1150344)
+    all_marker_events_live_status = _attributes.AttributeViInt32(1150344)
     '''Type: int
 
     Returns a bit field of the live status of all Marker Events.
     '''
-    analog_data_mask = attributes.AttributeViInt32(1150234)
+    analog_data_mask = _attributes.AttributeViInt32(1150234)
     '''Type: int
 
     Specifies the mask to apply to the analog output. The masked data is replaced with the data in analog_static_value.
     '''
-    analog_filter_enabled = attributes.AttributeViBoolean(1150103)
+    analog_filter_enabled = _attributes.AttributeViBoolean(1150103)
     '''Type: bool
 
     Controls whether the signal generator applies to an analog filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
-    analog_path = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AnalogPath, 1150222)
-    '''Type: enums.AnalogPath
+    analog_path = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.AnalogPath, 1150222)
+    '''Type: _enums.AnalogPath
 
     Specifies the analog signal path that should be used. The main path allows you to configure gain, offset, analog filter status, output impedance, and output enable. The main path has two amplifier options, high- and low-gain.
     The direct path presents a much smaller gain range, and you cannot adjust offset or the filter status. The direct path also provides a smaller output range but also lower distortion. NI-FGEN normally chooses the amplifier based on the user-specified gain.
     '''
-    analog_static_value = attributes.AttributeViInt32(1150235)
+    analog_static_value = _attributes.AttributeViInt32(1150235)
     '''Type: int
 
     Specifies the static value that replaces data masked by analog_data_mask.
     '''
-    arb_gain = attributes.AttributeViReal64(1250202)
+    arb_gain = _attributes.AttributeViReal64(1250202)
     '''Type: float
 
     Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges.
     For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
     Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     '''
-    arb_marker_position = attributes.AttributeViInt32(1150327)
+    arb_marker_position = _attributes.AttributeViInt32(1150327)
     '''Type: int
 
     Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when output_mode is set to OutputMode.ARB.
     Use export_signal to export the marker signal.
     '''
-    arb_offset = attributes.AttributeViReal64(1250203)
+    arb_offset = _attributes.AttributeViReal64(1250203)
     '''Type: float
 
     Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to shift the arbitrary waveform range.
@@ -144,25 +144,25 @@ class _SessionBase(object):
     Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     Units: Volts
     '''
-    arb_repeat_count = attributes.AttributeViInt32(1150328)
+    arb_repeat_count = _attributes.AttributeViInt32(1150328)
     '''Type: int
 
     Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
     When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
-    arb_sample_rate = attributes.AttributeViReal64(1250204)
+    arb_sample_rate = _attributes.AttributeViReal64(1250204)
     '''Type: float
 
     Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this property when output_mode is set  to OutputMode.ARB or OutputMode.SEQ.
     Units: Samples/s
     '''
-    arb_sequence_handle = attributes.AttributeViInt32(1250211)
+    arb_sequence_handle = _attributes.AttributeViInt32(1250211)
     '''Type: int
 
     This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using create_arb_sequence. create_arb_sequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
     Use this property only when output_mode is set to OutputMode.SEQ.
     '''
-    arb_waveform_handle = attributes.AttributeViInt32(1250201)
+    arb_waveform_handle = _attributes.AttributeViInt32(1250201)
     '''Type: int
 
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
@@ -177,17 +177,17 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    aux_power_enabled = attributes.AttributeViBoolean(1150411)
+    aux_power_enabled = _attributes.AttributeViBoolean(1150411)
     '''Type: bool
 
     Controls the specified auxiliary power pin. Setting this property to TRUE energizes the auxiliary power when the session is committed. When this property is FALSE, the power pin of the connector outputs no power.
     '''
-    bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
-    '''Type: enums.BusType
+    bus_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.BusType, 1150215)
+    '''Type: _enums.BusType
 
     The bus type of the signal generator.
     '''
-    cache = attributes.AttributeViBoolean(1050004)
+    cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
     Specifies whether to cache the value of properties.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
@@ -196,65 +196,65 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
-    '''Type: enums.CalADCInput
+    cal_adc_input = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.CalADCInput, 1150227)
+    '''Type: _enums.CalADCInput
 
     Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
     '''
-    channel_delay = attributes.AttributeViReal64(1150369)
+    channel_delay = _attributes.AttributeViReal64(1150369)
     '''Type: float
 
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
-    clock_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ClockMode, 1150110)
-    '''Type: enums.ClockMode
+    clock_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ClockMode, 1150110)
+    '''Type: _enums.ClockMode
 
     Controls which clock mode is used for the signal generator.
     For signal generators that support it, this property allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
     '''
-    common_mode_offset = attributes.AttributeViReal64(1150366)
+    common_mode_offset = _attributes.AttributeViReal64(1150366)
     '''Type: float
 
     Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the terminal_configuration property to TerminalConfiguration.DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
     '''
-    data_marker_events_count = attributes.AttributeViInt32(1150273)
+    data_marker_events_count = _attributes.AttributeViInt32(1150273)
     '''Type: int
 
     Returns the number of Data Marker Events supported by the device.
     '''
-    data_marker_event_data_bit_number = attributes.AttributeViInt32(1150337)
+    data_marker_event_data_bit_number = _attributes.AttributeViInt32(1150337)
     '''Type: int
 
     Specifies the bit number to assign to the Data Marker Event.
     '''
-    data_marker_event_level_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
-    '''Type: enums.DataMarkerEventLevelPolarity
+    data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DataMarkerEventLevelPolarity, 1150338)
+    '''Type: _enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
     '''
-    data_marker_event_output_terminal = attributes.AttributeViString(1150339)
+    data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
     '''Type: str
 
     Specifies the destination terminal for the Data Marker Event.
     '''
-    data_transfer_block_size = attributes.AttributeViInt32(1150241)
+    data_transfer_block_size = _attributes.AttributeViInt32(1150241)
     '''Type: int
 
     The number of samples at a time to download to onboard memory. Useful when the total data to be transferred to onboard memory is large.
     '''
-    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150373)
+    data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150373)
     '''Type: float
 
     Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this property. Set this property to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
     '''
-    data_transfer_maximum_in_flight_reads = attributes.AttributeViInt32(1150375)
+    data_transfer_maximum_in_flight_reads = _attributes.AttributeViInt32(1150375)
     '''Type: int
 
     Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue.
     When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this property is set to the highest value the signal generator supports.
     If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the NI signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
     '''
-    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150374)
+    data_transfer_preferred_packet_size = _attributes.AttributeViInt32(1150374)
     '''Type: int
 
     Specifies the preferred size of the data field in a PCI Express read request packet. In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
@@ -265,128 +265,128 @@ class _SessionBase(object):
     Note:
     :
     '''
-    digital_data_mask = attributes.AttributeViInt32(1150236)
+    digital_data_mask = _attributes.AttributeViInt32(1150236)
     '''Type: int
 
     Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in digital_static_value.
     '''
-    digital_edge_script_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150292)
-    '''Type: enums.ScriptTriggerDigitalEdgeEdge
+    digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ScriptTriggerDigitalEdgeEdge, 1150292)
+    '''Type: _enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
     '''
-    digital_edge_script_trigger_source = attributes.AttributeViString(1150291)
+    digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
     '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
     '''
-    digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
-    '''Type: enums.StartTriggerDigitalEdgeEdge
+    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartTriggerDigitalEdgeEdge, 1150282)
+    '''Type: _enums.StartTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
-    digital_edge_start_trigger_source = attributes.AttributeViString(1150281)
+    digital_edge_start_trigger_source = _attributes.AttributeViString(1150281)
     '''Type: str
 
     Specifies the source terminal for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
-    digital_filter_enabled = attributes.AttributeViBoolean(1150102)
+    digital_filter_enabled = _attributes.AttributeViBoolean(1150102)
     '''Type: bool
 
     Controls whether the signal generator applies a digital filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
-    digital_filter_interpolation_factor = attributes.AttributeViReal64(1150218)
+    digital_filter_interpolation_factor = _attributes.AttributeViReal64(1150218)
     '''Type: float
 
     This property only affects the device when digital_filter_enabled is set to True. If you do not set this property directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
     '''
-    digital_gain = attributes.AttributeViReal64(1150254)
+    digital_gain = _attributes.AttributeViReal64(1150254)
     '''Type: float
 
     Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
     Some signal generators support both digital gain and an analog gain (analog gain is specified with the func_amplitude property or the arb_gain property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
-    digital_level_script_trigger_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
-    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
+    digital_level_script_trigger_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
+    '''Type: _enums.ScriptTriggerDigitalLevelActiveLevel
 
     Specifies the active level for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
     '''
-    digital_level_script_trigger_source = attributes.AttributeViString(1150293)
+    digital_level_script_trigger_source = _attributes.AttributeViString(1150293)
     '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
     '''
-    digital_pattern_enabled = attributes.AttributeViBoolean(1150101)
+    digital_pattern_enabled = _attributes.AttributeViBoolean(1150101)
     '''Type: bool
 
     Controls whether the signal generator generates a digital pattern of the output signal.
     '''
-    digital_static_value = attributes.AttributeViInt32(1150237)
+    digital_static_value = _attributes.AttributeViInt32(1150237)
     '''Type: int
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    direct_dma_enabled = attributes.AttributeViBoolean(1150244)
+    direct_dma_enabled = _attributes.AttributeViBoolean(1150244)
     '''Type: bool
 
     Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
     '''
-    direct_dma_window_address = attributes.AttributeViInt32(1150274)
+    direct_dma_window_address = _attributes.AttributeViInt32(1150274)
     '''Type: int
 
     Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
     '''
-    direct_dma_window_size = attributes.AttributeViInt32(1150245)
+    direct_dma_window_size = _attributes.AttributeViInt32(1150245)
     '''Type: int
 
     Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
     '''
-    done_event_delay = attributes.AttributeViReal64(1150358)
+    done_event_delay = _attributes.AttributeViReal64(1150358)
     '''Type: float
 
     Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
     '''
-    done_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: enums.DoneEventDelayUnits
+    done_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DoneEventDelayUnits, 1150359)
+    '''Type: _enums.DoneEventDelayUnits
 
     Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
     '''
-    done_event_latched_status = attributes.AttributeViBoolean(1150351)
+    done_event_latched_status = _attributes.AttributeViBoolean(1150351)
     '''Type: bool
 
     Returns the latched status of the specified Done Event.
     '''
-    done_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: enums.DoneEventActiveLevel
+    done_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DoneEventActiveLevel, 1150317)
+    '''Type: _enums.DoneEventActiveLevel
 
     Specifies the output polarity of the Done Event.
     '''
-    done_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: enums.DoneEventOutputBehavior
+    done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DoneEventOutputBehavior, 1150332)
+    '''Type: _enums.DoneEventOutputBehavior
 
     Specifies the output behavior for the Done Event.
     '''
-    done_event_output_terminal = attributes.AttributeViString(1150315)
+    done_event_output_terminal = _attributes.AttributeViString(1150315)
     '''Type: str
 
     Specifies the destination terminal for the Done Event.
     '''
-    done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: enums.DoneEventPulsePolarity
+    done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DoneEventPulsePolarity, 1150319)
+    '''Type: _enums.DoneEventPulsePolarity
 
     Specifies the output polarity of the Done Event.
     '''
-    done_event_pulse_width = attributes.AttributeViReal64(1150336)
+    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
     '''Type: float
 
     Specifies the pulse width for the Done Event.
     '''
-    done_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
+    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DoneEventPulseWidthUnits, 1150334)
+    '''Type: _enums.DoneEventPulseWidthUnits
 
     Specifies the pulse width units for the Done Event.
     '''
-    driver_setup = attributes.AttributeViString(1050007)
+    driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
 
     Specifies the driver setup portion of the option string that was passed into the InitWithOptions method.
@@ -394,32 +394,32 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
+    exported_onboard_reference_clock_output_terminal = _attributes.AttributeViString(1150322)
     '''Type: str
 
     Specifies the terminal to which to export the Onboard Reference Clock.
     '''
-    exported_reference_clock_output_terminal = attributes.AttributeViString(1150321)
+    exported_reference_clock_output_terminal = _attributes.AttributeViString(1150321)
     '''Type: str
 
     Specifies the terminal to which to export the Reference Clock.
     '''
-    exported_sample_clock_divisor = attributes.AttributeViInt32(1150219)
+    exported_sample_clock_divisor = _attributes.AttributeViInt32(1150219)
     '''Type: int
 
     Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the export_signal method or the  exported_sample_clock_output_terminal property.
     '''
-    exported_sample_clock_output_terminal = attributes.AttributeViString(1150320)
+    exported_sample_clock_output_terminal = _attributes.AttributeViString(1150320)
     '''Type: str
 
     Specifies the terminal to which to export the Sample Clock.
     '''
-    exported_sample_clock_timebase_divisor = attributes.AttributeViInt32(1150230)
+    exported_sample_clock_timebase_divisor = _attributes.AttributeViInt32(1150230)
     '''Type: int
 
     Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the export_signal method or the  exported_sample_clock_timebase_output_terminal property.
     '''
-    exported_sample_clock_timebase_output_terminal = attributes.AttributeViString(1150329)
+    exported_sample_clock_timebase_output_terminal = _attributes.AttributeViString(1150329)
     '''Type: str
 
     Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the exported_sample_clock_timebase_divisor property,   the Sample clock exported with the exported_sample_clock_timebase_output_terminal  property is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
@@ -427,59 +427,59 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    exported_script_trigger_output_terminal = attributes.AttributeViString(1150295)
+    exported_script_trigger_output_terminal = _attributes.AttributeViString(1150295)
     '''Type: str
 
     Specifies the output terminal for the exported Script trigger.
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
     '''
-    exported_start_trigger_output_terminal = attributes.AttributeViString(1150283)
+    exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
     '''Type: str
 
     Specifies the destination terminal for exporting the Start trigger.
     '''
-    external_clock_delay_binary_value = attributes.AttributeViInt32(1150233)
+    external_clock_delay_binary_value = _attributes.AttributeViInt32(1150233)
     '''Type: int
 
     Binary value of the external clock delay.
     '''
-    external_sample_clock_multiplier = attributes.AttributeViReal64(1150376)
+    external_sample_clock_multiplier = _attributes.AttributeViReal64(1150376)
     '''Type: float
 
     Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this property to generate samples at a rate higher than your external clock rate.  When using this property, you do not need to explicitly set the external clock rate.
     '''
-    file_transfer_block_size = attributes.AttributeViInt32(1150240)
+    file_transfer_block_size = _attributes.AttributeViInt32(1150240)
     '''Type: int
 
     The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File methods.
     '''
-    filter_correction_frequency = attributes.AttributeViReal64(1150104)
+    filter_correction_frequency = _attributes.AttributeViReal64(1150104)
     '''Type: float
 
     Controls the filter correction frequency of the analog filter. This property corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this property to 0 Hz.
     '''
-    flatness_correction_enabled = attributes.AttributeViBoolean(1150323)
+    flatness_correction_enabled = _attributes.AttributeViBoolean(1150323)
     '''Type: bool
 
     When True, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
     This property should be set to False when performing Flatness Calibration.
     '''
-    fpga_bitfile_path = attributes.AttributeViString(1150412)
+    fpga_bitfile_path = _attributes.AttributeViString(1150412)
     '''Type: str
 
     Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
-    freq_list_duration_quantum = attributes.AttributeViReal64(1150214)
+    freq_list_duration_quantum = _attributes.AttributeViReal64(1150214)
     '''Type: float
 
     Returns the quantum of which all durations must be a multiple in a  frequency list.
     '''
-    freq_list_handle = attributes.AttributeViInt32(1150208)
+    freq_list_handle = _attributes.AttributeViInt32(1150208)
     '''Type: int
 
     Sets which frequency list the signal generator  produces. Create a frequency list using create_freq_list.  create_freq_list returns a handle that you can  use to identify the list.
     '''
-    func_amplitude = attributes.AttributeViReal64(1250102)
+    func_amplitude = _attributes.AttributeViReal64(1250102)
     '''Type: float
 
     Controls the amplitude of the standard waveform that the  signal generator produces. This value is the amplitude at the  output terminal.
@@ -489,7 +489,7 @@ class _SessionBase(object):
 
     Note: This parameter does not affect signal generator behavior when you
     '''
-    func_buffer_size = attributes.AttributeViInt32(1150238)
+    func_buffer_size = _attributes.AttributeViInt32(1150238)
     '''Type: int
 
     This property contains the number of samples used in the standard method waveform  buffer. This property is only valid on devices that implement standard method mode  in software, and is read-only for all other devices.
@@ -497,14 +497,14 @@ class _SessionBase(object):
 
     Note: Refer to the Standard Method Mode topic for more information on the
     '''
-    func_dc_offset = attributes.AttributeViReal64(1250103)
+    func_dc_offset = _attributes.AttributeViReal64(1250103)
     '''Type: float
 
     Controls the DC offset of the standard waveform that the  signal generator produces.  This value is the offset at the output  terminal. The value is the offset from ground to the center of the  waveform that you specify with the Waveform parameter.
     For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
     Units: volts
     '''
-    func_duty_cycle_high = attributes.AttributeViReal64(1250106)
+    func_duty_cycle_high = _attributes.AttributeViReal64(1250106)
     '''Type: float
 
     Controls the duty cycle of the square wave the signal generator  produces. Specify this property as a percentage of  the time the square wave is high in a cycle.
@@ -513,7 +513,7 @@ class _SessionBase(object):
 
     Note: This parameter only affects signal generator behavior when you
     '''
-    func_frequency = attributes.AttributeViReal64(1250104)
+    func_frequency = _attributes.AttributeViReal64(1250104)
     '''Type: float
 
     Controls the frequency of the standard waveform that the  signal generator produces.
@@ -524,7 +524,7 @@ class _SessionBase(object):
     Note:
     :
     '''
-    func_max_buffer_size = attributes.AttributeViInt32(1150239)
+    func_max_buffer_size = _attributes.AttributeViInt32(1150239)
     '''Type: int
 
     This property sets the maximum number of samples that can be used in the standard  method waveform buffer. Increasing this value may increase the quality of  the waveform. This property is only valid on devices that implement standard  method mode in software, and is read-only for all other devices.
@@ -532,7 +532,7 @@ class _SessionBase(object):
 
     Note: Refer to the Standard Method Mode topic for more information on the
     '''
-    func_start_phase = attributes.AttributeViReal64(1250105)
+    func_start_phase = _attributes.AttributeViReal64(1250105)
     '''Type: float
 
     Controls horizontal offset of the standard waveform the  signal generator produces. Specify this property in degrees of  one waveform cycle.
@@ -542,8 +542,8 @@ class _SessionBase(object):
 
     Note: This parameter does not affect signal generator behavior when you
     '''
-    func_waveform = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Waveform, 1250101)
-    '''Type: enums.Waveform
+    func_waveform = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Waveform, 1250101)
+    '''Type: _enums.Waveform
 
     This channel-based property specifies which standard waveform the signal generator produces.
     Use this property only when output_mode is set to  OutputMode.FUNC.
@@ -557,43 +557,43 @@ class _SessionBase(object):
     Waveform.USER      - User-defined waveform as defined with
     define_user_standard_waveform
     '''
-    gain_dac_value = attributes.AttributeViInt32(1150223)
+    gain_dac_value = _attributes.AttributeViInt32(1150223)
     '''Type: int
 
     Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    group_capabilities = attributes.AttributeViString(1050401)
+    group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
 
     Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
     '''
-    idle_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
-    '''Type: enums.IdleBehavior
+    idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.IdleBehavior, 1150377)
+    '''Type: _enums.IdleBehavior
 
     Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
     '''
-    idle_value = attributes.AttributeViInt32(1150378)
+    idle_value = _attributes.AttributeViInt32(1150378)
     '''Type: int
 
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
-    id_query_response = attributes.AttributeViString(1150001)
-    instrument_firmware_revision = attributes.AttributeViString(1050510)
+    id_query_response = _attributes.AttributeViString(1150001)
+    instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     A string that contains the firmware revision information  for the device that you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511)
+    instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
 
     A string that contains the name of the device manufacturer you are currently  using.
     '''
-    instrument_model = attributes.AttributeViString(1050512)
+    instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
 
     A string that contains the model number or name of the device that you  are currently using.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021)
+    interchange_check = _attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  _initiate_generation.
@@ -603,14 +603,14 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
+    io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor that NI-FGEN uses to identify the physical device.
     If you initialize NI-FGEN with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
     If you initialize NI-FGEN with the resource  descriptor, this property contains that value.
     '''
-    load_impedance = attributes.AttributeViReal64(1150220)
+    load_impedance = _attributes.AttributeViReal64(1150220)
     '''Type: float
 
     This channel-based property specifies the load impedance connected to the analog output of the channel. If you set this property to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
@@ -618,7 +618,7 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    logical_name = attributes.AttributeViString(1050305)
+    logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name that you specified when opening the  current IVI session.
@@ -627,332 +627,332 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    major_version = attributes.AttributeViInt32(1050503)
+    major_version = _attributes.AttributeViInt32(1050503)
     '''Type: int
 
     Returns the major version number of NI-FGEN.
     '''
-    marker_events_count = attributes.AttributeViInt32(1150271)
+    marker_events_count = _attributes.AttributeViInt32(1150271)
     '''Type: int
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    marker_event_delay = attributes.AttributeViReal64(1150354)
+    marker_event_delay = _attributes.AttributeViReal64(1150354)
     '''Type: float
 
     Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
     '''
-    marker_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: enums.MarkerEventDelayUnits
+    marker_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MarkerEventDelayUnits, 1150355)
+    '''Type: _enums.MarkerEventDelayUnits
 
     Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
     '''
-    marker_event_latched_status = attributes.AttributeViBoolean(1150350)
+    marker_event_latched_status = _attributes.AttributeViBoolean(1150350)
     '''Type: bool
 
     Specifies the latched status of the specified Marker Event.
     Write True to this property to clear the latched status of the Marker Event.
     '''
-    marker_event_live_status = attributes.AttributeViBoolean(1150345)
+    marker_event_live_status = _attributes.AttributeViBoolean(1150345)
     '''Type: bool
 
     Returns the live status of the specified Marker Event.
     '''
-    marker_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: enums.MarkerEventOutputBehavior
+    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MarkerEventOutputBehavior, 1150342)
+    '''Type: _enums.MarkerEventOutputBehavior
 
     Specifies the output behavior for the Marker Event.
     '''
-    marker_event_output_terminal = attributes.AttributeViString(1150312)
+    marker_event_output_terminal = _attributes.AttributeViString(1150312)
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
     '''
-    marker_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: enums.MarkerEventPulsePolarity
+    marker_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MarkerEventPulsePolarity, 1150313)
+    '''Type: _enums.MarkerEventPulsePolarity
 
     Specifies the output polarity of the Marker Event.
     '''
-    marker_event_pulse_width = attributes.AttributeViReal64(1150340)
+    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
     '''Type: float
 
     Specifies the pulse width for the Marker Event.
     '''
-    marker_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
+    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MarkerEventPulseWidthUnits, 1150341)
+    '''Type: _enums.MarkerEventPulseWidthUnits
 
     Specifies the pulse width units for the Marker Event.
     '''
-    marker_event_toggle_initial_state = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: enums.MarkerEventToggleInitialState
+    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MarkerEventToggleInitialState, 1150343)
+    '''Type: _enums.MarkerEventToggleInitialState
 
     Specifies the output polarity of the Marker Event.
     '''
-    max_freq_list_duration = attributes.AttributeViReal64(1150213)
+    max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
 
     Returns the maximum duration of any one step in the frequency  list.
     '''
-    max_freq_list_length = attributes.AttributeViInt32(1150211)
+    max_freq_list_length = _attributes.AttributeViInt32(1150211)
     '''Type: int
 
     Returns the maximum number of steps that can be in a frequency  list.
     '''
-    max_loop_count = attributes.AttributeViInt32(1250215)
+    max_loop_count = _attributes.AttributeViInt32(1250215)
     '''Type: int
 
     Returns the maximum number of times that the signal generator can repeat a waveform in a sequence. Typically, this value is constant for the signal generator.
     '''
-    max_num_freq_lists = attributes.AttributeViInt32(1150209)
+    max_num_freq_lists = _attributes.AttributeViInt32(1150209)
     '''Type: int
 
     Returns the maximum number of frequency lists the signal generator allows.
     '''
-    max_num_sequences = attributes.AttributeViInt32(1250212)
+    max_num_sequences = _attributes.AttributeViInt32(1250212)
     '''Type: int
 
     Returns the maximum number of arbitrary sequences that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
-    max_num_waveforms = attributes.AttributeViInt32(1250205)
+    max_num_waveforms = _attributes.AttributeViInt32(1250205)
     '''Type: int
 
     Returns the maximum number of arbitrary waveforms that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
-    max_sequence_length = attributes.AttributeViInt32(1250214)
+    max_sequence_length = _attributes.AttributeViInt32(1250214)
     '''Type: int
 
     Returns the maximum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
-    max_waveform_size = attributes.AttributeViInt32(1250208)
+    max_waveform_size = _attributes.AttributeViInt32(1250208)
     '''Type: int
 
     Returns the size, in samples, of the largest waveform that can be created. This property reflects the space currently available, taking into account previously allocated waveforms and instructions.
     '''
-    memory_size = attributes.AttributeViInt32(1150242)
+    memory_size = _attributes.AttributeViInt32(1150242)
     '''Type: int
 
     The total amount of memory, in bytes, on the signal generator.
     '''
-    minor_version = attributes.AttributeViInt32(1050504)
+    minor_version = _attributes.AttributeViInt32(1050504)
     '''Type: int
 
     Returns the minor version number of NI-FGEN.
     '''
-    min_freq_list_duration = attributes.AttributeViReal64(1150212)
+    min_freq_list_duration = _attributes.AttributeViReal64(1150212)
     '''Type: float
 
     Returns the minimum number of steps that can be in a frequency  list.
     '''
-    min_freq_list_length = attributes.AttributeViInt32(1150210)
+    min_freq_list_length = _attributes.AttributeViInt32(1150210)
     '''Type: int
 
     Returns the minimum number of frequency lists that the signal generator allows.
     '''
-    min_sequence_length = attributes.AttributeViInt32(1250213)
+    min_sequence_length = _attributes.AttributeViInt32(1250213)
     '''Type: int
 
     Returns the minimum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
-    min_waveform_size = attributes.AttributeViInt32(1250207)
+    min_waveform_size = _attributes.AttributeViInt32(1250207)
     '''Type: int
 
     Returns the minimum number of points that the signal generator allows in an arbitrary waveform. Typically, this value is constant for the signal generator.
     '''
-    module_revision = attributes.AttributeViString(1150390)
+    module_revision = _attributes.AttributeViString(1150390)
     '''Type: str
 
     A string that contains the module revision  for the device that you are currently using.
     '''
-    num_channels = attributes.AttributeViInt32(1050203)
+    num_channels = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
-    offset_dac_value = attributes.AttributeViInt32(1150224)
+    offset_dac_value = _attributes.AttributeViInt32(1150224)
     '''Type: int
 
     Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    oscillator_freq_dac_value = attributes.AttributeViInt32(1150225)
+    oscillator_freq_dac_value = _attributes.AttributeViInt32(1150225)
     '''Type: int
 
     Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    oscillator_phase_dac_value = attributes.AttributeViInt32(1150232)
+    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150232)
     '''Type: int
 
     The value of the oscillator phase DAC.
     '''
-    osp_carrier_enabled = attributes.AttributeViBoolean(1150249)
+    osp_carrier_enabled = _attributes.AttributeViBoolean(1150249)
     '''Type: bool
 
     Enables or disables generation of the carrier.
     '''
-    osp_carrier_frequency = attributes.AttributeViReal64(1150250)
+    osp_carrier_frequency = _attributes.AttributeViReal64(1150250)
     '''Type: float
 
     The frequency of the generated carrier.
     '''
-    osp_carrier_phase_i = attributes.AttributeViReal64(1150251)
+    osp_carrier_phase_i = _attributes.AttributeViReal64(1150251)
     '''Type: float
 
     I Carrier Phase in degrees at the first point of the generation.
     '''
-    osp_carrier_phase_q = attributes.AttributeViReal64(1150252)
+    osp_carrier_phase_q = _attributes.AttributeViReal64(1150252)
     '''Type: float
 
     Q Carrier Phase in degrees at the first point of the generation.  This property is only used when the osp_data_processing_mode  property is set to DataProcessingMode.COMPLEX.
     '''
-    osp_cic_filter_enabled = attributes.AttributeViBoolean(1150257)
+    osp_cic_filter_enabled = _attributes.AttributeViBoolean(1150257)
     '''Type: bool
 
     Enables or disables the CIC filter.
     The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
     '''
-    osp_cic_filter_gain = attributes.AttributeViReal64(1150263)
+    osp_cic_filter_gain = _attributes.AttributeViReal64(1150263)
     '''Type: float
 
     Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this property overrides the value set by NI-FGEN.
     '''
-    osp_cic_filter_interpolation = attributes.AttributeViReal64(1150258)
+    osp_cic_filter_interpolation = _attributes.AttributeViReal64(1150258)
     '''Type: float
 
     Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the osp_iq_rate property.
     '''
-    osp_compensate_for_filter_group_delay = attributes.AttributeViBoolean(1150389)
+    osp_compensate_for_filter_group_delay = _attributes.AttributeViBoolean(1150389)
     '''Type: bool
 
     Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
     '''
-    osp_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150247)
-    '''Type: enums.DataProcessingMode
+    osp_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DataProcessingMode, 1150247)
+    '''Type: _enums.DataProcessingMode
 
     The way in which data is processed by the OSP block.
     '''
-    osp_enabled = attributes.AttributeViBoolean(1150246)
+    osp_enabled = _attributes.AttributeViBoolean(1150246)
     '''Type: bool
 
     Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related properties are disabled and have no effect on the generated signal.
     '''
-    osp_fir_filter_enabled = attributes.AttributeViBoolean(1150255)
+    osp_fir_filter_enabled = _attributes.AttributeViBoolean(1150255)
     '''Type: bool
 
     Enables or disables the FIR filter.
     The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
     '''
-    osp_fir_filter_flat_passband = attributes.AttributeViReal64(1150261)
+    osp_fir_filter_flat_passband = _attributes.AttributeViReal64(1150261)
     '''Type: float
 
     Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This property is used only when the osp_fir_filter_type  property is set to FilterType.FLAT.
     '''
-    osp_fir_filter_gaussian_bt = attributes.AttributeViReal64(1150262)
+    osp_fir_filter_gaussian_bt = _attributes.AttributeViReal64(1150262)
     '''Type: float
 
     BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the osp_fir_filter_type property is set to  FilterType.GAUSSIAN.
     '''
-    osp_fir_filter_interpolation = attributes.AttributeViReal64(1150256)
+    osp_fir_filter_interpolation = _attributes.AttributeViReal64(1150256)
     '''Type: float
 
     Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the osp_iq_rate property.
     '''
-    osp_fir_filter_raised_cosine_alpha = attributes.AttributeViReal64(1150260)
+    osp_fir_filter_raised_cosine_alpha = _attributes.AttributeViReal64(1150260)
     '''Type: float
 
     Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the osp_fir_filter_type  property is set to FilterType.RAISED_COSINE.
     '''
-    osp_fir_filter_root_raised_cosine_alpha = attributes.AttributeViReal64(1150259)
+    osp_fir_filter_root_raised_cosine_alpha = _attributes.AttributeViReal64(1150259)
     '''Type: float
 
     Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This property is used only when the osp_fir_filter_type  property is set to FilterType.ROOT_RAISED_COSINE.
     '''
-    osp_fir_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150253)
-    '''Type: enums.FilterType
+    osp_fir_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.FilterType, 1150253)
+    '''Type: _enums.FilterType
 
     Pulse-shaping filter type for the FIR filter.
     '''
-    osp_frequency_shift = attributes.AttributeViReal64(1150371)
+    osp_frequency_shift = _attributes.AttributeViReal64(1150371)
     '''Type: float
 
     Specifies the amount of frequency shift applied to the baseband signal.
     '''
-    osp_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPMode, 1150370)
-    '''Type: enums.OSPMode
+    osp_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OSPMode, 1150370)
+    '''Type: _enums.OSPMode
 
     Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.
     '''
-    osp_overflow_error_reporting = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPOverflowErrorReporting, 1150268)
-    '''Type: enums.OSPOverflowErrorReporting
+    osp_overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OSPOverflowErrorReporting, 1150268)
+    '''Type: _enums.OSPOverflowErrorReporting
 
     Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
     You can use the osp_overflow_status property to query for overflow  conditions whether or not the osp_overflow_error_reporting property is  enabled. The device will continue to generate after an overflow whether or not the  osp_overflow_error_reporting property is enabled.
     '''
-    osp_overflow_status = attributes.AttributeViInt32(1150269)
+    osp_overflow_status = _attributes.AttributeViInt32(1150269)
     '''Type: int
 
     Returns a bit field of the overflow status in any stage of the OSP block.  This property is functional regardless of the value for the  osp_overflow_error_reporting property.
     Write 0 to this property to clear the current osp_overflow_error_reporting value.
     '''
-    osp_pre_filter_gain_i = attributes.AttributeViReal64(1150264)
+    osp_pre_filter_gain_i = _attributes.AttributeViReal64(1150264)
     '''Type: float
 
     Digital gain to apply to the I data stream before any filtering by the OSP block.
     '''
-    osp_pre_filter_gain_q = attributes.AttributeViReal64(1150265)
+    osp_pre_filter_gain_q = _attributes.AttributeViReal64(1150265)
     '''Type: float
 
     Digital gain to apply to the Q data stream before any filtering by the OSP block.  This property is only used when the osp_data_processing_mode property  is set to DataProcessingMode.COMPLEX.
     '''
-    osp_pre_filter_offset_i = attributes.AttributeViReal64(1150266)
+    osp_pre_filter_offset_i = _attributes.AttributeViReal64(1150266)
     '''Type: float
 
     Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.
     '''
-    osp_pre_filter_offset_q = attributes.AttributeViReal64(1150267)
+    osp_pre_filter_offset_q = _attributes.AttributeViReal64(1150267)
     '''Type: float
 
     Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This property is used only when  the osp_data_processing_mode property is set to DataProcessingMode.COMPLEX.
     '''
-    output_enabled = attributes.AttributeViBoolean(1250003)
+    output_enabled = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
     This channel-based property specifies whether the signal that the signal generator produces appears at the output connector.
     '''
-    output_impedance = attributes.AttributeViReal64(1250004)
+    output_impedance = _attributes.AttributeViReal64(1250004)
     '''Type: float
 
     This channel-based property specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
-    output_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputMode, 1250001)
-    '''Type: enums.OutputMode
+    output_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OutputMode, 1250001)
+    '''Type: _enums.OutputMode
 
     Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
-    p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410)
+    p2p_endpoint_fullness_start_trigger_level = _attributes.AttributeViInt32(1150410)
     '''Type: int
 
     Specifies the Endpoint threshold for the Start trigger. This property is used only when start_trigger_type is set to P2P Endpoint Fullness.
     '''
-    pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362)
+    pci_dma_optimizations_enabled = _attributes.AttributeViBoolean(1150362)
     '''Type: bool
 
     Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
     This property is only valid for PCI and PXI SMC-based devices.
     This property is enabled (True) by default, and NI recommends leaving it enabled.
     '''
-    post_amplifier_attenuation = attributes.AttributeViReal64(1150229)
+    post_amplifier_attenuation = _attributes.AttributeViReal64(1150229)
     '''Type: float
 
     Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
     '''
-    pre_amplifier_attenuation = attributes.AttributeViReal64(1150228)
+    pre_amplifier_attenuation = _attributes.AttributeViReal64(1150228)
     '''Type: float
 
     Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
     '''
-    range_check = attributes.AttributeViBoolean(1050002)
+    range_check = _attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
     Specifies whether to validate property values and method parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the methods. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
@@ -962,22 +962,22 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    ready_for_start_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: enums.ReadyForStartEventActiveLevel
+    ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ReadyForStartEventActiveLevel, 1150311)
+    '''Type: _enums.ReadyForStartEventActiveLevel
 
     Specifies the output polarity of the Ready for Start Event.
     '''
-    ready_for_start_event_live_status = attributes.AttributeViBoolean(1150348)
+    ready_for_start_event_live_status = _attributes.AttributeViBoolean(1150348)
     '''Type: bool
 
     Returns the live status of the specified Ready For Start Event.
     '''
-    ready_for_start_event_output_terminal = attributes.AttributeViString(1150310)
+    ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
     '''Type: str
 
     Specifies the destination terminal for the Ready for Start Event.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006)
+    record_coercions = _attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
     Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   Call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
@@ -987,8 +987,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    reference_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
-    '''Type: enums.ReferenceClockSource
+    reference_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, _enums.ReferenceClockSource, 1150113)
+    '''Type: _enums.ReferenceClockSource
 
     Specifies the reference clock source used by the signal generator.
     The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this property to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
@@ -996,12 +996,12 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    ref_clock_frequency = attributes.AttributeViReal64(1150107)
+    ref_clock_frequency = _attributes.AttributeViReal64(1150107)
     '''Type: float
 
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
     '''
-    sample_clock_absolute_delay = attributes.AttributeViReal64(1150231)
+    sample_clock_absolute_delay = _attributes.AttributeViReal64(1150231)
     '''Type: float
 
     Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
@@ -1009,15 +1009,15 @@ class _SessionBase(object):
 
     Note: For the NI 5421, absolute delay
     '''
-    sample_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockSource, 1150112)
-    '''Type: enums.SampleClockSource
+    sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, _enums.SampleClockSource, 1150112)
+    '''Type: _enums.SampleClockSource
 
     Specifies the Sample clock source. If you specify a divisor with the exported_sample_clock_divisor  property, the Sample clock exported with the exported_sample_clock_output_terminal property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
     To change the device configuration, call abort or wait for the generation to complete.
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    sample_clock_timebase_rate = attributes.AttributeViReal64(1150368)
+    sample_clock_timebase_rate = _attributes.AttributeViReal64(1150368)
     '''Type: float
 
     Specifies the Sample clock timebase rate. This property applies only to external Sample clock timebases.
@@ -1025,37 +1025,37 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    sample_clock_timebase_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
-    '''Type: enums.SampleClockTimebaseSource
+    sample_clock_timebase_source = _attributes.AttributeEnum(_attributes.AttributeViString, _enums.SampleClockTimebaseSource, 1150367)
+    '''Type: _enums.SampleClockTimebaseSource
 
     Specifies the Sample Clock Timebase source.
     To change the device configuration, call the abort method or wait for the generation to complete.
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    script_to_generate = attributes.AttributeViString(1150270)
+    script_to_generate = _attributes.AttributeViString(1150270)
     '''Type: str
 
     Specifies which script the generator produces. To configure the generator to run a particular script, set this property to the name of the script. Use write_script to create multiple scripts. Use this property when output_mode is set to OutputMode.SCRIPT.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
-    script_triggers_count = attributes.AttributeViInt32(1150272)
+    script_triggers_count = _attributes.AttributeViInt32(1150272)
     '''Type: int
 
     Specifies the number of Script triggers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    script_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerType, 1150290)
-    '''Type: enums.ScriptTriggerType
+    script_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ScriptTriggerType, 1150290)
+    '''Type: _enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
     '''
-    serial_number = attributes.AttributeViString(1150243)
+    serial_number = _attributes.AttributeViString(1150243)
     '''Type: str
 
     The signal generator's serial number.
     '''
-    simulate = attributes.AttributeViBoolean(1050005)
+    simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
     Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  methods perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  methods return calculated values.
@@ -1065,140 +1065,140 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     '''Type: int
 
     Returns the major version number of the class specification with which NI-FGEN is compliant.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
     '''Type: int
 
     Returns the minor version number of the class specification with which NI-FGEN is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514)
+    specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
     Returns a brief description of NI-FGEN.
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
+    specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
 
     A string that contains additional version information about  NI-FGEN.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513)
+    specific_driver_vendor = _attributes.AttributeViString(1050513)
     '''Type: str
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = attributes.AttributeViReal64(1150356)
+    started_event_delay = _attributes.AttributeViReal64(1150356)
     '''Type: float
 
     Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
     You can specify the units of the delay value by setting the started_event_delay property.
     '''
-    started_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: enums.StartedEventDelayUnits
+    started_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartedEventDelayUnits, 1150357)
+    '''Type: _enums.StartedEventDelayUnits
 
     Specifies the units applied to the value of the started_event_delay
     property.  Valid units are seconds and sample clock periods.
     '''
-    started_event_latched_status = attributes.AttributeViBoolean(1150352)
+    started_event_latched_status = _attributes.AttributeViBoolean(1150352)
     '''Type: bool
 
     Specifies the latched status of the Started Event.
     '''
-    started_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: enums.StartedEventActiveLevel
+    started_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartedEventActiveLevel, 1150316)
+    '''Type: _enums.StartedEventActiveLevel
 
     Specifies the output polarity of the Started Event.
     '''
-    started_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: enums.StartedEventOutputBehavior
+    started_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartedEventOutputBehavior, 1150331)
+    '''Type: _enums.StartedEventOutputBehavior
 
     Specifies the output behavior for the Started Event.
     '''
-    started_event_output_terminal = attributes.AttributeViString(1150314)
+    started_event_output_terminal = _attributes.AttributeViString(1150314)
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
     '''
-    started_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: enums.StartedEventPulsePolarity
+    started_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartedEventPulsePolarity, 1150318)
+    '''Type: _enums.StartedEventPulsePolarity
 
     Specifies the output polarity of the Started Event.
     '''
-    started_event_pulse_width = attributes.AttributeViReal64(1150335)
+    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
     '''Type: float
 
     Specifies the pulse width for the Started Event.
     '''
-    started_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
+    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartedEventPulseWidthUnits, 1150333)
+    '''Type: _enums.StartedEventPulseWidthUnits
 
     Specifies the pulse width units for the Started Event.
     '''
-    start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
-    '''Type: enums.StartTriggerType
+    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StartTriggerType, 1150280)
+    '''Type: _enums.StartTriggerType
 
     Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this property.
     '''
-    streaming_space_available_in_waveform = attributes.AttributeViInt32(1150325)
+    streaming_space_available_in_waveform = _attributes.AttributeViInt32(1150325)
     '''Type: int
 
     Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
     To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
     Used in conjunction with the streaming_waveform_handle or streaming_waveform_name properties.
     '''
-    streaming_waveform_handle = attributes.AttributeViInt32(1150324)
+    streaming_waveform_handle = _attributes.AttributeViInt32(1150324)
     '''Type: int
 
     Specifies the waveform handle of the waveform used to continuously stream data during generation. This property defaults to -1 when no streaming waveform is specified.
     Used in conjunction with streaming_space_available_in_waveform.
     '''
-    streaming_waveform_name = attributes.AttributeViString(1150326)
+    streaming_waveform_name = _attributes.AttributeViString(1150326)
     '''Type: str
 
     Specifies the name of the waveform used to continuously stream data during generation. This property defaults to // when no streaming waveform is specified.
     Use in conjunction with streaming_space_available_in_waveform.
     '''
-    streaming_write_timeout = attributes.AttributeViReal64TimeDeltaSeconds(1150409)
+    streaming_write_timeout = _attributes.AttributeViReal64TimeDeltaSeconds(1150409)
     '''Type: datetime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327)
+    supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
 
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
-    synchronization = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
-    '''Type: enums.SynchronizationSource
+    synchronization = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.SynchronizationSource, 1150111)
+    '''Type: _enums.SynchronizationSource
 
     Specify the source of the synchronization signal that you want to use.
     '''
-    sync_duty_cycle_high = attributes.AttributeViReal64(1150105)
+    sync_duty_cycle_high = _attributes.AttributeViReal64(1150105)
     '''Type: float
 
     Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
     Units: Percentage of time the waveform is high
     '''
-    sync_out_output_terminal = attributes.AttributeViString(1150330)
+    sync_out_output_terminal = _attributes.AttributeViString(1150330)
     '''Type: str
 
     Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
     '''
-    terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
-    '''Type: enums.TerminalConfiguration
+    terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TerminalConfiguration, 1150365)
+    '''Type: _enums.TerminalConfiguration
 
     Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
     '''
-    trigger_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerMode, 1150108)
-    '''Type: enums.TriggerMode
+    trigger_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerMode, 1150108)
+    '''Type: _enums.TriggerMode
 
     Controls the trigger mode.
     '''
-    trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250302)
-    '''Type: enums.TriggerSource
+    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerSource, 1250302)
+    '''Type: _enums.TriggerSource
 
     Controls which trigger source the signal generator uses.
     After you call the _initiate_generation method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT property.
@@ -1207,22 +1207,22 @@ class _SessionBase(object):
     Note:
     One or more of the referenced properties are not in the Python API for this driver.
     '''
-    video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
-    '''Type: enums.VideoWaveformType
+    video_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.VideoWaveformType, 1150216)
+    '''Type: _enums.VideoWaveformType
 
     Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
     '''
-    wait_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
-    '''Type: enums.WaitBehavior
+    wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.WaitBehavior, 1150379)
+    '''Type: _enums.WaitBehavior
 
     Specifies the behavior of the output while waiting for a script trigger or during a wait instruction.  The output can be configured to hold the last generated voltage before waiting or jump to the Wait Value.
     '''
-    wait_value = attributes.AttributeViInt32(1150380)
+    wait_value = _attributes.AttributeViInt32(1150380)
     '''Type: int
 
     Specifies the value to generate while waiting.  The Wait Behavior must be configured to jump to this value.
     '''
-    waveform_quantum = attributes.AttributeViInt32(1250206)
+    waveform_quantum = _attributes.AttributeViInt32(1250206)
     '''Type: int
 
     The size of each arbitrary waveform must be a multiple of a quantum value. This property returns the quantum value that the signal generator allows.
@@ -1262,7 +1262,7 @@ class _SessionBase(object):
         try:
             _, error_string = self._get_error()
             return error_string
-        except errors.Error:
+        except _errors.Error:
             pass
 
         try:
@@ -1273,7 +1273,7 @@ class _SessionBase(object):
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except errors.Error:
+        except _errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
@@ -1302,12 +1302,12 @@ class _SessionBase(object):
                 **Default Value**: "4096"
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case S150
+        waveform_size_ctype = _visatype.ViInt32(waveform_size)  # case S150
         error_code = self._library.niFgen_AllocateNamedWaveform(vi_ctype, channel_name_ctype, waveform_name_ctype, waveform_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def allocate_waveform(self, waveform_size):
@@ -1338,12 +1338,12 @@ class _SessionBase(object):
                 when referring to this waveform.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case S150
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        waveform_size_ctype = _visatype.ViInt32(waveform_size)  # case S150
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_AllocateWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def clear_user_standard_waveform(self):
@@ -1360,10 +1360,10 @@ class _SessionBase(object):
 
             session.channels['0,1'].clear_user_standard_waveform()
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         error_code = self._library.niFgen_ClearUserStandardWaveform(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_arb_sequence(self, sequence_handle, gain, offset):
@@ -1422,13 +1422,13 @@ class _SessionBase(object):
                 **Default Value**: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sequence_handle_ctype = visatype.ViInt32(sequence_handle)  # case S150
-        gain_ctype = visatype.ViReal64(gain)  # case S150
-        offset_ctype = visatype.ViReal64(offset)  # case S150
+        sequence_handle_ctype = _visatype.ViInt32(sequence_handle)  # case S150
+        gain_ctype = _visatype.ViReal64(gain)  # case S150
+        offset_ctype = _visatype.ViReal64(offset)  # case S150
         error_code = self._library.niFgen_ConfigureArbSequence(vi_ctype, channel_name_ctype, sequence_handle_ctype, gain_ctype, offset_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_arb_waveform(self, waveform_handle, gain, offset):
@@ -1497,13 +1497,13 @@ class _SessionBase(object):
                 **Default Value**: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
-        gain_ctype = visatype.ViReal64(gain)  # case S150
-        offset_ctype = visatype.ViReal64(offset)  # case S150
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
+        gain_ctype = _visatype.ViReal64(gain)  # case S150
+        offset_ctype = _visatype.ViReal64(offset)  # case S150
         error_code = self._library.niFgen_ConfigureArbWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, gain_ctype, offset_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_custom_fir_filter_coefficients(self, coefficients_array):
@@ -1538,12 +1538,12 @@ class _SessionBase(object):
                 The coefficients should range between –1.00 and +1.00.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case S160
-        coefficients_array_ctype = get_ctypes_pointer_for_buffer(value=coefficients_array, library_type=visatype.ViReal64)  # case B550
+        number_of_coefficients_ctype = _visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case S160
+        coefficients_array_ctype = get_ctypes_pointer_for_buffer(value=coefficients_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
@@ -1620,14 +1620,14 @@ class _SessionBase(object):
                 the **waveform** parameter to Waveform.DC.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        frequency_list_handle_ctype = visatype.ViInt32(frequency_list_handle)  # case S150
-        amplitude_ctype = visatype.ViReal64(amplitude)  # case S150
-        dc_offset_ctype = visatype.ViReal64(dc_offset)  # case S150
-        start_phase_ctype = visatype.ViReal64(start_phase)  # case S150
+        frequency_list_handle_ctype = _visatype.ViInt32(frequency_list_handle)  # case S150
+        amplitude_ctype = _visatype.ViReal64(amplitude)  # case S150
+        dc_offset_ctype = _visatype.ViReal64(dc_offset)  # case S150
+        start_phase_ctype = _visatype.ViReal64(start_phase)  # case S150
         error_code = self._library.niFgen_ConfigureFreqList(vi_ctype, channel_name_ctype, frequency_list_handle_ctype, amplitude_ctype, dc_offset_ctype, start_phase_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
@@ -1659,7 +1659,7 @@ class _SessionBase(object):
             session.channels['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
         Args:
-            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
+            waveform (_enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the func_waveform property to this
                 value.
 
@@ -1744,17 +1744,17 @@ class _SessionBase(object):
                 the **waveform** parameter to Waveform.DC.
 
         '''
-        if type(waveform) is not enums.Waveform:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(waveform) is not _enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.Waveform))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_ctype = visatype.ViInt32(waveform.value)  # case S130
-        amplitude_ctype = visatype.ViReal64(amplitude)  # case S150
-        dc_offset_ctype = visatype.ViReal64(dc_offset)  # case S150
-        frequency_ctype = visatype.ViReal64(frequency)  # case S150
-        start_phase_ctype = visatype.ViReal64(start_phase)  # case S150
+        waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
+        amplitude_ctype = _visatype.ViReal64(amplitude)  # case S150
+        dc_offset_ctype = _visatype.ViReal64(dc_offset)  # case S150
+        frequency_ctype = _visatype.ViReal64(frequency)  # case S150
+        start_phase_ctype = _visatype.ViReal64(start_phase)  # case S150
         error_code = self._library.niFgen_ConfigureStandardWaveform(vi_ctype, channel_name_ctype, waveform_ctype, amplitude_ctype, dc_offset_ctype, frequency_ctype, start_phase_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def create_waveform(self, waveform_data_array):
@@ -1837,14 +1837,14 @@ class _SessionBase(object):
                 when referring to this waveform.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_array = get_ctypes_and_array(value=waveform_data_array, array_type="d")  # case B550
-        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=visatype.ViReal64)  # case B550
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=_visatype.ViReal64)  # case B550
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def _create_waveform_f64_numpy(self, waveform_data_array):
@@ -1893,13 +1893,13 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_data_array.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def create_waveform_from_file_f64(self, file_name, byte_order):
@@ -1928,7 +1928,7 @@ class _SessionBase(object):
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
 
-            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
+            byte_order (_enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -1954,15 +1954,15 @@ class _SessionBase(object):
                 when referring to this waveform.
 
         '''
-        if type(byte_order) is not enums.ByteOrder:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(byte_order) is not _enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.ByteOrder))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
-        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case S130
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        byte_order_ctype = _visatype.ViInt32(byte_order.value)  # case S130
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def create_waveform_from_file_i16(self, file_name, byte_order):
@@ -1991,7 +1991,7 @@ class _SessionBase(object):
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
 
-            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
+            byte_order (_enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -2017,15 +2017,15 @@ class _SessionBase(object):
                 when referring to this waveform.
 
         '''
-        if type(byte_order) is not enums.ByteOrder:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(byte_order) is not _enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.ByteOrder))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
-        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case S130
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        byte_order_ctype = _visatype.ViInt32(byte_order.value)  # case S130
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def _create_waveform_i16_numpy(self, waveform_data_array):
@@ -2072,13 +2072,13 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
-        waveform_handle_ctype = visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
     def define_user_standard_waveform(self, waveform_data_array):
@@ -2119,12 +2119,12 @@ class _SessionBase(object):
                 **Default Value**: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_size_ctype = visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=visatype.ViReal64)  # case B550
+        waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def delete_named_waveform(self, waveform_name):
@@ -2149,11 +2149,11 @@ class _SessionBase(object):
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_DeleteNamedWaveform(vi_ctype, channel_name_ctype, waveform_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def delete_script(self, script_name):
@@ -2174,11 +2174,11 @@ class _SessionBase(object):
                 appears in the text of the script following the script keyword.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_DeleteScript(vi_ctype, channel_name_ctype, script_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -2212,12 +2212,12 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niFgen_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
@@ -2249,12 +2249,12 @@ class _SessionBase(object):
                 ViInt32 variable.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
@@ -2288,12 +2288,12 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFgen_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
@@ -2340,17 +2340,17 @@ class _SessionBase(object):
             attribute_id (int): Specifies the ID of an property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        array_size_ctype = visatype.ViInt32()  # case S170
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        array_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case C060
+        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (_visatype.ViChar * array_size_ctype.value)()  # case C060
         error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
@@ -2381,16 +2381,16 @@ class _SessionBase(object):
                 If you are not interested in this value, you can pass VI_NULL.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus()  # case S200
-        error_description_buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus()  # case S200
+        error_description_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_description_ctype = None  # case C050
         error_code = self._library.niFgen_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), error_description_buffer_size_ctype, error_description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_description_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        error_description_ctype = (visatype.ViChar * error_description_buffer_size_ctype.value)()  # case C060
+        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_description_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        error_description_ctype = (_visatype.ViChar * error_description_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niFgen_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), error_description_buffer_size_ctype, error_description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
     def get_fir_filter_coefficients(self):
@@ -2431,18 +2431,18 @@ class _SessionBase(object):
                 want to read.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        array_size_ctype = visatype.ViInt32()  # case S170
+        array_size_ctype = _visatype.ViInt32()  # case S170
         coefficients_array_ctype = None  # case B580
-        number_of_coefficients_read_ctype = visatype.ViInt32()  # case S200
+        number_of_coefficients_read_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # case S180
+        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
         coefficients_array_size = array_size_ctype.value  # case B590
-        coefficients_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=coefficients_array_size)  # case B590
+        coefficients_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=coefficients_array_size)  # case B590
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
     def _initialize_with_channels(self, resource_name, reset_device=False, option_string=""):
@@ -2579,11 +2579,11 @@ class _SessionBase(object):
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -2633,12 +2633,12 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niFgen_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -2688,12 +2688,12 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niFgen_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -2743,12 +2743,12 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niFgen_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -2798,12 +2798,12 @@ class _SessionBase(object):
                 settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
@@ -2835,7 +2835,7 @@ class _SessionBase(object):
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
 
-            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
+            relative_to (_enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -2851,15 +2851,15 @@ class _SessionBase(object):
                 loading the data into the waveform.
 
         '''
-        if type(relative_to) is not enums.RelativeTo:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(relative_to) is not _enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.RelativeTo))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case S130
-        offset_ctype = visatype.ViInt32(offset)  # case S150
+        relative_to_ctype = _visatype.ViInt32(relative_to.value)  # case S130
+        offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
@@ -2892,7 +2892,7 @@ class _SessionBase(object):
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform method.
 
-            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
+            relative_to (_enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -2908,15 +2908,15 @@ class _SessionBase(object):
                 data into the waveform.
 
         '''
-        if type(relative_to) is not enums.RelativeTo:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(relative_to) is not _enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.RelativeTo))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
-        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case S130
-        offset_ctype = visatype.ViInt32(offset)  # case S150
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
+        relative_to_ctype = _visatype.ViInt32(relative_to.value)  # case S130
+        offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_binary16_waveform_numpy(self, waveform_handle, data):
@@ -2960,13 +2960,13 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_named_waveform_f64(self, waveform_name, data):
@@ -3007,14 +3007,14 @@ class _SessionBase(object):
                 have at least as many elements as the value in **size**.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_array = get_ctypes_and_array(value=data, array_type="d")  # case B550
-        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=visatype.ViReal64)  # case B550
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_named_waveform_f64_numpy(self, waveform_name, data):
@@ -3063,13 +3063,13 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_named_waveform_i16_numpy(self, waveform_name, data):
@@ -3109,13 +3109,13 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def write_script(self, script):
@@ -3139,11 +3139,11 @@ class _SessionBase(object):
                 for more information about writing scripts.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         script_ctype = ctypes.create_string_buffer(script.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_WriteScript(vi_ctype, channel_name_ctype, script_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_waveform(self, waveform_handle, data):
@@ -3185,14 +3185,14 @@ class _SessionBase(object):
                 have at least as many elements as the value in **size**.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_array = get_ctypes_and_array(value=data, array_type="d")  # case B550
-        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=visatype.ViReal64)  # case B550
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _write_waveform_numpy(self, waveform_handle, data):
@@ -3242,13 +3242,13 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
-        size_ctype = visatype.ViInt32(0 if data is None else len(data))  # case S160
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
+        size_ctype = _visatype.ViInt32(0 if data is None else len(data))  # case S160
         data_ctype = get_ctypes_pointer_for_buffer(value=data)  # case B510
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def write_waveform(self, waveform_name_or_handle, data):
@@ -3315,11 +3315,11 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFgen_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
 
@@ -3439,7 +3439,7 @@ class Session(_SessionBase):
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
@@ -3472,7 +3472,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except _errors.Error as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -3486,9 +3486,9 @@ class Session(_SessionBase):
         nifgen_InitiateGeneration method to cause the signal generator to
         produce a signal again.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_AbortGeneration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def clear_arb_memory(self):
@@ -3502,9 +3502,9 @@ class Session(_SessionBase):
         The signal generator must not be in the Generating state when you
         call this method.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ClearArbMemory(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def clear_arb_sequence(self, sequence_handle):
@@ -3533,10 +3533,10 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        sequence_handle_ctype = visatype.ViInt32(sequence_handle)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        sequence_handle_ctype = _visatype.ViInt32(sequence_handle)  # case S150
         error_code = self._library.niFgen_ClearArbSequence(vi_ctype, sequence_handle_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def clear_arb_waveform(self, waveform_handle):
@@ -3576,10 +3576,10 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
         error_code = self._library.niFgen_ClearArbWaveform(vi_ctype, waveform_handle_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def clear_freq_list(self, frequency_list_handle):
@@ -3610,10 +3610,10 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        frequency_list_handle_ctype = visatype.ViInt32(frequency_list_handle)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        frequency_list_handle_ctype = _visatype.ViInt32(frequency_list_handle)  # case S150
         error_code = self._library.niFgen_ClearFreqList(vi_ctype, frequency_list_handle_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def commit(self):
@@ -3640,12 +3640,12 @@ class Session(_SessionBase):
         -  A subsequent _initiate_generation method can run faster
            because the device is already configured.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
+    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=_enums.ScriptTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_script_trigger
 
         Configures the specified Script Trigger for digital edge triggering.
@@ -3709,7 +3709,7 @@ class Session(_SessionBase):
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
 
-            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
+            edge (_enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
@@ -3725,17 +3725,17 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(edge) is not _enums.ScriptTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.ScriptTriggerDigitalEdgeEdge))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = visatype.ViInt32(edge.value)  # case S130
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
+    def configure_digital_edge_start_trigger(self, source, edge=_enums.StartTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_start_trigger
 
         Configures the Start Trigger for digital edge triggering.
@@ -3783,7 +3783,7 @@ class Session(_SessionBase):
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
 
-            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
+            edge (_enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
@@ -3799,13 +3799,13 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(edge) is not _enums.StartTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.StartTriggerDigitalEdgeEdge))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = visatype.ViInt32(edge.value)  # case S130
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_digital_level_script_trigger(self, trigger_id, source, trigger_when):
@@ -3872,7 +3872,7 @@ class Session(_SessionBase):
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
 
-            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
+            trigger_when (_enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
                 level.
 
                 **Defined Values**
@@ -3886,14 +3886,14 @@ class Session(_SessionBase):
                 +-------------+-------------------------------------------------+
 
         '''
-        if type(trigger_when) is not enums.TriggerWhen:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        if type(trigger_when) is not _enums.TriggerWhen:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerWhen))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        trigger_when_ctype = visatype.ViInt32(trigger_when.value)  # case S130
+        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
         error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
@@ -3996,17 +3996,17 @@ class Session(_SessionBase):
                 arbitrary sequence.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=visatype.ViInt32)  # case B550
-        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=visatype.ViInt32)  # case B550
-        sample_counts_array_ctype = get_ctypes_pointer_for_buffer(value=sample_counts_array, library_type=visatype.ViInt32)  # case B550
-        marker_location_array_ctype = get_ctypes_pointer_for_buffer(value=marker_location_array, library_type=visatype.ViInt32)  # case B550
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
+        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
+        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
+        sample_counts_array_ctype = get_ctypes_pointer_for_buffer(value=sample_counts_array, library_type=_visatype.ViInt32)  # case B550
+        marker_location_array_ctype = get_ctypes_pointer_for_buffer(value=marker_location_array, library_type=_visatype.ViInt32)  # case B550
         coerced_markers_array_size = (0 if marker_location_array is None else len(marker_location_array))  # case B560
-        coerced_markers_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViInt32, size=coerced_markers_array_size)  # case B560
-        sequence_handle_ctype = visatype.ViInt32()  # case S200
+        coerced_markers_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=coerced_markers_array_size)  # case B560
+        sequence_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
 
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
@@ -4065,13 +4065,13 @@ class Session(_SessionBase):
                 arbitrary sequence.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        sequence_length_ctype = visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=visatype.ViInt32)  # case B550
-        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=visatype.ViInt32)  # case B550
-        sequence_handle_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
+        waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
+        loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
+        sequence_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
     def create_freq_list(self, waveform, frequency_array, duration_array):
@@ -4095,7 +4095,7 @@ class Session(_SessionBase):
         this method.
 
         Args:
-            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
+            waveform (_enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the func_waveform property to this
                 value.
 
@@ -4148,16 +4148,16 @@ class Session(_SessionBase):
                 sequence.
 
         '''
-        if type(waveform) is not enums.Waveform:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        waveform_ctype = visatype.ViInt32(waveform.value)  # case S130
-        frequency_list_length_ctype = visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
-        frequency_array_ctype = get_ctypes_pointer_for_buffer(value=frequency_array, library_type=visatype.ViReal64)  # case B550
-        duration_array_ctype = get_ctypes_pointer_for_buffer(value=duration_array, library_type=visatype.ViReal64)  # case B550
-        frequency_list_handle_ctype = visatype.ViInt32()  # case S200
+        if type(waveform) is not _enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.Waveform))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
+        frequency_list_length_ctype = _visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
+        frequency_array_ctype = get_ctypes_pointer_for_buffer(value=frequency_array, library_type=_visatype.ViReal64)  # case B550
+        duration_array_ctype = get_ctypes_pointer_for_buffer(value=duration_array, library_type=_visatype.ViReal64)  # case B550
+        frequency_list_handle_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, None if frequency_list_handle_ctype is None else (ctypes.pointer(frequency_list_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(frequency_list_handle_ctype.value)
 
     def disable(self):
@@ -4167,9 +4167,9 @@ class Session(_SessionBase):
         impact on the system to which it is connected. The analog output and all
         exported signals are disabled.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def export_signal(self, signal, signal_identifier, output_terminal):
@@ -4190,7 +4190,7 @@ class Session(_SessionBase):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
-            signal (enums.Signal): Specifies the source of the signal to route.
+            signal (_enums.Signal): Specifies the source of the signal to route.
                 ****Defined Values****
 
                 +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -4299,14 +4299,14 @@ class Session(_SessionBase):
                 Routes** tab in MAX.
 
         '''
-        if type(signal) is not enums.Signal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        signal_ctype = visatype.ViInt32(signal.value)  # case S130
+        if type(signal) is not _enums.Signal:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.Signal))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_ext_cal_last_date_and_time(self):
@@ -4329,14 +4329,14 @@ class Session(_SessionBase):
             minute (int): Specifies the minute of the last successful calibration.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        year_ctype = visatype.ViInt32()  # case S200
-        month_ctype = visatype.ViInt32()  # case S200
-        day_ctype = visatype.ViInt32()  # case S200
-        hour_ctype = visatype.ViInt32()  # case S200
-        minute_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        year_ctype = _visatype.ViInt32()  # case S200
+        month_ctype = _visatype.ViInt32()  # case S200
+        day_ctype = _visatype.ViInt32()  # case S200
+        hour_ctype = _visatype.ViInt32()  # case S200
+        minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_ext_cal_last_temp(self):
@@ -4350,10 +4350,10 @@ class Session(_SessionBase):
                 Celsius.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = visatype.ViReal64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFgen_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def get_ext_cal_recommended_interval(self):
@@ -4367,10 +4367,10 @@ class Session(_SessionBase):
                 months.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        months_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
     def get_hardware_state(self):
@@ -4382,7 +4382,7 @@ class Session(_SessionBase):
         Note: Hardware states do not necessarily correspond to NI-FGEN states.
 
         Returns:
-            state (enums.HardwareState): Returns the hardware state of the signal generator.
+            state (_enums.HardwareState): Returns the hardware state of the signal generator.
 
                 **Defined Values**
 
@@ -4399,11 +4399,11 @@ class Session(_SessionBase):
                 +-----------------------------------------+--------------------------------------------+
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        state_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        state_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetHardwareState(vi_ctype, None if state_ctype is None else (ctypes.pointer(state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.HardwareState(state_ctype.value)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _enums.HardwareState(state_ctype.value)
 
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
@@ -4456,14 +4456,14 @@ class Session(_SessionBase):
             minute (int): Specifies the minute of the last successful calibration.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        year_ctype = visatype.ViInt32()  # case S200
-        month_ctype = visatype.ViInt32()  # case S200
-        day_ctype = visatype.ViInt32()  # case S200
-        hour_ctype = visatype.ViInt32()  # case S200
-        minute_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        year_ctype = _visatype.ViInt32()  # case S200
+        month_ctype = _visatype.ViInt32()  # case S200
+        day_ctype = _visatype.ViInt32()  # case S200
+        hour_ctype = _visatype.ViInt32()  # case S200
+        minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_self_cal_last_temp(self):
@@ -4477,10 +4477,10 @@ class Session(_SessionBase):
                 Celsius.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = visatype.ViReal64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFgen_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def get_self_cal_supported(self):
@@ -4500,10 +4500,10 @@ class Session(_SessionBase):
                 +-------+------------------------------------+
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        self_cal_supported_ctype = visatype.ViBoolean()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_cal_supported_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niFgen_GetSelfCalSupported(vi_ctype, None if self_cal_supported_ctype is None else (ctypes.pointer(self_cal_supported_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
     def _initiate_generation(self):
@@ -4514,9 +4514,9 @@ class Session(_SessionBase):
         is aborted, you can call the _initiate_generation method to
         cause the signal generator to produce a signal again.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_InitiateGeneration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def is_done(self):
@@ -4542,10 +4542,10 @@ class Session(_SessionBase):
                 +-------+-----------------------------+
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        done_ctype = visatype.ViBoolean()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        done_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niFgen_IsDone(vi_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
     def query_arb_seq_capabilities(self):
@@ -4575,13 +4575,13 @@ class Session(_SessionBase):
                 max_loop_count property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_sequences_ctype = visatype.ViInt32()  # case S200
-        minimum_sequence_length_ctype = visatype.ViInt32()  # case S200
-        maximum_sequence_length_ctype = visatype.ViInt32()  # case S200
-        maximum_loop_count_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_number_of_sequences_ctype = _visatype.ViInt32()  # case S200
+        minimum_sequence_length_ctype = _visatype.ViInt32()  # case S200
+        maximum_sequence_length_ctype = _visatype.ViInt32()  # case S200
+        maximum_loop_count_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_QueryArbSeqCapabilities(vi_ctype, None if maximum_number_of_sequences_ctype is None else (ctypes.pointer(maximum_number_of_sequences_ctype)), None if minimum_sequence_length_ctype is None else (ctypes.pointer(minimum_sequence_length_ctype)), None if maximum_sequence_length_ctype is None else (ctypes.pointer(maximum_sequence_length_ctype)), None if maximum_loop_count_ctype is None else (ctypes.pointer(maximum_loop_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
 
     def query_arb_wfm_capabilities(self):
@@ -4618,13 +4618,13 @@ class Session(_SessionBase):
                 max_waveform_size property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_waveforms_ctype = visatype.ViInt32()  # case S200
-        waveform_quantum_ctype = visatype.ViInt32()  # case S200
-        minimum_waveform_size_ctype = visatype.ViInt32()  # case S200
-        maximum_waveform_size_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_number_of_waveforms_ctype = _visatype.ViInt32()  # case S200
+        waveform_quantum_ctype = _visatype.ViInt32()  # case S200
+        minimum_waveform_size_ctype = _visatype.ViInt32()  # case S200
+        maximum_waveform_size_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_QueryArbWfmCapabilities(vi_ctype, None if maximum_number_of_waveforms_ctype is None else (ctypes.pointer(maximum_number_of_waveforms_ctype)), None if waveform_quantum_ctype is None else (ctypes.pointer(waveform_quantum_ctype)), None if minimum_waveform_size_ctype is None else (ctypes.pointer(minimum_waveform_size_ctype)), None if maximum_waveform_size_ctype is None else (ctypes.pointer(maximum_waveform_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
 
     def query_freq_list_capabilities(self):
@@ -4665,15 +4665,15 @@ class Session(_SessionBase):
                 freq_list_duration_quantum property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_freq_lists_ctype = visatype.ViInt32()  # case S200
-        minimum_frequency_list_length_ctype = visatype.ViInt32()  # case S200
-        maximum_frequency_list_length_ctype = visatype.ViInt32()  # case S200
-        minimum_frequency_list_duration_ctype = visatype.ViReal64()  # case S200
-        maximum_frequency_list_duration_ctype = visatype.ViReal64()  # case S200
-        frequency_list_duration_quantum_ctype = visatype.ViReal64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_number_of_freq_lists_ctype = _visatype.ViInt32()  # case S200
+        minimum_frequency_list_length_ctype = _visatype.ViInt32()  # case S200
+        maximum_frequency_list_length_ctype = _visatype.ViInt32()  # case S200
+        minimum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S200
+        maximum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S200
+        frequency_list_duration_quantum_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFgen_QueryFreqListCapabilities(vi_ctype, None if maximum_number_of_freq_lists_ctype is None else (ctypes.pointer(maximum_number_of_freq_lists_ctype)), None if minimum_frequency_list_length_ctype is None else (ctypes.pointer(minimum_frequency_list_length_ctype)), None if maximum_frequency_list_length_ctype is None else (ctypes.pointer(maximum_frequency_list_length_ctype)), None if minimum_frequency_list_duration_ctype is None else (ctypes.pointer(minimum_frequency_list_duration_ctype)), None if maximum_frequency_list_duration_ctype is None else (ctypes.pointer(maximum_frequency_list_duration_ctype)), None if frequency_list_duration_quantum_ctype is None else (ctypes.pointer(frequency_list_duration_quantum_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
     def read_current_temperature(self):
@@ -4687,10 +4687,10 @@ class Session(_SessionBase):
                 in degrees Celsius.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = visatype.ViReal64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFgen_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def reset_device(self):
@@ -4701,9 +4701,9 @@ class Session(_SessionBase):
         reset, hardware is configured to its default state, and all session
         properties are reset to their default states.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetDevice(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_with_defaults(self):
@@ -4714,9 +4714,9 @@ class Session(_SessionBase):
         was created without a logical name, this method is equivalent to the
         nifgen_reset method.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_cal(self):
@@ -4726,9 +4726,9 @@ class Session(_SessionBase):
         calibration is successful, new calibration data and constants are stored
         in the onboard EEPROM.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_SelfCal(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def send_software_edge_trigger(self, trigger, trigger_id):
@@ -4742,7 +4742,7 @@ class Session(_SessionBase):
         NI 5401/5411/5431.
 
         Args:
-            trigger (enums.Trigger): Sets the clock mode of the signal generator.
+            trigger (_enums.Trigger): Sets the clock mode of the signal generator.
 
                 ****Defined Values****
 
@@ -4757,13 +4757,13 @@ class Session(_SessionBase):
             trigger_id (str):
 
         '''
-        if type(trigger) is not enums.Trigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = visatype.ViInt32(trigger.value)  # case S130
+        if type(trigger) is not _enums.Trigger:
+            raise TypeError('Parameter mode must be of type ' + str(_enums.Trigger))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def wait_until_done(self, max_time=10000):
@@ -4776,10 +4776,10 @@ class Session(_SessionBase):
             max_time (datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        max_time_ctype = _converters.convert_timedelta_to_milliseconds(max_time, visatype.ViInt32)  # case S140
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        max_time_ctype = _converters.convert_timedelta_to_milliseconds(max_time, _visatype.ViInt32)  # case S140
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _close(self):
@@ -4808,9 +4808,9 @@ class Session(_SessionBase):
         After calling _close, you cannot use NI-FGEN again until you
         call the nifgen_init or nifgen_InitWithOptions methods.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_close(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset(self):
@@ -4825,9 +4825,9 @@ class Session(_SessionBase):
         For the NI 5401/5404/5411/5431, this method exhibits the same
         behavior as the nifgen_ResetDevice method.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_reset(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_test(self):
@@ -4858,11 +4858,11 @@ class Session(_SessionBase):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = visatype.ViInt16()  # case S200
-        self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFgen_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 

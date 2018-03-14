@@ -23,7 +23,7 @@ config = {
     },
     'init_function': 'InitWithOptions',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {'file_name': '_custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
