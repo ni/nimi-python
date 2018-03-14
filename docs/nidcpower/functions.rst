@@ -704,7 +704,7 @@ nidcpower.Session methods
 
     :type signal_identifier: str
 
-.. py:method:: fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
+.. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
     Returns an list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
@@ -730,7 +730,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
 
     :param count:

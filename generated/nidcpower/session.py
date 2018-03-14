@@ -2368,7 +2368,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, count=None, timeout=datetime.timedelta(seconds=1.0)):
+    def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
         Returns an list of named tuples (Measurement) that were
@@ -2391,7 +2391,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_multiple(count=None, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
         Args:
             count (int): Specifies the number of measurements to fetch.
@@ -2411,8 +2411,6 @@ class _SessionBase(object):
         '''
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
-        if count is None:
-            count = self.fetch_backlog
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
