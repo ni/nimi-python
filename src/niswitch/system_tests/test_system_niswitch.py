@@ -153,4 +153,4 @@ def test_error_message(session):
     # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
     # and there is no good way for us to invalidate a simulated session.
     message = session._error_message(-1074135027)
-    assert message == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.'
+    assert message.endswith('(Hex 0xBFFA000D) Attribute is read-only.')
