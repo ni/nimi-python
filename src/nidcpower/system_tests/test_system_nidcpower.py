@@ -152,26 +152,6 @@ def test_fetch_multiple(single_channel_session):
         assert measurements[1].current == 0.00001
 
 
-'''
-Enable once fetch_backlog is figured out
-def test_fetch_multiple_defaults(single_channel_session):
-    single_channel_session.source_mode = nidcpower.SourceMode.SINGLE_POINT
-    single_channel_session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
-    single_channel_session.voltage_level = 1
-    count = 10
-    single_channel_session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
-    with single_channel_session.initiate():
-        time.sleep(10)
-        measurements = single_channel_session.fetch_multiple()
-        assert len(measurements) == count
-        assert isinstance(measurements[1].voltage, float)
-        assert isinstance(measurements[1].current, float)
-        assert measurements[1].in_compliance in [True, False]
-        assert measurements[1].voltage == 1.0
-        assert measurements[1].current == 0.00001
-'''
-
-
 def test_measure_multiple(session):
     with session.initiate():
         # session is open to all 12 channels on the device
