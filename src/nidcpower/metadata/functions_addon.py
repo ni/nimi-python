@@ -149,7 +149,7 @@ functions_additional_functions = {
     },
     # Public function that wraps driver function but returns datetime object instead of individual items
     'GetLastExtCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'python_name': 'get_ext_cal_last_date_and_time',
         'real_datetime_call': 'GetExtCalLastDateAndTime',
@@ -179,7 +179,7 @@ functions_additional_functions = {
         },
     },
     'GetLastSelfCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'python_name': 'get_self_cal_last_date_and_time',
         'real_datetime_call': 'GetSelfCalLastDateAndTime',

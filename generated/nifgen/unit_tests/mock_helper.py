@@ -60,9 +60,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateFreqList'] = {}
         self._defaults['CreateFreqList']['return'] = 0
         self._defaults['CreateFreqList']['frequencyListHandle'] = None
-        self._defaults['CreateWaveformDispatcher'] = {}
-        self._defaults['CreateWaveformDispatcher']['return'] = 0
-        self._defaults['CreateWaveformDispatcher']['waveformHandle'] = None
         self._defaults['CreateWaveformF64'] = {}
         self._defaults['CreateWaveformF64']['return'] = 0
         self._defaults['CreateWaveformF64']['waveformHandle'] = None
@@ -349,15 +346,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_CreateFreqList", param='frequencyListHandle')
         frequency_list_handle.contents.value = self._defaults['CreateFreqList']['frequencyListHandle']
         return self._defaults['CreateFreqList']['return']
-
-    def niFgen_CreateWaveformDispatcher(self, vi, channel_name, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateWaveformDispatcher']['return'] != 0:
-            return self._defaults['CreateWaveformDispatcher']['return']
-        # waveform_handle
-        if self._defaults['CreateWaveformDispatcher']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateWaveformDispatcher", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformDispatcher']['waveformHandle']
-        return self._defaults['CreateWaveformDispatcher']['return']
 
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         if self._defaults['CreateWaveformF64']['return'] != 0:
@@ -875,8 +863,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_CreateArbSequence.return_value = 0
         mock_library.niFgen_CreateFreqList.side_effect = MockFunctionCallError("niFgen_CreateFreqList")
         mock_library.niFgen_CreateFreqList.return_value = 0
-        mock_library.niFgen_CreateWaveformDispatcher.side_effect = MockFunctionCallError("niFgen_CreateWaveformDispatcher")
-        mock_library.niFgen_CreateWaveformDispatcher.return_value = 0
         mock_library.niFgen_CreateWaveformF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformF64")
         mock_library.niFgen_CreateWaveformF64.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileF64")

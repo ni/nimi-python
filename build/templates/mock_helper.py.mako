@@ -11,7 +11,7 @@ c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 
 functions = template_parameters['metadata'].functions
-functions = helper.filter_codegen_functions(functions)
+functions = helper.filter_library_functions(functions)
 %>\
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
