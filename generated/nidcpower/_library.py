@@ -30,6 +30,7 @@ class Library(object):
         self.niDCPower_DeleteAdvancedSequence_cfunc = None
         self.niDCPower_Disable_cfunc = None
         self.niDCPower_ExportSignal_cfunc = None
+        self.niDCPower_FancyFetchMultiple_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
@@ -172,6 +173,14 @@ class Library(object):
                 self.niDCPower_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
+
+    def niDCPower_FancyFetchMultiple(self, vi, channel_name, count, timeout, measurements):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_FancyFetchMultiple_cfunc is None:
+                self.niDCPower_FancyFetchMultiple_cfunc = self._library.niDCPower_FancyFetchMultiple
+                self.niDCPower_FancyFetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_FancyFetchMultiple_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_FancyFetchMultiple_cfunc(vi, channel_name, count, timeout, measurements)
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         with self._func_lock:

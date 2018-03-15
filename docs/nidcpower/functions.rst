@@ -706,25 +706,21 @@ nidcpower.Session methods
 
 .. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
-    Returns an array of voltage measurements, an array of current
-    measurements, and an array of compliance measurements that were
+    Returns an list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
     :py:meth:`nidcpower.Session._initiate` before calling this method.
 
-    Refer to the `Acquiring
-    Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
-    and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
-    the *NI DC Power Supplies and SMUs Help* for more information about
-    configuring this method.
+    Fields in Measurement:
+
+    - **voltage** (float)
+    - **current** (float)
+    - **in_compliance** (bool)
 
     
 
-    .. note:: This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
+    .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -749,56 +745,24 @@ nidcpower.Session methods
     :param timeout:
 
 
-        Specifies the maximum time allowed for this method to complete, in
-        seconds. If the method does not complete within this time interval,
-        NI-DCPower returns an error.
+        Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
         
 
-        .. note:: When setting the timeout interval, ensure you take into account any
-            triggers so that the timeout interval is long enough for your
-            application.
+        .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
 
     :type timeout: datetime.timedelta
 
-    :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
-
-        WHERE
-
-        voltage_measurements (array.array("d")): 
+    :rtype: list of Measurement
+    :return:
 
 
-            Returns an array of voltage measurements. Ensure that sufficient space
-            has been allocated for the returned array.
+            List of named tuples with fields:
 
-            
-
-
-        current_measurements (array.array("d")): 
-
-
-            Returns an array of current measurements. Ensure that sufficient space
-            has been allocated for the returned array.
-
-            
-
-
-        in_compliance (list of bool): 
-
-
-            Returns an array of Boolean values indicating whether the output was in
-            compliance at the time the measurement was taken. Ensure that sufficient
-            space has been allocated for the returned array.
-
-            
-
-
-        actual_count (int): 
-
-
-            Indicates the number of measured values actually retrieved from the
-            device.
+            - **voltage** (float)
+            - **current** (float)
+            - **in_compliance** (bool)
 
             
 

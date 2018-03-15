@@ -42,6 +42,7 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -108,8 +109,8 @@ functions_default_value = {
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
-    'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
-                                                                       2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
+    'FetchMultiple':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
+    'FancyFetchMultiple':                            { 'parameters': { 3: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
 # Parameter that need to be array.array
@@ -145,6 +146,89 @@ functions_additional_functions = {
         ],
         'documentation': {
             'description': 'Returns the number of channels.',
+        },
+    },
+    'FancyFetchMultiple': {
+        'returns': 'ViStatus',
+        'python_name': 'fetch_multiple',
+        'method_templates': [
+            { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': '''
+Specifies the output channel(s) to which this configuration value
+applies. Specify multiple channels by using a channel list or a channel
+range. A channel list is a comma (,) separated sequence of channel names
+(for example, 0,2 specifies channels 0 and 2). A channel range is a
+lower bound channel followed by a hyphen (-) or colon (:) followed by an
+upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+In the Running state, multiple output channel configurations are
+performed sequentially based on the order specified in this parameter.
+''',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Count',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the number of measurements to fetch.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'Specifies the maximum time allowed for this function to complete. If the function does not complete within this time interval, NI-DCPower returns an error.',
+                    'note': 'When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'measurements',
+                'type': 'ViReal64[]',
+                'python_type': 'Measurement',
+                'documentation': {
+                    'description': '''
+List of named tuples with fields:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool)
+''',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Returns an list of named tuples (Measurement) that were
+previously taken and are stored in the NI-DCPower buffer. This function
+should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
+set to NIDCPOWER_VAL_ON_DEMAND. You must first call
+niDCPower_Initiate before calling this function.
+
+Fields in Measurement:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool)
+
+''',
+            'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.',
         },
     },
     # Public function that wraps driver function but returns datetime object instead of individual items
@@ -215,6 +299,8 @@ functions_additional_functions = {
 # Converted parameters
 functions_converters = {
     'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+                                                               'python_type': 'datetime.timedelta', }, }, },
+    'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
                                                                'python_type': 'datetime.timedelta', }, }, },
     'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
                                                                'python_type': 'datetime.timedelta', }, }, },

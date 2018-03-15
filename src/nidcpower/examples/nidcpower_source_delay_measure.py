@@ -6,10 +6,10 @@ import nidcpower
 import sys
 
 
-def print_fetched_measurements(voltage_measurements, current_measurements, in_compliance):
-    print('             Voltage : {:f} V'.format(voltage_measurements[0]))
-    print('              Current: {:f} A'.format(current_measurements[0]))
-    print('        In compliance: {0}'.format(in_compliance[0]))
+def print_fetched_measurements(measurements):
+    print('             Voltage : {:f} V'.format(measurements[0].voltage))
+    print('              Current: {:f} A'.format(measurements[0].current))
+    print('        In compliance: {0}'.format(measurements[0].in_compliance))
 
 
 def example(resource_name, channels, options, voltage1, voltage2, delay):
@@ -29,10 +29,10 @@ def example(resource_name, channels, options, voltage1, voltage2, delay):
 
         with session.initiate():
             print('Voltage 1:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
+            print_fetched_measurements(session.fetch_multiple(count=1, timeout=timeout))
             session.voltage_level = voltage2  # on-the-fly set
             print('Voltage 2:')
-            print_fetched_measurements(*session.fetch_multiple(count=1, timeout=timeout))
+            print_fetched_measurements(session.fetch_multiple(count=1, timeout=timeout))
             session.output_enabled = False
 
 

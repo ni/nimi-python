@@ -8,8 +8,8 @@ import sys
 
 def create_sweep(begin_value, end_value, number_of_steps):
     sweep = []
+    step_size = (end_value - begin_value) / number_of_steps
     for i in range(number_of_steps):
-        step_size = (end_value - begin_value) / number_of_steps
         sweep.append(begin_value + i * step_size)
     return sweep
 
@@ -45,16 +45,15 @@ def example(resource_name, channels, options, steps, voltage_start, voltage_fina
 
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SEQUENCE_ENGINE_DONE)
-            voltage_measurements, current_measurements, in_compliance = session.fetch_multiple(count=steps * 2)
+            measurements = session.fetch_multiple(count=steps * 2)
 
         # Print a table with the measurements
         programmed_levels = voltages + currents
         units = ['V'] * steps + ['A'] * steps
-        measurements = zip(programmed_levels, units, voltage_measurements, current_measurements, in_compliance)
         row_format = '{:<8} {:4} {:<25} {:<25} {}'
         print(row_format.format('Sourced', '', 'Measured voltage', 'Measured current', 'In-compliance'))
-        for m in measurements:
-            print(row_format.format(*m))
+        for i in range(steps * 2):
+            print(row_format.format(programmed_levels[i], units[i], measurements[i].voltage, measurements[i].current, measurements[i].in_compliance))
 
 
 def _main(argsv):
