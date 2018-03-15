@@ -22,10 +22,10 @@ The following is a basic example of using the **nidcpower** module to open a ses
         row_format = '{0:3d}:   {1:8.6f}   {2:8.6f}   {3}'
         with session.initiate():
             while samples_acquired < 20:
-                voltage_measurements, current_measurements, in_compliance = session.fetch_multiple(count=session.fetch_backlog)
-                samples_acquired += len(voltage_measurements)
-                for i in zip(range(len(voltage_measurements)), voltage_measurements, current_measurements, in_compliance):
-                    print(row_format.format(i[0], i[1], i[2], i[3]))
+                measurements = session.fetch_multiple(count=session.fetch_backlog)
+                samples_acquired += len(measurements)
+                for i in range(len(measurements)):
+                    print(row_format.format(i, measurements[i].voltage, measurements[i].current, measurements[i].in_compliance))
 
 Additional examples for NI-DCPower are located in src/nidcpower/examples/ directory.
 
