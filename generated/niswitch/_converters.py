@@ -1,5 +1,5 @@
-import niswitch._errors as _errors
 import niswitch._visatype as _visatype
+import niswitch.errors as _errors
 
 import datetime
 import six

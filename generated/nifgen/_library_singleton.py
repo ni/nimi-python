@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import nifgen._errors as _errors
 import nifgen._library as _library
+import nifgen.errors as _errors
 import threading
 
 

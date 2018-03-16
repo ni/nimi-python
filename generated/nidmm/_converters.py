@@ -1,5 +1,5 @@
-import nidmm._errors as _errors
 import nidmm._visatype as _visatype
+import nidmm.errors as _errors
 
 import datetime
 import six

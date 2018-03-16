@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import nimodinst._errors as _errors
 import nimodinst._library as _library
+import nimodinst.errors as _errors
 import threading
 
 

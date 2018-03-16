@@ -1,5 +1,5 @@
-import niscope._errors as _errors
 import niscope._visatype as _visatype
+import niscope.errors as _errors
 
 import datetime
 import six

@@ -6,10 +6,10 @@ import datetime
 
 import nifgen._attributes as _attributes
 import nifgen._converters as _converters
-import nifgen._enums as _enums
-import nifgen._errors as _errors
 import nifgen._library_singleton as _library_singleton
 import nifgen._visatype as _visatype
+import nifgen.enums as _enums
+import nifgen.errors as _errors
 
 # Used for __repr__
 import pprint

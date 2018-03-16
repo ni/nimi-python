@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import niswitch._errors as _errors
 import niswitch._library as _library
+import niswitch.errors as _errors
 import threading
 
 

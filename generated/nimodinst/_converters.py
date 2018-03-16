@@ -1,5 +1,5 @@
-import nimodinst._errors as _errors
 import nimodinst._visatype as _visatype
+import nimodinst.errors as _errors
 
 import datetime
 import six

@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import nidmm._errors as _errors
 import nidmm._library as _library
+import nidmm.errors as _errors
 import threading
 
 

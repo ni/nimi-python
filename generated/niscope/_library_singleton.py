@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import niscope._errors as _errors
 import niscope._library as _library
+import niscope.errors as _errors
 import threading
 
 

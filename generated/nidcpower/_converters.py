@@ -1,5 +1,5 @@
-import nidcpower._errors as _errors
 import nidcpower._visatype as _visatype
+import nidcpower.errors as _errors
 
 import datetime
 import six

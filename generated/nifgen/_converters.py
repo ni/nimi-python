@@ -1,5 +1,5 @@
-import nifgen._errors as _errors
 import nifgen._visatype as _visatype
+import nifgen.errors as _errors
 
 import datetime
 import six

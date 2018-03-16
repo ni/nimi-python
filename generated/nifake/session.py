@@ -6,12 +6,12 @@ import datetime
 
 import nifake._attributes as _attributes
 import nifake._converters as _converters
-import nifake._enums as _enums
-import nifake._errors as _errors
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
+import nifake.enums as _enums
+import nifake.errors as _errors
 
-import nifake._custom_struct as _custom_struct  # noqa: F401
+import nifake.custom_struct as custom_struct  # noqa: F401
 
 # Used for __repr__
 import pprint
@@ -857,10 +857,10 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=_custom_struct.custom_struct, size=array_out_size)  # case B560
+        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
+        return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
     def get_array_for_python_code_double(self):
         '''get_array_for_python_code_double
@@ -953,10 +953,10 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cs_ctype = _custom_struct.custom_struct()  # case S200
+        cs_ctype = custom_struct.custom_struct()  # case S200
         error_code = self._library.niFake_GetCustomType(vi_ctype, None if cs_ctype is None else (ctypes.pointer(cs_ctype)))
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _custom_struct.CustomStruct(cs_ctype)
+        return custom_struct.CustomStruct(cs_ctype)
 
     def get_custom_type_array(self, number_of_elements):
         '''get_custom_type_array
@@ -974,10 +974,10 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S190
         cs_size = number_of_elements  # case B600
-        cs_ctype = get_ctypes_pointer_for_buffer(library_type=_custom_struct.custom_struct, size=cs_size)  # case B600
+        cs_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=cs_size)  # case B600
         error_code = self._library.niFake_GetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
+        return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     def get_enum_value(self):
         '''get_enum_value
@@ -1293,7 +1293,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cs_ctype = _custom_struct.custom_struct(cs)  # case S150
+        cs_ctype = custom_struct.custom_struct(cs)  # case S150
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1309,7 +1309,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
-        cs_ctype = get_ctypes_pointer_for_buffer([_custom_struct.custom_struct(c) for c in cs], library_type=_custom_struct.custom_struct)  # case B540
+        cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in cs], library_type=custom_struct.custom_struct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import nifake._errors as _errors
 import nifake._library as _library
+import nifake.errors as _errors
 import threading
 
 

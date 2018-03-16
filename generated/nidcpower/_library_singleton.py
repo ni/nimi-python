@@ -3,8 +3,8 @@
 import platform
 
 import ctypes
-import nidcpower._errors as _errors
 import nidcpower._library as _library
+import nidcpower.errors as _errors
 import threading
 
 

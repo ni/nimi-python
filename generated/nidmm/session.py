@@ -6,10 +6,10 @@ import datetime
 
 import nidmm._attributes as _attributes
 import nidmm._converters as _converters
-import nidmm._enums as _enums
-import nidmm._errors as _errors
 import nidmm._library_singleton as _library_singleton
 import nidmm._visatype as _visatype
+import nidmm.enums as _enums
+import nidmm.errors as _errors
 
 # Used for __repr__
 import pprint

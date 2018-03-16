@@ -6,10 +6,10 @@ import datetime
 
 import niswitch._attributes as _attributes
 import niswitch._converters as _converters
-import niswitch._enums as _enums
-import niswitch._errors as _errors
 import niswitch._library_singleton as _library_singleton
 import niswitch._visatype as _visatype
+import niswitch.enums as _enums
+import niswitch.errors as _errors
 
 # Used for __repr__
 import pprint

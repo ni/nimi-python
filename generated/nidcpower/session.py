@@ -6,10 +6,10 @@ import datetime
 
 import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
-import nidcpower._enums as _enums
-import nidcpower._errors as _errors
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
+import nidcpower.enums as _enums
+import nidcpower.errors as _errors
 
 # Used for __repr__
 import pprint

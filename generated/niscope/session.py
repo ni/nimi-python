@@ -6,12 +6,12 @@ import datetime
 
 import niscope._attributes as _attributes
 import niscope._converters as _converters
-import niscope._enums as _enums
-import niscope._errors as _errors
 import niscope._library_singleton as _library_singleton
 import niscope._visatype as _visatype
+import niscope.enums as _enums
+import niscope.errors as _errors
 
-import niscope._waveform_info as _waveform_info  # noqa: F401
+import niscope.waveform_info as waveform_info  # noqa: F401
 
 # Used for __repr__
 import pprint
@@ -2120,10 +2120,10 @@ class _SessionBase(object):
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array, [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
@@ -2248,10 +2248,10 @@ class _SessionBase(object):
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
@@ -2374,10 +2374,10 @@ class _SessionBase(object):
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary16(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary32
@@ -2500,10 +2500,10 @@ class _SessionBase(object):
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary32(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary8
@@ -2626,10 +2626,10 @@ class _SessionBase(object):
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary8(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def fetch_into(self, waveform, relative_to=_enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
@@ -3220,10 +3220,10 @@ class _SessionBase(object):
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
-        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=_waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array, [_waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+        return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
         '''read_measurement

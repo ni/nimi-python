@@ -5,7 +5,7 @@ import threading
 
 from nifake._visatype import *  # noqa: F403,H303
 
-import nifake._custom_struct as _custom_struct  # noqa: F401
+import nifake.custom_struct as custom_struct  # noqa: F401
 
 
 class Library(object):
@@ -141,7 +141,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetArrayForPythonCodeCustomType_cfunc is None:
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc = self._library.niFake_GetArrayForPythonCodeCustomType
-                self.niFake_GetArrayForPythonCodeCustomType_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(_custom_struct.custom_struct)]  # noqa: F405
+                self.niFake_GetArrayForPythonCodeCustomType_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.custom_struct)]  # noqa: F405
                 self.niFake_GetArrayForPythonCodeCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArrayForPythonCodeCustomType_cfunc(vi, number_of_elements, array_out)
 
@@ -221,7 +221,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetCustomType_cfunc is None:
                 self.niFake_GetCustomType_cfunc = self._library.niFake_GetCustomType
-                self.niFake_GetCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(_custom_struct.custom_struct)]  # noqa: F405
+                self.niFake_GetCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct.custom_struct)]  # noqa: F405
                 self.niFake_GetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomType_cfunc(vi, cs)
 
@@ -229,7 +229,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetCustomTypeArray_cfunc is None:
                 self.niFake_GetCustomTypeArray_cfunc = self._library.niFake_GetCustomTypeArray
-                self.niFake_GetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(_custom_struct.custom_struct)]  # noqa: F405
+                self.niFake_GetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.custom_struct)]  # noqa: F405
                 self.niFake_GetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 
@@ -373,7 +373,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetCustomType_cfunc is None:
                 self.niFake_SetCustomType_cfunc = self._library.niFake_SetCustomType
-                self.niFake_SetCustomType_cfunc.argtypes = [ViSession, _custom_struct.custom_struct]  # noqa: F405
+                self.niFake_SetCustomType_cfunc.argtypes = [ViSession, custom_struct.custom_struct]  # noqa: F405
                 self.niFake_SetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomType_cfunc(vi, cs)
 
@@ -381,7 +381,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetCustomTypeArray_cfunc is None:
                 self.niFake_SetCustomTypeArray_cfunc = self._library.niFake_SetCustomTypeArray
-                self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(_custom_struct.custom_struct)]  # noqa: F405
+                self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.custom_struct)]  # noqa: F405
                 self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
 

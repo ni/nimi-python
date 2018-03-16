@@ -1,5 +1,5 @@
-import nifake._errors as _errors
 import nifake._visatype as _visatype
+import nifake.errors as _errors
 
 import datetime
 import six

@@ -1,9 +1,10 @@
 # This file was generated
 
 import ctypes
-from nimodinst import _errors
-from nimodinst import _library_singleton
-from nimodinst import _visatype
+
+import nimodinst._library_singleton as _library_singleton
+import nimodinst._visatype as _visatype
+import nimodinst.errors as _errors
 
 # Used for __repr__ and __str__
 import pprint
