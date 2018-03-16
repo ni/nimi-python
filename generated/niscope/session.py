@@ -8,8 +8,8 @@ import niscope._attributes as _attributes
 import niscope._converters as _converters
 import niscope._library_singleton as _library_singleton
 import niscope._visatype as _visatype
-import niscope.enums as _enums
-import niscope.errors as _errors
+import niscope.enums as enums
+import niscope.errors as errors
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 
@@ -167,8 +167,8 @@ class _SessionBase(object):
 
     Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  trigger_delay_time).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  horz_record_ref_position).
     '''
-    acquisition_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.AcquisitionType, 1250101)
-    '''Type: _enums.AcquisitionType
+    acquisition_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
+    '''Type: enums.AcquisitionType
 
     Specifies how the digitizer acquires data and fills the waveform record.
     '''
@@ -265,8 +265,8 @@ class _SessionBase(object):
         session.channels['0,1'].channel_enabled = var
         var = session.channels['0,1'].channel_enabled
     '''
-    channel_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TerminalConfiguration, 1150107)
-    '''Type: _enums.TerminalConfiguration
+    channel_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
+    '''Type: enums.TerminalConfiguration
 
     Specifies the terminal configuration for the channel.
 
@@ -314,8 +314,8 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_center_frequency = var
         var = session.channels['0,1'].ddc_center_frequency
     '''
-    ddc_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DataProcessingMode, 1150304)
-    '''Type: _enums.DataProcessingMode
+    ddc_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
+    '''Type: enums.DataProcessingMode
 
     The way in which data is processed by the DDC block.
     Valid Values:
@@ -591,14 +591,14 @@ class _SessionBase(object):
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
     '''
-    _fetch_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.FetchRelativeTo, 1150077)
-    '''Type: _enums.FetchRelativeTo
+    _fetch_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
+    '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
     Default Value: FetchRelativeTo.PRETRIGGER
     '''
-    flex_fir_antialias_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.FlexFIRAntialiasFilterType, 1150271)
-    '''Type: _enums.FlexFIRAntialiasFilterType
+    flex_fir_antialias_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
+    '''Type: enums.FlexFIRAntialiasFilterType
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
     Use this property to select from several types of filters to achieve desired filtering characteristics.
@@ -939,8 +939,8 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_transient_waveform_percent = var
         var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
-    meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.FilterType, 1150035)
-    '''Type: _enums.FilterType
+    meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
+    '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
     ·  NISCOPE_VAL_MEAS_LOWPASS
@@ -958,8 +958,8 @@ class _SessionBase(object):
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
     '''
-    meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.FIRFilterWindow, 1150042)
-    '''Type: _enums.FIRFilterWindow
+    meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
+    '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
     NISCOPE_VAL_NONE
@@ -1052,8 +1052,8 @@ class _SessionBase(object):
         session.channels['0,1'].meas_other_channel = var
         var = session.channels['0,1'].meas_other_channel
     '''
-    meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.PercentageMethod, 1150045)
-    '''Type: _enums.PercentageMethod
+    meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
+    '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
     NISCOPE_VAL_MEAS_LOW_HIGH
@@ -1079,8 +1079,8 @@ class _SessionBase(object):
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
     '''
-    meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.RefLevelUnits, 1150016)
-    '''Type: _enums.RefLevelUnits
+    meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
+    '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
     NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
@@ -1202,8 +1202,8 @@ class _SessionBase(object):
 
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
     '''
-    overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OverflowErrorReporting, 1150309)
-    '''Type: _enums.OverflowErrorReporting
+    overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OverflowErrorReporting, 1150309)
+    '''Type: enums.OverflowErrorReporting
 
     Configures error reporting when the DDC block detects an overflow in any of its  stages. Overflows lead to clipping of the waveform.
     Valid Values:
@@ -1288,8 +1288,8 @@ class _SessionBase(object):
 
     If input_clock_source is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
-    ref_trigger_detector_location = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.RefTriggerDetectorLocation, 1150314)
-    '''Type: _enums.RefTriggerDetectorLocation
+    ref_trigger_detector_location = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
+    '''Type: enums.RefTriggerDetectorLocation
 
     Indicates which analog compare circuitry to use on the device.
     '''
@@ -1316,8 +1316,8 @@ class _SessionBase(object):
     True  (1) - Use RIS sample rates in autosetup
     False (0) - Do not use RIS sample rates in autosetup
     '''
-    ris_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.RISMethod, 1150071)
-    '''Type: _enums.RISMethod
+    ris_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RISMethod, 1150071)
+    '''Type: enums.RISMethod
 
     Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of max_real_time_sampling_rate.
     '''
@@ -1424,8 +1424,8 @@ class _SessionBase(object):
         session.channels['0,1'].start_to_ref_trigger_holdoff = var
         var = session.channels['0,1'].start_to_ref_trigger_holdoff
     '''
-    stream_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.StreamingPositionType, 1150373)
-    '''Type: _enums.StreamingPositionType
+    stream_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
+    '''Type: enums.StreamingPositionType
 
     Determines which trigger peer-to-peer data is streamed relative to. The
     default value is **Start Trigger**.
@@ -1442,8 +1442,8 @@ class _SessionBase(object):
 
     Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered property to find out if the last acquisition was triggered.
     '''
-    trigger_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerCoupling, 1250014)
-    '''Type: _enums.TriggerCoupling
+    trigger_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
+    '''Type: enums.TriggerCoupling
 
     Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
@@ -1494,16 +1494,16 @@ class _SessionBase(object):
     Valid Values:
     The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
-    trigger_modifier = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerModifier, 1250102)
-    '''Type: _enums.TriggerModifier
+    trigger_modifier = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
+    '''Type: enums.TriggerModifier
 
     Configures the device to automatically complete an acquisition if a trigger has not been received.
     Valid Values:
     None (1)         - Normal triggering
     Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
     '''
-    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerSlope, 1250018)
-    '''Type: _enums.TriggerSlope
+    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
+    '''Type: enums.TriggerSlope
 
     Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
@@ -1527,8 +1527,8 @@ class _SessionBase(object):
 
     This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
-    trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1250012)
-    '''Type: _enums.TriggerType
+    trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1250012)
+    '''Type: enums.TriggerType
 
     Specifies the type of trigger to use.
     '''
@@ -1561,13 +1561,13 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    trigger_window_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerWindowMode, 1150012)
-    '''Type: _enums.TriggerWindowMode
+    trigger_window_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
+    '''Type: enums.TriggerWindowMode
 
     Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  trigger_window_low_level, or trigger_window_high_level.
     '''
-    tv_trigger_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.VideoTriggerEvent, 1250205)
-    '''Type: _enums.VideoTriggerEvent
+    tv_trigger_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
+    '''Type: enums.VideoTriggerEvent
 
     Specifies the condition in the video signal that causes the digitizer to trigger.
     '''
@@ -1576,13 +1576,13 @@ class _SessionBase(object):
 
     Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
-    tv_trigger_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.VideoPolarity, 1250204)
-    '''Type: _enums.VideoPolarity
+    tv_trigger_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
+    '''Type: enums.VideoPolarity
 
     Specifies whether the video signal sync is positive or negative.
     '''
-    tv_trigger_signal_format = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.VideoSignalFormat, 1250201)
-    '''Type: _enums.VideoSignalFormat
+    tv_trigger_signal_format = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoSignalFormat, 1250201)
+    '''Type: enums.VideoSignalFormat
 
     Specifies the type of video signal, such as NTSC, PAL, or SECAM.
 
@@ -1595,8 +1595,8 @@ class _SessionBase(object):
         session.channels['0,1'].tv_trigger_signal_format = var
         var = session.channels['0,1'].tv_trigger_signal_format
     '''
-    vertical_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.VerticalCoupling, 1250003)
-    '''Type: _enums.VerticalCoupling
+    vertical_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
+    '''Type: enums.VerticalCoupling
 
     Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 
@@ -1674,7 +1674,7 @@ class _SessionBase(object):
         try:
             _, error_string = self._get_error()
             return error_string
-        except _errors.Error:
+        except errors.Error:
             pass
 
         try:
@@ -1685,7 +1685,7 @@ class _SessionBase(object):
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except _errors.Error:
+        except errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
@@ -1714,10 +1714,10 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_wfms_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, None if num_wfms_ctype is None else (ctypes.pointer(num_wfms_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
 
-    def cal_self_calibrate(self, option=_enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
+    def cal_self_calibrate(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
         '''cal_self_calibrate
 
         Self-calibrates most NI digitizers, including all SMC-based devices and
@@ -1749,7 +1749,7 @@ class _SessionBase(object):
             session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
-            option (_enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
+            option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
                 operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
                 restore the previous calibration.
 
@@ -1757,16 +1757,16 @@ class _SessionBase(object):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(option) is not _enums.Option:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.Option))
+        if type(option) is not enums.Option:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Option))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         option_ctype = _visatype.ViInt32(option.value)  # case S130
         error_code = self._library.niScope_CalSelfCalibrate(vi_ctype, channel_list_ctype, option_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_measurement_stats(self, clearable_measurement_function=_enums.ClearableMeasurement.ALL_MEASUREMENTS):
+    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
         '''clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
@@ -1792,20 +1792,20 @@ class _SessionBase(object):
             session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
-            clearable_measurement_function (_enums.ClearableMeasurement): The `scalar
+            clearable_measurement_function (enums.ClearableMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 or `array
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to clear the stats for.
 
         '''
-        if type(clearable_measurement_function) is not _enums.ClearableMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ClearableMeasurement))
+        if type(clearable_measurement_function) is not enums.ClearableMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
         error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_chan_characteristics(self, input_impedance, max_input_frequency):
@@ -1837,7 +1837,7 @@ class _SessionBase(object):
         input_impedance_ctype = _visatype.ViReal64(input_impedance)  # case S150
         max_input_frequency_ctype = _visatype.ViReal64(max_input_frequency)  # case S150
         error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_equalization_filter_coefficients(self, coefficients):
@@ -1872,7 +1872,7 @@ class _SessionBase(object):
         number_of_coefficients_ctype = _visatype.ViInt32(0 if coefficients is None else len(coefficients))  # case S160
         coefficients_ctype = get_ctypes_pointer_for_buffer(value=coefficients, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(vi_ctype, channel_list_ctype, number_of_coefficients_ctype, coefficients_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_vertical(self, range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True):
@@ -1894,7 +1894,7 @@ class _SessionBase(object):
             range (float): Specifies the vertical range Refer to vertical_range for
                 more information.
 
-            coupling (_enums.VerticalCoupling): Specifies how to couple the input signal. Refer to
+            coupling (enums.VerticalCoupling): Specifies how to couple the input signal. Refer to
                 vertical_coupling for more information.
 
             offset (float): Specifies the vertical offset. Refer to vertical_offset
@@ -1907,8 +1907,8 @@ class _SessionBase(object):
                 channel_enabled for more information.
 
         '''
-        if type(coupling) is not _enums.VerticalCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.VerticalCoupling))
+        if type(coupling) is not enums.VerticalCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -1917,10 +1917,10 @@ class _SessionBase(object):
         probe_attenuation_ctype = _visatype.ViReal64(probe_attenuation)  # case S150
         enabled_ctype = _visatype.ViBoolean(enabled)  # case S150
         error_code = self._library.niScope_ConfigureVertical(vi_ctype, channel_list_ctype, range_ctype, offset_ctype, coupling_ctype, probe_attenuation_ctype, enabled_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, num_samples=None, relative_to=_enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
+    def fetch(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -1943,7 +1943,7 @@ class _SessionBase(object):
         Args:
             num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
-            relative_to (_enums.FetchRelativeTo): Position to start fetching within one record.
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
             offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
 
@@ -2122,7 +2122,7 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
@@ -2250,7 +2250,7 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
@@ -2376,7 +2376,7 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary16(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary32_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
@@ -2502,7 +2502,7 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary32(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary8_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
@@ -2628,10 +2628,10 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_FetchBinary8(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_into(self, waveform, relative_to=_enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
+    def fetch_into(self, waveform, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
         '''fetch
 
         Returns the waveform from a previously initiated acquisition that the
@@ -2668,7 +2668,7 @@ class _SessionBase(object):
                     waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
                     wfm_info = session['0,1'].fetch_into(num_samples, waveform, timeout=5.0)
 
-            relative_to (_enums.FetchRelativeTo): Position to start fetching within one record.
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
             offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
 
@@ -2776,7 +2776,7 @@ class _SessionBase(object):
             session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            scalar_meas_function (_enums.ScalarMeasurement): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
 
@@ -2790,8 +2790,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not _enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -2799,7 +2799,7 @@ class _SessionBase(object):
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
         error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def fetch_measurement_stats(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
@@ -2839,7 +2839,7 @@ class _SessionBase(object):
             session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            scalar_meas_function (_enums.ScalarMeasurement): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
 
@@ -2867,8 +2867,8 @@ class _SessionBase(object):
                 called.
 
         '''
-        if type(scalar_meas_function) is not _enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -2886,7 +2886,7 @@ class _SessionBase(object):
         num_in_stats_size = self._actual_num_wfms()  # case B560
         num_in_stats_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=num_in_stats_size)  # case B560
         error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())], [float(mean_ctype[i]) for i in range(self._actual_num_wfms())], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms())], [float(min_ctype[i]) for i in range(self._actual_num_wfms())], [float(max_ctype[i]) for i in range(self._actual_num_wfms())], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -2923,7 +2923,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niScope_GetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
@@ -2959,7 +2959,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_GetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
@@ -2996,7 +2996,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niScope_GetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
@@ -3040,11 +3040,11 @@ class _SessionBase(object):
         buf_size_ctype = _visatype.ViInt32()  # case S170
         value_ctype = None  # case C050
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
         value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
     def get_equalization_filter_coefficients(self, number_of_coefficients):
@@ -3082,7 +3082,7 @@ class _SessionBase(object):
         coefficients_size = number_of_coefficients  # case B600
         coefficients_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=coefficients_size)  # case B600
         error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
 
     def _get_error(self):
@@ -3118,11 +3118,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
@@ -3222,7 +3222,7 @@ class _SessionBase(object):
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
@@ -3252,7 +3252,7 @@ class _SessionBase(object):
             session.channels['0,1'].read_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            scalar_meas_function (_enums.ScalarMeasurement): The `scalar
+            scalar_meas_function (enums.ScalarMeasurement): The `scalar
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
 
@@ -3266,8 +3266,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not _enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums.ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -3276,7 +3276,7 @@ class _SessionBase(object):
         result_array = array.array("d", [0] * result_size)  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(value=result_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return result_array
 
     def _set_attribute_vi_boolean(self, attribute_id, value):
@@ -3325,7 +3325,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViBoolean(value)  # case S150
         error_code = self._library.niScope_SetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, attribute_id, value):
@@ -3374,7 +3374,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViInt32(value)  # case S150
         error_code = self._library.niScope_SetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, attribute_id, value):
@@ -3423,7 +3423,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
         error_code = self._library.niScope_SetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, attribute_id, value):
@@ -3474,7 +3474,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
         error_code = self._library.niScope_SetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
 
@@ -3645,7 +3645,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except _errors.Error as e:
+        except errors.Error as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -3660,7 +3660,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Abort(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def acquisition_status(self):
@@ -3670,7 +3670,7 @@ class Session(_SessionBase):
         output parameter.
 
         Returns:
-            acquisition_status (_enums.AcquisitionStatus): Returns whether the acquisition is complete, in progress, or unknown.
+            acquisition_status (enums.AcquisitionStatus): Returns whether the acquisition is complete, in progress, or unknown.
 
                 **Defined Values**
 
@@ -3684,8 +3684,8 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         acquisition_status_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, None if acquisition_status_ctype is None else (ctypes.pointer(acquisition_status_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _enums.AcquisitionStatus(acquisition_status_ctype.value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def auto_setup(self):
         '''auto_setup
@@ -3759,7 +3759,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_AutoSetup(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def commit(self):
@@ -3772,7 +3772,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Commit(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_horizontal_timing(self, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime):
@@ -3821,7 +3821,7 @@ class Session(_SessionBase):
         num_records_ctype = _visatype.ViInt32(num_records)  # case S150
         enforce_realtime_ctype = _visatype.ViBoolean(enforce_realtime)  # case S150
         error_code = self._library.niScope_ConfigureHorizontalTiming(vi_ctype, min_sample_rate_ctype, min_num_pts_ctype, ref_position_ctype, num_records_ctype, enforce_realtime_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
@@ -3878,10 +3878,10 @@ class Session(_SessionBase):
         mid_ctype = _visatype.ViReal64(mid)  # case S150
         high_ctype = _visatype.ViReal64(high)  # case S150
         error_code = self._library.niScope_ConfigureRefLevels(vi_ctype, low_ctype, mid_ctype, high_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_digital(self, trigger_source, slope=_enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
+    def configure_trigger_digital(self, trigger_source, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_digital
 
         Configures the common properties of a digital trigger.
@@ -3918,7 +3918,7 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            slope (_enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to trigger_slope for more
                 information.
 
@@ -3931,18 +3931,18 @@ class Session(_SessionBase):
                 information.
 
         '''
-        if type(slope) is not _enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerSlope))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=_enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
+    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -3969,13 +3969,13 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            trigger_coupling (_enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
             level (float): The voltage threshold for the trigger. Refer to
                 trigger_level for more information.
 
-            slope (_enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to trigger_slope for more
                 information.
 
@@ -3988,10 +3988,10 @@ class Session(_SessionBase):
                 information.
 
         '''
-        if type(slope) is not _enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerSlope))
-        if type(trigger_coupling) is not _enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerCoupling))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -4000,10 +4000,10 @@ class Session(_SessionBase):
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=_enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
+    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -4034,7 +4034,7 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            trigger_coupling (_enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
             level (float): The voltage threshold for the trigger. Refer to
@@ -4046,7 +4046,7 @@ class Session(_SessionBase):
                 specify with **slope**, and passes through the **level**. Refer to
                 trigger_hysteresis for defined values.
 
-            slope (_enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
+            slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to trigger_slope for more
                 information.
 
@@ -4059,10 +4059,10 @@ class Session(_SessionBase):
                 information.
 
         '''
-        if type(slope) is not _enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerSlope))
-        if type(trigger_coupling) is not _enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerCoupling))
+        if type(slope) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -4072,7 +4072,7 @@ class Session(_SessionBase):
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger_immediate(self):
@@ -4087,7 +4087,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ConfigureTriggerImmediate(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger_software(self, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
@@ -4129,7 +4129,7 @@ class Session(_SessionBase):
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger_video(self, trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
@@ -4161,16 +4161,16 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            signal_format (_enums.VideoSignalFormat): Specifies the type of video signal sync the digitizer should look for.
+            signal_format (enums.VideoSignalFormat): Specifies the type of video signal sync the digitizer should look for.
                 Refer to tv_trigger_signal_format for more
                 information.
 
-            event (_enums.VideoTriggerEvent): Specifies the TV event you want to trigger on. You can trigger on a
+            event (enums.VideoTriggerEvent): Specifies the TV event you want to trigger on. You can trigger on a
                 specific or on the next coming line or field of the signal.
 
-            polarity (_enums.VideoPolarity): Specifies the polarity of the video signal sync.
+            polarity (enums.VideoPolarity): Specifies the polarity of the video signal sync.
 
-            trigger_coupling (_enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
             enable_dc_restore (bool): Offsets each video line so the clamping level (the portion of the video
@@ -4195,14 +4195,14 @@ class Session(_SessionBase):
                 information.
 
         '''
-        if type(signal_format) is not _enums.VideoSignalFormat:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.VideoSignalFormat))
-        if type(event) is not _enums.VideoTriggerEvent:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.VideoTriggerEvent))
-        if type(polarity) is not _enums.VideoPolarity:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.VideoPolarity))
-        if type(trigger_coupling) is not _enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerCoupling))
+        if type(signal_format) is not enums.VideoSignalFormat:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
+        if type(event) is not enums.VideoTriggerEvent:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoTriggerEvent))
+        if type(polarity) is not enums.VideoPolarity:
+            raise TypeError('Parameter mode must be of type ' + str(enums.VideoPolarity))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         enable_dc_restore_ctype = _visatype.ViBoolean(enable_dc_restore)  # case S150
@@ -4214,7 +4214,7 @@ class Session(_SessionBase):
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger_window(self, trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
@@ -4254,10 +4254,10 @@ class Session(_SessionBase):
             high_level (float): Passes the voltage threshold you want the digitizer to use for high
                 triggering.
 
-            window_mode (_enums.TriggerWindowMode): Specifies whether you want the trigger to occur when the signal enters
+            window_mode (enums.TriggerWindowMode): Specifies whether you want the trigger to occur when the signal enters
                 or leaves a window.
 
-            trigger_coupling (_enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
             holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
@@ -4269,10 +4269,10 @@ class Session(_SessionBase):
                 information.
 
         '''
-        if type(window_mode) is not _enums.TriggerWindowMode:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerWindowMode))
-        if type(trigger_coupling) is not _enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerCoupling))
+        if type(window_mode) is not enums.TriggerWindowMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
+        if type(trigger_coupling) is not enums.TriggerCoupling:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         low_level_ctype = _visatype.ViReal64(low_level)  # case S150
@@ -4282,7 +4282,7 @@ class Session(_SessionBase):
         holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
         delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disable(self):
@@ -4293,7 +4293,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Disable(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def export_signal(self, signal, output_terminal, signal_identifier="None"):
@@ -4324,7 +4324,7 @@ class Session(_SessionBase):
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Args:
-            signal (_enums.ExportableSignals): signal (clock, trigger, or event) to export.
+            signal (enums.ExportableSignals): signal (clock, trigger, or event) to export.
 
                 **Defined Values**
 
@@ -4391,14 +4391,14 @@ class Session(_SessionBase):
             signal_identifier (str): Describes the signal being exported.
 
         '''
-        if type(signal) is not _enums.ExportableSignals:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ExportableSignals))
+        if type(signal) is not enums.ExportableSignals:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         signal_ctype = _visatype.ViInt32(signal.value)  # case S130
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niScope_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
@@ -4533,7 +4533,7 @@ class Session(_SessionBase):
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
     def _initiate_acquisition(self):
@@ -4547,7 +4547,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_InitiateAcquisition(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def probe_compensation_signal_start(self):
@@ -4557,7 +4557,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ProbeCompensationSignalStart(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def probe_compensation_signal_stop(self):
@@ -4567,7 +4567,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ProbeCompensationSignalStop(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_device(self):
@@ -4582,7 +4582,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ResetDevice(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_with_defaults(self):
@@ -4594,7 +4594,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ResetWithDefaults(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def send_software_trigger_edge(self, which_trigger):
@@ -4609,7 +4609,7 @@ class Session(_SessionBase):
         the corresponding trigger to the digitizer.
 
         Args:
-            which_trigger (_enums.WhichTrigger): Specifies the type of trigger to send to the digitizer.
+            which_trigger (enums.WhichTrigger): Specifies the type of trigger to send to the digitizer.
 
                 **Defined Values**
 
@@ -4619,12 +4619,12 @@ class Session(_SessionBase):
                 | WhichTrigger.ADVANCE (3L)
 
         '''
-        if type(which_trigger) is not _enums.WhichTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.WhichTrigger))
+        if type(which_trigger) is not enums.WhichTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         which_trigger_ctype = _visatype.ViInt32(which_trigger.value)  # case S130
         error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _close(self):
@@ -4639,7 +4639,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_close(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset(self):
@@ -4651,7 +4651,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_reset(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_test(self):
@@ -4678,7 +4678,7 @@ class Session(_SessionBase):
         self_test_result_ctype = _visatype.ViInt16()  # case S200
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niScope_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 

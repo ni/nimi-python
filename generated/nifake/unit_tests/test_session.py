@@ -54,7 +54,7 @@ class TestSession(object):
     # Session management
 
     def test_init_with_options_and_close(self):
-        errors_patcher = patch('nifake.session._errors', spec_set=['handle_error', '_is_error'])
+        errors_patcher = patch('nifake.session.errors', spec_set=['handle_error', '_is_error'])
         patched_errors = errors_patcher.start()
         patched_errors._is_error.return_value = 0
 

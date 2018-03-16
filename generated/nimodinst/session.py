@@ -4,7 +4,7 @@ import ctypes
 
 import nimodinst._library_singleton as _library_singleton
 import nimodinst._visatype as _visatype
-import nimodinst.errors as _errors
+import nimodinst.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
@@ -222,7 +222,7 @@ class Session(object):
         '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_extended_error_info(self):
@@ -246,11 +246,11 @@ class Session(object):
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
@@ -293,7 +293,7 @@ class Session(object):
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
@@ -332,11 +332,11 @@ class Session(object):
         attribute_value_buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (_visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _open_installed_devices_session(self, driver):
@@ -379,7 +379,7 @@ class Session(object):
         handle_ctype = _visatype.ViSession()  # case S200
         device_count_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
 
 

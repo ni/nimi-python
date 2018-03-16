@@ -8,8 +8,8 @@ import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
-import nidcpower.enums as _enums
-import nidcpower.errors as _errors
+import nidcpower.enums as enums
+import nidcpower.errors as errors
 
 # Used for __repr__
 import pprint
@@ -143,8 +143,8 @@ class _SessionBase(object):
         session.channels['0,1'].aperture_time = var
         var = session.channels['0,1'].aperture_time
     '''
-    aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ApertureTimeUnits, 1150059)
-    '''Type: _enums.ApertureTimeUnits
+    aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
+    '''Type: enums.ApertureTimeUnits
 
     Specifies the units of the aperture_time property for the channel configuration.
     for information about supported devices.
@@ -162,8 +162,8 @@ class _SessionBase(object):
         session.channels['0,1'].aperture_time_units = var
         var = session.channels['0,1'].aperture_time_units
     '''
-    auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.AutoZero, 1150055)
-    '''Type: _enums.AutoZero
+    auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1150055)
+    '''Type: enums.AutoZero
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
@@ -201,8 +201,8 @@ class _SessionBase(object):
 
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based properties, the IVI engine maintains a separate  cache value for each channel.
     '''
-    compliance_limit_symmetry = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ComplianceLimitSymmetry, 1150184)
-    '''Type: _enums.ComplianceLimitSymmetry
+    compliance_limit_symmetry = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
+    '''Type: enums.ComplianceLimitSymmetry
 
     Specifies whether compliance limits for current generation and voltage
     generation for the device are applied symmetrically about 0 V and 0 A or
@@ -493,8 +493,8 @@ class _SessionBase(object):
         session.channels['0,1'].current_pole_zero_ratio = var
         var = session.channels['0,1'].current_pole_zero_ratio
     '''
-    dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DCNoiseRejection, 1150066)
-    '''Type: _enums.DCNoiseRejection
+    dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
+    '''Type: enums.DCNoiseRejection
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
@@ -502,8 +502,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_measure_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DigitalEdge, 1150035)
-    '''Type: _enums.DigitalEdge
+    digital_edge_measure_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
     source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
@@ -522,8 +522,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_pulse_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DigitalEdge, 1150096)
-    '''Type: _enums.DigitalEdge
+    digital_edge_pulse_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
     Default Value: DigitalEdge.RISING
@@ -539,8 +539,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
-    digital_edge_sequence_advance_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DigitalEdge, 1150027)
-    '''Type: _enums.DigitalEdge
+    digital_edge_sequence_advance_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -558,8 +558,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
     '''
-    digital_edge_source_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DigitalEdge, 1150031)
-    '''Type: _enums.DigitalEdge
+    digital_edge_source_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Source trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -577,8 +577,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DigitalEdge, 1150022)
-    '''Type: _enums.DigitalEdge
+    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
+    '''Type: enums.DigitalEdge
 
     Specifies whether to configure the Start trigger to assert on the rising or falling edge.
     for information about supported devices.
@@ -741,8 +741,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    measure_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150044)
-    '''Type: _enums.Polarity
+    measure_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150044)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
@@ -792,8 +792,8 @@ class _SessionBase(object):
     Note:
     This property is not available in a session involving multiple channels.
     '''
-    measure_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1150034)
-    '''Type: _enums.TriggerType
+    measure_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150034)
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
@@ -801,15 +801,15 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MeasureWhen, 1150057)
-    '''Type: _enums.MeasureWhen
+    measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
+    '''Type: enums.MeasureWhen
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
     Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the _fetch_multiple method.
     '''
-    output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OutputCapacitance, 1150014)
-    '''Type: _enums.OutputCapacitance
+    output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
+    '''Type: enums.OutputCapacitance
 
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
@@ -865,8 +865,8 @@ class _SessionBase(object):
         session.channels['0,1'].output_enabled = var
         var = session.channels['0,1'].output_enabled
     '''
-    output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OutputFunction, 1150008)
-    '''Type: _enums.OutputFunction
+    output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputFunction, 1150008)
+    '''Type: enums.OutputFunction
 
     Configures the method to generate on the specified channel(s).
     When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following properties to configure the channel when  OutputFunction.DC_VOLTAGE is selected:
@@ -960,8 +960,8 @@ class _SessionBase(object):
         session.channels['0,1'].power_line_frequency = var
         var = session.channels['0,1'].power_line_frequency
     '''
-    power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.PowerSource, 1150000)
-    '''Type: _enums.PowerSource
+    power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSource, 1150000)
+    '''Type: enums.PowerSource
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: PowerSource.AUTOMATIC
@@ -969,8 +969,8 @@ class _SessionBase(object):
 
     Note: Automatic selection is not persistent and occurs only at the time this property
     '''
-    power_source_in_use = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.PowerSourceInUse, 1150001)
-    '''Type: _enums.PowerSourceInUse
+    power_source_in_use = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
+    '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
     '''
@@ -1257,8 +1257,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
-    pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150100)
-    '''Type: _enums.Polarity
+    pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150100)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Pulse Complete event.
     Default Value: Polarity.HIGH
@@ -1480,8 +1480,8 @@ class _SessionBase(object):
         session.channels['0,1'].pulse_on_time = var
         var = session.channels['0,1'].pulse_on_time
     '''
-    pulse_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1150095)
-    '''Type: _enums.TriggerType
+    pulse_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150095)
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Pulse trigger.
     Default Value: TriggerType.NONE
@@ -1682,8 +1682,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
     '''
-    ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150103)
-    '''Type: _enums.Polarity
+    ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150103)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: Polarity.HIGH
@@ -1752,8 +1752,8 @@ class _SessionBase(object):
         session.channels['0,1'].samples_to_average = var
         var = session.channels['0,1'].samples_to_average
     '''
-    self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.SelfCalibrationPersistence, 1150073)
-    '''Type: _enums.SelfCalibrationPersistence
+    self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
+    '''Type: enums.SelfCalibrationPersistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the reset_device method is called or the machine  is powered down.
     This property affects the behavior of the CalSelfCalibrate method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the CalSelfCalibrate method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the CalSelfCalibrate method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the CalSelfCalibrate method is made.
@@ -1765,8 +1765,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Sense, 1150013)
-    '''Type: _enums.Sense
+    sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
+    '''Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
@@ -1781,8 +1781,8 @@ class _SessionBase(object):
         session.channels['0,1'].sense = var
         var = session.channels['0,1'].sense
     '''
-    sequence_advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1150026)
-    '''Type: _enums.TriggerType
+    sequence_advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150026)
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
@@ -1799,8 +1799,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150048)
-    '''Type: _enums.Polarity
+    sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150048)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
@@ -1829,8 +1829,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150038)
-    '''Type: _enums.Polarity
+    sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150038)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
@@ -1886,8 +1886,8 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    source_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Polarity, 1150041)
-    '''Type: _enums.Polarity
+    source_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150041)
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
@@ -1927,14 +1927,14 @@ class _SessionBase(object):
         session.channels['0,1'].source_delay = var
         var = session.channels['0,1'].source_delay
     '''
-    source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.SourceMode, 1150054)
-    '''Type: _enums.SourceMode
+    source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SourceMode, 1150054)
+    '''Type: enums.SourceMode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: SourceMode.SINGLE_POINT
     '''
-    source_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1150030)
-    '''Type: _enums.TriggerType
+    source_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150030)
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
@@ -1972,8 +1972,8 @@ class _SessionBase(object):
 
     Contains the name of the vendor that supplies NI-DCPower.
     '''
-    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerType, 1150021)
-    '''Type: _enums.TriggerType
+    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150021)
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
@@ -1986,8 +1986,8 @@ class _SessionBase(object):
 
     Contains a comma-separated (,) list of supported NI-DCPower device models.
     '''
-    transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TransientResponse, 1150062)
-    '''Type: _enums.TransientResponse
+    transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransientResponse, 1150062)
+    '''Type: enums.TransientResponse
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.
@@ -2295,7 +2295,7 @@ class _SessionBase(object):
         try:
             _, error_string = self._get_error()
             return error_string
-        except _errors.Error:
+        except errors.Error:
             pass
 
         try:
@@ -2306,12 +2306,12 @@ class _SessionBase(object):
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except _errors.Error:
+        except errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
-    def configure_aperture_time(self, aperture_time, units=_enums.ApertureTimeUnits.SECONDS):
+    def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
 
         Configures the aperture time on the specified channel(s).
@@ -2348,7 +2348,7 @@ class _SessionBase(object):
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
 
-            units (_enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
+            units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
                 +--------------------------------------------+------------------------------+
@@ -2358,14 +2358,14 @@ class _SessionBase(object):
                 +--------------------------------------------+------------------------------+
 
         '''
-        if type(units) is not _enums.ApertureTimeUnits:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ApertureTimeUnits))
+        if type(units) is not enums.ApertureTimeUnits:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
         units_ctype = _visatype.ViInt32(units.value)  # case S130
         error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
@@ -2492,7 +2492,7 @@ class _SessionBase(object):
         in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
         actual_count_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -2546,7 +2546,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
@@ -2600,7 +2600,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_int64(self, attribute_id):
@@ -2654,7 +2654,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt64()  # case S200
         error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
@@ -2708,7 +2708,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
@@ -2754,11 +2754,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
     def get_channel_name(self, index):
@@ -2786,11 +2786,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         channel_name_ctype = None  # case C050
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
 
     def _get_error(self):
@@ -2823,11 +2823,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def measure(self, measurement_type):
@@ -2848,7 +2848,7 @@ class _SessionBase(object):
             session.channels['0,1'].measure(measurement_type)
 
         Args:
-            measurement_type (_enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
+            measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
                 +------------------------------+------------------------------+
@@ -2863,14 +2863,14 @@ class _SessionBase(object):
                 amps for current.
 
         '''
-        if type(measurement_type) is not _enums.MeasurementTypes:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.MeasurementTypes))
+        if type(measurement_type) is not enums.MeasurementTypes:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
         measurement_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
     def measure_multiple(self):
@@ -2909,7 +2909,7 @@ class _SessionBase(object):
         current_measurements_size = self._parse_channel_count()  # case B560
         current_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=current_measurements_size)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
 
     def _parse_channel_count(self):
@@ -2933,7 +2933,7 @@ class _SessionBase(object):
         channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         number_of_channels_ctype = _visatype.ViUInt32()  # case S200
         error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
 
     def query_in_compliance(self):
@@ -2979,7 +2979,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         in_compliance_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_compliance_ctype.value)
 
     def query_max_current_limit(self, voltage_level):
@@ -3011,7 +3011,7 @@ class _SessionBase(object):
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
         max_current_limit_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_current_limit_ctype.value)
 
     def query_max_voltage_level(self, current_limit):
@@ -3043,7 +3043,7 @@ class _SessionBase(object):
         current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
         max_voltage_level_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_voltage_level_ctype.value)
 
     def query_min_current_limit(self, voltage_level):
@@ -3075,7 +3075,7 @@ class _SessionBase(object):
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
         min_current_limit_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(min_current_limit_ctype.value)
 
     def query_output_state(self, output_state):
@@ -3097,7 +3097,7 @@ class _SessionBase(object):
             session.channels['0,1'].query_output_state(output_state)
 
         Args:
-            output_state (_enums.OutputStates): Specifies the output state of the output channel that is being queried.
+            output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
                 +--------------------------+-------------------------------------------------------------------+
@@ -3112,14 +3112,14 @@ class _SessionBase(object):
                 state.
 
         '''
-        if type(output_state) is not _enums.OutputStates:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.OutputStates))
+        if type(output_state) is not enums.OutputStates:
+            raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
         in_state_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -3176,7 +3176,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -3233,7 +3233,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
@@ -3290,7 +3290,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -3347,7 +3347,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -3404,7 +3404,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def set_sequence(self, source_delays, values=None):
@@ -3460,7 +3460,7 @@ class _SessionBase(object):
         source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
         size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _error_message(self, error_code):
@@ -3484,7 +3484,7 @@ class _SessionBase(object):
         error_code_ctype = _visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
 
@@ -3610,7 +3610,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except _errors.Error as e:
+        except errors.Error as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -3646,7 +3646,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def commit(self):
@@ -3669,10 +3669,10 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Commit(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_measure_trigger(self, input_terminal, edge=_enums.DigitalEdge.RISING):
+    def configure_digital_edge_measure_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_measure_trigger
 
         Configures the Measure trigger for digital edge triggering.
@@ -3699,7 +3699,7 @@ class Session(_SessionBase):
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-            edge (_enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
+            edge (enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3710,16 +3710,16 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not _enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.DigitalEdge))
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_pulse_trigger(self, input_terminal, edge=_enums.DigitalEdge.RISING):
+    def configure_digital_edge_pulse_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_pulse_trigger
 
         Configures the Pulse trigger for digital edge triggering.
@@ -3743,7 +3743,7 @@ class Session(_SessionBase):
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-            edge (_enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
+            edge (enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3754,16 +3754,16 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not _enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.DigitalEdge))
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=_enums.DigitalEdge.RISING):
+    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_sequence_advance_trigger
 
         Configures the Sequence Advance trigger for digital edge triggering.
@@ -3791,7 +3791,7 @@ class Session(_SessionBase):
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-            edge (_enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
+            edge (enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
                 the rising or falling edge.
                 **Defined Values:**
 
@@ -3802,16 +3802,16 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not _enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.DigitalEdge))
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_source_trigger(self, input_terminal, edge=_enums.DigitalEdge.RISING):
+    def configure_digital_edge_source_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_source_trigger
 
         Configures the Source trigger for digital edge triggering.
@@ -3838,7 +3838,7 @@ class Session(_SessionBase):
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-            edge (_enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
+            edge (enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3849,16 +3849,16 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not _enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.DigitalEdge))
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, input_terminal, edge=_enums.DigitalEdge.RISING):
+    def configure_digital_edge_start_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_start_trigger
 
         Configures the Start trigger for digital edge triggering.
@@ -3885,7 +3885,7 @@ class Session(_SessionBase):
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
-            edge (_enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
+            edge (enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3896,13 +3896,13 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not _enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.DigitalEdge))
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
@@ -4044,7 +4044,7 @@ class Session(_SessionBase):
         attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
         set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def create_advanced_sequence_step(self, set_as_active_step=True):
@@ -4086,7 +4086,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
         error_code = self._library.niDCPower_CreateAdvancedSequenceStep(vi_ctype, set_as_active_step_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def delete_advanced_sequence(self, sequence_name):
@@ -4123,7 +4123,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_DeleteAdvancedSequence(vi_ctype, sequence_name_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disable(self):
@@ -4138,7 +4138,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Disable(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def export_signal(self, signal, output_terminal, signal_identifier=""):
@@ -4158,7 +4158,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            signal (_enums.ExportSignal): Specifies which trigger or event to export.
+            signal (enums.ExportSignal): Specifies which trigger or event to export.
                 **Defined Values:**
 
                 +-------------------------------------------------------+------------------------------------------------+
@@ -4211,14 +4211,14 @@ class Session(_SessionBase):
             signal_identifier (str): Reserved for future use. Pass in an empty string for this parameter.
 
         '''
-        if type(signal) is not _enums.ExportSignal:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ExportSignal))
+        if type(signal) is not enums.ExportSignal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         signal_ctype = _visatype.ViInt32(signal.value)  # case S130
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_ext_cal_last_date_and_time(self):
@@ -4249,7 +4249,7 @@ class Session(_SessionBase):
         hour_ctype = _visatype.ViInt32()  # case S200
         minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_ext_cal_last_temp(self):
@@ -4266,7 +4266,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def get_ext_cal_recommended_interval(self):
@@ -4283,7 +4283,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
     def get_ext_cal_last_date_and_time(self):
@@ -4350,7 +4350,7 @@ class Session(_SessionBase):
         hour_ctype = _visatype.ViInt32()  # case S200
         minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_self_cal_last_temp(self):
@@ -4380,7 +4380,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def _initialize_with_channels(self, resource_name, channels="", reset=False, option_string=""):
@@ -4459,7 +4459,7 @@ class Session(_SessionBase):
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
     def _initiate(self):
@@ -4480,7 +4480,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Initiate(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def read_current_temperature(self):
@@ -4496,7 +4496,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def reset_device(self):
@@ -4518,7 +4518,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetDevice(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_with_defaults(self):
@@ -4534,10 +4534,10 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger=_enums.SendSoftwareEdgeTriggerType.START):
+    def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
         '''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
@@ -4554,7 +4554,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            trigger (_enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
+            trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
                 +----------------------------------------------+---------------------------------------+
@@ -4570,12 +4570,12 @@ class Session(_SessionBase):
                 +----------------------------------------------+---------------------------------------+
 
         '''
-        if type(trigger) is not _enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.SendSoftwareEdgeTriggerType))
+        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
@@ -4595,7 +4595,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            event_id (_enums.Event): Specifies which event to wait for.
+            event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
                 +-------------------------------------------------------+--------------------------------------------------+
@@ -4622,13 +4622,13 @@ class Session(_SessionBase):
                 application.
 
         '''
-        if type(event_id) is not _enums.Event:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.Event))
+        if type(event_id) is not enums.Event:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Event))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _close(self):
@@ -4651,7 +4651,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset(self):
@@ -4666,7 +4666,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_reset(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_test(self):
@@ -4699,7 +4699,7 @@ class Session(_SessionBase):
         self_test_result_ctype = _visatype.ViInt16()  # case S200
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 

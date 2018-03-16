@@ -203,17 +203,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | _enums.AcquisitionType |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.AcquisitionType |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -532,17 +532,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.TerminalConfiguration |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | True                         |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.TerminalConfiguration |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | True                        |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -694,17 +694,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | _enums.DataProcessingMode |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | False                     |
-    +----------------+---------------------------+
-    | Resettable     | No                        |
-    +----------------+---------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.DataProcessingMode |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | No                       |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1481,17 +1481,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | _enums.FlexFIRAntialiasFilterType |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | True                              |
-    +----------------+-----------------------------------+
-    | Resettable     | No                                |
-    +----------------+-----------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.FlexFIRAntialiasFilterType |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | True                             |
+    +----------------+----------------------------------+
+    | Resettable     | No                               |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2546,17 +2546,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------+
-    | Characteristic | Value             |
-    +================+===================+
-    | Datatype       | _enums.FilterType |
-    +----------------+-------------------+
-    | Permissions    | read-write        |
-    +----------------+-------------------+
-    | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | No                |
-    +----------------+-------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.FilterType |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | No               |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2618,17 +2618,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | _enums.FIRFilterWindow |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | True                   |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.FIRFilterWindow |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | True                  |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2819,17 +2819,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.PercentageMethod |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | True                    |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.PercentageMethod |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | True                   |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2886,17 +2886,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.RefLevelUnits |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | True                 |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.RefLevelUnits |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | True                |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3284,17 +3284,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | _enums.OverflowErrorReporting |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
-    | Resettable     | No                            |
-    +----------------+-------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.OverflowErrorReporting |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | No                           |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3615,17 +3615,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | _enums.RefTriggerDetectorLocation |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | No                                |
-    +----------------+-----------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.RefTriggerDetectorLocation |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | No                               |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3738,17 +3738,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------+
-    | Characteristic | Value            |
-    +================+==================+
-    | Datatype       | _enums.RISMethod |
-    +----------------+------------------+
-    | Permissions    | read-write       |
-    +----------------+------------------+
-    | Channel Based  | False            |
-    +----------------+------------------+
-    | Resettable     | No               |
-    +----------------+------------------+
+    +----------------+-----------------+
+    | Characteristic | Value           |
+    +================+=================+
+    | Datatype       | enums.RISMethod |
+    +----------------+-----------------+
+    | Permissions    | read-write      |
+    +----------------+-----------------+
+    | Channel Based  | False           |
+    +----------------+-----------------+
+    | Resettable     | No              |
+    +----------------+-----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4160,17 +4160,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.StreamingPositionType |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.StreamingPositionType |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4232,17 +4232,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | _enums.TriggerCoupling |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.TriggerCoupling |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4458,17 +4458,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | _enums.TriggerModifier |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.TriggerModifier |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4482,17 +4482,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | _enums.TriggerSlope |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.TriggerSlope |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | No                 |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4602,17 +4602,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | _enums.TriggerType |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerType |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | No                |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4695,17 +4695,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.TriggerWindowMode |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.TriggerWindowMode |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4719,17 +4719,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.VideoTriggerEvent |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoTriggerEvent |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4767,17 +4767,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.VideoPolarity |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.VideoPolarity |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4804,17 +4804,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.VideoSignalFormat |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | True                     |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoSignalFormat |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | True                    |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4841,17 +4841,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.VerticalCoupling |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | True                    |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.VerticalCoupling |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | True                   |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

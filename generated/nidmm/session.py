@@ -8,8 +8,8 @@ import nidmm._attributes as _attributes
 import nidmm._converters as _converters
 import nidmm._library_singleton as _library_singleton
 import nidmm._visatype as _visatype
-import nidmm.enums as _enums
-import nidmm.errors as _errors
+import nidmm.enums as enums
+import nidmm.errors as errors
 
 # Used for __repr__
 import pprint
@@ -104,8 +104,8 @@ class _SessionBase(object):
     Specifies the minimum frequency component of the input signal for AC  measurements. This property affects the DMM only when you set the  method property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
-    adc_calibration = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ADCCalibration, 1150022)
-    '''Type: _enums.ADCCalibration
+    adc_calibration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ADCCalibration, 1150022)
+    '''Type: enums.ADCCalibration
 
     For the NI 4070/4071/4072 only, specifies the ADC calibration mode.
     '''
@@ -123,8 +123,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ApertureTimeUnits, 1250322)
-    '''Type: _enums.ApertureTimeUnits
+    aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1250322)
+    '''Type: enums.ApertureTimeUnits
 
     Specifies the units of aperture time for the current configuration.
     The NI 4060 does not support an aperture time set in seconds.
@@ -134,8 +134,8 @@ class _SessionBase(object):
 
     Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this property is set during a read operation.
     '''
-    auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.AutoZero, 1250332)
-    '''Type: _enums.AutoZero
+    auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1250332)
+    '''Type: enums.AutoZero
 
     Specifies the AutoZero mode.
     The NI 4050 is not supported.
@@ -148,8 +148,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    cable_comp_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.CableCompensationType, 1150045)
-    '''Type: _enums.CableCompensationType
+    cable_comp_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CableCompensationType, 1150045)
+    '''Type: enums.CableCompensationType
 
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
@@ -175,8 +175,8 @@ class _SessionBase(object):
 
     For the NI 4072 only, controls the available DC bias for capacitance measurements.
     '''
-    dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.DCNoiseRejection, 1150026)
-    '''Type: _enums.DCNoiseRejection
+    dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150026)
+    '''Type: enums.DCNoiseRejection
 
     Specifies the DC noise rejection mode.
     The NI 4050 and NI 4060 are not supported.
@@ -198,8 +198,8 @@ class _SessionBase(object):
 
     Specifies the maximum amplitude of the input signal for frequency  measurements.
     '''
-    function = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.Function, 1250001)
-    '''Type: _enums.Function
+    function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Function, 1250001)
+    '''Type: enums.Function
 
     Specifies the measurement method.
     Refer to the method topic in  the NI Digital Multimeters Help for device-specific information.
@@ -260,8 +260,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    lc_calculation_model = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.LCCalculationModel, 1150052)
-    '''Type: _enums.LCCalculationModel
+    lc_calculation_model = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
+    '''Type: enums.LCCalculationModel
 
     For the NI 4072 only, specifies the type of algorithm that the measurement processing uses for  capacitance and inductance measurements.
     '''
@@ -275,15 +275,15 @@ class _SessionBase(object):
 
     A string containing the logical name of the instrument.
     '''
-    meas_complete_dest = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MeasurementCompleteDest, 1250305)
-    '''Type: _enums.MeasurementCompleteDest
+    meas_complete_dest = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasurementCompleteDest, 1250305)
+    '''Type: enums.MeasurementCompleteDest
 
     Specifies the destination of the measurement complete (MC) signal.
     The NI 4050 is not supported.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
-    meas_dest_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.MeasurementDestinationSlope, 1150002)
-    '''Type: _enums.MeasurementDestinationSlope
+    meas_dest_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasurementDestinationSlope, 1150002)
+    '''Type: enums.MeasurementDestinationSlope
 
     Specifies the polarity of the generated measurement complete signal.
     '''
@@ -310,8 +310,8 @@ class _SessionBase(object):
     For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
-    operation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.OperationMode, 1150014)
-    '''Type: _enums.OperationMode
+    operation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OperationMode, 1150014)
+    '''Type: enums.OperationMode
 
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  configure_measurement_digits, NI-DMM sets this property to OperationMode.IVIDMM.  When you call configure_waveform_acquisition, NI-DMM sets this property to OperationMode.WAVEFORM.  If you are programming properties directly, you must set this property before  setting other configuration properties.
     '''
@@ -377,14 +377,14 @@ class _SessionBase(object):
     Only positive values are valid when setting the sample interval.
     The NI 4050 is not supported.
     '''
-    sample_trigger = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.SampleTrigger, 1250302)
-    '''Type: _enums.SampleTrigger
+    sample_trigger = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SampleTrigger, 1250302)
+    '''Type: enums.SampleTrigger
 
     Specifies the sample trigger source.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
-    sample_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.SampleTrigSlope, 1150010)
-    '''Type: _enums.SampleTrigSlope
+    sample_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SampleTrigSlope, 1150010)
+    '''Type: enums.SampleTrigSlope
 
     Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
     '''
@@ -487,8 +487,8 @@ class _SessionBase(object):
 
     Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported RTDs,  including custom RTDs. The default value is 100 (?).
     '''
-    temp_rtd_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.RTDType, 1150120)
-    '''Type: _enums.RTDType
+    temp_rtd_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RTDType, 1150120)
+    '''Type: enums.RTDType
 
     Specifies the type of RTD used to measure temperature. The default value is RTDType.PT3851.
     Refer to the temp_rtd_type topic in the NI Digital Multimeters Help for additional information about defined values.
@@ -498,16 +498,16 @@ class _SessionBase(object):
 
     Specifies the reference junction temperature when a fixed reference junction is used to take  a thermocouple measurement. The default value is 25.0 (°C).
     '''
-    temp_tc_ref_junc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ThermocoupleReferenceJunctionType, 1250232)
-    '''Type: _enums.ThermocoupleReferenceJunctionType
+    temp_tc_ref_junc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
+    '''Type: enums.ThermocoupleReferenceJunctionType
 
     Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    temp_tc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ThermocoupleType, 1250231)
-    '''Type: _enums.ThermocoupleType
+    temp_tc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
+    '''Type: enums.ThermocoupleType
 
     Specifies the type of thermocouple used to measure the temperature. The default value is ThermocoupleType.J.
     '''
@@ -526,14 +526,14 @@ class _SessionBase(object):
 
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 1.568e-7 (44006).
     '''
-    temp_thermistor_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.ThermistorType, 1150124)
-    '''Type: _enums.ThermistorType
+    temp_thermistor_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermistorType, 1150124)
+    '''Type: enums.ThermistorType
 
     Specifies the type of thermistor used to measure the temperature. The default value is  ThermistorType.THERMISTOR_44006.
     Refer to the temp_thermistor_type topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
-    temp_transducer_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TransducerType, 1250201)
-    '''Type: _enums.TransducerType
+    temp_transducer_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransducerType, 1250201)
+    '''Type: enums.TransducerType
 
     Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
 
@@ -562,20 +562,20 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerSlope, 1250334)
-    '''Type: _enums.TriggerSlope
+    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
+    '''Type: enums.TriggerSlope
 
     Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
     '''
-    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.TriggerSource, 1250004)
-    '''Type: _enums.TriggerSource
+    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250004)
+    '''Type: enums.TriggerSource
 
     Specifies the trigger source. When _initiate is called, the DMM waits  for the trigger specified with this property. After it receives the trigger,  the DMM waits the length of time specified with the trigger_delay  property. The DMM then takes a measurement.
     This property is not supported on the NI 4050.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
-    waveform_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, _enums.WaveformCoupling, 1150027)
-    '''Type: _enums.WaveformCoupling
+    waveform_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaveformCoupling, 1150027)
+    '''Type: enums.WaveformCoupling
 
     For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisition.
     '''
@@ -623,7 +623,7 @@ class _SessionBase(object):
         try:
             _, error_string = self._get_error()
             return error_string
-        except _errors.Error:
+        except errors.Error:
             pass
 
         try:
@@ -634,7 +634,7 @@ class _SessionBase(object):
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except _errors.Error:
+        except errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
@@ -675,7 +675,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niDMM_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
@@ -714,7 +714,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
@@ -753,7 +753,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
@@ -791,11 +791,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
@@ -818,11 +818,11 @@ class _SessionBase(object):
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niDMM_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDMM_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -873,7 +873,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -924,7 +924,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -975,7 +975,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niDMM_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -1026,7 +1026,7 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niDMM_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _error_message(self, error_code):
@@ -1048,7 +1048,7 @@ class _SessionBase(object):
         error_code_ctype = _visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDMM_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
 
@@ -1187,7 +1187,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except _errors.Error as e:
+        except errors.Error as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -1202,7 +1202,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Abort(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
@@ -1237,7 +1237,7 @@ class Session(_SessionBase):
         ac_minimum_frequency_hz_ctype = _visatype.ViReal64(ac_minimum_frequency_hz)  # case S150
         ac_maximum_frequency_hz_ctype = _visatype.ViReal64(ac_maximum_frequency_hz)  # case S150
         error_code = self._library.niDMM_ConfigureACBandwidth(vi_ctype, ac_minimum_frequency_hz_ctype, ac_maximum_frequency_hz_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
@@ -1248,7 +1248,7 @@ class Session(_SessionBase):
         resolution_absolute.
 
         Args:
-            measurement_function (_enums.Function): Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets method to this value.
 
             range (float): Specifies the **range** for the method specified in the
@@ -1295,14 +1295,14 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(measurement_function) is not _enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.Function))
+        if type(measurement_function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
         resolution_absolute_ctype = _visatype.ViReal64(resolution_absolute)  # case S150
         error_code = self._library.niDMM_ConfigureMeasurementAbsolute(vi_ctype, measurement_function_ctype, range_ctype, resolution_absolute_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
@@ -1313,7 +1313,7 @@ class Session(_SessionBase):
         resolution_digits.
 
         Args:
-            measurement_function (_enums.Function): Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets method to this value.
 
             range (float): Specifies the range for the method specified in the
@@ -1361,17 +1361,17 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(measurement_function) is not _enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.Function))
+        if type(measurement_function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
         resolution_digits_ctype = _visatype.ViReal64(resolution_digits)  # case S150
         error_code = self._library.niDMM_ConfigureMeasurementDigits(vi_ctype, measurement_function_ctype, range_ctype, resolution_digits_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=_enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
         '''configure_multi_point
 
         Configures the properties for multipoint measurements. These properties
@@ -1394,7 +1394,7 @@ class Session(_SessionBase):
                 sequence initiated by a trigger. The driver sets
                 sample_count to this value. The default value is 1.
 
-            sample_trigger (_enums.SampleTrigger): Specifies the **sample_trigger** source you want to use. The driver
+            sample_trigger (enums.SampleTrigger): Specifies the **sample_trigger** source you want to use. The driver
                 sets sample_trigger to this value. The default is
                 Immediate.
 
@@ -1419,15 +1419,15 @@ class Session(_SessionBase):
                 Note: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
         '''
-        if type(sample_trigger) is not _enums.SampleTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.SampleTrigger))
+        if type(sample_trigger) is not enums.SampleTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_count_ctype = _visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = _visatype.ViInt32(sample_count)  # case S150
         sample_trigger_ctype = _visatype.ViInt32(sample_trigger.value)  # case S130
         sample_interval_ctype = _converters.convert_timedelta_to_seconds(sample_interval, _visatype.ViReal64)  # case S140
         error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_open_cable_comp_values(self, conductance, susceptance):
@@ -1447,7 +1447,7 @@ class Session(_SessionBase):
         conductance_ctype = _visatype.ViReal64(conductance)  # case S150
         susceptance_ctype = _visatype.ViReal64(susceptance)  # case S150
         error_code = self._library.niDMM_ConfigureOpenCableCompValues(vi_ctype, conductance_ctype, susceptance_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_power_line_frequency(self, power_line_frequency_hz):
@@ -1463,7 +1463,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         power_line_frequency_hz_ctype = _visatype.ViReal64(power_line_frequency_hz)  # case S150
         error_code = self._library.niDMM_ConfigurePowerLineFrequency(vi_ctype, power_line_frequency_hz_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
@@ -1490,7 +1490,7 @@ class Session(_SessionBase):
         rtd_b_ctype = _visatype.ViReal64(rtd_b)  # case S150
         rtd_c_ctype = _visatype.ViReal64(rtd_c)  # case S150
         error_code = self._library.niDMM_ConfigureRTDCustom(vi_ctype, rtd_a_ctype, rtd_b_ctype, rtd_c_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_rtd_type(self, rtd_type, rtd_resistance):
@@ -1499,7 +1499,7 @@ class Session(_SessionBase):
         Configures the RTD Type and RTD Resistance parameters for an RTD.
 
         Args:
-            rtd_type (_enums.RTDType): Specifies the type of RTD used to measure the temperature resistance.
+            rtd_type (enums.RTDType): Specifies the type of RTD used to measure the temperature resistance.
                 NI-DMM uses this value to set the RTD Type property. The default is
                 RTDType.PT3851.
 
@@ -1527,13 +1527,13 @@ class Session(_SessionBase):
                 set the RTD Resistance property. The default is 100 (Ω).
 
         '''
-        if type(rtd_type) is not _enums.RTDType:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.RTDType))
+        if type(rtd_type) is not enums.RTDType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RTDType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         rtd_type_ctype = _visatype.ViInt32(rtd_type.value)  # case S130
         rtd_resistance_ctype = _visatype.ViReal64(rtd_resistance)  # case S150
         error_code = self._library.niDMM_ConfigureRTDType(vi_ctype, rtd_type_ctype, rtd_resistance_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_short_cable_comp_values(self, resistance, reactance):
@@ -1553,7 +1553,7 @@ class Session(_SessionBase):
         resistance_ctype = _visatype.ViReal64(resistance)  # case S150
         reactance_ctype = _visatype.ViReal64(reactance)  # case S150
         error_code = self._library.niDMM_ConfigureShortCableCompValues(vi_ctype, resistance_ctype, reactance_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
@@ -1589,17 +1589,17 @@ class Session(_SessionBase):
         thermistor_b_ctype = _visatype.ViReal64(thermistor_b)  # case S150
         thermistor_c_ctype = _visatype.ViReal64(thermistor_c)  # case S150
         error_code = self._library.niDMM_ConfigureThermistorCustom(vi_ctype, thermistor_a_ctype, thermistor_b_ctype, thermistor_c_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type=_enums.ThermocoupleReferenceJunctionType.FIXED):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
         chosen thermocouple.
 
         Args:
-            thermocouple_type (_enums.ThermocoupleType): Specifies the type of thermocouple used to measure the temperature.
+            thermocouple_type (enums.ThermocoupleType): Specifies the type of thermocouple used to measure the temperature.
                 NI-DMM uses this value to set the Thermocouple Type property. The
                 default is ThermocoupleType.J.
 
@@ -1621,7 +1621,7 @@ class Session(_SessionBase):
                 | ThermocoupleType.T | Thermocouple type T |
                 +--------------------+---------------------+
 
-            reference_junction_type (_enums.ThermocoupleReferenceJunctionType): Specifies the type of reference junction to be used in the reference
+            reference_junction_type (enums.ThermocoupleReferenceJunctionType): Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
                 value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
@@ -1630,15 +1630,15 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(thermocouple_type) is not _enums.ThermocoupleType:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ThermocoupleType))
-        if type(reference_junction_type) is not _enums.ThermocoupleReferenceJunctionType:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.ThermocoupleReferenceJunctionType))
+        if type(thermocouple_type) is not enums.ThermocoupleType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
+        if type(reference_junction_type) is not enums.ThermocoupleReferenceJunctionType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         thermocouple_type_ctype = _visatype.ViInt32(thermocouple_type.value)  # case S130
         reference_junction_type_ctype = _visatype.ViInt32(reference_junction_type.value)  # case S130
         error_code = self._library.niDMM_ConfigureThermocouple(vi_ctype, thermocouple_type_ctype, reference_junction_type_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
@@ -1650,7 +1650,7 @@ class Session(_SessionBase):
         information.
 
         Args:
-            trigger_source (_enums.TriggerSource): Specifies the **trigger_source** that initiates the acquisition. The
+            trigger_source (enums.TriggerSource): Specifies the **trigger_source** that initiates the acquisition. The
                 driver sets trigger_source to this value. Software
                 configures the DMM to wait until send_software_trigger is called
                 before triggering the DMM.
@@ -1677,13 +1677,13 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(trigger_source) is not _enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.TriggerSource))
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = _visatype.ViInt32(trigger_source.value)  # case S130
         trigger_delay_ctype = _converters.convert_timedelta_to_seconds(trigger_delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
@@ -1693,7 +1693,7 @@ class Session(_SessionBase):
         on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 
         Args:
-            measurement_function (_enums.Function): Specifies the **measurement_function** used in a waveform acquisition.
+            measurement_function (enums.Function): Specifies the **measurement_function** used in a waveform acquisition.
                 The driver sets method to this value.
 
                 +-----------------------------------+------+------------------+
@@ -1730,15 +1730,15 @@ class Session(_SessionBase):
                 The default value is 500.
 
         '''
-        if type(measurement_function) is not _enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(_enums.Function))
+        if type(measurement_function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
         rate_ctype = _visatype.ViReal64(rate)  # case S150
         waveform_points_ctype = _visatype.ViInt32(waveform_points)  # case S150
         error_code = self._library.niDMM_ConfigureWaveformAcquisition(vi_ctype, measurement_function_ctype, range_ctype, rate_ctype, waveform_points_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disable(self):
@@ -1750,7 +1750,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Disable(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -1783,7 +1783,7 @@ class Session(_SessionBase):
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
     def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -1837,7 +1837,7 @@ class Session(_SessionBase):
         reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
     def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -1883,7 +1883,7 @@ class Session(_SessionBase):
         waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array_array
 
     def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -1935,7 +1935,7 @@ class Session(_SessionBase):
         waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def get_aperture_time_info(self):
@@ -1965,7 +1965,7 @@ class Session(_SessionBase):
                 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
                 the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
-            aperture_time_units (_enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
+            aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
                 seconds. Returns the value of the aperture_time_units
                 property.
 
@@ -1980,8 +1980,8 @@ class Session(_SessionBase):
         aperture_time_ctype = _visatype.ViReal64()  # case S200
         aperture_time_units_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetApertureTimeInfo(vi_ctype, None if aperture_time_ctype is None else (ctypes.pointer(aperture_time_ctype)), None if aperture_time_units_ctype is None else (ctypes.pointer(aperture_time_units_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(aperture_time_ctype.value), _enums.ApertureTimeUnits(aperture_time_units_ctype.value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
 
     def get_auto_range_value(self):
         '''get_auto_range_value
@@ -1998,7 +1998,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         actual_range_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetAutoRangeValue(vi_ctype, None if actual_range_ctype is None else (ctypes.pointer(actual_range_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
 
     def _get_cal_date_and_time(self, cal_type):
@@ -2044,7 +2044,7 @@ class Session(_SessionBase):
         hour_ctype = _visatype.ViInt32()  # case S200
         minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetCalDateAndTime(vi_ctype, cal_type_ctype, None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if year_ctype is None else (ctypes.pointer(year_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_dev_temp(self, options=""):
@@ -2066,7 +2066,7 @@ class Session(_SessionBase):
         options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020
         temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetDevTemp(vi_ctype, options_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def get_ext_cal_recommended_interval(self):
@@ -2085,7 +2085,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
 
     def get_cal_date_and_time(self, cal_type):
@@ -2148,7 +2148,7 @@ class Session(_SessionBase):
         cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
         temperature_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetLastCalTemp(vi_ctype, cal_type_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
     def get_measurement_period(self):
@@ -2173,7 +2173,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         period_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_GetMeasurementPeriod(vi_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(period_ctype.value)
 
     def get_self_cal_supported(self):
@@ -2196,7 +2196,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         self_cal_supported_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niDMM_GetSelfCalSupported(vi_ctype, None if self_cal_supported_ctype is None else (ctypes.pointer(self_cal_supported_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
@@ -2312,7 +2312,7 @@ class Session(_SessionBase):
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
     def _initiate(self):
@@ -2326,7 +2326,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Initiate(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def perform_open_cable_comp(self):
@@ -2354,7 +2354,7 @@ class Session(_SessionBase):
         conductance_ctype = _visatype.ViReal64()  # case S200
         susceptance_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_PerformOpenCableComp(vi_ctype, None if conductance_ctype is None else (ctypes.pointer(conductance_ctype)), None if susceptance_ctype is None else (ctypes.pointer(susceptance_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(conductance_ctype.value), float(susceptance_ctype.value)
 
     def perform_short_cable_comp(self):
@@ -2381,7 +2381,7 @@ class Session(_SessionBase):
         resistance_ctype = _visatype.ViReal64()  # case S200
         reactance_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_PerformShortCableComp(vi_ctype, None if resistance_ctype is None else (ctypes.pointer(resistance_ctype)), None if reactance_ctype is None else (ctypes.pointer(reactance_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
     def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -2413,7 +2413,7 @@ class Session(_SessionBase):
         maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
     def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
@@ -2466,7 +2466,7 @@ class Session(_SessionBase):
         reading_array_ctype = get_ctypes_pointer_for_buffer(value=reading_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
     def read_status(self):
@@ -2490,7 +2490,7 @@ class Session(_SessionBase):
                 AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of
                 the devices.
 
-            acquisition_status (_enums.AcquisitionStatus): Indicates status of the acquisition. The following table shows the
+            acquisition_status (enums.AcquisitionStatus): Indicates status of the acquisition. The following table shows the
                 acquisition states:
 
                 +---+----------------------------+
@@ -2510,8 +2510,8 @@ class Session(_SessionBase):
         acquisition_backlog_ctype = _visatype.ViInt32()  # case S200
         acquisition_status_ctype = _visatype.ViInt16()  # case S200
         error_code = self._library.niDMM_ReadStatus(vi_ctype, None if acquisition_backlog_ctype is None else (ctypes.pointer(acquisition_backlog_ctype)), None if acquisition_status_ctype is None else (ctypes.pointer(acquisition_status_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(acquisition_backlog_ctype.value), _enums.AcquisitionStatus(acquisition_status_ctype.value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_waveform
@@ -2561,7 +2561,7 @@ class Session(_SessionBase):
         waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, None if actual_number_of_points_ctype is None else (ctypes.pointer(actual_number_of_points_ctype)))
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array_array
 
     def reset_with_defaults(self):
@@ -2574,7 +2574,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_ResetWithDefaults(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_cal(self):
@@ -2590,7 +2590,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_SelfCal(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def send_software_trigger(self):
@@ -2609,7 +2609,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_SendSoftwareTrigger(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _close(self):
@@ -2619,7 +2619,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_close(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset(self):
@@ -2631,7 +2631,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_reset(vi_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_test(self):
@@ -2678,7 +2678,7 @@ class Session(_SessionBase):
         self_test_result_ctype = _visatype.ViInt16()  # case S200
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDMM_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        _errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 

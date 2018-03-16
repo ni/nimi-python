@@ -59,17 +59,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | _enums.ADCCalibration |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.ADCCalibration |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+    | Resettable     | No                   |
+    +----------------+----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -117,17 +117,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.ApertureTimeUnits |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.ApertureTimeUnits |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -166,17 +166,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------+
-    | Characteristic | Value           |
-    +================+=================+
-    | Datatype       | _enums.AutoZero |
-    +----------------+-----------------+
-    | Permissions    | read-write      |
-    +----------------+-----------------+
-    | Channel Based  | False           |
-    +----------------+-----------------+
-    | Resettable     | No              |
-    +----------------+-----------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.AutoZero |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
+    | Resettable     | No             |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -219,17 +219,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.CableCompensationType |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.CableCompensationType |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -341,17 +341,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.DCNoiseRejection |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.DCNoiseRejection |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -441,17 +441,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------+
-    | Characteristic | Value           |
-    +================+=================+
-    | Datatype       | _enums.Function |
-    +----------------+-----------------+
-    | Permissions    | read-write      |
-    +----------------+-----------------+
-    | Channel Based  | False           |
-    +----------------+-----------------+
-    | Resettable     | No              |
-    +----------------+-----------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Function |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
+    | Resettable     | No             |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -693,17 +693,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | _enums.LCCalculationModel |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | False                     |
-    +----------------+---------------------------+
-    | Resettable     | No                        |
-    +----------------+---------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.LCCalculationModel |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | No                       |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -767,17 +767,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------+
-    | Characteristic | Value                          |
-    +================+================================+
-    | Datatype       | _enums.MeasurementCompleteDest |
-    +----------------+--------------------------------+
-    | Permissions    | read-write                     |
-    +----------------+--------------------------------+
-    | Channel Based  | False                          |
-    +----------------+--------------------------------+
-    | Resettable     | No                             |
-    +----------------+--------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.MeasurementCompleteDest |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | False                         |
+    +----------------+-------------------------------+
+    | Resettable     | No                            |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -791,17 +791,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | _enums.MeasurementDestinationSlope |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | False                              |
-    +----------------+------------------------------------+
-    | Resettable     | No                                 |
-    +----------------+------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | enums.MeasurementDestinationSlope |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | False                             |
+    +----------------+-----------------------------------+
+    | Resettable     | No                                |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -914,17 +914,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.OperationMode |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.OperationMode |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1155,17 +1155,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.SampleTrigger |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.SampleTrigger |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1179,17 +1179,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------+
-    | Characteristic | Value                  |
-    +================+========================+
-    | Datatype       | _enums.SampleTrigSlope |
-    +----------------+------------------------+
-    | Permissions    | read-write             |
-    +----------------+------------------------+
-    | Channel Based  | False                  |
-    +----------------+------------------------+
-    | Resettable     | No                     |
-    +----------------+------------------------+
+    +----------------+-----------------------+
+    | Characteristic | Value                 |
+    +================+=======================+
+    | Datatype       | enums.SampleTrigSlope |
+    +----------------+-----------------------+
+    | Permissions    | read-write            |
+    +----------------+-----------------------+
+    | Channel Based  | False                 |
+    +----------------+-----------------------+
+    | Resettable     | No                    |
+    +----------------+-----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1646,17 +1646,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------+
-    | Characteristic | Value          |
-    +================+================+
-    | Datatype       | _enums.RTDType |
-    +----------------+----------------+
-    | Permissions    | read-write     |
-    +----------------+----------------+
-    | Channel Based  | False          |
-    +----------------+----------------+
-    | Resettable     | No             |
-    +----------------+----------------+
+    +----------------+---------------+
+    | Characteristic | Value         |
+    +================+===============+
+    | Datatype       | enums.RTDType |
+    +----------------+---------------+
+    | Permissions    | read-write    |
+    +----------------+---------------+
+    | Channel Based  | False         |
+    +----------------+---------------+
+    | Resettable     | No            |
+    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1698,17 +1698,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------------+
-    | Characteristic | Value                                    |
-    +================+==========================================+
-    | Datatype       | _enums.ThermocoupleReferenceJunctionType |
-    +----------------+------------------------------------------+
-    | Permissions    | read-write                               |
-    +----------------+------------------------------------------+
-    | Channel Based  | False                                    |
-    +----------------+------------------------------------------+
-    | Resettable     | No                                       |
-    +----------------+------------------------------------------+
+    +----------------+-----------------------------------------+
+    | Characteristic | Value                                   |
+    +================+=========================================+
+    | Datatype       | enums.ThermocoupleReferenceJunctionType |
+    +----------------+-----------------------------------------+
+    | Permissions    | read-write                              |
+    +----------------+-----------------------------------------+
+    | Channel Based  | False                                   |
+    +----------------+-----------------------------------------+
+    | Resettable     | No                                      |
+    +----------------+-----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1722,17 +1722,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.ThermocoupleType |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.ThermocoupleType |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1819,17 +1819,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | _enums.ThermistorType |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.ThermistorType |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+    | Resettable     | No                   |
+    +----------------+----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1847,17 +1847,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------+
-    | Characteristic | Value                 |
-    +================+=======================+
-    | Datatype       | _enums.TransducerType |
-    +----------------+-----------------------+
-    | Permissions    | read-write            |
-    +----------------+-----------------------+
-    | Channel Based  | False                 |
-    +----------------+-----------------------+
-    | Resettable     | No                    |
-    +----------------+-----------------------+
+    +----------------+----------------------+
+    | Characteristic | Value                |
+    +================+======================+
+    | Datatype       | enums.TransducerType |
+    +----------------+----------------------+
+    | Permissions    | read-write           |
+    +----------------+----------------------+
+    | Channel Based  | False                |
+    +----------------+----------------------+
+    | Resettable     | No                   |
+    +----------------+----------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1932,17 +1932,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | _enums.TriggerSlope |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.TriggerSlope |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | No                 |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1958,17 +1958,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.TriggerSource |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | No                   |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.TriggerSource |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | No                  |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1982,17 +1982,17 @@ nidmm.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.WaveformCoupling |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | No                      |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.WaveformCoupling |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+    | Resettable     | No                     |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

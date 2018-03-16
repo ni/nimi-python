@@ -106,17 +106,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------+
-    | Characteristic | Value             |
-    +================+===================+
-    | Datatype       | _enums.AnalogPath |
-    +----------------+-------------------+
-    | Permissions    | read-write        |
-    +----------------+-------------------+
-    | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | Yes               |
-    +----------------+-------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.AnalogPath |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | Yes              |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -366,17 +366,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------+
-    | Characteristic | Value          |
-    +================+================+
-    | Datatype       | _enums.BusType |
-    +----------------+----------------+
-    | Permissions    | read only      |
-    +----------------+----------------+
-    | Channel Based  | False          |
-    +----------------+----------------+
-    | Resettable     | No             |
-    +----------------+----------------+
+    +----------------+---------------+
+    | Characteristic | Value         |
+    +================+===============+
+    | Datatype       | enums.BusType |
+    +----------------+---------------+
+    | Permissions    | read only     |
+    +----------------+---------------+
+    | Channel Based  | False         |
+    +----------------+---------------+
+    | Resettable     | No            |
+    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -419,17 +419,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | _enums.CalADCInput |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | Yes                |
-    +----------------+--------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.CalADCInput |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | Yes               |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -468,17 +468,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------+
-    | Characteristic | Value            |
-    +================+==================+
-    | Datatype       | _enums.ClockMode |
-    +----------------+------------------+
-    | Permissions    | read-write       |
-    +----------------+------------------+
-    | Channel Based  | False            |
-    +----------------+------------------+
-    | Resettable     | Yes              |
-    +----------------+------------------+
+    +----------------+-----------------+
+    | Characteristic | Value           |
+    +================+=================+
+    | Datatype       | enums.ClockMode |
+    +----------------+-----------------+
+    | Permissions    | read-write      |
+    +----------------+-----------------+
+    | Channel Based  | False           |
+    +----------------+-----------------+
+    | Resettable     | Yes             |
+    +----------------+-----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -564,17 +564,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------+
-    | Characteristic | Value                               |
-    +================+=====================================+
-    | Datatype       | _enums.DataMarkerEventLevelPolarity |
-    +----------------+-------------------------------------+
-    | Permissions    | read-write                          |
-    +----------------+-------------------------------------+
-    | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
-    +----------------+-------------------------------------+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | enums.DataMarkerEventLevelPolarity |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | False                              |
+    +----------------+------------------------------------+
+    | Resettable     | Yes                                |
+    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -741,17 +741,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------+
-    | Characteristic | Value                               |
-    +================+=====================================+
-    | Datatype       | _enums.ScriptTriggerDigitalEdgeEdge |
-    +----------------+-------------------------------------+
-    | Permissions    | read-write                          |
-    +----------------+-------------------------------------+
-    | Channel Based  | False                               |
-    +----------------+-------------------------------------+
-    | Resettable     | Yes                                 |
-    +----------------+-------------------------------------+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | enums.ScriptTriggerDigitalEdgeEdge |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | False                              |
+    +----------------+------------------------------------+
+    | Resettable     | Yes                                |
+    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -789,17 +789,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | _enums.StartTriggerDigitalEdgeEdge |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | False                              |
-    +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | enums.StartTriggerDigitalEdgeEdge |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | False                             |
+    +----------------+-----------------------------------+
+    | Resettable     | Yes                               |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -910,17 +910,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------------+
-    | Characteristic | Value                                       |
-    +================+=============================================+
-    | Datatype       | _enums.ScriptTriggerDigitalLevelActiveLevel |
-    +----------------+---------------------------------------------+
-    | Permissions    | read-write                                  |
-    +----------------+---------------------------------------------+
-    | Channel Based  | False                                       |
-    +----------------+---------------------------------------------+
-    | Resettable     | Yes                                         |
-    +----------------+---------------------------------------------+
+    +----------------+--------------------------------------------+
+    | Characteristic | Value                                      |
+    +================+============================================+
+    | Datatype       | enums.ScriptTriggerDigitalLevelActiveLevel |
+    +----------------+--------------------------------------------+
+    | Permissions    | read-write                                 |
+    +----------------+--------------------------------------------+
+    | Channel Based  | False                                      |
+    +----------------+--------------------------------------------+
+    | Resettable     | Yes                                        |
+    +----------------+--------------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1102,17 +1102,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | _enums.DoneEventDelayUnits |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | Yes                        |
-    +----------------+----------------------------+
+    +----------------+---------------------------+
+    | Characteristic | Value                     |
+    +================+===========================+
+    | Datatype       | enums.DoneEventDelayUnits |
+    +----------------+---------------------------+
+    | Permissions    | read-write                |
+    +----------------+---------------------------+
+    | Channel Based  | False                     |
+    +----------------+---------------------------+
+    | Resettable     | Yes                       |
+    +----------------+---------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1150,17 +1150,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | _enums.DoneEventActiveLevel |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | Yes                         |
-    +----------------+-----------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.DoneEventActiveLevel |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | Yes                        |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1174,17 +1174,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------+
-    | Characteristic | Value                          |
-    +================+================================+
-    | Datatype       | _enums.DoneEventOutputBehavior |
-    +----------------+--------------------------------+
-    | Permissions    | read-write                     |
-    +----------------+--------------------------------+
-    | Channel Based  | False                          |
-    +----------------+--------------------------------+
-    | Resettable     | Yes                            |
-    +----------------+--------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.DoneEventOutputBehavior |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | False                         |
+    +----------------+-------------------------------+
+    | Resettable     | Yes                           |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1222,17 +1222,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | _enums.DoneEventPulsePolarity |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
-    | Resettable     | Yes                           |
-    +----------------+-------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.DoneEventPulsePolarity |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | Yes                          |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1270,17 +1270,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | _enums.DoneEventPulseWidthUnits |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
+    +----------------+--------------------------------+
+    | Characteristic | Value                          |
+    +================+================================+
+    | Datatype       | enums.DoneEventPulseWidthUnits |
+    +----------------+--------------------------------+
+    | Permissions    | read-write                     |
+    +----------------+--------------------------------+
+    | Channel Based  | False                          |
+    +----------------+--------------------------------+
+    | Resettable     | Yes                            |
+    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1929,17 +1929,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------+
-    | Characteristic | Value           |
-    +================+=================+
-    | Datatype       | _enums.Waveform |
-    +----------------+-----------------+
-    | Permissions    | read-write      |
-    +----------------+-----------------+
-    | Channel Based  | False           |
-    +----------------+-----------------+
-    | Resettable     | No              |
-    +----------------+-----------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.Waveform |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
+    | Resettable     | No             |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2001,17 +2001,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | _enums.IdleBehavior |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | Yes                 |
-    +----------------+---------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.IdleBehavior |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | Yes                |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2329,17 +2329,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.MarkerEventDelayUnits |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.MarkerEventDelayUnits |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | Yes                         |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2402,17 +2402,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | _enums.MarkerEventOutputBehavior |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.MarkerEventOutputBehavior |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2450,17 +2450,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | _enums.MarkerEventPulsePolarity |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
+    +----------------+--------------------------------+
+    | Characteristic | Value                          |
+    +================+================================+
+    | Datatype       | enums.MarkerEventPulsePolarity |
+    +----------------+--------------------------------+
+    | Permissions    | read-write                     |
+    +----------------+--------------------------------+
+    | Channel Based  | False                          |
+    +----------------+--------------------------------+
+    | Resettable     | Yes                            |
+    +----------------+--------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2498,17 +2498,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | _enums.MarkerEventPulseWidthUnits |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.MarkerEventPulseWidthUnits |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | Yes                              |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2522,17 +2522,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | _enums.MarkerEventToggleInitialState |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+-------------------------------------+
+    | Characteristic | Value                               |
+    +================+=====================================+
+    | Datatype       | enums.MarkerEventToggleInitialState |
+    +----------------+-------------------------------------+
+    | Permissions    | read-write                          |
+    +----------------+-------------------------------------+
+    | Channel Based  | False                               |
+    +----------------+-------------------------------------+
+    | Resettable     | Yes                                 |
+    +----------------+-------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3196,17 +3196,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | _enums.DataProcessingMode |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | False                     |
-    +----------------+---------------------------+
-    | Resettable     | Yes                       |
-    +----------------+---------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.DataProcessingMode |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | Yes                      |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3389,17 +3389,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------+
-    | Characteristic | Value             |
-    +================+===================+
-    | Datatype       | _enums.FilterType |
-    +----------------+-------------------+
-    | Permissions    | read-write        |
-    +----------------+-------------------+
-    | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | Yes               |
-    +----------------+-------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.FilterType |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | Yes              |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3437,17 +3437,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------+
-    | Characteristic | Value          |
-    +================+================+
-    | Datatype       | _enums.OSPMode |
-    +----------------+----------------+
-    | Permissions    | read-write     |
-    +----------------+----------------+
-    | Channel Based  | False          |
-    +----------------+----------------+
-    | Resettable     | Yes            |
-    +----------------+----------------+
+    +----------------+---------------+
+    | Characteristic | Value         |
+    +================+===============+
+    | Datatype       | enums.OSPMode |
+    +----------------+---------------+
+    | Permissions    | read-write    |
+    +----------------+---------------+
+    | Channel Based  | False         |
+    +----------------+---------------+
+    | Resettable     | Yes           |
+    +----------------+---------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3462,17 +3462,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | _enums.OSPOverflowErrorReporting |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.OSPOverflowErrorReporting |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3659,17 +3659,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------+
-    | Characteristic | Value             |
-    +================+===================+
-    | Datatype       | _enums.OutputMode |
-    +----------------+-------------------+
-    | Permissions    | read-write        |
-    +----------------+-------------------+
-    | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | No                |
-    +----------------+-------------------+
+    +----------------+------------------+
+    | Characteristic | Value            |
+    +================+==================+
+    | Datatype       | enums.OutputMode |
+    +----------------+------------------+
+    | Permissions    | read-write       |
+    +----------------+------------------+
+    | Channel Based  | False            |
+    +----------------+------------------+
+    | Resettable     | No               |
+    +----------------+------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3811,17 +3811,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------------+
-    | Characteristic | Value                                |
-    +================+======================================+
-    | Datatype       | _enums.ReadyForStartEventActiveLevel |
-    +----------------+--------------------------------------+
-    | Permissions    | read-write                           |
-    +----------------+--------------------------------------+
-    | Channel Based  | False                                |
-    +----------------+--------------------------------------+
-    | Resettable     | Yes                                  |
-    +----------------+--------------------------------------+
+    +----------------+-------------------------------------+
+    | Characteristic | Value                               |
+    +================+=====================================+
+    | Datatype       | enums.ReadyForStartEventActiveLevel |
+    +----------------+-------------------------------------+
+    | Permissions    | read-write                          |
+    +----------------+-------------------------------------+
+    | Channel Based  | False                               |
+    +----------------+-------------------------------------+
+    | Resettable     | Yes                                 |
+    +----------------+-------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3919,17 +3919,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | _enums.ReferenceClockSource |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | Yes                         |
-    +----------------+-----------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.ReferenceClockSource |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | Yes                        |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4001,17 +4001,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.SampleClockSource |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | Yes                      |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.SampleClockSource |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | Yes                     |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4059,17 +4059,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | _enums.SampleClockTimebaseSource |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.SampleClockTimebaseSource |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4135,17 +4135,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.ScriptTriggerType |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | Yes                      |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.ScriptTriggerType |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | Yes                     |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4359,17 +4359,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------+
-    | Characteristic | Value                         |
-    +================+===============================+
-    | Datatype       | _enums.StartedEventDelayUnits |
-    +----------------+-------------------------------+
-    | Permissions    | read-write                    |
-    +----------------+-------------------------------+
-    | Channel Based  | False                         |
-    +----------------+-------------------------------+
-    | Resettable     | Yes                           |
-    +----------------+-------------------------------+
+    +----------------+------------------------------+
+    | Characteristic | Value                        |
+    +================+==============================+
+    | Datatype       | enums.StartedEventDelayUnits |
+    +----------------+------------------------------+
+    | Permissions    | read-write                   |
+    +----------------+------------------------------+
+    | Channel Based  | False                        |
+    +----------------+------------------------------+
+    | Resettable     | Yes                          |
+    +----------------+------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4407,17 +4407,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------------+
-    | Characteristic | Value                          |
-    +================+================================+
-    | Datatype       | _enums.StartedEventActiveLevel |
-    +----------------+--------------------------------+
-    | Permissions    | read-write                     |
-    +----------------+--------------------------------+
-    | Channel Based  | False                          |
-    +----------------+--------------------------------+
-    | Resettable     | Yes                            |
-    +----------------+--------------------------------+
+    +----------------+-------------------------------+
+    | Characteristic | Value                         |
+    +================+===============================+
+    | Datatype       | enums.StartedEventActiveLevel |
+    +----------------+-------------------------------+
+    | Permissions    | read-write                    |
+    +----------------+-------------------------------+
+    | Channel Based  | False                         |
+    +----------------+-------------------------------+
+    | Resettable     | Yes                           |
+    +----------------+-------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4431,17 +4431,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | _enums.StartedEventOutputBehavior |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | False                             |
-    +----------------+-----------------------------------+
-    | Resettable     | Yes                               |
-    +----------------+-----------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | enums.StartedEventOutputBehavior |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | False                            |
+    +----------------+----------------------------------+
+    | Resettable     | Yes                              |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4479,17 +4479,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------------+
-    | Characteristic | Value                            |
-    +================+==================================+
-    | Datatype       | _enums.StartedEventPulsePolarity |
-    +----------------+----------------------------------+
-    | Permissions    | read-write                       |
-    +----------------+----------------------------------+
-    | Channel Based  | False                            |
-    +----------------+----------------------------------+
-    | Resettable     | Yes                              |
-    +----------------+----------------------------------+
+    +----------------+---------------------------------+
+    | Characteristic | Value                           |
+    +================+=================================+
+    | Datatype       | enums.StartedEventPulsePolarity |
+    +----------------+---------------------------------+
+    | Permissions    | read-write                      |
+    +----------------+---------------------------------+
+    | Channel Based  | False                           |
+    +----------------+---------------------------------+
+    | Resettable     | Yes                             |
+    +----------------+---------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4527,17 +4527,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | _enums.StartedEventPulseWidthUnits |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | False                              |
-    +----------------+------------------------------------+
-    | Resettable     | Yes                                |
-    +----------------+------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | enums.StartedEventPulseWidthUnits |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | False                             |
+    +----------------+-----------------------------------+
+    | Resettable     | Yes                               |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4551,17 +4551,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | _enums.StartTriggerType |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | Yes                     |
-    +----------------+-------------------------+
+    +----------------+------------------------+
+    | Characteristic | Value                  |
+    +================+========================+
+    | Datatype       | enums.StartTriggerType |
+    +----------------+------------------------+
+    | Permissions    | read-write             |
+    +----------------+------------------------+
+    | Channel Based  | False                  |
+    +----------------+------------------------+
+    | Resettable     | Yes                    |
+    +----------------+------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4699,17 +4699,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.SynchronizationSource |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.SynchronizationSource |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4772,17 +4772,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.TerminalConfiguration |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.TerminalConfiguration |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | Yes                         |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4796,17 +4796,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | _enums.TriggerMode |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+-------------------+
+    | Characteristic | Value             |
+    +================+===================+
+    | Datatype       | enums.TriggerMode |
+    +----------------+-------------------+
+    | Permissions    | read-write        |
+    +----------------+-------------------+
+    | Channel Based  | False             |
+    +----------------+-------------------+
+    | Resettable     | No                |
+    +----------------+-------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4826,17 +4826,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------+
-    | Characteristic | Value                |
-    +================+======================+
-    | Datatype       | _enums.TriggerSource |
-    +----------------+----------------------+
-    | Permissions    | read-write           |
-    +----------------+----------------------+
-    | Channel Based  | False                |
-    +----------------+----------------------+
-    | Resettable     | Yes                  |
-    +----------------+----------------------+
+    +----------------+---------------------+
+    | Characteristic | Value               |
+    +================+=====================+
+    | Datatype       | enums.TriggerSource |
+    +----------------+---------------------+
+    | Permissions    | read-write          |
+    +----------------+---------------------+
+    | Channel Based  | False               |
+    +----------------+---------------------+
+    | Resettable     | Yes                 |
+    +----------------+---------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4850,17 +4850,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | _enums.VideoWaveformType |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
+    +----------------+-------------------------+
+    | Characteristic | Value                   |
+    +================+=========================+
+    | Datatype       | enums.VideoWaveformType |
+    +----------------+-------------------------+
+    | Permissions    | read-write              |
+    +----------------+-------------------------+
+    | Channel Based  | False                   |
+    +----------------+-------------------------+
+    | Resettable     | No                      |
+    +----------------+-------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4874,17 +4874,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | _enums.WaitBehavior |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | Yes                 |
-    +----------------+---------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.WaitBehavior |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | Yes                |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

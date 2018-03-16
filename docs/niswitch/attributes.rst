@@ -329,17 +329,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | _enums.HandshakingInitiation |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | No                           |
-    +----------------+------------------------------+
+    +----------------+-----------------------------+
+    | Characteristic | Value                       |
+    +================+=============================+
+    | Datatype       | enums.HandshakingInitiation |
+    +----------------+-----------------------------+
+    | Permissions    | read-write                  |
+    +----------------+-----------------------------+
+    | Channel Based  | False                       |
+    +----------------+-----------------------------+
+    | Resettable     | No                          |
+    +----------------+-----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1268,17 +1268,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | _enums.ScanAdvancedOutput |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | False                     |
-    +----------------+---------------------------+
-    | Resettable     | No                        |
-    +----------------+---------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | enums.ScanAdvancedOutput |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | False                    |
+    +----------------+--------------------------+
+    | Resettable     | No                       |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1292,17 +1292,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | _enums.ScanAdvancedPolarity |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.ScanAdvancedPolarity |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | No                         |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1385,17 +1385,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------+
-    | Characteristic | Value           |
-    +================+=================+
-    | Datatype       | _enums.ScanMode |
-    +----------------+-----------------+
-    | Permissions    | read-write      |
-    +----------------+-----------------+
-    | Channel Based  | False           |
-    +----------------+-----------------+
-    | Resettable     | No              |
-    +----------------+-----------------+
+    +----------------+----------------+
+    | Characteristic | Value          |
+    +================+================+
+    | Datatype       | enums.ScanMode |
+    +----------------+----------------+
+    | Permissions    | read-write     |
+    +----------------+----------------+
+    | Channel Based  | False          |
+    +----------------+----------------+
+    | Resettable     | No             |
+    +----------------+----------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1670,17 +1670,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | _enums.TriggerInput |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+--------------------+
+    | Characteristic | Value              |
+    +================+====================+
+    | Datatype       | enums.TriggerInput |
+    +----------------+--------------------+
+    | Permissions    | read-write         |
+    +----------------+--------------------+
+    | Channel Based  | False              |
+    +----------------+--------------------+
+    | Resettable     | No                 |
+    +----------------+--------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1694,17 +1694,17 @@ niswitch.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------+
-    | Characteristic | Value                       |
-    +================+=============================+
-    | Datatype       | _enums.TriggerInputPolarity |
-    +----------------+-----------------------------+
-    | Permissions    | read-write                  |
-    +----------------+-----------------------------+
-    | Channel Based  | False                       |
-    +----------------+-----------------------------+
-    | Resettable     | No                          |
-    +----------------+-----------------------------+
+    +----------------+----------------------------+
+    | Characteristic | Value                      |
+    +================+============================+
+    | Datatype       | enums.TriggerInputPolarity |
+    +----------------+----------------------------+
+    | Permissions    | read-write                 |
+    +----------------+----------------------------+
+    | Channel Based  | False                      |
+    +----------------+----------------------------+
+    | Resettable     | No                         |
+    +----------------+----------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
