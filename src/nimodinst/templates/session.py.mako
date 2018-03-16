@@ -13,9 +13,10 @@
 %>\
 
 import ctypes
-from ${module_name} import _errors
-from ${module_name} import _library_singleton
-from ${module_name} import _visatype
+
+import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._visatype as _visatype
+import ${module_name}.errors as _errors
 
 # Used for __repr__ and __str__
 import pprint

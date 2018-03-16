@@ -11,7 +11,7 @@ RST_FILES_TO_GENERATE := $(DEFAULT_RST_FILES_TO_GENERATE)
 
 # Add custom types to copy
 CUSTOM_TYPES_TO_COPY += \
-    _waveform_info.py \
+    waveform_info.py \
 
 include $(BUILD_HELPER_DIR)/rules.mak
 

@@ -27,10 +27,10 @@ import datetime
 
 import ${module_name}._attributes as _attributes
 import ${module_name}._converters as _converters
-import ${module_name}._enums as _enums
-import ${module_name}._errors as _errors
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
+import ${module_name}.enums as _enums
+import ${module_name}.errors as _errors
 % for c in config['custom_types']:
 
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401

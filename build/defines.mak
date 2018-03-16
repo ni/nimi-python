@@ -52,11 +52,11 @@ all: $(TARGETS)
 
 DEFAULT_PY_FILES_TO_GENERATE := \
     _attributes.py \
-    _enums.py \
+    enums.py \
     _library.py \
     _library_singleton.py \
     session.py \
-    _errors.py \
+    errors.py \
     unit_tests/_mock_helper.py \
     unit_tests/_matchers.py \
     __init__.py \

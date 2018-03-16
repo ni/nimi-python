@@ -11,7 +11,7 @@ MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
 
 # Add custom types to copy
 CUSTOM_TYPES_TO_COPY += \
-    _custom_struct.py \
+    custom_struct.py \
 
 include $(BUILD_HELPER_DIR)/rules.mak
 

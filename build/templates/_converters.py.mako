@@ -2,8 +2,8 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
 %>\
-import ${module_name}._errors as _errors
 import ${module_name}._visatype as _visatype
+import ${module_name}.errors as _errors
 
 import datetime
 import six

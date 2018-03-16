@@ -9,8 +9,8 @@ module_name = config['module_name']
 import platform
 
 import ctypes
-import ${module_name}._errors as _errors
 import ${module_name}._library as _library
+import ${module_name}.errors as _errors
 import threading
 
 
