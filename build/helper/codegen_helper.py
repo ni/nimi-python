@@ -95,7 +95,7 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         module_name = custom_type['file_name'] + '.'
 
     if output_parameter['enum'] is not None:
-        return_type_snippet = '_enums.' + output_parameter['enum'] + '('
+        return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
         return_type_snippet = module_name + output_parameter['python_type'] + '('
 
@@ -549,7 +549,7 @@ parameters_for_testing = [
         'python_name': 'an_array',
         'python_name_with_default': 'an_array',
         'python_name_with_doc_default': 'an_array',
-        'python_type': '_enums.Turtle',
+        'python_type': 'enums.Turtle',
         'size': {'mechanism': 'passed-in', 'value': 'numberOfElements'},
         'type': 'ViInt16',
         'numpy': False,
@@ -574,7 +574,7 @@ parameters_for_testing = [
         'python_name': 'an_int_enum',
         'python_name_with_default': 'an_int_enum',
         'python_name_with_doc_default': 'an_int_enum',
-        'python_type': '_enums.Turtle',
+        'python_type': 'enums.Turtle',
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViInt16',
         'numpy': False,
@@ -887,7 +887,7 @@ def test_get_method_return_snippet_custom_type():
 
 def test_get_method_return_snippet_enum():
     param = [parameters_for_testing[4], parameters_for_testing[5]]
-    assert get_method_return_snippet(param, config_for_testing) == 'return [_enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
+    assert get_method_return_snippet(param, config_for_testing) == 'return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]'
 
 
 def test_get_method_return_snippet_into():
@@ -897,7 +897,7 @@ def test_get_method_return_snippet_into():
 
 def test_get_enum_type_check_snippet():
     param = parameters_for_testing[6]
-    assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not _enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(_enums.Turtle))"
+    assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
 
 
 def test_get_buffer_parameter_for_size_parameter_none():

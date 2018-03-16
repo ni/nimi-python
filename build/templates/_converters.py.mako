@@ -3,7 +3,7 @@
     module_name = config['module_name']
 %>\
 import ${module_name}._visatype as _visatype
-import ${module_name}.errors as _errors
+import ${module_name}.errors as errors
 
 import datetime
 import six
@@ -26,7 +26,7 @@ def _repeated_capability_string_to_list(repeated_capability, prefix):
         rc = r.split('-')
         if len(rc) > 1:
             if len(rc) > 2:
-                raise _errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
+                raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
             start = rc[0]
             end = rc[1]
             if int(end) < int(start):
@@ -308,22 +308,22 @@ def test_invalid_repeated_capabilies():
     try:
         convert_repeated_capabilities('6-8-10')
         assert False
-    except _errors.InvalidRepeatedCapabilityError:
+    except errors.InvalidRepeatedCapabilityError:
         pass
     try:
         convert_repeated_capabilities(['5', '6-8-10'])
         assert False
-    except _errors.InvalidRepeatedCapabilityError:
+    except errors.InvalidRepeatedCapabilityError:
         pass
     try:
         convert_repeated_capabilities(('5', '6-8-10'))
         assert False
-    except _errors.InvalidRepeatedCapabilityError:
+    except errors.InvalidRepeatedCapabilityError:
         pass
     try:
         convert_repeated_capabilities('5,6-8-10')
         assert False
-    except _errors.InvalidRepeatedCapabilityError:
+    except errors.InvalidRepeatedCapabilityError:
         pass
 
 

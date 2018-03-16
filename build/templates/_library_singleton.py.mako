@@ -10,7 +10,7 @@ import platform
 
 import ctypes
 import ${module_name}._library as _library
-import ${module_name}.errors as _errors
+import ${module_name}.errors as errors
 import threading
 
 
@@ -23,14 +23,14 @@ def _get_library_name():
     try:
         return _library_info[platform.system()][platform.architecture()[0]]['name']
     except KeyError:
-        raise _errors.UnsupportedConfigurationError
+        raise errors.UnsupportedConfigurationError
 
 
 def _get_library_type():
     try:
         return _library_info[platform.system()][platform.architecture()[0]]['type']
     except KeyError:
-        raise _errors.UnsupportedConfigurationError
+        raise errors.UnsupportedConfigurationError
 
 
 def get():
@@ -51,7 +51,7 @@ def get():
                     assert library_type == 'cdll'
                     ctypes_library = ctypes.CDLL(_get_library_name())
             except OSError:
-                raise _errors.DriverNotInstalledError()
+                raise errors.DriverNotInstalledError()
             _instance = _library.Library(ctypes_library)
         return _instance
 

@@ -70,7 +70,7 @@ def _add_python_type(item, config):
         if item['enum'] is None:
             item['python_type'] = get_python_type_for_api_type(item['type'], config)
         else:
-            item['python_type'] = '_enums.' + item['enum']
+            item['python_type'] = 'enums.' + item['enum']
     return item
 
 
@@ -191,7 +191,7 @@ def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
         if 'enum' in parameter and parameter['enum'] is not None and parameter['default_value'] is not None:
-            name_with_default = parameter['python_name'] + "=_enums." + parameter['default_value']
+            name_with_default = parameter['python_name'] + "=enums." + parameter['default_value']
         else:
             name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
 

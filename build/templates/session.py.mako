@@ -29,8 +29,8 @@ import ${module_name}._attributes as _attributes
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
-import ${module_name}.enums as _enums
-import ${module_name}.errors as _errors
+import ${module_name}.enums as enums
+import ${module_name}.errors as errors
 % for c in config['custom_types']:
 
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
@@ -125,7 +125,7 @@ if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, _enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
@@ -176,7 +176,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         try:
             _, error_string = self._get_error()
             return error_string
-        except _errors.Error:
+        except errors.Error:
             pass
 
         try:
@@ -187,7 +187,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             '''
             error_string = self._error_message(error_code)
             return error_string
-        except _errors.Error:
+        except errors.Error:
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
@@ -245,7 +245,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except _errors.Error as e:
+        except errors.Error as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0
