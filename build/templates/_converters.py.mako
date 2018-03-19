@@ -338,6 +338,21 @@ def test_invalid_repeated_capabilies():
         assert False
     except errors.InvalidRepeatedCapabilityError:
         pass
+    try:
+        convert_repeated_capabilities(5.0)
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities([5.0, '0'])
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities((5.0, '0'))
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
 
 
 def test_repeated_capabilies_slice_prefix():
