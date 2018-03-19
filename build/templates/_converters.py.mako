@@ -54,25 +54,6 @@ def _(repeated_capability, prefix):
     return [str(repeated_capability)]
 
 
-@_convert_repeated_capabilities.register(collections.Iterable)  # noqa: F811
-def _(repeated_capability, prefix):
-    '''Iterable version - can handle lists, ranges, and tuples'''
-    rep_cap_list = []
-    for r in repeated_capability:
-        rep_cap_list += _convert_repeated_capabilities(r, prefix)
-    return rep_cap_list
-
-
-@_convert_repeated_capabilities.register(slice)  # noqa: F811
-def _(repeated_capability, prefix):
-    '''slice version'''
-    def ifnone(a, b):
-        return b if a is None else a
-    # Turn the slice into a list and call ourselves again to let the iterable instance handle it
-    rng = range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1))
-    return _convert_repeated_capabilities(rng, prefix)
-
-
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
 @_convert_repeated_capabilities.register(six.string_types)  # noqa: F811
 @_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
@@ -112,6 +93,24 @@ def _(repeated_capability, prefix):
 @_convert_repeated_capabilities.register(list)  # noqa: F811
 @_convert_repeated_capabilities.register(range)  # noqa: F811
 @_convert_repeated_capabilities.register(tuple)  # noqa: F811
+def _(repeated_capability, prefix):
+    '''Iterable version - can handle lists, ranges, and tuples'''
+    rep_cap_list = []
+    for r in repeated_capability:
+        rep_cap_list += _convert_repeated_capabilities(r, prefix)
+    return rep_cap_list
+
+
+@_convert_repeated_capabilities.register(slice)  # noqa: F811
+def _(repeated_capability, prefix):
+    '''slice version'''
+    def ifnone(a, b):
+        return b if a is None else a
+    # Turn the slice into a list and call ourselves again to let the iterable instance handle it
+    rng = range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1))
+    return _convert_repeated_capabilities(rng, prefix)
+
+
 def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
