@@ -7,6 +7,7 @@ from ${module_name} import visatype
 
 import datetime
 import numbers
+import six
 
 try:
     from functools import singledispatch  # Python 3.4+
@@ -18,14 +19,31 @@ except ImportError:
 def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     '''Base version that should not be called
 
-    Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
+    Overall purpose is to convert the repeated capabilities to a list of strings with prefix from what ever form
 
-   '0' becomes [0]
-   '0-2' becomes [0, 1, 2]
-   '0:2' becomes [0, 1, 2]
-   '0,1,2' not allowed
+    Supported types:
+    - str - List (comma delimited)
+    - str - Range (using '-' or ':')
+    - str - single item
+    - int
+    - tuple
+    - range
+    - slice
 
-    Each instance should return a list of strings
+    Each instance should return a list of strings, without prefix
+    - '0' --> ['0']
+    - 0 --> ['0']
+    - '0, 1' --> ['0', '1']
+    - 'ScriptTrigger0, ScriptTrigger1' --> ['0', '1']
+    - '0-1' --> ['0', '1']
+    - '0:1' --> ['0', '1']
+    - '0-1,4' --> ['0', '1', '4']
+    - range(0, 2) --> ['0', '1']
+    - slice(0, 2) --> ['0', '1']
+    - (0, 1, 4) --> ['0', '1', '4']
+    - ('0-1', 4) --> ['0', '1', '4']
+    - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
+        ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     '''
     raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
 
