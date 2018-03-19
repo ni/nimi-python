@@ -28,7 +28,7 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
 
     Each instance should return a list of strings
     '''
-    raise errors.InvalidRepeatedCapabilityError('Invalid type: {0}'.format(type(arg)))
+    raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
 
 
 @_convert_repeated_capabilities.register(numbers.Integral)  # noqa: F811
@@ -331,6 +331,21 @@ def test_invalid_repeated_capabilies():
         pass
     try:
         convert_repeated_capabilities('5,6-8-10')
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities(5.0)
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities([5.0, '0'])
+        assert False
+    except errors.InvalidRepeatedCapabilityError:
+        pass
+    try:
+        convert_repeated_capabilities((5.0, '0'))
         assert False
     except errors.InvalidRepeatedCapabilityError:
         pass
