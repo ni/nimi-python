@@ -32,7 +32,7 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
 
     Each instance should return a list of strings
     '''
-    raise errors.InvalidRepeatedCapabilityError('Invalid type: {0}'.format(type(arg)))
+    raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
 
 
 @_convert_repeated_capabilities.register(numbers.Integral)  # noqa: F811
