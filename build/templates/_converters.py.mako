@@ -258,6 +258,8 @@ def test_convert_timedelta_to_microseconds_int():
 def test_repeated_capabilies_string_channel():
     test_result_list = convert_repeated_capabilities('0')
     assert test_result_list == ['0']
+    test_result_list = convert_repeated_capabilities('r0')
+    assert test_result_list == ['r0']
     test_result_list = convert_repeated_capabilities('0,1')
     assert test_result_list == ['0', '1']
 
@@ -270,6 +272,8 @@ def test_repeated_capabilies_string_prefix():
 def test_repeated_capabilies_list_channel():
     test_result_list = convert_repeated_capabilities(['0'])
     assert test_result_list == ['0']
+    test_result_list = convert_repeated_capabilities(['r0'])
+    assert test_result_list == ['r0']
     test_result_list = convert_repeated_capabilities(['0', '1'])
     assert test_result_list == ['0', '1']
     test_result_list = convert_repeated_capabilities([0, 1])
@@ -384,6 +388,8 @@ def test_repeated_capabilies_slice_prefix():
 
 
 def test_string_to_list_channel():
+    test_result = _convert_repeated_capabilities('r0', '')
+    assert test_result == ['r0']
     test_result = _convert_repeated_capabilities(['0-2'], '')
     assert test_result == ['0', '1', '2']
     test_result = _convert_repeated_capabilities(['3:7'], '')
@@ -395,8 +401,6 @@ def test_string_to_list_channel():
 
 
 def test_string_to_list_prefix():
-    test_result = _convert_repeated_capabilities(['ScriptTrigger0-ScriptTrigger2'], 'ScriptTrigger')
-    assert test_result == ['0', '1', '2']
     test_result = _convert_repeated_capabilities(['ScriptTrigger3-ScriptTrigger7'], 'ScriptTrigger')
     assert test_result == ['3', '4', '5', '6', '7']
     test_result = _convert_repeated_capabilities(['ScriptTrigger3:ScriptTrigger7'], 'ScriptTrigger')
