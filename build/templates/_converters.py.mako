@@ -9,11 +9,6 @@ import datetime
 import numbers
 
 try:
-    import collections.abc as collections  # Python 3.4+
-except ImportError:
-    import collections as collections  # Python 2.7
-
-try:
     from functools import singledispatch  # Python 3.4+
 except ImportError:
     from singledispatch import singledispatch  # Python 2.7
@@ -61,6 +56,8 @@ def _(repeated_capability, prefix):
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
+@_convert_repeated_capabilities.register(six.string_types)  # noqa: F811
+@_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
     '''String version (this is the most complex)
@@ -92,6 +89,11 @@ def _(repeated_capability, prefix):
     return [repeated_capability.replace(prefix, '').strip()]
 
 
+# We cannot use collections.abc.Iterable here because strings are also iterable and then this
+# instance is what gets called instead of the string one.
+@_convert_repeated_capabilities.register(list)  # noqa: F811
+@_convert_repeated_capabilities.register(range)  # noqa: F811
+@_convert_repeated_capabilities.register(tuple)  # noqa: F811
 def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
