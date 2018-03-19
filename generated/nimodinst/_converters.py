@@ -3,11 +3,7 @@ from nimodinst import visatype
 
 import datetime
 import numbers
-
-try:
-    import collections.abc as collections  # Python 3.4+
-except ImportError:
-    import collections as collections  # Python 2.7
+import six
 
 try:
     from functools import singledispatch  # Python 3.4+
@@ -19,14 +15,31 @@ except ImportError:
 def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     '''Base version that should not be called
 
-    Convert a IVI string format range into a list of repeated capabilities numbers I.e. no prefix
+    Overall purpose is to convert the repeated capabilities to a list of strings with prefix from what ever form
 
-   '0' becomes [0]
-   '0-2' becomes [0, 1, 2]
-   '0:2' becomes [0, 1, 2]
-   '0,1,2' not allowed
+    Supported types:
+    - str - List (comma delimited)
+    - str - Range (using '-' or ':')
+    - str - single item
+    - int
+    - tuple
+    - range
+    - slice
 
-    Each instance should return a list of strings
+    Each instance should return a list of strings, without prefix
+    - '0' --> ['0']
+    - 0 --> ['0']
+    - '0, 1' --> ['0', '1']
+    - 'ScriptTrigger0, ScriptTrigger1' --> ['0', '1']
+    - '0-1' --> ['0', '1']
+    - '0:1' --> ['0', '1']
+    - '0-1,4' --> ['0', '1', '4']
+    - range(0, 2) --> ['0', '1']
+    - slice(0, 2) --> ['0', '1']
+    - (0, 1, 4) --> ['0', '1', '4']
+    - ('0-1', 4) --> ['0', '1', '4']
+    - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
+        ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     '''
     raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
 
@@ -37,26 +50,9 @@ def _(repeated_capability, prefix):
     return [str(repeated_capability)]
 
 
-@_convert_repeated_capabilities.register(collections.Iterable)  # noqa: F811
-def _(repeated_capability, prefix):
-    '''Iterable version - can handle lists, ranges, and tuples'''
-    rep_cap_list = []
-    for r in repeated_capability:
-        rep_cap_list += _convert_repeated_capabilities(r, prefix)
-    return rep_cap_list
-
-
-@_convert_repeated_capabilities.register(slice)  # noqa: F811
-def _(repeated_capability, prefix):
-    '''slice version'''
-    def ifnone(a, b):
-        return b if a is None else a
-    # Turn the slice into a list and call ourselves again to let the iterable instance handle it
-    rng = range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1))
-    return _convert_repeated_capabilities(rng, prefix)
-
-
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
+@_convert_repeated_capabilities.register(six.string_types)  # noqa: F811
+@_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
     '''String version (this is the most complex)
@@ -86,6 +82,27 @@ def _(repeated_capability, prefix):
 
     # If we made it here, it must be a simple item so we remove any prefix and return
     return [repeated_capability.replace(prefix, '').strip()]
+
+
+@_convert_repeated_capabilities.register(list)  # noqa: F811
+@_convert_repeated_capabilities.register(range)  # noqa: F811
+@_convert_repeated_capabilities.register(tuple)  # noqa: F811
+def _(repeated_capability, prefix):
+    '''Iterable version - can handle lists, ranges, and tuples'''
+    rep_cap_list = []
+    for r in repeated_capability:
+        rep_cap_list += _convert_repeated_capabilities(r, prefix)
+    return rep_cap_list
+
+
+@_convert_repeated_capabilities.register(slice)  # noqa: F811
+def _(repeated_capability, prefix):
+    '''slice version'''
+    def ifnone(a, b):
+        return b if a is None else a
+    # Turn the slice into a list and call ourselves again to let the iterable instance handle it
+    rng = range(ifnone(repeated_capability.start, 0), repeated_capability.stop, ifnone(repeated_capability.step, 1))
+    return _convert_repeated_capabilities(rng, prefix)
 
 
 def convert_repeated_capabilities(repeated_capability, prefix=''):
@@ -235,6 +252,8 @@ def test_convert_timedelta_to_microseconds_int():
 def test_repeated_capabilies_string_channel():
     test_result_list = convert_repeated_capabilities('0')
     assert test_result_list == ['0']
+    test_result_list = convert_repeated_capabilities('r0')
+    assert test_result_list == ['r0']
     test_result_list = convert_repeated_capabilities('0,1')
     assert test_result_list == ['0', '1']
 
@@ -247,6 +266,8 @@ def test_repeated_capabilies_string_prefix():
 def test_repeated_capabilies_list_channel():
     test_result_list = convert_repeated_capabilities(['0'])
     assert test_result_list == ['0']
+    test_result_list = convert_repeated_capabilities(['r0'])
+    assert test_result_list == ['r0']
     test_result_list = convert_repeated_capabilities(['0', '1'])
     assert test_result_list == ['0', '1']
     test_result_list = convert_repeated_capabilities([0, 1])
@@ -361,6 +382,8 @@ def test_repeated_capabilies_slice_prefix():
 
 
 def test_string_to_list_channel():
+    test_result = _convert_repeated_capabilities('r0', '')
+    assert test_result == ['r0']
     test_result = _convert_repeated_capabilities(['0-2'], '')
     assert test_result == ['0', '1', '2']
     test_result = _convert_repeated_capabilities(['3:7'], '')
@@ -372,8 +395,6 @@ def test_string_to_list_channel():
 
 
 def test_string_to_list_prefix():
-    test_result = _convert_repeated_capabilities(['ScriptTrigger0-ScriptTrigger2'], 'ScriptTrigger')
-    assert test_result == ['0', '1', '2']
     test_result = _convert_repeated_capabilities(['ScriptTrigger3-ScriptTrigger7'], 'ScriptTrigger')
     assert test_result == ['3', '4', '5', '6', '7']
     test_result = _convert_repeated_capabilities(['ScriptTrigger3:ScriptTrigger7'], 'ScriptTrigger')
