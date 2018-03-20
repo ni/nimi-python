@@ -100,7 +100,6 @@ functions_buffer_info = {
     'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ConfigureEqualizationFilterCoefficients':  { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'GetEqualizationFilterCoefficients':        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'numberOfCoefficients'}, }, }, },
-    # TODO(marcoskirsch): Won't work until we fix #606
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
                                                                   4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
                                                                   5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
