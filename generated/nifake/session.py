@@ -1405,5 +1405,33 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def _self_test(self):
+        '''_self_test
+
+        Performs a self-test.
+
+        Returns:
+            self_test_result (int): Contains the value returned from the instrument self-test. Zero indicates success.
+
+            self_test_message (str): This parameter contains the string returned from the instrument self-test. The array must contain at least 256 elements.
+
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = visatype.ViInt16()  # case S200
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niFake_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+
+    def self_test(self):
+        '''self_test
+
+        Performs a self-test
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestFailureError(code, msg)
+        return None
+
 
 
