@@ -3,7 +3,7 @@
 import ctypes
 import threading
 
-from nimodinst.visatype import *  # noqa: F403,H303
+from nimodinst._visatype import *  # noqa: F403,H303
 
 
 class Library(object):

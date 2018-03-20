@@ -13,9 +13,10 @@
 %>\
 
 import ctypes
-from ${module_name} import errors
-from ${module_name} import library_singleton
-from ${module_name} import visatype
+
+import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._visatype as _visatype
+import ${module_name}.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
@@ -127,7 +128,7 @@ class Session(object):
         self._item_count = 0
         self._current_item = 0
         self._encoding = 'windows-1251'
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
@@ -164,13 +165,13 @@ class Session(object):
         # We hand-maintain the code that calls into self._library rather than leverage code-generation
         # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
         # See https://github.com/ni/nimi-python/issues/166
-        error_info_buffer_size_ctype = visatype.ViInt32()  # case S170
+        error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         if error_code <= 0:
             return "Failed to retrieve error description."
-        error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        error_info_ctype = (visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
+        error_info_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        error_info_ctype = (_visatype.ViChar * error_info_buffer_size_ctype.value)()  # case C060
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
         self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
