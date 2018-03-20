@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-from nifgen import _converters
+import niscope._converters as _converters
 
 import datetime
 

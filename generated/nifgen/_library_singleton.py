@@ -3,16 +3,16 @@
 import platform
 
 import ctypes
-from nimodinst import errors
-from nimodinst import library
+import nifgen._library as _library
+import nifgen.errors as errors
 import threading
 
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
-                 'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
-                             '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}
+_library_info = {'Linux': {'64bit': {'name': 'libfgen.so', 'type': 'cdll'}},
+                 'Windows': {'32bit': {'name': 'nifgen_32.dll', 'type': 'windll'},
+                             '64bit': {'name': 'nifgen_64.dll', 'type': 'cdll'}}}
 
 
 def _get_library_name():
@@ -32,7 +32,7 @@ def _get_library_type():
 def get():
     '''get
 
-    Returns the library.Library singleton for nimodinst.
+    Returns the library.Library singleton for nifgen.
     '''
     global _instance
     global _instance_lock
@@ -48,6 +48,6 @@ def get():
                     ctypes_library = ctypes.CDLL(_get_library_name())
             except OSError:
                 raise errors.DriverNotInstalledError()
-            _instance = library.Library(ctypes_library)
+            _instance = _library.Library(ctypes_library)
         return _instance
 

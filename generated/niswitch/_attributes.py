@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-from nidmm import _converters
+import niswitch._converters as _converters
 
 import datetime
 

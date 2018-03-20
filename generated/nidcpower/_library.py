@@ -3,7 +3,7 @@
 import ctypes
 import threading
 
-from nidcpower.visatype import *  # noqa: F403,H303
+from nidcpower._visatype import *  # noqa: F403,H303
 
 
 class Library(object):

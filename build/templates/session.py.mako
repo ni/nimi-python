@@ -25,15 +25,15 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from ${module_name} import _converters
-from ${module_name} import attributes
-from ${module_name} import enums
-from ${module_name} import errors
-from ${module_name} import library_singleton
-from ${module_name} import visatype
+import ${module_name}._attributes as _attributes
+import ${module_name}._converters as _converters
+import ${module_name}._library_singleton as _library_singleton
+import ${module_name}._visatype as _visatype
+import ${module_name}.enums as enums
+import ${module_name}.errors as errors
 % for c in config['custom_types']:
 
-from ${module_name} import ${c['file_name']}  # noqa: F401
+import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
 # Used for __repr__
@@ -125,9 +125,9 @@ if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
-    ${attributes[attribute]['python_name']} = attributes.${attributes[attribute]['attribute_class']}(${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''Type: ${attributes[attribute]['python_type']}
@@ -212,7 +212,7 @@ class Session(_SessionBase):
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
 %   endif
 % endfor
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function

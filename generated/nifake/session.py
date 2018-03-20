@@ -4,14 +4,14 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from nifake import _converters
-from nifake import attributes
-from nifake import enums
-from nifake import errors
-from nifake import library_singleton
-from nifake import visatype
+import nifake._attributes as _attributes
+import nifake._converters as _converters
+import nifake._library_singleton as _library_singleton
+import nifake._visatype as _visatype
+import nifake.enums as enums
+import nifake.errors as errors
 
-from nifake import custom_struct  # noqa: F401
+import nifake.custom_struct as custom_struct  # noqa: F401
 
 # Used for __repr__
 import pprint
@@ -94,47 +94,47 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
+    float_enum = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.FloatEnum, 1000005)
     '''Type: enums.FloatEnum
 
     An property with an enum that is also a float
     '''
-    read_write_bool = attributes.AttributeViBoolean(1000000)
+    read_write_bool = _attributes.AttributeViBoolean(1000000)
     '''Type: bool
 
     An property of type bool with read/write access.
     '''
-    read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
+    read_write_color = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Color, 1000003)
     '''Type: enums.Color
 
     An property of type Color with read/write access.
     '''
-    read_write_double = attributes.AttributeViReal64(1000001)
+    read_write_double = _attributes.AttributeViReal64(1000001)
     '''Type: float
 
     An property of type float with read/write access.
     '''
-    read_write_double_with_converter = attributes.AttributeViReal64TimeDeltaSeconds(1000007)
+    read_write_double_with_converter = _attributes.AttributeViReal64TimeDeltaSeconds(1000007)
     '''Type: datetime.timedelta
 
     Property in seconds
     '''
-    read_write_int64 = attributes.AttributeViInt64(1000006)
+    read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
     An property of type 64-bit integer with read/write access.
     '''
-    read_write_integer = attributes.AttributeViInt32(1000004)
+    read_write_integer = _attributes.AttributeViInt32(1000004)
     '''Type: int
 
     An property of type integer with read/write access.
     '''
-    read_write_integer_with_converter = attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
+    read_write_integer_with_converter = _attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
     '''Type: datetime.timedelta
 
     Property in milliseconds
     '''
-    read_write_string = attributes.AttributeViString(1000002)
+    read_write_string = _attributes.AttributeViString(1000002)
     '''Type: str
 
     An property of type string with read/write access.
@@ -210,10 +210,10 @@ class _SessionBase(object):
             attribute_value (bool): Returns the value of the property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niFake_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -239,10 +239,10 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFake_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -268,10 +268,10 @@ class _SessionBase(object):
             attribute_value (int): Returns the value of the property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt64()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt64()  # case S200
         error_code = self._library.niFake_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -297,10 +297,10 @@ class _SessionBase(object):
             attribute_value (float): Returns the value of the property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFake_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -322,15 +322,15 @@ class _SessionBase(object):
             attribute_id (int): Pass the ID of an property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niFake_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -344,14 +344,14 @@ class _SessionBase(object):
             error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus()  # case S200
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus()  # case S200
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niFake_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -377,10 +377,10 @@ class _SessionBase(object):
             reading (float): The measured value.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, visatype.ViInt32)  # case S140
-        reading_ctype = visatype.ViReal64()  # case S200
+        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, _visatype.ViInt32)  # case S140
+        reading_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
@@ -404,10 +404,10 @@ class _SessionBase(object):
             attribute_value (bool): Pass the value that you want to set the property to.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niFake_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -431,10 +431,10 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niFake_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -458,10 +458,10 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the property to.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
         error_code = self._library.niFake_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -485,10 +485,10 @@ class _SessionBase(object):
             attribute_value (float): Pass the value that you want to set the property to.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niFake_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -512,9 +512,9 @@ class _SessionBase(object):
             attribute_value (str): Pass the value that you want to set the property to.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niFake_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -533,9 +533,9 @@ class _SessionBase(object):
             error_message (str): The error information formatted into a string.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFake_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
@@ -605,7 +605,7 @@ class Session(_SessionBase):
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
@@ -648,7 +648,7 @@ class Session(_SessionBase):
 
         Aborts a previously initiated thingie.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_Abort(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -666,10 +666,10 @@ class Session(_SessionBase):
             an_array (list of bool): Contains an array of booleans
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S190
         an_array_size = number_of_elements  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViBoolean, size=an_array_size)  # case B600
+        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=an_array_size)  # case B600
         error_code = self._library.niFake_BoolArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -687,10 +687,10 @@ class Session(_SessionBase):
             an_array (list of enums.Turtle): Contains an array of enums, stored as 16 bit integers under the hood
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S190
         an_array_size = number_of_elements  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViInt16, size=an_array_size)  # case B600
+        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt16, size=an_array_size)  # case B600
         error_code = self._library.niFake_EnumArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -716,8 +716,8 @@ class Session(_SessionBase):
         '''
         if type(a_turtle) is not enums.Turtle:
             raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_turtle_ctype = visatype.ViInt16(a_turtle.value)  # case S130
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_turtle_ctype = _visatype.ViInt16(a_turtle.value)  # case S130
         error_code = self._library.niFake_EnumInputFunctionWithDefaults(vi_ctype, a_turtle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -737,12 +737,12 @@ class Session(_SessionBase):
             actual_number_of_samples (int): Number of samples actually fetched.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(number_of_samples)  # case S190
         waveform_data_size = number_of_samples  # case B600
         waveform_data_array = array.array("d", [0] * waveform_data_size)  # case B600
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=visatype.ViReal64)  # case B600
-        actual_number_of_samples_ctype = visatype.ViInt32()  # case S200
+        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViReal64)  # case B600
+        actual_number_of_samples_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_data_array
@@ -772,10 +772,10 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         number_of_samples = len(waveform_data)
 
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(number_of_samples)  # case S190
         waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data)  # case B510
-        actual_number_of_samples_ctype = visatype.ViInt32()  # case S200
+        actual_number_of_samples_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -791,8 +791,8 @@ class Session(_SessionBase):
             a_boolean (bool): Contains a boolean.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_boolean_ctype = visatype.ViBoolean()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_boolean_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niFake_GetABoolean(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value)
@@ -808,8 +808,8 @@ class Session(_SessionBase):
             a_number (int): Contains a number.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_number_ctype = visatype.ViInt16()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViInt16()  # case S200
         error_code = self._library.niFake_GetANumber(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value)
@@ -823,8 +823,8 @@ class Session(_SessionBase):
             a_string (str): String comes back here. Buffer must be 256 big.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_string_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_string_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFake_GetAStringOfFixedMaximumSize(vi_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -834,13 +834,13 @@ class Session(_SessionBase):
 
         Returns a string using the IVI dance.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
         error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        a_string_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        a_string_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -854,8 +854,8 @@ class Session(_SessionBase):
             array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
         array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
@@ -871,10 +871,10 @@ class Session(_SessionBase):
             array_out (list of float): Array of double using puthon-code size mechanism
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=array_out_size)  # case B560
+        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeDouble(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -888,8 +888,8 @@ class Session(_SessionBase):
             size_out (int): Size of array
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        size_out_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_out_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFake_GetArraySizeForPythonCode(vi_ctype, None if size_out_ctype is None else (ctypes.pointer(size_out_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(size_out_ctype.value)
@@ -899,14 +899,14 @@ class Session(_SessionBase):
 
         This method returns an array of float whose size is determined with the IVI dance.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        array_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        array_size_ctype = _visatype.ViInt32()  # case S170
         array_out_ctype = None  # case B580
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # case S180
+        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
         array_out_size = array_size_ctype.value  # case B590
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=array_out_size)  # case B590
+        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=array_out_size)  # case B590
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
@@ -932,13 +932,13 @@ class Session(_SessionBase):
             minute (int): Indicates the **minute** of the last calibration.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        cal_type_ctype = visatype.ViInt32(cal_type)  # case S150
-        month_ctype = visatype.ViInt32()  # case S200
-        day_ctype = visatype.ViInt32()  # case S200
-        year_ctype = visatype.ViInt32()  # case S200
-        hour_ctype = visatype.ViInt32()  # case S200
-        minute_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        cal_type_ctype = _visatype.ViInt32(cal_type)  # case S150
+        month_ctype = _visatype.ViInt32()  # case S200
+        day_ctype = _visatype.ViInt32()  # case S200
+        year_ctype = _visatype.ViInt32()  # case S200
+        hour_ctype = _visatype.ViInt32()  # case S200
+        minute_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFake_GetCalDateAndTime(vi_ctype, cal_type_ctype, None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if year_ctype is None else (ctypes.pointer(year_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -952,7 +952,7 @@ class Session(_SessionBase):
             cs (CustomStruct): Set using custom type
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         cs_ctype = custom_struct.custom_struct()  # case S200
         error_code = self._library.niFake_GetCustomType(vi_ctype, None if cs_ctype is None else (ctypes.pointer(cs_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -971,8 +971,8 @@ class Session(_SessionBase):
             cs (list of CustomStruct): Get using custom type
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S190
         cs_size = number_of_elements  # case B600
         cs_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=cs_size)  # case B600
         error_code = self._library.niFake_GetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
@@ -1004,9 +1004,9 @@ class Session(_SessionBase):
                 +---+---------------+
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_quantity_ctype = visatype.ViInt32()  # case S200
-        a_turtle_ctype = visatype.ViInt16()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_quantity_ctype = _visatype.ViInt32()  # case S200
+        a_turtle_ctype = _visatype.ViInt16()  # case S200
         error_code = self._library.niFake_GetEnumValue(vi_ctype, None if a_quantity_ctype is None else (ctypes.pointer(a_quantity_ctype)), None if a_turtle_ctype is None else (ctypes.pointer(a_turtle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
@@ -1061,10 +1061,10 @@ class Session(_SessionBase):
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        id_query_ctype = visatype.ViBoolean(id_query)  # case S150
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
+        id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niFake_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -1074,7 +1074,7 @@ class Session(_SessionBase):
 
         Initiates a thingie.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_Initiate(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1100,15 +1100,15 @@ class Session(_SessionBase):
             output_array_of_fixed_length (list of float): An array of doubles with fixed size.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        output_array_size_ctype = visatype.ViInt32(output_array_size)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S190
         output_array_size = output_array_size  # case B600
-        output_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=output_array_size)  # case B600
+        output_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_size)  # case B600
         output_array_of_fixed_length_size = 3  # case B570
-        output_array_of_fixed_length_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
-        input_array_sizes_ctype = visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
-        input_array_of_floats_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=visatype.ViReal64)  # case B550
-        input_array_of_integers_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=visatype.ViInt16)  # case B550
+        output_array_of_fixed_length_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
+        input_array_sizes_ctype = _visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
+        input_array_of_floats_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=_visatype.ViReal64)  # case B550
+        input_array_of_integers_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
@@ -1122,8 +1122,8 @@ class Session(_SessionBase):
             a_number (int): Contains a number
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_number_ctype = visatype.ViInt32(a_number)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViInt32(a_number)  # case S150
         error_code = self._library.niFake_OneInputFunction(vi_ctype, a_number_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1163,14 +1163,14 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
         if type(a_float_enum) is not enums.FloatEnum:
             raise TypeError('Parameter mode must be of type ' + str(enums.FloatEnum))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_boolean_ctype = visatype.ViBoolean(a_boolean)  # case S150
-        an_int32_ctype = visatype.ViInt32(an_int32)  # case S150
-        an_int64_ctype = visatype.ViInt64(an_int64)  # case S150
-        an_int_enum_ctype = visatype.ViInt16(an_int_enum.value)  # case S130
-        a_float_ctype = visatype.ViReal64(a_float)  # case S150
-        a_float_enum_ctype = visatype.ViReal64(a_float_enum.value)  # case S130
-        string_size_ctype = visatype.ViInt32(0 if a_string is None else len(a_string))  # case S160
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_boolean_ctype = _visatype.ViBoolean(a_boolean)  # case S150
+        an_int32_ctype = _visatype.ViInt32(an_int32)  # case S150
+        an_int64_ctype = _visatype.ViInt64(an_int64)  # case S150
+        an_int_enum_ctype = _visatype.ViInt16(an_int_enum.value)  # case S130
+        a_float_ctype = _visatype.ViReal64(a_float)  # case S150
+        a_float_enum_ctype = _visatype.ViReal64(a_float_enum.value)  # case S130
+        string_size_ctype = _visatype.ViInt32(0 if a_string is None else len(a_string))  # case S160
         a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020
         error_code = self._library.niFake_ParametersAreMultipleTypes(vi_ctype, a_boolean_ctype, an_int32_ctype, an_int64_ctype, an_int_enum_ctype, a_float_ctype, a_float_enum_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1181,7 +1181,7 @@ class Session(_SessionBase):
 
         This method takes no parameters other than the session.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_PoorlyNamedSimpleFunction(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1199,9 +1199,9 @@ class Session(_SessionBase):
             reading (float): The measured value.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, visatype.ViReal64)  # case S140
-        reading_ctype = visatype.ViReal64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, _visatype.ViReal64)  # case S140
+        reading_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
@@ -1219,9 +1219,9 @@ class Session(_SessionBase):
             a_string (str): Contains a string. Buffer must be 256 bytes or larger.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_number_ctype = visatype.ViInt16()  # case S200
-        a_string_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViInt16()  # case S200
+        a_string_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFake_ReturnANumberAndAString(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
@@ -1263,22 +1263,22 @@ class Session(_SessionBase):
                 Note: The size must be at least arraySize.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_boolean_ctype = visatype.ViBoolean()  # case S200
-        an_int32_ctype = visatype.ViInt32()  # case S200
-        an_int64_ctype = visatype.ViInt64()  # case S200
-        an_int_enum_ctype = visatype.ViInt16()  # case S200
-        a_float_ctype = visatype.ViReal64()  # case S200
-        a_float_enum_ctype = visatype.ViReal64()  # case S200
-        array_size_ctype = visatype.ViInt32(array_size)  # case S190
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_boolean_ctype = _visatype.ViBoolean()  # case S200
+        an_int32_ctype = _visatype.ViInt32()  # case S200
+        an_int64_ctype = _visatype.ViInt64()  # case S200
+        an_int_enum_ctype = _visatype.ViInt16()  # case S200
+        a_float_ctype = _visatype.ViReal64()  # case S200
+        a_float_enum_ctype = _visatype.ViReal64()  # case S200
+        array_size_ctype = _visatype.ViInt32(array_size)  # case S190
         an_array_size = array_size  # case B600
-        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=an_array_size)  # case B600
-        string_size_ctype = visatype.ViInt32()  # case S170
+        an_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=an_array_size)  # case B600
+        string_size_ctype = _visatype.ViInt32()  # case S170
         a_string_ctype = None  # case C050
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        string_size_ctype = visatype.ViInt32(error_code)  # case S180
-        a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # case C060
+        string_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        a_string_ctype = (_visatype.ViChar * string_size_ctype.value)()  # case C060
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, None if a_boolean_ctype is None else (ctypes.pointer(a_boolean_ctype)), None if an_int32_ctype is None else (ctypes.pointer(an_int32_ctype)), None if an_int64_ctype is None else (ctypes.pointer(an_int64_ctype)), None if an_int_enum_ctype is None else (ctypes.pointer(an_int_enum_ctype)), None if a_float_ctype is None else (ctypes.pointer(a_float_ctype)), None if a_float_enum_ctype is None else (ctypes.pointer(a_float_enum_ctype)), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
@@ -1292,7 +1292,7 @@ class Session(_SessionBase):
             cs (CustomStruct): Set using custom type
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         cs_ctype = custom_struct.custom_struct(cs)  # case S150
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1307,8 +1307,8 @@ class Session(_SessionBase):
             cs (list of CustomStruct): Set using custom type
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_elements_ctype = visatype.ViInt32(0 if cs is None else len(cs))  # case S160
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
         cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in cs], library_type=custom_struct.custom_struct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1325,8 +1325,8 @@ class Session(_SessionBase):
             a_string (str): Contains a string
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        a_number_ctype = visatype.ViReal64(a_number)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViReal64(a_number)  # case S150
         a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020
         error_code = self._library.niFake_TwoInputFunction(vi_ctype, a_number_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1347,9 +1347,9 @@ class Session(_SessionBase):
             output (int): A big number on its way out.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        input_ctype = visatype.ViInt64(input)  # case S150
-        output_ctype = visatype.ViInt64()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        input_ctype = _visatype.ViInt64(input)  # case S150
+        output_ctype = _visatype.ViInt64()  # case S200
         error_code = self._library.niFake_Use64BitNumber(vi_ctype, input_ctype, None if output_ctype is None else (ctypes.pointer(output_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(output_ctype.value)
@@ -1363,10 +1363,10 @@ class Session(_SessionBase):
             waveform (array.array("d")): Waveform data.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
         waveform_array = get_ctypes_and_array(value=waveform, array_type="d")  # case B550
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=visatype.ViReal64)  # case B550
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1388,8 +1388,8 @@ class Session(_SessionBase):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        number_of_samples_ctype = visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1400,7 +1400,7 @@ class Session(_SessionBase):
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

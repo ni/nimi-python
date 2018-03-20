@@ -1,5 +1,5 @@
-from niswitch import errors
-from niswitch import visatype
+import niswitch._visatype as _visatype
+import niswitch.errors as errors
 
 import datetime
 import six
@@ -92,7 +92,7 @@ def _convert_timedelta(value, library_type, scaling):
     scaled_value = value.total_seconds() * scaling
 
     # ctype integer types don't convert to int from float so we need to
-    if library_type in [visatype.ViInt64, visatype.ViInt32, visatype.ViUInt32, visatype.ViInt16, visatype.ViUInt16, visatype.ViInt8]:
+    if library_type in [_visatype.ViInt64, _visatype.ViInt32, _visatype.ViUInt32, _visatype.ViInt16, _visatype.ViUInt16, _visatype.ViInt8]:
         scaled_value = int(scaled_value)
 
     return library_type(scaled_value)
@@ -165,57 +165,57 @@ def test_convert_init_with_options_dictionary():
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
     assert test_result.value == 10.0
-    assert isinstance(test_result, visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
     assert test_result.value == -1
-    assert isinstance(test_result, visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
 
 
 def test_convert_timedelta_to_seconds_int():
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), visatype.ViInt32)
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
     assert test_result.value == 10
-    assert isinstance(test_result, visatype.ViInt32)
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
     assert test_result.value == -1
-    assert isinstance(test_result, visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
 
 
 def test_convert_timedelta_to_milliseconds_double():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), visatype.ViReal64)
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
     assert test_result.value == 10000.0
-    assert isinstance(test_result, visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
     assert test_result.value == -1000.0
-    assert isinstance(test_result, visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
 
 
 def test_convert_timedelta_to_milliseconds_int():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), visatype.ViInt32)
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
     assert test_result.value == 10000
-    assert isinstance(test_result, visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
     assert test_result.value == -1000
-    assert isinstance(test_result, visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
 
 
 def test_convert_timedelta_to_microseconds_double():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), visatype.ViReal64)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
     assert test_result.value == 10000000.0
-    assert isinstance(test_result, visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
     assert test_result.value == -1000000.0
-    assert isinstance(test_result, visatype.ViReal64)
+    assert isinstance(test_result, _visatype.ViReal64)
 
 
 def test_convert_timedelta_to_microseconds_int():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), visatype.ViInt32)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
     assert test_result.value == 10000000
-    assert isinstance(test_result, visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
     assert test_result.value == -1000000
-    assert isinstance(test_result, visatype.ViInt32)
+    assert isinstance(test_result, _visatype.ViInt32)
 
 
 # Tests - repeated capabilities
