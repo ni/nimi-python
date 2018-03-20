@@ -195,9 +195,8 @@ def test_fetch_double_into(session):
 
 
 def test_self_test(session):
-    result, message = session.self_test()
-    assert result == 0
-    assert message == 'Scope Self Tests PASSED.'
+    # We should not get an assert if self_test passes
+    session.self_test()
 
 
 def test_reset(session):

@@ -93,9 +93,8 @@ def test_method_configure_trigger(session):
 
 
 def test_method_self_test(session):
-    result, message = session.self_test()
-    assert result == 0
-    assert message == 'Self Test passed.'
+    # We should not get an assert if self_test passes
+    session.self_test()
 
 
 def test_method_get_dev_temp(session):
