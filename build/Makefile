@@ -19,16 +19,16 @@ define per_driver_per_target
 $1_$2: start
 	@echo
 	@echo "Making $1"
-	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
-	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 $2
+	$(_hide_cmds)make -j $(MAKE_NUMBER_OF_JOBS) --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make -j $(MAKE_NUMBER_OF_JOBS) --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 $2
 endef
 
 define per_driver_all
 $1: start
 	@echo
 	@echo "Making $1"
-	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
-	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1
+	$(_hide_cmds)make -j $(MAKE_NUMBER_OF_JOBS) --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make -j $(MAKE_NUMBER_OF_JOBS) --no-print-directory -s -f src/$1/$1.mak DRIVER=$1
 endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
@@ -38,7 +38,7 @@ $(foreach d,$(ALL_DRIVERS),\
 
 define per_target
 $1:
-	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
+	$(foreach d,$(DRIVERS),make -j $(MAKE_NUMBER_OF_JOBS) --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
 endef
 
 # We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be

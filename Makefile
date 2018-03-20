@@ -12,5 +12,8 @@ export BUILD_HELPER_DIR
 BIN_DIR := $(ROOT_DIR)/bin
 export BIN_DIR
 
+MAKE_NUMBER_OF_JOBS ?= 8
+export MAKE_NUMBER_OF_JOBS
+
 include $(BUILD_HELPER_DIR)/Makefile
 
