@@ -14,6 +14,7 @@ functions_codegen_method = {
     'GetError':                 { 'codegen_method': 'private',  },
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
+    'self_test':                { 'codegen_method': 'private',  },  # Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -51,6 +52,7 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
     'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
+    'self_test':                             { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -118,6 +120,28 @@ functions_array = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
+    # Public function that wraps self_test and will raise on self test failure
+    'self_test_wrapper': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Performs a self-test',
+        },
+    },
     'GetLastCalDateAndTime': {
         'codegen_method': 'python-only',
         'returns': 'ViStatus',
