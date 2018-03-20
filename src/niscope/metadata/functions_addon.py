@@ -544,6 +544,9 @@ functions_array = {
     'FetchDispatcher':                               { 'parameters': { 2: { 'use_array': True, }, }, },
     'Read':                                          { 'parameters': { 4: { 'use_array': True, }, }, },
     'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+    'GetFrequencyResponse':                          { 'parameters': { 3: { 'use_array': True, },
+                                                                       4: { 'use_array': True, },
+                                                                       5: { 'use_array': True, }, }, },
 }
 
 
