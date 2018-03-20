@@ -216,9 +216,9 @@ def filter_parameters(function, parameter_usage_options):
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
         # Find the size parameter - we are assuming there can only be one
-        size_parameter = find_size_parameter(filter_ivi_dance_parameter(function), function['parameters'])
+        size_parameter = find_size_parameter(filter_ivi_dance_parameters(function), function['parameters'])
         if size_parameter is None:
-            size_parameter = find_size_parameter(filter_len_parameter(function), function['parameters'])
+            size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
@@ -258,7 +258,7 @@ def filter_parameters(function, parameter_usage_options):
     return parameters_to_use
 
 
-def filter_ivi_dance_parameter(function):
+def filter_ivi_dance_parameters(function):
     '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
 
     asserts if more than one parameter found
@@ -270,13 +270,13 @@ def filter_ivi_dance_parameter(function):
         Parameter dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
-    if len(params) == 0:
-        return None
-    assert len(params) == 1, 'Found several ivi-dance parameters, expected only one. Found: {0}'.format([x['name'] for x in params])
-    return params[0]
+    if len(params) > 0:
+        size_param = params[0]['size']['value']
+        assert all(x['size']['value'] == size_param for x in params)
+    return params
 
 
-def filter_len_parameter(function):
+def filter_len_parameters(function):
     '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
 
 
@@ -290,10 +290,7 @@ def filter_len_parameter(function):
         Parameter dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
-    if len(params) == 0:
-        return None
-    assert len(params) == 1, 'Found more than one len parameter: {0}'.format(pp.pformat(params))
-    return params[0]
+    return params
 
 
 def filter_codegen_functions(functions):

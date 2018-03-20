@@ -5,11 +5,17 @@ def find_parameter(name, parameters):
     return parameter[0]
 
 
-def find_size_parameter(parameter, parameters):
+def find_size_parameter(parameter_list, parameters):
     '''Returns the parameter that is used to specify the size of another parameter. Applies to 'ivi-dance' and 'passed-in'.'''
-    if not parameter:
+    if len(parameter_list) == 0:
         return None
-    return find_parameter(parameter['size']['value'], parameters)
+    # We verified earlier that all paramers have the same size parameter, so we only need to use the first one
+    try:
+        # Try first as a list
+        return find_parameter(parameter_list[0]['size']['value'], parameters)
+    except KeyError:
+        # Not a list, so must be a single parameter
+        return find_parameter(parameter_list['size']['value'], parameters)
 
 
 def find_custom_type(p, config):

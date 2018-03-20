@@ -53,7 +53,6 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
-    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
     'FetchBinary8':                     { 'codegen_method': 'private',  },
@@ -102,9 +101,9 @@ functions_buffer_info = {
     'ConfigureEqualizationFilterCoefficients':  { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'GetEqualizationFilterCoefficients':        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'numberOfCoefficients'}, }, }, },
     # TODO(marcoskirsch): Won't work until we fix #606
-    # 'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
-    #                                                               4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
-    #                                                               5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+                                                                  4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+                                                                  5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
