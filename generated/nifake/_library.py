@@ -3,9 +3,9 @@
 import ctypes
 import threading
 
-from nifake.visatype import *  # noqa: F403,H303
+from nifake._visatype import *  # noqa: F403,H303
 
-from nifake import custom_struct  # noqa: F401
+import nifake.custom_struct as custom_struct  # noqa: F401
 
 
 class Library(object):

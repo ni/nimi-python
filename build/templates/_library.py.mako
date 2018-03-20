@@ -16,10 +16,10 @@ functions = helper.filter_library_functions(functions)
 import ctypes
 import threading
 
-from ${module_name}.visatype import *  # noqa: F403,H303
+from ${module_name}._visatype import *  # noqa: F403,H303
 % for c in config['custom_types']:
 
-from ${module_name} import ${c['file_name']}  # noqa: F401
+import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
 

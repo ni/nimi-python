@@ -4,14 +4,14 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from niscope import _converters
-from niscope import attributes
-from niscope import enums
-from niscope import errors
-from niscope import library_singleton
-from niscope import visatype
+import niscope._attributes as _attributes
+import niscope._converters as _converters
+import niscope._library_singleton as _library_singleton
+import niscope._visatype as _visatype
+import niscope.enums as enums
+import niscope.errors as errors
 
-from niscope import waveform_info  # noqa: F401
+import niscope.waveform_info as waveform_info  # noqa: F401
 
 # Used for __repr__
 import pprint
@@ -94,18 +94,18 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    adjust_pretrigger_samples_5102 = attributes.AttributeViBoolean(1150085)
+    adjust_pretrigger_samples_5102 = _attributes.AttributeViBoolean(1150085)
     '''Type: bool
 
     When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
     '''
-    five_v_out_output_terminal = attributes.AttributeViString(1150129)
+    five_v_out_output_terminal = _attributes.AttributeViString(1150129)
     '''Type: str
 
     Specifies the destination for the 5 Volt signal.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    absolute_sample_clock_offset = attributes.AttributeViReal64TimeDeltaSeconds(1150374)
+    absolute_sample_clock_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150374)
     '''Type: datetime.timedelta
 
     Gets or sets the absolute time offset of the sample clock relative to
@@ -120,7 +120,7 @@ class _SessionBase(object):
     periods, .5 sample clock periods]. The default absolute sample clock
     offset is 0s.
     '''
-    accessory_gain = attributes.AttributeViReal64(1150279)
+    accessory_gain = _attributes.AttributeViReal64(1150279)
     '''Type: float
 
     Returns the calibration gain for the current device configuration.
@@ -141,7 +141,7 @@ class _SessionBase(object):
         session.channels['0,1'].accessory_gain = var
         var = session.channels['0,1'].accessory_gain
     '''
-    accessory_offset = attributes.AttributeViReal64(1150280)
+    accessory_offset = _attributes.AttributeViReal64(1150280)
     '''Type: float
 
     Returns the calibration offset for the current device configuration.
@@ -162,17 +162,17 @@ class _SessionBase(object):
         session.channels['0,1'].accessory_offset = var
         var = session.channels['0,1'].accessory_offset
     '''
-    acquisition_start_time = attributes.AttributeViReal64TimeDeltaSeconds(1250109)
+    acquisition_start_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250109)
     '''Type: datetime.timedelta
 
     Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  trigger_delay_time).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  horz_record_ref_position).
     '''
-    acquisition_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
+    acquisition_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
     '''Type: enums.AcquisitionType
 
     Specifies how the digitizer acquires data and fills the waveform record.
     '''
-    acq_arm_source = attributes.AttributeViString(1150053)
+    acq_arm_source = _attributes.AttributeViString(1150053)
     '''Type: str
 
     Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
@@ -193,27 +193,27 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    adv_trig_src = attributes.AttributeViString(1150094)
+    adv_trig_src = _attributes.AttributeViString(1150094)
     '''Type: str
 
     Specifies the source the digitizer monitors for an advance trigger.   When the advance trigger is received, the digitizer begins acquiring pretrigger  samples.
     '''
-    allow_more_records_than_memory = attributes.AttributeViBoolean(1150068)
+    allow_more_records_than_memory = _attributes.AttributeViBoolean(1150068)
     '''Type: bool
 
     Indicates whether more records can be configured with configure_horizontal_timing  than fit in the onboard memory. If this property is set to True, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch method  if you attempt to fetch a record that has been overwritten.
     '''
-    arm_ref_trig_src = attributes.AttributeViString(1150095)
+    arm_ref_trig_src = _attributes.AttributeViString(1150095)
     '''Type: str
 
     Specifies the source the digitizer monitors for an arm reference trigger.   When the arm reference trigger is received, the digitizer begins looking for a  reference (stop) trigger from the user-configured trigger source.
     '''
-    backlog = attributes.AttributeViReal64(1150084)
+    backlog = _attributes.AttributeViReal64(1150084)
     '''Type: float
 
     Returns the number of samples (points_done) that have been acquired but not fetched  for the record specified by fetch_record_number.
     '''
-    bandpass_filter_enabled = attributes.AttributeViBoolean(1150318)
+    bandpass_filter_enabled = _attributes.AttributeViBoolean(1150318)
     '''Type: bool
 
     Enables the bandpass filter on the specificed channel.  The default value is FALSE.
@@ -227,7 +227,7 @@ class _SessionBase(object):
         session.channels['0,1'].bandpass_filter_enabled = var
         var = session.channels['0,1'].bandpass_filter_enabled
     '''
-    binary_sample_width = attributes.AttributeViInt32(1150005)
+    binary_sample_width = _attributes.AttributeViInt32(1150005)
     '''Type: int
 
     Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch method to use. Compare to resolution.
@@ -235,20 +235,20 @@ class _SessionBase(object):
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
-    cache = attributes.AttributeViBoolean(1050004)
+    cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
     Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
     The default value is True.   Use _init_with_options  to override this value.
     '''
-    channel_count = attributes.AttributeViInt32(1050203)
+    channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
     Indicates the number of channels that the specific instrument driver  supports.
     For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
-    channel_enabled = attributes.AttributeViBoolean(1250005)
+    channel_enabled = _attributes.AttributeViBoolean(1250005)
     '''Type: bool
 
     Specifies whether the digitizer acquires a waveform for the channel.
@@ -265,7 +265,7 @@ class _SessionBase(object):
         session.channels['0,1'].channel_enabled = var
         var = session.channels['0,1'].channel_enabled
     '''
-    channel_terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
+    channel_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
     '''Type: enums.TerminalConfiguration
 
     Specifies the terminal configuration for the channel.
@@ -279,27 +279,27 @@ class _SessionBase(object):
         session.channels['0,1'].channel_terminal_configuration = var
         var = session.channels['0,1'].channel_terminal_configuration
     '''
-    clock_sync_pulse_source = attributes.AttributeViString(1150007)
+    clock_sync_pulse_source = _attributes.AttributeViString(1150007)
     '''Type: str
 
     For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
     '''
-    data_transfer_block_size = attributes.AttributeViInt32(1150316)
+    data_transfer_block_size = _attributes.AttributeViInt32(1150316)
     '''Type: int
 
     Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system.
     '''
-    data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150321)
+    data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150321)
     '''Type: float
 
     This property specifies the maximum bandwidth that the device is allowed to consume.
     '''
-    data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150322)
+    data_transfer_preferred_packet_size = _attributes.AttributeViInt32(1150322)
     '''Type: int
 
     This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
     '''
-    ddc_center_frequency = attributes.AttributeViReal64(1150303)
+    ddc_center_frequency = _attributes.AttributeViReal64(1150303)
     '''Type: float
 
     The frequency at which the DDC block frequency translates the input data.
@@ -314,7 +314,7 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_center_frequency = var
         var = session.channels['0,1'].ddc_center_frequency
     '''
-    ddc_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
+    ddc_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
     '''Type: enums.DataProcessingMode
 
     The way in which data is processed by the DDC block.
@@ -323,7 +323,7 @@ class _SessionBase(object):
     Complex (1)
     Default Value: Complex
     '''
-    ddc_enabled = attributes.AttributeViBoolean(1150300)
+    ddc_enabled = _attributes.AttributeViBoolean(1150300)
     '''Type: bool
 
     Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
@@ -338,7 +338,7 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_enabled = var
         var = session.channels['0,1'].ddc_enabled
     '''
-    ddc_frequency_translation_enabled = attributes.AttributeViBoolean(1150302)
+    ddc_frequency_translation_enabled = _attributes.AttributeViBoolean(1150302)
     '''Type: bool
 
     Enables/disables frequency translating the data around the user-selected center  frequency down to baseband.
@@ -353,7 +353,7 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_frequency_translation_enabled = var
         var = session.channels['0,1'].ddc_frequency_translation_enabled
     '''
-    ddc_frequency_translation_phase_i = attributes.AttributeViReal64(1150305)
+    ddc_frequency_translation_phase_i = _attributes.AttributeViReal64(1150305)
     '''Type: float
 
     The I center frequency phase in degrees at the first point of the acquisition.
@@ -368,7 +368,7 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_frequency_translation_phase_i = var
         var = session.channels['0,1'].ddc_frequency_translation_phase_i
     '''
-    ddc_frequency_translation_phase_q = attributes.AttributeViReal64(1150306)
+    ddc_frequency_translation_phase_q = _attributes.AttributeViReal64(1150306)
     '''Type: float
 
     The Q center frequency phase in degrees at the first point of the acquisition.  Use this property only when ddc_data_processing_mode is set to Complex.
@@ -383,7 +383,7 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_frequency_translation_phase_q = var
         var = session.channels['0,1'].ddc_frequency_translation_phase_q
     '''
-    ddc_q_source = attributes.AttributeViString(1150310)
+    ddc_q_source = _attributes.AttributeViString(1150310)
     '''Type: str
 
     Indicates the channel that is the input of the Q path of the DDC.
@@ -398,17 +398,17 @@ class _SessionBase(object):
         session.channels['0,1'].ddc_q_source = var
         var = session.channels['0,1'].ddc_q_source
     '''
-    device_number = attributes.AttributeViInt32(1150076)
+    device_number = _attributes.AttributeViInt32(1150076)
     '''Type: int
 
     Indicates the device number associated with the current session.
     '''
-    device_temperature = attributes.AttributeViReal64(1150086)
+    device_temperature = _attributes.AttributeViReal64(1150086)
     '''Type: float
 
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
     '''
-    digital_gain = attributes.AttributeViReal64(1150307)
+    digital_gain = _attributes.AttributeViReal64(1150307)
     '''Type: float
 
     Applies gain to the specified channel in hardware before any onboard processing.
@@ -424,7 +424,7 @@ class _SessionBase(object):
         session.channels['0,1'].digital_gain = var
         var = session.channels['0,1'].digital_gain
     '''
-    digital_offset = attributes.AttributeViReal64(1150308)
+    digital_offset = _attributes.AttributeViReal64(1150308)
     '''Type: float
 
     Applies offset to the specified channel in hardware before any onboard processing.
@@ -440,7 +440,7 @@ class _SessionBase(object):
         session.channels['0,1'].digital_offset = var
         var = session.channels['0,1'].digital_offset
     '''
-    dither_enabled = attributes.AttributeViBoolean(1150319)
+    dither_enabled = _attributes.AttributeViBoolean(1150319)
     '''Type: bool
 
     Enables or Disables the analog dither on the device.  The default value is FALSE.
@@ -455,14 +455,14 @@ class _SessionBase(object):
         session.channels['0,1'].dither_enabled = var
         var = session.channels['0,1'].dither_enabled
     '''
-    driver_setup = attributes.AttributeViString(1050007)
+    driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  _init_with_options, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this property returns an empty string.
     '''
-    enable_dc_restore = attributes.AttributeViBoolean(1150093)
+    enable_dc_restore = _attributes.AttributeViBoolean(1150093)
     '''Type: bool
 
     Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point.
@@ -470,7 +470,7 @@ class _SessionBase(object):
     True - Enable DC restore
     False - Disable DC restore
     '''
-    enable_time_interleaved_sampling = attributes.AttributeViBoolean(1150128)
+    enable_time_interleaved_sampling = _attributes.AttributeViBoolean(1150128)
     '''Type: bool
 
     Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
@@ -487,19 +487,19 @@ class _SessionBase(object):
         session.channels['0,1'].enable_time_interleaved_sampling = var
         var = session.channels['0,1'].enable_time_interleaved_sampling
     '''
-    end_of_acquisition_event_output_terminal = attributes.AttributeViString(1150101)
+    end_of_acquisition_event_output_terminal = _attributes.AttributeViString(1150101)
     '''Type: str
 
     Specifies the destination for the End of Acquisition Event.    When this event is asserted, the digitizer has completed sampling for all records.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    end_of_record_event_output_terminal = attributes.AttributeViString(1150099)
+    end_of_record_event_output_terminal = _attributes.AttributeViString(1150099)
     '''Type: str
 
     Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    end_of_record_to_advance_trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1150366)
+    end_of_record_to_advance_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150366)
     '''Type: datetime.timedelta
 
     End of Record to Advance Trigger Holdoff is the length of time (in
@@ -510,7 +510,7 @@ class _SessionBase(object):
     accept an Advance Trigger, or trigger on the input signal..
     **Supported Devices**: NI 5185/5186
     '''
-    equalization_filter_enabled = attributes.AttributeViBoolean(1150313)
+    equalization_filter_enabled = _attributes.AttributeViBoolean(1150313)
     '''Type: bool
 
     Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside  of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients  should be between +1 and -1 in value.
@@ -524,7 +524,7 @@ class _SessionBase(object):
         session.channels['0,1'].equalization_filter_enabled = var
         var = session.channels['0,1'].equalization_filter_enabled
     '''
-    equalization_num_coefficients = attributes.AttributeViInt32(1150312)
+    equalization_num_coefficients = _attributes.AttributeViInt32(1150312)
     '''Type: int
 
     Returns the number of coefficients that the FIR filter can accept.  This filter is designed  to compensate the input signal for artifacts introduced to the signal outside of the digitizer.   However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be  between +1 and -1 in value.
@@ -538,66 +538,66 @@ class _SessionBase(object):
         session.channels['0,1'].equalization_num_coefficients = var
         var = session.channels['0,1'].equalization_num_coefficients
     '''
-    exported_advance_trigger_output_terminal = attributes.AttributeViString(1150109)
+    exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150109)
     '''Type: str
 
     Specifies the destination to export the advance trigger.   When the advance trigger is received, the digitizer begins acquiring  samples for the Nth record.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    exported_ref_trigger_output_terminal = attributes.AttributeViString(1150098)
+    exported_ref_trigger_output_terminal = _attributes.AttributeViString(1150098)
     '''Type: str
 
     Specifies the destination export for the reference (stop) trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    exported_start_trigger_output_terminal = attributes.AttributeViString(1150097)
+    exported_start_trigger_output_terminal = _attributes.AttributeViString(1150097)
     '''Type: str
 
     Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    fetch_interleaved_data = attributes.AttributeViBoolean(1150072)
+    fetch_interleaved_data = _attributes.AttributeViBoolean(1150072)
     '''Type: bool
 
     Set to True to retrieve one array with alternating values on the NI 5620/5621.  For example, this property can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to True, the resulting array will be twice the size of the actual record length.
     '''
-    fetch_interleaved_iq_data = attributes.AttributeViBoolean(1150311)
+    fetch_interleaved_iq_data = _attributes.AttributeViBoolean(1150311)
     '''Type: bool
 
     Enables/disables interleaving of the I and Q data.  When disabled, the traditional  _fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: True
     '''
-    fetch_meas_num_samples = attributes.AttributeViInt32(1150081)
+    fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
     '''Type: int
 
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
     Default Value: -1
     '''
-    _fetch_num_records = attributes.AttributeViInt32(1150080)
+    _fetch_num_records = _attributes.AttributeViInt32(1150080)
     '''Type: int
 
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
     '''
-    _fetch_offset = attributes.AttributeViInt32(1150078)
+    _fetch_offset = _attributes.AttributeViInt32(1150078)
     '''Type: int
 
     Offset in samples to start fetching data within each record. The offset is applied relative to  fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
-    _fetch_record_number = attributes.AttributeViInt32(1150079)
+    _fetch_record_number = _attributes.AttributeViInt32(1150079)
     '''Type: int
 
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
     '''
-    _fetch_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
+    _fetch_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
     '''Type: enums.FetchRelativeTo
 
     Position to start fetching within one record.
     Default Value: FetchRelativeTo.PRETRIGGER
     '''
-    flex_fir_antialias_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
+    flex_fir_antialias_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
     '''Type: enums.FlexFIRAntialiasFilterType
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
@@ -612,24 +612,24 @@ class _SessionBase(object):
         session.channels['0,1'].flex_fir_antialias_filter_type = var
         var = session.channels['0,1'].flex_fir_antialias_filter_type
     '''
-    fpga_bitfile_path = attributes.AttributeViString(1150375)
+    fpga_bitfile_path = _attributes.AttributeViString(1150375)
     '''Type: str
 
     Gets the absolute file path to the bitfile loaded on the FPGA.
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
-    fractional_resample_enabled = attributes.AttributeViBoolean(1150320)
+    fractional_resample_enabled = _attributes.AttributeViBoolean(1150320)
     '''Type: bool
 
     Enables the onboard signal processing block that resamples the input waveform to the user desired sample rate.  The default value is FALSE.
     '''
-    group_capabilities = attributes.AttributeViString(1050401)
+    group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
 
     A string that contains a comma-separated list of class extension groups that this driver implements.
     '''
-    high_pass_filter_frequency = attributes.AttributeViReal64(1150377)
+    high_pass_filter_frequency = _attributes.AttributeViReal64(1150377)
     '''Type: float
 
     Specifies the frequency for the highpass filter in Hz. The device uses
@@ -640,52 +640,52 @@ class _SessionBase(object):
     **Related topics:**
     `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
     '''
-    horz_enforce_realtime = attributes.AttributeViBoolean(1150004)
+    horz_enforce_realtime = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
 
     Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
     '''
-    horz_min_num_pts = attributes.AttributeViInt32(1250009)
+    horz_min_num_pts = _attributes.AttributeViInt32(1250009)
     '''Type: int
 
     Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. horz_record_length returns the actual record length.
     Valid Values: 1 - available onboard memory
     '''
-    horz_num_records = attributes.AttributeViInt32(1150001)
+    horz_num_records = _attributes.AttributeViInt32(1150001)
     '''Type: int
 
     Specifies the number of records to acquire. Can be used for multi-record acquisition  and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
     '''
-    horz_record_length = attributes.AttributeViInt32(1250008)
+    horz_record_length = _attributes.AttributeViInt32(1250008)
     '''Type: int
 
     Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  horz_min_num_pts.
     Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch methods. This property is only valid after a call to the one of the  Configure Horizontal methods.
     '''
-    horz_record_ref_position = attributes.AttributeViReal64(1250011)
+    horz_record_ref_position = _attributes.AttributeViReal64(1250011)
     '''Type: float
 
     Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  trigger_delay_time property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
-    horz_sample_rate = attributes.AttributeViReal64(1250010)
+    horz_sample_rate = _attributes.AttributeViReal64(1250010)
     '''Type: float
 
     Returns the effective sample rate using the current configuration. The units are samples per second.  This property is only valid after a call to the one of the Configure Horizontal methods.
     Units: Hertz (Samples / Second)
     '''
-    horz_time_per_record = attributes.AttributeViReal64TimeDeltaSeconds(1250007)
+    horz_time_per_record = _attributes.AttributeViReal64TimeDeltaSeconds(1250007)
     '''Type: datetime.timedelta
 
     Specifies the length of time that corresponds to the record length.
     Units: Seconds
     '''
-    input_clock_source = attributes.AttributeViString(1150002)
+    input_clock_source = _attributes.AttributeViString(1150002)
     '''Type: str
 
     Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock  for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source  of the board clock.
     '''
-    input_impedance = attributes.AttributeViReal64(1250103)
+    input_impedance = _attributes.AttributeViReal64(1250103)
     '''Type: float
 
     Specifies the input impedance for the channel in Ohms.
@@ -699,27 +699,27 @@ class _SessionBase(object):
         session.channels['0,1'].input_impedance = var
         var = session.channels['0,1'].input_impedance
     '''
-    instrument_firmware_revision = attributes.AttributeViString(1050510)
+    instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     A string that contains the firmware revision information  for the instrument you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511)
+    instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
 
     A string that contains the name of the instrument manufacturer.
     '''
-    instrument_model = attributes.AttributeViString(1050512)
+    instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
 
     A string that contains the model number of the current instrument.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021)
+    interchange_check = _attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
     NI-SCOPE does not generate interchange warnings and therefore ignores this property.
     '''
-    interleaving_offset_correction_enabled = attributes.AttributeViBoolean(1150376)
+    interleaving_offset_correction_enabled = _attributes.AttributeViBoolean(1150376)
     '''Type: bool
 
     Enables the interleaving offset correction on the specified channel. The
@@ -730,7 +730,7 @@ class _SessionBase(object):
 
     Note: If disabled, warranted specifications are not guaranteed.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
+    io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
@@ -739,7 +739,7 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    logical_name = attributes.AttributeViString(1050305)
+    logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
@@ -747,12 +747,12 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    master_enable = attributes.AttributeViBoolean(1150008)
+    master_enable = _attributes.AttributeViBoolean(1150008)
     '''Type: bool
 
     Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this property to False.
     '''
-    max_input_frequency = attributes.AttributeViReal64(1250006)
+    max_input_frequency = _attributes.AttributeViReal64(1250006)
     '''Type: float
 
     Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
@@ -776,17 +776,17 @@ class _SessionBase(object):
         session.channels['0,1'].max_input_frequency = var
         var = session.channels['0,1'].max_input_frequency
     '''
-    max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
+    max_real_time_sampling_rate = _attributes.AttributeViReal64(1150073)
     '''Type: float
 
     Returns the maximum real time sample rate in Hz.
     '''
-    max_ris_rate = attributes.AttributeViReal64(1150074)
+    max_ris_rate = _attributes.AttributeViReal64(1150074)
     '''Type: float
 
     Returns the maximum sample rate in RIS mode in Hz.
     '''
-    meas_array_gain = attributes.AttributeViReal64(1150043)
+    meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
@@ -804,7 +804,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_array_gain = var
         var = session.channels['0,1'].meas_array_gain
     '''
-    meas_array_offset = attributes.AttributeViReal64(1150044)
+    meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
@@ -822,7 +822,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_array_offset = var
         var = session.channels['0,1'].meas_array_offset
     '''
-    meas_chan_high_ref_level = attributes.AttributeViReal64(1150040)
+    meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
     '''Type: float
 
     Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based properties such as MEAS_HIGH_REF if you use  this property to set various channels to different values.
@@ -840,7 +840,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_high_ref_level = var
         var = session.channels['0,1'].meas_chan_high_ref_level
     '''
-    meas_chan_low_ref_level = attributes.AttributeViReal64(1150038)
+    meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
     '''Type: float
 
     Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_LOW_REF if you use this property to set various channels to different values.
@@ -858,7 +858,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_low_ref_level = var
         var = session.channels['0,1'].meas_chan_low_ref_level
     '''
-    meas_chan_mid_ref_level = attributes.AttributeViReal64(1150039)
+    meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
     '''Type: float
 
     Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_MID_REF if you use this property to set various channels to different values.
@@ -876,7 +876,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_mid_ref_level = var
         var = session.channels['0,1'].meas_chan_mid_ref_level
     '''
-    meas_filter_center_freq = attributes.AttributeViReal64(1150032)
+    meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
     '''Type: float
 
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
@@ -891,7 +891,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_center_freq = var
         var = session.channels['0,1'].meas_filter_center_freq
     '''
-    meas_filter_cutoff_freq = attributes.AttributeViReal64(1150031)
+    meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
     '''Type: float
 
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
@@ -906,25 +906,25 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_cutoff_freq = var
         var = session.channels['0,1'].meas_filter_cutoff_freq
     '''
-    meas_filter_order = attributes.AttributeViInt32(1150036)
+    meas_filter_order = _attributes.AttributeViInt32(1150036)
     '''Type: int
 
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
     '''
-    meas_filter_ripple = attributes.AttributeViReal64(1150033)
+    meas_filter_ripple = _attributes.AttributeViReal64(1150033)
     '''Type: float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
     '''
-    meas_filter_taps = attributes.AttributeViInt32(1150037)
+    meas_filter_taps = _attributes.AttributeViInt32(1150037)
     '''Type: int
 
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
     '''
-    meas_filter_transient_waveform_percent = attributes.AttributeViReal64(1150034)
+    meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
     '''Type: float
 
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
@@ -939,7 +939,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_transient_waveform_percent = var
         var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
-    meas_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150035)
+    meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
@@ -952,13 +952,13 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    meas_filter_width = attributes.AttributeViReal64(1150041)
+    meas_filter_width = _attributes.AttributeViReal64(1150041)
     '''Type: float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
     '''
-    meas_fir_filter_window = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
+    meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
@@ -983,7 +983,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_fir_filter_window = var
         var = session.channels['0,1'].meas_fir_filter_window
     '''
-    meas_hysteresis_percent = attributes.AttributeViReal64(1150019)
+    meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
     Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
@@ -998,7 +998,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_hysteresis_percent = var
         var = session.channels['0,1'].meas_hysteresis_percent
     '''
-    meas_interpolation_sampling_factor = attributes.AttributeViReal64(1150030)
+    meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
@@ -1019,7 +1019,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_interpolation_sampling_factor = var
         var = session.channels['0,1'].meas_interpolation_sampling_factor
     '''
-    meas_last_acq_histogram_size = attributes.AttributeViInt32(1150020)
+    meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
     '''Type: int
 
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
@@ -1034,7 +1034,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_last_acq_histogram_size = var
         var = session.channels['0,1'].meas_last_acq_histogram_size
     '''
-    meas_other_channel = attributes.AttributeViString(1150018)
+    meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
     Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
@@ -1052,7 +1052,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_other_channel = var
         var = session.channels['0,1'].meas_other_channel
     '''
-    meas_percentage_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
+    meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
@@ -1073,13 +1073,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_percentage_method = var
         var = session.channels['0,1'].meas_percentage_method
     '''
-    meas_polynomial_interpolation_order = attributes.AttributeViInt32(1150029)
+    meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
     '''Type: int
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
     '''
-    meas_ref_level_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
+    meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
@@ -1099,13 +1099,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_ref_level_units = var
         var = session.channels['0,1'].meas_ref_level_units
     '''
-    meas_time_histogram_high_time = attributes.AttributeViReal64(1150028)
+    meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
     '''Type: float
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
     '''
-    meas_time_histogram_high_volts = attributes.AttributeViReal64(1150026)
+    meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
@@ -1120,13 +1120,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_high_volts = var
         var = session.channels['0,1'].meas_time_histogram_high_volts
     '''
-    meas_time_histogram_low_time = attributes.AttributeViReal64(1150027)
+    meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
     '''Type: float
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
     '''
-    meas_time_histogram_low_volts = attributes.AttributeViReal64(1150025)
+    meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
@@ -1141,7 +1141,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_low_volts = var
         var = session.channels['0,1'].meas_time_histogram_low_volts
     '''
-    meas_time_histogram_size = attributes.AttributeViInt32(1150024)
+    meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
@@ -1156,25 +1156,25 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_size = var
         var = session.channels['0,1'].meas_time_histogram_size
     '''
-    meas_voltage_histogram_high_volts = attributes.AttributeViReal64(1150023)
+    meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
     '''
-    meas_voltage_histogram_low_volts = attributes.AttributeViReal64(1150022)
+    meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
     '''
-    meas_voltage_histogram_size = attributes.AttributeViInt32(1150021)
+    meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
     Default: 256
     '''
-    min_sample_rate = attributes.AttributeViReal64(1150009)
+    min_sample_rate = _attributes.AttributeViReal64(1150009)
     '''Type: float
 
     Specify the sampling rate for the acquisition in Samples per second.
@@ -1184,25 +1184,25 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    mux_mode_register = attributes.AttributeViInt32(1151002)
-    onboard_memory_size = attributes.AttributeViInt32(1150069)
+    mux_mode_register = _attributes.AttributeViInt32(1151002)
+    onboard_memory_size = _attributes.AttributeViInt32(1150069)
     '''Type: int
 
     Returns the total combined amount of onboard memory for all channels in bytes.
     '''
-    oscillator_phase_dac_value = attributes.AttributeViInt32(1150105)
+    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150105)
     '''Type: int
 
     Gets or sets the binary phase DAC value that controls the delay added to the Phase Locked Loop (PLL) of the sample clock.
 
     Note: if this value is set, sample clock adjust and TClk will not be able to do any sub-sample adjustment of the timebase sample clock.
     '''
-    output_clock_source = attributes.AttributeViString(1150003)
+    output_clock_source = _attributes.AttributeViString(1150003)
     '''Type: str
 
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
     '''
-    overflow_error_reporting = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OverflowErrorReporting, 1150309)
+    overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OverflowErrorReporting, 1150309)
     '''Type: enums.OverflowErrorReporting
 
     Configures error reporting when the DDC block detects an overflow in any of its  stages. Overflows lead to clipping of the waveform.
@@ -1212,22 +1212,22 @@ class _SessionBase(object):
     Disabled (2)
     Default Value: Warning
     '''
-    pll_lock_status = attributes.AttributeViBoolean(1151303)
+    pll_lock_status = _attributes.AttributeViBoolean(1151303)
     '''Type: bool
 
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
     '''
-    points_done = attributes.AttributeViReal64(1150082)
+    points_done = _attributes.AttributeViReal64(1150082)
     '''Type: float
 
     Actual number of samples acquired in the record specified by fetch_record_number from the fetch_relative_to and fetch_offset properties.
     '''
-    poll_interval = attributes.AttributeViInt32(1150100)
+    poll_interval = _attributes.AttributeViInt32(1150100)
     '''Type: int
 
     Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
     '''
-    probe_attenuation = attributes.AttributeViReal64(1250004)
+    probe_attenuation = _attributes.AttributeViReal64(1250004)
     '''Type: float
 
     Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this property to 10.0.
@@ -1243,72 +1243,72 @@ class _SessionBase(object):
         session.channels['0,1'].probe_attenuation = var
         var = session.channels['0,1'].probe_attenuation
     '''
-    range_check = attributes.AttributeViBoolean(1050002)
+    range_check = _attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
     Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
     The default value is True.   Use the _init_with_options  method to override this value.
     '''
-    ready_for_advance_event_output_terminal = attributes.AttributeViString(1150112)
+    ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
 
     Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    ready_for_ref_event_output_terminal = attributes.AttributeViString(1150111)
+    ready_for_ref_event_output_terminal = _attributes.AttributeViString(1150111)
     '''Type: str
 
     Specifies the destination for the Ready for Reference Event.   When this event is asserted, the digitizer is ready to receive a reference trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    ready_for_start_event_output_terminal = attributes.AttributeViString(1150110)
+    ready_for_start_event_output_terminal = _attributes.AttributeViString(1150110)
     '''Type: str
 
     Specifies the destination for the Ready for Start Event.   When this event is asserted, the digitizer is ready to receive a start trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    records_done = attributes.AttributeViInt32(1150083)
+    records_done = _attributes.AttributeViInt32(1150083)
     '''Type: int
 
     Specifies the number of records that have been completely acquired.
     '''
-    record_arm_source = attributes.AttributeViString(1150065)
+    record_arm_source = _attributes.AttributeViString(1150065)
     '''Type: str
 
     Specifies the record arm source.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006)
+    record_coercions = _attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
     The default value is False.   Use the _init_with_options  method to override this value.
     '''
-    ref_clk_rate = attributes.AttributeViReal64(1150090)
+    ref_clk_rate = _attributes.AttributeViReal64(1150090)
     '''Type: float
 
     If input_clock_source is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
-    ref_trigger_detector_location = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
+    ref_trigger_detector_location = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
     '''Type: enums.RefTriggerDetectorLocation
 
     Indicates which analog compare circuitry to use on the device.
     '''
-    ref_trigger_minimum_quiet_time = attributes.AttributeViReal64TimeDeltaSeconds(1150315)
+    ref_trigger_minimum_quiet_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150315)
     '''Type: datetime.timedelta
 
     The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This property is useful for triggering at the beginning and not in the  middle of signal bursts.
     '''
-    ref_trig_tdc_enable = attributes.AttributeViBoolean(1150096)
+    ref_trig_tdc_enable = _attributes.AttributeViBoolean(1150096)
     '''Type: bool
 
     This property controls whether the TDC is used to compute an accurate trigger.
     '''
-    resolution = attributes.AttributeViInt32(1150102)
+    resolution = _attributes.AttributeViInt32(1150102)
     '''Type: int
 
     Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to binary_sample_width.
     '''
-    ris_in_auto_setup_enable = attributes.AttributeViBoolean(1150106)
+    ris_in_auto_setup_enable = _attributes.AttributeViBoolean(1150106)
     '''Type: bool
 
     Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup.
@@ -1316,17 +1316,17 @@ class _SessionBase(object):
     True  (1) - Use RIS sample rates in autosetup
     False (0) - Do not use RIS sample rates in autosetup
     '''
-    ris_method = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RISMethod, 1150071)
+    ris_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RISMethod, 1150071)
     '''Type: enums.RISMethod
 
     Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of max_real_time_sampling_rate.
     '''
-    ris_num_averages = attributes.AttributeViInt32(1150070)
+    ris_num_averages = _attributes.AttributeViInt32(1150070)
     '''Type: int
 
     The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
     '''
-    sample_clock_timebase_multiplier = attributes.AttributeViInt32(1150367)
+    sample_clock_timebase_multiplier = _attributes.AttributeViInt32(1150367)
     '''Type: int
 
     If `Sample Clock Timebase
@@ -1347,68 +1347,68 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    sample_mode = attributes.AttributeViInt32(1250106)
+    sample_mode = _attributes.AttributeViInt32(1250106)
     '''Type: int
 
     Indicates the sample mode the digitizer is currently using.
     '''
-    samp_clk_timebase_div = attributes.AttributeViInt32(1150089)
+    samp_clk_timebase_div = _attributes.AttributeViInt32(1150089)
     '''Type: int
 
     If samp_clk_timebase_src is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
     '''
-    samp_clk_timebase_rate = attributes.AttributeViReal64(1150088)
+    samp_clk_timebase_rate = _attributes.AttributeViReal64(1150088)
     '''Type: float
 
     If samp_clk_timebase_src is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
     '''
-    samp_clk_timebase_src = attributes.AttributeViString(1150087)
+    samp_clk_timebase_src = _attributes.AttributeViString(1150087)
     '''Type: str
 
     Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  min_sample_rate (for internal sources) or the samp_clk_timebase_div (for external sources).
     '''
-    serial_number = attributes.AttributeViString(1150104)
+    serial_number = _attributes.AttributeViString(1150104)
     '''Type: str
 
     Returns the serial number of the device.
     '''
-    simulate = attributes.AttributeViBoolean(1050005)
+    simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
     The default value is False.   Use the _init_with_options  method to override this value.
     '''
-    slave_trigger_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150046)
+    slave_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: datetime.timedelta
 
     Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     '''Type: int
 
     The major version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
     '''Type: int
 
     The minor version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514)
+    specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
     A string that contains a brief description of the specific  driver
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
+    specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
 
     A string that contains additional version information about this  instrument driver.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513)
+    specific_driver_vendor = _attributes.AttributeViString(1050513)
     '''Type: str
 
     A string that contains the name of the vendor that supplies this driver.
     '''
-    start_to_ref_trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1150103)
+    start_to_ref_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150103)
     '''Type: datetime.timedelta
 
     Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
@@ -1424,7 +1424,7 @@ class _SessionBase(object):
         session.channels['0,1'].start_to_ref_trigger_holdoff = var
         var = session.channels['0,1'].start_to_ref_trigger_holdoff
     '''
-    stream_relative_to = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
+    stream_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
     '''Type: enums.StreamingPositionType
 
     Determines which trigger peer-to-peer data is streamed relative to. The
@@ -1432,54 +1432,54 @@ class _SessionBase(object):
 
     Note: On the NI 5122/5622, only **Start Trigger** is valid for this property.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327)
+    supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
 
     A string that contains a comma-separated list of the instrument model numbers supported by this driver.
     '''
-    trigger_auto_triggered = attributes.AttributeViBoolean(1150278)
+    trigger_auto_triggered = _attributes.AttributeViBoolean(1150278)
     '''Type: bool
 
     Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered property to find out if the last acquisition was triggered.
     '''
-    trigger_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
+    trigger_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
     '''Type: enums.TriggerCoupling
 
     Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
-    trigger_delay_time = attributes.AttributeViReal64TimeDeltaSeconds(1250015)
+    trigger_delay_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250015)
     '''Type: datetime.timedelta
 
     Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_from_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150052)
+    trigger_from_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150052)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
     '''
-    trigger_from_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150051)
+    trigger_from_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
     '''
-    trigger_from_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150050)
+    trigger_from_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150050)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this property  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
     '''
-    trigger_holdoff = attributes.AttributeViReal64TimeDeltaSeconds(1250016)
+    trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: datetime.timedelta
 
     Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This property affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to configure_horizontal_timing.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_hysteresis = attributes.AttributeViReal64(1150006)
+    trigger_hysteresis = _attributes.AttributeViReal64(1150006)
     '''Type: float
 
     Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify  with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
     '''
-    trigger_impedance = attributes.AttributeViReal64(1150075)
+    trigger_impedance = _attributes.AttributeViReal64(1150075)
     '''Type: float
 
     Specifies the input impedance for the external analog trigger channel in Ohms.
@@ -1487,14 +1487,14 @@ class _SessionBase(object):
     50      - 50 ohms
     1000000 - 1 mega ohm
     '''
-    trigger_level = attributes.AttributeViReal64(1250017)
+    trigger_level = _attributes.AttributeViReal64(1250017)
     '''Type: float
 
     Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     Valid Values:
     The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
-    trigger_modifier = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
+    trigger_modifier = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
     '''Type: enums.TriggerModifier
 
     Configures the device to automatically complete an acquisition if a trigger has not been received.
@@ -1502,37 +1502,37 @@ class _SessionBase(object):
     None (1)         - Normal triggering
     Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
     '''
-    trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
+    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
     '''Type: enums.TriggerSlope
 
     Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
-    trigger_source = attributes.AttributeViString(1250013)
+    trigger_source = _attributes.AttributeViString(1250013)
     '''Type: str
 
     Specifies the source the digitizer monitors for the trigger event.
     '''
-    trigger_to_pfi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150049)
+    trigger_to_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150049)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
     '''
-    trigger_to_rtsi_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150048)
+    trigger_to_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150048)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
     '''
-    trigger_to_star_delay = attributes.AttributeViReal64TimeDeltaSeconds(1150047)
+    trigger_to_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150047)
     '''Type: datetime.timedelta
 
     This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
-    trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerType, 1250012)
+    trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1250012)
     '''Type: enums.TriggerType
 
     Specifies the type of trigger to use.
     '''
-    trigger_window_high_level = attributes.AttributeViReal64(1150014)
+    trigger_window_high_level = _attributes.AttributeViReal64(1150014)
     '''Type: float
 
     Pass the upper voltage threshold you want the digitizer to use for  window triggering.
@@ -1546,7 +1546,7 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    trigger_window_low_level = attributes.AttributeViReal64(1150013)
+    trigger_window_low_level = _attributes.AttributeViReal64(1150013)
     '''Type: float
 
     Pass the lower voltage threshold you want the digitizer to use for  window triggering.
@@ -1561,27 +1561,27 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    trigger_window_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
+    trigger_window_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
     '''Type: enums.TriggerWindowMode
 
     Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  trigger_window_low_level, or trigger_window_high_level.
     '''
-    tv_trigger_event = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
+    tv_trigger_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
     '''Type: enums.VideoTriggerEvent
 
     Specifies the condition in the video signal that causes the digitizer to trigger.
     '''
-    tv_trigger_line_number = attributes.AttributeViInt32(1250206)
+    tv_trigger_line_number = _attributes.AttributeViInt32(1250206)
     '''Type: int
 
     Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
-    tv_trigger_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
+    tv_trigger_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
     '''Type: enums.VideoPolarity
 
     Specifies whether the video signal sync is positive or negative.
     '''
-    tv_trigger_signal_format = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoSignalFormat, 1250201)
+    tv_trigger_signal_format = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoSignalFormat, 1250201)
     '''Type: enums.VideoSignalFormat
 
     Specifies the type of video signal, such as NTSC, PAL, or SECAM.
@@ -1595,7 +1595,7 @@ class _SessionBase(object):
         session.channels['0,1'].tv_trigger_signal_format = var
         var = session.channels['0,1'].tv_trigger_signal_format
     '''
-    vertical_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
+    vertical_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
     '''Type: enums.VerticalCoupling
 
     Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
@@ -1609,7 +1609,7 @@ class _SessionBase(object):
         session.channels['0,1'].vertical_coupling = var
         var = session.channels['0,1'].vertical_coupling
     '''
-    vertical_offset = attributes.AttributeViReal64(1250002)
+    vertical_offset = _attributes.AttributeViReal64(1250002)
     '''Type: float
 
     Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this property to 5.0 V.
@@ -1625,7 +1625,7 @@ class _SessionBase(object):
         session.channels['0,1'].vertical_offset = var
         var = session.channels['0,1'].vertical_offset
     '''
-    vertical_range = attributes.AttributeViReal64(1250001)
+    vertical_range = _attributes.AttributeViReal64(1250001)
     '''Type: float
 
     Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
@@ -1710,9 +1710,9 @@ class _SessionBase(object):
                 two.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        num_wfms_ctype = visatype.ViInt32()  # case S200
+        num_wfms_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, None if num_wfms_ctype is None else (ctypes.pointer(num_wfms_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
@@ -1759,9 +1759,9 @@ class _SessionBase(object):
         '''
         if type(option) is not enums.Option:
             raise TypeError('Parameter mode must be of type ' + str(enums.Option))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        option_ctype = visatype.ViInt32(option.value)  # case S130
+        option_ctype = _visatype.ViInt32(option.value)  # case S130
         error_code = self._library.niScope_CalSelfCalibrate(vi_ctype, channel_list_ctype, option_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1801,9 +1801,9 @@ class _SessionBase(object):
         '''
         if type(clearable_measurement_function) is not enums.ClearableMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function.value)  # case S130
+        clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
         error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1832,10 +1832,10 @@ class _SessionBase(object):
                 achieve full bandwidth.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        input_impedance_ctype = visatype.ViReal64(input_impedance)  # case S150
-        max_input_frequency_ctype = visatype.ViReal64(max_input_frequency)  # case S150
+        input_impedance_ctype = _visatype.ViReal64(input_impedance)  # case S150
+        max_input_frequency_ctype = _visatype.ViReal64(max_input_frequency)  # case S150
         error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1867,10 +1867,10 @@ class _SessionBase(object):
                 property must be set to TRUE to enable the filter.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_coefficients_ctype = visatype.ViInt32(0 if coefficients is None else len(coefficients))  # case S160
-        coefficients_ctype = get_ctypes_pointer_for_buffer(value=coefficients, library_type=visatype.ViReal64)  # case B550
+        number_of_coefficients_ctype = _visatype.ViInt32(0 if coefficients is None else len(coefficients))  # case S160
+        coefficients_ctype = get_ctypes_pointer_for_buffer(value=coefficients, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(vi_ctype, channel_list_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1909,13 +1909,13 @@ class _SessionBase(object):
         '''
         if type(coupling) is not enums.VerticalCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        range_ctype = visatype.ViReal64(range)  # case S150
-        offset_ctype = visatype.ViReal64(offset)  # case S150
-        coupling_ctype = visatype.ViInt32(coupling.value)  # case S130
-        probe_attenuation_ctype = visatype.ViReal64(probe_attenuation)  # case S150
-        enabled_ctype = visatype.ViBoolean(enabled)  # case S150
+        range_ctype = _visatype.ViReal64(range)  # case S150
+        offset_ctype = _visatype.ViReal64(offset)  # case S150
+        coupling_ctype = _visatype.ViInt32(coupling.value)  # case S130
+        probe_attenuation_ctype = _visatype.ViReal64(probe_attenuation)  # case S150
+        enabled_ctype = _visatype.ViBoolean(enabled)  # case S150
         error_code = self._library.niScope_ConfigureVertical(vi_ctype, channel_list_ctype, range_ctype, offset_ctype, coupling_ctype, probe_attenuation_ctype, enabled_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2112,13 +2112,13 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=visatype.ViReal64)  # case B560
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
@@ -2242,10 +2242,10 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
@@ -2368,10 +2368,10 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
@@ -2494,10 +2494,10 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int32'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
@@ -2620,10 +2620,10 @@ class _SessionBase(object):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('int8'):
             raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
@@ -2792,12 +2792,12 @@ class _SessionBase(object):
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
-        result_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=result_size)  # case B560
+        result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
         error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
@@ -2869,22 +2869,22 @@ class _SessionBase(object):
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
-        result_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=result_size)  # case B560
+        result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
         mean_size = self._actual_num_wfms()  # case B560
-        mean_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=mean_size)  # case B560
+        mean_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=mean_size)  # case B560
         stdev_size = self._actual_num_wfms()  # case B560
-        stdev_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=stdev_size)  # case B560
+        stdev_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=stdev_size)  # case B560
         min_size = self._actual_num_wfms()  # case B560
-        min_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=min_size)  # case B560
+        min_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=min_size)  # case B560
         max_size = self._actual_num_wfms()  # case B560
-        max_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=max_size)  # case B560
+        max_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=max_size)  # case B560
         num_in_stats_size = self._actual_num_wfms()  # case B560
-        num_in_stats_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViInt32, size=num_in_stats_size)  # case B560
+        num_in_stats_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=num_in_stats_size)  # case B560
         error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())], [float(mean_ctype[i]) for i in range(self._actual_num_wfms())], [float(stdev_ctype[i]) for i in range(self._actual_num_wfms())], [float(min_ctype[i]) for i in range(self._actual_num_wfms())], [float(max_ctype[i]) for i in range(self._actual_num_wfms())], [int(num_in_stats_ctype[i]) for i in range(self._actual_num_wfms())]
@@ -2918,10 +2918,10 @@ class _SessionBase(object):
                 ViBoolean variable.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViBoolean()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niScope_GetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(value_ctype.value)
@@ -2954,10 +2954,10 @@ class _SessionBase(object):
             value (int): Returns the current value of the property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViInt32()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_GetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
@@ -2991,10 +2991,10 @@ class _SessionBase(object):
                 ViReal64 variable.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViReal64()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niScope_GetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
@@ -3034,15 +3034,15 @@ class _SessionBase(object):
             attribute_id (int): The ID of an property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        buf_size_ctype = visatype.ViInt32()  # case S170
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        buf_size_ctype = _visatype.ViInt32()  # case S170
         value_ctype = None  # case C050
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buf_size_ctype = visatype.ViInt32(error_code)  # case S180
-        value_ctype = (visatype.ViChar * buf_size_ctype.value)()  # case C060
+        buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
         error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
@@ -3076,11 +3076,11 @@ class _SessionBase(object):
                 property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case S190
+        number_of_coefficients_ctype = _visatype.ViInt32(number_of_coefficients)  # case S190
         coefficients_size = number_of_coefficients  # case B600
-        coefficients_ctype = get_ctypes_pointer_for_buffer(library_type=visatype.ViReal64, size=coefficients_size)  # case B600
+        coefficients_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=coefficients_size)  # case B600
         error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
@@ -3113,14 +3113,14 @@ class _SessionBase(object):
                 If you pass 0, you can pass VI_NULL for the **description** parameter.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus()  # case S200
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus()  # case S200
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -3212,13 +3212,13 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        num_samples_ctype = visatype.ViInt32(num_samples)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
-        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=visatype.ViReal64)  # case B560
+        waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self._actual_num_wfms()  # case B560
         wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
         error_code = self._library.niScope_Read(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
@@ -3268,13 +3268,13 @@ class _SessionBase(object):
         '''
         if type(scalar_meas_function) is not enums.ScalarMeasurement:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, visatype.ViReal64)  # case S140
-        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function.value)  # case S130
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_array = array.array("d", [0] * result_size)  # case B560
-        result_ctype = get_ctypes_pointer_for_buffer(value=result_array, library_type=visatype.ViReal64)  # case B560
+        result_ctype = get_ctypes_pointer_for_buffer(value=result_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return result_array
@@ -3320,10 +3320,10 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViBoolean(value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViBoolean(value)  # case S150
         error_code = self._library.niScope_SetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3369,10 +3369,10 @@ class _SessionBase(object):
                 valid depending on the current settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViInt32(value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViInt32(value)  # case S150
         error_code = self._library.niScope_SetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3418,10 +3418,10 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = visatype.ViReal64(value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViReal64(value)  # case S150
         error_code = self._library.niScope_SetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3469,9 +3469,9 @@ class _SessionBase(object):
                 be valid depending on the current settings of the instrument session.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
         error_code = self._library.niScope_SetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3613,7 +3613,7 @@ class Session(_SessionBase):
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
@@ -3658,7 +3658,7 @@ class Session(_SessionBase):
         Aborts an acquisition and returns the digitizer to the Idle state. Call
         this method if the digitizer times out waiting for a trigger.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Abort(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3681,8 +3681,8 @@ class Session(_SessionBase):
                 AcquisitionStatus.STATUS_UNKNOWN
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        acquisition_status_ctype = visatype.ViInt32()  # case S200
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        acquisition_status_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, None if acquisition_status_ctype is None else (ctypes.pointer(acquisition_status_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
@@ -3757,7 +3757,7 @@ class Session(_SessionBase):
         | Trigger output     | None                                          |
         +--------------------+-----------------------------------------------+
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_AutoSetup(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3770,7 +3770,7 @@ class Session(_SessionBase):
         reflected in the hardware. This method is not supported for
         Traditional NI-DAQ (Legacy) devices.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3814,12 +3814,12 @@ class Session(_SessionBase):
                 False—Allow real-time and equivalent-time acquisitions
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        min_sample_rate_ctype = visatype.ViReal64(min_sample_rate)  # case S150
-        min_num_pts_ctype = visatype.ViInt32(min_num_pts)  # case S150
-        ref_position_ctype = visatype.ViReal64(ref_position)  # case S150
-        num_records_ctype = visatype.ViInt32(num_records)  # case S150
-        enforce_realtime_ctype = visatype.ViBoolean(enforce_realtime)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        min_sample_rate_ctype = _visatype.ViReal64(min_sample_rate)  # case S150
+        min_num_pts_ctype = _visatype.ViInt32(min_num_pts)  # case S150
+        ref_position_ctype = _visatype.ViReal64(ref_position)  # case S150
+        num_records_ctype = _visatype.ViInt32(num_records)  # case S150
+        enforce_realtime_ctype = _visatype.ViBoolean(enforce_realtime)  # case S150
         error_code = self._library.niScope_ConfigureHorizontalTiming(vi_ctype, min_sample_rate_ctype, min_num_pts_ctype, ref_position_ctype, num_records_ctype, enforce_realtime_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3873,10 +3873,10 @@ class Session(_SessionBase):
                 Default Value: 90.0
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        low_ctype = visatype.ViReal64(low)  # case S150
-        mid_ctype = visatype.ViReal64(mid)  # case S150
-        high_ctype = visatype.ViReal64(high)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        low_ctype = _visatype.ViReal64(low)  # case S150
+        mid_ctype = _visatype.ViReal64(mid)  # case S150
+        high_ctype = _visatype.ViReal64(high)  # case S150
         error_code = self._library.niScope_ConfigureRefLevels(vi_ctype, low_ctype, mid_ctype, high_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3933,11 +3933,11 @@ class Session(_SessionBase):
         '''
         if type(slope) is not enums.TriggerSlope:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
-        slope_ctype = visatype.ViInt32(slope.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        slope_ctype = _visatype.ViInt32(slope.value)  # case S130
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3992,13 +3992,13 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
-        level_ctype = visatype.ViReal64(level)  # case S150
-        slope_ctype = visatype.ViInt32(slope.value)  # case S130
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        level_ctype = _visatype.ViReal64(level)  # case S150
+        slope_ctype = _visatype.ViInt32(slope.value)  # case S130
+        trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4063,14 +4063,14 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
-        level_ctype = visatype.ViReal64(level)  # case S150
-        hysteresis_ctype = visatype.ViReal64(hysteresis)  # case S150
-        slope_ctype = visatype.ViInt32(slope.value)  # case S130
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        level_ctype = _visatype.ViReal64(level)  # case S150
+        hysteresis_ctype = _visatype.ViReal64(hysteresis)  # case S150
+        slope_ctype = _visatype.ViInt32(slope.value)  # case S130
+        trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4085,7 +4085,7 @@ class Session(_SessionBase):
         specify the type of trigger that the digitizer waits for with a
         Configure Trigger method, such as configure_trigger_immediate.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ConfigureTriggerImmediate(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4125,9 +4125,9 @@ class Session(_SessionBase):
                 information.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4203,16 +4203,16 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.VideoPolarity))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
-        enable_dc_restore_ctype = visatype.ViBoolean(enable_dc_restore)  # case S150
-        signal_format_ctype = visatype.ViInt32(signal_format.value)  # case S130
-        event_ctype = visatype.ViInt32(event.value)  # case S130
-        line_number_ctype = visatype.ViInt32(line_number)  # case S150
-        polarity_ctype = visatype.ViInt32(polarity.value)  # case S130
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        enable_dc_restore_ctype = _visatype.ViBoolean(enable_dc_restore)  # case S150
+        signal_format_ctype = _visatype.ViInt32(signal_format.value)  # case S130
+        event_ctype = _visatype.ViInt32(event.value)  # case S130
+        line_number_ctype = _visatype.ViInt32(line_number)  # case S150
+        polarity_ctype = _visatype.ViInt32(polarity.value)  # case S130
+        trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4273,14 +4273,14 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
         if type(trigger_coupling) is not enums.TriggerCoupling:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
-        low_level_ctype = visatype.ViReal64(low_level)  # case S150
-        high_level_ctype = visatype.ViReal64(high_level)  # case S150
-        window_mode_ctype = visatype.ViInt32(window_mode.value)  # case S130
-        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, visatype.ViReal64)  # case S140
+        low_level_ctype = _visatype.ViReal64(low_level)  # case S150
+        high_level_ctype = _visatype.ViReal64(high_level)  # case S150
+        window_mode_ctype = _visatype.ViInt32(window_mode.value)  # case S130
+        trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
+        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4291,7 +4291,7 @@ class Session(_SessionBase):
         Aborts any current operation, opens data channel relays, and releases
         RTSI and PFI lines.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4393,8 +4393,8 @@ class Session(_SessionBase):
         '''
         if type(signal) is not enums.ExportableSignals:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExportableSignals))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        signal_ctype = visatype.ViInt32(signal.value)  # case S130
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niScope_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
@@ -4528,10 +4528,10 @@ class Session(_SessionBase):
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        id_query_ctype = visatype.ViBoolean(id_query)  # case S150
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
+        id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -4545,7 +4545,7 @@ class Session(_SessionBase):
         waits for a trigger. The digitizer acquires a waveform for each channel
         you enable with configure_vertical.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_InitiateAcquisition(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4555,7 +4555,7 @@ class Session(_SessionBase):
 
         Starts the 1 kHz square wave output on PFI 1 for probe compensation.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ProbeCompensationSignalStart(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4565,7 +4565,7 @@ class Session(_SessionBase):
 
         Stops the 1 kHz square wave output on PFI 1 for probe compensation.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ProbeCompensationSignalStop(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4580,7 +4580,7 @@ class Session(_SessionBase):
 
         -  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ResetDevice(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4592,7 +4592,7 @@ class Session(_SessionBase):
         state and applying any initial default settings from the IVI
         Configuration Store.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4621,8 +4621,8 @@ class Session(_SessionBase):
         '''
         if type(which_trigger) is not enums.WhichTrigger:
             raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        which_trigger_ctype = visatype.ViInt32(which_trigger.value)  # case S130
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        which_trigger_ctype = _visatype.ViInt32(which_trigger.value)  # case S130
         error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4637,7 +4637,7 @@ class Session(_SessionBase):
         -  Destroys the IVI session and all of its properties.
         -  Deallocates any memory resources used by the IVI session.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4649,7 +4649,7 @@ class Session(_SessionBase):
         reset to their `default
         states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4674,9 +4674,9 @@ class Session(_SessionBase):
                 in length.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = visatype.ViInt16()  # case S200
-        self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niScope_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
