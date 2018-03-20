@@ -1,6 +1,6 @@
 import ctypes
 
-from niscope import visatype
+import niscope._visatype
 
 
 # This class is an internal implementation detail
@@ -9,14 +9,14 @@ from niscope import visatype
 class struct_niScope_wfmInfo(ctypes.Structure):  # noqa N801
     _pack_ = 8
     _fields_ = [
-        ('absolute_initial_x', visatype.ViReal64),
-        ('relative_initial_x', visatype.ViReal64),
-        ('x_increment', visatype.ViReal64),
-        ('actual_samples', visatype.ViInt32),
-        ('offset', visatype.ViReal64),
-        ('gain', visatype.ViReal64),
-        ('reserved1', visatype.ViReal64),
-        ('reserved2', visatype.ViReal64),
+        ('absolute_initial_x', niscope._visatype.ViReal64),
+        ('relative_initial_x', niscope._visatype.ViReal64),
+        ('x_increment', niscope._visatype.ViReal64),
+        ('actual_samples', niscope._visatype.ViInt32),
+        ('offset', niscope._visatype.ViReal64),
+        ('gain', niscope._visatype.ViReal64),
+        ('reserved1', niscope._visatype.ViReal64),
+        ('reserved2', niscope._visatype.ViReal64),
     ]
 
     def __init__(self, data=None, absolute_initial_x=0.0, relative_initial_x=0.0,

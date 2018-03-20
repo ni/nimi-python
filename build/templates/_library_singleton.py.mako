@@ -1,18 +1,22 @@
 # This file was generated
+<%
+import build.helper as helper
+config        = template_parameters['metadata'].config
+
+module_name = config['module_name']
+%>\
 
 import platform
 
 import ctypes
-from niswitch import errors
-from niswitch import library
+import ${module_name}._library as _library
+import ${module_name}.errors as errors
 import threading
 
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libniswitch.so', 'type': 'cdll'}},
-                 'Windows': {'32bit': {'name': 'niswitch_32.dll', 'type': 'windll'},
-                             '64bit': {'name': 'niswitch_64.dll', 'type': 'cdll'}}}
+_library_info = ${helper.get_dictionary_snippet(config['library_info'], indent=16)}
 
 
 def _get_library_name():
@@ -32,7 +36,7 @@ def _get_library_type():
 def get():
     '''get
 
-    Returns the library.Library singleton for niswitch.
+    Returns the library.Library singleton for ${config['module_name']}.
     '''
     global _instance
     global _instance_lock
@@ -48,6 +52,6 @@ def get():
                     ctypes_library = ctypes.CDLL(_get_library_name())
             except OSError:
                 raise errors.DriverNotInstalledError()
-            _instance = library.Library(ctypes_library)
+            _instance = _library.Library(ctypes_library)
         return _instance
 

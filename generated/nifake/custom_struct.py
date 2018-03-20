@@ -1,6 +1,6 @@
 import ctypes
 
-from nifake import visatype
+import nifake._visatype
 
 
 # This class is an internal implementation detail
@@ -8,8 +8,8 @@ from nifake import visatype
 # Name must match exactly what the name of the structure type is named in the C API.
 class custom_struct(ctypes.Structure):  # noqa N801
     _fields_ = [
-        ('struct_int', visatype.ViInt32),
-        ('struct_double', visatype.ViReal64),
+        ('struct_int', nifake._visatype.ViInt32),
+        ('struct_double', nifake._visatype.ViReal64),
     ]
 
     def __init__(self, data=None, struct_int=0, struct_double=0.0):
