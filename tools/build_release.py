@@ -55,7 +55,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     python_cmd = list(args.python_cmd) if args.python_cmd is not None else default_python_cmd
 
     tox_cmd = python_cmd + ['-m', 'tox']
-    twine_cmd = python_cmd + ['-m' 'twine']
+    twine_cmd = python_cmd + ['-m', 'twine']
 
     passthrough_params = ['-v' for i in range(args.verbose)]
     if args.test:
@@ -94,7 +94,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     if args.upload:
         logging.info('Uploading to PyPI')
-        logging.info(pp.pformat(tox_cmd))
+        logging.info(pp.pformat(twine_cmd))
         if not args.test:
             call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
 
