@@ -65,6 +65,7 @@ functions_codegen_method = {
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'self_test':                            { 'codegen_method': 'private',  },  # Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -142,6 +143,43 @@ functions_converters = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
+    # Public function that wraps self_test and will raise on self test failure
+    'self_test_wrapper': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels functions and identifies a particular instrument session.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Runs the instrument self-test routine and returns the test result(s).
+
+Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+
+- code - failure code from driver
+- message - status message from driver
+''',
+            'note': '''
+When used on some signal generators, the device is reset after the
+niFgen_self_test function runs. If you use the niFgen_self_test
+function, your device may not be in its previously configured state
+after the function runs.
+''',
+            'table_body': [['0', 'Passed self-test'], ['1', 'Self-test failed']],
+            'table_header': ['Self-Test Code', 'Description'],
+        },
+    },
     'CreateWaveformDispatcher': {
         'codegen_method': 'python-only',
         'returns': 'ViStatus',

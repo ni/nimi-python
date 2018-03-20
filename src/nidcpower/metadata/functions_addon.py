@@ -43,6 +43,7 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
+    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -119,6 +120,12 @@ functions_array = {
                                                               5: { 'use_array': True, }, }, },
 }
 
+functions_self_test = {
+    'self_test': {
+        'codegen_method': 'private',
+    },
+}
+
 # Functions not in original metadata.
 functions_additional_functions = {
     # What is this function? I've never seen it in niDCPower.h!
@@ -148,8 +155,46 @@ functions_additional_functions = {
             'description': 'Returns the number of channels.',
         },
     },
+    # Public function that wraps self_test and will raise on self test failure
+    'self_test_wrapper': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitializeWithChannels function.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Performs the device self-test routine and returns the test result(s).
+Calling this function implicitly calls the niDCPower_reset function.
+
+When calling niDCPower_self_test with the PXIe-4162/4163, specify all
+channels of your PXIe-4162/4163 with the channels input of
+niDCPower_InitializeWithChannels. You cannot self test a subset of
+PXIe-4162/4163 channels.
+
+Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+
+- code - failure code from driver
+- message - status message from driver
+''',
+            'table_body': [['0', 'Self test passed.'], ['1', 'Self test failed.']],
+            'table_header': ['Self-Test Code', 'Description'],
+        },
+    },
     'FancyFetchMultiple': {
         'returns': 'ViStatus',
+        'codegen_method': 'python-only',
         'python_name': 'fetch_multiple',
         'method_templates': [
             { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },

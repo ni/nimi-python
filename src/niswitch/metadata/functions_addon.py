@@ -27,6 +27,7 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
+    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
 }
 
 # Override the 'python' name for some functions.
@@ -90,3 +91,40 @@ functions_converters = {
     'WaitForScanComplete':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
                                                                 'python_api_converter_type': 'datetime.timedelta', }, }, },
 }
+
+
+functions_additional_functions = {
+    # Public function that wraps self_test and will raise on self test failure
+    'self_test_wrapper': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'A particular NI-SWITCH session established with niSwitch_InitWithTopology, niSwitch_InitWithOptions, or niSwitch_init and used for all subsequent NI-SWITCH calls.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Verifies that the driver can communicate with the switch module.
+
+Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+
+- code - failure code from driver
+- message - status message from driver
+''',
+            'table_body': [['0', 'Passed self-test'], ['1', 'Self-test failed']],
+            'table_header': ['Self-Test Code', 'Description'],
+        },
+    },
+}
+
+

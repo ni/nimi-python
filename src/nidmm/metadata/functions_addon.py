@@ -50,6 +50,7 @@ functions_codegen_method = {
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetCalDateAndTime':               { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -156,6 +157,44 @@ functions_converters = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
+    # Public function that wraps self_test and will raise on self test failure
+    'self_test_wrapper': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niDMM_init or niDMM_InitWithOptions.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Performs a self-test on the DMM to ensure that the DMM is functioning
+properly. Self-test does not calibrate the DMM. Zero
+indicates success. 
+
+On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
+you should check the fuse and replace it, if necessary.
+
+Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+
+- code - failure code from driver
+- message - status message from driver
+''',
+            'note': [
+                'Self-test does not check the fuse on the NI 4065, NI 4071, and NI 4081. Hence, even if the fuse is blown on the device, self-test does not return error code 1013.',
+                'This function calls niDMM_reset, and any configurations previous to the call will be lost. All attributes will be set to their default values after the call returns.',
+            ],
+        },
+    },
     # Public function that wraps driver function but returns datetime object instead of individual items
     'GetLastCalDateAndTime': {
         'codegen_method': 'python-only',
