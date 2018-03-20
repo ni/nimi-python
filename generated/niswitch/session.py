@@ -4,12 +4,12 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-from niswitch import _converters
-from niswitch import attributes
-from niswitch import enums
-from niswitch import errors
-from niswitch import library_singleton
-from niswitch import visatype
+import niswitch._attributes as _attributes
+import niswitch._converters as _converters
+import niswitch._library_singleton as _library_singleton
+import niswitch._visatype as _visatype
+import niswitch.enums as enums
+import niswitch.errors as errors
 
 # Used for __repr__
 import pprint
@@ -92,7 +92,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
+    analog_bus_sharing_enable = _attributes.AttributeViBoolean(1150018)
     '''Type: bool
 
     Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
@@ -107,7 +107,7 @@ class _SessionBase(object):
         session.channels['0,1'].analog_bus_sharing_enable = var
         var = session.channels['0,1'].analog_bus_sharing_enable
     '''
-    bandwidth = attributes.AttributeViReal64(1250005)
+    bandwidth = _attributes.AttributeViReal64(1250005)
     '''Type: float
 
     This channel-based property returns the bandwidth for the channel.
@@ -122,17 +122,17 @@ class _SessionBase(object):
         session.channels['0,1'].bandwidth = var
         var = session.channels['0,1'].bandwidth
     '''
-    cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
+    cabled_module_scan_advanced_bus = _attributes.AttributeViInt32(1150009)
     '''Type: int
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
     '''
-    cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
+    cabled_module_trigger_bus = _attributes.AttributeViInt32(1150008)
     '''Type: int
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
-    cache = attributes.AttributeViBoolean(1050004)
+    cache = _attributes.AttributeViBoolean(1050004)
     '''Type: bool
 
     Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
@@ -142,12 +142,12 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    channel_count = attributes.AttributeViInt32(1050203)
+    channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
     '''
-    characteristic_impedance = attributes.AttributeViReal64(1250016)
+    characteristic_impedance = _attributes.AttributeViReal64(1250016)
     '''Type: float
 
     This channel-based property returns the characteristic impedance for the  channel.
@@ -162,19 +162,19 @@ class _SessionBase(object):
         session.channels['0,1'].characteristic_impedance = var
         var = session.channels['0,1'].characteristic_impedance
     '''
-    continuous_scan = attributes.AttributeViBoolean(1150002)
+    continuous_scan = _attributes.AttributeViBoolean(1150002)
     '''Type: bool
 
     When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
     Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
     '''
-    digital_filter_enable = attributes.AttributeViBoolean(1150016)
+    digital_filter_enable = _attributes.AttributeViBoolean(1150016)
     '''Type: bool
 
     This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
     When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
     '''
-    driver_setup = attributes.AttributeViString(1050007)
+    driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
@@ -184,28 +184,28 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    group_capabilities = attributes.AttributeViString(1050401)
+    group_capabilities = _attributes.AttributeViString(1050401)
     '''Type: str
 
     A string that contains a comma-separated list of class-extention groups that  this driver implements.
     '''
-    handshaking_initiation = attributes.AttributeEnum(attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
-    instrument_firmware_revision = attributes.AttributeViString(1050510)
+    handshaking_initiation = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
+    instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     A string that contains the firmware revision information  for the instrument you are currently using.
     '''
-    instrument_manufacturer = attributes.AttributeViString(1050511)
+    instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
 
     A string that contains the name of the instrument manufacturer you are currently  using.
     '''
-    instrument_model = attributes.AttributeViString(1050512)
+    instrument_model = _attributes.AttributeViString(1050512)
     '''Type: str
 
     A string that contains the model number or name of the instrument that you  are currently using.
     '''
-    interchange_check = attributes.AttributeViBoolean(1050021)
+    interchange_check = _attributes.AttributeViBoolean(1050021)
     '''Type: bool
 
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  connect, set_path and _initiate_scan methods.
@@ -216,14 +216,14 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
+    io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
 
     Indicates the resource descriptor the driver  uses to identify the physical device.
     If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource  descriptor, this property contains that value.
     '''
-    is_configuration_channel = attributes.AttributeViBoolean(1250003)
+    is_configuration_channel = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
     This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the connect method.  Configuration channels are not available  for external connections.
@@ -239,17 +239,17 @@ class _SessionBase(object):
         session.channels['0,1'].is_configuration_channel = var
         var = session.channels['0,1'].is_configuration_channel
     '''
-    is_debounced = attributes.AttributeViBoolean(1250002)
+    is_debounced = _attributes.AttributeViBoolean(1250002)
     '''Type: bool
 
     This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
     '''
-    is_scanning = attributes.AttributeViBoolean(1250024)
+    is_scanning = _attributes.AttributeViBoolean(1250024)
     '''Type: bool
 
     If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
     '''
-    is_source_channel = attributes.AttributeViBoolean(1250001)
+    is_source_channel = _attributes.AttributeViBoolean(1250001)
     '''Type: bool
 
     This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
@@ -263,12 +263,12 @@ class _SessionBase(object):
         session.channels['0,1'].is_source_channel = var
         var = session.channels['0,1'].is_source_channel
     '''
-    is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
+    is_waiting_for_trig = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
 
     In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
     '''
-    logical_name = attributes.AttributeViString(1050305)
+    logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
     A string containing the logical name you specified when opening the  current IVI session.
@@ -277,17 +277,17 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
+    master_slave_scan_advanced_bus = _attributes.AttributeViInt32(1150007)
     '''Type: int
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
     '''
-    master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
+    master_slave_trigger_bus = _attributes.AttributeViInt32(1150006)
     '''Type: int
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
-    max_ac_voltage = attributes.AttributeViReal64(1250007)
+    max_ac_voltage = _attributes.AttributeViReal64(1250007)
     '''Type: float
 
     This channel-based property returns the maximum AC voltage the channel  can switch.
@@ -302,7 +302,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_ac_voltage = var
         var = session.channels['0,1'].max_ac_voltage
     '''
-    max_carry_ac_current = attributes.AttributeViReal64(1250011)
+    max_carry_ac_current = _attributes.AttributeViReal64(1250011)
     '''Type: float
 
     This channel-based property returns the maximum AC current the channel  can carry.
@@ -317,7 +317,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_carry_ac_current = var
         var = session.channels['0,1'].max_carry_ac_current
     '''
-    max_carry_ac_power = attributes.AttributeViReal64(1250015)
+    max_carry_ac_power = _attributes.AttributeViReal64(1250015)
     '''Type: float
 
     This channel-based property returns the maximum AC power the channel can  carry.
@@ -332,7 +332,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_carry_ac_power = var
         var = session.channels['0,1'].max_carry_ac_power
     '''
-    max_carry_dc_current = attributes.AttributeViReal64(1250010)
+    max_carry_dc_current = _attributes.AttributeViReal64(1250010)
     '''Type: float
 
     This channel-based property returns the maximum DC current the channel  can carry.
@@ -347,7 +347,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_carry_dc_current = var
         var = session.channels['0,1'].max_carry_dc_current
     '''
-    max_carry_dc_power = attributes.AttributeViReal64(1250014)
+    max_carry_dc_power = _attributes.AttributeViReal64(1250014)
     '''Type: float
 
     This channel-based property returns the maximum DC power the channel can  carry.
@@ -362,7 +362,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_carry_dc_power = var
         var = session.channels['0,1'].max_carry_dc_power
     '''
-    max_dc_voltage = attributes.AttributeViReal64(1250006)
+    max_dc_voltage = _attributes.AttributeViReal64(1250006)
     '''Type: float
 
     This channel-based property returns the maximum DC voltage the channel  can switch.
@@ -377,7 +377,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_dc_voltage = var
         var = session.channels['0,1'].max_dc_voltage
     '''
-    max_switching_ac_current = attributes.AttributeViReal64(1250009)
+    max_switching_ac_current = _attributes.AttributeViReal64(1250009)
     '''Type: float
 
     This channel-based property returns the maximum AC current the channel  can switch.
@@ -392,7 +392,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_switching_ac_current = var
         var = session.channels['0,1'].max_switching_ac_current
     '''
-    max_switching_ac_power = attributes.AttributeViReal64(1250013)
+    max_switching_ac_power = _attributes.AttributeViReal64(1250013)
     '''Type: float
 
     This channel-based property returns the maximum AC power the channel can  switch.
@@ -407,7 +407,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_switching_ac_power = var
         var = session.channels['0,1'].max_switching_ac_power
     '''
-    max_switching_dc_current = attributes.AttributeViReal64(1250008)
+    max_switching_dc_current = _attributes.AttributeViReal64(1250008)
     '''Type: float
 
     This channel-based property returns the maximum DC current the channel  can switch.
@@ -422,7 +422,7 @@ class _SessionBase(object):
         session.channels['0,1'].max_switching_dc_current = var
         var = session.channels['0,1'].max_switching_dc_current
     '''
-    max_switching_dc_power = attributes.AttributeViReal64(1250012)
+    max_switching_dc_power = _attributes.AttributeViReal64(1250012)
     '''Type: float
 
     This channel-based property returns the maximum DC power the channel can  switch.
@@ -437,35 +437,35 @@ class _SessionBase(object):
         session.channels['0,1'].max_switching_dc_power = var
         var = session.channels['0,1'].max_switching_dc_power
     '''
-    number_of_relays = attributes.AttributeViInt32(1150014)
+    number_of_relays = _attributes.AttributeViInt32(1150014)
     '''Type: int
 
     This property returns the number of relays.
     '''
-    num_of_columns = attributes.AttributeViInt32(1250019)
+    num_of_columns = _attributes.AttributeViInt32(1250019)
     '''Type: int
 
     This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
     The wire_mode property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
     '''
-    num_of_rows = attributes.AttributeViInt32(1250018)
+    num_of_rows = _attributes.AttributeViInt32(1250018)
     '''Type: int
 
     This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
     The wire_mode property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
-    parsed_scan_list = attributes.AttributeViString(1150012)
+    parsed_scan_list = _attributes.AttributeViString(1150012)
     '''Type: str
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.
     '''
-    power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
+    power_down_latching_relays_after_debounce = _attributes.AttributeViBoolean(1150017)
     '''Type: bool
 
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
-    range_check = attributes.AttributeViBoolean(1050002)
+    range_check = _attributes.AttributeViBoolean(1050002)
     '''Type: bool
 
     Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver methods.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
@@ -474,7 +474,7 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    record_coercions = attributes.AttributeViBoolean(1050006)
+    record_coercions = _attributes.AttributeViBoolean(1050006)
     '''Type: bool
 
     Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   You call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
@@ -483,13 +483,13 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
+    scan_advanced_output = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
     '''Type: enums.ScanAdvancedOutput
 
     This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
-    scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
-    scan_delay = attributes.AttributeViReal64TimeDeltaSeconds(1250025)
+    scan_advanced_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
+    scan_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250025)
     '''Type: float
 
     This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
@@ -497,7 +497,7 @@ class _SessionBase(object):
 
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
     '''
-    scan_list = attributes.AttributeViString(1250020)
+    scan_list = _attributes.AttributeViString(1250020)
     '''Type: str
 
     This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The _initiate_scan  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
@@ -512,7 +512,7 @@ class _SessionBase(object):
     ; (semi-colon)
     Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
     '''
-    scan_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScanMode, 1250021)
+    scan_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanMode, 1250021)
     '''Type: enums.ScanMode
 
     This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
@@ -522,12 +522,12 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    serial_number = attributes.AttributeViString(1150015)
+    serial_number = _attributes.AttributeViString(1150015)
     '''Type: str
 
     This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
-    settling_time = attributes.AttributeViReal64TimeDeltaSeconds(1250004)
+    settling_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250004)
     '''Type: float
 
     This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
@@ -544,7 +544,7 @@ class _SessionBase(object):
         session.channels['0,1'].settling_time = var
         var = session.channels['0,1'].settling_time
     '''
-    simulate = attributes.AttributeViBoolean(1050005)
+    simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
@@ -553,57 +553,57 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     '''Type: int
 
     The major version number of the IviSwtch class specification.
     '''
-    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
     '''Type: int
 
     The minor version number of the class specification with which this driver is compliant.
     '''
-    specific_driver_description = attributes.AttributeViString(1050514)
+    specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
     A string that contains a brief description of the specific  driver.
     '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
+    specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
 
     A string that contains additional version information about this  instrument driver.
     '''
-    specific_driver_vendor = attributes.AttributeViString(1050513)
+    specific_driver_vendor = _attributes.AttributeViString(1050513)
     '''Type: str
 
     A string that contains the name of the vendor that supplies this driver.
     '''
-    supported_instrument_models = attributes.AttributeViString(1050327)
+    supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
 
     Contains a comma-separated list of supported instrument models.
     '''
-    temperature = attributes.AttributeViReal64(1150019)
+    temperature = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
     This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
-    trigger_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInput, 1250022)
+    trigger_input = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerInput, 1250022)
     '''Type: enums.TriggerInput
 
     This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
     '''
-    trigger_input_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
+    trigger_input_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
     '''Type: enums.TriggerInputPolarity
 
     Determines the behavior of the trigger Input.
     '''
-    trigger_mode = attributes.AttributeViInt32(1150005)
+    trigger_mode = _attributes.AttributeViInt32(1150005)
     '''Type: int
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input and/or route_scan_advanced_output  methods instead.
     '''
-    wire_mode = attributes.AttributeViInt32(1250017)
+    wire_mode = _attributes.AttributeViInt32(1250017)
     '''Type: int
 
     This property returns the wire mode of the switch device.
@@ -715,10 +715,10 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -770,10 +770,10 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -825,10 +825,10 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64()  # case S200
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64()  # case S200
         error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -883,15 +883,15 @@ class _SessionBase(object):
                 constants by moving to the Property Value control and pressing .
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        array_size_ctype = visatype.ViInt32()  # case S170
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        array_size_ctype = _visatype.ViInt32()  # case S170
         attribute_value_ctype = None  # case C050
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # case C060
+        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (_visatype.ViChar * array_size_ctype.value)()  # case C060
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -922,14 +922,14 @@ class _SessionBase(object):
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        code_ctype = visatype.ViStatus()  # case S200
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        code_ctype = _visatype.ViStatus()  # case S200
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -993,10 +993,10 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1060,10 +1060,10 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1127,10 +1127,10 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
         error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1194,9 +1194,9 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case S150
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1220,9 +1220,9 @@ class _SessionBase(object):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
@@ -1467,7 +1467,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        self._library = library_singleton.get()
+        self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
@@ -1513,7 +1513,7 @@ class Session(_SessionBase):
         _initiate_scan. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_AbortScan(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1564,10 +1564,10 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        path_capability_ctype = visatype.ViInt32()  # case S200
+        path_capability_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
@@ -1580,7 +1580,7 @@ class Session(_SessionBase):
         _initiate_scan. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1614,9 +1614,9 @@ class Session(_SessionBase):
         '''
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case C020
-        scan_mode_ctype = visatype.ViInt32(scan_mode.value)  # case S130
+        scan_mode_ctype = _visatype.ViInt32(scan_mode.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1661,10 +1661,10 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, visatype.ViReal64)  # case S140
-        trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case S130
-        scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case S130
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, _visatype.ViReal64)  # case S140
+        trigger_input_ctype = _visatype.ViInt32(trigger_input.value)  # case S130
+        scan_advanced_output_ctype = _visatype.ViInt32(scan_advanced_output.value)  # case S130
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1703,7 +1703,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_Connect(vi_ctype, channel1_ctype, channel2_ctype)
@@ -1744,7 +1744,7 @@ class Session(_SessionBase):
                 r2 is a configuration channel. Default value: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_ConnectMultiple(vi_ctype, connection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1757,7 +1757,7 @@ class Session(_SessionBase):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1782,7 +1782,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_Disconnect(vi_ctype, channel1_ctype, channel2_ctype)
@@ -1795,7 +1795,7 @@ class Session(_SessionBase):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_DisconnectAll(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1819,7 +1819,7 @@ class Session(_SessionBase):
                 None
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_DisconnectMultiple(vi_ctype, disconnection_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1838,14 +1838,14 @@ class Session(_SessionBase):
                 Value of Channel Count property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        index_ctype = visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         channel_name_buffer_ctype = None  # case C050
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        channel_name_buffer_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_buffer_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
@@ -1877,15 +1877,15 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        buffer_size_ctype = visatype.ViInt32()  # case S170
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
         path_ctype = None  # case C050
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        path_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        path_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
@@ -1909,9 +1909,9 @@ class Session(_SessionBase):
             relay_count (int): The number of relay cycles.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_count_ctype = visatype.ViInt32()  # case S200
+        relay_count_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, None if relay_count_ctype is None else (ctypes.pointer(relay_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
@@ -1929,14 +1929,14 @@ class Session(_SessionBase):
                 Value of Channel Count property.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        index_ctype = visatype.ViInt32(index)  # case S150
-        relay_name_buffer_size_ctype = visatype.ViInt32()  # case S170
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        relay_name_buffer_size_ctype = _visatype.ViInt32()  # case S170
         relay_name_buffer_ctype = None  # case C050
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # case S180
-        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case C060
+        relay_name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        relay_name_buffer_ctype = (_visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
@@ -1961,9 +1961,9 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_position_ctype = visatype.ViInt32()  # case S200
+        relay_position_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, None if relay_position_ctype is None else (ctypes.pointer(relay_position_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
@@ -2210,9 +2210,9 @@ class Session(_SessionBase):
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case C020
-        simulate_ctype = visatype.ViBoolean(simulate)  # case S150
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case S150
-        vi_ctype = visatype.ViSession()  # case S200
+        simulate_ctype = _visatype.ViBoolean(simulate)  # case S150
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
+        vi_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -2229,7 +2229,7 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         abort.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_InitiateScan(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2259,9 +2259,9 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_action_ctype = visatype.ViInt32(relay_action.value)  # case S130
+        relay_action_ctype = _visatype.ViInt32(relay_action.value)  # case S130
         error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2274,7 +2274,7 @@ class Session(_SessionBase):
         created without a logical name, this method is equivalent to
         reset.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2311,10 +2311,10 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        scan_advanced_output_connector_ctype = visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
-        scan_advanced_output_bus_line_ctype = visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
-        invert_ctype = visatype.ViBoolean(invert)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
+        scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
+        invert_ctype = _visatype.ViBoolean(invert)  # case S150
         error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2352,10 +2352,10 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        trigger_input_connector_ctype = visatype.ViInt32(trigger_input_connector.value)  # case S130
-        trigger_input_bus_line_ctype = visatype.ViInt32(trigger_input_bus_line.value)  # case S130
-        invert_ctype = visatype.ViBoolean(invert)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
+        trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
+        invert_ctype = _visatype.ViBoolean(invert)  # case S150
         error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2370,7 +2370,7 @@ class Session(_SessionBase):
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2387,8 +2387,8 @@ class Session(_SessionBase):
                 Default value: False
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        continuous_scan_ctype = visatype.ViBoolean(continuous_scan)  # case S150
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        continuous_scan_ctype = _visatype.ViBoolean(continuous_scan)  # case S150
         error_code = self._library.niSwitch_SetContinuousScan(vi_ctype, continuous_scan_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2410,7 +2410,7 @@ class Session(_SessionBase):
                 previously created path with get_path.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_SetPath(vi_ctype, path_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2431,8 +2431,8 @@ class Session(_SessionBase):
                 Default Value:5000 ms
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, _visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2453,8 +2453,8 @@ class Session(_SessionBase):
                 Value:5000 ms
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, visatype.ViInt32)  # case S140
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, _visatype.ViInt32)  # case S140
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2471,7 +2471,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2483,7 +2483,7 @@ class Session(_SessionBase):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2500,9 +2500,9 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = visatype.ViInt16()  # case S200
-        self_test_message_ctype = (visatype.ViChar * 256)()  # case C070
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)

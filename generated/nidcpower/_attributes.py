@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-from nifake import _converters
+import nidcpower._converters as _converters
 
 import datetime
 

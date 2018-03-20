@@ -7,7 +7,7 @@ ${encoding_tag}
 <%
     module_name = template_parameters['metadata'].config['module_name']
 %>\
-from ${module_name} import _converters
+import ${module_name}._converters as _converters
 
 import datetime
 

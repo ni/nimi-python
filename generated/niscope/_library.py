@@ -3,9 +3,9 @@
 import ctypes
 import threading
 
-from niscope.visatype import *  # noqa: F403,H303
+from niscope._visatype import *  # noqa: F403,H303
 
-from niscope import waveform_info  # noqa: F401
+import niscope.waveform_info as waveform_info  # noqa: F401
 
 
 class Library(object):

@@ -3,16 +3,16 @@
 import platform
 
 import ctypes
-from nifake import errors
-from nifake import library
+import niscope._library as _library
+import niscope.errors as errors
 import threading
 
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnifake.so', 'type': 'cdll'}},
-                 'Windows': {'32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
-                             '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'}}}
+_library_info = {'Linux': {'64bit': {'name': 'libniScope_64.so', 'type': 'cdll'}},
+                 'Windows': {'32bit': {'name': 'niscope_32.dll', 'type': 'windll'},
+                             '64bit': {'name': 'niscope_64.dll', 'type': 'cdll'}}}
 
 
 def _get_library_name():
@@ -32,7 +32,7 @@ def _get_library_type():
 def get():
     '''get
 
-    Returns the library.Library singleton for nifake.
+    Returns the library.Library singleton for niscope.
     '''
     global _instance
     global _instance_lock
@@ -48,6 +48,6 @@ def get():
                     ctypes_library = ctypes.CDLL(_get_library_name())
             except OSError:
                 raise errors.DriverNotInstalledError()
-            _instance = library.Library(ctypes_library)
+            _instance = _library.Library(ctypes_library)
         return _instance
 
