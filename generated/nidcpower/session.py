@@ -4669,13 +4669,13 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):
-        '''self_test
+    def _self_test(self):
+        '''_self_test
 
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
 
-        When calling self_test with the PXIe-4162/4163, specify all
+        When calling _self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
         _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
@@ -4701,6 +4701,35 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+
+    def self_test(self):
+        '''self_test
+
+        Performs the device self-test routine and returns the test result(s).
+        Calling this method implicitly calls the reset method.
+
+        When calling _self_test with the PXIe-4162/4163, specify all
+        channels of your PXIe-4162/4163 with the channels input of
+        _initialize_with_channels. You cannot self test a subset of
+        PXIe-4162/4163 channels.
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+-------------------+
+        | Self-Test Code | Description       |
+        +================+===================+
+        | 0              | Self test passed. |
+        +----------------+-------------------+
+        | 1              | Self test failed. |
+        +----------------+-------------------+
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestFailureError(code, msg)
+        return None
 
 
 

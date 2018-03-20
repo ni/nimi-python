@@ -4654,8 +4654,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):
-        '''self_test
+    def _self_test(self):
+        '''_self_test
 
         Runs the instrument self-test routine and returns the test result(s).
 
@@ -4680,6 +4680,30 @@ class Session(_SessionBase):
         error_code = self._library.niScope_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+
+    def self_test(self):
+        '''self_test
+
+        Runs the instrument self-test routine and returns the test result(s). Refer to the
+        device-specific help topics for an explanation of the message contents.
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestFailureError(code, msg)
+        return None
 
 
 
