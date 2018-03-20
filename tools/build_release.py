@@ -36,6 +36,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     verbosity_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
     verbosity_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
     verbosity_group.add_argument("--update", action="store_true", default=False, help="Update verion in config.py files")
+    verbosity_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
     verbosity_group.add_argument("--test", action="store_true", default=False, help="Run doctests and quit")
     verbosity_group.add_argument("--log-file", action="store", default=None, help="Send logging to listed file instead of stdout")
@@ -83,19 +84,19 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         logging.info(pp.pformat(tox_cmd))
         call(tox_cmd)
 
-    elif args.upload:
-        logging.info('Uploading to PyPI')
-        logging.info(pp.pformat(tox_cmd))
-        if not args.test:
-            call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
-
-    else:
+    if args.build:
         logging.info('Clean and build')
         logging.info(pp.pformat(tox_cmd + ['-e', 'clean']))
         logging.info(pp.pformat(tox_cmd))
         if not args.test:
             call(tox_cmd + ['-e', 'clean'])
             call(tox_cmd)
+
+    if args.upload:
+        logging.info('Uploading to PyPI')
+        logging.info(pp.pformat(tox_cmd))
+        if not args.test:
+            call(twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*'])
 
 
 if __name__ == '__main__':
