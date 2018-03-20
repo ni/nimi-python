@@ -3155,14 +3155,17 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
         frequencies_size = buffer_size_ctype.value  # case B590
-        frequencies_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=frequencies_size)  # case B590
+        frequencies_array = array.array("d", [0] * frequencies_size)  # case B590
+        frequencies_ctype = get_ctypes_pointer_for_buffer(value=frequencies_array, library_type=_visatype.ViReal64)  # case B590
         amplitudes_size = buffer_size_ctype.value  # case B590
-        amplitudes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=amplitudes_size)  # case B590
+        amplitudes_array = array.array("d", [0] * amplitudes_size)  # case B590
+        amplitudes_ctype = get_ctypes_pointer_for_buffer(value=amplitudes_array, library_type=_visatype.ViReal64)  # case B590
         phases_size = buffer_size_ctype.value  # case B590
-        phases_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=phases_size)  # case B590
+        phases_array = array.array("d", [0] * phases_size)  # case B590
+        phases_ctype = get_ctypes_pointer_for_buffer(value=phases_array, library_type=_visatype.ViReal64)  # case B590
         error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, None if number_of_frequencies_ctype is None else (ctypes.pointer(number_of_frequencies_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(frequencies_ctype[i]) for i in range(buffer_size_ctype.value)], [float(amplitudes_ctype[i]) for i in range(buffer_size_ctype.value)], [float(phases_ctype[i]) for i in range(buffer_size_ctype.value)], int(number_of_frequencies_ctype.value)
+        return frequencies_array, amplitudes_array, phases_array
 
     def read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''read
