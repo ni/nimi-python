@@ -52,6 +52,7 @@ class Library(object):
         self.niScope_GetAttributeViString_cfunc = None
         self.niScope_GetEqualizationFilterCoefficients_cfunc = None
         self.niScope_GetError_cfunc = None
+        self.niScope_GetFrequencyResponse_cfunc = None
         self.niScope_InitWithOptions_cfunc = None
         self.niScope_InitiateAcquisition_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
@@ -332,6 +333,14 @@ class Library(object):
                 self.niScope_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
+
+    def niScope_GetFrequencyResponse(self, vi, channel, buffer_size, frequencies, amplitudes, phases, number_of_frequencies):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_GetFrequencyResponse_cfunc is None:
+                self.niScope_GetFrequencyResponse_cfunc = self._library.niScope_GetFrequencyResponse
+                self.niScope_GetFrequencyResponse_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niScope_GetFrequencyResponse_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_GetFrequencyResponse_cfunc(vi, channel, buffer_size, frequencies, amplitudes, phases, number_of_frequencies)
 
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:

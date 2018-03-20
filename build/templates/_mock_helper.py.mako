@@ -39,11 +39,11 @@ f = functions[func_name]
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
-ivi_dance_param = helper.filter_ivi_dance_parameter(f)
+ivi_dance_params = helper.filter_ivi_dance_parameters(f)
 %>\
-% if ivi_dance_param is not None:
-        self._defaults['${func_name}']['${ivi_dance_param['name']}'] = None
-% endif
+% for param in ivi_dance_params:
+        self._defaults['${func_name}']['${param['name']}'] = None
+% endfor
 % endfor
 
     def __getitem__(self, func):
@@ -57,8 +57,8 @@ ivi_dance_param = helper.filter_ivi_dance_parameter(f)
 f = functions[func_name]
 params = f['parameters']
 output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
-ivi_dance_param = helper.filter_ivi_dance_parameter(f)
-ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
+ivi_dance_params = helper.filter_ivi_dance_parameters(f)
+ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
         if self._defaults['${func_name}']['return'] != 0:
@@ -99,23 +99,23 @@ if p['use_array']:
 %           endif
 %       endif
 %    endfor
-%    if ivi_dance_param is not None:
-        if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
-            raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
+%    for id_param in ivi_dance_params:
+        if self._defaults['${func_name}']['${id_param['name']}'] is None:
+            raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${id_param['name']}')
         if ${ivi_dance_size_param['python_name']}.value == 0:
-            return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
-%       if ivi_dance_param['is_string']:  # strings
-        ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
+            return len(self._defaults['${func_name}']['${id_param['name']}'])
+%       if id_param['is_string']:  # strings
+        ${id_param['python_name']}.value = self._defaults['${func_name}']['${id_param['name']}'].encode('ascii')
 %       else:  # arrays
-<% param_name = ivi_dance_param['python_name'] %>\
+<% param_name = id_param['python_name'] %>\
         try:
             ${param_name}_ref = ${param_name}.contents
         except AttributeError:
             ${param_name}_ref = ${param_name}
-        for i in range(len(self._defaults['${func_name}']['${ivi_dance_param["name"]}'])):
-            ${param_name}_ref[i] = self._defaults['${func_name}']['${ivi_dance_param["name"]}'][i]
+        for i in range(len(self._defaults['${func_name}']['${id_param["name"]}'])):
+            ${param_name}_ref[i] = self._defaults['${func_name}']['${id_param["name"]}'][i]
 %       endif
-%    endif
+%    endfor
         return self._defaults['${func_name}']['return']
 
 % endfor
