@@ -84,6 +84,8 @@ def _(repeated_capability, prefix):
     return [repeated_capability.replace(prefix, '').strip()]
 
 
+# We cannot use collections.abc.Iterable here because strings are also iterable and then this
+# instance is what gets called instead of the string one.
 @_convert_repeated_capabilities.register(list)  # noqa: F811
 @_convert_repeated_capabilities.register(range)  # noqa: F811
 @_convert_repeated_capabilities.register(tuple)  # noqa: F811
