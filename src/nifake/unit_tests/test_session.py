@@ -3,6 +3,7 @@ import ctypes
 import datetime
 import math
 import nifake
+import nifake.errors
 import numpy
 import six
 import warnings
@@ -176,7 +177,7 @@ class TestSession(object):
             try:
                 session.self_test()
                 assert False
-            except Exception as e:
+            except nifake.errors.SelfTestFailureError as e:
                 assert e.code == test_error_code
                 assert e.message == test_error_message
 
