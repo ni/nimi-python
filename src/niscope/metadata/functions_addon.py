@@ -67,6 +67,7 @@ functions_codegen_method = {
     'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'ActualMeasWfmSize':                { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'self_test':                        { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.}
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -520,12 +521,38 @@ channels, the acquisition type, and the number of records you specify.''',
             'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
         },
     },
+    'FancyGetEqualizationFilterCoefficients': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channel',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': 'The channel to configure.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.',
+        },
+    },
 }
 
 # Override the 'python' name for some functions.
 functions_python_name = {
-    'FetchDispatcher':            { 'python_name': 'fetch', },
-    'FancyFetch':                 { 'python_name': 'fetch', },
+    'FetchDispatcher':                        { 'python_name': 'fetch', },
+    'FancyFetch':                             { 'python_name': 'fetch', },
+    'FancyGetEqualizationFilterCoefficients': { 'python_name': 'get_equalization_filter_coefficients', },
 }
 
 # Set parameter name to Waveform instead of Wfm, even for private functions (for consistency)
@@ -558,6 +585,9 @@ functions_method_templates = {
     ], },
     'FancyFetch':      { 'method_templates': [
         { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'FancyGetEqualizationFilterCoefficients':      { 'method_templates': [
+        { 'session_filename': 'get_equalization_filter_coefficients', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
 }
 
