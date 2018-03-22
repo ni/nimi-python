@@ -1607,13 +1607,9 @@ niscope.Session methods
 
 
 
-.. py:method:: get_equalization_filter_coefficients(number_of_coefficients)
+.. py:method:: get_equalization_filter_coefficients()
 
-    Retrieves the custom coefficients for the equalization FIR filter on the
-    device. This filter is designed to compensate the input signal for
-    artifacts introduced to the signal outside of the digitizer. Because
-    this filter is a generic FIR filter, any coefficients are valid.
-    Coefficient values should be between +1 and –1.
+    Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.
 
     
 
@@ -1625,31 +1621,7 @@ niscope.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
-
-
-    :param number_of_coefficients:
-
-
-        The number of coefficients being passed in the **coefficients** array.
-
-        
-
-
-    :type number_of_coefficients: int
-
-    :rtype: list of float
-    :return:
-
-
-            The custom coefficients for the equalization FIR filter on the device.
-            These coefficients should be between +1 and –1. You can obtain the
-            number of coefficients from the
-            `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
-            property.
-
-            
-
+            session.channels['0,1'].get_equalization_filter_coefficients()
 
 
 .. py:method:: get_frequency_response()
