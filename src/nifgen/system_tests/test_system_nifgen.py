@@ -376,6 +376,11 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
+def test_routing_attribute(session):
+    session.sample_clock_timebase_source = 'ClkIn'
+    assert session.sample_clock_timebase_source == 'ClkIn'
+
+
 # TODO(bhaswath): Doesn't work, issue #596
 '''
 def test_fir_filter_coefficients():
