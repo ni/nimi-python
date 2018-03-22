@@ -2024,6 +2024,21 @@ class _SessionBase(object):
 
         return wfm_info
 
+    def get_equalization_filter_coefficients(self):
+        '''get_equalization_filter_coefficients
+
+        Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].get_equalization_filter_coefficients()
+        '''
+        return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
+
     def _fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
@@ -3047,8 +3062,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
-    def get_equalization_filter_coefficients(self, number_of_coefficients):
-        '''get_equalization_filter_coefficients
+    def _get_equalization_filter_coefficients(self, number_of_coefficients):
+        '''_get_equalization_filter_coefficients
 
         Retrieves the custom coefficients for the equalization FIR filter on the
         device. This filter is designed to compensate the input signal for
@@ -3062,7 +3077,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].get_equalization_filter_coefficients(number_of_coefficients)
+            session.channels['0,1']._get_equalization_filter_coefficients(number_of_coefficients)
 
         Args:
             number_of_coefficients (int): The number of coefficients being passed in the **coefficients** array.

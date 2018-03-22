@@ -77,6 +77,7 @@ All notable changes to this project will be documented in this file.
             * `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
+        * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
