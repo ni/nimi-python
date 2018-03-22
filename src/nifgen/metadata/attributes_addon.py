@@ -44,6 +44,12 @@ attributes_codegen_method = {
     1150408: { "codegen_method": "no" },  # P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS - P2P Attribute
 }
 
+attributes_remove_enum = {
+    1150367: { 'enum': None, },
+    1150112: { 'enum': None, },
+    1150113: { 'enum': None, },
+}
+
 attributes_converters = {
     1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'python_type': 'datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT

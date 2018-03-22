@@ -9,6 +9,9 @@ enums_codegen_method = {
 }
 
 enums_additional_enums = {
+    'SampleClockTimebaseSource': {},  # Remove, Enum contains incomplete list and precludes inter device routing
+    'SampleClockSource': {},  # Remove, Enum contains incomplete list and precludes inter device routing
+    'ReferenceClockSource': {},  # Remove, Enum contains incomplete list and precludes inter device routing
     'RelativeTo': {
         'values': [
             {
