@@ -987,8 +987,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    reference_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
-    '''Type: enums.ReferenceClockSource
+    reference_clock_source = _attributes.AttributeViString(1150113)
+    '''Type: str
 
     Specifies the reference clock source used by the signal generator.
     The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this property to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
@@ -1009,8 +1009,8 @@ class _SessionBase(object):
 
     Note: For the NI 5421, absolute delay
     '''
-    sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockSource, 1150112)
-    '''Type: enums.SampleClockSource
+    sample_clock_source = _attributes.AttributeViString(1150112)
+    '''Type: str
 
     Specifies the Sample clock source. If you specify a divisor with the exported_sample_clock_divisor  property, the Sample clock exported with the exported_sample_clock_output_terminal property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
     To change the device configuration, call abort or wait for the generation to complete.
@@ -1025,8 +1025,8 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
-    sample_clock_timebase_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
-    '''Type: enums.SampleClockTimebaseSource
+    sample_clock_timebase_source = _attributes.AttributeViString(1150367)
+    '''Type: str
 
     Specifies the Sample Clock Timebase source.
     To change the device configuration, call the abort method or wait for the generation to complete.
