@@ -377,8 +377,8 @@ def test_user_standard_waveform(session):
 
 
 def test_routing_attribute(session):
-    session.sample_clock_timebase_source = 'ClkIn'
-    assert session.sample_clock_timebase_source == 'ClkIn'
+    session.digital_edge_start_trigger_source = 'ClkIn'
+    assert session.digital_edge_start_trigger_source == 'ClkIn'
 
 
 # TODO(bhaswath): Doesn't work, issue #596
