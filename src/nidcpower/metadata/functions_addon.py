@@ -156,12 +156,12 @@ functions_additional_functions = {
         },
     },
     # Public function that wraps self_test and will raise on self test failure
-    'self_test_wrapper': {
+    'fancy_self_test': {
         'returns': 'ViStatus',
         'codegen_method': 'python-only',
         'python_name': 'self_test',
         'method_templates': [
-            { 'session_filename': 'self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+            { 'session_filename': 'fancy_self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
         ],
         'parameters': [
             {
