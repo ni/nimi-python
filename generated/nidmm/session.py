@@ -2622,6 +2622,30 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def self_test(self):
+        '''self_test
+
+        Performs a self-test on the DMM to ensure that the DMM is functioning
+        properly. Self-test does not calibrate the DMM. Zero
+        indicates success.
+
+        On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
+        you should check the fuse and replace it, if necessary.
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        Note: Self-test does not check the fuse on the NI 4065, NI 4071, and NI 4081. Hence, even if the fuse is blown on the device, self-test does not return error code 1013.
+
+        Note: This method calls reset, and any configurations previous to the call will be lost. All properties will be set to their default values after the call returns.
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
+
     def reset(self):
         '''reset
 
@@ -2680,30 +2704,6 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-    def self_test(self):
-        '''self_test
-
-        Performs a self-test on the DMM to ensure that the DMM is functioning
-        properly. Self-test does not calibrate the DMM. Zero
-        indicates success.
-
-        On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
-        you should check the fuse and replace it, if necessary.
-
-        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
-
-        - code - failure code from driver
-        - message - status message from driver
-
-        Note: Self-test does not check the fuse on the NI 4065, NI 4071, and NI 4081. Hence, even if the fuse is blown on the device, self-test does not return error code 1013.
-
-        Note: This method calls reset, and any configurations previous to the call will be lost. All properties will be set to their default values after the call returns.
-        '''
-        code, msg = self._self_test()
-        if code:
-            raise errors.SelfTestFailureError(code, msg)
-        return None
 
 
 

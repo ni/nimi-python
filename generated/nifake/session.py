@@ -1405,6 +1405,16 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def self_test(self):
+        '''self_test
+
+        Performs a self-test
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
+
     def _self_test(self):
         '''_self_test
 
@@ -1422,16 +1432,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-    def self_test(self):
-        '''self_test
-
-        Performs a self-test
-        '''
-        code, msg = self._self_test()
-        if code:
-            raise errors.SelfTestFailureError(code, msg)
-        return None
 
 
 

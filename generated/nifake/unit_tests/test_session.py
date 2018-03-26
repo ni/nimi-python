@@ -177,7 +177,7 @@ class TestSession(object):
             try:
                 session.self_test()
                 assert False
-            except nifake.errors.SelfTestFailureError as e:
+            except nifake.errors.SelfTestError as e:
                 assert e.code == test_error_code
                 assert e.message == test_error_message
 
