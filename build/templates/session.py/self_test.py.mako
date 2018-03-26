@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Call self test and throw if there is a failure'''
+    '''Call self-test and throw if there is a failure'''
     import build.helper as helper
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
