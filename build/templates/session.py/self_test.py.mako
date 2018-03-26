@@ -10,6 +10,6 @@
         '''
         code, msg = self._self_test()
         if code:
-            raise errors.SelfTestFailureError(code, msg)
+            raise errors.SelfTestError(code, msg)
         return None
 
