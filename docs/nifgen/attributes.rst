@@ -413,30 +413,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Cache**
             - C Attribute: **NIFGEN_ATTR_CACHE**
 
-.. py:attribute:: cal_adc_input
-
-    Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-------------------+
-    | Characteristic | Value             |
-    +================+===================+
-    | Datatype       | enums.CalADCInput |
-    +----------------+-------------------+
-    | Permissions    | read-write        |
-    +----------------+-------------------+
-    | Channel Based  | False             |
-    +----------------+-------------------+
-    | Resettable     | Yes               |
-    +----------------+-------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Calibration:Cal ADC Input**
-            - C Attribute: **NIFGEN_ATTR_CAL_ADC_INPUT**
-
 .. py:attribute:: channel_delay
 
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.

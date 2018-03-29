@@ -58,37 +58,6 @@ class ByteOrder(Enum):
     BIG = 1
 
 
-class CalADCInput(Enum):
-    ANALOG_OUTPUT = 0
-    '''
-    Specifies that the ADC measures the analog output.
-    '''
-    INTERNAL_VOLTAGE_REFERENCE = 1
-    '''
-    Specifies that the ADC measures the internal voltage reference.
-    '''
-    GROUND = 2
-    '''
-    Specifies that the ADC measures the ground voltage.
-    '''
-    ANALOG_OUTPUT_DIFFERENTIAL = 3
-    '''
-    Specifies that the ADC measures the differential analog output.
-    '''
-    ANALOG_OUTPUT_PLUS = 4
-    '''
-    Specifies that the ADC measures the positive differential analog output.
-    '''
-    ANALOG_OUTPUT_MINUS = 5
-    '''
-    Specifies that the ADC measures the negative differential analog output.
-    '''
-    ANALOG_OUTPUT_IDLE = 6
-    '''
-    Specifies that the ADC measures the idle analog output.
-    '''
-
-
 class ClockMode(Enum):
     HIGH_RESOLUTION = 0
     '''

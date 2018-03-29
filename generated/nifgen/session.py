@@ -196,11 +196,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    cal_adc_input = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CalADCInput, 1150227)
-    '''Type: enums.CalADCInput
-
-    Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
-    '''
     channel_delay = _attributes.AttributeViReal64(1150369)
     '''Type: float
 
