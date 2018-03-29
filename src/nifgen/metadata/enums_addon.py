@@ -6,6 +6,7 @@
 # We also do not codegen enums associated with P2P or External Calibration since neither 
 # are supported in Python
 enums_codegen_method = {
+    'CalADCInput': { 'codegen_method': 'no', },  # Calibration Enum - not supported in Python
 }
 
 enums_additional_enums = {
