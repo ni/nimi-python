@@ -150,6 +150,10 @@ class SideEffectsHelper(object):
         self._defaults['error_message'] = {}
         self._defaults['error_message']['return'] = 0
         self._defaults['error_message']['errorMessage'] = None
+        self._defaults['self_test'] = {}
+        self._defaults['self_test']['return'] = 0
+        self._defaults['self_test']['selfTestResult'] = None
+        self._defaults['self_test']['selfTestMessage'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -652,6 +656,24 @@ class SideEffectsHelper(object):
             error_message[i] = test_value[i]
         return self._defaults['error_message']['return']
 
+    def niFake_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+        if self._defaults['self_test']['return'] != 0:
+            return self._defaults['self_test']['return']
+        # self_test_result
+        if self._defaults['self_test']['selfTestResult'] is None:
+            raise MockFunctionCallError("niFake_self_test", param='selfTestResult')
+        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        # self_test_message
+        if self._defaults['self_test']['selfTestMessage'] is None:
+            raise MockFunctionCallError("niFake_self_test", param='selfTestMessage')
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
+        return self._defaults['self_test']['return']
+
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
@@ -744,3 +766,5 @@ class SideEffectsHelper(object):
         mock_library.niFake_close.return_value = 0
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
         mock_library.niFake_error_message.return_value = 0
+        mock_library.niFake_self_test.side_effect = MockFunctionCallError("niFake_self_test")
+        mock_library.niFake_self_test.return_value = 0

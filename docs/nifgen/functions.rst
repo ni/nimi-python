@@ -2245,42 +2245,23 @@ nifgen.Session methods
 
     Runs the instrument self-test routine and returns the test result(s).
 
-    
+    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+    - code - failure code from driver
+    - message - status message from driver
+
+    +----------------+------------------+
+    | Self-Test Code | Description      |
+    +================+==================+
+    | 0              | Passed self-test |
+    +----------------+------------------+
+    | 1              | Self-test failed |
+    +----------------+------------------+
 
     .. note:: When used on some signal generators, the device is reset after the
-        :py:meth:`nifgen.Session.self_test` method runs. If you use the :py:meth:`nifgen.Session.self_test`
+        :py:meth:`nifgen.Session._self_test` method runs. If you use the :py:meth:`nifgen.Session._self_test`
         method, your device may not be in its previously configured state
         after the method runs.
-
-
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Contains the value returned from the instrument self-test. A value of 0
-            indicates success.
-
-            +----------------+------------------+
-            | Self-Test Code | Description      |
-            +================+==================+
-            | 0              | Passed self-test |
-            +----------------+------------------+
-            | 1              | Self-test failed |
-            +----------------+------------------+
-
-
-        self_test_message (str): 
-
-
-            Returns the self-test response string from the instrument.
-
-            You must pass a ViChar array with at least 256 bytes.
-
-            
 
 
 

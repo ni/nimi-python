@@ -64,6 +64,7 @@ class Library(object):
         self.niFake_WriteWaveform_cfunc = None
         self.niFake_close_cfunc = None
         self.niFake_error_message_cfunc = None
+        self.niFake_self_test_cfunc = None
 
     def niFake_Abort(self, vi):  # noqa: N802
         with self._func_lock:
@@ -424,3 +425,11 @@ class Library(object):
                 self.niFake_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_error_message_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_error_message_cfunc(vi, error_code, error_message)
+
+    def niFake_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_self_test_cfunc is None:
+                self.niFake_self_test_cfunc = self._library.niFake_self_test
+                self.niFake_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_self_test_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_self_test_cfunc(vi, self_test_result, self_test_message)

@@ -66,6 +66,7 @@ functions_codegen_method = {
     'AddWaveformProcessing':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'ActualMeasWfmSize':                { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
+    'self_test':                        { 'codegen_method': 'private',  },  # Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.}
 }
 
@@ -242,6 +243,38 @@ functions_converters = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
+    # Public function that wraps self_test and will raise on self test failure
+    'fancy_self_test': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'self_test',
+        'method_templates': [
+            { 'session_filename': 'fancy_self_test', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Runs the instrument self-test routine and returns the test result(s). Refer to the
+device-specific help topics for an explanation of the message contents.
+
+Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+
+- code - failure code from driver
+- message - status message from driver
+''',
+            'table_body': [['0', 'Passed self-test'], ['1', 'Self-test failed']],
+            'table_header': ['Self-Test Code', 'Description'],
+},
+    },
     'FancyFetch': {
         'codegen_method': 'python-only',
         'returns': 'ViStatus',

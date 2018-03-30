@@ -4657,6 +4657,30 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def self_test(self):
+        '''self_test
+
+        Runs the instrument self-test routine and returns the test result(s). Refer to the
+        device-specific help topics for an explanation of the message contents.
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
+
     def reset(self):
         '''reset
 
@@ -4669,8 +4693,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):
-        '''self_test
+    def _self_test(self):
+        '''_self_test
 
         Runs the instrument self-test routine and returns the test result(s).
 

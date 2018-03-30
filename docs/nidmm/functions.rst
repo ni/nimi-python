@@ -1516,56 +1516,22 @@ nidmm.Session methods
 .. py:method:: self_test()
 
     Performs a self-test on the DMM to ensure that the DMM is functioning
-    properly. Self-test does not calibrate the DMM.
+    properly. Self-test does not calibrate the DMM. Zero
+    indicates success.
+
+    On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
+    you should check the fuse and replace it, if necessary.
+
+    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+    - code - failure code from driver
+    - message - status message from driver
 
     
 
-    .. note:: This method calls :py:meth:`nidmm.Session.reset`, and any configurations previous to
-        the call will be lost. All properties will be set to their default
-        values after the call returns.
+    .. note:: Self-test does not check the fuse on the NI 4065, NI 4071, and NI 4081. Hence, even if the fuse is blown on the device, self-test does not return error code 1013.
 
-
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Contains the value returned from the instrument self-test. Zero
-            indicates success.
-
-            On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
-            you should check the fuse and replace it, if necessary.
-
-            
-
-            .. note:: Self-test does not check the fuse on the NI 4065, NI 4071, and
-                NI 4081. Hence, even if the fuse is blown on the device, self-test does
-                not return error code 1013.
-
-
-        self_test_message (str): 
-
-
-            This parameter contains the string returned from the instrument
-            self-test. The array must contain at least 256 elements.
-
-            For the NI 4050 and NI 4060, the error codes returned for self-test
-            failures include the following:
-
-            -  NIDMM_ERROR_AC_TEST_FAILURE
-            -  NIDMM_ERROR_DC_TEST_FAILURE
-            -  NIDMM_ERROR_RESISTANCE_TEST_FAILURE
-
-            These error codes indicate that the DMM should be repaired.
-
-            For the NI 4080/4081/4082 and the NI 4070/4071/4072, the error code
-            returned for a self-test failure is NIDMM_ERROR_SELF_TEST_FAILURE.
-            This error code indicates that the DMM should be repaired.
-
-            
+    .. note:: This method calls :py:meth:`nidmm.Session.reset`, and any configurations previous to the call will be lost. All properties will be set to their default values after the call returns.
 
 
 

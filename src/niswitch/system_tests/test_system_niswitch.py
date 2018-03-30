@@ -121,9 +121,8 @@ def test_functions_get_channel_name(session):
 
 
 def test_functions_self_test(session):
-    self_test_result, self_test_string = session.self_test()
-    assert self_test_result == 0
-    assert self_test_string == 'No Error'
+    # We should not get an assert if self_test passes
+    session.self_test()
 
 
 def test_functions_get_path(session):

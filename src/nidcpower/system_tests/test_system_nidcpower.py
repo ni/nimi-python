@@ -19,9 +19,8 @@ def test_self_test():
     # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
     with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        result, message = session.self_test()
-        assert result == 0
-        assert message == 'Self test passed'
+        # We should not get an assert if self_test passes
+        session.self_test()
 
 
 def test_get_channel_name(session):

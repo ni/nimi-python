@@ -12,9 +12,8 @@ def session():
 
 
 def test_self_test(session):
-    result, message = session.self_test()
-    assert result == 0
-    assert message == 'Self test passed'
+    # We should not get an assert if self_test passes
+    session.self_test()
 
 
 def test_get_attribute_string(session):

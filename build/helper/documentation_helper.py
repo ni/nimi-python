@@ -757,9 +757,16 @@ def _check_documentation(nd, config, start_enum=None):
     need_enum_note = False
     for k in keys_to_check:
         if k in nd:
-            need_func_note = need_func_note or _need_func_note(nd[k], config)
-            need_attr_note = need_attr_note or _need_attr_note(nd[k], config)
-            need_enum_note = need_enum_note or _need_enum_note(nd[k], config)
+            try:
+                need_func_note = need_func_note or _need_func_note(nd[k], config)
+                need_attr_note = need_attr_note or _need_attr_note(nd[k], config)
+                need_enum_note = need_enum_note or _need_enum_note(nd[k], config)
+            except TypeError:
+                # If we get a type error then we will assume it is an iterable (list)
+                for n in nd[k]:
+                    need_func_note = need_func_note or _need_func_note(n, config)
+                    need_attr_note = need_attr_note or _need_attr_note(n, config)
+                    need_enum_note = need_enum_note or _need_enum_note(n, config)
 
     if 'table_body' in nd:
         tb = nd['table_body']
