@@ -1187,7 +1187,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except errors.DriverError as e:
             self._vi = 0
             raise
         self._vi = 0
