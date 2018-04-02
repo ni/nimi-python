@@ -19,7 +19,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 <%
 table_contents = []
 table_contents.append(('Property', 'Datatype'))
-for attr in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
+for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(attributes)):
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
     else:

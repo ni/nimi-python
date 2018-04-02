@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * All exceptions raised by the Python bindings inherit from `<driver>.Error`
+        * Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
+            * This encapsulates any error that is returned by the underlying driver
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -46,6 +49,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
         * `SampleClockTimebaseSource`, `SampleClockSource`, and `ReferenceClockSource` enums removed
+        * `Session.cal_adc_input` attribute and `Session.enums.CalADCInput` enum - External Cal not supported in Python
 * ### NI-SCOPE
     * #### Added
     * #### Changed

@@ -42,6 +42,7 @@ attributes_codegen_method = {
     1150406: { "codegen_method": "no" },  # P2P_DONE_NOTIFICATION_ADDRESS_TYPE - P2P Attribute
     1150407: { "codegen_method": "no" },  # P2P_DONE_NOTIFICATION_VALUE - P2P Attribute
     1150408: { "codegen_method": "no" },  # P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS - P2P Attribute
+    1150227: { "codegen_method": "no" },  # CAL_ADC_INPUT - Calibration Attribute
 }
 
 attributes_remove_enum = {

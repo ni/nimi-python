@@ -3,6 +3,7 @@ import ctypes
 import datetime
 import math
 import nifake
+import nifake.errors
 import numpy
 import six
 import warnings
@@ -157,6 +158,28 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.simple_function()
             self.patched_library.niFake_PoorlyNamedSimpleFunction.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
+
+    def test_self_test(self):
+        self.patched_library.niFake_self_test.side_effect = self.side_effects_helper.niFake_self_test
+        test_error_code = 0
+        self.side_effects_helper['self_test']['selfTestResult'] = test_error_code
+        self.side_effects_helper['self_test']['selfTestMessage'] = ''
+        with nifake.Session('dev1') as session:
+            session.self_test()
+
+    def test_self_test_fail(self):
+        self.patched_library.niFake_self_test.side_effect = self.side_effects_helper.niFake_self_test
+        test_error_code = 1
+        test_error_message = 'error message'
+        self.side_effects_helper['self_test']['selfTestResult'] = test_error_code
+        self.side_effects_helper['self_test']['selfTestMessage'] = test_error_message
+        with nifake.Session('dev1') as session:
+            try:
+                session.self_test()
+                assert False
+            except nifake.errors.SelfTestError as e:
+                assert e.code == test_error_code
+                assert e.message == test_error_message
 
     def test_get_a_number(self):
         test_number = 16

@@ -105,6 +105,12 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['Description'] = None
+        self._defaults['GetFrequencyResponse'] = {}
+        self._defaults['GetFrequencyResponse']['return'] = 0
+        self._defaults['GetFrequencyResponse']['numberOfFrequencies'] = None
+        self._defaults['GetFrequencyResponse']['frequencies'] = None
+        self._defaults['GetFrequencyResponse']['amplitudes'] = None
+        self._defaults['GetFrequencyResponse']['phases'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -525,6 +531,45 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niScope_GetFrequencyResponse(self, vi, channel, buffer_size, frequencies, amplitudes, phases, number_of_frequencies):  # noqa: N802
+        if self._defaults['GetFrequencyResponse']['return'] != 0:
+            return self._defaults['GetFrequencyResponse']['return']
+        # number_of_frequencies
+        if self._defaults['GetFrequencyResponse']['numberOfFrequencies'] is None:
+            raise MockFunctionCallError("niScope_GetFrequencyResponse", param='numberOfFrequencies')
+        number_of_frequencies.contents.value = self._defaults['GetFrequencyResponse']['numberOfFrequencies']
+        if self._defaults['GetFrequencyResponse']['frequencies'] is None:
+            raise MockFunctionCallError("niScope_GetFrequencyResponse", param='frequencies')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetFrequencyResponse']['frequencies'])
+        try:
+            frequencies_ref = frequencies.contents
+        except AttributeError:
+            frequencies_ref = frequencies
+        for i in range(len(self._defaults['GetFrequencyResponse']['frequencies'])):
+            frequencies_ref[i] = self._defaults['GetFrequencyResponse']['frequencies'][i]
+        if self._defaults['GetFrequencyResponse']['amplitudes'] is None:
+            raise MockFunctionCallError("niScope_GetFrequencyResponse", param='amplitudes')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetFrequencyResponse']['amplitudes'])
+        try:
+            amplitudes_ref = amplitudes.contents
+        except AttributeError:
+            amplitudes_ref = amplitudes
+        for i in range(len(self._defaults['GetFrequencyResponse']['amplitudes'])):
+            amplitudes_ref[i] = self._defaults['GetFrequencyResponse']['amplitudes'][i]
+        if self._defaults['GetFrequencyResponse']['phases'] is None:
+            raise MockFunctionCallError("niScope_GetFrequencyResponse", param='phases')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetFrequencyResponse']['phases'])
+        try:
+            phases_ref = phases.contents
+        except AttributeError:
+            phases_ref = phases
+        for i in range(len(self._defaults['GetFrequencyResponse']['phases'])):
+            phases_ref[i] = self._defaults['GetFrequencyResponse']['phases'][i]
+        return self._defaults['GetFrequencyResponse']['return']
+
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
@@ -723,6 +768,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_GetEqualizationFilterCoefficients.return_value = 0
         mock_library.niScope_GetError.side_effect = MockFunctionCallError("niScope_GetError")
         mock_library.niScope_GetError.return_value = 0
+        mock_library.niScope_GetFrequencyResponse.side_effect = MockFunctionCallError("niScope_GetFrequencyResponse")
+        mock_library.niScope_GetFrequencyResponse.return_value = 0
         mock_library.niScope_InitWithOptions.side_effect = MockFunctionCallError("niScope_InitWithOptions")
         mock_library.niScope_InitWithOptions.return_value = 0
         mock_library.niScope_InitiateAcquisition.side_effect = MockFunctionCallError("niScope_InitiateAcquisition")

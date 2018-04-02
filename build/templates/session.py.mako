@@ -245,7 +245,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0

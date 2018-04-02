@@ -2035,4 +2035,36 @@ functions = {
             'description': 'Returns the date and time of the last calibration performed.',
         },
     },
+    'self_test': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.',
+                    },
+            },
+            {
+                'direction': 'out',
+                'name': 'selfTestResult',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Contains the value returned from the instrument self-test. Zero indicates success.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'selfTestMessage',
+                'type': 'ViChar[ ]',
+                'documentation': {
+                    'description': 'This parameter contains the string returned from the instrument self-test. The array must contain at least 256 elements.'
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Performs a self-test.',
+        },
+    },
 }

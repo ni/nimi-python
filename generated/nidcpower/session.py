@@ -3610,7 +3610,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except errors.DriverError as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -4654,6 +4654,35 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def self_test(self):
+        '''self_test
+
+        Performs the device self-test routine and returns the test result(s).
+        Calling this method implicitly calls the reset method.
+
+        When calling _self_test with the PXIe-4162/4163, specify all
+        channels of your PXIe-4162/4163 with the channels input of
+        _initialize_with_channels. You cannot self test a subset of
+        PXIe-4162/4163 channels.
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+-------------------+
+        | Self-Test Code | Description       |
+        +================+===================+
+        | 0              | Self test passed. |
+        +----------------+-------------------+
+        | 1              | Self test failed. |
+        +----------------+-------------------+
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
+
     def reset(self):
         '''reset
 
@@ -4669,13 +4698,13 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):
-        '''self_test
+    def _self_test(self):
+        '''_self_test
 
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
 
-        When calling self_test with the PXIe-4162/4163, specify all
+        When calling _self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
         _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.

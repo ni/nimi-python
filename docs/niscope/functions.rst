@@ -1624,6 +1624,35 @@ niscope.Session methods
             session.channels['0,1'].get_equalization_filter_coefficients()
 
 
+.. py:method:: get_frequency_response()
+
+    Gets the frequency response of the digitizer for the current
+    configurations of the channel properties. Not all digitizers support
+    this method.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session.channels['0,1'].get_frequency_response()
+
+
+    :rtype: int
+    :return:
+
+
+            Returns the number of frequencies in the returned spectrum.
+
+            
+
+
+
 .. py:method:: probe_compensation_signal_start()
 
     Starts the 1 kHz square wave output on PFI 1 for probe compensation.
@@ -1856,39 +1885,21 @@ niscope.Session methods
 
 .. py:method:: self_test()
 
-    Runs the instrument self-test routine and returns the test result(s).
+    Runs the instrument self-test routine and returns the test result(s). Refer to the
+    device-specific help topics for an explanation of the message contents.
 
-    
+    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
 
+    - code - failure code from driver
+    - message - status message from driver
 
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            This control contains the value returned from the instrument self-test.
-
-            **Self-Test Code Description**
-
-            0—Self-test passed
-
-            1—Self-test failed
-
-            
-
-
-        self_test_message (str): 
-
-
-            Returns the self-test response string from the instrument. Refer to the
-            device-specific help topics for an explanation of the string contents;
-            you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
-            in length.
-
-            
+    +----------------+------------------+
+    | Self-Test Code | Description      |
+    +================+==================+
+    | 0              | Passed self-test |
+    +----------------+------------------+
+    | 1              | Self-test failed |
+    +----------------+------------------+
 
 
 

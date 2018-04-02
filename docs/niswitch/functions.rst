@@ -685,29 +685,18 @@ niswitch.Session methods
 
     Verifies that the driver can communicate with the switch module.
 
-    
+    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
 
+    - code - failure code from driver
+    - message - status message from driver
 
-
-    :rtype: tuple (self_test_result, self_test_message)
-
-        WHERE
-
-        self_test_result (int): 
-
-
-            Value returned from the switch device self-test. Passed 0 Failed 1
-
-            
-
-
-        self_test_message (str): 
-
-
-            Self-test response string from the switch device. You must pass a ViChar
-            array with at least 256 bytes.
-
-            
+    +----------------+------------------+
+    | Self-Test Code | Description      |
+    +================+==================+
+    | 0              | Passed self-test |
+    +----------------+------------------+
+    | 1              | Self-test failed |
+    +----------------+------------------+
 
 
 

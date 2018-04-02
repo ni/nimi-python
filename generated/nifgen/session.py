@@ -196,11 +196,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    cal_adc_input = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CalADCInput, 1150227)
-    '''Type: enums.CalADCInput
-
-    Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
-    '''
     channel_delay = _attributes.AttributeViReal64(1150369)
     '''Type: float
 
@@ -3472,7 +3467,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error as e:
+        except errors.DriverError as e:
             self._vi = 0
             raise
         self._vi = 0
@@ -4813,6 +4808,35 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def self_test(self):
+        '''self_test
+
+        Runs the instrument self-test routine and returns the test result(s).
+
+        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
+
+        Note:
+        When used on some signal generators, the device is reset after the
+        _self_test method runs. If you use the _self_test
+        method, your device may not be in its previously configured state
+        after the method runs.
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
+
     def reset(self):
         '''reset
 
@@ -4830,14 +4854,14 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):
-        '''self_test
+    def _self_test(self):
+        '''_self_test
 
         Runs the instrument self-test routine and returns the test result(s).
 
         Note:
         When used on some signal generators, the device is reset after the
-        self_test method runs. If you use the self_test
+        _self_test method runs. If you use the _self_test
         method, your device may not be in its previously configured state
         after the method runs.
 
